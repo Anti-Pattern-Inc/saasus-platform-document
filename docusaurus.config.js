@@ -29,12 +29,12 @@ const config = {
   // to replace "ja" with "zh-Hans".
   i18n: {
     defaultLocale: 'ja',
-    locales: ['ja'],
+    locales: ['ja', 'en'],
   },
 
   presets: [
     [
-      'classic',
+      '@docusaurus/preset-classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
@@ -79,6 +79,10 @@ const config = {
           },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
+            type: 'localeDropdown',
+            position: 'right',
+          },
+          {
             href: 'https://github.com/facebook/docusaurus',
             label: 'GitHub',
             position: 'right',
@@ -93,7 +97,7 @@ const config = {
             items: [
               {
                 label: 'Tutorial',
-                to: '/docs',
+                to: '/docs/saasus-platform-document',
               },
             ],
           },
