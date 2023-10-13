@@ -39,6 +39,8 @@ const sidebars = {
       items: [
         'tutorial/prepare-sample-application',
         'tutorial/prepare-saasus-platform',
+        'tutorial/saas-management-using-the-saas-operation-console',
+        'tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant'
       ],
     },
   ],
