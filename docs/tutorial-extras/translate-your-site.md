@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Translate your site
 
-Let's translate `docs/intro.md` to French.
+Let's translate `docs/saasus-platform-document.md` to French.
 
 ## Configure i18n
 
@@ -13,23 +13,23 @@ Modify `docusaurus.config.js` to add support for the `fr` locale:
 ```js title="docusaurus.config.js"
 module.exports = {
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en', 'fr'],
+    defaultLocale: "en",
+    locales: ["en", "fr"],
   },
 };
 ```
 
 ## Translate a doc
 
-Copy the `docs/intro.md` file to the `i18n/fr` folder:
+Copy the `docs/saasus-platform-document.md` file to the `i18n/fr` folder:
 
 ```bash
 mkdir -p i18n/fr/docusaurus-plugin-content-docs/current/
 
-cp docs/intro.md i18n/fr/docusaurus-plugin-content-docs/current/intro.md
+cp docs/saasus-platform-document.md i18n/fr/docusaurus-plugin-content-docs/current/saasus-platform-document.md
 ```
 
-Translate `i18n/fr/docusaurus-plugin-content-docs/current/intro.md` in French.
+Translate `i18n/fr/docusaurus-plugin-content-docs/current/saasus-platform-document.md` in French.
 
 ## Start your localized site
 
@@ -60,7 +60,7 @@ module.exports = {
       items: [
         // highlight-start
         {
-          type: 'localeDropdown',
+          type: "localeDropdown",
         },
         // highlight-end
       ],
