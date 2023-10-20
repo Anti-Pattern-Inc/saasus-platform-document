@@ -50,6 +50,28 @@ const config = {
         },
       }),
     ],
+    [
+      'redocusaurus',
+      {
+        specs: [
+          {
+            id: 'authapi-spec',
+            spec: '../saasus-dev-env/api/modules/v1/auth/controller/authapi/authapi.yml',
+          },
+          {
+            id: 'billingapi-spec',
+            spec: '../saasus-dev-env/api/modules/v1/billing/controller/billingapi/billingapi.yml',
+          },
+          {
+            id: 'pricingapi-spec',
+            spec: '../saasus-dev-env/api/modules/v1/pricing/controller/pricingapi/pricingapi.yml',
+          },
+        ],
+        theme: {
+          primaryColor: '#1A75FF',
+        }
+      }
+    ]
   ],
 
   themeConfig:
@@ -70,6 +92,12 @@ const config = {
             sidebarId: 'tutorialSidebar',
             position: 'left',
             label: 'Tutorial',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'apiDocSidebar',
+            position: 'left',
+            label: 'API Docs',
           },
           {
             type: 'localeDropdown',

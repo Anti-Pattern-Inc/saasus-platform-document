@@ -44,6 +44,14 @@ const sidebars = {
       ],
     },
   ],
+
+  apiDocSidebar: [
+    {
+      type: 'category',
+      label: 'API Docs',
+      items: ['reference/auth-api', 'reference/billing-api', 'reference/pricing-api'],
+    }
+  ]
 };
 
 module.exports = sidebars;
