@@ -58,6 +58,10 @@ const config = {
             id: 'authapi-spec',
             spec: '../saasus-dev-env/api/modules/v1/auth/controller/authapi/authapi.yml',
           },
+          // {
+          //   id: 'authapi-spec-en',
+          //   spec: '../saasus-dev-env/api/modules/v1/auth/controller/authapi/authapi.en.yml',
+          // },
           {
             id: 'billingapi-spec',
             spec: '../saasus-dev-env/api/modules/v1/billing/controller/billingapi/billingapi.yml',

@@ -14,5 +14,9 @@
   "sidebar.tutorialSidebar.category.チュートリアル": {
     "message": "Tutorials",
     "description": "The label for category チュートリアル in sidebar tutorialSidebar"
+  },
+  "sidebar.apiDocSidebar.category.API Docs": {
+    "message": "API Docs",
+    "description": "The label for category API Docs in sidebar apiDocSidebar"
   }
 }

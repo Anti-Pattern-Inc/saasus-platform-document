@@ -11,10 +11,3 @@ theme:
   # See https://redocly.com/docs/api-reference-docs/configuration/functionality/
   openapi:
     hideDownloadButton: true
-    # See https://redocly.com/docs/api-reference-docs/configuration/theming/
-    generateCodeSamples:
-      languages:
-        - lang: curl
-          label: Custom label
-        - lang: Python
-        - lang: JavaScript
