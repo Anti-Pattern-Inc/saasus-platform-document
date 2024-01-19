@@ -3,7 +3,7 @@ version: "3"
 services:
   node:
     image: node:latest
-    container_name: node
+    container_name: saasus-platform-document
     tty: true
     volumes:
       - ./:/usr/src/app
