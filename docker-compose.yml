@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  node:
+    image: node:latest
+    container_name: saasus-platform-document
+    tty: true
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - 3000:3000
+    working_dir: /usr/src/app

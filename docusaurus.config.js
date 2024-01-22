@@ -56,7 +56,7 @@ const config = {
         specs: [
           {
             id: 'authapi-spec',
-            spec: '../saasus-dev-env/api/modules/v1/auth/controller/authapi/authapi.yml',
+            spec: './api/authapi.yml',
           },
           // {
           //   id: 'authapi-spec-en',
@@ -64,11 +64,11 @@ const config = {
           // },
           {
             id: 'billingapi-spec',
-            spec: '../saasus-dev-env/api/modules/v1/billing/controller/billingapi/billingapi.yml',
+            spec: './api/billingapi.yml',
           },
           {
             id: 'pricingapi-spec',
-            spec: '../saasus-dev-env/api/modules/v1/pricing/controller/pricingapi/pricingapi.yml',
+            spec: './api/pricingapi.yml',
           },
         ],
         theme: {
@@ -111,6 +111,12 @@ const config = {
             href: 'https://github.com/facebook/docusaurus',
             label: 'GitHub',
             position: 'right',
+          },
+          {
+            type: 'docsVersionDropdown',
+            position: 'left',
+            dropdownItemsAfter: [{to: '/versions', label: 'All versions'}],
+            dropdownActiveClassDisabled: true,
           },
         ],
       },
