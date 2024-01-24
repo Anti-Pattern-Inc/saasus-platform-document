@@ -3,18 +3,36 @@
 This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
 ### Installation
-
+１、saasus-dev-envリポジトリのディレクトリへ移動
 ```
-$ npm install
+cd saasus-dev-env
+```
+２、saasus-platform-documentリポジトリをcloneする
+```
+git clone git@github.com:Anti-Pattern-Inc/saasus-platform-document.git
+```
+３、リポジトリに移動
+```
+cd saasus-platform-document
+```
+4、apiのymlファイルをコピーしてくる
+```
+sh copy.sh
+```
+５、コンテナを立ち上げる
+```
+docker-compose up -d
+```
+６、コンテナへ入って、npm installを実行
+```
+docker exec -it {コンテナID} bash
+/usr/src/app# npm install
+```
+７、開発サーバー立ち上げ、localhost:3000でアクセスできる
+```
+npm run start -- --host 0.0.0.0
 ```
 
-### Local Development
-
-```
-$ npm run start
-```
-
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
 ### Build
 
