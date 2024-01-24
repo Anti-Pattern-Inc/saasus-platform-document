@@ -22,7 +22,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'はじめに',
-      items: ['saasus-platform-document', 'faq'],
+      items: ['saasus-platform-document', 'faq', 'test'],
       collapsed: false,
       collapsible: false,
     },
