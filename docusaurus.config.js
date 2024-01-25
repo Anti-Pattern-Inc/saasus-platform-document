@@ -58,10 +58,6 @@ const config = {
             id: 'authapi-spec',
             spec: './api/authapi.yml',
           },
-          // {
-          //   id: 'authapi-spec-en',
-          //   spec: '../saasus-dev-env/api/modules/v1/auth/controller/authapi/authapi.en.yml',
-          // },
           {
             id: 'billingapi-spec',
             spec: './api/billingapi.yml',
@@ -69,6 +65,50 @@ const config = {
           {
             id: 'pricingapi-spec',
             spec: './api/pricingapi.yml',
+          },
+          {
+            id: 'communicationapi-spec',
+            spec: './api/communicationapi.yml',
+          },
+          {
+            id: "apilogapi-spec",
+            spec: "./api/apilogapi.yml"
+          },
+          {
+            id: "awsmarketplaceapi-spec",
+            spec: "./api/awsmarketplaceapi.yml"
+          },
+          {
+            id: "integration-spec",
+            spec: "./api/integration.yml"
+          },
+          {
+            id: "pricingapi-spec-jpn",
+            spec: "./api/pricingapi.jpn.yml"
+          },
+          {
+            id: "apilogapi-spec-jpn",
+            spec: "./api/apilogapi.jpn.yml"
+          },
+          {
+            id: "authapi-spec-jpn",
+            spec: "./api/authapi.jpn.yml"
+          },
+          {
+            id: "awsmarketplaceapi-spec-jpn",
+            spec: "./api/awsmarketplaceapi.jpn.yml"
+          },
+          {
+            id: "billingapi-spec-jpn",
+            spec: "./api/billingapi.jpn.yml"
+          },
+          {
+            id: "communicationapi-spec-jpn",
+            spec: "./api/communicationapi.jpn.yml"
+          },
+          {
+            id: "integration-spec-jpn",
+            spec: "./api/integrationapi.jpn.yml"
           },
         ],
         theme: {
