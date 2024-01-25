@@ -1,0 +1,22 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.はじめに": {
+    "message": "はじめに",
+    "description": "The label for category はじめに in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.ビジネスユーザー向けチュートリアル": {
+    "message": "ビジネスユーザー向けチュートリアル",
+    "description": "The label for category ビジネスユーザー向けチュートリアル in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.チュートリアル": {
+    "message": "チュートリアル",
+    "description": "The label for category チュートリアル in sidebar tutorialSidebar"
+  },
+  "sidebar.apiDocSidebar.category.API Docs": {
+    "message": "API Docs",
+    "description": "The label for category API Docs in sidebar apiDocSidebar"
+  }
+}

@@ -49,7 +49,15 @@ const sidebars = {
     {
       type: 'category',
       label: 'API Docs',
-      items: ['reference/auth-api', 'reference/billing-api', 'reference/pricing-api'],
+      items: [
+        'reference/auth-api',
+        'reference/billing-api',
+        'reference/pricing-api',
+        'reference/communication-api',
+        'reference/apilog-api',
+        'reference/awsmarketplace-api',
+        'reference/integration'
+      ],
     }
   ]
 };

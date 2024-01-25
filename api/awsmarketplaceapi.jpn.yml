@@ -1,0 +1,605 @@
+openapi: 3.0.0
+info:
+  description: SaaSus AWS Marketplace API Schema
+  version: 1.0.0
+  title: SaaSus AWS Marketplace API Schema
+  contact:
+    name: Anti-Pattern
+servers:
+  - url: https://api.saasus.io/v1/awsmarketplace
+    description: Production API Server
+tags:
+  - name: awsMarketplace
+    description: AWS Marketplaceリソースの操作
+  - name: error
+    description: テスト用途のエラー
+security:
+  - Bearer: []
+paths:
+  /settings:
+    get:
+      tags:
+        - awsMarketplace
+      operationId: GetSettings
+      summary: AWS Marketplaceの設定を取得
+      description: |
+        AWS Marketplaceの設定を取得します。
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: AWSMarketplace設定情報
+                $ref: "#/components/schemas/Settings"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      tags:
+        - awsMarketplace
+      operationId: UpdateSettings
+      summary: AWS Marketplaceの設定を更新
+      description: |
+        AWS Marketplaceの設定を更新します。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSettingsParam"
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /listing-status:
+    get:
+      tags:
+        - awsMarketplace
+      operationId: GetListingStatus
+      summary: AWS Marketplaceの出品状況を取得
+      description: |
+        AWS Marketplaceの出品状況を取得します。
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetListingStatusResult"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      tags:
+        - awsMarketplace
+      operationId: UpdateListingStatus
+      summary: AWS Marketplaceの出品状況を更新
+      description: |
+        AWS Marketplaceの出品状況を更新します。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateListingStatusParam"
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /plans:
+    get:
+      tags:
+        - awsMarketplace
+      operationId: GetPlans
+      summary: AWS Marketplaceに連携するプラン情報を取得
+      description: |
+        Marketplaceと連携するプラン情報を取得します。
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: AWSMarketplace連携プラン情報
+                $ref: "#/components/schemas/Plans"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      tags:
+        - awsMarketplace
+      operationId: SavePlan
+      summary: AWS Marketplaceに連携するプラン情報を登録
+      description: |
+        AWSMarketplaceに連携するプラン情報を登録します。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SavePlanParam"
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/plans/{plan_name}":
+    get:
+      tags:
+        - awsMarketplace
+      parameters:
+        - $ref: "#/components/parameters/PlanName"
+      operationId: GetPlanByPlanName
+      summary: AWSMarketplaceに連携するプラン情報を取得
+      description: |
+        Marketplaceと連携するプラン情報を取得します。
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: AWSMarketplace連携プラン情報
+                $ref: "#/components/schemas/Plan"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /customers:
+    post:
+      tags:
+        - awsMarketplace
+      operationId: CreateCustomer
+      summary: AWS Marketplaceに連携する顧客情報を新規作成
+      description: |
+        AWS Marketplaceに連携する顧客情報を新規作成します。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCustomerParam"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    get:
+      tags:
+        - awsMarketplace
+      operationId: GetCustomers
+      summary: AWS Marketplaceに連携する顧客情報の一覧を取得
+      description: |
+        Get a list of customer information to be linked to AWS Marketplace.
+      x-description      -i18n:
+        jpn: |
+          AWS Marketplaceに連携する顧客情報の一覧を取得します。
+      parameters:
+        - in: query
+          name: tenant_ids
+          description: 指定したテナントIDの顧客を取得する(Get customers with the specified tenant ID)
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Uuid"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customers"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/customers/{customer_identifier}":
+    get:
+      tags:
+        - awsMarketplace
+      parameters:
+        - $ref: "#/components/parameters/CustomerIdentifier"
+      operationId: GetCustomer
+      summary: AWS Marketplaceに連携する顧客情報を取得
+      description: |
+        AWS Marketplaceに連携する顧客情報を取得します。
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/customers/{customer_identifier}/sync":
+    post:
+      tags:
+        - awsMarketplace
+      parameters:
+        - $ref: "#/components/parameters/CustomerIdentifier"
+      operationId: SyncCustomer
+      summary: AWS Marketplaceの顧客情報をSaaSusに同期します
+      description: |
+        AWS Marketplaceの顧客情報をSaaSusに同期します。
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /cloudformation-launch-stack-link:
+    get:
+      tags:
+        - awsMarketplace
+      operationId: GetCloudFormationLaunchStackLink
+      summary: AWS CloudFormationのスタック作成リンクを取得
+      description: |
+        CloudFormationのクイック作成リンクを取得します。
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloudFormationLaunchStackLink"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /registration-token/verify:
+    post:
+      tags:
+        - awsMarketplace
+      operationId: VerifyRegistrationToken
+      summary: Registration Tokenを検証
+      description: |
+        Registration Tokenを検証します。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VerifyRegistrationTokenParam"
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /catalog-entity/visibility:
+    get:
+      tags:
+        - awsMarketplace
+      operationId: GetCatalogEntityVisibility
+      summary: AWS Marketplaceから商品の公開状況を取得
+      description: |
+        AWS Marketplaceから商品の公開状況を取得します。
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CatalogEntityVisibility"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /errors/internal-server-error:
+    get:
+      tags:
+        - error
+      operationId: ReturnInternalServerError
+      summary: ステータスコード500でサーバーエラーを返却
+      description: |
+        テスト用途で使用するエンドポイントです。ステータスコード500でサーバーエラーを返却します。
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      description: APIへのアクセス情報または認証情報
+  parameters:
+    TenantId:
+      in: path
+      name: tenant_id
+      description: テナントID
+      required: true
+      schema:
+        $ref: "#/components/schemas/Uuid"
+    PlanName:
+      in: path
+      name: plan_name
+      description: AWS Marketplace連携プラン名
+      required: true
+      schema:
+        type: string
+        example: normal_plan_name_month
+    CustomerIdentifier:
+      in: path
+      name: customer_identifier
+      description: 顧客ID
+      required: true
+      schema:
+        type: string
+        example: 123456789012
+  schemas:
+    Error:
+      properties:
+        type:
+          type: string
+          example: permission_denied
+        message:
+          type: string
+          example: エラーメッセージ
+      required:
+        - type
+        - message
+    Uuid:
+      type: string
+      example: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+    Settings:
+      title: AWS Marketplace設定情報
+      type: object
+      properties:
+        product_code:
+          type: string
+          example: 1234567890
+        role_arn:
+          type: string
+          example: arn:aws:iam::123456789012:role/role-name
+        role_external_id:
+          type: string
+          example: 1234567890
+        sns_topic_arn:
+          type: string
+          example: arn:aws:sns:us-east-1:123456789012:topic-name
+        cas_bucket_name:
+          type: string
+          example: cas-bucket-name
+        cas_sns_topic_arn:
+          type: string
+          example: arn:aws:sns:us-east-1:123456789012:topic-name
+        seller_sns_topic_arn:
+          type: string
+          example: arn:aws:sns:us-east-1:123456789012:topic-name
+        redirect_sign_up_page_function_url:
+          type: string
+          example: http://example.com/sign-up
+        sqs_arn:
+          type: string
+          example: arn:aws:sqs:us-east-1:123456789012:queue_name
+      required:
+        - product_code
+        - role_arn
+        - role_external_id
+        - sns_topic_arn
+        - cas_bucket_name
+        - cas_sns_topic_arn
+        - seller_sns_topic_arn
+        - redirect_sign_up_page_function_url
+        - sqs_arn
+    UpdateSettingsParam:
+      title: AWS Marketplace設定の更新パラメータ
+      type: object
+      properties:
+        product_code:
+          type: string
+          example: 1234567890
+        role_arn:
+          type: string
+          example: arn:aws:iam::123456789012:role/role-name
+        role_external_id:
+          type: string
+          example: 1234567890
+        sns_topic_arn:
+          type: string
+          example: arn:aws:sns:us-east-1:123456789012:topic-name
+        cas_bucket_name:
+          type: string
+          example: cas-bucket-name
+        cas_sns_topic_arn:
+          type: string
+          example: arn:aws:sns:us-east-1:123456789012:topic-name
+        seller_sns_topic_arn:
+          type: string
+          example: arn:aws:sns:us-east-1:123456789012:topic-name
+        sqs_arn:
+          type: string
+          example: arn:aws:sqs:us-east-1:123456789012:queue_name
+    Plans:
+      title: AWS Marketplaceに連携するプラン情報一覧
+      type: object
+      properties:
+        plans:
+          type: array
+          items:
+            $ref: "#/components/schemas/Plan"
+      required:
+        - plans
+    Plan:
+      title: AWS Marketplaceに連携するプラン情報
+      type: object
+      properties:
+        plan_id:
+          $ref: "#/components/schemas/Uuid"
+        plan_name:
+          type: string
+          example: normal_plan_name_month
+      required:
+        - plan_id
+        - plan_name
+    SavePlanParam:
+      title: AWS Marketplaceに連携するプラン情報登録パラメータ
+      type: object
+      properties:
+        plan_id:
+          $ref: "#/components/schemas/Uuid"
+        plan_name:
+          type: string
+          example: normal_plan_name_month
+      required:
+        - plan_id
+        - plan_name
+    Customer:
+      title: 顧客情報
+      type: object
+      properties:
+        customer_identifier:
+          type: string
+          example: "123456789012"
+        customer_aws_account_id:
+          type: string
+          example: "123456789012"
+        tenant_id:
+          $ref: "#/components/schemas/Uuid"
+      required:
+        - customer_identifier
+        - customer_aws_account_id
+        - tenant_id
+    Customers:
+      title: 顧客情報一覧
+      type: object
+      properties:
+        customers:
+          type: array
+          items:
+            $ref: "#/components/schemas/Customer"
+      required:
+        - customers
+    CreateCustomerParam:
+      title: AWS Marketplaceに連携する顧客情報登録パラメータ
+      type: object
+      properties:
+        tenant_id:
+          $ref: "#/components/schemas/Uuid"
+        registration_token:
+          type: string
+          example: registration_token
+      required:
+        - tenant_id
+        - registration_token
+    ListingStatus:
+      title: AWS Marketplace出品状況
+      type: string
+      enum:
+        - no_listing
+        - first_step_working
+        - first_step_completed
+        - second_step_working
+        - second_step_plan_created
+        - second_step_completed
+        - third_step_working
+        - third_step_completed
+        - limited
+        - restricted
+        - public
+    GetListingStatusResult:
+      title: AWS Marketplace出品状況
+      type: object
+      properties:
+        listing_status:
+          $ref: "#/components/schemas/ListingStatus"
+      required:
+        - listing_status
+    UpdateListingStatusParam:
+      title: AWS Marketplace出品状況更新パラメータ
+      type: object
+      properties:
+        listing_status:
+          $ref: "#/components/schemas/ListingStatus"
+      required:
+        - listing_status
+    CloudFormationLaunchStackLink:
+      title: AWS CloudFormationスタック作成リンク
+      type: object
+      properties:
+        link:
+          type: string
+          example: https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create?stackName=sample&templateURL=https://s3.us-west-2.amazonaws.com/cloudformation-templates-sample.template
+      required:
+        - link
+    VerifyRegistrationTokenParam:
+      title: Registration Tokenの検証パラメータ
+      type: object
+      properties:
+        registration_token:
+          type: string
+          example: registration_token
+      required:
+        - registration_token
+    CatalogEntityVisibility:
+      title: AWS Marketplace公開状況
+      type: object
+      properties:
+        visibility:
+          $ref: "#/components/schemas/VisibilityStatus"
+      required:
+        - visibility
+    VisibilityStatus:
+      title: AWS Marketplace公開状況ステータス
+      type: string
+      enum:
+        - Public
+        - Limited
+        - Restricted
+
