@@ -29,10 +29,10 @@ Q: SDKはどのようなプログラミング言語で利用できますか？
 A: 現在提供中のものは、PHP(Laravel)、TypeScript(Node.js)、Java、Go、Python向けのものになります。今後、Ruby、C#用のSDKの提供を予定しております。
 
 Q: SDKをどのように使って自社のSaaSに組み込むのでしょうか？  
-A: <a href="https://www.youtube.com/watch?v=deSkPJ-zTgw" target="_blank">こちらのデモ動画</a>および、<a href="https://docs.saasus.io/docs/prepare-the-sample-application-jp" target="_black">チュートリアル</a>をご実施ください。チュートリアルでは、普通のWebチャットアプリケーションに実際にSaaSus SDKのコードを組み込んでいただき、SaaSus Platformを用いてマルチテナントSaaS化することをご体験いただけます。
+A: <a href="https://www.youtube.com/watch?v=deSkPJ-zTgw" target="_blank">こちらのデモ動画</a>および、<a href="./tutorial/prepare-sample-application" target="_black">チュートリアル</a>をご実施ください。チュートリアルでは、普通のWebチャットアプリケーションに実際にSaaSus SDKのコードを組み込んでいただき、SaaSus Platformを用いてマルチテナントSaaS化することをご体験いただけます。
 
 Q: APIはどのようなものが用意されていますでしょうか？  
-A: <a href="https://docs.saasus.io/reference/getting-started-with-your-api" target="_black">こちらのAPIマニュアル</a>をご参照ください。
+A: <a href="./reference/getting-started-with-your-api" target="_black">こちらのAPIマニュアル</a>をご参照ください。
 
 Q: 機能開発要望はどのように伝えれば良いですか？  
 A: Webコンソールから、機能開発要望フォームにアクセスできるようになっております。そちらからご送信お願いします。
