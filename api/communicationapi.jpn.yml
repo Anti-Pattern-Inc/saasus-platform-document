@@ -9,10 +9,10 @@ servers:
   - url: https://api.saasus.io/v1/communication
     description: Production API Server
 tags:
-  - name: フィードバック
-    description: Feedback
-  - name: テスト用途のエラー
-    description: Error for testing
+  - name: feedback
+    description: フィードバック
+  - name: error
+    description: テスト用途のエラー
 security:
   - Bearer: []
 paths:
