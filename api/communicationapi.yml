@@ -11,11 +11,11 @@ servers:
 tags:
   - name: "feedback"
     description: Feedback
-    x-name-i18n:
+    x-description-i18n:
       jpn: フィードバック
   - name: "error"
     description: Error for testing
-    x-name-i18n:
+    x-description-i18n:
       jpn: テスト用途のエラー
 security:
   - Bearer: []
