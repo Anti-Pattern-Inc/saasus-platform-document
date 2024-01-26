@@ -255,7 +255,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/CustomerIdentifier"
       operationId: SyncCustomer
-      summary: AWS Marketplaceの顧客情報をSaaSusに同期します
+      summary: AWS Marketplaceの顧客情報をSaaSusに同期
       description: |
         AWS Marketplaceの顧客情報をSaaSusに同期します。
       responses:
