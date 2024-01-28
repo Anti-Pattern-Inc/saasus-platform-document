@@ -1,5 +1,5 @@
 ---
-title: "About AWS Marketplace Integration"
+title: "AWS Marketplace 連携機能について"
 slug: "aws-marketplace-integration"
 excerpt: ""
 hidden: false
