@@ -43,6 +43,13 @@ const sidebars = {
         'tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant'
       ],
     },
+    {
+      type: 'category',
+      label: 'AWS Marketplace Integration',
+      items: ['aws-marketplace-integration/aws-marketplace-integration'],
+      collapsed: false,
+      collapsible: false,
+    },
   ],
 
   apiDocSidebar: [
