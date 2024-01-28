@@ -313,7 +313,7 @@ paths:
       operationId: SyncCustomer
       summary: Sync AWS Marketplace customer information to SaaSus
       x-summary-i18n:
-        jpn: AWS Marketplaceの顧客情報をSaaSusに同期します
+        jpn: AWS Marketplaceの顧客情報をSaaSusに同期
       description: |
         Sync AWS Marketplace customer information to SaaSus.
       x-description-i18n:
