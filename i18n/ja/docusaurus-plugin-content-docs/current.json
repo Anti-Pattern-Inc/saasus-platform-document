@@ -15,6 +15,10 @@
     "message": "チュートリアル",
     "description": "The label for category チュートリアル in sidebar tutorialSidebar"
   },
+  "sidebar.apiDocSidebar.category.Getting Started": {
+    "message": "Getting Started",
+    "description": "The label for category Getting Started in sidebar apiDocSidebar"
+  },
   "sidebar.apiDocSidebar.category.API Docs": {
     "message": "API Docs",
     "description": "The label for category API Docs in sidebar apiDocSidebar"
