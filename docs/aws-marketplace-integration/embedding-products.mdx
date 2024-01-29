@@ -1,0 +1,107 @@
+---
+title: "SaaS製品への組み込み（既存ユーザーと購入した製品の紐付け）"
+slug: "embedding-products"
+excerpt: ""
+hidden: false
+metadata: 
+  image: []
+  robots: "index"
+createdAt: "Mon Jun 19 2023 06:17:14 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Jul 06 2023 01:28:17 GMT+0000 (Coordinated Universal Time)"
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+SaaSus Platform でSaas製品を出品する場合、既存ユーザーによる購入フローにマルチテナントを考慮した実装が必要になります。
+
+:::caution
+テストフェーズの「AWS Marketplaceとの連携確認」までには実装を完了してください。最終的にはAWS Marketpalce サポートチームによるレビュー対象となるため未実装の場合、出品の許可が出ません。
+:::
+
+既存ユーザーがAWS Marketplace  から製品を購入しお客様のSaaSにログインした際、まだ既存ユーザーと購入した製品との紐付けが完了していません。  
+理由は、購入した製品はテナントに対して紐付けが行う必要があるためです。SaaSus Platformの仕様上、既存ユーザーは複数のテナントに所属している可能性があります。SaaSus Platform側でそれを把握することはできないため、お客様側で購入した製品とユーザーの所属するテナントを紐づける実装をしていただく形になっています。
+
+## 実装の流れ
+
+１．既存ユーザーがAWS Marketplace で製品を購入してログイン、Callbackページへ来た場合の判定処理を実装
+
+AWS Marketplace で製品を購入してログイン、Callbackページへ来た場合は、お客様に設定していただいた Callback URLに対してregistration_tokenパラメータを付与しています。その有無を判定して分岐する処理を実装します。  
+`https://example.com/defaultcallback?code=xxxxxx-xxxx-xxxx-xxxx-xxxxxxxx&registration_token=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
+
+２．利用するアカウント選択画面を作成
+
+registration_tokenパラメータは存在する場合、以下のような購入するアカウントを選択する画面が表示されるようにしてください。
+
+![account select page](/img/aws-marketplace-integration/account-select-page.png)
+
+Select Box の内容はリクエストしてきたユーザ情報`$request->userinfo`から作成します。
+
+
+
+
+<Tabs>
+<TabItem value="php" label="PHP">
+
+```php
+// Callback先
+function index(Request $request)
+{
+  // $request->userinfo に各種ユーザ情報、テナント情報が設定される
+  return view('selectAccount.index', ['tenants' => $request->userinfo["tenants"]]);
+}
+```
+
+</TabItem>
+</Tabs>
+
+View 側で `tenants`を利用してselect box を作成、選択したアカウント情報を利用するため`tenant["id"]`を Value へ設定します。
+
+<Tabs>
+<TabItem value="html" label="HTML">
+
+```html
+<select name="tenant_id">
+@foreach ($tenants as $tenant)
+    <option value="{{ $tenant["id"] }}">{{ $tenant["name"] }}</option>
+@endforeach
+</select>
+```
+
+</TabItem>
+</Tabs>
+
+３．選択したアカウントに対してSAASUS AUTH APIの[LinkAwsMarketplace](https://docs.saasus.io/reference/linkawsmarketplace)を実行
+
+アカウントを選択後`LinkAwsMarketplace`を呼び出す
+
+<Tabs>
+<TabItem value="php" label="PHP">
+
+```php
+// このアカウントで利用を開始するを押下した処理
+function post(Request $request)
+{
+
+  // SaaSus SDK 利用
+  $client = new ApiClient();
+  $auth_api_client = $client->getAuthClient();
+
+  // AWS Marketplaceとテナントの連携パラメータ設定
+  $link_marketplace_param = new CreateLinkAwsMarketplaceParam();
+  //アカウント選択画面から送信されたテナントID
+  $link_marketplace_param->setTenantId($request->tenant_id);
+  $link_marketplace_param->setAccessToken($request->_token);
+  //Callback時に受け取ったregistration_token
+  $link_marketplace_param->setRegistrationToken($request->registration_token);
+  
+  // 購入した製品とテナントとの紐付け
+  $auth_api_client->LinkAWSMarketplace($link_marketplace_param);
+  
+  // プロダクトの画面へ遷移
+  return view('xxxxxxxxxxx.index', ['xxxxx' => $xxxxxx]);
+}
+```
+
+</TabItem>
+</Tabs>
+
