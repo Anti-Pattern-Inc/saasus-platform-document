@@ -9,6 +9,9 @@ metadata:
 createdAt: "Mon Jun 19 2023 06:17:14 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Jul 06 2023 01:28:17 GMT+0000 (Coordinated Universal Time)"
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 SaaSus Platform でSaas製品を出品する場合、既存ユーザーによる購入フローにマルチテナントを考慮した実装が必要になります。
 
 :::caution
@@ -33,6 +36,12 @@ registration_tokenパラメータは存在する場合、以下のような購�
 
 Select Box の内容はリクエストしてきたユーザ情報`$request->userinfo`から作成します。
 
+
+
+
+<Tabs>
+<TabItem value="php" label="PHP">
+
 ```php
 // Callback先
 function index(Request $request)
@@ -42,7 +51,13 @@ function index(Request $request)
 }
 ```
 
+</TabItem>
+</Tabs>
+
 View 側で `tenants`を利用してselect box を作成、選択したアカウント情報を利用するため`tenant["id"]`を Value へ設定します。
+
+<Tabs>
+<TabItem value="html" label="HTML">
 
 ```html
 <select name="tenant_id">
@@ -52,9 +67,15 @@ View 側で `tenants`を利用してselect box を作成、選択したアカウ
 </select>
 ```
 
+</TabItem>
+</Tabs>
+
 ３．選択したアカウントに対してSAASUS AUTH APIの[LinkAwsMarketplace](https://docs.saasus.io/reference/linkawsmarketplace)を実行
 
 アカウントを選択後`LinkAwsMarketplace`を呼び出す
+
+<Tabs>
+<TabItem value="php" label="PHP">
 
 ```php
 // このアカウントで利用を開始するを押下した処理
@@ -80,3 +101,7 @@ function post(Request $request)
   return view('xxxxxxxxxxx.index', ['xxxxx' => $xxxxxx]);
 }
 ```
+
+</TabItem>
+</Tabs>
+
