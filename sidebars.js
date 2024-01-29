@@ -29,7 +29,11 @@ const sidebars = {
     {
       type: 'category',
       label: 'ビジネスユーザー向けチュートリアル',
-      items: ['tutorials-for-business-users'],
+      items: [],
+      link: {
+        type: 'doc',
+        id: "tutorials-for-business-users"
+      },
       collapsed: false,
       collapsible: false,
     },
