@@ -27,15 +27,9 @@ const sidebars = {
       collapsible: false,
     },
     {
-      type: 'category',
-      label: 'ビジネスユーザー向けチュートリアル',
-      items: [],
-      link: {
-        type: 'doc',
-        id: "tutorials-for-business-users"
-      },
-      collapsed: false,
-      collapsible: false,
+      type: 'doc',
+      label: 'Tutorials for Business Users',
+      id: "tutorials-for-business-users",
     },
     {
       type: 'category',
