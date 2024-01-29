@@ -49,7 +49,12 @@ const sidebars = {
     {
       type: 'category',
       label: 'Getting Started',
-      items: ['reference/getting-started-with-your-api'],
+      link: {
+        type: 'doc',
+        id: 'reference/getting-started-with-your-api',
+      },
+      items: [],
+    },
     },
     {
       type: 'category',
