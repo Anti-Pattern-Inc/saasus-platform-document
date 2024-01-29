@@ -72,6 +72,10 @@ const sidebars = {
             id: 'aws-marketplace-integration/product-submission',
           },
           items: [
+            'aws-marketplace-integration/product-submission/onboarding',
+            'aws-marketplace-integration/product-submission/general',
+            'aws-marketplace-integration/product-submission/pricing',
+            'aws-marketplace-integration/product-submission/notes',
           ],
         },
         'aws-marketplace-integration/embedding-products',
