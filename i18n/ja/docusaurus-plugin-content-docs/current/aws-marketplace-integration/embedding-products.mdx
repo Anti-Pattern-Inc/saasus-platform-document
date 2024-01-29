@@ -9,11 +9,14 @@ metadata:
 createdAt: "Mon Jun 19 2023 06:17:14 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Jul 06 2023 01:28:17 GMT+0000 (Coordinated Universal Time)"
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 SaaSus Platform でSaas製品を出品する場合、既存ユーザーによる購入フローにマルチテナントを考慮した実装が必要になります。
 
-> ⚠️ 注意事項
-> 
-> テストフェーズの「AWS Marketplaceとの連携確認」までには実装を完了してください。最終的にはAWS Marketpalce サポートチームによるレビュー対象となるため未実装の場合、出品の許可が出ません。
+:::caution
+テストフェーズの「AWS Marketplaceとの連携確認」までには実装を完了してください。最終的にはAWS Marketpalce サポートチームによるレビュー対象となるため未実装の場合、出品の許可が出ません。
+:::
 
 既存ユーザーがAWS Marketplace  から製品を購入しお客様のSaaSにログインした際、まだ既存ユーザーと購入した製品との紐付けが完了していません。  
 理由は、購入した製品はテナントに対して紐付けが行う必要があるためです。SaaSus Platformの仕様上、既存ユーザーは複数のテナントに所属している可能性があります。SaaSus Platform側でそれを把握することはできないため、お客様側で購入した製品とユーザーの所属するテナントを紐づける実装をしていただく形になっています。
@@ -29,9 +32,15 @@ AWS Marketplace で製品を購入してログイン、Callbackページへ来�
 
 registration_tokenパラメータは存在する場合、以下のような購入するアカウントを選択する画面が表示されるようにしてください。
 
-![](https://files.readme.io/2e50d4d-image.png)
+![account select page](/img/aws-marketplace-integration/account-select-page.png)
 
 Select Box の内容はリクエストしてきたユーザ情報`$request->userinfo`から作成します。
+
+
+
+
+<Tabs>
+<TabItem value="php" label="PHP">
 
 ```php
 // Callback先
@@ -42,7 +51,13 @@ function index(Request $request)
 }
 ```
 
+</TabItem>
+</Tabs>
+
 View 側で `tenants`を利用してselect box を作成、選択したアカウント情報を利用するため`tenant["id"]`を Value へ設定します。
+
+<Tabs>
+<TabItem value="html" label="HTML">
 
 ```html
 <select name="tenant_id">
@@ -52,9 +67,15 @@ View 側で `tenants`を利用してselect box を作成、選択したアカウ
 </select>
 ```
 
+</TabItem>
+</Tabs>
+
 ３．選択したアカウントに対してSAASUS AUTH APIの[LinkAwsMarketplace](https://docs.saasus.io/reference/linkawsmarketplace)を実行
 
 アカウントを選択後`LinkAwsMarketplace`を呼び出す
+
+<Tabs>
+<TabItem value="php" label="PHP">
 
 ```php
 // このアカウントで利用を開始するを押下した処理
@@ -80,3 +101,7 @@ function post(Request $request)
   return view('xxxxxxxxxxx.index', ['xxxxx' => $xxxxxx]);
 }
 ```
+
+</TabItem>
+</Tabs>
+
