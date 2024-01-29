@@ -1,27 +1,31 @@
 ---
 sidebar_position: 1
+title: "SaaSus Platform Document"
+slug: "saasus-platform-document"
+excerpt: ""
+hidden: false
+createdAt: "Thu Jan 19 2023 08:19:34 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
+## Issues for SaaS providers or those who are about to become SaaS providers
 
-# SaaSus Platform ドキュメント
+SaaS is more than just "providing software over the Internet." The greatest advantage for users is that they can continue to use the latest best practices with software that contains constantly improved specialized best practices. Therefore, an impressive SaaS motivates users to keep using it.
 
-## SaaS 事業者、もしくは SaaS 事業者になろうとしている方の課題
+However, when trying to provide SaaS, or when SaaS is provided, problems and issues with characteristics different from conventional application sales arise. For example, compared an application installed per system, SaaS always requires authentication and authorization. Characteristic issues will arise, such as how to deal with performance deterioration, billing plans, and how to incorporate the concept of revenue into the business plan.
 
-SaaS というのは、「ソフトウェアをインターネット越しに提供する」だけではありません。その領域に特化したベストプラクティスをソフトウェアに載せて提供し、常にそのベストプラクティスを改善し続けることによって、最新のベストプラクティスが使い続けられることが利用者の最大のメリットです。そのため、素晴らしい SaaS は利用者にとって使い続けるモチベーションがあります。
+If you don't recognize that SaaS has its own unique challenges, you probably only notice them when you face them. Dealing with these issues first lacks speed and in the end are hard to solve.
 
-しかし、いざ SaaS を提供しようとすると、もしくは SaaS を提供していくと、いままでのアプリケーション販売の時とは違った特徴を持った問題や課題がでてきます。たとえば、各 PC へインストールするタイプのアプリケーションに比べて、必ず認証・認可の処理が必要になったり、テナントの概念をどのようにしようか、マルチテナント提供時に利用量の多いお客様の影響で他のお客様の性能が劣化してしまってどうしようか、料金プランをどうするか、レベニューという概念をどう事業計画に入れていくか、などなど特徴的な課題が出てきます。
+## What SaaSus Platform solves
 
-SaaS が特徴的な課題を持っているという認識がない場合には、これらの課題に直面したときに初めて気づくケースが多いかと思います。直面してから考えはじめるのは、スピード感的にも芳しく無く、また解決もなかなか難しいかと思います。
+As we know that SaaS has these characteristic challenges, the SaaSus Platform provides a solution as a SaaS itself.
 
-## SaaSus Platform が解決すること
+For example, we provide SaaS-specific authentication functions  for the following concepts. Tenants, additional work automation when the number of tenants increases (tenant onboarding), authorization according to billing plans, measurement and bill usage, It provides SaaS-specific functions such as business plan formulation and automatic performance input from SaaS billing. Thus the SaaS that provides the best practices of SaaS itself.
 
-SaaS はこういった特徴的な課題を持っているということがわかっているので、 SaaSus Platform はこれらを SaaS として解決します。
+By incorporating each feature, you can effortlessly create the tedious parts of SaaS, and you can concentrate on the business knowledge and know-how that SaaS should provide, the implementation of best practices, and continuous improvement.
 
-たとえば、 SaaS に特化した、テナントの概念が入っている認証機能の提供、テナントが増えたときの追加作業の自動化（テナントオンボーディング）、料金プランに応じた認可、利用量の計測と請求、事業計画の策定と SaaS の請求処理からの自動実績入力など、 SaaS に特化した機能を SaaS として提供するものです。つまり SaaS 自体のベストプラクティスを提供する SaaS になります。
+## What exactly can you do with the SaaSus Platform?
 
-これらをうまく使うことにより、 SaaS として当たり前の部分に労力を使わなくてもよくなり、本来 SaaS が提供するべき業務ナレッジやノウハウ、ベストプラクティスの実装や継続的改善に集中することができるようになります。
+Using the web console, you can configure the basic functions of SaaS. By incorporating the SaaS SDK/API into the web application built by the customer, the basic functions of SaaS will be incorporated into the customer's SaaS based on the settings made on the web console. This reduces development and ongoing operating costs for basic SaaS functionality. In the β version, basic functions such as tenant management, user management, login screen generation, role management, billing plan, and billing (Stripe linkage) are available for multi-tenant SaaS.
 
-## 具体的に SaaSus Platform を使うとなにができるのか？
+Please see [this public roadmap](https://github.com/orgs/saasus-platform/projects/1/views/1) for future implementation plans.
 
-Web コンソールを使って、SaaS の基本的な機能の設定ができます。お客様が構築した Web アプリケーションに SaaSus SDK/API を組み込んでいただくことにより、Web コンソールで設定した内容をもとに SaaS の基本的な機能がお客様の SaaS に組み込まれます。そのため、SaaS の基本的な機能に関する、開発と継続的な運用コストが削減できます。β 版においては基本的な機能として、マルチテナント SaaS を前提にしたテナント管理機能、ユーザ管理機能、ログイン画面作成機能、役割（ロール）管理機能、料金プラン機能、請求（Stripe 連携）機能がご利用いただけます。
-
-今後の実装予定は、[こちらのパブリックロードマップ](https://github.com/orgs/saasus-platform/projects/1/views/1)をご覧ください。

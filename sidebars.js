@@ -48,6 +48,15 @@ const sidebars = {
   apiDocSidebar: [
     {
       type: 'category',
+      label: 'Getting Started',
+      link: {
+        type: 'doc',
+        id: 'reference/getting-started-with-your-api',
+      },
+      items: [],
+    },
+    {
+      type: 'category',
       label: 'API Docs',
       items: [
         'reference/auth-api',
