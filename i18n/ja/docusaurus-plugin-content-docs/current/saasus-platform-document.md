@@ -6,7 +6,6 @@ hidden: false
 createdAt: "Sat Jul 30 2022 11:37:27 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
-[English](https://docs.saasus.io/docs/saasus-platform-document)
 
 ## SaaS 事業者、もしくは SaaS 事業者になろうとしている方の課題
 
