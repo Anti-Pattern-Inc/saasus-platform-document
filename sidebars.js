@@ -47,16 +47,7 @@ const sidebars = {
       type: 'category',
       label: 'AWS Marketplace連携機能',
       items: [
-        {
-          type: 'category',
-          label: 'AWS Marketplace連携機能について',
-          link: {
-            type: 'doc',
-            id: 'aws-marketplace-integration/aws-marketplace-integration',
-          },
-          items: [
-          ],
-        },
+        'aws-marketplace-integration/aws-marketplace-integration',
         {
           type: 'category',
           label: 'セラー登録から銀行口座の設定',
