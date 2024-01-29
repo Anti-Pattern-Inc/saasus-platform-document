@@ -31,18 +31,18 @@ All API responses have an "X-Saasus-Trace-Id" header. This is used to enable API
 "X-Saasus-Trace-Id" header can also be specified at request time. If specified at request time, the Trace-Id is inherited.
 
 API  
-[SaaSus Auth API Schema](https://docs.saasus.io/reference/getuserinfo)  
+[SaaSus Auth API Schema](./auth-api)  
 ユーザ情報、基本情報、認証情報、テナント情報、役割(ロール)情報などに関するAPI  
 (APIs related to user information, basic information, authentication information, tenant information, role information, etc.)
 
-[SaaSus Billing API Schema](https://docs.saasus.io/reference/getstripeinfo)  
+[SaaSus Billing API Schema](./billing-api)  
 請求業務で使う外部SaaSとの連携情報の取得・更新・削除に関するAPI  
 (API for acquiring, updating, and deleting information linked with external SaaS used in billing operations)
 
-[SaaSus Pricing API Schema](https://docs.saasus.io/reference/getpricingunits)  
+[SaaSus Pricing API Schema](./pricing-api)  
 プライシングユニット、機能メニュー、料金プラン、メータリングユニットカウントなど料金に関連するAPI  
 (Pricing-related APIs such as pricing units, feature menus, rate plans, metering unit counts, etc.)
 
-[SaaSus Integration API Schema](https://docs.saasus.io/reference/geteventbridgesettings)  
+[SaaSus Integration API Schema](./integration)  
 Amazon EventBridge 連携に関連するAPI  
 (APIs related to Amazon EventBridge integration)
