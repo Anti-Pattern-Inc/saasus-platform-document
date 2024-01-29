@@ -43,6 +43,44 @@ const sidebars = {
         'tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant'
       ],
     },
+    {
+      type: 'category',
+      label: 'AWS Marketplace連携機能',
+      items: [
+        'aws-marketplace-integration/aws-marketplace-integration',
+        {
+          type: 'category',
+          label: 'セラー登録から銀行口座の設定',
+          link: {
+            type: 'doc',
+            id: 'aws-marketplace-integration/aws-marketplace-seller-registration',
+          },
+          items: [
+          ],
+        },
+        {
+          type: 'category',
+          label: 'SaaS製品情報の登録',
+          link: {
+            type: 'doc',
+            id: 'aws-marketplace-integration/product-submission',
+          },
+          items: [
+          ],
+        },
+        'aws-marketplace-integration/embedding-products',
+        {
+          type: 'category',
+          label: '補足',
+          link: {
+            type: 'doc',
+            id: 'aws-marketplace-integration/supplementary',
+          },
+          items: [
+          ],
+        },
+      ],
+    },
   ],
 
   apiDocSidebar: [
