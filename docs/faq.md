@@ -1,48 +1,51 @@
 ---
-sidebar_position: 2
+title: "FAQ"
+slug: "faq-en"
+excerpt: ""
+hidden: false
+createdAt: "Thu Jan 19 2023 08:19:39 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
+■ Frequently Asked Questions
 
-# FAQ
+Q: What can I do with the SaaSus Platform?  
+A: You can use the web console to configure basic SaaS functions. By incorporating the SaaS SDK/API into the web application built by the customer, the basic functions of SaaS will be incorporated into the customer's SaaS based on the settings made on the web console. This reduces development and ongoing operating costs for basic SaaS functionality.
 
-■ よくある質問  
-Q: SaaSus Platform を利用すると何ができますか？  
-A: Web コンソールを使って、SaaS の基本的な機能の設定ができます。お客様が構築した Web アプリケーションに SaaSus SDK/API を組み込んでいただくことにより、Web コンソールで設定した内容をもとに SaaS の基本的な機能がお客様の SaaS に組み込まれます。そのため、SaaS の基本的な機能に関する、開発と継続的な運用コストが削減できます。
+Q: What are the basic functions of SaaS?  
+A: As of January 2023, you can use the following functions tenant management, user management, login screen creation, role management, billing plan, and billing (Stripe linkage) for multi-tenant SaaS.
 
-Q: SaaS の基本的な機能はどのようなものがありますか？  
-A: 2023 年 1 月現在では、マルチテナント SaaS を前提にしたテナント管理機能、ユーザ管理機能、ログイン画面作成機能、役割（ロール）管理機能、料金プラン機能、請求（Stripe 連携）機能がご利用いただけます。
+Q: What kind of features will be implemented in the future?  
+A: Please refer to [public roadmap here](https://github.com/orgs/saasus-platform/projects/1).
 
-Q: 今後はどのような機能が実装される予定ですか？  
-A: [こちらのパブリックロードマップ](https://github.com/orgs/saasus-platform/projects/1)をご参照ください。
+Q: Are the contents of the web console in Japanese?  
+A: Currently, only available in Japanese. We are planning to release an English version in the near future.
 
-Q: Web コンソールの内容は日本語ですか？  
-A: 現状は日本語のみになります。近日、英語版もリリースを予定しております。
+Q: This is my first time creating SaaS, is that okay?  
+A: If you can create a general web application, you can start using it without any knowledge of SaaS. For SaaS-specific parts, we have designed it so that you can understand it better by reading the web console and operation manual.
 
-Q: SaaS を作るのがはじめてなのですが、大丈夫でしょうか？  
-A: 一般的な Web アプリケーションが作成できれば、SaaS の知識がなくても使い始めることが可能です。SaaS 特有の部分に関しては、Web コンソールと操作マニュアルを読んでいただくと理解が進むような設計にしております。
+Q:What programming languages is the SDK available?  
+A: The ones currently provided are for PHP (Laravel) and TypeScript (Node.js). In the future, we plan to provide SDKs for Ruby (Ruby on Rails), Java (Spring), and Go (Echo).
 
-Q: SDK はどのようなプログラミング言語で利用できますか？  
-A: 現在提供中のものは、PHP(Laravel)、TypeScript(Node.js)向けのものになります。今後、Ruby(Ruby on Rails)、Java(Spring)、Go(Echo)用の SDK の提供を予定しております。
+Q: How do you use the SDK and incorporate it into your own SaaS?  
+A: [This demo video](https://www.youtube.com/watch?v=deSkPJ-zTgw) and [Tutorial](./tutorial/prepare-sample-application). In the tutorial, you can actually incorporate the SaaSus SDK code into a normal web chat application and experience multi-tenant SaaS using the SaaSus Platform.
 
-Q: SDK をどのように使って自社の SaaS に組み込むのでしょうか？  
-A: [こちらのデモ動画](https://www.youtube.com/watch?v=deSkPJ-zTgw)および、[チュートリアル](https://docs.saasus.io/docs/prepare-the-sample-application-jp)をご実施ください。チュートリアルでは、普通の Web チャットアプリケーションに実際に SaaSus SDK のコードを組み込んでいただき、SaaSus Platform を用いてマルチテナント SaaS 化することをご体験いただけます。
+Q: What kind of APIs are available?  
+A: Please refer to [this API manual](./reference/getting-started-with-your-api).
 
-Q: API はどのようなものが用意されていますでしょうか？  
-A: [こちらの API マニュアル](https://docs.saasus.io/reference/getting-started-with-your-api)をご参照ください。
+Q: How should I send feature development requests?  
+A: You can now access the feature development request form from the web console. Please send it through there.
 
-Q: 機能開発要望はどのように伝えれば良いですか？  
-A: Web コンソールから、機能開発要望フォームにアクセスできるようになっております。そちらからご送信お願いします。
+Q: Is the SaaSus Platform multi-tenant?  
+A: Yes. The SaaSus Platform itself is created using the SaaSus Platform.
 
-Q: SaaSus Platform はマルチテナントですか？  
-A: はい。マルチテナント SaaS になります。SaaSus Platform 自体が SaaSus Platform を利用して作成されています。
+Q: How does the SaaSus Platform protect data?  
+A: The SaaS Platform uses the Amazon Web Services (AWS) Japan region as its infrastructure. Customer accounts using the SaaS Platform are designed to be fully separate AWS accounts, with data segregation at the AWS account level. In addition, data is encrypted when stored. Therefore, when you self-sign up for the SaaSus Platform, it takes at least one hour to prepare your AWS account automatically. If self-signup is crowded, it may take longer to prepare.
 
-Q: SaaSus Platform でデータはどのように保護していますか？  
-A: SaaSus Platform ではインフラストラクチャとしてアマゾン ウェブ サービス(AWS)の日本国内リージョンを利用しています。SaaSus Platform ご利用のお客様のアカウントは、完全に個別の AWS アカウントを利用するようにデザインされており、AWS アカウントレベルでデータも分離されています。また、保存時にはデータの暗号化を行っています。そのため、SaaSus Platform にセルフサインアップしていただいた際には、AWS アカウントの準備を自動的に行うため最短でも１時間のお時間をいただいております。セルフサインアップが混雑している場合はさらに準備にお時間がかかる可能性があります。
+Q: Is it possible to use separate accounts for development and production?  
+A: In the free plan, only one account for development is accounted. In the standard plan, three environments, development, staging, and production, are accounted for on each SaaSus Platform account.
 
-Q: 開発用のアカウントと本番用のアカウントを分けて利用することは可能ですか？  
-A: フリープランでは、開発用のアカウント１つのみが払い出されます。スタンダードプランでは、SaaSus Platform ご利用アカウントごとに、開発、ステージング、本番、と３つの環境が払い出されます。
+Q: What should I do if I want to cancel the SaaSus Platform?  
+A: Cancellation is completed by completing and sending the cancellation form from the web console. AWS accounts for canceled customer accounts will be closed.
 
-Q: SaaSus Platform の解約を行いたい場合はどうすればよいですか？  
-A: Web コンソール上から解約フォームに記入いただき送信していただくことで解約が完了します。解約されたお客様アカウント用の AWS アカウントはクローズされます。
-
-Q: SaaSus Platform の解約を行った時にデータを引き出すことはできますか？  
-A: SaaSus API を利用して引き出すことが可能です。また、SaaSus Platform 卒業プランとして、お客様アカウント用の AWS アカウントの所有権をデータが入ったままの状態でお客様に移管させていただくプランも検討しております。そのため、SaaSus Platform の成長速度よりもお客様 SaaS の成長速度のほうが大幅に速い場合、SaaSus Platform でカバーしていた部分をご自身の実装に切り替えていただくことが可能です。
+Q: Can I withdraw my data when I cancel my SaaSus Platform?  
+A: It is possible to withdraw the data using the SaaSus API. Also, as a SaaS Platform cancelation plan, we are considering a plan to transfer the ownership of the AWS account for the customer account to the customer with the data still included. Therefore, if the growth rate of customer SaaS is much faster than the growth rate of SaaSus Platform, it will be possible to switch the part covered by SaaSus Platform to your own implementation.
