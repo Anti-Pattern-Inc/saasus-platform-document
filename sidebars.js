@@ -55,7 +55,6 @@ const sidebars = {
       },
       items: [],
     },
-    },
     {
       type: 'category',
       label: 'API Docs',
