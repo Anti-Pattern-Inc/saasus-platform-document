@@ -22,5 +22,13 @@
   "sidebar.apiDocSidebar.category.API Docs": {
     "message": "API Docs",
     "description": "The label for category API Docs in sidebar apiDocSidebar"
+  },
+  "sidebar.tutorialSidebar.category.AWS Marketplace連携機能": {
+    "message": "AWS Marketplace連携機能",
+    "description": "The label for category AWS Marketplace連携機能 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.セラー登録から銀行口座の設定": {
+    "message": "セラー登録から銀行口座の設定",
+    "description": "The label for category セラー登録から銀行口座の設定 in sidebar tutorialSidebar"
   }
 }
