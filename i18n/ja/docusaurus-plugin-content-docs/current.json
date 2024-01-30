@@ -23,6 +23,10 @@
     "message": "API Docs",
     "description": "The label for category API Docs in sidebar apiDocSidebar"
   },
+  "sidebar.tutorialSidebar.doc.Tutorials for Business Users": {
+    "message": "ビジネスユーザー向けチュートリアル",
+    "description": "The label for the doc item Tutorials for Business Users in sidebar tutorialSidebar, linking to the doc tutorials-for-business-users"
+  },
   "sidebar.tutorialSidebar.category.AWS Marketplace連携機能": {
     "message": "AWS Marketplace連携機能",
     "description": "The label for category AWS Marketplace連携機能 in sidebar tutorialSidebar"
