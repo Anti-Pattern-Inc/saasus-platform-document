@@ -18,7 +18,8 @@ updatedAt: "Fri Oct 27 2023 07:14:31 GMT+0000 (Coordinated Universal Time)"
 3. 限定公開状態のSaaS製品の一覧が表示されるので確認したいSaaS製品を選択する。
 4. 詳細ページが表示されますので、ページ右上の「View on AWS Marketplace」のボタンから製品ページのURLを確認することができます。
 
-![](https://files.readme.io/6b982e7-_2023-06-21_15.29.20.png)
+![integration-test-1](/img/aws-marketplace-integration/supplementary/integration-test-1.png)
+
 
 ## 連携確認方法について
 
