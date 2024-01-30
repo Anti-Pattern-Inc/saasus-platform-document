@@ -13,7 +13,7 @@ updatedAt: "Fri Jun 30 2023 03:38:36 GMT+0000 (Coordinated Universal Time)"
 
 :::info
 入力する情報が多いため、あらかじめ入力情報を用意しておくとスムーズに入力を進めることが出来ます。  
-各入力項目の制限やAWS Marketplace上にどのように公開されるかは補足資料を用意していますので、ご確認ください。[公開例](https://docs.saasus.io/docs/supplementary-1-jp)、[入力項目の詳細](https://docs.saasus.io/docs/supplementary-2-jp)
+各入力項目の制限やAWS Marketplace上にどのように公開されるかは補足資料を用意していますので、ご確認ください。[公開例](/docs/aws-marketplace-integration/supplementary/supplementary-1)、[入力項目の詳細](/docs/aws-marketplace-integration/supplementary/supplementary-2)
 :::
 
 入力項目の概要について、以下に列挙しますので確認しながら入力を進めてください。
