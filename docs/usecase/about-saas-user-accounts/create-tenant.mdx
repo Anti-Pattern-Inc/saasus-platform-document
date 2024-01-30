@@ -1,0 +1,63 @@
+---
+title: "テナントの作成"
+slug: "create-tenant"
+excerpt: ""
+hidden: false
+createdAt: "Wed Nov 01 2023 06:48:33 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Dec 21 2023 22:58:57 GMT+0000 (Coordinated Universal Time)"
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+セルフサインアップができたら、テナントを作成します。
+
+今回はテナント作成時はチュートリアルで作成した<a href="/docs/tutorial/setting-measurement-units-function-menus-and-price-plans-jp#free-%E3%83%97%E3%83%A9%E3%83%B3" target="_blank">Freeプラン</a>を自動で適用するようになっています。
+
+<Tabs>
+<TabItem value="php" label="PHP">
+
+```php
+        // バリデーション済みデータの取得
+        $validated = $request->validated();
+
+        // SaaSusSDKの利用
+        $client = new ApiClient();
+        $auth_api_client = $client->getAuthClient();
+        $pricing_api_client = $client->getPricingClient();
+
+        // 料金プランを検索
+        $pricing_plans = $pricing_api_client->getPricingPlans();
+        $next_plan_id = "";
+        foreach ($pricing_plans->getPricingPlans() as $pricing_plan) {
+            if ($pricing_plan['display_name'] == 'Freeプラン') {
+                $next_plan_id = $pricing_plan['id'];
+            }
+        }
+
+        // プランのidを取得できなかった場合エラーとする
+        if (empty($next_plan_id)) {
+            redirect('リダイレクト先を指定')->with('flash_message', '登録に失敗しました。');
+        }
+
+        // 月初のUnixTimeを取得する
+        // プラン変更時に月初のUnixTimeを指定すると即時反映されるため
+        $unixtime_of_first_day_of_current_month = Carbon::now()->startOfMonth()->timestamp;
+
+        // テナント作成
+        // テナント名：画面で入力された名前
+        // 料金プラン：Freeプラン
+        // バックオフィススタッフemail：ログインしている人のメールアドレス
+        $tenant = $auth_api_client->createTenant((object)array(
+            "name" => $validated['tenant_name'],
+            "next_plan_id" => $next_plan_id,
+            "using_next_plan_from" => $unixtime_of_first_day_of_current_month,
+            "back_office_staff_email" => $request['userinfo']['email'],
+        ));
+```
+
+</TabItem>
+</Tabs>
+
+APIを利用してテナントが正常に作成できたかの確認は、「SaaSus管理コンソール＞SaaS 運用コンソール＞テナント管理」よりご確認頂けます。
+
+![tenant](/img/usecase/about-saas-user-accounts/create-tenant/tenant.png)
