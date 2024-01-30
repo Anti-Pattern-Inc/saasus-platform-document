@@ -1,0 +1,63 @@
+---
+title: "テナントにユーザーを紐づけロールを設定する"
+slug: "add-tenant-user"
+excerpt: ""
+hidden: false
+createdAt: "Wed Nov 01 2023 22:00:34 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Dec 21 2023 22:59:04 GMT+0000 (Coordinated Universal Time)"
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+テナントの作成ができたら、テナントにセルフサインアップしたユーザーを紐付けます。
+
+テナント作成のソースに下記を追記してください。
+
+<Tabs>
+<TabItem value="php" label="PHP">
+
+```php
+        // テナントにユーザ紐付け
+        // 姓：画面で入力されたlastname
+        // 名：画面で入力されたfirstname
+        $create_tenant_user_param = new CreateTenantUserParam();
+        $create_tenant_user_param->setEmail($request['userinfo']['email']);
+        $create_tenant_user_param->setAttributes([
+            'memo' => $validated['memo'],
+        ]);
+        $auth_api_client->createTenantUser($tenant->getId(), $create_tenant_user_param, $auth_api_client::FETCH_RESPONSE);
+```
+
+</TabItem>
+</Tabs>
+
+CreateTenantUserParamオブジェクトを利用してください。
+
+setAttributesは<a href="/docs/tutorial/prepare-saasus-platform#%E3%83%86%E3%83%8A%E3%83%B3%E3%83%88%E3%81%AB%E8%BF%BD%E5%8A%A0%E5%B1%9E%E6%80%A7%E3%82%92%E5%AE%9A%E7%BE%A9%E3%81%99%E3%82%8B" target="_blank">テナントに追加属性を定義する</a>で定義したテナントの属性情報をセットします。
+
+続いて、ロールを設定します。
+
+下記コードを追記してください。
+
+<Tabs>
+<TabItem value="php" label="PHP">
+
+```php
+        // ロール設定
+        $create_tenant_user_roles_param = new CreateTenantUserRolesParam();
+        $create_tenant_user_roles_param->setRoleNames(['admin']);
+        $auth_api_client->createTenantUserRoles($tenant->getId(), $request['userinfo']['id'], getenv('DEFAULT_SAASUSER_ENV'), $create_tenant_user_roles_param);
+```
+
+</TabItem>
+</Tabs>
+
+CreateTenantUserRolesParamオブジェクト利用してください。
+
+setRoleNamesは複数指定できます。
+
+指定できる値は、<a href="/docs/tutorial/prepare-saasus-platform#%E5%BD%B9%E5%89%B2%E3%81%AE%E5%AE%9A%E7%BE%A9" target="_blank">役割の定義</a>で作成した「役割名」が指定できます。
+
+API経由でテナントユーザーが登録できたかどうかの確認は、「SaaSus管理コンソール＞SaaS 運用コンソール＞ユーザー管理」よりご確認頂けます。
+
+![user](/img/usecase/about-saas-user-accounts/add-tenant-user/user.png)
