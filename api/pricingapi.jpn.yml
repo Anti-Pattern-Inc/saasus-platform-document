@@ -292,10 +292,7 @@ paths:
       operationId: CreatePricingPlan
       summary: 料金プランを作成
       description: |
-        Create a pricing plan.
-      x-descriptioni18n:
-        jpn: |
-          料金プランを作成します。
+        料金プランを作成します。
       requestBody:
         content:
           application/json:
@@ -322,10 +319,7 @@ paths:
       operationId: GetPricingPlan
       summary: 料金プランを取得
       description: |
-        Get a pricing plan.
-      x-descriptioni18n:
-        jpn: |
-          料金プランを取得します。
+        料金プランを取得します。
       parameters:
         - $ref: "#/components/parameters/PlanId"
       responses:
@@ -348,10 +342,7 @@ paths:
       operationId: DeletePricingPlan
       summary: 料金プランを削除
       description: |
-        Delete a pricing plan.
-      x-descriptioni18n:
-        jpn: |
-          料金プランを削除します。
+        料金プランを削除します。
       parameters:
         - $ref: "#/components/parameters/PlanId"
       responses:
@@ -375,10 +366,7 @@ paths:
       operationId: UpdatePricingPlan
       summary: 料金プランを更新
       description: |
-        Update a pricing plan.
-      x-descriptioni18n:
-        jpn: |
-          料金プランを更新します。
+        料金プランを更新します。
       parameters:
         - $ref: "#/components/parameters/PlanId"
       requestBody:
@@ -402,10 +390,7 @@ paths:
       operationId: UpdatePricingPlansUsed
       summary: 使用済みフラグ更新
       description: |
-        Update price plan and feature menu/pricing unit to used.
-      x-descriptioni18n:
-        jpn: |
-          料金プランと配下のメニュー・ユニットを使用済みに更新します。
+        料金プランと配下のメニュー・ユニットを使用済みに更新します。
       requestBody:
         content:
           application/json:
@@ -427,10 +412,7 @@ paths:
       operationId: LinkPlanToStripe
       summary: stripe連携
       description: |
-        Connect information to Stripe.
-      x-descriptioni18n:
-        jpn: |
-          stripeへ情報を連携します。
+        stripeへ情報を連携します。
       responses:
         "200":
           description: OK
@@ -447,10 +429,7 @@ paths:
       operationId: DeleteStripePlan
       summary: stripe上の商品情報を削除
       description: |
-        Delete product data from Stripe.
-      x-descriptioni18n:
-        jpn: |
-          stripe上の商品情報を削除します。
+        stripe上の商品情報を削除します。
       responses:
         "200":
           description: OK
@@ -467,10 +446,7 @@ paths:
       operationId: GetMeteringUnitDateCountByTenantIdAndUnitNameAndDate
       summary: 指定した日付のメータリングユニットカウントを取得
       description: |
-        Gets the metering unit count for a specific date.
-      x-descriptioni18n:
-        jpn: |
-          指定した日付のメータリングユニットカウントを取得します。
+        指定した日付のメータリングユニットカウントを取得します。
       parameters:
         - $ref: "#/components/parameters/TenantId"
         - $ref: "#/components/parameters/MeteringUnitName"
