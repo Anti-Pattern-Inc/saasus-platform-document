@@ -42,6 +42,23 @@ const sidebars = {
       ],
     },
     {
+      type: "category",
+      label: "実装ガイド",
+      items: [
+        "implementation-guide/implementing-authentication-using-saasus-platform-apiserver",
+        "implementation-guide/implementing-authentication-using-saasus-serverless",
+        {
+          type: "category",
+          label: "メータリングAPIの実装サンプルと使用例(Laravel)",
+          link: {
+            type: "doc",
+            id: "implementation-guide/meteringapisamplelaravelandusecase"
+          },
+          items: ["implementation-guide/example_implementation_using_metering_api"]
+        }
+      ]
+    },
+    {
       type: 'category',
       label: 'ユースケース',
       items: [

@@ -7,10 +7,6 @@
     "message": "はじめに",
     "description": "The label for category はじめに in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.ビジネスユーザー向けチュートリアル": {
-    "message": "ビジネスユーザー向けチュートリアル",
-    "description": "The label for category ビジネスユーザー向けチュートリアル in sidebar tutorialSidebar"
-  },
   "sidebar.tutorialSidebar.category.チュートリアル": {
     "message": "チュートリアル",
     "description": "The label for category チュートリアル in sidebar tutorialSidebar"
@@ -26,6 +22,14 @@
   "sidebar.tutorialSidebar.doc.Tutorials for Business Users": {
     "message": "ビジネスユーザー向けチュートリアル",
     "description": "The label for the doc item Tutorials for Business Users in sidebar tutorialSidebar, linking to the doc tutorials-for-business-users"
+  },
+  "sidebar.tutorialSidebar.category.実装ガイド": {
+    "message": "実装ガイド",
+    "description": "The label for category 実装ガイド in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.メータリングAPIの実装サンプルと使用例(Laravel)": {
+    "message": "メータリングAPIの実装サンプルと使用例(Laravel)",
+    "description": "The label for category メータリングAPIの実装サンプルと使用例(Laravel) in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.AWS Marketplace連携機能": {
     "message": "AWS Marketplace連携機能",
