@@ -1,14 +1,16 @@
 ---
-sidebar_label: "ビジネスユーザー向け チュートリアル"
-sidebar_position: 1
+title: "Tutorials for Business Users"
+slug: "tutorials-for-business-users"
+excerpt: ""
+hidden: false
+createdAt: "Thu Jan 19 2023 08:24:39 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
+Engineers are indispensable for using the SaaS Platform, but of course SaaS requires not only engineers but also cooperation with the business side.  Here is a tutorial for what can business users do with the SaaSus Platform.
 
-# ビジネスユーザー向けチュートリアル
+The actual tutorial has a part that is embedded in the application code, but even if you omit that part, you can get a feel of what settings can be made with the SaaS Platform.
 
-SaaSus Platform の利用にはエンジニアが不可欠ですが、SaaS はもちろんエンジニアだけではなく、ビジネスサイドとの連携が不可欠です。そのため、ビジネスユーザーの方にも SaaSus Platform でどんなことができるのか？を体験していただければと思います。
+For business users, please try the following parts of the tutorial.
 
-実際のチュートリアルはアプリケーションのコードに組み込む部分がありますが、その部分を省略しても SaaSus Platform でどのような設定ができるかのイメージを付けていただくこともできると考えております。
+\*SaaS Platform preparation includes setting the domain name, setting the Callback URL, and customizing the login screen.
 
-そのため、ビジネスユーザの方は、チュートリアルの以下の部分をお試しいただければと思います。
-
-※SaaSus Platform の準備にはドメイン名の設定や Callback URL の設定、またログイン画面のカスタマイズが含まれていますが、そこは省略していただければと思います。
