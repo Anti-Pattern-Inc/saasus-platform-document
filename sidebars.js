@@ -71,6 +71,12 @@ const sidebars = {
             id: 'aws-marketplace-integration/aws-marketplace-seller-registration',
           },
           items: [
+            'aws-marketplace-integration/aws-marketplace-seller-registration/aws-marketplace-seller-registration',
+            'aws-marketplace-integration/aws-marketplace-seller-registration/public-profile-settings',
+            'aws-marketplace-integration/aws-marketplace-seller-registration/tax-information-interview',
+            'aws-marketplace-integration/aws-marketplace-seller-registration/dac7-tax-survey',
+            'aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account',
+            'aws-marketplace-integration/aws-marketplace-seller-registration/hyperwallet-registration',
           ],
         },
         {
