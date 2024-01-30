@@ -120,6 +120,14 @@ const sidebars = {
             id: 'aws-marketplace-integration/supplementary',
           },
           items: [
+            'aws-marketplace-integration/supplementary/integration-test',
+            'aws-marketplace-integration/supplementary/self-up-setting',
+            'aws-marketplace-integration/supplementary/user-judgment-method',,
+            'aws-marketplace-integration/supplementary/supplementary-1',
+            'aws-marketplace-integration/supplementary/supplementary-2',
+            'aws-marketplace-integration/supplementary/supplementary-3',
+            'aws-marketplace-integration/supplementary/final-review-request',
+            'aws-marketplace-integration/supplementary/public-request'
           ],
         },
       ],

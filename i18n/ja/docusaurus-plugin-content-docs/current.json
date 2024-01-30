@@ -38,5 +38,13 @@
   "sidebar.tutorialSidebar.category.セラー登録から銀行口座の設定": {
     "message": "セラー登録から銀行口座の設定",
     "description": "The label for category セラー登録から銀行口座の設定 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.SaaS製品情報の登録": {
+    "message": "SaaS製品情報の登録",
+    "description": "The label for category SaaS製品情報の登録 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.補足": {
+    "message": "補足",
+    "description": "The label for category 補足 in sidebar tutorialSidebar"
   }
 }
