@@ -1,6 +1,6 @@
 ---
 title: "Generalの入力項目詳細"
-slug: "supplementary-2-jp"
+slug: "supplementary-2"
 excerpt: ""
 hidden: false
 metadata: 

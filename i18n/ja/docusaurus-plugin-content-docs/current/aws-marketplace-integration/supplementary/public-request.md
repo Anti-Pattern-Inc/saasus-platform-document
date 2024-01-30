@@ -11,9 +11,9 @@ updatedAt: "Fri Oct 27 2023 07:17:41 GMT+0000 (Coordinated Universal Time)"
 ---
 [出品手順「11. 本番用SaaS製品の最終レビュー依頼」](/docs/aws-marketplace-integration/aws-marketplace-integration)が完了後、AWS Marketplaceサポートチームから公開依頼する手順について説明するメールが届きますので、それを元に公開依頼を行います。
 
-> ⚠️ 注意事項
-> 
-> 事前に調査した内容から、公開依頼の方法についてドキュメントを作成していますが実際に届いたメールの内容が最新の方法となりますので、そちらの方法に従ってください。
+:::caution
+事前に調査した内容から、公開依頼の方法についてドキュメントを作成していますが実際に届いたメールの内容が最新の方法となりますので、そちらの方法に従ってください。
+:::
 
 まず、AWS Marketplace Management Portalで公開依頼のリクエストを行う必要があります。
 

@@ -9,32 +9,32 @@ metadata:
 createdAt: "Thu Jun 01 2023 08:31:18 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Fri Jun 30 2023 03:39:08 GMT+0000 (Coordinated Universal Time)"
 ---
-# Product Overview
+## Product Overview
 
 Generalにて入力した`Software by`、`Title`、`Product Description`、`Short Product Description`、`Product Logo URL`等は、プロダクト公開時に `Product Overview`として表示されます。
 
-![](https://files.readme.io/378a86f-image.png)
+![supplementary-1-1](/img/aws-marketplace-integration/supplementary/supplementary-1-1.png)
 
-# Pricing Information　
+## Pricing Information　
 
 Pricingにて入力した`Dimension name`、　`Description of Dimension`、　`API name for Dimension`、　`Price/ month`、　`Price/1 year`等は、プロダクト公開時に `Pricing Information`として表示されます。
 
-![](https://files.readme.io/34ace85-image.png)
+![supplementary-1-2](/img/aws-marketplace-integration/supplementary/supplementary-1-2.png)
 
-# Usage Information
+## Usage Information
 
 Generalにて入力した`EULA`は、プロダクト公開時に `Usage Information`として表示されます。
 
-![](https://files.readme.io/317fe6a-image.png)
+![supplementary-1-3](/img/aws-marketplace-integration/supplementary/supplementary-1-3.png)
 
-# Support Information
+## Support Information
 
 Generalにて入力した`Resource Name 1-3`、`Resource URL 1-3`、`Support Contacts`、`Support Resources`、`Refund Policy`等は、プロダクト公開時に `Support Information`として表示されます。
 
-![](https://files.readme.io/75b5799-image.png)
+![supplementary-1-4](/img/aws-marketplace-integration/supplementary/supplementary-1-4.png)
 
-# Product Category
+## Product Category
 
 Generalにて入力した `Product Category`はエンドユーザが`AWS Marketplace`上でプロダクトを探すためのカテゴリーとして利用されます。
 
-![](https://files.readme.io/3d641e0-image.png)
+![supplementary-1-5](/img/aws-marketplace-integration/supplementary/supplementary-1-5.png)
