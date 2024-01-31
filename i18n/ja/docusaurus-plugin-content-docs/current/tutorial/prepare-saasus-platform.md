@@ -23,31 +23,31 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 
 メールアドレスと希望するパスワードを入力し、利用規約とプライバシーポリシーを読んでいただき同意していただける場合はチェックを入れ、新規登録ボタンを押します
 
-![01](/ja/img/tutorial/prepare-saasus-platform-01.png)
+![01](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-01.png)
 
 入力したメールアドレスに検証コードが届くので、それを入力してアカウントを有効化します
 
-![02](/ja/img/tutorial/prepare-saasus-platform-02.png)
+![02](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-02.png)
 
 検証が完了するとログイン画面が表示されます
 
 先ほど登録していただいたメールアドレスとパスワードを入れてログインします。
 
-![03](/ja/img/tutorial/prepare-saasus-platform-03.png)
+![03](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-03.png)
 
 はじめて SaaSus Platform に登録した時には、登録していただいた方専用のテナントを作成します。これは、お客様専用の AWS アカウントを作成しているため、最短で１時間ほどお時間がかかります。アカウント作成が完了次第、先ほどのメールアドレスにご案内が届きます。
 
-![04](/ja/img/tutorial/prepare-saasus-platform-04.png)
+![04](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-04.png)
 
 ### コンソールへのログイン
 
 テナントが作成されたのちに、ログインを行うと、このようにユーザ属性の入力が求められますので、会社名、名前を入力してください。
 
-![05](/ja/img/tutorial/prepare-saasus-platform-05.png)
+![05](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-05.png)
 
 入力後テナントの各コンソールへの遷移画面が表示されます。
 
-![06](/ja/img/tutorial/prepare-saasus-platform-06.png)
+![06](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-06.png)
 
 **SaaS 開発コンソール**は、SaaS 構築のための設定を行うコンソールで、
 
@@ -61,19 +61,19 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 
 SaaS 開発コンソールにログインしたら、まずは SaaS で使うドメイン名を登録します。サイドメニューの「ドメイン」をクリックし、ドメイン登録画面を表示します。このドメイン名は、ログイン画面やメール送信のベースドメインとして利用します。このあと DNS レコードを作成していただくので、**ご自身で操作可能なドメイン名**を登録してください。
 
-![07](/ja/img/tutorial/prepare-saasus-platform-07.png)
+![07](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-07.png)
 
 ドメイン名を登録していただくと、数秒後画面下部に DNS 検証（確かにそのドメイン名を所有しているということの確認）を行うために、CNAME レコードが表示されます。こちらの値をご自身の DNS に登録してください。
 
-![08](/ja/img/tutorial/prepare-saasus-platform-08.png)
+![08](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-08.png)
 
 例えば、Value Domain にてドメインを管理している場合は、以下のような設定を行います。
 
-![09](/ja/img/tutorial/prepare-saasus-platform-09.png)
+![09](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-09.png)
 
 ご自身の DNS に登録していただいた後に、数分経つと検証が完了し、「以下の DNS 情報が検証され、正常に動作中です。」と表示されます。これで SaaSus Platform の設定をするための前準備が整いました。
 
-![10](/ja/img/tutorial/prepare-saasus-platform-10.png)
+![10](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-10.png)
 
 このドメインをベースに、SaaSus Platform がログイン画面を自動生成します。
 
@@ -87,7 +87,7 @@ SaaS 開発コンソールにログインしたら、まずは SaaS で使うド
 
 <http://localhost/callback>
 
-![11](/ja/img/tutorial/prepare-saasus-platform-11.png)
+![11](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-11.png)
 
 ### SaaS ID, API キーの確認
 
@@ -102,7 +102,7 @@ SaaS 開発コンソールにログインしたら、まずは SaaS で使うド
 これらの情報は、あとからもこの画面で確認可能ですので、いま覚えていただかなくても大丈夫です。  
 (セキュリティ強化のため、API キーはあとから確認できなくなる予定です)
 
-![12](/ja/img/tutorial/prepare-saasus-platform-12.png)
+![12](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-12.png)
 
 ### ログイン画面など認証系画面のカスタマイズ
 
@@ -110,7 +110,7 @@ SaaS 開発コンソールにログインしたら、まずは SaaS で使うド
 
 サイドメニューの「認証詳細設定」をクリックします
 
-![13](/ja/img/tutorial/prepare-saasus-platform-13.png)
+![13](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-13.png)
 
 基本情報では、認証系画面で利用される各種情報を編集します。
 
@@ -121,7 +121,7 @@ SaaS 開発コンソールにログインしたら、まずは SaaS で使うド
 - 利用規約 URL、プライバシーポリシー URL が**利用規約、プライバシーポリシーのリンク先**  
   となります。
 
-![14](/ja/img/tutorial/prepare-saasus-platform-14.png)
+![14](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-14.png)
 
 変更を適用するために「保存」ボタンをクリックします
 
@@ -145,7 +145,7 @@ SaaS 開発コンソールにログインしたら、まずは SaaS で使うド
 
 サイドメニューの「ユーザ属性定義」をクリックします。
 
-![15](/ja/img/tutorial/prepare-saasus-platform-15.png)
+![15](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-15.png)
 
 SaaSus Platform 上では、初期状態では管理する SaaS のユーザはユーザ ID(UUID)とメールアドレスしか持っていません。これで足りない場合は、ユーザに追加の属性を持たせることができます。
 
@@ -171,11 +171,11 @@ SaaS 設計者は、ユーザに関するどの属性を SaaSus Platform 側で�
 
 入力したら、「作成」ボタンを押します
 
-![16](/ja/img/tutorial/prepare-saasus-platform-16.png)
+![16](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-16.png)
 
 ユーザー属性が追加されました。
 
-![17](/ja/img/tutorial/prepare-saasus-platform-17.png)
+![17](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-17.png)
 
 ### テナントに追加属性を定義する
 
@@ -195,11 +195,11 @@ SaaS 設計者は、ユーザに関するどの属性を SaaSus Platform 側で�
 
 入力したら、「作成」ボタンを押します
 
-![18](/ja/img/tutorial/prepare-saasus-platform-18.png)
+![18](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-18.png)
 
 テナント属性が追加されました。
 
-![19](/ja/img/tutorial/prepare-saasus-platform-19.png)
+![19](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-19.png)
 
 ### 役割の定義
 
@@ -223,7 +223,7 @@ SaaS 設計者は、ユーザに関するどの属性を SaaSus Platform 側で�
 - 表示名: 一般利用者
 
 
-![21](/ja/img/tutorial/prepare-saasus-platform-21.png)
+![21](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-21.png)
 
 これでマルチテナント SaaS を作る準備ができました。
 

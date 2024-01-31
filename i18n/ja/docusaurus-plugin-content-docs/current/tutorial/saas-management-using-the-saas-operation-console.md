@@ -12,11 +12,11 @@ SaaS 運用コンソールでは、テナントの管理、ユーザの管理な
 
 先ほどまでは、SaaSus コンソールにログインていたと思いますので、画面上部の環境ボタン(開発環境 > と書いてあるところ)をクリックして、ログイン環境選択画面に戻りましょう
 
-![01](/ja/img/tutorial/saas-management-using-the-saas-operation-console-01.png)
+![01](/ja/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-01.png)
 
 そして、改めて「SaaS 運用コンソール」をクリックして、コンソールを切り替えます。
 
-![02](/ja/img/tutorial/saas-management-using-the-saas-operation-console-02.png)
+![02](/ja/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-02.png)
 
 ### SaaS 利用者テナントの作成
 
@@ -24,7 +24,7 @@ SaaS 運用コンソールでは、テナントの管理、ユーザの管理な
 
 サイドメニューの「テナント管理」をクリックします
 
-![03](/ja/img/tutorial/saas-management-using-the-saas-operation-console-03.png)
+![03](/ja/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-03.png)
 
 「テナント作成」ボタンをクリックしてポップアップを表示します
 
@@ -39,7 +39,7 @@ SaaS 運用コンソールでは、テナントの管理、ユーザの管理な
 - 代表者メールアドレス： [saasus-sample-tenant1@example.com](mailto:saasus-sample-tenant1@example.com)
 - 代表者のパスワード： G@2qYPQq などパスワード要件を満たすもの
 
-![04](/ja/img/tutorial/saas-management-using-the-saas-operation-console-04.png)
+![04](/ja/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-04.png)
 
 ２つ目
 
@@ -51,7 +51,7 @@ SaaS 運用コンソールでは、テナントの管理、ユーザの管理な
 
 （特に決まりではないので、他の値を入れていただいても OK です）
 
-![05](/ja/img/tutorial/saas-management-using-the-saas-operation-console-05.png)
+![05](/ja/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-05.png)
 
 これで、テナントの作成と、そのテナントに属する各１名のユーザーが作成されました。
 
@@ -61,7 +61,7 @@ SaaS 運用コンソールでは、テナントの管理、ユーザの管理な
 
 先ほど作成したユーザーが、各テナント、各環境の admin（SaaS 管理者）の役割として登録されています。
 
-![06](/ja/img/tutorial/saas-management-using-the-saas-operation-console-06.png)
+![06](/ja/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-06.png)
 
 SaaSus Platform では、SaaS 利用者のテナントに「環境」という概念が利用できます。
 
@@ -80,7 +80,7 @@ SaaSus Platform では、SaaS 利用者のテナントに「環境」という�
 テナント： テナントサンプルその１  
 ユーザ名： ユーザ 1-1
 
-![07](/ja/img/tutorial/saas-management-using-the-saas-operation-console-07.png)
+![07](/ja/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-07.png)
 
 メールアドレス: [user1-2@example.com](mailto:user1-2@example.com)  
 パスワード： パスワード要件を満たすもの  
@@ -97,7 +97,7 @@ SaaSus Platform では、SaaS 利用者のテナントに「環境」という�
 テナント： サンプルアプリテナント２  
 ユーザ名： ユーザ 2-2
 
-![08](/ja/img/tutorial/saas-management-using-the-saas-operation-console-08.png)
+![08](/ja/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-08.png)
 
 4 名追加でユーザ登録できました。
 
@@ -113,7 +113,7 @@ SaaSus Platform では、SaaS 利用者のテナントに「環境」という�
 
 上記条件を入れて検索をクリックします。
 
-![09](/ja/img/tutorial/saas-management-using-the-saas-operation-console-09.png)
+![09](/ja/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-09.png)
 
 この役割に該当するユーザがまだいないため、誰も表示されません。
 
@@ -121,7 +121,7 @@ SaaSus Platform では、SaaS 利用者のテナントに「環境」という�
 
 ユーザ 1-1, ユーザ 1-2 のメールアドレスを選択して、追加をクリックします
 
-![10](/ja/img/tutorial/saas-management-using-the-saas-operation-console-10.png)
+![10](/ja/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-10.png)
 
 ユーザに役割が追加されました
 
@@ -129,7 +129,7 @@ SaaSus Platform では、SaaS 利用者のテナントに「環境」という�
 
 ユーザ管理画面でも役割が付与されているか確認してみましょう。サイドメニューの「ユーザー管理」をクリックして確認します。
 
-![11](/ja/img/tutorial/saas-management-using-the-saas-operation-console-11.png)
+![11](/ja/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-11.png)
 
 ここまでで、SaaS 運用の準備ができました。
 
