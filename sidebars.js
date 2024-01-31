@@ -80,10 +80,11 @@ const sidebars = {
       type: 'category',
       label: 'SaaS Development Console',
       items: [
-        'saas-development-console/notifymailcustomize',
-        'saas-development-console/saasususerinvitation',
         'saas-development-console/tiered-unit',
-        'saas-development-console/tax-rates'
+        'saas-development-console/tax-rates',
+        'saas-development-console/notifymailcustomize',
+        'saas-development-console/saasususerinvitation'
+        
       ],
     },
     {
