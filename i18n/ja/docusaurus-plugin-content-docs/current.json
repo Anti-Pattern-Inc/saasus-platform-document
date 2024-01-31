@@ -58,5 +58,41 @@
   "sidebar.tutorialSidebar.category.SaaS Development Console": {
     "message": "SaaS 開発コンソール",
     "description": "The label for category SaaS Development Console in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.SaaS Operation Console": {
+    "message": "SaaS 運用コンソール",
+    "description": "The label for category SaaS Operation Console in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Pricing Plan Setting": {
+    "message": "料金プラン設定",
+    "description": "The label for category Pricing Plan Setting in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Google Tag Managerの設定": {
+    "message": "Google Tag Managerの設定",
+    "description": "The label for category Google Tag Managerの設定 in sidebar tutorialSidebar"
+  },
+  "sidebar.changelogSidebar.category.Changelog": {
+    "message": "Changelog",
+    "description": "The label for category Changelog in sidebar changelogSidebar"
+  },
+  "sidebar.changelogSidebar.doc.2023/11/28": {
+    "message": "2023/11/28",
+    "description": "The label for the doc item 2023/11/28 in sidebar changelogSidebar, linking to the doc changelog/20231128"
+  },
+  "sidebar.changelogSidebar.doc.2023/11/18": {
+    "message": "2023/11/18",
+    "description": "The label for the doc item 2023/11/18 in sidebar changelogSidebar, linking to the doc changelog/20231118"
+  },
+  "sidebar.changelogSidebar.doc.2023/11/05": {
+    "message": "2023/11/05",
+    "description": "The label for the doc item 2023/11/05 in sidebar changelogSidebar, linking to the doc changelog/20231105"
+  },
+  "sidebar.changelogSidebar.doc.2022/12/24": {
+    "message": "2022/12/24",
+    "description": "The label for the doc item 2022/12/24 in sidebar changelogSidebar, linking to the doc changelog/20221224"
+  },
+  "sidebar.changelogSidebar.doc.Welcome to SaaSus Platform": {
+    "message": "Welcome to SaaSus Platform",
+    "description": "The label for the doc item Welcome to SaaSus Platform in sidebar changelogSidebar, linking to the doc changelog/welcome-to-saasus-platform"
   }
 }
