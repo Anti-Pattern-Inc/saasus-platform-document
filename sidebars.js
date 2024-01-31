@@ -85,7 +85,6 @@ const sidebars = {
         'saas-development-console/tax-rates',
         'saas-development-console/notifymailcustomize',
         'saas-development-console/saasususerinvitation',
-        
       ],
     },
     {
