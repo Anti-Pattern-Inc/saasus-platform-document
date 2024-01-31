@@ -34,12 +34,12 @@ SaaSus Platform 内の操作だけで出品が完了するものではないの�
 ### 出品手順全体の流れ
 
 1. セラー登録(AWS)
-   1. [セラー登録ガイド](https://docs.saasus.io/docs/aws-marketplace-seller-registration-jp)
+   1. [セラー登録ガイド](/docs/aws-marketplace-integration/aws-marketplace-seller-registration/aws-marketplace-seller-registration)
 
 2. Public profileと銀行口座の設定(AMMP)
 
-   1. [Public profileの設定ガイド](https://docs.saasus.io/docs/public-profile-settings-jp)
-   2. [銀行口座の設定の始め方](https://docs.saasus.io/docs/tax-information-interview-jp)
+   1. [Public profileの設定ガイド](/docs/aws-marketplace-integration/aws-marketplace-seller-registration/public-profile-settings)
+   2. [銀行口座の設定の始め方](/docs/aws-marketplace-integration/aws-marketplace-seller-registration/tax-information-interview)
 
    ***
 
@@ -48,13 +48,13 @@ SaaSus Platform 内の操作だけで出品が完了するものではないの�
 3. テスト用SaaS製品の準備(SaaSus Platform::ステージング環境)
 
 4. テスト用SaaS製品の登録(AMMP)
-   1. [登録の始め方](https://docs.saasus.io/docs/product-submission-jp)
+   1. [登録の始め方](/docs/aws-marketplace-integration/product-submission)
 
 5. API統合の準備(SaaSus Platform::ステージング環境)
 
 6. AWS Marketplaceとの連携確認(AWS)
 
-   1. [連携確認の例](https://docs.saasus.io/docs/integration-test)
+   1. [連携確認の例](/docs/aws-marketplace-integration/supplementary/integration-test)
 
    ===**テストフェーズ終了**===
 
@@ -80,10 +80,10 @@ SaaSus Platform 内の操作だけで出品が完了するものではないの�
     ***
 
 5.  本番用SaaS製品の最終レビュー依頼
-    1. [依頼方法](https://docs.saasus.io/docs/final-review-request)
+    1. [依頼方法](/docs/aws-marketplace-integration/supplementary/final-review-request)
 
 6.  本番用SaaS製品の公開依頼
-    1. [依頼方法](https://docs.saasus.io/docs/public-request)
+    1. [依頼方法](/docs/aws-marketplace-integration/supplementary/public-request)
 
 # 出品におけるSaaS製品の基準
 
@@ -97,8 +97,8 @@ AWS MarketplaceへSaaS製品を出品するための基準が設けられてお�
 SaaS製品ガイドラインを踏まえて、SaaSus Platformからも基準を満たしているかチェック致します。  
 AWS Marketplace連携機能を利用時にチェックする形になっていますが、ドキュメントにも掲載しておきますのでご確認ください。
 
-・SaaSusの認証詳細設定でセルフサインアップを有効にしている ([参考](https://docs.saasus.io/docs/self-up-setting))  
+・SaaSusの認証詳細設定でセルフサインアップを有効にしている ([参考](/docs/aws-marketplace-integration/supplementary/self-up-setting))  
 ・ユーザー自身がSaaS上で契約しているプランを確認できるようになっている  
 ・ユーザー自身がSaaS上でサポートへ問い合わせできる動線が配置されている  
-・既にアカウントを持っているユーザーがSaaSを購入した時のマルチテナントの考慮を実装している ([参考](https://docs.saasus.io/docs/embedding-products))  
-・AWS Marketplaceから購入したユーザーは、SaaS上ではプランの変更、退会をできないようにしている ([参考](https://docs.saasus.io/docs/user-judgment-method))
+・既にアカウントを持っているユーザーがSaaSを購入した時のマルチテナントの考慮を実装している ([参考](/docs/aws-marketplace-integration/embedding-products))  
+・AWS Marketplaceから購入したユーザーは、SaaS上ではプランの変更、退会をできないようにしている ([参考](/docs/aws-marketplace-integration/supplementary/user-judgment-method))

@@ -1,0 +1,542 @@
+---
+title: "メータリングAPIを利用した実装例"
+slug: "example_implementation_using_metering_api"
+excerpt: ""
+hidden: false
+createdAt: "Wed Dec 27 2023 08:53:56 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Wed Dec 27 2023 09:01:38 GMT+0000 (Coordinated Universal Time)"
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+## 概要
+
+ユーザー数とアクティブユーザー数に対する従量課金が設定されたプランがあるSaaSを例とします。
+
+テナント管理者が日付やメータリングユニットを上記の使用量を確認できる機能を作成します。
+
+<details><summary><b>今回の実装例で利用する料金プラン作成</b></summary>
+
+## 料金プランの作成
+
+### 計測単位作成
+
+ユーザー数とアクティブユーザー数の計測単位を作成します。
+
+今回は使用量ユニットで作成しますが、実際に運用する際は下記のリンクを参考に段階ユニットや段階使用量ユニットでの作成も検討してください。
+
+<!-- TODO fix link url -->
+<a href="doc:tiered_unit">段階ユニット、段階的使用量ユニットの料金計算の違いについて</a>
+
+1. 開発コンソールから料金プラン -> 計測単位設定 に進みます
+2. 計測単位設定画面右上にある「固定ユニット計測単位の作成」の右側にある「▼」をクリックし、「使用量ユニット計測単位の作成」を選択後、「使用量ユニット計測単位の作成」ボタンをクリックしてください
+
+   ![](/img/metering-api-sample/image-03.png)
+3. ユーザー数とアクティブユーザー数の計測単位を設定します
+
+   ![](/img/metering-api-sample/image-04.png)
+
+   ![](/img/metering-api-sample/image-05.png)
+
+### 機能メニュー作成
+
+作成した計測単位を設定する機能メニューを作成します。
+
+1. 開発コンソールから料金プラン -> 機能メニュー設定 に進みます
+2. 右上の「機能メニューの作成」をクリックします
+3. 計測単位にユーザー数とアクティブユーザー数を設定した機能メニューを作成します
+
+   ![](/img/metering-api-sample/image-06.png)
+
+### 料金プラン作成
+
+作成した機能メニューを設定した料金プランを作成します。
+
+1. 開発コンソールから料金プラン ->料金プラン設定 に進みます
+2. 右上の「料金プランの作成」をクリックします
+3. 機能メニューに作成した機能メニューを設定した料金プランを作成します
+
+   ![](/img/metering-api-sample/image-07.png)
+
+## 料金プランの適用
+
+SaaSus運用コンソールから料金プランを適用します。
+
+1. SaaSus運用コンソールの料金プラン設定をクリックします
+2. 料金プランを適用したいテナントの行にある「プラン設定」ボタンをクリックします
+3. 作成した料金プランを設定、反映日をすぐ反映にして保存します
+
+   ![](/img/metering-api-sample/image-08.png)
+
+以上で、5分後に料金プランが適用されます
+
+</details>
+
+## 実装サンプル
+
+Laravelの実装サンプルにおいて、ログインユーザー情報取得APIとテナント情報取得APIの省略しております。
+
+<details><summary><b>React実装サンプル</b></summary>
+
+<Tabs>
+<TabItem value="typescript" label="App.tsx">
+
+```typescript
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import Auth from "./components/route/Auth.tsx";
+import Tenant from "./components/route/Tenant.tsx";
+import Callback from "./pages/Callback";
+import UsageCheck from "./pages/UsageCheck.tsx";
+
+function App() {
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/callback" element={<Callback />} />
+                <Route path="/" element={<Auth />}>
+                    <Route path="/tenants/:tenantId" element={<Tenant />}>
+                        <Route path="usage-check" element={<UsageCheck />} />
+                    </Route>
+                </Route>
+            </Routes>
+        </BrowserRouter>
+    );
+}
+
+export default App;
+```
+
+</TabItem>
+</Tabs>
+
+<Tabs>
+<TabItem value="typescript" label="Auth.tsx">
+
+```typescript
+import axios from "axios";
+import React, {useEffect, useState} from "react";
+import {Outlet} from "react-router-dom";
+
+const LOGIN_URL = import.meta.env.VITE_LOGIN_URL;
+const API_ENDPOINT = import.meta.env.VITE_API_URL;
+
+const Auth: React.FC = () => {
+    const [authUser, setAuthUser] = useState<User>()
+    const [authUserFetching, setAuthUserFetching] = useState(true);
+    // ログインユーザの情報を取得
+    const getUserInfo = async () => {
+        try {
+            const jwtToken = window.localStorage.getItem("SaaSusIdToken");
+            const res = await axios.get<User>(`${API_ENDPOINT}/api/userinfo`, {
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    Authorization: `Bearer ${jwtToken}`,
+                },
+                withCredentials: true,
+            });
+            // ログインユーザの情報が取得できない（ログインが確認できない）場合、ログイン画面に遷移
+            if (!res) {
+                window.location.href = LOGIN_URL;
+            } else {
+                setAuthUser(res.data)
+                setAuthUserFetching(false);
+            }
+        } catch {
+            window.location.href = LOGIN_URL;
+        }
+    };
+
+    useEffect(() => {
+        (async () => {
+            await getUserInfo();
+        })()
+    }, []);
+
+    // Outlet Contextとしてログイン済みユーザー情報及びユーザー情報更新関数を渡す
+    return authUserFetching ? <></> :<Outlet context={{ authUser, getUserInfo }} />;
+};
+
+export default Auth;
+```
+
+</TabItem>
+</Tabs>
+
+<Tabs>
+<TabItem value="typescript" label="UsageCheck.tsx">
+
+```typescript
+import React, {useEffect, useState} from 'react';
+import axios, {isAxiosError} from "axios";
+import {useOutletContext} from "react-router-dom";
+import { DateTime } from 'luxon';
+import styled from "styled-components";
+import {SubmitHandler, useForm, useWatch} from "react-hook-form";
+
+interface UsageCount {
+    count: number;
+    date: string | undefined;
+    month: string | undefined;
+    timestamp: number | undefined;
+    meteringUnitName: 'user_count' | 'active_user_count'; // 料金プランの作成で定義した対象メーター名
+}
+
+interface MonthSearchFormSchema {
+    type: 'month';
+    month: string;
+    date: null | undefined;
+    meteringUnitName: null | undefined;
+}
+
+interface MonthMeteringUnitNameSearchFormSchema {
+    type: 'month';
+    month: string;
+    meteringUnitName: string;
+    date: null | undefined;
+}
+
+interface DateSearchFormSchema {
+    type: 'date';
+    date: string;
+    month: null | undefined;
+    meteringUnitName: null | undefined;
+}
+
+interface DateMeteringUnitNameSearchFormSchema {
+    type: 'date';
+    date: string;
+    meteringUnitName: string;
+    month: null | undefined;
+}
+
+type SearchFormSchema = MonthMeteringUnitNameSearchFormSchema|MonthSearchFormSchema|DateMeteringUnitNameSearchFormSchema|DateSearchFormSchema;
+
+const METERING_UNIT_NAME_DICT_ARRAY = [
+    {
+        key: 'user_count', // 料金プランの作成で定義したユーザー数の対象メーター名
+        displayName: 'ユーザー数',
+    },
+    {
+        key: 'active_user_count', // 料金プランの作成で定義したアクティブユーザー数の対象メーター名
+        displayName: 'アクティブユーザー数',
+    },
+]
+
+const LOGIN_URL = import.meta.env.VITE_LOGIN_URL;
+const API_ENDPOINT = import.meta.env.VITE_API_URL ?? "";
+
+const UsageCheck: React.FC = () => {
+    const { tenant } = useOutletContext<UserRouterContext & TenantRouterContext>()
+    const [meteringUnitCountList, setMeteringUnitCountList] = useState<Array<UsageCount>>([])
+    const [targetMonthOrDate, setTargetMonthOrDate] = useState('')
+    const jwtToken = window.localStorage.getItem("SaaSusIdToken");
+    const { register, control, handleSubmit, formState: { isDirty, isValid }, getValues } = useForm<SearchFormSchema>();
+    const searchType = useWatch({ control, name: 'type' });
+
+    /**
+     * 指定した日付のメータリングユニットカウントを取得
+     * @param date
+     * @param meteringUnitName
+     */
+    const fetchUsageCountOfSpecifiedDate = async (date: string, meteringUnitName: string) => {
+        try {
+            const res = await axios.get<UsageCount>(`${API_ENDPOINT}/api/tenants/${tenant.id}/metering/${meteringUnitName}/date/${date}/count`, {
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${jwtToken}`,
+                },
+            })
+            setMeteringUnitCountList([res.data]);
+        } catch (e) {
+            if (isAxiosError<{type: string, message: string}>(e) && e.response && e.response.data.type === 'token_validation_error_expired') {
+                window.location.href = LOGIN_URL;
+            }
+        }
+    }
+
+    /**
+     * 指定月の全メータリングユニットカウントを取得
+     * @param month
+     */
+    const fetchAllUsageCountOfSpecifiedMonth = async (month: string) => {
+        try {
+            const res = await axios.get<Array<UsageCount>>(`${API_ENDPOINT}/api/tenants/${tenant.id}/metering/month/${month}/count`, {
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${jwtToken}`,
+                },
+            })
+            setMeteringUnitCountList(res.data);
+        } catch (e) {
+            if (isAxiosError<{type: string, message: string}>(e) && e.response && e.response.data.type === 'token_validation_error_expired') {
+                window.location.href = LOGIN_URL;
+            }
+        }
+    }
+
+    /**
+     * 指定日の全メータリングユニットカウントを取得
+     * @param date
+     */
+    const fetchAllUsageCountOfSpecifiedDate = async (date: string) => {
+        try {
+            const res = await axios.get<Array<UsageCount>>(`${API_ENDPOINT}/api/tenants/${tenant.id}/metering/date/${date}/count`, {
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${jwtToken}`,
+                },
+            })
+            setMeteringUnitCountList(res.data);
+        } catch (e) {
+            if (isAxiosError<{type: string, message: string}>(e) && e.response && e.response.data.type === 'token_validation_error_expired') {
+                window.location.href = LOGIN_URL;
+            }
+        }
+    }
+
+    /**
+     * 指定月のメータリングユニットカウントを取得
+     * @param month
+     * @param meteringUnitName
+     */
+    const fetchUsageCountOfSpecifiedMonth = async (month: string, meteringUnitName: string) => {
+        try {
+            const res = await axios.get<UsageCount>(`${API_ENDPOINT}/api/tenants/${tenant.id}/metering/${meteringUnitName}/month/${month}/count`, {
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${jwtToken}`,
+                },
+            })
+            setMeteringUnitCountList([res.data]);
+        } catch (e) {
+            if (isAxiosError<{type: string, message: string}>(e) && e.response && e.response.data.type === 'token_validation_error_expired') {
+                window.location.href = LOGIN_URL;
+            }
+        }
+    }
+
+    useEffect(() => {
+        const month = DateTime.now().toFormat('yyyy-MM');
+        setTargetMonthOrDate(month);
+        fetchAllUsageCountOfSpecifiedMonth(month);
+    }, []);
+
+
+
+    const onSearchSubmit: SubmitHandler<SearchFormSchema> = async (data) => {
+        if (data.type === 'month') {
+            if (!data.meteringUnitName) {
+                await fetchAllUsageCountOfSpecifiedMonth(data.month);
+            } else {
+                await fetchUsageCountOfSpecifiedMonth(data.month, data.meteringUnitName);
+            }
+            setTargetMonthOrDate(data.month);
+        } else {
+            if (!data.meteringUnitName) {
+                await fetchAllUsageCountOfSpecifiedDate(data.date);
+            } else {
+                await fetchUsageCountOfSpecifiedDate(data.date, data.meteringUnitName);
+            }
+            setTargetMonthOrDate(data.date);
+        }
+    }
+
+    return (
+        <div>
+            <h2>使用量確認</h2>
+            <form onSubmit={handleSubmit(onSearchSubmit)}>
+                <label>検索対象指定方法</label>
+                <select {...register('type', {required: '選択してください。'})}>
+                    <option></option>
+                    <option value="month">年月</option>
+                    <option value="date">年月日</option>
+                </select>
+                {searchType && (
+                    <>
+                        <label>{searchType === 'month' ? '対象年月' : '対象年月日'}</label>
+                        <input {...register(searchType, { required: '必須です' })} />
+                        <label>計測対象メータ名</label>
+                        <select {...register('meteringUnitName')}>
+                            <option></option>
+                            {METERING_UNIT_NAME_DICT_ARRAY.map(({ key, displayName }) => (
+                                <option key={key} value={key}>{displayName}</option>
+                            ))}
+                        </select>
+                    </>
+                )}
+                <button type="submit" disabled={!isDirty || !isValid}>検索</button>
+            </form>
+
+            <h3>検索対象日：{targetMonthOrDate}</h3>
+            {METERING_UNIT_NAME_DICT_ARRAY.map(({key, displayName}) => {
+                const formMeteringUnitName = getValues('meteringUnitName')
+                return (!formMeteringUnitName || formMeteringUnitName && formMeteringUnitName === key) && (
+                    <UsageCountWrapper key={key}>
+                        <p>{displayName}：{meteringUnitCountList.find(({meteringUnitName}) => key === meteringUnitName)?.count ?? 0}件</p>
+                    </UsageCountWrapper>
+                );
+            })}
+        </div>
+    )
+}
+
+const UsageCountWrapper = styled.div`
+    border-bottom: 1px solid #333;
+`
+
+export default UsageCheck;
+```
+
+</TabItem>
+</Tabs>
+
+</details>
+
+<details><summary><b>Laravel実装サンプル</b></summary>
+
+<Tabs>
+<TabItem value="php" label="routes/api.php">
+
+```php
+Route::middleware(\AntiPatternInc\Saasus\Laravel\Middleware\Auth::class)->group(function () {
+    Route::get('/userinfo', 'App\Http\Controllers\UserinfoController@index')->name('userinfo.index');
+    
+    Route::get('/tenant/{tenantId}', 'App\Http\Controllers\TenantController@show')->name('tenant.index');
+
+    Route::get('/tenants/{tenantId}/metering/{meteringUnitName}/date/{date}/count', 'App\Http\Controllers\MeteringController@getCountOfSpecifiedDate')->name('metering.get-count-of-specified-date');
+    Route::get('/tenants/{tenantId}/metering/{meteringUnitName}/month/{month}/count', 'App\Http\Controllers\MeteringController@getCountOfSpecifiedMonth')->name('metering.get-count-of-specified-month');
+    Route::get('/tenants/{tenantId}/metering/date/{date}/count', 'App\Http\Controllers\MeteringController@getAllMeteringCountOfSpecifiedDate')->name('metering.get-all-unit-count-of-specified-date');
+    Route::get('/tenants/{tenantId}/metering/month/{month}/count', 'App\Http\Controllers\MeteringController@getAllMeteringCountOfSpecifiedMonth')->name('metering.get-all-unit-count-of-specified-month');  
+}
+```
+
+</TabItem>
+</Tabs>
+
+<Tabs>
+<TabItem value="typescript" label="MeteringController.php">
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use AntiPatternInc\Saasus\Sdk\Pricing\Model\MeteringUnitMonthCount;
+
+class MeteringController extends Controller
+{
+    /**
+     * 指定した日付のユニットカウントを取得
+     *
+     * @see https://docs.saasus.io/reference/getmeteringunitdatecountbytenantidandunitnameanddate
+     *
+     * @param string $tenantId
+     * @param string $meteringUnitName
+     * @param string $date
+     * @return array
+     */
+    public function getCountOfSpecifiedDate(string $tenantId, string $meteringUnitName, string $date)
+    {
+        $client = new \AntiPatternInc\Saasus\Api\Client();
+        $pricingApi = $client->getPricingClient();
+        $unitCount = $pricingApi->getMeteringUnitDateCountByTenantIdAndUnitNameAndDate(
+            $tenantId,
+            $meteringUnitName,
+            $date
+        );
+
+        return [
+            'count' => $unitCount->getCount(),
+            'date' => $unitCount->getDate(),
+            'meteringUnitName' => $unitCount->getMeteringUnitName(),
+        ];
+    }
+
+    /**
+     * 指定月のユニットカウント取得
+     *
+     * @see https://docs.saasus.io/reference/getmeteringunitmonthcountbytenantidandunitnameandmonth
+     *
+     * @param string $tenantId
+     * @param string $meteringUnitName
+     * @param string $month
+     * @return array
+     */
+    public function getCountOfSpecifiedMonth(string $tenantId, string $meteringUnitName, string $month)
+    {
+        $client = new \AntiPatternInc\Saasus\Api\Client();
+        $pricingApi = $client->getPricingClient();
+        $unitCount = $pricingApi->getMeteringUnitMonthCountByTenantIdAndUnitNameAndMonth(
+            $tenantId, $meteringUnitName, $month
+        );
+
+        return [
+            'count' => $unitCount->getCount(),
+            'month' => $unitCount->getMonth(),
+            'meteringUnitName' => $unitCount->getMeteringUnitName(),
+        ];
+    }
+
+    /**
+     * 指定日の全ユニットカウントを取得
+     *
+     * @param string $tenantId
+     * @param string $date
+     * @return \AntiPatternInc\Saasus\Sdk\Pricing\Model\MeteringUnitDateCount[]
+     */
+    public function getAllMeteringCountOfSpecifiedDate(string $tenantId, string $date)
+    {
+        $client = new \AntiPatternInc\Saasus\Api\Client();
+        $pricingApi = $client->getPricingClient();
+        $allMeteringCount = $pricingApi->getMeteringUnitDateCountsByTenantIdAndDate(
+            $tenantId, $date
+        );
+
+        return array_map(function ($unitCount) {
+            return [
+                'count' => $unitCount->getCount(),
+                'date' => $unitCount->getDate(),
+                'meteringUnitName' => $unitCount->getMeteringUnitName(),
+            ];
+        }, $allMeteringCount->getCounts());
+    }
+
+    /**
+     * 指定月の全ユニットカウントを取得
+     *
+     * @param string $tenantId
+     * @param string $month
+     * @return MeteringUnitMonthCount[]
+     */
+    public function getAllMeteringCountOfSpecifiedMonth(string $tenantId, string $month)
+    {
+        $client = new \AntiPatternInc\Saasus\Api\Client();
+        $pricingApi = $client->getPricingClient();
+        $allMeteringCount = $pricingApi->getMeteringUnitMonthCountsByTenantIdAndMonth(
+            $tenantId, $month
+        );
+
+        return array_map(function ($unitCount) {
+            return [
+                'count' => $unitCount->getCount(),
+                'month' => $unitCount->getMonth(),
+                'meteringUnitName' => $unitCount->getMeteringUnitName(),
+            ];
+        }, $allMeteringCount->getCounts());
+    }
+}
+```
+
+</TabItem>
+</Tabs>
+
+</details>
+
+実装サンプルを実装すると以下の画像のような機能が作成されます。
+
+![](/img/metering-api-sample/metering_system_example.gif)
