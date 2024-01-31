@@ -144,6 +144,12 @@ const config = {
             label: 'API Docs',
           },
           {
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'changelogSidebar',
+            label: 'Changelog',
+          },
+          {
             type: 'localeDropdown',
             position: 'right',
           },
