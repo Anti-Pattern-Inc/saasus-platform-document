@@ -80,6 +80,22 @@ const sidebars = {
       type: 'category',
       label: 'SaaS Development Console',
       items: [
+        {
+          type: 'category',
+          label: 'Google Tag Managerの設定',
+          link: {
+            type: 'doc',
+            id: 'saas-development-console/googletagmanagersetting',
+          },
+          items: [
+            'saas-development-console/googletagmanagersetting/googletagmanagercreateaccountandcontainer',
+            'saas-development-console/googletagmanagersetting/googletagmanagercontaineridsetting',
+            'saas-development-console/googletagmanagersetting/creategoogleanalyticsaccount',
+            'saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink',
+            
+            
+          ],
+        },
         'saas-development-console/notifymailcustomize',
         'saas-development-console/saasususerinvitation',
       ],

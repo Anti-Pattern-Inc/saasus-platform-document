@@ -58,5 +58,9 @@
   "sidebar.tutorialSidebar.category.SaaS Development Console": {
     "message": "SaaS 開発コンソール",
     "description": "The label for category SaaS Development Console in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Google Tag Managerの設定": {
+    "message": "Google Tag Managerの設定",
+    "description": "The label for category Google Tag Managerの設定 in sidebar tutorialSidebar"
   }
 }
