@@ -46,5 +46,17 @@
   "sidebar.tutorialSidebar.category.補足": {
     "message": "補足",
     "description": "The label for category 補足 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.ユースケース": {
+    "message": "ユースケース",
+    "description": "The label for category ユースケース in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.SaaS利用者（ユーザー）のアカウントについて": {
+    "message": "SaaS利用者（ユーザー）のアカウントについて",
+    "description": "The label for category SaaS利用者（ユーザー）のアカウントについて in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.SaaS Development Console": {
+    "message": "SaaS 開発コンソール",
+    "description": "The label for category SaaS Development Console in sidebar tutorialSidebar"
   }
 }
