@@ -7,10 +7,6 @@
     "message": "はじめに",
     "description": "The label for category はじめに in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.ビジネスユーザー向けチュートリアル": {
-    "message": "ビジネスユーザー向けチュートリアル",
-    "description": "The label for category ビジネスユーザー向けチュートリアル in sidebar tutorialSidebar"
-  },
   "sidebar.tutorialSidebar.category.チュートリアル": {
     "message": "チュートリアル",
     "description": "The label for category チュートリアル in sidebar tutorialSidebar"
@@ -27,6 +23,14 @@
     "message": "ビジネスユーザー向けチュートリアル",
     "description": "The label for the doc item Tutorials for Business Users in sidebar tutorialSidebar, linking to the doc tutorials-for-business-users"
   },
+  "sidebar.tutorialSidebar.category.実装ガイド": {
+    "message": "実装ガイド",
+    "description": "The label for category 実装ガイド in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.メータリングAPIの実装サンプルと使用例(Laravel)": {
+    "message": "メータリングAPIの実装サンプルと使用例(Laravel)",
+    "description": "The label for category メータリングAPIの実装サンプルと使用例(Laravel) in sidebar tutorialSidebar"
+  },
   "sidebar.tutorialSidebar.category.AWS Marketplace連携機能": {
     "message": "AWS Marketplace連携機能",
     "description": "The label for category AWS Marketplace連携機能 in sidebar tutorialSidebar"
@@ -34,6 +38,22 @@
   "sidebar.tutorialSidebar.category.セラー登録から銀行口座の設定": {
     "message": "セラー登録から銀行口座の設定",
     "description": "The label for category セラー登録から銀行口座の設定 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.SaaS製品情報の登録": {
+    "message": "SaaS製品情報の登録",
+    "description": "The label for category SaaS製品情報の登録 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.補足": {
+    "message": "補足",
+    "description": "The label for category 補足 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.ユースケース": {
+    "message": "ユースケース",
+    "description": "The label for category ユースケース in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.SaaS利用者（ユーザー）のアカウントについて": {
+    "message": "SaaS利用者（ユーザー）のアカウントについて",
+    "description": "The label for category SaaS利用者（ユーザー）のアカウントについて in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.SaaS Development Console": {
     "message": "SaaS 開発コンソール",

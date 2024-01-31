@@ -1,6 +1,6 @@
 ---
 title: "SaaS製品情報の登録"
-slug: "product-submission-jp"
+slug: "product-submission"
 excerpt: ""
 hidden: false
 metadata: 
@@ -12,7 +12,7 @@ updatedAt: "Fri Jun 30 2023 03:38:36 GMT+0000 (Coordinated Universal Time)"
 AWS Marketplace Management Portalにて、SaaS製品情報を登録します。
 
 :::caution
-本手順を実施する前に[セラー登録から銀行口座の設定](https://docs.saasus.io/docs/aws-marketplace-seller-registration-jp-1)の手続きが完了していることをご確認ください。
+本手順を実施する前に[セラー登録から銀行口座の設定](/docs/aws-marketplace-integration/aws-marketplace-seller-registration)の手続きが完了していることをご確認ください。
 :::
 
 本手順では以下の内容を準備する必要がありますので、あらかじめご準備ください。
@@ -29,4 +29,4 @@ AWS Marketplace Management Portalにて、SaaS製品情報を登録します。
 - 製品情報は全て英語での登録となります
 - AWS Marketplace サポートチームのレビューを2~3度受ける必要があります、1回につき3~5営業日掛かります。
 
-入力内容等は `AWS Marketplace` 上で公開されます、各入力内容と表示例は[こちら](https://docs.saasus.io/docs/supplementary-1-jp)をご確認ください。（[補足１](https://docs.saasus.io/docs/supplementary-1-jp)）（[補足２](https://docs.saasus.io/docs/supplementary-2-jp)）
+入力内容等は `AWS Marketplace` 上で公開されます、各入力内容と表示例は[こちら](/docs/aws-marketplace-integration/supplementary/supplementary-1)をご確認ください。（[補足１](/docs/aws-marketplace-integration/supplementary/supplementary-1)）（[補足２](/docs/aws-marketplace-integration/supplementary/supplementary-2)）
