@@ -12,21 +12,21 @@ SaaSの運用にはマーケティング活動が重要になるので、ユー�
 
 まずは、Google Tag Managerのアカウントとコンテナを作ります。
 
-<a href="doc:googletagmanagercreateaccountandcontainer" target="_blank">Google Tag Managerのアカウントとコンテナの作成</a>
+[Google Tag Managerのアカウントとコンテナの作成](/docs/saas-development-console/googletagmanagersetting/googletagmanagercreateaccountandcontainer)
 
 Google Tag Managerのアカウントとコンテナの作成が完了したら、実際にSaaSにGoogle Tag Managerを設定します。
 
-<a href="doc:googletagmanagercontaineridsetting" target="_blank">Google Tag Manager コンテナ IDを設定</a>
+[Google Tag Manager コンテナ IDを設定](/docs/saas-development-console/googletagmanagersetting/googletagmanagercontaineridsetting)
 
 以上で、ログイン画面にGoogle Tag Managerのタグがログイン画面に埋め込まれるようになりましたので、Google Analyticsと連携してユーザー行動を取得していきます。
 
 Google Analyticsのアカウント作成がまだの方は以下のリンク先ドキュメントをご確認ください。
 
-<a href="doc:creategoogleanalyticsaccount" target="_blank">Google Analyticsアカウント作成</a>
+[Google Analyticsアカウント作成](/docs/saas-development-console/googletagmanagersetting/creategoogleanalyticsaccount)
 
 Google Analyticsのアカウント作成済みの方ないしアカウント作成が完了した方は、以下のドキュメントからGoogle AnalyticsとGoogle Tag Managerを設定しましょう。
 
-<a href="googleanalyticsgoogletagmanagerlink" target="_blank">Google AnalyticsとGoogle Tag Managerを連携する</a>
+[Google AnalyticsとGoogle Tag Managerを連携する](/docs/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink)
 
 今回はGoogle Analyticsを使用しましたが、Google Tag Managerがサポートしているタグその他のタグや第三者によって提供されているテンプレート等で様々なタグの利用が可能です。
 
