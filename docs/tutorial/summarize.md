@@ -1,15 +1,18 @@
 ---
-title: "まとめ"
+title: "Summary"
 slug: "summarize"
 excerpt: ""
 hidden: false
-createdAt: "Sun Aug 07 2022 12:30:50 GMT+0000 (Coordinated Universal Time)"
+createdAt: "Fri Jan 20 2023 01:47:47 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
-ここまでで、チュートリアルを一通り実施していただき、SaaSus Platformでどんなことができるのかのイメージを持っていただいたけたかと思います。SaaSでは、重要な機能にも関わらず差別化にならない機能がたくさんあります。これらに工数を割くのではなく、貴社のSaaS本来の価値に集中して工数を割いていただきたいと思います。
+Hopefully you have gone through the tutorial and have an idea of what you can do with the SaaSus Platform. In SaaS, there are many features that are not differentiating despite being important features. Instead of spending man-hours on these, use this time to focus on the original value of your company's SaaS.
 
-また、SaaSで大変なのは開発よりも運用です。運用をしていくと、さまざまな機能強化やセキュリティ強化、そして改善が必要になってきます。また、テナント数増加とともにその負荷はどんどん高くなっていきます。そして、それはSaaS運用のフェーズが進んでいかないとなかなか気が付きません。
+Also, the hardest part of SaaS is operation rather than development. As you continue to operate, you will need to enhance various features, strengthen security, and make improvements. In addition, as the number of tenants increases, the load increases steadily. It is difficult to notice it until the SaaS operation phase progresses.
 
-SaaSus Platformで現状できることはまだまだSaaSの基本的な部分だけではありますが、今後よりSaaS運用がスムーズに行くような機能を実装予定です。たとえば、ノイジーネイバー問題と言われるマルチテナントにおいて大きなお客様が他のテナントに影響を与えてしまう問題などにうまく対応していく機能やノウハウです。
+Currently, what the SaaS Platform can do is still only the basics of SaaS, but we plan to implement functions that will make SaaS operations smoother in the future. For example, we are working on providing a solution to the well known noisy neighbor problem where on a multi-tenant setup a large customer affects other tenants.
 
-今後もSaaSus Platformにご期待ください。
+Please look forward to the future of the SaaSus Platform.
+
+\*We would appreciate it if you could answer the following questionnaire after completing the tutorial.  
+<https://docs.google.com/forms/d/e/1FAIpQLSfvb266PjDIMjPSQJhqUCiyJUNux5usfmbsTcP5iAXPQvYh2g/viewform>

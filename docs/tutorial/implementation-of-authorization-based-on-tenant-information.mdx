@@ -1,38 +1,37 @@
 ---
-title: "テナントの情報をもとにした認可の実装"
+title: "Implementation of authorization based on tenant information"
 slug: "implementation-of-authorization-based-on-tenant-information"
 excerpt: ""
 hidden: false
-createdAt: "Wed Jan 11 2023 03:13:22 GMT+0000 (Coordinated Universal Time)"
+createdAt: "Fri Jan 20 2023 01:47:33 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-## 認可の実装
+## Implementation of Authorization
 
-### 料金プランの計測単位に基づいたコメント上限の実装
+### Implementation of comment limits based on pricing plan measurement unit
 
-さきほどのサンプルアプリケーションにさらに手を加えていき、認可の一歩目を実装してみます。
+Let's modify the previous sample application and implement the first step of authorization.
 
-ここまでのSaaSus Platformの設定で、どのユーザがログインしていて、そのユーザはどのテナントに属していてどんな役割で、そのテナントがどの料金プランを選択していて、どんなメニューが使えるのか？というのがアプリケーションから取得できる状態になっています。その情報を使って、アプリケーションに制限をかけていきます。
+With the SaaS Platform settings so far, which user is logged in, which tenant the user belongs to, what role the user has, which price plan is selected by that tenant, and what menu can be used? can be obtained from the application. We will use that information to limit the application.
 
-ここでは、料金プランの中の計測単位の一部である「コメント数」に注目してみましょう。
+For now, focus on "Comments", which is one of the measurement units in the pricing plans.
 
-さきほど、料金プランごとにコメント数の上限値が異なっている設定を行いました。
+Earlier, we set a different upper limit for the number of comments for each price plan.
 
-- Free プランでは、コメント数上限 10
-- Basic プランでは、コメント数上限 100
-- Advanced プラン以上では、上限なし
+- 10 comments limit on Free plan
+- 100 comments limit on Basic plan
+- No limit on Advanced plan and above
 
-という設定を行っています。
+Now, get the maximum number associated with this pricing plan for each tenant and set a limit.
 
-では、この料金プランに紐付いた上限数をテナントごとに取得して、制限をかけてみましょう。
+Rewrite the post method of api/app/Http/Controllers/MessageController.php as follows.
 
-では、先ほど書き換えた、 api/app/Http/Controllers/MessageController.php のpostメソッドを以下のように書き換えてみましょう。
 
 <Tabs>
-<TabItem value="php" label="PHP">
+<TabItem value="php" label="PHP" default>
 
 ```php
    public function post(Request $request)
@@ -44,29 +43,28 @@ import TabItem from '@theme/TabItem';
         $tenant_id = $request->userinfo['tenants'][0]['id'];
         $plan_id = $request->userinfo['tenants'][0]['plan_id'];
 
-        // SaaSus SDKを使ってSaaSus APIを叩いて、各種情報を取得し、判断に使う
+        // Use the SaaSus SDK to hit the SaaSus API, acquire various information, and use it for judgment
         $client = new \AntiPatternInc\Saasus\Api\Client();
         $pricingApi = $client->getPricingClient();
         $res = $pricingApi->getPricingPlan($plan_id, $pricingApi::FETCH_RESPONSE);
         $plan = json_decode($res->getBody(), true);
 
-        // メータリングのメータ、comment_count(コメント数)を使う
+        // use metering meter, comment_count
         $meteringUnitName = "comment_count";
         $res = $pricingApi->getMeteringUnitDateCountByTenantIdAndUnitNameToday($tenant_id, $meteringUnitName, $pricingApi::FETCH_RESPONSE);
-        // 今回は、１日ごとの上限コメント数として扱う
+        // This time, treat it as the maximum number of comments per day
         $count = json_decode($res->getBody(), true);
 
-				// メータリングの上限コメント数を取得
-     		$upper = \AntiPatternInc\Saasus\Api\Lib::findUpperCountByMeteringUnitName($plan, $meteringUnitName);
+        $upper = \AntiPatternInc\Saasus\Api\Lib::findUpperCountByMeteringUnitName($plan, $meteringUnitName);
 
-        // 現在契約中の料金プランの上限コメント数を超えていたら、投稿できなくする
+        // Disable posting if the number of comments exceeds the maximum number of comments for the current contracted price plan
         if ($count['count'] < $upper || $upper === 0) {
             $message = Message::create([
                 'tenant_id' => $tenant_id,
                 'user_id' => $request->userinfo['tenants'][0]['user_attribute']['username'],
                 'message' => $request->message,
             ]);
-            // メータリングAPIで、コメント数に１を足す
+            // add 1 to the number of comments in the metering API
             $param = new \AntiPatternInc\Saasus\Sdk\Pricing\Model\UpdateMeteringUnitTimestampCountNowParam();
             $param->setMethod('add');
             $param->setCount(1);
@@ -81,66 +79,61 @@ import TabItem from '@theme/TabItem';
 </TabItem>
 </Tabs>
 
-先ほどのコードに加えて、コメント数の対象メーター “comment_count” をベースにしてコメント数の上限を確認しています。
 
-先ほど、計測単位は以下の画面のようにどの料金プランの計測単位でも  “comment_count” をベースに設定していると思います。
+In addition to the previous code, check the maximum number of comments based on the comment count target meter “comment_count”.
+
+Earlier, the measurement unit is set based on “comment_count” in any price plan measurement unit as shown in the screen below.
 
 ![](/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-1.png)
 
-そこでコード上では、
+In the function,
 
-テナントに紐付いている**料金プラン**を取得し、
+Get the **price plan** associated with the tenant,
 
-対象メーター “comment_count” の**現在の値**を取得し、
+Get the **current value** of the target meter “comment_count”,
 
-料金プランに紐付いている上限値 “comment_count” の **上限値**を確認しています
+Checking the **upper limit** of the upper limit "comment_count" associated with the pricing plan
 
-そして、もし現在の値が上限値を超えていなければ、
+and if the current value does not exceed the upper limit,
 
-コメント書き込み処理を通常通り行い、
+Do the comment writing process as usual,
 
-対象メーター “comment_count” の**現在の値**に１を足して更新します。
+Add 1 to the **current value** of the target meter "comment_count" and update.
 
-このようにすることで、料金プランごとの上限値を超えた場合には書き込みを行わせない、ということを実現できます。
+By doing this, it is possible to prevent writing when the upper limit for each pricing plan is exceeded.
 
-今回は処理をシンプルにするために、書き込みが行えないということにとどめていますが、実際はエラーメッセージを出したり、アップセルを促すメッセージを出すことになると思います。
+In order to simplify the process this time, the program will be limited to stopping additional comments once the maximum number is reached. However, in a real case scenario an error message or a message prompting an upsell should be displayed.
 
-しかし、機能によっては上限値で完全に止めてしまうとSaaSの価値が損なわれる場合があります。  
-たとえば、今回のようにコメントに上限をもうけて、そこで完全に書き込みができなくなってしまうと、これはチャットとして成り立たなくなってしまいます。  
-そうした場合、このメーターがリセットされるまで、このSaaSは使われなくなってしまう可能性があります。  
-その後、ずっと使われなくなってしまう可能性ももちろんあります。  
-そのため、完全に止めるのではなく、書き込みはできるが警告を出したり、保存期間を調整するなどこのSaaS自体の価値が失われないようにすることが重要です。
+Depending on the function, if it is completely stopped at the upper limit, the value of SaaS may be impaired.  
+For example, if we put an upper limit on comments, and it becomes impossible to write completely there, this will not work as a chat application.  
+Resulting in this SaaS may going unused until this meter is reset, also taking the risk that there is also the possibility that it will never be used again.  
+Therefore, instead of stopping comments completely, it is important to prevent the value of this SaaS itself from being lost, such as issuing a warning about the limit, or adjusting the storage period.
 
-今回はチュートリアルですので、無情にも完全に書き込みができない状態にしました。では、ちゃんと上限で書き込みができなくなっているか試してみましょう！
+Since this is a tutorial, it is completely unwritable. Now, check to see if writing is not possible at the upper limit!
 
-まず、最初にアプリケーションを初期化したときのように、 init.sh を実行してアプリケーションをまっさらな状態に戻しましょう。
+First, run init.sh to clean up the application, just like when we first initialized the application.
 
-そして、テナント１の方にはFreeプランを設定し、[user1-1@example.com](mailto:user1-1@example.com) でログインして、１０件以上の書き込みを行ってみましょう。
+Then, set the Free plan for Tenant 1, log in with [user1-1@example.com](mailto:user1-1@example.com), and write 10 or more items.
 
-フリープラン設定後の書き込みが、１０件までしかできないことが確認できたと思います。
-
-※ 今回はメーター設定後の書き込みのみをカウントする実装としています。<br/>　設定前の書き込みも考慮したい場合は、メーターの値を直接更新する方法もあります。
+This shows that tenant 1 can write a maximum of 10 records.
 
 ![](/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-2.png)
 
-では、次にテナント２のユーザー [user2-1@example.com](mailto:user2-1@example.com) でログインして、１０件以上の書き込みを行ってみましょう。
+Next, log in with user [user2-1@example.com](mailto:user2-1@example.com) in tenant 2 and write 10 or more items.
 
-こちらは上限が100件になっているので、１０件以上の書き込みができたはずです。
+Since the upper limit is 100 here, you should have been able to write more than 10.
+
+![](/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-2.png)
+
+Furthermore, assuming that tenant 1 has upgraded the plan, change the setting from the Free plan to the Basic plan, log in again with [user1-1@example.com](mailto:user1-1@example.com), and write 10 or more items. prize.  
+(It takes about 5 minutes to reflect the changed settings.)
 
 ![](/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-3.png)
 
-さらに、テナント１の方がプランのアップグレードをした想定で、FreeプランからBasicプランに設定を変更して、再度 [user1-1@example.com](mailto:user1-1@example.com) でログインして、１０件以上の書き込みを行ってみましょう。  
-(設定変更後反映には５分ほど時間がかかります。)
+This shows that user1-1 can write more than ten items.
 
 ![](/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-4.png)
 
-今度は書き込みができるようになっているかと思います。
+Using this method it is now possible to meter and limit according to the pricing plan!
 
-![](/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-5.png)
-
-このような形で、料金プランに応じたメータリングや制限ができるようになりました！
-
-制限はSaaSusと連携後から1件とカウントします。  
-APIとしてカウントの制限値を変更する機能など提供しております。
-
-ここまでは、Bladeベースでのアプリケーションへの実装でしたが、最後に Next.js(APIベースでのSPA)への実装の場合はどのようにすればよいか？確認しておきましょう。
+Up to this point, we have implemented Blade-based applications, but finally, how should we implement Next.js (API-based SPA)? Let's continue.

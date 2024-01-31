@@ -1,230 +1,240 @@
 ---
 sidebar_position: 2
-title: "SaaSus Platformの準備"
+title: "Prepare SaaS Platform"
 slug: "prepare-saas-platform"
 excerpt: ""
 hidden: false
-createdAt: "Wed Jan 11 2023 03:12:50 GMT+0000 (Coordinated Universal Time)"
+createdAt: "Fri Jan 20 2023 01:46:40 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
 
-※全体の流れを動画でご覧になることもできます。  
+\*You can also watch the entire process via video.  
 <https://www.youtube.com/watch?v=deSkPJ-zTgw>
 
-## SaaSus Platform の準備
+## Preparing the SaaSus Platform
 
-### SaaSus Platform アカウントの作成
+### Creating a SaaSus Platform Account
 
-まずは SaaSus Platform のアカウントを作成しましょう。
+First, let's create a SaaSus Platform account.
 
-新規登録画面を表示し、ご自身のメールアドレスを用いて新規登録を行います
+Access the registration screen and perform new registration using your own email address.
 
 <https://auth.saasus.io/sign-up>
 
-メールアドレスと希望するパスワードを入力し、利用規約とプライバシーポリシーを読んでいただき同意していただける場合はチェックを入れ、新規登録ボタンを押します
+Enter your email address and desired password, read the terms of use and privacy policy, check if you agree, and press the sign up button.
 
-![01](/img/tutorial/prepare-saasus-platform-01.png)
+![01](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-01.png)
 
-入力したメールアドレスに検証コードが届くので、それを入力してアカウントを有効化します
+A verification code will be sent to the email address you entered, enter it to activate your account
 
-![02](/img/tutorial/prepare-saasus-platform-02.png)
+![02](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-02.png)
 
-検証が完了するとログイン画面が表示されます
+After verification is completed, the login screen will be displayed
 
-先ほど登録していただいたメールアドレスとパスワードを入れてログインします。
+Log in with the email address and password you registered with earlier.
 
-![03](/img/tutorial/prepare-saasus-platform-03.png)
+![03](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-03.png)
 
-はじめて SaaSus Platform に登録した時には、登録していただいた方専用のテナントを作成します。これは、お客様専用の AWS アカウントを作成しているため、最短で１時間ほどお時間がかかります。アカウント作成が完了次第、先ほどのメールアドレスにご案内が届きます。
+When you register for the SaaSus Platform for the first time, we will create a tenant exclusively for you. This takes at least an hour because we will create a customer-dedicated AWS account. Once your account has been created, you will receive an email to the email address you provided.
 
-![04](/img/tutorial/prepare-saasus-platform-04.png)
+![04](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-04.png)
 
-### コンソールへのログイン
+### Logging into the Console
 
-テナントが作成されたのちに、ログインを行うと、このようにユーザ属性の入力が求められますので、会社名、名前を入力してください。
+After the tenant is created, when you log in, you will be prompted to enter user attributes like this.
 
-![05](/img/tutorial/prepare-saasus-platform-05.png)
+![05](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-05.png)
 
-入力後テナントの各コンソールへの遷移画面が表示されます。
+After filling in the information, the transition page to each console of the tenant is displayed.
 
-![06](/img/tutorial/prepare-saasus-platform-06.png)
+![06](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-06.png)
 
-**SaaS 開発コンソール**は、SaaS 構築のための設定を行うコンソールで、
+**SaaS Development Console** is a console for setting up SaaS construction.
 
-**SaaS 管理コンソール**は、SaaS を運用していくためのコンソールになります。
+**SaaS Management Console** is a console for managing SaaS.
 
-詳細は後ほど説明しますが、まずは SaaS 作成の設定を行いたいので、**SaaS 開発コンソール**にログインします。
+Details on registration will be provided later.  
+First, in order to set up SaaS creation settings log into the **SaaS Development Console**.
 
-### ドメイン名の設定
+### Setting the Domain Name
 
-※ドメイン名をお持ちで無い方は、この項目はスキップして[次に行っていただいて大丈夫です。](#認証後の遷移先-url-の設定)
+\*If you do not have a domain name, skip this item and click [Next]. ](#%E8%AA%8D%E8%A8%BC%E5%BE%8C%E3%81%AE%E9%81%B7%E7%A7%BB%E5%85%88url%E3%81% AE%E8%A8%AD%E5%AE%9A)
 
-SaaS 開発コンソールにログインしたら、まずは SaaS で使うドメイン名を登録します。サイドメニューの「ドメイン」をクリックし、ドメイン登録画面を表示します。このドメイン名は、ログイン画面やメール送信のベースドメインとして利用します。このあと DNS レコードを作成していただくので、**ご自身で操作可能なドメイン名**を登録してください。
+After logging in to the SaaS Development Console, register the domain name used for SaaS. Click "Domain" on the side menu to display the domain registration page. This domain name will be used as the base domain for the login page and for emails. After that, you will be asked to create a DNS record, so please register a **domain name that you can operate**.
 
-![07](/img/tutorial/prepare-saasus-platform-07.png)
+![07](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-07.png)
 
-ドメイン名を登録していただくと、数秒後画面下部に DNS 検証（確かにそのドメイン名を所有しているということの確認）を行うために、CNAME レコードが表示されます。こちらの値をご自身の DNS に登録してください。
+After registering your domain name, a CNAME record will appear at the bottom of the screen after a few seconds for DNS verification (confirming that you do indeed own the domain name). Register this value in your DNS.
 
-![08](/img/tutorial/prepare-saasus-platform-08.png)
+![08](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-08.png)
 
-例えば、Value Domain にてドメインを管理している場合は、以下のような設定を行います。
+For example, if the domain is managed by Value Domain, the settings are as follows.
 
-![09](/img/tutorial/prepare-saasus-platform-09.png)
+![09](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-09.png)
 
-ご自身の DNS に登録していただいた後に、数分経つと検証が完了し、「以下の DNS 情報が検証され、正常に動作中です。」と表示されます。これで SaaSus Platform の設定をするための前準備が整いました。
+After registering your DNS, the verification will be completed momentarily and "The following DNS information has been verified and is working properly." will be displayed. You are now ready to set up the SaaSus Platform.
 
-![10](/img/tutorial/prepare-saasus-platform-10.png)
+![10](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-10.png)
 
-このドメインをベースに、SaaSus Platform がログイン画面を自動生成します。
+Based on this domain, the SaaSus Platform automatically generates a login screen.
 
-### 認証後の遷移先 URL の設定
+### Authentication Redirect URL Setting
 
-いま設定したドメイン名をベースに SaaSus Platform はログイン画面を生成します。このログイン画面を経てログインしたのちに、SaaS 側に認証情報を引き継ぎます。この引き継ぎ先の SaaS の URL を Callback URL として登録する必要があります。
+The SaaSus Platform will generate a login page based on the domain name you just set. After logging in through this login page, the authentication information will be handed over to the SaaS side. It is necessary to register the SaaS redirect URL as the Callback URL.
 
-サイドメニューの「認証後遷移先」をクリックし、Callback URL 設定画面を表示します。
+Click "Auth Transition" on the side menu to display the Callback URL setting page.
 
-通常は SaaS を提供している URL をベースに Callback URL を設定します。今回はサンプルアプリケーションをローカルで動かしてみますので、以下のように設定します。
+Normally, set the Callback URL based on the URL that provides SaaS. This time, we will run the sample application locally, so set it as follows.
 
 <http://localhost/callback>
 
-![11](/img/tutorial/prepare-saasus-platform-11.png)
+![11](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-11.png)
 
-### SaaS ID, API キーの確認
+### SaaS ID and API Key Confirmation
 
-次に、SaaS 実装時に利用する、「SaaS ID」と「API キー」を確認しておきます。
+Next, check the "SaaS ID" and "API key" that will be used when implementing SaaS.
 
-「SaaS ID」は、デフォルトで発行されています。このまま利用しても良いですし、「SaaS ID の再発行」ボタンを押して再発行して使っていただくことも可能です。
+"SaaS ID" is issued by default. You can use it as it is, or you can reissue it by pressing the "Reissue SaaS ID" button.
 
-「API キー」は初期では発行されていないので、「API キーの発行」ボタンを押して１つ発行します。
+Since an "API Key" is not issued by default, press "Issue API Key" to issue one.
 
-※実際に SaaS 運用が始まったあとに、「SaaS ID の再発行」を行った場合は、SaaS アプリケーション側に設定している SaaS ID も修正が必要になりますので注意してください。
+\*Please note that if you reissue a SaaS ID after the actual SaaS operation has started, you will also need to modify the SaaS ID set on the SaaS application side.
 
-これらの情報は、あとからもこの画面で確認可能ですので、いま覚えていただかなくても大丈夫です。  
-(セキュリティ強化のため、API キーはあとから確認できなくなる予定です)
+At this time you can check this information anytime on this page, however for enhanced security we plan to change it so that the the API key will not be displayed.
 
-![12](/img/tutorial/prepare-saasus-platform-12.png)
+![12](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-12.png)
 
-### ログイン画面など認証系画面のカスタマイズ
+### Customizing Authentication Pages such as Login Pages
 
-次に、先ほど生成されたログイン画面類のカスタマイズを行います。
+Next, customize the login pages generated earlier.
 
-サイドメニューの「認証詳細設定」をクリックします
+Click "Authentication Details" on the side menu
 
-![13](/img/tutorial/prepare-saasus-platform-13.png)
+![13](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-13.png)
 
-基本情報では、認証系画面で利用される各種情報を編集します。
+In Basic Information, edit the various information used on the authentication page.
 
-たとえば、先ほどのログイン画面でいうと、
+For example, on the previous login page,
 
-- 「SaaSus Platform へようこそ」の部分が**サービス名**
-- 上部のアイコンが**アイコンアップロード**
-- 利用規約 URL、プライバシーポリシー URL が**利用規約、プライバシーポリシーのリンク先**  
-  となります。
+- "Welcome to the SaaSus Platform" is the **service name**
+- The icon at the top is **icon upload**
+- The Terms of Use URL and privacy policy URL are **Terms of Use and Privacy Policy Link**  
+  becomes:
 
-![14](/img/tutorial/prepare-saasus-platform-14.png)
+![14](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-14.png)
 
-変更を適用するために「保存」ボタンをクリックします
+Click the "Save" button to apply the changes
 
-「画面設定」タブでは、新規登録画面、ログイン画面、パスワード変更画面の各画面に、利用規約とプライバシーポリシーを表示するかを選択できます。
+On the "Page Settings" tab, you can select whether to display the terms of use and privacy policy on the following pages new registration, login, and password change.
 
-「認証設定」タブでは、各種詳細な認証設定が行なえます
+On the "Authentication Settings" tab, you can configure various detailed authentication settings.
 
-ここまで設定が完了すると、先ほど設定したドメイン名に “auth.” をつけた URL にてログイン画面が生成されます。実際にログイン画面が表示できるか確認してみましょう
+Once the settings are completed, the login page will be generated at the URL with “auth.” added to the domain name set earlier. Let's check if the login screen can actually be displayed
 
-※変更を保存すると、新しいログイン画面が生成されます。生成には数分かかりますので、最後に保存した内容を確認するためには数分後にアクセスしてみてください。
+- When you save your changes, a new login page will be generated. It will take a few minutes to generate, so please try to access it after a few minutes to see what you last saved.
 
-ログイン画面は、さきほど設定したドメイン名の頭に “auth.” をつけた URL で生成されます。
+The login page will be generated with a URL that adds “auth.” to the beginning of the domain name you set earlier.
 
-たとえば、ドメイン名を “sample.saasus.jp” で設定した場合は、 <https://auth.sample.saasus.jp/>にてログイン画面が提供されます。
+For example, if the domain name is set to “sample.saasus.jp”, a login page at <https://auth.sample.saasus.jp/> is provided.
 
-ログイン画面が確認できたら、SaaSus コンソールに戻りましょう
+After confirming the login page, let's return to the SaaSus console
 
-### ユーザに追加属性を定義する
+### Define Additional Attributes for Users
 
-次に、ユーザ属性を定義します。
+Next, define user attributes.
 
-サイドメニューの「ユーザ属性定義」をクリックします。
+Click "User Attribute Definition" on the side menu.
 
-![15](/img/tutorial/prepare-saasus-platform-15.png)
+![15](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-15.png)
 
-SaaSus Platform 上では、初期状態では管理する SaaS のユーザはユーザ ID(UUID)とメールアドレスしか持っていません。これで足りない場合は、ユーザに追加の属性を持たせることができます。
+On the default SaaS Platform managed SaaS users only have user IDs (UUIDs) and email addresses. If this is not enough, users can be assigned additional attributes.
 
-SaaS 設計者は、ユーザに関するどの属性を SaaSus Platform 側でもち、どの属性を SaaS 側で持つかの分担を考える必要があります。
+SaaS designers need to consider which user attributes should be on the SaaS Platform side and which attributes should be on the SaaS side.
 
-たとえば、すべてのユーザ情報を SaaSus Platform 側で管理したい場合は、必要な追加属性を SaaSus Platform に定義します。しかし、個人情報などの重要な情報は SaaSus Platform 側で管理したくなかったり、ユーザの追加属性をもとに各種集計を行いたい場合などがあります。その場合には、SaaSus Platform 側には認証だけを求め、ユーザ情報の管理は SaaS 側でユーザマスタをベースに行い、UUID を SaaSus Platform 側の認証情報と紐付ける方が柔軟に対応できます。
+For example, if you want to manage all user information on the SaaS Platform side, define the required additional attributes in the SaaS Platform. However, there are cases where you do not want to manage important information such as personal information on the SaaS Platform side, or you want to perform various aggregations based on additional user attributes. In that case, it is more flexible to require only authentication on the SaaS Platform side, manage user information on the SaaS side based on the user master, and associate the UUID with the authentication information on the SaaS Platform side.
 
-今回はサンプルアプリケーションでユーザ名が必要になるので、「ユーザー名」という属性を定義してみます。
+For this example, the sample application requires a username, so let's define an attribute called "username".
 
-「＋ユーザ属性の作成」ボタンをクリックすると、ユーザ属性作成のポップアップが表示されます
+Click the "+ Create User Attribute" to display the dialog for creating user attributes
 
-属性名は、SaaS アプリケーション(プログラム)側で識別するためのキーとして使います。そのため、英字で入力しておくのが無難です。
+The attribute name is used as a key for identification on the SaaS application (code) side. Therefore, it is important to enter in English.
 
-表示名は、その属性がどういうものか？をわかるように記載します。
+Display name is described so that the attribute can be easily understood
 
-タイプは、データ型を指定します。
+Type specifies the data type.
 
-今回はサンプルアプリケーションのために、以下で設定します
+For the sample application, set as follows
 
-- 属性名： username
-- 表示名： ユーザー名
-- タイプ： 文字列
+- Attribute Name: username
+- Display Name: Username
+- Type: String
 
-入力したら、「作成」ボタンを押します
+After entering, press the "Create" button
 
-![16](/img/tutorial/prepare-saasus-platform-16.png)
+![16](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-16.png)
 
-ユーザー属性が追加されました。
+User attributes added.
 
-![17](/img/tutorial/prepare-saasus-platform-17.png)
+![17](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-17.png)
 
-### テナントに追加属性を定義する
+### Defining Additional Attributes for a Tenant
 
-次に「テナント属性定義」をクリックして、テナントの追加属性を定義します。
+Then click “Tenant Attribute Definition” to define additional attributes for the tenant.
 
-ここで言うテナントとは、マルチテナント SaaS におけるテナントの意味を表しています。つまり、SaaS 利用者の組織の単位（契約の単位）をテナントと呼びます。
+Here "Tenant" refers to the tenants in a multi-tenant SaaS. In other words, the organizational unit (contracting unit) of the SaaS is called a tenant.
 
-各テナントで必要になりそうな追加属性を定義しておきます。
+Define any additional attributes that may be required for each tenant.
 
-ユーザー属性の時と同じように、「＋テナント属性の作成」をクリックして追加します。
+Click “+ Create Tenant Attribute” to add it in the same way as for user attributes.
 
-今回は、そのテナントに対するメモを書けるようにしてみます。
+This time, let's make it possible to add a memo for the tenant.
 
-- 属性名： memo
-- 表示名： メモ
-- タイプ： 文字列
+- Attribute Name: memo
+- Display Name: Memo
+- Type: String
 
-入力したら、「作成」ボタンを押します
+After entering, press the "Create" button
 
-![18](/img/tutorial/prepare-saasus-platform-18.png)
+![18](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-18.png)
 
-テナント属性が追加されました。
+Tenant attribute added.
 
-![19](/img/tutorial/prepare-saasus-platform-19.png)
+![19](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-19.png)
 
-### 役割の定義
+### Role Definition
 
-次に、役割を定義していきます。
+Next, we will define the roles.
 
-この役割は、各種 SaaS における役割（ロール）になり、認可のベースとして利用します。
+This role becomes a role in various SaaS and is used as the basis for authorization.
 
-たとえば、テナントごとの管理者権限を持つ場合には、admin のような役割を定義し、一般利用者の場合は user のような役割を付与します。
+For example, if you have administrator privileges for each tenant, define a role such as admin, and for general users, assign a role such as user.
 
-今回は、サンプルアプリケーションのために、admin, user を定義していきます。
+This time, we will define admin and user for the sample application.
 
-「＋役割の作成」ボタンをクリックして、役割の作成ポップアップを表示します。
+Click the "+ Create Role" button to display the Create Role dialog.
 
-役割名は、SaaS アプリケーション側で役割を識別するために使います。
+The role name is used to identify the role on the SaaS application side.
 
-表示名は、その役割がどういうものか？をわかるように記載します。
+The display name is for easy recognition per role.
 
-まずは一般利用者を追加しましょう。
+Enter,
 
-- 役割名: user
-- 表示名: 一般利用者
+- Role Name: admin
+- Display Name: SaaS Admin
 
+and click the Create button.
 
-![21](/img/tutorial/prepare-saasus-platform-21.png)
+![20](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-20.png)
 
-これでマルチテナント SaaS を作る準備ができました。
+Similarly,
 
-では、次に**SaaS 運用コンソール**に切り替えて、SaaS のテナントやユーザ作成を行ってみましょう！
+- Role Name: user
+- Display Name: General User
+
+![21](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-21.png)
+
+![22](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-22.png)
+
+Now you are ready to create a multi-tenant SaaS.
+
+Now let's switch to the **SaaS Operation Console** and create SaaS tenants and users!

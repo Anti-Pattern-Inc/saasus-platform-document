@@ -1,136 +1,133 @@
 ---
 sidebar_position: 3
+title: "SaaS Management using the SaaS Operation Console"
+slug: "saas-management-using-the-saas-operation-console"
+excerpt: ""
+hidden: false
+createdAt: "Fri Jan 20 2023 01:46:49 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
 
-# SaaS 運用コンソールを利用した SaaS の管理
+## Manage SaaS with SaaS Operation Console
 
-## SaaS 運用コンソールを利用した SaaS の管理
+### Switch Consoles
 
-### コンソールの切り替え
+In the SaaS Operation Console, functions for SaaS operation such as tenant management and user management can be used.
 
-SaaS 運用コンソールでは、テナントの管理、ユーザの管理など、SaaS 運用のための機能が利用できます。
+On the SaaSus console click the environment button at the top of the screen (where it says development environment > ) to return to the login environment selection page.
 
-先ほどまでは、SaaSus コンソールにログインていたと思いますので、画面上部の環境ボタン(開発環境 > と書いてあるところ)をクリックして、ログイン環境選択画面に戻りましょう
+![01](/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-01.png)
 
-![01](/img/tutorial/saas-management-using-the-saas-operation-console-01.png)
+Then, click "SaaS Operation Console" again to switch consoles.
 
-そして、改めて「SaaS 運用コンソール」をクリックして、コンソールを切り替えます。
+![02](/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-02.png)
 
-![02](/img/tutorial/saas-management-using-the-saas-operation-console-02.png)
+### Create a SaaS Consumer Tenant
 
-### SaaS 利用者テナントの作成
+First, let's create two tenants for the sample application.
 
-ではまず、サンプルアプリケーション用に、テナントを２つ作成してみましょう
+Click "Tenant Management" on the side menu
 
-サイドメニューの「テナント管理」をクリックします
+![03](/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-03.png)
 
-![03](/img/tutorial/saas-management-using-the-saas-operation-console-03.png)
+Click the Create Tenant button
 
-「テナント作成」ボタンをクリックしてポップアップを表示します
+First example tenant
 
-テナント名・代表者ユーザーの追加・代表者メールアドレス・代表者の仮パスワード、その他に[チュートリアル＞SaaSusPlatformの準備＞テナントに追加属性を定義する」](./prepare-saas-platform#ユーザに追加属性を定義する)に追加したテナント属性が表示されます
+- Name: Tenant Sample 1
+- Primary Email Address: [saasus-sample-tenant1@example.com](mailto:saasus-sample-tenant1@example.com)
+- Representative's password: Temporary password that meets the requirements such as G@2qYPQq
 
+![04](/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-04.png)
 
-１つ目
+Second example tenant
 
-- 名前：テナントサンプルその１
-- メモ：テナント属性で定義した属性情報となり、自由に設定可能となります
-- 代表ユーザーの追加：新規でユーザーを作成
-- 代表者メールアドレス： [saasus-sample-tenant1@example.com](mailto:saasus-sample-tenant1@example.com)
-- 代表者のパスワード： G@2qYPQq などパスワード要件を満たすもの
+- Name: Sample App Tenant 2
+- Primary email address: [saasus-sample-tenant2@example.com](mailto:saasus-sample-tenant2@example.com)
+- Representative's password: Temporary password that meets the requirements such as irG_l88r
 
-![04](/img/tutorial/saas-management-using-the-saas-operation-console-04.png)
+(There are no rules to these values so others can be input)
 
-２つ目
+![05](/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-05.png)
 
-- 名前：サンプルアプリテナント２
-- メモ：テナント属性で定義した属性情報となり、自由に設定可能となります
-- 代表ユーザーの追加：新規でユーザーを作成
-- 代表者メールアドレス： [saasus-sample-tenant2@example.com](mailto:saasus-sample-tenant2@example.com)
-- 代表者のパスワード： irG_l88r などパスワード要件を満たすもの
+You have now created a tenant and one user for each tenant that belongs to that tenant.
 
-（特に決まりではないので、他の値を入れていただいても OK です）
+### Creating SaaS Users
 
-![05](/img/tutorial/saas-management-using-the-saas-operation-console-05.png)
+Let's take a look at the user list. Click User Management from the side menu.
 
-これで、テナントの作成と、そのテナントに属する各１名のユーザーが作成されました。
+The user created earlier is registered as the admin (SaaS administrator) role for each tenant and each environment.
 
-### SaaS 利用ユーザーの作成
+![06](/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-06.png)
 
-では、ユーザー一覧を見てみましょう。サイドメニューから「ユーザー管理」をクリックします。
+In the SaaS Platform, the concept of "environment" can be used for the tenant of the SaaS customer.
 
-先ほど作成したユーザーが、各テナント、各環境の admin（SaaS 管理者）の役割として登録されています。
+For example, in SaaS that mainly uses APIs like Stripe, SaaS users need an environment for integration testing and development. SaaS administrators can define multiple environments, such as using the dev environment for these tasks and using the prod environment for actual operations.
 
-![06](/img/tutorial/saas-management-using-the-saas-operation-console-06.png)
+- Depending on the SaaS, multiple environments may not be necessary, so if you use a single environment, just take prod into consideration.
 
-SaaSus Platform では、SaaS 利用者のテナントに「環境」という概念が利用できます。
+Now, let's register one user for each tenant.
 
-たとえば、Stripe のように API をメインで使う SaaS では、SaaS 利用者は連携のテストや開発時用の環境が必要になります。これらを行うために dev という環境を使い、実際の運用では prod という環境を使うというように SaaS 管理者は複数の環境を定義することができるようになっています。
+Click the "Create User" button on the top right
 
-※もちろん SaaS によっては、複数環境が不要な場合もありますので、単一環境を使う場合は prod だけ意識していただければ大丈夫です。
+For now, let's register 4 people.
 
-では、各テナントごとに１名づつユーザーを登録してみましょう
+Email Address: [user1-1@example.com](mailto:user1-1@example.com)  
+Password: password that meets the password requirements  
+Tenant: Tenant Sample 1  
+Username: User 1-1
 
-右上の「ユーザ作成」ボタンをクリックし、ポップアップを出します
+![07](/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-07.png)
 
-とりあえず、4 名登録してみましょう
+Email Address: [user1-2@example.com](mailto:user1-2@example.com)  
+Password: password that meets the password requirements  
+Tenant: Tenant sample #1  
+Username: User 1-2
 
-メールアドレス: [user1-1@example.com](mailto:user1-1@example.com)  
-パスワード： パスワード要件を満たすもの  
-テナント： テナントサンプルその１  
-ユーザ名： ユーザ 1-1
+Email Address: [user2-1@example.com](mailto:user2-1@example.com)  
+Password: password that meets the password requirements  
+Tenant: Sample application tenant 2  
+Username: User 2-1
 
-![07](/img/tutorial/saas-management-using-the-saas-operation-console-07.png)
+Email Address: [user2-2@example.com](mailto:user2-2@example.com)  
+Password: password that meets the password requirements  
+Tenant: Sample application tenant 2  
+Username: User 2-2
 
-メールアドレス: [user1-2@example.com](mailto:user1-2@example.com)  
-パスワード： パスワード要件を満たすもの  
-テナント： テナントサンプルその１  
-ユーザ名： ユーザ 1-2
+![08](/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-08.png)
 
-メールアドレス: [user2-1@example.com](mailto:user2-1@example.com)  
-パスワード： パスワード要件を満たすもの  
-テナント： サンプルアプリテナント２  
-ユーザ名： ユーザ 2-1
+4 additional users have been registered.
 
-メールアドレス: [user2-2@example.com](mailto:user2-2@example.com)  
-パスワード： パスワード要件を満たすもの  
-テナント： サンプルアプリテナント２  
-ユーザ名： ユーザ 2-2
+Now let's add roles to these users.
 
-![08](/img/tutorial/saas-management-using-the-saas-operation-console-08.png)
+### Add Role to User
 
-4 名追加でユーザ登録できました。
+Click "Role Management" on the side menu
 
-では、これらのユーザーに役割を追加してみましょう。
+Search for the role you want to add.
 
-### ユーザーに役割を追加
+First, let's give user 1-1 and user 1-2 the role of "general user" for "development" on "tenant sample 1".
 
-サイドメニューの「役割管理」をクリックします
+Enter the above conditions and click Search.
 
-ここの画面で追加したい役割を検索します。
+![09](/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-09.png)
 
-まずは、ユーザ 1-1, ユーザ 1-2 に「テナントサンプルその１」の「開発」の「一般利用者」の役割を付与してみましょう。
+None are displayed because there are no users with this role yet.
 
-上記条件を入れて検索をクリックします。
+Now, assign roles by clicking "Grant Roles to Users" on the upper right.
 
-![09](/img/tutorial/saas-management-using-the-saas-operation-console-09.png)
+Select the email addresses of User 1-1 and User 1-2 and click Add
 
-この役割に該当するユーザがまだいないため、誰も表示されません。
+![10](/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-10.png)
 
-では、右上の「ユーザへ役割の付与」をクリックして、役割を付与していきましょう
+Role added to user
 
-ユーザ 1-1, ユーザ 1-2 のメールアドレスを選択して、追加をクリックします
+In the same way, give user 2-1 and user 2-2 the role of "general user" for "development" on "sample application tenant 2".
 
-![10](/img/tutorial/saas-management-using-the-saas-operation-console-10.png)
+Let's check whether the role has been granted on the user management screen as well. Click "User Management" in the side menu to confirm.
 
-ユーザに役割が追加されました
+![11](/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-11.png)
 
-同じように、ユーザ 2-1, ユーザ 2-2 に「サンプルアプリテナント２」の「開発」の「一般利用者」の役割を付与してみましょう。
+Preparations for SaaS operation are now complete.
 
-ユーザ管理画面でも役割が付与されているか確認してみましょう。サイドメニューの「ユーザー管理」をクリックして確認します。
-
-![11](/img/tutorial/saas-management-using-the-saas-operation-console-11.png)
-
-ここまでで、SaaS 運用の準備ができました。
-
-では、いよいよ Web アプリケーションを SaaS 化していきましょう！
+Now let's turn your web application into SaaS!
