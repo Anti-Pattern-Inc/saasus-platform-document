@@ -86,6 +86,27 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'SaaS Operation Console',
+      items: [
+        {
+          type: 'category',
+          label: 'Pricing Plan Setting',
+          link: {
+            type: 'doc',
+            id: 'saas-operation-console/price-plan',
+          },
+          items: [
+            'saas-operation-console/price-plan/price-plan-setting-000',
+            'saas-operation-console/price-plan/price-plan-setting-001',
+            'saas-operation-console/price-plan/price-plan-setting-002',
+            'saas-operation-console/price-plan/price-plan-setting-003',
+            'saas-operation-console/price-plan/price-plan-setting-004',
+          ],
+        },
+      ],
+    },
+    {
+      type: 'category',
       label: 'AWS Marketplace連携機能',
       items: [
         'aws-marketplace-integration/aws-marketplace-integration',

@@ -58,5 +58,13 @@
   "sidebar.tutorialSidebar.category.SaaS Development Console": {
     "message": "SaaS 開発コンソール",
     "description": "The label for category SaaS Development Console in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.SaaS Operation Console": {
+    "message": "SaaS 運用コンソール",
+    "description": "The label for category SaaS Operation Console in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Pricing Plan Setting": {
+    "message": "料金プラン設定",
+    "description": "The label for category Pricing Plan Setting in sidebar tutorialSidebar"
   }
 }
