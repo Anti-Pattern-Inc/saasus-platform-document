@@ -34,5 +34,9 @@
   "sidebar.tutorialSidebar.category.セラー登録から銀行口座の設定": {
     "message": "セラー登録から銀行口座の設定",
     "description": "The label for category セラー登録から銀行口座の設定 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.SaaS Development Console": {
+    "message": "SaaS 開発コンソール",
+    "description": "The label for category SaaS Development Console in sidebar tutorialSidebar"
   }
 }
