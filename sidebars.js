@@ -83,8 +83,43 @@ const sidebars = {
         'saas-development-console/google-linkage',
         'saas-development-console/tiered-unit',
         'saas-development-console/tax-rates',
+        {
+          type: 'category',
+          label: 'Google Tag Managerの設定',
+          link: {
+            type: 'doc',
+            id: 'saas-development-console/googletagmanagersetting',
+          },
+          items: [
+            'saas-development-console/googletagmanagersetting/googletagmanagercreateaccountandcontainer',
+            'saas-development-console/googletagmanagersetting/googletagmanagercontaineridsetting',
+            'saas-development-console/googletagmanagersetting/creategoogleanalyticsaccount',
+            'saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink',
+          ],
+        },
         'saas-development-console/notifymailcustomize',
         'saas-development-console/saasususerinvitation',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'SaaS Operation Console',
+      items: [
+        {
+          type: 'category',
+          label: 'Pricing Plan Setting',
+          link: {
+            type: 'doc',
+            id: 'saas-operation-console/price-plan',
+          },
+          items: [
+            'saas-operation-console/price-plan/price-plan-setting-000',
+            'saas-operation-console/price-plan/price-plan-setting-001',
+            'saas-operation-console/price-plan/price-plan-setting-002',
+            'saas-operation-console/price-plan/price-plan-setting-003',
+            'saas-operation-console/price-plan/price-plan-setting-004',
+          ],
+        },
       ],
     },
     {
@@ -167,6 +202,40 @@ const sidebars = {
         'reference/awsmarketplace-api',
         'reference/integration'
       ],
+    }
+  ],
+  changelogSidebar: [
+    {
+      type: "category",
+      label: "Changelog",
+      items: [
+        {
+          label: "2023/11/28",
+          type: "doc",
+          id: "changelog/20231128"
+        },
+        {
+          label: "2023/11/18",
+          type: "doc",
+          id: "changelog/20231118"
+        },
+        {
+          label: "2023/11/05",
+          type: "doc",
+          id: "changelog/20231105"
+        },
+        {
+          label: "2022/12/24",
+          type: "doc",
+          id: "changelog/20221224"
+        },
+        {
+          label: "Welcome to SaaSus Platform",
+          type: "doc",
+          id: "changelog/welcome-to-saasus-platform"
+        },
+      ],
+      collapsible: false,
     }
   ]
 };
