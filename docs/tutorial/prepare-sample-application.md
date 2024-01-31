@@ -1,8 +1,12 @@
 ---
 sidebar_position: 1
+title: "サンプルアプリケーションの準備"
+slug: "prepare-sample-application"
+excerpt: "シンプルなWebチャットアプリケーションをSaaS化してみましょう"
+hidden: false
+createdAt: "Wed Jan 11 2023 03:12:42 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
-
-# サンプルアプリケーションの準備
 
 シンプルな Web チャットアプリケーションを SaaS 化してみましょう
 

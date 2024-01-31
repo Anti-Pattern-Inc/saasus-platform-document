@@ -21,7 +21,7 @@ const sidebars = {
   tutorialSidebar: [
     {
       type: 'category',
-      label: 'はじめに',
+      label: 'Getting Started',
       items: ['saasus-platform-document', 'faq'],
       collapsed: false,
       collapsible: false,
@@ -33,12 +33,26 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'チュートリアル',
+      label: 'TUTORIAL',
       items: [
         'tutorial/prepare-sample-application',
         'tutorial/prepare-saasus-platform',
         'tutorial/saas-management-using-the-saas-operation-console',
-        'tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant'
+        'tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant',
+        {
+          type: 'category',
+          label: 'Manage Rate Plans',
+          link: {
+            type: 'doc',
+            id: 'tutorial/manage-rate-plans/manage-rate-plans',
+          },
+          items: [
+            'tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans',
+          ],
+        },
+        'tutorial/implementation-of-authorization-based-on-tenant-information',
+        'tutorial/implementation-to-nextjs-spa-based-application',
+        'tutorial/summarize',
       ],
     },
     {
