@@ -1,8 +1,12 @@
 ---
 sidebar_position: 2
+title: "SaaSus Platformの準備"
+slug: "prepare-saas-platform"
+excerpt: ""
+hidden: false
+createdAt: "Wed Jan 11 2023 03:12:50 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
-
-# SaaSus Platform の準備
 
 ※全体の流れを動画でご覧になることもできます。  
 <https://www.youtube.com/watch?v=deSkPJ-zTgw>
@@ -53,7 +57,7 @@ sidebar_position: 2
 
 ### ドメイン名の設定
 
-※ドメイン名をお持ちで無い方は、この項目はスキップして[次に行っていただいて大丈夫です。](#%E8%AA%8D%E8%A8%BC%E5%BE%8C%E3%81%AE%E9%81%B7%E7%A7%BB%E5%85%88url%E3%81%AE%E8%A8%AD%E5%AE%9A)
+※ドメイン名をお持ちで無い方は、この項目はスキップして[次に行っていただいて大丈夫です。](#認証後の遷移先-url-の設定)
 
 SaaS 開発コンソールにログインしたら、まずは SaaS で使うドメイン名を登録します。サイドメニューの「ドメイン」をクリックし、ドメイン登録画面を表示します。このドメイン名は、ログイン画面やメール送信のベースドメインとして利用します。このあと DNS レコードを作成していただくので、**ご自身で操作可能なドメイン名**を登録してください。
 
@@ -213,24 +217,11 @@ SaaS 設計者は、ユーザに関するどの属性を SaaSus Platform 側で�
 
 表示名は、その役割がどういうものか？をわかるように記載します。
 
-まず、
-
-- 役割名: admin
-- 表示名: SaaS 管理者
-
-![20](/img/tutorial/prepare-saasus-platform-20.png)
-
-と入力し、「作成」ボタンをクリックします。
-
-※ SaaS 管理者(admin) はアカウント作成時に初期登録されています。  
- 登録されている場合、以下 user を作成して下さい。
-
-同じように、
+まずは一般利用者を追加しましょう。
 
 - 役割名: user
 - 表示名: 一般利用者
 
-も作成しておきます。
 
 ![21](/img/tutorial/prepare-saasus-platform-21.png)
 
