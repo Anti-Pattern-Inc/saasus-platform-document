@@ -165,6 +165,40 @@ const sidebars = {
         'reference/integration'
       ],
     }
+  ],
+  changelogSidebar: [
+    {
+      type: "category",
+      label: "Changelog",
+      items: [
+        {
+          label: "2023/11/28",
+          type: "doc",
+          id: "changelog/20231128"
+        },
+        {
+          label: "2023/11/18",
+          type: "doc",
+          id: "changelog/20231118"
+        },
+        {
+          label: "2023/11/05",
+          type: "doc",
+          id: "changelog/20231105"
+        },
+        {
+          label: "2022/12/24",
+          type: "doc",
+          id: "changelog/20221224"
+        },
+        {
+          label: "Welcome to SaaSus Platform",
+          type: "doc",
+          id: "changelog/welcome-to-saasus-platform"
+        },
+      ],
+      collapsible: false,
+    }
   ]
 };
 
