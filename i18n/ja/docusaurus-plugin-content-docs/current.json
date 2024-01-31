@@ -55,6 +55,10 @@
     "message": "SaaS利用者（ユーザー）のアカウントについて",
     "description": "The label for category SaaS利用者（ユーザー）のアカウントについて in sidebar tutorialSidebar"
   },
+  "sidebar.tutorialSidebar.category.SaaS Development Console": {
+    "message": "SaaS 開発コンソール",
+    "description": "The label for category SaaS Development Console in sidebar tutorialSidebar"
+  },
   "sidebar.tutorialSidebar.category.SaaS Operation Console": {
     "message": "SaaS 運用コンソール",
     "description": "The label for category SaaS Operation Console in sidebar tutorialSidebar"

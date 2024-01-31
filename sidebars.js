@@ -78,6 +78,14 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'SaaS Development Console',
+      items: [
+        'saas-development-console/notifymailcustomize',
+        'saas-development-console/saasususerinvitation',
+      ],
+    },
+    {
+      type: 'category',
       label: 'SaaS Operation Console',
       items: [
         {
