@@ -6,21 +6,21 @@ hidden: false
 createdAt: "Thu Dec 07 2023 06:43:12 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Fri Dec 22 2023 06:01:24 GMT+0000 (Coordinated Universal Time)"
 ---
-# 1. コンテナIDの確認
+## 1. コンテナIDの確認
 
-## Google Tag Managerホームページから確認
+### Google Tag Managerホームページから確認
 
 コンテナ一覧に表示される「コンテナID」列に表示される「GTM-XXXXXXXX」を確認してください。
 
 ![googletagmanagercontaineridsetting-1](/img/saas-development-console/googletagmanagersetting/googletagmanagercontaineridsetting-1.png)
 
-## コンテナページから確認
+### コンテナページから確認
 
 画面右上の「GTM-XXXXXXXX」を確認してください。
 
 ![googletagmanagercontaineridsetting-2](/img/saas-development-console/googletagmanagersetting/googletagmanagercontaineridsetting-2.png)
 
-# 2. コンテナIDを設定
+## 2. コンテナIDを設定
 
 1. SaaSus開発コンソールの「認証詳細設定」を開く
 

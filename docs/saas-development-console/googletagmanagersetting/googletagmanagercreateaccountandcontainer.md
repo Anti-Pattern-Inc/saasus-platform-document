@@ -10,7 +10,7 @@ Google Tag Managerのアカウントとコンテナを作成します。
 
 既にアカウントを作成済みの場合は「2. コンテナから作成」をご覧ください。
 
-# 1. アカウントから作成
+## 1. アカウントから作成
 
 1. <a href="https://tagmanager.google.com/?hl=JA" target="_blank">Google Tag Managerのホームページ</a>にアクセス
 2. 「アカウントを作成」ボタンを押す
@@ -29,7 +29,7 @@ Google Tag Managerのアカウントとコンテナを作成します。
 
 以上でアカウントとコンテナが作成され、コンテナページが表示されます。
 
-# 2. コンテナから作成
+## 2. コンテナから作成
 
 1. <a href="https://tagmanager.google.com/?hl=JA" target="_blank">Google Tag Managerのホームページ</a>にアクセス
 2. コンテナ一覧の右側のドットメニューから「コンテナを作成」を押す
