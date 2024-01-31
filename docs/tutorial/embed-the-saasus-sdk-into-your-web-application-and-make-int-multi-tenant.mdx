@@ -1,38 +1,39 @@
 ---
 sidebar_position: 4
-title: "SaaSus SDK をWebアプリケーションに組み込みマルチテナント化する"
+title: "Embed the SaaSus SDK into your Web Application and make it multi-tenant"
 slug: "embed-the-saasus-sdk-into-your-web-application-and-make-it-multi-tenant"
-excerpt: "test"
+excerpt: ""
 hidden: false
-createdAt: "Wed Jan 11 2023 03:13:06 GMT+0000 (Coordinated Universal Time)"
+createdAt: "Thu Jan 26 2023 02:07:21 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-## Web アプリケーションに SaaSus SDK を組み込む
 
-※ここからはプログラミングの知識が必要になります
+## Embed the SaaSus SDK in your web application
 
-### SaaS ID と API キー、クライアントシークレットの再確認
+\*Programming knowledge is required
 
-まず、**SaaSus 開発コンソール**にて API キーを表示しておきましょう。これをアプリケーションの設定に使います  
-(API キーは決して外部に漏らさないようにお気をつけください。このチュートリアルに表示されている API キーは既に無効化してあります)
+### Reconfirm SaaS ID, API Key and Client Secret
 
-![01](/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-01.png)
+First, check the API key on the **SaaSus Development Console**. Use this in your application settings  
+(Be careful not to expose your API key to other people. The API key displayed in this tutorial has already been deactivated.)
 
-### SaaSus SDK 利用の準備
+![01](/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-01.png)
 
-では、さきほど準備したサンプルアプリケーションを開発環境で開きましょう。
+### Prepare to use the SaaSus SDK
 
-冒頭で行ったとおり、 init.sh を利用して docker コンテナが立ち上がっており、http://localhost/board でサンプルアプリケーションが動いていることを確認しておいてください。
+Open the sample application we prepared earlier in the development environment.
 
-まず、 SaaSus Platform を簡単に使うためには、 SaaSus SDK をアプリケーションに組み込みます。
+As we did at the beginning, make sure that the docker container is started using init.sh and the sample application is running on <http://localhost/board>.
 
-今回は PHP なので、 composer を使います。
+First, to easily use the SaaSus Platform, embed the SaaSus SDK into your application.
 
-ターミナルを開き php のコンテナに入り、composer を使ってセットアップをします。
+In this setup the SDK is PHP based, the next step is using Composer.
+
+Enter the php container and setup using composer.
 
 ```mdx-code-block
 <Tabs>
@@ -59,40 +60,40 @@ repo$ docker compose exec node bash
 </Tabs>
 ```
 
-api ディレクトリで、 composer コマンドを使って追加します
+In the api directory add the SDK using the following composer command
 
 ```txt
 root@xxx:/var/www/api# composer require saasus-platform/saasus-sdk-php
 ```
 
-SaaSus SDK がインストールできたら、まずは SaaSus SDK 利用にあたって必要な環境変数を定義しましょう
+After installing the SaaSus SDK, define the environment variables necessary for using the SaaSus SDK.
 
-api ディレクトリの .env.example ファイルをコピーして.env ファイルを作成し、その.env ファイルの一番下の以下の部分を編集します
+Create a .env file by copying the .env.example file in the api directory and edit the following part at the bottom of the .env file
 
 ```.env
-### for SaaSus Platform
-SAASUS_SAAS_ID="98tjo3wifaoua （画面のSaaS ID）"
-SAASUS_API_KEY="kjntowjfoasnkjntwonsflajsno4as （画面のAPI KEY）"
-SAASUS_SECRET_KEY=" （画面のクライアントシークレット）"
-SAASUS_LOGIN_URL="https://auth.sample.saasus.jp/　（ログイン画面のURL）"
+### for SaaS Platform
+SAASUS_SAAS_ID="saasid_98tjo3wifaoua (SaaS ID of the screen)"
+SAASUS_API_KEY="apikey_kjntowjfoasnkjntwonsflajsno4as (Screen API KEY)"
+SAASUS_SECRET_KEY=" (screen client secret)"
+SAASUS_LOGIN_URL="https://auth.sample.saasus.jp/ (Login screen URL)"
 ```
 
-SAASUS_SAAS_ID, SAASUS_API_KEY, SAASUS_SECRET_KEY は先ほど画面で表示した SaaS ID と API Key、クライアントシークレットを、  
-SAASUS_LOGIN_URL は、SaaSus 開発コンソールで作成したログイン画面の URL を設定します。
+SAASUS_SAAS_ID, SAASUS_API_KEY, SAASUS_SECRET_KEY are the SaaS ID, API Key, and client secret displayed on the console page,  
+SAASUS_LOGIN_URL sets the URL of the login page created on the SaaSus development console.
 
-### 認証モジュールの組み込み
+### Include Authentication Module
 
-次に、 SaaSus Platform の認証モジュールを組み込みます。
+Next, include the SaaSus Platform's authentication module.
 
-今回のアプリケーションでは、すべての URI のルートに認証を必要とします。認証されていない場合には、アプリケーションが利用できない仕様にします。そのため、 Laravel の Middleware として SaaSus 認証機能を組み込みます。
+In this application, authentication is required at the root of all URIs. If not authenticated, the application cannot be used. The SaaSus authentication function is incorporated as middleware through Laravel.
 
-現状は、
+As default in
 
 api/routes/web.php
 
-にて、Laravel 標準の認証機能が利用されているので、SaaSus の認証機能に置き換えます。
+, the Laravel standard authentication function is used, replace it with the SaaSus authentication function.
 
-この部分
+Default code
 
 ```mdx-code-block
 <Tabs>
@@ -134,7 +135,7 @@ app.use(passport.session());
 </Tabs>
 ```
 
-を
+Change to the following in order to incorporate the SaaSus authentication function
 
 ```mdx-code-block
 <Tabs>
@@ -146,7 +147,7 @@ app.use(passport.session());
 //     Route::get('/', function () {
 //         return view('welcome');
 //     });
-// SaaSus SDK標準のAuth Middlewareを利用する
+// Use SaaSus SDK standard Auth Middleware
 Route::middleware(\AntiPatternInc\Saasus\Laravel\Middleware\Auth::class)->group(function () {
    Route::get('/dispatch', 'App\Http\Controllers\DispatchController@index')->name('dispatch');
    Route::get('/board', 'App\Http\Controllers\MessageController@index')->name('board');
@@ -186,11 +187,9 @@ app.use(
 </Tabs>
 ```
 
-このようにします。
+Next prepare a receiver for callback from the authentication screen. Earlier in the set up on the SaaSus development console, the callback destination is defined as <http://localhost/callback>, thus receivable it at /callback .
 
-そして、認証画面からのコールバックの受口を用意します。先ほど SaaSus 開発コンソールでコールバック先を <http://localhost/callback> と定義したので、 /callback で受け取れるようにします。
-
-おなじく、 api/routes/web.php の最後の行に以下を追加します。
+In order to set up the callback, add the following to the last line of api/routes/web.php:
 
 ```mdx-code-block
 <Tabs>
@@ -198,7 +197,7 @@ app.use(
 ```
 
 ```php
-// SaaSus SDK標準のCallback Controllerを利用して、JWTをCookieやLocal Storageに入れる
+// Use the SaaS SDK standard Callback Controller to store JWT in Cookie or Local Storage
 Route::get('/callback', 'AntiPatternInc\Saasus\Laravel\Controllers\CallbackController@index');
 ```
 
@@ -218,7 +217,7 @@ app.use("/callback", callbackRouter);
 </Tabs>
 ```
 
-さらに、SaaSus SDK が提供する View を使えるように api/config/view.php にパスを追加します
+In addition, add the path to api/config/view.php so that the views provided by the SaaSus SDK can be used
 
 ```mdx-code-block
 <Tabs>
@@ -227,9 +226,9 @@ app.use("/callback", callbackRouter);
 
 ```php
    'paths' => [
-       resource_path('views'),
-       # ↓この行を追加：SaaSus SDKが提供するViewのディレクトリ
-       resource_path('../vendor/saasus-platform/saasus-sdk-php/src/Laravel/Views'),
+      resource_path('views'),
+      # ↓Add this line: View directory provided by SaaSus SDK
+      resource_path('../vendor/saasus-platform/saasus-sdk-php/src/Laravel/Views'),
    ],
 ```
 
@@ -261,11 +260,11 @@ app.use("/callback", callbackRouter);
 </Tabs>
 ```
 
-ここまで設定すると、 アプリケーションの Controller にたどり着いた時点で、SaaSus Platform で設定した認証情報が request の一部として渡ってくるようになります。
+With this setup, the authentication information set in the SaaSus Platform will be passed as part of the request when the controller of the application is reached.
 
-api/app/Http/Controllers/MessageController.php の index に Request の引数を追加し、 dd を使って $request に userinfo が入っているか確認してみましょう
+Add a request argument to the index function of api/app/Http/Controllers/MessageController.php and use dd to check if $request contains userinfo
 
-以下の４行を書き換えてください。
+Change the following 4 lines.
 
 ```mdx-code-block
 <Tabs>
@@ -275,7 +274,7 @@ api/app/Http/Controllers/MessageController.php の index に Request の引数�
 ```php
    public function index(Request $request)
    {
-       // SaaSus Platformからユーザ情報が渡ってきているかを確認する
+       // Check if user information is passed from SaaSus Platform
        dd($request->userinfo);
 ```
 
@@ -286,7 +285,7 @@ api/app/Http/Controllers/MessageController.php の index に Request の引数�
 
 ```js
 const getChats = async (req: Request, res: Response) => {
-  // SaaSus Platformからユーザ情報が渡ってきているかを確認する
+  // Check if user information is passed from SaaSus Platform
   console.log(req.userinfo);
 ```
 
@@ -295,23 +294,23 @@ const getChats = async (req: Request, res: Response) => {
 </Tabs>
 ```
 
-ここまでで連携の基本ができました。
+Once this step is completed the basic SDK setup is complete.
 
-では、実際に SaaSus Platform からログインして動作確認してみましょう。
+Now, log in from the SaaSus Platform and check the operation.
 
-### SaaSus SDK 組み込みの確認
+### Confirmation of SaaSus SDK Integration
 
-SaaSus Platform で作成したログイン画面を表示します。
+Access the login page created on the SaaSus Platform.
 
-<https://auth.sample.saasus.jp> など、ご自身で設定したドメインのログイン画面を表示してください。
+Access the login page on the domain set on the console, such as <https://auth.sample.saasus.jp>.
 
-![02](/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-02.png)
+![02](/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-02.png)
 
-先ほど作成したユーザのメールアドレスとパスワードでログインすると、Callback URL で設定した URL に、認証情報とともにリダイレクトされます。
+Log in with the email address and password of the user created earlier, then the page will be redirected to the URL set in the Callback URL along with the authentication information.
 
-たとえば、 [user1-1@example.com](mailto:user1-1@example.com) でログインしてみましょう。
+For example, log in with [user1-1@example.com](mailto:user1-1@example.com).
 
-実際に先ほどのコードが動作すると、ログイン後にこのような表示になるはずです。
+If there are no problems with the previous code, the following should be displayed after login.
 
 ```php
 array:3 [▼
@@ -344,22 +343,22 @@ array:3 [▼
 ]
 ```
 
-アプリケーション側で、先ほど SaaSus Platform で設定したユーザ情報、テナント情報が取得できているのがわかります。
+On the application side, you can see that the user information and tenant information set earlier on the SaaSus Platform.
 
-リダイレクト先の URL は、今回 SaaSus SDK 標準の Callback 処理で受けるようになっており(<http://localhost/callback>)、その処理の中で ブラウザの Local Storage や Cookie の中に認証情報を記憶します。
+The redirect URL is received by the Callback processing of the SaaS SDK standard (<http://localhost/callback>), and in that process the authentication information is stored in the browser's local storage and cookies.
 
-そして、 SaaSus SDK の Auth Middleware で、SaaSus Platform を利用し認証情報を検証しユーザ情報を取得して Request オブジェクトに詰めます。
+Then, with the Auth Middleware of the SaaSus SDK, use the SaaSus Platform to validate the authentication information, get the user information, and put in the Request object.
 
-そのあと、アプリケーションのコントローラに処理が移るので、この時点ですでにアプリケーションはログインした人の情報を持っていることになります。
+After that, the application's controller will take over, so at this point the application already has the logged-in person's information.
 
-では、この情報を使って、掲示板アプリケーションをマルチテナント対応にしてみましょう！
+Now let's use this information to make the sample bulletin board application multi-tenant ready!
 
-### サンプルアプリケーションのマルチテナント化
+### Making the Sample Application Multi-Tenant
 
-api/app/Http/Controllers/MessageController.php がメインの処理なので、ここにマルチテナント対応にするための処理を入れてみましょう。
+As api/app/Http/Controllers/MessageController.php contains the main process, the processing for multi-tenant support will be put here.
 
-まず、表示の部分を変更します。  
-public function index の部分をまるごと書き換えてみましょう。
+First, change the display part.  
+Rewrite the whole public function index.
 
 ```mdx-code-block
 <Tabs>
@@ -369,9 +368,9 @@ public function index の部分をまるごと書き換えてみましょう。
 ```php
    public function index(Request $request)
    {
-       // $request->userinfo に各種ユーザ情報、テナント情報が入ってくるので、それを使う
-       $messages = Message::where('tenant_id', $request->userinfo['tenants'][0]['id'])->get();
-       return view('messageBoard.index', ['messages' => $messages, 'plans' => $this::PLANS, 'tenant_name' => $request->userinfo['tenants'][0]['name']]);
+      // $request->userinfo contains various user information and tenant information, so use it
+      $messages = Message::where('tenant_id', $request->userinfo['tenants'][0]['id'])->get();
+      return view('messageBoard.index', ['messages' => $messages, 'plans' => $this::PLANS, 'tenant_name' => $request->userinfo['tenants'][0]['name']]);
    }
 ```
 
@@ -405,9 +404,9 @@ const getChats = async (req: Request, res: Response) => {
 </Tabs>
 ```
 
-このようにして、渡ってきたテナント ID をもとに DB を検索するようにします。
+In this way, search the DB based on the passed tenant ID.
 
-次に投稿の部分です。
+Below is the post function.
 
 ```mdx-code-block
 <Tabs>
@@ -417,19 +416,19 @@ const getChats = async (req: Request, res: Response) => {
 ```php
    public function post(Request $request)
    {
-       $validated = $request->validate([
-           'message' => 'required|max:255'
-       ]);
+      $validated = $request->validate([
+          'message' => 'required|max:255'
+      ]);
 
-       // $request の userinfo から各種情報を取得し、判断に使う
-       $message = Message::create([
-            'tenant_id' => $request->userinfo['tenants'][0]['id'],
-            'user_id' => $request->userinfo['tenants'][0]['user_attribute']['username'],
-            'message' => $request->message,
-        ]);
+      // Acquire various information from userinfo of $request and use it for judgment
+      $message = Message::create([
+          'tenant_id' => $request->userinfo['tenants'][0]['id'],
+          'user_id' => $request->userinfo['tenants'][0]['user_attribute']['username'],
+          'message' => $request->message,
+      ]);
 
-       $request->session()->regenerateToken();
-       return redirect()->route('board');
+      $request->session()->regenerateToken();
+      return redirect()->route('board');
    }
 ```
 
@@ -441,6 +440,7 @@ const getChats = async (req: Request, res: Response) => {
 ```js
 const postChats = async (req: Request, res: Response) => {
   const mes = req.body.message;
+  // Acquire various information from userinfo of $request and use it for judgment
   const tenantId = req.userInfo?.tenants[0].id || "";
   const userName =
     req.userInfo?.tenants[0].user_attribute.username || "テストユーザー";
@@ -462,15 +462,15 @@ const postChats = async (req: Request, res: Response) => {
 </Tabs>
 ```
 
-渡ってきたユーザ属性をもとに、テナント ID、ユーザ名をセットで格納します。
+Store tenant ID and user name as a set based on the passed user attributes.
 
-画面表示の部分も、ユーザ ID を表示するようにしてみます。
+Next, display the user ID on the page display.
 
-api/resources/views/messageBoard/index.blade.php を編集します。
+Edit api/resources/views/messageBoard/index.blade.php.
 
-32 行目あたりの、この $message->user->name の部分を $message->user_id に変更します。
+Change this $message->user->name part to $message->user_id around line 32.
 
-修正前：
+Before change:
 
 ```blade
                    <div class="mt-4">
@@ -482,7 +482,7 @@ api/resources/views/messageBoard/index.blade.php を編集します。
                        </p>
 ```
 
-修正後：
+Revised:
 
 ```blade
                    <div class="mt-4">
@@ -494,44 +494,44 @@ api/resources/views/messageBoard/index.blade.php を編集します。
                        </p>
 ```
 
-これでマルチテナント対応ができました！
+Multi-tenant support is now available!
 
-では、早速ログインして試してみましょう。
+Now log in and try it out.
 
-先ほどと同じように、SaaSus Platform で作成したログイン画面からログインを行います。
+As before, log in from the login page created on the SaaSus Platform.
 
-ログインすると、テナント名が先ほど SaaS 開発コンソールで設定したものに変わっているのが確認できます。
+When you log in, you can see that the tenant name has changed to what was set in the SaaS development console earlier.
 
-![03](/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-03.png)
+![03](/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-03.png)
 
-まだデータが無いので、いくつか投稿をしてみましょう。
+There isn't any data yet, so let's post some.
 
-![04](/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-04.png)
+![04](/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-04.png)
 
-ユーザ名も表示されていることが確認できました。
+The user name is also displayed.
 
-では、もう一度ログイン画面に戻り、 [user1-2@example.com](mailto:user1-2@example.com) でログインして、いくつか投稿してみましょう。
+Go back to the login screen, and log in as [user1-2@example.com](mailto:user1-2@example.com), and make some posts.
 
-![05](/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-05.png)
+![05](/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-05.png)
 
-当然画面に反映されます。
+It will be reflected on the page.
 
-では、もうひとつのテナントのユーザ、 [user2-1@example.com](mailto:user2-1@example.com) でログインしてみましょう
+Next log in with another tenant's user, [user2-1@example.com](mailto:user2-1@example.com)
 
-![06](/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-06.png)
+![06](/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-06.png)
 
-テナント名の表示が変わり、内容が空になっていることが確認できます。
+The displayed tenant name has changed, and the content is empty.
 
-自分のテナントの情報にしかアクセスできないことが確認できました。
+This shows that displayed information is limited to each specific tenant.
 
-では、同じようにいくつか投稿をした後に、 [user2-2@example.com](mailto:user2-2@example.com) でログインし、同一テナントの情報が表示できることを確認します。
+Now, after posting several posts in the same way, log in with [user2-2@example.com](mailto:user2-2@example.com) and confirm that the information of the same tenant can be displayed.
 
-![07](/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-07.png)
+![07](/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-07.png)
 
-このように、テナントごとの分離が完了しました。
+Thus, per-tenant isolation is complete.
 
-今回の分離方式としては、プール型モデルで同一 DB 内での分離を行いシンプルな方式でテナント分離を行いました。スキーマ分離、データベース分離など、要件に応じてテナント分離の方式を選択する場合においても、同様に SaaSus SDK を利用してテナント情報を取得し実装することができます。
+As for the current separation method, a pool model to separate tenants within the same DB and separated tenants using a simple method. Even if a different tenant separation method per your requirements, such as schema separation or database separation, you can also use the SaaSus SDK to acquire tenant information and implement it.
 
-テナント分離ができたので、今度は料金関係の機能の実装をしてみましょう。
+Now that the tenants are separated, next is the implementation of billing-related functions.
 
-料金設定（プライシング）、利用量計測（メータリング）、請求（ビリング）の第一歩を実装してみます。請求においては Stripe という請求 SaaS を利用します。Stripe を使わない場合は、請求の部分はスキップしてください。
+Let's implement the first steps of pricing, metering, and billing. For billing, we use a billing SaaS called Stripe. If you don't use Stripe, skip the billing part.

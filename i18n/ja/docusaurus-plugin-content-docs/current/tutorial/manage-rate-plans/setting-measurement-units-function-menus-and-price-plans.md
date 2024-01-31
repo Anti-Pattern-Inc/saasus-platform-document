@@ -59,9 +59,9 @@ updatedAt: "Mon Dec 11 2023 05:50:46 GMT+0000 (Coordinated Universal Time)"
 
 ![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/04_basic_user.png "04_basic_user.png")
 
-![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/image.png)
+![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/04_basic_comment-1.png "04_basic_comment-1.png")
 
-![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/image.png)
+![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/04_basic_comment-2.png "04_basic_comment-2.png")
 
 # Advenced プラン
 
@@ -85,9 +85,9 @@ updatedAt: "Mon Dec 11 2023 05:50:46 GMT+0000 (Coordinated Universal Time)"
 
 ![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/05_advanced_user.png "05_advanced_user.png")
 
-![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/05_advanced_comment.png "05_advanced_comment.png")
+![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/05_advanced_comment-1.png "05_advanced_comment-1.png")
 
-![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/05_advanced_comment.png "05_advanced_comment.png")
+![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/05_advanced_comment-2.png "05_advanced_comment-2.png")
 
 # Enterprise プラン
 

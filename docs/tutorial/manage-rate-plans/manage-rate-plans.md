@@ -1,202 +1,205 @@
 ---
-title: "料金プランの管理"
+title: "Manage Rate Plans"
 slug: "manage-rate-plans"
 excerpt: ""
 hidden: false
-createdAt: "Wed Jan 11 2023 03:13:15 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Fri Dec 08 2023 02:28:54 GMT+0000 (Coordinated Universal Time)"
+createdAt: "Fri Jan 20 2023 01:46:57 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
-## SaaSus Platformを利用した、料金設定（プライシング）、利用量計測（メータリング）、請求（ビリング）の第一歩
+## The first step of pricing, metering, and billing using the SaaSus Platform
 
-### SaaSus 開発コンソール を使った料金プランの作成
+### Creating a Pricing Plan Using the SaaSus Development Console
 
-では、SaaSus PlatformのSaaSus 開発コンソールにログインし、料金プランの設定を行います。
+Log in to the SaaSus Development Console on the SaaSus Platform and set up a pricing plan.
 
-SaaSus Platformでは、サブスクリプション型および従量課金のモデルに対応した料金プランの作成が可能です。
+The SaaS Platform allows the creation of pricing plans that support subscription and pay-as-you-go models.
 
-たとえば、今回はこのような料金プランを作成してみましょう。
+For example, create a pricing plan like this:
 
-- Free プラン
-  - ユーザー数 Max 2
-  - コメント数 Max 10
-- Basic プラン
-  - 固定料金 500円
-  - ユーザー数 Max 5
-  - コメント数 従量課金
-    - 10コメントまで、 500円
-    - 11コメント〜50コメントまで、 1000円 
-    - Max 100コメントまで、 1500円
-- Advanced プラン
-  - 固定料金 3,000円
-  - ユーザー数 Max 10
-  - コメント数 従量課金
-    - 10コメントまで、 1コメントあたり 5円
-    - 11コメント〜100コメントまで、 1コメントあたり 2円
-    - 101コメント〜 1コメントあたり 1円
-- Enterprise プラン
-  - 固定料金 50,000円
-  - ユーザー数 Free
-  - コメント数 Free
+- Free plan
+  - Number of users Max 2
+  - Number of comments Max 10
+- Basic plan
+  - Fixed fee 500 yen
+  - Max 5 users
+  - Number of comments pay-as-you-go
+    - Up to 10 comments, 0 yen
+    - From 11 comments to 100 comments, 500 yen
+    - Max 100 comments
+- Advanced plan
+  - Fixed fee 3,000 yen
+  - Number of users Max 10
+  - Number of comments pay-as-you-go
+    - Up to 10 comments, 5 yen per comment
+    - From 11 to 100 comments, 2 yen per comment
+    - 101 comments ~ 1 yen per comment
+- Enterprise plan
+  - Fixed fee 50,000 yen
+  - Number of users Free
+  - Number of comments Free
 
-| プラン        |     基本料金 | ユーザー数(MAX) | コメント数                                                                             |
-| :--------- | -------: | ---------: | :-------------------------------------------------------------------------------- |
-| Free       |          |        2 人 | 10                                                                                |
-| Basic      |    500 円 |        5 人 | 従量課金<br />　５００ 円:10コメントまで<br />　1000 円:11コメント〜50コメント<br />　1500 円:51コメント〜　　最大 100コメントまで |
-| Advanced   |  3,000 円 |       10 人 | 従量課金(１コメントあたり)<br />　5 円:0〜10コメント<br />　2円: 11〜100コメント<br />　1 円: 101コメント〜              |
-| Enterprise | 50,000 円 |        無制限 | 無制限                                                                               |
+| Plan       | Basic Charge | Number of Users (MAX) | Number of Comments                                                                                         |
+| :--------- | -----------: | --------------------: | :--------------------------------------------------------------------------------------------------------- |
+| Free       |              |              2 people | 10                                                                                                         |
+| Basic      |      500 yen |              5 people | Pay-as-you-go<br/> 0 yen: Up to 10 comments<br/> 500 yen: 11 to 100 comments<br/> Up to 100 comments          |
+| Advanced   |    3,000 yen |             10 people | Pay-as-you-go (per comment)<br/> 5 yen: 0-10 comments<br/> 2 yen: 11-100 comments <br/> 1 yen: 101 comments ~ |
+| Enterprise |   50,000 Yen |             Unlimited | Unlimited                                                                                                  |
 
-※今回はチュートリアルのため、複雑な料金プランになっていますが、深い理由がない場合はこのような複雑な料金プラン設定は行わないでください。  
-SaaSの利用料は原価をベースに考えるのではなく、お客様がどれくらいの価値を享受できるかをベースに考えるべきです。  
-そのため、複雑な料金設定はお客様に複雑な計算と予測を強いることになり、SaaSを使うことでお客様の負担を減らす一方で、料金計算や予測に対する負担を与えることになります。  
-そのため、なるべくシンプルでわかりやすい料金プランを作成するべきです。
+\*Since this is a tutorial, the price plan is complicated, but unless absolutely necessary a complex pricing plan is not recommended.  
+SaaS usage fees should not be based on cost, but based on how much value customers can receive.  
+Therefore, complex pricing imposes complex calculations and forecasts on customers, and while using SaaS reduces the burden on customers, it places a burden on pricing calculations and forecasts.  
+Therefore, create a pricing plan that is as simple and easy to understand as possible.
 
-SaaSus Platformでこのような料金プランを定義するためには、
+To define such a pricing plan in the SaaSus Platform,
 
-計測単位
+Measurement Unit
 
-・利用量を計測し、課金をする単位
+・Unit for measuring usage and charging
 
-機能メニュー
+Feature Menu
 
-・計測単位を組み合わせて機能として提供する単位
+・A unit provided as a feature by combining measurement units
 
-料金プラン
+Rate plan
 
-・テナントに紐付けるプラン単位
+・Plan units linked to tenants
 
-という単位で作成します。
+Create units of
 
-たとえば、
+For example,
 
-- Advanced プラン
-  - 固定料金 3,000円
-  - ユーザー数 Max 10
-  - コメント数 従量課金
-    - 10コメントまで、 1コメントあたり 5円
-    - 11コメント〜100コメントまで、 1コメントあたり 2円
-    - 101コメント〜 1コメントあたり 1円
+- Advanced plan
+  - Fixed fee 3,000 yen
+  - Number of users Max 10
+  - Number of comments pay-as-you-go
+    - Up to 10 comments, 5 yen per comment
+    - From 11 to 100 comments, 2 yen per comment
+    - 101 comments ~ 1 yen per comment
 
-を設定する場合には、
+If you set
 
-計測単位は
+The measurement unit as
 
-- Advanced 固定ユニット 3,000円
-- ユーザー数 Max10 使用量ユニット 0円
-- コメント数 段階的使用量ユニット
-  - 10コメントまで、 1コメントあたり 5円
-  - 11コメント〜100コメントまで、 1コメントあたり 2円
-  - 101コメント〜 1コメントあたり 1円
+- Advanced fixed unit 3,000 yen
+- Number of users Max10 Usage unit 0 yen
+- Number of comments tiered usage units
+  - Up to 10 comments, 5 yen per comment
+  - From 11 to 100 comments, 2 yen per comment
+  - 101 comments ~ 1 yen per comment
 
-という３つのユニットを作成し、
+Create three units called
 
-機能メニューは
+The feature menu is
 
-- Advenced 機能メニュー
-  - 上記３つの計測単位を入れる
+- Advanced feature menu
+  - Include the above three units of measure
 
-料金プランは
+The price plan is
 
-- Advenced プラン
-  - Advenced 機能メニュー を入れる
+- Advanced plan
+  - Include Advanced feature menu
 
-というように作成します。
+Use following steps.
 
-では、Advenced プラン以外の料金プランも作成してみましょう！  
-今回作成する、計測単位、機能メニュー、料金プランは以下になります、最後に作成動画で準備しておりますので詳しくは動画をご覧ください。
+Now, create a price plan other than the advanced plan!  
+The measurement unit, feature menu, and price plan that will be created this time are as follows. Please see the video for details.
 
-[計測単位・機能メニュー・料金プランの設定の設定内容(画像)はこちらを参照](./setting-measurement-units-function-menus-and-price-plans) 
+[See here for the setting contents (image) of the measurement unit, feature menu, and price plan settings.](https://docs.saasus.io/docs/setting-measurement-units-function-menus-and-price-plans) 
 
-※ 今回チュートリアルを進める上で必要なプランは **Free プラン**、**Basic プラン**のみになります、Advenced プラン、Enterprise プランに関しては他設定できる例として記載しております。
+\*The only plans required for this tutorial are the **Free Plan** and **Basic Plan**.The Advanced Plan and Enterprise Plan are listed as examples of other settings that can be made.
 
-#### 計測単位
+#### Measurement Unit
 
-##### 基本料金設定
+##### Basic Pricing
 
-計測単位：固定ユニット計測単位
+Measurement Unit: Fixed Units
 
-| 計測単位名           | 計測単位の表示名          | 計測単位の説明           | 金額    | 繰り返しの期間 | 通貨  |
-| :-------------- | :---------------- | :---------------- | :---- | :------ | :-- |
-| basic_base      | Basicプラン基本料金      | Basicプラン基本料金      | 500   | 月       | JPY |
-| advanced_base   | Advancedプラン基本料金   | Advancedプラン基本料金   | 3000  | 月       | JPY |
-| enterprise_base | Enterpriseプラン基本料金 | Enterpriseプラン基本料金 | 50000 | 月       | JPY |
+| Measurement Unit Name | Measurement Unit Display Name | Measurement Unit Description | Amount |       |     |
+| :-------------------- | :---------------------------- | :--------------------------- | :----- | :---- | :-- |
+| basic_base            | Basic Plan Base Fee           | Basic Plan Base Fee          | 500    | Month | JPY |
+| advanced_base         | Advanced Plan Base Fee        | Advanced Plan Base Fee       | 3000   | Month | JPY |
+| enterprise_base       | Enterprise Plan Base Fee      | Enterprise Plan Base Fee     | 50000  | Month | JPY |
 
-##### Free プラン
+##### Free Plan
 
-計測単位：使用量ユニット計測単位
+Measurement Unit: Usage Unit
 
-| 計測単位名        | 計測単位の表示名     | 計測単位の説明      | 対象メーター名       | 単位使用量あたりの金額 | 上限 | 通貨  |
-| :----------- | :----------- | :----------- | :------------ | :---------- | :- | :-- |
-| free_user    | Freeプランユーザー数 | Freeプランユーザー数 | user_count    | 0           | 2  | JPY |
-| free_comment | Freeプランコメント数 | Freeプランコメント数 | comment_count | 0           | 10 | JPY |
+| Measurement Unit Name | Measurement Unit Display Name | Measurement Unit Description | Target Meter Name | Amount per Unit Usage | Limit | Currency |
+| :-------------------- | :---------------------------- | :--------------------------- | :---------------- | :-------------------- | :---- | :------- |
+| free_user             | Number of Free Plan users     | Number of Free Plan users    | user_count        | 0                     | 2     | JPY      |
+| free_comment          | Number of Free Plan comments  | Number of Free Plan comments | comment_count     | 0                     | 10    | JPY      |
 
-##### Basic プラン
+##### Basic plan
 
-計測単位：使用量ユニット計測単位
+Measurement Unit: Usage Unit
 
-| 計測単位名      | 計測単位の表示名      | 計測単位の説明       | 対象メーター名    | 単位使用量あたりの金額 | 上限 | 通貨  |
-| :--------- | :------------ | :------------ | :--------- | :---------- | :- | :-- |
-| basic_user | Basicプランユーザー数 | Basicプランユーザー数 | user_count | 0           | 5  | JPY |
+| Measurement Name | Measurement Unit Display Name | Measurement Unit Description | Target Meter Name | Amount per Unit Usage | Limit | Currency |
+| :--------------- | :---------------------------- | :--------------------------- | :---------------- | :-------------------- | :---- | :------- |
+| basic_user       | Number of Basic plan users    | Number of Basic plan users   | user_count        | 0                     | 5     | JPY      |
 
-計測単位：段階ユニット計測単位
+Unit of Measure: Tiered Unit
 
-| 計測単位名         | 計測単位の表示名       | 計測単位の説明        | 対象メーター名       | 通貨  | 範囲    |  上限 |
-| :------------ | :------------- | :------------- | :------------ | :-- | :---- | --: |
-| basic_comment | Basicプランのコメント数 | Basicプランのコメント数 | comment_count | JPY | 以下表参照 | 100 |
+| Measurement  Unit Name | Measurement Unit Display Name     | Measurement Unit Description      | Target Meter Name | Range           | Limit | Currency |
+| :--------------------- | :-------------------------------- | :-------------------------------- | :---------------- | :-------------- | :---- | -------: |
+| basic_comment          | Number of comments for Basic plan | Number of comments for Basic plan | comment_count     | See table below | 100   |      JPY |
 
-範囲
+Range
 
-| 以上 | 以下 | 単位金額 | 固定金額 |
-| -: | -: | ---: | ---: |
-|  0 | 10 |    0 |  500 |
-| 11 | 50 |    0 | 1000 |
-| 51 |    |    0 | 1500 |
+| More than | Less than | Unit amount | Fixed amount |
+| --------: | --------: | ----------: | -----------: |
+|         0 |        10 |           0 |            0 |
+|        11 |        59 |           0 |         1000 |
+|        51 |           |           0 |         1500 |
 
-##### Advenced プラン
+##### Advanced Plan
 
-計測単位：使用量ユニット計測単位
+Measurement Unit:Usage Unit
 
-| 計測単位名         | 計測単位の表示名          | 計測単位の説明           | 対象メーター名    | 単位使用量あたりの金額 | 上限 | 通貨  |
-| :------------ | :---------------- | :---------------- | :--------- | :---------- | :- | :-- |
-| advanced_user | Advancedプランのユーザー数 | Advancedプランのユーザー数 | user_count | 0           | 10 | JPY |
+| Measurement Unit Name | Measurement Unit Display Name | Measurement Unit Description  | Target Meter Name | Amount per Unit Usage | Limit | Currency |
+| :-------------------- | :---------------------------- | :---------------------------- | :---------------- | :-------------------- | :---- | :------- |
+| advanced_user         | Number of Advanced plan users | Number of Advanced plan users | user_count        | 0                     | 10    | JPY      |
 
-計測単位：段階的使用量ユニット計測単位
+Measurement Unit: Tiered Usage Unit
 
-| 計測単位名            | 計測単位の表示名          | 計測単位の説明           | 対象メーター名       | 通貨  | 範囲    | 上限 |
-| :--------------- | :---------------- | :---------------- | :------------ | :-- | :---- | -: |
-| advanced_comment | Advancedプランのコメント数 | Advancedプランのコメント数 | comment_count | JPY | 以下表参照 |  0 |
+| Measurement Unit Name | Measurement Unit Display Name       | Measurement Unit Description        | Target Meter Name | Currency | Range           | Limit |
+| :-------------------- | :---------------------------------- | :---------------------------------- | :---------------- | :------- | :-------------- | ----: |
+| advanced_comment      | number of comments in Advanced plan | number of comments in Advanced plan | comment_count     | JPY      | see table below |     0 |
 
-|  以上 |  以下 | 単位金額 | 固定金額 |
-| --: | --: | ---: | ---: |
-|   0 |  10 |    5 |    0 |
-|  11 | 100 |    2 |    0 |
-| 101 |     |    1 |    0 |
+Range
 
-##### Enterprise プラン
+| More than | Less than | Unit Amount | Fixed Amount |
+| --------: | --------: | ----------: | -----------: |
+|         0 |        10 |           5 |            0 |
+|        11 |       100 |           2 |            0 |
+|       101 |           |           1 |            0 |
 
-計測単位：使用量ユニット計測単位
+##### Enterprise Plan
 
-| 計測単位名              | 計測単位の表示名            | 計測単位の説明             | 対象メーター名      | 単位使用量あたりの金額 | 上限 | 通貨  |
-| :----------------- | :------------------ | :------------------ | :----------- | :---------- | :- | :-- |
-| enterprise_user    | Enterpriseプランのユーザー数 | Enterpriseプランのユーザー数 | user_count   | 0           | 0  | JPY |
-| enterprise_comment | Enterpriseプランコメント数  | Enterpriseプランコメント数  | user_comment | 0           | 0  | JPY |
+Measurement Unit: Usage Unit
 
-#### 機能メニュー
+| Measurement Unit Name | Measurement Unit Display Name | Measurement Unit Description | Target Meter Name | Amount per Unit Usage | Limit | Currency |
+| :-------------------- | :---------------------------- | :--------------------------- | :---------------- | :-------------------- | :---- | :------- |
+| enterprise_user       | Enterprise plan user count    | Enterprise plan user count   | user_count        | 0                     | 0     | JPY      |
+| enterprise_comment    | Enterprise Plan Comments      | Enterprise Plan Comments     | user_comment      | 0                     | 0     | JPY      |
 
-| 機能メニュー名         | 機能メニューの表示名          | 機能メニューの説明           | 計測単位                                                            |
-| :-------------- | :------------------ | :------------------ | :-------------------------------------------------------------- |
-| free_menu       | Freeプラン基本メニュー       | Freeプラン基本メニュー       | Freeプランユーザー数<br />Freeプランコメント数                                    |
-| basic_menu      | Basicプラン基本メニュー      | Basicプラン基本メニュー      | Basicプラン基本料金<br />Basicプランユーザー数<br />Basicプランのコメント数                 |
-| advanced_menu   | Advancedプラン基本メニュー   | Advancedプラン基本メニュー   | Advancedプラン基本料金<br />Advancedプランのユーザー数<br />Advancedプランのコメント数       |
-| enterprise_menu | Enterpriseプラン基本メニュー | Enterpriseプラン基本メニュー | Enterpriseプラン基本料金<br />Enterpriseプランのユーザー数<br />Enterpriseプランのコメント数 |
+#### Feature Menu
 
-#### 料金プラン
+| Feature Menu Name | Feature Menu Display Name  | Feature Menu Description   | Measurement Unit                                                               |
+| :---------------- | :------------------------- | :------------------------- | :----------------------------------------------------------------------------- |
+| free_menu         | Free plan basic menu       | Free plan basic menu       | Free plan users<br/>Free plan comments                                          |
+| basic_menu        | Basic plan basic menu      | Basic plan basic menu      | Basic plan basic fee<br/>Basic plan users<br/>Basic plan comments                |
+| advanced_menu     | Advanced plan basic menu   | Advanced plan basic menu   | Advanced plan basic fee<br/>Advanced plan users<br/>Advanced plan comments       |
+| enterprise_menu   | Enterprise plan basic menu | Enterprise plan basic menu | Enterprise plan basic fee<br/>Enterprise plan users<br/>Enterprise plan comments |
 
-| 料金プラン名        | 料金プランの表示名     | 料金プランの説明      | 機能メニュー              |
-| :------------ | :------------ | :------------ | :------------------ |
-| Freeプラン       | Freeプラン       | Freeプラン       | Freeプラン基本メニュー       |
-| Basicプラン      | Basicプラン      | Basicプラン      | Basicプラン基本メニュー      |
-| Advancedプラン   | Advancedプラン   | Advancedプラン   | Advancedプラン基本メニュー   |
-| Enterpriseプラン | Enterpriseプラン | Enterpriseプラン | Enterpriseプラン基本メニュー |
+#### Pricing Plan
+
+| Pricing Plan Name | Pricing Plan Display Name | Pricing Plan Description | Feature Menu               |
+| :---------------- | :------------------------ | :----------------------- | :------------------------- |
+| Free plan         | Free plan                 | Free plan                | Free plan basic menu       |
+| Basic Plan        | Basic Plan                | Basic Plan               | Basic Plan Basic Menu      |
+| Advanced plan     | Advanced plan             | Advanced plan            | Advanced plan basic menu   |
+| Enterprise plan   | Enterprise plan           | Enterprise plan          | Enterprise plan basic menu |
+
 
 <iframe
   className="embedly-embed"
@@ -212,47 +215,47 @@ SaaSus Platformでこのような料金プランを定義するためには、
 
 
 
-### SaaSus 開発コンソール を使った請求との紐付け
+### Linking Billing Using the SaaSus Development Console
 
-次に請求の設定を行います。
+Next, set up billing.
 
-これらのテナントごとの料金プランや使用量の情報をベースに、自前で請求処理を実装することももちろん可能です。
+It is also possible to implement billing processing independently based on the billing plans and usage information for each tenant.
 
-しかし、すでに世の中には請求を簡単に行うためのSaaSが存在しています。  
-SaaSus Platformを利用して楽にSaaSを構築、運用を行うのと同様に、便利なSaaSを積極的に使うことにより、構築、運用の労力をSaaSにオフロードすることができます。  
-そのため、今回は課金SaaSの一つであるStripeと連携をしてみます。
+However, there are already SaaS that exists in the world to make billing easy.  
+In the same way that you can easily build and operate SaaS using the SaaS Platform, you can offload the effort of building and operating to SaaS by actively using a convenient SaaS.  
+Therefore, this time we will use Stripe, which is one of the billing SaaS.
 
-　**※Stripe連携を行わない場合は、こちらの作業はスキップしていただいてOKです**
+　**If you do not want to connect  Stripe, you can skip this step**
 
-サイドメニューから、「外部連携」をクリックします
+From the side menu, click "External linkage"
 
-Stripeのシークレットキーを入力し、保存ボタンをクリックします。
+Enter your Stripe secret key and click the Save button.
 
 ![](/img/tutorial/manage-rate-plans/manage-rate-plans-01.png)
 
-これでStripeとの連携ができました。  
-上記で作成した料金プランが Stripeへ連携されていると思います。
+You are now ready to integrate with Stripe.  
+The price plan created above should be linked to Stripe.
 
-また、料金プランが関わるオペレーションを行うと、Stripeに連携されるようになります。
+Also, if an operation is performed that involves a pricing plan, it will be linked to Stripe.
 
-ここまでで、料金プランの設定が終わりました。
+As of now, pricing plan settings are complete.
 
-では、この料金プランを各テナントに適用してみましょう。
+Apply this pricing plan to each tenant.
 
-### テナントへの料金プランの適用
+### Applying Rate Plans to Tenants
 
-SaaS 運用コンソールにログインし、「料金プラン設定」をクリックします。
+Log in to the SaaS Operation Console and click Pricing Plan Settings.
 
 ![](/img/tutorial/manage-rate-plans/manage-rate-plans-02.png)
 
-各テナントのプラン設定をクリックし、料金プランを変更します。
+Click plan settings for each tenant to change the rate plan.
 
-テナントサンプルその１は無料プランを、サンプルアプリテナント２はベーシックプランを設定してみましょう。
+Set the free plan for tenant sample 1 and the basic plan for sample app tenant 2.
 
 ![](/img/tutorial/manage-rate-plans/manage-rate-plans-03.png)
 
-これで、テナントに紐付いた料金プランが変更されます。Stripeと連携している場合は、Stripe側に顧客情報が作成され、サブスクリプションも作成されます。
+This will change the pricing plan associated with the tenant. When working with Stripe, customer information is created on Stripe and a subscription is also created.
 
 ![](/img/tutorial/manage-rate-plans/manage-rate-plans-04.png)
 
-では、ここまで設定した、料金設定（プライシング）、利用量計測（メータリング）の情報を活かして、アプリケーションに認可処理の一歩目を実装してみましょう。
+Now, use the pricing and metering information set up so far to implement the first step of authorization processing in the application.
