@@ -8,7 +8,7 @@ updatedAt: "Fri Dec 22 2023 06:01:24 GMT+0000 (Coordinated Universal Time)"
 ---
 Google AnalyticsのタグをGoogle Tag Managerに設定し、ログイン画面へアクセスしたユーザーの分析をします。
 
-# 1. Google Analyticsの測定IDを確認
+## 1. Google Analyticsの測定IDを確認
 
 1. <a href="https://analytics.google.com/analytics/web" target="_blank">Google Analytics</a>にアクセス
 2. 左下の歯車から「管理」画面に移動
@@ -18,7 +18,7 @@ Google AnalyticsのタグをGoogle Tag Managerに設定し、ログイン画面�
 
    ![googleanalyticsgoogletagmanagerlink-1](/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-1.png)
 
-# 2. Google Tag ManagerでGoogle Analyticsを設定
+## 2. Google Tag ManagerでGoogle Analyticsを設定
 
 1. <a href="https://tagmanager.google.com/?hl=JA" target="_blank">Google Tag Managerのホームページ</a>にアクセス
 2. 「新しいタグを追加」を押す
