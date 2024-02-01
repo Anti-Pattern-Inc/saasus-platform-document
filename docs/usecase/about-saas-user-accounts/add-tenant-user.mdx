@@ -1,5 +1,5 @@
 ---
-title: "テナントにユーザーを紐づけロールを設定する"
+title: "Assigning Users to Tenants and Setting Roles"
 slug: "add-tenant-user"
 excerpt: ""
 hidden: false
@@ -9,17 +9,17 @@ updatedAt: "Thu Dec 21 2023 22:59:04 GMT+0000 (Coordinated Universal Time)"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-テナントの作成ができたら、テナントにセルフサインアップしたユーザーを紐付けます。
+After a tenant has been created, you can then associate the self-signed up user with the tenant.
 
-テナント作成のソースに下記を追記してください。
+Please append the following to the tenant creation source code:
 
 <Tabs>
 <TabItem value="php" label="PHP">
 
 ```php
-        // テナントにユーザ紐付け
-        // 姓：画面で入力されたlastname
-        // 名：画面で入力されたfirstname
+        // Tenant user association
+        // Last name: the 'lastname' entered on the page
+        // First name: the 'firstname' entered on the page
         $create_tenant_user_param = new CreateTenantUserParam();
         $create_tenant_user_param->setEmail($request['userinfo']['email']);
         $create_tenant_user_param->setAttributes([
@@ -31,20 +31,20 @@ import TabItem from '@theme/TabItem';
 </TabItem>
 </Tabs>
 
-CreateTenantUserParamオブジェクトを利用してください。
+Please use the CreateTenantUserParam object.
 
 <!-- TODO fix link url -->
-setAttributesは<a href="/docs/tutorial/prepare-saasus-platform#%E3%83%86%E3%83%8A%E3%83%B3%E3%83%88%E3%81%AB%E8%BF%BD%E5%8A%A0%E5%B1%9E%E6%80%A7%E3%82%92%E5%AE%9A%E7%BE%A9%E3%81%99%E3%82%8B" target="_blank">テナントに追加属性を定義する</a>で定義したテナントの属性情報をセットします。
+setAttributes sets the attribute information of the tenant defined in <a href="/docs/tutorial/prepare-saasus-platform#%E3%83%86%E3%83%8A%E3%83%B3%E3%83%88%E3%81%AB%E8%BF%BD%E5%8A%A0%E5%B1%9E%E6%80%A7%E3%82%92%E5%AE%9A%E7%BE%A9%E3%81%99%E3%82%8B" target="_blank">Defining Additional Attributes for a Tenant</a>.
 
-続いて、ロールを設定します。
+Next, set the role.
 
-下記コードを追記してください。
+Please append the following code:
 
 <Tabs>
 <TabItem value="php" label="PHP">
 
 ```php
-        // ロール設定
+        // Role setting
         $create_tenant_user_roles_param = new CreateTenantUserRolesParam();
         $create_tenant_user_roles_param->setRoleNames(['admin']);
         $auth_api_client->createTenantUserRoles($tenant->getId(), $request['userinfo']['id'], getenv('DEFAULT_SAASUSER_ENV'), $create_tenant_user_roles_param);
@@ -53,13 +53,14 @@ setAttributesは<a href="/docs/tutorial/prepare-saasus-platform#%E3%83%86%E3%83%
 </TabItem>
 </Tabs>
 
-CreateTenantUserRolesParamオブジェクト利用してください。
+Please use the CreateTenantUserRolesParam object.
 
-setRoleNamesは複数指定できます。
+setRoleNames allows you to specify multiple roles.
+
 
 <!-- TODO fix link url -->
-指定できる値は、<a href="/docs/tutorial/prepare-saasus-platform#%E5%BD%B9%E5%89%B2%E3%81%AE%E5%AE%9A%E7%BE%A9" target="_blank">役割の定義</a>で作成した「役割名」が指定できます。
+The values that can be specified are the "Role Name" that you created in <a href="/docs/tutorial/prepare-saasus-platform#%E5%BD%B9%E5%89%B2%E3%81%AE%E5%AE%9A%E7%BE%A9" target="_blank">Role Definition</a>.
 
-API経由でテナントユーザーが登録できたかどうかの確認は、「SaaSus管理コンソール＞SaaS 運用コンソール＞ユーザー管理」よりご確認頂けます。
+You can check whether the tenant user was registered via API in "SaaS Operation Console > User Management".
 
 ![user](/img/usecase/about-saas-user-accounts/add-tenant-user/user.png)
