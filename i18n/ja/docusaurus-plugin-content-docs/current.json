@@ -59,6 +59,10 @@
     "message": "SaaS 開発コンソール",
     "description": "The label for category SaaS Development Console in sidebar tutorialSidebar"
   },
+  "sidebar.tutorialSidebar.category.Amazon EventBridge 連携機能": {
+    "message": "Amazon EventBridge 連携機能",
+    "description": "The label for category Amazon EventBridge 連携機能 in sidebar tutorialSidebar"
+  },
   "sidebar.tutorialSidebar.category.SaaS Operation Console": {
     "message": "SaaS 運用コンソール",
     "description": "The label for category SaaS Operation Console in sidebar tutorialSidebar"

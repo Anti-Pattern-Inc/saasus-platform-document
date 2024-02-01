@@ -98,6 +98,18 @@ const sidebars = {
         },
         'saas-development-console/notifymailcustomize',
         'saas-development-console/saasususerinvitation',
+        'saas-development-console/procedure-for-applying-for-a-paid-plan',
+        {
+          type: 'category',
+          label: 'Amazon EventBridge 連携機能',
+          link: {
+            type: 'doc',
+            id: 'saas-development-console/integrate-with-amazon-eventbridge-jp',
+          },
+          items: [
+            'saas-development-console/integrate-with-amazon-eventbridge/event-sample',
+          ],
+        },
       ],
     },
     {
