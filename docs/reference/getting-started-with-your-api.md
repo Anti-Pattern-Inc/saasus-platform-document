@@ -20,13 +20,13 @@ All API responses have an “X-Saasus-Trace-Id” header. This is used to enable
 
 API  
 [SaaSus Auth API Schema](./auth-api)  
-APIs related to user information, fundamental information, authentication information, tenant information, role information, etc.
+APIs related to user information, basic information, authentication information, tenant information, role information, etc.
 
 [SaaSus Billing API Schema](./billing-api)  
 APIs pertaining to obtaining, updating, and deleting information related to external SaaS used in billing operations.
 
 [SaaSus Pricing API Schema](./pricing-api)  
-APIs related to pricing units, feature menu, pricing plans, metering unit count, etc.
+APIs related to pricing units, feature menus, pricing plans, metering unit count, etc.
 
 [SaaSus Integration API Schema](./integration)  
 APIs related to Amazon EventBridge integration.
