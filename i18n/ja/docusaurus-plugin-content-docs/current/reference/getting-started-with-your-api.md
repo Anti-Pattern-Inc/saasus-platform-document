@@ -18,17 +18,6 @@ SAASUSSIGV1 Sig=署名, SaaSID=SaaS ID, APIKey=API Key
 全てのAPIレスポンスには、 X-Saasus-Trace-Id ヘッダが付きます。これを利用してAmazon EventBridge連携時にAPIのトレースが可能になるようになっています。  
 X-Saasus-Trace-Id ヘッダは、リクエスト時に指定することも出来ます。リクエスト時に指定すると、その Trace ID を引き継ぎます。
 
-A signature is required to call the SaaSus API.
-
-Authorization Header:  
-SAASUSSIGV1 Sig=Signature, SaaSID=SaaS ID, APIKey=API Key
-
-Signature = date and time information + API Key + HTTP method + URL (Host: Port/URI) + Request Body  
-Date and time information: YYYYMMDDHHNN (minute information in UTC)  
-Obtain HMAC-SHA256 with the above information as a secret key and use it as a signature
-
-All API responses have an "X-Saasus-Trace-Id" header. This is used to enable API tracing during Amazon EventBridge integration.  
-"X-Saasus-Trace-Id" header can also be specified at request time. If specified at request time, the Trace-Id is inherited.
 
 API  
 [SaaSus Auth API Schema](./auth-api)  
