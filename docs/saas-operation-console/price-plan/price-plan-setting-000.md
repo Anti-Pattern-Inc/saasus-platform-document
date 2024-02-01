@@ -1,18 +1,18 @@
 ---
-title: "テナントの請求先情報を設定"
+title: "Setting Billing Information for Tenants"
 slug: "price-plan-setting-000"
 excerpt: ""
 hidden: false
 createdAt: "Mon Sep 11 2023 01:17:21 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
-## 請求先の住所設定
+## Setting Billing Address
 
-テナントへの料金プラン設定前に請求先の情報を入力します。  
-テナント管理画面を開き対象のテナントの編集ボタンをクリックします
+Enter the billing information before setting up the price plan for tenants.  
+Open the tenant management screen and click the edit button of the target tenant.
 
 ![](/img/saas-operation-console/price-plan/price-plan-setting-000/tenant.png)
 
-請求情報編集にて請求先の情報を入力して保存
+Enter and save the billing information in the *Edit Billing Information*.
 
 ![](/img/saas-operation-console/price-plan/price-plan-setting-000/setting.png)
