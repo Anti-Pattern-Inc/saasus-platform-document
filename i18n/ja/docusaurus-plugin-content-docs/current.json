@@ -47,12 +47,12 @@
     "message": "補足",
     "description": "The label for category 補足 in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.TUTORIAL": {
+  "sidebar.tutorialSidebar.category.Tutorial": {
     "message": "チュートリアル",
-    "description": "The label for category チュートリアル in sidebar tutorialSidebar"
+    "description": "The label for category Tutorial in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Manage Rate Plans": {
     "message": "料金プランの管理",
-    "description": "The label for category 料金プランの管理 in sidebar tutorialSidebar"
+    "description": "The label for category Manage Rate Plans in sidebar tutorialSidebar"
   }
 }
