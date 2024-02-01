@@ -33,7 +33,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'TUTORIAL',
+      label: 'Tutorial',
       items: [
         'tutorial/prepare-sample-application',
         'tutorial/prepare-saasus-platform',
