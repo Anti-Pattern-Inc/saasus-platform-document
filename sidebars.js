@@ -60,11 +60,11 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'ユースケース',
+      label: 'Usecase',
       items: [
         {
           type: 'category',
-          label: 'SaaS利用者（ユーザー）のアカウントについて',
+          label: 'About SaaS User Accounts',
           link: {
             type: 'doc',
             id: 'usecase/about-saas-user-accounts',
