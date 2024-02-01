@@ -8,14 +8,14 @@ updatedAt: "Thu Dec 07 2023 01:43:51 GMT+0000 (Coordinated Universal Time)"
 ---
 A signature is necessary to call the SaaSus API.
 
-Authorization Header:
-SAASUSSIGV1 Sig=Signature, SaaSID=SaaS ID, APIKey=API Key
+Authorization Header:  
+SAASUSSIGV1 Sig=Signature, SaaSID=SaaS ID, APIKey=API Key  
 
-Signature = date and time information + API Key + HTTP method + URL (Host: Port/URI) + Request Body
-Date and time information: YYYYMMDDHHNN (minute information in UTC)
-Obtain HMAC-SHA256 with the above information as a secret key and use it as a signature
+Signature = date and time information + API Key + HTTP method + URL (Host: Port/URI) + Request Body  
+Date and time information: YYYYMMDDHHNN (minute information in UTC)  
+Obtain HMAC-SHA256 with the above information as a secret key and use it as a signature  
 
-All API responses have an “X-Saasus-Trace-Id” header. This is used to enable API tracing during Amazon EventBridge integration.
+All API responses have an “X-Saasus-Trace-Id” header. This is used to enable API tracing during Amazon EventBridge integration.  
 “X-Saasus-Trace-Id” header can also be specified at request time. If specified at request time, the Trace-Id is inherited.
 
 API  
