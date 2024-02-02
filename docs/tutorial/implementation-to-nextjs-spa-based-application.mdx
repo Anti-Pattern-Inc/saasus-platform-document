@@ -1,0 +1,273 @@
+---
+title: "Implementation to Next.js (SPA) based application"
+slug: "implementation-to-nextjs-spa-based-application"
+excerpt: ""
+hidden: false
+createdAt: "Fri Jan 20 2023 01:47:39 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+## Implementation in SPA based application
+
+### Preparation of Next.js (SPA) based sample application
+
+Let's implement the same functionality in a Next.js-based application that we implemented in a Blade-based application. A Next.js based application is under the front directory.
+
+In the case of SPA, the API is called from the front end to update the page. Therefore, it is necessary to make calls with a Bearer token when calling the API.
+
+This time we use axios for API calls, but the mechanism is the same even when using fetch or ajax.
+
+Since it is a local environment, check the operation of the Next.js-based application by logging in as follows.
+
+URL: <http://localhost:80/login>  
+Authentication Email: [user@example.com](mailto:user@example.com)  
+Password: password
+
+Operations are the same as the blade-based one, but first access the above URL and check the operation.
+
+![](https://files.readme.io/31272a2-Next_001.png "Next_001.png")
+
+After confirming the operation, first, point the callback after login to the Next.js-based application. Change the callback URL to <http://localhost:3000/callback> in the SaaSus console.
+
+![](https://files.readme.io/596148e-01_sample_052en.png "01_sample_052en.png")
+
+\*Since the login screen will be rebuilt, it will take a few minutes for the callback destination URL to be reflected.
+
+### Adjust the front end
+
+Now let's incorporate it into our application.  
+First, create a page to receive the modified callback.
+
+front/src/pages/callback/index.tsx
+
+and do the following:
+
+<Tabs>
+<TabItem value="typescript" label="Typescript">
+
+```typescript
+import Container from '@mui/material/Container'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import axios from '@/lib/axios'
+
+const Callback = () => {
+  const router = useRouter()
+  const query = router.query
+  const code = query.code as string
+
+  const fetchAuthCredentials = async () => {
+    const res = await axios.get(`/api/callback?code=${code}`)
+    // Save the passed JWT in Local Storage
+    const idToken = res.data.id_token as string
+    localStorage.setItem('SaaSusIdToken', idToken)
+    router.replace('/board')
+  }
+
+  useEffect(() => {
+    if (router.isReady) {
+      if (code) {
+        fetchAuthCredentials()
+      }
+    }
+  }, [query, router])
+
+  return <Container disableGutters></Container>
+}
+
+export default Callback
+```
+
+</TabItem>
+</Tabs>
+
+Here, the authentication information is obtained from the API based on the passed temporary code, the id_token is stored in the browser's local storage, and redirected to the board page.
+
+Next, we will attach this saved token to the header later when calling the API.
+
+Edit front/src/pages/board/index.tsx.
+
+<Tabs>
+<TabItem value="typescript" label="Typescript">
+
+```typescript
+import { MessageBoard } from '@/components/MessageBoard'
+import { formValueFormat } from '@/const/formTemplate'
+import Container from '@mui/material/Container'
+import useSWR, { useSWRConfig } from 'swr'
+import axios from '@/lib/axios'
+
+const Board = () => {
+ const { mutate } = useSWRConfig()
+ const fetcher = (url: string) => {
+   // Get JWT from Local Storage, attach it to header as Bearer token and call API
+   const token = localStorage.getItem('SaaSusIdToken')
+   if (!token) return ''
+   return axios
+     .get(url, {
+       headers: {
+         Authorization: `Bearer ${token}`,
+       },
+     })
+     .then((res) => res.data)
+ }
+ const { data: tenant_name, error: tenant_error } = useSWR(
+   `/api/tenant`,
+   fetcher
+ )
+ const { data: messages, error } = useSWR(`/api/board`, fetcher, {
+   refreshInterval: 5000,
+ })
+ if (error || tenant_error) return <div>failed to load</div>
+ if (!messages || !tenant_name) return <div>loading...</div>
+
+ const handleSubmit = async (value: string) => {
+   const formValue = { ...formValueFormat, message: value }
+   // Update local data immediately without revalidation
+   mutate('/api/board', [...messages, formValue], false)
+   // Send a request to the API to update
+   // Get JWT from Local Storage, attach it to header as Bearer token and call API
+   const token = localStorage.getItem('SaaSusIdToken')
+   await axios.post('/api/post', formValue, {
+     headers: {
+       Authorization: `Bearer ${token}`,
+     },
+   })
+ }
+
+ return (
+   <Container disableGutters>
+     <MessageBoard
+       messages={messages}
+       tenant_name={tenant_name}
+       onSubmit={handleSubmit}
+     />
+   </Container>
+ )
+}
+
+export default Board
+```
+
+</TabItem>
+</Tabs>
+
+Since there are few API calls this time, it is simply specified directly when calling axios, however it would be better to standardize the implementation using middleware.
+
+The front side is now complete.
+
+### Tweaking the backend
+
+Next is the API side. In this sample, the API is also based on Laravel, so what you do is almost the same as the Blade version.
+
+First, set the environment variables in .env that will be used by the API this time. This will force the middleware to return an API response on failure.
+
+api/.env
+
+```
+SAASUS_AUTH_MODE="api"
+```
+
+then api/routes/api.php  
+to use the SaaSus SDK middleware and CallbackApiController.
+
+<Tabs>
+<TabItem value="php" label="PHP">
+
+```php
+// Register a controller that retrieves authentication information such as ID tokens from temporary code
+Route::get('/callback', 'AntiPatternInc\Saasus\Laravel\Controllers\CallbackApiController@index');
+
+// Use SaaSus SDK standard Auth Middleware
+Route::middleware(\AntiPatternInc\Saasus\Laravel\Middleware\Auth::class)->group(function () {
+   Route::get('/board', 'App\Http\Controllers\MessageApiController@index');
+   Route::post('/post', 'App\Http\Controllers\MessageApiController@post');
+   Route::get('/plan', 'App\Http\Controllers\PlanApiController@index');
+   Route::get('/tenant', 'App\Http\Controllers\TenantApiController@index');
+});
+```
+
+</TabItem>
+</Tabs>
+
+api/app/Http/Controllers/MessageApiController.php
+
+On the controller side, the implementation is similar to the Blade version.
+
+<Tabs>
+<TabItem value="php" label="PHP">
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Message;
+
+class MessageApiController extends Controller
+{
+   public function index(Request $request)
+   {
+       // The idea is the same for SPA
+       // Refer to MessageController for processing
+       $tenantid = $request->userinfo['tenants'][0]['id'];
+
+       $messages = DB::table('messages')
+           ->select('messages.*')
+           ->where('tenant_id', $tenantid)
+           ->get();
+       return response()->json($messages);
+   }
+
+   public function post(Request $request)
+   {
+        $tenant_id = $request->userinfo['tenants'][0]['id'];
+        $plan_id = $request->userinfo['tenants'][0]['plan_id'];
+
+        // Use the SaaSus SDK to hit the SaaSus API, acquire various information, and use it for judgment
+        $client = new \AntiPatternInc\Saasus\Api\Client();
+        $pricingApi = $client->getPricingClient();
+        $res = $pricingApi->getPricingPlan($plan_id, $pricingApi::FETCH_RESPONSE);
+        $plan = json_decode($res->getBody(), true);
+
+        $meteringUnitName = "comment_count";
+        $res = $pricingApi->getMeteringUnitDateCountByTenantIdAndUnitNameToday($tenant_id, $meteringUnitName, $pricingApi::FETCH_RESPONSE);
+        $count = json_decode($res->getBody(), true);
+
+        $upper = \AntiPatternInc\Saasus\Api\Lib::findUpperCountByMeteringUnitName($plan, $meteringUnitName);
+
+        $result = '';
+        // Disable posting if the number of comments exceeds the maximum number of comments for the current contracted price plan
+        if ($count['count'] < $upper || $upper === 0) {
+            $result = Message::create([
+                'tenant_id' => $tenant_id,
+                'user_id' => $request->userinfo['tenants'][0]['user_attribute']['username'],
+                'message' => $request->message,
+            ]);
+            // add 1 to the number of comments in the metering API
+            $param = new \AntiPatternInc\Saasus\Sdk\Pricing\Model\UpdateMeteringUnitTimestampCountNowParam();
+            $param->setMethod('add');
+            $param->setCount(1);
+            $res = $pricingApi->updateMeteringUnitTimestampCountNow($request->userinfo['tenants'][0]['id'], $meteringUnitName, $param, $pricingApi::FETCH_RESPONSE);
+        }
+
+        return response()->json($result);
+   }
+}
+```
+
+</TabItem>
+</Tabs>
+
+Now we have implemented the same functionality as the Blade version.
+
+When you log in from the login page, a callback is made to the Next.js version and the page is displayed.  
+Let's check if it behaves the same as the Blade version.
+
+![](https://files.readme.io/1bb80bc-53.png "53.png")
+
+This is the end of the tutorial, lastly a summary is provided.

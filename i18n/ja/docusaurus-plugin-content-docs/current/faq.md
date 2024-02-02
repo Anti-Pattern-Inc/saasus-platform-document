@@ -1,6 +1,6 @@
 ---
 title: "FAQ"
-slug: "faq-jp"
+slug: "faq"
 excerpt: ""
 hidden: false
 createdAt: "Mon Aug 08 2022 11:55:56 GMT+0000 (Coordinated Universal Time)"

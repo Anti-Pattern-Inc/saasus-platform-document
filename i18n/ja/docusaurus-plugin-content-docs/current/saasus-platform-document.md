@@ -1,6 +1,6 @@
 ---
 title: "SaaSus Platformドキュメント"
-slug: "saasus-platform-document-jp"
+slug: "saasus-platform-document"
 excerpt: ""
 hidden: false
 createdAt: "Sat Jul 30 2022 11:37:27 GMT+0000 (Coordinated Universal Time)"
