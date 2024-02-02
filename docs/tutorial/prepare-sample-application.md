@@ -1,67 +1,72 @@
 ---
 sidebar_position: 1
+title: "Prepare a Sample Application"
+slug: "prepare-the-sample-application"
+excerpt: "Let's turn a simple web chat application into SaaS"
+hidden: false
+createdAt: "Fri Jan 20 2023 01:46:32 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
 
-# サンプルアプリケーションの準備
+Let's turn a simple web chat application into SaaS
 
-シンプルな Web チャットアプリケーションを SaaS 化してみましょう
+In this tutorial, a simple chat system created as a so-called ordinary web application will be converted to SaaS using the SaaSus Platform.
 
-このチュートリアルでは、いわゆる普通の Web アプリケーションとして作成されている簡易チャットシステムを、SaaSus Platform を利用して SaaS 化していきます。
+## Preparing the Sample Application
 
-## サンプルアプリケーションの準備
+First, let's start the sample application!
 
-まず、今回のサンプルアプリケーションを起動してみましょう！
+The backend of this simple chat system is PHP8 + Laravel9 + PostgreSQL13.  
+There are two types of frontends, one created with Laravel with Blade and one created as an SPA with Next.js.
 
-この簡易チャットシステムは、バックエンドは PHP8 + Laravel9 + PostgreSQL13 にて作成されています。  
-フロントエンドは Laravel with Blade にて作成されたものと、 Next.js にて SPA として作成されたものの２種類が入っています。
-
-まずは、こちらを動作確認してみましょう！
+First of all, let's check the operation!
 
 <https://github.com/saasus-platform/sampleapp-basic-chat>
 
-上記リポジトリを clone したディレクトリにて、  
-※ PHP の場合`sampleapp-basic-chat/php/laravel`配下  
-※ Next.js の場合`sampleapp-basic-chat/node/express`配下
+In the directory where the above repository is cloned,
+
+- For PHP, under `sampleapp-basic-chat/php/laravel`
+- For Next.js, under `sampleapp-basic-chat/node/express`
 
 ```shell
 ./init.sh
 ```
 
-でアプリケーションをローカルで起動できます。
+will start the application locally.
 
-起動したら、以下の URL にアクセスして試してみましょう。
+Once it's started, go to the URL below and give it a try.
 
-Blade 版
+Blade version
 
 URL: <http://localhost/board>  
-認証用 Email: [user@example.com](mailto:user@example.com)  
+Authentication Email: [user@example.com](mailto:user@example.com)  
 Password: password
 
-![サンプル](/img/tutorial/prepare-sample-application-01.png)
+![サンプル](/img/tutorial/prepare-sample-application/prepare-sample-application-01.png)
 
-Next.js 版
+Next.js version
 
 URL: <http://localhost:80/login/>  
-認証用 Email: [user@example.com](mailto:user@example.com)  
+Authentication Email: [user@example.com](mailto:user@example.com)  
 Password: password
 
-※ Next.js 版は、ビルドに数分掛かる可能性があります。表示できない場合は、数分待ってから再度表示してみてください。
+- The Next.js version may take several minutes to build. If it doesn't display, wait a few minutes and try to view it again.
 
-![サンプル](/img/tutorial/prepare-sample-application-02.png)
+![サンプル](/img/tutorial/prepare-sample-application/prepare-sample-application-02.png)
 
-このような形で、ユーザが好きに書き込みができます。
+In this way, users can write whatever they like.
 
-現状では、ユーザを識別するために Laravel 標準の認証モジュールを利用しています。
+Currently, we use Laravel's standard authentication module to identify users.
 
-しかし、Laravel 標準の認証モジュールなのでセキュリティが強力とは言いづらいです。そして、シンプルな Web アプリケーションなので、もちろんテナントの概念がありません。役割(ロール)の概念もありませんし、料金プランなどはもちろんありません。
+However, since it is a Laravel standard authentication module, it is difficult to say that security is strong. Also since it's a simple web application, of course there is no concept of tenants. There is no concept of roles, and there are no pricing plans.
 
-この状態のシンプルな Web アプリケーションを SaaS 化していきましょう！
+Let's turn this simple web application into SaaS!
 
-※チュートリアル開始時点と完了時点でのソースコードの差分は  
+\*The difference between the source code at the start of the tutorial and at the end of the tutorial is  
 PHP  
 <https://github.com/saasus-platform/sampleapp-basic-chat/pull/10/files>
 
 Next.js  
 <https://github.com/saasus-platform/sampleapp-basic-chat/pull/11/files>
 
-こちらになりますので、参考にしてみてください
+Please use the above links as reference.

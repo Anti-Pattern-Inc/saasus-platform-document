@@ -1,6 +1,6 @@
 ---
 title: "ビジネスユーザー向けチュートリアル"
-slug: "tutorials-for-business-users-jp"
+slug: "tutorials-for-business-users"
 excerpt: ""
 hidden: false
 createdAt: "Sun Aug 07 2022 13:09:14 GMT+0000 (Coordinated Universal Time)"
