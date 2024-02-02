@@ -25,8 +25,8 @@ updatedAt: "Wed Jan 17 2024 08:25:52 GMT+0000 (Coordinated Universal Time)"
 
 #### １．１．１．認証後遷移先画面
 
-- <a href="https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/pages/Callback.tsx" target="_blank">Reactの実装サンプル</a>
-- <a href="https://github.com/saasus-platform/implementation-sample-front-vue/blob/main/src/views/Callback.vue" target="_blank">Vue.jsの実装サンプル</a>
+- [Reactの実装サンプル](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/pages/Callback.tsx)
+- [Vue.jsの実装サンプル](https://github.com/saasus-platform/implementation-sample-front-vue/blob/main/src/views/Callback.vue)
 
 SaaSus Platformが生成するログイン画面からログインを実施すると、認証後遷移先で設定したURLが呼び出されます。
 
@@ -53,8 +53,8 @@ APIコール時にはローカルストレージに保存したJWTを利用し�
 
 #### １．１．３．ユーザ一覧画面（トップページ）
 
-- <a href="https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/pages/UserPage.tsx" target="_blank">Reactの実装サンプル</a>
-- <a href="https://github.com/saasus-platform/implementation-sample-front-vue/blob/main/src/views/UserPage.vue" target="_black">Vue.jsの実装サンプル</a>
+- [Reactの実装サンプル](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/pages/UserPage.tsx)
+- [Vue.jsの実装サンプル](https://github.com/saasus-platform/implementation-sample-front-vue/blob/main/src/views/UserPage.vue)
 
 エンドポイント /userinfo から取得しているユーザ情報の利用について
 
@@ -78,8 +78,8 @@ roles配列：
 
 ### １．２．実装サンプルの使い方
 
-- <a href="https://github.com/saasus-platform/implementation-sample-front-react/blob/main/README.md" target="_blank">React</a>
-- <a href="https://github.com/saasus-platform/implementation-sample-front-vue/blob/main/README.md" target="_blank">Vue.js</a>
+- [React](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/README.md")
+- [Vue.js](https://github.com/saasus-platform/implementation-sample-front-vue/blob/main/README.md")
 
 ## ２．バックエンド実装
 
@@ -87,20 +87,20 @@ roles配列：
 
 #### ２．１．１．JWT取得API
 
-- <a href="https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L82" target="_blank">Go(echo)の実装サンプル</a>  
+- [Go(echo)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L82")  
   `e.GET("/credentials", getCredentials)`
-- <a href="https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L48" target="_blank">Python(FastAPI)の実装サンプル</a>  
+- [Python(FastAPI)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L48")  
   `@app.get("/credentials")`
-- <a href="https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L36" target="_blank">Java(Maven)の実装サンプル</a>  
+- [Java(Maven)の実装](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L36")  
   `@GetMapping(value = "/credentials", produces = "application/json")`
 
 #### ２．１．２．ユーザ情報取得API
 
-- <a href="https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L144" target="_black">Go(echo)の実装サンプル</a>  
+- [Go(echo)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L144")  
   `e.GET("/userinfo", getMe, authMiddleware)`
-- <a href="https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L53" target="_blank">Python(FastAPI)の実装サンプル</a>  
+- [Python(FastAPI)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L53")  
   `@app.get("/userinfo")`
-- <a href="https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L82" target="_blank">Java(Maven)の実装サンプル</a>  
+- [Java(Maven)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L82")  
   `@GetMapping(value = "/userinfo", produces = "application/json")`
 
 #### 
@@ -122,11 +122,11 @@ c. ログインユーザをテナントの管理者に設定
 
 #### ２．１．４．ユーザ一覧取得API
 
-- <a href="https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L156" target="_blank">Go(echo)の実装サンプル</a>  
+- [Go(echo)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L156")  
   `e.GET("/users", getUsers, authMiddleware)`
-- <a href="https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L58" target="_blank">Python(FastAPI)の実装サンプル</a>  
+- [Python(FastAPI)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L58")  
   `@app.get("/users")`
-- <a href="https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L82" target="_blank">Java(Maven)の実装サンプル</a>  
+- [Java(Maven)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L8")  
   `@GetMapping(value = "/users", produces = "application/json")`
 
 #### 
@@ -136,11 +136,8 @@ APIリクエストがSaaSus Platformにログインしたユーザからのも�
 
 ### ２．２．実装サンプルの使い方
 
-- <a href="https://github.com/saasus-platform/implementation-sample-api-go/blob/main/README.md" target="_blank">Go(echo)</a>
-
-- <a href="https://github.com/saasus-platform/implementation-sample-api-python" target="_blank">Python(FastAPI)</a>
-
-- <a href="https://github.com/saasus-platform/implementation-sample-api-java"
-  target="_blank">Java(Maven)</a>
+- [Go(echo)](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/README.md")
+- [Python(FastAPI)](https://github.com/saasus-platform/implementation-sample-api-python")
+- [Java(Maven)](https://github.com/saasus-platform/implementation-sample-api-java")
 
 #### 
