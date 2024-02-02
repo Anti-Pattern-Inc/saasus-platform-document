@@ -106,5 +106,9 @@
   "sidebar.tutorialSidebar.category.About SaaS User Accounts": {
     "message": "SaaS利用者（ユーザー）のアカウントについて",
     "description": "The label for category About SaaS User Accounts in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Metering API Implementation Sample and Examples of Use (Laravel)": {
+    "message": "メータリングAPIの実装サンプルと使用例(Laravel)",
+    "description": "The label for category Metering API Implementation Sample and Examples of Use (Laravel) in sidebar tutorialSidebar"
   }
 }
