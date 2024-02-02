@@ -80,6 +80,9 @@ const sidebars = {
       type: 'category',
       label: 'SaaS Development Console',
       items: [
+        'saas-development-console/google-linkage',
+        'saas-development-console/tiered-unit',
+        'saas-development-console/tax-rates',
         {
           type: 'category',
           label: 'Google Tag Managerの設定',
@@ -92,8 +95,6 @@ const sidebars = {
             'saas-development-console/googletagmanagersetting/googletagmanagercontaineridsetting',
             'saas-development-console/googletagmanagersetting/creategoogleanalyticsaccount',
             'saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink',
-            
-            
           ],
         },
         'saas-development-console/notifymailcustomize',
