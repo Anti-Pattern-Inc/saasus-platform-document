@@ -55,14 +55,6 @@
     "message": "料金プランの管理",
     "description": "The label for category Manage Rate Plans in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.ユースケース": {
-    "message": "ユースケース",
-    "description": "The label for category ユースケース in sidebar tutorialSidebar"
-  },
-  "sidebar.tutorialSidebar.category.SaaS利用者（ユーザー）のアカウントについて": {
-    "message": "SaaS利用者（ユーザー）のアカウントについて",
-    "description": "The label for category SaaS利用者（ユーザー）のアカウントについて in sidebar tutorialSidebar"
-  },
   "sidebar.tutorialSidebar.category.SaaS Development Console": {
     "message": "SaaS 開発コンソール",
     "description": "The label for category SaaS Development Console in sidebar tutorialSidebar"
@@ -106,5 +98,13 @@
   "sidebar.changelogSidebar.doc.Welcome to SaaSus Platform": {
     "message": "Welcome to SaaSus Platform",
     "description": "The label for the doc item Welcome to SaaSus Platform in sidebar changelogSidebar, linking to the doc changelog/welcome-to-saasus-platform"
+  },
+  "sidebar.tutorialSidebar.category.Usecase": {
+    "message": "ユースケース",
+    "description": "The label for category Usecase in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.About SaaS User Accounts": {
+    "message": "SaaS利用者（ユーザー）のアカウントについて",
+    "description": "The label for category About SaaS User Accounts in sidebar tutorialSidebar"
   }
 }
