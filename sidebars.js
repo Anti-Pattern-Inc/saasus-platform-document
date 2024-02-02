@@ -80,6 +80,18 @@ const sidebars = {
       type: 'category',
       label: 'SaaS Development Console',
       items: [
+        'saas-development-console/procedure-for-applying-for-a-paid-plan',
+        {
+          type: 'category',
+          label: 'Integrate with Amazon EventBridge',
+          link: {
+            type: 'doc',
+            id: 'saas-development-console/integrate-with-amazon-eventbridge',
+          },
+          items: [
+            'saas-development-console/integrate-with-amazon-eventbridge/event-sample',
+          ],
+        },
         'saas-development-console/google-linkage',
         'saas-development-console/tiered-unit',
         'saas-development-console/tax-rates',
@@ -99,18 +111,6 @@ const sidebars = {
         },
         'saas-development-console/notifymailcustomize',
         'saas-development-console/saasususerinvitation',
-        'saas-development-console/procedure-for-applying-for-a-paid-plan',
-        {
-          type: 'category',
-          label: 'Amazon EventBridge 連携機能',
-          link: {
-            type: 'doc',
-            id: 'saas-development-console/integrate-with-amazon-eventbridge-jp',
-          },
-          items: [
-            'saas-development-console/integrate-with-amazon-eventbridge/event-sample',
-          ],
-        },
       ],
     },
     {
