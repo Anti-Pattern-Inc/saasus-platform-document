@@ -97,7 +97,7 @@ User Typeで「外部」を選択し、「作成」ボタンを押す
 - 承認済みのJavaScript生成元：＜SaaSus管理コンソールで確認した値＞
 - 承認済みのリダイレクトURI：＜SaaSus管理コンソールで確認した値＞
 
-![google-linkage-1](/img/saas-development-console/google-linkage-11.png)
+![google-linkage-11](/img/saas-development-console/google-linkage-11.png)
 
 
 OAuthクライアントが作成されました  
