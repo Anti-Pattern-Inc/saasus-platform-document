@@ -74,11 +74,11 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'ユースケース',
+      label: 'Usecase',
       items: [
         {
           type: 'category',
-          label: 'SaaS利用者（ユーザー）のアカウントについて',
+          label: 'About SaaS User Accounts',
           link: {
             type: 'doc',
             id: 'usecase/about-saas-user-accounts',
@@ -94,6 +94,9 @@ const sidebars = {
       type: 'category',
       label: 'SaaS Development Console',
       items: [
+        'saas-development-console/google-linkage',
+        'saas-development-console/tiered-unit',
+        'saas-development-console/tax-rates',
         {
           type: 'category',
           label: 'Google Tag Managerの設定',
@@ -106,8 +109,6 @@ const sidebars = {
             'saas-development-console/googletagmanagersetting/googletagmanagercontaineridsetting',
             'saas-development-console/googletagmanagersetting/creategoogleanalyticsaccount',
             'saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink',
-            
-            
           ],
         },
         'saas-development-console/notifymailcustomize',
