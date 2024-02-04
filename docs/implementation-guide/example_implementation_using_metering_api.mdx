@@ -19,20 +19,20 @@ We will create a feature that allows tenant administrators to check the usage ba
 
 ## Creating the Pricing Plan
 
-### Creating Measurement Units
+### Creating Pricing Units
 
-We will create measurement units for the number of users and active users.
+We will create pricing units for the number of users and active users.
 
 In this example, we are creating usage units, but when actually operating, consider creating tiered units or tiered usage units as referenced in the link below.
 
 <!-- TODO fix link url -->
 <a href="doc:tiered_unit">About the Difference in Billing Calculation between Tiered Units and Tiered Usage Units</a>
 
-1. Go to Pricing Plan -> Measurement Unit Settings from the development console.
-2. In the Measurement Unit Settings screen, click the "▼" next to "Create Fixed Unit Measurement" and select "Create Usage Unit Measurement", then click the "Create Usage Unit Measurement" button.
+1. Go to Pricing Plan -> Pricing Unit Settings from the development console.
+2. In the Pricing Unit Settings screen, click the "▼" next to "Create Fixed Unit Pricing" and select "Create Usage Unit Pricing", then click the "Create Usage Unit Pricing" button.
 
    ![](/img/metering-api-sample/image-03.png)
-3. Set the measurement units for the number of users and active users.
+3. Set the pricing units for the number of users and active users.
 
    ![](/img/metering-api-sample/image-04.png)
 
@@ -40,11 +40,11 @@ In this example, we are creating usage units, but when actually operating, consi
 
 ### Creating Feature Menus
 
-Create feature menus to set the created measurement units.
+Create feature menus to set the created pricing units.
 
 1. Go to Pricing Plan -> Feature Menu Settings from the development console.
 2. Click on "Create Feature Menu" at the top right.
-3. Create a feature menu with the measurement units for the number of users and active users set.
+3. Create a feature menu with the pricing units for the number of users and active users set.
 
    ![](/img/metering-api-sample/image-06.png)
 
@@ -219,11 +219,11 @@ type SearchFormSchema = MonthMeteringUnitNameSearchFormSchema | MonthSearchFormS
 const METERING_UNIT_NAME_DICT_ARRAY = [
     {
         key: 'user_count', // Target meter name for user count defined in the pricing plan creation
-        displayName: 'ユーザー数', // Display name for user count
+        displayName: 'Number of Users', // Display name for user count
     },
     {
         key: 'active_user_count', // Target meter name for active user count defined in the pricing plan creation
-        displayName: 'アクティブユーザー数', // Display name for active user count
+        displayName: 'Number of Active Users', // Display name for active user count
     },
 ]
 
@@ -350,19 +350,19 @@ const UsageCheck: React.FC = () => {
 
     return (
         <div>
-            <h2>使用量確認</h2>
+            <h2>Usage Check</h2>
             <form onSubmit={handleSubmit(onSearchSubmit)}>
-                <label>検索対象指定方法</label>
-                <select {...register('type', {required: '選択してください。'})}>
+                <label>Method of Specifying Search Target</label>
+                <select {...register('type', {required: 'Please select.'})}>
                     <option></option>
-                    <option value="month">年月</option>
-                    <option value="date">年月日</option>
+                    <option value="month">Year-Month</option>
+                    <option value="date">Year-Month-Day</option>
                 </select>
                 {searchType && (
                     <>
-                        <label>{searchType === 'month' ? '対象年月' : '対象年月日'}</label>
-                        <input {...register(searchType, { required: '必須です' })} />
-                        <label>計測対象メータ名</label>
+                        <label>{searchType === 'month' ? 'Target Year-Month' : 'Target Year-Month-Day'}</label>
+                        <input {...register(searchType, { required: 'Required' })} />
+                        <label>Metering Unit Name</label>
                         <select {...register('meteringUnitName')}>
                             <option></option>
                             {METERING_UNIT_NAME_DICT_ARRAY.map(({ key, displayName }) => (
@@ -371,15 +371,15 @@ const UsageCheck: React.FC = () => {
                         </select>
                     </>
                 )}
-                <button type="submit" disabled={!isDirty || !isValid}>検索</button>
+                <button type="submit" disabled={!isDirty || !isValid}>Search</button>
             </form>
 
-            <h3>検索対象日：{targetMonthOrDate}</h3>
+            <h3>Search Target Date: {targetMonthOrDate}</h3>
             {METERING_UNIT_NAME_DICT_ARRAY.map(({key, displayName}) => {
                 const formMeteringUnitName = getValues('meteringUnitName')
                 return (!formMeteringUnitName || formMeteringUnitName && formMeteringUnitName === key) && (
                     <UsageCountWrapper key={key}>
-                        <p>{displayName}：{meteringUnitCountList.find(({meteringUnitName}) => key === meteringUnitName)?.count ?? 0}件</p>
+                        <p>{displayName}：{meteringUnitCountList.find(({meteringUnitName}) => key === meteringUnitName)?.count ?? 0} cases</p>
                     </UsageCountWrapper>
                 );
             })}
