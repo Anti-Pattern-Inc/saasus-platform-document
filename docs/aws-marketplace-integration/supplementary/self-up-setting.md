@@ -1,19 +1,19 @@
 ---
-title: "セルフサインアップの設定方法"
+title: "How to Set Self-Signup"
 slug: "self-up-setting"
 excerpt: ""
 hidden: false
-metadata: 
+metadata:
   image: []
   robots: "index"
 createdAt: "Tue Jun 20 2023 11:34:45 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Fri Oct 27 2023 07:15:37 GMT+0000 (Coordinated Universal Time)"
 ---
-1. <a href="https://settings.console.saasus.io/customize" target="_blank">SaaS 開発コンソールの認証詳細設定</a>にアクセスします。
-2. 「認証設定」タブをクリックしてください。
-3. スクロールして、セルフサインアップ（ユーザー自身による新規登録）の可否の項目を見つけてください。
-4. トグルボタンをONにして、保存ボタンを押してください。
+1. Access <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Advanced Setting of SaaS Development Console</a>.
+2. Please click on the `Authentication` tab.
+3. Scroll down to find the item for enabling or disabling Self-Signup (new registration by the user).
+4. Turn on the toggle button and press the Save button.
 
 ![self-up-setting-1](/img/aws-marketplace-integration/supplementary/self-up-setting-1.png)
 
-以上で設定完了です。数分後に実際の画面に反映されます。
+That completes the setting. It will be reflected in the actual screen after a few minutes.
