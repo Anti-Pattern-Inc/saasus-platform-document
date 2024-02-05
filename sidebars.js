@@ -236,9 +236,9 @@ const sidebars = {
       label: "Changelog",
       items: [
         {
-          label: "2023/11/28",
+          label: "2023/11/23",
           type: "doc",
-          id: "changelog/20231128"
+          id: "changelog/20231123"
         },
         {
           label: "2023/11/18",
