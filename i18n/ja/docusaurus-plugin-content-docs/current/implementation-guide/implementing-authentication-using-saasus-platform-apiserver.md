@@ -91,7 +91,7 @@ roles配列：
   `e.GET("/credentials", getCredentials)`
 - [Python(FastAPI)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L48")  
   `@app.get("/credentials")`
-- [Java(Maven)の実装](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L36")  
+- [Java(Maven)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L36")  
   `@GetMapping(value = "/credentials", produces = "application/json")`
 
 #### ２．１．２．ユーザ情報取得API
@@ -126,7 +126,7 @@ c. ログインユーザをテナントの管理者に設定
   `e.GET("/users", getUsers, authMiddleware)`
 - [Python(FastAPI)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L58")  
   `@app.get("/users")`
-- [Java(Maven)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L8")  
+- [Java(Maven)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L82")  
   `@GetMapping(value = "/users", produces = "application/json")`
 
 #### 
