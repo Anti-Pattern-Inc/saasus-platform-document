@@ -1,27 +1,29 @@
 ---
-title: "最終レビュー依頼の方法について"
+title: "How to Request a Final Review"
 slug: "final-review-request"
 excerpt: ""
 hidden: false
-metadata: 
+metadata:
   image: []
   robots: "index"
 createdAt: "Thu Jun 29 2023 11:59:26 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Fri Jun 30 2023 03:39:08 GMT+0000 (Coordinated Universal Time)"
 ---
-[出品手順「10. AWS Marketplaceとの連携確認」](/docs/aws-marketplace-integration/aws-marketplace-integration)が完了したら、AWS Marketplaceサポートチームへ最終レビューの依頼を行います。
+<!-- TODO 遷移先画面の英語対応後にリンク名を修正 -->
+Once the [Listing Procedure "10. Confirmation of Integration with AWS Marketplace"](/docs/aws-marketplace-integration/aws-marketplace-integration) is complete, you will need to request a final review from the AWS Marketplace Support Team.
 
-[出品手順「8. 本番用SaaS製品の登録(AMMP)](/docs/aws-marketplace-integration/aws-marketplace-integration)」が完了時、サポートチームから**「Action Required: AWS Marketplace SaaS Contract Next Steps [ thread::XXXXXXXXXX:: ]」**というメールが届きます、お手元で届いているかご確認ください。
+<!-- TODO 遷移先画面の英語対応後にリンク名を修正 -->
+When you complete the [Listing Procedure "8. Registration of Production SaaS Product (AMMP)"](/docs/aws-marketplace-integration/aws-marketplace-integration), you'll receive an email from the support team titled **"Action Required: AWS Marketplace SaaS Contract Next Steps [ thread::XXXXXXXXXX:: ]"**, please confirm if you've received it.
 
 ![final-review-request-1](/img/aws-marketplace-integration/supplementary/final-review-request-1.png)
 
 
-最終レビュー依頼は、届いたメールへ返信する必要がございます。メールの本文で「API統合と動作確認テストが終わりました、レビューお願いします」という旨の**英文**を書いて送信してください。  
-以上で最終レビュー依頼は完了です。
+To request a final review, you need to reply to the received email. In the body of the email, write "The API integration and operational test have been completed, please review" in **English** and send.  
+This completes the final review request.
 
-### 最終レビューの結果を受けて
+### Receiving the final review results
 
-3~5営業日で返信が届きます。最終レビューに問題がなければ、サポートチームからテストに使用した契約情報を削除してもよいかの承諾を求められます。その際は、メールで返信してください。  
-最終レビューで問題がある場合は、サポートチームから修正を求められることがありますので、修正対応を行った後に再度メールで最終レビュー依頼を行ってください。
+You will receive a reply within 3-5 business days. If there are no problems with the final review, the support team may ask for your consent to delete the contract information used for testing. Please reply to the email in that case.  
+If there are problems during the final review, the support team may request corrections. After making the necessary corrections, please request a final review again by email.
 
-テスト契約情報の削除が完了すると、サポートチームからメールが届きます。メールを受け取ったら、次の公開依頼の手続きに進むことができます。
+Once the deletion of test contract information is complete, you'll receive an email from the support team. Once you receive the email, you can proceed to the next step of requesting publication.
