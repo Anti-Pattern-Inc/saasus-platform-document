@@ -17,7 +17,7 @@ import TabItem from '@theme/TabItem';
 
 # フロー（JWT取得〜テナントオンボーディング）
 
-![](/img/metering-api-sample/image-01.png)
+![](/ja/img/metering-api-sample/image-01.png)
 
 # 実装サンプル
 
@@ -32,7 +32,7 @@ SaaSusが生成するログイン画面からログインを実施すると、�
 本実装サンプルを使って動作確認を行うためには、  
 `http://localhost:3000/callback`　と設定してください。
 
-![](/img/metering-api-sample/image-02.png)
+![](/ja/img/metering-api-sample/image-02.png)
 
 認証後遷移先にはクエリパラメータ(code=xxxxx)で、認証情報取得に必要な一時コードが渡される仕様となってます。一時コードを使ってJWTを取得、ローカルストレージに保存する実装を行ってください。
 
