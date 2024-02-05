@@ -20,7 +20,7 @@ updatedAt: "Fri Oct 27 2023 07:17:41 GMT+0000 (Coordinated Universal Time)"
 1. <a href="https://aws.amazon.com/marketplace/management/homepage" target="_blank">AWS Marketplace Management Portal</a>にアクセスします
 2. Requestsページへ移動後、公開するSaaS製品のリクエストを選択します
 3. 公開依頼できる状態であれば、「Review your Product Listing」というタイトルのページが表示されます  
-   ![public-request-1](/img/aws-marketplace-integration/supplementary/public-request-1.png)
+   ![public-request-1](/ja/img/aws-marketplace-integration/supplementary/public-request-1.png)
 4. Status「Approve」を選択して、「Submit」ボタンを押下してください
 
 以上で公開依頼のリクエストは完了です。
