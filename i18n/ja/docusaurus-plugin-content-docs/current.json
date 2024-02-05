@@ -35,10 +35,6 @@
     "message": "AWS Marketplace連携機能",
     "description": "The label for category AWS Marketplace連携機能 in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.セラー登録から銀行口座の設定": {
-    "message": "セラー登録から銀行口座の設定",
-    "description": "The label for category セラー登録から銀行口座の設定 in sidebar tutorialSidebar"
-  },
   "sidebar.tutorialSidebar.category.SaaS製品情報の登録": {
     "message": "SaaS製品情報の登録",
     "description": "The label for category SaaS製品情報の登録 in sidebar tutorialSidebar"
@@ -106,5 +102,9 @@
   "sidebar.tutorialSidebar.category.Integrate with Amazon EventBridge": {
     "message": "Amazon EventBridge 連携機能",
     "description": "The label for category Integrate with Amazon EventBridge in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Setting Up Bank Account From Seller Registration": {
+    "message": "セラー登録から銀行口座の設定",
+    "description": "The label for category Setting Up Bank Account From Seller Registration in sidebar tutorialSidebar"
   }
 }

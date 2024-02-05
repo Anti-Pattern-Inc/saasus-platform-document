@@ -13,18 +13,18 @@ updatedAt: "Fri Oct 27 2023 07:11:18 GMT+0000 (Coordinated Universal Time)"
 Settingsの`Add public profile`から設定を始めてください。
 
 
-![public-profile-settings-1](/img/aws-marketplace-integration/public-profile-settings/public-profile-settings-1.png)
+![public-profile-settings-1](/ja/img/aws-marketplace-integration/public-profile-settings/public-profile-settings-1.png)
 
 
 ここで設定する内容は、AWS Marketplaceで公開される企業情報（Public profile）となります。
 
-![public-profile-settings-2](/img/aws-marketplace-integration/public-profile-settings/public-profile-settings-2.png)
+![public-profile-settings-2](/ja/img/aws-marketplace-integration/public-profile-settings/public-profile-settings-2.png)
 
 
 企業情報を設定後、送信ボタンを押下して設定します。
 
-![public-profile-settings-3](/img/aws-marketplace-integration/public-profile-settings/public-profile-settings-3.png)
+![public-profile-settings-3](/ja/img/aws-marketplace-integration/public-profile-settings/public-profile-settings-3.png)
 
 Public profileの設定が完了した後は、銀行口座の設定を始めてください
 
-![public-profile-settings-4](/img/aws-marketplace-integration/public-profile-settings/public-profile-settings-4.png)
+![public-profile-settings-4](/ja/img/aws-marketplace-integration/public-profile-settings/public-profile-settings-4.png)

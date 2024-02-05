@@ -17,12 +17,12 @@ updatedAt: "Fri Oct 27 2023 07:12:02 GMT+0000 (Coordinated Universal Time)"
 `Payment Information`を確認してください。  
 以下のようにエラーが表示され、先の手続きを進めることができないと思います。
 
-![tax-information-interview-1](/img/aws-marketplace-integration/tax-information-interview/tax-information-interview-1.png)
+![tax-information-interview-1](/ja/img/aws-marketplace-integration/tax-information-interview/tax-information-interview-1.png)
 
 
 解消する方法については、<a href="https://aws.amazon.com/jp/legal/awsjp/" target="_blank">JP SOR FAQ</a>に載っており、それについて抜粋したものが以下になります。
 
-![tax-information-interview-2](/img/aws-marketplace-integration/tax-information-interview/tax-information-interview-2.png)
+![tax-information-interview-2](/ja/img/aws-marketplace-integration/tax-information-interview/tax-information-interview-2.png)
 
 
 ## 日本を拠点とするお客様が行う手続き
@@ -35,46 +35,46 @@ updatedAt: "Fri Oct 27 2023 07:12:02 GMT+0000 (Coordinated Universal Time)"
 
 `Go to tax dashboard`を押下して税務情報に関するインタビューの入力を始めます。
 
-![tax-information-interview-3](/img/aws-marketplace-integration/tax-information-interview/tax-information-interview-3.png)
+![tax-information-interview-3](/ja/img/aws-marketplace-integration/tax-information-interview/tax-information-interview-3.png)
 
 
 `Select Language`にて`Japanese`を選択することで日本語表記で入力を進めることが出来ます。
 
-![tax-information-interview-4](/img/aws-marketplace-integration/tax-information-interview/tax-information-interview-4.png)
+![tax-information-interview-4](/ja/img/aws-marketplace-integration/tax-information-interview/tax-information-interview-4.png)
 
 
 税務情報に関するインタビューで`開始`ボタンを押下します。
 
-![tax-information-interview-5](/img/aws-marketplace-integration/tax-information-interview/tax-information-interview-5.png)
+![tax-information-interview-5](/ja/img/aws-marketplace-integration/tax-information-interview/tax-information-interview-5.png)
 
 
 質問項目を入力していきます。
 
-![tax-information-interview-6](/img/aws-marketplace-integration/tax-information-interview/tax-information-interview-6.png)
+![tax-information-interview-6](/ja/img/aws-marketplace-integration/tax-information-interview/tax-information-interview-6.png)
 
 
 税務上の身元情報の設定
 
-![tax-information-interview-7](/img/aws-marketplace-integration/tax-information-interview/tax-information-interview-7.png)
+![tax-information-interview-7](/ja/img/aws-marketplace-integration/tax-information-interview/tax-information-interview-7.png)
 
-![tax-information-interview-8](/img/aws-marketplace-integration/tax-information-interview/tax-information-interview-8.png)
+![tax-information-interview-8](/ja/img/aws-marketplace-integration/tax-information-interview/tax-information-interview-8.png)
 
 
 署名（氏名を入力）しプレビューにて内容を確認します。
 
-![tax-information-interview-9](/img/aws-marketplace-integration/tax-information-interview/tax-information-interview-9.png)
+![tax-information-interview-9](/ja/img/aws-marketplace-integration/tax-information-interview/tax-information-interview-9.png)
 
 
 **米国で課税されないように、日本の納税者である事を申告するフォーム**
 
-![tax-information-interview-10](/img/aws-marketplace-integration/tax-information-interview/tax-information-interview-10.png)
+![tax-information-interview-10](/ja/img/aws-marketplace-integration/tax-information-interview/tax-information-interview-10.png)
 
 
 内容確認後、`フォームを送信`ボタンを押下し提出します。
 
-![tax-information-interview-11](/img/aws-marketplace-integration/tax-information-interview/tax-information-interview-11.png)
+![tax-information-interview-11](/ja/img/aws-marketplace-integration/tax-information-interview/tax-information-interview-11.png)
 
 
 送信完了し、税務情報に関するインタビューを終了します。
 
-![tax-information-interview-12](/img/aws-marketplace-integration/tax-information-interview/tax-information-interview-12.png)
+![tax-information-interview-12](/ja/img/aws-marketplace-integration/tax-information-interview/tax-information-interview-12.png)
