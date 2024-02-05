@@ -1,29 +1,30 @@
 ---
-title: "公開依頼の方法について"
+title: "How to Request for Publication"
 slug: "public-request"
 excerpt: ""
 hidden: false
-metadata: 
+metadata:
   image: []
   robots: "index"
 createdAt: "Thu Jun 29 2023 12:23:26 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Fri Oct 27 2023 07:17:41 GMT+0000 (Coordinated Universal Time)"
 ---
-[出品手順「11. 本番用SaaS製品の最終レビュー依頼」](/docs/aws-marketplace-integration/aws-marketplace-integration)が完了後、AWS Marketplaceサポートチームから公開依頼する手順について説明するメールが届きますので、それを元に公開依頼を行います。
+<!-- TODO 遷移先画面の英語対応後にリンク名を修正 -->
+Once you've completed the [Listing Procedure "11. Final Review Request of Production SaaS Product"](/docs/aws-marketplace-integration/aws-marketplace-integration), you will receive an email from the AWS Marketplace Support Team detailing the process to request publication. Follow these instructions to request your publication.
 
 :::caution
-事前に調査した内容から、公開依頼の方法についてドキュメントを作成していますが実際に届いたメールの内容が最新の方法となりますので、そちらの方法に従ってください。
+While we have prepared a document regarding the publication request process based on our prior research, the actual instructions provided in the email you'll receive represents the most updated procedure and should be followed accordingly.
 :::
 
-まず、AWS Marketplace Management Portalで公開依頼のリクエストを行う必要があります。
+First, you need to make a publication request in the AWS Marketplace Management Portal.
 
-1. <a href="https://aws.amazon.com/marketplace/management/homepage" target="_blank">AWS Marketplace Management Portal</a>にアクセスします
-2. Requestsページへ移動後、公開するSaaS製品のリクエストを選択します
-3. 公開依頼できる状態であれば、「Review your Product Listing」というタイトルのページが表示されます  
-   ![public-request-1](/img/aws-marketplace-integration/supplementary/public-request-1.png)
-4. Status「Approve」を選択して、「Submit」ボタンを押下してください
+1. Access the <a href="https://aws.amazon.com/marketplace/management/homepage" target="_blank">AWS Marketplace Management Portal</a>
+2. After moving to the 'Requests' page, select the request for the SaaS product you want to publish.
+3. If the product is ready for a publication request, a page with the title 'Review your Product Listing' will be displayed.
+  ![public-request-1](/img/aws-marketplace-integration/supplementary/public-request-1.png)
+4. Select 'Approve' for the status, and click the 'Submit' button.
 
-以上で公開依頼のリクエストは完了です。
+That's it! You've completed the publication request.
 
-最後に、**「Action Required: AWS Marketplace SaaS Contract Next Steps [ thread::XXXXXXXXXX:: ]」**というメールに対して「SaaS製品を公開してください」という旨の**英文**を書いて返信してください。返信が完了したら公開依頼は完了となります。  
-3~5営業日以内には、サポートチームによってSaaS製品がAWS Marketplace上に公開されることになります。
+Finally, reply to the **"Action Required: AWS Marketplace SaaS Contract Next Steps [ thread::XXXXXXXXXX:: ]"** email by writing a message in **English** that says "Please publish the SaaS product". Once you've replied, your publication request is complete.  
+With this process, your SaaS product will be published on the AWS Marketplace by the Support Team within 3 to 5 business days.
