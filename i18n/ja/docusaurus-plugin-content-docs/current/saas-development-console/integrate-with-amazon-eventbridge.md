@@ -16,38 +16,38 @@ SaaSus Platform は、 Amazon EventBridge と統合されています。 SaaSus 
 
 <a href="https://settings.console.saasus.io/integrations/event" target="_blank">SaaS 開発コンソールのイベント連携画面</a>を開きます。
 
-![664155d-_2023-01-21_19.02.26](/img/saas-development-console/664155d-_2023-01-21_19.02.26.png)
+![664155d-_2023-01-21_19.02.26](/ja/img/saas-development-console/664155d-_2023-01-21_19.02.26.png)
 
 AWSアカウントID の部分には、イベント送信先のAWSアカウントID(SaaSを構築しているAWSアカウントの12桁のID)を入力します。また、通知を受け取るAWSリージョンも選択します。そして保存ボタンを押します。
 
-![b625f39-_2023-01-21_23.55.59](/img/saas-development-console/b625f39-_2023-01-21_23.55.59.png)
+![b625f39-_2023-01-21_23.55.59](/ja/img/saas-development-console/b625f39-_2023-01-21_23.55.59.png)
 
 上記で設定したAWSアカウント上に、パートナーイベントパスが作成されます。該当AWSアカウントにログインした後に、<a href="https://ap-northeast-1.console.aws.amazon.com/events/home#/partners" target="_blank">Amazon EventBridgeのパートナーイベントソースのコンソール</a>を開き、パートナーイベントソースが作成されていることを確認してください。
 
-![11c56cb-_2023-01-21_23.57.06](/img/saas-development-console/11c56cb-_2023-01-21_23.57.06.png)
+![11c56cb-_2023-01-21_23.57.06](/ja/img/saas-development-console/11c56cb-_2023-01-21_23.57.06.png)
 
 作成されたパートナーイベントソースを選択し、「イベントバスと関連付ける」を行ってください。すると、他のイベントソースと同様にイベントバスで利用することができるようになります。
 
-![22a9b2d-_2023-01-21_23.58.05](/img/saas-development-console/22a9b2d-_2023-01-21_23.58.05.png)
+![22a9b2d-_2023-01-21_23.58.05](/ja/img/saas-development-console/22a9b2d-_2023-01-21_23.58.05.png)
 
 次に、イベントの送信を試してみましょう。<a href="https://ap-northeast-1.console.aws.amazon.com/events/home#/rules" target="_blank">Amazon EventBridgeのバスのルールのページ</a>を開きます。ここ画面で、先ほどのパートナーイベントソースがイベントバスとして選択できる状態になっているはずです。
 
-![234abaa-_2023-01-22_18.59.46](/img/saas-development-console/234abaa-_2023-01-22_18.59.46.png)
+![234abaa-_2023-01-22_18.59.46](/ja/img/saas-development-console/234abaa-_2023-01-22_18.59.46.png)
 
 このイベントバスをベースにルールを作成します。以下の画面のように設定していきましょう。  
 まずは、SaaSus Platformのイベントバスを選択し、ルールを作成をクリックします。各画面では、以下の画面を参考に入力してみてください。
 
-![288246d-_2023-01-22_19.19.22](/img/saas-development-console/288246d-_2023-01-22_19.19.22.png)
+![288246d-_2023-01-22_19.19.22](/ja/img/saas-development-console/288246d-_2023-01-22_19.19.22.png)
 
-![eefcee6-_2023-01-22_19.20.13](/img/saas-development-console/eefcee6-_2023-01-22_19.20.13.png)
+![eefcee6-_2023-01-22_19.20.13](/ja/img/saas-development-console/eefcee6-_2023-01-22_19.20.13.png)
 
-![d1e7c0d-_2023-01-22_19.20.25](/img/saas-development-console/d1e7c0d-_2023-01-22_19.20.25.png)
+![d1e7c0d-_2023-01-22_19.20.25](/ja/img/saas-development-console/d1e7c0d-_2023-01-22_19.20.25.png)
 
 イベントパターンの部分には、まずは全てのSaaSus Platformのイベントを取得するために、以下のパターンを記載します。「パターンを編集」ボタンをクリックし、以下のJSONを直接記載します。
 
-![0867394-_2023-01-22_19.20.34](/img/saas-development-console/0867394-_2023-01-22_19.20.34.png)
+![0867394-_2023-01-22_19.20.34](/ja/img/saas-development-console/0867394-_2023-01-22_19.20.34.png)
 
-![4d3ea03-_2023-01-22_19.20.51](/img/saas-development-console/4d3ea03-_2023-01-22_19.20.51.png)
+![4d3ea03-_2023-01-22_19.20.51](/ja/img/saas-development-console/4d3ea03-_2023-01-22_19.20.51.png)
 
 ```json
 {
@@ -61,23 +61,23 @@ AWSアカウントID の部分には、イベント送信先のAWSアカウン�
 
 今回はどのようなイベントが届くのかを確認するために、全てのイベントを CloudWatch Logs に出力してみましょう。
 
-![7d74d3b-_2023-01-22_19.21.19](/img/saas-development-console/7d74d3b-_2023-01-22_19.21.19.png)
+![7d74d3b-_2023-01-22_19.21.19](/ja/img/saas-development-console/7d74d3b-_2023-01-22_19.21.19.png)
 
-![b260840-_2023-01-22_19.21.33](/img/saas-development-console/b260840-_2023-01-22_19.21.33.png)
+![b260840-_2023-01-22_19.21.33](/ja/img/saas-development-console/b260840-_2023-01-22_19.21.33.png)
 
 全ての設定が終わったら、ルールの作成をクリックし、ルールが作成されたことを確認してください。
 
-![9b4be62-_2023-01-22_19.21.43](/img/saas-development-console/9b4be62-_2023-01-22_19.21.43.png)
+![9b4be62-_2023-01-22_19.21.43](/ja/img/saas-development-console/9b4be62-_2023-01-22_19.21.43.png)
 
-![ddda235-_2023-01-22_19.21.53](/img/saas-development-console/ddda235-_2023-01-22_19.21.53.png)
+![ddda235-_2023-01-22_19.21.53](/ja/img/saas-development-console/ddda235-_2023-01-22_19.21.53.png)
 
 これでイベントを連携する準備ができましたので、テストイベントを送信してみましょう。SaaSus 開発コンソールに戻り、テスト送信ボタンをクリックします。
 
-![128194b-_2023-01-21_23.55.59](/img/saas-development-console/128194b-_2023-01-21_23.55.59.png)
+![128194b-_2023-01-21_23.55.59](/ja/img/saas-development-console/128194b-_2023-01-21_23.55.59.png)
 
 イベントが正常に届くと、CloudWatch Logsにイベントの内容が記録されているはずです。確認してみましょう。
 
-![b93fff7-_2023-01-22_19.24.48](/img/saas-development-console/b93fff7-_2023-01-22_19.24.48.png)
+![b93fff7-_2023-01-22_19.24.48](/ja/img/saas-development-console/b93fff7-_2023-01-22_19.24.48.png)
 
 このような形でイベントが取得できることができました。
 

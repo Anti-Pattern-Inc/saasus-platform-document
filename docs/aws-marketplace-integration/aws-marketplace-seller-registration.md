@@ -1,25 +1,25 @@
 ---
-title: "セラー登録から銀行口座の設定"
+title: "Setting Up Bank Account From Seller Registration"
 slug: "aws-marketplace-seller-registration"
 excerpt: ""
 hidden: false
-metadata: 
+metadata:
   image: []
   robots: "index"
 createdAt: "Fri May 12 2023 06:09:31 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Fri Jun 30 2023 03:38:18 GMT+0000 (Coordinated Universal Time)"
 ---
-### 事前準備
+### Preparation
 
-AWS Marketplace用にAWSアカウントを用意してください。
+Please prepare an AWS account for AWS Marketplace.
 
-### 全体の流れ
+### Overall Process
 
-出品手続きを始めるにあたって、まずお客様自身で以下の手続きを実施していただく必要があります。  
-AWS Marketplaceへの出品に必要な登録、設定となるため忘れずに実施してください。
+Before starting the listing process, you need to perform the following procedures by yourself.  
+These are necessary registrations and settings for listing on AWS Marketplace, so make sure to proceed with them.
 
-1. セラー登録
-2. Public profileの設定
-3. 税務情報に関するインタビュー
-4. DAC7の税務アンケート
-5. 銀行口座の設定
+1. Seller registration
+2. Setting up Public profile
+3. Interview about tax information
+4. DAC7 tax questionnaire
+5. Setting up a bank account
