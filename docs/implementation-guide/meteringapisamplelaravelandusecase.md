@@ -1,5 +1,5 @@
 ---
-title: "メータリングAPIの実装サンプルと使用例(Laravel)"
+title: "Metering API Implementation Sample and Examples of Use (Laravel)"
 slug: "metering-api-sample"
 excerpt: ""
 hidden: false
@@ -9,34 +9,34 @@ updatedAt: "Wed Dec 27 2023 09:00:19 GMT+0000 (Coordinated Universal Time)"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-SDKを使用した各メータリングAPIのLaravel実装サンプルとメータリングAPIを利用した機能の一例を記載します。
+We will describe Laravel implementation samples for each Metering API using SDK and an example of a feature using the Metering API.
 
-それぞれのAPIの詳細はAPIドキュメントをご確認ください。
+Please check the API documentation for details of each API.
 
-# Laravel実装サンプル
+# Laravel Implementation Sample
 
-## 指定した日付のメータリングユニットカウントを取得
+## Get the Metering Unit Count for a Specified Date
 
-<a href="../reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountByTenantIdAndUnitNameAndDate" target="_blank">APIドキュメント</a>
+[API Documentation](../reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountByTenantIdAndUnitNameAndDate)
 
-### ユースケース
+### Use Case
 
-テナント向けに使用量を見せたい場合などに使用してください。
+Please use this when you want to show usage to tenants.
 
-### 実装サンプル
+### Implementation Sample
 
 <Tabs>
 <TabItem value="php" label="PHP">
 
 ```php PHP
 /**
- * 指定した日付のメータリングユニットカウントを取得
+ * Get the Metering Unit Count for a Specified Date
  *
  * @see https://docs.saasus.io/reference/getmeteringunitdatecountbytenantidandunitnameanddate
  *
- * @param string $tenantId テナントID
- * @param string $meteringUnitName メータリングユニット名
- * @param string $date 日付 yyyy-mm-dd形式
+ * @param string $tenantId Tenant ID
+ * @param string $meteringUnitName Metering Unit Name
+ * @param string $date Date in yyyy-mm-dd format
  * @return array
  */
 public function getCountOfSpecifiedDate(string $tenantId, string $meteringUnitName, string $date)
@@ -59,35 +59,34 @@ public function getCountOfSpecifiedDate(string $tenantId, string $meteringUnitNa
 
 </TabItem>
 </Tabs>
+## Update the Metering Unit Count for a Specified Timestamp
 
-## 指定したタイムスタンプのメータリングユニットカウントを更新
+[API Documentation](../reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCount)
 
-<a href="../reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCount" target="_blank">APIドキュメント</a>
+### Use Case
 
-### ユースケース
+Please use this for adjustments in case of mistakes in usage updates in past data.
 
-過去のデータで使用量の更新ミスがあった場合に調整する場合などに使用してください。
-
-### 実装サンプル
+### Implementation Sample
 
 <Tabs>
 <TabItem value="php" label="PHP">
 
 ```php
 /**
- * 指定したタイムスタンプのメータリングユニットカウントを更新
+ * Update the Metering Unit Count for a Specified Timestamp
  *
  * @see https://docs.saasus.io/reference/updatemeteringunittimestampcount
  *
- * @param string $tenantId テナントID
- * @param string $meteringUnitName メータリングユニット名
- * @param int $timestamp タイムスタンプ 秒までのタイムスタンプ
+ * @param string $tenantId Tenant ID
+ * @param string $meteringUnitName Metering Unit Name
+ * @param int $timestamp Timestamp in seconds
  * @param Request $request
  * @return array
  */
 public function updateCountOfSpecifiedTimestamp(string $tenantId, string $meteringUnitName, int $timestamp, Request $request)
 {
-    // リクエストから更新方法と件数を取得
+    // Retrieve the update method and count from the request
     ['method' => $method, 'count' => $count] = $request->only(['method', 'count']);
     $updateMeteringUnitTimeStampParam = new UpdateMeteringUnitTimestampCountParam();
     $updateMeteringUnitTimeStampParam->setMethod($method)
@@ -107,29 +106,28 @@ public function updateCountOfSpecifiedTimestamp(string $tenantId, string $meteri
 
 </TabItem>
 </Tabs>
+## Delete the Metering Unit Count for a Specified Timestamp
 
-## 指定したタイムスタンプのメータリングユニットカウントを削除
+[API Documentation](../reference/pricing-api#tag/metering/operation/DeleteMeteringUnitTimestampCount)
 
-<a href="../reference/pricing-api#tag/metering/operation/DeleteMeteringUnitTimestampCount" target="_blank">APIドキュメント</a>
+### Use Case
 
-### ユースケース
+Please use this for adjustments in case of mistakes in usage updates in past data.
 
-過去のデータで使用量の更新ミスがあった場合に調整する場合などに使用してください。
-
-### 実装サンプル
+### Implementation Sample
 
 <Tabs>
 <TabItem value="php" label="PHP">
 
 ```php
 /**
- * 指定したタイムスタンプのメータリングユニットカウントを削除
+ * Delete the Metering Unit Count for a Specified Timestamp
  *
  * @see https://docs.saasus.io/reference/deletemeteringunittimestampcount
  *
- * @param string $tenantId テナントID
- * @param string $meteringUnitName メータリングユニット名
- * @param int $timestamp タイムスタンプ 秒までのタイムスタンプ
+ * @param string $tenantId Tenant ID
+ * @param string $meteringUnitName Metering Unit Name
+ * @param int $timestamp Timestamp in seconds
  * @return array
  */
 public function deleteCountOfSpecifiedTimestamp(string $tenantId, string $meteringUnitName, int $timestamp)
@@ -147,27 +145,27 @@ public function deleteCountOfSpecifiedTimestamp(string $tenantId, string $meteri
 </TabItem>
 </Tabs>
 
-## 当日のメータリングユニットカウントを取得
+## Get the Metering Unit Count for Today
 
-<a href="../reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountByTenantIdAndUnitNameToday" target="_blank">APIドキュメント</a>
+[API Documentation](../reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountByTenantIdAndUnitNameToday)
 
-### ユースケース
+### Use Case
 
-テナント向けに使用量を見せたい場合などに使用してください。
+Please use this when you want to show the usage to tenants.
 
-### 実装サンプル
+### Implementation Sample
 
 <Tabs>
 <TabItem value="php" label="PHP">
 
 ```php
 /**
- * 当日のメータリングユニットのカウントを取得
+ * Get the Metering Unit Count for Today
  *
  * @see https://docs.saasus.io/reference/getmeteringunitdatecountbytenantidandunitnametoday
  *
- * @param string $tenantId テナントID
- * @param string $meteringUnitName メータリングユニット名
+ * @param string $tenantId Tenant ID
+ * @param string $meteringUnitName Metering Unit Name
  * @return array
  */
 public function getCountOfCurrentDay(string $tenantId, string $meteringUnitName)
@@ -189,33 +187,33 @@ public function getCountOfCurrentDay(string $tenantId, string $meteringUnitName)
 </TabItem>
 </Tabs>
 
-## 現在時刻のメータリングユニットカウントを更新
+## Update the Current Time Metering Unit Count
 
-<a href="../reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCountNow" target="_blank">APIドキュメント</a>
+[API Documentation](../reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCountNow)
 
-### ユースケース
+### Use Case
 
-ユーザー数等の使用量の変更が発生したタイミング等、ユニットカウントを更新する場合などに使用してください。
+Please use this when updating the unit count, such as at times of changes in usage like the number of users.
 
-### 実装サンプル
+### Implementation Sample
 
 <Tabs>
 <TabItem value="php" label="PHP">
 
 ```php
 /**
- * 現在時刻のメータリングユニットカウントを更新
+ * Update the Current Time Metering Unit Count
  * 
  * @see https://docs.saasus.io/reference/updatemeteringunittimestampcountnow
  *
- * @param string $tenantId テナントID
- * @param string $meteringUnitName メータリングユニット名
+ * @param string $tenantId Tenant ID
+ * @param string $meteringUnitName Metering Unit Name
  * @param Request $request
  * @return array
  */
 public function updateCountOfNow(string $tenantId, string $meteringUnitName, Request $request)
 {
-    // リクエストから更新方法と件数を取得
+    // Retrieve the update method and count from the request
     ['method' => $method, 'count' => $count] = $request->only(['method', 'count']);
     $updateMeteringUnitTimeStampNowParam = new UpdateMeteringUnitTimestampCountNowParam();
     $updateMeteringUnitTimeStampNowParam->setMethod($method)
@@ -238,27 +236,27 @@ public function updateCountOfNow(string $tenantId, string $meteringUnitName, Req
 </TabItem>
 </Tabs>
 
-## 当月のメータリングユニットカウントを取得
+## Get the Metering Unit Count for the Current Month
 
-<a href="../reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountByTenantIdAndUnitNameThisMonth" target="_blank">APIドキュメント</a>
+[API Documentation](../reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountByTenantIdAndUnitNameThisMonth)
 
-### ユースケース
+### Use Case
 
-テナント向けに使用量を見せたい場合などに使用してください。
+Please use this when you want to show usage to tenants.
 
-### 実装サンプル
+### Implementation Sample
 
 <Tabs>
 <TabItem value="php" label="PHP">
 
 ```php
 /**
- * 当月のメータリングユニットのカウントを取得
+ * Get the Metering Unit Count for the Current Month
  *
  * @see https://docs.saasus.io/reference/getmeteringunitmonthcountbytenantidandunitnamethismonth
  *
- * @param string $tenantId テナントID
- * @param string $meteringUnitName メータリングユニット名
+ * @param string $tenantId Tenant ID
+ * @param string $meteringUnitName Metering Unit Name
  * @return array
  */
 public function getCountOfCurrentMonth(string $tenantId, string $meteringUnitName)
@@ -278,28 +276,28 @@ public function getCountOfCurrentMonth(string $tenantId, string $meteringUnitNam
 </TabItem>
 </Tabs>
 
-## 指定月のメータリングユニットカウントを取得
+## Get the Metering Unit Count for a Specified Month
 
-<a href="../reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountByTenantIdAndUnitNameAndMonth" target="_blank">APIドキュメント</a>
+[API Documentation](../reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountByTenantIdAndUnitNameAndMonth)
 
-### ユースケース
+### Use Case
 
-テナント向けに使用量を見せたい場合などに使用してください。
+Please use this when you want to show usage to tenants.
 
-### 実装サンプル
+### Implementation Sample
 
 <Tabs>
 <TabItem value="php" label="PHP">
 
 ```php
 /**
- * 指定月のメータリングユニットカウントを取得
+ * Get the Metering Unit Count for a Specified Month
  *
  * @see https://docs.saasus.io/reference/getmeteringunitmonthcountbytenantidandunitnameandmonth
  *
- * @param string $tenantId テナントID
- * @param string $meteringUnitName メータリングユニット名
- * @param string $month 月 yyyy-mm形式
+ * @param string $tenantId Tenant ID
+ * @param string $meteringUnitName Metering Unit Name
+ * @param string $month Month in yyyy-mm format
  * @return array
  */
 public function getCountOfSpecifiedMonth(string $tenantId, string $meteringUnitName, string $month)
@@ -321,27 +319,27 @@ public function getCountOfSpecifiedMonth(string $tenantId, string $meteringUnitN
 </TabItem>
 </Tabs>
 
-## 指定日の全メータリングユニットカウントを取得
+## Get All Metering Unit Counts for a Specified Date
 
-<a href="../reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountsByTenantIdAndDate" target="_blank">APIドキュメント</a>
+[API Documentation](../reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountsByTenantIdAndDate)
 
-### ユースケース
+### Use Case
 
-テナント向けに使用量を見せたい場合などに使用してください。
+Please use this when you want to show usage to tenants.
 
-### 実装サンプル
+### Implementation Sample
 
 <Tabs>
 <TabItem value="php" label="PHP">
 
 ```php
 /**
- * 指定日の全メータリングユニットカウントを取得
+ * Get All Metering Unit Counts for a Specified Date
  *
  * @see https://docs.saasus.io/reference/getmeteringunitdatecountsbytenantidanddate
  *
- * @param string $tenantId テナントID
- * @param string $date 日付 yyyy-mm-dd形式
+ * @param string $tenantId Tenant ID
+ * @param string $date Date in yyyy-mm-dd format
  * @return \AntiPatternInc\Saasus\Sdk\Pricing\Model\MeteringUnitDateCount[]
  */
 public function getAllMeteringCountOfSpecifiedDate(string $tenantId, string $date)
@@ -364,28 +362,27 @@ public function getAllMeteringCountOfSpecifiedDate(string $tenantId, string $dat
 
 </TabItem>
 </Tabs>
+## Get All Metering Unit Counts for a Specified Month
 
-## 指定月の全メータリングユニットカウントを取得
+[API Documentation](../reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountsByTenantIdAndMonth)
 
-<a href="../reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountsByTenantIdAndMonth" target="_blank">APIドキュメント</a>
+### Use Case
 
-### ユースケース
+Please use this when you want to show usage to tenants.
 
-テナント向けに使用量を見せたい場合などに使用してください。
-
-### 実装サンプル
+### Implementation Sample
 
 <Tabs>
 <TabItem value="php" label="PHP">
 
 ```php
 /**
- * 指定月の全メータリングユニットカウントを取得
+ * Get All Metering Unit Counts for a Specified Month
  *
  * @see https://docs.saasus.io/reference/getmeteringunitmonthcountsbytenantidandmonth
  *
- * @param string $tenantId テナントID
- * @param string $month 月 yyyy-mm形式
+ * @param string $tenantId Tenant ID
+ * @param string $month Month in yyyy-mm format
  * @return MeteringUnitMonthCount[]
  */
 public function getAllMeteringCountOfSpecifiedMonth(string $tenantId, string $month)

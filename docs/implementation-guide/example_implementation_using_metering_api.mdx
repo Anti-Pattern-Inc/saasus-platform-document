@@ -1,5 +1,5 @@
 ---
-title: "メータリングAPIを利用した実装例"
+title: "Implementation Example Using Metering API"
 slug: "example_implementation_using_metering_api"
 excerpt: ""
 hidden: false
@@ -9,74 +9,74 @@ updatedAt: "Wed Dec 27 2023 09:01:38 GMT+0000 (Coordinated Universal Time)"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-## 概要
+## Overview
 
-ユーザー数とアクティブユーザー数に対する従量課金が設定されたプランがあるSaaSを例とします。
+Let's consider a SaaS with plans set up for metered billing based on the number of users and active users.
 
-テナント管理者が日付やメータリングユニットを上記の使用量を確認できる機能を作成します。
+We will create a feature that allows tenant administrators to check the usage based on the date and metering units.
 
-<details><summary><b>今回の実装例で利用する料金プラン作成</b></summary>
+<details><summary><b>Creating the Pricing Plan for This Implementation Example</b></summary>
 
-## 料金プランの作成
+## Creating the Pricing Plan
 
-### 計測単位作成
+### Creating Pricing Units
 
-ユーザー数とアクティブユーザー数の計測単位を作成します。
+We will create pricing units for the number of users and active users.
 
-今回は使用量ユニットで作成しますが、実際に運用する際は下記のリンクを参考に段階ユニットや段階使用量ユニットでの作成も検討してください。
+In this example, we are creating usage units, but when actually operating, consider creating tiered units or tiered usage units as referenced in the link below.
 
 <!-- TODO fix link url -->
-<a href="doc:tiered_unit">段階ユニット、段階的使用量ユニットの料金計算の違いについて</a>
+<a href="doc:tiered_unit">About the Difference in Billing Calculation between Tiered Units and Tiered Usage Units</a>
 
-1. 開発コンソールから料金プラン -> 計測単位設定 に進みます
-2. 計測単位設定画面右上にある「固定ユニット計測単位の作成」の右側にある「▼」をクリックし、「使用量ユニット計測単位の作成」を選択後、「使用量ユニット計測単位の作成」ボタンをクリックしてください
+1. Go to Pricing Plan -> Pricing Unit Settings from the development console.
+2. In the Pricing Unit Settings screen, click the "▼" next to "Create Fixed Unit Pricing" and select "Create Usage Unit Pricing", then click the "Create Usage Unit Pricing" button.
 
    ![](/img/metering-api-sample/image-03.png)
-3. ユーザー数とアクティブユーザー数の計測単位を設定します
+3. Set the pricing units for the number of users and active users.
 
    ![](/img/metering-api-sample/image-04.png)
 
    ![](/img/metering-api-sample/image-05.png)
 
-### 機能メニュー作成
+### Creating Feature Menus
 
-作成した計測単位を設定する機能メニューを作成します。
+Create feature menus to set the created pricing units.
 
-1. 開発コンソールから料金プラン -> 機能メニュー設定 に進みます
-2. 右上の「機能メニューの作成」をクリックします
-3. 計測単位にユーザー数とアクティブユーザー数を設定した機能メニューを作成します
+1. Go to Pricing Plan -> Feature Menu Settings from the development console.
+2. Click on "Create Feature Menu" at the top right.
+3. Create a feature menu with the pricing units for the number of users and active users set.
 
    ![](/img/metering-api-sample/image-06.png)
 
-### 料金プラン作成
+### Creating the Pricing Plan
 
-作成した機能メニューを設定した料金プランを作成します。
+Create a pricing plan with the created feature menus set.
 
-1. 開発コンソールから料金プラン ->料金プラン設定 に進みます
-2. 右上の「料金プランの作成」をクリックします
-3. 機能メニューに作成した機能メニューを設定した料金プランを作成します
+1. Go to Pricing Plan -> Pricing Plan Settings from the development console.
+2. Click on "Create Pricing Plan" at the top right.
+3. Create a pricing plan with the created feature menus set.
 
    ![](/img/metering-api-sample/image-07.png)
 
-## 料金プランの適用
+## Applying the Pricing Plan
 
-SaaSus運用コンソールから料金プランを適用します。
+Apply the pricing plan from the SaaSus operation console.
 
-1. SaaSus運用コンソールの料金プラン設定をクリックします
-2. 料金プランを適用したいテナントの行にある「プラン設定」ボタンをクリックします
-3. 作成した料金プランを設定、反映日をすぐ反映にして保存します
+1. Click on Pricing Plan Settings in the SaaSus operation console.
+2. Click the "Plan Settings" button in the row of the tenant you want to apply the pricing plan to.
+3. Set the created pricing plan and save it with the application date set to immediate effect.
 
    ![](/img/metering-api-sample/image-08.png)
 
-以上で、5分後に料金プランが適用されます
+After this, the pricing plan will be applied in 5 minutes.
 
 </details>
 
-## 実装サンプル
+## Implementation Sample
 
-Laravelの実装サンプルにおいて、ログインユーザー情報取得APIとテナント情報取得APIの省略しております。
+In the Laravel implementation sample, APIs for obtaining login user information and tenant information are omitted.
 
-<details><summary><b>React実装サンプル</b></summary>
+<details><summary><b>React Implementation Sample</b></summary>
 
 <Tabs>
 <TabItem value="typescript" label="App.tsx">
@@ -115,8 +115,8 @@ export default App;
 
 ```typescript
 import axios from "axios";
-import React, {useEffect, useState} from "react";
-import {Outlet} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
 
 const LOGIN_URL = import.meta.env.VITE_LOGIN_URL;
 const API_ENDPOINT = import.meta.env.VITE_API_URL;
@@ -124,7 +124,7 @@ const API_ENDPOINT = import.meta.env.VITE_API_URL;
 const Auth: React.FC = () => {
     const [authUser, setAuthUser] = useState<User>()
     const [authUserFetching, setAuthUserFetching] = useState(true);
-    // ログインユーザの情報を取得
+    // Fetching information of the logged-in user
     const getUserInfo = async () => {
         try {
             const jwtToken = window.localStorage.getItem("SaaSusIdToken");
@@ -135,7 +135,7 @@ const Auth: React.FC = () => {
                 },
                 withCredentials: true,
             });
-            // ログインユーザの情報が取得できない（ログインが確認できない）場合、ログイン画面に遷移
+            // If unable to fetch logged-in user information (login not confirmed), redirect to login screen
             if (!res) {
                 window.location.href = LOGIN_URL;
             } else {
@@ -153,11 +153,12 @@ const Auth: React.FC = () => {
         })()
     }, []);
 
-    // Outlet Contextとしてログイン済みユーザー情報及びユーザー情報更新関数を渡す
-    return authUserFetching ? <></> :<Outlet context={{ authUser, getUserInfo }} />;
+    // Passing logged-in user information and user info update function as Outlet Context
+    return authUserFetching ? <></> : <Outlet context={{ authUser, getUserInfo }} />;
 };
 
 export default Auth;
+
 ```
 
 </TabItem>
@@ -167,21 +168,23 @@ export default Auth;
 <TabItem value="typescript" label="UsageCheck.tsx">
 
 ```typescript
-import React, {useEffect, useState} from 'react';
-import axios, {isAxiosError} from "axios";
-import {useOutletContext} from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import axios, { isAxiosError } from "axios";
+import { useOutletContext } from "react-router-dom";
 import { DateTime } from 'luxon';
 import styled from "styled-components";
-import {SubmitHandler, useForm, useWatch} from "react-hook-form";
+import { SubmitHandler, useForm, useWatch } from "react-hook-form";
 
+// Defining interface for usage counts
 interface UsageCount {
     count: number;
     date: string | undefined;
     month: string | undefined;
     timestamp: number | undefined;
-    meteringUnitName: 'user_count' | 'active_user_count'; // 料金プランの作成で定義した対象メーター名
+    meteringUnitName: 'user_count' | 'active_user_count'; // Target meter names defined in the pricing plan creation
 }
 
+// Defining form schemas for different search types
 interface MonthSearchFormSchema {
     type: 'month';
     month: string;
@@ -210,16 +213,17 @@ interface DateMeteringUnitNameSearchFormSchema {
     month: null | undefined;
 }
 
-type SearchFormSchema = MonthMeteringUnitNameSearchFormSchema|MonthSearchFormSchema|DateMeteringUnitNameSearchFormSchema|DateSearchFormSchema;
+type SearchFormSchema = MonthMeteringUnitNameSearchFormSchema | MonthSearchFormSchema | DateMeteringUnitNameSearchFormSchema | DateSearchFormSchema;
 
+// Dictionary for metering unit names
 const METERING_UNIT_NAME_DICT_ARRAY = [
     {
-        key: 'user_count', // 料金プランの作成で定義したユーザー数の対象メーター名
-        displayName: 'ユーザー数',
+        key: 'user_count', // Target meter name for user count defined in the pricing plan creation
+        displayName: 'Number of Users', // Display name for user count
     },
     {
-        key: 'active_user_count', // 料金プランの作成で定義したアクティブユーザー数の対象メーター名
-        displayName: 'アクティブユーザー数',
+        key: 'active_user_count', // Target meter name for active user count defined in the pricing plan creation
+        displayName: 'Number of Active Users', // Display name for active user count
     },
 ]
 
@@ -227,15 +231,15 @@ const LOGIN_URL = import.meta.env.VITE_LOGIN_URL;
 const API_ENDPOINT = import.meta.env.VITE_API_URL ?? "";
 
 const UsageCheck: React.FC = () => {
-    const { tenant } = useOutletContext<UserRouterContext & TenantRouterContext>()
-    const [meteringUnitCountList, setMeteringUnitCountList] = useState<Array<UsageCount>>([])
-    const [targetMonthOrDate, setTargetMonthOrDate] = useState('')
+    const { tenant } = useOutletContext<UserRouterContext & TenantRouterContext>();
+    const [meteringUnitCountList, setMeteringUnitCountList] = useState<Array<UsageCount>>([]);
+    const [targetMonthOrDate, setTargetMonthOrDate] = useState('');
     const jwtToken = window.localStorage.getItem("SaaSusIdToken");
     const { register, control, handleSubmit, formState: { isDirty, isValid }, getValues } = useForm<SearchFormSchema>();
     const searchType = useWatch({ control, name: 'type' });
 
     /**
-     * 指定した日付のメータリングユニットカウントを取得
+     * Retrieve the metering unit count for the specified date
      * @param date
      * @param meteringUnitName
      */
@@ -257,7 +261,7 @@ const UsageCheck: React.FC = () => {
     }
 
     /**
-     * 指定月の全メータリングユニットカウントを取得
+     * Retrieve all metering unit counts for the specified month
      * @param month
      */
     const fetchAllUsageCountOfSpecifiedMonth = async (month: string) => {
@@ -278,7 +282,7 @@ const UsageCheck: React.FC = () => {
     }
 
     /**
-     * 指定日の全メータリングユニットカウントを取得
+     * Retrieve all metering unit counts for the specified date
      * @param date
      */
     const fetchAllUsageCountOfSpecifiedDate = async (date: string) => {
@@ -299,7 +303,7 @@ const UsageCheck: React.FC = () => {
     }
 
     /**
-     * 指定月のメータリングユニットカウントを取得
+     * Retrieve the metering unit count for the specified month
      * @param month
      * @param meteringUnitName
      */
@@ -326,8 +330,6 @@ const UsageCheck: React.FC = () => {
         fetchAllUsageCountOfSpecifiedMonth(month);
     }, []);
 
-
-
     const onSearchSubmit: SubmitHandler<SearchFormSchema> = async (data) => {
         if (data.type === 'month') {
             if (!data.meteringUnitName) {
@@ -348,19 +350,19 @@ const UsageCheck: React.FC = () => {
 
     return (
         <div>
-            <h2>使用量確認</h2>
+            <h2>Usage Check</h2>
             <form onSubmit={handleSubmit(onSearchSubmit)}>
-                <label>検索対象指定方法</label>
-                <select {...register('type', {required: '選択してください。'})}>
+                <label>Method of Specifying Search Target</label>
+                <select {...register('type', {required: 'Please select.'})}>
                     <option></option>
-                    <option value="month">年月</option>
-                    <option value="date">年月日</option>
+                    <option value="month">Year-Month</option>
+                    <option value="date">Year-Month-Day</option>
                 </select>
                 {searchType && (
                     <>
-                        <label>{searchType === 'month' ? '対象年月' : '対象年月日'}</label>
-                        <input {...register(searchType, { required: '必須です' })} />
-                        <label>計測対象メータ名</label>
+                        <label>{searchType === 'month' ? 'Target Year-Month' : 'Target Year-Month-Day'}</label>
+                        <input {...register(searchType, { required: 'Required' })} />
+                        <label>Metering Unit Name</label>
                         <select {...register('meteringUnitName')}>
                             <option></option>
                             {METERING_UNIT_NAME_DICT_ARRAY.map(({ key, displayName }) => (
@@ -369,15 +371,15 @@ const UsageCheck: React.FC = () => {
                         </select>
                     </>
                 )}
-                <button type="submit" disabled={!isDirty || !isValid}>検索</button>
+                <button type="submit" disabled={!isDirty || !isValid}>Search</button>
             </form>
 
-            <h3>検索対象日：{targetMonthOrDate}</h3>
+            <h3>Search Target Date: {targetMonthOrDate}</h3>
             {METERING_UNIT_NAME_DICT_ARRAY.map(({key, displayName}) => {
                 const formMeteringUnitName = getValues('meteringUnitName')
                 return (!formMeteringUnitName || formMeteringUnitName && formMeteringUnitName === key) && (
                     <UsageCountWrapper key={key}>
-                        <p>{displayName}：{meteringUnitCountList.find(({meteringUnitName}) => key === meteringUnitName)?.count ?? 0}件</p>
+                        <p>{displayName}：{meteringUnitCountList.find(({meteringUnitName}) => key === meteringUnitName)?.count ?? 0} cases</p>
                     </UsageCountWrapper>
                 );
             })}
@@ -385,11 +387,13 @@ const UsageCheck: React.FC = () => {
     )
 }
 
+
 const UsageCountWrapper = styled.div`
     border-bottom: 1px solid #333;
 `
 
 export default UsageCheck;
+
 ```
 
 </TabItem>
@@ -397,7 +401,7 @@ export default UsageCheck;
 
 </details>
 
-<details><summary><b>Laravel実装サンプル</b></summary>
+<details><summary><b>Laravel Implementation Sample</b></summary>
 
 <Tabs>
 <TabItem value="php" label="routes/api.php">
@@ -431,7 +435,7 @@ use AntiPatternInc\Saasus\Sdk\Pricing\Model\MeteringUnitMonthCount;
 class MeteringController extends Controller
 {
     /**
-     * 指定した日付のユニットカウントを取得
+     * Retrieve the unit count for the specified date
      *
      * @see https://docs.saasus.io/reference/getmeteringunitdatecountbytenantidandunitnameanddate
      *
@@ -458,7 +462,7 @@ class MeteringController extends Controller
     }
 
     /**
-     * 指定月のユニットカウント取得
+     * Retrieve the unit count for the specified month
      *
      * @see https://docs.saasus.io/reference/getmeteringunitmonthcountbytenantidandunitnameandmonth
      *
@@ -483,7 +487,7 @@ class MeteringController extends Controller
     }
 
     /**
-     * 指定日の全ユニットカウントを取得
+     * Retrieve all unit counts for the specified date
      *
      * @param string $tenantId
      * @param string $date
@@ -507,7 +511,7 @@ class MeteringController extends Controller
     }
 
     /**
-     * 指定月の全ユニットカウントを取得
+     * Retrieve all unit counts for the specified month
      *
      * @param string $tenantId
      * @param string $month
@@ -537,6 +541,6 @@ class MeteringController extends Controller
 
 </details>
 
-実装サンプルを実装すると以下の画像のような機能が作成されます。
+Implementing the sample code will create a feature as shown in the image below.
 
 ![](/img/metering-api-sample/metering_system_example.gif)
