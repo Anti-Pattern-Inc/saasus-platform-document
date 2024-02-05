@@ -186,7 +186,7 @@ const sidebars = {
         'aws-marketplace-integration/embedding-products',
         {
           type: 'category',
-          label: '補足',
+          label: 'Supplementary',
           link: {
             type: 'doc',
             id: 'aws-marketplace-integration/supplementary',
