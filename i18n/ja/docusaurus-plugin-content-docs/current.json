@@ -31,17 +31,9 @@
     "message": "AWS Marketplace連携機能",
     "description": "The label for category AWS Marketplace連携機能 in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.セラー登録から銀行口座の設定": {
-    "message": "セラー登録から銀行口座の設定",
-    "description": "The label for category セラー登録から銀行口座の設定 in sidebar tutorialSidebar"
-  },
   "sidebar.tutorialSidebar.category.SaaS製品情報の登録": {
     "message": "SaaS製品情報の登録",
     "description": "The label for category SaaS製品情報の登録 in sidebar tutorialSidebar"
-  },
-  "sidebar.tutorialSidebar.category.補足": {
-    "message": "補足",
-    "description": "The label for category 補足 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Tutorial": {
     "message": "チュートリアル",
@@ -54,10 +46,6 @@
   "sidebar.tutorialSidebar.category.SaaS Development Console": {
     "message": "SaaS 開発コンソール",
     "description": "The label for category SaaS Development Console in sidebar tutorialSidebar"
-  },
-  "sidebar.tutorialSidebar.category.Amazon EventBridge 連携機能": {
-    "message": "Amazon EventBridge 連携機能",
-    "description": "The label for category Amazon EventBridge 連携機能 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.SaaS Operation Console": {
     "message": "SaaS 運用コンソール",
@@ -75,9 +63,9 @@
     "message": "Changelog",
     "description": "The label for category Changelog in sidebar changelogSidebar"
   },
-  "sidebar.changelogSidebar.doc.2023/11/28": {
-    "message": "2023/11/28",
-    "description": "The label for the doc item 2023/11/28 in sidebar changelogSidebar, linking to the doc changelog/20231128"
+  "sidebar.changelogSidebar.doc.2023/11/23": {
+    "message": "2023/11/23",
+    "description": "The label for the doc item 2023/11/23 in sidebar changelogSidebar, linking to the doc changelog/20231123"
   },
   "sidebar.changelogSidebar.doc.2023/11/18": {
     "message": "2023/11/18",
@@ -110,5 +98,17 @@
   "sidebar.tutorialSidebar.category.Implementation Guide": {
     "message": "実装ガイド",
     "description": "The label for category Implementation Guide in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Integrate with Amazon EventBridge": {
+    "message": "Amazon EventBridge 連携機能",
+    "description": "The label for category Integrate with Amazon EventBridge in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Setting Up Bank Account From Seller Registration": {
+    "message": "セラー登録から銀行口座の設定",
+    "description": "The label for category Setting Up Bank Account From Seller Registration in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Supplementary": {
+    "message": "補足",
+    "description": "The label for category Supplementary in sidebar tutorialSidebar"
   }
 }

@@ -14,6 +14,6 @@ updatedAt: "Fri Oct 27 2023 07:15:37 GMT+0000 (Coordinated Universal Time)"
 3. スクロールして、セルフサインアップ（ユーザー自身による新規登録）の可否の項目を見つけてください。
 4. トグルボタンをONにして、保存ボタンを押してください。
 
-![self-up-setting-1](/img/aws-marketplace-integration/supplementary/self-up-setting-1.png)
+![self-up-setting-1](/ja/img/aws-marketplace-integration/supplementary/self-up-setting-1.png)
 
 以上で設定完了です。数分後に実際の画面に反映されます。

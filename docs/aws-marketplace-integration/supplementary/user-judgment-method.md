@@ -1,20 +1,20 @@
 ---
-title: "AWS Marketplaceから購入したユーザーの判定方法"
+title: "How to Identify Users who Purchased from AWS Marketplace"
 slug: "user-judgment-method"
 excerpt: ""
 hidden: false
-metadata: 
+metadata:
   image: []
   robots: "index"
 createdAt: "Tue Jun 20 2023 11:31:59 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Fri Jun 30 2023 03:39:08 GMT+0000 (Coordinated Universal Time)"
 ---
-SAASUS AWS MARKETPLACE APIを利用します。
+We will use the SAASUS AWS MARKETPLACE API.
 
-[GetCustomers](/docs/reference/awsmarketplace-api#tag/awsMarketplace/operation/GetCustomers)というエンドポイントを利用します。仕様はドキュメントを参照してください。
+Use the endpoint named [GetCustomers](/docs/reference/awsmarketplace-api#tag/awsMarketplace/operation/GetCustomers). Please refer to the document for details on the specification.
 
-## 判定までの流れ
+## Flow till Judgment
 
-1. getUserInfoで取得したtenant_idを、GetCustomersのパラメーターtenant_idsに設定し実行する
-2. 返却値が空であるかをチェックする
-3. 空でない場合は、AWS Marketplaceから購入したユーザーであると判定することができます。
+1. Set the tenant_id obtained by getUserInfo as the parameter tenant_ids for GetCustomers and execute.
+2. Check whether the return value is empty.
+3. If not empty, you can determine it is a user who purchased from AWS Marketplace.

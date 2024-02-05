@@ -15,16 +15,16 @@ DAC7とは企業からの課税報告に関する欧州委員会指令のこと�
 
 DAC7の税務アンケートの開始を押下します
 
-![dac7-tax-survey-1](/img/aws-marketplace-integration/dac7-tax-survey/dac7-tax-survey-1.png)
+![dac7-tax-survey-1](/ja/img/aws-marketplace-integration/dac7-tax-survey/dac7-tax-survey-1.png)
 
 貴社の状況に合わせ以下アンケートをお答えください。
 
-![dac7-tax-survey-2](/img/aws-marketplace-integration/dac7-tax-survey/dac7-tax-survey-2.png)
+![dac7-tax-survey-2](/ja/img/aws-marketplace-integration/dac7-tax-survey/dac7-tax-survey-2.png)
 
 アンケート回答後署名して送信ボタンを押下しアンケートを終了します。
 
-![dac7-tax-survey-3](/img/aws-marketplace-integration/dac7-tax-survey/dac7-tax-survey-3.png)
+![dac7-tax-survey-3](/ja/img/aws-marketplace-integration/dac7-tax-survey/dac7-tax-survey-3.png)
 
 クライアントダッシュボードで`インタビューを終了`を押下して税務情報に関するインタビューを終了します。
 
-![dac7-tax-survey-4](/img/aws-marketplace-integration/dac7-tax-survey/dac7-tax-survey-4.png)
+![dac7-tax-survey-4](/ja/img/aws-marketplace-integration/dac7-tax-survey/dac7-tax-survey-4.png)

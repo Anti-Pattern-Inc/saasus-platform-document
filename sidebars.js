@@ -94,6 +94,18 @@ const sidebars = {
       type: 'category',
       label: 'SaaS Development Console',
       items: [
+        'saas-development-console/procedure-for-applying-for-a-paid-plan',
+        {
+          type: 'category',
+          label: 'Integrate with Amazon EventBridge',
+          link: {
+            type: 'doc',
+            id: 'saas-development-console/integrate-with-amazon-eventbridge',
+          },
+          items: [
+            'saas-development-console/integrate-with-amazon-eventbridge/event-sample',
+          ],
+        },
         'saas-development-console/google-linkage',
         'saas-development-console/tiered-unit',
         'saas-development-console/tax-rates',
@@ -113,18 +125,6 @@ const sidebars = {
         },
         'saas-development-console/notifymailcustomize',
         'saas-development-console/saasususerinvitation',
-        'saas-development-console/procedure-for-applying-for-a-paid-plan',
-        {
-          type: 'category',
-          label: 'Amazon EventBridge 連携機能',
-          link: {
-            type: 'doc',
-            id: 'saas-development-console/integrate-with-amazon-eventbridge-jp',
-          },
-          items: [
-            'saas-development-console/integrate-with-amazon-eventbridge/event-sample',
-          ],
-        },
       ],
     },
     {
@@ -155,7 +155,7 @@ const sidebars = {
         'aws-marketplace-integration/aws-marketplace-integration',
         {
           type: 'category',
-          label: 'セラー登録から銀行口座の設定',
+          label: 'Setting Up Bank Account From Seller Registration',
           link: {
             type: 'doc',
             id: 'aws-marketplace-integration/aws-marketplace-seller-registration',
@@ -186,7 +186,7 @@ const sidebars = {
         'aws-marketplace-integration/embedding-products',
         {
           type: 'category',
-          label: '補足',
+          label: 'Supplementary',
           link: {
             type: 'doc',
             id: 'aws-marketplace-integration/supplementary',
@@ -236,9 +236,9 @@ const sidebars = {
       label: "Changelog",
       items: [
         {
-          label: "2023/11/28",
+          label: "2023/11/23",
           type: "doc",
-          id: "changelog/20231128"
+          id: "changelog/20231123"
         },
         {
           label: "2023/11/18",
