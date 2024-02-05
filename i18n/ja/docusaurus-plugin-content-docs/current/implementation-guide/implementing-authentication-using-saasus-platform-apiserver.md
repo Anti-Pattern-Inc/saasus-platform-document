@@ -14,7 +14,7 @@ updatedAt: "Wed Jan 17 2024 08:25:52 GMT+0000 (Coordinated Universal Time)"
 
 # 処理フロー（ログイン〜ユーザ一覧表示）
 
-![](/img/metering-api-sample/SaaSus_PlatformAPI.drawio.svg)
+![](/ja/img/metering-api-sample/SaaSus_PlatformAPI.png)
 
 
 # 実装サンプル
@@ -33,7 +33,7 @@ SaaSus Platformが生成するログイン画面からログインを実施す�
 本実装サンプルを使って動作確認を行うためには、  
 `http://localhost:3000/callback`　と設定してください。
 
-![](/img/metering-api-sample/image-02.png)
+![](/ja/img/metering-api-sample/image-02.png)
 
 認証後遷移先にはクエリパラメータ(code=xxxxx)で、認証情報取得に必要な一時コードが渡される仕様となってます。一時コードを使ってJWTを取得、ローカルストレージに保存する実装を行ってください。
 
