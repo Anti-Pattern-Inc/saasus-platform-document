@@ -155,7 +155,7 @@ const sidebars = {
         'aws-marketplace-integration/aws-marketplace-integration',
         {
           type: 'category',
-          label: 'セラー登録から銀行口座の設定',
+          label: 'Setting Up Bank Account From Seller Registration',
           link: {
             type: 'doc',
             id: 'aws-marketplace-integration/aws-marketplace-seller-registration',
