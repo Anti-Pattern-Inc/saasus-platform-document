@@ -5,6 +5,6 @@ type: ""
 createdAt: {}
 hidden: false
 ---
-Release v0.10(final beta version) on 2022/12/10
+2022/12/10 v0.10 (ファイナルβ版) を公開しました
 
-Release v0.8(beta version) on 2022/07/30
+2022/07/30 v0.8 (β版) を公開しました
