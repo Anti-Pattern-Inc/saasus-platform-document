@@ -1,64 +1,63 @@
 ---
-title: "API統合が完了した後に実施する連携確認の例"
+title: "Examples of Integration Confirmation to be Done After API Integration"
 slug: "integration-test"
 excerpt: ""
 hidden: false
-metadata: 
+metadata:
   image: []
   robots: "index"
 createdAt: "Wed Jun 21 2023 06:02:27 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Fri Oct 27 2023 07:14:31 GMT+0000 (Coordinated Universal Time)"
 ---
-事前にAWS Marketplace上に限定公開されている製品ページのURLを確認してください。
+Please check the URL of the product page that is privately published on AWS Marketplace in advance.
 
-### 製品ページURLの確認方法
+### How to Check the Product Page URL
 
-1. AWS Marketplace Management Portalへログインする。
-2. こちらの<a href="https://aws.amazon.com/marketplace/management/products/saas?#" target="_blank">リンク</a>
-3. 限定公開状態のSaaS製品の一覧が表示されるので確認したいSaaS製品を選択する。
-4. 詳細ページが表示されますので、ページ右上の「View on AWS Marketplace」のボタンから製品ページのURLを確認することができます。
+1. Sign in to AWS Marketplace Management Portal.
+2. Follow this <a href="https://aws.amazon.com/marketplace/management/products/saas?#" target="_blank">link</a>.
+3. A list of SaaS products in private publication will be displayed, so select the SaaS product you want to check.
+4. On the detail page shown, you can check the product page URL from the button `View on AWS Marketplace` at the top right of the page.
 
 ![integration-test-1](/img/aws-marketplace-integration/supplementary/integration-test-1.png)
 
+## About Integration Confirmation Methods
 
-## 連携確認方法について
+To confirm the integration with AWS Marketplace, you need to implement three use cases in total.
 
-AWS Marketplaceとの連携を確認するには、全部で3つのユースケースを実施する必要があります。
+### When a New Account is Created by Signup After Purchase
 
-### 購入後、サインアップをして新規アカウントを作った場合
+After signing up, please make sure that the created account is correctly synchronized with the purchased contract.
 
-サインアップ後に生成されるアカウントに対して、正しく購入した契約が同期されていることを確認してください。
+Confirmation Example
 
-確認例
-
-1. テストアカウントで、AWS Marketplace上の製品ページへアクセス
-2. 特定の契約を選択し購入する
+1. Access the product page on AWS Marketplace with a test account.
+2. Select and purchase a particular contract.
 
 <!----->
 
-1. 購入後に表示される動線から、SaaSのサインアップ画面へ遷移
-2. SaaSのサインアップを実施後そのアカウントでSaaSへログインする
-3. 契約情報を確認できるページへ移動して、契約内容を確認する
+1. After the purchase, follow the prompts to the sign-up page of the SaaS service.
+2. After signing up, sign in to the SaaS service with that account.
+3. Move to the page where you can check the contract information and inspect the contract details.
 
-### 購入後、既存ユーザーでサインインをした場合
+### When an Existing User Sign-In After Purchase
 
-既にSaaSにアカウントを持っているユーザーが、購入した際に正しく契約が同期されていることを確認してください。
+Please ensure that a user who already has an account on the SaaS service is correctly synchronized with the contract after purchase.
 
-確認例
+Confirmation Example
 
-1. 既にSaaS上にアカウントを持っているテストアカウントで、AWS Marketplace上の製品ページへアクセス
-2. 特定の契約を選択し購入する
-3. 購入後に表示される動線から、SaaSのサインアップ画面→サインイン画面と遷移する
-4. SaaSのサインインを実施後そのアカウントでSaaSへログインする
-5. 契約情報を確認できるページへ移動して、契約内容を確認する
+1. With a test account that already possesses an account on the SaaS service, access the product page on AWS Marketplace.
+2. Choose a specific contract and purchase it.
+3. After the purchase, follow the prompts to the sign-up page of the SaaS service, then move on to the sign-in page.
+4. After signing in, sign in to the SaaS with that account.
+5. Move to the page where you can check the contract information and inspect the contract details.
 
-### 購入後、AWS Marketplaceの製品契約ページで契約を変更した場合
+### When Changing a Contract on the AWS Marketplace Product Contract Page After Purchase
 
-既にAWS Marketplace上で契約していた場合、製品契約ページで契約を変更した際に正しく契約が同期されることを確認してください。
+If you already have a contract on AWS Marketplace, when you update the contract on the product contract page, please ensure that the contract is correctly synchronized.
 
-確認例
+Confirmation Example
 
-1. AWS Marketplace上の製品契約ページへアクセス
-2. 特定の契約を選択し、契約を更新する
-3. SaaSにログインする
-4. 契約情報を確認できるページへ移動して、契約内容を確認する
+1. Access the product contract page on AWS Marketplace.
+2. Choose a specific contract and update the contract.
+3. Sign in to SaaS.
+4. Move to the page where you can check the contract information and inspect the contract details.
