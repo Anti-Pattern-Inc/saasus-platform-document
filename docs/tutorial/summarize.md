@@ -14,5 +14,3 @@ Currently, what the SaaS Platform can do is still only the basics of SaaS, but w
 
 Please look forward to the future of the SaaSus Platform.
 
-\*We would appreciate it if you could answer the following questionnaire after completing the tutorial.  
-<https://docs.google.com/forms/d/e/1FAIpQLSfvb266PjDIMjPSQJhqUCiyJUNux5usfmbsTcP5iAXPQvYh2g/viewform>

@@ -14,13 +14,9 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 
 In the SaaS Operation Console, functions for SaaS operation such as tenant management and user management can be used.
 
-On the SaaSus console click the environment button at the top of the screen (where it says development environment > ) to return to the login environment selection page.
+I believe you were logged into the SaaSus console until now, so let's switch to the SaaS Operation Console at the top left corner of the screen.
 
 ![01](/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-01.png)
-
-Then, click "SaaS Operation Console" again to switch consoles.
-
-![02](/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-02.png)
 
 ### Create a SaaS Consumer Tenant
 
@@ -38,7 +34,8 @@ First example tenant
 - Primary Email Address: [saasus-sample-tenant1@example.com](mailto:saasus-sample-tenant1@example.com)
 - Representative's password: Temporary password that meets the requirements such as G@2qYPQq
 
-![04](/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-04.png)
+<img src="/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-04.png" width="400">
+</img>
 
 Second example tenant
 
@@ -60,10 +57,6 @@ The user created earlier is registered as the admin (SaaS administrator) role fo
 
 ![06](/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-06.png)
 
-In the SaaS Platform, the concept of "environment" can be used for the tenant of the SaaS customer.
-
-For example, in SaaS that mainly uses APIs like Stripe, SaaS users need an environment for integration testing and development. SaaS administrators can define multiple environments, such as using the dev environment for these tasks and using the prod environment for actual operations.
-
 - Depending on the SaaS, multiple environments may not be necessary, so if you use a single environment, just take prod into consideration.
 
 Now, let's register one user for each tenant.
@@ -77,7 +70,8 @@ Password: password that meets the password requirements
 Tenant: Tenant Sample 1  
 Username: User 1-1
 
-![07](/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-07.png)
+<img src="/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-07.png" width="400">
+</img>
 
 Email Address: [user1-2@example.com](mailto:user1-2@example.com)  
 Password: password that meets the password requirements  
@@ -94,7 +88,9 @@ Password: password that meets the password requirements
 Tenant: Sample application tenant 2  
 Username: User 2-2
 
-![08](/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-08.png)
+<!-- TODO -->
+<!-- ユーザ追加してもロールを付与されないと表示されないため、表示される用になったら画像を追加する -->
+<!-- ![08](/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-08.png) -->
 
 4 additional users have been registered.
 
@@ -118,7 +114,8 @@ Now, assign roles by clicking "Grant Roles to Users" on the upper right.
 
 Select the email addresses of User 1-1 and User 1-2 and click Add
 
-![10](/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-10.png)
+<img src="/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-10.png" width="400">
+</img>
 
 Role added to user
 
