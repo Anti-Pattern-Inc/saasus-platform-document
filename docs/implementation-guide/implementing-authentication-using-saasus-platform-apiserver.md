@@ -14,7 +14,7 @@ When configuring the backend as an API server, the following implementations are
 
 # Process Flow (Login to User List Display)
 
-![SaaSus Platform API Process Flow](/img/metering-api-sample/SaaSus_PlatformAPI.drawio.svg)
+![SaaSus Platform API Process Flow](/img/metering-api-sample/SaaSus_PlatformAPI.png)
 
 
 # Implementation Sample
