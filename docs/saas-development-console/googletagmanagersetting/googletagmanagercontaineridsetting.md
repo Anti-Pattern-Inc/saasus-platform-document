@@ -1,32 +1,32 @@
 ---
-title: "Google Tag Manager コンテナ IDを設定"
+title: "Setting the Google Tag Manager Container ID"
 slug: "googletagmanagercontaineridsetting"
 excerpt: ""
 hidden: false
 createdAt: "Thu Dec 07 2023 06:43:12 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Fri Dec 22 2023 06:01:24 GMT+0000 (Coordinated Universal Time)"
 ---
-## 1. コンテナIDの確認
+## 1. Confirming the Container ID
 
-### Google Tag Managerホームページから確認
+### From the Google Tag Manager Homepage
 
-コンテナ一覧に表示される「コンテナID」列に表示される「GTM-XXXXXXXX」を確認してください。
+Please check the "Container ID" column in the list of containers, which will display as "GTM-XXXXXXXX".
 
 ![googletagmanagercontaineridsetting-1](/ja/img/saas-development-console/googletagmanagersetting/googletagmanagercontaineridsetting-1.png)
 
-### コンテナページから確認
+### From the Container Page
 
-画面右上の「GTM-XXXXXXXX」を確認してください。
+Check the "GTM-XXXXXXXX" displayed at the top right of the screen.
 
 ![googletagmanagercontaineridsetting-2](/ja/img/saas-development-console/googletagmanagersetting/googletagmanagercontaineridsetting-2.png)
 
-## 2. コンテナIDを設定
+## 2. Setting the Container ID
 
-1. SaaSus開発コンソールの「認証詳細設定」を開く
+1. Open the "Authentication Details Settings" in the SaaSus development console.
 
    ![googletagmanagercontaineridsetting-3](/ja/img/saas-development-console/googletagmanagersetting/googletagmanagercontaineridsetting-3.png)
-2. 認証詳細設定画面の「基本設定」最下部にある「Google Tag Manager コンテナ ID」にコンテナIDを設定し保存ボタンを押す
+2. In the "Basic Settings" at the bottom of the Authentication Details Settings screen, set the "Google Tag Manager Container ID" to your container ID and press the save button.
 
    ![googletagmanagercontaineridsetting-4](/ja/img/saas-development-console/googletagmanagersetting/googletagmanagercontaineridsetting-4.png)
 
-以上でログイン画面にGoogle Tag Managerのタグが埋め込まれます。
+This completes the process of embedding the Google Tag Manager tags into the login screen.
