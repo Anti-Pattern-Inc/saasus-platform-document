@@ -1,148 +1,144 @@
 ---
-title: "Google連携"
+title: "Google Linkage"
 slug: "google-linkage"
 excerpt: ""
 hidden: false
 createdAt: "Sun May 21 2023 05:12:10 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
-# 概要説明
+## Summary Explanation
 
-Google連携を行うためには、Google Cloud PlatformのアカウントにOAuthクライアントを作成し、SaaSusと連携する設定を実施する必要があります。  
-SaaSusとの連携設定を行うことで、SaaSusのログイン画面に「Googleでログイン」のボタンが表示され、Google連携を利用することが出来るようになります  
-注意点として、一般公開するためにはGoogleに利用申請を行う必要があります。申請後の審査に1週間程度の時間を要します。（不備がある場合はメールで連絡があるので、対応を実施してください）
+To incorporate Google linkage, it is necessary to create an OAuth client in your Google Cloud Platform account and set up the linkage with SaaSus. By setting up the linkage with SaaSus, the button 'Sign in with Google' will appear on the sign-in page of SaaSus, and Google linkage can be enabled. It should be noted that to make the app publicly available, it is necessary to apply to Google. It takes about one week to review the application after submission. (If there are any mistakes, guidance will be sent by email, so please take corrective action)
 
-Google連携の手順
+Google linkage procedure consists of:
 
-- Google Cloud PlatformのOAuthクライアント作成
-- Google Cloud PlatformとSaaSusアカウントの連携
-- Google認証の動作確認
-- 利用申請
+- Creating OAuth Client in Google Cloud Platform
+- Linking Google Cloud Platform and SaaSus account
+- Confirmation on Google Authentication Performance
+- Application for Usage
 
-## Google Cloud PlatformのOAuthクライアント作成
+## Creating an OAuth Client in Google Cloud Platform
 
-### Google連携用の情報を確認
+### Confirming the Information for Google Linkage
 
-SaaSus管理コンソールにログイン  
-認証詳細設定画面を開く  
-認証設定タブのGoogle連携を確認する
-
-![google-linkage-1](/ja/img/saas-development-console/google-linkage-1.png)
-
-以下の項目がGoogleのOAuthクライアント作成時に必要なのでメモします
-
-- 承認済みの JavaScript 生成元
-- 承認済みのリダイレクト URI
-
-![google-linkage-2](/ja/img/saas-development-console/google-linkage-2.png)
-
-### OAuthの利用に同意
-
-Google連携を管理するための、Google Cloud Platformアカウントにログイン（Google Cloud Platformがない場合は作成してください）
-
-Google連携用に新しいプロジェクトを作成
-
-<a href="https://console.cloud.google.com/projectcreate?previousPage=%2Fprojectselector2%2Fhome%2Fdashboard%3Fhl%3Dja%26organizationId%3D0%26supportedpurview%3Dproject&organizationId=0&hl=ja&supportedpurview=project" target="_blank">新しいプロジェクト</a>を開いて、新規プロジェクトを作成します  
-プロジェクト名：GoogleOAuth（任意のわかりやすいもので大丈夫です）
-
-![google-linkage-3](/ja/img/saas-development-console/google-linkage-3.png)
+Sign in to SaaSus management console. Open "Authentication Authorization" > "Advanced Settings". Check the Google linkage in Authentication tab.
 
 
-「APIとサービス」 - 「OAuth同意画面」を開く
+![google-linkage-1](/img/saas-development-console/google-linkage-1.png)
 
-![google-linkage-4](/ja/img/saas-development-console/google-linkage-4.png)
+Make a note of the following items as they are required when creating an OAuth client in Google:
 
+- Approved JavaScript Origin
+- Authorized Redirect URI
 
-User Typeで「外部」を選択し、「作成」ボタンを押す
+![google-linkage-2](/img/saas-development-console/google-linkage-2.png)
 
-![google-linkage-5](/ja/img/saas-development-console/google-linkage-5.png)
+### Agreeing to the Use of OAuth
 
+Sign in to Google Cloud Platform account (create a Google Cloud Platform account if you don’t have one) for managing Google linkage.
 
-以下のとおり入力し、「保存して次へ」ボタンを選択
+Create a new project for Google linkage.
 
-- アプリ名：OAuth
-- ユーザーサポートメール：任意のメールアドレス
-- デベロッパーの連絡先情報：任意のメールアドレス
+Open <a href="https://console.cloud.google.com/projectcreate?previousPage=%2Fprojectselector2%2Fhome%2Fdashboard%3Fhl%3Dja%26organizationId%3D0%26supportedpurview%3Dproject&organizationId=0&hl=ja&supportedpurview=project" target="_blank">New Project</a>, and create a new project.
 
-![google-linkage-6](/ja/img/saas-development-console/google-linkage-6.png)
+Project Name: GoogleOAuth (or any other easy-to-understand name)
 
+![google-linkage-3](/img/saas-development-console/google-linkage-3.png)
 
-「保存して次へ」を選択
+Open 'APIs & Services' - 'OAuth Consent Screen'
 
-![google-linkage-7](/ja/img/saas-development-console/google-linkage-7.png)
+![google-linkage-4](/img/saas-development-console/google-linkage-4.png)
 
+Select 'External' as User Type and press 'Create' button
 
-テストユーザーを追加し、「保存して次へ」を選択  
-公開ステータスが「テスト中」の場合は、ここで設定したユーザのみでログインすることが可能です
-
-![google-linkage-8](/ja/img/saas-development-console/google-linkage-8.png)
-
-
-### OAuthクライアントの作成
-
-「APIとサービス」 - 「認証情報」を開く
-
-![google-linkage-9](/ja/img/saas-development-console/google-linkage-9.png)
+![google-linkage-5](/img/saas-development-console/google-linkage-5.png)
 
 
-「認証情報を作成」 - 「OAuthクライアントID」を選択
+Input following information and select 'Save and Continue' button
 
-![google-linkage-10](/ja/img/saas-development-console/google-linkage-10.png)
+- App Name: GoogleOAuth
+- User Support Email: any email address
+- Developer Contact Information: any email address
 
-
-以下のとおり入力し、「作成」ボタンを選択
-
-- アプリケーションの種類：ウェブアプリケーション
-- 名前：GoogleOAuth（任意のわかりやすいもので大丈夫です）
-- 承認済みのJavaScript生成元：＜SaaSus管理コンソールで確認した値＞
-- 承認済みのリダイレクトURI：＜SaaSus管理コンソールで確認した値＞
-
-![google-linkage-11](/ja/img/saas-development-console/google-linkage-11.png)
+![google-linkage-6](/img/saas-development-console/google-linkage-6.png)
 
 
-OAuthクライアントが作成されました  
-以下の項目をSaaSus管理コンソールに設定するのでメモします  
-※「JSONをダウンロード」を選択し、ダウンロードして保管することをおすすめします
+Select 'Save and Continue'
 
-- クライアントID
-- クライアントシークレット
-
-![google-linkage-12](/ja/img/saas-development-console/google-linkage-12.png)
+![google-linkage-7](/img/saas-development-console/google-linkage-7.png)
 
 
-## Google Cloud PlatformとSaaSusアカウントの連携
+Add test users and select 'Save and Continue'
+Only the users set here can login when the public status is 'Testing'
 
-以下のとおり入力し、「保存」ボタンを選択
-
-- クライアントID：＜OAuthクライアント作成後に画面で確認した値＞
-- クライアントシークレット：＜OAuthクライアント作成後に画面で確認した値＞
-
-![google-linkage-13](/ja/img/saas-development-console/google-linkage-13.png)
+![google-linkage-8](/img/saas-development-console/google-linkage-8.png)
 
 
-「連携済み」と表示されていれば完了です
+### Creating OAuth Client
 
-![google-linkage-14](/ja/img/saas-development-console/google-linkage-14.png)
+Open 'APIs & Services' - 'Credentials'
 
-
-## Google認証の動作確認
-
-ログイン画面に表示される「Googleでログイン」ボタンの動作確認をしていきます
-
-![google-linkage-15](/ja/img/saas-development-console/google-linkage-15.png)
+![google-linkage-9](/img/saas-development-console/google-linkage-9.png)
 
 
-「Googleでログイン」の動作について
+Select 'Create Credentials' - 'OAuth client ID'
 
-- 表示される画面
-  - ログイン画面
-  - 新規登録画面（セルフサインアップを有効にしている場合）
-- Googleでログイン時の動作
-  - セルフサインアップを有効にしている場合  
-    アカウントが存在しない場合はアカウントが自動的に作成され、ログインされます
-  - セルフサインアップを有効にしていない場合  
-    アカウントが存在しない場合はログインされません
+![google-linkage-10](/img/saas-development-console/google-linkage-10.png)
 
-## 利用申請
 
-準備中
+Enter the following information and select 'Create' button:
+
+- Application type: Web Application
+- Name: GoogleOAuth (any easy-to-understand name is fine)
+- Authorized JavaScript origins: ＜the value confirmed on SaaSus management console＞
+- Authorized redirect URIs: ＜the value confirmed on SaaSus management console＞
+
+![google-linkage-11](/img/saas-development-console/google-linkage-11.png)
+
+
+The OAuth client has been created.
+Make a note of the following items for setting up SaaSus management console.  
+※ It is recommended to select 'Download JSON' and save the downloaded file.
+
+- Client ID
+- Client Secret
+
+![google-linkage-12](/img/saas-development-console/google-linkage-12.png)
+
+
+## Linking Google Cloud Platform and SaaSus Account
+
+Enter the following and select 'Save' button:
+
+- Client ID: ＜The value confirmed on the screen after creating the OAuth client＞
+- Client Secret: ＜The value confirmed on the screen after creating the OAuth client＞
+
+![google-linkage-13](/img/saas-development-console/google-linkage-13.png)
+
+
+If 'Linked' is displayed, then the operation is completed.
+
+![google-linkage-14](/img/saas-development-console/google-linkage-14.png)
+
+
+## Confirming Google Authentication Operation
+
+We will confirm the operation of the 'Sign with Google' button displayed on the sign in screen.
+
+![google-linkage-15](/img/saas-development-console/google-linkage-15.png)
+
+
+About 'Sign in with Google' operation:
+
+- Screen Displayed
+  - Sign in screen
+  - New registration screen (when self-sign-up is enabled)
+- Actions when Sign in with Google
+  - If self-sign-up is enabled  
+    If the account does not exist, an account will be created automatically and signed in.
+  - If self-sign-up is not enabled  
+    If the account does not exist, it will not sign in.
+
+## Application for Use
+
+Coming soon.
