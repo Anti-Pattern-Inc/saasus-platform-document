@@ -1,18 +1,16 @@
 ---
-title: "イベントサンプル"
+title: "Event Samples"
 slug: "event-sample"
 excerpt: ""
 hidden: false
 createdAt: "Tue Oct 31 2023 07:46:13 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
-テナント、ユーザー作成時にAmazon EventBridge に連携されたイベントのサンプルとなります。  
-APIのリクエストの情報とレスポンスの情報を確認することができます。
+These event samples are associated with Amazon EventBridge when creating tenants and users. You can check the information of both API request and response.
 
-# create_tenant
+## create_tenant
 
-作成したテナント情報が`response_body`に設定されます。  
-APIリファレンス : <a href="/docs/reference/auth-api#tag/tenant/operation/CreateTenant" target="_blank">Create Tenant</a>
+The created tenant information is set as `response_body`. API reference: <a href="/docs/reference/auth-api#tag/tenant/operation/CreateTenant" target="_blank">Create Tenant</a>
 
 ```json
 {
@@ -56,10 +54,9 @@ APIリファレンス : <a href="/docs/reference/auth-api#tag/tenant/operation/C
 }
 ```
 
-# create_saas_user
+## create_saas_user
 
-作成したユーザー情報が`response_body`に設定されます。  
-APIリファレンス : <a href="/docs/reference/auth-api#tag/saasUser/operation/CreateSaasUser" target="_blank">Create SaaS User</a>
+The created user information is set as `response_body`. API reference: <a href="/docs/reference/auth-api#tag/saasUser/operation/CreateSaasUser" target="_blank">Create SaaS User</a>
 
 ```json
 {
@@ -99,4 +96,4 @@ APIリファレンス : <a href="/docs/reference/auth-api#tag/saasUser/operation
 }
 ```
 
-各APIの内容は、<a href="/docs/reference/getting-started-with-your-api" target="_blank">APIリファレンス</a>を確認してください。
+For the details of each API, please check the <a href="/docs/reference/getting-started-with-your-api" target="_blank">API reference</a>.
