@@ -24,7 +24,7 @@ This guide covers setting up Google Analytics tags in Google Tag Manager to anal
 2. Click on "Add a new tag"
 
    ![googleanalyticsgoogletagmanagerlink-2](/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-2.png)
-3. Select "Google Analytics" > "Google Analytics: GA4 Configuration" from "Tag Configuration"
+3. From "Tag Configuration", select "Google Analytics" > "Google Tag".
 
    ![googleanalyticsgoogletagmanagerlink-3](/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-3.png)
 4. Enter the Google Analytics Measurement ID for the tag ID
