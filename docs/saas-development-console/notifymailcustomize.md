@@ -26,7 +26,6 @@ User ID: {username}
 Temporary Password: {####}
 
 Please input the above temporary password on the following page and complete the sign-up.
-
 https://auth.your.domain/sign-up-confirm
 
 Please include your user ID when making inquiries.
@@ -42,7 +41,6 @@ User ID: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 Temporary Password: xxxxxxxx
 
 Please input the above temporary password on the following page and complete the sign-up.
-
 https://auth.your.domain/sign-up-confirm
 
 Please include your user ID when making inquiries.
