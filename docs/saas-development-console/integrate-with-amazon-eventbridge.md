@@ -27,7 +27,7 @@ A partner event path will be created on the AWS account configured above. After 
 
 ![11c56cb-_2023-01-21_23.57.06](/img/saas-development-console/11c56cb-_2023-01-21_23.57.06.png)
 
-Select the created partner event source and "Associate with Event Bus". It will then be available for use on the Event Bus just like any other event source.
+Select the created partner event source and "Associate with event bus". It will then be available for use on the Event Bus just like any other event source.
 
 ![22a9b2d-_2023-01-21_23.58.05](/img/saas-development-console/22a9b2d-_2023-01-21_23.58.05.png)
 
@@ -36,7 +36,7 @@ Next, let's try sending an event. Open the [Amazon EventBridge Bus Rules page](h
 ![234abaa-_2023-01-22_18.59.46](/img/saas-development-console/234abaa-_2023-01-22_18.59.46.png)
 
 Create rules based on this event bus. Let's set it up as shown in the following page.  
-First, select the SaaSus Platform event bus and click Create Rule. On each page, try to enter the information referring to the following page.
+First, select the SaaSus Platform event bus and click Create rule. On each page, try to enter the information referring to the following page.
 
 ![288246d-_2023-01-22_19.19.22](/img/saas-development-console/288246d-_2023-01-22_19.19.22.png)
 
@@ -44,7 +44,7 @@ First, select the SaaSus Platform event bus and click Create Rule. On each page,
 
 ![d1e7c0d-_2023-01-22_19.20.25](/img/saas-development-console/d1e7c0d-_2023-01-22_19.20.25.png)
 
-In the event pattern section, first describe the following pattern to get all SaaSus Platform events. Click on the "Edit Pattern" button and enter the following JSON directly.
+In the event pattern section, first describe the following pattern to get all SaaSus Platform events. Click on the "Edit pattern" button and enter the following JSON directly.
 
 ![0867394-_2023-01-22_19.20.34](/img/saas-development-console/0867394-_2023-01-22_19.20.34.png)
 
@@ -66,7 +66,7 @@ In this case, let's output all events to CloudWatch Logs to see what kind of eve
 
 ![b260840-_2023-01-22_19.21.33](/img/saas-development-console/b260840-_2023-01-22_19.21.33.png)
 
-After all settings are complete, click Create Rule and confirm that the rule has been created.
+After all settings are complete, click Create rule and confirm that the rule has been created.
 
 ![9b4be62-_2023-01-22_19.21.43](/img/saas-development-console/9b4be62-_2023-01-22_19.21.43.png)
 
