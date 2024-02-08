@@ -1,5 +1,5 @@
 ---
-title: "The difference in rate calculation between tiered units and stepped-rate units"
+title: "The difference in rate calculation between tiered units and Tiered usage units"
 slug: "tiered_unit"
 excerpt: ""
 hidden: false
@@ -8,7 +8,7 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
 In unit measurement settings, you set the smallest unit of measurement which serves as the basis for rate calculation. 
 'Tiered units' are like mobile phone packet charges, where a fixed fee is incurred at each usage stage, 
-'Stepped-rate units' are like volume discounts, where the unit price fluctuates according to usage.
+'Tiered usage units' are like volume discounts, where the unit price fluctuates according to usage.
 
 Applying the respective definitions, I will explain the method for calculating charges in the case of making 15 comments.
 
@@ -25,7 +25,7 @@ Applying the respective definitions, I will explain the method for calculating c
 
 With Tiered Units, you will be billed 1350 yen. 
 
-## Stepped-rate Units
+## Tiered usage Units
 
 10 items \* 100 yen = 1000 yen
 
@@ -33,4 +33,4 @@ With Tiered Units, you will be billed 1350 yen.
 
 1000 yen + 450 yen = ***1450 yen***
 
-With Stepped-rate Units, you will be billed 1450 yen. 
+With Tiered usage Units, you will be billed 1450 yen. 
