@@ -1,5 +1,5 @@
 ---
-title: "The difference in rate calculation between tiered units and Tiered usage units"
+title: "The difference in rate calculation between Tiered units and Tiered usage units"
 slug: "tiered_unit"
 excerpt: ""
 hidden: false
