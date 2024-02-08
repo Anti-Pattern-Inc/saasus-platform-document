@@ -1,111 +1,111 @@
 ---
-title: "通知メール内容のカスタマイズ方法"
+title: "How to Customize Notification Email Content"
 slug: "notifymailcustomize"
 excerpt: ""
 hidden: false
 createdAt: "Tue Dec 12 2023 05:46:38 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Dec 21 2023 02:21:05 GMT+0000 (Coordinated Universal Time)"
 ---
-<a href="https://settings.console.saasus.io/customize" target="_blank">認証詳細設定画面</a>の通知メール内容タブでは、ログイン画面などの認証系ページでユーザーに送信するメールをカスタマイズすることができます。
 
-# メール本文のカスタマイズ方法
+In the E-Mail Content tab of the <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Authorization > Advanced Settings</a>, you can customize the emails that are sent to users on authentication pages such as the sign in page.
 
-## 新規登録時の仮パスワード送信メール
+# How to Customize Email Body
 
-{####} と {username} という文字列が必要になります。
+## Email Sent with a Temporary Password at New Registration
+The strings {####} and {username} are required.
 
-{####} は仮パスワードに、{username} はユーザーIDに置き換えられて送信されます。
+{####} will be replaced with the temporary password and {username} will be replaced with the user ID when sent.
 
-### 例
+### Example
 
 ```
-会員登録いただきありがとうございます。
-ユーザーIDと仮パスワードをお知らせいたします。
+Thank you for your registration.
+We will notify you of your user ID and temporary password.
 
-ユーザーID: {username}
-仮パスワード: {####}
+User ID: {username}
+Temporary Password: {####}
 
-下記画面にて上記仮パスワードを入力し、サインアップを完了してください。
+Please input the above temporary password on the following page and complete the sign-up.
 https://auth.your.domain/sign-up-confirm
 
-お問い合わせの際には、ユーザーIDを添えてお問い合わせください。
+Please include your user ID when making inquiries.
 ```
 
-上記のように設定すると、実際に送信されるメールは以下のようになります。
+When the above setting is made, the actual sent mail will be as follows:
 
 ```
-会員登録いただきありがとうございます。
-ユーザーIDと仮パスワードをお知らせいたします。
+Thank you for your registration.
+We will notify you of your user ID and temporary password.
 
-ユーザーID: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-仮パスワード: xxxxxxxx
+User ID: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+Temporary Password: xxxxxxxx
 
-下記画面にて上記仮パスワードを入力し、サインアップを完了してください。
+Please input the above temporary password on the following page and complete the sign-up.
 https://auth.your.domain/sign-up-confirm
 
-お問い合わせの際には、ユーザーIDを添えてお問い合わせください。
+Please include your user ID when making inquiries.
 ```
 
-## 新規登録時の仮パスワード再送メール
+## Email Resending Temporary Password at New Registration
 
-{####} と {username} という文字列が必要になります。
+The strings {####} and {username} are required.
 
-{####} は仮パスワードに、{username} はユーザーIDに置き換えられて送信されます。
+{####} will be replaced with the temporary password and {username} will be replaced with the user ID when sent.
 
-### 例
+### Example*
 
 ```
-ユーザーIDと仮パスワードをお知らせいたします。
+We will notify you of your user ID and temporary password.
 
-ユーザーID: {username}
-仮パスワード: {####}
+User ID: {username}
+Temporary Password: {####}
 
-下記画面にて上記仮パスワードを入力し、サインアップを完了してください。
+Please input the above temporary password on the following page and complete the sign-up.
 https://auth.your.domain/sign-up-confirm
 
-お問い合わせの際には、ユーザーIDを添えてお問い合わせください。
+Please include your user ID when making inquiries.
 ```
 
-上記のように設定すると、実際に送信されるメールは以下のようになります。
+When the above setting is made, the actual sent mail will be as follows:
 
 ```
-ユーザーIDと仮パスワードをお知らせいたします。
+We will notify you of your user ID and temporary password.
 
-ユーザーID: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-仮パスワード: xxxxxxxx
+User ID: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+Temporary Password: xxxxxxxx
 
-下記画面にて上記仮パスワードを入力し、サインアップを完了してください。
+Please input the above temporary password on the following page and complete the sign-up.
 https://auth.your.domain/sign-up-confirm
 
-お問い合わせの際には、ユーザーIDを添えてお問い合わせください。
+Please include your user ID when making inquiries.
 ```
 
-## パスワードリセット用の検証コード送信メール
+## Email Sent with Verification Code for Password Reset
 
-{####} という文字列が必要になります。
+The string {####} is required.
 
-{####} は、検証コードに置き換えられて送信されます。
+{####} will be replaced with the verification code when sent.
 
-### 例
+### Example
 
 ```
-会員登録いただきありがとうございます。
-パスワードリセット用検証コードをお知らせいたします。
+Thank you for your registration.
+We will notify you of your verification code for password reset.
 
-検証コード: {####}
+Verification Code: {####}
 
-下記画面にて上記検証コードを入力し、パスワードをリセットしてください。
+Please input the above verification code on the following page and reset your password.
 https://auth.your.domain/recover-password-confirm
 ```
 
-上記のように設定すると、実際に送信されるメールは以下のようになります。
+When the above setting is made, the actual sent mail will be as follows:
 
 ```
-会員登録いただきありがとうございます。
-パスワードリセット用検証コードをお知らせいたします。
+Thank you for your registration.
+We will notify you of your verification code for password reset.
 
-検証コード:111111
+Verification Code: 111111
 
-下記画面にて上記検証コードを入力し、パスワードをリセットしてください。
+Please input the above verification code on the following page and reset your password.
 https://auth.your.domain/recover-password-confirm
 ```

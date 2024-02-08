@@ -1,34 +1,34 @@
 ---
-title: "SaaSusユーザー招待"
+title: "Inviting SaaSus Users"
 slug: "saasususerinvitation"
 excerpt: ""
 hidden: false
 createdAt: "Thu Dec 28 2023 04:34:39 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Jan 22 2024 01:38:49 GMT+0000 (Coordinated Universal Time)"
 ---
-SaaSの開発・運用は複数人で行う場合は一つのSaaSusアカウントを共有せず、ユーザー招待機能を使用し適切な権限を与えてアカウントを管理しましょう。
+If you are developing and operating SaaS with multiple people, it is advisable not to share a single SaaSus account. Instead, use the user invitation feature to grant appropriate permissions and manage the account.
 
-# ユーザーの招待方法
+# How to Invite Users
 
-1. 開発コンソールのメニューから「アカウント設定」をクリックします
+1. From the development console menu, click on 'Account Settings'
 
-   ![saasususerinvitation-1](/ja/img/saas-development-console/saasususerinvitation-1.png)
-2. 「ユーザー管理」タブをクリックします
-3. 「招待」ボタンをクリックします
+   ![saasususerinvitation-1](/img/saas-development-console/saasususerinvitation-1.png)
+2. Click the 'Users' tab
+3. Click the 'Invitations' button
 
-   ![saasususerinvitation-2](/ja/img/saas-development-console/saasususerinvitation-2.png)
-4. 招待するユーザーのメールアドレスの入力と権限の選択をし、「招待」ボタンのクリックします
+   ![saasususerinvitation-2](/img/saas-development-console/saasususerinvitation-2.png)
+4. Enter the email address of the user to be invited, select the permission, and click the 'Invite' button
 
-   ![saasususerinvitation-3](/ja/img/saas-development-console/saasususerinvitation-3.png)
+   ![saasususerinvitation-3](/img/saas-development-console/saasususerinvitation-3.png)
 
-   権限は複数選択可能です
-5. 招待が完了すると入力されたメールアドレス宛にURLが記載されたメールが送信されますので、URLをクリックし会員登録することでユーザーが追加されます
+   Multiple permissions can be selected.
+5. Once the invitation is successful, an email with a URL will be sent to the entered email address. The user will be added by clicking on the URL and registering as a member.
 
-# 招待状況の確認・キャンセル
+# To Check the Status of Invitations and Cancel
 
-1. 開発コンソールのメニューから「アカウント設定」をクリックします
-2. 「ユーザー管理」タブをクリックします
-3. 「招待」ボタンの左にある「ユーザー」と記載されているセレクトボックスをクリックし、プルダウンから「招待」を選択します
-4. ユーザーの招待状況が表示されるので、キャンセルを行う場合は対象ユーザーの右端にあるゴミ箱のマークをクリックしてください
+1. From the development console menu, click on 'Account Settings'
+2. Click the 'Users' tab
+3. Click the select box marked 'Users' to the left of the 'Invite' button, and select 'Invitations' from the dropdown
+4. The status of user invitations will be displayed, to cancel an invitation, click on the trash can icon at the right end of the target user
 
-   ![saasususerinvitation-4](/ja/img/saas-development-console/saasususerinvitation-4.png)
+   ![saasususerinvitation-4](/img/saas-development-console/saasususerinvitation-4.png)
