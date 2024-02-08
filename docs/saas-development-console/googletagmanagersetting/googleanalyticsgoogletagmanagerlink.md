@@ -16,30 +16,30 @@ This guide covers setting up Google Analytics tags in Google Tag Manager to anal
 4. Select the relevant stream
 5. Confirm the Measurement ID displayed
 
-   ![googleanalyticsgoogletagmanagerlink-1](/ja/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-1.png)
+   ![googleanalyticsgoogletagmanagerlink-1](/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-1.png)
 
 ## 2. Set up Google Analytics in Google Tag Manager
 
-1. Access the [Google Tag Manager homepage](https://tagmanager.google.com/?hl=JA)
+1. Access the [Google Tag Manager homepage](https://tagmanager.google.com/)
 2. Click on "Add a new tag"
 
-   ![googleanalyticsgoogletagmanagerlink-2](/ja/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-2.png)
+   ![googleanalyticsgoogletagmanagerlink-2](/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-2.png)
 3. Select "Google Analytics" > "Google Analytics: GA4 Configuration" from "Tag Configuration"
 
-   ![googleanalyticsgoogletagmanagerlink-3](/ja/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-3.png)
+   ![googleanalyticsgoogletagmanagerlink-3](/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-3.png)
 4. Enter the Google Analytics Measurement ID for the tag ID
 
-   ![googleanalyticsgoogletagmanagerlink-4](/ja/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-4.png)
+   ![googleanalyticsgoogletagmanagerlink-4](/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-4.png)
 5. Choose "Initialization - All Pages" for the trigger
 
-   ![googleanalyticsgoogletagmanagerlink-5](/ja/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-5.png)
+   ![googleanalyticsgoogletagmanagerlink-5](/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-5.png)
 6. Enter a name for the tag at the top left input field and click save
 7. Click on "Submit" at the top right of the container page
 
-   ![googleanalyticsgoogletagmanagerlink-6](/ja/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-6.png)
+   ![googleanalyticsgoogletagmanagerlink-6](/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-6.png)
 8. Enter details for version publication and creation, then click on submit
 
-   ![googleanalyticsgoogletagmanagerlink-7](/ja/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-7.png)
+   ![googleanalyticsgoogletagmanagerlink-7](/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-7.png)
 
    - Version name: Optional (can be left blank)
    - Version description: Optional (can be left blank)
