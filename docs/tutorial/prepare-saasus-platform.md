@@ -23,7 +23,8 @@ Access the registration screen and perform new registration using your own email
 
 Enter your email address and desired password, read the terms of use and privacy policy, check if you agree, and press the sign up button.
 
-![01](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-01.png)
+<img src="/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-01.png" width="500">
+</img>
 
 A verification code will be sent to the email address you entered, enter it to activate your account
 
@@ -33,17 +34,19 @@ After verification is completed, the login screen will be displayed
 
 Log in with the email address and password you registered with earlier.
 
-![03](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-03.png)
+<img src="/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-03.png" width="500">
+</img>
 
 When you register for the SaaSus Platform for the first time, we will create a tenant exclusively for you. This takes at least an hour because we will create a customer-dedicated AWS account. Once your account has been created, you will receive an email to the email address you provided.
 
-![04](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-04.png)
+![06](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-04.png)
 
 ### Logging into the Console
 
 After the tenant is created, when you log in, you will be prompted to enter user attributes like this.
 
-![05](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-05.png)
+<img src="/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-05.png" width="500">
+</img>
 
 After filling in the information, the transition page to each console of the tenant is displayed.
 
@@ -58,7 +61,7 @@ First, in order to set up SaaS creation settings log into the **SaaS Development
 
 ### Setting the Domain Name
 
-\*If you do not have a domain name, skip this item and click [Next]. ](#%E8%AA%8D%E8%A8%BC%E5%BE%8C%E3%81%AE%E9%81%B7%E7%A7%BB%E5%85%88url%E3%81% AE%E8%A8%AD%E5%AE%9A)
+\*If you do not have a domain name, skip this item and click [Next.](#authentication-redirect-url-setting)
 
 After logging in to the SaaS Development Console, register the domain name used for SaaS. Click "Domain" on the side menu to display the domain registration page. This domain name will be used as the base domain for the login page and for emails. After that, you will be asked to create a DNS record, so please register a **domain name that you can operate**.
 
@@ -68,9 +71,7 @@ After registering your domain name, a CNAME record will appear at the bottom of 
 
 ![08](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-08.png)
 
-For example, if the domain is managed by Value Domain, the settings are as follows.
-
-![09](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-09.png)
+Login to your domain registrar's account, select the domain and edit the CNAME records. (GoDaddy, Namecheap, Domain.com, Name.com, AWS Route53, Azure DNS, Cloud DNS, .etc)
 
 After registering your DNS, the verification will be completed momentarily and "The following DNS information has been verified and is working properly." will be displayed. You are now ready to set up the SaaSus Platform.
 
@@ -121,7 +122,8 @@ For example, on the previous login page,
 - The Terms of Use URL and privacy policy URL are **Terms of Use and Privacy Policy Link**  
   becomes:
 
-![14](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-14.png)
+<img src="/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-14.png" width="500">
+</img>
 
 Click the "Save" button to apply the changes
 
