@@ -110,5 +110,9 @@
   "sidebar.tutorialSidebar.category.Supplementary": {
     "message": "補足",
     "description": "The label for category Supplementary in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Settings for Google Tag Manager": {
+    "message": "Google Tag Managerの設定",
+    "description": "The label for category Settings for Google Tag Manager in sidebar tutorialSidebar"
   }
 }
