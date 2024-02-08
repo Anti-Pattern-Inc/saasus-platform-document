@@ -88,9 +88,7 @@ Password: password that meets the password requirements
 Tenant: Sample application tenant 2  
 Username: User 2-2
 
-<!-- TODO -->
-<!-- ユーザ追加してもロールを付与されないと表示されないため、表示される用になったら画像を追加する -->
-<!-- ![08](/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-08.png) -->
+![08](/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-08.png)
 
 4 additional users have been registered.
 
