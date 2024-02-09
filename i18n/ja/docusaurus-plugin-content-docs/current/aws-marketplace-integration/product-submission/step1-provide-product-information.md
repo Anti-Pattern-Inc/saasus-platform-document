@@ -1,32 +1,44 @@
 ---
-title: "Registering SaaS Product Information"
-slug: "product-submission"
+title: "Step1 : Provide product information"
+slug: "step1-provide-product-information"
 excerpt: ""
-hidden: false
-metadata: 
-  image: []
-  robots: "index"
-createdAt: "Wed May 24 2023 07:19:23 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Fri Jun 30 2023 03:38:36 GMT+0000 (Coordinated Universal Time)"
+hidden: true
+createdAt: "Mon Feb 05 2024 16:35:58 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Feb 08 2024 07:15:49 GMT+0000 (Coordinated Universal Time)"
 ---
-You will register the SaaS product information on the AWS Marketplace Management Portal.
+続いて、SaaS製品を公開するための情報を**英語**で入力していきます。
 
-:::caution
-Before carrying out these procedures, please make sure that you have completed the [Seller Registration and Bank Account Setup](/docs/aws-marketplace-integration/aws-marketplace-seller-registration) procedure.
+:::info
+
+入力する情報が多いため、あらかじめ入力情報を用意しておくとスムーズに入力を進めることが出来ます。  
+各入力項目の制限やAWS Marketplace上にどのように公開されるかは補足資料を用意していますので、ご確認ください。[公開例](/docs/aws-marketplace-integration/supplementary/supplementary-1)、[入力項目の詳細](/docs/aws-marketplace-integration/supplementary/supplementary-2)
 :::
 
-You will need to prepare the following for this procedure. Please prepare them in advance.
+入力項目の概要について、以下に列挙しますので確認しながら入力を進めてください。
 
-- Publisher information, product description/overview, etc.
-- End User License Agreement (EULA): You will choose whether to use the terms defined in the AWS Marketplace or your own custom terms. If you are using your own terms, you will need to specify the `EULA URL`.
-- Product support information: You will need to prepare the method for providing support, such as email, support form, etc.
-- Refund policy information: You will need to prepare the content of the refund policy, URL of the page where written, etc.
+`Product title`：  
+  - テストフェーズ時：**Test Product(お客様SaaSの製品名)**  
+  - プロダクションフェーズ時：お客様SaaSの製品名
 
-There are also the following restrictions related to the registration:
+:::caution
 
-- The only pricing model supported by SaaSus is SaaS contract. The contract period will be either 1 month or 1 year.
-- The currency for the listing price must be in USD.
-- The product information must be registered in English.
-- You will need to undergo a review by the AWS Marketplace support team 2-3 times, each review will take around 3-5 business days.
+テストフェーズの場合は、Titleを「Test Product(お客様SaaSの製品名)」と入力してください。本番用と区別するために必要です。
+:::
 
-The input content etc. will be published on the `AWS Marketplace`. Please check the input content and display examples [here](/docs/aws-marketplace-integration/supplementary/supplementary-1) ([Supplementary 1](/docs/aws-marketplace-integration/supplementary/supplementary-1), [Supplementary 2](/docs/aws-marketplace-integration/supplementary/supplementary-2)).
+`SKU`：AWS Marketplace Management Portal上で製品を区別するための固有文字列  
+`Product logo S3 URL`：製品のログURL  
+`Short description`：製品の概要  
+`Long description`：製品の説明  
+`Product video URL`：製品の紹介動画などのURL  
+`Highlight 1-3`：製品ページに載せる機能や特徴など  
+`Support details`：製品に関するサポートについて  
+`Product categories`：製品のカテゴリー情報、AWS Marketplaceでカテゴリー検索する際に利用されます  
+`Keywords for search results`：製品の検索キーワード情報、AWS Marketplaceで検索する際に利用されます
+
+製品に関する入力が完了した後`Next`を押下して次に進みます。
+
+![](/ja/img/aws-marketplace-integration/product-submission/step1-provide-product-information/step1-provide-product-information-1.png)
+
+![](/ja/img/aws-marketplace-integration/product-submission/step1-provide-product-information/step1-provide-product-information-2.png)
+
+![](/ja/img/aws-marketplace-integration/product-submission/step1-provide-product-information/step1-provide-product-information-3.png)
