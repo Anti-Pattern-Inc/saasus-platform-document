@@ -150,7 +150,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'AWS Marketplace連携機能',
+      label: 'AWS Marketplace Integration',
       items: [
         'aws-marketplace-integration/aws-marketplace-integration',
         {

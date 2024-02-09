@@ -118,5 +118,9 @@
   "sidebar.tutorialSidebar.category.Settings for Google Tag Manager": {
     "message": "Google Tag Managerの設定",
     "description": "The label for category Settings for Google Tag Manager in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.AWS Marketplace Integration": {
+    "message": "AWS Marketplace 連携機能",
+    "description": "The label for category AWS Marketplace Integration in sidebar tutorialSidebar"
   }
 }

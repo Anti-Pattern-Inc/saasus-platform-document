@@ -14,6 +14,6 @@ This is where you'll specify the refund policy for selling the SaaS product on t
 You may wish to read this [document](https://docs.aws.amazon.com/marketplace/latest/userguide/refunds.html) that provides further details on refunds when selling a SaaS product on the AWS Marketplace.
 :::
 
-![](/ja/img/aws-marketplace-integration/product-submission/step5-specify-refund-policy/step5-specify-refund-policy-1.png)
+![](/img/aws-marketplace-integration/product-submission/step5-specify-refund-policy/step5-specify-refund-policy-1.png)
 
 After completing the input, press `Next` to proceed.

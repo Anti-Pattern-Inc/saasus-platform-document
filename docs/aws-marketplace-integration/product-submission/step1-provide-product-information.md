@@ -10,14 +10,14 @@ Next, you'll enter the information necessary to publish the SaaS product.
 
 :::info
 
-Since there's a lot of information to input, it's recommended that you prepare ahead of time. Please check the supplementary documents to understand the limitations for each input field and how it will be published on the AWS Marketplace. See examples [here](/docs/aws-marketplace-integration/suplementary/create-product-input-content-and-the-content-being-published) and input field details [here](/docs/aws-marketplace-integration/suplementary/create-product-input-field-details).
+Since there's a lot of information to input, it's recommended that you prepare ahead of time. Please check the supplementary documents to understand the limitations for each input field and how it will be published on the AWS Marketplace. See examples [here](/docs/aws-marketplace-integration/supplementary/supplementary-1) and input field details [here](/docs/aws-marketplace-integration/supplementary/supplementary-2).
 :::
 
 Please proceed with entering the following information:
 
-`Product title`:  
-<blockquote></blockquote>During the test phase: **Test Product (Your SaaS Product Name)**  
-<blockquote></blockquote>During the production phase: Your SaaS Product Name
+`Product title`:
+  - During the test phase: **Test Product (Your SaaS Product Name)**  
+  - During the production phase: Your SaaS Product Name
 
 :::caution
 

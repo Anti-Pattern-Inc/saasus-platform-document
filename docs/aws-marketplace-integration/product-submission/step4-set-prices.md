@@ -15,9 +15,9 @@ Please make sure to follow the instructions on the sheet.
 
 You can check the instruction sheet by starting the listing process from the [AWS Marketplace integration function page](https://settings.console.saasus.io/integrations/aws-marketplace), and proceeding up to `Step 1-4: Registering SaaS product information`.
 
-![](/ja/img/aws-marketplace-integration/product-submission/step4-set-prices/step4-set-prices-1.png)
+![](/img/aws-marketplace-integration/product-submission/step4-set-prices/step4-set-prices-1.png)
 :::
 
-![](/ja/img/aws-marketplace-integration/product-submission/step4-set-prices/step4-set-prices-2.png)
+![](/img/aws-marketplace-integration/product-submission/step4-set-prices/step4-set-prices-2.png)
 
 After completing the input, press `Next` to proceed.

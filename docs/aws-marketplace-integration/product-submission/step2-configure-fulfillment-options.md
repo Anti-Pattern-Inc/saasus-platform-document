@@ -16,8 +16,8 @@ Please be sure to follow the instructions on the sheet.
 
 You can access the instruction sheet by starting the listing process from the [AWS Marketplace integration function page](https://settings.console.saasus.io/integrations/aws-marketplace), and proceed to `Step 1-4: Registering SaaS product information`.
 
-![](/ja/img/aws-marketplace-integration/product-submission/step2-configure-fulfillment-options/step2-configure-fulfillment-options-1.png)
+![](/img/aws-marketplace-integration/product-submission/step2-configure-fulfillment-options/step2-configure-fulfillment-options-1.png)
 :::
 
-![](/ja/img/aws-marketplace-integration/product-submission/step2-configure-fulfillment-options/step2-configure-fulfillment-options-2.png)
+![](/img/aws-marketplace-integration/product-submission/step2-configure-fulfillment-options/step2-configure-fulfillment-options-2.png)
 After completing the input, press `Next` to proceed.
