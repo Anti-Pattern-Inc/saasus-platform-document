@@ -1,124 +1,118 @@
 ---
-title: "税率設定"
+title: "Tax Rate Setting"
 slug: "tax-rates"
 excerpt: ""
 hidden: false
 createdAt: "Fri Sep 08 2023 02:07:14 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
-税率設定は各テナントに適用される料金プランに適用する税金の比率や種類を設定します。
+Tax rate settings determine the proportion and type of taxes applied to the pricing plan applied to each tenant.
 
 :::info
-請求書に表示する消費税について
-2023年10月1日からインボイス制度が始まります。この「インボイス」とは、事業者間でやり取りされる消費税額等が記載された請求書や領収書のことで、事業者が消費税の納税額を計算する際に必要となるものです。  
+Regarding the consumption tax to be displayed on the invoice, the invoice system will start from October 1, 2023. This "invoice" refers to a bill or receipt that is exchanged between businesses and lists the amount of consumption tax, which is necessary when a business calculates the amount of consumption tax to be paid.
 <a href="https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/invoice.htm" target="_blank">https\://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/invoice.htm</a>
 :::
 
-## 税率設定
+## Tax Rate Setting
 
-1. **SaaS 開発コンソールよりから`料金プランｰ>税率設定`を選択**
+1. ***Select Pricing Plan->Tax Rate Settings from the SaaS Development Console***
 
-![tax-rates-1](/ja/img/saas-development-console/tax-rates-1.png)
+![tax-rates-1](/img/saas-development-console/tax-rates-1.png)
 
-1. **`税率の作成`をクリック**
+2. ***Click on Create Tax Rate***
 
-![tax-rates-2](/ja/img/saas-development-console/tax-rates-2.png)
+![tax-rates-2](/img/saas-development-console/tax-rates-2.png)
 
-2. `税率の作成`で税率を設定  
-    税率名　　：プログラムで識別するための定義を決めます。重複した名前は作成できません  
-    表示名　　：税率の名前を決めます。Stripe と連携している場合は Stripe で作成される請求書に表示します  
-    説明　　　：人がわかりやすい税率の説明を設定  
-    パーセント：徴収する税率を示す数値  
-    国　　　　：税率が適用される国を設定します  
-    内税／外税：設定した税率が金額に含まれるか、含まれないかを設定します
-
+3. Setup the tax rate in Create Tax Rate
+    Tax Rate Name: Define a name for identification by the program. Duplicate names cannot be created.
+    Display Name: Specify the name of the tax rate. It will be displayed on the invoice created in Stripe if connected with Stripe.
+    Description: Define a clear description for humans to understand the tax rate.
+    Percentage: Numeric value indicating the tax rate to be collected.
+    Country: Define the country where the tax rate will be applied.
+    Inclusive/Exclusive: Setting whether the tax rate is included in the amount or not.
    :::caution
-   税率は一度作成すると変更・削除ができませんのでご注意ください。
+   Please note that once a tax rate is created, it cannot be changed or deleted.
    :::
+    After setting up the above details, click on the Create button.
 
-    上記内容を設定し作成ボタンをクリックします。
+![tax-rates-3](/img/saas-development-console/tax-rates-3.png)
 
-![tax-rates-3](/ja/img/saas-development-console/tax-rates-3.png)
+![tax-rates-4](/img/saas-development-console/tax-rates-4.png)
 
-![tax-rates-4](/ja/img/saas-development-console/tax-rates-4.png)
+## Setting Pricing Plan (Tax Rate) for Tenants
 
-## テナントへの料金プラン(税率)設定
+1. ***Setting up Billing Address***
 
-1. **請求先の住所設定**
+Input the billing information before setting up the pricing plan for the tenant.
+Open the tenant management screen and click the edit button for the target tenant.
 
-テナントへの料金プラン設定前に請求先の情報を入力します。  
-テナント管理画面を開き対象のテナントの編集ボタンをクリックします
+![tax-rates-5](/img/saas-development-console/tax-rates-5.png)
 
-![tax-rates-5](/ja/img/saas-development-console/tax-rates-5.png)
+Enter the billing information and save it in Billing Information Edit mode.
 
-請求情報編集にて請求先の情報を入力して保存
+![tax-rates-6](/img/saas-development-console/tax-rates-6.png)
 
-![tax-rates-6](/ja/img/saas-development-console/tax-rates-6.png)
+2. ***Select Pricing Plan Settings from the SaaS Operation Console***
 
-2. **SaaS 運用コンソールよりから`料金プラン設定`を選択**
+![tax-rates-7](/img/saas-development-console/tax-rates-7.png)
 
-![tax-rates-7](/ja/img/saas-development-console/tax-rates-7.png)
+3. ***In Pricing Plan Setting, click Plan Setup for the tenant***
 
-3. **料金プラン設定でテナントへ`プラン設定`をクリック**
+![tax-rates-8](/img/saas-development-console/tax-rates-8.png)
 
-![tax-rates-8](/ja/img/saas-development-console/tax-rates-8.png)
+4. ***Set Plan/Tax Rate for the tenant***
+   On the Pricing Plan Settings screen, set up the pricing plan and the consumption tax rate that you set up in the SaaS Development Console, then save it.
 
-4. **テナントへ`プラン`/`税率`を設定**  
-   料金プラン設定画面で料金プランとSaaS 開発コンソールで設定した消費税率を設定し保存します。
+![tax-rates-9](/img/saas-development-console/tax-rates-9.png)
 
-![tax-rates-9](/ja/img/saas-development-console/tax-rates-9.png)
+## Tax Rate Setting Linked with Stripe
 
-## Stripe連携した税率設定
+1. ***Setting a tax rate linked with Stripe***
 
-1. **Stripe へ連携した税率設定**
+The following information set up in SaaS Development Console will be linked to each item in Stripe:
 
-SaaS 開発コンソールで設定した以下情報がStripeの各項目へ連携されます
-
-| Stripe | SaaS 運用コンソール | 説明                     |
+| Stripe | SaaS Operation Console | Description|
 | ------ | ------------ | ---------------------- |
-| -      | 税率名          | プログラムで識別するための定義        |
-| タイプ    | 表示名          | 税率の名前                  |
-| 説明     | 説明           | 率の説明                   |
-| 率      | パーセント        | 徴収する税率を示す数値            |
-| 地域     | 国            | 税率が適用される国              |
-| 率      | 内税／外税        | 設定した税率が金額に含まれるか、含まれないか |
+| -      | Tax Rate Name          | Definition for identification by the program |
+| Type   | Display Name          | Name of the tax rate |
+| Description | Description | Description of the rate |
+| Rate   | Percentage | Numeric value indicating the tax rate to be collected |
+| Region | Country | Country where the tax rate will apply |
+| Rate   | Inclusive/Exclusive | Setting whether the tax rate is included in the amount or not |
 
-![tax-rates-10](/ja/img/saas-development-console/tax-rates-10.png)
+![tax-rates-10](/img/saas-development-console/tax-rates-10.png)
 
-## Stripeで発行した請求書のサンプル
+## Sample of Invoices Issued with Stripe
 
-内税、外税、設定無しのパターンにおいて、請求書のサンプルを掲載します。  
-どのような内容で請求書が作成されるかご確認ください。  
+Here we present samples of invoices for the patterns of inclusive, exclusive, and unset.
+Please check how the invoices will be generated.
 
-1. **発行した請求書 内税**
+1. ***Issued Invoice Inclusive Tax***
 
-**インボイス**
+***INVOICE***
 
-![tax-rates-11](/ja/img/saas-development-console/tax-rates-11.png)
+![tax-rates-11](/img/saas-development-console/tax-rates-11.png)
 
+***Invoice PDF***
 
-**請求書 PDF**
+![tax-rates-12](/img/saas-development-console/tax-rates-12.png)
 
-![tax-rates-12](/ja/img/saas-development-console/tax-rates-12.png)
+1. ***Issued Invoice Exclusive Tax***
 
-1. **発行した請求書 外税**
+***INVOICE***
 
-**インボイス**
+![tax-rates-13](/img/saas-development-console/tax-rates-13.png)
 
-![tax-rates-13](/ja/img/saas-development-console/tax-rates-13.png)
+***Invoice PDF***
 
+![tax-rates-14](/img/saas-development-console/tax-rates-14.png)
 
-**請求書 PDF**
+1. ***Issued Invoice Unset***
 
-![tax-rates-14](/ja/img/saas-development-console/tax-rates-14.png)
+***INVOICE***
 
-1. **発行した請求書 設定無し**
+![tax-rates-15](/img/saas-development-console/tax-rates-15.png)
 
-**インボイス**
+***Invoice PDF***
 
-![tax-rates-15](/ja/img/saas-development-console/tax-rates-15.png)
-
-
-**請求書 PDF**
-
-![tax-rates-16](/ja/img/saas-development-console/tax-rates-16.png)
+![tax-rates-16](/img/saas-development-console/tax-rates-16.png)

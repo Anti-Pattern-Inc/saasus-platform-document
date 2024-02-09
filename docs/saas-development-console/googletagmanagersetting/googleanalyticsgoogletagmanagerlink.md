@@ -1,49 +1,49 @@
 ---
-title: "Google AnalyticsとGoogle Tag Managerを連携する"
+title: "Linking Google Analytics with Google Tag Manager"
 slug: "googleanalyticsgoogletagmanagerlink"
 excerpt: ""
 hidden: false
 createdAt: "Mon Dec 11 2023 02:34:11 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Fri Dec 22 2023 06:01:24 GMT+0000 (Coordinated Universal Time)"
 ---
-Google AnalyticsのタグをGoogle Tag Managerに設定し、ログイン画面へアクセスしたユーザーの分析をします。
+This guide covers setting up Google Analytics tags in Google Tag Manager to analyze users accessing the login screen.
 
-## 1. Google Analyticsの測定IDを確認
+## 1. Confirm the Google Analytics Measurement ID
 
-1. <a href="https://analytics.google.com/analytics/web" target="_blank">Google Analytics</a>にアクセス
-2. 左下の歯車から「管理」画面に移動
-3. 「データの収集と修正」内の「データ ストリーム」を押す
-4. 対象のストリームを選択
-5. 測定IDが表示されるので確認する
+1. Access [Google Analytics](https://analytics.google.com/analytics/web)
+2. Go to the "Admin" screen from the gear icon at the bottom left
+3. Click on "Data Streams" under "Data Collection and Correction"
+4. Select the relevant stream
+5. Confirm the Measurement ID displayed
 
-   ![googleanalyticsgoogletagmanagerlink-1](/ja/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-1.png)
+   ![googleanalyticsgoogletagmanagerlink-1](/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-1.png)
 
-## 2. Google Tag ManagerでGoogle Analyticsを設定
+## 2. Set up Google Analytics in Google Tag Manager
 
-1. <a href="https://tagmanager.google.com/?hl=JA" target="_blank">Google Tag Managerのホームページ</a>にアクセス
-2. 「新しいタグを追加」を押す
+1. Access the [Google Tag Manager homepage](https://tagmanager.google.com/)
+2. Click on "Add a new tag"
 
-   ![googleanalyticsgoogletagmanagerlink-2](/ja/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-2.png)
-3. 「タグの設定」から「Googleアナリティクス」> 「Googleタグ」を選択
+   ![googleanalyticsgoogletagmanagerlink-2](/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-2.png)
+3. From "Tag Configuration", select "Google Analytics" > "Google Tag".
 
-   ![googleanalyticsgoogletagmanagerlink-3](/ja/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-3.png)
-4. タグIDにGoogle Analyticsの測定IDを入力
+   ![googleanalyticsgoogletagmanagerlink-3](/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-3.png)
+4. Enter the Google Analytics Measurement ID for the tag ID
 
-   ![googleanalyticsgoogletagmanagerlink-4](/ja/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-4.png)
-5. トリガーにInitialization - All Pagesを選択
+   ![googleanalyticsgoogletagmanagerlink-4](/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-4.png)
+5. Choose "Initialization - All Pages" for the trigger
 
-   ![googleanalyticsgoogletagmanagerlink-5](/ja/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-5.png)
-6. 左上の入力項目にタグの名前を入力し、保存を押す
-7. コンテナページ右上の公開を押す
+   ![googleanalyticsgoogletagmanagerlink-5](/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-5.png)
+6. Enter a name for the tag at the top left input field and click save
+7. Click on "Submit" at the top right of the container page
 
-   ![googleanalyticsgoogletagmanagerlink-6](/ja/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-6.png)
-8. バージョンの公開と作成の項目を入力し公開を押す
+   ![googleanalyticsgoogletagmanagerlink-6](/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-6.png)
+8. Enter details for version publication and creation, then click on submit
 
-   ![googleanalyticsgoogletagmanagerlink-7](/ja/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-7.png)
+   ![googleanalyticsgoogletagmanagerlink-7](/img/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-7.png)
 
-   - バージョン名：任意（未入力での可能）
-   - バージョンの説明：任意（未入力での可能）
+   - Version name: Optional (can be left blank)
+   - Version description: Optional (can be left blank)
 
-以上でGoogle AnalyticsとGoogle Tag Managerが連携されましたので、ログイン画面にアクセスするとGoogle Analyticsに情報が反映されます。
+With these steps, Google Analytics and Google Tag Manager are now linked. Accessing the login screen will reflect the information in Google Analytics.
 
-なお、Google Analyticsへの反映は24~48時間かかる場合があります。詳細は<a href="https://support.google.com/analytics/answer/7084038?hl=ja&sjid=9555982415879226311-AP#zippy=%2C%E3%81%93%E3%81%AE%E8%A8%98%E4%BA%8B%E3%81%AE%E5%86%85%E5%AE%B9" target="_blank">Google Analyticsのドキュメント</a>をご確認ください。
+Please note that it may take 24-48 hours for the data to appear in Google Analytics. For more details, refer to the [Google Analytics documentation](https://support.google.com/analytics/answer/7084038?hl=ja&sjid=9555982415879226311-AP#zippy=%2C%E3%81%93%E3%81%AE%E8%A8%98%E4%BA%8B%E3%81%AE%E5%86%85%E5%AE%B9).

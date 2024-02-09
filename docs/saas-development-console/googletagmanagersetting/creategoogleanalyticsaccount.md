@@ -1,43 +1,43 @@
 ---
-title: "Google Analyticsアカウント作成"
+title: "Creating a Google Analytics Account"
 slug: "creategoogleanalyticsaccount"
 excerpt: ""
 hidden: false
 createdAt: "Mon Dec 11 2023 01:12:22 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Fri Dec 22 2023 06:01:24 GMT+0000 (Coordinated Universal Time)"
 ---
-Google Tag Managerに設定するためにGoogle Analyticsアカウントを作成していきます。
+This guide will walk you through the steps to create a Google Analytics account for setting up in Google Tag Manager.
 
-1. <a href="https://analytics.google.com/analytics/web" target="_blank">Google Analytics</a>にアクセスし、「測定を開始」を押す
-2. アカウント名の入力とアカウントのデータ共有設定し、次へを押す
+1. Access [Google Analytics](https://analytics.google.com/analytics/web) and click on "Start measuring".
+2. Enter an account name and configure the data sharing settings, then click next.
 
-   ![creategoogleanalyticsaccount-1](/ja/img/saas-development-console/googletagmanagersetting/creategoogleanalyticsaccount-1.png)
+   ![creategoogleanalyticsaccount-1](/img/saas-development-console/googletagmanagersetting/creategoogleanalyticsaccount-1.png)
 
-   - アカウント名：任意
-   - データ共有設定：内容を確認し、共有する項目をチェック
-3. プロパティを作成し、次へを押す
+   - Account name: As desired
+   - Data sharing settings: Review the options and check the items you want to share
+3. Create a property and click next.
 
-   ![creategoogleanalyticsaccount-2](/ja/img/saas-development-console/googletagmanagersetting/creategoogleanalyticsaccount-2.png)
+   ![creategoogleanalyticsaccount-2](/img/saas-development-console/googletagmanagersetting/creategoogleanalyticsaccount-2.png)
 
-   - プロパティ名：任意
-   - レポートのタイムゾーン：対象となる国を選択（基本的には日本）
-   - 通貨：対象となる通貨を選択（基本的には日本円）
-4. ビジネスの詳細を設定し、次へを押す
+   - Property name: As desired
+   - Reporting time zone: Select the relevant country (United States by default)
+   - Currency: Select the relevant currency (US Dollar by default)
+4. Set up your business details and click next.
 
-   ![creategoogleanalyticsaccount-3](/ja/img/saas-development-console/googletagmanagersetting/creategoogleanalyticsaccount-3.png)
+   ![creategoogleanalyticsaccount-3](/img/saas-development-console/googletagmanagersetting/creategoogleanalyticsaccount-3.png)
 
-   - 業種：当てはまるものを選択
-   - ビジネスの規模：当てはまるものを選択
-5. ビジネス目標を選択し、作成を押す
+   - Industry Category: Choose the one that applies
+   - Business Size: Choose the one that applies
+5. Select your business objectives and click on create.
 
-   ![creategoogleanalyticsaccount-4](/ja/img/saas-development-console/googletagmanagersetting/creategoogleanalyticsaccount-4.png)
-6. データの収集を開始するで「ウェブ」を選択
+   ![creategoogleanalyticsaccount-4](/img/saas-development-console/googletagmanagersetting/creategoogleanalyticsaccount-4.png)
+6. Choose "Web" to start collecting data.
 
-   ![creategoogleanalyticsaccount-5](/ja/img/saas-development-console/googletagmanagersetting/creategoogleanalyticsaccount-5.png)
-7. データストリームの設定を行いストリームを作成を押す
+   ![creategoogleanalyticsaccount-5](/img/saas-development-console/googletagmanagersetting/creategoogleanalyticsaccount-5.png)
+7. Set up your data stream and click on create stream.
 
-   ![creategoogleanalyticsaccount-6](/ja/img/saas-development-console/googletagmanagersetting/creategoogleanalyticsaccount-6.png)
+   ![creategoogleanalyticsaccount-6](/img/saas-development-console/googletagmanagersetting/creategoogleanalyticsaccount-6.png)
 
-   ストリーム作成後に表示されるウェブストリームの詳細の測定IDはGoogle Tag Managerで使用しますので、このタイミングでひかえておくことをお勧めします。
+   It is recommended to take note of the Measurement ID displayed after creating the stream, as it will be used in Google Tag Manager.
 
-以上でGoogle Analyticsのアカウントが作成されます。
+This completes the creation of your Google Analytics account.
