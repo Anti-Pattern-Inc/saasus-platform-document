@@ -111,7 +111,7 @@ const sidebars = {
         'saas-development-console/tax-rates',
         {
           type: 'category',
-          label: 'Google Tag Managerの設定',
+          label: 'Settings for Google Tag Manager',
           link: {
             type: 'doc',
             id: 'saas-development-console/googletagmanagersetting',

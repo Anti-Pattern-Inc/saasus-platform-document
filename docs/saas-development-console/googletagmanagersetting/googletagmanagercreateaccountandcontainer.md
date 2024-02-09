@@ -1,45 +1,45 @@
 ---
-title: "Google Tag Managerのアカウントとコンテナの作成"
+title: "Creating a Google Tag Manager Account and Container"
 slug: "googletagmanagercreateaccountandcontainer"
 excerpt: ""
 hidden: false
 createdAt: "Thu Dec 07 2023 05:52:36 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Fri Dec 22 2023 06:06:38 GMT+0000 (Coordinated Universal Time)"
 ---
-Google Tag Managerのアカウントとコンテナを作成します。
+Create your Google Tag Manager account and container with the following steps.
 
-既にアカウントを作成済みの場合は「2. コンテナから作成」をご覧ください。
+If you have already created an account, please see "2. Creating from a Container" for further instructions.
 
-## 1. アカウントから作成
+## 1. Creating from an Account
 
-1. <a href="https://tagmanager.google.com/?hl=JA" target="_blank">Google Tag Managerのホームページ</a>にアクセス
-2. 「アカウントを作成」ボタンを押す
+1. Access the [Google Tag Manager homepage](https://tagmanager.google.com/)
+2. Click the "Create Account" button
 
-   ![googletagmanagercreateaccountandcontainer-1](/ja/img/saas-development-console/googletagmanagersetting/googletagmanagercreateaccountandcontainer-1.png)
-3. 「アカウントの設定」及び「コンテナの設定」項目を入力し、「作成」を押す
+   ![googletagmanagercreateaccountandcontainer-1](/img/saas-development-console/googletagmanagersetting/googletagmanagercreateaccountandcontainer-1.png)
+3. Fill in the "Account Settings" and "Container Settings" then click "Create"
 
-   - アカウント名：任意
-   - 国：任意
-   - Google や他の人と匿名でデータを共有：任意
-   - コンテナ名：任意
-   - ターゲットプラットフォーム：ウェブ
+   - Account name: As desired
+   - Country: As desired
+   - Share data anonymously with Google and others: As desired
+   - Container name: As desired
+   - Target platform: Web
 
-   ![googletagmanagercreateaccountandcontainer-2](/ja/img/saas-development-console/googletagmanagersetting/googletagmanagercreateaccountandcontainer-2.png)
-4. Google タグ マネージャー利用規約を確認し、問題なければ「はい」を押す
+   ![googletagmanagercreateaccountandcontainer-2](/img/saas-development-console/googletagmanagersetting/googletagmanagercreateaccountandcontainer-2.png)
+4. Review the Google Tag Manager Terms of Service, and if acceptable, click "Yes"
 
-以上でアカウントとコンテナが作成され、コンテナページが表示されます。
+This completes the creation of your account and container, and you will be directed to the container page.
 
-## 2. コンテナから作成
+## 2. Creating from a Container
 
-1. <a href="https://tagmanager.google.com/?hl=JA" target="_blank">Google Tag Managerのホームページ</a>にアクセス
-2. コンテナ一覧の右側のドットメニューから「コンテナを作成」を押す
+1. Access the [Google Tag Manager homepage](https://tagmanager.google.com/)
+2. Click on "Create Container" from the dot menu on the right side of the container list
 
-   ![googletagmanagercreateaccountandcontainer-3](/ja/img/saas-development-console/googletagmanagersetting/googletagmanagercreateaccountandcontainer-3.png)
-3. 「コンテナの設定」項目を入力し、右上の「作成」を押す
+   ![googletagmanagercreateaccountandcontainer-3](/img/saas-development-console/googletagmanagersetting/googletagmanagercreateaccountandcontainer-3.png)
+3. Fill in the "Container Settings" and then click "Create" at the top right
 
-   - コンテナ名：任意
-   - ターゲットプラットフォーム：ウェブ
+   - Container name: As desired
+   - Target platform: Web
 
-   ![googletagmanagercreateaccountandcontainer-4](/ja/img/saas-development-console/googletagmanagersetting/googletagmanagercreateaccountandcontainer-4.png)
+   ![googletagmanagercreateaccountandcontainer-4](/img/saas-development-console/googletagmanagersetting/googletagmanagercreateaccountandcontainer-4.png)
 
-以上でコンテナが作成され、コンテナページが表示されます。
+This completes the creation of your container, and you will be directed to the container page.
