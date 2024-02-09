@@ -1,25 +1,23 @@
 ---
-title: "Step2 : Configure fulfillment options"
+title: "Step 2: Configure Fulfillment Options"
 slug: "step2-configure-fulfillment-options"
 excerpt: ""
 hidden: true
 createdAt: "Mon Feb 05 2024 18:20:27 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Feb 08 2024 04:54:32 GMT+0000 (Coordinated Universal Time)"
 ---
-続いて、AWS Marketplace上で商品を購入した際にリダイレクトされるURLを入力していきます。
+Next, enter the URL to which customers will be redirected upon purchasing the product on the AWS Marketplace.
 
-SaaSus PlatformのAWS Marketplace連携機能で出力された指示書に入力するURLが表示されていますので、コピーしてFulfillment URLの入力エリアにペーストしてください。
+The URL to be entered is displayed in the instruction sheet output by the SaaSus Platform's AWS Marketplace integration function, please copy and paste it into the Fulfillment URL input area.
 
 :::caution
 
-必ず指示書に従って入力してください。
+Please be sure to follow the instructions on the sheet.
 
-[AWS Marketplace連携機能ページ](https://settings.console.saasus.io/integrations/aws-marketplace)から出品手続きを開始していただき、`ステップ1-4:SaaS製品情報の登録`まで進めていだたくと指示書を確認できるようになります。
+You can access the instruction sheet by starting the listing process from the [AWS Marketplace integration function page](https://settings.console.saasus.io/integrations/aws-marketplace), and proceed to `Step 1-4: Registering SaaS product information`.
 
 ![](/ja/img/aws-marketplace-integration/product-submission/step2-configure-fulfillment-options/step2-configure-fulfillment-options-1.png)
 :::
 
 ![](/ja/img/aws-marketplace-integration/product-submission/step2-configure-fulfillment-options/step2-configure-fulfillment-options-2.png)
-
-
-入力が完了した後`Next`を押下して次に進みます。
+After completing the input, press `Next` to proceed.

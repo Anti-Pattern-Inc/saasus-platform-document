@@ -1,41 +1,40 @@
 ---
-title: "Step1 : Provide product information"
+title: "Step 1: Provide Product Information"
 slug: "step1-provide-product-information"
 excerpt: ""
 hidden: true
 createdAt: "Mon Feb 05 2024 16:35:58 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Feb 08 2024 07:15:49 GMT+0000 (Coordinated Universal Time)"
 ---
-続いて、SaaS製品を公開するための情報を**英語**で入力していきます。
+Next, you'll enter the information necessary to publish the SaaS product.
 
 :::info
 
-入力する情報が多いため、あらかじめ入力情報を用意しておくとスムーズに入力を進めることが出来ます。  
-各入力項目の制限やAWS Marketplace上にどのように公開されるかは補足資料を用意していますので、ご確認ください。[公開例](https://docs.saasus.io/docs/create-product%E3%81%AE%E5%85%A5%E5%8A%9B%E5%86%85%E5%AE%B9%E3%81%A8%E5%85%AC%E9%96%8B%E3%81%95%E3%82%8C%E3%82%8B%E5%86%85%E5%AE%B9%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)、[入力項目の詳細](https://docs.saasus.io/docs/create-product%E3%81%AE%E5%85%A5%E5%8A%9B%E9%A0%85%E7%9B%AE%E8%A9%B3%E7%B4%B0)
+Since there's a lot of information to input, it's recommended that you prepare ahead of time. Please check the supplementary documents to understand the limitations for each input field and how it will be published on the AWS Marketplace. See examples [here](/docs/aws-marketplace-integration/suplementary/create-product-input-content-and-the-content-being-published) and input field details [here](/docs/aws-marketplace-integration/suplementary/create-product-input-field-details).
 :::
 
-入力項目の概要について、以下に列挙しますので確認しながら入力を進めてください。
+Please proceed with entering the following information:
 
-`Product title`：  
-　　テストフェーズ時：**Test Product(お客様SaaSの製品名)**  
-　　プロダクションフェーズ時：お客様SaaSの製品名
+`Product title`:  
+<blockquote></blockquote>During the test phase: **Test Product (Your SaaS Product Name)**  
+<blockquote></blockquote>During the production phase: Your SaaS Product Name
 
 :::caution
 
-テストフェーズの場合は、Titleを「Test Product(お客様SaaSの製品名)」と入力してください。本番用と区別するために必要です。
+In the test phase, please input the title as "Test Product (Your SaaS Product Name)". This is necessary to distinguish it from the production version.
 :::
 
-`SKU`：AWS Marketplace Management Portal上で製品を区別するための固有文字列  
-`Product logo S3 URL`：製品のログURL  
-`Short description`：製品の概要  
-`Long description`：製品の説明  
-`Product video URL`：製品の紹介動画などのURL  
-`Highlight 1-3`：製品ページに載せる機能や特徴など  
-`Support details`：製品に関するサポートについて  
-`Product categories`：製品のカテゴリー情報、AWS Marketplaceでカテゴリー検索する際に利用されます  
-`Keywords for search results`：製品の検索キーワード情報、AWS Marketplaceで検索する際に利用されます
+`SKU`: Unique string to distinguish products on the AWS Marketplace Management Portal  
+`Product logo S3 URL`: Product logo URL  
+`Short description`: Product overview  
+`Long description`: Product description  
+`Product video URL`: URL for product introduction video etc.  
+`Highlight 1-3`: Features and characteristics to be included on the product page  
+`Support details`: Information about product support  
+`Product categories`: Product category information, used when category searching on AWS Marketplace  
+`Keywords for search results`: Product search keywords, used when searching on AWS Marketplace  
 
-製品に関する入力が完了した後`Next`を押下して次に進みます。
+After entering the product-related information, click `Next` to proceed.
 
 ![](/ja/img/aws-marketplace-integration/product-submission/step1-provide-product-information/step1-provide-product-information-1.png)
 
