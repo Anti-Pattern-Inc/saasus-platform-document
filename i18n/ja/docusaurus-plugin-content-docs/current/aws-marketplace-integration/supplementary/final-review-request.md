@@ -2,26 +2,30 @@
 title: "最終レビュー依頼の方法について"
 slug: "final-review-request"
 excerpt: ""
-hidden: false
-metadata: 
-  image: []
-  robots: "index"
-createdAt: "Thu Jun 29 2023 11:59:26 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Fri Jun 30 2023 03:39:08 GMT+0000 (Coordinated Universal Time)"
+hidden: true
+createdAt: "Wed Feb 07 2024 03:05:21 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Wed Feb 07 2024 03:24:16 GMT+0000 (Coordinated Universal Time)"
 ---
 [出品手順「10. AWS Marketplaceとの連携確認」](/docs/aws-marketplace-integration/aws-marketplace-integration)が完了したら、AWS Marketplaceサポートチームへ最終レビューの依頼を行います。
 
-[出品手順「8. 本番用SaaS製品の登録(AMMP)](/docs/aws-marketplace-integration/aws-marketplace-integration)」が完了時、サポートチームから**「Action Required: AWS Marketplace SaaS Contract Next Steps [ thread::XXXXXXXXXX:: ]」**というメールが届きます、お手元で届いているかご確認ください。
+まず<a href="https://aws.amazon.com/marketplace/management/homepage" target="_blank">AWS Marketplace Management Portal</a>にアクセスしていただき、対象のプロダクト詳細ページを開きます。
+
+次に画面上部に表示されているアラートの右側の`Update visibility`を押下します。
 
 ![final-review-request-1](/ja/img/aws-marketplace-integration/supplementary/final-review-request-1.png)
 
+遷移後にVisibility optionsを`public`に設定します。
 
-最終レビュー依頼は、届いたメールへ返信する必要がございます。メールの本文で「API統合と動作確認テストが終わりました、レビューお願いします」という旨の**英文**を書いて送信してください。  
+![final-review-request-2](/ja/img/aws-marketplace-integration/supplementary/final-review-request-2.png)
+
+
+追加で契約金額を入力するフォームが追加で表示されるので、正規の金額を入力した後`Submit`を押下します。
+
+![final-review-request-3](/ja/img/aws-marketplace-integration/supplementary/final-review-request-3.png)
+
+
 以上で最終レビュー依頼は完了です。
 
-### 最終レビューの結果を受けて
-
-3~5営業日で返信が届きます。最終レビューに問題がなければ、サポートチームからテストに使用した契約情報を削除してもよいかの承諾を求められます。その際は、メールで返信してください。  
-最終レビューで問題がある場合は、サポートチームから修正を求められることがありますので、修正対応を行った後に再度メールで最終レビュー依頼を行ってください。
-
-テスト契約情報の削除が完了すると、サポートチームからメールが届きます。メールを受け取ったら、次の公開依頼の手続きに進むことができます。
+> 📘 補足事項
+> 
+> AWS Marketplace 販売者オペレーション チームによって製品の検証と公開が行われます。約 7 ～ 10 営業日ほどで公開されます。詳しくは[こちら](https://docs.aws.amazon.com/marketplace/latest/userguide/product-submission.html#timing-and-expectations)

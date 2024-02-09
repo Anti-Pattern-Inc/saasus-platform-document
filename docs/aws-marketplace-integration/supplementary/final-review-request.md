@@ -2,28 +2,29 @@
 title: "How to Request a Final Review"
 slug: "final-review-request"
 excerpt: ""
-hidden: false
-metadata:
-  image: []
-  robots: "index"
-createdAt: "Thu Jun 29 2023 11:59:26 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Fri Jun 30 2023 03:39:08 GMT+0000 (Coordinated Universal Time)"
+hidden: true
+createdAt: "Wed Feb 07 2024 03:05:21 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Wed Feb 07 2024 03:24:16 GMT+0000 (Coordinated Universal Time)"
 ---
-<!-- TODO 遷移先画面の英語対応後にリンク名を修正 -->
-Once the [Listing Procedure "10. Confirmation of Integration with AWS Marketplace"](/docs/aws-marketplace-integration/aws-marketplace-integration) is complete, you will need to request a final review from the AWS Marketplace Support Team.
+Once you have completed the [exhibition steps '10. Confirmation of integration with AWS Marketplace'](/docs/aws-marketplace-integration/aws-marketplace-integration), you can request a final review from the AWS Marketplace support team.
 
-<!-- TODO 遷移先画面の英語対応後にリンク名を修正 -->
-When you complete the [Listing Procedure "8. Registration of Production SaaS Product (AMMP)"](/docs/aws-marketplace-integration/aws-marketplace-integration), you'll receive an email from the support team titled **"Action Required: AWS Marketplace SaaS Contract Next Steps [ thread::XXXXXXXXXX:: ]"**, please confirm if you've received it.
+First, access the <a href="https://aws.amazon.com/marketplace/management/homepage" target="_blank">AWS Marketplace Management Portal</a> and open the product detail page you want to manage.
+
+Then click on `Update visibility` located on the right of the alert displayed at the top of the page.
 
 ![final-review-request-1](/img/aws-marketplace-integration/supplementary/final-review-request-1.png)
 
+After the transition, set the Visibility options to `public`.
 
-To request a final review, you need to reply to the received email. In the body of the email, write "The API integration and operational test have been completed, please review" in **English** and send.  
-This completes the final review request.
+![final-review-request-2](/img/aws-marketplace-integration/supplementary/final-review-request-2.png)
 
-### Receiving the final review results
 
-You will receive a reply within 3-5 business days. If there are no problems with the final review, the support team may ask for your consent to delete the contract information used for testing. Please reply to the email in that case.  
-If there are problems during the final review, the support team may request corrections. After making the necessary corrections, please request a final review again by email.
+An additional form to enter the contract amount will be displayed. After entering the correct amount, click `Submit`.
 
-Once the deletion of test contract information is complete, you'll receive an email from the support team. Once you receive the email, you can proceed to the next step of requesting publication.
+![final-review-request-3](/img/aws-marketplace-integration/supplementary/final-review-request-3.png)
+
+
+That's all you need to do to request a final review.
+> 📘 Note
+>
+> The AWS Marketplace Seller Operations team will verify and publish the product. It will be published in about 7 to 10 business days. For more information, click [here](https://docs.aws.amazon.com/marketplace/latest/userguide/product-submission.html#timing-and-expectations)
