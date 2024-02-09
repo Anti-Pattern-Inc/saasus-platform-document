@@ -110,5 +110,9 @@
   "sidebar.tutorialSidebar.category.Supplementary": {
     "message": "補足",
     "description": "The label for category Supplementary in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Registration of SaaS Product Information": {
+    "message": "SaaS製品情報の登録",
+    "description": "The label for category Registration of SaaS Product Information in sidebar tutorialSidebar"
   }
 }
