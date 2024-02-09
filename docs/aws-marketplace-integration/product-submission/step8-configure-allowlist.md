@@ -14,7 +14,7 @@ When your SaaS product is in limited release, only the designated accounts will 
 Once you purchase the product for testing, you can't immediately terminate the contract. While you can apply to add test accounts from the AWS Marketplace Management Portal, it takes 3-5 business days for this to reflect. Therefore, to prepare for re-testing at the time of a new purchase, we recommend registering at least five AWS accounts.
 :::
 
-![](/ja/img/aws-marketplace-integration/product-submission/step8-configure-allowlist/step8-configure-allowlist-1.png)
+![](/img/aws-marketplace-integration/product-submission/step8-configure-allowlist/step8-configure-allowlist-1.png)
 
 After completing the input, press `Submit`.
 This completes the registration of the SaaS product information.

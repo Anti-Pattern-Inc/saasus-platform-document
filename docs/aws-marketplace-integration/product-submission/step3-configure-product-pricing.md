@@ -14,7 +14,7 @@ Firstly, for the pricing model, select `Contract-based pricing`.
 Since other pricing models are not supported, please make sure to select `Contract-based pricing`.
 :::
 
-![](/ja/img/aws-marketplace-integration/product-submission/step3-configure-product-pricing/step3-configure-product-pricing-1.png)
+![](/img/aws-marketplace-integration/product-submission/step3-configure-product-pricing/step3-configure-product-pricing-1.png)
 
 
 Next, you'll input the usage units and contract types of the SaaS product.
@@ -32,9 +32,9 @@ Please be sure to follow the instructions on the sheet.
 
 You can access the instruction sheet by starting the listing process from the [AWS Marketplace integration function page](https://settings.console.saasus.io/integrations/aws-marketplace), then proceed to `Step 1-4: Registering SaaS product information`.
 
-![](/ja/img/aws-marketplace-integration/product-submission/step3-configure-product-pricing/step3-configure-product-pricing-2.png)
+![](/img/aws-marketplace-integration/product-submission/step3-configure-product-pricing/step3-configure-product-pricing-2.png)
 :::
 
-![](/ja/img/aws-marketplace-integration/product-submission/step3-configure-product-pricing/step3-configure-product-pricing-3.png)
+![](/img/aws-marketplace-integration/product-submission/step3-configure-product-pricing/step3-configure-product-pricing-3.png)
 
 After completing the input, press `Next` to proceed.
