@@ -66,23 +66,23 @@ SaaSus Platform 内の操作だけで出品が完了するものではないの�
 
    ===**プロダクションフェーズ開始**===
 
-1. 本番用SaaS製品の準備(SaaSus Platform::本番環境)
+7. 本番用SaaS製品の準備(SaaSus Platform::本番環境)
 
-2. 本番用SaaS製品の登録(AMMP)
+8. 本番用SaaS製品の登録(AMMP)
 
-3. API統合の準備(SaaSus Platform::本番環境)
+9. API統合の準備(SaaSus Platform::本番環境)
 
-4.  AWS Marketplaceとの連携確認  
+10.  AWS Marketplaceとの連携確認  
     ===**プロダクションフェーズ終了**===
     :::info
     プロダクションフェーズでは、本番環境で出品に必要な環境を作ることになります。テストフェーズでの連携確認が済んでいれば、スムーズに進めることが出来ます。出品手続きが完了すると実際に料金が発生するようになるため、もし本番環境で動作確認したい場合はSaaS製品を非公開にする必要があります。
     :::
     ***
 
-5.  本番用SaaS製品の最終レビュー依頼
+1.  本番用SaaS製品の最終レビュー依頼
     1. [依頼方法](/docs/aws-marketplace-integration/supplementary/final-review-request)
 
-6.  本番用SaaS製品の公開依頼
+1.  本番用SaaS製品の公開依頼
     1. [依頼方法](/docs/aws-marketplace-integration/supplementary/public-request)
 
 # 出品におけるSaaS製品の基準
