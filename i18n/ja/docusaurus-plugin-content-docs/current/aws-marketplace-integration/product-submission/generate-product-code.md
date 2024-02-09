@@ -1,6 +1,6 @@
 ---
 title: "登録の始め方〜Product Codeの生成"
-slug: "登録の始め方product-codeの生成"
+slug: "generate-product-code"
 excerpt: ""
 hidden: true
 createdAt: "Mon Feb 05 2024 05:00:16 GMT+0000 (Coordinated Universal Time)"

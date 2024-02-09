@@ -1,23 +1,20 @@
 ---
-title: "Step8 : Configure allowlist"
+title: "Step 8: Configure Allowlist"
 slug: "step8-configure-allowlist"
 excerpt: ""
 hidden: true
 createdAt: "Tue Feb 06 2024 00:56:39 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Feb 08 2024 05:40:23 GMT+0000 (Coordinated Universal Time)"
 ---
-続いて、連携確認時のテストに使うAWS アカウント IDを設定します。
+Next, you'll set up the AWS account ID to use for testing during partnership verification.
 
-SaaS製品が限定公開時は、対象のアカウントのみが商品を参照し購入することが可能となります。
+When your SaaS product is in limited release, only the designated accounts will be able to view and purchase the product.
 
 :::info
-
-テスト時に一度購入するとすぐには契約解除できません。テストアカウントの追加をAWS Marketplace Management Portalから申請できますが反映までに3~5営業日かかるため、新規購入時の再テストに備えてに最低5つ以上はAWSアカウントを登録しておくことをお勧めします。
+Once you purchase the product for testing, you can't immediately terminate the contract. While you can apply to add test accounts from the AWS Marketplace Management Portal, it takes 3-5 business days for this to reflect. Therefore, to prepare for re-testing at the time of a new purchase, we recommend registering at least five AWS accounts.
 :::
 
 ![](/ja/img/aws-marketplace-integration/product-submission/step8-configure-allowlist/step8-configure-allowlist-1.png)
 
-
-入力が完了した後`Submit`を押下します。
-
-以上でSaaS製品情報の登録は完了です。
+After completing the input, press `Submit`.
+This completes the registration of the SaaS product information.
