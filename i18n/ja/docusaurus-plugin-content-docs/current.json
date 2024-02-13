@@ -111,8 +111,16 @@
     "message": "補足",
     "description": "The label for category Supplementary in sidebar tutorialSidebar"
   },
+  "sidebar.tutorialSidebar.category.Registration of SaaS Product Information": {
+    "message": "SaaS製品情報の登録",
+    "description": "The label for category Registration of SaaS Product Information in sidebar tutorialSidebar"
+  },
   "sidebar.tutorialSidebar.category.Settings for Google Tag Manager": {
     "message": "Google Tag Managerの設定",
     "description": "The label for category Settings for Google Tag Manager in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.AWS Marketplace Integration": {
+    "message": "AWS Marketplace 連携機能",
+    "description": "The label for category AWS Marketplace Integration in sidebar tutorialSidebar"
   }
 }
