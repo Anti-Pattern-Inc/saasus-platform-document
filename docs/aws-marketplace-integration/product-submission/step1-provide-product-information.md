@@ -36,8 +36,8 @@ In the test phase, please input the title as "Test Product (Your SaaS Product Na
 
 After entering the product-related information, click `Next` to proceed.
 
-![](/ja/img/aws-marketplace-integration/product-submission/step1-provide-product-information/step1-provide-product-information-1.png)
+![](/img/aws-marketplace-integration/product-submission/step1-provide-product-information/step1-provide-product-information-1.png)
 
-![](/ja/img/aws-marketplace-integration/product-submission/step1-provide-product-information/step1-provide-product-information-2.png)
+![](/img/aws-marketplace-integration/product-submission/step1-provide-product-information/step1-provide-product-information-2.png)
 
-![](/ja/img/aws-marketplace-integration/product-submission/step1-provide-product-information/step1-provide-product-information-3.png)
+![](/img/aws-marketplace-integration/product-submission/step1-provide-product-information/step1-provide-product-information-3.png)
