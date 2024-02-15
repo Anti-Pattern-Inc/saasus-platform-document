@@ -27,7 +27,7 @@ Q:What programming languages is the SDK available?
 A: The ones currently provided are for PHP (Laravel) and TypeScript (Node.js). In the future, we plan to provide SDKs for Ruby (Ruby on Rails), Java (Spring), and Go (Echo).
 
 Q: How do you use the SDK and incorporate it into your own SaaS?  
-A: [This demo video](https://www.youtube.com/watch?v=deSkPJ-zTgw) and [Tutorial](./tutorial/prepare-sample-application). In the tutorial, you can actually incorporate the SaaSus SDK code into a normal web chat application and experience multi-tenant SaaS using the SaaSus Platform.
+A: [This demo video](https://www.youtube.com/watch?v=deSkPJ-zTgw) and [Tutorial](./tutorial/prepare-the-sample-application). In the tutorial, you can actually incorporate the SaaSus SDK code into a normal web chat application and experience multi-tenant SaaS using the SaaSus Platform.
 
 Q: What kind of APIs are available?  
 A: Please refer to [this API manual](./reference/getting-started-with-your-api).

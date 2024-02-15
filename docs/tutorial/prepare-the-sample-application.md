@@ -42,7 +42,7 @@ URL: <http://localhost/board>
 Authentication Email: [user@example.com](mailto:user@example.com)  
 Password: password
 
-![サンプル](/img/tutorial/prepare-sample-application/prepare-sample-application-01.png)
+![サンプル](/img/tutorial/prepare-the-sample-application/prepare-the-sample-application-01.png)
 
 Next.js version
 
@@ -52,7 +52,7 @@ Password: password
 
 - The Next.js version may take several minutes to build. If it doesn't display, wait a few minutes and try to view it again.
 
-![サンプル](/img/tutorial/prepare-sample-application/prepare-sample-application-02.png)
+![サンプル](/img/tutorial/prepare-the-sample-application/prepare-the-sample-application-02.png)
 
 In this way, users can write whatever they like.
 

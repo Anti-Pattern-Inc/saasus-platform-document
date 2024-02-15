@@ -6,7 +6,7 @@ hidden: false
 createdAt: "Fri Jan 20 2023 01:47:13 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
-# Basic Pricing
+## Basic Pricing
 
 Measurement Unit: Fixed Unit
 
@@ -22,7 +22,7 @@ Measurement Unit: Fixed Unit
 
 ![](/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/02_enterprise_base.png "02_ enterprise_base.png")
 
-# Free Plan
+## Free Plan
 
 Measurement Unit: Usage Unit
 
@@ -35,7 +35,7 @@ Measurement Unit: Usage Unit
 
 ![](/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/03_free_comment.png "03_free_comment.png")
 
-# Basic plan
+## Basic plan
 
 Measurement Unit: Usage Unit
 
@@ -63,7 +63,7 @@ Range
 
 ![](/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/04_basic_comment-2.png "04_basic_comment-2.png")
 
-# Advanced Plan
+## Advanced Plan
 
 Measurement Unit: Usage Unit
 
@@ -89,7 +89,7 @@ Unit of Measure: Tiered Usage Unit
 
 ![](/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/05_advanced_comment-2.png "05_advanced_comment-2.png")
 
-# Enterprise Plan
+## Enterprise Plan
 
 Measurement Unit: Usage Unit
 
@@ -102,7 +102,7 @@ Measurement Unit: Usage Unit
 
 ![](/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/06_enterprise_comment.png "06_enterprise_comment.png")
 
-# Feature Menu
+## Feature Menu
 
 | Feature Menu Name | Feature Menu Display Name  | Feature Menu Description   | Measurement Unit                                                               |
 | :---------------- | :------------------------- | :------------------------- | :----------------------------------------------------------------------------- |
@@ -119,7 +119,7 @@ Measurement Unit: Usage Unit
 
 ![](/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/07_enterprise_menu.png "07_enterprise_menu.png")
 
-# Pricing Plan
+## Pricing Plan
 
 | Pricing plan Name | Pricing Plan Display Name | Pricing Plan Description | Feature Menu               |
 | :---------------- | :------------------------ | :----------------------- | :------------------------- |

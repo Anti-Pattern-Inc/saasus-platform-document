@@ -1,10 +1,8 @@
 ---
 sidebar_position: 3
+title: "SaaS 運用コンソールを利用した SaaS の管理"
+slug: "saas-management-using-the-saas-operation-console"
 ---
-
-# SaaS 運用コンソールを利用した SaaS の管理
-
-## SaaS 運用コンソールを利用した SaaS の管理
 
 ### コンソールの切り替え
 
