@@ -158,12 +158,11 @@ const config = {
             label: 'GitHub',
             position: 'right',
           },
-          // {
-          //   type: 'docsVersionDropdown',
-          //   position: 'left',
-          //   dropdownItemsAfter: [{to: '/versions', label: 'All versions'}],
-          //   dropdownActiveClassDisabled: true,
-          // },
+          {
+            type: 'docsVersionDropdown',
+            position: 'left',
+            dropdownActiveClassDisabled: true,
+          },
         ],
       },
       footer: {
