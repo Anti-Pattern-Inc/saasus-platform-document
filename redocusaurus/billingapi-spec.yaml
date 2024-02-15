@@ -1,0 +1,174 @@
+openapi: 3.0.0
+info:
+  description: SaaSus Billing API Schema
+  version: 1.0.0
+  title: SaaSus Billing API Schema
+  x-title-i18n:
+    jpn: SaaSus Billing API スキーマ
+  contact:
+    name: Anti-Pattern
+servers:
+  - url: https://api.saasus.io/v1/billing
+    description: Production API Server
+tags:
+  - name: stripe
+    description: Stripe Resource Operations
+    x-description-i18n:
+      jpn: stripeリソースの操作
+  - name: error
+    description: Testing Purpose Error
+    x-description-i18n:
+      jpn: テスト用途のエラー
+security:
+  - Bearer: []
+paths:
+  /stripe/info:
+    get:
+      tags:
+        - stripe
+      operationId: GetStripeInfo
+      summary: Get Stripe Connection information
+      x-summary-i18n:
+        jpn: Stripe連携情報を取得
+      description: >
+        Get information on connnections with external billing SaaS.
+
+        Currently possible to integrate with Stripe.
+
+        Without integration, you will need to implement billing using the SaaSus
+        SDK/API.
+      x-description-i18n:
+        jpn: |
+          請求業務で使う外部SaaSとの連携情報を取得します。
+          現在は Stripe と連携が可能です。
+          連携を行わない場合は、 SaaSus SDK/API を利用して請求処理を実装する必要があります。
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: Stripe Connection Information
+                x-title-i18n:
+                  jpn: Stripe連携情報
+                $ref: '#/components/schemas/StripeInfo'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+        - stripe
+      operationId: UpdateStripeInfo
+      summary: Update Stripe Connection Info
+      x-summary-i18n:
+        jpn: Stripe連携情報を更新
+      description: |
+        Updates information on connection with external billing SaaS.
+        Currently possible to connect to Stripe.
+      x-description-i18n:
+        jpn: |
+          請求業務で使う外部SaaSとの連携情報を更新します。
+          現在は Stripe と連携が可能です。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateStripeInfoParam'
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+        - stripe
+      operationId: DeleteStripeInfo
+      summary: Delete Stripe Connection
+      x-summary-i18n:
+        jpn: Stripe連携情報を削除
+      description: |
+        Delete connection with external billing SaaS
+      x-description-i18n:
+        jpn: |
+          請求業務で使う外部SaaSとの連携情報を削除します。
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /errors/internal-server-error:
+    get:
+      tags:
+        - error
+      operationId: ReturnInternalServerError
+      summary: Return Internal Server Error
+      x-summary-i18n:
+        jpn: ステータスコード500でサーバーエラーを返却
+      description: >
+        This endpoint is used for testing purposes. Returns a server error with
+        status code 500.
+      x-description-i18n:
+        jpn: テスト用途で使用するエンドポイントです。ステータスコード500でサーバーエラーを返却します。
+      responses:
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      description: Credentials or access token for API
+  schemas:
+    Error:
+      properties:
+        type:
+          type: string
+          description: permission_denied
+        message:
+          type: string
+          description: Error message
+      required:
+        - type
+        - message
+    Uuid:
+      type: string
+      example: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+    StripeInfo:
+      title: Stripe Connection Info
+      x-title-i18n:
+        jpn: Stripe連携情報
+      type: object
+      properties:
+        is_registered:
+          type: boolean
+      required:
+        - is_registered
+    UpdateStripeInfoParam:
+      title: Stripe Connection Information Update Parameter
+      x-title-i18n:
+        jpn: Stripe連携情報の更新パラメータ
+      type: object
+      properties:
+        secret_key:
+          type: string
+          description: secret key
+          x-description-i18n:
+            jpn: シークレットキー
+          example: sk_test_09l3shTSTKHYCzzZZsiLl2vA
+      required:
+        - secret_key

@@ -1,0 +1,222 @@
+openapi: 3.0.0
+info:
+  description: SaaSus ApiLog API Schema
+  version: 1.0.0
+  title: SaaSus ApiLog API スキーマ
+  contact:
+    name: Anti-Pattern
+servers:
+  - url: https://api.saasus.io/v1/apilog
+    description: Production API Server
+tags:
+  - name: apiLog
+    description: api実行ログ
+  - name: error
+    description: テスト用途のエラー
+security:
+  - Bearer: []
+paths:
+  /logs:
+    get:
+      tags:
+        - apiLog
+      operationId: GetLogs
+      summary: 全API実行ログ取得
+      description: 全API実行のログ登録を取得します。
+      parameters:
+        - in: query
+          name: created_date
+          schema:
+            type: string
+            format: date
+          description: ログを取得する日付 (YYYY-MM-DD 形式)
+        - in: query
+          name: created_at
+          schema:
+            type: string
+            format: date-time
+          description: ログを取得する日時 (ISO 8601 形式の日時)
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+          description: 取得するログの最大数
+        - in: query
+          name: cursor
+          schema:
+            type: string
+          description: カーソルページネーション用のカーソル
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: 作成されたAPIログ
+                $ref: '#/components/schemas/ApiLogs'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /logs/{api_log_id}:
+    get:
+      tags:
+        - apiLog
+      operationId: GetLog
+      summary: API実行ログ取得
+      description: 指定したIDのAPI実行のログ登録を取得します。
+      parameters:
+        - $ref: '#/components/parameters/ApiLogId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: APIログ
+                $ref: '#/components/schemas/ApiLog'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /errors/internal-server-error:
+    get:
+      tags:
+        - error
+      operationId: ReturnInternalServerError
+      summary: ステータスコード500でサーバーエラーを返却
+      description: |
+        テスト用途で使用するエンドポイントです。ステータスコード500でサーバーエラーを返却します。
+      responses:
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      description: Credentials or access token for API
+  parameters:
+    ApiLogId:
+      in: path
+      name: api_log_id
+      description: APIログID
+      required: true
+      schema:
+        $ref: '#/components/schemas/Uuid'
+  schemas:
+    Error:
+      properties:
+        type:
+          type: string
+          description: permission_denied
+        message:
+          type: string
+          description: Error message
+      required:
+        - type
+        - message
+    Uuid:
+      type: string
+      example: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+    ApiLogs:
+      title: API実行ログ一覧
+      type: object
+      properties:
+        api_logs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiLog'
+        cursor:
+          type: string
+          description: カーソルページネーション用のカーソル
+      required:
+        - api_logs
+    ApiLog:
+      title: Apiログ
+      type: object
+      allOf:
+        - properties:
+            trace_id:
+              type: string
+              example: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+              description: トレースID
+            api_log_id:
+              $ref: '#/components/schemas/Uuid'
+              description: APIログID
+            created_at:
+              type: integer
+              x-go-type: int64
+              example: 1670997124
+              description: APIログ登録日時のエポック秒
+            created_date:
+              type: string
+              example: '2022-12-14'
+              description: APIログ登録日
+            ttl:
+              type: integer
+              x-go-type: int64
+              example: 1670997124
+              description: APIログ削除予定エポック秒
+            request_method:
+              type: string
+              example: GET
+              description: リクエストメソッド
+            saas_id:
+              $ref: '#/components/schemas/Uuid'
+              description: saas id
+            api_key:
+              type: string
+              example: icFS9Hit7jZjeSKMbNZP2cmfqBseyxnJZ
+              description: APIキー
+            response_status:
+              type: string
+              example: 200
+              description: レスポンスステータス
+            request_uri:
+              type: string
+              example: /v1/auth/tenants
+              description: リクエストURI
+            remote_address:
+              type: string
+              example: 192.168.0.20
+              description: クライアントIPアドレス
+            referer:
+              type: string
+              example: /v1/auth/user_info
+              description: リクエストリファラー
+            request_body:
+              type: string
+              example: '{"name":"1207 Tenant","back_office_staff_email":"example.com"}'
+              description: リクエストボディー
+            response_body:
+              type: string
+              example: >-
+                {"id": "98684c58-ca59-4046-9c2a-861ef6f12dd4", "name":"1207
+                Tenant"}
+              description: レスポンスボディー
+          required:
+            - trace_id
+            - api_log_id
+            - created_at
+            - created_date
+            - ttl
+            - request_method
+            - saas_id
+            - api_key
+            - response_status
+            - request_uri
+            - remote_address
+            - referer
+            - request_body
+            - response_body
