@@ -110,13 +110,16 @@ create_new_version:
 	docker exec -it saasus-platform-document npm run docusaurus docs:version ${VERSION}
 
 # ディレクトリとファイルのパス
-VERSIONED_DOCS_DIR = versioned_docs/version-$(VERSION)
+VERSIONED_DOCS_DIR_EN = versioned_docs/version-$(VERSION)
+VERSIONED_DOCS_DIR_JA = i18n/ja/docusaurus-plugin-content-docs/version-$(VERSION)
 VERSIONS_JSON_FILE = versions.json
 
 # ターゲット：バージョンの削除
 remove_version:
 	# versioned_docs/version-1.6/ ディレクトリを削除
-	rm -rf $(VERSIONED_DOCS_DIR)
+	# i18n/ja/docusaurus-plugin-content-docs/version-1.6/ ディレクトリを削除
+	rm -rf $(VERSIONED_DOCS_DIR_EN)
+	rm -rf $(VERSIONED_DOCS_DIR_JA)
 	# versions.json から "1.6" を削除
 	jq 'del(.[] | select(. == "$(VERSION)"))' $(VERSIONS_JSON_FILE) > $(VERSIONS_JSON_FILE).tmp && mv $(VERSIONS_JSON_FILE).tmp $(VERSIONS_JSON_FILE)
 
