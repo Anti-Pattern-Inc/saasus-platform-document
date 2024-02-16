@@ -30,7 +30,7 @@ const sidebars = {
       type: 'category',
       label: 'Tutorial',
       items: [
-        'tutorial/prepare-sample-application',
+        'tutorial/prepare-the-sample-application',
         'tutorial/prepare-saasus-platform',
         'tutorial/saas-management-using-the-saas-operation-console',
         'tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant',
@@ -194,7 +194,7 @@ const sidebars = {
           items: [
             'aws-marketplace-integration/supplementary/integration-test',
             'aws-marketplace-integration/supplementary/self-up-setting',
-            'aws-marketplace-integration/supplementary/user-judgment-method',,
+            'aws-marketplace-integration/supplementary/user-judgment-method',
             'aws-marketplace-integration/supplementary/supplementary-1',
             'aws-marketplace-integration/supplementary/supplementary-2',
             'aws-marketplace-integration/supplementary/supplementary-3',

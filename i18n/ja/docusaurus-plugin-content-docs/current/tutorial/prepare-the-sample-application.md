@@ -41,7 +41,7 @@ URL: <http://localhost/board>
 認証用 Email: [user@example.com](mailto:user@example.com)  
 Password: password
 
-![サンプル](/ja/img/tutorial/prepare-sample-application/prepare-sample-application-01.png)
+![サンプル](/ja/img/tutorial/prepare-the-sample-application/prepare-the-sample-application-01.png)
 
 Next.js 版
 
@@ -51,7 +51,7 @@ Password: password
 
 ※ Next.js 版は、ビルドに数分掛かる可能性があります。表示できない場合は、数分待ってから再度表示してみてください。
 
-![サンプル](/ja/img/tutorial/prepare-sample-application/prepare-sample-application-02.png)
+![サンプル](/ja/img/tutorial/prepare-the-sample-application/prepare-the-sample-application-02.png)
 
 このような形で、ユーザが好きに書き込みができます。
 
