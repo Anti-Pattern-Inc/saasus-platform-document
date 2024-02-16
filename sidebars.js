@@ -27,11 +27,6 @@ const sidebars = {
       collapsible: false,
     },
     {
-      type: 'doc',
-      label: 'Tutorials for Business Users',
-      id: "tutorials-for-business-users",
-    },
-    {
       type: 'category',
       label: 'Tutorial',
       items: [
