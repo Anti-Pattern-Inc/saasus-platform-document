@@ -19,8 +19,7 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 **※反映日を当日にした場合、操作日時の約5分後から料金プランの設定が反映されます。**  
 _例,  2022年12月28日午前9時0分に料金プランを設定→2022/12/28 09:05:00に反映_
 
-<!-- TODO fix link url -->
-**税率設定についてはこちらのドキュメントを参照してください。（[税率設定](https://docs.saasus.io/docs/tax-rates)）**
+**税率設定についてはこちらのドキュメントを参照してください。（[税率設定](/docs/saas-development-console/tax-rates)）**
 
 ![](/ja/img/saas-operation-console/price-plan/price-plan-setting-001/plan.png)
 
