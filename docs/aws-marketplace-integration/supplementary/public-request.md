@@ -9,7 +9,6 @@ metadata:
 createdAt: "Thu Jun 29 2023 12:23:26 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Fri Oct 27 2023 07:17:41 GMT+0000 (Coordinated Universal Time)"
 ---
-<!-- TODO 遷移先画面の英語対応後にリンク名を修正 -->
 Once you've completed the [Listing Procedure "11. Final Review Request of Production SaaS Product"](/docs/aws-marketplace-integration/aws-marketplace-integration), you will receive an email from the AWS Marketplace Support Team detailing the process to request publication. Follow these instructions to request your publication.
 
 :::caution
