@@ -19,10 +19,6 @@
     "message": "API Docs",
     "description": "The label for category API Docs in sidebar apiDocSidebar"
   },
-  "sidebar.tutorialSidebar.doc.Tutorials for Business Users": {
-    "message": "ビジネスユーザー向けチュートリアル",
-    "description": "The label for the doc item Tutorials for Business Users in sidebar tutorialSidebar, linking to the doc tutorials-for-business-users"
-  },
   "sidebar.tutorialSidebar.category.メータリングAPIの実装サンプルと使用例(Laravel)": {
     "message": "メータリングAPIの実装サンプルと使用例(Laravel)",
     "description": "The label for category メータリングAPIの実装サンプルと使用例(Laravel) in sidebar tutorialSidebar"
