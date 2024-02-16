@@ -1,0 +1,102 @@
+{
+  "version.label": {
+    "message": "1.6",
+    "description": "The label for version 1.6"
+  },
+  "sidebar.tutorialSidebar.category.Getting Started": {
+    "message": "Getting Started",
+    "description": "The label for category Getting Started in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Tutorial": {
+    "message": "Tutorial",
+    "description": "The label for category Tutorial in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Manage Rate Plans": {
+    "message": "Manage Rate Plans",
+    "description": "The label for category Manage Rate Plans in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Implementation Guide": {
+    "message": "Implementation Guide",
+    "description": "The label for category Implementation Guide in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Metering API Implementation Sample and Examples of Use (Laravel)": {
+    "message": "Metering API Implementation Sample and Examples of Use (Laravel)",
+    "description": "The label for category Metering API Implementation Sample and Examples of Use (Laravel) in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Usecase": {
+    "message": "Usecase",
+    "description": "The label for category Usecase in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.About SaaS User Accounts": {
+    "message": "About SaaS User Accounts",
+    "description": "The label for category About SaaS User Accounts in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.SaaS Development Console": {
+    "message": "SaaS Development Console",
+    "description": "The label for category SaaS Development Console in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Integrate with Amazon EventBridge": {
+    "message": "Integrate with Amazon EventBridge",
+    "description": "The label for category Integrate with Amazon EventBridge in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Settings for Google Tag Manager": {
+    "message": "Settings for Google Tag Manager",
+    "description": "The label for category Settings for Google Tag Manager in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.SaaS Operation Console": {
+    "message": "SaaS Operation Console",
+    "description": "The label for category SaaS Operation Console in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Pricing Plan Setting": {
+    "message": "Pricing Plan Setting",
+    "description": "The label for category Pricing Plan Setting in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.AWS Marketplace Integration": {
+    "message": "AWS Marketplace Integration",
+    "description": "The label for category AWS Marketplace Integration in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Setting Up Bank Account From Seller Registration": {
+    "message": "Setting Up Bank Account From Seller Registration",
+    "description": "The label for category Setting Up Bank Account From Seller Registration in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Registration of SaaS Product Information": {
+    "message": "Registration of SaaS Product Information",
+    "description": "The label for category Registration of SaaS Product Information in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Supplementary": {
+    "message": "Supplementary",
+    "description": "The label for category Supplementary in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.doc.Tutorials for Business Users": {
+    "message": "Tutorials for Business Users",
+    "description": "The label for the doc item Tutorials for Business Users in sidebar tutorialSidebar, linking to the doc tutorials-for-business-users"
+  },
+  "sidebar.apiDocSidebar.category.API Docs": {
+    "message": "API Docs",
+    "description": "The label for category API Docs in sidebar apiDocSidebar"
+  },
+  "sidebar.changelogSidebar.category.Changelog": {
+    "message": "Changelog",
+    "description": "The label for category Changelog in sidebar changelogSidebar"
+  },
+  "sidebar.changelogSidebar.doc.2023/11/23": {
+    "message": "2023/11/23",
+    "description": "The label for the doc item 2023/11/23 in sidebar changelogSidebar, linking to the doc changelog/20231123"
+  },
+  "sidebar.changelogSidebar.doc.2023/11/18": {
+    "message": "2023/11/18",
+    "description": "The label for the doc item 2023/11/18 in sidebar changelogSidebar, linking to the doc changelog/20231118"
+  },
+  "sidebar.changelogSidebar.doc.2023/11/05": {
+    "message": "2023/11/05",
+    "description": "The label for the doc item 2023/11/05 in sidebar changelogSidebar, linking to the doc changelog/20231105"
+  },
+  "sidebar.changelogSidebar.doc.2022/12/24": {
+    "message": "2022/12/24",
+    "description": "The label for the doc item 2022/12/24 in sidebar changelogSidebar, linking to the doc changelog/20221224"
+  },
+  "sidebar.changelogSidebar.doc.Welcome to SaaSus Platform": {
+    "message": "Welcome to SaaSus Platform",
+    "description": "The label for the doc item Welcome to SaaSus Platform in sidebar changelogSidebar, linking to the doc changelog/welcome-to-saasus-platform"
+  }
+}

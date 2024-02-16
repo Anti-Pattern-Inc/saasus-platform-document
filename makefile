@@ -99,7 +99,25 @@ translate_ja:
 	docker exec -it saasus-platform-document /bin/bash -c "swagger-i18n-extension translate ./api/apilogapi.yml jpn > ./api/apilogapi.jpn.yml"
 
 ########### 
-# new version
+# version
 ########### 
+
+# ex) make override_version VERSION=1.6
+override_version: remove_version create_new_version
+
+# ex) make create_new_file VERSION=1.6
 create_new_version:
 	docker exec -it saasus-platform-document npm run docusaurus docs:version ${VERSION}
+
+# ディレクトリとファイルのパス
+VERSIONED_DOCS_DIR = versioned_docs/version-$(VERSION)
+VERSIONS_JSON_FILE = versions.json
+
+# ターゲット：バージョンの削除
+remove_version:
+	# versioned_docs/version-1.6/ ディレクトリを削除
+	rm -rf $(VERSIONED_DOCS_DIR)
+	# versions.json から "1.6" を削除
+	jq 'del(.[] | select(. == "$(VERSION)"))' $(VERSIONS_JSON_FILE) > $(VERSIONS_JSON_FILE).tmp && mv $(VERSIONS_JSON_FILE).tmp $(VERSIONS_JSON_FILE)
+
+.PHONY: remove_version
