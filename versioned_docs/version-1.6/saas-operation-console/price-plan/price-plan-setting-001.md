@@ -18,6 +18,8 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 **\*If you set the reflection date to the current day, the billing plan settings will be reflected about 5 minutes after the operation date and time. **  
 _For example, a billing plan is set at 9:00 am on December 28, 2022 → Reflected at 09:05:00 on December 28, 2022_
 
+**For information on tax rate settings, please refer to this document: ([Tax Rate Settings](/docs/saas-development-console/tax-rates))**
+
 ![plan](/img/saas-operation-console/price-plan/price-plan-setting-001/plan.png)
 *Dialog that appears when you perform the operation in step 2 (operate here from step 3 onwards)*
 
