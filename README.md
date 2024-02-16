@@ -2,6 +2,8 @@
 
 This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
+[wiki](https://github.com/Anti-Pattern-Inc/saasus-platform-document/wiki)
+
 ### Installation
 １、saasus-dev-envリポジトリのディレクトリへ移動
 ```
