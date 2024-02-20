@@ -196,28 +196,17 @@ const config = {
     }),
 
   plugins: [
-    [
-      '@docusaurus/plugin-client-redirects',
-      {
-        redirects: [
-          {
-            from: ['/'], // リダイレクト元のパス
-            to: '/docs/saasus-platform-document', // 目的地のパス
-          },
-        ],
-      },
-    ],
-    [
-      '@docusaurus/plugin-ideal-image',
-      {
-        size: 500,
-        // quality: 70,
-        // max: 640, // max resized image's size.
-        // min: 640, // min resized image's size. if original is lower, use that size.
-        // steps: 1, // the max number of images generated between min and max (inclusive)
-        disableInDev: false,
-      },
-    ],
+    // [
+    //   '@docusaurus/plugin-ideal-image',
+    //   {
+    //     size: 500,
+    //     // quality: 70,
+    //     // max: 640, // max resized image's size.
+    //     // min: 640, // min resized image's size. if original is lower, use that size.
+    //     // steps: 1, // the max number of images generated between min and max (inclusive)
+    //     disableInDev: false,
+    //   },
+    // ],
   ],
 };
 

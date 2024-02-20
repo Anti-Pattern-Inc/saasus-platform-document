@@ -6,7 +6,7 @@
 PORT := 3000
 
 # Docker Composeを立ち上げるターゲット
-init: up install run-en
+init: up install run_en
 
 up:
 	@echo "チェック中: ポート3000の使用状況..."
@@ -27,7 +27,6 @@ up:
 
 install:
 	docker exec -it saasus-platform-document npm install
-	# docker exec -it saasus-platform-document npm install swagger-i18n-extension @docusaurus/plugin-client-redirects
 
 run_en:
 	docker exec -it saasus-platform-document npm run start -- --host 0.0.0.0
