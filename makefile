@@ -103,11 +103,12 @@ translate_ja:
 ########### 
 
 # ex) make override_version VERSION=1.6
-override_version: remove_version create_new_version
+override_version: remove_version create_new_version ja_sidebar
 
-# ex) make create_new_file VERSION=1.6
+# ex) make create_new_version VERSION=1.6
 create_new_version:
 	docker exec -it saasus-platform-document npm run docusaurus docs:version ${VERSION}
+	$(MAKE) ja_sidebar
 
 # ディレクトリとファイルのパス
 VERSIONED_DOCS_DIR_EN = versioned_docs/version-$(VERSION)
