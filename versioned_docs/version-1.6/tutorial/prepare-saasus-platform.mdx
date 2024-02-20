@@ -23,7 +23,7 @@ Access the registration screen and perform new registration using your own email
 
 Enter your email address and desired password, read the terms of use and privacy policy, check if you agree, and press the sign up button.
 
-<Image img={require('/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-01.png')} />
+![01](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-01.png)
 
 A verification code will be sent to the email address you entered, enter it to activate your account
 
@@ -33,7 +33,7 @@ After verification is completed, the login screen will be displayed
 
 Log in with the email address and password you registered with earlier.
 
-<Image img={require('/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-03.png')} />
+![03](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-03.png)
 
 When you register for the SaaSus Platform for the first time, we will create a tenant exclusively for you. This takes at least an hour because we will create a customer-dedicated AWS account. Once your account has been created, you will receive an email to the email address you provided.
 
@@ -43,7 +43,7 @@ When you register for the SaaSus Platform for the first time, we will create a t
 
 After the tenant is created, when you log in, you will be prompted to enter user attributes like this.
 
-<Image img={require('/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-05.png')} />
+![05](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-05.png)
 
 After filling in the information, the transition page to each console of the tenant is displayed.
 
@@ -119,7 +119,7 @@ For example, on the previous login page,
 - The Terms of Use URL and privacy policy URL are **Terms of Use and Privacy Policy Link**  
   becomes:
 
-<Image img={require('/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-14.png')} />
+![14](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-14.png)
 
 Click the "Save" button to apply the changes
 

@@ -17,7 +17,4 @@ updatedAt: "Fri Oct 27 2023 07:16:51 GMT+0000 (Coordinated Universal Time)"
 5. エクスポート名に表示されている名前を確認して、その値をコピーしてください。
    1. ![supplementary-3-2](/ja/img/aws-marketplace-integration/supplementary/supplementary-3-2.png)
 6. コピーしてきた値のエクスポート名と同じフォーム項目にペーストしてください。
-
-<!---->
-
-1. 1. ![supplementary-3-3](/ja/img/aws-marketplace-integration/supplementary/supplementary-3-3.png)
+   1. ![supplementary-3-3](/ja/img/aws-marketplace-integration/supplementary/supplementary-3-3.png)

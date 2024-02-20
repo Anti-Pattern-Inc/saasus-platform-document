@@ -21,7 +21,7 @@ There are two types of frontends, one created with Laravel with Blade and one cr
 
 First of all, let's check the operation!
 
-<https://github.com/saasus-platform/sampleapp-basic-chat>
+[https://github.com/saasus-platform/sampleapp-basic-chat](https://github.com/saasus-platform/sampleapp-basic-chat)
 
 In the directory where the above repository is cloned,
 
@@ -38,7 +38,7 @@ Once it's started, go to the URL below and give it a try.
 
 Blade version
 
-URL: <http://localhost/board>  
+URL: [http://localhost/board](http://localhost/board)
 Authentication Email: [user@example.com](mailto:user@example.com)  
 Password: password
 
@@ -46,7 +46,7 @@ Password: password
 
 Next.js version
 
-URL: <http://localhost:80/login/>  
+URL: [http://localhost:80/login/](http://localhost:80/login/)
 Authentication Email: [user@example.com](mailto:user@example.com)  
 Password: password
 
@@ -64,9 +64,9 @@ Let's turn this simple web application into SaaS!
 
 \*The difference between the source code at the start of the tutorial and at the end of the tutorial is  
 PHP  
-<https://github.com/saasus-platform/sampleapp-basic-chat/pull/10/files>
+[https://github.com/saasus-platform/sampleapp-basic-chat/pull/10/files](https://github.com/saasus-platform/sampleapp-basic-chat/pull/10/files)
 
 Next.js  
-<https://github.com/saasus-platform/sampleapp-basic-chat/pull/11/files>
+[https://github.com/saasus-platform/sampleapp-basic-chat/pull/11/files](https://github.com/saasus-platform/sampleapp-basic-chat/pull/11/files)
 
 Please use the above links as reference.

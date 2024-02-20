@@ -12,9 +12,9 @@ In the E-Mail Content tab of the <a href="https://settings.console.saasus.io/cus
 # How to Customize Email Body
 
 ## Email Sent with a Temporary Password at New Registration
-The strings {####} and {username} are required.
+The strings `{####}` and `{username}` are required.
 
-{####} will be replaced with the temporary password and {username} will be replaced with the user ID when sent.
+`{####}` will be replaced with the temporary password and {username} will be replaced with the user ID when sent.
 
 ### Example
 
@@ -23,7 +23,7 @@ Thank you for your registration.
 We will notify you of your user ID and temporary password.
 
 User ID: {username}
-Temporary Password: {####}
+Temporary Password: `{####}`
 
 Please input the above temporary password on the following page and complete the sign-up.
 https://auth.your.domain/sign-up-confirm
@@ -48,9 +48,9 @@ Please include your user ID when making inquiries.
 
 ## Email Resending Temporary Password at New Registration
 
-The strings {####} and {username} are required.
+The strings `{####}` and `{username}` are required.
 
-{####} will be replaced with the temporary password and {username} will be replaced with the user ID when sent.
+`{####}` will be replaced with the temporary password and {username} will be replaced with the user ID when sent.
 
 ### Example*
 
@@ -82,9 +82,9 @@ Please include your user ID when making inquiries.
 
 ## Email Sent with Verification Code for Password Reset
 
-The string {####} is required.
+The string `{####}` is required.
 
-{####} will be replaced with the verification code when sent.
+`{####}` will be replaced with the verification code when sent.
 
 ### Example
 
