@@ -1,8 +1,7 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -38,6 +37,8 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
+          // routeBasePath: '/',
+          // path: 'docs',
           sidebarPath: require.resolve('./sidebars.js'),
           // editUrl:
           //   'https://github.com/Anti-Pattern-Inc/saasus-platform-document',
@@ -188,11 +189,36 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} Anti-Pattern Inc.`,
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        theme: prismThemes.github,
+        darkTheme: prismThemes.dracula,
         additionalLanguages: ['php']
       },
     }),
+
+  plugins: [
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          {
+            from: ['/'], // リダイレクト元のパス
+            to: '/docs/saasus-platform-document', // 目的地のパス
+          },
+        ],
+      },
+    ],
+    [
+      '@docusaurus/plugin-ideal-image',
+      {
+        size: 500,
+        // quality: 70,
+        // max: 640, // max resized image's size.
+        // min: 640, // min resized image's size. if original is lower, use that size.
+        // steps: 1, // the max number of images generated between min and max (inclusive)
+        disableInDev: false,
+      },
+    ],
+  ],
 };
 
 module.exports = config;

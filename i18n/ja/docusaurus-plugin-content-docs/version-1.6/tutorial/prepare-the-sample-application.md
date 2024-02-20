@@ -21,7 +21,7 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 
 まずは、こちらを動作確認してみましょう！
 
-<https://github.com/saasus-platform/sampleapp-basic-chat>
+[https://github.com/saasus-platform/sampleapp-basic-chat](https://github.com/saasus-platform/sampleapp-basic-chat)
 
 上記リポジトリを clone したディレクトリにて、  
 ※ PHP の場合`sampleapp-basic-chat/php/laravel`配下  
@@ -37,7 +37,7 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 
 Blade 版
 
-URL: <http://localhost/board>  
+URL: [http://localhost/board](http://localhost/board)
 認証用 Email: [user@example.com](mailto:user@example.com)  
 Password: password
 
@@ -45,7 +45,7 @@ Password: password
 
 Next.js 版
 
-URL: <http://localhost:80/login/>  
+URL: [http://localhost:80/login/](http://localhost:80/login/)
 認証用 Email: [user@example.com](mailto:user@example.com)  
 Password: password
 
@@ -63,9 +63,9 @@ Password: password
 
 ※チュートリアル開始時点と完了時点でのソースコードの差分は  
 PHP  
-<https://github.com/saasus-platform/sampleapp-basic-chat/pull/10/files>
+[https://github.com/saasus-platform/sampleapp-basic-chat/pull/10/files](https://github.com/saasus-platform/sampleapp-basic-chat/pull/10/files)
 
 Next.js  
-<https://github.com/saasus-platform/sampleapp-basic-chat/pull/11/files>
+[https://github.com/saasus-platform/sampleapp-basic-chat/pull/11/files](https://github.com/saasus-platform/sampleapp-basic-chat/pull/11/files)
 
 こちらになりますので、参考にしてみてください
