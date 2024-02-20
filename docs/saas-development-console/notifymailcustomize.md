@@ -14,7 +14,7 @@ In the E-Mail Content tab of the <a href="https://settings.console.saasus.io/cus
 ## Email Sent with a Temporary Password at New Registration
 The strings `{####}` and `{username}` are required.
 
-`{####}` will be replaced with the temporary password and {username} will be replaced with the user ID when sent.
+`{####}` will be replaced with the temporary password and `{username}` will be replaced with the user ID when sent.
 
 ### Example
 
@@ -50,7 +50,7 @@ Please include your user ID when making inquiries.
 
 The strings `{####}` and `{username}` are required.
 
-`{####}` will be replaced with the temporary password and {username} will be replaced with the user ID when sent.
+`{####}` will be replaced with the temporary password and `{username}` will be replaced with the user ID when sent.
 
 ### Example*
 
