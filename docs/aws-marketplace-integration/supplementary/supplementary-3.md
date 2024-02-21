@@ -17,7 +17,4 @@ updatedAt: "Fri Oct 27 2023 07:16:51 GMT+0000 (Coordinated Universal Time)"
 5. Verify the name displayed for the Export name and copy its value.
    1. ![supplementary-3-2](/img/aws-marketplace-integration/supplementary/supplementary-3-2.png)
 6. Paste the copied value into the form field with the same export name.
-
-<!---->
-
-1. 1. ![supplementary-3-3](/img/aws-marketplace-integration/supplementary/supplementary-3-3.png)
+   1. ![supplementary-3-3](/img/aws-marketplace-integration/supplementary/supplementary-3-3.png)

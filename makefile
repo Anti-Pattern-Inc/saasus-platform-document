@@ -6,7 +6,7 @@
 PORT := 3000
 
 # Docker Composeを立ち上げるターゲット
-init: up install run-en
+init: up install run_en
 
 up:
 	@echo "チェック中: ポート3000の使用状況..."
@@ -27,12 +27,11 @@ up:
 
 install:
 	docker exec -it saasus-platform-document npm install
-	docker exec -it saasus-platform-document npm install -g swagger-i18n-extension
 
-run-en:
+run_en:
 	docker exec -it saasus-platform-document npm run start -- --host 0.0.0.0
 
-run-ja:
+run_ja:
 	docker exec -it saasus-platform-document npm run start -- --host 0.0.0.0 --locale ja
 
 down:
@@ -103,11 +102,12 @@ translate_ja:
 ########### 
 
 # ex) make override_version VERSION=1.6
-override_version: remove_version create_new_version
+override_version: remove_version create_new_version ja_sidebar
 
-# ex) make create_new_file VERSION=1.6
+# ex) make create_new_version VERSION=1.6
 create_new_version:
 	docker exec -it saasus-platform-document npm run docusaurus docs:version ${VERSION}
+	$(MAKE) ja_sidebar
 
 # ディレクトリとファイルのパス
 VERSIONED_DOCS_DIR_EN = versioned_docs/version-$(VERSION)

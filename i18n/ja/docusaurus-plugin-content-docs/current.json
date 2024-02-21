@@ -7,29 +7,9 @@
     "message": "はじめに",
     "description": "The label for category Getting Started in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.チュートリアル": {
-    "message": "チュートリアル",
-    "description": "The label for category チュートリアル in sidebar tutorialSidebar"
-  },
-  "sidebar.apiDocSidebar.category.Getting Started": {
-    "message": "Getting Started",
-    "description": "The label for category Getting Started in sidebar apiDocSidebar"
-  },
   "sidebar.apiDocSidebar.category.API Docs": {
     "message": "API Docs",
     "description": "The label for category API Docs in sidebar apiDocSidebar"
-  },
-  "sidebar.tutorialSidebar.category.メータリングAPIの実装サンプルと使用例(Laravel)": {
-    "message": "メータリングAPIの実装サンプルと使用例(Laravel)",
-    "description": "The label for category メータリングAPIの実装サンプルと使用例(Laravel) in sidebar tutorialSidebar"
-  },
-  "sidebar.tutorialSidebar.category.AWS Marketplace連携機能": {
-    "message": "AWS Marketplace連携機能",
-    "description": "The label for category AWS Marketplace連携機能 in sidebar tutorialSidebar"
-  },
-  "sidebar.tutorialSidebar.category.SaaS製品情報の登録": {
-    "message": "SaaS製品情報の登録",
-    "description": "The label for category SaaS製品情報の登録 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Tutorial": {
     "message": "チュートリアル",
@@ -50,10 +30,6 @@
   "sidebar.tutorialSidebar.category.Pricing Plan Setting": {
     "message": "料金プラン設定",
     "description": "The label for category Pricing Plan Setting in sidebar tutorialSidebar"
-  },
-  "sidebar.tutorialSidebar.category.Google Tag Managerの設定": {
-    "message": "Google Tag Managerの設定",
-    "description": "The label for category Google Tag Managerの設定 in sidebar tutorialSidebar"
   },
   "sidebar.changelogSidebar.category.Changelog": {
     "message": "Changelog",
