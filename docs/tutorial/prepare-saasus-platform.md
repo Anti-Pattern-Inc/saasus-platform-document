@@ -9,7 +9,7 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
 
 \*You can also watch the entire process via video.  
-<https://www.youtube.com/watch?v=deSkPJ-zTgw>
+[https://www.youtube.com/watch?v=deSkPJ-zTgw](https://www.youtube.com/watch?v=deSkPJ-zTgw)
 
 ## Preparing the SaaSus Platform
 
@@ -19,12 +19,11 @@ First, let's create a SaaSus Platform account.
 
 Access the registration screen and perform new registration using your own email address.
 
-<https://auth.saasus.io/sign-up>
+[https://auth.saasus.io/sign-up](https://auth.saasus.io/sign-up)
 
 Enter your email address and desired password, read the terms of use and privacy policy, check if you agree, and press the sign up button.
 
-<img src="/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-01.png" width="500">
-</img>
+![01](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-01.png)
 
 A verification code will be sent to the email address you entered, enter it to activate your account
 
@@ -34,8 +33,7 @@ After verification is completed, the login screen will be displayed
 
 Log in with the email address and password you registered with earlier.
 
-<img src="/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-03.png" width="500">
-</img>
+![03](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-03.png)
 
 When you register for the SaaSus Platform for the first time, we will create a tenant exclusively for you. This takes at least an hour because we will create a customer-dedicated AWS account. Once your account has been created, you will receive an email to the email address you provided.
 
@@ -45,8 +43,7 @@ When you register for the SaaSus Platform for the first time, we will create a t
 
 After the tenant is created, when you log in, you will be prompted to enter user attributes like this.
 
-<img src="/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-05.png" width="500">
-</img>
+![05](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-05.png)
 
 After filling in the information, the transition page to each console of the tenant is displayed.
 
@@ -87,7 +84,7 @@ Click "Auth Transition" on the side menu to display the Callback URL setting pag
 
 Normally, set the Callback URL based on the URL that provides SaaS. This time, we will run the sample application locally, so set it as follows.
 
-<http://localhost/callback>
+[http://localhost/callback](http://localhost/callback)
 
 ![11](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-11.png)
 
@@ -122,8 +119,7 @@ For example, on the previous login page,
 - The Terms of Use URL and privacy policy URL are **Terms of Use and Privacy Policy Link**  
   becomes:
 
-<img src="/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-14.png" width="500">
-</img>
+![14](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-14.png)
 
 Click the "Save" button to apply the changes
 
@@ -137,7 +133,7 @@ Once the settings are completed, the login page will be generated at the URL wit
 
 The login page will be generated with a URL that adds “auth.” to the beginning of the domain name you set earlier.
 
-For example, if the domain name is set to “sample.saasus.jp”, a login page at <https://auth.sample.saasus.jp/> is provided.
+For example, if the domain name is set to “sample.saasus.jp”, a login page at [https://auth.sample.saasus.jp/](https://auth.sample.saasus.jp/) is provided.
 
 After confirming the login page, let's return to the SaaSus console
 

@@ -9,7 +9,7 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
 
 ※全体の流れを動画でご覧になることもできます。  
-<https://www.youtube.com/watch?v=deSkPJ-zTgw>
+[https://www.youtube.com/watch?v=deSkPJ-zTgw](https://www.youtube.com/watch?v=deSkPJ-zTgw)
 
 ## SaaSus Platform の準備
 
@@ -19,7 +19,7 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 
 新規登録画面を表示し、ご自身のメールアドレスを用いて新規登録を行います
 
-<https://auth.saasus.io/sign-up>
+[https://auth.saasus.io/sign-up](https://auth.saasus.io/sign-up)
 
 メールアドレスと希望するパスワードを入力し、利用規約とプライバシーポリシーを読んでいただき同意していただける場合はチェックを入れ、新規登録ボタンを押します
 
@@ -85,7 +85,7 @@ SaaS 開発コンソールにログインしたら、まずは SaaS で使うド
 
 通常は SaaS を提供している URL をベースに Callback URL を設定します。今回はサンプルアプリケーションをローカルで動かしてみますので、以下のように設定します。
 
-<http://localhost/callback>
+[http://localhost/callback](http://localhost/callback)
 
 ![11](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-11.png)
 
@@ -135,7 +135,7 @@ SaaS 開発コンソールにログインしたら、まずは SaaS で使うド
 
 ログイン画面は、さきほど設定したドメイン名の頭に “auth.” をつけた URL で生成されます。
 
-たとえば、ドメイン名を “sample.saasus.jp” で設定した場合は、 <https://auth.sample.saasus.jp/>にてログイン画面が提供されます。
+たとえば、ドメイン名を “sample.saasus.jp” で設定した場合は、 [https://auth.sample.saasus.jp/](https://auth.sample.saasus.jp/)にてログイン画面が提供されます。
 
 ログイン画面が確認できたら、SaaSus コンソールに戻りましょう
 

@@ -27,7 +27,7 @@ First, check the API key on the **SaaSus Development Console**. Use this in your
 
 Open the sample application we prepared earlier in the development environment.
 
-As we did at the beginning, make sure that the docker container is started using init.sh and the sample application is running on <http://localhost/board>.
+As we did at the beginning, make sure that the docker container is started using init.sh and the sample application is running on [http://localhost/board](http://localhost/board).
 
 First, to easily use the SaaSus Platform, embed the SaaSus SDK into your application.
 
@@ -187,7 +187,7 @@ app.use(
 </Tabs>
 ```
 
-Next prepare a receiver for callback from the authentication screen. Earlier in the set up on the SaaSus development console, the callback destination is defined as <http://localhost/callback>, thus receivable it at /callback .
+Next prepare a receiver for callback from the authentication screen. Earlier in the set up on the SaaSus development console, the callback destination is defined as [http://localhost/callback](http://localhost/callback), thus receivable it at /callback .
 
 In order to set up the callback, add the following to the last line of api/routes/web.php:
 
@@ -302,7 +302,7 @@ Now, log in from the SaaSus Platform and check the operation.
 
 Access the login page created on the SaaSus Platform.
 
-Access the login page on the domain set on the console, such as <https://auth.sample.saasus.jp>.
+Access the login page on the domain set on the console, such as [https://auth.sample.saasus.jp](https://auth.sample.saasus.jp).
 
 ![02](/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-02.png)
 
@@ -345,7 +345,7 @@ array:3 [▼
 
 On the application side, you can see that the user information and tenant information set earlier on the SaaSus Platform.
 
-The redirect URL is received by the Callback processing of the SaaS SDK standard (<http://localhost/callback>), and in that process the authentication information is stored in the browser's local storage and cookies.
+The redirect URL is received by the Callback processing of the SaaS SDK standard ([http://localhost/callback](http://localhost/callback)), and in that process the authentication information is stored in the browser's local storage and cookies.
 
 Then, with the Auth Middleware of the SaaSus SDK, use the SaaSus Platform to validate the authentication information, get the user information, and put in the Request object.
 

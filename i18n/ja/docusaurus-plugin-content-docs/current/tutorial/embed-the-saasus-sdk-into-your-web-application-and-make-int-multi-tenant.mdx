@@ -26,7 +26,7 @@ import TabItem from "@theme/TabItem";
 
 では、さきほど準備したサンプルアプリケーションを開発環境で開きましょう。
 
-冒頭で行ったとおり、 init.sh を利用して docker コンテナが立ち上がっており、http://localhost/board でサンプルアプリケーションが動いていることを確認しておいてください。
+冒頭で行ったとおり、 init.sh を利用して docker コンテナが立ち上がっており、[http://localhost/board](http://localhost/board) でサンプルアプリケーションが動いていることを確認しておいてください。
 
 まず、 SaaSus Platform を簡単に使うためには、 SaaSus SDK をアプリケーションに組み込みます。
 
@@ -188,7 +188,7 @@ app.use(
 
 このようにします。
 
-そして、認証画面からのコールバックの受口を用意します。先ほど SaaSus 開発コンソールでコールバック先を <http://localhost/callback> と定義したので、 /callback で受け取れるようにします。
+そして、認証画面からのコールバックの受口を用意します。先ほど SaaSus 開発コンソールでコールバック先を [http://localhost/callback](http://localhost/callback) と定義したので、 /callback で受け取れるようにします。
 
 おなじく、 api/routes/web.php の最後の行に以下を追加します。
 
@@ -303,7 +303,7 @@ const getChats = async (req: Request, res: Response) => {
 
 SaaSus Platform で作成したログイン画面を表示します。
 
-<https://auth.sample.saasus.jp> など、ご自身で設定したドメインのログイン画面を表示してください。
+[https://auth.sample.saasus.jp](https://auth.sample.saasus.jp) など、ご自身で設定したドメインのログイン画面を表示してください。
 
 ![02](/ja/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-02.png)
 
@@ -346,7 +346,7 @@ array:3 [▼
 
 アプリケーション側で、先ほど SaaSus Platform で設定したユーザ情報、テナント情報が取得できているのがわかります。
 
-リダイレクト先の URL は、今回 SaaSus SDK 標準の Callback 処理で受けるようになっており(<http://localhost/callback>)、その処理の中で ブラウザの Local Storage や Cookie の中に認証情報を記憶します。
+リダイレクト先の URL は、今回 SaaSus SDK 標準の Callback 処理で受けるようになっており([http://localhost/callback](http://localhost/callback))、その処理の中で ブラウザの Local Storage や Cookie の中に認証情報を記憶します。
 
 そして、 SaaSus SDK の Auth Middleware で、SaaSus Platform を利用し認証情報を検証しユーザ情報を取得して Request オブジェクトに詰めます。
 
