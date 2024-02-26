@@ -8,14 +8,26 @@ function Home() {
   const { siteConfig } = useDocusaurusContext();
 
   useEffect(() => {
-    // 現在のパスを取得
     const path = location.pathname;
+    const userLang = navigator.language || navigator.userLanguage;
     // 言語コードがURLに含まれているかチェック
-    const languagePathMatch = path.match(/\/(ja|en|es|fr|de)\//);
-    // 言語コードがあれば、そのコードを保持してリダイレクトパスを設定
-    const redirectPath = languagePathMatch
-      ? `${languagePathMatch[0]}docs/saasus-platform-document`
-      : '/docs/saasus-platform-document';
+    const languagePathMatch = path.match(/\/(ja)\//);
+
+    let redirectPath = '/docs/saasus-platform-document';
+
+    if (languagePathMatch) {
+      redirectPath = `${languagePathMatch[0]}docs/saasus-platform-document`;
+    } else if (path.includes('/docs/')) {
+      redirectPath = '/docs/saasus-platform-document';
+    } else {
+      // その他の場合はブラウザの言語設定に基づいてリダイレクト
+      if (userLang.startsWith("ja")) {
+        redirectPath = '/ja/docs/saasus-platform-document';
+      } else {
+        // ブラウザの言語設定が英語またはその他の場合
+        redirectPath = '/docs/saasus-platform-document';
+      }
+    }
 
     // クライアントサイドでのリダイレクト
     if (typeof window !== 'undefined') {
