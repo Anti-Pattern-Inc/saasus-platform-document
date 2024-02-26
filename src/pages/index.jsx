@@ -34,14 +34,6 @@ function Home() {
       window.location.href = redirectPath;
     }
   }, [location.pathname]);
-
-  return (
-    <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
-      <div>Redirecting...</div>
-    </Layout>
-  );
 }
 
 export default Home;
