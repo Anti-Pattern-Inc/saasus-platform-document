@@ -9,16 +9,13 @@ function Home() {
 
   useEffect(() => {
     // 現在のパスを取得
-    // const path = location.pathname;
+    const path = location.pathname;
     // 言語コードがURLに含まれているかチェック
-    // const languagePathMatch = path.match(/^\/(ja|en|es|fr|de)\//);
+    const languagePathMatch = path.match(/\/(ja|en|es|fr|de)\//);
     // 言語コードがあれば、そのコードを保持してリダイレクトパスを設定
-    // const redirectPath = languagePathMatch
-    //   ? `/saasus-platform-document${languagePathMatch[0]}docs/saasus-platform-document`
-    //   : '/saasus-platform-document/docs/saasus-platform-document';
-
-    // 言語コードでのリダイレクトは上手くいかないので、言語コードを削除してリダイレクト
-    const redirectPath = '/saasus-platform-document/docs/saasus-platform-document';
+    const redirectPath = languagePathMatch
+      ? `/saasus-platform-document${languagePathMatch[0]}docs/saasus-platform-document`
+      : '/saasus-platform-document/docs/saasus-platform-document';
 
     // クライアントサイドでのリダイレクト
     if (typeof window !== 'undefined') {
