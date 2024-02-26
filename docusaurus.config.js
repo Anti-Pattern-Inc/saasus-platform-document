@@ -37,12 +37,10 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          onlyIncludeVersions: ['1.6'], // 公開したいバージョンを指定
-          // routeBasePath: '/',
-          // path: 'docs',
+          // バージョンファイルを作成した後に、公開したいバージョンを指定する
+          // docs:version　{ver} する場合はonlyIncludeVersionsに{ver}が含まれていたり、空配列だとエラーになる
+          onlyIncludeVersions: ['1.6'],
           sidebarPath: require.resolve('./sidebars.js'),
-          // editUrl:
-          //   'https://github.com/Anti-Pattern-Inc/saasus-platform-document',
         },
         blog: false,
         theme: {
