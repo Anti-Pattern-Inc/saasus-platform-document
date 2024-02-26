@@ -14,8 +14,8 @@ function Home() {
     const languagePathMatch = path.match(/\/(ja|en|es|fr|de)\//);
     // 言語コードがあれば、そのコードを保持してリダイレクトパスを設定
     const redirectPath = languagePathMatch
-      ? `/saasus-platform-document${languagePathMatch[0]}docs/saasus-platform-document`
-      : '/saasus-platform-document/docs/saasus-platform-document';
+      ? `${languagePathMatch[0]}docs/saasus-platform-document`
+      : '/docs/saasus-platform-document';
 
     // クライアントサイドでのリダイレクト
     if (typeof window !== 'undefined') {
