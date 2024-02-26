@@ -37,6 +37,7 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
+          onlyIncludeVersions: ['1.6'], // 公開したいバージョンを指定
           // routeBasePath: '/',
           // path: 'docs',
           sidebarPath: require.resolve('./sidebars.js'),
