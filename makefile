@@ -102,11 +102,13 @@ translate_ja:
 ########### 
 
 # ex) make override_version VERSION=1.6
-override_version: remove_version create_new_version ja_sidebar
+override_version: remove_version create_new_version
 
 # ex) make create_new_version VERSION=1.6
 create_new_version:
+	${MAKE} comment_out_versions
 	docker exec -it saasus-platform-document npm run docusaurus docs:version ${VERSION}
+	${MAKE} uncomment_versions
 	$(MAKE) ja_sidebar
 
 # ディレクトリとファイルのパス
@@ -122,5 +124,13 @@ remove_version:
 	rm -rf $(VERSIONED_DOCS_DIR_JA)
 	# versions.json から "1.6" を削除
 	jq 'del(.[] | select(. == "$(VERSION)"))' $(VERSIONS_JSON_FILE) > $(VERSIONS_JSON_FILE).tmp && mv $(VERSIONS_JSON_FILE).tmp $(VERSIONS_JSON_FILE)
+
+# onlyIncludeVersionsをコメントアウト
+comment_out_versions:
+	docker exec -it saasus-platform-document /bin/bash -c "sed -i.bak '/onlyIncludeVersions:/s/^/\\/\\//g' docusaurus.config.js"
+
+# onlyIncludeVersionsのコメントを解除
+uncomment_versions:
+	docker exec -it saasus-platform-document /bin/bash -c "mv docusaurus.config.js.bak docusaurus.config.js"
 
 .PHONY: remove_version
