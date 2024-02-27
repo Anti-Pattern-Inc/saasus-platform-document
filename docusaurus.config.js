@@ -13,7 +13,7 @@ const config = {
   url: 'https://docs.saasus.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/saasus-platform-document/',
+  baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -37,11 +37,10 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          // routeBasePath: '/',
-          // path: 'docs',
+          // バージョンファイルを作成した後に、公開したいバージョンを指定する
+          // docs:version　{ver} する場合はonlyIncludeVersionsに{ver}が含まれていたり、空配列だとエラーになる
+          onlyIncludeVersions: ['1.6'],
           sidebarPath: require.resolve('./sidebars.js'),
-          // editUrl:
-          //   'https://github.com/Anti-Pattern-Inc/saasus-platform-document',
         },
         blog: false,
         theme: {
