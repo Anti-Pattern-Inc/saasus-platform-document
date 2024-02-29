@@ -152,11 +152,6 @@ const config = {
             position: 'right',
           },
           {
-            href: 'https://github.com/Anti-Pattern-Inc/saasus-platform-document',
-            label: 'GitHub',
-            position: 'right',
-          },
-          {
             type: 'docsVersionDropdown',
             position: 'left',
             dropdownActiveClassDisabled: true,
@@ -172,15 +167,6 @@ const config = {
               {
                 label: 'Tutorial',
                 to: '/docs/saasus-platform-document',
-              },
-            ],
-          },
-          {
-            title: 'More',
-            items: [
-              {
-                label: 'GitHub',
-                href: 'https://github.com/Anti-Pattern-Inc/saasus-platform-document',
               },
             ],
           },
