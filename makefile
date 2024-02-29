@@ -27,6 +27,7 @@ up:
 
 install:
 	docker exec -it saasus-platform-document npm install
+	docker exec -it saasus-platform-document npm install -g swagger-i18n-extension
 
 run_en:
 	docker exec -it saasus-platform-document npm run start -- --host 0.0.0.0
