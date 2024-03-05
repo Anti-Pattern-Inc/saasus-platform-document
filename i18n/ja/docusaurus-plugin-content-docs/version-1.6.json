@@ -94,5 +94,9 @@
   "sidebar.tutorialSidebar.category.AWS Marketplace Integration": {
     "message": "AWS Marketplace 連携機能",
     "description": "The label for category AWS Marketplace Integration in sidebar tutorialSidebar"
+  },
+  "sidebar.changelogSidebar.doc.2024/03/05": {
+    "message": "2024/03/05",
+    "description": "The label for the doc item 2024/03/05 in sidebar changelogSidebar, linking to the doc changelog/20240305"
   }
 }
