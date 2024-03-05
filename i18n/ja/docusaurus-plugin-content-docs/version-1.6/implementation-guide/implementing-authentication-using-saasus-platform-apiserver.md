@@ -136,8 +136,8 @@ APIリクエストがSaaSus Platformにログインしたユーザからのも�
 
 ### ２．２．実装サンプルの使い方
 
-- [Go(echo)](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/README.md")
-- [Python(FastAPI)](https://github.com/saasus-platform/implementation-sample-api-python")
-- [Java(Maven)](https://github.com/saasus-platform/implementation-sample-api-java")
+- [Go(echo)](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/README.md)
+- [Python(FastAPI)](https://github.com/saasus-platform/implementation-sample-api-python)
+- [Java(Maven)](https://github.com/saasus-platform/implementation-sample-api-java)
 
 #### 
