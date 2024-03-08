@@ -18,37 +18,13 @@ const sidebars = {
 
   // But you can create a sidebar manually
 
-  tutorialSidebar: [
+  guideSidebar: [
     {
       type: 'category',
       label: 'Getting Started',
       items: ['saasus-platform-document', 'faq'],
       collapsed: false,
       collapsible: false,
-    },
-    {
-      type: 'category',
-      label: 'Tutorial',
-      items: [
-        'tutorial/prepare-the-sample-application',
-        'tutorial/prepare-saasus-platform',
-        'tutorial/saas-management-using-the-saas-operation-console',
-        'tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant',
-        {
-          type: 'category',
-          label: 'Manage Rate Plans',
-          link: {
-            type: 'doc',
-            id: 'tutorial/manage-rate-plans/manage-rate-plans',
-          },
-          items: [
-            'tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans',
-          ],
-        },
-        'tutorial/implementation-of-authorization-based-on-tenant-information',
-        'tutorial/implementation-to-nextjs-spa-based-application',
-        'tutorial/summarize',
-      ],
     },
     {
       type: "category",
@@ -202,6 +178,33 @@ const sidebars = {
             'aws-marketplace-integration/supplementary/public-request'
           ],
         },
+      ],
+    },
+  ],
+
+  tutorialSidebar: [
+    {
+      type: 'category',
+      label: 'Tutorial',
+      items: [
+        'tutorial/prepare-the-sample-application',
+        'tutorial/prepare-saasus-platform',
+        'tutorial/saas-management-using-the-saas-operation-console',
+        'tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant',
+        {
+          type: 'category',
+          label: 'Manage Rate Plans',
+          link: {
+            type: 'doc',
+            id: 'tutorial/manage-rate-plans/manage-rate-plans',
+          },
+          items: [
+            'tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans',
+          ],
+        },
+        'tutorial/implementation-of-authorization-based-on-tenant-information',
+        'tutorial/implementation-to-nextjs-spa-based-application',
+        'tutorial/summarize',
       ],
     },
   ],
