@@ -1254,15 +1254,10 @@ components:
     PricingUnit:
       title: プライシングユニット情報
       type: object
-      properties:
-        type:
-          $ref: "#/components/schemas/UnitType"
-      required:
-        - type
       discriminator:
         propertyName: type
         mapping:
-          tieredUsage: "#/components/schemas/PricingTieredUsageUnit"
+          tiered_usage: "#/components/schemas/PricingTieredUsageUnit"
           tiered: "#/components/schemas/PricingTieredUnit"
           usage: "#/components/schemas/PricingUsageUnit"
           fixed: "#/components/schemas/PricingFixedUnit"
@@ -1274,15 +1269,10 @@ components:
     PricingUnitForSave:
       title: プライシングユニット保存パラメータ
       type: object
-      properties:
-        type:
-          $ref: "#/components/schemas/UnitType"
-      required:
-        - type
       discriminator:
         propertyName: type
         mapping:
-          tieredUsage: "#/components/schemas/PricingTieredUsageUnitForSave"
+          tiered_usage: "#/components/schemas/PricingTieredUsageUnitForSave"
           tiered: "#/components/schemas/PricingTieredUnitForSave"
           usage: "#/components/schemas/PricingUsageUnitForSave"
           fixed: "#/components/schemas/PricingFixedUnitForSave"
