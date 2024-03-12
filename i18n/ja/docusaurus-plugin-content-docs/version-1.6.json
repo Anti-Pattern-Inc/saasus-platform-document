@@ -53,54 +53,54 @@
   },
   "sidebar.guideSidebar.category.Implementation Guide": {
     "message": "実装ガイド",
-    "description": "The label for category Implementation Guide in sidebar tutorialSidebar"
+    "description": "The label for category Implementation Guide in sidebar guideSidebar"
   },
   "sidebar.guideSidebar.category.Usecase": {
     "message": "ユースケース",
-    "description": "The label for category Usecase in sidebar tutorialSidebar"
+    "description": "The label for category Usecase in sidebar guideSidebar"
   },
   "sidebar.guideSidebar.category.SaaS Development Console": {
     "message": "SaaS 開発コンソール",
-    "description": "The label for category SaaS Development Console in sidebar tutorialSidebar"
+    "description": "The label for category SaaS Development Console in sidebar guideSidebar"
   },
   "sidebar.guideSidebar.category.SaaS Operation Console": {
     "message": "SaaS 運用コンソール",
-    "description": "The label for category SaaS Operation Console in sidebar tutorialSidebar"
+    "description": "The label for category SaaS Operation Console in sidebar guideSidebar"
   },
   "sidebar.guideSidebar.category.AWS Marketplace Integration": {
     "message": "AWS Marketplace 連携機能",
-    "description": "The label for category AWS Marketplace Integration in sidebar tutorialSidebar"
+    "description": "The label for category AWS Marketplace Integration in sidebar guideSidebar"
   },
   "sidebar.guideSidebar.category.Metering API Implementation Sample and Examples of Use (Laravel)": {
     "message": "メータリングAPIの実装サンプルと使用例(Laravel)",
-    "description": "The label for category Metering API Implementation Sample and Examples of Use (Laravel) in sidebar tutorialSidebar"
+    "description": "The label for category Metering API Implementation Sample and Examples of Use (Laravel) in sidebar guideSidebar"
   },
   "sidebar.guideSidebar.category.Integrate with Amazon EventBridge": {
     "message": "Amazon EventBridge 連携機能",
-    "description": "The label for category Integrate with Amazon EventBridge in sidebar tutorialSidebar"
+    "description": "The label for category Integrate with Amazon EventBridge in sidebar guideSidebar"
   },
   "sidebar.guideSidebar.category.About SaaS User Accounts": {
     "message": "SaaS利用者（ユーザー）のアカウントについて",
-    "description": "The label for category About SaaS User Accounts in sidebar tutorialSidebar"
+    "description": "The label for category About SaaS User Accounts in sidebar guideSidebar"
   },
   "sidebar.guideSidebar.category.Settings for Google Tag Manager": {
     "message": "Google Tag Managerの設定",
-    "description": "The label for category Settings for Google Tag Manager in sidebar tutorialSidebar"
+    "description": "The label for category Settings for Google Tag Manager in sidebar guideSidebar"
   },
   "sidebar.guideSidebar.category.Pricing Plan Setting": {
     "message": "料金プラン設定",
-    "description": "The label for category Pricing Plan Setting in sidebar tutorialSidebar"
+    "description": "The label for category Pricing Plan Setting in sidebar guideSidebar"
   },
   "sidebar.guideSidebar.category.Setting Up Bank Account From Seller Registration": {
     "message": "セラー登録から銀行口座の設定",
-    "description": "The label for category Setting Up Bank Account From Seller Registration in sidebar tutorialSidebar"
+    "description": "The label for category Setting Up Bank Account From Seller Registration in sidebar guideSidebar"
   },
   "sidebar.guideSidebar.category.Registration of SaaS Product Information": {
     "message": "SaaS製品情報の登録",
-    "description": "The label for category Registration of SaaS Product Information in sidebar tutorialSidebar"
+    "description": "The label for category Registration of SaaS Product Information in sidebar guideSidebar"
   },
   "sidebar.guideSidebar.category.Supplementary": {
     "message": "補足",
-    "description": "The label for category Supplementary in sidebar tutorialSidebar"
+    "description": "The label for category Supplementary in sidebar guideSidebar"
   }
 }
