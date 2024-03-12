@@ -96,6 +96,7 @@ const sidebars = {
         },
         'saas-development-console/notifymailcustomize',
         'saas-development-console/saasususerinvitation',
+        'saas-development-console/usage-metering',
       ],
     },
     {
