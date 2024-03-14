@@ -62,6 +62,7 @@ const sidebars = {
             "usecase/about-saas-user-accounts/add-tenant-user",
           ],
         },
+        'saas-operation-console/user-feedback',
       ],
     },
     {
