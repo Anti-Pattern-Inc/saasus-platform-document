@@ -8,22 +8,27 @@ createdAt: "Fri Jan 20 2023 01:46:32 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
 
-Let's turn a simple web chat application into SaaS
-
-In this tutorial, a simple chat system created as a so-called ordinary web application will be converted to SaaS using the SaaSus Platform.
+In this tutorial, we will use SaaSus Platform to turn a simple chat system created as a regular web application into SaaS (Software as a Service).
 
 ## Preparing the Sample Application
 
-First, let's start the sample application!
+First, start this sample application.
 
-The backend of this simple chat system is PHP8 + Laravel9 + PostgreSQL13.  
-There are two types of frontends, one created with Laravel with Blade and one created as an SPA with Next.js.
+This simple chat system uses PHP 8, Laravel 9, and PostgreSQL 13 as the backend.
 
-First of all, let's check the operation!
+The front end includes two SPA (Single Page Application) created with Laravel with Blade and Next.js.
+
+Prerequisites<br/>
+- PHP 8 must be installed.<br/>
+- Composer must be installed.<br/>
+- PostgreSQL 13 is installed and properly configured.<br/>
+- Node.js and npm must be installed.
+
+First, clone the sample application from the repository below.
 
 [https://github.com/saasus-platform/sampleapp-basic-chat](https://github.com/saasus-platform/sampleapp-basic-chat)
 
-In the directory where the above repository is cloned,
+After cloning, move to the directory below and execute the command.
 
 - For PHP, under `sampleapp-basic-chat/php/laravel`
 - For Next.js, under `sampleapp-basic-chat/node/express`
@@ -32,9 +37,9 @@ In the directory where the above repository is cloned,
 ./init.sh
 ```
 
-will start the application locally.
+The application was launched locally.
 
-Once it's started, go to the URL below and give it a try.
+Once launched, try it out by accessing the URL below.
 
 Blade version
 
@@ -54,13 +59,11 @@ Password: password
 
 ![サンプル](/img/tutorial/prepare-the-sample-application/prepare-the-sample-application-02.png)
 
-In this way, users can write whatever they like.
+To allow users to post freely, we currently use Laravel's standard authentication module to identify users.
 
-Currently, we use Laravel's standard authentication module to identify users.
+However, Laravel's standard authentication module cannot be said to have strong security, and this simple web application has no concept of tenants, roles, or even pricing plans.
 
-However, since it is a Laravel standard authentication module, it is difficult to say that security is strong. Also since it's a simple web application, of course there is no concept of tenants. There is no concept of roles, and there are no pricing plans.
-
-Let's turn this simple web application into SaaS!
+Let's turn this simple web application into SaaS.
 
 \*The difference between the source code at the start of the tutorial and at the end of the tutorial is  
 PHP  
@@ -69,4 +72,4 @@ PHP
 Next.js  
 [https://github.com/saasus-platform/sampleapp-basic-chat/pull/11/files](https://github.com/saasus-platform/sampleapp-basic-chat/pull/11/files)
 
-Please use the above links as reference.
+Please use this as a reference.
