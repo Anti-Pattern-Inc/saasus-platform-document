@@ -102,5 +102,9 @@
   "sidebar.guideSidebar.category.Supplementary": {
     "message": "補足",
     "description": "The label for category Supplementary in sidebar guideSidebar"
+  },
+  "sidebar.changelogSidebar.doc.2024/03/13": {
+    "message": "2024/03/13",
+    "description": "The label for the doc item 2024/03/13 in sidebar changelogSidebar, linking to the doc changelog/20240313"
   }
 }

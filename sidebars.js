@@ -62,7 +62,6 @@ const sidebars = {
             "usecase/about-saas-user-accounts/add-tenant-user",
           ],
         },
-        'saas-operation-console/user-feedback',
       ],
     },
     {
@@ -122,6 +121,7 @@ const sidebars = {
             "saas-operation-console/price-plan/price-plan-setting-004",
           ],
         },
+        'saas-operation-console/user-feedback',
       ],
     },
     {
