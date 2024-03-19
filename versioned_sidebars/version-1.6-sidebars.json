@@ -3,7 +3,10 @@
     {
       "type": "category",
       "label": "Getting Started",
-      "items": ["saasus-platform-document", "faq"],
+      "items": [
+        "saasus-platform-document",
+        "faq"
+      ],
       "collapsed": false,
       "collapsible": false
     },
@@ -100,7 +103,8 @@
             "saas-operation-console/price-plan/price-plan-setting-003",
             "saas-operation-console/price-plan/price-plan-setting-004"
           ]
-        }
+        },
+        "saas-operation-console/user-feedback"
       ]
     },
     {
