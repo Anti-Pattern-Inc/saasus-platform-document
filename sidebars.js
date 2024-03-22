@@ -121,6 +121,7 @@ const sidebars = {
             "saas-operation-console/price-plan/price-plan-setting-004",
           ],
         },
+        'saas-operation-console/user-feedback',
       ],
     },
     {
