@@ -1,0 +1,110 @@
+{
+  "version.label": {
+    "message": "1.8",
+    "description": "The label for version 1.8"
+  },
+  "sidebar.tutorialSidebar.category.Getting Started": {
+    "message": "はじめに",
+    "description": "The label for category Getting Started in sidebar tutorialSidebar"
+  },
+  "sidebar.apiDocSidebar.category.API Docs": {
+    "message": "API Docs",
+    "description": "The label for category API Docs in sidebar apiDocSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Tutorial": {
+    "message": "チュートリアル",
+    "description": "The label for category Tutorial in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Manage Rate Plans": {
+    "message": "料金プランの管理",
+    "description": "The label for category Manage Rate Plans in sidebar tutorialSidebar"
+  },
+  "sidebar.changelogSidebar.category.Changelog": {
+    "message": "Changelog",
+    "description": "The label for category Changelog in sidebar changelogSidebar"
+  },
+  "sidebar.changelogSidebar.doc.2023/11/23": {
+    "message": "2023/11/23",
+    "description": "The label for the doc item 2023/11/23 in sidebar changelogSidebar, linking to the doc changelog/20231123"
+  },
+  "sidebar.changelogSidebar.doc.2023/11/18": {
+    "message": "2023/11/18",
+    "description": "The label for the doc item 2023/11/18 in sidebar changelogSidebar, linking to the doc changelog/20231118"
+  },
+  "sidebar.changelogSidebar.doc.2023/11/05": {
+    "message": "2023/11/05",
+    "description": "The label for the doc item 2023/11/05 in sidebar changelogSidebar, linking to the doc changelog/20231105"
+  },
+  "sidebar.changelogSidebar.doc.2022/12/24": {
+    "message": "2022/12/24",
+    "description": "The label for the doc item 2022/12/24 in sidebar changelogSidebar, linking to the doc changelog/20221224"
+  },
+  "sidebar.changelogSidebar.doc.Welcome to SaaSus Platform": {
+    "message": "Welcome to SaaSus Platform",
+    "description": "The label for the doc item Welcome to SaaSus Platform in sidebar changelogSidebar, linking to the doc changelog/welcome-to-saasus-platform"
+  },
+  "sidebar.changelogSidebar.doc.2024/03/05": {
+    "message": "2024/03/05",
+    "description": "The label for the doc item 2024/03/05 in sidebar changelogSidebar, linking to the doc changelog/20240305"
+  },
+  "sidebar.guideSidebar.category.Getting Started": {
+    "message": "はじめに",
+    "description": "The label for category Getting Started in sidebar guideSidebar"
+  },
+  "sidebar.guideSidebar.category.Implementation Guide": {
+    "message": "実装ガイド",
+    "description": "The label for category Implementation Guide in sidebar guideSidebar"
+  },
+  "sidebar.guideSidebar.category.Usecase": {
+    "message": "ユースケース",
+    "description": "The label for category Usecase in sidebar guideSidebar"
+  },
+  "sidebar.guideSidebar.category.SaaS Development Console": {
+    "message": "SaaS 開発コンソール",
+    "description": "The label for category SaaS Development Console in sidebar guideSidebar"
+  },
+  "sidebar.guideSidebar.category.SaaS Operation Console": {
+    "message": "SaaS 運用コンソール",
+    "description": "The label for category SaaS Operation Console in sidebar guideSidebar"
+  },
+  "sidebar.guideSidebar.category.AWS Marketplace Integration": {
+    "message": "AWS Marketplace 連携機能",
+    "description": "The label for category AWS Marketplace Integration in sidebar guideSidebar"
+  },
+  "sidebar.guideSidebar.category.Metering API Implementation Sample and Examples of Use (Laravel)": {
+    "message": "メータリングAPIの実装サンプルと使用例(Laravel)",
+    "description": "The label for category Metering API Implementation Sample and Examples of Use (Laravel) in sidebar guideSidebar"
+  },
+  "sidebar.guideSidebar.category.Integrate with Amazon EventBridge": {
+    "message": "Amazon EventBridge 連携機能",
+    "description": "The label for category Integrate with Amazon EventBridge in sidebar guideSidebar"
+  },
+  "sidebar.guideSidebar.category.About SaaS User Accounts": {
+    "message": "SaaS利用者（ユーザー）のアカウントについて",
+    "description": "The label for category About SaaS User Accounts in sidebar guideSidebar"
+  },
+  "sidebar.guideSidebar.category.Settings for Google Tag Manager": {
+    "message": "Google Tag Managerの設定",
+    "description": "The label for category Settings for Google Tag Manager in sidebar guideSidebar"
+  },
+  "sidebar.guideSidebar.category.Pricing Plan Setting": {
+    "message": "料金プラン設定",
+    "description": "The label for category Pricing Plan Setting in sidebar guideSidebar"
+  },
+  "sidebar.guideSidebar.category.Setting Up Bank Account From Seller Registration": {
+    "message": "セラー登録から銀行口座の設定",
+    "description": "The label for category Setting Up Bank Account From Seller Registration in sidebar guideSidebar"
+  },
+  "sidebar.guideSidebar.category.Registration of SaaS Product Information": {
+    "message": "SaaS製品情報の登録",
+    "description": "The label for category Registration of SaaS Product Information in sidebar guideSidebar"
+  },
+  "sidebar.guideSidebar.category.Supplementary": {
+    "message": "補足",
+    "description": "The label for category Supplementary in sidebar guideSidebar"
+  },
+  "sidebar.changelogSidebar.doc.2024/03/13": {
+    "message": "2024/03/13",
+    "description": "The label for the doc item 2024/03/13 in sidebar changelogSidebar, linking to the doc changelog/20240313"
+  }
+}
