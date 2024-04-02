@@ -81,7 +81,9 @@
           ]
         },
         "saas-development-console/notifymailcustomize",
-        "saas-development-console/saasususerinvitation"
+        "saas-development-console/saasususerinvitation",
+        "saas-development-console/usage-metering",
+        "saas-development-console/ip-restriction"
       ]
     },
     {
@@ -102,7 +104,8 @@
             "saas-operation-console/price-plan/price-plan-setting-003",
             "saas-operation-console/price-plan/price-plan-setting-004"
           ]
-        }
+        },
+        "saas-operation-console/user-feedback"
       ]
     },
     {
@@ -223,6 +226,11 @@
       "type": "category",
       "label": "Changelog",
       "items": [
+        {
+          "label": "2024/03/13",
+          "type": "doc",
+          "id": "changelog/20240313"
+        },
         {
           "label": "2024/03/05",
           "type": "doc",
