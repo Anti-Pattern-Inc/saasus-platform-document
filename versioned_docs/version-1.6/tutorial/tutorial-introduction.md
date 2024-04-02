@@ -16,3 +16,21 @@ By following the procedures from Step 1 to Step 5, the basic chat system will un
 
 This process will result in the development of an enhanced chat system, capable of accommodating diverse user needs through the support of multi-tenancy and flexible control via pricing plans.
 
+Check the diagram to see the difference between the architects before and after the tutorial.
+
+Before the tutorial
+![サンプル](/img/tutorial/tutorial-introduction/tutorial-introduction-02.png)
+
+After the tutorial
+![サンプル](/img/tutorial/tutorial-introduction/tutorial-introduction-03.png)
+
+Migration of User and Tenant Information:<br/>
+SaaSus Platform manages user information and the tenant information associated with it. Therefore, there is no need for the chat system to maintain this information.
+
+External Delegation of User Authentication:<br/>
+User authentication is delegated to SaaSus Platform. The chat system only needs to receive callbacks from SaaSus Platform and perform necessary processing to implement the login functionality.
+
+Changes to Data Model:<br/>
+A tenant_id column will be added to the data model previously maintained by the chat system. This enables multi-tenancy support.
+
+By following these steps, the chat system can be SaaS-enabled using SaaSus Platform.
