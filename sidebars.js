@@ -123,7 +123,7 @@ const sidebars = {
             "saas-operation-console/price-plan/price-plan-setting-004",
           ],
         },
-        'saas-operation-console/user-feedback',
+        "saas-operation-console/user-feedback",
       ],
     },
     {
@@ -245,6 +245,16 @@ const sidebars = {
       type: "category",
       label: "Changelog",
       items: [
+        {
+          label: "2024/04/02",
+          type: "doc",
+          id: "changelog/20240402",
+        },
+        {
+          label: "2024/03/19",
+          type: "doc",
+          id: "changelog/20240319",
+        },
         {
           label: "2024/03/13",
           type: "doc",

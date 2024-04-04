@@ -3,10 +3,7 @@
     {
       "type": "category",
       "label": "Getting Started",
-      "items": [
-        "saasus-platform-document",
-        "faq"
-      ],
+      "items": ["saasus-platform-document", "faq"],
       "collapsed": false,
       "collapsible": false
     },
@@ -224,6 +221,16 @@
       "type": "category",
       "label": "Changelog",
       "items": [
+        {
+          "label": "2024/04/02",
+          "type": "doc",
+          "id": "changelog/20240402"
+        },
+        {
+          "label": "2024/03/19",
+          "type": "doc",
+          "id": "changelog/20240319"
+        },
         {
           "label": "2024/03/13",
           "type": "doc",
