@@ -15,10 +15,17 @@ import TabItem from "@theme/TabItem";
 
 ※ここからはプログラミングの知識が必要になります
 
-### SaaS ID と API キー、クライアントシークレットの再確認
+### SaaS ID と API キー、クライアントシークレットの確認
 
-まず、**SaaSus 開発コンソール**にて API キーを表示しておきましょう。これをアプリケーションの設定に使います  
-(API キーは決して外部に漏らさないようにお気をつけください。このチュートリアルに表示されている API キーは既に無効化してあります)
+まず、**SaaSus 開発コンソール**で API キーを表示します。このキーはアプリケーションの設定に使用されます。
+
+「SaaS ID」は、通常はデフォルトで生成されています。必要に応じて、既存の「SaaS ID」を使用するか、「SaaS ID の再発行」ボタンをクリックして新しいIDを生成することもできます。
+
+「API キー」は初期状態では自動的に生成されていません。必要に応じて、「API キーの発行」ボタンをクリックして新しいキーを1つ発行してください。
+
+※実際にSaaSの運用が開始された後、「SaaS ID の再発行」を行った場合、SaaSアプリケーション内で使用している SaaS ID も更新する必要がありますので、ご注意ください。
+
+(API キーは絶対に外部に漏洩しないようご注意ください。このチュートリアルで表示されている API キーはすでに無効化されています。)
 
 ![01](/ja/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-01.png)
 
@@ -297,7 +304,19 @@ const getChats = async (req: Request, res: Response) => {
 
 ここまでで連携の基本ができました。
 
-では、実際に SaaSus Platform からログインして動作確認してみましょう。
+### 認証後の遷移先 URL の設定
+
+設定したドメイン名をベースにして、SaaSus Platform はログイン画面を生成します。ログイン後、SaaS 側に認証情報を引き継ぎます。この引き継ぎ先の SaaS の URL を、Callback URL として登録する必要があります。
+
+サイドメニューから「認証後遷移先」をクリックし、Callback URL 設定画面を表示します。
+
+通常は、提供している SaaS の URL をベースに Callback URL を設定します。ただし、今回はサンプルアプリケーションをローカルで動かすため、以下のように設定します。
+
+[http://localhost/callback](http://localhost/callback)
+
+![08](/ja/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-08.png)
+
+実際に SaaSus Platform からログインして動作を確認します。
 
 ### SaaSus SDK 組み込みの確認
 
@@ -353,6 +372,11 @@ array:3 [▼
 そのあと、アプリケーションのコントローラに処理が移るので、この時点ですでにアプリケーションはログインした人の情報を持っていることになります。
 
 では、この情報を使って、掲示板アプリケーションをマルチテナント対応にしてみましょう！
+
+:::info
+自動生成されたログイン画面はサービス名やアイコンを表示したり、利用規約やプライバシーポリシーのリンクを設定することができます。<br/>
+設定方法は、[ログイン画面など認証系画面のカスタマイズ](../saas-development-console/authorization-screen-customize)で確認してください。
+:::
 
 ### サンプルアプリケーションのマルチテナント化
 
