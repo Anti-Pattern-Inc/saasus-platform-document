@@ -42,19 +42,21 @@ clone後、下記ディレクトリに移動し、コマンドを実行します
 
 Blade 版
 
-URL: [http://localhost/board](http://localhost/board)
-認証用 Email: [user@example.com](mailto:user@example.com)  
+URL: [http://localhost/board](http://localhost/board)<br/>
+認証用 Email: [user@example.com](mailto:user@example.com)<br/>
 Password: password
 
 ![サンプル](/ja/img/tutorial/prepare-the-sample-application/prepare-the-sample-application-01.png)
 
 Next.js 版
 
-URL: [http://localhost:80/login/](http://localhost:80/login/)
-認証用 Email: [user@example.com](mailto:user@example.com)  
+URL: [http://localhost:80/login/](http://localhost:80/login/)<br/>
+認証用 Email: [user@example.com](mailto:user@example.com)<br/>
 Password: password
 
-※ Next.js 版は、ビルドに数分掛かる可能性があります。表示できない場合は、数分待ってから再度表示してみてください。
+:::warning
+Next.js 版は、ビルドに数分掛かる可能性があります。表示できない場合は、数分待ってから再度表示してみてください。
+:::
 
 ![サンプル](/ja/img/tutorial/prepare-the-sample-application/prepare-the-sample-application-02.png)
 
@@ -64,11 +66,9 @@ Password: password
 
 このようなシンプルなWebアプリケーションをSaaS化していきましょう。
 
-※チュートリアル開始時点と完了時点でのソースコードの差分は  
+※チュートリアル開始時点と完了時点でのソースコードの差分は以下を参考にしてください。<br/>
 PHP  
 [https://github.com/saasus-platform/sampleapp-basic-chat/pull/10/files](https://github.com/saasus-platform/sampleapp-basic-chat/pull/10/files)
 
 Next.js  
 [https://github.com/saasus-platform/sampleapp-basic-chat/pull/11/files](https://github.com/saasus-platform/sampleapp-basic-chat/pull/11/files)
-
-こちらになりますので、参考にしてみてください。
