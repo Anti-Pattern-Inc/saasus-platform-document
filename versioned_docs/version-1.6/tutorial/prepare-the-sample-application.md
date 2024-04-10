@@ -43,19 +43,21 @@ Once launched, try it out by accessing the URL below.
 
 Blade version
 
-URL: [http://localhost/board](http://localhost/board)
-Authentication Email: [user@example.com](mailto:user@example.com)  
+URL: [http://localhost/board](http://localhost/board<br/>)<br/>
+Authentication Email: [user@example.com](mailto:user@example.com)<br/>
 Password: password
 
 ![サンプル](/img/tutorial/prepare-the-sample-application/prepare-the-sample-application-01.png)
 
 Next.js version
 
-URL: [http://localhost:80/login/](http://localhost:80/login/)
-Authentication Email: [user@example.com](mailto:user@example.com)  
+URL: [http://localhost:80/login/](http://localhost:80/login/)<br/>
+Authentication Email: [user@example.com](mailto:user@example.com)<br/>
 Password: password
 
-- The Next.js version may take several minutes to build. If it doesn't display, wait a few minutes and try to view it again.
+:::warning
+The Next.js version may take several minutes to build. If it doesn't display, wait a few minutes and try to view it again.
+:::
 
 ![サンプル](/img/tutorial/prepare-the-sample-application/prepare-the-sample-application-02.png)
 
@@ -65,11 +67,9 @@ However, Laravel's standard authentication module cannot be said to have strong 
 
 Let's turn this simple web application into SaaS.
 
-\*The difference between the source code at the start of the tutorial and at the end of the tutorial is  
+\*Please refer to the following for the difference between the source code at the start and end of the tutorial.<br/>
 PHP  
 [https://github.com/saasus-platform/sampleapp-basic-chat/pull/10/files](https://github.com/saasus-platform/sampleapp-basic-chat/pull/10/files)
 
 Next.js  
 [https://github.com/saasus-platform/sampleapp-basic-chat/pull/11/files](https://github.com/saasus-platform/sampleapp-basic-chat/pull/11/files)
-
-Please use this as a reference.
