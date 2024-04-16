@@ -194,6 +194,7 @@ const sidebars = {
       type: "category",
       label: "Tutorial",
       items: [
+        "tutorial/tutorial-introduction",
         "tutorial/prepare-the-sample-application",
         "tutorial/prepare-saasus-platform",
         "tutorial/saas-management-using-the-saas-operation-console",
