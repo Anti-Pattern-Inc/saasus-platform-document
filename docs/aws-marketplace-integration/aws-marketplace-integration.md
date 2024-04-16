@@ -74,11 +74,11 @@ Because it's hard to imagine from text, we will introduce the flow to listing in
    :::
    ***
 
-1. Final review request for SaaS product for production
-   1. [How torequest](/docs/aws-marketplace-integration/supplementary/final-review-request)
+11. Final review request for SaaS product for production
+    1. [How torequest](/docs/aws-marketplace-integration/supplementary/final-review-request)
 
-1. Public release request for SaaS product for production
-   1. [Request Method](/docs/aws-marketplace-integration/supplementary/public-request)
+12.  Public release request for SaaS product for production
+     1. [Request Method](/docs/aws-marketplace-integration/supplementary/public-request)
 
 # Criteria for SaaS Products in Listing
 
