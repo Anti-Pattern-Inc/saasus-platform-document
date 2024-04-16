@@ -16,7 +16,7 @@ By following the procedures from Step 1 to Step 5, the basic chat system will un
 
 This process will result in the development of an enhanced chat system, capable of accommodating diverse user needs through the support of multi-tenancy and flexible control via pricing plans.
 
-Check the diagram to see the difference between the architects before and after the tutorial.
+Check the diagram to see the difference between the architecture before and after the tutorial.
 
 Before the tutorial
 ![サンプル](/img/tutorial/tutorial-introduction/tutorial-introduction-02.png)
