@@ -8,7 +8,7 @@ createdAt: "Wed Jan 11 2023 03:12:42 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
 
-このチュートリアルでは、普通のWebアプリケーションとして作成された簡易チャットシステムを、SaaSus Platformを使用してSaaS（Software as a Service）化します。
+このチュートリアルでは、文字列の投稿ができるWebアプリケーションとして作成された簡易チャットシステムを、SaaSus Platformを使用してSaaS（Software as a Service）化します。
 
 ## サンプルアプリケーションの準備
 
@@ -26,7 +26,9 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 
 まずは、下記リポジトリからサンプルアプリケーションを clone してきます。
 
-[https://github.com/saasus-platform/sampleapp-basic-chat](https://github.com/saasus-platform/sampleapp-basic-chat)
+```git
+git clone https://github.com/saasus-platform/sampleapp-basic-chat
+```
 
 clone後、下記ディレクトリに移動し、コマンドを実行します。  
 ※ PHP の場合`sampleapp-basic-chat/php/laravel`配下  
@@ -54,7 +56,7 @@ URL: [http://localhost:80/login/](http://localhost:80/login/)<br/>
 認証用 Email: [user@example.com](mailto:user@example.com)<br/>
 Password: password
 
-:::warning
+:::caution
 Next.js 版は、ビルドに数分掛かる可能性があります。表示できない場合は、数分待ってから再度表示してみてください。
 :::
 
@@ -62,7 +64,13 @@ Next.js 版は、ビルドに数分掛かる可能性があります。表示で
 
 ユーザが自由に投稿できるように、現在はLaravelの標準認証モジュールを使用してユーザを識別しています。
 
-しかし、Laravelの標準認証モジュールはセキュリティが強固とは言い難く、また、このシンプルなWebアプリケーションにはテナントの概念や役割の概念、さらには料金プランなどが存在しません。
+SaaSus Platformを導入しユーザー認証をSaaSus Platform経由で行うことにより、ユーザーの識別やユーザーに紐づいているテナント情報の取得を簡単に行うことができるようになります。
+
+テナントのデータ設計や情報管理をSaaSアプリケーション側が行う必要はありません。
+
+また、料金プランもSaaSus Platformで設定を行えば、すぐに利用ができるようになります。
+
+SaaSus Platformが持つ情報は、APIを経由してSaaSアプリケーションでも登録・取得・更新ができるようになります。
 
 このようなシンプルなWebアプリケーションをSaaS化していきましょう。
 
