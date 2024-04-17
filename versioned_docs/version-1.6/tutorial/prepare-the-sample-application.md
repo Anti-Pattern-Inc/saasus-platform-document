@@ -8,7 +8,7 @@ createdAt: "Fri Jan 20 2023 01:46:32 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
 
-In this tutorial, we will use SaaSus Platform to turn a simple chat system created as a regular web application into SaaS (Software as a Service).
+In this tutorial, we will use SaaSus Platform to turn a simple chat system created as a web application that can post strings into SaaS (Software as a Service).
 
 ## Preparing the Sample Application
 
@@ -26,7 +26,9 @@ Prerequisites<br/>
 
 First, clone the sample application from the repository below.
 
-[https://github.com/saasus-platform/sampleapp-basic-chat](https://github.com/saasus-platform/sampleapp-basic-chat)
+```git
+git clone https://github.com/saasus-platform/sampleapp-basic-chat
+```
 
 After cloning, move to the directory below and execute the command.
 
@@ -55,7 +57,7 @@ URL: [http://localhost:80/login/](http://localhost:80/login/)<br/>
 Authentication Email: [user@example.com](mailto:user@example.com)<br/>
 Password: password
 
-:::warning
+:::caution
 The Next.js version may take several minutes to build. If it doesn't display, wait a few minutes and try to view it again.
 :::
 
@@ -63,7 +65,13 @@ The Next.js version may take several minutes to build. If it doesn't display, wa
 
 To allow users to post freely, we currently use Laravel's standard authentication module to identify users.
 
-However, Laravel's standard authentication module cannot be said to have strong security, and this simple web application has no concept of tenants, roles, or even pricing plans.
+By introducing the SaaSus Platform and performing user authentication via the SaaSus Platform, you will be able to easily identify users and obtain tenant information associated with them.
+
+There is no need for the SaaS application to design tenant data or manage information.
+
+Additionally, once you set up your pricing plan on the SaaSus Platform, you can start using it right away.
+
+Information held by the SaaSus Platform can be registered, acquired, and updated by SaaS applications via API.
 
 Let's turn this simple web application into SaaS.
 
