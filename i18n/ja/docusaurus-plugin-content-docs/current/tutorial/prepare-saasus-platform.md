@@ -53,7 +53,7 @@ SaaSus Platformではドメインを設定することで、ログイン画面�
 :::
 
 :::info
-SaaS アプリケーションに必要となる主な登録情報の設定方法は、下記ページを確認してください。<br/>
+SaaS アプリケーションを実際に開発する際には必要となる主な登録情報の設定方法は、下記ページを確認してください。<br/>
 [ユーザに追加属性を定義する](../saas-development-console/declare-additional-attribute-to-user)<br/>
 [テナントに追加属性を定義する](../saas-development-console/declare-additional-attribute-to-tenant)<br/>
 [役割の定義](../saas-development-console/role-definition)
