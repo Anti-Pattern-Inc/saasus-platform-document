@@ -30,6 +30,18 @@ The "API key" is not automatically generated in the initial state. If necessary,
 
 ![01](/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-01.png)
 
+### Authentication Redirect URL Setting
+
+The SaaSus Platform generates a login screen based on the domain name you set. After login, the authentication information is transferred to the SaaS side. The URL of the SaaS to which the authentication information is transferred must be registered as the Callback URL.
+
+Click "Auth Transition" from the side menu to display the Callback URL setting screen.
+
+Normally, the Callback URL is set based on the provided SaaS URL. However, in this case, since the sample application is run locally, the following settings are used.
+
+[http://localhost/callback](http://localhost/callback)
+
+![08](/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-08.png)
+
 ### Prepare to use the SaaSus SDK
 
 Open the sample application we prepared earlier in the development environment.
@@ -302,18 +314,6 @@ const getChats = async (req: Request, res: Response) => {
 ```
 
 Once this step is completed the basic SDK setup is complete.
-
-### Authentication Redirect URL Setting
-
-The SaaSus Platform generates a login screen based on the domain name you set. After login, the authentication information is transferred to the SaaS side. The URL of the SaaS to which the authentication information is transferred must be registered as the Callback URL.
-
-Click "Auth Transition" from the side menu to display the Callback URL setting screen.
-
-Normally, the Callback URL is set based on the provided SaaS URL. However, in this case, since the sample application is run locally, the following settings are used.
-
-[http://localhost/callback](http://localhost/callback)
-
-![08](/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-08.png)
 
 Now, log in from the SaaSus Platform and check the operation.
 

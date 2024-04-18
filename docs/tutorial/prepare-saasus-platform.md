@@ -15,47 +15,48 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 
 ### Creating a SaaSus Platform Account
 
-First, let's create a SaaSus Platform account.
+First, let's create an account on SaaSus Platform.
 
-Access the registration screen and perform new registration using your own email address.
+Display the new registration screen and register using your email address.
 
 [https://auth.saasus.io/sign-up](https://auth.saasus.io/sign-up)
 
-Enter your email address and desired password, read the terms of use and privacy policy, check if you agree, and press the sign up button.
+Please enter your email address, read the terms of use and privacy policy, and check the box if you agree. Then click the new registration button.
 
 ![01](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-01.png)
 
-A verification code will be sent to the email address you entered, enter it to activate your account
+A temporary password will be sent to the email address you entered. Enter the temporary password you received and the new password you want to register. Press the "Set new password" button to activate your account.
 
 ![02](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-02.png)
 
-After verification is completed, the login screen will be displayed
-
-Log in with the email address and password you registered with earlier.
+When you register with SaaSus Platform for the first time, we will create a tenant exclusively for you. This will take at least an hour as we are creating an AWS account specifically for you. Once your account creation is complete, you will receive instructions at the email address you provided earlier.
 
 ![03](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-03.png)
 
-When you register for the SaaSus Platform for the first time, we will create a tenant exclusively for you. This takes at least an hour because we will create a customer-dedicated AWS account. Once your account has been created, you will receive an email to the email address you provided.
-
-![06](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-04.png)
-
 ### Logging into the Console
 
-After the tenant is created, when you log in, you will be prompted to enter user attributes like this.
+When you log in after the tenant is created, you will be asked to enter user attributes as shown above, so please enter your company name and name.
+
+![04](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-04.png)
+
+After entering the information, a transition screen to each console of the tenant will be displayed.
 
 ![05](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-05.png)
-
-After filling in the information, the transition page to each console of the tenant is displayed.
-
-![06](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-06.png)
 
 **SaaS Development Console** is a console for setting up SaaS construction.
 
 **SaaS Management Console** is a console for managing SaaS.
 
-Details on registration will be provided later.  
-First, in order to set up SaaS creation settings log into the **SaaS Development Console**.
+:::info
+By setting a domain on SaaSus Platform, you can set it as the base domain for automatically generating the login screen and sending emails.<br/>
+For information on how to set up your domain, please see [Domain Name Preference](../saas-development-console/domain-name-preference).
+:::
 
-Now you are ready to create a multi-tenant SaaS.
+:::info
+Please check the following page for information on how to set the main registration information required for SaaS applications.<br/>
+[Declare Additional Attribute To User](../saas-development-console/declare-additional-attribute-to-user)<br/>
+[Declare Additional Attribute To Tenant](../saas-development-console/declare-additional-attribute-to-tenant)<br/>
+[Role Definition](../saas-development-console/role-definition)
+:::
 
-Now let's switch to the **SaaS Operation Console** and create SaaS tenants and users!
+Once the SaaSus Platform is ready, we will incorporate it into the sample application.
