@@ -47,8 +47,6 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 
 **SaaS 管理コンソール**は、SaaS を運用していくためのコンソールになります。
 
-まずは SaaS 作成の設定を行いたいので、**SaaS 開発コンソール**にログインします。
-
 :::info
 SaaSus Platformではドメインを設定することで、ログイン画面の自動生成やメール送信の際のベースドメインに設定することができます。<br/>
 ドメインの設定方法に関しては、[ドメイン名の設定](../saas-development-console/domain-name-preference)で確認してください。

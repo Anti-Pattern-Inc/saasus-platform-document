@@ -29,6 +29,18 @@ import TabItem from "@theme/TabItem";
 
 ![01](/ja/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-01.png)
 
+### 認証後の遷移先 URL の設定
+
+設定したドメイン名をベースにして、SaaSus Platform はログイン画面を生成します。ログイン後、SaaS 側に認証情報を引き継ぎます。この引き継ぎ先の SaaS の URL を、Callback URL として登録する必要があります。
+
+サイドメニューから「認証後遷移先」をクリックし、Callback URL 設定画面を表示します。
+
+通常は、提供している SaaS の URL をベースに Callback URL を設定します。ただし、今回はサンプルアプリケーションをローカルで動かすため、以下のように設定します。
+
+[http://localhost/callback](http://localhost/callback)
+
+![08](/ja/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-08.png)
+
 ### SaaSus SDK 利用の準備
 
 では、さきほど準備したサンプルアプリケーションを開発環境で開きましょう。
@@ -304,19 +316,7 @@ const getChats = async (req: Request, res: Response) => {
 
 ここまでで連携の基本ができました。
 
-### 認証後の遷移先 URL の設定
-
-設定したドメイン名をベースにして、SaaSus Platform はログイン画面を生成します。ログイン後、SaaS 側に認証情報を引き継ぎます。この引き継ぎ先の SaaS の URL を、Callback URL として登録する必要があります。
-
-サイドメニューから「認証後遷移先」をクリックし、Callback URL 設定画面を表示します。
-
-通常は、提供している SaaS の URL をベースに Callback URL を設定します。ただし、今回はサンプルアプリケーションをローカルで動かすため、以下のように設定します。
-
-[http://localhost/callback](http://localhost/callback)
-
-![08](/ja/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-08.png)
-
-実際に SaaSus Platform からログインして動作を確認します。。
+実際に SaaSus Platform からログインして動作を確認します。
 
 ### SaaSus SDK 組み込みの確認
 

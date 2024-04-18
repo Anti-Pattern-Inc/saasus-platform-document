@@ -47,8 +47,6 @@ After entering the information, a transition screen to each console of the tenan
 
 **SaaS Management Console** is a console for managing SaaS.
 
-First, we want to configure the SaaS creation settings, so log in to the **SaaS development console**.
-
 :::info
 By setting a domain on SaaSus Platform, you can set it as the base domain for automatically generating the login screen and sending emails.<br/>
 For information on how to set up your domain, please see [Domain Name Preference](../saas-development-console/domain-name-preference).
