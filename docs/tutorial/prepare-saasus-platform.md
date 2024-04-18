@@ -53,7 +53,7 @@ For information on how to set up your domain, please see [Domain Name Preference
 :::
 
 :::info
-Please check the following page for information on how to set the main registration information required for SaaS applications.<br/>
+Please refer to the following page for the main registration settings required when actually developing a SaaS application.<br/>
 [Declare Additional Attribute To User](../saas-development-console/declare-additional-attribute-to-user)<br/>
 [Declare Additional Attribute To Tenant](../saas-development-console/declare-additional-attribute-to-tenant)<br/>
 [Role Definition](../saas-development-console/role-definition)
