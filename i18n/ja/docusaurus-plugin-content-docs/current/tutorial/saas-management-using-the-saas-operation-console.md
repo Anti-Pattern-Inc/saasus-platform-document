@@ -12,7 +12,7 @@ SaaS 運用コンソールでは、テナントの管理、ユーザの管理な
 
 ![01](/ja/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-01.png)
 
-先ほどまでは、SaaS 開発コンソールにログインていたと思いますので、「SaaS 運用コンソール」をクリックすると、SaaS 運用コンソールに切り替わります。
+先ほどまでは、SaaS 開発コンソールにログインしていたと思いますので、「SaaS 運用コンソール」をクリックすると、SaaS 運用コンソールに切り替わります。
 
 ### SaaS 利用者テナントの作成
 
