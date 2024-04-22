@@ -12,11 +12,13 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 
 ### Switch Consoles
 
-In the SaaS Operation Console, functions for SaaS operation such as tenant management and user management can be used.
+The SaaS operations console allows you to use functions for SaaS operations such as tenant management and user management.
 
-I believe you were logged into the SaaSus console until now, so let's switch to the SaaS Operation Console at the top left corner of the screen.
+When you click "SaaS Development Console" on the left menu bar, the option of "SaaS Operation Console" will be displayed.
 
 ![01](/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-01.png)
+
+Up until now, I believe you were logged in to the SaaS Development Console, so click "SaaS Operations Console" to switch to the SaaS Operations Console.
 
 ### Create a SaaS Consumer Tenant
 
