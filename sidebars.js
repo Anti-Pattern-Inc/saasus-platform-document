@@ -129,8 +129,12 @@ const sidebars = {
     {
       type: "category",
       label: "AWS Marketplace Integration",
+      link: {
+        type: "doc",
+        id: "aws-marketplace-integration/aws-marketplace-integration",
+      },
       items: [
-        "aws-marketplace-integration/aws-marketplace-integration",
+        
         {
           type: "category",
           label: "Setting Up Bank Account From Seller Registration",

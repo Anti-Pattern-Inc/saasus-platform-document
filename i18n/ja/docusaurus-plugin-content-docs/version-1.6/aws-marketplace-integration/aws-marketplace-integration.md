@@ -27,7 +27,7 @@ SaaSus Platform 内の操作だけで出品が完了するものではないの�
 以降は、SaaSus Platformが提供するステージング環境、本番環境を介した手続きとなります。  
 文章ではイメージしずらいと思いますので、ここからは出品までの流れを全体図と関連ドキュメントと共に紹介します。
 
-![the whole picture](/img/aws-marketplace-integration/the-whole-picture.png)
+![the whole picture](/ja/img/aws-marketplace-integration/the-whole-picture.png)
 
 
 
@@ -75,15 +75,15 @@ SaaSus Platform 内の操作だけで出品が完了するものではないの�
 10.  AWS Marketplaceとの連携確認  
     ===**プロダクションフェーズ終了**===
     :::info
-    プロダクションフェーズでは、本番環境で出品に必要な環境を作ることになります。テストフェーズでの連携確認が済んでいれば、スムーズに進めることが出来ます。出品手続きが完了すると実際に料金が発生するようになるため、もし本番環境で動作確認したい場合はSaaS製品を非公開にする必要があります。
-    :::
-    ***
+  プロダクションフェーズでは、本番環境で出品に必要な環境を作ることになります。テストフェーズでの連携確認が済んでいれば、スムーズに進めることが出来ます。出品手続きが完了すると実際に料金が発生するようになるため、もし本番環境で動作確認したい場合はSaaS製品を非公開にする必要があります。
+  :::
+   ***
 
-1.  本番用SaaS製品の最終レビュー依頼
-    1. [依頼方法](/docs/aws-marketplace-integration/supplementary/final-review-request)
+11.   本番用SaaS製品の最終レビュー依頼
+      1. [依頼方法](/docs/aws-marketplace-integration/supplementary/final-review-request)
 
-1.  本番用SaaS製品の公開依頼
-    1. [依頼方法](/docs/aws-marketplace-integration/supplementary/public-request)
+12.   本番用SaaS製品の公開依頼
+      1. [依頼方法](/docs/aws-marketplace-integration/supplementary/public-request)
 
 # 出品におけるSaaS製品の基準
 
