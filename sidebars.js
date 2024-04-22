@@ -102,6 +102,11 @@ const sidebars = {
         "saas-development-console/usage-metering",
         "saas-development-console/ip-restriction",
         "saas-development-console/user-env-definition",
+        "saas-development-console/domain-name-preference",
+        "saas-development-console/authorization-screen-customize",
+        "saas-development-console/declare-additional-attribute-to-user",
+        "saas-development-console/declare-additional-attribute-to-tenant",
+        "saas-development-console/role-definition"
       ],
     },
     {
@@ -194,6 +199,7 @@ const sidebars = {
       type: "category",
       label: "Tutorial",
       items: [
+        "tutorial/tutorial-introduction",
         "tutorial/prepare-the-sample-application",
         "tutorial/prepare-saasus-platform",
         "tutorial/saas-management-using-the-saas-operation-console",
