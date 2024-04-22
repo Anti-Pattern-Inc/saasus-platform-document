@@ -8,13 +8,11 @@ slug: "saas-management-using-the-saas-operation-console"
 
 SaaS 運用コンソールでは、テナントの管理、ユーザの管理など、SaaS 運用のための機能が利用できます。
 
-先ほどまでは、SaaSus コンソールにログインていたと思いますので、画面上部の環境ボタン(開発環境 > と書いてあるところ)をクリックして、ログイン環境選択画面に戻りましょう
+左メニューバーの「SaaS 開発コンソール」を押下すると、「SaaS 運用コンソール」の選択肢が表示されます。
 
 ![01](/ja/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-01.png)
 
-そして、改めて「SaaS 運用コンソール」をクリックして、コンソールを切り替えます。
-
-![02](/ja/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-02.png)
+先ほどまでは、SaaS 開発コンソールにログインしていたと思いますので、「SaaS 運用コンソール」をクリックすると、SaaS 運用コンソールに切り替わります。
 
 ### SaaS 利用者テナントの作成
 
