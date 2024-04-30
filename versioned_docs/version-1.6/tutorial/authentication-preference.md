@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
-title: "SaaS Management using the SaaS Operation Console"
-slug: "saas-management-using-the-saas-operation-console"
+title: "Authentication Preference"
+slug: "authentication-preference"
 excerpt: ""
 hidden: false
 createdAt: "Fri Jan 20 2023 01:46:49 GMT+0000 (Coordinated Universal Time)"
@@ -9,16 +9,6 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
 
 ## Manage SaaS with SaaS Operation Console
-
-### Switch Consoles
-
-The SaaS operations console allows you to use functions for SaaS operations such as tenant management and user management.
-
-When you click "SaaS Development Console" on the left menu bar, the option of "SaaS Operation Console" will be displayed.
-
-![01](/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-01.png)
-
-Up until now, I believe you were logged in to the SaaS Development Console, so click "SaaS Operations Console" to switch to the SaaS Operations Console.
 
 ### Create a SaaS Consumer Tenant
 
@@ -95,36 +85,3 @@ Username: User 2-2
 4 additional users have been registered.
 
 Now let's add roles to these users.
-
-### Add Role to User
-
-Click "Role Management" on the side menu
-
-Search for the role you want to add.
-
-First, let's give user 1-1 and user 1-2 the role of "general user" for "development" on "tenant sample 1".
-
-Enter the above conditions and click Search.
-
-![09](/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-09.png)
-
-None are displayed because there are no users with this role yet.
-
-Now, assign roles by clicking "Grant Roles to Users" on the upper right.
-
-Select the email addresses of User 1-1 and User 1-2 and click Add
-
-<img src="/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-10.png" width="400">
-</img>
-
-Role added to user
-
-In the same way, give user 2-1 and user 2-2 the role of "general user" for "development" on "sample application tenant 2".
-
-Let's check whether the role has been granted on the user management screen as well. Click "User Management" in the side menu to confirm.
-
-![11](/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-11.png)
-
-Preparations for SaaS operation are now complete.
-
-Now let's turn your web application into SaaS!

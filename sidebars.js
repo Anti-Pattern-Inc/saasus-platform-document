@@ -106,7 +106,8 @@ const sidebars = {
         "saas-development-console/authorization-screen-customize",
         "saas-development-console/declare-additional-attribute-to-user",
         "saas-development-console/declare-additional-attribute-to-tenant",
-        "saas-development-console/role-definition"
+        "saas-development-console/role-definition",
+        "saas-development-console/console-switching"
       ],
     },
     {
@@ -129,6 +130,7 @@ const sidebars = {
           ],
         },
         "saas-operation-console/user-feedback",
+        "saas-operation-console/adding-role-to-user"
       ],
     },
     {
@@ -202,7 +204,7 @@ const sidebars = {
         "tutorial/tutorial-introduction",
         "tutorial/prepare-the-sample-application",
         "tutorial/prepare-saasus-platform",
-        "tutorial/saas-management-using-the-saas-operation-console",
+        "tutorial/authentication-preference",
         "tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant",
         {
           type: "category",
