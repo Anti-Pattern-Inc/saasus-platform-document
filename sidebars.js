@@ -102,6 +102,7 @@ const sidebars = {
         "saas-development-console/usage-metering",
         "saas-development-console/ip-restriction",
         "saas-development-console/user-env-definition",
+        "saas-development-console/single-tenant-management",
       ],
     },
     {
