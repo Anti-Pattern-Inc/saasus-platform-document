@@ -118,6 +118,7 @@ const sidebars = {
         "saas-development-console/declare-additional-attribute-to-user",
         "saas-development-console/declare-additional-attribute-to-tenant",
         "saas-development-console/role-definition",
+        "saas-development-console/console-switching",
         "saas-development-console/saasus-development-console-used-billing-with-association"
       ],
     },
@@ -141,6 +142,7 @@ const sidebars = {
           ],
         },
         "saas-operation-console/user-feedback",
+        "saas-operation-console/adding-role-to-user"
       ],
     },
     {
@@ -214,7 +216,7 @@ const sidebars = {
         "tutorial/tutorial-introduction",
         "tutorial/prepare-the-sample-application",
         "tutorial/prepare-saasus-platform",
-        "tutorial/saas-management-using-the-saas-operation-console",
+        "tutorial/authentication-preference",
         "tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant",
         {
           type: "category",
