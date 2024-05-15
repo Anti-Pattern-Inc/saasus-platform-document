@@ -1,18 +1,8 @@
 ---
 sidebar_position: 3
-title: "SaaS 運用コンソールを利用した SaaS の管理"
-slug: "saas-management-using-the-saas-operation-console"
+title: "認証の設定"
+slug: "authentication-preference"
 ---
-
-### コンソールの切り替え
-
-SaaS 運用コンソールでは、テナントの管理、ユーザの管理など、SaaS 運用のための機能が利用できます。
-
-左メニューバーの「SaaS 開発コンソール」を押下すると、「SaaS 運用コンソール」の選択肢が表示されます。
-
-![01](/ja/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-01.png)
-
-先ほどまでは、SaaS 開発コンソールにログインしていたと思いますので、「SaaS 運用コンソール」をクリックすると、SaaS 運用コンソールに切り替わります。
 
 ### SaaS 利用者テナントの作成
 
@@ -98,35 +88,3 @@ SaaSus Platform では、SaaS 利用者のテナントに「環境」という�
 4 名追加でユーザ登録できました。
 
 では、これらのユーザーに役割を追加してみましょう。
-
-### ユーザーに役割を追加
-
-サイドメニューの「役割管理」をクリックします
-
-ここの画面で追加したい役割を検索します。
-
-まずは、ユーザ 1-1, ユーザ 1-2 に「テナントサンプルその１」の「開発」の「一般利用者」の役割を付与してみましょう。
-
-上記条件を入れて検索をクリックします。
-
-![09](/ja/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-09.png)
-
-この役割に該当するユーザがまだいないため、誰も表示されません。
-
-では、右上の「ユーザへ役割の付与」をクリックして、役割を付与していきましょう
-
-ユーザ 1-1, ユーザ 1-2 のメールアドレスを選択して、追加をクリックします
-
-![10](/ja/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-10.png)
-
-ユーザに役割が追加されました
-
-同じように、ユーザ 2-1, ユーザ 2-2 に「サンプルアプリテナント２」の「開発」の「一般利用者」の役割を付与してみましょう。
-
-ユーザ管理画面でも役割が付与されているか確認してみましょう。サイドメニューの「ユーザー管理」をクリックして確認します。
-
-![11](/ja/img/tutorial/saas-management-using-the-saas-operation-console/saas-management-using-the-saas-operation-console-11.png)
-
-ここまでで、SaaS 運用の準備ができました。
-
-では、いよいよ Web アプリケーションを SaaS 化していきましょう！
