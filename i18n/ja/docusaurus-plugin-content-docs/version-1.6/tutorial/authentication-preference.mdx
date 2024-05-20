@@ -1,53 +1,150 @@
 ---
-sidebar_position: 4
-title: "SaaSus SDK をWebアプリケーションに組み込みマルチテナント化する"
-slug: "embed-the-saasus-sdk-into-your-web-application-and-make-it-multi-tenant"
-excerpt: "test"
-hidden: false
-createdAt: "Wed Jan 11 2023 03:13:06 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
+sidebar_position: 3
+title: "認証の設定"
+slug: "authentication-preference"
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-## Web アプリケーションに SaaSus SDK を組み込む
+### SaaS 利用者テナントの作成
 
-※ここからはプログラミングの知識が必要になります
+ではまず、サンプルアプリケーション用に、テナントを２つ作成してみましょう。
+
+サイドメニューの「テナント管理」をクリックします。
+
+![01](/ja/img/tutorial/authentication-preference/authentication-preference-01.png)
+
+「テナント作成」ボタンをクリックしてポップアップを表示します。
+
+テナント名・代表者ユーザーの追加・代表者メールアドレス・代表者の仮パスワード、その他にGuidesでご紹介している[テナントに追加属性を定義する](../saas-development-console/declare-additional-attribute-to-tenant)で追加したテナント属性が表示されます。
+
+
+１つ目
+
+- 名前：テナントサンプルその１
+- メモ：テナント属性で定義した属性情報となり、自由に設定可能となります
+- 代表ユーザーの追加：新規でユーザーを作成
+- 代表者メールアドレス： [saasus-sample-tenant1@example.com](mailto:saasus-sample-tenant1@example.com)
+- 代表者のパスワード： G@2qYPQq などパスワード要件を満たすもの
+
+![02](/ja/img/tutorial/authentication-preference/authentication-preference-02.png)
+
+２つ目
+
+- 名前：サンプルアプリテナント２
+- メモ：テナント属性で定義した属性情報となり、自由に設定可能となります
+- 代表ユーザーの追加：新規でユーザーを作成
+- 代表者メールアドレス： [saasus-sample-tenant2@example.com](mailto:saasus-sample-tenant2@example.com)
+- 代表者のパスワード： irG_l88r などパスワード要件を満たすもの
+
+（特に決まりではないので、他の値を入れていただいても OK です）
+
+![03](/ja/img/tutorial/authentication-preference/authentication-preference-03.png)
+
+これで、テナントの作成と、そのテナントに属する各１名のユーザーが作成されました。
+
+### SaaS 利用ユーザーの作成
+
+では、ユーザー一覧を見てみましょう。サイドメニューから「ユーザー管理」をクリックします。
+
+先ほど作成したユーザーが、各テナント、各環境の admin（SaaS 管理者）の役割として登録されています。
+
+![04](/ja/img/tutorial/authentication-preference/authentication-preference-04.png)
+
+SaaSus Platform では、SaaS 利用者のテナントに「環境」という概念が利用できます。
+
+たとえば、Stripe のように API をメインで使う SaaS では、SaaS 利用者は連携のテストや開発時用の環境が必要になります。<br/>
+これらを行うために 開発環境 という環境を使い、実際の運用では 本番環境 という環境を使うというように SaaS 管理者は複数の環境を定義することができるようになっています。
+
+![05](/ja/img/tutorial/authentication-preference/authentication-preference-05.png)
+
+:::info
+SaaS によっては、複数環境が不要な場合もありますので、単一環境を使う場合は 本番環境 だけ意識していただければ大丈夫です。
+:::
+
+では、各テナントごとに１名づつユーザーを登録してみましょう。
+
+右上の「ユーザ作成」ボタンをクリックし、ポップアップを出します。
+
+とりあえず、4 名登録してみましょう。
+
+メールアドレス: [user1-1@example.com](mailto:user1-1@example.com)  
+パスワード： パスワード要件を満たすもの  
+テナント： テナントサンプルその１  
+ユーザ名： ユーザー1-1
+
+![06](/ja/img/tutorial/authentication-preference/authentication-preference-06.png)
+
+メールアドレス: [user1-2@example.com](mailto:user1-2@example.com)  
+パスワード： パスワード要件を満たすもの  
+テナント： テナントサンプルその１  
+ユーザ名： ユーザー1-2
+
+メールアドレス: [user2-1@example.com](mailto:user2-1@example.com)  
+パスワード： パスワード要件を満たすもの  
+テナント： サンプルアプリテナント２  
+ユーザ名： ユーザー2-1
+
+メールアドレス: [user2-2@example.com](mailto:user2-2@example.com)  
+パスワード： パスワード要件を満たすもの  
+テナント： サンプルアプリテナント２  
+ユーザ名： ユーザー2-2
+
+![07](/ja/img/tutorial/authentication-preference/authentication-preference-07.png)
+
+4 名追加でユーザ登録できました。
+
+これらのユーザーに役割を追加することもできます。
+
+:::info
+役割の追加方法は下記ページを確認してください。<br/>
+[ユーザーに役割を追加](../saas-operation-console/adding-role-to-user)
+:::
+
+:::info
+以降の手順ではプログラミングの知識が必要となります。
+:::
 
 ### SaaS ID と API キー、クライアントシークレットの確認
 
 まず、**SaaSus 開発コンソール**で API キーを表示します。このキーはアプリケーションの設定に使用されます。
 
-「SaaS ID」は、通常はデフォルトで生成されています。必要に応じて、既存の「SaaS ID」を使用するか、「SaaS ID の再発行」ボタンをクリックして新しいIDを生成することもできます。
+「SaaS ID」は通常、デフォルトで生成されます。必要に応じて、既存の「SaaS ID」を使用するか、「SaaS ID の再発行」ボタンをクリックして新しいIDを生成することもできます。
 
-「API キー」は初期状態では自動的に生成されていません。必要に応じて、「API キーの発行」ボタンをクリックして新しいキーを1つ発行してください。
+初期状態では、「APIキー」は自動的に生成されません。必要に応じて、「APIキーの発行」ボタンをクリックして新しいキーを1つ発行してください。
 
-※実際にSaaSの運用が開始された後、「SaaS ID の再発行」を行った場合、SaaSアプリケーション内で使用している SaaS ID も更新する必要がありますので、ご注意ください。
+:::info
+実際にSaaSの運用が開始された後、「SaaS ID の再発行」を行った場合、SaaSアプリケーション内で使用している SaaS ID も更新する必要がありますので、ご注意ください。
 
-(API キーは絶対に外部に漏洩しないようご注意ください。このチュートリアルで表示されている API キーはすでに無効化されています。)
+また、外部に API キーが漏洩しないよう、細心の注意を払ってください。このチュートリアルで表示されている API キーはすでに使用できない状態になっています。
+:::
 
-![01](/ja/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-01.png)
+![08](/ja/img/tutorial/authentication-preference/authentication-preference-08.png)
+
+![09](/ja/img/tutorial/authentication-preference/authentication-preference-09.png)
 
 ### 認証後の遷移先 URL の設定
 
-設定したドメイン名をベースにして、SaaSus Platform はログイン画面を生成します。ログイン後、SaaS 側に認証情報を引き継ぎます。この引き継ぎ先の SaaS の URL を、Callback URL として登録する必要があります。
+設定したドメイン名をベースにして、SaaSus Platform はログイン画面を生成します。<br/>
+ログイン後、SaaS 側に認証情報を引き継ぎます。この引き継ぎ先の SaaS の URL を、Callback URL として登録する必要があります。
 
 サイドメニューから「認証後遷移先」をクリックし、Callback URL 設定画面を表示します。
 
-通常は、提供している SaaS の URL をベースに Callback URL を設定します。ただし、今回はサンプルアプリケーションをローカルで動かすため、以下のように設定します。
+通常は、提供している SaaS の URL をベースに Callback URL を設定します。<br/>
+ただし、今回はサンプルアプリケーションをローカルで動かすため、以下のように設定します。
 
 [http://localhost/callback](http://localhost/callback)
 
-![08](/ja/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-08.png)
+![10](/ja/img/tutorial/authentication-preference/authentication-preference-10.png)
 
 ### SaaSus SDK 利用の準備
 
 では、さきほど準備したサンプルアプリケーションを開発環境で開きましょう。
 
-冒頭で行ったとおり、 init.sh を利用して docker コンテナが立ち上がっており、[http://localhost/board](http://localhost/board) でサンプルアプリケーションが動いていることを確認しておいてください。
+冒頭で行ったとおり、 init.sh を利用して docker コンテナが立ち上がっており、[http://localhost/board](http://localhost/board) でサンプルアプリケーションが動いていることを確認してください。
 
-まず、 SaaSus Platform を簡単に使うためには、 SaaSus SDK をアプリケーションに組み込みます。
+まず、 SaaSus Platform を使うためには、 SaaSus SDK をアプリケーションに組み込みます。
 
 今回は PHP なので、 composer を使います。
 
@@ -78,15 +175,15 @@ repo$ docker compose exec node bash
 </Tabs>
 ```
 
-api ディレクトリで、 composer コマンドを使って追加します
+api ディレクトリで、 composer コマンドを使って追加します。
 
 ```txt
 root@xxx:/var/www/api# composer require saasus-platform/saasus-sdk-php
 ```
 
-SaaSus SDK がインストールできたら、まずは SaaSus SDK 利用にあたって必要な環境変数を定義しましょう
+SaaSus SDK がインストールできたら、まずは SaaSus SDK 利用にあたって必要な環境変数を定義しましょう。
 
-api ディレクトリの .env.example ファイルをコピーして.env ファイルを作成し、その.env ファイルの一番下の以下の部分を編集します
+api ディレクトリの .env.example ファイルをコピーして.env ファイルを作成し、その.env ファイルの一番下の以下の部分を編集します。
 
 ```.env
 ### for SaaSus Platform
@@ -96,8 +193,7 @@ SAASUS_SECRET_KEY=" （画面のクライアントシークレット）"
 SAASUS_LOGIN_URL="https://auth.sample.saasus.jp/　（ログイン画面のURL）"
 ```
 
-SAASUS_SAAS_ID, SAASUS_API_KEY, SAASUS_SECRET_KEY は先ほど画面で表示した SaaS ID と API Key、クライアントシークレットを、  
-SAASUS_LOGIN_URL は、SaaSus 開発コンソールで作成したログイン画面の URL を設定します。
+SAASUS_SAAS_ID, SAASUS_API_KEY, SAASUS_SECRET_KEY は先ほど画面で表示した SaaS ID と API キー、クライアントシークレットを、SAASUS_LOGIN_URL は、SaaSus 開発コンソールで作成したログイン画面の URL を設定します。
 
 ### 認証モジュールの組み込み
 
@@ -284,8 +380,6 @@ app.use("/callback", callbackRouter);
 
 api/app/Http/Controllers/MessageController.php の index に Request の引数を追加し、 dd を使って $request に userinfo が入っているか確認してみましょう
 
-以下の４行を書き換えてください。
-
 ```mdx-code-block
 <Tabs>
 <TabItem value="php" label="PHP" default>
@@ -324,7 +418,7 @@ SaaSus Platform で作成したログイン画面を表示します。
 
 [https://auth.sample.saasus.jp](https://auth.sample.saasus.jp) など、ご自身で設定したドメインのログイン画面を表示してください。
 
-![02](/ja/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-02.png)
+![11](/ja/img/tutorial/authentication-preference/authentication-preference-11.png)
 
 先ほど作成したユーザのメールアドレスとパスワードでログインすると、Callback URL で設定した URL に、認証情報とともにリダイレクトされます。
 
@@ -371,7 +465,7 @@ array:3 [▼
 
 そのあと、アプリケーションのコントローラに処理が移るので、この時点ですでにアプリケーションはログインした人の情報を持っていることになります。
 
-では、この情報を使って、掲示板アプリケーションをマルチテナント対応にしてみましょう！
+では、この情報を使って、掲示板アプリケーションをマルチテナント対応にしてみましょう。
 
 :::info
 自動生成されたログイン画面はサービス名やアイコンを表示したり、利用規約やプライバシーポリシーのリンクを設定することができます。<br/>
@@ -518,7 +612,7 @@ api/resources/views/messageBoard/index.blade.php を編集します。
                        </p>
 ```
 
-これでマルチテナント対応ができました！
+これでマルチテナント対応ができました。
 
 では、早速ログインして試してみましょう。
 
@@ -526,23 +620,23 @@ api/resources/views/messageBoard/index.blade.php を編集します。
 
 ログインすると、テナント名が先ほど SaaS 開発コンソールで設定したものに変わっているのが確認できます。
 
-![03](/ja/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-03.png)
+![12](/ja/img/tutorial/authentication-preference/authentication-preference-12.png)
 
 まだデータが無いので、いくつか投稿をしてみましょう。
 
-![04](/ja/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-04.png)
+![13](/ja/img/tutorial/authentication-preference/authentication-preference-13.png)
 
 ユーザ名も表示されていることが確認できました。
 
 では、もう一度ログイン画面に戻り、 [user1-2@example.com](mailto:user1-2@example.com) でログインして、いくつか投稿してみましょう。
 
-![05](/ja/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-05.png)
+![14](/ja/img/tutorial/authentication-preference/authentication-preference-14.png)
 
 当然画面に反映されます。
 
-では、もうひとつのテナントのユーザ、 [user2-1@example.com](mailto:user2-1@example.com) でログインしてみましょう
+では、もうひとつのテナントのユーザ、 [user2-1@example.com](mailto:user2-1@example.com) でログインしてみましょう。
 
-![06](/ja/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-06.png)
+![15](/ja/img/tutorial/authentication-preference/authentication-preference-15.png)
 
 テナント名の表示が変わり、内容が空になっていることが確認できます。
 
@@ -550,7 +644,7 @@ api/resources/views/messageBoard/index.blade.php を編集します。
 
 では、同じようにいくつか投稿をした後に、 [user2-2@example.com](mailto:user2-2@example.com) でログインし、同一テナントの情報が表示できることを確認します。
 
-![07](/ja/img/tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant-07.png)
+![16](/ja/img/tutorial/authentication-preference/authentication-preference-16.png)
 
 このように、テナントごとの分離が完了しました。
 
