@@ -205,7 +205,6 @@ const sidebars = {
         "tutorial/prepare-the-sample-application",
         "tutorial/prepare-saasus-platform",
         "tutorial/authentication-preference",
-        "tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant",
         {
           type: "category",
           label: "Manage Rate Plans",
