@@ -135,7 +135,6 @@ const sidebars = {
         id: "aws-marketplace-integration/aws-marketplace-integration",
       },
       items: [
-        
         {
           type: "category",
           label: "Setting Up Bank Account From Seller Registration",
@@ -250,6 +249,21 @@ const sidebars = {
       type: "category",
       label: "Changelog",
       items: [
+        {
+          label: "2024/05/24",
+          type: "doc",
+          id: "changelog/20240524",
+        },
+        {
+          label: "2024/04/23",
+          type: "doc",
+          id: "changelog/20240423",
+        },
+        {
+          label: "2024/04/11",
+          type: "doc",
+          id: "changelog/20240411",
+        },
         {
           label: "2024/04/02",
           type: "doc",

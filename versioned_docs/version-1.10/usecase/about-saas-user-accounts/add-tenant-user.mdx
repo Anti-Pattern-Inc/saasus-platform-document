@@ -1,0 +1,64 @@
+---
+title: "Assigning Users to Tenants and Setting Roles"
+slug: "add-tenant-user"
+excerpt: ""
+hidden: false
+createdAt: "Wed Nov 01 2023 22:00:34 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Dec 21 2023 22:59:04 GMT+0000 (Coordinated Universal Time)"
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+After a tenant has been created, you can then associate the self-signed up user with the tenant.
+
+Please append the following to the tenant creation source code:
+
+<Tabs>
+<TabItem value="php" label="PHP">
+
+```php
+        // Tenant user association
+        // Last name: the 'lastname' entered on the page
+        // First name: the 'firstname' entered on the page
+        $create_tenant_user_param = new CreateTenantUserParam();
+        $create_tenant_user_param->setEmail($request['userinfo']['email']);
+        $create_tenant_user_param->setAttributes([
+            'memo' => $validated['memo'],
+        ]);
+        $auth_api_client->createTenantUser($tenant->getId(), $create_tenant_user_param, $auth_api_client::FETCH_RESPONSE);
+```
+
+</TabItem>
+</Tabs>
+
+Please use the CreateTenantUserParam object.
+
+setAttributes sets the attribute information of the tenant defined in <a href="/docs/tutorial/prepare-saas-platform#defining-additional-attributes-for-a-tenant" target="_blank">Defining Additional Attributes for a Tenant</a>.
+
+Next, set the role.
+
+Please append the following code:
+
+<Tabs>
+<TabItem value="php" label="PHP">
+
+```php
+        // Role setting
+        $create_tenant_user_roles_param = new CreateTenantUserRolesParam();
+        $create_tenant_user_roles_param->setRoleNames(['admin']);
+        $auth_api_client->createTenantUserRoles($tenant->getId(), $request['userinfo']['id'], getenv('DEFAULT_SAASUSER_ENV'), $create_tenant_user_roles_param);
+```
+
+</TabItem>
+</Tabs>
+
+Please use the CreateTenantUserRolesParam object.
+
+setRoleNames allows you to specify multiple roles.
+
+
+The values that can be specified are the "Role Name" that you created in <a href="/docs/tutorial/prepare-saas-platform#role-definition" target="_blank">Role Definition</a>.
+
+You can check whether the tenant user was registered via API in "SaaS Operation Console > User Management".
+
+![user](/img/usecase/about-saas-user-accounts/add-tenant-user/user.png)

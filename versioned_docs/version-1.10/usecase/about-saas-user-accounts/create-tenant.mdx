@@ -1,0 +1,63 @@
+---
+title: "Creating a Tenant"
+slug: "create-tenant"
+excerpt: ""
+hidden: false
+createdAt: "Wed Nov 01 2023 06:48:33 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Dec 21 2023 22:58:57 GMT+0000 (Coordinated Universal Time)"
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Once self-signup is complete, the next step is to create a tenant.
+
+In this case, the <a href="/docs/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans#free-plan" target="_blank">Free Plan</a> created in the tutorial will be automatically applied when creating a tenant.
+
+<Tabs>
+<TabItem value="php" label="PHP">
+
+```php
+        // Retrieving validated data
+        $validated = $request->validated();
+
+        // Using the SaaSusSDK
+        $client = new ApiClient();
+        $auth_api_client = $client->getAuthClient();
+        $pricing_api_client = $client->getPricingClient();
+
+        // Searching for pricing plans
+        $pricing_plans = $pricing_api_client->getPricingPlans();
+        $next_plan_id = "";
+        foreach ($pricing_plans->getPricingPlans() as $pricing_plan) {
+            if ($pricing_plan['display_name'] == 'Free Plan') {
+                $next_plan_id = $pricing_plan['id'];
+            }
+        }
+
+        // Raise an error if the plan id could not be obtained
+        if (empty($next_plan_id)) {
+            redirect('Specify the redirect destination')->with('flash_message', 'Registration failed.');
+        }
+
+        // To get the UnixTime of the first day of the month
+        // Because when changing the plan, specifying the UnixTime of the first day of the month updates immediately
+        $unixtime_of_first_day_of_current_month = Carbon::now()->startOfMonth()->timestamp;
+
+        // Creating the tenant
+        // Tenant Name: The name entered on the screen
+        // Pricing Plan: Free Plan
+        // Back Office Staff Email: The email of the logged-in user
+        $tenant = $auth_api_client->createTenant((object)array(
+            "name" => $validated['tenant_name'],
+            "next_plan_id" => $next_plan_id,
+            "using_next_plan_from" => $unixtime_of_first_day_of_current_month,
+            "back_office_staff_email" => $request['userinfo']['email'],
+        ));
+```
+
+</TabItem>
+</Tabs>
+
+You can check if the tenant was created successfully using the API by visiting "SaaS Operation Console > Tenant Management".
+
+![tenant](/img/usecase/about-saas-user-accounts/create-tenant/tenant.png) 
