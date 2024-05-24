@@ -204,6 +204,7 @@ const sidebars = {
         "tutorial/tutorial-introduction",
         "tutorial/prepare-the-sample-application",
         "tutorial/prepare-saasus-platform",
+        "tutorial/configuring-sdk-for-saasus-platform",
         "tutorial/authentication-preference",
         {
           type: "category",
