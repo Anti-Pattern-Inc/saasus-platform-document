@@ -45,7 +45,7 @@ The Cloud Formation's Outputs should specify the following items:
 
 | Logical ID       | Value                                              |
 | :--------------- | :------------------------------------------------- |
-| AccountId        | AWS account where Cloud Formation is executed        |
+| AccountId        | AWS account where Cloud Formation is executed      |
 | SubnetIds        | IDs of the subnets set for the DB instance         |
 | SecurityGroupIds | IDs of the security groups set for the DB instance |
 | DbUser           | User for connecting to the DB                      |
@@ -76,4 +76,5 @@ In the SaaS operations console - Tenant Management screen, display the target te
 
 ### Note
 
+Tenant onboarding processes will be carried out in the Tokyo region (ap-northeast-1).
 Tenant offboarding process is not supported.
