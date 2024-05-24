@@ -106,24 +106,6 @@ SaaS によっては、複数環境が不要な場合もありますので、単
 以降の手順ではプログラミングの知識が必要となります。
 :::
 
-### SaaS ID と API キー、クライアントシークレットの確認
-
-まず、**SaaSus 開発コンソール**で API キーを表示します。このキーはアプリケーションの設定に使用されます。
-
-「SaaS ID」は通常、デフォルトで生成されます。必要に応じて、既存の「SaaS ID」を使用するか、「SaaS ID の再発行」ボタンをクリックして新しいIDを生成することもできます。
-
-初期状態では、「APIキー」は自動的に生成されません。必要に応じて、「APIキーの発行」ボタンをクリックして新しいキーを1つ発行してください。
-
-:::info
-実際にSaaSの運用が開始された後、「SaaS ID の再発行」を行った場合、SaaSアプリケーション内で使用している SaaS ID も更新する必要がありますので、ご注意ください。
-
-また、外部に API キーが漏洩しないよう、細心の注意を払ってください。このチュートリアルで表示されている API キーはすでに使用できない状態になっています。
-:::
-
-![08](/ja/img/tutorial/authentication-preference/authentication-preference-08.png)
-
-![09](/ja/img/tutorial/authentication-preference/authentication-preference-09.png)
-
 ### 認証後の遷移先 URL の設定
 
 設定したドメイン名をベースにして、SaaSus Platform はログイン画面を生成します。<br/>
@@ -136,64 +118,7 @@ SaaS によっては、複数環境が不要な場合もありますので、単
 
 [http://localhost/callback](http://localhost/callback)
 
-![10](/ja/img/tutorial/authentication-preference/authentication-preference-10.png)
-
-### SaaSus SDK 利用の準備
-
-では、さきほど準備したサンプルアプリケーションを開発環境で開きましょう。
-
-冒頭で行ったとおり、 init.sh を利用して docker コンテナが立ち上がっており、[http://localhost/board](http://localhost/board) でサンプルアプリケーションが動いていることを確認してください。
-
-まず、 SaaSus Platform を使うためには、 SaaSus SDK をアプリケーションに組み込みます。
-
-今回は PHP なので、 composer を使います。
-
-ターミナルを開き php のコンテナに入り、composer を使ってセットアップをします。
-
-```mdx-code-block
-<Tabs>
-<TabItem value="php" label="PHP" default>
-```
-
-```txt
-repo$ docker compose exec php bash
-root@xxx:/var/www# cd api
-root@xxx:/var/www/api# composer config repositories.saasus-platform/saasus-sdk-php vcs https://github.com/saasus-platform/saasus-sdk-php
-```
-
-```mdx-code-block
-</TabItem>
-<TabItem value="nodejs" label="Node.js">
-```
-
-```txt
-repo$ docker compose exec node bash
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
-api ディレクトリで、 composer コマンドを使って追加します。
-
-```txt
-root@xxx:/var/www/api# composer require saasus-platform/saasus-sdk-php
-```
-
-SaaSus SDK がインストールできたら、まずは SaaSus SDK 利用にあたって必要な環境変数を定義しましょう。
-
-api ディレクトリの .env.example ファイルをコピーして.env ファイルを作成し、その.env ファイルの一番下の以下の部分を編集します。
-
-```.env
-### for SaaSus Platform
-SAASUS_SAAS_ID="98tjo3wifaoua （画面のSaaS ID）"
-SAASUS_API_KEY="kjntowjfoasnkjntwonsflajsno4as （画面のAPI KEY）"
-SAASUS_SECRET_KEY=" （画面のクライアントシークレット）"
-SAASUS_LOGIN_URL="https://auth.sample.saasus.jp/　（ログイン画面のURL）"
-```
-
-SAASUS_SAAS_ID, SAASUS_API_KEY, SAASUS_SECRET_KEY は先ほど画面で表示した SaaS ID と API キー、クライアントシークレットを、SAASUS_LOGIN_URL は、SaaSus 開発コンソールで作成したログイン画面の URL を設定します。
+![08](/ja/img/tutorial/authentication-preference/authentication-preference-08.png)
 
 ### 認証モジュールの組み込み
 
@@ -418,7 +343,7 @@ SaaSus Platform で作成したログイン画面を表示します。
 
 [https://auth.sample.saasus.jp](https://auth.sample.saasus.jp) など、ご自身で設定したドメインのログイン画面を表示してください。
 
-![11](/ja/img/tutorial/authentication-preference/authentication-preference-11.png)
+![09](/ja/img/tutorial/authentication-preference/authentication-preference-09.png)
 
 先ほど作成したユーザのメールアドレスとパスワードでログインすると、Callback URL で設定した URL に、認証情報とともにリダイレクトされます。
 
@@ -620,23 +545,23 @@ api/resources/views/messageBoard/index.blade.php を編集します。
 
 ログインすると、テナント名が先ほど SaaS 開発コンソールで設定したものに変わっているのが確認できます。
 
-![12](/ja/img/tutorial/authentication-preference/authentication-preference-12.png)
+![10](/ja/img/tutorial/authentication-preference/authentication-preference-10.png)
 
 まだデータが無いので、いくつか投稿をしてみましょう。
 
-![13](/ja/img/tutorial/authentication-preference/authentication-preference-13.png)
+![11](/ja/img/tutorial/authentication-preference/authentication-preference-11.png)
 
 ユーザ名も表示されていることが確認できました。
 
 では、もう一度ログイン画面に戻り、 [user1-2@example.com](mailto:user1-2@example.com) でログインして、いくつか投稿してみましょう。
 
-![14](/ja/img/tutorial/authentication-preference/authentication-preference-14.png)
+![12](/ja/img/tutorial/authentication-preference/authentication-preference-12.png)
 
 当然画面に反映されます。
 
 では、もうひとつのテナントのユーザ、 [user2-1@example.com](mailto:user2-1@example.com) でログインしてみましょう。
 
-![15](/ja/img/tutorial/authentication-preference/authentication-preference-15.png)
+![13](/ja/img/tutorial/authentication-preference/authentication-preference-13.png)
 
 テナント名の表示が変わり、内容が空になっていることが確認できます。
 
@@ -644,7 +569,7 @@ api/resources/views/messageBoard/index.blade.php を編集します。
 
 では、同じようにいくつか投稿をした後に、 [user2-2@example.com](mailto:user2-2@example.com) でログインし、同一テナントの情報が表示できることを確認します。
 
-![16](/ja/img/tutorial/authentication-preference/authentication-preference-16.png)
+![14](/ja/img/tutorial/authentication-preference/authentication-preference-14.png)
 
 このように、テナントごとの分離が完了しました。
 
