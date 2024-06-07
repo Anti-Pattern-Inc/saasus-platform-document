@@ -65,7 +65,7 @@ The measurement unit as
   - From 11 to 50 comments, 1,000 yen
   - 51 to 100 comments, 1,500 yen
 
-Create three units and set the upper limit to 100.
+Create units and set the upper limit to 100.
 
 The feature menu is
 
@@ -79,7 +79,6 @@ The price plan is
 
 Use following steps.
 
-Now, let's create a price plan other than the Free plan!
 The measurement unit, feature menu, and price plan that will be created this time are as follows. Please see the video for details.
 
 [See here for the setting contents (image) of the measurement unit, feature menu, and price plan settings.](https://docs.saasus.io/docs/setting-measurement-units-function-menus-and-price-plans) 
@@ -144,33 +143,6 @@ Range
   allow="autoplay; fullscreen"
   allowfullscreen="true">
 </iframe>
-
-### Linking Billing Using the SaaSus Development Console
-
-Next, set up billing.
-
-It is also possible to implement billing processing independently based on the billing plans and usage information for each tenant.
-
-However, there are already SaaS that exists in the world to make billing easy.  
-In the same way that you can easily build and operate SaaS using the SaaS Platform, you can offload the effort of building and operating to SaaS by actively using a convenient SaaS.  
-Therefore, this time we will use Stripe, which is one of the billing SaaS.
-
-　**If you do not want to connect  Stripe, you can skip this step**
-
-From the side menu, click "External linkage"
-
-Enter your Stripe secret key and click the Save button.
-
-![](/img/tutorial/manage-rate-plans/manage-rate-plans-01.png)
-
-You are now ready to integrate with Stripe.  
-The price plan created above should be linked to Stripe.
-
-Also, if an operation is performed that involves a pricing plan, it will be linked to Stripe.
-
-As of now, pricing plan settings are complete.
-
-Apply this pricing plan to each tenant.
 
 ### Applying Rate Plans to Tenants
 

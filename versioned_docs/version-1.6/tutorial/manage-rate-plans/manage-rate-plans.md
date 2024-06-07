@@ -65,7 +65,7 @@ The measurement unit as
   - From 11 to 50 comments, 1,000 yen
   - 51 to 100 comments, 1,500 yen
 
-Create three units and set the upper limit to 100.
+Create units and set the upper limit to 100.
 
 The feature menu is
 
@@ -79,7 +79,6 @@ The price plan is
 
 Use following steps.
 
-Now, let's create a price plan other than the Free plan!
 The measurement unit, feature menu, and price plan that will be created this time are as follows. Please see the video for details.
 
 [See here for the setting contents (image) of the measurement unit, feature menu, and price plan settings.](https://docs.saasus.io/docs/setting-measurement-units-function-menus-and-price-plans) 
