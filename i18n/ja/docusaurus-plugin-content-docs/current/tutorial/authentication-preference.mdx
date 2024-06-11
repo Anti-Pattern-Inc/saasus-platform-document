@@ -116,7 +116,9 @@ SaaS によっては、複数環境が不要な場合もありますので、単
 通常は、提供している SaaS の URL をベースに Callback URL を設定します。<br/>
 ただし、今回はサンプルアプリケーションをローカルで動かすため、以下のように設定します。
 
-[http://localhost/callback](http://localhost/callback)
+PHPの場合　[http://localhost/callback](http://localhost/callback)
+
+Next.jsの場合　[http://localhost:3000/callback](http://localhost:3000/callback)
 
 ![08](/ja/img/tutorial/authentication-preference/authentication-preference-08.png)
 
@@ -124,13 +126,133 @@ SaaS によっては、複数環境が不要な場合もありますので、単
 
 次に、 SaaSus Platform の認証モジュールを組み込みます。
 
-今回のアプリケーションでは、すべての URI のルートに認証を必要とします。認証されていない場合には、アプリケーションが利用できない仕様にします。そのため、 Laravel の Middleware として SaaSus 認証機能を組み込みます。
+今回のアプリケーションでは、すべての URI のルートに認証を必要とします。認証されていない場合には、アプリケーションが利用できない仕様にします。
+
+Next.jsのサンプルアプリで動作確認を行なっている場合は、Callbackを受け取るページの作成を行います。
+
+front/src/pages/callback/index.tsx を作成し、以下を追加してください。
+
+<Tabs>
+<TabItem value="typescript" label="Typescript">
+
+```typescript
+import Container from '@mui/material/Container'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import axios from '@/lib/axios'
+
+const Callback = () => {
+  const router = useRouter()
+  const query = router.query
+  const code = query.code as string
+
+  const fetchAuthCredentials = async () => {
+    const res = await axios.get(`/api/callback?code=${code}`)
+    // 渡ってきたJWTをLocal Storageに保存する
+    const idToken = res.data.id_token as string
+    localStorage.setItem('SaaSusIdToken', idToken)
+    router.replace('/board')
+  }
+
+  useEffect(() => {
+    if (router.isReady) {
+      if (code) {
+        fetchAuthCredentials()
+      }
+    }
+  }, [query, router])
+
+  return <Container disableGutters></Container>
+}
+
+export default Callback
+```
+
+</TabItem>
+</Tabs>
+
+ここでは、渡ってきた一時コードを元にAPIから認証情報を取得し、id_token をブラウザのlocal storageに格納して、boardページにリダイレクトしています。
+
+次に、この保存したトークンを後ほどAPIコール時にヘッダにつけるようにします。
+
+front/src/pages/board/index.tsx を編集していきます。
+
+<Tabs>
+<TabItem value="typescript" label="Typescript">
+
+```typescript
+import { MessageBoard } from '@/components/MessageBoard'
+import { formValueFormat } from '@/const/formTemplate'
+import Container from '@mui/material/Container'
+import useSWR, { useSWRConfig } from 'swr'
+import axios from '@/lib/axios'
+
+const Board = () => {
+ const { mutate } = useSWRConfig()
+ const fetcher = (url: string) => {
+   // Local StorageからJWTを取得し、Bearer tokenとしてヘッダにつけてAPIコールする
+   const token = localStorage.getItem('SaaSusIdToken')
+   if (!token) return ''
+   return axios
+     .get(url, {
+       headers: {
+         Authorization: `Bearer ${token}`,
+       },
+     })
+     .then((res) => res.data)
+ }
+ const { data: tenant_name, error: tenant_error } = useSWR(
+   `/api/tenant`,
+   fetcher
+ )
+ const { data: messages, error } = useSWR(`/api/board`, fetcher, {
+   refreshInterval: 5000,
+ })
+ if (error || tenant_error) return <div>failed to load</div>
+ if (!messages || !tenant_name) return <div>loading...</div>
+
+ const handleSubmit = async (value: string) => {
+   const formValue = { ...formValueFormat, message: value }
+   // 再検証をせずに直ちにローカルデータを更新
+   mutate('/api/board', [...messages, formValue], false)
+   // 更新するために API にリクエストを送信
+   // Local StorageからJWTを取得し、Bearer tokenとしてヘッダにつけてAPIコールする
+   const token = localStorage.getItem('SaaSusIdToken')
+   await axios.post('/api/post', formValue, {
+     headers: {
+       Authorization: `Bearer ${token}`,
+     },
+   })
+ }
+
+ return (
+   <Container disableGutters>
+     <MessageBoard
+       messages={messages}
+       tenant_name={tenant_name}
+       onSubmit={handleSubmit}
+     />
+   </Container>
+ )
+}
+
+export default Board
+```
+
+</TabItem>
+</Tabs>
+
+今回はAPIコールしている部分が少ないので簡易的にaxiosのコール時に直接指定してますが、実施にはミドルウェアを使うなどで共通化するのが良いかと思います。
+
+次にバックエンドの調整を行います。
 
 現状は、
 
-api/routes/web.php
+PHPの場合は、api/routes/web.php
 
-にて、Laravel 標準の認証機能が利用されているので、SaaSus の認証機能に置き換えます。
+Next.jsの場合は、api/app.ts
+
+にて認証機能が利用されているので、SaaSus の認証機能に置き換えます。
 
 この部分
 
@@ -228,9 +350,17 @@ app.use(
 
 このようにします。
 
-そして、認証画面からのコールバックの受口を用意します。先ほど SaaSus 開発コンソールでコールバック先を [http://localhost/callback](http://localhost/callback) と定義したので、 /callback で受け取れるようにします。
+そして、認証画面からのコールバックの受口を用意します。先ほど SaaSus 開発コンソールでコールバック先を 
 
-おなじく、 api/routes/web.php の最後の行に以下を追加します。
+PHPの場合は、[http://localhost/callback](http://localhost/callback) 
+
+Next.jsの場合は、[http://localhost:3000/callback](http://localhost:3000/callback) 
+
+と定義したので、 /callback で受け取れるようにします。
+
+PHPの場合はおなじく、 api/routes/web.php の最後の行に以下を追加します。
+
+Next.jsの場合は、api/routes/callback.tsを作成して以下を記載します。
 
 ```mdx-code-block
 <Tabs>
@@ -248,9 +378,13 @@ Route::get('/callback', 'AntiPatternInc\Saasus\Laravel\Controllers\CallbackContr
 ```
 
 ```js
-import { CallbackRouter } from "saasus-sdk";
-...
-app.use("/callback", callbackRouter);
+import express from "express";
+const router = express.Router();
+import { CallbackRouteFunction } from "saasus-sdk";
+
+router.get("/", CallbackRouteFunction);
+
+export { router };
 ```
 
 ```mdx-code-block
@@ -258,7 +392,11 @@ app.use("/callback", callbackRouter);
 </Tabs>
 ```
 
-さらに、SaaSus SDK が提供する View を使えるように api/config/view.php にパスを追加します
+さらに、SaaSus SDK が提供する View を使えるように 
+
+PHPの場合は、api/config/view.php にパスを追加します。
+
+Next.jsの場合は、api/views/callback.ejsを作成し下記を記載します。
 
 ```mdx-code-block
 <Tabs>
@@ -303,7 +441,9 @@ app.use("/callback", callbackRouter);
 
 ここまで設定すると、 アプリケーションの Controller にたどり着いた時点で、SaaSus Platform で設定した認証情報が request の一部として渡ってくるようになります。
 
-api/app/Http/Controllers/MessageController.php の index に Request の引数を追加し、 dd を使って $request に userinfo が入っているか確認してみましょう
+PHPの場合は、api/app/Http/Controllers/MessageController.php の index に Request の引数を追加し、 dd を使って $request に userinfo が入っているか確認してみましょう。
+
+Next.jsの場合は、api/controllers/chat.ts の getChats に Request の引数を追加し、console.logを使って req に userinfo が入っているか確認してみましょう。
 
 ```mdx-code-block
 <Tabs>
@@ -399,10 +539,14 @@ array:3 [▼
 
 ### サンプルアプリケーションのマルチテナント化
 
-api/app/Http/Controllers/MessageController.php がメインの処理なので、ここにマルチテナント対応にするための処理を入れてみましょう。
+PHPの場合は、api/app/Http/Controllers/MessageController.php が
+
+Next.jsの場合は、api/controllers/chat.ts が
+
+メインの処理なので、ここにマルチテナント対応にするための処理を入れてみましょう。
 
 まず、表示の部分を変更します。  
-public function index の部分をまるごと書き換えてみましょう。
+下記の部分をまるごと書き換えてみましょう。
 
 ```mdx-code-block
 <Tabs>
@@ -509,7 +653,7 @@ const postChats = async (req: Request, res: Response) => {
 
 画面表示の部分も、ユーザ ID を表示するようにしてみます。
 
-api/resources/views/messageBoard/index.blade.php を編集します。
+PHPの場合は、api/resources/views/messageBoard/index.blade.php を編集します。
 
 32 行目あたりの、この $message->user->name の部分を $message->user_id に変更します。
 
@@ -536,6 +680,8 @@ api/resources/views/messageBoard/index.blade.php を編集します。
                            </span>
                        </p>
 ```
+
+Next.jsの方は修正不要です。
 
 これでマルチテナント対応ができました。
 
