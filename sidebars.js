@@ -218,7 +218,6 @@ const sidebars = {
           ],
         },
         "tutorial/implementation-of-authorization-based-on-tenant-information",
-        "tutorial/implementation-to-nextjs-spa-based-application",
         "tutorial/summarize",
       ],
     },
