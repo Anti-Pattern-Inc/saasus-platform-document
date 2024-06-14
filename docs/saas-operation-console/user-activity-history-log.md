@@ -1,5 +1,5 @@
 ---
-title: "行動履歴ログ"
+title: "User Activity History Log"
 slug: "user-activity-history-log"
 excerpt: ""
 hidden: false
@@ -10,38 +10,37 @@ updatedAt: "Tue Jun 11 2024 00:47:10 GMT+0000 (Coordinated Universal Time)"
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-## 概要
+## Overview
 
-行動履歴ログでは、ユーザーがSaaSを操作した履歴を確認することができます。
+The user activity history log enables you to check the history of user operations on the SaaS.
 
 :::info
-行動履歴ログはアドバンスドプラン以上のお客様のみご利用いただけます。
+The user activity history log is only available to customers on the Advanced plan or higher.
 :::
 
-SaaS運用コンソール > ユーザー管理 のActions内にある「行動履歴ログ」から閲覧することができます。
+You can view the "action history log" in the Actions column of the SaaS Operations Console > User Management.
 
+![users](/img/saas-operation-console/user-activity-history-log/users.png)
+![activity-history-log](/img/saas-operation-console/user-activity-history-log/activity-history-log.png)
 
-![users](/ja/img/saas-operation-console/user-activity-history-log/users.png)
-![activity-history-log](/ja/img/saas-operation-console/user-activity-history-log/activity-history-log.png)
+The history of the screen transitions by users on the SaaS is displayed in chronological order.
+The log retention period is up to one month.
 
-ユーザーがSaaSの画面を遷移した履歴が時系列順に表示されます。
-ログの保持期間は最大1ヶ月です。
+## Setup
 
-## 設定方法
+When executing `GetUserInfo`, set the `Referer` or `X-SaaSus-Referer` header.
+If both are set, `X-SaaSus-Referer` takes precedence.
 
-`GetUserInfo` を実行する際に `Referer` または `X-SaaSus-Referer` ヘッダーを設定します。
-両方とも設定した場合は `X-SaaSus-Referer` が優先されます。
-
-言語毎のSDKの実装例は以下になります。
+Examples of SDK implementations for each language are as follows.
 
 ```mdx-code-block
 <Tabs>
 <TabItem value="php" label="PHP" default>
 ```
 
-例えば [`Laravel`](https://github.com/laravel/laravel) を使用する場合、以下のようになります。
+For example, if you are using [Laravel](https://github.com/laravel/laravel), it would look like this.
 
-`AntiPatternInc\Saasus\Laravel\Middleware\Auth` を使用します。
+Use `AntiPatternInc\Saasus\Laravel\Middleware\Auth`.
 
 ```php
 <?php
@@ -49,8 +48,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-// Middleware\Auth 内で GetUserInfo を実行する
-// リクエストヘッダーの"Referer","X-SaaSus-Referer"を取得し、 GetUserInfo の実行時にヘッダーとして付与する
+// Run GetUserInfo inside Middleware\Auth
+// Retrieve the "Referer" and "X-SaaSus-Referer" from the request headers and add them as headers when executing
 Route::middleware(\AntiPatternInc\Saasus\Laravel\Middleware\Auth::class)->group(function () {
   Route::get('/users', 'App\Http\Controllers\UserApiController@index');
 });
@@ -61,9 +60,9 @@ Route::middleware(\AntiPatternInc\Saasus\Laravel\Middleware\Auth::class)->group(
 <TabItem value="nodejs" label="Node.js">
 ```
 
-例えば [`Express`](https://github.com/expressjs/express) を使用する場合、以下のようになります。
+For example, if you are using [`Express`](https://github.com/expressjs/express), it would look like this.
 
-`saasus-sdk.AuthMiddleware` を使用します。
+Use `saasus-sdk.AuthMiddleware`.
 
 ```js
 import express from "express";
@@ -73,15 +72,14 @@ import { AuthMiddleware } from "saasus-sdk";
 const app = express();
 
 app.use(
-  // AuthMiddleware 内で GetUserInfo を実行する
-  // リクエストヘッダーの"Referer","X-SaaSus-Referer"を取得し、 GetUserInfo の実行時にヘッダーとして付与する
+  // Run GetUserInfo inside AuthMiddleware
+  // Retrieve the "Referer" and "X-SaaSus-Referer" from the request headers and add them as headers when executing
   ["/users"],
   AuthMiddleware
 );
 
 app.use(["/users"], usersRouter);
 ```
-
 
 ```mdx-code-block
 </TabItem>
@@ -92,7 +90,7 @@ app.use(["/users"], usersRouter);
     @GetMapping(value = "/users", produces = "application/json")
     public ResponseEntity<?> getUsers(HttpSession session, HttpServletRequest request) throws Exception {
         AuthApiClient apiClient = new Configuration().getAuthApiClient();
-        apiClient.setReferer(request.getHeader("Referer")); // Refererヘッダーを設定する
+        apiClient.setReferer(request.getHeader("Referer")); // Set the Referer header
 
         UserInfoApi userInfoApi = new UserInfoApi(apiClient);
         UserInfo userInfo = null;
@@ -125,9 +123,9 @@ app.use(["/users"], usersRouter);
 <TabItem value="go" label="Go">
 ```
 
-例えば [`Echo`](https://github.com/labstack/echo) を使用する場合、以下のようになります。
+For example, if you are using [`Echo`](https://github.com/labstack/echo), it would look like this.
 
-`middleware.ExtractReferer` を使用します。
+Use `middleware.ExtractReferer`.
 
 ```go
 package main
@@ -170,8 +168,8 @@ func run() error {
 
 	e := echo.New()
 
-	// リクエストヘッダーの"Referer","X-SaaSus-Referer"を取得し、contextに保持する
-	// middleware.ExtractReferer は GetUserInfo より先に実行する必要がある
+	// Retrieve the "Referer" and "X-SaaSus-Referer" from the request headers and store in context
+	// middleware.ExtractReferer must be executed before GetUserInfo
 	e.Use(echo.WrapMiddleware(middleware.ExtractReferer))
 
 	e.GET("/users", getUsers, authMiddleware)
@@ -181,8 +179,8 @@ func run() error {
 func authMiddlewareEcho(getter middleware.IDTokenGetter) echo.MiddlewareFunc {
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
-			// middleware.Authenticate 内で GetUserInfo を実行する
-			// context が Referer を保持している場合、GetUserInfo の実行時にヘッダーとして付与する
+			// Execute GetUserInfo inside middleware.Authenticate
+			// If the context holds Referer, add it as a header when executing GetUserInfo
 			userInfo, err := middleware.Authenticate(c.Request().Context(), getter.GetIDToken(c.Request()))
 			if err != nil {
 				http.Error(c.Response().Writer, "Unauthorized "+err.Error(), http.StatusUnauthorized)
@@ -202,7 +200,7 @@ func authMiddlewareEcho(getter middleware.IDTokenGetter) echo.MiddlewareFunc {
 <TabItem value="python" label="Python">
 ```
 
-例えば [`FastAPI`](https://github.com/tiangolo/fastapi) を使用する場合、以下のようになります。
+For example, if you are using [`FastAPI`](https://github.com/tiangolo/fastapi), it would look like this.
 
 ```python
 import uvicorn
@@ -226,8 +224,8 @@ def fastapi_auth(request: Request) -> Union[dict, HTTPException]:
     auth_header = request.headers.get("Authorization", "")
     token = auth_header.replace("Bearer ", "") if "Bearer " in auth_header else ""
     referer = request.headers.get("Referer", "")
-    # auth.authenticate 内で GetUserInfo を実行する
-    # 引数としてrefererを設定することができる
+    # Execute GetUserInfo inside auth.authenticate
+    # You can set the referer as an argument
     user_info, error = auth.authenticate(id_token=token, referer=referer)
     if error:
         raise HTTPException(status_code=401, detail=str(error))
@@ -256,13 +254,12 @@ if __name__ == "__main__":
 </TabItem>
 </Tabs>
 ```
-
 ---
 
-SaaSの画面からSaaSへHTTPリクエストを送信する際に `Referer` または `X-SaaSus-Referer` ヘッダーを設定します。
+When sending HTTP requests from the SaaS screen to the SaaS, set the `Referer` or `X-SaaSus-Referer` header.
 
-`Referer` ヘッダーはブラウザが自動で設定しますが、URLのパス部分が省略されている場合があります。
-期待した値が設定されない場合は `X-SaaSus-Referer` ヘッダーを手動で設定します。
+The `Referer` header is automatically set by the browser, but the path part of the URL may be omitted.
+If the expected value is not set, manually set the `X-SaaSus-Referer` header.
 
 ```js
 await fetch(url, {
@@ -272,4 +269,4 @@ await fetch(url, {
 });
 ```
 
-行動履歴ログで表示されるのは `Referer` または `X-SaaSus-Referer` ヘッダーを付与して実行した `GetUserInfo` の履歴になります。そのため、ある画面に遷移した時、SaaSへHTTPリクエストを送信しない場合や `GetUserInfo` を実行しないHTTPリクエストのみを送信する場合、その画面への遷移は記録されません。
+The activity history log displays the history of `GetUserInfo` executed with `Referer` or `X-SaaSus-Referer` headers. Therefore, if an HTTP request is not sent to the SaaS when navigating to a certain screen or only HTTP requests that do not execute `GetUserInfo` are sent, the transition to that screen will not be recorded.
