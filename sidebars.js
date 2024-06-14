@@ -125,6 +125,7 @@ const sidebars = {
           ],
         },
         "saas-operation-console/user-feedback",
+        "saas-operation-console/user-activity-history-log",
       ],
     },
     {

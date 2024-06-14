@@ -182,7 +182,7 @@ const config = {
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
-        additionalLanguages: ["php"],
+        additionalLanguages: ["php","java","python"],
       },
     }),
 
