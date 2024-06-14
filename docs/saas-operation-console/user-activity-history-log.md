@@ -269,4 +269,4 @@ await fetch(url, {
 });
 ```
 
-The activity history log displays the history of `GetUserInfo` executed with `Referer` or `X-SaaSus-Referer` headers. Therefore, if an HTTP request is not sent to the SaaS when navigating to a certain screen or only HTTP requests that do not execute `GetUserInfo` are sent, the transition to that screen will not be recorded.
+The activity history log displays the history of `GetUserInfo` executed with `Referer` or `X-SaaSus-Referer` headers. Therefore if a HTTP request is not sent to the SaaS or only HTTP requests that do not execute `GetUserInfo` are sent when navigating to a certain screen, the transition to that screen will not be recorded.
