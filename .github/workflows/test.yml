@@ -10,11 +10,7 @@ concurrency:
 
 jobs:
   test:
-    runs-on: [self-hosted, linux]
-
-    permissions:
-      id-token: write
-      contents: read    
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
