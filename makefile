@@ -68,8 +68,11 @@ clean:
 ########## 
 
 # saasus-platform-document/sidebars.jsで追加した設定をjaにも反映
+# i18n/ja/docusaurus-plugin-content-docs/current.jsonを更新
 ja_sidebar:
+	docker exec -it saasus-platform-document /bin/bash -c "sed -i.bak 's/onlyIncludeVersions: \[.*\]/onlyIncludeVersions: [\"current\"]/g' docusaurus.config.js"
 	docker exec -it saasus-platform-document npm run write-translations -- --locale ja
+	docker exec -it saasus-platform-document /bin/bash -c "mv docusaurus.config.js.bak docusaurus.config.js"
 
 ########### 
 # copy api file(api)
@@ -106,11 +109,13 @@ translate_ja:
 override_version: remove_version create_new_version
 
 # ex) make create_new_version VERSION=1.6
+VERSIONED_DOCS_SIDEBAR_JSON_FILE = i18n/ja/docusaurus-plugin-content-docs/version-$(VERSION).json
 create_new_version:
 	${MAKE} comment_out_versions
 	docker exec -it saasus-platform-document npm run docusaurus docs:version ${VERSION}
 	${MAKE} uncomment_versions
-	$(MAKE) ja_sidebar
+	cp ./i18n/ja/docusaurus-plugin-content-docs/current.json $(VERSIONED_DOCS_SIDEBAR_JSON_FILE)
+	jq '.["version.label"].message = "$(VERSION)" | .["version.label"].description = "The label for version " + "$(VERSION)"' $(VERSIONED_DOCS_SIDEBAR_JSON_FILE) > $(VERSIONED_DOCS_SIDEBAR_JSON_FILE).tmp && mv $(VERSIONED_DOCS_SIDEBAR_JSON_FILE).tmp $(VERSIONED_DOCS_SIDEBAR_JSON_FILE)
 
 # ディレクトリとファイルのパス
 VERSIONED_DOCS_DIR_EN = versioned_docs/version-$(VERSION)
