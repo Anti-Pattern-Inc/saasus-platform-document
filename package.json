@@ -54,9 +54,5 @@
   },
   "engines": {
     "node": ">=18.0"
-  },
-  "overrides": {
-    "@docusaurus/core": "3.0.0",
-    "@docusaurus/theme-common": "3.0.0"
   }
 }
