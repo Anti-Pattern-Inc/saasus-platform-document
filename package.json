@@ -23,6 +23,7 @@
     "@docusaurus/plugin-content-docs": "3.1.1",
     "@docusaurus/plugin-ideal-image": "^3.1.1",
     "@docusaurus/preset-classic": "3.1.1",
+    "@easyops-cn/docusaurus-search-local": "^0.44.2",
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.0.0",
     "prism-react-renderer": "^2.3.0",
@@ -53,5 +54,9 @@
   },
   "engines": {
     "node": ">=18.0"
+  },
+  "overrides": {
+    "@docusaurus/core": "3.0.0",
+    "@docusaurus/theme-common": "3.0.0"
   }
 }
