@@ -62,6 +62,17 @@ const sidebars = {
             "usecase/about-saas-user-accounts/add-tenant-user",
           ],
         },
+        {
+          "type": "category",
+          "label": "About Rate Plans",
+          "link": {
+            "type": "doc",
+            "id": "usecase/about-rate-plans"
+          },
+          "items": [
+            "usecase/about-rate-plans/basic-charge-preference"
+          ]
+        }
       ],
     },
     {
@@ -107,7 +118,8 @@ const sidebars = {
         "saas-development-console/declare-additional-attribute-to-user",
         "saas-development-console/declare-additional-attribute-to-tenant",
         "saas-development-console/role-definition",
-        "saas-development-console/console-switching"
+        "saas-development-console/console-switching",
+        "saas-development-console/saasus-development-console-used-billing-with-association"
       ],
     },
     {
@@ -215,9 +227,9 @@ const sidebars = {
           },
           items: [
             "tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans",
+            "tutorial/manage-rate-plans/implementation-of-authorization-based-on-tenant-information"
           ],
         },
-        "tutorial/implementation-of-authorization-based-on-tenant-information",
         "tutorial/implementation-to-nextjs-spa-based-application",
         "tutorial/summarize",
       ],
