@@ -29,13 +29,19 @@ import TabItem from "@theme/TabItem";
 
 では、さきほど準備したサンプルアプリケーションを開発環境で開きましょう。
 
-冒頭で行ったとおり、 init.sh を利用して docker コンテナが立ち上がっており、[http://localhost/board](http://localhost/board) でサンプルアプリケーションが動いていることを確認してください。
+冒頭で行ったとおり、 init.sh を利用して docker コンテナが立ち上がっており、
+
+PHPなら[http://localhost/board](http://localhost/board) で、
+
+Node.jsなら[http://localhost:3000/board](http://localhost:3000/board)で、サンプルアプリケーションが動いていることを確認してください。
 
 まず、 SaaSus Platform を使うためには、 SaaSus SDK をアプリケーションに組み込みます。
 
-今回は PHP なので、 composer を使います。
+PHP なら composer を
 
-ターミナルを開き php のコンテナに入り、composer を使ってセットアップをします。
+Node.js なら npm を使います。
+
+ターミナルを開きSDKのセットアップをします。
 
 ```mdx-code-block
 <Tabs>
@@ -46,6 +52,7 @@ import TabItem from "@theme/TabItem";
 repo$ docker compose exec php bash
 root@xxx:/var/www# cd api
 root@xxx:/var/www/api# composer config repositories.saasus-platform/saasus-sdk-php vcs https://github.com/saasus-platform/saasus-sdk-php
+root@xxx:/var/www/api# composer require saasus-platform/saasus-sdk-php
 ```
 
 ```mdx-code-block
@@ -55,17 +62,12 @@ root@xxx:/var/www/api# composer config repositories.saasus-platform/saasus-sdk-p
 
 ```txt
 repo$ docker compose exec node bash
+repo$ npm install saasus-sdk
 ```
 
 ```mdx-code-block
 </TabItem>
 </Tabs>
-```
-
-api ディレクトリで、 composer コマンドを使って追加します。
-
-```txt
-root@xxx:/var/www/api# composer require saasus-platform/saasus-sdk-php
 ```
 
 SaaSus SDK がインストールできたら、まずは SaaSus SDK 利用にあたって必要な環境変数を定義しましょう。
@@ -78,6 +80,7 @@ SAASUS_SAAS_ID="98tjo3wifaoua （画面のSaaS ID）"
 SAASUS_API_KEY="kjntowjfoasnkjntwonsflajsno4as （画面のAPI KEY）"
 SAASUS_SECRET_KEY=" （画面のクライアントシークレット）"
 SAASUS_LOGIN_URL="https://auth.sample.saasus.jp/　（ログイン画面のURL）"
+SAASUS_AUTH_MODE="api"（Next.jsの場合は記載）
 ```
 
 SAASUS_SAAS_ID, SAASUS_API_KEY, SAASUS_SECRET_KEY は先ほど画面で表示した SaaS ID と API キー、クライアントシークレットを、SAASUS_LOGIN_URL は、SaaSus 開発コンソールで作成したログイン画面の URL を設定します。

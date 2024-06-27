@@ -36,13 +36,19 @@ Also, please be extremely careful not to leak your API key to outside parties. T
 
 Now, let's open the sample application we just prepared in the development environment.
 
-As we did at the beginning, make sure that the docker container is started using init.sh and that the sample application is running at [http://localhost/board](http://localhost/board).
+As mentioned at the beginning, the docker container has been started using init.sh, and
+
+please check that the sample application is running at [http://localhost/board](http://localhost/board) for PHP, 
+
+or at [http://localhost:3000/board](http://localhost:3000/board) for Next.js.
 
 First, to use the SaaSus Platform, embed the SaaSus SDK into your application.
 
-This time I'm using PHP, so I'll use composer.
+For PHP, use composer.
 
-Open a terminal, enter the php container, and use composer to set it up.
+For Next.js, use npm.
+
+Open a terminal and set up the SDK.
 
 ```mdx-code-block
 <Tabs>
@@ -53,6 +59,7 @@ Open a terminal, enter the php container, and use composer to set it up.
 repo$ docker compose exec php bash
 root@xxx:/var/www# cd api
 root@xxx:/var/www/api# composer config repositories.saasus-platform/saasus-sdk-php vcs https://github.com/saasus-platform/saasus-sdk-php
+root@xxx:/var/www/api# composer require saasus-platform/saasus-sdk-php
 ```
 
 ```mdx-code-block
@@ -62,17 +69,12 @@ root@xxx:/var/www/api# composer config repositories.saasus-platform/saasus-sdk-p
 
 ```txt
 repo$ docker compose exec node bash
+repo$ npm install saasus-sdk
 ```
 
 ```mdx-code-block
 </TabItem>
 </Tabs>
-```
-
-In the api directory, add it using the composer command.
-
-```txt
-root@xxx:/var/www/api# composer require saasus-platform/saasus-sdk-php
 ```
 
 After installing SaaSus SDK, first let's define the environment variables required to use SaaSus SDK.
@@ -85,6 +87,7 @@ SAASUS_SAAS_ID="98tjo3wifaoua （Screen SaaS ID）"
 SAASUS_API_KEY="kjntowjfoasnkjntwonsflajsno4as （Screen API Key）"
 SAASUS_SECRET_KEY=" （Screen client secret）"
 SAASUS_LOGIN_URL="https://auth.sample.saasus.jp/　（Login screen URL）"
+SAASUS_AUTH_MODE="api"（For Next.js, please write）
 ```
 
 For SAASUS_SAAS_ID, SAASUS_API_KEY, and SAASUS_SECRET_KEY, set the SaaS ID, API key, and client secret displayed on the screen earlier, and for SAASUS_LOGIN_URL, set the URL of the login screen created in the SaaSus development console.
