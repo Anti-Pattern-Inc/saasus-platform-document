@@ -230,7 +230,7 @@ const sidebars = {
             "tutorial/manage-rate-plans/implementation-of-authorization-based-on-tenant-information"
           ],
         },
-        "tutorial/implementation-to-nextjs-spa-based-application",
+        "tutorial/implementation-of-authorization-based-on-tenant-information",
         "tutorial/summarize",
       ],
     },
