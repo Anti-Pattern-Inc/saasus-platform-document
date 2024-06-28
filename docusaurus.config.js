@@ -198,6 +198,13 @@ const config = {
     //     disableInDev: false,
     //   },
     // ],
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      {
+        hashed: true,
+        language: ["en", "ja"]
+      },
+    ],
   ],
 };
 
