@@ -1,0 +1,272 @@
+openapi: 3.0.0
+info:
+  description: "SaaSus Eventbridge API Schema"
+  version: "1.0.0"
+  title: "SaaSus Eventbridge API Schema"
+  x-title-i18n:
+    jpn: "SaaSus Eventbridge API スキーマ"
+  contact:
+    name: "Anti-Pattern"
+servers:
+  - url: "https://api.saasus.io/v1/integration"
+    description: Production API Server
+tags:
+  - name: "eventBridge"
+    description: Eventbridge Resource Operations
+    x-description-i18n:
+      jpn: Eventbridgeリソースの操作
+  - name: "error"
+    description: Errors for testing purposes
+    x-description-i18n:
+      jpn: テスト用途のエラー
+security:
+  - Bearer: []
+paths:
+  /eventbridge/info:
+    get:
+      tags:
+        - eventBridge
+      operationId: GetEventBridgeSettings
+      summary: Get EventBridge Settings
+      x-summary-i18n:
+        jpn: イベント連携設定を取得
+      description: |
+        Gets the settings for providing real-time status of all monitored hosts via Amazon EventBridge.
+      x-description-i18n:
+        jpn: |
+          監視対象となっている全ホストの状態をリアルタイムにAmazon EventBridge 経由で提供するための設定を取得します。
+      responses:
+        200: 
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EventBridgeSettings"
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+        - eventBridge
+      operationId: SaveEventBridgeSettings
+      summary: Update EventBridge Settings
+      x-summary-i18n:
+        jpn: イベント連携設定を更新
+      description: |
+        Update configuration used to provide the host state via Amazon EventBridge.
+      x-description-i18n:
+        jpn: |
+          ホストの状態を Amazon EventBridge 経由で提供するための設定を更新します。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SaveEventBridgeSettingsParam"
+      responses:
+        200:
+          description: OK
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+        - eventBridge
+      operationId: DeleteEventBridgeSettings
+      summary: Delete EventBridge Settings
+      x-summary-i18n:
+        jpn: イベント連携設定を削除
+      description: |
+        Delete settings used to provide host state via Amazon EventBridge.
+      x-description-i18n:
+        jpn: |
+          ホストの状態を Amazon EventBridge 経由で提供するための設定を解除します。
+      responses:
+        200:
+          description: OK
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /eventbridge/event:
+    post:
+      tags:
+        - eventBridge
+      operationId: CreateEventBridgeEvent
+      summary: Send Events
+      x-summary-i18n:
+        jpn: イベント連携の送信
+      description: |
+        Send events to Amazon EventBridge.
+      x-description-i18n:
+        jpn: |
+          Amazon EventBridge へイベントを送信します。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateEventBridgeEventParam"
+      responses:
+        201:
+          description: Created
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /eventbridge/test-event:
+    post:
+      tags:
+        - eventBridge
+      operationId: CreateEventBridgeTestEvent
+      summary: Test EventBridge Connection
+      x-summary-i18n:
+        jpn: イベント連携のテスト送信
+      description: |
+        Send events to test the connection with Amazon EventBridge.
+      x-description-i18n:
+        jpn: |
+          Amazon EventBridge との連携をテストする為のイベントを送信します。
+      responses:
+        201:
+          description: Created
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /errors/internal-server-error:
+    get:
+      tags:
+        - "error"
+      operationId: ReturnInternalServerError
+      summary: Return Internal Server Error
+      x-summary-i18n:
+        jpn: ステータスコード500でサーバーエラーを返却
+      description: |
+        This endpoint is used for testing purposes. Returns a server error with status code 500.
+      x-description-i18n:
+        jpn: |
+          テスト用途で使用するエンドポイントです。ステータスコード500でサーバーエラーを返却します。
+      responses:
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      description: Credentials or access token for API
+  schemas:
+    Error:
+      properties:
+        type:
+          type: string
+          description: permission_denied
+        message:
+          type: string
+          description: Error message
+      required:
+        - type
+        - message
+    AwsRegion:
+      title: AWS Regions
+      x-title-i18n:
+        jpn: AWSリージョン
+      type: string
+      enum:
+        - us-east-1
+        - us-east-2
+        - us-west-1
+        - us-west-2
+        - af-south-1
+        - ap-east-1
+        - ap-south-1
+        - ap-northeast-1
+        - ap-northeast-2
+        - ap-northeast-3
+        - ap-southeast-1
+        - ap-southeast-2
+        - ap-southeast-3
+        - ca-central-1
+        - eu-central-1
+        - eu-north-1
+        - eu-south-1
+        - eu-west-1
+        - eu-west-2
+        - eu-west-3
+        - me-south-1
+        - sa-east-1
+      description: |
+        All AWS regions except Ningxia and Beijing in China can be selected.
+      x-description-i18n:
+        jpn: |
+          中国の寧夏、北京を除く全てのAWSリージョンが選択可能です。
+    EventBridgeSettings:
+      type: object
+      properties:
+        aws_account_id:
+          type: string
+          example: 267185063265
+          description: AWS Account ID
+          x-description-i18n:
+            jpn: AWSアカウントID
+        aws_region:
+          $ref: "#/components/schemas/AwsRegion"
+      required:
+        - aws_account_id
+        - aws_region
+    SaveEventBridgeSettingsParam:
+      $ref: "#/components/schemas/EventBridgeSettings"
+    CreateEventBridgeEventParam:
+      type: object
+      properties:
+        event_messages:
+          type: array
+          items: {$ref: "#/components/schemas/EventMessage"}
+          description: event message
+          x-description-i18n:
+            jpn: イベントメッセージ
+      required:
+        - event_messages
+    EventMessage:
+      title: EventMessage
+      type: object
+      properties:
+        event_type:
+          type: string
+          example: "api_call"
+          description: event type
+          x-description-i18n:
+            jpn: イベントタイプ
+        event_detail_type:
+          type: string
+          example: "create_user"
+          description: detailed event type
+          x-description-i18n:
+            jpn: 詳細イベントタイプ
+        message:
+          type: string
+          example: "{id:8b79528a-ec3b-4f68-b7c4-d793e3894561,name:test222}"
+          description: event message
+          x-description-i18n:
+            jpn: イベントメッセージ
+      required:
+        - event_type
+        - event_detail_type
+        - message
+
