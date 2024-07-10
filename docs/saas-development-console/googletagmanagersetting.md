@@ -1,41 +1,41 @@
 ---
-title: "Google Tag Managerの設定"
+title: "Google Tag Manager Settings"
 slug: "googletagmanagersetting"
 excerpt: ""
 hidden: false
 createdAt: "Thu Dec 07 2023 05:40:29 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Fri Dec 22 2023 06:01:24 GMT+0000 (Coordinated Universal Time)"
 ---
-Google Tag Managerを設定することで、ログイン画面にGoogle Tag Managerのタグが埋め込まれGoogle Analyticsなどが設定可能です。
+By setting up Google Tag Manager, you can embed Google Tag Manager tags in the login screen, and configure Google Analytics and other services.
 
-SaaSの運用にはマーケティング活動が重要になるので、ユーザーの情報や流入元などの情報を取得するために設定していきましょう。
+Marketing activities are crucial for SaaS operations, so let's set up Google Tag Manager to acquire information about users and traffic sources.
 
-まずは、Google Tag Managerのアカウントとコンテナを作ります。
+First, create a Google Tag Manager account and container.
 
-[Google Tag Managerのアカウントとコンテナの作成](/docs/saas-development-console/googletagmanagersetting/googletagmanagercreateaccountandcontainer)
+[Create a Google Tag Manager Account and Container](/docs/saas-development-console/googletagmanagersetting/googletagmanagercreateaccountandcontainer)
 
-Google Tag Managerのアカウントとコンテナの作成が完了したら、実際にSaaSにGoogle Tag Managerを設定します。
+Once you have created the Google Tag Manager account and container, you can actually set up Google Tag Manager in your SaaS.
 
-[Google Tag Manager コンテナ IDを設定](/docs/saas-development-console/googletagmanagersetting/googletagmanagercontaineridsetting)
+[Set the Google Tag Manager Container ID](/docs/saas-development-console/googletagmanagersetting/googletagmanagercontaineridsetting)
 
-以上で、ログイン画面にGoogle Tag Managerのタグがログイン画面に埋め込まれるようになりましたので、Google Analyticsと連携してユーザー行動を取得していきます。
+Now, the Google Tag Manager tag is embedded in the login screen, so you can integrate with Google Analytics to collect user behavior data.
 
-Google Analyticsのアカウント作成がまだの方は以下のリンク先ドキュメントをご確認ください。
+If you haven't created a Google Analytics account yet, please check the following document.
 
-[Google Analyticsアカウント作成](/docs/saas-development-console/googletagmanagersetting/creategoogleanalyticsaccount)
+[Create a Google Analytics Account](/docs/saas-development-console/googletagmanagersetting/creategoogleanalyticsaccount)
 
-Google Analyticsのアカウント作成済みの方ないしアカウント作成が完了した方は、以下のドキュメントからGoogle AnalyticsとGoogle Tag Managerを設定しましょう。
+If you have already created a Google Analytics account or completed the account creation, set up Google Analytics and Google Tag Manager with the following document.
 
-[Google AnalyticsとGoogle Tag Managerを連携する](/docs/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink)
+[Link Google Analytics and Google Tag Manager](/docs/saas-development-console/googletagmanagersetting/googleanalyticsgoogletagmanagerlink)
 
-今回はGoogle Analyticsを使用しましたが、Google Tag Managerがサポートしているタグその他のタグや第三者によって提供されているテンプレート等で様々なタグの利用が可能です。
+This time we used Google Analytics, but Google Tag Manager supports various other tags and templates provided by third parties.
 
-詳細は以下のリンク先をご確認ください。
+For more details, please check the following links:
 
-<a href="https://support.google.com/tagmanager/answer/6106924" target="_blank">Google Tag Managerがサポートしているタグ</a>
+[Tags Supported by Google Tag Manager](https://support.google.com/tagmanager/answer/6106924)
 
-<a href="https://tagmanager.google.com/gallery" target="_blank">Google Tag Manager Community Template Gallery</a>
+[Google Tag Manager Community Template Gallery](https://tagmanager.google.com/gallery)
 
-<a href="https://support.google.com/tagmanager/answer/9334084" target="_blank">カスタムテンプレートについて</a>
+[About Custom Templates](https://support.google.com/tagmanager/answer/9334084)
 
-<a href="https://support.google.com/tagmanager/answer/6107167" target="_blank">カスタムタグについて</a>
+[About Custom Tags](https://support.google.com/tagmanager/answer/6107167)
