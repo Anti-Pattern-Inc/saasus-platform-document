@@ -23,6 +23,10 @@
     "message": "Changelog",
     "description": "The label for category Changelog in sidebar changelogSidebar"
   },
+  "sidebar.changelogSidebar.doc.2024/03/05": {
+    "message": "2024/03/05",
+    "description": "The label for the doc item 2024/03/05 in sidebar changelogSidebar, linking to the doc changelog/20240305"
+  },
   "sidebar.changelogSidebar.doc.2023/11/23": {
     "message": "2023/11/23",
     "description": "The label for the doc item 2023/11/23 in sidebar changelogSidebar, linking to the doc changelog/20231123"
@@ -42,10 +46,6 @@
   "sidebar.changelogSidebar.doc.Welcome to SaaSus Platform": {
     "message": "Welcome to SaaSus Platform",
     "description": "The label for the doc item Welcome to SaaSus Platform in sidebar changelogSidebar, linking to the doc changelog/welcome-to-saasus-platform"
-  },
-  "sidebar.changelogSidebar.doc.2024/03/05": {
-    "message": "2024/03/05",
-    "description": "The label for the doc item 2024/03/05 in sidebar changelogSidebar, linking to the doc changelog/20240305"
   },
   "sidebar.guideSidebar.category.Getting Started": {
     "message": "はじめに",
