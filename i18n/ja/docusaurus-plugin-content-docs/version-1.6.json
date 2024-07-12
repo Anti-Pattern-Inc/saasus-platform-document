@@ -110,5 +110,13 @@
   "sidebar.changelogSidebar.doc.2024/03/13": {
     "message": "2024/03/13",
     "description": "The label for the doc item 2024/03/13 in sidebar changelogSidebar, linking to the doc changelog/20240313"
+  },
+  "sidebar.changelogSidebar.doc.2024/04/02": {
+    "message": "2024/04/02",
+    "description": "The label for the doc item 2024/04/02 in sidebar changelogSidebar, linking to the doc changelog/20240402"
+  },
+  "sidebar.changelogSidebar.doc.2024/03/19": {
+    "message": "2024/03/19",
+    "description": "The label for the doc item 2024/03/19 in sidebar changelogSidebar, linking to the doc changelog/20240319"
   }
 }
