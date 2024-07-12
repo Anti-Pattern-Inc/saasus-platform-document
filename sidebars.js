@@ -230,7 +230,6 @@ const sidebars = {
             "tutorial/manage-rate-plans/implementation-of-authorization-based-on-tenant-information"
           ],
         },
-        "tutorial/implementation-of-authorization-based-on-tenant-information",
         "tutorial/summarize",
       ],
     },
