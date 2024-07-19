@@ -16,6 +16,12 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 
 まず、今回のサンプルアプリケーションを起動してみましょう！
 
+:::info
+
+AWS の EC2 や Cloud9 を利用して、Blade 版の動作環境を作成する場合は、[サンプルアプリケーションの準備(EC2)](https://docs.saasus.io/ja/docs/tutorial/prepare-the-sample-application-ec2/)の手順で行ってください。
+
+:::
+
 この簡易チャットシステムは、バックエンドは PHP8 + Laravel9 + PostgreSQL13 にて作成されています。  
 フロントエンドは Laravel with Blade にて作成されたものと、 Next.js にて SPA として作成されたものの２種類が入っています。
 
