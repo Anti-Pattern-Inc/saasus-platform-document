@@ -6,9 +6,8 @@ hidden: false
 createdAt: "Wed Jan 11 2023 03:13:22 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
-
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 ## 認可の実装
 
@@ -16,7 +15,7 @@ import TabItem from "@theme/TabItem";
 
 さきほどのサンプルアプリケーションにさらに手を加えていき、認可の一歩目を実装してみます。
 
-ここまでの SaaSus Platform の設定で、どのユーザがログインしていて、そのユーザはどのテナントに属していてどんな役割で、そのテナントがどの料金プランを選択していて、どんなメニューが使えるのか？というのがアプリケーションから取得できる状態になっています。その情報を使って、アプリケーションに制限をかけていきます。
+ここまでのSaaSus Platformの設定で、どのユーザがログインしていて、そのユーザはどのテナントに属していてどんな役割で、そのテナントがどの料金プランを選択していて、どんなメニューが使えるのか？というのがアプリケーションから取得できる状態になっています。その情報を使って、アプリケーションに制限をかけていきます。
 
 ここでは、料金プランの中の計測単位の一部である「コメント数」に注目してみましょう。
 
@@ -30,7 +29,7 @@ import TabItem from "@theme/TabItem";
 
 では、この料金プランに紐付いた上限数をテナントごとに取得して、制限をかけてみましょう。
 
-では、先ほど書き換えた、 api/app/Http/Controllers/MessageController.php の post メソッドを以下のように書き換えてみましょう。
+では、先ほど書き換えた、 api/app/Http/Controllers/MessageController.php のpostメソッドを以下のように書き換えてみましょう。
 
 <Tabs>
 <TabItem value="php" label="PHP">
@@ -84,7 +83,7 @@ import TabItem from "@theme/TabItem";
 
 先ほどのコードに加えて、コメント数の対象メーター “comment_count” をベースにしてコメント数の上限を確認しています。
 
-先ほど、計測単位は以下の画面のようにどの料金プランの計測単位でも “comment_count” をベースに設定していると思います。
+先ほど、計測単位は以下の画面のようにどの料金プランの計測単位でも  “comment_count” をベースに設定していると思います。
 
 ![](/ja/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-1.png)
 
@@ -106,17 +105,17 @@ import TabItem from "@theme/TabItem";
 
 今回は処理をシンプルにするために、書き込みが行えないということにとどめていますが、実際はエラーメッセージを出したり、アップセルを促すメッセージを出すことになると思います。
 
-しかし、機能によっては上限値で完全に止めてしまうと SaaS の価値が損なわれる場合があります。  
+しかし、機能によっては上限値で完全に止めてしまうとSaaSの価値が損なわれる場合があります。  
 たとえば、今回のようにコメントに上限をもうけて、そこで完全に書き込みができなくなってしまうと、これはチャットとして成り立たなくなってしまいます。  
-そうした場合、このメーターがリセットされるまで、この SaaS は使われなくなってしまう可能性があります。  
+そうした場合、このメーターがリセットされるまで、このSaaSは使われなくなってしまう可能性があります。  
 その後、ずっと使われなくなってしまう可能性ももちろんあります。  
-そのため、完全に止めるのではなく、書き込みはできるが警告を出したり、保存期間を調整するなどこの SaaS 自体の価値が失われないようにすることが重要です。
+そのため、完全に止めるのではなく、書き込みはできるが警告を出したり、保存期間を調整するなどこのSaaS自体の価値が失われないようにすることが重要です。
 
 今回はチュートリアルですので、無情にも完全に書き込みができない状態にしました。では、ちゃんと上限で書き込みができなくなっているか試してみましょう！
 
 まず、最初にアプリケーションを初期化したときのように、 init.sh を実行してアプリケーションをまっさらな状態に戻しましょう。
 
-そして、テナント１の方には Free プランを設定し、[user1-1@example.com](mailto:user1-1@example.com) でログインして、１０件以上の書き込みを行ってみましょう。
+そして、テナント１の方にはFreeプランを設定し、[user1-1@example.com](mailto:user1-1@example.com) でログインして、１０件以上の書き込みを行ってみましょう。
 
 フリープラン設定後の書き込みが、１０件までしかできないことが確認できたと思います。
 
@@ -126,11 +125,11 @@ import TabItem from "@theme/TabItem";
 
 では、次にテナント２のユーザー [user2-1@example.com](mailto:user2-1@example.com) でログインして、１０件以上の書き込みを行ってみましょう。
 
-こちらは上限が 100 件になっているので、１０件以上の書き込みができたはずです。
+こちらは上限が100件になっているので、１０件以上の書き込みができたはずです。
 
 ![](/ja/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-3.png)
 
-さらに、テナント１の方がプランのアップグレードをした想定で、Free プランから Basic プランに設定を変更して、再度 [user1-1@example.com](mailto:user1-1@example.com) でログインして、１０件以上の書き込みを行ってみましょう。  
+さらに、テナント１の方がプランのアップグレードをした想定で、FreeプランからBasicプランに設定を変更して、再度 [user1-1@example.com](mailto:user1-1@example.com) でログインして、１０件以上の書き込みを行ってみましょう。  
 (設定変更後反映には５分ほど時間がかかります。)
 
 ![](/ja/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-4.png)
@@ -141,7 +140,7 @@ import TabItem from "@theme/TabItem";
 
 このような形で、料金プランに応じたメータリングや制限ができるようになりました！
 
-制限は SaaSus と連携後から 1 件とカウントします。  
-API としてカウントの制限値を変更する機能など提供しております。
+制限はSaaSusと連携後から1件とカウントします。  
+APIとしてカウントの制限値を変更する機能など提供しております。
 
-ここまでは、Blade ベースでのアプリケーションへの実装でしたが、最後に Next.js(API ベースでの SPA)への実装の場合はどのようにすればよいか？確認しておきましょう。
+ここまでは、Bladeベースでのアプリケーションへの実装でしたが、最後に Next.js(APIベースでのSPA)への実装の場合はどのようにすればよいか？確認しておきましょう。
