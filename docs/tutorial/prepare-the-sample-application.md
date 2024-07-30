@@ -16,6 +16,12 @@ In this tutorial, a simple chat system created as a so-called ordinary web appli
 
 First, let's start the sample application!
 
+:::info
+
+If you are using AWS EC2 or Cloud9 to create an operating environment for the Blade version, please follow the steps in [Preparing the Sample Application (EC2)](https://docs.saasus.io/docs/tutorial/prepare-the-sample-application-ec2/).
+
+:::
+
 The backend of this simple chat system is PHP8 + Laravel9 + PostgreSQL13.  
 There are two types of frontends, one created with Laravel with Blade and one created as an SPA with Next.js.
 
