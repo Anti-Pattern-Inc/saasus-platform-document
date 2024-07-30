@@ -70,7 +70,7 @@ chmod -R 777 api/storage/
 After executing the above commands, try accessing the following URL
 
 URL: http<dummy>://</dummy>[EC2's global IP]/board  
-認証用 Email: <dummy>user</dummy>@example.com  
+Authentication Email: <dummy>user</dummy>@example.com  
 Password: password
 
 ![Sample](/ja/img/tutorial/prepare-the-sample-application/prepare-the-sample-application-01.png)
