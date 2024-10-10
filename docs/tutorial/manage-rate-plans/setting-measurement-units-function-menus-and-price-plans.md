@@ -6,6 +6,16 @@ hidden: false
 createdAt: "Fri Jan 20 2023 01:47:13 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
+## Setting measurement units, feature menus, and pricing plans
+
+## Metering Units Setting
+
+| Unit Name    | Unit Display Name   | Unit Description |
+|:-----------|:-------------|:-----------------|
+| comment_count | comment_count | Comment Count    |
+
+![07](/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/setting-measurement-units-function-menus-and-price-plans-07.png)
+
 ## Basic Pricing
 
 Measurement Unit: Fixed Unit
