@@ -57,8 +57,8 @@ Next.js 版では、api/controllers/chat.ts のpostChatsメソッドを以下の
         // 今回は、１日ごとの上限コメント数として扱う
         $count = json_decode($res->getBody(), true);
 
-				// メータリングの上限コメント数を取得
-     		$upper = \AntiPatternInc\Saasus\Api\Lib::findUpperCountByMeteringUnitName($plan, $meteringUnitName);
+        // メータリングの上限コメント数を取得
+        $upper = \AntiPatternInc\Saasus\Api\Lib::findUpperCountByMeteringUnitName($plan, $meteringUnitName);
 
         // 現在契約中の料金プランの上限コメント数を超えていたら、投稿できなくする
         if ($count['count'] < $upper || $upper === 0) {

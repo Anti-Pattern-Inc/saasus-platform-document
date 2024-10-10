@@ -118,5 +118,17 @@
   "sidebar.changelogSidebar.doc.2024/03/19": {
     "message": "2024/03/19",
     "description": "The label for the doc item 2024/03/19 in sidebar changelogSidebar, linking to the doc changelog/20240319"
+  },
+  "sidebar.changelogSidebar.doc.2024/05/24": {
+    "message": "2024/05/24",
+    "description": "The label for the doc item 2024/05/24 in sidebar changelogSidebar, linking to the doc changelog/20240524"
+  },
+  "sidebar.changelogSidebar.doc.2024/04/23": {
+    "message": "2024/04/23",
+    "description": "The label for the doc item 2024/04/23 in sidebar changelogSidebar, linking to the doc changelog/20240423"
+  },
+  "sidebar.changelogSidebar.doc.2024/04/11": {
+    "message": "2024/04/11",
+    "description": "The label for the doc item 2024/04/11 in sidebar changelogSidebar, linking to the doc changelog/20240411"
   }
 }

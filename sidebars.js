@@ -119,7 +119,8 @@ const sidebars = {
         "saas-development-console/declare-additional-attribute-to-tenant",
         "saas-development-console/role-definition",
         "saas-development-console/console-switching",
-        "saas-development-console/saasus-development-console-used-billing-with-association"
+        "saas-development-console/saasus-development-console-used-billing-with-association",
+        "saas-development-console/single-tenant-management",
       ],
     },
     {
@@ -142,14 +143,18 @@ const sidebars = {
           ],
         },
         "saas-operation-console/user-feedback",
-        "saas-operation-console/adding-role-to-user"
+        "saas-operation-console/adding-role-to-user",
+        "saas-operation-console/user-activity-history-log",
       ],
     },
     {
       type: "category",
       label: "AWS Marketplace Integration",
+      link: {
+        type: "doc",
+        id: "aws-marketplace-integration/aws-marketplace-integration",
+      },
       items: [
-        "aws-marketplace-integration/aws-marketplace-integration",
         {
           type: "category",
           label: "Setting Up Bank Account From Seller Registration",
@@ -264,6 +269,21 @@ const sidebars = {
       type: "category",
       label: "Changelog",
       items: [
+        {
+          label: "2024/05/24",
+          type: "doc",
+          id: "changelog/20240524",
+        },
+        {
+          label: "2024/04/23",
+          type: "doc",
+          id: "changelog/20240423",
+        },
+        {
+          label: "2024/04/11",
+          type: "doc",
+          id: "changelog/20240411",
+        },
         {
           label: "2024/04/02",
           type: "doc",

@@ -1,0 +1,225 @@
+openapi: 3.0.0
+info:
+  description: "SaaSus Analysis API Schema"
+  version: "1.0.0"
+  title: "SaaSus Analysis API Schema"
+  contact:
+    name: "Anti-Pattern"
+servers:
+  - url: "https://api.saasus.io/v1/analysis"
+    description: Production API Server
+tags:
+  - name: "userAnalysis"
+    description: User Behavior Analysis
+    x-description-i18n:
+      jpn: ユーザの行動分析
+  - name: "error"
+    description: Error for Testing Purposes
+    x-description-i18n:
+      jpn: テスト用途のエラー
+security:
+  - Bearer: []
+paths:
+  /user-behavior-day:
+    put:
+      tags:
+        - userAnalysis
+      operationId: UpdateUserBehaviorHistoriesByDay
+      summary: Analysis of user behavior on the day
+      x-summary-i18n:
+        jpn: 当日のユーザ行動履歴を更新
+      description: |
+        Analysis of user behavior on the day.
+      x-description-i18n:
+        jpn: |
+          当日のユーザ行動履歴を更新します。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserBehaviorHistoriesByDayParam"
+      responses:
+        200:
+          description: OK
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users/{user_id}/behavior-histories:
+    get:
+      tags:
+        - userAnalysis
+      operationId: GetUserBehaviorHistories
+      summary: Acquisition of user behavior history
+      x-summary-i18n:
+        jpn: 過去1ヶ月のユーザ行動履歴を取得します
+      description: |
+        Obtain user activity history for the past month.
+      x-description-i18n:
+        jpn: |
+          過去1ヶ月のユーザ行動履歴を取得します
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserBehaviorHistories"
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /errors/internal-server-error:
+    get:
+      tags:
+        - "error"
+      operationId: ReturnInternalServerError
+      summary: Return Internal Server Error
+      x-summary-i18n:
+        jpn: ステータスコード500でサーバーエラーを返却
+      description: |
+        This endpoint is used for testing purposes. Returns a server error with status code 500.
+      x-description-i18n:
+        jpn: |
+          テスト用途で使用するエンドポイントです。ステータスコード500でサーバーエラーを返却します。
+      responses:
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      description: Access or authentication information to API
+      x-description-i18n:
+        jpn: APIへのアクセス情報または認証情報
+  parameters:
+    UserId:
+      in: path
+      name: user_id
+      description: User ID
+      x-description-i18n:
+        jpn: ユーザーID
+      schema:
+        type: string
+        example: f94bfffc-8be2-11ec-b41a-0242ac120004
+      required: true  
+  schemas:
+    Error:
+      properties:
+        type:
+          type: string
+          example: permission_denied
+        message:
+          type: string
+          example: Error message
+          x-example-i18n:
+            jpn: エラーメッセージ
+      required:
+        - type
+        - message
+    Uuid:
+      type: string
+      example: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+    UpdateUserBehaviorHistoriesByDayParam:
+      type: object
+      properties:
+        timestamp:
+          title: Date subject to renewal
+          x-title-i18n:
+            jpn: 更新対象日
+          description: Date subject to renewal
+          x-description-i18n:
+            jpn: 更新対象日
+          type: integer
+          example: 1640995200
+        user_id:
+          title: User ID
+          x-title-i18n:
+            jpn: ユーザーID
+          description: User ID
+          x-description-i18n:
+            jpn: ユーザーID
+          $ref: "#/components/schemas/Uuid"
+        histories:
+          type: array
+          items: {$ref: "#/components/schemas/UserBehaviorHistory"}
+          description: user behavior history list
+          x-description-i18n:
+            jpn: ユーザの行動履歴一覧
+      required:
+        - timestamp
+        - user_id
+        - histories
+    UserBehaviorHistory:
+      type: object
+      properties:
+        timestamp:
+          title: operation time stamp
+          x-title-i18n:
+            jpn: 行動履歴のタイムスタンプ
+          description: Behavior Timestamp
+          x-description-i18n:
+            jpn: 行動履歴のタイムスタンプ
+          type: integer
+          example: 1640995200
+        referer:
+          title: Referer
+          x-title-i18n:
+            jpn: リファラー
+          description: URL of the request origin
+          x-description-i18n:
+            jpn: リクエスト元のURL
+          type: string
+          example: https://examaple.com/examaple
+      required:
+        - timestamp
+        - referer
+    UserBehaviorHistories:
+      title: User behavior history
+      x-title-i18n:
+        jpn: ユーザ行動履歴
+      type: object
+      properties:
+        histories:
+          type: array
+          items: {$ref: "#/components/schemas/DailyBehaviorHistory"}
+          description: user behavior history list
+          x-description-i18n:
+            jpn: ユーザの行動履歴一覧
+      required:
+        - histories
+    DailyBehaviorHistory:
+      title: Daily Behavior History
+      x-title-i18n:
+        jpn: 日毎のユーザ行動履歴
+      type: object
+      properties:        
+        behaved_at:
+          title: Action History Date
+          x-title-i18n:
+            jpn: 行動履歴日
+          description: Action History Date
+          x-description-i18n:
+            jpn: 行動履歴日
+          type: integer
+          example: 1640995200
+        histories:
+          type: array
+          items: {$ref: "#/components/schemas/UserBehaviorHistory"}
+          description: user behavior history list
+          x-description-i18n:
+            jpn: ユーザの行動履歴一覧
+      required:
+        - behaved_at
+        - histories
