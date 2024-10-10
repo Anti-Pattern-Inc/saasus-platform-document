@@ -58,3 +58,5 @@ SaaS アプリケーションを実際に開発する際には必要となる主
 [テナントに追加属性を定義する](../saas-development-console/declare-additional-attribute-to-tenant)<br/>
 [役割の定義](../saas-development-console/role-definition)
 :::
+
+SaaSus Platformの準備ができたら、サンプルアプリケーションに組み込みを行います。

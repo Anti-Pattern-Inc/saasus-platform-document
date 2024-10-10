@@ -36,8 +36,7 @@ SaaSの設計者は、SaaSus Platform側とSaaS側の両方で管理されるユ
 - タイプ： 文字列
 
 入力が完了したら、「作成」ボタンをクリックします。
-<img src="/ja/img/saas-development-console/declare-additional-attribute-to-user-02.png" width="100%"></img>
-<!-- ![02](/ja/img/saas-development-console/declare-additional-attribute-to-user-02.png) -->
+![02](/ja/img/saas-development-console/declare-additional-attribute-to-user-02.png)
 
 ユーザー属性が追加されました。
 
