@@ -1,0 +1,912 @@
+openapi: 3.0.0
+info:
+  description: "SaaSus Stripe API Schema"
+  version: "1.0.0"
+  title: "SaaSus Stripe API Schema"
+  contact:
+    name: "Anti-Pattern"
+servers:
+  - url: "https://api.saasus.io/v1/stripe"
+    description: Production API Server
+tags:
+  - name: "stripe"
+    description: stripeリソースの操作
+  - name: "error"
+    description: テスト用途のエラー
+security:
+  - Bearer: []
+paths:
+  /info:
+    get:
+      tags:
+        - stripe
+      operationId: GetStripeInfo
+      description: Stripeの連携情報を取得
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: Stripe連携情報
+                $ref: "#/components/schemas/StripeInfo"
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+        - stripe
+      operationId: UpdateStripeInfo
+      description: Stripeの連携情報を更新
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateStripeInfoParam"
+      responses:
+        200:
+          description: OK
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+        - stripe
+      operationId: DeleteStripeInfo
+      description: Stripeの連携情報を削除
+      responses:
+        200:
+          description: OK
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /plans:
+    post:
+      tags:
+        - stripe
+      operationId: CreateStripePlans
+      description: Stripeの商品, 料金を作成
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateStripePlansParam"
+      responses:
+        201:
+          description: Created
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+        - stripe
+      operationId: DeleteAllStripePlans
+      description: Stripeの全ての商品, 料金, 税金の削除
+      responses:
+        200:
+          description: OK
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /plans/{plan_id}:
+    delete:
+      tags:
+        - stripe
+      operationId: DeleteStripePlan
+      description: Stripeの商品, 料金の削除
+      parameters:
+        - $ref: '#/components/parameters/PlanId'
+      responses:
+        200:
+          description: OK
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /tenants:
+    put:
+      tags:
+        - stripe
+      operationId: UpdateStripeTenants
+      description: Stripeの顧客を更新, planがある場合はサブスクリプションも更新する
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateStripeTenantsParam"
+      responses:
+        200:
+          description: OK
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+        - stripe
+      operationId: DeleteAllStripeTenants
+      description: Stripeの全ての顧客を削除
+      responses:
+        200:
+          description: OK
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /tenants/plans:
+    put:
+      tags:
+        - stripe
+      operationId: UpdateStripeTenantsPlans
+      description: Stripeの顧客のサブスクリプションを更新する
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateStripeTenantsPlansParam"
+      responses:
+        200:
+          description: OK
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /tenants/{tenant_id}:
+    delete:
+      tags:
+        - stripe
+      operationId: DeleteStripeTenant
+      description: Stripeの顧客を削除
+      parameters:
+        - $ref: '#/components/parameters/TenantId'
+      responses:
+        200:
+          description: OK
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /tenants/{tenant_id}/meters:
+    post:
+      tags:
+        - stripe
+      operationId: CreateStripeTenantMeters
+      description: Stripeの使用量作成
+      parameters:
+        - $ref: '#/components/parameters/TenantId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateStripeTenantMetersParam"
+      responses:
+        201:
+          description: Created
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /tenants/{tenant_id}/payment-status:
+    get:
+      tags:
+        - stripe
+      operationId: GetStripeTenantPaymentStatus
+      description: 顧客に紐づくStripeのサブスクリプションの支払い状況を取得
+      parameters:
+        - $ref: '#/components/parameters/TenantId'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: Stripeサブスクリプション支払い状況
+                $ref: "#/components/schemas/PaymentStatus"
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /tax-rates:
+    put:
+      tags:
+        - stripe
+      operationId: UpdateStripeTaxRate
+      description: Stripeの税率を作成/更新
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateStripeTaxRateParam"
+      responses:
+        200:
+          description: OK
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /tax-rates/{tax_rate_id}:
+    delete:
+      tags:
+        - stripe
+      operationId: DeleteStripeTaxRate
+      description: Stripeの税率を削除
+      parameters:
+        - $ref: '#/components/parameters/TaxRateId'
+      responses:
+        200:
+          description: OK
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /reset:
+    delete:
+      tags:
+        - stripe
+      operationId: ResetStripeLink
+      summary: Stripeの連携情報を全削除
+      description: |
+        Stripeの連携情報を全削除
+      responses:
+        200:
+          description: OK
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /plans/{plan_id}/is-external-id:
+    get:
+      tags:
+        - stripe
+      operationId: IsPlanExternalID
+      description: プランIDに紐付くExternalIDの存在有無
+      parameters:
+        - $ref: '#/components/parameters/PlanId'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: ExternalIDの存在有無
+                $ref: "#/components/schemas/IsExternalID"
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /units/{unit_id}/is-external-id:
+    get:
+      tags:
+        - stripe
+      operationId: IsUnitExternalID
+      description: ユニットIDに紐付くExternalIDの存在有無
+      parameters:
+        - $ref: '#/components/parameters/UnitId'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: ExternalIDの存在有無
+                $ref: "#/components/schemas/IsExternalID"
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /units:
+    delete:
+      tags:
+        - stripe
+      operationId: DeleteStripeUnits
+      description: Stripeの商品情報を全削除
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteStripeUnitsParam'
+      responses:
+        200:
+          description: OK
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /unit:
+    put:
+      tags:
+        - stripe
+      operationId: UpdateStripeUnit
+      description: StripeのUnit更新
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateStripeUnitParam"
+      responses:
+        200:
+          description: OK
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /tenants/{tenant_id}/collection-method-charge-automatically:
+    patch:
+      tags:
+        - stripe
+      operationId: UpdateCollectionMethodChargeAutomatically
+      description: 顧客に紐づくStripeの支払い方法を自動支払いに変更
+      parameters:
+        - $ref: '#/components/parameters/TenantId'
+      responses:
+        200:
+          description: OK
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /errors/internal-server-error:
+    get:
+      tags:
+        - "error"
+      operationId: ReturnInternalServerError
+      summary: ステータスコード500でサーバーエラーを返却(Return Internal Server Error)
+      description: |
+        テスト用途で使用するエンドポイントです。ステータスコード500でサーバーエラーを返却します。
+
+        This endpoint is used for testing purposes. Returns a server error with status code 500.
+      responses:
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      description: Credentials or access token for API
+
+  parameters:
+    PlanId:
+      in: path
+      name: plan_id
+      description: プランID
+      required: true
+      schema:
+        $ref: "#/components/schemas/Uuid"
+    TenantId:
+      in: path
+      name: tenant_id
+      description: テナントID
+      required: true
+      schema:
+        $ref: "#/components/schemas/Uuid"
+    TaxRateId:
+      in: path
+      name: tax_rate_id
+      description: 税率ID
+      required: true
+      schema:
+        $ref: "#/components/schemas/Uuid"
+    UnitId:
+      in: path
+      name: unit_id
+      description: ユニットID
+      required: true
+      schema:
+        $ref: "#/components/schemas/Uuid"
+
+  schemas:
+    Error:
+      properties:
+        type:
+          type: string
+          description: permission_denied
+        message:
+          type: string
+          description: Error message
+      required:
+        - type
+        - message
+    Uuid:
+      type: string
+      example: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+    StripeInfo:
+      title: Stripe連携情報
+      type: object
+      properties:
+        is_registered:
+          type: boolean
+      required:
+        - is_registered
+    UnitType:
+      type: string
+      enum:
+        - fixed
+        - usage
+        - tiered
+        - tiered_usage
+    Currency:
+      type: string
+      enum:
+        - JPY
+        - USD
+    RecurringInterval:
+      type: string
+      enum:
+        - month
+        - year
+    PricingTieredUsageUnit:
+      title: 段階的使用量ユニット
+      type: object
+      allOf:
+      - properties:
+          aggregate_usage:
+            $ref: "#/components/schemas/AggregateUsage"
+      - $ref: "#/components/schemas/PricingUnitBaseProps"
+      - $ref: "#/components/schemas/PricingTiers"
+    PricingTieredUnit:
+      title: 段階ユニット
+      type: object
+      allOf:
+      - properties:
+          aggregate_usage:
+            $ref: "#/components/schemas/AggregateUsage"
+      - $ref: "#/components/schemas/PricingUnitBaseProps"
+      - $ref: "#/components/schemas/PricingTiers"
+    PricingUsageUnit:
+      title: 使用量ユニット
+      type: object
+      allOf:
+      - properties:
+          unit_amount:
+            type: integer
+            x-go-type: uint64
+            example: 10000
+          aggregate_usage:
+            $ref: "#/components/schemas/AggregateUsage"
+        required:
+          - unit_amount
+      - $ref: "#/components/schemas/PricingUnitBaseProps"
+    PricingFixedUnit:
+      title: 固定ユニット
+      type: object
+      allOf:
+      - properties:
+          unit_amount:
+            type: integer
+            x-go-type: uint64
+            example: 10000
+        required:
+          - unit_amount
+      - $ref: "#/components/schemas/PricingUnitBaseProps"
+    PricingUnitBaseProps:
+      title: プライシングユニット基本情報
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/Uuid"
+        name:
+          type: string
+          example: storage_unit
+        display_name:
+          type: string
+          example: StorageUnit
+        description:
+          type: string
+          example: Free up to 5 storage units
+        currency:
+          $ref: "#/components/schemas/Currency"
+        recurring_interval:
+          $ref: "#/components/schemas/RecurringInterval"
+      required:
+        - id
+        - name
+        - display_name
+        - description
+        - currency
+        - recurring_interval
+    PricingUnit:
+      title: プライシングユニット情報
+      type: object
+      properties:
+        type:
+          $ref: "#/components/schemas/UnitType"
+        unit:
+          oneOf:
+            - $ref: "#/components/schemas/PricingTieredUsageUnit"
+            - $ref: "#/components/schemas/PricingTieredUnit"
+            - $ref: "#/components/schemas/PricingUsageUnit"
+            - $ref: "#/components/schemas/PricingFixedUnit"
+      required:
+        - type
+        - unit
+    PricingUnits:
+      title: プライシングユニット一覧
+      type: object
+      properties:
+        units:
+          type: array
+          items: {$ref: "#/components/schemas/PricingUnit"}
+      required:
+        - units
+    PricingTiers:
+      title: 従量課金表一覧
+      type: object
+      properties:
+        tiers:
+          type: array
+          items: {$ref: "#/components/schemas/PricingTier"}
+      required:
+        - tiers
+    PricingTier:
+      title: 従量課金表
+      type: object
+      properties:
+        up_to:
+          type: integer
+          x-go-type: uint64
+          example: 5
+        unit_amount:
+          type: integer
+          x-go-type: uint64
+          example: 1000
+        flat_amount:
+          type: integer
+          x-go-type: uint64
+          example: 500
+        inf:
+          type: boolean
+      required:
+        - up_to
+        - unit_amount
+        - flat_amount
+        - inf
+    PricingMenu:
+      title: プライシング機能メニュー
+      type: object
+      allOf:
+      - properties:
+          id:
+            $ref: "#/components/schemas/Uuid"
+        required:
+          - id
+      - $ref: "#/components/schemas/PricingUnits"
+    PricingMenus:
+      title: プライシング機能メニュー一覧
+      type: object
+      properties:
+        pricing_menus:
+          type: array
+          items: {$ref: "#/components/schemas/PricingMenu"}
+      required:
+        - pricing_menus
+    PricingPlan:
+      title: 料金プラン情報
+      type: object
+      allOf:
+      - properties:
+          id:
+            $ref: "#/components/schemas/Uuid"
+          name:
+            type: string
+            example: Standard Plan
+          description:
+            type: string
+            example: スタンダードプラン
+        required:
+          - id
+          - name
+          - description
+      - $ref: "#/components/schemas/PricingMenus"
+    PricingPlans:
+      title: 料金プラン一覧
+      type: object
+      properties:
+        plans:
+          type: array
+          items: { $ref: "#/components/schemas/PricingPlan" }
+      required:
+        - plans
+    Country:
+      type: string
+      pattern: '^[A-Z]{2}$'
+      description: |
+        住所の国を ISO 3166-1 alpha-2 コードで指定します。
+
+        Country of the billing address.
+    BillingAddress:
+      title: テナントの請求先住所(Tenant Billing Address)
+      properties:
+        street:
+          type: string
+          description: |
+            住所の通りの名前や番地を含めた部分
+
+            Street address, apartment or suite number.
+          example: 神宮前1-1-1
+        city:
+          type: string
+          description: |
+            住所の市区町村
+
+            City, district, suburb, town, or village.
+          example: 渋谷区
+        state:
+          type: string
+          description: |
+            住所の都道府県または州
+
+            State name or abbreviation.
+          example: 東京都
+        country:
+          $ref: "#/components/schemas/Country"
+        additional_address_info:
+          type: string
+          description: |
+            建物名・部屋番号などの住所に関する追加情報
+
+            Additional information about the address, such as a building name, floor, or department name.
+          example: オフィスビル3階
+        postal_code:
+          type: string
+          description: |
+            郵便番号
+
+            ZIP or postal code.
+          example: '123-4567'
+      required:
+        - street
+        - city
+        - state
+        - country
+        - postal_code
+    InvoiceLanguage:
+      type: string
+      description: |
+        請求書の言語
+
+        Language of invoice
+      enum:
+        - "ja-JP"
+        - "en-US"
+    Tenant:
+      title: stripeの顧客
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/Uuid"
+        name:
+          type: string
+          example: saasus
+        email:
+          type: string
+          example: hoge@example.com
+        address:
+          $ref: '#/components/schemas/BillingAddress'
+        invoice_language:
+          $ref: '#/components/schemas/InvoiceLanguage'
+      required:
+        - id
+        - email
+    Tenants:
+      title: テナント一覧
+      type: object
+      properties:
+        tenants:
+          type: array
+          items: { $ref: "#/components/schemas/Tenant" }
+      required:
+        - tenants
+    TenantPlan:
+      title: stripeの顧客のプラン情報
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/Uuid"
+        plan_id:
+          $ref: "#/components/schemas/Uuid"
+        unit_ids:
+          type: array
+          items: { $ref: "#/components/schemas/Uuid" }
+        plan_applied_at:
+          type: integer
+          example: 1640995200
+        tax_rate_id:
+          $ref: "#/components/schemas/Uuid"
+        proration_behavior:
+          $ref: '#/components/schemas/ProrationBehavior'
+        delete_usage:
+          $ref: '#/components/schemas/DeleteUsage'
+      required:
+        - id
+    TenantsPlans:
+      title: 複数のテナントのプラン情報
+      type: object
+      properties:
+        tenants_plans:
+          type: array
+          items: { $ref: "#/components/schemas/TenantPlan" }
+      required:
+        - tenants_plans
+    MeteringUnitTimestampCount:
+      title: タイムスタンプごとのメータリングユニットカウント情報
+      type: object
+      properties:
+        pricing_unit_id:
+          $ref: "#/components/schemas/Uuid"
+        timestamp:
+          type: integer
+          example: 1669042800
+        count:
+          type: integer
+          example: 10000
+      required:
+        - pricing_unit_id
+        - timestamp
+        - count
+    MeteringUnitTimestampCounts:
+      title: タイムスタンプごとのメータリングユニットカウント情報
+      type: object
+      properties:
+        metering_unit_timestamp_counts:
+          type: array
+          items: { $ref: "#/components/schemas/MeteringUnitTimestampCount" }
+      required:
+        - metering_unit_timestamp_counts
+    UpdateStripeInfoParam:
+      title: Stripe連携情報の更新パラメータ
+      type: object
+      properties:
+        secret_key:
+          type: string
+          example: sk_test_09l3shTSTKHYCzzZZsiLl2vA
+      required:
+        - secret_key
+    CreateStripePlansParam:
+      title: Stripeの商品, 料金, 作成パラメータ
+      $ref: "#/components/schemas/PricingPlans"
+    UpdateStripeTenantsParam:
+      title: Stripeの顧客更新パラメータ
+      $ref: "#/components/schemas/Tenants"
+    UpdateStripeTenantsPlansParam:
+      title: Stripeの顧客のサブスクリプション更新パラメータ
+      $ref: "#/components/schemas/TenantsPlans"
+    CreateStripeTenantMetersParam:
+      title: Stripeの使用量作成パラメータ
+      type: object
+      allOf:
+      - $ref: "#/components/schemas/MeteringUnitTimestampCounts"
+    UpdateStripeTaxRateParam:
+      title: Stripeの税率作成/更新パラメータ
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/Uuid"
+        display_name:
+          type: string
+          example: "消費税(外税)"
+        percentage:
+          type: number
+          x-go-type: float64
+          example: 10
+        inclusive:
+          type: boolean
+          example: false
+        country:
+          $ref: "#/components/schemas/Country"
+        description:
+          type: string
+          example: "SaaSusとの連携用の税率"
+      required:
+        - id
+        - display_name
+        - percentage
+        - inclusive
+        - country
+        - description
+    PaymentStatus:
+      title: Stripeのサブスクリプション支払い状況
+      type: object
+      properties:
+        is_paid:
+          type: boolean
+      required:
+        - is_paid
+    AggregateUsage:
+      type: string
+      description: 使用量の集計方法
+      enum:
+        - sum
+        - max
+    ProrationBehavior:
+      type: string
+      title: プラン変更時の比例配分の挙動(Proration Behavior When Changing Plans)
+      description:  |
+        プラン変更時の比例配分の挙動を設定
+      enum:
+        - create_prorations
+        - none
+        - always_invoice
+    DeleteUsage:
+      type: boolean
+      title: プラン変更時の従量課金アイテムの削除(Proration Behavior When Changing Plans)
+      description:  |
+        プラン変更時に従量課金アイテムを削除するか設定できます。
+        プラン変更した場合に、現在のサブスクリプションに含まれる従量課金アイテムを全て削除して、従量課金アイテムに基づく請求の発生を止めることができます
+    DeleteStripeUnitsParam:
+      title: 削除対象のユニットID情報
+      type: object
+      properties:
+        pricing_unit_ids:
+          type: array
+          items: { $ref: "#/components/schemas/Uuid" }
+      required:
+        - pricing_unit_ids
+    IsExternalID:
+      title: ExternalIDの存在有無
+      type: object
+      properties:
+        is_external_id:
+          type: boolean
+      required:
+        - is_external_id
+    UpdateStripeUnitParam:
+      title: StripeのUnit更新パラメータ
+      type: object
+      properties:
+        unit:
+          $ref: "#/components/schemas/PricingUnit"
+      required:
+        - unit

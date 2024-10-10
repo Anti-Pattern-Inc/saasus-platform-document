@@ -15,6 +15,14 @@ In this tutorial, we will use SaaSus Platform to turn a simple chat system creat
 First, start this sample application.
 
 This simple chat system uses PHP 8, Laravel 9, and PostgreSQL 13 as the backend.
+:::info
+
+If you are using AWS EC2 or Cloud9 to create an operating environment for the Blade version, please follow the steps in [Preparing the Sample Application (EC2)](https://docs.saasus.io/docs/tutorial/prepare-the-sample-application-ec2/).
+
+:::
+
+The backend of this simple chat system is PHP8 + Laravel9 + PostgreSQL13.  
+There are two types of frontends, one created with Laravel with Blade and one created as an SPA with Next.js.
 
 The front end includes two SPA (Single Page Application) created with Laravel with Blade and Next.js.
 
