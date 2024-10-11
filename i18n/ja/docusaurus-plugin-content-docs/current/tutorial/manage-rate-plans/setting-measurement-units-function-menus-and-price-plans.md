@@ -6,6 +6,16 @@ hidden: false
 createdAt: "Wed Jan 18 2023 09:36:51 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Dec 11 2023 05:50:46 GMT+0000 (Coordinated Universal Time)"
 ---
+# 計測単位・機能メニュー・料金プランの設定
+
+# メーター単位設定
+
+| メーター単位名    | メーター単位の表示名   | メーター単位の説明 |
+|:-----------|:-------------|:----------|
+| comment_count | comment_count | コメント数     |
+
+![07](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/setting-measurement-units-function-menus-and-price-plans-07.png)
+
 # 基本料金設定
 
 計測単位：固定ユニット計測単位

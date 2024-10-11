@@ -354,23 +354,19 @@ app.use(
 
 Do it like this.
 
-Next, prepare an outlet for the callback from the authentication screen. 
+And for PHP, we will prepare an endpoint to handle the callback from the authentication screen.
 
-Earlier, in the SaaSus development console, we defined the callback destination as
+Earlier, in the SaaSus Development Console, we defined the callback URL as
 
-For PHP, [http://localhost/callback](http://localhost/callback)
+[http://localhost/callback](http://localhost/callback) 
 
-For Next.js, [http://localhost:3000/callback](http://localhost:3000/callback)
+so we’ll set it up to receive at /callback.
 
-So we will make it possible to receive the callback at /callback.
-
-Similarly, for PHP, add the following to the last line of api/routes/web.php.
-
-For Next.js, create api/routes/callback.ts and write the following.
+Add the following to the last line of api/routes/web.php
 
 ```mdx-code-block
 <Tabs>
-<TabItem value="php" label="PHP" default>
+<TabItem value="php" label="PHP">
 ```
 
 ```php
@@ -380,6 +376,60 @@ Route::get('/callback', 'AntiPatternInc\Saasus\Laravel\Controllers\CallbackContr
 
 ```mdx-code-block
 </TabItem>
+</Tabs>
+```
+
+Furthermore, to be able to use the View provided by the SaaSus SDK,
+
+Add the path to api/config/view.php.
+
+```mdx-code-block
+<Tabs>
+<TabItem value="php" label="PHP" default>
+```
+
+```php
+   'paths' => [
+       resource_path('views'),
+       # ↓Add this line: Directory of views provided by SaaSus SDK
+       resource_path('../vendor/saasus-platform/saasus-sdk-php/src/Laravel/Views'),
+   ],
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+For Next.js,
+
+In the previously created front/src/pages/callback/index.tsx, the /api/callback endpoint is used to obtain authentication information.
+
+To handle this endpoint, follow these steps to configure it.
+
+Add the import statement and app.use to api/app.ts to define the route.
+
+```mdx-code-block
+<Tabs>
+<TabItem value="nodejs" label="Node.js">
+```
+
+```js
+import { router as apiCallbackRouter } from "./routes/api/callback";
+
+// Other code omitted
+
+app.use("/api/callback", apiCallbackRouter);
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+To implement the /api/callback endpoint, create api/routes/api/callback.ts and add the following code.
+```mdx-code-block
+<Tabs>
 <TabItem value="nodejs" label="Node.js">
 ```
 
@@ -398,58 +448,11 @@ export { router };
 </Tabs>
 ```
 
-Furthermore, to be able to use the View provided by the SaaSus SDK,
-
-in PHP, add the path to api/config/view.php.
-
-In Next.js, create api/views/callback.ejs and write the following.
-
-```mdx-code-block
-<Tabs>
-<TabItem value="php" label="PHP" default>
-```
-
-```php
-   'paths' => [
-       resource_path('views'),
-       # ↓Add this line: Directory of views provided by SaaSus SDK
-       resource_path('../vendor/saasus-platform/saasus-sdk-php/src/Laravel/Views'),
-   ],
-```
-
-```mdx-code-block
-</TabItem>
-<TabItem value="nodejs" label="Node.js">
-```
-
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Auth Callback</title>
-  </head>
-
-  <body>
-    <script>
-      location.href = "/chat";
-    </script>
-  </body>
-</html>
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 With the settings up to this point, the authentication information set in SaaSus Platform will be passed as part of the request when the application's Controller is reached.
 
 For PHP, add a Request argument to index in api/app/Http/Controllers/MessageController.php and use dd to check if userinfo is included in $request.
 
-For Next.js, add a Request argument to getChats in api/controllers/chat.ts and use console.log to check if userinfo is included in req.
+For Next.js, add a Request argument to getBoard in api/controllers/api/board.ts and use console.log to check if userinfo is included in req.
 
 ```mdx-code-block
 <Tabs>
@@ -469,9 +472,9 @@ For Next.js, add a Request argument to getChats in api/controllers/chat.ts and u
 ```
 
 ```js
-const getChats = async (req: Request, res: Response) => {
+const getBoard = async (req: Request, res: Response) => {
   // Check whether user information is being passed from SaaSus Platform
-  console.log(req.userinfo);
+  console.log(req.userInfo);
 ```
 
 ```mdx-code-block
@@ -547,7 +550,7 @@ For the setting method, please check [Customizing Authentication Pages such as L
 
 For PHP, api/app/Http/Controllers/MessageController.php
 
-For Next.js, api/controllers/chat.ts
+For Next.js, api/controllers/api/board.ts
 
 This is the main process, so let's add the process to make it multi-tenant compatible here.
 
@@ -574,21 +577,19 @@ Let's rewrite the whole part below.
 ```
 
 ```js
-const getChats = async (req: Request, res: Response) => {
+const getBoard = async (req: Request, res: Response) => {
   try {
     const messages = await db.Messages.findAll({
       where: {
         tenant_id: req.userInfo?.tenants[0].id,
       },
     });
-    res.render("chat", {
-      messages: messages,
-      plans: PLANS,
-      tenant_name: TENANT_NAME,
-    });
+    return res.json(messages);
   } catch (error) {
     console.error(error);
-    res.redirect("/chat");
+    return res
+      .status(500)
+      .send({ redirect_url: process.env.SAASUS_LOGIN_URL || "" });
   }
 };
 ```
@@ -632,7 +633,7 @@ Next is the posting part.
 ```
 
 ```js
-const postChats = async (req: Request, res: Response) => {
+const post = async (req: Request, res: Response) => {
   const mes = req.body.message;
   const tenantId = req.userInfo?.tenants[0].id || "";
   const userName =
@@ -643,10 +644,10 @@ const postChats = async (req: Request, res: Response) => {
       user_id: userName,
       message: mes,
     });
+    return res.status(201).send();
   } catch (error) {
     console.error(error);
   }
-  res.redirect("/chat");
 };
 ```
 

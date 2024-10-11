@@ -350,21 +350,19 @@ app.use(
 
 このようにします。
 
-そして、認証画面からのコールバックの受口を用意します。先ほど SaaSus 開発コンソールでコールバック先を 
+そして、PHPの場合は認証画面からのコールバックの受口を用意します。
 
-PHPの場合は、[http://localhost/callback](http://localhost/callback) 
+先ほど SaaSus 開発コンソールでコールバック先を 
 
-Next.jsの場合は、[http://localhost:3000/callback](http://localhost:3000/callback) 
+[http://localhost/callback](http://localhost/callback) 
 
 と定義したので、 /callback で受け取れるようにします。
 
-PHPの場合はおなじく、 api/routes/web.php の最後の行に以下を追加します。
-
-Next.jsの場合は、api/routes/callback.tsを作成して以下を記載します。
+api/routes/web.php の最後の行に以下を追加します。
 
 ```mdx-code-block
 <Tabs>
-<TabItem value="php" label="PHP" default>
+<TabItem value="php" label="PHP">
 ```
 
 ```php
@@ -374,6 +372,60 @@ Route::get('/callback', 'AntiPatternInc\Saasus\Laravel\Controllers\CallbackContr
 
 ```mdx-code-block
 </TabItem>
+</Tabs>
+```
+
+さらに、SaaSus SDK が提供する View を使えるように 
+
+api/config/view.php にパスを追加します。
+
+```mdx-code-block
+<Tabs>
+<TabItem value="php" label="PHP" default>
+```
+
+```php
+   'paths' => [
+       resource_path('views'),
+       # ↓この行を追加：SaaSus SDKが提供するViewのディレクトリ
+       resource_path('../vendor/saasus-platform/saasus-sdk-php/src/Laravel/Views'),
+   ],
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+Next.jsの場合は、
+
+事前に作成した front/src/pages/callback/index.tsx では、認証情報を取得するために /api/callback というエンドポイントを使用します。
+
+このエンドポイントを処理できるように、次の手順で設定します。
+
+api/app.ts に import文 と app.use を追加することでルートを追加します。
+
+```mdx-code-block
+<Tabs>
+<TabItem value="nodejs" label="Node.js">
+```
+
+```js
+import { router as apiCallbackRouter } from "./routes/api/callback";
+
+// 他のコードは省略
+
+app.use("/api/callback", apiCallbackRouter);
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+/api/callback の処理を実装するために、api/routes/api/callback.ts を作成し、以下を追加してください。
+```mdx-code-block
+<Tabs>
 <TabItem value="nodejs" label="Node.js">
 ```
 
@@ -392,58 +444,11 @@ export { router };
 </Tabs>
 ```
 
-さらに、SaaSus SDK が提供する View を使えるように 
-
-PHPの場合は、api/config/view.php にパスを追加します。
-
-Next.jsの場合は、api/views/callback.ejsを作成し下記を記載します。
-
-```mdx-code-block
-<Tabs>
-<TabItem value="php" label="PHP" default>
-```
-
-```php
-   'paths' => [
-       resource_path('views'),
-       # ↓この行を追加：SaaSus SDKが提供するViewのディレクトリ
-       resource_path('../vendor/saasus-platform/saasus-sdk-php/src/Laravel/Views'),
-   ],
-```
-
-```mdx-code-block
-</TabItem>
-<TabItem value="nodejs" label="Node.js">
-```
-
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Auth Callback</title>
-  </head>
-
-  <body>
-    <script>
-      location.href = "/chat";
-    </script>
-  </body>
-</html>
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 ここまで設定すると、 アプリケーションの Controller にたどり着いた時点で、SaaSus Platform で設定した認証情報が request の一部として渡ってくるようになります。
 
 PHPの場合は、api/app/Http/Controllers/MessageController.php の index に Request の引数を追加し、 dd を使って $request に userinfo が入っているか確認してみましょう。
 
-Next.jsの場合は、api/controllers/chat.ts の getChats に Request の引数を追加し、console.logを使って req に userinfo が入っているか確認してみましょう。
+Next.jsの場合は、api/controllers/api/board.ts の getBoard に、console.logを使って req に userinfo が入っているか確認してみましょう。
 
 ```mdx-code-block
 <Tabs>
@@ -463,9 +468,9 @@ Next.jsの場合は、api/controllers/chat.ts の getChats に Request の引数
 ```
 
 ```js
-const getChats = async (req: Request, res: Response) => {
+const getBoard = async (req: Request, res: Response) => {
   // SaaSus Platformからユーザ情報が渡ってきているかを確認する
-  console.log(req.userinfo);
+  console.log(req.userInfo);
 ```
 
 ```mdx-code-block
@@ -541,7 +546,7 @@ array:3 [▼
 
 PHPの場合は、api/app/Http/Controllers/MessageController.php が
 
-Next.jsの場合は、api/controllers/chat.ts が
+Next.jsの場合は、api/controllers/api/board.ts が
 
 メインの処理なので、ここにマルチテナント対応にするための処理を入れてみましょう。
 
@@ -568,21 +573,19 @@ Next.jsの場合は、api/controllers/chat.ts が
 ```
 
 ```js
-const getChats = async (req: Request, res: Response) => {
+const getBoard = async (req: Request, res: Response) => {
   try {
     const messages = await db.Messages.findAll({
       where: {
         tenant_id: req.userInfo?.tenants[0].id,
       },
     });
-    res.render("chat", {
-      messages: messages,
-      plans: PLANS,
-      tenant_name: TENANT_NAME,
-    });
+    return res.json(messages);
   } catch (error) {
     console.error(error);
-    res.redirect("/chat");
+    return res
+      .status(500)
+      .send({ redirect_url: process.env.SAASUS_LOGIN_URL || "" });
   }
 };
 ```
@@ -626,7 +629,7 @@ const getChats = async (req: Request, res: Response) => {
 ```
 
 ```js
-const postChats = async (req: Request, res: Response) => {
+const post = async (req: Request, res: Response) => {
   const mes = req.body.message;
   const tenantId = req.userInfo?.tenants[0].id || "";
   const userName =
@@ -637,10 +640,10 @@ const postChats = async (req: Request, res: Response) => {
       user_id: userName,
       message: mes,
     });
+    return res.status(201).send();
   } catch (error) {
     console.error(error);
   }
-  res.redirect("/chat");
 };
 ```
 

@@ -28,9 +28,9 @@ import TabItem from '@theme/TabItem';
 
 では、この料金プランに紐付いた上限数をテナントごとに取得して、制限をかけてみましょう。
 
-Blade 版では、api/app/Http/Controllers/MessageController.php のpostメソッドを
+Blade 版では、api/app/Http/Controllers/MessageController.php のpostメソッドを書き換えてみましょう。
 
-Next.js 版では、api/controllers/chat.ts のpostChatsメソッドを以下のように書き換えてみましょう。
+Next.js 版では、api/controllers/api/board.ts へimport文を追加し、postメソッドを書き換えてみましょう。
 
 <Tabs>
 <TabItem value="php" label="PHP">
@@ -81,14 +81,19 @@ Next.js 版では、api/controllers/chat.ts のpostChatsメソッドを以下の
 
 </TabItem>
 
-<TabItem value="typescript" label="Typescript">
-```typescript
-const postChats = async (req: Request, res: Response) => {
+<TabItem value="nodejs" label="Node.js">
+```js
+import { UpdateMeteringUnitTimestampCountNowParam } from "saasus-sdk/dist/generated/Pricing";
+import { findUpperCountByMeteringUnitName, PricingClient } from "saasus-sdk";
+
+// 他のコードは省略
+
+const post = async (req: Request, res: Response) => {
   const mes = req.body.message;
   const tenantId = req.userInfo?.tenants[0].id || "";
   const planId = req.userInfo?.tenants[0].plan_id || "";
   const userName =
-    req.userInfo?.tenants[0].user_attribute.username || "テストユーザー";
+    req.userInfo?.tenants[0].user_attribute.username || "test user";
   try {
     const pricingClient = new PricingClient();
     const pricingPlan = await pricingClient.pricingPlansApi.getPricingPlan(
@@ -129,10 +134,10 @@ const postChats = async (req: Request, res: Response) => {
           param
         );
     }
+    return res.status(201).send();
   } catch (error) {
     console.error(error);
   }
-  res.redirect("/chat");
 };
 ```
 </TabItem>
