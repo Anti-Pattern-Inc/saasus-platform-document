@@ -36,7 +36,7 @@ You can select a meter unit that is already registered.
 ![usage-metering-3](/img/saas-development-console/usage-metering-3.png)
 
 ## Updating and deleting meter units
-Meter units that have been set as measurement units cannot be deleted.
+Meter units that have been set as measurement units cannot be deleted.  
 Only the meter unit display name and meter unit description can be updated.
 
 ![usage-metering-4](/img/saas-development-console/usage-metering-4.png)
