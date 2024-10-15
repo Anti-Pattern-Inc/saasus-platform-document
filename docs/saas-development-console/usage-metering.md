@@ -1,24 +1,24 @@
 ---
-title: "Usage metering meter settings"
+title: "Meter Unit Setting"
 slug: "usage-metering"
 excerpt: ""
 hidden: false
 createdAt: "Mon Mar 11 2024 13:45:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Mar 11 2024 13:45:00 GMT+0000 (Coordinated Universal Time)"
 ---
-The usage measurement unit setting sets the name and aggregation method applied to each usage measurement meter.
+Define the meter unit that will be used as the measurement unit.
 
-## Usage metering meter settings
+## Meter Unit Setting
 
-1. From the **SaaS Development Console, select `Meter Unit Settings`**
+1. From the **SaaS Development Console, select `Metering Units`**
 
 ![usage-metering-1](/img/saas-development-console/usage-metering-1.png)
 
-1. **Click on `Create Meter Units`**
+1. **Click on `Metering Unit`**
 
 ![usage-metering-2](/img/saas-development-console/usage-metering-2.png)
 
-2. Set up usage measurement metersy with `Create Meter Units`  
+2. Set the meter unit with `Metering Unit`  
 
 | Keyword               | Description    |
 |---------------------  |--------------- |
@@ -29,14 +29,14 @@ The usage measurement unit setting sets the name and aggregation method applied 
 
     Set the above information and click the Save button.
 
-## Set the usage measurement meter to the measurement unit.
-When creating a unit of measurement, you can set up a usage measurement meter.
-You can select a usage metering meter that is already registered.
+## Set the meter unit to the measurement unit.
+When creating a measurement unit, you can set a meter unit.
+You can select a meter unit that is already registered.
 
 ![usage-metering-3](/img/saas-development-console/usage-metering-3.png)
 
-## Updating and deleting usage metering meters
-Usage measurement meters that have been set as measurement units cannot be deleted.  
+## Updating and deleting meter units
+Meter units that have been set as measurement units cannot be deleted.
 Only the meter unit display name and meter unit description can be updated.
 
 ![usage-metering-4](/img/saas-development-console/usage-metering-4.png)
