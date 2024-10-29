@@ -453,8 +453,6 @@ components:
         - properties:
             id:
               $ref: '#/components/schemas/Uuid'
-            user_id:
-              $ref: '#/components/schemas/Uuid'
             created_at:
               title: 投稿日付
               type: integer
@@ -465,7 +463,6 @@ components:
               example: 貴重なご意見ありがとうございます。
           required:
             - id
-            - user_id
             - created_at
             - body
     User:
@@ -536,14 +533,11 @@ components:
       title: フィードバックへのコメント投稿パラメータ
       type: object
       properties:
-        user_id:
-          $ref: '#/components/schemas/Uuid'
         body:
           title: コメント内容
           type: string
           example: 貴重なご意見ありがとうございます。
       required:
-        - user_id
         - body
     UpdateFeedbackCommentParam:
       title: フィードバックへのコメント編集パラメータ
