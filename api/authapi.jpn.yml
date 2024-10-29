@@ -33,6 +33,8 @@ tags:
     description: 認証・認可情報
   - name: invitation
     description: 招待
+  - name: singleTenant
+    description: シングルテナント管理
   - name: error
     description: テスト用途のエラー
 security:
@@ -196,6 +198,7 @@ paths:
       summary: SaaSにユーザーを作成
       description: |
         SaaSにユーザーを作成します。
+        passwordを空にした場合、登録されたメールアドレスに対して仮パスワードを送信します。
       requestBody:
         content:
           application/json:
@@ -365,6 +368,30 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ConfirmEmailUpdateParam"
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/users/{user_id}/attributes":
+    patch:
+      tags:
+        - saasUser
+      operationId: UpdateSaasUserAttributes
+      summary: SaaSユーザーの属性情報を更新
+      description: |
+        SaaSユーザーの追加属性を更新します。
+      parameters:
+        - $ref: "#/components/parameters/UserId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSaasUserAttributesParam"
       responses:
         "200":
           description: OK
@@ -859,6 +886,8 @@ paths:
       description: >
         SaaSus Platform にて保持するユーザーの追加属性を登録します。
 
+        テナント毎に異なる値を持たせることができます。
+
         例えば、ユーザー名を持たせる、誕生日を持たせるなど、ユーザーに紐付いた項目の定義を行うことができます。
 
         一方で、個人情報を SaaSus Platform 側に持たせたくない場合は、このユーザー属性定義を行わずに SaaS 側で個人情報を持つことを検討してください。
@@ -906,6 +935,34 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /saas-user-attributes:
+    post:
+      tags:
+        - userAttribute
+      operationId: CreateSaasUserAttribute
+      summary: SaaSユーザー属性の作成
+      description: |
+        SaaSus Platform にて保持するSaaSユーザーの追加属性を登録します。
+        すべてのテナントに対して共通の値を持たせることができます。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSaasUserAttributeParam"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                title: 作成されたUserAttribute
+                $ref: "#/components/schemas/Attribute"
         "500":
           description: Internal Server Error
           content:
@@ -2071,6 +2128,99 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  /single-tenant/cloudformation-launch-stack-link:
+    get:
+      tags:
+        - singleTenant
+      operationId: GetCloudFormationLaunchStackLinkForSingleTenant
+      summary: SingleTenant用CloudFormationスタック起動リンク取得
+      description: |
+        SingleTenant用CloudFormationスタック起動リンクを取得します。
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloudFormationLaunchStackLink"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /single-tenant/settings:
+    get:
+      tags:
+        - singleTenant
+      operationId: GetSingleTenantSettings
+      summary: シングルテナント機能の設定情報を取得する
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SingleTenantSettings"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    patch:
+      tags:
+        - singleTenant
+      operationId: UpdateSingleTenantSettings
+      summary: シングルテナント機能の設定情報を更新する
+      description: |
+        シングルテナント機能の設定情報を更新します。
+        シングルテナント機能の有効化ができない場合はエラーを返します。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSingleTenantSettingsParam"
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/tenants/{tenant_id}/stripe-customer":
+    get:
+      tags:
+        - tenant
+      operationId: GetStripeCustomer
+      summary: Stripe顧客情報取得
+      description: |
+        テナントに連携されているStripe顧客情報を取得します。
+        サブスクリプション情報も含まれます。
+      parameters:
+        - $ref: "#/components/parameters/TenantId"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: Stripe顧客情報
+                $ref: "#/components/schemas/StripeCustomer"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
   /errors/internal-server-error:
     get:
       tags:
@@ -2175,6 +2325,13 @@ components:
           type: string
           description: メールアドレス
           example: hoge@example.com
+        user_attribute:
+          type: object
+          additionalProperties: true
+          example:
+            address: 東京都
+            employee_number: 100
+          description: ユーザー追加属性
         tenants:
           type: array
           items:
@@ -2183,6 +2340,7 @@ components:
       required:
         - id
         - email
+        - user_attribute
         - tenants
     BasicInfo:
       title: 基本設定情報
@@ -2276,9 +2434,19 @@ components:
           type: string
           example: hoge@example.com
           description: メールアドレス
+        attributes:
+          type: object
+          additionalProperties: true
+          example:
+            address: 東京都
+            birthday: 19940925
+            sex: 男
+          description: |
+            属性情報
       required:
         - id
         - email
+        - attributes
     SaasUsers:
       title: SaaSユーザー一覧
       type: object
@@ -2303,7 +2471,6 @@ components:
           description: パスワード
       required:
         - email
-        - password
     User:
       title: ユーザー
       type: object
@@ -2474,8 +2641,26 @@ components:
       required:
         - code
         - access_token
+    UpdateSaasUserAttributesParam:
+      title: SaaSユーザー属性の更新パラメータ
+      type: object
+      properties:
+        attributes:
+          type: object
+          additionalProperties: true
+          example:
+            address: 東京都
+            birthday: 19940925
+            sex: 男
+          description: |
+            属性情報
+      required:
+        - attributes
     CreateUserAttributeParam:
       title: ユーザー属性の作成パラメータ
+      $ref: "#/components/schemas/Attribute"
+    CreateSaasUserAttributeParam:
+      title: SaaSユーザー属性の作成パラメータ
       $ref: "#/components/schemas/Attribute"
     CreateTenantAttributeParam:
       title: テナント追加属性の作成パラメータ
@@ -3721,4 +3906,95 @@ components:
       required:
         - access_token
         - code
+    CloudFormationLaunchStackLink:
+      title: AWS CloudFormationスタック作成リンク
+      type: object
+      properties:
+        link:
+          title: cloud formation launch dtack link
+          type: string
+          example: https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create?stackName=sample&templateURL=https://s3.us-west-2.amazonaws.com/cloudformation-templates-sample.template
+      required:
+        - link
+    SingleTenantSettings:
+      title: シングルテナント設定
+      type: object
+      properties:
+        enabled:
+          title: シングルテナント設定を有効にするか否か
+          description: シングルテナント設定を有効にするか否か
+          type: boolean
+        role_arn:
+          title: AssumeRoleするためのロールのARN
+          description: SaaS PlatformがAssumeRoleするためのロールのARN
+          type: string
+          example: arn:aws:iam::123456789012:role/role-name
+        cloudformation_template_url:
+          title: CloudFormationテンプレートURL
+          description: SaaS環境で実行するCloudFormationTemplateが格納されているS3のURL
+          type: string
+          example: https://presigned-url-test.s3.ap-northeast-1.amazonaws.com/test.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=xxxxxx%2F20230710%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20230710T054140Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=xxxxxxxxxxxxxxxx
+        ddl_template_url:
+          title: ddlテンプレートURL
+          description: S3 URL where the ddlTemplate to be executed in the SaaS environment
+            is stored
+          type: string
+          example: https://presigned-url-test.s3.ap-northeast-1.amazonaws.com/test.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=xxxxxx%2F20230710%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-Date=20230710T054140Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=xxxxxxxxxxxxxxxx
+        role_external_id:
+          title: AssumeRoleする時に使用するExternalID
+          description: SaaSusがSaaSを操作するためにAssumeRoleする時に使用するexternal id
+          type: string
+          example: 1234567890
+      required:
+        - enabled
+        - role_arn
+        - cloudformation_template_url
+        - ddl_template_url
+        - role_external_id
+    UpdateSingleTenantSettingsParam:
+      title: シングルテナント設定更新パラメータ
+      properties:
+        enabled:
+          title: シングルテナント設定を有効にするか否か
+          description: シングルテナント設定を有効にするか否か
+          type: boolean
+        role_arn:
+          title: AssumeRoleするためのロールのARN
+          description: SaaS PlatformがAssumeRoleするためのロールのARN
+          type: string
+          example: arn:aws:iam::123456789012:role/role-name
+        cloudformation_template:
+          title: CloudFormationテンプレートファイル
+          description: SaaS環境で実行するCloudFormationTemplateファイル
+          type: string
+          format: base64
+          example: U3dhZ2dlciByb2Nrcw==
+        ddl_template:
+          title: ddlテンプレートファイル
+          description: SaaS環境で実行するddlファイル
+          type: string
+          format: base64
+          example: U3dhZ2dlciByb2Nrcw==
+        role_external_id:
+          title: AssumeRoleする時に使用するExternalID
+          description: SaaSusがSaaSを操作するためにAssumeRoleする時に使用するexternal id
+          type: string
+          example: 1234567890
+    StripeCustomer:
+      title: Stripeの顧客ID連携情報
+      type: object
+      properties:
+        customer_id:
+          title: 顧客ID
+          description: stripeの顧客ID
+          type: string
+          example: cus_1234567890
+        subscription_schedule_id:
+          title: サブスクリプションスケジュールID
+          description: stripeのサブスクリプションスケジュールID
+          type: string
+          example: cus_1234567890
+      required:
+        - customer_id
+        - subscription_schedule_id
 
