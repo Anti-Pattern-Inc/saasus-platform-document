@@ -192,6 +192,17 @@ const sidebars = {
         },
       ],
     },
+    {
+      type: "category",
+      label: "API Gateway Function",
+      link: {
+        type: "doc",
+        id: "api-gateway-function/overview",
+      },
+      items: [
+        "api-gateway-function/manual",
+      ],
+    },
   ],
 
   tutorialSidebar: [
