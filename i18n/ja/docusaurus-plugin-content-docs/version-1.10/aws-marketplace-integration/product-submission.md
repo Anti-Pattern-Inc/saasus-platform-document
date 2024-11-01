@@ -27,6 +27,6 @@ AWS Marketplace Management Portalにて、SaaS製品情報を登録します。
 - SaaSusがサポートする料金モデルはSaaS契約のみです。契約期間は1ヶ月か1年となります
 - 出品価格として登録できる通貨はUSDとなります
 - 製品情報は全て英語での登録となります
-- AWS Marketplace サポートチームのレビューを2~3度受ける必要があります、1回につき3~5営業日掛かります。
+- AWS Marketplace サポートチームのレビューを2\~3度受ける必要があります、1回につき3\~5営業日掛かります。
 
 入力内容等は `AWS Marketplace` 上で公開されます、各入力内容と表示例は[こちら](/docs/aws-marketplace-integration/supplementary/supplementary-1)をご確認ください。（[補足１](/docs/aws-marketplace-integration/supplementary/supplementary-1)）（[補足２](/docs/aws-marketplace-integration/supplementary/supplementary-2)）

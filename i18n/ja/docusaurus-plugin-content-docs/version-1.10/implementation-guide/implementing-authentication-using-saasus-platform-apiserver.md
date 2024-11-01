@@ -78,8 +78,8 @@ roles配列：
 
 ### １．２．実装サンプルの使い方
 
-- [React](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/README.md")
-- [Vue.js](https://github.com/saasus-platform/implementation-sample-front-vue/blob/main/README.md")
+- [React](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/README.md)
+- [Vue.js](https://github.com/saasus-platform/implementation-sample-front-vue/blob/main/README.md)
 
 ## ２．バックエンド実装
 
