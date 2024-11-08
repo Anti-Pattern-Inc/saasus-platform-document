@@ -121,7 +121,7 @@ $ bash merge_java_files.sh src/main/java/org/springframework/samples/petclinic
 
 1. **Permission タブ**に移動し、**Assume Role 用の CloudFormation** を作成します。
 2. 作成した **Role ARN** と **External ID** を登録します。
-3. Application Load Balancer の **VPC ID** と **Subnet IDs** を登録します。
+3. PrivateLink(Network Load Balancer)を作成する VPC の **VPC ID** と **Subnet IDs** を登録します。
 4. Application Load Balancer の **ALB ARN** を登録します。
 
 設定が完了すると、SaaSus とお客様の環境を接続するインフラが作成されます。
