@@ -81,6 +81,10 @@ const config = {
             spec: "./api/integration.yml",
           },
           {
+            id: "apigatewayapi-spec",
+            spec: "./api/apigatewayapi.yml",
+          },
+          {
             id: "pricingapi-spec-jpn",
             spec: "./api/pricingapi.jpn.yml",
           },
@@ -107,6 +111,10 @@ const config = {
           {
             id: "integration-spec-jpn",
             spec: "./api/integrationapi.jpn.yml",
+          },
+          {
+            id: "apigatewayapi-spec-jpn",
+            spec: "./api/apigatewayapi.jpn.yml",
           },
         ],
         theme: {
@@ -202,7 +210,7 @@ const config = {
       require.resolve("@easyops-cn/docusaurus-search-local"),
       {
         hashed: true,
-        language: ["en", "ja"]
+        language: ["en", "ja"],
       },
     ],
   ],

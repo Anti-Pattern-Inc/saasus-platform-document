@@ -199,9 +199,7 @@ const sidebars = {
         type: "doc",
         id: "api-gateway-function/overview",
       },
-      items: [
-        "api-gateway-function/manual",
-      ],
+      items: ["api-gateway-function/manual"],
     },
   ],
 
@@ -253,6 +251,7 @@ const sidebars = {
         "reference/apilog-api",
         "reference/awsmarketplace-api",
         "reference/integration",
+        "reference/apigateway-api",
       ],
     },
   ],
