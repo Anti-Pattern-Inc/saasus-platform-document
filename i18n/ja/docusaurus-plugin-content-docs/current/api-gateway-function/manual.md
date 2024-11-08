@@ -15,7 +15,7 @@ SaaSus Platform の API Gateway 機能を利用して、API を簡単に公開�
 
 ### Step 1: 利用申請
 
-1. **API Gateway 機能 β 版利用申請フォーム**にアクセスし、利用申請を行います。
+1. **[API Gateway 機能 β 版利用申請フォーム](https://docs.google.com/forms/d/e/1FAIpQLSftCXrCOH-19uoVyaziajuRSdvwCzdlteqK5xLxjvYs3Lz7Ww/viewform)** にアクセスし、利用申請を行います。
 
 ---
 
