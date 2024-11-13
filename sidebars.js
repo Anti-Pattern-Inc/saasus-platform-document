@@ -192,6 +192,15 @@ const sidebars = {
         },
       ],
     },
+    {
+      type: "category",
+      label: "API Gateway Function",
+      link: {
+        type: "doc",
+        id: "api-gateway-function/overview",
+      },
+      items: ["api-gateway-function/manual"],
+    },
   ],
 
   tutorialSidebar: [
@@ -242,6 +251,7 @@ const sidebars = {
         "reference/apilog-api",
         "reference/awsmarketplace-api",
         "reference/integration",
+        "reference/apigateway-api",
       ],
     },
   ],
@@ -250,6 +260,11 @@ const sidebars = {
       type: "category",
       label: "Changelog",
       items: [
+        {
+          label: "2024/10/29",
+          type: "doc",
+          id: "changelog/20241029",
+        },
         {
           label: "2024/05/24",
           type: "doc",
