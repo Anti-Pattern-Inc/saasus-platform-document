@@ -91,9 +91,9 @@
     "message": "料金プラン設定",
     "description": "The label for category Pricing Plan Setting in sidebar guideSidebar"
   },
-  "sidebar.guideSidebar.category.Setting Up Bank Account From Seller Registration": {
-    "message": "セラー登録から銀行口座の設定",
-    "description": "The label for category Setting Up Bank Account From Seller Registration in sidebar guideSidebar"
+  "sidebar.guideSidebar.category.Setting Up Disbursement methods From Seller Registration": {
+    "message": "セラー登録から支払い方法の設定",
+    "description": "The label for category Setting Up Disbursement methods From Seller Registration in sidebar guideSidebar"
   },
   "sidebar.guideSidebar.category.Registration of SaaS Product Information": {
     "message": "SaaS製品情報の登録",
