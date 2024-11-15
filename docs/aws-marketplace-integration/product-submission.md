@@ -12,7 +12,7 @@ updatedAt: "Fri Jun 30 2023 03:38:36 GMT+0000 (Coordinated Universal Time)"
 You will register the SaaS product information on the AWS Marketplace Management Portal.
 
 :::caution
-Before carrying out these procedures, please make sure that you have completed the [Seller Registration and Bank Account Setup](/docs/aws-marketplace-integration/aws-marketplace-seller-registration) procedure.
+Before carrying out these procedures, please make sure that you have completed the [Seller Registration and Setting Disbursement methods](/docs/aws-marketplace-integration/aws-marketplace-seller-registration) procedure.
 :::
 
 You will need to prepare the following for this procedure. Please prepare them in advance.
