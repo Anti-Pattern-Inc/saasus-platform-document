@@ -1,5 +1,5 @@
 ---
-title: "セラー登録から銀行口座の設定"
+title: "セラー登録から支払い方法の設定"
 slug: "aws-marketplace-seller-registration"
 excerpt: ""
 hidden: false
@@ -23,3 +23,4 @@ AWS Marketplaceへの出品に必要な登録、設定となるため忘れず�
 3. 税務情報に関するインタビュー
 4. DAC7の税務アンケート
 5. 銀行口座の設定
+6. 支払い方法の設定
