@@ -1,0 +1,802 @@
+openapi: 3.0.0
+info:
+  description: SaaSus ApiGateway API Schema
+  version: 1.0.0
+  title: SaaSus ApiGateway API Schema
+  contact:
+    name: Anti-Pattern
+servers:
+  - url: https://api.saasus.io/v1/apigateway
+    description: Production API Server
+tags:
+  - name: apiGateway
+    description: SaaSus API Gateway Management
+    x-description-i18n:
+      jpn: SaaSus API ゲートウェイ管理
+  - name: error
+    description: Error for Testing Purposes
+    x-description-i18n:
+      jpn: テスト用途のエラー
+security:
+  - Bearer: []
+paths:
+  /settings:
+    get:
+      tags:
+        - apiGateway
+      operationId: GetApiGatewaySettings
+      summary: Obtain configuration information for api gateway function
+      x-summary-i18n:
+        jpn: ApiGateway機能の設定情報取得します
+      description: |
+        Obtain configuration information for api gateway function.
+      x-description-i18n:
+        jpn: |
+          ApiGateway機能の設定情報取得します
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiGatewaySettings'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      tags:
+        - apiGateway
+      operationId: UpdateApiGatewaySettings
+      summary: Update configuration information for api gateway function
+      x-summary-i18n:
+        jpn: ApiGateway機能の設定情報更新します
+      description: |
+        Update configuration information for api gateway function.
+      x-description-i18n:
+        jpn: |
+          ApiGateway機能の設定情報更新します
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateApiGatewaySettingsParam'
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /create:
+    post:
+      tags:
+        - apiGateway
+      operationId: CreateApiGateway
+      summary: Create the API Gateway
+      x-summary-i18n:
+        jpn: API Gatewayを作成します
+      description: |
+        Create the API Gateway.
+      x-description-i18n:
+        jpn: |
+          API Gatewayを作成します
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /tenants/{tenant_id}/api-key:
+    post:
+      tags:
+        - apiGateway
+      operationId: CreateApiKey
+      summary: Create an API key
+      x-summary-i18n:
+        jpn: APIキーを作成します
+      description: |
+        Create an API key.
+      x-description-i18n:
+        jpn: |
+          APIキーを作成します
+      parameters:
+        - $ref: '#/components/parameters/TenantId'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      tags:
+        - apiGateway
+      operationId: GetApiKey
+      summary: Get an API key
+      x-summary-i18n:
+        jpn: APIキーを取得します
+      description: |
+        Get an API key.
+      x-description-i18n:
+        jpn: |
+          APIキーを取得します
+      parameters:
+        - $ref: '#/components/parameters/TenantId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /publish:
+    post:
+      tags:
+        - apiGateway
+      operationId: PublishApiGateway
+      summary: Publish the API Gateway
+      x-summary-i18n:
+        jpn: API Gatewayを公開します
+      description: |
+        Publish the API Gateway.
+      x-description-i18n:
+        jpn: |
+          API Gatewayを公開します
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /unpublish:
+    post:
+      tags:
+        - apiGateway
+      operationId: UnpublishApiGateway
+      summary: Unpublish the API Gateway
+      x-summary-i18n:
+        jpn: API Gatewayを非公開にします
+      description: |
+        Unpublish the API Gateway.
+      x-description-i18n:
+        jpn: |
+          API Gatewayを非公開にします
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /upload:
+    post:
+      tags:
+        - apiGateway
+      operationId: UploadGenerationFiles
+      summary: Upload files to create an API Gateway
+      x-summary-i18n:
+        jpn: API Gatewayを作成するファイルをアップロードします
+      description: |
+        Upload files to create an API Gateway
+      x-description-i18n:
+        jpn: |
+          API Gatewayを作成するファイルをアップロードします
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiGatewayInputFile'
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /cloudformation-launch-stack-link:
+    get:
+      tags:
+        - apiGateway
+      operationId: GetCloudFormationLaunchStackLink
+      summary: Get the link to create the AWS CloudFormation stack
+      x-summary-i18n:
+        jpn: AWS CloudFormationのスタック作成リンクを取得
+      description: |
+        Get the CloudFormation Quick Create link.
+      x-description-i18n:
+        jpn: |
+          CloudFormationのクイック作成リンクを取得します。
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudFormationLaunchStackLink'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /errors/internal-server-error:
+    get:
+      tags:
+        - error
+      operationId: ReturnInternalServerError
+      summary: Return Internal Server Error
+      x-summary-i18n:
+        jpn: ステータスコード500でサーバーエラーを返却
+      description: >
+        This endpoint is used for testing purposes. Returns a server error with
+        status code 500.
+      x-description-i18n:
+        jpn: |
+          テスト用途で使用するエンドポイントです。ステータスコード500でサーバーエラーを返却します。
+      responses:
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      description: Access or authentication information to API
+      x-description-i18n:
+        jpn: APIへのアクセス情報または認証情報
+  parameters:
+    TenantId:
+      in: path
+      name: tenant_id
+      description: Tenant ID
+      x-description-i18n:
+        jpn: テナントID
+      required: true
+      schema:
+        $ref: '#/components/schemas/Uuid'
+  schemas:
+    Error:
+      properties:
+        type:
+          type: string
+          example: permission_denied
+        message:
+          type: string
+          example: Error message
+          x-example-i18n:
+            jpn: エラーメッセージ
+      required:
+        - type
+        - message
+    Uuid:
+      type: string
+      example: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+    ApiGatewaySettings:
+      title: Api Gateway Settings
+      x-title-i18n:
+        jpn: ApiGsteway設定
+      type: object
+      properties:
+        generated_file_status:
+          title: Status of automatically generated files
+          x-title-i18n:
+            jpn: 自動生成ファイルの状態
+          description: Status of automatically generated files
+          x-description-i18n:
+            jpn: Status of automatically generated files
+          type: string
+          example: finished
+        internal_endpoint_openapi_definition_file_download_url:
+          title: openapi definition download URL
+          x-title-i18n:
+            jpn: openapi定義ファイルのダウンロードURL
+          description: >-
+            URL to download the auto-generated openapi definition file, which
+            will be used to build the API Gateway.
+          x-description-i18n:
+            jpn: 自動生成されたopenapi定義ファイルのダウンロードURL。API Gatewayを構築するために使用されます。
+          type: string
+          example: >-
+            https://presigned-url-test.s3.ap-northeast-1.amazonaws.com/test.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=xxxxxx%2F20230710%2Fap-northeast-1%2Fs3%2Faws4_request
+        internal_endpoint_mapping_file_download_url:
+          title: internal endpoint mapping file download URL
+          x-title-i18n:
+            jpn: インターナルエンドポイントマッピングファイルのダウンロードURL
+          description: >-
+            The download URL for the auto-generated internal endpoint mapping
+            file, which will be used to build the API Gateway.
+          x-description-i18n:
+            jpn: 自動生成されたインターナルエンドポイントマッピングファイルのダウンロードURL。API Gatewayを構築するために使用されます。
+          type: string
+          example: >-
+            https://presigned-url-test.s3.ap-northeast-1.amazonaws.com/test.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=xxxxxx%2F20230710%2Fap-northeast-1%2Fs3%2Faws4_request
+        status:
+          title: status of creation
+          x-title-i18n:
+            jpn: API Gatewayの作成状態
+          description: API Gateway creation status
+          x-description-i18n:
+            jpn: API Gatewayの作成状態
+          type: string
+          example: published
+        role_arn:
+          title: ARN of the role to be AssumeRole
+          x-title-i18n:
+            jpn: AssumeRoleするためのロールのARN
+          description: ARN of the role for SaaSus Platform to AssumeRole
+          x-description-i18n:
+            jpn: SaaSus PlatformがAssumeRoleするためのロールのARN
+          type: string
+          example: arn:aws:iam::123456789012:role/role-name
+        role_external_id:
+          title: External id to use when AssumeRole
+          x-title-i18n:
+            jpn: AssumeRoleする時に使用するExternalID
+          description: External id used by SaaSus when AssumeRole to operate SaaS
+          x-description-i18n:
+            jpn: SaaSus PlatformがSaaSを操作するためにAssumeRoleする時に使用するexternal id
+          type: string
+          example: 1234567890
+        internal_endpoint_health_check_path:
+          title: Internal endpoint health check path
+          x-title-i18n:
+            jpn: インターナルエンドポイントのヘルスチェックパス
+          description: The path to be used for health checks on the internal endpoint.
+          x-description-i18n:
+            jpn: インターナルエンドポイントのヘルスチェックに使用するパス
+          type: string
+          example: /health
+        internal_endpoint_health_check_port:
+          title: Internal endpoint health check port
+          x-title-i18n:
+            jpn: インターナルエンドポイントのヘルスチェックポート
+          description: The port to be used for health checks on the internal endpoint.
+          x-description-i18n:
+            jpn: インターナルエンドポイントのヘルスチェックに使用するポート
+          type: integer
+          example: 80
+        internal_endpoint_health_check_protocol:
+          title: Internal endpoint health check protocol
+          x-title-i18n:
+            jpn: インターナルエンドポイントのヘルスチェックプロトコル
+          description: The protocol to be used for health checks on the internal endpoint.
+          x-description-i18n:
+            jpn: インターナルエンドポイントのヘルスチェックに使用するプロトコル
+          type: string
+          example: HTTP or HTTPS
+        internal_endpoint_health_status_codes:
+          title: Internal endpoint health check status codes
+          x-title-i18n:
+            jpn: インターナルエンドポイントのヘルスチェックステータスコード
+          description: >-
+            The status codes to be used for health checks on the internal
+            endpoint.
+          x-description-i18n:
+            jpn: インターナルエンドポイントのヘルスチェックに使用するステータスコード
+          type: string
+          example: 200
+        saas_subnet_ids:
+          title: SaaS Subnet IDs
+          x-title-i18n:
+            jpn: SaaSサブネットID
+          description: Subnet IDs for SaaS
+          x-description-i18n:
+            jpn: SaaSのサブネットID
+          type: array
+          items:
+            type: string
+          example:
+            - subnet-1234567890abcdef0
+            - subnet-1234567890abcdef1
+        saas_vpc_id:
+          title: SaaS VPC ID
+          x-title-i18n:
+            jpn: SaaS VPC ID
+          description: VPC ID for SaaS
+          x-description-i18n:
+            jpn: SaaSのVPC ID
+          type: string
+          example: vpc-12345678
+        allowed_ips:
+          title: Allowed IP addresses
+          x-title-i18n:
+            jpn: 許可されたIPアドレス一覧
+          description: Allowed IP addresses
+          x-description-i18n:
+            jpn: 許可されたIPアドレス一覧
+          type: array
+          items:
+            type: string
+          example:
+            - 192.168.0.0/24
+            - 172.16.0.0/24
+        domain_name:
+          type: string
+          example: dev.saasus.io
+          description: Domain Name
+          x-description-i18n:
+            jpn: ドメイン名
+        is_dns_validated:
+          type: boolean
+          example: false
+          description: DNS Record Verification Results
+          x-description-i18n:
+            jpn: DNSレコードの検証結果
+        certificate_dns_record:
+          $ref: '#/components/schemas/DnsRecord'
+          description: Certificate Domain Name
+          x-description-i18n:
+            jpn: 代替ドメイン名
+        cloud_front_dns_record:
+          $ref: '#/components/schemas/DnsRecord'
+          description: CloudFront DNS Records
+          x-description-i18n:
+            jpn: Cloud Front DNS レコード
+        default_domain_name:
+          type: string
+          description: Default Domain Name
+          x-description-i18n:
+            jpn: デフォルトドメイン名
+          example: d78bh0l3saarv.cloudfront.net
+        saas_alb_arn:
+          title: SaaS Application Load Balancer ARN
+          x-title-i18n:
+            jpn: SaaS アプリケーションロードバランサーARN
+          description: SaaS Application Load Balancer ARN
+          x-description-i18n:
+            jpn: SaaS アプリケーションロードバランサーARN
+          type: string
+          example: >-
+            arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188
+        endpoint_settings_list:
+          title: Endpoint Settings List
+          x-title-i18n:
+            jpn: エンドポイント設定一覧
+          description: Endpoint Settings List
+          x-description-i18n:
+            jpn: エンドポイント毎の設定一覧
+          type: array
+          items:
+            $ref: '#/components/schemas/EndpointSettings'
+      required:
+        - generated_file_status
+        - internal_endpoint_openapi_definition_file_download_url
+        - internal_endpoint_mapping_file_download_url
+        - status
+        - role_arn
+        - role_external_id
+        - internal_endpoint_health_check_path
+        - internal_endpoint_health_check_port
+        - internal_endpoint_health_check_protocol
+        - internal_endpoint_health_status_codes
+        - saas_subnet_ids
+        - saas_vpc_id
+        - allowed_ips
+        - domain_name
+        - is_dns_validated
+        - certificate_dns_record
+        - cloud_front_dns_record
+        - default_domain_name
+        - saas_alb_arn
+        - endpoint_settings_list
+    UpdateApiGatewaySettingsParam:
+      title: Update Api Gateway Settings Param
+      x-title-i18n:
+        jpn: ApiGateway設定更新パラメータ
+      type: object
+      properties:
+        role_arn:
+          title: ARN of the role to be AssumeRole
+          x-title-i18n:
+            jpn: AssumeRoleするためのロールのARN
+          description: ARN of the role for SaaSus Platform to AssumeRole
+          x-description-i18n:
+            jpn: SaaSus PlatformがAssumeRoleするためのロールのARN
+          type: string
+          example: arn:aws:iam::123456789012:role/role-name
+        role_external_id:
+          title: External id to use when AssumeRole
+          x-title-i18n:
+            jpn: AssumeRoleする時に使用するExternalID
+          description: External id used by SaaSus when AssumeRole to operate SaaS
+          x-description-i18n:
+            jpn: SaaSus PlatformがSaaSを操作するためにAssumeRoleする時に使用するexternal id
+          type: string
+          example: 1234567890
+        internal_endpoint_health_check_path:
+          title: Internal endpoint health check path
+          x-title-i18n:
+            jpn: インターナルエンドポイントのヘルスチェックパス
+          description: The path to be used for health checks on the internal endpoint.
+          x-description-i18n:
+            jpn: インターナルエンドポイントのヘルスチェックに使用するパス
+          type: string
+          example: /health
+        internal_endpoint_health_check_port:
+          title: Internal endpoint health check port
+          x-title-i18n:
+            jpn: インターナルエンドポイントのヘルスチェックポート
+          description: The port to be used for health checks on the internal endpoint.
+          x-description-i18n:
+            jpn: インターナルエンドポイントのヘルスチェックに使用するポート
+          type: integer
+          example: 80
+        internal_endpoint_health_check_protocol:
+          title: Internal endpoint health check protocol
+          x-title-i18n:
+            jpn: インターナルエンドポイントのヘルスチェックプロトコル
+          description: The protocol to be used for health checks on the internal endpoint.
+          x-description-i18n:
+            jpn: インターナルエンドポイントのヘルスチェックに使用するプロトコル
+          type: string
+          example: HTTP or HTTPS
+        internal_endpoint_health_status_codes:
+          title: Internal endpoint health check status codes
+          x-title-i18n:
+            jpn: インターナルエンドポイントのヘルスチェックステータスコード
+          description: >-
+            The status codes to be used for health checks on the internal
+            endpoint.
+          x-description-i18n:
+            jpn: インターナルエンドポイントのヘルスチェックに使用するステータスコード
+          type: string
+          example: 200
+        saas_subnet_ids:
+          title: SaaS Subnet IDs
+          x-title-i18n:
+            jpn: SaaSサブネットID
+          description: Subnet IDs for SaaS
+          x-description-i18n:
+            jpn: SaaSのサブネットID
+          type: array
+          items:
+            type: string
+          example:
+            - subnet-1234567890abcdef0
+            - subnet-1234567890abcdef1
+        saas_vpc_id:
+          title: SaaS VPC ID
+          x-title-i18n:
+            jpn: SaaS VPC ID
+          description: VPC ID for SaaS
+          x-description-i18n:
+            jpn: SaaSのVPC ID
+          type: string
+          example: vpc-12345678
+        allowed_ips:
+          title: Allowed IP addresses
+          x-title-i18n:
+            jpn: 許可されたIPアドレス一覧
+          description: Allowed IP addresses
+          x-description-i18n:
+            jpn: 許可されたIPアドレス一覧
+          type: array
+          items:
+            type: string
+          example:
+            - 192.168.0.0/24
+            - 172.16.0.0/24
+        domain_name:
+          type: string
+          example: dev.saasus.io
+          description: Domain Name
+          x-description-i18n:
+            jpn: ドメイン名
+        saas_alb_arn:
+          title: SaaS Application Load Balancer ARN
+          x-title-i18n:
+            jpn: SaaS アプリケーションロードバランサーARN
+          description: SaaS Application Load Balancer ARN
+          x-description-i18n:
+            jpn: SaaS アプリケーションロードバランサーARN
+          type: string
+          example: >-
+            arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188
+        endpoint_settings_list:
+          title: Endpoint Settings List
+          x-title-i18n:
+            jpn: エンドポイント設定一覧
+          description: Endpoint Settings List
+          x-description-i18n:
+            jpn: エンドポイント毎の設定一覧
+          type: array
+          items:
+            $ref: '#/components/schemas/EndpointSettings'
+    ApiGatewayInputFile:
+      title: Api Gateway Input File
+      x-title-i18n:
+        jpn: ApiGateway入力ファイル
+      type: object
+      properties:
+        content:
+          title: Api Gateway Input File Content
+          x-title-i18n:
+            jpn: ApiGateway入力ファイルのコンテンツ
+          description: The content of the file to be uploaded to create an API Gateway.
+          x-description-i18n:
+            jpn: API Gatewayを作成するためにアップロードするファイルのコンテンツ
+          type: string
+          format: base64
+          example: UEsDBBQACAAIAJr6oFQmTAuRfvOGAA==
+      required:
+        - content
+    ApiKey:
+      title: Api Key
+      x-title-i18n:
+        jpn: APIキー
+      type: object
+      properties:
+        api_key:
+          title: API Key
+          x-title-i18n:
+            jpn: APIキー
+          description: The API key that was created.
+          x-description-i18n:
+            jpn: 作成されたAPIキー
+          type: string
+          example: 1234567890abcdef
+      required:
+        - api_key
+    CloudFormationLaunchStackLink:
+      title: AWS CloudFormation Stack Launch Link
+      x-title-i18n:
+        jpn: AWS CloudFormationスタック作成リンク
+      type: object
+      properties:
+        link:
+          type: string
+          example: >-
+            https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create?stackName=sample&templateURL=https://s3.us-west-2.amazonaws.com/cloudformation-templates-sample.template
+      required:
+        - link
+    DnsRecord:
+      title: DNS Record
+      x-title-i18n:
+        jpn: DNSレコード
+      type: object
+      properties:
+        type:
+          type: string
+          description: CNAME Resource Record
+          x-description-i18n:
+            jpn: CNAMEリソースレコード
+          enum:
+            - CNAME
+          example: CNAME
+        name:
+          type: string
+          example: _k90jaskdfawehro.domain-of-saasus-client.com.
+          description: Record Name
+          x-description-i18n:
+            jpn: レコード名
+        value:
+          type: string
+          example: _cmojwc239j102mosd9.acm-validations.aws.
+          description: Value
+          x-description-i18n:
+            jpn: 値
+      required:
+        - type
+        - name
+        - value
+    EndpointSettings:
+      title: Endpoint Settings
+      x-title-i18n:
+        jpn: エンドポイント設定
+      description: Settings per endpoint
+      x-description-i18n:
+        jpn: エンドポイント毎の設定
+      type: object
+      properties:
+        path:
+          title: Path
+          x-title-i18n:
+            jpn: パス
+          description: Path
+          x-description-i18n:
+            jpn: パス
+          type: string
+          example: /users/get-by-id
+        method:
+          title: Method
+          x-title-i18n:
+            jpn: メソッド
+          description: Method
+          x-description-i18n:
+            jpn: メソッド
+          type: string
+          enum:
+            - GET
+            - HEAD
+            - POST
+            - PUT
+            - PATCH
+            - DELETE
+            - CONNECT
+            - OPTIONS
+            - TRACE
+          example: GET
+        throttling:
+          $ref: '#/components/schemas/Throttling'
+      required:
+        - path
+        - method
+    Throttling:
+      title: Throttling Settings
+      x-title-i18n:
+        jpn: スロットリング設定
+      type: object
+      description: >-
+        Permit requests up to the limit number of times within a range (seconds)
+        time for each target.
+      x-description-i18n:
+        jpn: targetごとにrange（秒）の時間内にlimitの回数までリクエストを許可します。
+      properties:
+        target:
+          title: Target
+          x-title-i18n:
+            jpn: 対象
+          description: Target of restriction
+          x-description-i18n:
+            jpn: 制限対象
+          type: string
+          enum:
+            - tenant
+            - user
+          example: tenant
+        range:
+          title: range
+          x-title-i18n:
+            jpn: 範囲
+          description: Throttling time range (seconds)
+          x-description-i18n:
+            jpn: スロットリングの時間範囲（秒）
+          type: integer
+          minimum: 60
+          maximum: 31536000
+          example: 600
+        limit:
+          title: limit
+          x-title-i18n:
+            jpn: 上限
+          description: Throttling limit
+          x-description-i18n:
+            jpn: スロットリングの上限
+          type: integer
+          example: 100
+      required:
+        - target
+        - range
+        - limit
