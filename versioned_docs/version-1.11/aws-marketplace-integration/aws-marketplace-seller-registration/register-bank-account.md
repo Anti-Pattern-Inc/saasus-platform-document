@@ -44,5 +44,5 @@ If everything is correct, you can check the added bank account under `Payment In
 
 :::caution
 At this point, the settings necessary for listing are not yet complete.
-Please refer to the next page, `Setting up Payment Methods`.
+Please refer to the next page, `Setting up Disbursement Methods`.
 :::

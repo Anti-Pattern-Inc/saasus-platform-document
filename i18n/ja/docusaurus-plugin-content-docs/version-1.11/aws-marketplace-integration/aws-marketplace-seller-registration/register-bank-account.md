@@ -13,7 +13,7 @@ updatedAt: "Thu Jul 06 2023 01:27:22 GMT+0000 (Coordinated Universal Time)"
 
 ![new-register-bank-account-1](/ja/img/aws-marketplace-integration/register-bank-account/new-register-bank-account-1.png)
 
-最初に支払い方法を選択する必要があります。米国ベースのACHアカウント、SWIFTアカウント、またはHyperwalletアカウントを選択できます。SWIFTアカウントは、対応するすべての通貨（AUD、EUR、GBP、JPY、USD）で使用できますが、米国ベースのACHおよびHyperwalletアカウントはUSDのみ使用可能です。
+最初に、支払い方法を選択する必要があります。米国ベースのACHアカウント、SWIFTアカウント、またはHyperwalletアカウントを選択できます。SWIFTアカウントは、対応するすべての通貨（AUD、EUR、GBP、JPY、USD）で使用できますが、米国ベースのACHおよびHyperwalletアカウントはUSDのみ使用可能です。
 
 :::info
 日本の銀行口座を設定したい場合は、海外送金・外貨送金の受け取りが可能な銀行口座をご用意いただき
