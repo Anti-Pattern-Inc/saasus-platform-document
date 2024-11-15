@@ -1,5 +1,5 @@
 ---
-title: "How to Start Setting Up Bank Account"
+title: "How to Start Setting Up Bank Account and Disbursement methods"
 slug: "tax-information-interview"
 excerpt: ""
 hidden: false
