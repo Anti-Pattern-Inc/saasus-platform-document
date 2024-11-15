@@ -44,7 +44,7 @@ Regarding the consumption tax to be displayed on the invoice, the invoice system
 1. ***Setting up Billing Address***
 
 Input the billing information before setting up the pricing plan for the tenant.
-Open the tenant management screen and click the edit button for the target tenant.
+Open the tenant management screen in the SaaS operations console and click the edit button for the target tenant.
 
 ![tax-rates-5](/img/saas-development-console/tax-rates-5.png)
 
