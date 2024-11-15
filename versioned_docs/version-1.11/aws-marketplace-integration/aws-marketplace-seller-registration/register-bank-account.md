@@ -9,33 +9,40 @@ metadata:
 createdAt: "Wed May 17 2023 01:10:33 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Jul 06 2023 01:27:22 GMT+0000 (Coordinated Universal Time)"
 ---
-Next, press `Complete banking information` from `Payment Information` and set up your bank account.
-A US bank account is required. If you don't have one, you can obtain a virtual US bank account number (Deposit Account) through Hyperwallet and receive it at a specific Japanese bank account.
+Next, click on `Add bank account` under `Payment Information`.
 
-![register-bank-account-1](/img/aws-marketplace-integration/register-bank-account/register-bank-account-1.png)
+![new-register-bank-account-1](/img/aws-marketplace-integration/register-bank-account/new-register-bank-account-1.png)
 
-Answer the questions about US bank accounts.
+First, you need to select a payment method. You can choose a US-based ACH account, SWIFT account, or Hyperwallet account. SWIFT accounts can be used for any supported currency (AUD, EUR, GBP, JPY, USD), whereas US-based ACH and Hyperwallet accounts can only use USD.
 
-![register-bank-account-2](/img/aws-marketplace-integration/register-bank-account/register-bank-account-2.png)
+:::info
+If you wish to set up a Japanese bank account, you will need a bank account that can receive international wire transfers or foreign currency transfers, and you must select SWIFT account as the payment method.
+:::
 
-Answer the questions about Hyperwallet accounts if you do not have a US bank account.
+This document explains the setup procedure for a SWIFT account. First, select `SWIFT account` from the `Payment Method` options.
 
-![register-bank-account-3](/img/aws-marketplace-integration/register-bank-account/register-bank-account-3.png)
+![new-register-bank-account-2](/img/aws-marketplace-integration/register-bank-account/new-register-bank-account-2.png)
 
-If you don't have a Hyperwallet account, create one from `Sign up for Hyperwallet`.
+For a SWIFT account, you need to enter the following three items. Please contact your bank for the SWIFT code.
+- Bank account holder name
+- BIC (SWIFT code)
+- Account number
 
-![register-bank-account-4](/img/aws-marketplace-integration/register-bank-account/register-bank-account-4.png)
+![new-register-bank-account-3](/img/aws-marketplace-integration/register-bank-account/new-register-bank-account-3.png)
 
-Please refer to the procedure in [Hyperwallet Registration](./hyperwallet-registration).
+Next, enter the billing address.
 
-Register the information you obtained from Hyperwallet as a US bank account.
+![new-register-bank-account-4](/img/aws-marketplace-integration/register-bank-account/new-register-bank-account-4.png)
 
-![register-bank-account-5](/img/aws-marketplace-integration/register-bank-account/register-bank-account-5.png)
+Once you have finished entering all the information, click on `Add bank account`.
 
-After registering the necessary information, press `Submit` to set up your bank account.
+![new-register-bank-account-5](/img/aws-marketplace-integration/register-bank-account/new-register-bank-account-5.png)
 
-![register-bank-account-6](/img/aws-marketplace-integration/register-bank-account/register-bank-account-6.png)
+If everything is correct, you can check the added bank account under `Payment Information`.
 
-This concludes the setting up of your bank account.
+![new-register-bank-account-6](/img/aws-marketplace-integration/register-bank-account/new-register-bank-account-6.png)
 
-![register-bank-account-7](/img/aws-marketplace-integration/register-bank-account/register-bank-account-7.png)
+:::caution
+At this point, the settings necessary for listing are not yet complete.
+Please refer to the next page, `Setting up Payment Methods`.
+:::

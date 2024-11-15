@@ -9,34 +9,43 @@ metadata:
 createdAt: "Wed May 17 2023 01:10:33 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Jul 06 2023 01:27:22 GMT+0000 (Coordinated Universal Time)"
 ---
-続いて`Payment Information`より`Complete banking information`を押下して銀行口座を設定します。  
-米国の銀行口座の登録が必要となり、無い場合は、Hyperwalletで仮想のUS bank account number  
-（Deposit Account）を取得し、指定の日本の銀行口座で受け取ることが可能となります。
+続いて`Payment Information`より`Add bank account`を押下してください。  
 
-![register-bank-account-1](/ja/img/aws-marketplace-integration/register-bank-account/register-bank-account-1.png)
+![new-register-bank-account-1](/ja/img/aws-marketplace-integration/register-bank-account/new-register-bank-account-1.png)
 
-米国の銀行口座についての質問に回答します。
+最初に支払い方法を選択する必要があります。米国ベースのACHアカウント、SWIFTアカウント、またはHyperwalletアカウントを選択できます。SWIFTアカウントは、対応するすべての通貨（AUD、EUR、GBP、JPY、USD）で使用できますが、米国ベースのACHおよびHyperwalletアカウントはUSDのみ使用可能です。
 
-![register-bank-account-2](/ja/img/aws-marketplace-integration/register-bank-account/register-bank-account-2.png)
+:::info
+日本の銀行口座を設定したい場合は、海外送金・外貨送金の受け取りが可能な銀行口座をご用意いただき
+SWIFTアカウントによる支払い方法を選択する必要があります。
+:::
 
-米国の銀行口座を保持していない場合、Hyperwallet アカウントについて回答します。
+本ドキュメントでは、SWIFTアカウントによる設定手順を解説いたします。
+まず、`Payment Method`の選択肢から`SWIFT account`を選択してください。
 
-![register-bank-account-3](/ja/img/aws-marketplace-integration/register-bank-account/register-bank-account-3.png)
+![new-register-bank-account-2](/ja/img/aws-marketplace-integration/register-bank-account/new-register-bank-account-2.png)
 
-Hyperwallet アカウントを保持していない場合、`Sign up for Hyper wallet`からアカウントを作成します。
+SWIFTアカウントでは、以下の三つの項目を入力します。SWIFT codeはご利用の銀行に問い合わせください。
+- Bank account holder name
+- BIC (SWIFT code)
+- Account number
 
-![register-bank-account-4](/ja/img/aws-marketplace-integration/register-bank-account/register-bank-account-4.png)
+![new-register-bank-account-3](/ja/img/aws-marketplace-integration/register-bank-account/new-register-bank-account-3.png)
 
-[Hyperwalletの登録](./hyperwallet-registration)についてはこちらの手順を参照ください。
 
-Hyperwalletの登録で取得した情報を米国銀行口座として登録します。
+次に、請求先住所を入力します。
 
-![register-bank-account-5](/ja/img/aws-marketplace-integration/register-bank-account/register-bank-account-5.png)
+![new-register-bank-account-4](/ja/img/aws-marketplace-integration/register-bank-account/new-register-bank-account-4.png)
 
-必要な情報を登録後`Submit`を押下し銀行口座の設定を行います。
+全ての入力を終えたら、`Add bank account`を押下します。
 
-![register-bank-account-6](/ja/img/aws-marketplace-integration/register-bank-account/register-bank-account-6.png)
+![new-register-bank-account-5](/ja/img/aws-marketplace-integration/register-bank-account/new-register-bank-account-5.png)
 
-以上で、銀行口座の設定が完了となります。
+問題なければ、`Payment Information`にて追加した銀行口座をご確認いただけます。
 
-![register-bank-account-7](/ja/img/aws-marketplace-integration/register-bank-account/register-bank-account-7.png)
+![new-register-bank-account-6](/ja/img/aws-marketplace-integration/register-bank-account/new-register-bank-account-6.png)
+
+:::caution
+この時点では、まだ出品に必要な設定が完了していません。
+次ページの`支払い方法の設定`をご確認ください。
+:::
