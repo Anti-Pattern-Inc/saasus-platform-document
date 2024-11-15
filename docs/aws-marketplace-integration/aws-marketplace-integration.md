@@ -32,9 +32,9 @@ Because it's hard to imagine from text, we will introduce the flow to listing in
 1. Seller registration (AWS)
    1. [Seller Registration Guide](/docs/aws-marketplace-integration/aws-marketplace-seller-registration/aws-marketplace-seller-registration)
 
-2. Setting of Public profile and bank account (AMMP)
+2. Setting of Public profile and disbursement methods (AMMP)
    1. [Guide to setting the Public profile](/docs/aws-marketplace-integration/aws-marketplace-seller-registration/public-profile-settings)
-   2. [How to start setting the bank account](/docs/aws-marketplace-integration/aws-marketplace-seller-registration/tax-information-interview)
+   2. [How to start setting the bank account and disbursement methods](/docs/aws-marketplace-integration/aws-marketplace-seller-registration/tax-information-interview)
 
    ***
    ===**Start of Test Phase**===
