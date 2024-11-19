@@ -138,7 +138,7 @@ const sidebars = {
       items: [
         {
           type: "category",
-          label: "Setting Up Bank Account From Seller Registration",
+          label: "Setting Up Disbursement methods From Seller Registration",
           link: {
             type: "doc",
             id: "aws-marketplace-integration/aws-marketplace-seller-registration",
@@ -149,7 +149,7 @@ const sidebars = {
             "aws-marketplace-integration/aws-marketplace-seller-registration/tax-information-interview",
             "aws-marketplace-integration/aws-marketplace-seller-registration/dac7-tax-survey",
             "aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account",
-            "aws-marketplace-integration/aws-marketplace-seller-registration/hyperwallet-registration",
+            "aws-marketplace-integration/aws-marketplace-seller-registration/register-disbursement-methods",
           ],
         },
         {

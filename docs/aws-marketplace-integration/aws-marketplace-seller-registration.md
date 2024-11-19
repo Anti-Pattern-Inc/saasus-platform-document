@@ -1,5 +1,5 @@
 ---
-title: "Setting Up Bank Account From Seller Registration"
+title: "Setting Up Disbursement methods From Seller Registration"
 slug: "aws-marketplace-seller-registration"
 excerpt: ""
 hidden: false
@@ -23,3 +23,4 @@ These are necessary registrations and settings for listing on AWS Marketplace, s
 3. Interview about tax information
 4. DAC7 tax questionnaire
 5. Setting up a bank account
+6. Setting up a disbursement methods

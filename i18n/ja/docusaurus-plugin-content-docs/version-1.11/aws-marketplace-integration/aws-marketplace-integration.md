@@ -36,10 +36,10 @@ SaaSus Platform 内の操作だけで出品が完了するものではないの�
 1. セラー登録(AWS)
    1. [セラー登録ガイド](/docs/aws-marketplace-integration/aws-marketplace-seller-registration/aws-marketplace-seller-registration)
 
-2. Public profileと銀行口座の設定(AMMP)
+2. Public profileと支払い方法の設定(AMMP)
 
    1. [Public profileの設定ガイド](/docs/aws-marketplace-integration/aws-marketplace-seller-registration/public-profile-settings)
-   2. [銀行口座の設定の始め方](/docs/aws-marketplace-integration/aws-marketplace-seller-registration/tax-information-interview)
+   2. [銀行口座・支払い方法設定の始め方](/docs/aws-marketplace-integration/aws-marketplace-seller-registration/tax-information-interview)
 
    ***
 
