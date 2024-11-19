@@ -26,7 +26,7 @@ updatedAt: "Thu Feb 08 2024 07:15:49 GMT+0000 (Coordinated Universal Time)"
 :::
 
 `SKU`：AWS Marketplace Management Portal上で製品を区別するための固有文字列  
-`Product logo S3 URL`：製品のログURL  
+`Product logo S3 URL`：製品のロゴURL  
 `Short description`：製品の概要  
 `Long description`：製品の説明  
 `Product video URL`：製品の紹介動画などのURL  
