@@ -12,7 +12,7 @@ updatedAt: "Fri Jun 30 2023 03:38:36 GMT+0000 (Coordinated Universal Time)"
 AWS Marketplace Management Portalにて、SaaS製品情報を登録します。
 
 :::caution
-本手順を実施する前に[セラー登録から銀行口座の設定](/docs/aws-marketplace-integration/aws-marketplace-seller-registration)の手続きが完了していることをご確認ください。
+本手順を実施する前に[セラー登録から支払い方法の設定](/docs/aws-marketplace-integration/aws-marketplace-seller-registration)の手続きが完了していることをご確認ください。
 :::
 
 本手順では以下の内容を準備する必要がありますので、あらかじめご準備ください。

@@ -1,5 +1,5 @@
 ---
-title: "銀行口座の設定の始め方"
+title: "銀行口座・支払い方法設定の始め方"
 slug: "tax-information-interview"
 excerpt: ""
 hidden: false

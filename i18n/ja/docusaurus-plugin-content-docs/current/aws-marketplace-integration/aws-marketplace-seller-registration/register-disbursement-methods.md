@@ -1,6 +1,6 @@
 ---
-title: "銀行口座の設定"
-slug: "register-bank-account"
+title: "支払い方法の設定"
+slug: "register-disbursement-methods"
 excerpt: ""
 hidden: false
 metadata: 
@@ -9,11 +9,19 @@ metadata:
 createdAt: "Wed May 17 2023 01:10:33 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Jul 06 2023 01:27:22 GMT+0000 (Coordinated Universal Time)"
 ---
-続いて`Payment Information`より`Add bank account`を押下してください。  
+
+:::caution
+あらかじめ銀行口座の設定が完了していることをご確認ください。
+まだお済みでない場合は、[銀行口座の設定](/docs/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account)を参考に設定を行ってください。
+:::
+
+`Payment Information`より`Add disbursement method`を押下してください。  
 
 ![new-register-bank-account-1](/ja/img/aws-marketplace-integration/register-bank-account/new-register-bank-account-1.png)
 
-最初に、支払い方法を選択する必要があります。米国ベースのACHアカウント、SWIFTアカウント、またはHyperwalletアカウントを選択できます。SWIFTアカウントは、対応するすべての通貨（AUD、EUR、GBP、JPY、USD）で使用できますが、米国ベースのACHおよびHyperwalletアカウントはUSDのみ使用可能です。
+最初に、支払われる通貨を選択します。利用可能な通貨は[公式ドキュメント](https://docs.aws.amazon.com/ja_jp/marketplace/latest/userguide/disbursement.html#currency)を参照してください。
+
+次に支払いを受け取る銀行口座を選択します。[銀行口座の設定](/docs/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account)で追加した銀行口座の中で直前に選択した通貨に対応している銀行口座が選択肢として選べるようになっています。
 
 :::info
 日本の銀行口座を設定したい場合は、海外送金・外貨送金の受け取りが可能な銀行口座をご用意いただき
