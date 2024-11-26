@@ -16,7 +16,7 @@
     "description": "The label for category Tutorial in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Manage Rate Plans": {
-    "message": "料金プランの管理",
+    "message": "料金プランの設定",
     "description": "The label for category Manage Rate Plans in sidebar tutorialSidebar"
   },
   "sidebar.changelogSidebar.category.Changelog": {
@@ -82,6 +82,10 @@
   "sidebar.guideSidebar.category.About SaaS User Accounts": {
     "message": "SaaS利用者（ユーザー）のアカウントについて",
     "description": "The label for category About SaaS User Accounts in sidebar guideSidebar"
+  },
+  "sidebar.guideSidebar.category.About Rate Plans": {
+    "message": "複雑な料金プランについて",
+    "description": "The label for category About Rate Plans in sidebar guideSidebar"
   },
   "sidebar.guideSidebar.category.Settings for Google Tag Manager": {
     "message": "Google Tag Managerの設定",
