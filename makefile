@@ -90,6 +90,7 @@ copy_api_files:
 	cp -f ../api/modules/v1/awsmarketplace/controller/awsmarketplaceapi/awsmarketplaceapi.yml ./api/awsmarketplaceapi.yml
 	cp -f ../api/modules/v1/communication/controller/communicationapi/communicationapi.yml ./api/communicationapi.yml
 	cp -f ../api/modules/v1/apilog/controller/apilogapi/apilogapi.yml ./api/apilogapi.yml
+	cp -f ../api/modules/v1/apigateway/controller/apigatewayapi/apigatewayapi.yml ./api/apigatewayapi.yml 
 
 # CRLFにならないようにbashで実行
 translate_ja:
@@ -100,6 +101,7 @@ translate_ja:
 	docker exec -it saasus-platform-document /bin/bash -c "swagger-i18n-extension translate ./api/awsmarketplaceapi.yml jpn > ./api/awsmarketplaceapi.jpn.yml"
 	docker exec -it saasus-platform-document /bin/bash -c "swagger-i18n-extension translate ./api/communicationapi.yml jpn > ./api/communicationapi.jpn.yml"
 	docker exec -it saasus-platform-document /bin/bash -c "swagger-i18n-extension translate ./api/apilogapi.yml jpn > ./api/apilogapi.jpn.yml"
+	docker exec -it saasus-platform-document /bin/bash -c "swagger-i18n-extension translate ./api/apigatewayapi.yml jpn > ./api/apigatewayapi.jpn.yml"
 
 ########### 
 # version
