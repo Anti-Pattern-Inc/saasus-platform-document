@@ -16,6 +16,11 @@ The API Gateway feature of the SaaSus Platform is designed to facilitate the pub
 - Must be a **Java application**.
 - The application must be **running under an Application Load Balancer**.
 
+:::info
+Currently, this feature is only available with the Java SDK.<br/>
+Support for other SDKs will be gradually provided in the future.
+:::
+
 ### Important Notes
 
 When using the API Gateway feature, the following AWS resources will be created in your SaaS environment, which will incur additional AWS fees.
