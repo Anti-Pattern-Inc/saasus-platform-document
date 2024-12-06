@@ -1,0 +1,294 @@
+---
+title: "設定手順"
+slug: "manual"
+excerpt: ""
+hidden: false
+createdAt: "Thu Oct 07 2024 19:00:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Oct 07 2024 19:00:00 GMT+0000 (Coordinated Universal Time)"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+## API Gateway 利用手順
+
+SaaSus Platform の API Gateway 機能を利用して、API を簡単に公開・管理するための設定手順を以下に示します。
+
+---
+
+### 事前準備
+ - サンプルアプリ<br/>
+本手順では、サンプルアプリとして spring-petclinic を利用します。<br/>
+以下のリンクから spring-petclinic を clone してください。<br/>
+[Spring Petclinic リポジトリをクローン](https://github.com/spring-projects/spring-petclinic)
+
+ - 利用する Java SDK<br/>
+本手順で使用する Java SDK は、以下のリンクから clone してください。<br/>
+[Java SDK リポジトリをクローン](https://github.com/saasus-platform/saasus-sdk-java)
+
+### Step 1: 利用申請
+
+1. **[API Gateway 機能 β 版利用申請フォーム](https://docs.google.com/forms/d/e/1FAIpQLSftCXrCOH-19uoVyaziajuRSdvwCzdlteqK5xLxjvYs3Lz7Ww/viewform)** アクセスし、必要事項を記入の上、利用申請を行ってください。
+
+:::info
+利用申請後、弊社より確認メールを送付いたします。<br/>
+メールが届くまでの間に、Step 2 以降の手順を進めてお待ちください。
+:::
+
+---
+
+### Step 2: ソースコードへのアノテーション設定
+
+1. 公開対象のメソッドにアノテーションを追加し、API エンドポイントとして使用できるように設定します。
+
+```mdx-code-block
+<Tabs>
+<TabItem value="java" label="java" default>
+```
+
+```txt
+package org.springframework.samples.petclinic.owner;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.stereotype.Component;
+import org.springframework.context.ApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.validation.Valid;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import org.springframework.context.ApplicationContextAware;
+
+// SaaSusAPIを読み込む
+import saasus.sdk.modules.SaaSusAPI;
+
+import org.springframework.ui.ExtendedModelMap;
+import org.springframework.validation.DataBinder;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
+@Component
+class ApplicationContextProvider implements ApplicationContextAware {
+
+	private static ApplicationContext context;
+
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) {
+		context = applicationContext;
+	}
+
+	public static ApplicationContext getApplicationContext() {
+		return context;
+	}
+
+}
+
+@Component
+public class FindFormApi {
+
+	private static ApplicationContext applicationContext;
+
+	// SaaSusAPIを利用するには
+	// public staticのメソッドを用意する
+	// パラメータはプリミティブな形式にする
+	// 戻り値はJSON（正しくはプリミティブ型）にする
+
+	@SaaSusAPI(path = "findFormApi")
+	public static String processFindFormApi() {
+		System.out.println("processFindFormApi");
+
+		// OwnerControllerを取得
+		ApplicationContext applicationContext = ApplicationContextProvider.getApplicationContext();
+		OwnerController ownerController = applicationContext.getBean(OwnerController.class);
+
+		// processFindFormのコールに必要な引数を設定
+		Owner owner = new Owner();
+		DataBinder binder = new DataBinder(owner);
+		BindingResult result = binder.getBindingResult();
+		org.springframework.ui.Model model = new org.springframework.ui.ExtendedModelMap();
+
+		// processFindFormをコール
+		String function_result = ownerController.processFindForm(1, owner, result, model);
+
+		// processFindFormの結果を取得
+		List<Owner> listOwners = (List<Owner>) model.getAttribute("listOwners");
+		System.out.println("listOwners: " + listOwners);
+
+		// OwnerのリストをJSONに変換
+		String listOwnersJson = "";
+		try {
+			ObjectMapper objectMapper = new ObjectMapper();
+			objectMapper.registerModule(new JavaTimeModule());
+			listOwnersJson = objectMapper.writeValueAsString(listOwners);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listOwnersJson;
+	}
+
+}
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+---
+
+### Step 3: API Server の起動設定
+
+1. アプリケーションの起動時に `saasus-sdk` の API サーバーが起動するよう、以下のコードを `ServletInitializer` クラスに追加してください。
+
+```mdx-code-block
+<Tabs>
+<TabItem value="java" label="java" default>
+```
+
+```txt
+import saasus.sdk.util.apiserver.ApiServer;
+
+/**
+ * PetClinic Spring Boot Application.
+ *
+ * @author Dave Syer
+ *
+ */
+@SpringBootApplication
+@ImportRuntimeHints(PetClinicRuntimeHints.class)
+public class PetClinicApplication {
+
+	public static void main(String[] args) {
+
+		try {
+			ApiServer.start(8083);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
+
+		SpringApplication.run(PetClinicApplication.class, args);
+	}
+
+}
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+2. **Application Load Balancer** に対して、以下の設定が必要です：
+
+   - **リスナー**: ポート **8083**
+   - **ターゲットグループ**: ポート **8083** のターゲットグループを作成
+   - **セキュリティグループ**: ALB とアプリケーションにポート **8083** へのアクセスを許可
+
+---
+
+### Step 4: ソースコードの統合と圧縮
+
+対象のソースコードを以下のシェルスクリプトでまとめ、ZIP ファイルに圧縮します。
+
+```bash
+#!/bin/bash
+
+# Usage: $0 <directory>
+
+DIRECTORY=$1
+OUTPUT_FILE="generated_file_name.txt"
+
+if [ -f "$OUTPUT_FILE" ]; then
+    rm "$OUTPUT_FILE"
+fi
+
+find "$DIRECTORY" -type f -name "*.java" -print0 | while IFS= read -r -d '' file; do
+    echo "===== $file =====" >> "$OUTPUT_FILE"
+    cat "$file" >> "$OUTPUT_FILE"
+    echo -e "\n" >> "$OUTPUT_FILE"
+done
+
+ZIP_FILE="generated_file_name.zip"
+if [ -f "$ZIP_FILE" ]; then
+    rm "$ZIP_FILE"
+fi
+
+zip "$ZIP_FILE" "$OUTPUT_FILE"
+echo "All Java files have been merged and zipped into $ZIP_FILE"
+```
+
+**使用方法**:
+
+```sh
+$ bash merge_java_files.sh <アプリケーションのパス>
+```
+
+例:
+
+```sh
+$ bash merge_java_files.sh src/main/java/org/springframework/samples/petclinic
+```
+
+---
+
+### Step 5: ZIP ファイルのアップロード
+
+1. 弊社から送信された確認メールを受信後、開発コンソールの API Gateway 機能画面にアクセスしてください。
+
+2. 画面上から生成した ZIP ファイルをアップロードしてください。
+
+---
+
+### Step 6: 権限の設定
+
+1. **Permission タブ**に移動し、**Assume Role 用の CloudFormation** を作成します。
+2. 作成した **Role ARN** と **External ID** を登録します。
+3. PrivateLink(Network Load Balancer)を作成する VPC の **VPC ID** と **Subnet IDs** を登録します。
+4. Application Load Balancer の **ALB ARN** を登録します。
+:::info
+Subnet IDs には、必ず **Public Subnet の ID** のみを入力してください。<br/>
+Private Subnet の ID を入力しないようご注意ください。
+:::
+
+設定が完了すると、SaaSus とお客様の環境を接続するインフラが作成されます。
+
+---
+
+### Step 7: API の公開とアクセス
+
+1. API を公開し、利用可能になります。
+
+#### API アクセス方法
+
+- API のアクセスには **API Key** が必要です。運用コンソールの **テナント管理画面**で API Key を発行し、アクセスに利用します。
+- β 版のため、アクセスに必要なドメイン情報は SaaSus 運営側からメールにて送付されます。
+
+#### アクセス例
+
+```sh
+$ curl -v -X GET https://<ドメイン>/<クラスのフルパス>/<メソッド名> -H 'x-api-key:<発行したAPI Key>' -H 'tenantId:<取得した tenantId>'
+```
+
+#### Example
+
+```sh
+$ curl -v -X GET https://xxxxxxxxxxxxxxxxxxxxx/org.springframework.samples.petclinic.owner.FindFormApi/processFindFormApi -H 'x-api-key:azydsktcf1b93Mmjxuex7CEbEoV7OjrGk0RIqgzCQtc' -H 'tenantId:dc38a950-5203-4820-a325-418c0764ec69'
+```

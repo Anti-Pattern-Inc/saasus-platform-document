@@ -16,6 +16,11 @@ SaaSus Platform の API Gateway 機能は、従来のパッケージソフトウ
 - **Java のアプリケーション**であること。
 - **Application Load Balancer 配下でアプリケーションが起動**していること。
 
+:::info
+現在、本機能は Java SDK でのみご利用いただけます。<br/>
+他の SDK については、今後順次対応を予定しております。
+:::
+
 ### 注意事項
 
 この API Gateway 機能の利用にあたり、お客様の SaaS 環境に以下の AWS リソースが作成されるため、別途 AWS の料金が発生します。
