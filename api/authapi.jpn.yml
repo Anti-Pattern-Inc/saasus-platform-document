@@ -78,6 +78,41 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  /userinfo/search/email:
+    get:
+      tags:
+        - userInfo
+      operationId: GetUserInfoByEmail
+      summary: メールアドレスからユーザー情報取得
+      description: |
+        メールアドレスを条件にユーザー情報を取得します
+      parameters:
+        - in: query
+          name: email
+          description: メールアドレス
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: ユーザー情報
+                $ref: "#/components/schemas/UserInfo"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
   /basic-info:
     get:
       tags:
