@@ -20,11 +20,50 @@ SaaSus Platform の API Gateway 機能を利用して、API を簡単に公開�
  - サンプルアプリ<br/>
 本手順では、サンプルアプリとして spring-petclinic を利用します。<br/>
 以下のリンクから spring-petclinic を clone してください。<br/>
+clone 場所は任意となります。<br/>
 [Spring Petclinic リポジトリをクローン](https://github.com/spring-projects/spring-petclinic)
 
  - 利用する Java SDK<br/>
 本手順で使用する Java SDK は、以下のリンクから clone してください。<br/>
 [Java SDK リポジトリをクローン](https://github.com/saasus-platform/saasus-sdk-java)
+
+ -  SDKのセットアップ
+下記手順でSDKのセットアップを行ってください。
+
+1. Java SDKでパッケージを作成し、ローカルリポジトリにインストールしてください。
+```
+git clone git@github.com:saasus-platform/saasus-sdk-java.git
+cd saasus-sdk-java
+mvn clean package
+mvn install:install-file -Dfile=target/saasus-sdk-java-1.0.0.jar -DgroupId=io.saasus -DartifactId=saasus-java -Dversion=0.0.1 -Dpackaging=jar
+```
+
+2. spring-petclinic/pom.xml の dependencies タグの中に下記を追記してください。
+```
+    <dependency>
+      <groupId>io.saasus</groupId>
+      <artifactId>saasus-java</artifactId>
+      <version>0.0.1</version>
+    </dependency>
+```
+
+3. spring-petclinic プロジェクトで Java SDK を利用設定を行ってください。
+```
+cd spring-petclinic
+mvn clean package
+
+cp .env.example .env
+vi .env
+
+SAASUS_SAAS_ID="xxxxxxxxxx"
+SAASUS_API_KEY="xxxxxxxxxx"
+SAASUS_SECRET_KEY="xxxxxxxxxx"
+```
+
+:::info
+SAASUS_SAAS_ID,SAASUS_API_KEY,SAASUS_SECRET_KEYの取得方法は、下記をご参照ください。<br/>
+[SaaS ID と API キー、クライアントシークレットの再確認](../tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-it-multi-tenant#saas-id-と-api-キークライアントシークレットの再確認)
+:::
 
 ### Step 1: 利用申請
 
@@ -32,7 +71,7 @@ SaaSus Platform の API Gateway 機能を利用して、API を簡単に公開�
 
 :::info
 利用申請後、弊社より確認メールを送付いたします。<br/>
-メールが届くまでの間に、Step 2 以降の手順を進めてお待ちください。
+メールが届くまでの間に、Step 2 〜 Step 4 の手順を進めてお待ちください。
 :::
 
 ---
@@ -40,6 +79,19 @@ SaaSus Platform の API Gateway 機能を利用して、API を簡単に公開�
 ### Step 2: ソースコードへのアノテーション設定
 
 1. 公開対象のメソッドにアノテーションを追加し、API エンドポイントとして使用できるように設定します。
+:::info
+今回はサンプルとして <br/>
+spring-petclinic/src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java<br/>
+にある、processFindForm メソッドを呼び出すAPIを作成します。<br/>
+
+FindFormApi.java を<br/>
+spring-petclinic/src/main/java/org/springframework/samples/petclinic/owner<br/>
+配下に作成し、下記のコードを記載してください。<br/>
+
+Smart API Gatewayはstaticなメソッドを呼び出す仕様となります。<br/>
+そのため Smart API Gatewayから呼び出されるstaticなメソッドを作成し、その中でprocessFindFormを呼び出しています。<br/>
+また、作成したstaticなメソッドに@SaaSusAPIのアノテーションを付与し、Smart API Gatewayのエンドポイントとして利用することを宣言しています。
+:::
 
 ```mdx-code-block
 <Tabs>
@@ -206,7 +258,7 @@ public class PetClinicApplication {
 
 ### Step 4: ソースコードの統合と圧縮
 
-対象のソースコードを以下のシェルスクリプトでまとめ、ZIP ファイルに圧縮します。
+対象のソースコードを Step5 でアップロードするため、以下のシェルスクリプトでまとめ、ZIP ファイルに圧縮します。
 
 ```bash
 #!/bin/bash
@@ -268,7 +320,7 @@ Subnet IDs には、必ず **Public Subnet の ID** のみを入力してくだ�
 Private Subnet の ID を入力しないようご注意ください。
 :::
 
-設定が完了すると、SaaSus とお客様の環境を接続するインフラが作成されます。
+設定が完了すると、SaaSus Platform とお客様の環境を接続するインフラが作成されます。
 
 ---
 
@@ -279,7 +331,7 @@ Private Subnet の ID を入力しないようご注意ください。
 #### API アクセス方法
 
 - API のアクセスには **API Key** が必要です。運用コンソールの **テナント管理画面**で API Key を発行し、アクセスに利用します。
-- β 版のため、アクセスに必要なドメイン情報は SaaSus 運営側からメールにて送付されます。
+- β 版のため、アクセスに必要なドメイン情報は SaaSus Platform 運営側からメールにて送付されます。
 
 #### アクセス例
 
