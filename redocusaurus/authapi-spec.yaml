@@ -127,6 +127,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /userinfo/search/email:
+    get:
+      tags:
+        - userInfo
+      operationId: GetUserInfoByEmail
+      summary: Get User Info by Email
+      x-summary-i18n:
+        jpn: メールアドレスからユーザー情報取得
+      description: |
+        Get user information by email address.
+      x-description-i18n:
+        jpn: |
+          メールアドレスを条件にユーザー情報を取得します
+      parameters:
+        - in: query
+          name: email
+          description: Email
+          x-description-i18n:
+            jpn: メールアドレス
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: User Info
+                x-title-i18n:
+                  jpn: ユーザー情報
+                $ref: '#/components/schemas/UserInfo'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /basic-info:
     get:
       tags:
