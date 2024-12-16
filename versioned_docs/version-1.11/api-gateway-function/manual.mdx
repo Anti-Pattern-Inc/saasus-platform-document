@@ -1,0 +1,349 @@
+---
+title: "Setup Guide"
+slug: "manual"
+excerpt: ""
+hidden: false
+createdAt: "Thu Oct 07 2024 19:00:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Oct 07 2024 19:00:00 GMT+0000 (Coordinated Universal Time)"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+## Smart API Gateway Usage Guide
+
+This document provides the setup steps for using the Smart API Gateway feature of the SaaSus Platform to easily publish and manage APIs.
+
+---
+
+### Prerequisites
+ - Sample Application<br/>
+TIn this procedure, we will use the spring-petclinic as a sample application.<br/>
+Please clone the spring-petclinic from the following link.<br/>
+The location where you clone it is optional. (Please implement this under an EC2 instance under ALB, etc.)<br/>
+[Clone the Spring Petclinic Repository](https://github.com/spring-projects/spring-petclinic)
+
+ - Java SDK
+The Java SDK used in this guide can be cloned from the link below:<br/>
+The location where you clone it is optional. (Please implement this under an EC2 instance under ALB, etc.)<br/>
+[Clone the Java SDK Repository](https://github.com/spring-projects/spring-petclinic)
+
+ - SDK Setup
+Please follow the steps below to set up the SDK.
+
+1. Create the package using the Java SDK and install it into your local repository:
+```
+git clone git@github.com:saasus-platform/saasus-sdk-java.git
+cd saasus-sdk-java
+mvn clean package
+mvn install:install-file -Dfile=target/saasus-sdk-java-1.0.0.jar -DgroupId=io.saasus -DartifactId=saasus-java -Dversion=0.0.1 -Dpackaging=jar
+```
+
+2. Add the following to the `<dependencies>` section of the spring-petclinic/pom.xml file:
+```
+    <dependency>
+      <groupId>io.saasus</groupId>
+      <artifactId>saasus-java</artifactId>
+      <version>0.0.1</version>
+    </dependency>
+```
+
+3. Configure the Java SDK in the spring-petclinic project:
+```
+cd spring-petclinic
+mvn clean package
+
+cp .env.example .env
+vi .env
+
+SAASUS_SAAS_ID="xxxxxxxxxx"
+SAASUS_API_KEY="xxxxxxxxxx"
+SAASUS_SECRET_KEY="xxxxxxxxxx"
+```
+
+:::info
+For instructions on how to obtain the SAASUS_SAAS_ID, SAASUS_API_KEY, and SAASUS_SECRET_KEY, please refer to the following:<br/>
+[Reconfirm SaaS ID, API Key and Client Secret](../tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-it-multi-tenant#reconfirm-saas-id-api-key-and-client-secret)
+:::
+---
+
+### Step 1: Application for Use
+
+1. Access the **[Smart API Gateway Feature Beta Version Application Form](https://docs.google.com/forms/d/e/1FAIpQLSftCXrCOH-19uoVyaziajuRSdvwCzdlteqK5xLxjvYs3Lz7Ww/viewform)** and fill out the required information to submit your application.
+
+:::info
+After submitting your application, you will receive a confirmation email from us.<br/>
+While waiting for the email, proceed with the steps from Step2 onward.
+:::
+---
+
+### Step 2: Annotation Settings in the Source Code
+
+1. Add annotations to the methods to be exposed and configure them to be used as API endpoints.
+:::info
+As an example, we will create an API to call the processFindForm method located in the following file: <br/>
+spring-petclinic/src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java<br/>
+
+Create a new file named FindFormApi.java in the following directory:<br/>
+spring-petclinic/src/main/java/org/springframework/samples/petclinic/owner<br/>
+and add the following code:<br/>
+
+The Smart API Gateway is designed to call static methods.<br/>
+Therefore, we will create a static method to be called by the Smart API Gateway, and within that method, we will call processFindForm.<br/>
+Additionally, we will annotate the created static method with @SaaSusAPI to declare it as an endpoint for the Smart API Gateway.
+:::
+
+```mdx-code-block
+<Tabs>
+<TabItem value="java" label="java" default>
+```
+
+```txt
+package org.springframework.samples.petclinic.owner;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.stereotype.Component;
+import org.springframework.context.ApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.validation.Valid;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import org.springframework.context.ApplicationContextAware;
+
+// Load the SaaSus API
+import saasus.sdk.modules.SaaSusAPI;
+
+import org.springframework.ui.ExtendedModelMap;
+import org.springframework.validation.DataBinder;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
+@Component
+class ApplicationContextProvider implements ApplicationContextAware {
+
+	private static ApplicationContext context;
+
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) {
+		context = applicationContext;
+	}
+
+	public static ApplicationContext getApplicationContext() {
+		return context;
+	}
+
+}
+
+@Component
+public class FindFormApi {
+
+	private static ApplicationContext applicationContext;
+
+	// To use the SaaSus API:
+	// Prepare a public static method
+	// Use primitive types for parameters
+	// Ensure the return value is in JSON format (or strictly in primitive types)
+	@SaaSusAPI(path = "findFormApi")
+	public static String processFindFormApi() {
+		System.out.println("processFindFormApi");
+
+		// Retrieve the OwnerController
+		ApplicationContext applicationContext = ApplicationContextProvider.getApplicationContext();
+		OwnerController ownerController = applicationContext.getBean(OwnerController.class);
+
+		// Set the arguments required for calling processFindForm
+		Owner owner = new Owner();
+		DataBinder binder = new DataBinder(owner);
+		BindingResult result = binder.getBindingResult();
+		org.springframework.ui.Model model = new org.springframework.ui.ExtendedModelMap();
+
+		// Call processFindForm
+		String function_result = ownerController.processFindForm(1, owner, result, model);
+
+		// Retrieve the result of processFindForm
+		List<Owner> listOwners = (List<Owner>) model.getAttribute("listOwners");
+		System.out.println("listOwners: " + listOwners);
+
+		// Convert the list of Owner objects to JSON
+		String listOwnersJson = "";
+		try {
+			ObjectMapper objectMapper = new ObjectMapper();
+			objectMapper.registerModule(new JavaTimeModule());
+			listOwnersJson = objectMapper.writeValueAsString(listOwners);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listOwnersJson;
+	}
+
+}
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+---
+
+### Step 3: API Server Startup Configuration
+
+1. To enable the `saasus-sdk` API server to start when the application launches, add the following code to the `ServletInitializer` class.
+
+```mdx-code-block
+<Tabs>
+<TabItem value="java" label="java" default>
+```
+
+```txt
+import saasus.sdk.util.apiserver.ApiServer;
+
+/**
+ * PetClinic Spring Boot Application.
+ *
+ * @author Dave Syer
+ *
+ */
+@SpringBootApplication
+@ImportRuntimeHints(PetClinicRuntimeHints.class)
+public class PetClinicApplication {
+
+	public static void main(String[] args) {
+
+		try {
+			ApiServer.start(8083);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
+
+		SpringApplication.run(PetClinicApplication.class, args);
+	}
+
+}
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+2. Configure the **Application Load Balancer** with the following settings:
+
+   - **Listener**: Port **8083**
+   - **Target Group**: Create a target group for port **8083**
+   - **Security Group**: Allow access to port **8083** for both the ALB and the application
+
+---
+
+### Step 4: Integration and Compression of Source Code
+
+To upload the source code in Step 5, package it using the following shell script and compress it into a ZIP file.
+
+```bash
+#!/bin/bash
+
+# Usage: $0 <directory>
+
+DIRECTORY=$1
+OUTPUT_FILE="generated_file_name.txt"
+
+if [ -f "$OUTPUT_FILE" ]; then
+    rm "$OUTPUT_FILE"
+fi
+
+find "$DIRECTORY" -type f -name "*.java" -print0 | while IFS= read -r -d '' file; do
+    echo "===== $file =====" >> "$OUTPUT_FILE"
+    cat "$file" >> "$OUTPUT_FILE"
+    echo -e "\n" >> "$OUTPUT_FILE"
+done
+
+ZIP_FILE="generated_file_name.zip"
+if [ -f "$ZIP_FILE" ]; then
+    rm "$ZIP_FILE"
+fi
+
+zip "$ZIP_FILE" "$OUTPUT_FILE"
+echo "All Java files have been merged and zipped into $ZIP_FILE"
+```
+
+**Usage**:
+
+```sh
+$ bash merge_java_files.sh <path_to_application>
+```
+
+Example:
+
+```sh
+$ bash merge_java_files.sh src/main/java/org/springframework/samples/petclinic
+```
+
+---
+
+### Step 5: Upload the ZIP File
+
+1. After receiving the confirmation email from us, access the Smart API Gateway feature screen in the development console.
+
+2. Upload the generated ZIP file from the screen.
+
+---
+
+### Step 6: Permission Settings
+
+1. Go to the **Permission** tab and create the **CloudFormation for Assume Role**.
+2. Register the created **Role ARN** and **External ID**.
+3. Register the **VPC ID** and **Subnet IDs** for the VPC where you will create the PrivateLink (Network Load Balancer).
+4. Register the **ALB ARN** of the Application Load Balancer.
+
+:::info
+Please enter only the **Public Subnet ID** in the Subnet IDs field.<br/>
+Be sure not to enter the Private Subnet ID.
+:::
+
+Once these settings are complete, the infrastructure connecting SaaSus Platform with your environment will be created.
+
+---
+
+### Step 7: API Publishing and Access
+
+1. Publish the API.
+2. After submitting the application in Step 1, please reply to the notification sent by the SaaSus Platform team confirming that the API has been published.<br/>
+   The domain information required for access will be sent to you via email by the SaaSus Platform team.
+
+#### API Access Method
+
+- An **API Key** is required to access the API. Generate an API Key from the **Tenant Management screen** in the operation console and use it to access the API.
+- As this is a beta version, domain information required for access will be sent via email by the SaaSus Platform team.
+
+#### Access Example
+
+```sh
+$ curl -v -X GET https://<domain>/<full_class_path>/<method_name> -H 'x-api-key:<issued_API_Key>' -H 'tenantId:<retrieved_tenantId>'
+```
+
+#### Example
+
+```sh
+$ curl -v -X GET https://xxxxxxxxxxxxxxxxxxxxx/org.springframework.samples.petclinic.owner.FindFormApi/processFindFormApi -H 'x-api-key:azydsktcf1b93Mmjxuex7CEbEoV7OjrGk0RIqgzCQtc' -H 'tenantId:dc38a950-5203-4820-a325-418c0764ec69'
+```
