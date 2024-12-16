@@ -104,7 +104,7 @@
     "description": "The label for category Supplementary in sidebar guideSidebar"
   },
   "sidebar.guideSidebar.category.Smart API Gateway Function": {
-    "message": "Smart API Gateway 機能",
+    "message": "Smart API Gateway 機能(β版)",
     "description": "The label for category Smart API Gateway Function sidebar guideSidebar"
   },
   "sidebar.changelogSidebar.doc.2024/03/13": {
