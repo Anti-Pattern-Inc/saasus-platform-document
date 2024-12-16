@@ -9,12 +9,12 @@ updatedAt: "Thu Oct 07 2024 19:00:00 GMT+0000 (Coordinated Universal Time)"
 
 ### Smart API Gateway Feature Overview
 
-The Smart API Gateway feature of the SaaSus Platform is designed to facilitate the publication and management of APIs when transitioning traditional packaged software or standalone applications to SaaS. With the Smart API Gateway, managing API endpoints and delivering them to end-users becomes streamlined. The Smart API Gateway Beta version is available across **all plans** of the SaaSus Platform.
+In API development, there are typically many considerations beyond implementing business logic, such as authentication and authorization, throttling, protection against external attacks, API schema management, and publishing and updating API documentation. Additionally, maintaining and operating endpoints for API exposure becomes necessary. The Smart API Gateway feature of the SaaSus Platform is designed to enable easy development and construction of APIs with minimal knowledge and expertise in API building, especially when converting existing web-based packaged software or standalone web applications into SaaS solutions. With Smart API Gateway, management of API endpoints and provision to end-users becomes simplified. Note that the Smart API Gateway feature in beta is available across **all plans** of the SaaSus Platform.
 
 ### Prerequisites
 
-- Must be a **Java application**.
-- The application must be **running under an Application Load Balancer**.
+- The application targeted for API implementation must be a **Java Web Application running on AWS**
+- The application must be **operating under an Application Load Balancer**
 
 :::info
 Currently, this feature is only available with the Java SDK.<br/>
