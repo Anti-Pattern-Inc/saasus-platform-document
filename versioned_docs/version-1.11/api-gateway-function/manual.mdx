@@ -10,9 +10,9 @@ updatedAt: "Thu Oct 07 2024 19:00:00 GMT+0000 (Coordinated Universal Time)"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-## API Gateway Usage Guide
+## Smart API Gateway Usage Guide
 
-This document provides the setup steps for using the API Gateway feature of the SaaSus Platform to easily publish and manage APIs.
+This document provides the setup steps for using the Smart API Gateway feature of the SaaSus Platform to easily publish and manage APIs.
 
 ---
 
@@ -20,11 +20,12 @@ This document provides the setup steps for using the API Gateway feature of the 
  - Sample Application<br/>
 TIn this procedure, we will use the spring-petclinic as a sample application.<br/>
 Please clone the spring-petclinic from the following link.<br/>
-The location where you clone it is optional.<br/>
+The location where you clone it is optional. (Please implement this under an EC2 instance under ALB, etc.)<br/>
 [Clone the Spring Petclinic Repository](https://github.com/spring-projects/spring-petclinic)
 
  - Java SDK
 The Java SDK used in this guide can be cloned from the link below:<br/>
+The location where you clone it is optional. (Please implement this under an EC2 instance under ALB, etc.)<br/>
 [Clone the Java SDK Repository](https://github.com/spring-projects/spring-petclinic)
 
  - SDK Setup
@@ -68,7 +69,7 @@ For instructions on how to obtain the SAASUS_SAAS_ID, SAASUS_API_KEY, and SAASUS
 
 ### Step 1: Application for Use
 
-1. Access the **[API Gateway Feature Beta Version Application Form](https://docs.google.com/forms/d/e/1FAIpQLSftCXrCOH-19uoVyaziajuRSdvwCzdlteqK5xLxjvYs3Lz7Ww/viewform)** and fill out the required information to submit your application.
+1. Access the **[Smart API Gateway Feature Beta Version Application Form](https://docs.google.com/forms/d/e/1FAIpQLSftCXrCOH-19uoVyaziajuRSdvwCzdlteqK5xLxjvYs3Lz7Ww/viewform)** and fill out the required information to submit your application.
 
 :::info
 After submitting your application, you will receive a confirmation email from us.<br/>
@@ -302,7 +303,7 @@ $ bash merge_java_files.sh src/main/java/org/springframework/samples/petclinic
 
 ### Step 5: Upload the ZIP File
 
-1. After receiving the confirmation email from us, access the API Gateway feature screen in the development console.
+1. After receiving the confirmation email from us, access the Smart API Gateway feature screen in the development console.
 
 2. Upload the generated ZIP file from the screen.
 

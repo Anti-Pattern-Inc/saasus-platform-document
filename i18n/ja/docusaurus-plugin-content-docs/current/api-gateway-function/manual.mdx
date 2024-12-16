@@ -10,9 +10,9 @@ updatedAt: "Thu Oct 07 2024 19:00:00 GMT+0000 (Coordinated Universal Time)"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-## API Gateway 利用手順
+## Smart API Gateway 利用手順
 
-SaaSus Platform の API Gateway 機能を利用して、API を簡単に公開・管理するための設定手順を以下に示します。
+SaaSus Platform の Smart API Gateway 機能を利用して、API を簡単に公開・管理するための設定手順を以下に示します。
 
 ---
 
@@ -20,11 +20,12 @@ SaaSus Platform の API Gateway 機能を利用して、API を簡単に公開�
  - サンプルアプリ<br/>
 本手順では、サンプルアプリとして spring-petclinic を利用します。<br/>
 以下のリンクから spring-petclinic を clone してください。<br/>
-clone 場所は任意となります。<br/>
+clone 場所は任意となります。（ALB配下のEC2等で実施してください）<br/>
 [Spring Petclinic リポジトリをクローン](https://github.com/spring-projects/spring-petclinic)
 
  - 利用する Java SDK<br/>
 本手順で使用する Java SDK は、以下のリンクから clone してください。<br/>
+clone 場所は任意となります。（ALB配下のEC2等で実施してください）<br/>
 [Java SDK リポジトリをクローン](https://github.com/saasus-platform/saasus-sdk-java)
 
  -  SDKのセットアップ
@@ -68,7 +69,7 @@ SAASUS_SAAS_ID,SAASUS_API_KEY,SAASUS_SECRET_KEYの取得方法は、下記をご
 
 ### Step 1: 利用申請
 
-1. **[API Gateway 機能 β 版利用申請フォーム](https://docs.google.com/forms/d/e/1FAIpQLSftCXrCOH-19uoVyaziajuRSdvwCzdlteqK5xLxjvYs3Lz7Ww/viewform)** アクセスし、必要事項を記入の上、利用申請を行ってください。
+1. **[Smart API Gateway 機能 β 版利用申請フォーム](https://docs.google.com/forms/d/e/1FAIpQLSftCXrCOH-19uoVyaziajuRSdvwCzdlteqK5xLxjvYs3Lz7Ww/viewform)** アクセスし、必要事項を記入の上、利用申請を行ってください。
 
 :::info
 利用申請後、弊社より確認メールを送付いたします。<br/>
@@ -304,7 +305,7 @@ $ bash merge_java_files.sh src/main/java/org/springframework/samples/petclinic
 
 ### Step 5: ZIP ファイルのアップロード
 
-1. 弊社から送信された確認メールを受信後、開発コンソールの API Gateway 機能画面にアクセスしてください。
+1. 弊社から送信された確認メールを受信後、開発コンソールの Smart API Gateway 機能画面にアクセスしてください。
 
 2. 画面上から生成した ZIP ファイルをアップロードしてください。
 

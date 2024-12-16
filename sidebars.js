@@ -194,7 +194,7 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "API Gateway Function",
+      label: "Smart API Gateway Function",
       link: {
         type: "doc",
         id: "api-gateway-function/overview",
