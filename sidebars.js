@@ -194,7 +194,7 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Smart API Gateway Function",
+      label: "Smart API Gateway Function(beta)",
       link: {
         type: "doc",
         id: "api-gateway-function/overview",
