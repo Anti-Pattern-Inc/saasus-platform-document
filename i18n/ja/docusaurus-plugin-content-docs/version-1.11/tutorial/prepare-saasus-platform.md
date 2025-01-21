@@ -85,7 +85,9 @@ SaaS 開発コンソールにログインしたら、まずは SaaS で使うド
 
 通常は SaaS を提供している URL をベースに Callback URL を設定します。今回はサンプルアプリケーションをローカルで動かしてみますので、以下のように設定します。
 
-[http://localhost/callback](http://localhost/callback)
+PHPの場合　[http://localhost/callback](http://localhost/callback)
+
+Next.jsの場合　[http://localhost:3000/callback](http://localhost:3000/callback)
 
 ![11](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-11.png)
 

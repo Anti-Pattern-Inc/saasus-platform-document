@@ -27,8 +27,9 @@ Earlier, we set a different upper limit for the number of comments for each pric
 
 Now, get the maximum number associated with this pricing plan for each tenant and set a limit.
 
-Rewrite the post method of api/app/Http/Controllers/MessageController.php as follows.
+For the Blade version, let’s modify the post method in api/app/Http/Controllers/MessageController.php.
 
+For the Next.js version, let’s add an import statement to api/controllers/api/board.ts and modify the post method.
 
 <Tabs>
 <TabItem value="php" label="PHP" default>
@@ -76,6 +77,67 @@ Rewrite the post method of api/app/Http/Controllers/MessageController.php as fol
    }
 ```
 
+</TabItem>
+
+<TabItem value="nodejs" label="Node.js">
+```js
+import { UpdateMeteringUnitTimestampCountNowParam } from "saasus-sdk/dist/generated/Pricing";
+import { findUpperCountByMeteringUnitName, PricingClient } from "saasus-sdk";
+
+// Other code omitted
+
+const post = async (req: Request, res: Response) => {
+  const mes = req.body.message;
+  const tenantId = req.userInfo?.tenants[0].id || "";
+  const planId = req.userInfo?.tenants[0].plan_id || "";
+  const userName =
+    req.userInfo?.tenants[0].user_attribute.username || "test user";
+  try {
+    const pricingClient = new PricingClient();
+    const pricingPlan = await pricingClient.pricingPlansApi.getPricingPlan(
+      planId
+    );
+
+    // use metering meter, comment_count
+    const meteringUnitName = "comment_count";
+    const meteringUnitCountData =
+      await pricingClient.meteringApi.getMeteringUnitDateCountByTenantIdAndUnitNameToday(
+        tenantId,
+        meteringUnitName
+      );
+    
+    // This time, treat it as the maximum number of comments per day
+    const upper = findUpperCountByMeteringUnitName(
+      pricingPlan.data,
+      meteringUnitName
+    );
+
+    // Disable posting if the number of comments exceeds the maximum number of comments for the current contracted price plan
+    if (meteringUnitCountData.data.count < upper || upper === 0) {
+      await db.Messages.create({
+        tenant_id: tenantId,
+        user_id: userName,
+        message: mes,
+      });
+
+      // add 1 to the number of comments in the metering API
+      let param: UpdateMeteringUnitTimestampCountNowParam = {
+        method: "add",
+        count: 1,
+      };
+      const res =
+        await pricingClient.meteringApi.updateMeteringUnitTimestampCountNow(
+          tenantId,
+          meteringUnitName,
+          param
+        );
+    }
+    return res.status(201).send();
+  } catch (error) {
+    console.error(error);
+  }
+};
+```
 </TabItem>
 </Tabs>
 
