@@ -27,13 +27,19 @@ First, check the API key on the **SaaSus Development Console**. Use this in your
 
 Open the sample application we prepared earlier in the development environment.
 
-As we did at the beginning, make sure that the docker container is started using init.sh and the sample application is running on [http://localhost/board](http://localhost/board).
+As mentioned at the beginning, the docker container has been started using init.sh, and
+
+please check that the sample application is running at [http://localhost/board](http://localhost/board) for PHP, 
+
+or at [http://localhost:3000/board](http://localhost:3000/board) for Next.js.
 
 First, to easily use the SaaSus Platform, embed the SaaSus SDK into your application.
 
-In this setup the SDK is PHP based, the next step is using Composer.
+For PHP, use composer.
 
-Enter the php container and setup using composer.
+For Next.js, use npm.
+
+Open a terminal and set up the SDK.
 
 ```mdx-code-block
 <Tabs>
@@ -44,6 +50,7 @@ Enter the php container and setup using composer.
 repo$ docker compose exec php bash
 root@xxx:/var/www# cd api
 root@xxx:/var/www/api# composer config repositories.saasus-platform/saasus-sdk-php vcs https://github.com/saasus-platform/saasus-sdk-php
+root@xxx:/var/www/api# composer require saasus-platform/saasus-sdk-php
 ```
 
 ```mdx-code-block
@@ -53,17 +60,12 @@ root@xxx:/var/www/api# composer config repositories.saasus-platform/saasus-sdk-p
 
 ```txt
 repo$ docker compose exec node bash
+root@xxx:/app# npm install saasus-sdk
 ```
 
 ```mdx-code-block
 </TabItem>
 </Tabs>
-```
-
-In the api directory add the SDK using the following composer command
-
-```txt
-root@xxx:/var/www/api# composer require saasus-platform/saasus-sdk-php
 ```
 
 After installing the SaaSus SDK, define the environment variables necessary for using the SaaSus SDK.
@@ -76,6 +78,7 @@ SAASUS_SAAS_ID="saasid_98tjo3wifaoua (SaaS ID of the screen)"
 SAASUS_API_KEY="apikey_kjntowjfoasnkjntwonsflajsno4as (Screen API KEY)"
 SAASUS_SECRET_KEY=" (screen client secret)"
 SAASUS_LOGIN_URL="https://auth.sample.saasus.jp/ (Login screen URL)"
+SAASUS_AUTH_MODE="api"（For Next.js, please write）
 ```
 
 SAASUS_SAAS_ID, SAASUS_API_KEY, SAASUS_SECRET_KEY are the SaaS ID, API Key, and client secret displayed on the console page,  
@@ -83,15 +86,135 @@ SAASUS_LOGIN_URL sets the URL of the login page created on the SaaSus developmen
 
 ### Include Authentication Module
 
-Next, include the SaaSus Platform's authentication module.
+Next, include the SaaSus Platform authentication module.
 
-In this application, authentication is required at the root of all URIs. If not authenticated, the application cannot be used. The SaaSus authentication function is incorporated as middleware through Laravel.
+In this application, authentication is required for all URI routes. If authentication is not successful, the application will be unavailable.
 
-As default in
+If you are checking the operation of the Next.js sample app, create a page that receives the callback.
 
-api/routes/web.php
+Create front/src/pages/callback/index.tsx and add the following.
 
-, the Laravel standard authentication function is used, replace it with the SaaSus authentication function.
+<Tabs>
+<TabItem value="typescript" label="Typescript">
+
+```typescript
+import Container from '@mui/material/Container'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import axios from '@/lib/axios'
+
+const Callback = () => {
+  const router = useRouter()
+  const query = router.query
+  const code = query.code as string
+
+  const fetchAuthCredentials = async () => {
+    const res = await axios.get(`/api/callback?code=${code}`)
+    // Save the received JWT to Local Storage
+    const idToken = res.data.id_token as string
+    localStorage.setItem('SaaSusIdToken', idToken)
+    router.replace('/board')
+  }
+
+  useEffect(() => {
+    if (router.isReady) {
+      if (code) {
+        fetchAuthCredentials()
+      }
+    }
+  }, [query, router])
+
+  return <Container disableGutters></Container>
+}
+
+export default Callback
+```
+
+</TabItem>
+</Tabs>
+
+Here, we obtain authentication information from the API based on the temporary code that was passed, store the id_token in the browser's local storage, and redirect to the board page.
+
+Next, we'll add this saved token to the header when making an API call later.
+
+Edit front/src/pages/board/index.tsx.
+
+<Tabs>
+<TabItem value="typescript" label="Typescript">
+
+```typescript
+import { MessageBoard } from '@/components/MessageBoard'
+import { formValueFormat } from '@/const/formTemplate'
+import Container from '@mui/material/Container'
+import useSWR, { useSWRConfig } from 'swr'
+import axios from '@/lib/axios'
+
+const Board = () => {
+ const { mutate } = useSWRConfig()
+ const fetcher = (url: string) => {
+   // Get the JWT from Local Storage, attach it as a Bearer token in the header, and make an API call
+   const token = localStorage.getItem('SaaSusIdToken')
+   if (!token) return ''
+   return axios
+     .get(url, {
+       headers: {
+         Authorization: `Bearer ${token}`,
+       },
+     })
+     .then((res) => res.data)
+ }
+ const { data: tenant_name, error: tenant_error } = useSWR(
+   `/api/tenant`,
+   fetcher
+ )
+ const { data: messages, error } = useSWR(`/api/board`, fetcher, {
+   refreshInterval: 5000,
+ })
+ if (error || tenant_error) return <div>failed to load</div>
+ if (!messages || !tenant_name) return <div>loading...</div>
+
+ const handleSubmit = async (value: string) => {
+   const formValue = { ...formValueFormat, message: value }
+   // Immediately update local data without revalidation
+   mutate('/api/board', [...messages, formValue], false)
+   // Send a request to the API to update
+   // Get the JWT from Local Storage, attach it as a Bearer token in the header, and make an API call
+   const token = localStorage.getItem('SaaSusIdToken')
+   await axios.post('/api/post', formValue, {
+     headers: {
+       Authorization: `Bearer ${token}`,
+     },
+   })
+ }
+
+ return (
+   <Container disableGutters>
+     <MessageBoard
+       messages={messages}
+       tenant_name={tenant_name}
+       onSubmit={handleSubmit}
+     />
+   </Container>
+ )
+}
+
+export default Board
+```
+
+</TabItem>
+</Tabs>
+
+This time, there are only a few API calls, so we're simply specifying them directly when calling axios, but it might be better to standardize them using middleware or something similar.
+
+Next, we'll adjust the backend.
+
+The current situation is
+
+For PHP, use api/routes/web.php
+
+For Next.js, use api/app.ts
+
+The authentication function is used in this section, so replace it with the SaaSus authentication function.
 
 Default code
 
@@ -187,29 +310,26 @@ app.use(
 </Tabs>
 ```
 
-Next prepare a receiver for callback from the authentication screen. Earlier in the set up on the SaaSus development console, the callback destination is defined as [http://localhost/callback](http://localhost/callback), thus receivable it at /callback .
+Do it like this.
 
-In order to set up the callback, add the following to the last line of api/routes/web.php:
+And for PHP, we will prepare an endpoint to handle the callback from the authentication screen.
+
+Earlier, in the SaaSus Development Console, we defined the callback URL as
+
+[http://localhost/callback](http://localhost/callback) 
+
+so we’ll set it up to receive at /callback.
+
+Add the following to the last line of api/routes/web.php
 
 ```mdx-code-block
 <Tabs>
-<TabItem value="php" label="PHP" default>
+<TabItem value="php" label="PHP">
 ```
 
 ```php
-// Use the SaaS SDK standard Callback Controller to store JWT in Cookie or Local Storage
+// Use the SaaSus SDK standard Callback Controller to put the JWT into Cookies or Local Storage
 Route::get('/callback', 'AntiPatternInc\Saasus\Laravel\Controllers\CallbackController@index');
-```
-
-```mdx-code-block
-</TabItem>
-<TabItem value="nodejs" label="Node.js">
-```
-
-```js
-import { CallbackRouter } from "saasus-sdk";
-...
-app.use("/callback", callbackRouter);
 ```
 
 ```mdx-code-block
@@ -217,7 +337,9 @@ app.use("/callback", callbackRouter);
 </Tabs>
 ```
 
-In addition, add the path to api/config/view.php so that the views provided by the SaaSus SDK can be used
+Furthermore, to be able to use the View provided by the SaaSus SDK,
+
+Add the path to api/config/view.php.
 
 ```mdx-code-block
 <Tabs>
@@ -226,33 +348,10 @@ In addition, add the path to api/config/view.php so that the views provided by t
 
 ```php
    'paths' => [
-      resource_path('views'),
-      # ↓Add this line: View directory provided by SaaSus SDK
-      resource_path('../vendor/saasus-platform/saasus-sdk-php/src/Laravel/Views'),
+       resource_path('views'),
+       # ↓Add this line: Directory of views provided by SaaSus SDK
+       resource_path('../vendor/saasus-platform/saasus-sdk-php/src/Laravel/Views'),
    ],
-```
-
-```mdx-code-block
-</TabItem>
-<TabItem value="nodejs" label="Node.js">
-```
-
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Auth Callback</title>
-  </head>
-
-  <body>
-    <script>
-      location.href = "/chat";
-    </script>
-  </body>
-</html>
 ```
 
 ```mdx-code-block
@@ -260,11 +359,58 @@ In addition, add the path to api/config/view.php so that the views provided by t
 </Tabs>
 ```
 
-With this setup, the authentication information set in the SaaSus Platform will be passed as part of the request when the controller of the application is reached.
+For Next.js,
 
-Add a request argument to the index function of api/app/Http/Controllers/MessageController.php and use dd to check if $request contains userinfo
+In the previously created front/src/pages/callback/index.tsx, the /api/callback endpoint is used to obtain authentication information.
 
-Change the following 4 lines.
+To handle this endpoint, follow these steps to configure it.
+
+Add the import statement and app.use to api/app.ts to define the route.
+
+```mdx-code-block
+<Tabs>
+<TabItem value="nodejs" label="Node.js">
+```
+
+```js
+import { router as apiCallbackRouter } from "./routes/api/callback";
+
+// Other code omitted
+
+app.use("/api/callback", apiCallbackRouter);
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+To implement the /api/callback endpoint, create api/routes/api/callback.ts and add the following code.
+```mdx-code-block
+<Tabs>
+<TabItem value="nodejs" label="Node.js">
+```
+
+```js
+import express from "express";
+const router = express.Router();
+import { CallbackRouteFunction } from "saasus-sdk";
+
+router.get("/", CallbackRouteFunction);
+
+export { router };
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+With the settings up to this point, the authentication information set in SaaSus Platform will be passed as part of the request when the application's Controller is reached.
+
+For PHP, add a Request argument to index in api/app/Http/Controllers/MessageController.php and use dd to check if userinfo is included in $request.
+
+For Next.js, add a Request argument to getBoard in api/controllers/api/board.ts and use console.log to check if userinfo is included in req.
 
 ```mdx-code-block
 <Tabs>
@@ -284,9 +430,9 @@ Change the following 4 lines.
 ```
 
 ```js
-const getChats = async (req: Request, res: Response) => {
-  // Check if user information is passed from SaaSus Platform
-  console.log(req.userinfo);
+const getBoard = async (req: Request, res: Response) => {
+  // Check whether user information is being passed from SaaSus Platform
+  console.log(req.userInfo);
 ```
 
 ```mdx-code-block
@@ -355,10 +501,14 @@ Now let's use this information to make the sample bulletin board application mul
 
 ### Making the Sample Application Multi-Tenant
 
-As api/app/Http/Controllers/MessageController.php contains the main process, the processing for multi-tenant support will be put here.
+For PHP, api/app/Http/Controllers/MessageController.php
 
-First, change the display part.  
-Rewrite the whole public function index.
+For Next.js, api/controllers/api/board.ts
+
+This is the main process, so let's add the process to make it multi-tenant compatible here.
+
+First, change the display part.
+Let's rewrite the whole part below.
 
 ```mdx-code-block
 <Tabs>
@@ -380,21 +530,19 @@ Rewrite the whole public function index.
 ```
 
 ```js
-const getChats = async (req: Request, res: Response) => {
+const getBoard = async (req: Request, res: Response) => {
   try {
     const messages = await db.Messages.findAll({
       where: {
         tenant_id: req.userInfo?.tenants[0].id,
       },
     });
-    res.render("chat", {
-      messages: messages,
-      plans: PLANS,
-      tenant_name: TENANT_NAME,
-    });
+    return res.json(messages);
   } catch (error) {
     console.error(error);
-    res.redirect("/chat");
+    return res
+      .status(500)
+      .send({ redirect_url: process.env.SAASUS_LOGIN_URL || "" });
   }
 };
 ```
@@ -438,22 +586,21 @@ Below is the post function.
 ```
 
 ```js
-const postChats = async (req: Request, res: Response) => {
+const post = async (req: Request, res: Response) => {
   const mes = req.body.message;
-  // Acquire various information from userinfo of $request and use it for judgment
   const tenantId = req.userInfo?.tenants[0].id || "";
   const userName =
-    req.userInfo?.tenants[0].user_attribute.username || "テストユーザー";
+    req.userInfo?.tenants[0].user_attribute.username || "test user";
   try {
     await db.Messages.create({
       tenant_id: tenantId,
       user_id: userName,
       message: mes,
     });
+    return res.status(201).send();
   } catch (error) {
     console.error(error);
   }
-  res.redirect("/chat");
 };
 ```
 
@@ -466,9 +613,9 @@ Store tenant ID and user name as a set based on the passed user attributes.
 
 Next, display the user ID on the page display.
 
-Edit api/resources/views/messageBoard/index.blade.php.
+For PHP, edit api/resources/views/messageBoard/index.blade.php.
 
-Change this $message->user->name part to $message->user_id around line 32.
+Around line 32, change $message->user->name to $message->user_id.
 
 Before change:
 
@@ -493,6 +640,8 @@ Revised:
                            </span>
                        </p>
 ```
+
+No modifications are required for Next.js.
 
 Multi-tenant support is now available!
 
