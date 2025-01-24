@@ -84,9 +84,7 @@ Click "Auth Transition" on the side menu to display the Callback URL setting pag
 
 Normally, set the Callback URL based on the URL that provides SaaS. This time, we will run the sample application locally, so set it as follows.
 
-For PHP： [http://localhost/callback](http://localhost/callback)
-
-For Next.js： [http://localhost:3000/callback](http://localhost:3000/callback)
+[http://localhost/callback](http://localhost/callback)
 
 ![11](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-11.png)
 

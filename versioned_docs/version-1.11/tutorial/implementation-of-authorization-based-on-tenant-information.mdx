@@ -29,7 +29,7 @@ Now, get the maximum number associated with this pricing plan for each tenant an
 
 For the Blade version, let’s modify the post method in api/app/Http/Controllers/MessageController.php.
 
-For the Next.js version, let’s add an import statement to api/controllers/api/board.ts and modify the post method.
+For the Node.js version, let’s add an import statement to api/controllers/chat.ts and modify the post method.
 
 <Tabs>
 <TabItem value="php" label="PHP" default>
@@ -86,7 +86,7 @@ import { findUpperCountByMeteringUnitName, PricingClient } from "saasus-sdk";
 
 // Other code omitted
 
-const post = async (req: Request, res: Response) => {
+const postChats = async (req: Request, res: Response) => {
   const mes = req.body.message;
   const tenantId = req.userInfo?.tenants[0].id || "";
   const planId = req.userInfo?.tenants[0].plan_id || "";
@@ -132,10 +132,10 @@ const post = async (req: Request, res: Response) => {
           param
         );
     }
-    return res.status(201).send();
   } catch (error) {
     console.error(error);
   }
+  res.redirect("/chat");
 };
 ```
 </TabItem>
