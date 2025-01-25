@@ -411,7 +411,19 @@ Log in with the email address and password of the user created earlier, then the
 
 For example, log in with [user1-1@example.com](mailto:user1-1@example.com).
 
-If there are no problems with the previous code, the following should be displayed after login.
+In PHP, if the code provided earlier is functioning correctly, it should display something like this after logging in.
+
+For Node.js, open your terminal and execute the following command.
+
+```txt
+root@xxx:/app# exit
+repo$ docker docker compose logs -f
+```
+
+```mdx-code-block
+<Tabs>
+<TabItem value="php" label="PHP" default>
+```
 
 ```php
 array:3 [▼
@@ -427,14 +439,14 @@ array:3 [▼
           "name" => "dev"
           "roles" => array:1 [▼
             0 => array:2 [▼
-              "display_name" => "一般利用者"
+              "display_name" => "General User"
               "role_name" => "user"
             ]
           ]
         ]
       ]
       "id" => "7b639774-6fba-4b26-b580-f3d755876a4b"
-      "name" => "テナントのサンプルその１"
+      "name" => "Tenant Sample 1"
       "plan_id" => "bc011444-a9f1-41c0-8251-bc8928b09ee7"
       "user_attribute" => array:1 [▼
         "username" => "user1-1"
@@ -442,6 +454,41 @@ array:3 [▼
     ]
   ]
 ]
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="nodejs" label="Node.js">
+```
+
+```js
+{
+  email: 'user1-1@example.com',
+  id: '951fe2e3-b89b-40cf-95db-2fc11f09cbdf',
+  tenants: [
+    {
+      back_office_staff_email: 'saasus-sample-tenant1@example.com',
+      completed_sign_up: true,
+      envs: [
+        {
+          id: 3,
+          name: 'prod',
+          roles: [ { display_name: 'General User', role_name: 'user' } ]
+        }
+      ],
+      id: '2d76c5ed-8462-4de0-b107-97bb97b7e9e2',
+      is_paid: true,
+      name: 'Tenant Sample 1',
+      plan_id: 'ddb8b9e9-5fe4-48cc-846e-b9031552877a',
+      user_attribute: { username: 'user1-1' }
+    }
+  ],
+  user_attribute: {}
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
 ```
 
 On the application side, you can see that the user information and tenant information set earlier on the SaaSus Platform.
