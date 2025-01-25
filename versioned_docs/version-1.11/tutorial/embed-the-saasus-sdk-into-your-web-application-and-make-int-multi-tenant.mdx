@@ -548,7 +548,7 @@ const postChats = async (req: Request, res: Response) => {
   // Acquire various information from userinfo of $request and use it for judgment
   const tenantId = req.userInfo?.tenants[0].id || "";
   const userName =
-    req.userInfo?.tenants[0].user_attribute.username || "test user";
+    req.userInfo?.tenants[0].user_attribute.username;
   try {
     await db.Messages.create({
       tenant_id: tenantId,

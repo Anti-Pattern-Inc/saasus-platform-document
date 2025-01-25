@@ -94,7 +94,7 @@ const postChats = async (req: Request, res: Response) => {
   const tenantId = req.userInfo?.tenants[0].id || "";
   const planId = req.userInfo?.tenants[0].plan_id || "";
   const userName =
-    req.userInfo?.tenants[0].user_attribute.username || "test user";
+    req.userInfo?.tenants[0].user_attribute.username;
   try {
     const pricingClient = new PricingClient();
     const pricingPlan = await pricingClient.pricingPlansApi.getPricingPlan(
