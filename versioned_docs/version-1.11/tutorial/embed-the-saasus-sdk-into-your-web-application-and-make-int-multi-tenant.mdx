@@ -387,7 +387,7 @@ For Node.js, add a Request argument to getChats in api/controllers/chat.ts and u
 ```js
 const getChats = async (req: Request, res: Response) => {
   // Check whether user information is being passed from SaaSus Platform
-  console.log(req.userInfo);
+  console.dir(req.userInfo,{depth:null});
 ```
 
 ```mdx-code-block

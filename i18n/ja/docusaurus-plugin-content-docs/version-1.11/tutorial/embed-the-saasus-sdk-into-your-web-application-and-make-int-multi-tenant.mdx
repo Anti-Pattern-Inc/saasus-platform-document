@@ -383,7 +383,7 @@ Node.jsの場合は、api/controllers/chat.ts の getChats に、console.logを�
 ```js
 const getChats = async (req: Request, res: Response) => {
   // SaaSus Platformからユーザ情報が渡ってきているかを確認する
-  console.log(req.userInfo);
+  console.dir(req.userInfo,{depth:null});
 ```
 
 ```mdx-code-block
