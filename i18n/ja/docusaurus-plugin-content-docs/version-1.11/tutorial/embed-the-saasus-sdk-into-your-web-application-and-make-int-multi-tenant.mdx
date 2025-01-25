@@ -543,7 +543,7 @@ const postChats = async (req: Request, res: Response) => {
   const mes = req.body.message;
   const tenantId = req.userInfo?.tenants[0].id || "";
   const userName =
-    req.userInfo?.tenants[0].user_attribute.username || "テストユーザー";
+    req.userInfo?.tenants[0].user_attribute.username;
   try {
     await db.Messages.create({
       tenant_id: tenantId,
