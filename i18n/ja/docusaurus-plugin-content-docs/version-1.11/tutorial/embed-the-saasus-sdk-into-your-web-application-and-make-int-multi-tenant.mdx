@@ -407,7 +407,19 @@ SaaSus Platform で作成したログイン画面を表示します。
 
 たとえば、 [user1-1@example.com](mailto:user1-1@example.com) でログインしてみましょう。
 
-実際に先ほどのコードが動作すると、ログイン後にこのような表示になるはずです。
+PHPの場合、実際に先ほどのコードが動作すると、ログイン後にこのような表示になるはずです。
+
+Node.jsの場合は、ターミナルを開き以下のコマンドを実行してください。
+
+```txt
+root@xxx:/app# exit
+repo$ docker docker compose logs -f
+```
+
+```mdx-code-block
+<Tabs>
+<TabItem value="php" label="PHP" default>
+```
 
 ```php
 array:3 [▼
@@ -438,6 +450,42 @@ array:3 [▼
     ]
   ]
 ]
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="nodejs" label="Node.js">
+```
+
+```js
+{
+  email: 'user1-1@example.com',
+  id: '951fe2e3-b89b-40cf-95db-2fc11f09cbdf',
+  tenants: [
+    {
+      back_office_staff_email: 'saasus-sample-tenant1@example.com',
+      completed_sign_up: true,
+      envs: [
+        {
+          id: 3,
+          name: 'prod',
+          roles: [ { display_name: '一般利用者', role_name: 'user' } ]
+        }
+      ],
+      id: '2d76c5ed-8462-4de0-b107-97bb97b7e9e2',
+      is_paid: true,
+      name: 'テナントサンプルその１',
+      plan_id: 'ddb8b9e9-5fe4-48cc-846e-b9031552877a',
+      user_attribute: { username: 'ユーザ１−１' }
+    }
+  ],
+  user_attribute: {}
+}
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
 ```
 
 アプリケーション側で、先ほど SaaSus Platform で設定したユーザ情報、テナント情報が取得できているのがわかります。
