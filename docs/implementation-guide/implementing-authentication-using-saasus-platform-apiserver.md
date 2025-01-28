@@ -38,7 +38,7 @@ At the post-authentication redirect, a temporary code necessary for obtaining au
 
 #### 1.1.2. Self-Signup Screen
 
-- React implementation sample (In preparation)
+- [React implementation sample](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/pages/SelfSignUp.tsx)
 
 It is necessary to check if the user is logged in, so call the API to get user information and confirm that the user is logged in.  
 Use the JWT stored in local storage for the API call.  
@@ -85,24 +85,41 @@ Regarding the use of user information obtained from the /userinfo endpoint:
 ### 2.1. Description of the Implementation Sample
 
 #### 2.1.1. JWT Retrieval API
-- [Go(echo) implementation sample](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L82)  
+- [Go(echo) implementation sample](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L118)  
   `e.GET("/credentials", getCredentials)`
-- [Python(FastAPI) implementation sample](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L48)  
+- [Python(FastAPI) implementation sample](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L85)  
   `@app.get("/credentials")`
-- [Java(Maven) implementation sample](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L36)  
+- [Java(Maven) implementation sample](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L85)  
   `@GetMapping(value = "/credentials", produces = "application/json")`
+- [C#(.NET 8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs#L148)  
+  `app.MapGet("/credentials")`
+- [C#(.NET Framework 4.8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebApplication/Controllers/MainController.cs#L80)  
+  `[HttpGet, Route("credentials")]`
 
 #### 2.1.2. User Information Retrieval API
-- [Go(echo) implementation sample](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L144)  
+- [Go(echo) implementation sample](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L180)  
   `e.GET("/userinfo", getMe, authMiddleware)`
-- [Python(FastAPI) implementation sample](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L53)  
+- [Python(FastAPI) implementation sample](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L90)  
   `@app.get("/userinfo")`
-- [Java(Maven) implementation sample](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L82)  
+- [Java(Maven) implementation sample](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L131)  
   `@GetMapping(value = "/userinfo", produces = "application/json")`
+- [C#(.NET 8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs#L195)  
+  `app.MapGet("/userinfo")`
+- [C#(.NET Framework 4.8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebApplication/Controllers/MainController.cs#L127)  
+  `[HttpGet, Route("userinfo")]`
 
 #### 2.1.3. Self-Signup API
-- Go(echo) implementation sample (Preparation in progress)
-- Python implementation sample (Preparation in progress)
+
+- [Go(echo) implementation sample](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L618")  
+  `e.POST("/self_sign_up", selfSignup, authMiddleware)`
+- [Python(FastAPI) implementation sample](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L372")  
+  `@app.post("/self_sign_up")`
+- [Java(Maven) implementation sample](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L570")  
+  `@PostMapping(value = "/self_sign_up", produces = "application/json")`
+- [C#(.NET 8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs#L632")  
+  `app.MapPost("/self_sign_up")`
+- [C#(.NET Framework 4.8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebApplication/Controllers/MainController.cs#L537")  
+  `[HttpPost, Route("self_sign_up")]`
 
 In order to confirm that the API request is from the user who logged into the SaaSus Platform, it is always necessary to confirm the login by retrieving the user information. The self-signup process is as follows:
   - Prerequisite) The user who self-signs up becomes the administrator of the new tenant:
@@ -111,12 +128,16 @@ In order to confirm that the API request is from the user who logged into the Sa
     - c. Set the logged-in user as the admin of the tenant
 
 #### 2.1.4. User List Retrieval API
-- [Go(echo) implementation sample](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L156)  
+- [Go(echo) implementation sample](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L192)  
   `e.GET("/users", getUsers, authMiddleware)`
-- [Python(FastAPI) implementation sample](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L58)  
+- [Python(FastAPI) implementation sample](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L95)  
   `@app.get("/users")`
-- [Java(Maven) implementation sample](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L82)  
+- [Java(Maven) implementation sample](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L154)  
   `@GetMapping(value = "/users", produces = "application/json")`
+- [C#(.NET 8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs#L219)  
+  `app.MapGet("/users")`
+- [C#(.NET Framework 4.8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebApplication/Controllers/MainController.cs#L147)  
+  `[HttpGet, Route("users")]`
 
 It is always necessary to confirm the login by retrieving the user information to verify that the API request originates from the user that is logged into SaaSus Platform.
 
@@ -124,3 +145,5 @@ It is always necessary to confirm the login by retrieving the user information t
 - [Go(echo)](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/README.md)
 - [Python(FastAPI)](https://github.com/saasus-platform/implementation-sample-api-python)
 - [Java(Maven)](https://github.com/saasus-platform/implementation-sample-api-java)
+- [C#(.NET 8)](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/README.md)
+- [C#(.NET Framework 4.8)](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/README.md)
