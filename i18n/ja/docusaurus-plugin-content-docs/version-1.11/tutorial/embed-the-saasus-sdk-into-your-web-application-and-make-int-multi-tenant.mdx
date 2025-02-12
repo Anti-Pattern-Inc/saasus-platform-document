@@ -26,13 +26,19 @@ import TabItem from "@theme/TabItem";
 
 では、さきほど準備したサンプルアプリケーションを開発環境で開きましょう。
 
-冒頭で行ったとおり、 init.sh を利用して docker コンテナが立ち上がっており、[http://localhost/board](http://localhost/board) でサンプルアプリケーションが動いていることを確認しておいてください。
+冒頭で行ったとおり、 init.sh を利用して docker コンテナが立ち上がっており、
+
+PHPなら[http://localhost/board](http://localhost/board) で、
+
+Node.jsなら[http://localhost/login/](http://localhost/login/)で、サンプルアプリケーションが動いていることを確認してください。
 
 まず、 SaaSus Platform を簡単に使うためには、 SaaSus SDK をアプリケーションに組み込みます。
 
-今回は PHP なので、 composer を使います。
+PHP なら composer を
 
-ターミナルを開き php のコンテナに入り、composer を使ってセットアップをします。
+Node.js なら npm を使います。
+
+ターミナルを開きSDKのセットアップをします。
 
 ```mdx-code-block
 <Tabs>
@@ -43,6 +49,7 @@ import TabItem from "@theme/TabItem";
 repo$ docker compose exec php bash
 root@xxx:/var/www# cd api
 root@xxx:/var/www/api# composer config repositories.saasus-platform/saasus-sdk-php vcs https://github.com/saasus-platform/saasus-sdk-php
+root@xxx:/var/www/api# composer require saasus-platform/saasus-sdk-php
 ```
 
 ```mdx-code-block
@@ -52,17 +59,13 @@ root@xxx:/var/www/api# composer config repositories.saasus-platform/saasus-sdk-p
 
 ```txt
 repo$ docker compose exec node bash
+root@xxx:/app# npm install saasus-sdk
+root@xxx:/app# exit
 ```
 
 ```mdx-code-block
 </TabItem>
 </Tabs>
-```
-
-api ディレクトリで、 composer コマンドを使って追加します
-
-```txt
-root@xxx:/var/www/api# composer require saasus-platform/saasus-sdk-php
 ```
 
 SaaSus SDK がインストールできたら、まずは SaaSus SDK 利用にあたって必要な環境変数を定義しましょう
@@ -84,13 +87,15 @@ SAASUS_LOGIN_URL は、SaaSus 開発コンソールで作成したログイン�
 
 次に、 SaaSus Platform の認証モジュールを組み込みます。
 
-今回のアプリケーションでは、すべての URI のルートに認証を必要とします。認証されていない場合には、アプリケーションが利用できない仕様にします。そのため、 Laravel の Middleware として SaaSus 認証機能を組み込みます。
+今回のアプリケーションでは、すべての URI のルートに認証を必要とします。認証されていない場合には、アプリケーションが利用できない仕様にします。
 
 現状は、
 
-api/routes/web.php
+PHPの場合は、api/routes/web.php
 
-にて、Laravel 標準の認証機能が利用されているので、SaaSus の認証機能に置き換えます。
+Node.jsの場合は、api/app.ts
+
+にて認証機能が利用されているので、SaaSus の認証機能に置き換えます。
 
 この部分
 
@@ -186,15 +191,66 @@ app.use(
 </Tabs>
 ```
 
-このようにします。
+SaaSus の認証ミドルウェアが適用されたため、個別のルートでの認証チェックは不要 になります。
 
-そして、認証画面からのコールバックの受口を用意します。先ほど SaaSus 開発コンソールでコールバック先を [http://localhost/callback](http://localhost/callback) と定義したので、 /callback で受け取れるようにします。
+PHPの場合（変更不要）
 
-おなじく、 api/routes/web.php の最後の行に以下を追加します。
+Node.jsの場合は、api/routes/chat.ts
 
 ```mdx-code-block
 <Tabs>
-<TabItem value="php" label="PHP" default>
+<TabItem value="nodejs" label="Node.js">
+```
+
+```js
+router.get(
+  "/",
+  (req: Request, res: Response, next: NextFunction) => {
+    if (req.isAuthenticated()) {
+      next();
+    } else {
+      res.redirect(302, "/login");
+    }
+  },
+  getChats
+);
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+を
+
+```mdx-code-block
+<Tabs>
+<TabItem value="nodejs" label="Node.js">
+```
+
+```js
+router.get("/", getChats);
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+そして、認証画面からのコールバックの受口を用意します。
+
+先ほど SaaSus 開発コンソールでコールバック先を 
+
+[http://localhost/callback](http://localhost/callback) 
+
+と定義したので、 /callback で受け取れるようにします。
+
+PHPの場合は、
+api/routes/web.php の最後の行に以下を追加します。
+
+```mdx-code-block
+<Tabs>
+<TabItem value="php" label="PHP">
 ```
 
 ```php
@@ -204,21 +260,12 @@ Route::get('/callback', 'AntiPatternInc\Saasus\Laravel\Controllers\CallbackContr
 
 ```mdx-code-block
 </TabItem>
-<TabItem value="nodejs" label="Node.js">
-```
-
-```js
-import { CallbackRouter } from "saasus-sdk";
-...
-app.use("/callback", callbackRouter);
-```
-
-```mdx-code-block
-</TabItem>
 </Tabs>
 ```
 
-さらに、SaaSus SDK が提供する View を使えるように api/config/view.php にパスを追加します
+さらに、SaaSus SDK が提供する View を使えるように 
+
+api/config/view.php にパスを追加します。
 
 ```mdx-code-block
 <Tabs>
@@ -235,6 +282,56 @@ app.use("/callback", callbackRouter);
 
 ```mdx-code-block
 </TabItem>
+</Tabs>
+```
+
+Node.jsの場合は、
+api/app.ts に import文 と app.use を追加することでルートを追加します。
+
+```mdx-code-block
+<Tabs>
+<TabItem value="nodejs" label="Node.js">
+```
+
+```js
+import { router as callbackRouter } from "./routes/callback";
+
+// 他のコードは省略
+
+app.use("/callback", callbackRouter);
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+/callback の処理を実装するために、api/routes/callback.ts を作成し、以下を追加してください。
+
+```mdx-code-block
+<Tabs>
+<TabItem value="nodejs" label="Node.js">
+```
+
+```js
+import express from "express";
+const router = express.Router();
+import { CallbackRouteFunction } from "saasus-sdk";
+
+router.get("/", CallbackRouteFunction);
+
+export { router };
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+api/views/callback.ejs を作成し、以下を追加してください。
+
+```mdx-code-block
+<Tabs>
 <TabItem value="nodejs" label="Node.js">
 ```
 
@@ -263,9 +360,9 @@ app.use("/callback", callbackRouter);
 
 ここまで設定すると、 アプリケーションの Controller にたどり着いた時点で、SaaSus Platform で設定した認証情報が request の一部として渡ってくるようになります。
 
-api/app/Http/Controllers/MessageController.php の index に Request の引数を追加し、 dd を使って $request に userinfo が入っているか確認してみましょう
+PHPの場合は、api/app/Http/Controllers/MessageController.php の index に Request の引数を追加し、 dd を使って $request に userinfo が入っているか確認してみましょう。
 
-以下の４行を書き換えてください。
+Node.jsの場合は、api/controllers/chat.ts の getChats に、console.logを使って req に userinfo が入っているか確認してみましょう。
 
 ```mdx-code-block
 <Tabs>
@@ -287,7 +384,7 @@ api/app/Http/Controllers/MessageController.php の index に Request の引数�
 ```js
 const getChats = async (req: Request, res: Response) => {
   // SaaSus Platformからユーザ情報が渡ってきているかを確認する
-  console.log(req.userinfo);
+  console.dir(req.userInfo,{depth:null});
 ```
 
 ```mdx-code-block
@@ -311,7 +408,18 @@ SaaSus Platform で作成したログイン画面を表示します。
 
 たとえば、 [user1-1@example.com](mailto:user1-1@example.com) でログインしてみましょう。
 
-実際に先ほどのコードが動作すると、ログイン後にこのような表示になるはずです。
+PHPの場合、実際に先ほどのコードが動作すると、ログイン後にこのような表示になるはずです。
+
+Node.jsの場合は、ターミナルを開き以下のコマンドを実行してください。
+
+```txt
+repo$ docker compose logs -f
+```
+
+```mdx-code-block
+<Tabs>
+<TabItem value="php" label="PHP" default>
+```
 
 ```php
 array:3 [▼
@@ -344,6 +452,42 @@ array:3 [▼
 ]
 ```
 
+```mdx-code-block
+</TabItem>
+<TabItem value="nodejs" label="Node.js">
+```
+
+```js
+{
+  email: 'user1-1@example.com',
+  id: '951fe2e3-b89b-40cf-95db-2fc11f09cbdf',
+  tenants: [
+    {
+      back_office_staff_email: 'saasus-sample-tenant1@example.com',
+      completed_sign_up: true,
+      envs: [
+        {
+          id: 3,
+          name: 'prod',
+          roles: [ { display_name: '一般利用者', role_name: 'user' } ]
+        }
+      ],
+      id: '2d76c5ed-8462-4de0-b107-97bb97b7e9e2',
+      is_paid: true,
+      name: 'テナントサンプルその１',
+      plan_id: 'ddb8b9e9-5fe4-48cc-846e-b9031552877a',
+      user_attribute: { username: 'ユーザ１−１' }
+    }
+  ],
+  user_attribute: {}
+}
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
 アプリケーション側で、先ほど SaaSus Platform で設定したユーザ情報、テナント情報が取得できているのがわかります。
 
 リダイレクト先の URL は、今回 SaaSus SDK 標準の Callback 処理で受けるようになっており([http://localhost/callback](http://localhost/callback))、その処理の中で ブラウザの Local Storage や Cookie の中に認証情報を記憶します。
@@ -356,10 +500,14 @@ array:3 [▼
 
 ### サンプルアプリケーションのマルチテナント化
 
-api/app/Http/Controllers/MessageController.php がメインの処理なので、ここにマルチテナント対応にするための処理を入れてみましょう。
+PHPの場合は、api/app/Http/Controllers/MessageController.php が
+
+Node.jsの場合は、api/controllers/chat.ts が
+
+メインの処理なので、ここにマルチテナント対応にするための処理を入れてみましょう。
 
 まず、表示の部分を変更します。  
-public function index の部分をまるごと書き換えてみましょう。
+下記の部分をまるごと書き換えてみましょう。
 
 ```mdx-code-block
 <Tabs>
@@ -391,7 +539,7 @@ const getChats = async (req: Request, res: Response) => {
     res.render("chat", {
       messages: messages,
       plans: PLANS,
-      tenant_name: TENANT_NAME,
+      tenant_name: req.userInfo?.tenants[0].name,
     });
   } catch (error) {
     console.error(error);
@@ -443,7 +591,7 @@ const postChats = async (req: Request, res: Response) => {
   const mes = req.body.message;
   const tenantId = req.userInfo?.tenants[0].id || "";
   const userName =
-    req.userInfo?.tenants[0].user_attribute.username || "テストユーザー";
+    req.userInfo?.tenants[0].user_attribute.username;
   try {
     await db.Messages.create({
       tenant_id: tenantId,
@@ -466,7 +614,7 @@ const postChats = async (req: Request, res: Response) => {
 
 画面表示の部分も、ユーザ ID を表示するようにしてみます。
 
-api/resources/views/messageBoard/index.blade.php を編集します。
+PHPの場合は、api/resources/views/messageBoard/index.blade.php を編集します。
 
 32 行目あたりの、この $message->user->name の部分を $message->user_id に変更します。
 
@@ -494,7 +642,9 @@ api/resources/views/messageBoard/index.blade.php を編集します。
                        </p>
 ```
 
-これでマルチテナント対応ができました！
+Node.jsの方は修正不要です。
+
+これでマルチテナント対応ができました。
 
 では、早速ログインして試してみましょう。
 
