@@ -39,7 +39,7 @@ SaaSus Platformが生成するログイン画面からログインを実施す�
 
 #### １．１．２．セルフサインアップ画面
 
-- Reactの実装サンプル（準備中）
+- [Reactの実装サンプル](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/pages/SelfSignUp.tsx)
 
 ユーザがログインしていることのチェックをする必要があるので、ユーザ情報取得のAPIをコールしログインしていることを確認します。  
 APIコール時にはローカルストレージに保存したJWTを利用します。  
@@ -87,28 +87,32 @@ roles配列：
 
 #### ２．１．１．JWT取得API
 
-- [Go(echo)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L82")  
+- [Go(echo)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L118")  
   `e.GET("/credentials", getCredentials)`
-- [Python(FastAPI)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L48")  
+- [Python(FastAPI)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L85")  
   `@app.get("/credentials")`
-- [Java(Maven)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L36")  
+- [Java(Maven)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L85")  
   `@GetMapping(value = "/credentials", produces = "application/json")`
 
 #### ２．１．２．ユーザ情報取得API
 
-- [Go(echo)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L144")  
+- [Go(echo)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L180")  
   `e.GET("/userinfo", getMe, authMiddleware)`
-- [Python(FastAPI)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L53")  
+- [Python(FastAPI)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L90")  
   `@app.get("/userinfo")`
-- [Java(Maven)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L82")  
+- [Java(Maven)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L131")  
   `@GetMapping(value = "/userinfo", produces = "application/json")`
 
 #### 
 
 #### ２．１．３．セルフサインアップAPI
 
-- Go(echo)の実装サンプル（準備中）
-- Pythonの実装サンプル（準備中）
+- [Go(echo)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L618")  
+  `e.POST("/self_sign_up", selfSignup, authMiddleware)`
+- [Python(FastAPI)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L372")  
+  `@app.post("/self_sign_up")`
+- [Java(Maven)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L570")  
+  `@PostMapping(value = "/self_sign_up", produces = "application/json")`
 
 APIリクエストがSaaSus Platformにログインしたユーザからのものであることを確認するため、  
 ユーザ情報取得を実施してログイン確認を必ず行ってください
@@ -122,11 +126,11 @@ c. ログインユーザをテナントの管理者に設定
 
 #### ２．１．４．ユーザ一覧取得API
 
-- [Go(echo)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L156")  
+- [Go(echo)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L192")  
   `e.GET("/users", getUsers, authMiddleware)`
-- [Python(FastAPI)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L58")  
+- [Python(FastAPI)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L95")  
   `@app.get("/users")`
-- [Java(Maven)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L82")  
+- [Java(Maven)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L154")  
   `@GetMapping(value = "/users", produces = "application/json")`
 
 #### 
