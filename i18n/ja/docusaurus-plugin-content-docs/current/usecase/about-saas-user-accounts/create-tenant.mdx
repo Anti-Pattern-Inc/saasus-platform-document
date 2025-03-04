@@ -56,6 +56,66 @@ import TabItem from '@theme/TabItem';
 ```
 
 </TabItem>
+
+<TabItem value="nodejs" label="Node.js">
+
+```js
+    // リクエストデータの取得
+    const { tenantName, userAttributeValues }: SelfSignUpRequest = request.body;
+    if (!tenantName) {
+    return response.status(400).send({ message: 'Missing required fields' });
+    }
+
+    const userInfo = request.userInfo
+    if (userInfo === undefined) {
+    return response.status(400).json({ detail: 'No user' })
+    }
+
+    // 料金プランを検索
+    const pricingClient = new PricingClient()
+    const pricingPlans = (await pricingClient.pricingPlansApi.getPricingPlans()).data.pricing_plans
+    let nextPlanId = ""
+    for (const pricingPlan of pricingPlans) {
+        if (pricingPlan.display_name === "Freeプラン") {
+            nextPlanId = pricingPlan.id;
+        }
+    }
+
+    // プランのidを取得できなかった場合エラーとする
+    if (!nextPlanId) {
+        request.flash('error', '登録に失敗しました。');
+        response.redirect('/リダイレクト先を指定');
+    }
+
+    // テナント作成
+    // テナント名：画面で入力された名前
+    // バックオフィススタッフemail：ログインしている人のメールアドレス
+    const tenantProps: TenantProps = {
+        name: tenantName,
+        attributes: [],
+        back_office_staff_email: userInfo.email
+    }
+
+    // テナントを作成
+    const client = new AuthClient()
+    const createdTenant = (await client.tenantApi.createTenant(tenantProps)).data
+
+    // 作成したテナントのIDを取得
+    const tenantId = createdTenant.id
+
+    // 月初のUnixTimeを取得する
+    // プラン変更時に現在の時刻から5分以上未来の時間を指定
+    const currentTimeWith5MinutesAfterUnixTime = dayjs().add(5, 'minute').unix()
+    const planReservation: PlanReservation = {
+        next_plan_id: nextPlanId,
+        using_next_plan_from: currentTimeWith5MinutesAfterUnixTime
+    }
+
+    // プラン情報を更新
+    await client.tenantApi.updateTenantPlan(tenantId, planReservation)
+```
+
+</TabItem>
 </Tabs>
 
 APIを利用してテナントが正常に作成できたかの確認は、「SaaSus管理コンソール＞SaaS 運用コンソール＞テナント管理」よりご確認頂けます。
