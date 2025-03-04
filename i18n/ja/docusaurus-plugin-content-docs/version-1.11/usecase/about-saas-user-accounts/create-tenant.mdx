@@ -103,7 +103,6 @@ import TabItem from '@theme/TabItem';
     // 作成したテナントのIDを取得
     const tenantId = createdTenant.id
 
-    // 月初のUnixTimeを取得する
     // プラン変更時に現在の時刻から5分以上未来の時間を指定
     const currentTimeWith5MinutesAfterUnixTime = dayjs().add(5, 'minute').unix()
     const planReservation: PlanReservation = {
