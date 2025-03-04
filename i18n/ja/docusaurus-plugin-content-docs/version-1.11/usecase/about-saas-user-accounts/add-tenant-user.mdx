@@ -29,6 +29,36 @@ import TabItem from '@theme/TabItem';
 ```
 
 </TabItem>
+
+<TabItem value="nodejs" label="Node.js">
+
+```js
+    // ユーザー属性情報の取得
+    const userAttributesObj = (await client.userAttributeApi.getUserAttributes()).data
+    const userAttributes = userAttributesObj.user_attributes
+    let userAttributeValuesCopy = userAttributeValues || {}
+
+    // ユーザー属性情報で number 型が定義されている場合は置換する
+    userAttributes.forEach((attribute) => {
+      const attributeName = attribute.attribute_name
+      const attributeType = attribute.attribute_type
+
+      if (userAttributeValuesCopy[attributeName] && attributeType === 'number') {
+        userAttributeValuesCopy[attributeName] = parseInt(userAttributeValuesCopy[attributeName], 10);
+      }
+    });
+
+    // テナントユーザー登録用のパラメータを作成
+    const createTenantUserParam: CreateTenantUserParam = {
+      email: userInfo.email,
+      attributes: userAttributeValuesCopy
+    }
+
+    // SaaSユーザーをテナントユーザーに追加
+    const tenantUser = (await client.tenantUserApi.createTenantUser(tenantId, createTenantUserParam)).data
+```
+
+</TabItem>
 </Tabs>
 
 CreateTenantUserParamオブジェクトを利用してください。
@@ -47,6 +77,20 @@ setAttributesは<a href="/docs/tutorial/prepare-saas-platform#テナントに追
         $create_tenant_user_roles_param = new CreateTenantUserRolesParam();
         $create_tenant_user_roles_param->setRoleNames(['admin']);
         $auth_api_client->createTenantUserRoles($tenant->getId(), $request['userinfo']['id'], getenv('DEFAULT_SAASUSER_ENV'), $create_tenant_user_roles_param);
+```
+
+</TabItem>
+
+<TabItem value="nodejs" label="Node.js">
+
+```js
+    // ロール設定用のパラメータを作成
+    const createTenantUserRolesParam: CreateTenantUserRolesParam = {
+      role_names: ['admin']
+    }
+
+    // 作成したテナントユーザーにロールを設定
+    await client.tenantUserApi.createTenantUserRoles(tenantId, tenantUser.id, 3, createTenantUserRolesParam)
 ```
 
 </TabItem>
