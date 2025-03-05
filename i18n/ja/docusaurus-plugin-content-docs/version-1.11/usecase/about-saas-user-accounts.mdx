@@ -96,6 +96,17 @@ SaaS 開発コンソール - 認証後遷移先 - Callback URL
 ```
 
 </TabItem>
+
+<TabItem value="go" label="Go">
+
+```go
+        userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
+
+        // テナント登録がされていない場合は、セルフサインアップ処理を実施
+        if len(userInfo.Tenants) == 0 
+```
+
+</TabItem>
 </Tabs>
 
 #### ３．１．３．実装サンプル
@@ -120,6 +131,14 @@ dd($request->userinfo['tenants']);
 ```js
         const userInfo = request.userInfo
         console.log(userInfo.tenants)
+```
+
+</TabItem>
+
+<TabItem value="go" label="Go">
+
+```go
+        fmt.Printf("Tenants: %+v\n", tenants)
 ```
 
 </TabItem>
@@ -161,6 +180,21 @@ dd($request->userinfo['tenants']);
         }
 
         await client.saasUserApi.createSaasUser(createSaasUserParam)
+```
+
+</TabItem>
+
+<TabItem value="go" label="Go">
+
+```go
+        var authClient *authapi.ClientWithResponses
+
+        createSaasUserParam := authapi.CreateSaasUserJSONRequestBody{
+          Email:    email,
+          Password: password,
+        }
+
+        _, err = authClient.CreateSaasUser(context.Background(), createSaasUserParam)
 ```
 
 </TabItem>
