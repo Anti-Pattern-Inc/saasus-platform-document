@@ -59,6 +59,48 @@ import TabItem from '@theme/TabItem';
 ```
 
 </TabItem>
+
+<TabItem value="go" label="Go">
+
+```go
+    // ユーザー属性情報の取得
+    userAttributesResp, err := authClient.GetUserAttributesWithResponse(context.Background())
+    if err != nil {
+        c.Logger().Errorf("Failed to retrieve user attributes: %v", err)
+        return c.JSON(http.StatusInternalServerError, echo.Map{"error": "Failed to retrieve user attributes"})
+    }
+
+    userAttributes := userAttributesResp.JSON200
+    if userAttributeValues == nil {
+        userAttributeValues = make(map[string]interface{})
+    }
+
+    // ユーザー属性情報で number 型が定義されている場合は置換する
+    if userAttributes != nil {
+        for _, attribute := range userAttributes.UserAttributes {
+            attributeName := attribute.AttributeName
+            attributeType := attribute.AttributeType
+            if value, ok := userAttributeValues[attributeName]; ok && attributeType == "number" {
+                userAttributeValues[attributeName], err = strconv.Atoi(value.(string))
+                if err != nil {
+                    c.Logger().Errorf("Invalid user attribute value: %v", err)
+                    return c.JSON(http.StatusBadRequest, echo.Map{"error": "Invalid user attribute value"})
+                }
+            }
+        }
+    }
+
+    // テナントユーザー登録用のパラメータを作成
+    createTenantUserParam := authapi.CreateTenantUserParam{
+        Email:      userInfo.Email,
+        Attributes: userAttributeValues,
+    }
+
+    // SaaSユーザーをテナントユーザーに追加
+    tenantUserResp, err := authClient.CreateTenantUserWithResponse(context.Background(), tenantID, createTenantUserParam)
+```
+
+</TabItem>
 </Tabs>
 
 CreateTenantUserParamオブジェクトを利用してください。
@@ -91,6 +133,20 @@ setAttributesは<a href="/docs/tutorial/prepare-saas-platform#テナントに追
 
     // 作成したテナントユーザーにロールを設定
     await client.tenantUserApi.createTenantUserRoles(tenantId, tenantUser.id, 3, createTenantUserRolesParam)
+```
+
+</TabItem>
+
+<TabItem value="go" label="Go">
+
+```go
+    // ロール設定用のパラメータを作成
+    createTenantUserRolesParam := authapi.CreateTenantUserRolesParam{
+        RoleNames: []string{"admin"},
+    }
+
+    // 作成したテナントユーザーにロールを設定
+    _, err = authClient.CreateTenantUserRolesWithResponse(context.Background(), tenantID, tenantUserResp.JSON201.Id, 3, createTenantUserRolesParam)
 ```
 
 </TabItem>
