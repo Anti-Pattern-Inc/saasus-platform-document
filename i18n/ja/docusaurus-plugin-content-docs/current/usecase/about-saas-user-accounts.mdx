@@ -107,6 +107,15 @@ SaaS 開発コンソール - 認証後遷移先 - Callback URL
 ```
 
 </TabItem>
+
+<TabItem value="python" label="Python">
+
+```python
+        // テナント登録がされていない場合は、セルフサインアップ処理を実施
+        if not auth_user.tenants:
+```
+
+</TabItem>
 </Tabs>
 
 #### ３．１．３．実装サンプル
@@ -138,7 +147,15 @@ dd($request->userinfo['tenants']);
 <TabItem value="go" label="Go">
 
 ```go
-fmt.Printf("Tenants: %+v\n", tenants)
+        fmt.Printf("Tenants: %+v\n", tenants)
+```
+
+</TabItem>
+
+<TabItem value="python" label="Python">
+
+```python
+        print(auth_user.tenants)
 ```
 
 </TabItem>
@@ -195,6 +212,20 @@ fmt.Printf("Tenants: %+v\n", tenants)
         }
 
         _, err = authClient.CreateSaasUser(context.Background(), createSaasUserParam)
+```
+
+</TabItem>
+
+<TabItem value="python" label="Python">
+
+```python
+        from saasus_sdk_python.src.auth import SaasUserApi, CreateSaasUserParam
+
+        api_client = SignedAuthApiClient()
+        
+        create_saas_user_param = CreateSaasUserParam(email=email, password=password)
+
+        SaasUserApi(api_client=api_client).create_saas_user(create_saas_user_param=create_saas_user_param)
 ```
 
 </TabItem>
