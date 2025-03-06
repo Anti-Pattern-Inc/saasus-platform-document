@@ -116,6 +116,15 @@ SaaS 開発コンソール - 認証後遷移先 - Callback URL
 ```
 
 </TabItem>
+
+<TabItem value="java" label="Java">
+
+```java
+        // テナント登録がされていない場合は、セルフサインアップ処理を実施
+        if (userInfo.getTenants() == null || userInfo.getTenants().isEmpty())
+```
+
+</TabItem>
 </Tabs>
 
 #### ３．１．３．実装サンプル
@@ -156,6 +165,16 @@ dd($request->userinfo['tenants']);
 
 ```python
         print(auth_user.tenants)
+```
+
+</TabItem>
+
+<TabItem value="java" label="Java">
+
+```java
+        UserInfo userInfo = null;
+        userInfo = userInfoApi.getUserInfo(getIDToken(request));
+        System.out.println(userInfo);
 ```
 
 </TabItem>
@@ -226,6 +245,18 @@ dd($request->userinfo['tenants']);
         create_saas_user_param = CreateSaasUserParam(email=email, password=password)
 
         SaasUserApi(api_client=api_client).create_saas_user(create_saas_user_param=create_saas_user_param)
+```
+
+</TabItem>
+
+<TabItem value="java" label="Java">
+
+```java
+        AuthApiClient apiClient = new Configuration().getAuthApiClient();
+        apiClient.setReferer(request.getHeader("Referer"));
+        
+        CreateSaasUserParam createSaasUserParam = new CreateSaasUserParam().email(email).password(password);
+        saasUserApi.createSaasUser(createSaasUserParam);
 ```
 
 </TabItem>

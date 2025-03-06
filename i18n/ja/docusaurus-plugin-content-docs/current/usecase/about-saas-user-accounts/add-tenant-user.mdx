@@ -135,6 +135,46 @@ import TabItem from '@theme/TabItem';
 ```
 
 </TabItem>
+
+<TabItem value="java" label="Java">
+
+```java
+        // ユーザー属性情報の取得
+        UserAttributeApi userAttributeApi = new UserAttributeApi(apiClient);
+        UserAttributes userAttributes = userAttributeApi.getUserAttributes();
+
+        // ユーザー属性情報で number 型が定義されている場合は置換する
+        for (Attribute attribute : userAttributes.getUserAttributes()) {
+            String attributeName = attribute.getAttributeName();
+            String attributeType = attribute.getAttributeType().getValue();
+
+            if (userAttributeValues.containsKey(attributeName)) {
+                Object attributeValue = userAttributeValues.get(attributeName);
+
+                if ("number".equalsIgnoreCase(attributeType)) {
+                    try {
+                        int numericValue = Integer.parseInt(attributeValue.toString());
+                        userAttributeValues.put(attributeName, numericValue);
+                    } catch (NumberFormatException e) {
+                        System.err.println("Invalid value for user attribute: " + attributeName);
+                        throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                                "Invalid value for user attribute: " + attributeName);
+                    }
+                }
+            }
+        }
+
+        // テナントユーザー登録用のパラメータを作成
+        CreateTenantUserParam createTenantUserParam = new CreateTenantUserParam()
+                .email(userInfo.getEmail())
+                .attributes(userAttributeValues);
+
+        // SaaSユーザーをテナントユーザーに追加
+        TenantUserApi tenantUserApi = new TenantUserApi(apiClient);
+        User tenantUser = tenantUserApi.createTenantUser(tenantId, createTenantUserParam);
+```
+
+</TabItem>
 </Tabs>
 
 CreateTenantUserParamオブジェクトを利用してください。
@@ -193,6 +233,19 @@ setAttributesは<a href="/docs/tutorial/prepare-saas-platform#テナントに追
 
         # 作成したテナントユーザーにロールを設定
         TenantUserApi(api_client=api_client).create_tenant_user_roles(tenant_id=tenant_id, user_id=tenant_user.id, env_id=3, create_tenant_user_roles_param=create_tenant_user_roles_param)
+```
+
+</TabItem>
+
+<TabItem value="java" label="Java">
+
+```java
+        // ロール設定用のパラメータを作成
+        CreateTenantUserRolesParam createTenantUserRolesParam = new CreateTenantUserRolesParam();
+        createTenantUserRolesParam.setRoleNames(Arrays.asList("admin"));
+
+        // 作成したテナントユーザーにロールを設定
+        tenantUserApi.createTenantUserRoles(tenantId, tenantUser.getId(), 3, createTenantUserRolesParam);
 ```
 
 </TabItem>
