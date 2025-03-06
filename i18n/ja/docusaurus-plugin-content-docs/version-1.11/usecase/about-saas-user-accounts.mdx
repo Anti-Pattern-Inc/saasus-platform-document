@@ -125,6 +125,15 @@ SaaS 開発コンソール - 認証後遷移先 - Callback URL
 ```
 
 </TabItem>
+
+<TabItem value="csharp" label="C#">
+
+```csharp
+        // テナント登録がされていない場合は、セルフサインアップ処理を実施
+        if (userInfo.Tenants == null || !userInfo.Tenants.Any())
+```
+
+</TabItem>
 </Tabs>
 
 #### ３．１．３．実装サンプル
@@ -175,6 +184,17 @@ dd($request->userinfo['tenants']);
         UserInfo userInfo = null;
         userInfo = userInfoApi.getUserInfo(getIDToken(request));
         System.out.println(userInfo);
+```
+
+</TabItem>
+
+<TabItem value="csharp" label="C#">
+
+```csharp
+        var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig(), context);
+        var userInfoApi = new UserInfoApi(authApiClientConfig);
+        var userInfo = await userInfoApi.GetUserInfoAsync(token);
+        Console.WriteLine(string.Join("\n", userInfo.Tenants.Select(tenant => tenant.ToString())));
 ```
 
 </TabItem>
@@ -257,6 +277,18 @@ dd($request->userinfo['tenants']);
         
         CreateSaasUserParam createSaasUserParam = new CreateSaasUserParam().email(email).password(password);
         saasUserApi.createSaasUser(createSaasUserParam);
+```
+
+</TabItem>
+
+<TabItem value="csharp" label="C#">
+
+```csharp
+        var saasUserApi = new SaasUserApi(authApiClientConfig);
+
+        var createSaasUserParam = new CreateSaasUserParam(email, password);
+        
+        await saasUserApi.CreateSaasUserAsync(createSaasUserParam);
 ```
 
 </TabItem>

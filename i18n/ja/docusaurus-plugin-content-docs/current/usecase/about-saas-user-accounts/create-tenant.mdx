@@ -273,7 +273,7 @@ import TabItem from '@theme/TabItem';
         }
 
         TenantApi tenantApi = new TenantApi(apiClient);
-        
+
         // テナント作成
         // テナント名：画面で入力された名前
         // バックオフィススタッフemail：ログインしている人のメールアドレス
@@ -298,6 +298,63 @@ import TabItem from '@theme/TabItem';
 
         // プラン情報を更新
         tenantApi.updateTenantPlan(tenantId, planReservation);
+```
+
+</TabItem>
+
+<TabItem value="csharp" label="C#">
+
+```csharp
+        // リクエストデータの取得
+        string tenantName = requestBody.TenantName;
+        var userAttributeValues = requestBody.UserAttributeValues ?? new Dictionary<string, object>();
+
+        // 料金プランを検索
+        var pricingClientConfig = CreateClientConfiguration(c => c.GetPricingApiClientConfig(), context);
+        var pricingPlansApi = new PricingPlansApi(pricingClientConfig);
+        var pricingPlans = pricingPlansApi.GetPricingPlans();
+        string nextPlanId = "";
+        foreach (var pricingPlan in pricingPlans.VarPricingPlans)
+        {
+            if (pricingPlan.DisplayName == "Freeプラン")
+            {
+                nextPlanId = pricingPlan.Id;
+                break;
+            }
+        }
+
+        // プランのidを取得できなかった場合エラーとする
+        if (string.IsNullOrEmpty(nextPlanId))
+        {
+            return Results.Redirect("/リダイレクト先を指定");
+        }
+
+        // テナント作成
+        // テナント名：画面で入力された名前
+        // バックオフィススタッフemail：ログインしている人のメールアドレス
+        var tenantApi = new TenantApi(authApiClientConfig);
+        var tenantProps = new TenantProps(
+            name: tenantName,
+            attributes: new Dictionary<string, object>(),
+            backOfficeStaffEmail: userInfo.Email
+        );
+
+        // テナントを作成
+        var createdTenant = await tenantApi.CreateTenantAsync(tenantProps);
+
+        // 作成したテナントのIDを取得
+        var tenantId = createdTenant.Id;
+
+        // プラン変更時に現在の時刻から5分以上未来の時間を指定
+        var currentTimeWith5MinutesAfterUnixTime = DateTimeOffset.UtcNow.AddMinutes(5).ToUnixTimeSeconds();
+        var planReservation = new PlanReservation
+        {
+            NextPlanId = nextPlanId,
+            UsingNextPlanFrom = (int)currentTimeWith5MinutesAfterUnixTime
+        };
+
+        // プラン情報を更新
+        tenantApi.UpdateTenantPlan(tenantId, planReservation);
 ```
 
 </TabItem>
