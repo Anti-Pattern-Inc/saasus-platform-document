@@ -22,7 +22,7 @@ const sidebars = {
     {
       type: "category",
       label: "Getting Started",
-      items: ["saasus-platform-document", "faq"],
+      items: ["saasus-platform-document", "sdk-list", "faq"],
       collapsed: false,
       collapsible: false,
     },

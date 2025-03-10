@@ -5,6 +5,7 @@
       "label": "Getting Started",
       "items": [
         "saasus-platform-document",
+        "sdk-list",
         "faq"
       ],
       "collapsed": false,
