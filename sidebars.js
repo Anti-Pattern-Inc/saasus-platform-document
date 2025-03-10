@@ -63,6 +63,7 @@ const sidebars = {
             "usecase/about-saas-user-accounts/add-tenant-user",
           ],
         },
+        "usecase/authentication-methods"
       ],
     },
     {
