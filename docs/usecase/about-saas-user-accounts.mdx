@@ -125,6 +125,15 @@ This verification can be performed by checking whether the tenants information i
 ```
 
 </TabItem>
+
+<TabItem value="csharp" label="C#">
+
+```csharp
+        // Implement self-signup process if tenant registration isn't done
+        if (userInfo.Tenants == null || !userInfo.Tenants.Any())
+```
+
+</TabItem>
 </Tabs>
 
 #### 3.1.3. Implementation Sample
@@ -175,6 +184,17 @@ dd($request->userinfo['tenants']);
         UserInfo userInfo = null;
         userInfo = userInfoApi.getUserInfo(getIDToken(request));
         System.out.println(userInfo);
+```
+
+</TabItem>
+
+<TabItem value="csharp" label="C#">
+
+```csharp
+        var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig(), context);
+        var userInfoApi = new UserInfoApi(authApiClientConfig);
+        var userInfo = await userInfoApi.GetUserInfoAsync(token);
+        Console.WriteLine(string.Join("\n", userInfo.Tenants.Select(tenant => tenant.ToString())));
 ```
 
 </TabItem>
@@ -257,6 +277,18 @@ Firstly, register a new user on SaaS.
         
         CreateSaasUserParam createSaasUserParam = new CreateSaasUserParam().email(email).password(password);
         saasUserApi.createSaasUser(createSaasUserParam);
+```
+
+</TabItem>
+
+<TabItem value="csharp" label="C#">
+
+```csharp
+        var saasUserApi = new SaasUserApi(authApiClientConfig);
+
+        var createSaasUserParam = new CreateSaasUserParam(email, password);
+        
+        await saasUserApi.CreateSaasUserAsync(createSaasUserParam);
 ```
 
 </TabItem>
