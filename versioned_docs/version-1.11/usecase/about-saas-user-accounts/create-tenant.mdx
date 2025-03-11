@@ -17,42 +17,292 @@ In this case, the <a href="/docs/tutorial/manage-rate-plans/setting-measurement-
 <TabItem value="php" label="PHP">
 
 ```php
-        // Retrieving validated data
-        $validated = $request->validated();
+    // Retrieving validated data
+    $validated = $request->validated();
 
-        // Using the SaaSusSDK
-        $client = new ApiClient();
-        $auth_api_client = $client->getAuthClient();
-        $pricing_api_client = $client->getPricingClient();
+    // Using the SaaSusSDK
+    $client = new ApiClient();
+    $authClient = $this->client->getAuthClient();
+    $pricingClient = $this->client->getPricingClient();
 
-        // Searching for pricing plans
-        $pricing_plans = $pricing_api_client->getPricingPlans();
-        $next_plan_id = "";
-        foreach ($pricing_plans->getPricingPlans() as $pricing_plan) {
-            if ($pricing_plan['display_name'] == 'Free Plan') {
-                $next_plan_id = $pricing_plan['id'];
-            }
+    // Searching for pricing plans
+    $pricingPlans = $pricingClient->getPricingPlans();
+    $nextPlanId = "";
+    foreach ($pricingPlans->getPricingPlans() as $pricingPlan) {
+        if ($pricingPlan['display_name'] == 'Freeプラン') {
+            $nextPlanId = $pricingPlan['id'];
         }
+    }
 
-        // Raise an error if the plan id could not be obtained
-        if (empty($next_plan_id)) {
-            redirect('Specify the redirect destination')->with('flash_message', 'Registration failed.');
+    // Raise an error if the plan id could not be obtained
+    if (empty($nextPlanId)) {
+        redirect('Specify the redirect destination')->with('flash_message', 'Registration failed.');
+    }
+
+    // Tenant creation
+    // Tenant name: Name entered on the screen
+    // Back office staff email: Logged-in user's email address
+    $tenant = $authClient->createTenant((object)array(
+        'name' => $tenantName,
+        'back_office_staff_email' => $email,
+    ));
+
+    // Retrieve the ID of the created tenant
+    $tenantId = $tenant->getId();
+
+    // Specify a time at least 5 minutes in the future from the current time when changing the plan
+    $currentTimeWith5MinutesAfterUnixTime = Carbon::now('UTC')->addMinutes(5)->timestamp;
+
+    // Update plan information
+    $authClient->updateTenantPlan($tenantId, (object)array(
+        'next_plan_id' => $nextPlanId,
+        'using_next_plan_from' => $currentTimeWith5MinutesAfterUnixTime,
+    ));
+```
+
+</TabItem>
+
+<TabItem value="nodejs" label="Node.js">
+
+```js
+    // Retrieving validated data
+    const { tenantName, userAttributeValues }: SelfSignUpRequest = request.body;
+    if (!tenantName) {
+    return response.status(400).send({ message: 'Missing required fields' });
+    }
+
+    const userInfo = request.userInfo
+    if (userInfo === undefined) {
+    return response.status(400).json({ detail: 'No user' })
+    }
+
+    // Searching for pricing plans
+    const pricingClient = new PricingClient()
+    const pricingPlans = (await pricingClient.pricingPlansApi.getPricingPlans()).data.pricing_plans
+    let nextPlanId = ""
+    for (const pricingPlan of pricingPlans) {
+        if (pricingPlan.display_name === "Freeプラン") {
+            nextPlanId = pricingPlan.id;
         }
+    }
 
-        // To get the UnixTime of the first day of the month
-        // Because when changing the plan, specifying the UnixTime of the first day of the month updates immediately
-        $unixtime_of_first_day_of_current_month = Carbon::now()->startOfMonth()->timestamp;
+    // Raise an error if the plan id could not be obtained
+    if (!nextPlanId) {
+        request.flash('error', '登録に失敗しました。');
+        response.redirect('/リダイレクト先を指定');
+    }
 
-        // Creating the tenant
-        // Tenant Name: The name entered on the screen
-        // Pricing Plan: Free Plan
-        // Back Office Staff Email: The email of the logged-in user
-        $tenant = $auth_api_client->createTenant((object)array(
-            "name" => $validated['tenant_name'],
-            "next_plan_id" => $next_plan_id,
-            "using_next_plan_from" => $unixtime_of_first_day_of_current_month,
-            "back_office_staff_email" => $request['userinfo']['email'],
-        ));
+    // Tenant creation
+    // Tenant name: Name entered on the screen
+    // Back office staff email: Logged-in user's email address
+    const tenantProps: TenantProps = {
+        name: tenantName,
+        attributes: [],
+        back_office_staff_email: userInfo.email
+    }
+    const client = new AuthClient()
+    const createdTenant = (await client.tenantApi.createTenant(tenantProps)).data
+
+    // Retrieve the ID of the created tenant
+    const tenantId = createdTenant.id
+
+    // Specify a time at least 5 minutes in the future from the current time when changing the plan
+    const currentTimeWith5MinutesAfterUnixTime = dayjs().add(5, 'minute').unix()
+    const planReservation: PlanReservation = {
+        next_plan_id: nextPlanId,
+        using_next_plan_from: currentTimeWith5MinutesAfterUnixTime
+    }
+
+    // Update plan information
+    await client.tenantApi.updateTenantPlan(tenantId, planReservation)
+```
+
+</TabItem>
+
+<TabItem value="go" label="Go">
+
+```go
+	// Retrieving validated data
+	var request SelfSignupRequest
+	tenantName := request.TenantName
+	userAttributeValues := request.UserAttributeValues
+
+	// Searching for pricing plans
+	pricingPlans, err := pricingClient.GetPricingPlansWithResponse(context.Background())
+	var nextPlanId string
+	if pricingPlans.JSON200 != nil {
+		for _, pricingPlan := range pricingPlans.JSON200.PricingPlans {
+			if pricingPlan.DisplayName == "Freeプラン" {
+				nextPlanId = pricingPlan.Id
+				break
+			}
+		}
+	}
+
+	// Raise an error if the plan id could not be obtained
+	if nextPlanId == "" {
+		http.Redirect(responseWriter, request, "/リダイレクト先を指定", http.StatusFound)
+		return
+	}
+
+	// Tenant creation
+	// Tenant name: Name entered on the screen
+	// Back office staff email: Logged-in user's email address
+	tenantProps := authapi.CreateTenantParam{
+		Name:                 tenantName,
+		BackOfficeStaffEmail: userInfo.Email,
+	}
+
+	tenantResp, err := authClient.CreateTenantWithResponse(context.Background(), tenantProps)
+	if err != nil {
+		c.Logger().Errorf("Failed to create tenant: %v", err)
+		return c.JSON(http.StatusInternalServerError, echo.Map{"error": "Failed to create tenant"})
+	}
+
+	// Retrieve the ID of the created tenant
+	tenantID := tenantResp.JSON201.Id
+
+	// Specify a time at least 5 minutes in the future from the current time when changing the plan
+	currentTimeWith5MinutesAfterUnixTime := time.Now().Add(5 * time.Minute).Unix()
+
+	// Convert int64 to int  
+	usingNextPlanFrom := int(currentTimeWith5MinutesAfterUnixTime)
+
+	planReservation := authapi.PlanReservation{
+		NextPlanId:        &nextPlanId,
+		NextPlanTaxRateId: nil,
+		UsingNextPlanFrom: &usingNextPlanFrom,
+	}
+
+	// Update plan information
+	authClient.UpdateTenantPlan(context.Background(), tenantID, planReservation)
+```
+
+</TabItem>
+
+<TabItem value="python" label="Python">
+
+```python
+    # Retrieving validated data
+    tenant_name = request.tenantName
+    user_attribute_values = request.userAttributeValues
+
+    try:
+        # Searching for pricing plans
+        pricing_plan_api = PricingPlansApi(api_client=pricing_api_client)
+        pricing_plans = pricing_plan_api.get_pricing_plans().to_dict()
+        next_plan_id = ""
+        for pricing_plan in pricing_plans["pricing_plans"]:
+            if pricing_plan["display_name"] == "Freeプラン":
+                next_plan_id = pricing_plan["id"]
+
+        # Raise an error if the plan id could not be obtained
+        if not next_plan_id:
+            flash("登録に失敗しました。", "error")
+            redirect("/リダイレクト先を指定")
+
+        # Tenant creation
+        # Tenant name: Name entered on the screen
+        # Back office staff email: Logged-in user's email address
+        tenant_props = TenantProps(
+            name=tenant_name,
+            attributes={},
+            back_office_staff_email=auth_user.email
+        )
+
+        tenant_api = TenantApi(api_client=api_client)
+        created_tenant = tenant_api.create_tenant(body=tenant_props)
+
+        # Retrieve the ID of the created tenant
+        tenant_id = created_tenant.id
+
+        # Get JST (Japan Standard Time) timezone
+        jst = pytz.timezone('Asia/Tokyo')
+
+        # Get the current local time (JST)
+        local_time = datetime.now(jst)
+
+        # Specify a time at least 5 minutes in the future from the current time when changing the plan
+        current_time_with_5_minutes_after_unix_time = int((local_time + timedelta(minutes=5)).timestamp())
+        plan_reservation = PlanReservation(
+            next_plan_id = next_plan_id,
+            using_next_plan_from = current_time_with_5_minutes_after_unix_time
+        )
+
+        # Update plan information
+        TenantApi(api_client=api_client).update_tenant_plan(
+            tenant_id=tenant_id,
+            body=plan_reservation
+        )
+```
+
+</TabItem>
+
+<TabItem value="java" label="Java">
+
+```java
+    // Retrieving validated data
+    String tenantName = (String) requestBody.get("tenantName");
+    Map<String, Object> userAttributeValues = requestBody.get("userAttributeValues") != null
+            ? (Map<String, Object>) requestBody.get("userAttributeValues")
+            : new HashMap<>();
+
+    AuthApiClient apiClient = new Configuration().getAuthApiClient();
+    apiClient.setReferer(request.getHeader("Referer"));
+    UserInfoApi userInfoApi = new UserInfoApi(apiClient);
+    UserInfo userInfo = userInfoApi.getUserInfo(getIDToken(request));
+
+    if (userInfo.getTenants() != null && !userInfo.getTenants().isEmpty()) {
+        System.err.println("User is already associated with a tenant");
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User is already associated with a tenant");
+    }
+
+    // Searching for pricing plans
+    PricingApiClient pricingApiClient = new Configuration().getPricingApiClient();
+    pricingApiClient.setReferer(request.getHeader("Referer"));
+    PricingPlansApi pricingPlansApi = new PricingPlansApi(pricingApiClient);
+    PricingPlans pricingPlans = null;
+    pricingPlans = pricingPlansApi.getPricingPlans();
+    String nextPlanId = "";
+    for (PricingPlan pricingPlan : pricingPlans.getPricingPlans()) {
+        if ("Freeプラン".equals(pricingPlan.getDisplayName())) {
+            nextPlanId = pricingPlan.getId();
+            break;
+        }
+    }
+
+    // Raise an error if the plan id could not be obtained
+    if (nextPlanId == null || nextPlanId.isEmpty()) {
+        return ResponseEntity
+            .status(HttpStatus.BAD_REQUEST)
+            .body("登録に失敗しました。");
+    }
+
+    TenantApi tenantApi = new TenantApi(apiClient);
+    
+    // Tenant creation
+    // Tenant name: Name entered on the screen
+    // Back office staff email: Logged-in user's email address
+    TenantProps tenantProps = new TenantProps()
+            .name(tenantName)
+            .backOfficeStaffEmail(userInfo.getEmail());
+    
+    Tenant createdTenant = tenantApi.createTenant(tenantProps);
+
+    // Retrieve the ID of the created tenant
+    String tenantId = createdTenant.getId();
+
+    // Specify a time at least 5 minutes in the future from the current time when changing the plan
+    long currentTimeWith5MinutesAfterUnixTime = Instant.now()
+        .plus(5, ChronoUnit.MINUTES)
+        .getEpochSecond();
+
+    PlanReservation planReservation = new PlanReservation()
+            .nextPlanId(nextPlanId)
+            .usingNextPlanFrom((int) currentTimeWith5MinutesAfterUnixTime);
+
+    // Update plan information
+    tenantApi.updateTenantPlan(tenantId, planReservation);
 ```
 
 </TabItem>

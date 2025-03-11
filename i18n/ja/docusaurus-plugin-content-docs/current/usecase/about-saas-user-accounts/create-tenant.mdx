@@ -17,42 +17,48 @@ import TabItem from '@theme/TabItem';
 <TabItem value="php" label="PHP">
 
 ```php
-        // バリデーション済みデータの取得
-        $validated = $request->validated();
+    // バリデーション済みデータの取得
+    $validated = $request->validated();
 
-        // SaaSusSDKの利用
-        $client = new ApiClient();
-        $auth_api_client = $client->getAuthClient();
-        $pricing_api_client = $client->getPricingClient();
+    // SaaSusSDKの利用
+    $client = new ApiClient();
+    $auth_api_client = $client->getAuthClient();
+    $pricing_api_client = $client->getPricingClient();
 
-        // 料金プランを検索
-        $pricing_plans = $pricing_api_client->getPricingPlans();
-        $next_plan_id = "";
-        foreach ($pricing_plans->getPricingPlans() as $pricing_plan) {
-            if ($pricing_plan['display_name'] == 'Freeプラン') {
-                $next_plan_id = $pricing_plan['id'];
-            }
+    // 料金プランを検索
+    $pricingClient = $this->client->getPricingClient();
+    $pricingPlans = $pricingClient->getPricingPlans();
+    $nextPlanId = "";
+    foreach ($pricingPlans->getPricingPlans() as $pricingPlan) {
+        if ($pricingPlan['display_name'] == 'Freeプラン') {
+            $nextPlanId = $pricingPlan['id'];
         }
+    }
 
-        // プランのidを取得できなかった場合エラーとする
-        if (empty($next_plan_id)) {
-            redirect('リダイレクト先を指定')->with('flash_message', '登録に失敗しました。');
-        }
+    // プランのidを取得できなかった場合エラーとする
+    if (empty($nextPlanId)) {
+        redirect('リダイレクト先を指定')->with('flash_message', '登録に失敗しました。');
+    }
 
-        // 月初のUnixTimeを取得する
-        // プラン変更時に月初のUnixTimeを指定すると即時反映されるため
-        $unixtime_of_first_day_of_current_month = Carbon::now()->startOfMonth()->timestamp;
+    // テナント作成
+    // テナント名：画面で入力された名前
+    // バックオフィススタッフemail：ログインしている人のメールアドレス
+    $tenant = $authClient->createTenant((object)array(
+        'name' => $tenantName,
+        'back_office_staff_email' => $email,
+    ));
 
-        // テナント作成
-        // テナント名：画面で入力された名前
-        // 料金プラン：Freeプラン
-        // バックオフィススタッフemail：ログインしている人のメールアドレス
-        $tenant = $auth_api_client->createTenant((object)array(
-            "name" => $validated['tenant_name'],
-            "next_plan_id" => $next_plan_id,
-            "using_next_plan_from" => $unixtime_of_first_day_of_current_month,
-            "back_office_staff_email" => $request['userinfo']['email'],
-        ));
+    // 作成したテナントのIDを取得
+    $tenantId = $tenant->getId();
+
+    // プラン変更時に現在の時刻から5分以上未来の時間を指定
+    $currentTimeWith5MinutesAfterUnixTime = Carbon::now('UTC')->addMinutes(5)->timestamp;
+
+    // プラン情報を更新
+    $authClient->updateTenantPlan($tenantId, (object)array(
+        'next_plan_id' => $nextPlanId,
+        'using_next_plan_from' => $currentTimeWith5MinutesAfterUnixTime,
+    ));
 ```
 
 </TabItem>
