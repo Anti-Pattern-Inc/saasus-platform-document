@@ -29,7 +29,7 @@ In this case, the <a href="/docs/tutorial/manage-rate-plans/setting-measurement-
     $pricingPlans = $pricingClient->getPricingPlans();
     $nextPlanId = "";
     foreach ($pricingPlans->getPricingPlans() as $pricingPlan) {
-        if ($pricingPlan['display_name'] == 'Freeプラン') {
+        if ($pricingPlan['display_name'] == 'Free Plan') {
             $nextPlanId = $pricingPlan['id'];
         }
     }
@@ -81,15 +81,15 @@ In this case, the <a href="/docs/tutorial/manage-rate-plans/setting-measurement-
     const pricingPlans = (await pricingClient.pricingPlansApi.getPricingPlans()).data.pricing_plans
     let nextPlanId = ""
     for (const pricingPlan of pricingPlans) {
-        if (pricingPlan.display_name === "Freeプラン") {
+        if (pricingPlan.display_name === "Free Plan") {
             nextPlanId = pricingPlan.id;
         }
     }
 
     // Raise an error if the plan id could not be obtained
     if (!nextPlanId) {
-        request.flash('error', '登録に失敗しました。');
-        response.redirect('/リダイレクト先を指定');
+        request.flash('error', 'Registration failed.');
+        response.redirect('/Specify the redirect destination');
     }
 
     // Tenant creation
@@ -132,7 +132,7 @@ In this case, the <a href="/docs/tutorial/manage-rate-plans/setting-measurement-
 	var nextPlanId string
 	if pricingPlans.JSON200 != nil {
 		for _, pricingPlan := range pricingPlans.JSON200.PricingPlans {
-			if pricingPlan.DisplayName == "Freeプラン" {
+			if pricingPlan.DisplayName == "Free Plan" {
 				nextPlanId = pricingPlan.Id
 				break
 			}
@@ -141,7 +141,7 @@ In this case, the <a href="/docs/tutorial/manage-rate-plans/setting-measurement-
 
 	// Raise an error if the plan id could not be obtained
 	if nextPlanId == "" {
-		http.Redirect(responseWriter, request, "/リダイレクト先を指定", http.StatusFound)
+		http.Redirect(responseWriter, request, "/Specify the redirect destination", http.StatusFound)
 		return
 	}
 
@@ -193,13 +193,13 @@ In this case, the <a href="/docs/tutorial/manage-rate-plans/setting-measurement-
         pricing_plans = pricing_plan_api.get_pricing_plans().to_dict()
         next_plan_id = ""
         for pricing_plan in pricing_plans["pricing_plans"]:
-            if pricing_plan["display_name"] == "Freeプラン":
+            if pricing_plan["display_name"] == "Free Plan":
                 next_plan_id = pricing_plan["id"]
 
         # Raise an error if the plan id could not be obtained
         if not next_plan_id:
-            flash("登録に失敗しました。", "error")
-            redirect("/リダイレクト先を指定")
+            flash("Registration failed.", "error")
+            redirect("/Specify the redirect destination")
 
         # Tenant creation
         # Tenant name: Name entered on the screen
@@ -265,7 +265,7 @@ In this case, the <a href="/docs/tutorial/manage-rate-plans/setting-measurement-
     pricingPlans = pricingPlansApi.getPricingPlans();
     String nextPlanId = "";
     for (PricingPlan pricingPlan : pricingPlans.getPricingPlans()) {
-        if ("Freeプラン".equals(pricingPlan.getDisplayName())) {
+        if ("Free Plan".equals(pricingPlan.getDisplayName())) {
             nextPlanId = pricingPlan.getId();
             break;
         }
@@ -275,7 +275,7 @@ In this case, the <a href="/docs/tutorial/manage-rate-plans/setting-measurement-
     if (nextPlanId == null || nextPlanId.isEmpty()) {
         return ResponseEntity
             .status(HttpStatus.BAD_REQUEST)
-            .body("登録に失敗しました。");
+            .body("Registration failed.");
     }
 
     TenantApi tenantApi = new TenantApi(apiClient);
