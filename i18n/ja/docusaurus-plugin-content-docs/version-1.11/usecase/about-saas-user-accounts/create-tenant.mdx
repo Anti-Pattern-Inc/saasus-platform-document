@@ -22,11 +22,10 @@ import TabItem from '@theme/TabItem';
 
     // SaaSusSDKの利用
     $client = new ApiClient();
-    $auth_api_client = $client->getAuthClient();
-    $pricing_api_client = $client->getPricingClient();
+    $authClient = $this->client->getAuthClient();
+    $pricingClient = $this->client->getPricingClient();
 
     // 料金プランを検索
-    $pricingClient = $this->client->getPricingClient();
     $pricingPlans = $pricingClient->getPricingPlans();
     $nextPlanId = "";
     foreach ($pricingPlans->getPricingPlans() as $pricingPlan) {
