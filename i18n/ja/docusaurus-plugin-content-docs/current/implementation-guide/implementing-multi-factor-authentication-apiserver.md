@@ -43,7 +43,7 @@ MFA機能を実装するために、以下のエンドポイントを追加し�
 #### **２．１．１．MFA設定取得API**
 
 <Tabs>
-<TabItem value="go" label="Go (Echo)" default>
+<TabItem value="go" label="Go" default>
 
 `e.GET("/mfa_status", getMfaStatus, authMiddleware)`
 
@@ -71,12 +71,12 @@ func getMfaStatus(c echo.Context) error {
 ```
 
 </TabItem>
-<TabItem value="python" label="Python (FastAPI)">
+<TabItem value="python" label="Python">
 
 **Python(FastAPI)の実装サンプル（準備中）**
 
 </TabItem>
-<TabItem value="java" label="Java (Maven)">
+<TabItem value="java" label="Java">
 
 **Java(Maven)の実装サンプル（準備中）**
 
@@ -86,7 +86,7 @@ func getMfaStatus(c echo.Context) error {
 #### **２．１．２．認証アプリケーション登録用のシークレットコード作成API**
 
 <Tabs>
-<TabItem value="go" label="Go (Echo)" default>
+<TabItem value="go" label="Go" default>
 
 `e.GET("/mfa_setup", getMfaSetup, authMiddleware)`
 
@@ -121,12 +121,12 @@ func getMfaSetup(c echo.Context) error {
 ```
 
 </TabItem>
-<TabItem value="python" label="Python (FastAPI)">
+<TabItem value="python" label="Python">
 
 **Python(FastAPI)の実装サンプル（準備中）**
 
 </TabItem>
-<TabItem value="java" label="Java (Maven)">
+<TabItem value="java" label="Java">
 
 **Java(Maven)の実装サンプル（準備中）**
 
@@ -136,7 +136,7 @@ func getMfaSetup(c echo.Context) error {
 #### **２．１．３．認証アプリケーション登録API**
 
 <Tabs>
-<TabItem value="go" label="Go (Echo)" default>
+<TabItem value="go" label="Go" default>
 
 `e.POST("/mfa_verify", verifyMfa, authMiddleware)`
 
@@ -177,12 +177,12 @@ func verifyMfa(c echo.Context) error {
 ```
 
 </TabItem>
-<TabItem value="python" label="Python (FastAPI)">
+<TabItem value="python" label="Python">
 
 **Python(FastAPI)の実装サンプル（準備中）**
 
 </TabItem>
-<TabItem value="java" label="Java (Maven)">
+<TabItem value="java" label="Java">
 
 **Java(Maven)の実装サンプル（準備中）**
 
@@ -192,7 +192,7 @@ func verifyMfa(c echo.Context) error {
 #### **２．１．４．MFA設定更新API(有効)**
 
 <Tabs>
-<TabItem value="go" label="Go (Echo)" default>
+<TabItem value="go" label="Go" default>
 
 `e.POST("/mfa_enable", enableMfa, authMiddleware)`
 
@@ -220,12 +220,12 @@ func enableMfa(c echo.Context) error {
 ```
 
 </TabItem>
-<TabItem value="python" label="Python (FastAPI)">
+<TabItem value="python" label="Python">
 
 **Python(FastAPI)の実装サンプル（準備中）**
 
 </TabItem>
-<TabItem value="java" label="Java (Maven)">
+<TabItem value="java" label="Java">
 
 **Java(Maven)の実装サンプル（準備中）**
 
@@ -235,7 +235,7 @@ func enableMfa(c echo.Context) error {
 #### **２．１．５．MFA設定更新API(無効)**
 
 <Tabs>
-<TabItem value="go" label="Go (Echo)" default>
+<TabItem value="go" label="Go" default>
 
 `e.POST("/mfa_disable", disableMfa, authMiddleware)`
 
@@ -263,12 +263,12 @@ func disableMfa(c echo.Context) error {
 ```
 
 </TabItem>
-<TabItem value="python" label="Python (FastAPI)">
+<TabItem value="python" label="Python">
 
 **Python(FastAPI)の実装サンプル（準備中）**
 
 </TabItem>
-<TabItem value="java" label="Java (Maven)">
+<TabItem value="java" label="Java">
 
 **Java(Maven)の実装サンプル（準備中）**
 
