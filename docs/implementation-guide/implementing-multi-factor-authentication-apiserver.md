@@ -43,7 +43,7 @@ To implement MFA functionality, the following endpoints have been added.
 #### **2.1.1. Get MFA Status API**
 
 <Tabs>
-<TabItem value="go" label="Go (Echo)" default>
+<TabItem value="go" label="Go" default>
 
 `e.GET("/mfa_status", getMfaStatus, authMiddleware)`
 
@@ -71,12 +71,12 @@ func getMfaStatus(c echo.Context) error {
 ```
 
 </TabItem>
-<TabItem value="python" label="Python (FastAPI)">
+<TabItem value="python" label="Python">
 
 **Python (FastAPI) sample implementation (In preparation)**
 
 </TabItem>
-<TabItem value="java" label="Java (Maven)">
+<TabItem value="java" label="Java">
 
 **Java (Maven) sample implementation (In preparation)**
 
@@ -86,7 +86,7 @@ func getMfaStatus(c echo.Context) error {
 #### **2.1.2. Generate Secret Code for MFA App Registration API**
 
 <Tabs>
-<TabItem value="go" label="Go (Echo)" default>
+<TabItem value="go" label="Go" default>
 
 `e.GET("/mfa_setup", getMfaSetup, authMiddleware)`
 
@@ -121,12 +121,12 @@ func getMfaSetup(c echo.Context) error {
 ```
 
 </TabItem>
-<TabItem value="python" label="Python (FastAPI)">
+<TabItem value="python" label="Python">
 
 **Python (FastAPI) sample implementation (In preparation)**
 
 </TabItem>
-<TabItem value="java" label="Java (Maven)">
+<TabItem value="java" label="Java">
 
 **Java (Maven) sample implementation (In preparation)**
 
@@ -136,7 +136,7 @@ func getMfaSetup(c echo.Context) error {
 #### **2.1.3. Verify MFA Authentication Code API**
 
 <Tabs>
-<TabItem value="go" label="Go (Echo)" default>
+<TabItem value="go" label="Go" default>
 
 `e.POST("/mfa_verify", verifyMfa, authMiddleware)`
 
@@ -147,12 +147,98 @@ func verifyMfa(c echo.Context) error {
 ```
 
 </TabItem>
-<TabItem value="python" label="Python (FastAPI)">
+<TabItem value="python" label="Python">
 
 **Python (FastAPI) sample implementation (In preparation)**
 
 </TabItem>
-<TabItem value="java" label="Java (Maven)">
+<TabItem value="java" label="Java">
+
+**Java (Maven) sample implementation (In preparation)**
+
+</TabItem>
+</Tabs>
+
+#### **2.1.4. Enable MFA API**
+
+<Tabs>
+<TabItem value="go" label="Go" default>
+
+`e.POST("/mfa_enable", enableMfa, authMiddleware)`
+
+```go
+func enableMfa(c echo.Context) error {
+	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
+	if !ok {
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
+	}
+
+	method := authapi.SoftwareToken
+	requestBody := authapi.UpdateUserMfaPreferenceJSONRequestBody{
+		Enabled: true,
+		Method:  &method,
+	}
+
+	_, err := authClient.UpdateUserMfaPreferenceWithResponse(context.Background(), userInfo.Id, requestBody)
+	if err != nil {
+		c.Logger().Errorf("Failed to enable MFA: %v", err)
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to enable MFA"})
+	}
+
+	return c.JSON(http.StatusOK, map[string]string{"message": "MFA has been enabled"})
+}
+```
+
+</TabItem>
+<TabItem value="python" label="Python">
+
+**Python (FastAPI) sample implementation (In preparation)**
+
+</TabItem>
+<TabItem value="java" label="Java">
+
+**Java (Maven) sample implementation (In preparation)**
+
+</TabItem>
+</Tabs>
+
+#### **2.1.5. Disable MFA API**
+
+<Tabs>
+<TabItem value="go" label="Go" default>
+
+`e.POST("/mfa_disable", disableMfa, authMiddleware)`
+
+```go
+func disableMfa(c echo.Context) error {
+	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
+	if !ok {
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
+	}
+
+	method := authapi.SoftwareToken
+	requestBody := authapi.UpdateUserMfaPreferenceJSONRequestBody{
+		Enabled: false,
+		Method:  &method,
+	}
+
+	_, err := authClient.UpdateUserMfaPreferenceWithResponse(context.Background(), userInfo.Id, requestBody)
+	if err != nil {
+		c.Logger().Errorf("Failed to disable MFA: %v", err)
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to disable MFA"})
+	}
+
+	return c.JSON(http.StatusOK, map[string]string{"message": "MFA has been disabled"})
+}
+```
+
+</TabItem>
+<TabItem value="python" label="Python">
+
+**Python (FastAPI) sample implementation (In preparation)**
+
+</TabItem>
+<TabItem value="java" label="Java">
 
 **Java (Maven) sample implementation (In preparation)**
 
