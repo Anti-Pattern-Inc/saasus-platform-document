@@ -72,7 +72,8 @@ const sidebars = {
           "items": [
             "usecase/about-rate-plans/basic-charge-preference"
           ]
-        }
+        },
+        "usecase/authentication-methods"
       ],
     },
     {
@@ -157,7 +158,7 @@ const sidebars = {
       items: [
         {
           type: "category",
-          label: "Setting Up Bank Account From Seller Registration",
+          label: "Setting Up Disbursement methods From Seller Registration",
           link: {
             type: "doc",
             id: "aws-marketplace-integration/aws-marketplace-seller-registration",
@@ -168,7 +169,7 @@ const sidebars = {
             "aws-marketplace-integration/aws-marketplace-seller-registration/tax-information-interview",
             "aws-marketplace-integration/aws-marketplace-seller-registration/dac7-tax-survey",
             "aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account",
-            "aws-marketplace-integration/aws-marketplace-seller-registration/hyperwallet-registration",
+            "aws-marketplace-integration/aws-marketplace-seller-registration/register-disbursement-methods",
           ],
         },
         {
@@ -210,6 +211,15 @@ const sidebars = {
           ],
         },
       ],
+    },
+    {
+      type: "category",
+      label: "Smart API Gateway Function(beta)",
+      link: {
+        type: "doc",
+        id: "api-gateway-function/overview",
+      },
+      items: ["api-gateway-function/manual"],
     },
   ],
 
@@ -261,6 +271,7 @@ const sidebars = {
         "reference/apilog-api",
         "reference/awsmarketplace-api",
         "reference/integration",
+        "reference/apigateway-api",
       ],
     },
   ],
@@ -269,6 +280,21 @@ const sidebars = {
       type: "category",
       label: "Changelog",
       items: [
+        {
+          label: "2024/12/10",
+          type: "doc",
+          id: "changelog/20241210",
+        },
+        {
+          label: "2024/11/15",
+          type: "doc",
+          id: "changelog/20241115",
+        },
+        {
+          label: "2024/10/29",
+          type: "doc",
+          id: "changelog/20241029",
+        },
         {
           label: "2024/05/24",
           type: "doc",

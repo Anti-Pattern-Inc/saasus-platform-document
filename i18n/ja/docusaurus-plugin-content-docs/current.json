@@ -95,9 +95,9 @@
     "message": "料金プラン設定",
     "description": "The label for category Pricing Plan Setting in sidebar guideSidebar"
   },
-  "sidebar.guideSidebar.category.Setting Up Bank Account From Seller Registration": {
-    "message": "セラー登録から銀行口座の設定",
-    "description": "The label for category Setting Up Bank Account From Seller Registration in sidebar guideSidebar"
+  "sidebar.guideSidebar.category.Setting Up Disbursement methods From Seller Registration": {
+    "message": "セラー登録から支払い方法の設定",
+    "description": "The label for category Setting Up Disbursement methods From Seller Registration in sidebar guideSidebar"
   },
   "sidebar.guideSidebar.category.Registration of SaaS Product Information": {
     "message": "SaaS製品情報の登録",
@@ -106,6 +106,10 @@
   "sidebar.guideSidebar.category.Supplementary": {
     "message": "補足",
     "description": "The label for category Supplementary in sidebar guideSidebar"
+  },
+  "sidebar.guideSidebar.category.Smart API Gateway Function(beta)": {
+    "message": "Smart API Gateway 機能(β版)",
+    "description": "The label for category Smart API Gateway Function sidebar guideSidebar"
   },
   "sidebar.changelogSidebar.doc.2024/03/13": {
     "message": "2024/03/13",
