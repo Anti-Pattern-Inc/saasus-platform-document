@@ -48,24 +48,30 @@ To implement MFA functionality, the following endpoints have been added.
 `e.GET("/mfa_status", getMfaStatus, authMiddleware)`
 
 ```go
+// Retrieve MFA status (enabled/disabled)
+// The frontend application must include X-Access-Token in the request header
 func getMfaStatus(c echo.Context) error {
+	// Retrieve user information from context
 	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
 	if !ok {
 		c.Logger().Error("Failed to get user info")
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
 	}
 
+	// Retrieve X-Access-Token from the request header
 	accessToken := c.Request().Header.Get("X-Access-Token")
 	if accessToken == "" {
 		return c.JSON(http.StatusUnauthorized, map[string]string{"error": "Access token is missing"})
 	}
 
+	// Use the SaaSus API to get the user's MFA status
 	response, err := authClient.GetUserMfaPreferenceWithResponse(context.Background(), userInfo.Id)
 	if err != nil || response.JSON200 == nil {
-		c.Logger().Errorf("failed to get MFA status: %v", err)
+		c.Logger().Errorf("Failed to get MFA status: %v", err)
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve MFA status"})
 	}
 
+	// Return MFA enabled/disabled status
 	return c.JSON(http.StatusOK, map[string]bool{"enabled": response.JSON200.Enabled})
 }
 ```
@@ -91,28 +97,35 @@ func getMfaStatus(c echo.Context) error {
 `e.GET("/mfa_setup", getMfaSetup, authMiddleware)`
 
 ```go
+// Retrieve MFA setup information (generate QR code)
+// The frontend application must include X-Access-Token in the request header
 func getMfaSetup(c echo.Context) error {
+	// Retrieve X-Access-Token from the request header
 	accessToken := c.Request().Header.Get("X-Access-Token")
 	if accessToken == "" {
 		return c.JSON(http.StatusUnauthorized, map[string]string{"error": "Access token is missing"})
 	}
 
+	// Retrieve user information from context
 	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
 	if !ok {
-		c.Logger().Error("failed to get user info")
+		c.Logger().Error("Failed to get user info")
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
 	}
 
+	// Use the SaaSus API to generate a secret code for MFA authentication app registration
 	response, err := authClient.CreateSecretCodeWithResponse(context.Background(), userInfo.Id, authapi.CreateSecretCodeJSONRequestBody{
 		AccessToken: accessToken,
 	})
 	if err != nil || response.JSON201 == nil {
-		c.Logger().Errorf("failed to create secret code: %v", err)
+		c.Logger().Errorf("Failed to create secret code: %v", err)
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to generate QR code"})
 	}
 
+	// Generate a QR code URL for Google Authenticator and other authentication apps
 	qrCodeUrl := "otpauth://totp/SaaSusPlatform:" + userInfo.Email + "?secret=" + response.JSON201.SecretCode + "&issuer=SaaSusPlatform"
 
+	// Return the secret key and QR code URL
 	return c.JSON(http.StatusOK, map[string]string{
 		"secretKey": response.JSON201.SecretCode,
 		"qrCodeUrl": qrCodeUrl,
@@ -141,8 +154,44 @@ func getMfaSetup(c echo.Context) error {
 `e.POST("/mfa_verify", verifyMfa, authMiddleware)`
 
 ```go
+// Verify the user's MFA authentication code
+// The frontend application must include X-Access-Token in the request header
 func verifyMfa(c echo.Context) error {
-	// Implementation here
+	// Retrieve user information from context
+	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
+	if !ok {
+		c.Logger().Error("Failed to get user info")
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
+	}
+
+	// Retrieve X-Access-Token from the request header
+	accessToken := c.Request().Header.Get("X-Access-Token")
+	if accessToken == "" {
+		return c.JSON(http.StatusUnauthorized, map[string]string{"error": "Access token is missing"})
+	}
+
+	// Retrieve the verification code from the request body
+	var requestBody struct {
+		VerificationCode string `json:"verification_code"`
+	}
+	if err := c.Bind(&requestBody); err != nil {
+		return c.JSON(http.StatusBadRequest, map[string]string{"error": "Invalid request: malformed JSON or incorrect parameters"})
+	}
+	if requestBody.VerificationCode == "" {
+		return c.JSON(http.StatusBadRequest, map[string]string{"error": "Verification code is required"})
+	}
+
+	// Use the SaaSus API to register the authentication application
+	response, err := authClient.UpdateSoftwareTokenWithResponse(context.Background(), userInfo.Id, authapi.UpdateSoftwareTokenJSONRequestBody{
+		AccessToken:      accessToken,
+		VerificationCode: requestBody.VerificationCode,
+	})
+	if err != nil || response.StatusCode() != http.StatusOK {
+		c.Logger().Errorf("MFA verification failed: Status Code %d, Response %s", response.StatusCode(), string(response.Body))
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "MFA verification failed"})
+	}
+
+	return c.JSON(http.StatusOK, map[string]string{"message": "MFA verification successful"})
 }
 ```
 
@@ -167,18 +216,22 @@ func verifyMfa(c echo.Context) error {
 `e.POST("/mfa_enable", enableMfa, authMiddleware)`
 
 ```go
+// Enable MFA for the user
 func enableMfa(c echo.Context) error {
+	// Retrieve user information from context
 	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
 	if !ok {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
 	}
 
+	// Create request body to enable MFA
 	method := authapi.SoftwareToken
 	requestBody := authapi.UpdateUserMfaPreferenceJSONRequestBody{
 		Enabled: true,
 		Method:  &method,
 	}
 
+	// Use the SaaSus API to enable MFA
 	_, err := authClient.UpdateUserMfaPreferenceWithResponse(context.Background(), userInfo.Id, requestBody)
 	if err != nil {
 		c.Logger().Errorf("Failed to enable MFA: %v", err)
@@ -210,18 +263,22 @@ func enableMfa(c echo.Context) error {
 `e.POST("/mfa_disable", disableMfa, authMiddleware)`
 
 ```go
+// Disable MFA for the user
 func disableMfa(c echo.Context) error {
+	// Retrieve user information from context
 	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
 	if !ok {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
 	}
 
+	// Create request body to disable MFA
 	method := authapi.SoftwareToken
 	requestBody := authapi.UpdateUserMfaPreferenceJSONRequestBody{
 		Enabled: false,
 		Method:  &method,
 	}
 
+	// Use the SaaSus API to disable MFA
 	_, err := authClient.UpdateUserMfaPreferenceWithResponse(context.Background(), userInfo.Id, requestBody)
 	if err != nil {
 		c.Logger().Errorf("Failed to disable MFA: %v", err)
