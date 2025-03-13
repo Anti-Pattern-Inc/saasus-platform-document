@@ -52,6 +52,44 @@ By setting a domain on SaaSus Platform, you can set it as the base domain for au
 For information on how to set up your domain, please see [Domain Name Preference](../saas-development-console/domain-name-preference).
 :::
 
+### Define Additional Attributes for Users
+
+Next, define user attributes.
+
+Click "User Attribute Definition" on the side menu.
+
+![06](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-06.png)
+
+On the default SaaS Platform managed SaaS users only have user IDs (UUIDs) and email addresses. If this is not enough, users can be assigned additional attributes.
+
+SaaS designers need to consider which user attributes should be on the SaaS Platform side and which attributes should be on the SaaS side.
+
+For example, if you want to manage all user information on the SaaS Platform side, define the required additional attributes in the SaaS Platform. However, there are cases where you do not want to manage important information such as personal information on the SaaS Platform side, or you want to perform various aggregations based on additional user attributes. In that case, it is more flexible to require only authentication on the SaaS Platform side, manage user information on the SaaS side based on the user master, and associate the UUID with the authentication information on the SaaS Platform side.
+
+For this example, the sample application requires a username, so let's define an attribute called "username".
+
+Click the "+ Create User Attribute" to display the dialog for creating user attributes
+
+The attribute name is used as a key for identification on the SaaS application (code) side. Therefore, it is important to enter in English.
+
+Display name is described so that the attribute can be easily understood
+
+Type specifies the data type.
+
+For the sample application, set as follows
+
+- Attribute Name: username
+- Display Name: Username
+- Type: String
+
+After entering, press the "Create" button
+
+![07](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-07.png)
+
+User attributes added.
+
+![08](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-08.png)
+
 :::info
 Please refer to the following page for the main registration settings required when actually developing a SaaS application.<br/>
 [Declare Additional Attribute To User](../saas-development-console/declare-additional-attribute-to-user)<br/>
