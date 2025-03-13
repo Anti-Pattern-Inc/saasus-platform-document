@@ -22,11 +22,10 @@ import TabItem from '@theme/TabItem';
 
     // SaaSusSDKの利用
     $client = new ApiClient();
-    $auth_api_client = $client->getAuthClient();
-    $pricing_api_client = $client->getPricingClient();
+    $authClient = $this->client->getAuthClient();
+    $pricingClient = $this->client->getPricingClient();
 
     // 料金プランを検索
-    $pricingClient = $this->client->getPricingClient();
     $pricingPlans = $pricingClient->getPricingPlans();
     $nextPlanId = "";
     foreach ($pricingPlans->getPricingPlans() as $pricingPlan) {
@@ -37,7 +36,7 @@ import TabItem from '@theme/TabItem';
 
     // プランのidを取得できなかった場合エラーとする
     if (empty($nextPlanId)) {
-        redirect('リダイレクト先を指定')->with('flash_message', '登録に失敗しました。');
+        return response()->json(['detail' => 'プラン情報の取得に失敗しました。'], Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
     // テナント作成
@@ -89,8 +88,7 @@ import TabItem from '@theme/TabItem';
 
     // プランのidを取得できなかった場合エラーとする
     if (!nextPlanId) {
-        request.flash('error', '登録に失敗しました。');
-        response.redirect('/リダイレクト先を指定');
+        return response.status(400).send({ message: 'プラン情報の取得に失敗しました。' });
     }
 
     // テナント作成
@@ -144,8 +142,7 @@ import TabItem from '@theme/TabItem';
 
 	// プランのidを取得できなかった場合エラーとする
 	if nextPlanId == "" {
-		http.Redirect(responseWriter, request, "/リダイレクト先を指定", http.StatusFound)
-		return
+		return c.JSON(http.StatusInternalServerError, echo.Map{"error": "プラン情報の取得に失敗しました。"})
 	}
 
 	// テナントを作成
@@ -197,8 +194,7 @@ import TabItem from '@theme/TabItem';
 
         # プランのidを取得できなかった場合エラーとする
         if not next_plan_id:
-            flash("登録に失敗しました。", "error")
-            redirect("/リダイレクト先を指定")
+            raise HTTPException(status_code=500, detail="プラン情報の取得に失敗しました。")
 
         # テナント作成
         # テナント名：画面で入力された名前
@@ -274,8 +270,8 @@ import TabItem from '@theme/TabItem';
         // プランのidを取得できなかった場合エラーとする
         if (nextPlanId == null || nextPlanId.isEmpty()) {
             return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body("登録に失敗しました。");
+                .status(HttpStatus.HTTP_INTERNAL_SERVER_ERROR)
+                .body("プラン情報の取得に失敗しました。");
         }
 
         TenantApi tenantApi = new TenantApi(apiClient);
