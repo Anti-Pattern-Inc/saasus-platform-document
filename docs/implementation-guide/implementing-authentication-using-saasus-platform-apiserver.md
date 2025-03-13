@@ -91,6 +91,10 @@ Regarding the use of user information obtained from the /userinfo endpoint:
   `@app.get("/credentials")`
 - [Java(Maven) implementation sample](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L85)  
   `@GetMapping(value = "/credentials", produces = "application/json")`
+- [C#(.NET 8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs#L148)  
+  `app.MapGet("/credentials")`
+- [C#(.NET Framework 4.8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebApplication/Controllers/MainController.cs#L80)  
+  `[HttpGet, Route("credentials")]`
 
 #### 2.1.2. User Information Retrieval API
 - [Go(echo) implementation sample](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L180)  
@@ -99,6 +103,10 @@ Regarding the use of user information obtained from the /userinfo endpoint:
   `@app.get("/userinfo")`
 - [Java(Maven) implementation sample](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L131)  
   `@GetMapping(value = "/userinfo", produces = "application/json")`
+- [C#(.NET 8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs#L195)  
+  `app.MapGet("/userinfo")`
+- [C#(.NET Framework 4.8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebApplication/Controllers/MainController.cs#L127)  
+  `[HttpGet, Route("userinfo")]`
 
 #### 2.1.3. Self-Signup API
 
@@ -108,6 +116,10 @@ Regarding the use of user information obtained from the /userinfo endpoint:
   `@app.post("/self_sign_up")`
 - [Java(Maven) implementation sample](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L570")  
   `@PostMapping(value = "/self_sign_up", produces = "application/json")`
+- [C#(.NET 8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs#L632")  
+  `app.MapPost("/self_sign_up")`
+- [C#(.NET Framework 4.8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebApplication/Controllers/MainController.cs#L537")  
+  `[HttpPost, Route("self_sign_up")]`
 
 In order to confirm that the API request is from the user who logged into the SaaSus Platform, it is always necessary to confirm the login by retrieving the user information. The self-signup process is as follows:
   - Prerequisite) The user who self-signs up becomes the administrator of the new tenant:
@@ -122,6 +134,10 @@ In order to confirm that the API request is from the user who logged into the Sa
   `@app.get("/users")`
 - [Java(Maven) implementation sample](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L154)  
   `@GetMapping(value = "/users", produces = "application/json")`
+- [C#(.NET 8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs#L219)  
+  `app.MapGet("/users")`
+- [C#(.NET Framework 4.8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebApplication/Controllers/MainController.cs#L147)  
+  `[HttpGet, Route("users")]`
 
 It is always necessary to confirm the login by retrieving the user information to verify that the API request originates from the user that is logged into SaaSus Platform.
 
@@ -129,3 +145,5 @@ It is always necessary to confirm the login by retrieving the user information t
 - [Go(echo)](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/README.md)
 - [Python(FastAPI)](https://github.com/saasus-platform/implementation-sample-api-python)
 - [Java(Maven)](https://github.com/saasus-platform/implementation-sample-api-java)
+- [C#(.NET 8)](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/README.md)
+- [C#(.NET Framework 4.8)](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/README.md)
