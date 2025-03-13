@@ -16,7 +16,7 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 
 ## 税率設定
 
-1. **SaaS 開発コンソールよりから`料金プランｰ>税率設定`を選択**
+1. **SaaS 開発コンソールから`料金プランｰ>税率設定`を選択**
 
 ![tax-rates-1](/ja/img/saas-development-console/tax-rates-1.png)
 
@@ -47,7 +47,7 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 1. **請求先の住所設定**
 
 テナントへの料金プラン設定前に請求先の情報を入力します。  
-テナント管理画面を開き対象のテナントの編集ボタンをクリックします
+SaaS 運用コンソールのテナント管理画面を開き対象のテナントの編集ボタンをクリックします
 
 ![tax-rates-5](/ja/img/saas-development-console/tax-rates-5.png)
 
@@ -55,7 +55,7 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 
 ![tax-rates-6](/ja/img/saas-development-console/tax-rates-6.png)
 
-2. **SaaS 運用コンソールよりから`料金プラン設定`を選択**
+2. **SaaS 運用コンソールから`料金プラン設定`を選択**
 
 ![tax-rates-7](/ja/img/saas-development-console/tax-rates-7.png)
 
