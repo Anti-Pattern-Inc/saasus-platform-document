@@ -23,7 +23,6 @@ import TabItem from '@theme/TabItem';
 
 - Free プランでは、コメント数上限 10
 - Basic プランでは、コメント数上限 100
-- Advanced プラン以上では、上限なし
 
 という設定を行っています。
 
@@ -31,7 +30,7 @@ import TabItem from '@theme/TabItem';
 
 Blade 版では、api/app/Http/Controllers/MessageController.php のpostメソッドを書き換えてみましょう。
 
-Node.js 版では、api/controllers/chat.ts へimport文を追加し、postメソッドを書き換えてみましょう。
+Next.js 版では、api/controllers/api/board.ts へimport文を追加し、postメソッドを書き換えてみましょう。
 
 <Tabs>
 <TabItem value="php" label="PHP">
@@ -89,12 +88,12 @@ import { findUpperCountByMeteringUnitName, PricingClient } from "saasus-sdk";
 
 // 他のコードは省略
 
-const postChats = async (req: Request, res: Response) => {
+const post = async (req: Request, res: Response) => {
   const mes = req.body.message;
   const tenantId = req.userInfo?.tenants[0].id || "";
   const planId = req.userInfo?.tenants[0].plan_id || "";
   const userName =
-    req.userInfo?.tenants[0].user_attribute.username;
+    req.userInfo?.tenants[0].user_attribute.username || "test user";
   try {
     const pricingClient = new PricingClient();
     const pricingPlan = await pricingClient.pricingPlansApi.getPricingPlan(
@@ -135,10 +134,10 @@ const postChats = async (req: Request, res: Response) => {
           param
         );
     }
+    return res.status(201).send();
   } catch (error) {
     console.error(error);
   }
-  res.redirect("/chat");
 };
 ```
 </TabItem>
@@ -174,7 +173,7 @@ const postChats = async (req: Request, res: Response) => {
 その後、ずっと使われなくなってしまう可能性ももちろんあります。  
 そのため、完全に止めるのではなく、書き込みはできるが警告を出したり、保存期間を調整するなどこのSaaS自体の価値が失われないようにすることが重要です。
 
-今回はチュートリアルですので、無情にも完全に書き込みができない状態にしました。では、ちゃんと上限で書き込みができなくなっているか試してみましょう！
+今回はチュートリアルですので、無情にも完全に書き込みができない状態にしました。では、ちゃんと上限で書き込みができなくなっているか試してみましょう。
 
 まず、最初にアプリケーションを初期化したときのように、 init.sh を実行してアプリケーションをまっさらな状態に戻しましょう。
 
@@ -182,7 +181,9 @@ const postChats = async (req: Request, res: Response) => {
 
 フリープラン設定後の書き込みが、１０件までしかできないことが確認できたと思います。
 
-※ 今回はメーター設定後の書き込みのみをカウントする実装としています。<br/>　設定前の書き込みも考慮したい場合は、メーターの値を直接更新する方法もあります。
+:::info
+今回はメーター設定後の書き込みのみをカウントする実装としています。<br/>設定前の書き込みも考慮したい場合は、メーターの値を直接更新する方法もあります。
+:::
 
 ![](/ja/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-2.png)
 
@@ -201,7 +202,7 @@ const postChats = async (req: Request, res: Response) => {
 
 ![](/ja/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-5.png)
 
-このような形で、料金プランに応じたメータリングや制限ができるようになりました！
+このような形で、料金プランに応じたメータリングや制限ができるようになりました。
 
 制限はSaaSusと連携後から1件とカウントします。  
 APIとしてカウントの制限値を変更する機能など提供しております。
