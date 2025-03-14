@@ -1,17 +1,15 @@
 ---
-title: "最後に"
+title: "まとめ"
 slug: "summarize"
 excerpt: ""
 hidden: false
 createdAt: "Sun Aug 07 2022 12:30:50 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Wed May 22 2024 15:16:11 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
 ここまでで、チュートリアルを一通り実施していただき、SaaSus Platformでどんなことができるのかのイメージを持っていただいたけたかと思います。SaaSでは、重要な機能にも関わらず差別化にならない機能がたくさんあります。これらに工数を割くのではなく、貴社のSaaS本来の価値に集中して工数を割いていただきたいと思います。
 
 また、SaaSで大変なのは開発よりも運用です。運用をしていくと、さまざまな機能強化やセキュリティ強化、そして改善が必要になってきます。また、テナント数増加とともにその負荷はどんどん高くなっていきます。そして、それはSaaS運用のフェーズが進んでいかないとなかなか気が付きません。
 
 SaaSus Platformで現状できることはまだまだSaaSの基本的な部分だけではありますが、今後よりSaaS運用がスムーズに行くような機能を実装予定です。たとえば、ノイジーネイバー問題と言われるマルチテナントにおいて大きなお客様が他のテナントに影響を与えてしまう問題などにうまく対応していく機能やノウハウです。
-
-[実装ガイド](./../saasus-platform-document)には、各項目の詳細な設定方法も記載しておりますので、ぜひご参考にしてください。
 
 今後もSaaSus Platformにご期待ください。
