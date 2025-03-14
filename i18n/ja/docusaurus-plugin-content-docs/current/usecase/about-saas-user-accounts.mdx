@@ -126,7 +126,16 @@ SaaS 開発コンソール - 認証後遷移先 - Callback URL
 
 </TabItem>
 
-<TabItem value="csharp" label="C#">
+<TabItem value="csharp" label="C#(.Net8)">
+
+```csharp
+        // テナント登録がされていない場合は、セルフサインアップ処理を実施
+        if (userInfo.Tenants == null || !userInfo.Tenants.Any())
+```
+
+</TabItem>
+
+<TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
 
 ```csharp
         // テナント登録がされていない場合は、セルフサインアップ処理を実施
@@ -188,13 +197,27 @@ dd($request->userinfo['tenants']);
 
 </TabItem>
 
-<TabItem value="csharp" label="C#">
+<TabItem value="csharp" label="C#(.Net8)">
 
 ```csharp
         var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig(), context);
         var userInfoApi = new UserInfoApi(authApiClientConfig);
         var userInfo = await userInfoApi.GetUserInfoAsync(token);
         Console.WriteLine(string.Join("\n", userInfo.Tenants.Select(tenant => tenant.ToString())));
+```
+
+</TabItem>
+
+<TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
+
+```csharp
+        var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig());
+        var userInfoApi = new UserInfoApi(authApiClientConfig);
+        var userInfo = await userInfoApi.GetUserInfoAsync(token);
+        foreach (var tenant in userInfo.Tenants)
+        {
+            Console.WriteLine(tenant.ToString());
+        }
 ```
 
 </TabItem>
@@ -281,7 +304,19 @@ dd($request->userinfo['tenants']);
 
 </TabItem>
 
-<TabItem value="csharp" label="C#">
+<TabItem value="csharp" label="C#(.Net8)">
+
+```csharp
+        var saasUserApi = new SaasUserApi(authApiClientConfig);
+
+        var createSaasUserParam = new CreateSaasUserParam(email, password);
+        
+        await saasUserApi.CreateSaasUserAsync(createSaasUserParam);
+```
+
+</TabItem>
+
+<TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
 
 ```csharp
         var saasUserApi = new SaasUserApi(authApiClientConfig);
