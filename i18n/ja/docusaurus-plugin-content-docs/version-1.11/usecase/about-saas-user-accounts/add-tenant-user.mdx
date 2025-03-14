@@ -188,7 +188,7 @@ import TabItem from '@theme/TabItem';
 
 </TabItem>
 
-<TabItem value="csharp" label="C#">
+<TabItem value="csharp" label="C#(.Net8)">
 
 ```csharp
         // ユーザー属性の取得
@@ -204,6 +204,42 @@ import TabItem from '@theme/TabItem';
             if (userAttributeValues.ContainsKey(attributeName))
             {
                 userAttributeValues[attributeName] = ConvertToExpectedType(userAttributeValues[attributeName], attributeType);
+            }
+        }
+
+        // テナントユーザー登録用のパラメータを作成
+        var createTenantUserParam = new CreateTenantUserParam(userInfo.Email, userAttributeValues);
+
+        // SaaSユーザーをテナントユーザーに追加
+        var tenantUserApi = new TenantUserApi(authApiClientConfig);
+        var tenantUser = await tenantUserApi.CreateTenantUserAsync(tenantId, createTenantUserParam);
+```
+
+</TabItem>
+
+<TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
+
+```csharp
+        // ユーザー属性の取得
+        var userAttributeApi = new UserAttributeApi(authApiClientConfig);
+        var userAttributes = await userAttributeApi.GetUserAttributesAsync();
+
+        // ユーザー属性情報で number 型が定義されている場合は置換する
+        foreach (var attribute in userAttributes.VarUserAttributes)
+        {
+            var attributeName = attribute.AttributeName;
+            var attributeType = attribute.AttributeType.ToString();
+
+            if (userAttributeValues.ContainsKey(attributeName) && attributeType.ToLower() == "number")
+            {
+                if (int.TryParse(userAttributeValues[attributeName]?.ToString(), out int numericValue))
+                {
+                    userAttributeValues[attributeName] = numericValue;
+                }
+                else
+                {
+                    return BadRequest("Invalid attribute value");
+                }
             }
         }
 
@@ -291,7 +327,19 @@ setAttributesは<a href="/ja/docs/tutorial/prepare-saas-platform#テナントに
 
 </TabItem>
 
-<TabItem value="csharp" label="C#">
+<TabItem value="csharp" label="C#(.Net8)">
+
+```csharp
+        // ロール設定用のパラメータを作成
+        var createTenantUserRolesParam = new CreateTenantUserRolesParam(new List<string> { "admin" });
+
+        // 作成したテナントユーザーにロールを設定
+        await tenantUserApi.CreateTenantUserRolesAsync(tenantId, tenantUser.Id, 3, createTenantUserRolesParam);
+```
+
+</TabItem>
+
+<TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
 
 ```csharp
         // ロール設定用のパラメータを作成
