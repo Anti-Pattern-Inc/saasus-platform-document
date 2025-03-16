@@ -188,7 +188,7 @@ Please append the following to the tenant creation source code:
 
 </TabItem>
 
-<TabItem value="csharp" label="C#">
+<TabItem value="csharp" label="C#(.Net8)">
 
 ```csharp
         // Retrieve user attribute information
@@ -204,6 +204,42 @@ Please append the following to the tenant creation source code:
             if (userAttributeValues.ContainsKey(attributeName))
             {
                 userAttributeValues[attributeName] = ConvertToExpectedType(userAttributeValues[attributeName], attributeType);
+            }
+        }
+
+        // Create parameters for tenant user registration
+        var createTenantUserParam = new CreateTenantUserParam(userInfo.Email, userAttributeValues);
+
+        // Add a SaaS user to the tenant users
+        var tenantUserApi = new TenantUserApi(authApiClientConfig);
+        var tenantUser = await tenantUserApi.CreateTenantUserAsync(tenantId, createTenantUserParam);
+```
+
+</TabItem>
+
+<TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
+
+```csharp
+        // Retrieve user attribute information
+        var userAttributeApi = new UserAttributeApi(authApiClientConfig);
+        var userAttributes = await userAttributeApi.GetUserAttributesAsync();
+
+        // Replace if a number type is defined in the user attribute information
+        foreach (var attribute in userAttributes.VarUserAttributes)
+        {
+            var attributeName = attribute.AttributeName;
+            var attributeType = attribute.AttributeType.ToString();
+
+            if (userAttributeValues.ContainsKey(attributeName) && attributeType.ToLower() == "number")
+            {
+                if (int.TryParse(userAttributeValues[attributeName]?.ToString(), out int numericValue))
+                {
+                    userAttributeValues[attributeName] = numericValue;
+                }
+                else
+                {
+                    return BadRequest("Invalid attribute value");
+                }
             }
         }
 
@@ -293,7 +329,19 @@ Please append the following code:
 
 </TabItem>
 
-<TabItem value="csharp" label="C#">
+<TabItem value="csharp" label="C#(.Net8)">
+
+```csharp
+        // Create parameters for role configuration
+        var createTenantUserRolesParam = new CreateTenantUserRolesParam(new List<string> { "admin" });
+
+        // Assign a role to the created tenant user
+        await tenantUserApi.CreateTenantUserRolesAsync(tenantId, tenantUser.Id, 3, createTenantUserRolesParam);
+```
+
+</TabItem>
+
+<TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
 
 ```csharp
         // Create parameters for role configuration
