@@ -93,7 +93,7 @@ Regarding the use of user information obtained from the /userinfo endpoint:
   `@GetMapping(value = "/credentials", produces = "application/json")`
 - [C#(.NET 8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs#L148)  
   `app.MapGet("/credentials")`
-- [C#(.NET Framework 4.8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebApplication/Controllers/MainController.cs#L80)  
+- [C#(.NET Framework 4.8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs#L80)  
   `[HttpGet, Route("credentials")]`
 
 #### 2.1.2. User Information Retrieval API
@@ -105,7 +105,7 @@ Regarding the use of user information obtained from the /userinfo endpoint:
   `@GetMapping(value = "/userinfo", produces = "application/json")`
 - [C#(.NET 8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs#L195)  
   `app.MapGet("/userinfo")`
-- [C#(.NET Framework 4.8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebApplication/Controllers/MainController.cs#L127)  
+- [C#(.NET Framework 4.8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs#L127)  
   `[HttpGet, Route("userinfo")]`
 
 #### 2.1.3. Self-Signup API
@@ -118,7 +118,7 @@ Regarding the use of user information obtained from the /userinfo endpoint:
   `@PostMapping(value = "/self_sign_up", produces = "application/json")`
 - [C#(.NET 8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs#L632")  
   `app.MapPost("/self_sign_up")`
-- [C#(.NET Framework 4.8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebApplication/Controllers/MainController.cs#L537")  
+- [C#(.NET Framework 4.8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs#L537")  
   `[HttpPost, Route("self_sign_up")]`
 
 In order to confirm that the API request is from the user who logged into the SaaSus Platform, it is always necessary to confirm the login by retrieving the user information. The self-signup process is as follows:
@@ -136,7 +136,7 @@ In order to confirm that the API request is from the user who logged into the Sa
   `@GetMapping(value = "/users", produces = "application/json")`
 - [C#(.NET 8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs#L219)  
   `app.MapGet("/users")`
-- [C#(.NET Framework 4.8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebApplication/Controllers/MainController.cs#L147)  
+- [C#(.NET Framework 4.8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs#L147)  
   `[HttpGet, Route("users")]`
 
 It is always necessary to confirm the login by retrieving the user information to verify that the API request originates from the user that is logged into SaaSus Platform.
