@@ -49,19 +49,12 @@ To implement MFA functionality, the following endpoints have been added.
 
 ```go
 // Retrieve MFA status (enabled/disabled)
-// The frontend application must include X-Access-Token in the request header
 func getMfaStatus(c echo.Context) error {
 	// Retrieve user information from context
 	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
 	if !ok {
 		c.Logger().Error("Failed to get user info")
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
-	}
-
-	// Retrieve X-Access-Token from the request header
-	accessToken := c.Request().Header.Get("X-Access-Token")
-	if accessToken == "" {
-		return c.JSON(http.StatusUnauthorized, map[string]string{"error": "Access token is missing"})
 	}
 
 	// Use the SaaSus API to get the user's MFA status
@@ -125,9 +118,8 @@ func getMfaSetup(c echo.Context) error {
 	// Generate a QR code URL for Google Authenticator and other authentication apps
 	qrCodeUrl := "otpauth://totp/SaaSusPlatform:" + userInfo.Email + "?secret=" + response.JSON201.SecretCode + "&issuer=SaaSusPlatform"
 
-	// Return the secret key and QR code URL
+	// Return the QR code URL
 	return c.JSON(http.StatusOK, map[string]string{
-		"secretKey": response.JSON201.SecretCode,
 		"qrCodeUrl": qrCodeUrl,
 	})
 }
