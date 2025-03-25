@@ -131,18 +131,6 @@ SaaSus Platformでこのような料金プランを定義するためには、
 | Freeプラン       | Freeプラン       | Freeプラン       | Freeプラン基本メニュー       |
 | Basicプラン      | Basicプラン      | Basicプラン      | Basicプラン基本メニュー      |
 
-<iframe
-  className="embedly-embed"
-  src="https://www.youtube.com/embed/deSkPJ-zTgw?start=257&feature=oembed"
-  width="854"
-  height="480"
-  scrolling="no"
-  title="YouTube embed"
-  frameborder="0"
-  allow="autoplay; fullscreen"
-  allowfullscreen="true">
-</iframe>
-
 ### SaaSus 開発コンソール を使った請求との紐付け
 
 次に請求の設定を行います。
