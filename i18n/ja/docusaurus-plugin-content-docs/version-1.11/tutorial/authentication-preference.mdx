@@ -67,6 +67,8 @@ SaaS によっては、複数環境が不要な場合もありますので、単
 
 右上の「ユーザ作成」ボタンをクリックし、ポップアップを出します。
 
+メールアドレス・パスワード・テナント、その他にGuidesでご紹介している[ユーザに追加属性を定義する](../saas-development-console/declare-additional-attribute-to-user)で追加したユーザー属性が表示されます。
+
 とりあえず、4 名登録してみましょう。
 
 メールアドレス: [user1-1@example.com](mailto:user1-1@example.com)  
@@ -447,7 +449,7 @@ SaaSus Platform で作成したログイン画面を表示します。
 - Laravel の場合、実際に先ほどのコードが動作していれば、ログイン後にユーザー情報が画面に表示されるはずです。
 - Express の場合は、まずターミナルで以下のコマンドを実行してログを確認できる状態にしてから、ログインを行ってください。
 
-```txt
+```bash
 repo$ docker compose logs -f
 ```
 
