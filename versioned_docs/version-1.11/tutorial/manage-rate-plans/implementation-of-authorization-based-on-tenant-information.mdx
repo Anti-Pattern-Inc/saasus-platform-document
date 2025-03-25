@@ -26,12 +26,11 @@ Earlier, we set a different upper limit for the number of comments for each pric
 
 Now, get the maximum number associated with this pricing plan for each tenant and set a limit.
 
-For the Blade version, let’s modify the post method in api/app/Http/Controllers/MessageController.php.
-
-For the Next.js version, let’s add an import statement to api/controllers/api/board.ts and modify the post method.
+- For Laravel, let’s modify the `post` method in `api/app/Http/Controllers/MessageController.php`.
+- For Express, let’s add an `import` statement to `api/controllers/chat.ts` and modify the `postChats` method.
 
 <Tabs>
-<TabItem value="php" label="PHP" default>
+<TabItem value="php" label="Laravel (PHP)">
 
 ```php
    public function post(Request $request)
@@ -78,19 +77,19 @@ For the Next.js version, let’s add an import statement to api/controllers/api/
 
 </TabItem>
 
-<TabItem value="nodejs" label="Node.js">
+<TabItem value="typescript" label="Express (TS)">
 ```js
 import { UpdateMeteringUnitTimestampCountNowParam } from "saasus-sdk/dist/generated/Pricing";
 import { findUpperCountByMeteringUnitName, PricingClient } from "saasus-sdk";
 
 // Other code omitted
 
-const post = async (req: Request, res: Response) => {
+const postChats = async (req: Request, res: Response) => {
   const mes = req.body.message;
   const tenantId = req.userInfo?.tenants[0].id || "";
   const planId = req.userInfo?.tenants[0].plan_id || "";
   const userName =
-    req.userInfo?.tenants[0].user_attribute.username || "test user";
+    req.userInfo?.tenants[0].user_attribute.username;
   try {
     const pricingClient = new PricingClient();
     const pricingPlan = await pricingClient.pricingPlansApi.getPricingPlan(
@@ -131,10 +130,10 @@ const post = async (req: Request, res: Response) => {
           param
         );
     }
-    return res.status(201).send();
   } catch (error) {
     console.error(error);
   }
+  res.redirect("/chat");
 };
 ```
 </TabItem>
@@ -200,5 +199,3 @@ This shows that user1-1 can write more than ten items.
 ![](/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-5.png)
 
 Using this method it is now possible to meter and limit according to the pricing plan.
-
-Up to this point, we have implemented Blade-based applications, but finally, how should we implement Next.js (API-based SPA)? Let's continue.

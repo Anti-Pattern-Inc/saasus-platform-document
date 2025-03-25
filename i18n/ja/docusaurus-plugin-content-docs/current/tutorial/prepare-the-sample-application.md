@@ -20,15 +20,18 @@ AWS の EC2 や Cloud9 を利用して、Blade 版の動作環境を作成する
 
 :::
 
-この簡易チャットシステムは、PHP 8とLaravel 9、そしてPostgreSQL 13をバックエンドに使用しています。
+この簡易チャットシステムは、以下の2種類の構成が用意されています。
 
-フロントエンドは、Laravel with BladeとNext.jsで作成されたSPA（Single Page Application）の2つが含まれています。
+1. **Laravel + Blade**（PHP 8 / Laravel 9 / PostgreSQL 13）
+2. **Express + EJS**（Node.js / Express 4.16.x / PostgreSQL 13）
 
-前提条件<br/>
-- PHP 8がインストールされていること。<br/>
-- Composerがインストールされていること。<br/>
-- PostgreSQL 13がインストールされ、適切に設定されていること。<br/>
-- Node.jsおよびnpmがインストールされていること。
+どちらの構成でも、設定によってNext.jsをフロントエンドとして利用可能ですが、このチュートリアルではNext.jsは使用しません。
+
+### 前提条件
+- PHP 8がインストールされていること（Laravel + Bladeの場合）。
+- Composerがインストールされていること（Laravel + Bladeの場合）。
+- PostgreSQL 13がインストールされ、適切に設定されていること。
+- Node.jsおよびnpmがインストールされていること（Express + EJSの場合）。
 
 まずは、下記リポジトリからサンプルアプリケーションを clone してきます。
 
@@ -36,9 +39,10 @@ AWS の EC2 や Cloud9 を利用して、Blade 版の動作環境を作成する
 git clone https://github.com/saasus-platform/sampleapp-basic-chat
 ```
 
-clone後、下記ディレクトリに移動し、コマンドを実行します。  
-※ PHP の場合`sampleapp-basic-chat/php/laravel`配下  
-※ Next.js の場合`sampleapp-basic-chat/node/express`配下
+clone後、使用するアプリケーションのディレクトリに移動し、初期設定を行います。
+
+- **Laravel + Blade の場合**: `sampleapp-basic-chat/php/laravel`
+- **Express + EJS の場合**: `sampleapp-basic-chat/node/express`
 
 ```shell
 ./init.sh
@@ -48,29 +52,29 @@ clone後、下記ディレクトリに移動し、コマンドを実行します
 
 起動したら、以下の URL にアクセスして試してみましょう。
 
-Blade 版
+### Laravel + Blade 版
 
-URL: [http://localhost/board](http://localhost/board)<br/>
-認証用 Email: [user@example.com](mailto:user@example.com)<br/>
-Password: password
+- URL: [http://localhost/board](http://localhost/board)
+- 認証用 Email: [user@example.com](mailto:user@example.com)
+- Password: password
 
 ![サンプル](/ja/img/tutorial/prepare-the-sample-application/prepare-the-sample-application-01.png)
 
-Next.js 版
+### Express + EJS 版
 
-URL: [http://localhost/login/](http://localhost/login/)<br/>
-認証用 Email: [user@example.com](mailto:user@example.com)<br/>
-Password: password
+- URL: [http://localhost/board](http://localhost/board)
+- 認証用 Email: [user@example.com](mailto:user@example.com)
+- Password: password
 
 :::caution
-Next.js 版は、ビルドに数分掛かる可能性があります。表示できない場合は、数分待ってから再度表示してみてください。
+Express + EJS 版のビルドには時間がかかることがあります。表示できない場合は、数分待ってから再度試してください。
 :::
 
 ![サンプル](/ja/img/tutorial/prepare-the-sample-application/prepare-the-sample-application-02.png)
 
-ユーザが自由に投稿できるように、現在はLaravelの標準認証モジュールを使用してユーザを識別しています。
+現在、ユーザが自由に投稿できるように、Laravel 版では Laravel の標準認証モジュール、Express 版では独自の認証機能を使用してユーザを識別しています。
 
-SaaSus Platformを導入しユーザー認証をSaaSus Platform経由で行うことにより、ユーザーの識別やユーザーに紐づいているテナント情報の取得を簡単に行うことができるようになります。
+SaaSus Platformを導入し、ユーザー認証をSaaSus Platform経由で行うことにより、ユーザーの識別やユーザーに紐づいているテナント情報の取得を簡単に行うことができるようになります。
 
 テナントのデータ設計や情報管理をSaaSアプリケーション側が行う必要はありません。
 
@@ -80,9 +84,12 @@ SaaSus Platformが持つ情報は、APIを経由してSaaSアプリケーショ�
 
 このようなシンプルなWebアプリケーションをSaaS化していきましょう。
 
-※チュートリアル開始時点と完了時点でのソースコードの差分は以下を参考にしてください。<br/>
-PHP  
+※チュートリアル開始時点と完了時点でのソースコードの差分は以下を参考にしてください。
+
+**Laravel + Blade**  
 [https://github.com/saasus-platform/sampleapp-basic-chat/pull/10/files](https://github.com/saasus-platform/sampleapp-basic-chat/pull/10/files)
 
-Next.js  
+**Express + EJS**  
 [https://github.com/saasus-platform/sampleapp-basic-chat/pull/11/files](https://github.com/saasus-platform/sampleapp-basic-chat/pull/11/files)
+
+※ これらの差分には、Next.js を使用した場合の修正も含まれています。
