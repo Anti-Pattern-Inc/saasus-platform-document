@@ -8,11 +8,6 @@ createdAt: "Fri Jan 20 2023 01:46:40 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
 
-\*You can also watch the entire process via video.  
-[https://www.youtube.com/watch?v=deSkPJ-zTgw](https://www.youtube.com/watch?v=deSkPJ-zTgw)
-
-## Preparing the SaaSus Platform
-
 ### Creating a SaaSus Platform Account
 
 First, let's create an account on SaaSus Platform.

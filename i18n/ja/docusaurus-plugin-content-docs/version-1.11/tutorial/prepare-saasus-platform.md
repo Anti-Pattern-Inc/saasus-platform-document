@@ -8,11 +8,6 @@ createdAt: "Wed Jan 11 2023 03:12:50 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
 
-※全体の流れを動画でご覧になることもできます。  
-[https://www.youtube.com/watch?v=deSkPJ-zTgw](https://www.youtube.com/watch?v=deSkPJ-zTgw)
-
-## SaaSus Platform の準備
-
 ### SaaSus Platform アカウントの作成
 
 まずは、SaaSus Platform のアカウントを作成しましょう。

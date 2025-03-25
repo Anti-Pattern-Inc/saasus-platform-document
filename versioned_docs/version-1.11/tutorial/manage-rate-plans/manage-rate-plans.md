@@ -132,18 +132,6 @@ Range
 | Free plan         | Free plan                 | Free plan                | Free plan basic menu       |
 | Basic Plan        | Basic Plan                | Basic Plan               | Basic Plan Basic Menu      |
 
-<iframe
-  className="embedly-embed"
-  src="https://www.youtube.com/embed/deSkPJ-zTgw?start=257&feature=oembed"
-  width="854"
-  height="480"
-  scrolling="no"
-  title="YouTube embed"
-  frameborder="0"
-  allow="autoplay; fullscreen"
-  allowfullscreen="true">
-</iframe>
-
 ### Linking Billing Using the SaaSus Development Console
 
 Next, set up billing.
