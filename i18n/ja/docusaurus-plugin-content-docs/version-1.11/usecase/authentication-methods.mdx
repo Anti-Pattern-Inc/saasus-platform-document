@@ -455,7 +455,7 @@ public ResponseEntity<?> refresh(HttpSession session, HttpServletRequest request
 <TabItem value="go" label="Go">
 
 ```go
-var request UserRegisterRequest
+    var request UserRegisterRequest
 	if err := c.Bind(&request); err != nil {
 		return c.JSON(http.StatusBadRequest, echo.Map{"error": "Invalid request"})
 	}
@@ -503,39 +503,37 @@ var request UserRegisterRequest
 <TabItem value="python" label="Python">
 
 ```python
-@app.post("/user_register")
-async def user_register(fast_request: Request, request: UserRegisterRequest, auth_user: dict = Depends(fastapi_auth)):
-    # リクエストデータの取得
-    email = request.email
-    tenant_id = request.tenantId
+# リクエストデータの取得
+email = request.email
+tenant_id = request.tenantId
 
-    # ユーザー登録処理
-    try:
-        # 招待を作成するユーザーのアクセストークンを取得
-        access_token = fast_request.headers.get("X-Access-Token")
+# ユーザー登録処理
+try:
+    # 招待を作成するユーザーのアクセストークンを取得
+    access_token = fast_request.headers.get("X-Access-Token")
 
-        # アクセストークンがリクエストヘッダーに含まれていなかったらエラー
-        if not access_token:
-            raise HTTPException(status_code=401, detail="Access token is missing")
-        
-        # テナント招待のパラメータを作成
-        invited_user_environment_information_inner = InvitedUserEnvironmentInformationInner(
-            id=3, # 本番環境のid:3を指定
-            role_names=['admin']
-        )
-        create_tenant_invitation_param = CreateTenantInvitationParam(
-            email=email,
-            access_token=access_token,
-            envs=[invited_user_environment_information_inner]
-        )
+    # アクセストークンがリクエストヘッダーに含まれていなかったらエラー
+    if not access_token:
+        raise HTTPException(status_code=401, detail="Access token is missing")
+    
+    # テナント招待のパラメータを作成
+    invited_user_environment_information_inner = InvitedUserEnvironmentInformationInner(
+        id=3, # 本番環境のid:3を指定
+        role_names=['admin']
+    )
+    create_tenant_invitation_param = CreateTenantInvitationParam(
+        email=email,
+        access_token=access_token,
+        envs=[invited_user_environment_information_inner]
+    )
 
-        # テナントへの招待を作成
-        InvitationApi(api_client=api_client).create_tenant_invitation(tenant_id=tenant_id, create_tenant_invitation_param=create_tenant_invitation_param)
+    # テナントへの招待を作成
+    InvitationApi(api_client=api_client).create_tenant_invitation(tenant_id=tenant_id, create_tenant_invitation_param=create_tenant_invitation_param)
 
-        return {"message": "Create tenant user invitation successfully"}
-    except Exception as e:
-        print(e)
-        raise HTTPException(status_code=500, detail=str(e))
+    return {"message": "Create tenant user invitation successfully"}
+except Exception as e:
+    print(e)
+    raise HTTPException(status_code=500, detail=str(e))
 ```
 
 </TabItem>
