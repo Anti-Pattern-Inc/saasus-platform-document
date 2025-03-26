@@ -739,7 +739,6 @@ try {
 <TabItem value="csharp" label="C#(.Net8)">
 
 ```csharp
-// バリデーションの実行
 var validationResults = new List<ValidationResult>();
 var validationContext = new ValidationContext(requestBody);
 if (!Validator.TryValidateObject(requestBody, validationContext, validationResults, true))
@@ -798,7 +797,6 @@ catch (Exception ex)
 <TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
 
 ```csharp
-// バリデーションのチェック
 if (!ModelState.IsValid)
     return BadRequest(ModelState);
 
