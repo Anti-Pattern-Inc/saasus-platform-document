@@ -6,6 +6,9 @@ hidden: false
 createdAt: "Fri Feb 07 2025 02:41:08 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Wed Jan 17 2024 08:25:52 GMT+0000 (Coordinated Universal Time)"
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Authentication Methods
 In web applications, including SaaS, there are two main authentication methods:<br/>
 ・Session-based authentication<br/>
@@ -59,11 +62,523 @@ SaaSus Platform generates the following three types of tokens:<br/>
 ### ID Token
 The ID token is used for authentication and has a validity period of one hour.<br/>
 Once the token expires, it becomes invalid, and the SaaS user will be logged out.
+<Tabs>
+<TabItem value="php" label="PHP">
+
+```php
+// In the case of Laravel, use the standard Auth Middleware of the SaaSus SDK in the routing file.
+// Define routes for features that require authentication on the SaaSus Platform.
+Route::middleware(\AntiPatternInc\Saasus\Laravel\Middleware\Auth::class)->group(function () {
+    Route::get('/userinfo', [IndexController::class, 'userinfo']);
+    Route::get('/users', [IndexController::class, 'users']);
+    Route::get('/tenant_attributes', [IndexController::class, 'tenantAttributes']);
+    Route::get('/user_attributes', [IndexController::class, 'userAttributes']);
+    Route::post('/user_register', [IndexController::class, 'userRegister']);
+    Route::delete('/user_delete', [IndexController::class, 'userDelete']);
+    Route::get('/delete_user_log', [IndexController::class, 'deleteUserLog']);
+    Route::get('/pricing_plan', [IndexController::class, 'pricingPlan']);
+    Route::get('/tenant_attributes_list', [IndexController::class, 'tenantAttributesList']);
+    Route::post('/self_sign_up', [IndexController::class, 'selfSignUp']);
+    Route::post('/logout', [IndexController::class, 'logout']);
+});
+```
+
+</TabItem>
+
+<TabItem value="nodejs" label="Node.js">
+
+```js
+// In the case of Express, use the standard AuthMiddleware of the SaaSus SDK.
+// Define routes for features that require authentication on the SaaSus Platform.
+import { AuthMiddleware } from 'saasus-sdk'
+
+app.use([
+  '/userinfo', 
+  '/users', 
+  '/tenant_attributes', 
+  '/user_register', 
+  '/user_delete', 
+  '/delete_user_log', 
+  '/pricing_plan', 
+  '/tenant_attributes_list', 
+  '/self_sign_up'
+], AuthMiddleware)
+```
+
+</TabItem>
+
+<TabItem value="go" label="Go">
+
+```go
+// By using the created authMiddlewareEcho, user authentication is performed, and UserInfo is set in the context.
+authMiddleware := authMiddlewareEcho(idTokenGetter)
+
+e.GET("/userinfo", getMe, authMiddleware)
+e.GET("/users", getUsers, authMiddleware)
+e.GET("/tenant_attributes", getTenantAttributes, authMiddleware)
+e.GET("/user_attributes", getUserAttributes, authMiddleware)
+e.GET("/pricing_plan", getPricingPlan, authMiddleware)
+e.POST("/user_register", userRegister, authMiddleware)
+e.DELETE("/user_delete", userDelete, authMiddleware)
+e.GET("/delete_user_log", getDeleteUserLogs, authMiddleware)
+e.POST("/self_sign_up", selfSignup, authMiddleware)
+e.POST("/logout", logout, authMiddleware)
+
+func authMiddlewareEcho(getter middleware.IDTokenGetter) echo.MiddlewareFunc {
+	return func(next echo.HandlerFunc) echo.HandlerFunc {
+		return func(c echo.Context) error {
+			userInfo, err := middleware.Authenticate(c.Request().Context(), getter.GetIDToken(c.Request()))
+			if err != nil {
+				http.Error(c.Response().Writer, "Unauthorized "+err.Error(), http.StatusUnauthorized)
+				return nil
+			}
+
+			c.Set(string(ctxlib.UserInfoKey), userInfo)
+			return next(c)
+		}
+	}
+}
+```
+
+</TabItem>
+
+
+<TabItem value="python" label="Python">
+
+```python
+# In the case of FastAPI, create an authentication method.
+def fastapi_auth(request: Request) -> Union[dict, HTTPException]:
+    auth_header = request.headers.get("Authorization", "")
+    token = auth_header.replace("Bearer ", "") if "Bearer " in auth_header else ""
+    referer = request.headers.get("Referer", "")
+    user_info, error = auth.authenticate(id_token=token, referer=referer)
+    if error:
+        raise HTTPException(status_code=401, detail=str(error))
+    return user_info
+
+# Call the created authentication method in routes that require authentication.
+@app.get("/userinfo")
+def get_user_info(user_info: dict = Depends(fastapi_auth)):
+    return user_info
+```
+
+</TabItem>
+
+<TabItem value="java" label="Java">
+
+```java
+// Create a method to obtain the ID token
+public static String getIDToken(HttpServletRequest request) {
+    String authHeader = request.getHeader("Authorization");
+    if (authHeader != null) {
+        StringTokenizer st = new StringTokenizer(authHeader);
+        if (st.countTokens() == 2 && st.nextToken().equalsIgnoreCase("Bearer")) {
+            return st.nextToken();
+        }
+    }
+    return "";
+}
+
+@GetMapping(value = "/userinfo", produces = "application/json")
+public ResponseEntity<?> getMe(HttpSession session, HttpServletRequest request) throws Exception {
+    AuthApiClient apiClient = new Configuration().getAuthApiClient();
+    apiClient.setReferer(request.getHeader("Referer"));
+
+    UserInfoApi userInfoApi = new UserInfoApi(apiClient);
+    UserInfo userInfo = null;
+    try {
+        // Call the created method to obtain the ID token when executing authentication-required processes.
+        userInfo = userInfoApi.getUserInfo(getIDToken(request));
+        System.out.println(userInfo);
+    } catch (ApiException e) {
+        System.err.println("Exception when calling UserInfoApi#getUserInfo");
+        System.err.println("Status code: " + e.getCode());
+        System.err.println("Reason: " + e.getResponseBody());
+        System.err.println("Response headers: " + e.getResponseHeaders());
+        e.printStackTrace();
+        throw e;
+    }
+
+    System.out.println(userInfo.toJson());
+    return ResponseEntity.ok(userInfo.toJson());
+}
+```
+
+</TabItem>
+</Tabs>
 
 ### Refresh Token
 If a longer login session is required, the refresh token can be used to regenerate the ID token, enabling continuous login.<br/>
 The refresh token has a validity period of one month.
+<Tabs>
+<TabItem value="php" label="PHP">
+
+```php
+public function refresh(Request $request)
+{
+    // Obtain the refresh token
+    $refreshToken = $request->cookie('SaaSusRefreshToken');
+    if (!is_string($refreshToken)) {
+        return response('Refresh token not found', Response::HTTP_BAD_REQUEST);
+    }
+
+    try {
+        $authClient = $this->client->getAuthClient();
+
+        // The first argument is for setting the temporary code, so specify Blank.
+        // Set the authentication flow to refreshTokenAuth in the second argument, and set the refresh token retrieved from the Cookie in the third argument.
+        $response = $authClient->getAuthCredentials([
+            '',
+            'refreshTokenAuth',
+            $refreshToken
+        ]);
+
+        return response()->json($response->getBody());
+    } catch (\Exception $e) {
+        return response('Error occurred', Response::HTTP_INTERNAL_SERVER_ERROR);
+    }
+}
+```
+
+</TabItem>
+
+<TabItem value="nodejs" label="Node.js">
+
+```js
+app.get('/refresh', async (request: Request, response: Response) => {
+    // Obtain the refresh token
+    const refreshToken = request.cookies.SaaSusRefreshToken
+    if (typeof refreshToken !== 'string') {
+        response.status(400).send('Refresh token not found')
+        return
+    }
+
+    const client = new AuthClient()
+    // The first argument is for setting the temporary code, so specify Blank.
+    // Set the authentication flow to refreshTokenAuth in the second argument, and set the refresh token retrieved from the Cookie in the third argument.
+    const credentials = (
+        await client.credentialApi.getAuthCredentials(
+        '',
+        'refreshTokenAuth',
+        refreshToken
+        )
+    ).data
+    response.send(credentials)
+})
+```
+
+</TabItem>
+
+<TabItem value="go" label="Go">
+
+```go
+func refresh(c echo.Context) error {
+    // Obtain the refresh token
+	token, err := c.Cookie("SaaSusRefreshToken")
+	if err != nil {
+		return c.String(http.StatusInternalServerError, "internal server error")
+	}
+	c.Logger().Error("SaaSusRefreshToken: %v", token.Value)
+
+    // Set the refresh token retrieved from the Cookie in the second argument.
+	credentials, err := credential.GetAuthCredentialsWithRefreshTokenAuth(context.Background(), token.Value)
+	if err != nil {
+		return c.String(http.StatusInternalServerError, "internal server error")
+	}
+
+	return c.JSON(http.StatusOK, credentials)
+}
+```
+
+</TabItem>
+
+<TabItem value="python" label="Python">
+
+```python
+@app.get("/refresh")
+def refresh(request: Request):
+    # Obtain the refresh token
+    saasus_refresh_token = request.cookies.get("SaaSusRefreshToken")
+    if not saasus_refresh_token:
+        raise HTTPException(status_code=400, detail="SaaSusRefreshToken is missing")
+
+    try:
+        # Obtain new authentication credentials using the refresh token.
+        credentials = callback.get_refresh_token_auth_credentials(saasus_refresh_token)
+
+        return credentials
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+```
+
+</TabItem>
+
+<TabItem value="java" label="Java">
+
+```java
+// Obtain the refresh token from the cookie.
+@GetMapping(value = "/refresh", produces = "application/json")
+public ResponseEntity<?> refresh(HttpSession session, HttpServletRequest request,
+        @CookieValue(name = "SaaSusRefreshToken", defaultValue = "") String cookieValue) throws Exception {
+    if (cookieValue == "") {
+        return ResponseEntity.badRequest().body("No refresh token found");
+    }
+
+    AuthApiClient apiClient = new Configuration().getAuthApiClient();
+    apiClient.setReferer(request.getHeader("Referer"));
+    CredentialApi apiInstance = new CredentialApi(apiClient);
+    Credentials result = null;
+    try {
+        // Set the first argument to null to specify a temporary code.
+        // Set the second argument to refreshTokenAuth for the authentication flow, and set the third argument to the refresh token obtained from the cookie.
+        result = apiInstance.getAuthCredentials(null, "refreshTokenAuth", cookieValue);
+    } catch (ApiException e) {
+        System.err.println("Exception when calling CredentialApi#getAuthCredentials");
+        System.err.println("Status code: " + e.getCode());
+        System.err.println("Reason: " + e.getResponseBody());
+        System.err.println("Response headers: " + e.getResponseHeaders());
+        e.printStackTrace();
+        throw e;
+    }
+    return ResponseEntity.ok(result.toJson());
+}
+```
+
+</TabItem>
+</Tabs>
 
 ### Access Token
 The access token is required when using features that require authorization.<br/>
 For example, it is used for functions that require specific permissions, such as inviting users to a tenant.
+<Tabs>
+<TabItem value="php" label="PHP">
+
+```php
+    // Retrieve information from the request.
+    $email = $request->input('email');
+    $tenantId = $request->input('tenantId');
+    if (!$email || !$tenantId) {
+        return response()->json(['message' => 'Missing required fields'], Response::HTTP_BAD_REQUEST);
+    }
+
+    // Retrieve UserInfo.
+    $userInfo = $request->userinfo;
+    if (!$userInfo) {
+        return response()->json(['detail' => 'No user'], Response::HTTP_BAD_REQUEST);
+    }
+
+    try {
+        // Retrieve the access token of the user creating the invitation.
+        $accessToken = $request->header('X-Access-Token');
+
+        // If the access token is not included in the request header, return an error.
+        if (empty($accessToken)) {
+            return response()->json(['error' => 'Access token is missing'], 401);
+        }
+
+        // Create the parameters for the tenant invitation.
+        $createTenantInvitationParamEnvsItem = new CreateTenantInvitationParamEnvsItem();
+        $createTenantInvitationParamEnvsItem
+            ->setId(3) // Specify the ID of the production environment: 3.
+            ->setRoleNames(['admin']);
+        $createTenantInvitationParam = new CreateTenantInvitationParam();
+        $createTenantInvitationParam
+            ->setEmail($email)
+            ->setAccessToken($accessToken)
+            ->setEnvs([$createTenantInvitationParamEnvsItem]);
+
+        // Call the tenant invitation API.
+        $authClient = $this->client->getAuthClient();
+        $authClient->createTenantInvitation(
+            $tenantId,
+            $createTenantInvitationParam
+        );
+
+        return response()->json(['message' => 'Create tenant user invitation successfully']);
+    } catch (\Exception $e) {
+        Log::error($e->getMessage());
+        return response()->json(['detail' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
+    }
+```
+
+</TabItem>
+
+<TabItem value="nodejs" label="Node.js">
+
+```js
+    const { email, password, tenantId, userAttributeValues }: UserRegisterRequest = request.body
+    if (!email || !password || !tenantId) {
+        return response.status(400).send({ message: 'Missing required fields' });
+    }
+
+    const userInfo = request.userInfo
+    if (userInfo === undefined) {
+        return response.status(400).json({ detail: 'No user' })
+    }
+
+    try {
+        // Retrieve the access token of the user creating the invitation.
+        const accessToken = request.header('X-Access-Token')
+
+        // If the access token is not included in the request header, return an error.
+        if (!accessToken) {
+        return response.status(401).json({ detail: 'Access token is missing' })
+        }
+
+        // Create the parameters for the tenant invitation.
+        const invitedUserEnvironmentInformationInner: InvitedUserEnvironmentInformationInner = {
+        id: 3,  // Specify the ID of the production environment: 3.
+        role_names: ['admin']
+        }
+        const createTenantInvitationParam: CreateTenantInvitationParam = {
+        email: email,
+        access_token: accessToken,
+        envs: [invitedUserEnvironmentInformationInner]
+        }
+
+        // Call the tenant invitation API.
+        const client = new AuthClient()
+        await client.invitationApi.createTenantInvitation(tenantId, createTenantInvitationParam)
+
+        response.json({ message: 'Create tenant user invitation successfully' })
+    } catch (error) {
+        console.error(error);
+        response.status(500).json({ detail: error });
+    }
+```
+
+</TabItem>
+
+<TabItem value="go" label="Go">
+
+```go
+var request UserRegisterRequest
+	if err := c.Bind(&request); err != nil {
+		return c.JSON(http.StatusBadRequest, echo.Map{"error": "Invalid request"})
+	}
+
+	email := request.Email
+	tenantID := request.TenantID
+
+	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
+	if !ok {
+		c.Logger().Error("failed to get user info")
+		return c.String(http.StatusInternalServerError, "internal server error")
+	}
+
+	// Retrieve the access token of the user creating the invitation.
+	accessToken := c.Request().Header.Get("X-Access-Token")
+
+	// If the access token is not included in the request header, return an error.
+	if accessToken == "" {
+		return c.String(http.StatusBadRequest, "Access token is missing")
+	}
+
+	// Create the parameters for the tenant invitation.
+	createTenantInvitationJSONRequestBody := authapi.CreateTenantInvitationJSONRequestBody{
+		AccessToken: accessToken,
+		Email:       email,
+		Envs: []struct {
+			Id        uint64   `json:"id"`
+			RoleNames []string `json:"role_names"`
+		}{
+			{
+				Id:        3,                 // Specify the ID of the production environment: 3.
+				RoleNames: []string{"admin"},
+			},
+		},
+	}
+
+	// Call the tenant invitation API.
+	authClient.CreateTenantInvitation(context.Background(), tenantID, createTenantInvitationJSONRequestBody)
+
+	return c.JSON(http.StatusOK, echo.Map{"message": "Create tenant user invitation successfully"})
+```
+
+</TabItem>
+
+<TabItem value="python" label="Python">
+
+```python
+# Retrieve information from the request.
+email = request.email
+tenant_id = request.tenantId
+
+try:
+    # Retrieve the access token of the user creating the invitation.
+    access_token = fast_request.headers.get("X-Access-Token")
+
+    # If the access token is not included in the request header, return an error.
+    if not access_token:
+        raise HTTPException(status_code=401, detail="Access token is missing")
+    
+    # Create the parameters for the tenant invitation.
+    invited_user_environment_information_inner = InvitedUserEnvironmentInformationInner(
+        id=3, # Specify the ID of the production environment: 3.
+        role_names=['admin']
+    )
+    create_tenant_invitation_param = CreateTenantInvitationParam(
+        email=email,
+        access_token=access_token,
+        envs=[invited_user_environment_information_inner]
+    )
+
+    # Call the tenant invitation API.
+    InvitationApi(api_client=api_client).create_tenant_invitation(tenant_id=tenant_id, create_tenant_invitation_param=create_tenant_invitation_param)
+
+    return {"message": "Create tenant user invitation successfully"}
+except Exception as e:
+    print(e)
+    raise HTTPException(status_code=500, detail=str(e))
+```
+
+</TabItem>
+
+<TabItem value="java" label="Java">
+
+```java
+try {
+    String email = requestBody.getEmail();
+    String tenantId = requestBody.getTenantId();
+
+    AuthApiClient apiClient = new Configuration().getAuthApiClient();
+    apiClient.setReferer(request.getHeader("Referer"));
+
+    UserInfoApi userInfoApi = new UserInfoApi(apiClient);
+    UserInfo userInfo = userInfoApi.getUserInfo(getIDToken(request));
+
+    // Retrieve the access token from the request header.
+    String accessToken = request.getHeader("X-Access-Token");
+
+    // If the access token is not included in the request header, return an error.
+    if (accessToken == null || accessToken.isEmpty()) {
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Access token is missing");
+    }
+
+    // Create the parameters for the tenant invitation.
+    InvitedUserEnvironmentInformationInner invitedUserEnvironmentInformationInner = new InvitedUserEnvironmentInformationInner()
+        .id(3) // Specify the ID of the production environment: 3.
+        .addRoleNamesItem("admin");
+    CreateTenantInvitationParam createTenantInvitationParam = new CreateTenantInvitationParam()
+        .email(email)
+        .accessToken(accessToken)
+        .addEnvsItem(invitedUserEnvironmentInformationInner);
+
+    // Call the tenant invitation API.
+    InvitationApi invitationApi = new InvitationApi(apiClient);
+    invitationApi.createTenantInvitation(tenantId, createTenantInvitationParam);
+
+    Map<String, String> successResponse = new HashMap<>();
+    successResponse.put("message", "Create tenant user invitation successfully");
+    return ResponseEntity.ok(successResponse);
+} catch (ApiException e) {
+    System.err.println("API Exception: " + e.getMessage());
+    throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "API Exception: " + e.getMessage(), e);
+} catch (Exception e) {
+    System.err.println("Unexpected Exception: " + e.getMessage());
+    throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected Exception: " + e.getMessage(), e);
+}
+```
+
+</TabItem>
+</Tabs>
