@@ -208,6 +208,91 @@ public ResponseEntity<?> getMe(HttpSession session, HttpServletRequest request) 
 ```
 
 </TabItem>
+
+<TabItem value="csharp" label="C#(.Net8)">
+
+```csharp
+// IDトークン取得用のメソッドを作成
+string? GetBearerToken(HttpContext context)
+{
+    if (context.Request.Headers.TryGetValue("Authorization", out var authHeader) &&
+        authHeader.ToString().StartsWith("Bearer "))
+    {
+        return authHeader.ToString().Substring("Bearer ".Length).Trim();
+    }
+    return null;
+}
+
+app.MapGet("/userinfo", async (HttpContext context) =>
+{
+    // 作成したIDトークン取得用のメソッドから取得
+    var token = GetBearerToken(context);
+    if (string.IsNullOrEmpty(token))
+    {
+        return Results.Unauthorized();
+    }
+
+    try
+    {
+        var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig(), context);
+        var userInfoApi = new UserInfoApi(authApiClientConfig);
+        // 取得したIDトークンを利用して、APIをCallする
+        var userInfo = await userInfoApi.GetUserInfoAsync(token);
+
+        var jsonResponse = userInfo.ToJson();
+        return Results.Text(jsonResponse, "application/json");
+    }
+    catch (Exception ex)
+    {
+        return HandleApiException(ex);
+    }
+});
+```
+
+</TabItem>
+
+<TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
+
+```csharp
+// IDトークン取得用のメソッドを作成
+private string GetBearerToken(HttpRequestMessage request)
+{
+    // Authorization ヘッダーを確認
+    var authHeader = request.Headers.Authorization;
+
+    // Authorization ヘッダーが存在し、スキームが "Bearer" であることを確認
+    if (authHeader != null && authHeader.Scheme.Equals("Bearer", StringComparison.OrdinalIgnoreCase))
+    {
+        return authHeader.Parameter?.Trim() ?? throw new HttpResponseException(HttpStatusCode.Unauthorized);
+    }
+
+    // Authorization ヘッダーが存在しない場合
+    throw new HttpResponseException(HttpStatusCode.Unauthorized);
+}
+
+[HttpGet]
+[Route("userinfo")]
+public async Task<IHttpActionResult> GetUserInfo()
+{
+    try
+    {
+        // 作成したIDトークン取得用のメソッドから取得
+        var token = GetBearerToken(Request);
+        var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig());
+        var userInfoApi = new UserInfoApi(authApiClientConfig);
+        // 取得したIDトークンを利用して、APIをCallする
+        var userInfo = await userInfoApi.GetUserInfoAsync(token);
+
+        return Ok(userInfo);
+    }
+    catch (Exception ex)
+    {
+        return HandleApiException(ex);
+    }
+}
+```
+
+</TabItem>
 </Tabs>
 
 ### リフレッシュトークン
@@ -348,6 +433,71 @@ public ResponseEntity<?> refresh(HttpSession session, HttpServletRequest request
 ```
 
 </TabItem>
+
+<TabItem value="csharp" label="C#(.Net8)">
+
+```csharp
+app.MapGet("/refresh", async (HttpContext context) =>
+{
+    // Cookieからリフレッシュトークンを取得
+    var refreshToken = context.Request.Cookies["SaaSusRefreshToken"];
+    if (string.IsNullOrEmpty(refreshToken))
+    {
+        return Results.BadRequest("No refresh token found.");
+    }
+
+    try
+    {
+        var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig(), context);
+        var credentialApi = new CredentialApi(authApiClientConfig);
+        // 第1引数は一時コードを設定するため、nullを指定
+        // 第2引数に認証フローを refreshTokenAuth に設定し、第3引数にCookieから取得したリフレッシュトークンを設定する
+        var credentials = await credentialApi.GetAuthCredentialsAsync(null, "refreshTokenAuth", refreshToken);
+
+        var jsonResponse = credentials.ToJson();
+        return Results.Text(jsonResponse, "application/json");
+    }
+    catch (Exception ex)
+    {
+        return HandleApiException(ex);
+    }
+});
+```
+
+</TabItem>
+
+<TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
+
+```csharp
+[HttpGet]
+[Route("refresh")]
+public async Task<IHttpActionResult> Refresh()
+{
+    try
+    {
+        // Cookieからリフレッシュトークンを取得
+        var refreshTokenCookie = Request.Headers.GetCookies("SaaSusRefreshToken").FirstOrDefault();
+        if (refreshTokenCookie == null)
+        {
+            return BadRequest("No refresh token found.");
+        }
+
+        var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig());
+        var credentialApi = new CredentialApi(authApiClientConfig);
+        // 第1引数は一時コードを設定するため、nullを指定
+        // 第2引数に認証フローを refreshTokenAuth に設定し、第3引数にCookieから取得したリフレッシュトークンを設定する
+        var credentials = await credentialApi.GetAuthCredentialsAsync(null, "refreshTokenAuth", refreshTokenCookie["SaaSusRefreshToken"].Value);
+
+        return Ok(credentials);
+    }
+    catch (Exception ex)
+    {
+        return HandleApiException(ex);
+    }
+}
+```
+
+</TabItem>
 </Tabs>
 
 ### アクセストークン
@@ -455,7 +605,7 @@ public ResponseEntity<?> refresh(HttpSession session, HttpServletRequest request
 <TabItem value="go" label="Go">
 
 ```go
-    var request UserRegisterRequest
+var request UserRegisterRequest
 	if err := c.Bind(&request); err != nil {
 		return c.JSON(http.StatusBadRequest, echo.Map{"error": "Invalid request"})
 	}
@@ -581,6 +731,113 @@ try {
 } catch (Exception e) {
     System.err.println("Unexpected Exception: " + e.getMessage());
     throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected Exception: " + e.getMessage(), e);
+}
+```
+
+</TabItem>
+
+<TabItem value="csharp" label="C#(.Net8)">
+
+```csharp
+// バリデーションの実行
+var validationResults = new List<ValidationResult>();
+var validationContext = new ValidationContext(requestBody);
+if (!Validator.TryValidateObject(requestBody, validationContext, validationResults, true))
+{
+    var errors = validationResults.Select(vr => new { Field = vr.MemberNames.FirstOrDefault(), Error = vr.ErrorMessage });
+    return Results.BadRequest(new { error = "Validation failed.", details = errors });
+}
+
+string email = requestBody.Email;
+string tenantId = requestBody.TenantId;
+
+try
+{
+    // 招待を作成するユーザーのアクセストークンを取得
+    var accessToken = context.Request.Headers["X-Access-Token"].FirstOrDefault();
+
+    // アクセストークンがリクエストヘッダーに含まれていなかったらエラー
+    if (string.IsNullOrEmpty(accessToken))
+    {
+        return Results.Unauthorized();
+    }
+
+    var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig(), context);
+    var invitationApi = new InvitationApi(authApiClientConfig);
+
+    // envsに追加するオブジェクトを作成
+    var invitedEnv = new InvitedUserEnvironmentInformationInner(
+        id: 3, // 本番環境のid:3を指定
+        roleNames: new List<string> { "admin" }
+    );
+
+    // envsのリストを作成
+    var envsList = new List<InvitedUserEnvironmentInformationInner> { invitedEnv };
+
+    // テナント招待のパラメータを作成
+    var createTenantInvitationParam = new CreateTenantInvitationParam(
+        email,
+        accessToken,
+        envsList
+    );
+
+    // テナントへの招待を作成
+    invitationApi.CreateTenantInvitation(tenantId, createTenantInvitationParam);
+
+    return Results.Ok(new { message = "Create tenant user invitation successfully" });
+}
+catch (Exception ex)
+{
+    Console.Error.WriteLine($"Error: {ex.Message}");
+    return Results.Problem(detail: ex.Message, statusCode: 500);
+}
+```
+
+</TabItem>
+
+<TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
+
+```csharp
+// バリデーションのチェック
+if (!ModelState.IsValid)
+    return BadRequest(ModelState);
+
+string email = request.Email;
+string tenantId = request.TenantId;
+
+try
+{
+    // 招待を作成するユーザーのアクセストークンを取得
+    var accessToken = HttpContext.Current.Request.Headers.Get("X-Access-Token");
+
+    var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig());
+    var invitationApi = new InvitationApi(authApiClientConfig);
+
+    // envsに追加するオブジェクトを作成
+    var invitedEnv = new InvitedUserEnvironmentInformationInner(
+        id: 3, // 本番環境のid:3を指定
+        roleNames: new List<string> { "admin" }
+    );
+
+    // envsのリストを作成
+    var envsList = new List<InvitedUserEnvironmentInformationInner> { invitedEnv };
+
+    // テナント招待のパラメータを作成
+    var createTenantInvitationParam = new CreateTenantInvitationParam(
+        email,
+        accessToken,
+        envsList
+    );
+
+    // 非同期メソッドを使用する場合（CreateTenantInvitationが非同期の場合）
+    invitationApi.CreateTenantInvitation(tenantId, createTenantInvitationParam);
+
+    // 結果を返す
+    return Ok(new { message = "Create tenant user invitation successfully", request });
+}
+catch (Exception ex)
+{
+    return HandleApiException(ex);
 }
 ```
 
