@@ -6,131 +6,69 @@ hidden: false
 createdAt: "Fri Jan 20 2023 01:46:57 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
-## The first step of pricing, metering, and billing using the SaaSus Platform
+The first step of pricing, metering, and billing using the SaaSus Platform
 
-### Creating a Pricing Plan Using the SaaSus Development Console
+## Structure and Terminology of Pricing Plans
 
-Log in to the SaaSus Development Console on the SaaSus Platform and set up a pricing plan.
+In SaaSus, pricing plans are organized in the following **hierarchical structure**:
 
-The SaaS Platform allows the creation of pricing plans that support subscription and pay-as-you-go models.
+![](/img/tutorial/manage-rate-plans/manage-rate-plans-05.png)
 
-For example, create a pricing plan like this:
+- **Metering Unit**: An item used to measure usage, such as the number of comments or users.
+- **Measurement Unit**: The smallest unit that serves as the basis for pricing.
+  - **Fixed Unit**: A unit where a fixed fee is charged on a regular basis, such as monthly.
+  - **Usage Unit**: A unit where a fixed amount is charged per usage.
+  - **Tiered Unit**: A unit where a fixed fee is applied based on usage ranges, similar to tiered data charges in mobile plans.
+  - **Tiered Usage Unit**: A unit where the per-unit price decreases as usage increases, similar to volume discount pricing.
+- **Feature Menu**: A set of one or more measurement units grouped into a feature. Multiple feature menus can be combined to define a pricing plan.
+- **Pricing Plan**: The top-level pricing definition assigned to a tenant.
+  - A pricing plan consists of one or more function menus.
+  - Each tenant can be assigned a specific pricing plan. You can also create a private pricing plan for individual tenants if needed.
 
-- Free plan
+---
+
+## Creating a Pricing Plan Using the SaaSus Developer Console
+
+SaaSus Platform allows you to define pricing plans that support both subscription-based and usage-based billing models.
+
+In this tutorial, we’ll walk through how to configure two example pricing plans:
+
+### Example Pricing Plans
+
+- **Free plan**
   - Number of comments Max 10
-- Basic plan
+- **Basic plan**
   - Fixed fee 500 yen
   - Number of comments pay-as-you-go
-    - Up to 10 comments, 0 yen
-    - From 11 comments to 100 comments, 500 yen
+    - Up to 10 comments, 500 yen
+    - From 11 comments to 50 comments, 1000 yen
+    - From 51 comments to 100 comments, 1500 yen
     - Max 100 comments
 
 | Plan       | Basic Charge | Number of Comments                                                                                         |
 | :--------- | -----------: | :--------------------------------------------------------------------------------------------------------- |
 | Free       |              | 10                                                                                                         |
-| Basic      |      500 yen | Pay-as-you-go<br/> 0 yen: Up to 10 comments<br/> 500 yen: 11 to 100 comments<br/> Up to 100 comments          |
+| Basic      |      500 yen | Pay-as-you-go<br/> 500 yen: Up to 10 comments<br/> 1000 yen: 11 to 50 comments<br/> 1500 yen: 51 to 100 comments<br/> Up to 100 comments          |
 
-To define such a pricing plan in the SaaSus Platform,
+## Structure of the Free Plan
 
-Measurement Unit
+The Free Plan is a simple plan that allows up to 10 comments at no cost.
 
-・Unit for measuring usage and charging
+![](/img/tutorial/manage-rate-plans/manage-rate-plans-06.png)
 
-Feature Menu
+## Structure of the Basic Plan
 
-・A unit provided as a feature by combining measurement units
+The Basic Plan combines a fixed monthly fee with tiered usage-based pricing for comment count.
 
-Rate plan
+![](/img/tutorial/manage-rate-plans/manage-rate-plans-07.png)
 
-・Plan units linked to tenants
+You can create multiple measurement units, each of which can be linked to a metering unit as needed (not required for fixed unit).
 
-Create units of
+Based on this structure, you can use the SaaSus Developer Console to configure each component: metering units, measurement units, feature menus, and pricing plans.
 
-For example,
+For detailed input steps and screenshots, please refer to the following guide:
 
-- Basic plan
-  - Fixed fee 500 yen
-  - Number of comments pay-as-you-go
-    - Up to 10 comments, 500 yen
-    - From 11 to 50 comments, 1,000 yen
-    - 51 to 100 comments, 1,500 yen
-
-If you set
-
-The measurement unit as
-
-- Basic fixed unit 500 yen
-- Number of comments tiered usage units
-  - Up to 10 comments, 500 yen
-  - From 11 to 50 comments, 1,000 yen
-  - 51 to 100 comments, 1,500 yen
-
-Create units and set the upper limit to 100.
-
-The feature menu is
-
-- Basic feature menu
-  - Include the above three units of measure
-
-The price plan is
-
-- Basic plan
-  - Include Basic feature menu
-
-Use following steps.
-
-The measurement unit, feature menu, and price plan that will be created this time are as follows. Please see the video for details.
-
-[See here for the setting contents (image) of the measurement unit, feature menu, and price plan settings.](https://docs.saasus.io/docs/setting-measurement-units-function-menus-and-price-plans) 
-
-#### Measurement Unit
-
-##### Basic Pricing
-
-Measurement Unit: Fixed Units
-
-| Measurement Unit Name | Measurement Unit Display Name | Measurement Unit Description | Amount |       |     |
-| :-------------------- | :---------------------------- | :--------------------------- | :----- | :---- | :-- |
-| basic_base            | Basic Plan Base Fee           | Basic Plan Base Fee          | 500    | Month | JPY |
-
-##### Free Plan
-
-Measurement Unit: Usage Unit
-
-| Measurement Unit Name | Measurement Unit Display Name | Measurement Unit Description | Target Meter Name | Amount per Unit Usage | Limit | Currency |
-| :-------------------- | :---------------------------- | :--------------------------- | :---------------- | :-------------------- | :---- | :------- |
-| free_comment          | Number of Free Plan comments  | Number of Free Plan comments | comment_count     | 0                     | 10    | JPY      |
-
-##### Basic plan
-
-Unit of Measure: Tiered Unit
-
-| Measurement  Unit Name | Measurement Unit Display Name     | Measurement Unit Description      | Target Meter Name | Range           | Limit | Currency |
-| :--------------------- | :-------------------------------- | :-------------------------------- | :---------------- | :-------------- | :---- | -------: |
-| basic_comment          | Number of comments for Basic plan | Number of comments for Basic plan | comment_count     | See table below | 100   |      JPY |
-
-Range
-
-| More than | Less than | Unit amount | Fixed amount |
-| --------: | --------: | ----------: | -----------: |
-|         0 |        10 |           0 |            0 |
-|        11 |        59 |           0 |         1000 |
-|        51 |       100 |           0 |         1500 |
-
-
-#### Feature Menu
-
-| Feature Menu Name | Feature Menu Display Name  | Feature Menu Description   | Measurement Unit                                                               |
-| :---------------- | :------------------------- | :------------------------- | :----------------------------------------------------------------------------- |
-| free_menu         | Free plan basic menu       | Free plan basic menu       | Free plan users<br/>Free plan comments                                          |
-| basic_menu        | Basic plan basic menu      | Basic plan basic menu      | Basic plan basic fee<br/>Basic plan users<br/>Basic plan comments                |
-
-#### Pricing Plan
-
-| Pricing Plan Name | Pricing Plan Display Name | Pricing Plan Description | Feature Menu               |
-| :---------------- | :------------------------ | :----------------------- | :------------------------- |
-| Free plan         | Free plan                 | Free plan                | Free plan basic menu       |
-| Basic Plan        | Basic Plan                | Basic Plan               | Basic Plan Basic Menu      |
+[See the step-by-step guide here (with screenshots)](./setting-measurement-units-function-menus-and-price-plans)
 
 ### Linking Billing Using the SaaSus Development Console
 
