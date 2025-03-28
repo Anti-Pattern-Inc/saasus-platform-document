@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 When configuring the backend as serverless, the following implementations are required:
 - Store the token (JWT), which is the authentication information for the SaaSus Platform, in the browser's local storage.
 - SaaS Platform users authenticate themselves using the JWT.
-- The frontend is implemented with React, Vue.js, etc.
+- The frontend is implemented with React, etc.
 - The backend is implemented using serverless services such as Lambda.
 
 # Flow (JWT Acquisition ~ Tenant Onboarding)
