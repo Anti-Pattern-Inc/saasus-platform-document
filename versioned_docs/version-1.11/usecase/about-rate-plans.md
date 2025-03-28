@@ -31,7 +31,15 @@ SaaS usage fees should not be considered based on cost, but rather on how much v
 Therefore, complex pricing will force customers to make complex calculations and forecasts, and while using SaaS will reduce the burden on customers, it will place a burden on them for pricing calculations and forecasts.
 You should create a pricing plan that is as simple and easy to understand as possible.
 
-[Click here for settings (images) of measurement units, function menus, and price plan settings for Individual and Enterprise plans.](./about-rate-plans/basic-charge-preference)
+[Click here for settings (images) of metering units, measurement units, function menus, and price plan settings for Individual and Enterprise plans.](./about-rate-plans/basic-charge-preference)
+
+## Metering Units
+
+### Example: Comment Count
+
+| Unit Name    | Unit Display Name   | Unit Description |
+|:-----------|:-------------|:-----------------|
+| comment_count | Comment Count | Comment Count    |
 
 ## Measurement Unit
 
@@ -44,13 +52,13 @@ Measurement Unit: Fixed Units
 | individual_base         | Individual Plan Base Fee        | Individual Plan Base Fee       | 3000   | Month | JPY |
 | enterprise_base       | Enterprise Plan Base Fee      | Enterprise Plan Base Fee     | 50000  | Month | JPY |
 
-#### Individual Plan
+#### Individual Plan – Tiered Usage Unit
 
 Measurement Unit: Tiered Usage Unit
 
 | Measurement Unit Name | Measurement Unit Display Name       | Measurement Unit Description        | Target Meter Name | Currency | Range           | Limit |
 | :-------------------- | :---------------------------------- | :---------------------------------- | :---------------- | :------- | :-------------- | ----: |
-| advanced_comment      | number of comments in Advanced plan | number of comments in Advanced plan | comment_count     | JPY      | see table below |     0 |
+| individual_comment      | number of comments in Individual plan | number of comments in Individual plan | Comment Count     | JPY      | see table below |     0 |
 
 Range
 
@@ -60,22 +68,22 @@ Range
 |        11 |       100 |           2 |            0 |
 |       101 |           |           1 |            0 |
 
-#### Enterprise Plan
+#### Enterprise Plan – Usage Unit
 
 Measurement Unit: Usage Unit
 
 | Measurement Unit Name | Measurement Unit Display Name | Measurement Unit Description | Target Meter Name | Amount per Unit Usage | Limit | Currency |
 | :-------------------- | :---------------------------- | :--------------------------- | :---------------- | :-------------------- | :---- | :------- |
-| enterprise_comment    | Enterprise Plan Comments      | Enterprise Plan Comments     | user_comment      | 0                     | 0     | JPY      |
+| enterprise_comment    | number of comments in Enterprise plan      | number of comments in Enterprise plan     | Comment Count      | 0                     | 0     | JPY      |
 
-### Feature Menu
+## Feature Menu
 
 | Feature Menu Name | Feature Menu Display Name  | Feature Menu Description   | Measurement Unit                                                               |
 | :---------------- | :------------------------- | :------------------------- | :----------------------------------------------------------------------------- |
 | individual_menu     | Individual plan basic menu   | Individual plan basic menu   | Individual plan basic fee<br/>Individual plan comments       |
 | enterprise_menu   | Enterprise plan basic menu | Enterprise plan basic menu | Enterprise plan basic fee<br/>Enterprise plan comments |
 
-#### Pricing Plan
+## Pricing Plan
 
 | Pricing Plan Name | Pricing Plan Display Name | Pricing Plan Description | Feature Menu               |
 | :---------------- | :------------------------ | :----------------------- | :------------------------- |

@@ -36,26 +36,24 @@ Also, please be extremely careful not to leak your API key to outside parties. T
 
 Now, let's open the sample application we just prepared in the development environment.
 
-As mentioned at the beginning, the docker container has been started using init.sh, and
+As mentioned at the beginning, the docker container has been started using `init.sh`, and
 
-please check that the sample application is running at [http://localhost/board](http://localhost/board) for PHP, 
+- For **Laravel**, check that the sample application is running at [http://localhost/board](http://localhost/board).
+- For **Express**, check that it is running at [http://localhost/login/](http://localhost/login/).
 
-or at [http://localhost:3000/board](http://localhost:3000/board) for Next.js.
+First, to use the SaaSus Platform, you need to integrate the SaaSus SDK into your application.
 
-First, to use the SaaSus Platform, embed the SaaSus SDK into your application.
-
-For PHP, use composer.
-
-For Next.js, use npm.
+- For Laravel, use **Composer**.
+- For Express, use **npm**.
 
 Open a terminal and set up the SDK.
 
 ```mdx-code-block
 <Tabs>
-<TabItem value="php" label="PHP" default>
+<TabItem value="laravel-bash" label="Laravel (Bash)" default>
 ```
 
-```txt
+```bash
 repo$ docker compose exec php bash
 root@xxx:/var/www# cd api
 root@xxx:/var/www/api# composer config repositories.saasus-platform/saasus-sdk-php vcs https://github.com/saasus-platform/saasus-sdk-php
@@ -64,12 +62,13 @@ root@xxx:/var/www/api# composer require saasus-platform/saasus-sdk-php
 
 ```mdx-code-block
 </TabItem>
-<TabItem value="nodejs" label="Node.js">
+<TabItem value="express-bash" label="Express (Bash)">
 ```
 
-```txt
+```bash
 repo$ docker compose exec node bash
-repo$ npm install saasus-sdk
+root@xxx:/app# npm install saasus-sdk
+root@xxx:/app# exit
 ```
 
 ```mdx-code-block
@@ -77,17 +76,32 @@ repo$ npm install saasus-sdk
 </Tabs>
 ```
 
-After installing SaaSus SDK, first let's define the environment variables required to use SaaSus SDK.
+## Setting Environment Variables
 
-Create a .env file by copying the .env.example file in the api directory, and edit the following section at the bottom of the .env file.
+After installing the SaaSus SDK, set the environment variables required to use it.
 
-```.env
-### for SaaSus Platform
-SAASUS_SAAS_ID="98tjo3wifaoua （Screen SaaS ID）"
-SAASUS_API_KEY="kjntowjfoasnkjntwonsflajsno4as （Screen API Key）"
-SAASUS_SECRET_KEY=" （Screen client secret）"
-SAASUS_LOGIN_URL=" （Login screen URL）"
-SAASUS_AUTH_MODE="api"（For Next.js, please write）
+First, copy the `.env.example` file in the `api` directory to create a `.env` file:
+
+```bash
+cp api/.env.example api/.env
 ```
 
-For SAASUS_SAAS_ID, SAASUS_API_KEY, and SAASUS_SECRET_KEY, set the SaaS ID, API key, and client secret displayed on the screen earlier, and for SAASUS_LOGIN_URL, set the URL of the login screen created in the SaaSus development console.
+Next, open the newly created `.env` file and enter the following values:
+
+---
+
+### Environment Variables for the SaaSus Platform
+
+```env
+SAASUS_SAAS_ID="Enter your SaaS ID"
+SAASUS_API_KEY="Enter your API key"
+SAASUS_SECRET_KEY="Enter your client secret"
+SAASUS_LOGIN_URL="Enter your login screen URL"
+```
+
+You can find these values in the SaaSus development console:
+
+- On the **Basics > API Key** screen: `SAASUS_SAAS_ID`, `SAASUS_API_KEY`, `SAASUS_SECRET_KEY`
+- On the **Authentication Authorization > Advanced Settings** screen: `SAASUS_LOGIN_URL`
+
+With this, the basic setup of the SDK is complete.

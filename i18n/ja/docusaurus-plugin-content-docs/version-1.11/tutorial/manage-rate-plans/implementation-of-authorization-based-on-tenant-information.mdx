@@ -28,12 +28,11 @@ import TabItem from '@theme/TabItem';
 
 では、この料金プランに紐付いた上限数をテナントごとに取得して、制限をかけてみましょう。
 
-Blade 版では、api/app/Http/Controllers/MessageController.php のpostメソッドを書き換えてみましょう。
-
-Next.js 版では、api/controllers/api/board.ts へimport文を追加し、postメソッドを書き換えてみましょう。
+- Laravel では、`api/app/Http/Controllers/MessageController.php` の`post`メソッドを書き換えてみましょう。
+- Express では、`api/controllers/chat.ts` へ`import文`を追加し、`postChats`メソッドを書き換えてみましょう。
 
 <Tabs>
-<TabItem value="php" label="PHP">
+<TabItem value="php" label="Laravel (PHP)">
 
 ```php
    public function post(Request $request)
@@ -81,19 +80,19 @@ Next.js 版では、api/controllers/api/board.ts へimport文を追加し、post
 
 </TabItem>
 
-<TabItem value="nodejs" label="Node.js">
+<TabItem value="typescript" label="Express (TS)">
 ```js
 import { UpdateMeteringUnitTimestampCountNowParam } from "saasus-sdk/dist/generated/Pricing";
 import { findUpperCountByMeteringUnitName, PricingClient } from "saasus-sdk";
 
 // 他のコードは省略
 
-const post = async (req: Request, res: Response) => {
+const postChats = async (req: Request, res: Response) => {
   const mes = req.body.message;
   const tenantId = req.userInfo?.tenants[0].id || "";
   const planId = req.userInfo?.tenants[0].plan_id || "";
   const userName =
-    req.userInfo?.tenants[0].user_attribute.username || "test user";
+    req.userInfo?.tenants[0].user_attribute.username;
   try {
     const pricingClient = new PricingClient();
     const pricingPlan = await pricingClient.pricingPlansApi.getPricingPlan(
@@ -134,10 +133,10 @@ const post = async (req: Request, res: Response) => {
           param
         );
     }
-    return res.status(201).send();
   } catch (error) {
     console.error(error);
   }
+  res.redirect("/chat");
 };
 ```
 </TabItem>
@@ -206,5 +205,3 @@ const post = async (req: Request, res: Response) => {
 
 制限はSaaSusと連携後から1件とカウントします。  
 APIとしてカウントの制限値を変更する機能など提供しております。
-
-ここまでは、Bladeベースでのアプリケーションへの実装でしたが、最後に Next.js(APIベースでのSPA)への実装の場合はどのようにすればよいか？確認しておきましょう。

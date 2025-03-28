@@ -8,11 +8,6 @@ createdAt: "Wed Jan 11 2023 03:12:50 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
 
-※全体の流れを動画でご覧になることもできます。  
-[https://www.youtube.com/watch?v=deSkPJ-zTgw](https://www.youtube.com/watch?v=deSkPJ-zTgw)
-
-## SaaSus Platform の準備
-
 ### SaaSus Platform アカウントの作成
 
 まずは、SaaSus Platform のアカウントを作成しましょう。
@@ -51,44 +46,6 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 SaaSus Platformではドメインを設定することで、ログイン画面の自動生成やメール送信の際のベースドメインに設定することができます。<br/>
 ドメインの設定方法に関しては、[ドメイン名の設定](../saas-development-console/domain-name-preference)で確認してください。
 :::
-
-### ユーザに追加属性を定義する
-
-次に、ユーザ属性を定義します。
-
-サイドメニューの「ユーザ属性定義」をクリックします。
-
-![06](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-06.png)
-
-SaaSus Platform 上では、初期状態では管理する SaaS のユーザはユーザ ID(UUID)とメールアドレスしか持っていません。これで足りない場合は、ユーザに追加の属性を持たせることができます。
-
-SaaS 設計者は、ユーザに関するどの属性を SaaSus Platform 側でもち、どの属性を SaaS 側で持つかの分担を考える必要があります。
-
-たとえば、すべてのユーザ情報を SaaSus Platform 側で管理したい場合は、必要な追加属性を SaaSus Platform に定義します。しかし、個人情報などの重要な情報は SaaSus Platform 側で管理したくなかったり、ユーザの追加属性をもとに各種集計を行いたい場合などがあります。その場合には、SaaSus Platform 側には認証だけを求め、ユーザ情報の管理は SaaS 側でユーザマスタをベースに行い、UUID を SaaSus Platform 側の認証情報と紐付ける方が柔軟に対応できます。
-
-今回はサンプルアプリケーションでユーザ名が必要になるので、「ユーザー名」という属性を定義してみます。
-
-「＋ユーザ属性の作成」ボタンをクリックすると、ユーザ属性作成のポップアップが表示されます
-
-属性名は、SaaS アプリケーション(プログラム)側で識別するためのキーとして使います。そのため、英字で入力しておくのが無難です。
-
-表示名は、その属性がどういうものか？をわかるように記載します。
-
-タイプは、データ型を指定します。
-
-今回はサンプルアプリケーションのために、以下で設定します
-
-- 属性名： username
-- 表示名： ユーザー名
-- タイプ： 文字列
-
-入力したら、「作成」ボタンを押します
-
-![07](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-07.png)
-
-ユーザー属性が追加されました。
-
-![08](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-08.png)
 
 :::info
 SaaS アプリケーションを実際に開発する際には必要となる主な登録情報の設定方法は、下記ページを確認してください。<br/>

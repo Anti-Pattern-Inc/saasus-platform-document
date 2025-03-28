@@ -20,15 +20,19 @@ If you are using AWS EC2 or Cloud9 to create an operating environment for the Bl
 
 :::
 
-This simple chat system uses PHP 8, Laravel 9, and PostgreSQL 13 as the backend.  
+This simple chat system comes with two configuration options:
 
-The front end includes two SPA (Single Page Application) created with Laravel with Blade and Next.js.
+1. Laravel + Blade (PHP 8 / Laravel 9 / PostgreSQL 13)  
+2. Express + EJS (Node.js / Express 4.16.x / PostgreSQL 13)
 
-Prerequisites<br/>
-- PHP 8 must be installed.<br/>
-- Composer must be installed.<br/>
-- PostgreSQL 13 is installed and properly configured.<br/>
-- Node.js and npm must be installed.
+In either setup, it is possible to use Next.js as the frontend with additional configuration.  
+However, Next.js is not used in this tutorial.
+
+### Prerequisites
+- PHP 8 must be installed (for Laravel + Blade).
+- Composer must be installed (for Laravel + Blade).
+- PostgreSQL 13 must be installed and properly configured.
+- Node.js and npm must be installed (for Express + EJS).
 
 First, clone the sample application from the repository below.
 
@@ -36,10 +40,10 @@ First, clone the sample application from the repository below.
 git clone https://github.com/saasus-platform/sampleapp-basic-chat
 ```
 
-After cloning, move to the directory below and execute the command.
+After cloning the repository, move to the appropriate application directory and perform the initial setup.
 
-- For PHP, under `sampleapp-basic-chat/php/laravel`
-- For Next.js, under `sampleapp-basic-chat/node/express`
+- **Laravel + Blade**: `sampleapp-basic-chat/php/laravel`
+- **Express + EJS**: `sampleapp-basic-chat/node/express`
 
 ```shell
 ./init.sh
@@ -49,29 +53,29 @@ The application was launched locally.
 
 Once launched, try it out by accessing the URL below.
 
-Blade version
+### Laravel + Blade Version
 
-URL: [http://localhost/board](http://localhost/board<br/>)<br/>
-Authentication Email: [user@example.com](mailto:user@example.com)<br/>
-Password: password
+- URL: [http://localhost/board](http://localhost/board<br/>)
+- Authentication Email: [user@example.com](mailto:user@example.com)
+- Password: password
 
 ![サンプル](/img/tutorial/prepare-the-sample-application/prepare-the-sample-application-01.png)
 
-Next.js version
+### Express + EJS Version
 
-URL: [http://localhost/login/](http://localhost/login/)<br/>
-Authentication Email: [user@example.com](mailto:user@example.com)<br/>
-Password: password
+- URL: [http://localhost/login/](http://localhost/login/)
+- Authentication Email: [user@example.com](mailto:user@example.com)
+- Password: password
 
 :::caution
-The Next.js version may take several minutes to build. If it doesn't display, wait a few minutes and try to view it again.
+The Express + EJS version may take several minutes to build. If it doesn't display, wait a few minutes and try to view it again.
 :::
 
 ![サンプル](/img/tutorial/prepare-the-sample-application/prepare-the-sample-application-02.png)
 
-To allow users to post freely, we currently use Laravel's standard authentication module to identify users.
+To allow users to post freely, the Laravel version uses Laravel's standard authentication module, while the Express version uses a custom authentication mechanism to identify users.
 
-By introducing the SaaSus Platform and performing user authentication via the SaaSus Platform, you will be able to easily identify users and obtain tenant information associated with them.
+By integrating the SaaSus Platform and handling user authentication through it, you can easily identify users and retrieve tenant information associated with them.
 
 There is no need for the SaaS application to design tenant data or manage information.
 
@@ -81,9 +85,12 @@ Information held by the SaaSus Platform can be registered, acquired, and updated
 
 Let's turn this simple web application into SaaS.
 
-\*Please refer to the following for the difference between the source code at the start and end of the tutorial.<br/>
-PHP  
+\*Please refer to the following for the difference between the source code at the start and end of the tutorial.
+
+**Laravel + Blade**    
 [https://github.com/saasus-platform/sampleapp-basic-chat/pull/10/files](https://github.com/saasus-platform/sampleapp-basic-chat/pull/10/files)
 
-Next.js  
+**Express + EJS**  
 [https://github.com/saasus-platform/sampleapp-basic-chat/pull/11/files](https://github.com/saasus-platform/sampleapp-basic-chat/pull/11/files)
+
+* These differences also include changes required when using Next.js.
