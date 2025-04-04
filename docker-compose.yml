@@ -8,5 +8,5 @@ services:
     volumes:
       - ./:/usr/src/app
     ports:
-      - 3000:3000
+      - 3001:3000
     working_dir: /usr/src/app
