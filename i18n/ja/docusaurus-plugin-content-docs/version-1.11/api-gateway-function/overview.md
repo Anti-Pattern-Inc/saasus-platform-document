@@ -1,5 +1,5 @@
 ---
-title: "Smart API Gateway 機能(β版)"
+title: "Smart API Gateway 機能"
 slug: "overview"
 excerpt: ""
 hidden: false
