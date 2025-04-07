@@ -74,7 +74,7 @@ The transition page can be set at:
 SaaS Development Console - Basics - Auth Transition - Callback URL
 
 When self-signup is enabled, the following judgement needs to be made at the Callback URL.  
-You can verify this by checking the presence of 'tenants' information in the array obtained through `$request->userinfo`.
+This verification can be performed by checking whether the tenants information is included within the UserInfo array obtained from the SaaSus Platform.
 
 <Tabs>
 <TabItem value="php" label="PHP">
@@ -82,6 +82,64 @@ You can verify this by checking the presence of 'tenants' information in the arr
 ```php
         // Implement self-signup process if tenant registration isn't done
         if (empty($request->userinfo['tenants']))
+```
+
+</TabItem>
+
+<TabItem value="nodejs" label="Node.js">
+
+```js
+        const userInfo = request.userInfo
+
+        // Implement self-signup process if tenant registration isn't done
+        if (!userInfo.tenants || userInfo.tenants.length === 0)
+```
+
+</TabItem>
+
+<TabItem value="go" label="Go">
+
+```go
+        userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
+
+        // Implement self-signup process if tenant registration isn't done
+        if len(userInfo.Tenants) == 0 
+```
+
+</TabItem>
+
+<TabItem value="python" label="Python">
+
+```python
+        // Implement self-signup process if tenant registration isn't done
+        if not auth_user.tenants:
+```
+
+</TabItem>
+
+<TabItem value="java" label="Java">
+
+```java
+        // Implement self-signup process if tenant registration isn't done
+        if (userInfo.getTenants() == null || userInfo.getTenants().isEmpty())
+```
+
+</TabItem>
+
+<TabItem value="csharp" label="C#(.Net8)">
+
+```csharp
+        // Implement self-signup process if tenant registration isn't done
+        if (userInfo.Tenants == null || !userInfo.Tenants.Any())
+```
+
+</TabItem>
+
+<TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
+
+```csharp
+        // Implement self-signup process if tenant registration isn't done
+        if (userInfo.Tenants == null || !userInfo.Tenants.Any())
 ```
 
 </TabItem>
@@ -93,13 +151,73 @@ Try modifying the <a href="/docs/usecase/about-saas-user-accounts/create-tenant"
 
 Once tenant registration can be done, let's <a href="/docs/usecase/about-saas-user-accounts/add-tenant-user" target="_blank">assign a user to a tenant and set a role</a>.
 
-Once tenant creation and tenant user creation is done, confirm whether the tenant information set in `$request->userinfo['tenants']` is output or not.
+After creating a tenant and a tenant user, verify whether the configured tenant information appears in the tenants array within UserInfo.
 
 <Tabs>
 <TabItem value="php" label="PHP">
 
 ```php
 dd($request->userinfo['tenants']);
+```
+
+</TabItem>
+
+<TabItem value="nodejs" label="Node.js">
+
+```js
+        const userInfo = request.userInfo
+        console.log(userInfo.tenants)
+```
+
+</TabItem>
+
+<TabItem value="go" label="Go">
+
+```go
+        fmt.Printf("Tenants: %+v\n", tenants)
+```
+
+</TabItem>
+
+<TabItem value="python" label="Python">
+
+```python
+        print(auth_user.tenants)
+```
+
+</TabItem>
+
+<TabItem value="java" label="Java">
+
+```java
+        UserInfo userInfo = null;
+        userInfo = userInfoApi.getUserInfo(getIDToken(request));
+        System.out.println(userInfo);
+```
+
+</TabItem>
+
+<TabItem value="csharp" label="C#(.Net8)">
+
+```csharp
+        var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig(), context);
+        var userInfoApi = new UserInfoApi(authApiClientConfig);
+        var userInfo = await userInfoApi.GetUserInfoAsync(token);
+        Console.WriteLine(string.Join("\n", userInfo.Tenants.Select(tenant => tenant.ToString())));
+```
+
+</TabItem>
+
+<TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
+
+```csharp
+        var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig());
+        var userInfoApi = new UserInfoApi(authApiClientConfig);
+        var userInfo = await userInfoApi.GetUserInfoAsync(token);
+        foreach (var tenant in userInfo.Tenants)
+        {
+            Console.WriteLine(tenant.ToString());
+        }
 ```
 
 </TabItem>
@@ -126,6 +244,86 @@ Firstly, register a new user on SaaS.
             ->setPassword($inputs['password']);
 
         $authApiClient->createSaasUser($createSaasUserParam);
+```
+
+</TabItem>
+
+<TabItem value="nodejs" label="Node.js">
+
+```js
+        const client = new AuthClient()
+
+        const createSaasUserParam: CreateSaasUserParam = {
+          email,
+          password
+        }
+
+        await client.saasUserApi.createSaasUser(createSaasUserParam)
+```
+
+</TabItem>
+
+<TabItem value="go" label="Go">
+
+```go
+        var authClient *authapi.ClientWithResponses
+
+        createSaasUserParam := authapi.CreateSaasUserJSONRequestBody{
+          Email:    email,
+          Password: password,
+        }
+
+        _, err = authClient.CreateSaasUser(context.Background(), createSaasUserParam)
+```
+
+</TabItem>
+
+<TabItem value="python" label="Python">
+
+```python
+        from saasus_sdk_python.src.auth import SaasUserApi, CreateSaasUserParam
+
+        api_client = SignedAuthApiClient()
+        
+        create_saas_user_param = CreateSaasUserParam(email=email, password=password)
+
+        SaasUserApi(api_client=api_client).create_saas_user(create_saas_user_param=create_saas_user_param)
+```
+
+</TabItem>
+
+<TabItem value="java" label="Java">
+
+```java
+        AuthApiClient apiClient = new Configuration().getAuthApiClient();
+        apiClient.setReferer(request.getHeader("Referer"));
+        
+        CreateSaasUserParam createSaasUserParam = new CreateSaasUserParam().email(email).password(password);
+        saasUserApi.createSaasUser(createSaasUserParam);
+```
+
+</TabItem>
+
+<TabItem value="csharp" label="C#(.Net8)">
+
+```csharp
+        var saasUserApi = new SaasUserApi(authApiClientConfig);
+
+        var createSaasUserParam = new CreateSaasUserParam(email, password);
+        
+        await saasUserApi.CreateSaasUserAsync(createSaasUserParam);
+```
+
+</TabItem>
+
+<TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
+
+```csharp
+        var saasUserApi = new SaasUserApi(authApiClientConfig);
+
+        var createSaasUserParam = new CreateSaasUserParam(email, password);
+        
+        await saasUserApi.CreateSaasUserAsync(createSaasUserParam);
 ```
 
 </TabItem>

@@ -52,7 +52,7 @@ Password: password
 
 Next.js version
 
-URL: [http://localhost:80/login/](http://localhost:80/login/)
+URL: [http://localhost/login/](http://localhost/login/)
 Authentication Email: [user@example.com](mailto:user@example.com)  
 Password: password
 

@@ -22,7 +22,7 @@ const sidebars = {
     {
       type: "category",
       label: "Getting Started",
-      items: ["saasus-platform-document", "faq"],
+      items: ["saasus-platform-document", "sdk-list", "faq"],
       collapsed: false,
       collapsible: false,
     },
@@ -44,6 +44,7 @@ const sidebars = {
             "implementation-guide/example_implementation_using_metering_api",
           ],
         },
+        "implementation-guide/implementing-multi-factor-authentication-apiserver",
       ],
     },
     {
@@ -62,6 +63,7 @@ const sidebars = {
             "usecase/about-saas-user-accounts/add-tenant-user",
           ],
         },
+        "usecase/authentication-methods"
       ],
     },
     {
@@ -103,6 +105,7 @@ const sidebars = {
         "saas-development-console/ip-restriction",
         "saas-development-console/user-env-definition",
         "saas-development-console/single-tenant-management",
+        "saas-development-console/multi-factor-authentication",
       ],
     },
     {
@@ -260,6 +263,11 @@ const sidebars = {
       type: "category",
       label: "Changelog",
       items: [
+        {
+            label: "2025/03/14",
+            type: "doc",
+            id: "changelog/20250314",
+          },
         {
           label: "2024/12/10",
           type: "doc",
