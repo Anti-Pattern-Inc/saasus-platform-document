@@ -14,12 +14,12 @@ This page provides a list of SDKs for integrating with the SaaSus Platform. By u
 
 | Language | SDK Link |
 |------|------------------|
-| Python | [Python SDK GitHub](https://github.com/your-org/python-sdk) |
-| JavaScript | [JavaScript SDK GitHub](https://github.com/your-org/javascript-sdk) |
-| Go | [Go SDK GitHub](https://github.com/your-org/go-sdk) |
-| Java | [Java SDK GitHub](https://github.com/your-org/java-sdk) |
-| PHP | [PHP SDK GitHub](https://github.com/your-org/php-sdk) |
-| C# | In Preparation |
+| Python | [Python SDK GitHub](https://github.com/saasus-platform/saasus-sdk-python) |
+| JavaScript | [JavaScript SDK GitHub](https://github.com/saasus-platform/saasus-sdk-javascript) |
+| Go | [Go SDK GitHub](https://github.com/saasus-platform/saasus-sdk-go) |
+| Java | [Java SDK GitHub](https://github.com/saasus-platform/saasus-sdk-java) |
+| PHP | [PHP SDK GitHub](https://github.com/saasus-platform/saasus-sdk-php) |
+| C# | [C# SDK GitHub](https://github.com/saasus-platform/saasus-sdk-csharp) |
 
 ## SDK Overview
 

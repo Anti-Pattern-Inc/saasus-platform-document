@@ -19,7 +19,7 @@ updatedAt: "Mon Mar 10 2025 08:00:00 GMT+0000 (Coordinated Universal Time)"
 | Go | [Go SDK GitHub](https://github.com/saasus-platform/saasus-sdk-go) |
 | Java | [Java SDK GitHub](https://github.com/saasus-platform/saasus-sdk-java) |
 | PHP | [PHP SDK GitHub](https://github.com/saasus-platform/saasus-sdk-php) |
-| C# | 準備中 |
+| C# | [C# SDK GitHub](https://github.com/saasus-platform/saasus-sdk-csharp) |
 
 ## SDKの概要
 
