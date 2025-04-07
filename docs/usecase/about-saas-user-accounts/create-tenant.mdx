@@ -303,6 +303,114 @@ In this case, the <a href="/docs/tutorial/manage-rate-plans/setting-measurement-
 ```
 
 </TabItem>
+
+<TabItem value="csharp" label="C#(.Net8)">
+
+```csharp
+        // Retrieving validated data
+        string tenantName = requestBody.TenantName;
+        var userAttributeValues = requestBody.UserAttributeValues ?? new Dictionary<string, object>();
+
+        // Searching for pricing plans
+        var pricingClientConfig = CreateClientConfiguration(c => c.GetPricingApiClientConfig(), context);
+        var pricingPlansApi = new PricingPlansApi(pricingClientConfig);
+        var pricingPlans = pricingPlansApi.GetPricingPlans();
+        string nextPlanId = "";
+        foreach (var pricingPlan in pricingPlans.VarPricingPlans)
+        {
+            if (pricingPlan.DisplayName == "Free Plan")
+            {
+                nextPlanId = pricingPlan.Id;
+                break;
+            }
+        }
+
+        // Raise an error if the plan id could not be obtained
+        if (string.IsNullOrEmpty(nextPlanId))
+        {
+            Results.Problem(detail: "Failed to retrieve plan information.", statusCode: 500);
+        }
+
+        // Tenant creation
+        // Tenant name: Name entered on the screen
+        // Back office staff email: Logged-in user's email address
+        var tenantApi = new TenantApi(authApiClientConfig);
+        var tenantProps = new TenantProps(
+            name: tenantName,
+            attributes: new Dictionary<string, object>(),
+            backOfficeStaffEmail: userInfo.Email
+        );
+        var createdTenant = await tenantApi.CreateTenantAsync(tenantProps);
+
+        // Retrieve the ID of the created tenant
+        var tenantId = createdTenant.Id;
+
+        // Specify a time at least 5 minutes in the future from the current time when changing the plan
+        var currentTimeWith5MinutesAfterUnixTime = DateTimeOffset.UtcNow.AddMinutes(5).ToUnixTimeSeconds();
+        var planReservation = new PlanReservation
+        {
+            NextPlanId = nextPlanId,
+            UsingNextPlanFrom = (int)currentTimeWith5MinutesAfterUnixTime
+        };
+
+        // Update plan information
+        tenantApi.UpdateTenantPlan(tenantId, planReservation);
+```
+
+</TabItem>
+
+<TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
+
+```csharp
+        // Retrieving validated data
+        string tenantName = request.TenantName;
+        var userAttributeValues = request.UserAttributeValues ?? new Dictionary<string, object>();
+        
+        // Searching for pricing plans
+        var pricingApiClientConfig = CreateClientConfiguration(c => c.GetPricingApiClientConfig());
+        var pricingPlansApi = new PricingPlansApi(pricingApiClientConfig);
+        pricingapi.Model.PricingPlans pricingPlans = await pricingPlansApi.GetPricingPlansAsync();
+        string nextPlanId = "";
+        foreach (var pricingPlan in pricingPlans.VarPricingPlans)
+        {
+            if (pricingPlan.DisplayName == "Free Plan")
+            {
+                nextPlanId = pricingPlan.Id;
+                break;
+            }
+        }
+
+        // Raise an error if the plan id could not be obtained
+        if (string.IsNullOrEmpty(nextPlanId))
+        {
+            return InternalServerError();
+        }
+
+        // Tenant creation
+        // Tenant name: Name entered on the screen
+        // Back office staff email: Logged-in user's email address
+        var tenantProps = new TenantProps(
+            name: tenantName,
+            attributes: new Dictionary<string, object>(),
+            backOfficeStaffEmail: userInfo.Email
+        );
+        var createdTenant = await tenantApi.CreateTenantAsync(tenantProps);
+
+        // Retrieve the ID of the created tenant
+        var tenantId = createdTenant.Id;
+
+        // Specify a time at least 5 minutes in the future from the current time when changing the plan
+        var currentTimeWith5MinutesAfterUnixTime = new DateTimeOffset(DateTime.UtcNow.AddMinutes(5)).ToUnixTimeSeconds();
+        var planReservation = new PlanReservation(
+            nextPlanId: nextPlanId,
+            usingNextPlanFrom: (int)currentTimeWith5MinutesAfterUnixTime
+        );
+
+        // Update plan information
+        tenantApi.UpdateTenantPlan(tenantId, planReservation);
+```
+
+</TabItem>
 </Tabs>
 
 You can check if the tenant was created successfully using the API by visiting "SaaS Operation Console > Tenant Management".
