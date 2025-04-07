@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 バックエンドをサーバレスで構成する場合、以下のような実装が必要となります  
 ・SaaSus Platformの認証情報となるトークン（JWT）を、ブラウザのローカルストレージに保管  
 ・SaaS Platform利用者はJWTを使って本人確認を行う  
-・フロントエンドはReact、Vue.jsなどで実装  
+・フロントエンドはReactなどで実装  
 ・バックエンドはLambdaなどのサーバレスサービスを利用し実装
 
 # フロー（JWT取得〜テナントオンボーディング）
