@@ -26,7 +26,8 @@
           "items": [
             "implementation-guide/example_implementation_using_metering_api"
           ]
-        }
+        },
+        "implementation-guide/implementing-multi-factor-authentication-apiserver"
       ]
     },
     {
@@ -86,7 +87,8 @@
         "saas-development-console/usage-metering",
         "saas-development-console/ip-restriction",
         "saas-development-console/user-env-definition",
-        "saas-development-console/single-tenant-management"
+        "saas-development-console/single-tenant-management",
+        "saas-development-console/multi-factor-authentication"
       ]
     },
     {
