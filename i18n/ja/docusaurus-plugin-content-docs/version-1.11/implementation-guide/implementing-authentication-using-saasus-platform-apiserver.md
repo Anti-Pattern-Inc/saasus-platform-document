@@ -9,7 +9,7 @@ updatedAt: "Wed Jan 17 2024 08:25:52 GMT+0000 (Coordinated Universal Time)"
 バックエンドをAPIサーバで構成する場合、以下のような実装が必要となります  
 ・SaaSus Platformの認証情報となるトークン（JWT）を、ブラウザのローカルストレージに保管  
 ・SaaS Platform利用者はJWTを使って本人確認を行う  
-・フロントエンドはReact、Vue.jsなどで実装  
+・フロントエンドはReactなどで実装  
 ・バックエンドのAPIサーバはPHP / TypeScript / Go / Python / C# / JAVAなどで実装
 
 # 処理フロー（ログイン〜ユーザ一覧表示）
@@ -26,7 +26,6 @@ updatedAt: "Wed Jan 17 2024 08:25:52 GMT+0000 (Coordinated Universal Time)"
 #### １．１．１．認証後遷移先画面
 
 - [Reactの実装サンプル](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/pages/Callback.tsx)
-- [Vue.jsの実装サンプル](https://github.com/saasus-platform/implementation-sample-front-vue/blob/main/src/views/Callback.vue)
 
 SaaSus Platformが生成するログイン画面からログインを実施すると、認証後遷移先で設定したURLが呼び出されます。
 
@@ -54,7 +53,6 @@ APIコール時にはローカルストレージに保存したJWTを利用し�
 #### １．１．３．ユーザ一覧画面（トップページ）
 
 - [Reactの実装サンプル](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/pages/UserPage.tsx)
-- [Vue.jsの実装サンプル](https://github.com/saasus-platform/implementation-sample-front-vue/blob/main/src/views/UserPage.vue)
 
 エンドポイント /userinfo から取得しているユーザ情報の利用について
 
@@ -79,7 +77,6 @@ roles配列：
 ### １．２．実装サンプルの使い方
 
 - [React](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/README.md)
-- [Vue.js](https://github.com/saasus-platform/implementation-sample-front-vue/blob/main/README.md)
 
 ## ２．バックエンド実装
 
