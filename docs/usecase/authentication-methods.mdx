@@ -205,6 +205,85 @@ public ResponseEntity<?> getMe(HttpSession session, HttpServletRequest request) 
 ```
 
 </TabItem>
+
+<TabItem value="csharp" label="C#(.Net8)">
+
+```csharp
+// Create a method to obtain the ID token
+string? GetBearerToken(HttpContext context)
+{
+    if (context.Request.Headers.TryGetValue("Authorization", out var authHeader) &&
+        authHeader.ToString().StartsWith("Bearer "))
+    {
+        return authHeader.ToString().Substring("Bearer ".Length).Trim();
+    }
+    return null;
+}
+
+app.MapGet("/userinfo", async (HttpContext context) =>
+{
+    // Call the created method to obtain the ID token when executing authentication-required processes.
+    var token = GetBearerToken(context);
+    if (string.IsNullOrEmpty(token))
+    {
+        return Results.Unauthorized();
+    }
+
+    try
+    {
+        var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig(), context);
+        var userInfoApi = new UserInfoApi(authApiClientConfig);
+        var userInfo = await userInfoApi.GetUserInfoAsync(token);
+
+        var jsonResponse = userInfo.ToJson();
+        return Results.Text(jsonResponse, "application/json");
+    }
+    catch (Exception ex)
+    {
+        return HandleApiException(ex);
+    }
+});
+```
+
+</TabItem>
+
+<TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
+
+```csharp
+// Create a method to obtain the ID token
+private string GetBearerToken(HttpRequestMessage request)
+{
+    var authHeader = request.Headers.Authorization;
+    if (authHeader != null && authHeader.Scheme.Equals("Bearer", StringComparison.OrdinalIgnoreCase))
+    {
+        return authHeader.Parameter?.Trim() ?? throw new HttpResponseException(HttpStatusCode.Unauthorized);
+    }
+
+    throw new HttpResponseException(HttpStatusCode.Unauthorized);
+}
+
+[HttpGet]
+[Route("userinfo")]
+public async Task<IHttpActionResult> GetUserInfo()
+{
+    try
+    {
+        // Call the created method to obtain the ID token when executing authentication-required processes.
+        var token = GetBearerToken(Request);
+        var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig());
+        var userInfoApi = new UserInfoApi(authApiClientConfig);
+        var userInfo = await userInfoApi.GetUserInfoAsync(token);
+
+        return Ok(userInfo);
+    }
+    catch (Exception ex)
+    {
+        return HandleApiException(ex);
+    }
+}
+```
+
+</TabItem>
 </Tabs>
 
 ### Refresh Token
@@ -341,6 +420,71 @@ public ResponseEntity<?> refresh(HttpSession session, HttpServletRequest request
         throw e;
     }
     return ResponseEntity.ok(result.toJson());
+}
+```
+
+</TabItem>
+
+<TabItem value="csharp" label="C#(.Net8)">
+
+```csharp
+app.MapGet("/refresh", async (HttpContext context) =>
+{
+    // Retrieve the refresh token from the cookie.
+    var refreshToken = context.Request.Cookies["SaaSusRefreshToken"];
+    if (string.IsNullOrEmpty(refreshToken))
+    {
+        return Results.BadRequest("No refresh token found.");
+    }
+
+    try
+    {
+        var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig(), context);
+        var credentialApi = new CredentialApi(authApiClientConfig);
+        // Set the first argument to null to specify a temporary code.
+        // Set the second argument to refreshTokenAuth for the authentication flow, and set the third argument to the refresh token obtained from the cookie.
+        var credentials = await credentialApi.GetAuthCredentialsAsync(null, "refreshTokenAuth", refreshToken);
+
+        var jsonResponse = credentials.ToJson();
+        return Results.Text(jsonResponse, "application/json");
+    }
+    catch (Exception ex)
+    {
+        return HandleApiException(ex);
+    }
+});
+```
+
+</TabItem>
+
+<TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
+
+```csharp
+[HttpGet]
+[Route("refresh")]
+public async Task<IHttpActionResult> Refresh()
+{
+    try
+    {
+        // Retrieve the refresh token from the cookie.
+        var refreshTokenCookie = Request.Headers.GetCookies("SaaSusRefreshToken").FirstOrDefault();
+        if (refreshTokenCookie == null)
+        {
+            return BadRequest("No refresh token found.");
+        }
+
+        var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig());
+        var credentialApi = new CredentialApi(authApiClientConfig);
+        // Set the first argument to null to specify a temporary code.
+        // Set the second argument to refreshTokenAuth for the authentication flow, and set the third argument to the refresh token obtained from the cookie.
+        var credentials = await credentialApi.GetAuthCredentialsAsync(null, "refreshTokenAuth", refreshTokenCookie["SaaSusRefreshToken"].Value);
+
+        return Ok(credentials);
+    }
+    catch (Exception ex)
+    {
+        return HandleApiException(ex);
+    }
 }
 ```
 
@@ -577,6 +721,110 @@ try {
 } catch (Exception e) {
     System.err.println("Unexpected Exception: " + e.getMessage());
     throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected Exception: " + e.getMessage(), e);
+}
+```
+
+</TabItem>
+
+<TabItem value="csharp" label="C#(.Net8)">
+
+```csharp
+var validationResults = new List<ValidationResult>();
+var validationContext = new ValidationContext(requestBody);
+if (!Validator.TryValidateObject(requestBody, validationContext, validationResults, true))
+{
+    var errors = validationResults.Select(vr => new { Field = vr.MemberNames.FirstOrDefault(), Error = vr.ErrorMessage });
+    return Results.BadRequest(new { error = "Validation failed.", details = errors });
+}
+
+string email = requestBody.Email;
+string tenantId = requestBody.TenantId;
+
+try
+{
+    // Retrieve the access token from the request header.
+    var accessToken = context.Request.Headers["X-Access-Token"].FirstOrDefault();
+
+    // If the access token is not included in the request header, return an error.
+    if (string.IsNullOrEmpty(accessToken))
+    {
+        return Results.Unauthorized();
+    }
+
+    var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig(), context);
+    var invitationApi = new InvitationApi(authApiClientConfig);
+
+    // Create an object to add to the envs.
+    var invitedEnv = new InvitedUserEnvironmentInformationInner(
+        id: 3, // Specify the ID of the production environment: 3.
+        roleNames: new List<string> { "admin" }
+    );
+
+    // Create a list of envs
+    var envsList = new List<InvitedUserEnvironmentInformationInner> { invitedEnv };
+
+    // Create the parameters for the tenant invitation.
+    var createTenantInvitationParam = new CreateTenantInvitationParam(
+        email,
+        accessToken,
+        envsList
+    );
+
+    // Call the tenant invitation API.
+    invitationApi.CreateTenantInvitation(tenantId, createTenantInvitationParam);
+
+    return Results.Ok(new { message = "Create tenant user invitation successfully" });
+}
+catch (Exception ex)
+{
+    Console.Error.WriteLine($"Error: {ex.Message}");
+    return Results.Problem(detail: ex.Message, statusCode: 500);
+}
+```
+
+</TabItem>
+
+<TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
+
+```csharp
+if (!ModelState.IsValid)
+    return BadRequest(ModelState);
+
+string email = request.Email;
+string tenantId = request.TenantId;
+
+try
+{
+    // Retrieve the access token from the request header.
+    var accessToken = HttpContext.Current.Request.Headers.Get("X-Access-Token");
+
+    var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig());
+    var invitationApi = new InvitationApi(authApiClientConfig);
+
+    // Create an object to add to the envs.
+    var invitedEnv = new InvitedUserEnvironmentInformationInner(
+        id: 3, // Specify the ID of the production environment: 3.
+        roleNames: new List<string> { "admin" }
+    );
+
+    // Create a list of envs
+    var envsList = new List<InvitedUserEnvironmentInformationInner> { invitedEnv };
+
+    // Create the parameters for the tenant invitation.
+    var createTenantInvitationParam = new CreateTenantInvitationParam(
+        email,
+        accessToken,
+        envsList
+    );
+
+    // Call the tenant invitation API.
+    invitationApi.CreateTenantInvitation(tenantId, createTenantInvitationParam);
+
+    return Ok(new { message = "Create tenant user invitation successfully", request });
+}
+catch (Exception ex)
+{
+    return HandleApiException(ex);
 }
 ```
 
