@@ -32,8 +32,6 @@ Please use this when you want to show usage to tenants.
 /**
  * Get the Metering Unit Count for a Specified Date
  *
- * @see https://docs.saasus.io/reference/getmeteringunitdatecountbytenantidandunitnameanddate
- *
  * @param string $tenantId Tenant ID
  * @param string $meteringUnitName Metering Unit Name
  * @param string $date Date in yyyy-mm-dd format
@@ -75,8 +73,6 @@ Please use this for adjustments in case of mistakes in usage updates in past dat
 ```php
 /**
  * Update the Metering Unit Count for a Specified Timestamp
- *
- * @see https://docs.saasus.io/reference/updatemeteringunittimestampcount
  *
  * @param string $tenantId Tenant ID
  * @param string $meteringUnitName Metering Unit Name
@@ -123,8 +119,6 @@ Please use this for adjustments in case of mistakes in usage updates in past dat
 /**
  * Delete the Metering Unit Count for a Specified Timestamp
  *
- * @see https://docs.saasus.io/reference/deletemeteringunittimestampcount
- *
  * @param string $tenantId Tenant ID
  * @param string $meteringUnitName Metering Unit Name
  * @param int $timestamp Timestamp in seconds
@@ -161,8 +155,6 @@ Please use this when you want to show the usage to tenants.
 ```php
 /**
  * Get the Metering Unit Count for Today
- *
- * @see https://docs.saasus.io/reference/getmeteringunitdatecountbytenantidandunitnametoday
  *
  * @param string $tenantId Tenant ID
  * @param string $meteringUnitName Metering Unit Name
@@ -204,8 +196,6 @@ Please use this when updating the unit count, such as at times of changes in usa
 /**
  * Update the Current Time Metering Unit Count
  * 
- * @see https://docs.saasus.io/reference/updatemeteringunittimestampcountnow
- *
  * @param string $tenantId Tenant ID
  * @param string $meteringUnitName Metering Unit Name
  * @param Request $request
@@ -253,8 +243,6 @@ Please use this when you want to show usage to tenants.
 /**
  * Get the Metering Unit Count for the Current Month
  *
- * @see https://docs.saasus.io/reference/getmeteringunitmonthcountbytenantidandunitnamethismonth
- *
  * @param string $tenantId Tenant ID
  * @param string $meteringUnitName Metering Unit Name
  * @return array
@@ -292,8 +280,6 @@ Please use this when you want to show usage to tenants.
 ```php
 /**
  * Get the Metering Unit Count for a Specified Month
- *
- * @see https://docs.saasus.io/reference/getmeteringunitmonthcountbytenantidandunitnameandmonth
  *
  * @param string $tenantId Tenant ID
  * @param string $meteringUnitName Metering Unit Name
@@ -336,8 +322,6 @@ Please use this when you want to show usage to tenants.
 /**
  * Get All Metering Unit Counts for a Specified Date
  *
- * @see https://docs.saasus.io/reference/getmeteringunitdatecountsbytenantidanddate
- *
  * @param string $tenantId Tenant ID
  * @param string $date Date in yyyy-mm-dd format
  * @return \AntiPatternInc\Saasus\Sdk\Pricing\Model\MeteringUnitDateCount[]
@@ -378,8 +362,6 @@ Please use this when you want to show usage to tenants.
 ```php
 /**
  * Get All Metering Unit Counts for a Specified Month
- *
- * @see https://docs.saasus.io/reference/getmeteringunitmonthcountsbytenantidandmonth
  *
  * @param string $tenantId Tenant ID
  * @param string $month Month in yyyy-mm format

@@ -1,6 +1,6 @@
 ---
 title: "FAQ"
-slug: "faq-en"
+slug: "faq"
 excerpt: ""
 hidden: false
 createdAt: "Thu Jan 19 2023 08:19:39 GMT+0000 (Coordinated Universal Time)"

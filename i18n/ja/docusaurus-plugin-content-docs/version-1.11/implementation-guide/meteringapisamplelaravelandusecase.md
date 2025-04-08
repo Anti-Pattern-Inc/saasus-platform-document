@@ -32,8 +32,6 @@ SDKを使用した各メータリングAPIのLaravel実装サンプルとメー�
 /**
  * 指定した日付のメータリングユニットカウントを取得
  *
- * @see https://docs.saasus.io/reference/getmeteringunitdatecountbytenantidandunitnameanddate
- *
  * @param string $tenantId テナントID
  * @param string $meteringUnitName メータリングユニット名
  * @param string $date 日付 yyyy-mm-dd形式
@@ -76,8 +74,6 @@ public function getCountOfSpecifiedDate(string $tenantId, string $meteringUnitNa
 ```php
 /**
  * 指定したタイムスタンプのメータリングユニットカウントを更新
- *
- * @see https://docs.saasus.io/reference/updatemeteringunittimestampcount
  *
  * @param string $tenantId テナントID
  * @param string $meteringUnitName メータリングユニット名
@@ -125,8 +121,6 @@ public function updateCountOfSpecifiedTimestamp(string $tenantId, string $meteri
 /**
  * 指定したタイムスタンプのメータリングユニットカウントを削除
  *
- * @see https://docs.saasus.io/reference/deletemeteringunittimestampcount
- *
  * @param string $tenantId テナントID
  * @param string $meteringUnitName メータリングユニット名
  * @param int $timestamp タイムスタンプ 秒までのタイムスタンプ
@@ -163,8 +157,6 @@ public function deleteCountOfSpecifiedTimestamp(string $tenantId, string $meteri
 ```php
 /**
  * 当日のメータリングユニットのカウントを取得
- *
- * @see https://docs.saasus.io/reference/getmeteringunitdatecountbytenantidandunitnametoday
  *
  * @param string $tenantId テナントID
  * @param string $meteringUnitName メータリングユニット名
@@ -206,8 +198,6 @@ public function getCountOfCurrentDay(string $tenantId, string $meteringUnitName)
 /**
  * 現在時刻のメータリングユニットカウントを更新
  * 
- * @see https://docs.saasus.io/reference/updatemeteringunittimestampcountnow
- *
  * @param string $tenantId テナントID
  * @param string $meteringUnitName メータリングユニット名
  * @param Request $request
@@ -255,8 +245,6 @@ public function updateCountOfNow(string $tenantId, string $meteringUnitName, Req
 /**
  * 当月のメータリングユニットのカウントを取得
  *
- * @see https://docs.saasus.io/reference/getmeteringunitmonthcountbytenantidandunitnamethismonth
- *
  * @param string $tenantId テナントID
  * @param string $meteringUnitName メータリングユニット名
  * @return array
@@ -294,8 +282,6 @@ public function getCountOfCurrentMonth(string $tenantId, string $meteringUnitNam
 ```php
 /**
  * 指定月のメータリングユニットカウントを取得
- *
- * @see https://docs.saasus.io/reference/getmeteringunitmonthcountbytenantidandunitnameandmonth
  *
  * @param string $tenantId テナントID
  * @param string $meteringUnitName メータリングユニット名
@@ -338,8 +324,6 @@ public function getCountOfSpecifiedMonth(string $tenantId, string $meteringUnitN
 /**
  * 指定日の全メータリングユニットカウントを取得
  *
- * @see https://docs.saasus.io/reference/getmeteringunitdatecountsbytenantidanddate
- *
  * @param string $tenantId テナントID
  * @param string $date 日付 yyyy-mm-dd形式
  * @return \AntiPatternInc\Saasus\Sdk\Pricing\Model\MeteringUnitDateCount[]
@@ -381,8 +365,6 @@ public function getAllMeteringCountOfSpecifiedDate(string $tenantId, string $dat
 ```php
 /**
  * 指定月の全メータリングユニットカウントを取得
- *
- * @see https://docs.saasus.io/reference/getmeteringunitmonthcountsbytenantidandmonth
  *
  * @param string $tenantId テナントID
  * @param string $month 月 yyyy-mm形式

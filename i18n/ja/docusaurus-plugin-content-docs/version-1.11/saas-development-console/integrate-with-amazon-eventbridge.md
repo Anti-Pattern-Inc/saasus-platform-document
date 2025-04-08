@@ -1,6 +1,6 @@
 ---
 title: "Amazon EventBridge 連携機能"
-slug: "integrate-with-amazon-eventbridge-jp"
+slug: "integrate-with-amazon-eventbridge"
 excerpt: ""
 hidden: false
 createdAt: "Sat Jan 21 2023 09:57:10 GMT+0000 (Coordinated Universal Time)"
