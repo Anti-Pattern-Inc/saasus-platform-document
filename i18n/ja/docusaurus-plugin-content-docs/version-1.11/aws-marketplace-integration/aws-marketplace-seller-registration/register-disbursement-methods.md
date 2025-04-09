@@ -3,7 +3,7 @@ title: "支払い方法の設定"
 slug: "register-disbursement-methods"
 excerpt: ""
 hidden: false
-metadata: 
+metadata:
   image: []
   robots: "index"
 createdAt: "Wed May 17 2023 01:10:33 GMT+0000 (Coordinated Universal Time)"
@@ -15,7 +15,7 @@ updatedAt: "Thu Jul 06 2023 01:27:22 GMT+0000 (Coordinated Universal Time)"
 まだお済みでない場合は、[銀行口座の設定](/docs/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account)を参考に設定を行ってください。
 :::
 
-`Payment Information`より`Add disbursement method`を押下してください。  
+`Payment Information`より`Add disbursement method`を押下してください。
 
 ![new-register-disbursement-methods-1](/ja/img/aws-marketplace-integration/register-disbursement-methods/new-register-disbursement-methods-1.png)
 
@@ -27,8 +27,8 @@ updatedAt: "Thu Jul 06 2023 01:27:22 GMT+0000 (Coordinated Universal Time)"
 
 ![new-register-disbursement-methods-3](/ja/img/aws-marketplace-integration/register-disbursement-methods/new-register-disbursement-methods-3.png)
 
-最後に支払いスケジュールを設定してください。AWSが販売者の銀行口座に支払うスケジュールになります。
-以下のスクショは、毎月1日に支払われる設定になります。`Daily`を選択する場合は、出品者は支払いを受け取るために残高がプラスである必要があります。
+最後に支払いスケジュールを設定してください。AWS が販売者の銀行口座に支払うスケジュールになります。
+以下のスクショは、毎月 1 日に支払われる設定になります。`Daily`を選択する場合は、出品者は支払いを受け取るために残高がプラスである必要があります。
 
 ![new-register-disbursement-methods-4](/ja/img/aws-marketplace-integration/register-disbursement-methods/new-register-disbursement-methods-4.png)
 
@@ -41,8 +41,8 @@ updatedAt: "Thu Jul 06 2023 01:27:22 GMT+0000 (Coordinated Universal Time)"
 ![new-register-disbursement-methods-6](/ja/img/aws-marketplace-integration/register-disbursement-methods/new-register-disbursement-methods-6.png)
 
 :::warning
-Public OfferではUSDのみ対応しているため、通貨がUSDの支払い方法を必ず設定する必要があります。
-Private Offerを日本円のみで作成することを想定しているお客様でもUSD、JPYの2種類の支払い方法が設定されている状態にしてください。
+Public Offer では USD のみ対応しているため、通貨が USD の支払い方法を必ず設定する必要があります。
+Private Offer を日本円のみで作成することを想定しているお客様でも USD、JPY の 2 種類の支払い方法が設定されている状態にしてください。
 :::
 
 以上で、出品手続きを始めるために必要な設定は完了になります。
