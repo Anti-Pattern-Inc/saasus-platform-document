@@ -63,7 +63,7 @@ const sidebars = {
             "usecase/about-saas-user-accounts/add-tenant-user",
           ],
         },
-        "usecase/authentication-methods"
+        "usecase/authentication-methods",
       ],
     },
     {
@@ -197,7 +197,7 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Smart API Gateway Function(beta)",
+      label: "Smart API Gateway Function",
       link: {
         type: "doc",
         id: "api-gateway-function/overview",

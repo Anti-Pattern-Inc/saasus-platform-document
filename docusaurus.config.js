@@ -207,6 +207,17 @@ const config = {
     //   },
     // ],
     [
+      require.resolve("docusaurus-plugin-image-zoom"),
+      {
+        selector: ".markdown img",
+        background: {
+          light: "rgb(255, 255, 255)",
+          dark: "rgb(50, 50, 50)",
+        },
+        config: {},
+      },
+    ],
+    [
       require.resolve("@easyops-cn/docusaurus-search-local"),
       {
         hashed: true,
