@@ -3,7 +3,7 @@ title: "支払い方法の設定"
 slug: "register-disbursement-methods"
 excerpt: ""
 hidden: false
-metadata: 
+metadata:
   image: []
   robots: "index"
 createdAt: "Wed May 17 2023 01:10:33 GMT+0000 (Coordinated Universal Time)"
@@ -15,45 +15,34 @@ updatedAt: "Thu Jul 06 2023 01:27:22 GMT+0000 (Coordinated Universal Time)"
 まだお済みでない場合は、[銀行口座の設定](/docs/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account)を参考に設定を行ってください。
 :::
 
-`Payment Information`より`Add disbursement method`を押下してください。  
+`Payment Information`より`Add disbursement method`を押下してください。
 
-![new-register-bank-account-1](/ja/img/aws-marketplace-integration/register-bank-account/new-register-bank-account-1.png)
+![new-register-disbursement-methods-1](/ja/img/aws-marketplace-integration/register-disbursement-methods/new-register-disbursement-methods-1.png)
 
 最初に、支払われる通貨を選択します。利用可能な通貨は[公式ドキュメント](https://docs.aws.amazon.com/ja_jp/marketplace/latest/userguide/disbursement.html#currency)を参照してください。
 
-次に支払いを受け取る銀行口座を選択します。[銀行口座の設定](/docs/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account)で追加した銀行口座の中で直前に選択した通貨に対応している銀行口座が選択肢として選べるようになっています。
+![new-register-disbursement-methods-2](/ja/img/aws-marketplace-integration/register-disbursement-methods/new-register-disbursement-methods-2.png)
 
-:::info
-日本の銀行口座を設定したい場合は、海外送金・外貨送金の受け取りが可能な銀行口座をご用意いただき
-SWIFTアカウントによる支払い方法を選択する必要があります。
+次に、支払いを受け取る銀行口座を選択します。[銀行口座の設定](/docs/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account)で追加した銀行口座の中で、直前に選択した通貨に対応している銀行口座が選択肢として選べるようになっています。
+
+![new-register-disbursement-methods-3](/ja/img/aws-marketplace-integration/register-disbursement-methods/new-register-disbursement-methods-3.png)
+
+最後に支払いスケジュールを設定してください。AWS が販売者の銀行口座に支払うスケジュールになります。
+以下のスクショは、毎月 1 日に支払われる設定になります。`Daily`を選択する場合は、出品者は支払いを受け取るために残高がプラスである必要があります。
+
+![new-register-disbursement-methods-4](/ja/img/aws-marketplace-integration/register-disbursement-methods/new-register-disbursement-methods-4.png)
+
+全ての入力を終えたら、`Add disbursement method`を押下します。
+
+![new-register-disbursement-methods-5](/ja/img/aws-marketplace-integration/register-disbursement-methods/new-register-disbursement-methods-5.png)
+
+問題なければ、`Payment Information`にて追加した支払い方法をご確認いただけます。
+
+![new-register-disbursement-methods-6](/ja/img/aws-marketplace-integration/register-disbursement-methods/new-register-disbursement-methods-6.png)
+
+:::warning
+Public Offer では USD のみ対応しているため、通貨が USD の支払い方法を必ず設定する必要があります。
+Private Offer を日本円のみで作成することを想定しているお客様でも USD、JPY の 2 種類の支払い方法が設定されている状態にしてください。
 :::
 
-本ドキュメントでは、SWIFTアカウントによる設定手順を解説いたします。
-まず、`Payment Method`の選択肢から`SWIFT account`を選択してください。
-
-![new-register-bank-account-2](/ja/img/aws-marketplace-integration/register-bank-account/new-register-bank-account-2.png)
-
-SWIFTアカウントでは、以下の三つの項目を入力します。SWIFT codeはご利用の銀行に問い合わせください。
-- Bank account holder name
-- BIC (SWIFT code)
-- Account number
-
-![new-register-bank-account-3](/ja/img/aws-marketplace-integration/register-bank-account/new-register-bank-account-3.png)
-
-
-次に、請求先住所を入力します。
-
-![new-register-bank-account-4](/ja/img/aws-marketplace-integration/register-bank-account/new-register-bank-account-4.png)
-
-全ての入力を終えたら、`Add bank account`を押下します。
-
-![new-register-bank-account-5](/ja/img/aws-marketplace-integration/register-bank-account/new-register-bank-account-5.png)
-
-問題なければ、`Payment Information`にて追加した銀行口座をご確認いただけます。
-
-![new-register-bank-account-6](/ja/img/aws-marketplace-integration/register-bank-account/new-register-bank-account-6.png)
-
-:::caution
-この時点では、まだ出品に必要な設定が完了していません。
-次ページの`支払い方法の設定`をご確認ください。
-:::
+以上で、出品手続きを始めるために必要な設定は完了になります。
