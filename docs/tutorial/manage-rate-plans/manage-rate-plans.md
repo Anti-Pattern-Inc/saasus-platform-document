@@ -104,7 +104,7 @@ Use following steps.
 Now, create a price plan other than the advanced plan!  
 The measurement unit, feature menu, and price plan that will be created this time are as follows. Please see the video for details.
 
-[See here for the setting contents (image) of the measurement unit, feature menu, and price plan settings.](https://docs.saasus.io/docs/setting-measurement-units-function-menus-and-price-plans) 
+[See here for the setting contents (image) of the measurement unit, feature menu, and price plan settings.](./setting-measurement-units-function-menus-and-price-plans) 
 
 \*The only plans required for this tutorial are the **Free Plan** and **Basic Plan**.The Advanced Plan and Enterprise Plan are listed as examples of other settings that can be made.
 

@@ -1,6 +1,6 @@
 ---
 title: "多要素認証の実装（APIサーバ）"
-slug: "implementing-mfa-apiserver"
+slug: "implementing-multi-factor-authentication-apiserver"
 excerpt: ""
 hidden: false
 createdAt: "Fri Feb 28 2025 09:00:00 GMT+0000 (Coordinated Universal Time)"
