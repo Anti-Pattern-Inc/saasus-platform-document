@@ -1,0 +1,201 @@
+---
+title: "Implementation of authorization based on tenant information"
+slug: "implementation-of-authorization-based-on-tenant-information"
+excerpt: ""
+hidden: false
+createdAt: "Fri Jan 20 2023 01:47:33 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+## Implementation of Authorization
+
+### Implementation of comment limits based on pricing plan measurement unit
+
+Let's modify the previous sample application and implement the first step of authorization.
+
+With the SaaS Platform settings so far, which user is logged in, which tenant the user belongs to, what role the user has, which price plan is selected by that tenant, and what menu can be used? can be obtained from the application. We will use that information to limit the application.
+
+For now, focus on "Comments", which is one of the measurement units in the pricing plans.
+
+Earlier, we set a different upper limit for the number of comments for each price plan.
+
+- 10 comments limit on Free plan
+- 100 comments limit on Basic plan
+
+Now, get the maximum number associated with this pricing plan for each tenant and set a limit.
+
+- For Laravel, let’s modify the `post` method in `api/app/Http/Controllers/MessageController.php`.
+- For Express, let’s add an `import` statement to `api/controllers/chat.ts` and modify the `postChats` method.
+
+<Tabs>
+<TabItem value="php" label="Laravel (PHP)">
+
+```php
+   public function post(Request $request)
+   {
+        $validated = $request->validate([
+            'message' => 'required|max:255'
+        ]);
+
+        $tenant_id = $request->userinfo['tenants'][0]['id'];
+        $plan_id = $request->userinfo['tenants'][0]['plan_id'];
+
+        // Use the SaaSus SDK to hit the SaaSus API, acquire various information, and use it for judgment
+        $client = new \AntiPatternInc\Saasus\Api\Client();
+        $pricingApi = $client->getPricingClient();
+        $res = $pricingApi->getPricingPlan($plan_id, $pricingApi::FETCH_RESPONSE);
+        $plan = json_decode($res->getBody(), true);
+
+        // use metering meter, comment_count
+        $meteringUnitName = "comment_count";
+        $res = $pricingApi->getMeteringUnitDateCountByTenantIdAndUnitNameToday($tenant_id, $meteringUnitName, $pricingApi::FETCH_RESPONSE);
+        // This time, treat it as the maximum number of comments per day
+        $count = json_decode($res->getBody(), true);
+
+        $upper = \AntiPatternInc\Saasus\Api\Lib::findUpperCountByMeteringUnitName($plan, $meteringUnitName);
+
+        // Disable posting if the number of comments exceeds the maximum number of comments for the current contracted price plan
+        if ($count['count'] < $upper || $upper === 0) {
+            $message = Message::create([
+                'tenant_id' => $tenant_id,
+                'user_id' => $request->userinfo['tenants'][0]['user_attribute']['username'],
+                'message' => $request->message,
+            ]);
+            // add 1 to the number of comments in the metering API
+            $param = new \AntiPatternInc\Saasus\Sdk\Pricing\Model\UpdateMeteringUnitTimestampCountNowParam();
+            $param->setMethod('add');
+            $param->setCount(1);
+            $res = $pricingApi->updateMeteringUnitTimestampCountNow($request->userinfo['tenants'][0]['id'], $meteringUnitName, $param, $pricingApi::FETCH_RESPONSE);
+        }
+
+        $request->session()->regenerateToken();
+        return redirect()->route('board');
+   }
+```
+
+</TabItem>
+
+<TabItem value="typescript" label="Express (TS)">
+```js
+import { UpdateMeteringUnitTimestampCountNowParam } from "saasus-sdk/dist/generated/Pricing";
+import { findUpperCountByMeteringUnitName, PricingClient } from "saasus-sdk";
+
+// Other code omitted
+
+const postChats = async (req: Request, res: Response) => {
+  const mes = req.body.message;
+  const tenantId = req.userInfo?.tenants[0].id || "";
+  const planId = req.userInfo?.tenants[0].plan_id || "";
+  const userName =
+    req.userInfo?.tenants[0].user_attribute.username;
+  try {
+    const pricingClient = new PricingClient();
+    const pricingPlan = await pricingClient.pricingPlansApi.getPricingPlan(
+      planId
+    );
+
+    // use metering meter, comment_count
+    const meteringUnitName = "comment_count";
+    const meteringUnitCountData =
+      await pricingClient.meteringApi.getMeteringUnitDateCountByTenantIdAndUnitNameToday(
+        tenantId,
+        meteringUnitName
+      );
+    
+    // This time, treat it as the maximum number of comments per day
+    const upper = findUpperCountByMeteringUnitName(
+      pricingPlan.data,
+      meteringUnitName
+    );
+
+    // Disable posting if the number of comments exceeds the maximum number of comments for the current contracted price plan
+    if (meteringUnitCountData.data.count < upper || upper === 0) {
+      await db.Messages.create({
+        tenant_id: tenantId,
+        user_id: userName,
+        message: mes,
+      });
+
+      // add 1 to the number of comments in the metering API
+      let param: UpdateMeteringUnitTimestampCountNowParam = {
+        method: "add",
+        count: 1,
+      };
+      const res =
+        await pricingClient.meteringApi.updateMeteringUnitTimestampCountNow(
+          tenantId,
+          meteringUnitName,
+          param
+        );
+    }
+  } catch (error) {
+    console.error(error);
+  }
+  res.redirect("/chat");
+};
+```
+</TabItem>
+</Tabs>
+
+
+In addition to the previous code, check the maximum number of comments based on the comment count target meter “comment_count”.
+
+Earlier, the measurement unit is set based on “comment_count” in any price plan measurement unit as shown in the screen below.
+
+![](/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-1.png)
+
+In the function,
+
+Get the **price plan** associated with the tenant,
+
+Get the **current value** of the target meter “comment_count”,
+
+Checking the **upper limit** of the upper limit "comment_count" associated with the pricing plan
+
+and if the current value does not exceed the upper limit,
+
+Do the comment writing process as usual,
+
+Add 1 to the **current value** of the target meter "comment_count" and update.
+
+By doing this, it is possible to prevent writing when the upper limit for each pricing plan is exceeded.
+
+In order to simplify the process this time, the program will be limited to stopping additional comments once the maximum number is reached. However, in a real case scenario an error message or a message prompting an upsell should be displayed.
+
+Depending on the function, if it is completely stopped at the upper limit, the value of SaaS may be impaired.  
+For example, if we put an upper limit on comments, and it becomes impossible to write completely there, this will not work as a chat application.  
+Resulting in this SaaS may going unused until this meter is reset, also taking the risk that there is also the possibility that it will never be used again.  
+Therefore, instead of stopping comments completely, it is important to prevent the value of this SaaS itself from being lost, such as issuing a warning about the limit, or adjusting the storage period.
+
+Since this is a tutorial, it is completely unwritable. Now, check to see if writing is not possible at the upper limit.
+
+First, run init.sh to clean up the application, just like when we first initialized the application.
+
+Then, set the Free plan for Tenant 1, log in with [user1-1@example.com](mailto:user1-1@example.com), and write 10 or more items.
+
+This shows that tenant 1 can write a maximum of 10 records.
+
+:::info
+This time, the implementation only counts writings after the meter is set. <br/> If you want to take writings before the setting into account, you can also update the meter value directly.
+:::
+
+![](/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-2.png)
+
+Next, log in with user [user2-1@example.com](mailto:user2-1@example.com) in tenant 2 and write 10 or more items.
+
+Since the upper limit is 100 here, you should have been able to write more than 10.
+
+![](/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-3.png)
+
+Furthermore, assuming that tenant 1 has upgraded the plan, change the setting from the Free plan to the Basic plan, log in again with [user1-1@example.com](mailto:user1-1@example.com), and write 10 or more items. prize.  
+(It takes about 5 minutes to reflect the changed settings.)
+
+![](/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-4.png)
+
+This shows that user1-1 can write more than ten items.
+
+![](/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-5.png)
+
+Using this method it is now possible to meter and limit according to the pricing plan.

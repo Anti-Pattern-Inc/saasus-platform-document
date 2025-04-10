@@ -1,55 +1,77 @@
 ---
-title: "計測単位・機能メニュー・料金プランの設定"
+title: "料金プラン設定の手順"
 slug: "setting-measurement-units-function-menus-and-price-plans"
 excerpt: ""
 hidden: false
 createdAt: "Wed Jan 18 2023 09:36:51 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Dec 11 2023 05:50:46 GMT+0000 (Coordinated Universal Time)"
 ---
-# 基本料金設定
+# 料金プラン設定の手順
+
+このページでは、SaaSus 開発コンソールを使って以下の要素を順番に設定していく方法を説明します。
+
+- メーター単位
+- 計測単位
+- 機能メニュー
+- 料金プラン
+
+---
+
+## メーター単位の作成
+
+まずは、アプリケーション内で利用量を計測するための「メーター単位」を作成します。
+
+### 設定内容（コメント数）
+
+| メーター単位名    | メーター単位の表示名   | メーター単位の説明 |
+|:-----------|:-------------|:----------|
+| comment_count | コメント数 | コメント数     |
+
+![07](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/setting-measurement-units-function-menus-and-price-plans-07.png)
+
+---
+
+## 計測単位の作成
+
+### 基本料金（Basicプラン）
+
+「Basicプラン」の月額基本料金を固定で設定するための計測単位です。
 
 計測単位：固定ユニット計測単位
 
 | 計測単位名           | 計測単位の表示名          | 計測単位の説明           | 金額    | 繰り返しの期間 | 通貨  |
 | :-------------- | :---------------- | :---------------- | :---- | :------ | :-- |
 | basic_base      | Basicプラン基本料金      | Basicプラン基本料金      | 500   | 月       | JPY |
-| advanced_base   | Advancedプラン基本料金   | Advancedプラン基本料金   | 3000  | 月       | JPY |
-| enterprise_base | Enterpriseプラン基本料金 | Enterpriseプラン基本料金 | 50000 | 月       | JPY |
 
-![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/02_basic_base.png "02_basic_base.png")
+![01](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/setting-measurement-units-function-menus-and-price-plans-01.png)
 
-![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/02_advanced_base.png "02_advanced_base.png")
+---
 
-![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/02_enterprise_base.png "02_ enterprise_base.png")
+### Freeプラン用の計測単位
 
-# Free プラン
+コメント数が10件まで無料で利用できる設定です。
 
 計測単位：使用量ユニット計測単位
 
 | 計測単位名        | 計測単位の表示名     | 計測単位の説明      | 対象メーター名       | 単位使用量あたりの金額 | 上限 | 通貨  |
 | :----------- | :----------- | :----------- | :------------ | :---------- | :- | :-- |
-| free_user    | Freeプランユーザー数 | Freeプランユーザー数 | user_count    | 0           | 2  | JPY |
-| free_comment | Freeプランコメント数 | Freeプランコメント数 | comment_count | 0           | 10 | JPY |
+| free_comment | Freeプランコメント数 | Freeプランコメント数 | コメント数 | 0           | 10 | JPY |
 
-![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/03_free_user.png "03_free_user.png")
+![02](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/setting-measurement-units-function-menus-and-price-plans-02.png)
 
-![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/03_free_comment.png "03_free_comment.png")
+---
 
-# Basic プラン
+### Basicプラン用の計測単位（段階課金）
 
-計測単位：使用量ユニット計測単位
-
-| 計測単位名      | 計測単位の表示名      | 計測単位の説明       | 対象メーター名    | 単位使用量あたりの金額 | 上限 | 通貨  |
-| :--------- | :------------ | :------------ | :--------- | :---------- | :- | :-- |
-| basic_user | Basicプランユーザー数 | Basicプランユーザー数 | user_count | 0           | 5  | JPY |
+コメント数に応じて金額が変動する「段階ユニット」の設定です。
 
 計測単位：段階ユニット計測単位
 
 | 計測単位名         | 計測単位の表示名       | 計測単位の説明        | 対象メーター名       | 通貨  | 範囲    |  上限 |
 | :------------ | :------------- | :------------- | :------------ | :-- | :---- | --: |
-| basic_comment | Basicプランのコメント数 | Basicプランのコメント数 | comment_count | JPY | 以下表参照 | 100 |
+| basic_comment | Basicプランのコメント数 | Basicプランのコメント数 | コメント数 | JPY | 以下表参照 | 100 |
 
-範囲
+**段階別の料金設定：**
 
 | 以上 | 以下 | 単位金額 | 固定金額 |
 | -: | -: | ---: | ---: |
@@ -57,81 +79,34 @@ updatedAt: "Mon Dec 11 2023 05:50:46 GMT+0000 (Coordinated Universal Time)"
 | 11 | 50 |    0 | 1000 |
 | 51 |    |    0 | 1500 |
 
-![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/04_basic_user.png "04_basic_user.png")
+![03](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/setting-measurement-units-function-menus-and-price-plans-03.png)
 
-![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/04_basic_comment-1.png "04_basic_comment-1.png")
+---
 
-![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/04_basic_comment-2.png "04_basic_comment-2.png")
+## 機能メニューの作成
 
-# Advenced プラン
-
-計測単位：使用量ユニット計測単位
-
-| 計測単位名         | 計測単位の表示名          | 計測単位の説明           | 対象メーター名    | 単位使用量あたりの金額 | 上限 | 通貨  |
-| :------------ | :---------------- | :---------------- | :--------- | :---------- | :- | :-- |
-| advanced_user | Advancedプランのユーザー数 | Advancedプランのユーザー数 | user_count | 0           | 10 | JPY |
-
-計測単位：段階的使用量ユニット計測単位
-
-| 計測単位名            | 計測単位の表示名          | 計測単位の説明           | 対象メーター名       | 通貨  | 範囲    | 上限 |
-| :--------------- | :---------------- | :---------------- | :------------ | :-- | :---- | -: |
-| advanced_comment | Advancedプランのコメント数 | Advancedプランのコメント数 | comment_count | JPY | 以下表参照 |  0 |
-
-|  以上 |  以下 | 単位金額 | 固定金額 |
-| --: | --: | ---: | ---: |
-|   0 |  10 |    5 |    0 |
-|  11 | 100 |    2 |    0 |
-| 101 |     |    1 |    0 |
-
-![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/05_advanced_user.png "05_advanced_user.png")
-
-![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/05_advanced_comment-1.png "05_advanced_comment-1.png")
-
-![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/05_advanced_comment-2.png "05_advanced_comment-2.png")
-
-# Enterprise プラン
-
-計測単位：使用量ユニット計測単位
-
-| 計測単位名              | 計測単位の表示名            | 計測単位の説明             | 対象メーター名      | 単位使用量あたりの金額 | 上限 | 通貨  |
-| :----------------- | :------------------ | :------------------ | :----------- | :---------- | :- | :-- |
-| enterprise_user    | Enterpriseプランのユーザー数 | Enterpriseプランのユーザー数 | user_count   | 0           | 0  | JPY |
-| enterprise_comment | Enterpriseプランコメント数  | Enterpriseプランコメント数  | user_comment | 0           | 0  | JPY |
-
-![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/06_enterprise_user.png "06_enterprise_user.png")
-
-![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/06_enterprise_comment.png "06_enterprise_comment.png")
-
-# 機能メニュー
+各プランに対して提供する機能を設定します。
 
 | 機能メニュー名         | 機能メニューの表示名          | 機能メニューの説明           | 計測単位                                                            |
 | :-------------- | :------------------ | :------------------ | :-------------------------------------------------------------- |
-| free_menu       | Freeプラン基本メニュー       | Freeプラン基本メニュー       | Freeプランユーザー数<br />Freeプランコメント数                                    |
-| basic_menu      | Basicプラン基本メニュー      | Basicプラン基本メニュー      | Basicプラン基本料金<br />Basicプランユーザー数<br />Basicプランのコメント数                 |
-| advanced_menu   | Advancedプラン基本メニュー   | Advancedプラン基本メニュー   | Advancedプラン基本料金<br />Advancedプランのユーザー数<br />Advancedプランのコメント数       |
-| enterprise_menu | Enterpriseプラン基本メニュー | Enterpriseプラン基本メニュー | Enterpriseプラン基本料金<br />Enterpriseプランのユーザー数<br />Enterpriseプランのコメント数 |
+| free_menu       | Freeプラン基本メニュー       | Freeプラン基本メニュー       | Freeプランコメント数                                    |
+| basic_menu      | Basicプラン基本メニュー      | Basicプラン基本メニュー      | Basicプラン基本料金<br />Basicプランのコメント数                 |
 
-![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/07_free_menu.png "07_free_menu.png")
+![05](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/setting-measurement-units-function-menus-and-price-plans-05.png)
 
-![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/07_basic_menu.png "07_basic_menu.png")
+BasicプランもFreeプランと同様に設定を行なってください。
 
-![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/07_advanced_menu.png "07_advanced_menu.png")
+---
 
-![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/07_enterprise_menu.png "07_enterprise_menu.png")
+## 料金プランの作成
 
-# 料金プラン
+最後に、機能メニューを料金プランとして定義します。
 
 | 料金プラン名          | 料金プランの表示名     | 料金プランの説明      | 機能メニュー              |
 | :-------------- | :------------ | :------------ | :------------------ |
 | free_plan       | Freeプラン       | Freeプラン       | Freeプラン基本メニュー       |
 | basic_plan      | Basicプラン      | Basicプラン      | Basicプラン基本メニュー      |
-| advanced_plan   | Advancedプラン   | Advancedプラン   | Advancedプラン基本メニュー   |
-| enterprise_plan | Enterpriseプラン | Enterpriseプラン | Enterpriseプラン基本メニュー |
 
-![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/03_free_plan.png "03_free_plan.png")
+![06](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/setting-measurement-units-function-menus-and-price-plans-06.png)
 
-![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/03_basic_plan.png "03_basic_plan.png")
-
-![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/03_Advanced_plan.png "03_Advanced_plan.png")
-
-![](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/08_Enterprise_plan.png "08_Enterprise_plan.png")
+BasicプランもFreeプランと同様に設定を行なってください。
