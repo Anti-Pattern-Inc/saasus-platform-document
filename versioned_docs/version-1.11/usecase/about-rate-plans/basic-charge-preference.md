@@ -1,13 +1,26 @@
 ---
-title: "Basic Pricing"
+title: "Step-by-Step Guide to Setting Up Complicated Pricing Plans"
 slug: "basic-charge-preference"
 excerpt: ""
 hidden: false
 createdAt: "Tue May 07 2024 05:17:30 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Tue May 07 2024 05:17:30 GMT+0000 (Coordinated Universal Time)"
 ---
+# Step-by-Step Guide to Setting Up Complicated Pricing Plans
 
-# Basic Pricing
+## Metering Units
+
+### Example: Comment Count
+
+| Unit Name    | Unit Display Name   | Unit Description |
+|:-----------|:-------------|:-----------------|
+| comment_count | Comment Count | Comment Count    |
+
+![08](/img/usecase/about-rate-plans/basic-charge-preference-08.png)
+
+## Measurement Unit
+
+### Basic Pricing
 
 Measurement Unit: Fixed Unit
 
@@ -20,13 +33,13 @@ Measurement Unit: Fixed Unit
 
 ![02](/img/usecase/about-rate-plans/basic-charge-preference-02.png)
 
-## Individual Plan
+#### Individual Plan – Tiered Usage Unit
 
 Unit of Measure: Tiered Usage Unit
 
 | Measurement Unit Name | Measurement Unit Display Name       | Measurement Unit Description        | Target Meter Name | Currency | Range           | Upper Limit |
 | :-------------------- | :---------------------------------- | :---------------------------------- | :---------------- | :------- | :-------------- | ----------: |
-| individual_comment      | number of comments in Individual plan | number of comments in Individual plan | comment_count     | JPY      | see table below |           0 |
+| individual_comment      | number of comments in Individual plan | number of comments in Individual plan | Comment Count     | JPY      | see table below |           0 |
 
 | More than | Less than | Unit amount | Fixed amount |
 | --------: | --------: | ----------: | -----------: |
@@ -36,15 +49,13 @@ Unit of Measure: Tiered Usage Unit
 
 ![03](/img/usecase/about-rate-plans/basic-charge-preference-03.png)
 
-![04](/img/usecase/about-rate-plans/basic-charge-preference-04.png)
-
-## Enterprise Plan
+#### Enterprise Plan – Usage Unit
 
 Measurement Unit: Usage Unit
 
 | Measurement Unit  Name | Measurement Unit Display Name | Measurement Unit Description | Target Meter Name | Amount per Unit Usage | Limit | Currency |
 | :--------------------- | :---------------------------- | :--------------------------- | :---------------- | :-------------------- | :---- | :------- |
-| enterprise_comment     | Enterprise Plan Comments      | Enterprise Plan Comments     | user_comment      | 0                     | 0     | JPY      |
+| enterprise_comment     | number of comments in Enterprise plan      | number of comments in Enterprise plan     | Comment Count      | 0                     | 0     | JPY      |
 
 ![05](/img/usecase/about-rate-plans/basic-charge-preference-05.png)
 
@@ -52,8 +63,8 @@ Measurement Unit: Usage Unit
 
 | Feature Menu Name | Feature Menu Display Name  | Feature Menu Description   | Measurement Unit                                                               |
 | :---------------- | :------------------------- | :------------------------- | :----------------------------------------------------------------------------- |
-| individual_menu     | Individual Plan Basic Menu   | Individual Plan Basic Menu   | Individual Plan Basic Fee<br/>Individual Plan Comments       |
-| enterprise_menu   | Enterprise Plan Basic Menu | Enterprise Plan Basic Menu | Enterprise Plan Basic Fee<br/>Enterprise Plan Comments |
+| individual_menu     | Individual Plan Basic Menu   | Individual Plan Basic Menu   | Individual Plan Base Fee<br/>number of comments in Individual plan       |
+| enterprise_menu   | Enterprise Plan Basic Menu | Enterprise Plan Basic Menu | Enterprise Plan Base Fee<br/>number of comments in Enterprise plan |
 
 ![06](/img/usecase/about-rate-plans/basic-charge-preference-06.png)
 
