@@ -9,7 +9,7 @@ updatedAt: "Wed Jan 17 2024 08:25:52 GMT+0000 (Coordinated Universal Time)"
 バックエンドをAPIサーバで構成する場合、以下のような実装が必要となります  
 ・SaaSus Platformの認証情報となるトークン（JWT）を、ブラウザのローカルストレージに保管  
 ・SaaS Platform利用者はJWTを使って本人確認を行う  
-・フロントエンドはReact、Vue.jsなどで実装  
+・フロントエンドはReactなどで実装  
 ・バックエンドのAPIサーバはPHP / TypeScript / Go / Python / C# / JAVAなどで実装
 
 # 処理フロー（ログイン〜ユーザ一覧表示）
@@ -26,7 +26,6 @@ updatedAt: "Wed Jan 17 2024 08:25:52 GMT+0000 (Coordinated Universal Time)"
 #### １．１．１．認証後遷移先画面
 
 - [Reactの実装サンプル](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/pages/Callback.tsx)
-- [Vue.jsの実装サンプル](https://github.com/saasus-platform/implementation-sample-front-vue/blob/main/src/views/Callback.vue)
 
 SaaSus Platformが生成するログイン画面からログインを実施すると、認証後遷移先で設定したURLが呼び出されます。
 
@@ -54,7 +53,6 @@ APIコール時にはローカルストレージに保存したJWTを利用し�
 #### １．１．３．ユーザ一覧画面（トップページ）
 
 - [Reactの実装サンプル](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/pages/UserPage.tsx)
-- [Vue.jsの実装サンプル](https://github.com/saasus-platform/implementation-sample-front-vue/blob/main/src/views/UserPage.vue)
 
 エンドポイント /userinfo から取得しているユーザ情報の利用について
 
@@ -79,7 +77,6 @@ roles配列：
 ### １．２．実装サンプルの使い方
 
 - [React](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/README.md)
-- [Vue.js](https://github.com/saasus-platform/implementation-sample-front-vue/blob/main/README.md)
 
 ## ２．バックエンド実装
 
@@ -93,6 +90,10 @@ roles配列：
   `@app.get("/credentials")`
 - [Java(Maven)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L85")  
   `@GetMapping(value = "/credentials", produces = "application/json")`
+- [C#(.NET 8)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs#L148")  
+  `app.MapGet("/credentials")`
+- [C#(.NET Framework 4.8)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs#L80")  
+  `[HttpGet, Route("credentials")]`
 
 #### ２．１．２．ユーザ情報取得API
 
@@ -102,6 +103,10 @@ roles配列：
   `@app.get("/userinfo")`
 - [Java(Maven)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L131")  
   `@GetMapping(value = "/userinfo", produces = "application/json")`
+- [C#(.NET 8)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs#L195")  
+  `app.MapGet("/userinfo")`
+- [C#(.NET Framework 4.8)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs#L127")  
+  `[HttpGet, Route("userinfo")]`
 
 #### 
 
@@ -113,6 +118,10 @@ roles配列：
   `@app.post("/self_sign_up")`
 - [Java(Maven)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L570")  
   `@PostMapping(value = "/self_sign_up", produces = "application/json")`
+- [C#(.NET 8)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs#L632")  
+  `app.MapPost("/self_sign_up")`
+- [C#(.NET Framework 4.8)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs#L537")  
+  `[HttpPost, Route("self_sign_up")]`
 
 APIリクエストがSaaSus Platformにログインしたユーザからのものであることを確認するため、  
 ユーザ情報取得を実施してログイン確認を必ず行ってください
@@ -132,6 +141,10 @@ c. ログインユーザをテナントの管理者に設定
   `@app.get("/users")`
 - [Java(Maven)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L154")  
   `@GetMapping(value = "/users", produces = "application/json")`
+- [C#(.NET 8)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs#L219")  
+  `app.MapGet("/users")`
+- [C#(.NET Framework 4.8)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs#L147")  
+  `[HttpGet, Route("users")]`
 
 #### 
 
@@ -143,5 +156,7 @@ APIリクエストがSaaSus Platformにログインしたユーザからのも�
 - [Go(echo)](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/README.md)
 - [Python(FastAPI)](https://github.com/saasus-platform/implementation-sample-api-python)
 - [Java(Maven)](https://github.com/saasus-platform/implementation-sample-api-java)
+- [C#(.NET 8)](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/README.md)
+- [C#(.NET Framework 4.8)](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/README.md)
 
 #### 
