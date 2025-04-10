@@ -190,7 +190,7 @@ const config = {
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
-        additionalLanguages: ["php"],
+        additionalLanguages: ["php", "java", "scala", "csharp"],
       },
     }),
 
@@ -206,6 +206,17 @@ const config = {
     //     disableInDev: false,
     //   },
     // ],
+    [
+      require.resolve("docusaurus-plugin-image-zoom"),
+      {
+        selector: ".markdown img",
+        background: {
+          light: "rgb(255, 255, 255)",
+          dark: "rgb(50, 50, 50)",
+        },
+        config: {},
+      },
+    ],
     [
       require.resolve("@easyops-cn/docusaurus-search-local"),
       {
