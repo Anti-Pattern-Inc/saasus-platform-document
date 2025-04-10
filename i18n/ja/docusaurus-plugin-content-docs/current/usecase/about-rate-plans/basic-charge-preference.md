@@ -1,5 +1,5 @@
 ---
-title: "基本料金設定"
+title: "複雑な料金プラン設定の手順"
 slug: "basic-charge-preference"
 excerpt: ""
 hidden: false
@@ -7,7 +7,20 @@ createdAt: "Tue May 07 2024 05:17:30 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Tue May 07 2024 05:17:30 GMT+0000 (Coordinated Universal Time)"
 ---
 
-# 基本料金設定
+# 複雑な料金プラン設定の手順
+
+## メーター単位
+
+### 設定内容（コメント数）
+| メーター単位名    | メーター単位の表示名   | メーター単位の説明 |
+|:-----------|:-------------|:----------|
+| comment_count | コメント数 | コメント数     |
+
+![08](/ja/img/usecase/about-rate-plans/basic-charge-preference-08.png)
+
+## 計測単位
+
+### 基本料金設定
 
 計測単位：固定ユニット計測単位
 
@@ -20,13 +33,13 @@ updatedAt: "Tue May 07 2024 05:17:30 GMT+0000 (Coordinated Universal Time)"
 
 ![02](/ja/img/usecase/about-rate-plans/basic-charge-preference-02.png)
 
-# Individual プラン
+### Individual プラン用の計測単位
 
 計測単位：段階的使用量ユニット計測単位
 
 | 計測単位名            | 計測単位の表示名          | 計測単位の説明           | 対象メーター名       | 通貨  | 範囲    | 上限 |
 | :--------------- | :---------------- | :---------------- | :------------ | :-- | :---- | -: |
-| individual_comment | Individualプランのコメント数 | Individualプランのコメント数 | comment_count | JPY | 以下表参照 |  0 |
+| individual_comment | Individualプランのコメント数 | Individualプランのコメント数 | コメント数 | JPY | 以下表参照 |  0 |
 
 |  以上 |  以下 | 単位金額 | 固定金額 |
 | --: | --: | ---: | ---: |
@@ -36,19 +49,17 @@ updatedAt: "Tue May 07 2024 05:17:30 GMT+0000 (Coordinated Universal Time)"
 
 ![03](/ja/img/usecase/about-rate-plans/basic-charge-preference-03.png)
 
-![04](/ja/img/usecase/about-rate-plans/basic-charge-preference-04.png)
-
-# Enterprise プラン
+### Enterprise プラン用の計測単位
 
 計測単位：使用量ユニット計測単位
 
 | 計測単位名              | 計測単位の表示名            | 計測単位の説明             | 対象メーター名      | 単位使用量あたりの金額 | 上限 | 通貨  |
 | :----------------- | :------------------ | :------------------ | :----------- | :---------- | :- | :-- |
-| enterprise_comment | Enterpriseプランコメント数  | Enterpriseプランコメント数  | user_comment | 0           | 0  | JPY |
+| enterprise_comment | Enterpriseプランコメント数  | Enterpriseプランコメント数  | コメント数 | 0           | 0  | JPY |
 
 ![05](/ja/img/usecase/about-rate-plans/basic-charge-preference-05.png)
 
-# 機能メニュー
+## 機能メニュー
 
 | 機能メニュー名         | 機能メニューの表示名          | 機能メニューの説明           | 計測単位                                                            |
 | :-------------- | :------------------ | :------------------ | :-------------------------------------------------------------- |
@@ -59,7 +70,7 @@ updatedAt: "Tue May 07 2024 05:17:30 GMT+0000 (Coordinated Universal Time)"
 
 EnterpriseプランもIndividualプランと同様に設定を行なってください。
 
-# 料金プラン
+## 料金プラン
 
 | 料金プラン名          | 料金プランの表示名     | 料金プランの説明      | 機能メニュー              |
 | :-------------- | :------------ | :------------ | :------------------ |
