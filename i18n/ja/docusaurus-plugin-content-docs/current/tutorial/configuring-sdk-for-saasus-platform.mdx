@@ -1,0 +1,104 @@
+---
+sidebar_position: 3
+title: "SaaSus PlatformのSDKの設定"
+slug: "configuring-sdk-for-saasus-platform"
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+### SaaS ID と API キー、クライアントシークレットの確認
+
+まず、**SaaSus 開発コンソール**で API キーを表示します。このキーはアプリケーションの設定に使用されます。
+
+「SaaS ID」は通常、デフォルトで生成されます。必要に応じて、既存の「SaaS ID」を使用するか、「SaaS ID の再発行」ボタンをクリックして新しいIDを生成することもできます。
+
+初期状態では、「APIキー」は自動的に生成されません。必要に応じて、「APIキーの発行」ボタンをクリックして新しいキーを1つ発行してください。
+
+:::info
+実際にSaaSの運用が開始された後、「SaaS ID の再発行」を行った場合、SaaSアプリケーション内で使用している SaaS ID も更新する必要がありますので、ご注意ください。
+
+また、外部に API キーが漏洩しないよう、細心の注意を払ってください。このチュートリアルで表示されている API キーはすでに使用できない状態になっています。
+:::
+
+![01](/ja/img/tutorial/configuring-sdk-for-saasus-platform/configuring-sdk-for-saasus-platform-01.png)
+
+![02](/ja/img/tutorial/configuring-sdk-for-saasus-platform/configuring-sdk-for-saasus-platform-02.png)
+
+### SaaSus SDK 利用の準備
+
+では、さきほど準備したサンプルアプリケーションを開発環境で開きましょう。
+
+冒頭で行ったとおり、 `init.sh` を利用して Docker コンテナが立ち上がっており、
+
+- **Laravel** なら [http://localhost/board](http://localhost/board) で、
+- **Express** なら [http://localhost/login/](http://localhost/login/) で、
+
+サンプルアプリケーションが動いていることを確認してください。
+
+まず、 SaaSus Platform を使うためには、 SaaSus SDK をアプリケーションに組み込みます。
+
+- Laravel なら **Composer**
+- Express なら **npm**
+
+を使います。
+
+ターミナルを開き、SDKのセットアップを行います。
+
+```mdx-code-block
+<Tabs>
+<TabItem value="laravel-bash" label="Laravel (Bash)" default>
+```
+
+```bash
+repo$ docker compose exec php bash
+root@xxx:/var/www# cd api
+root@xxx:/var/www/api# composer config repositories.saasus-platform/saasus-sdk-php vcs https://github.com/saasus-platform/saasus-sdk-php
+root@xxx:/var/www/api# composer require saasus-platform/saasus-sdk-php
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="express-bash" label="Express (Bash)">
+```
+
+```bash
+repo$ docker compose exec node bash
+root@xxx:/app# npm install saasus-sdk
+root@xxx:/app# exit
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+## 環境変数の設定
+
+SaaSus SDK のインストール後、利用に必要な環境変数を設定します。
+
+まず、`api` ディレクトリ内にある `.env.example` ファイルをコピーして `.env` ファイルを作成します：
+
+```bash
+cp api/.env.example api/.env
+```
+
+作成した `.env` ファイルを開いて、以下の内容を入力してください。
+
+---
+
+### SaaSus Platform 用の環境変数
+
+```env
+SAASUS_SAAS_ID="あなたの SaaS ID を入力"
+SAASUS_API_KEY="あなたの API キーを入力"
+SAASUS_SECRET_KEY="あなたのクライアントシークレットを入力"
+SAASUS_LOGIN_URL="あなたのログイン画面の URL を入力"
+```
+
+各値は、SaaSus 開発コンソールの以下の画面で確認できます：
+
+- **基本設定 > APIキー** 画面：`SAASUS_SAAS_ID`、`SAASUS_API_KEY`、`SAASUS_SECRET_KEY`
+- **認証認可 > 認証詳細設定** 画面：`SAASUS_LOGIN_URL`
+
+これで SDK の基本設定が完了しました。

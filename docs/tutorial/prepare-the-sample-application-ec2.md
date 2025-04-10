@@ -24,7 +24,7 @@ EC2 creation parameters
 
 :::info
 
-To access EC2 via SSH, inbound SSH (22) must be allowed.
+To access an EC2 instance via SSH, inbound traffic on port 22 (SSH) must be allowed.
 For Cloud9, the initial disk capacity will not be sufficient, so additional disk capacity is needed to reach 20G.
 
 :::
