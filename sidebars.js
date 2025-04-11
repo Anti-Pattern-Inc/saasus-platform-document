@@ -244,9 +244,9 @@ const sidebars = {
           },
           items: [
             "tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans",
-            "tutorial/manage-rate-plans/implementation-of-authorization-based-on-tenant-information"
           ],
         },
+        "tutorial/implementation-of-authorization-based-on-tenant-information",
         "tutorial/summarize",
       ],
     },
