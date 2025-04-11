@@ -17,11 +17,11 @@ updatedAt: "Thu Jul 06 2023 01:27:22 GMT+0000 (Coordinated Universal Time)"
 
 `Payment Information`より`Add disbursement method`を押下してください。
 
-![new-register-bank-account-1](/ja/img/aws-marketplace-integration/register-bank-account/new-register-bank-account-1.png)
+![new-register-disbursement-methods-1](/ja/img/aws-marketplace-integration/register-disbursement-methods/new-register-disbursement-methods-1.png)
 
 最初に、支払われる通貨を選択します。利用可能な通貨は[公式ドキュメント](https://docs.aws.amazon.com/ja_jp/marketplace/latest/userguide/disbursement.html#currency)を参照してください。
 
-次に支払いを受け取る銀行口座を選択します。[銀行口座の設定](/docs/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account)で追加した銀行口座の中で直前に選択した通貨に対応している銀行口座が選択肢として選べるようになっています。
+![new-register-disbursement-methods-2](/ja/img/aws-marketplace-integration/register-disbursement-methods/new-register-disbursement-methods-2.png)
 
 次に、支払いを受け取る銀行口座を選択します。[銀行口座の設定](/docs/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account)で追加した銀行口座の中で、直前に選択した通貨に対応している銀行口座が選択肢として選べるようになっています。
 
