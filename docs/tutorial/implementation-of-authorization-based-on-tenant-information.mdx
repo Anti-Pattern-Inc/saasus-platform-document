@@ -23,15 +23,14 @@ Earlier, we set a different upper limit for the number of comments for each pric
 
 - 10 comments limit on Free plan
 - 100 comments limit on Basic plan
-- No limit on Advanced plan and above
 
 Now, get the maximum number associated with this pricing plan for each tenant and set a limit.
 
-Rewrite the post method of api/app/Http/Controllers/MessageController.php as follows.
-
+- For Laravel, let’s modify the `post` method in `api/app/Http/Controllers/MessageController.php`.
+- For Express, let’s add an `import` statement to `api/controllers/chat.ts` and modify the `postChats` method.
 
 <Tabs>
-<TabItem value="php" label="PHP" default>
+<TabItem value="php" label="Laravel (PHP)">
 
 ```php
    public function post(Request $request)
@@ -77,6 +76,67 @@ Rewrite the post method of api/app/Http/Controllers/MessageController.php as fol
 ```
 
 </TabItem>
+
+<TabItem value="typescript" label="Express (TS)">
+```js
+import { UpdateMeteringUnitTimestampCountNowParam } from "saasus-sdk/dist/generated/Pricing";
+import { findUpperCountByMeteringUnitName, PricingClient } from "saasus-sdk";
+
+// Other code omitted
+
+const postChats = async (req: Request, res: Response) => {
+  const mes = req.body.message;
+  const tenantId = req.userInfo?.tenants[0].id || "";
+  const planId = req.userInfo?.tenants[0].plan_id || "";
+  const userName =
+    req.userInfo?.tenants[0].user_attribute.username;
+  try {
+    const pricingClient = new PricingClient();
+    const pricingPlan = await pricingClient.pricingPlansApi.getPricingPlan(
+      planId
+    );
+
+    // use metering meter, comment_count
+    const meteringUnitName = "comment_count";
+    const meteringUnitCountData =
+      await pricingClient.meteringApi.getMeteringUnitDateCountByTenantIdAndUnitNameToday(
+        tenantId,
+        meteringUnitName
+      );
+    
+    // This time, treat it as the maximum number of comments per day
+    const upper = findUpperCountByMeteringUnitName(
+      pricingPlan.data,
+      meteringUnitName
+    );
+
+    // Disable posting if the number of comments exceeds the maximum number of comments for the current contracted price plan
+    if (meteringUnitCountData.data.count < upper || upper === 0) {
+      await db.Messages.create({
+        tenant_id: tenantId,
+        user_id: userName,
+        message: mes,
+      });
+
+      // add 1 to the number of comments in the metering API
+      let param: UpdateMeteringUnitTimestampCountNowParam = {
+        method: "add",
+        count: 1,
+      };
+      const res =
+        await pricingClient.meteringApi.updateMeteringUnitTimestampCountNow(
+          tenantId,
+          meteringUnitName,
+          param
+        );
+    }
+  } catch (error) {
+    console.error(error);
+  }
+  res.redirect("/chat");
+};
+```
+</TabItem>
 </Tabs>
 
 
@@ -109,7 +169,7 @@ For example, if we put an upper limit on comments, and it becomes impossible to 
 Resulting in this SaaS may going unused until this meter is reset, also taking the risk that there is also the possibility that it will never be used again.  
 Therefore, instead of stopping comments completely, it is important to prevent the value of this SaaS itself from being lost, such as issuing a warning about the limit, or adjusting the storage period.
 
-Since this is a tutorial, it is completely unwritable. Now, check to see if writing is not possible at the upper limit!
+Since this is a tutorial, it is completely unwritable. Now, check to see if writing is not possible at the upper limit.
 
 First, run init.sh to clean up the application, just like when we first initialized the application.
 
@@ -117,26 +177,25 @@ Then, set the Free plan for Tenant 1, log in with [user1-1@example.com](mailto:u
 
 This shows that tenant 1 can write a maximum of 10 records.
 
-<img src="/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-2.png" width="400">
-</img>
+:::info
+This time, the implementation only counts writings after the meter is set. <br/> If you want to take writings before the setting into account, you can also update the meter value directly.
+:::
+
+![](/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-2.png)
 
 Next, log in with user [user2-1@example.com](mailto:user2-1@example.com) in tenant 2 and write 10 or more items.
 
 Since the upper limit is 100 here, you should have been able to write more than 10.
 
-<img src="/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-3.png" width="400">
-</img>
+![](/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-3.png)
 
 Furthermore, assuming that tenant 1 has upgraded the plan, change the setting from the Free plan to the Basic plan, log in again with [user1-1@example.com](mailto:user1-1@example.com), and write 10 or more items. prize.  
 (It takes about 5 minutes to reflect the changed settings.)
 
-<img src="/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-4.png" width="400">
-</img>
+![](/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-4.png)
 
 This shows that user1-1 can write more than ten items.
 
 ![](/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-5.png)
 
-Using this method it is now possible to meter and limit according to the pricing plan!
-
-Up to this point, we have implemented Blade-based applications, but finally, how should we implement Next.js (API-based SPA)? Let's continue.
+Using this method it is now possible to meter and limit according to the pricing plan.

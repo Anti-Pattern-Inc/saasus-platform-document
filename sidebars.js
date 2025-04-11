@@ -22,7 +22,7 @@ const sidebars = {
     {
       type: "category",
       label: "Getting Started",
-      items: ["saasus-platform-document", "faq"],
+      items: ["saasus-platform-document", "sdk-list", "faq"],
       collapsed: false,
       collapsible: false,
     },
@@ -44,6 +44,7 @@ const sidebars = {
             "implementation-guide/example_implementation_using_metering_api",
           ],
         },
+        "implementation-guide/implementing-multi-factor-authentication-apiserver",
       ],
     },
     {
@@ -62,6 +63,18 @@ const sidebars = {
             "usecase/about-saas-user-accounts/add-tenant-user",
           ],
         },
+        {
+          "type": "category",
+          "label": "About Rate Plans",
+          "link": {
+            "type": "doc",
+            "id": "usecase/about-rate-plans"
+          },
+          "items": [
+            "usecase/about-rate-plans/basic-charge-preference"
+          ]
+        },
+        "usecase/authentication-methods"
       ],
     },
     {
@@ -102,7 +115,15 @@ const sidebars = {
         "saas-development-console/usage-metering",
         "saas-development-console/ip-restriction",
         "saas-development-console/user-env-definition",
+        "saas-development-console/domain-name-preference",
+        "saas-development-console/authorization-screen-customize",
+        "saas-development-console/declare-additional-attribute-to-user",
+        "saas-development-console/declare-additional-attribute-to-tenant",
+        "saas-development-console/role-definition",
+        "saas-development-console/console-switching",
+        "saas-development-console/saasus-development-console-used-billing-with-association",
         "saas-development-console/single-tenant-management",
+        "saas-development-console/multi-factor-authentication",
       ],
     },
     {
@@ -125,6 +146,7 @@ const sidebars = {
           ],
         },
         "saas-operation-console/user-feedback",
+        "saas-operation-console/adding-role-to-user",
         "saas-operation-console/user-activity-history-log",
       ],
     },
@@ -194,7 +216,7 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "API Gateway Function",
+      label: "Smart API Gateway Function",
       link: {
         type: "doc",
         id: "api-gateway-function/overview",
@@ -208,10 +230,11 @@ const sidebars = {
       type: "category",
       label: "Tutorial",
       items: [
+        "tutorial/tutorial-introduction",
         "tutorial/prepare-the-sample-application",
         "tutorial/prepare-saasus-platform",
-        "tutorial/saas-management-using-the-saas-operation-console",
-        "tutorial/embed-the-saasus-sdk-into-your-web-application-and-make-int-multi-tenant",
+        "tutorial/configuring-sdk-for-saasus-platform",
+        "tutorial/authentication-preference",
         {
           type: "category",
           label: "Manage Rate Plans",
@@ -224,7 +247,6 @@ const sidebars = {
           ],
         },
         "tutorial/implementation-of-authorization-based-on-tenant-information",
-        "tutorial/implementation-to-nextjs-spa-based-application",
         "tutorial/summarize",
       ],
     },
@@ -260,6 +282,16 @@ const sidebars = {
       type: "category",
       label: "Changelog",
       items: [
+        {
+          label: "2025/03/14",
+          type: "doc",
+          id: "changelog/20250314",
+        },
+        {
+          label: "2024/12/10",
+          type: "doc",
+          id: "changelog/20241210",
+        },
         {
           label: "2024/11/26",
           type: "doc",
