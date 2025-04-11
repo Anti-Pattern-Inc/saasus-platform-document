@@ -44,17 +44,19 @@ Once it's started, go to the URL below and give it a try.
 
 Blade version
 
-URL: [http://localhost/board](http://localhost/board)
-Authentication Email: [user@example.com](mailto:user@example.com)  
-Password: password
+URL: [http://localhost/board](http://localhost/board)  
+Authentication  
+　Email: [user@example.com](mailto:user@example.com)  
+　Password: password
 
 ![サンプル](/img/tutorial/prepare-the-sample-application/prepare-the-sample-application-01.png)
 
 Next.js version
 
-URL: [http://localhost/login/](http://localhost/login/)
-Authentication Email: [user@example.com](mailto:user@example.com)  
-Password: password
+URL: [http://localhost/login/](http://localhost/login/)  
+Authentication  
+　Email: [user@example.com](mailto:user@example.com)  
+　Password: password
 
 - The Next.js version may take several minutes to build. If it doesn't display, wait a few minutes and try to view it again.
 
