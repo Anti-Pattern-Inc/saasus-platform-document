@@ -29,6 +29,13 @@ updatedAt: "Mon Dec 11 2023 05:50:46 GMT+0000 (Coordinated Universal Time)"
 
 ![07](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/setting-measurement-units-function-menus-and-price-plans-07.png)
 
+:::info
+この画面では「使用量の集計」項目が表示されていませんが、**Stripeと連携している場合**には「sum（合計）」や「max（最大値）」を選択できるようになります。
+
+詳細は以下のページをご覧ください。  
+[メーター単位設定についてはこちら](/docs/saas-development-console/usage-metering)
+:::
+
 ---
 
 ## 計測単位の作成
