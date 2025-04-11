@@ -101,11 +101,14 @@ username： User2-2
 
 I was able to register 4 additional users.
 
-You can also add roles to these users.
+Please assign appropriate roles to these users using the steps below.
 
-:::info
-Please check the page below for how to add a role.<br/>
-[Adding Role To User](../saas-operation-console/adding-role-to-user)
+:::caution Required setup before continuing the tutorial
+To proceed smoothly with the following tutorial steps, it is essential to assign appropriate roles to users in advance.
+
+Refer to the following page to complete this setup:
+
+- [Adding Role To User](../saas-operation-console/adding-role-to-user)
 :::
 
 :::info
@@ -537,11 +540,6 @@ Processing then moves to the application's controller, so at this point the appl
 
 Now, let's use this information to make our bulletin board application multi-tenant-enabled.
 
-:::info
-The automatically generated login screen can display the service name and icon, and you can set links to the terms of use and privacy policy.<br/>
-For the setting method, please check [Customizing Authentication Pages such as Login Pages](../saas-development-console/authorization-screen-customize).
-:::
-
 ### Multi-tenancy of sample application
 
 - For Laravel: `api/app/Http/Controllers/MessageController.php`
@@ -664,7 +662,7 @@ Around line 32, change `$message->user->name` to `$message->user_id`.
 
 Before correction：
 
-```blade
+```html
                    <div class="mt-4">
                        <p>
                            {{ $message->user->name }}
@@ -676,7 +674,7 @@ Before correction：
 
 After correction：
 
-```blade
+```html
                    <div class="mt-4">
                        <p>
                            {{ $message->user_id }}

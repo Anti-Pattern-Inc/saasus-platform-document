@@ -97,11 +97,14 @@ SaaS によっては、複数環境が不要な場合もありますので、単
 
 4 名追加でユーザ登録できました。
 
-これらのユーザーに役割を追加することもできます。
+以下の手順で、これらのユーザーに役割を設定してください。
 
-:::info
-役割の追加方法は下記ページを確認してください。<br/>
-[ユーザーに役割を追加](../saas-operation-console/adding-role-to-user)
+:::caution チュートリアルの前提として必要な設定です
+ユーザーに適切な役割を設定しておくことで、このあとのチュートリアルを正しく進めることができます。
+
+以下のページを参考に、事前に設定を行ってください：
+
+- [ユーザーに役割を追加](../saas-operation-console/adding-role-to-user)
 :::
 
 :::info
@@ -534,11 +537,6 @@ array:3 [▼
 
 では、この情報を使って、掲示板アプリケーションをマルチテナント対応にしてみましょう。
 
-:::info
-自動生成されたログイン画面はサービス名やアイコンを表示したり、利用規約やプライバシーポリシーのリンクを設定することができます。<br/>
-設定方法は、[ログイン画面など認証系画面のカスタマイズ](../saas-development-console/authorization-screen-customize)で確認してください。
-:::
-
 ### サンプルアプリケーションのマルチテナント化
 
 - Laravel の場合は、`api/app/Http/Controllers/MessageController.php` が
@@ -661,7 +659,7 @@ const postChats = async (req: Request, res: Response) => {
 
 修正前：
 
-```blade
+```html
                    <div class="mt-4">
                        <p>
                            {{ $message->user->name }}
@@ -673,7 +671,7 @@ const postChats = async (req: Request, res: Response) => {
 
 修正後：
 
-```blade
+```html
                    <div class="mt-4">
                        <p>
                            {{ $message->user_id }}
