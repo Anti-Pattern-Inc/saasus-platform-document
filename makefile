@@ -3,21 +3,21 @@
 ##########
 # local server setup
 ######### 
-PORT := 3000
+PORT := 3001
 
 # Docker Composeを立ち上げるターゲット
 init: up install run_en
 
 up:
-	@echo "チェック中: ポート3000の使用状況..."
-	@lsof -iTCP:3000 -sTCP:LISTEN > /dev/null 2>&1; \
+	@echo "チェック中: ポート3001の使用状況..."
+	@lsof -iTCP:3001 -sTCP:LISTEN > /dev/null 2>&1; \
 	if [ $$? -eq 0 ]; then \
-		echo "ポート3000は使用中です。使用しているコンテナを確認します..."; \
-		if docker ps --filter "publish=3000" --format "{{.Names}}" | grep -q 'saasus-platform-document'; then \
-			echo "ポート3000はsaasus-platform-documentコンテナによって使用されています。処理を続行します。"; \
+		echo "ポート3001は使用中です。使用しているコンテナを確認します..."; \
+		if docker ps --filter "publish=3001" --format "{{.Names}}" | grep -q 'saasus-platform-document'; then \
+			echo "ポート3001はsaasus-platform-documentコンテナによって使用されています。処理を続行します。"; \
 			docker-compose up -d; \
 		else \
-			echo "エラー: ポート3000はsaasus-platform-document以外のプロセスによって使用されています。"; \
+			echo "エラー: ポート3001はsaasus-platform-document以外のプロセスによって使用されています。"; \
 			exit 1; \
 		fi \
 	else \
@@ -90,7 +90,7 @@ copy_api_files:
 	cp -f ../api/modules/v1/awsmarketplace/controller/awsmarketplaceapi/awsmarketplaceapi.yml ./api/awsmarketplaceapi.yml
 	cp -f ../api/modules/v1/communication/controller/communicationapi/communicationapi.yml ./api/communicationapi.yml
 	cp -f ../api/modules/v1/apilog/controller/apilogapi/apilogapi.yml ./api/apilogapi.yml
-	cp -f ../api/modules/v1/apigateway/controller/apigatewayapi/apigatewayapi.yml ./api/apigatewayapi.yml 
+	cp -f ../api/modules/v1/apigateway/controller/apigatewayapi/apigatewayapi.yml ./api/apigatewayapi.yml
 
 # CRLFにならないようにbashで実行
 translate_ja:
