@@ -54,17 +54,19 @@ clone後、使用するアプリケーションのディレクトリに移動し
 
 ### Laravel + Blade 版
 
-- URL: [http://localhost/board](http://localhost/board)
-- 認証用 Email: [user@example.com](mailto:user@example.com)
-- Password: password
+URL: [http://localhost/board](http://localhost/board)  
+認証情報  
+　Email: [user@example.com](mailto:user@example.com)  
+　Password: password
 
 ![サンプル](/ja/img/tutorial/prepare-the-sample-application/prepare-the-sample-application-01.png)
 
 ### Express + EJS 版
 
-- URL: [http://localhost/board](http://localhost/board)
-- 認証用 Email: [user@example.com](mailto:user@example.com)
-- Password: password
+URL: [http://localhost/login/](http://localhost/login/)  
+認証情報  
+　Email: [user@example.com](mailto:user@example.com)  
+　Password: password
 
 :::caution
 Express + EJS 版のビルドには時間がかかることがあります。表示できない場合は、数分待ってから再度試してください。
