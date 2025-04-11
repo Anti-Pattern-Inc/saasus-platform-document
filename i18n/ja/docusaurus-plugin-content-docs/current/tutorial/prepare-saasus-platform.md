@@ -42,16 +42,26 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 
 **SaaS 管理コンソール**は、SaaS を運用していくためのコンソールになります。
 
-:::info
+:::info ドメイン設定について
 SaaSus Platformではドメインを設定することで、ログイン画面の自動生成やメール送信の際のベースドメインに設定することができます。<br/>
 ドメインの設定方法に関しては、[ドメイン名の設定](../saas-development-console/domain-name-preference)で確認してください。
 :::
 
-:::info
-SaaS アプリケーションを実際に開発する際には必要となる主な登録情報の設定方法は、下記ページを確認してください。<br/>
-[ユーザに追加属性を定義する](../saas-development-console/declare-additional-attribute-to-user)<br/>
-[テナントに追加属性を定義する](../saas-development-console/declare-additional-attribute-to-tenant)<br/>
-[役割の定義](../saas-development-console/role-definition)
+:::info ログイン画面のカスタマイズについて
+自動生成されたログイン画面はサービス名やアイコンを表示したり、利用規約やプライバシーポリシーのリンクを設定することができます。<br/>
+設定方法は、[ログイン画面など認証系画面のカスタマイズ](../saas-development-console/authorization-screen-customize)で確認してください。
+:::
+
+:::caution チュートリアルを進める前に必要な設定です
+このあとのチュートリアルをスムーズに進めるためには、ユーザやテナントに関する追加情報の定義が **必須** です。
+
+以下の設定を事前に行ってください：
+
+- [ユーザに追加属性を定義する](../saas-development-console/declare-additional-attribute-to-user)
+- [テナントに追加属性を定義する](../saas-development-console/declare-additional-attribute-to-tenant)
+- [役割の定義](../saas-development-console/role-definition)
+
+以降の手順は、これらの設定が完了していることを前提として進行します。
 :::
 
 SaaSus Platformの準備ができたら、サンプルアプリケーションに組み込みを行います。

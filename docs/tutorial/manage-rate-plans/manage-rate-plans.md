@@ -6,8 +6,6 @@ hidden: false
 createdAt: "Fri Jan 20 2023 01:46:57 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
-The first step of pricing, metering, and billing using the SaaSus Platform
-
 ## Structure and Terminology of Pricing Plans
 
 In SaaSus, pricing plans are organized in the following **hierarchical structure**:
@@ -70,34 +68,7 @@ For detailed input steps and screenshots, please refer to the following guide:
 
 [See the step-by-step guide here (with screenshots)](./setting-measurement-units-function-menus-and-price-plans)
 
-### Linking Billing Using the SaaSus Development Console
-
-Next, set up billing.
-
-It is also possible to implement billing processing independently based on the billing plans and usage information for each tenant.
-
-However, there are already SaaS that exists in the world to make billing easy.  
-In the same way that you can easily build and operate SaaS using the SaaS Platform, you can offload the effort of building and operating to SaaS by actively using a convenient SaaS.  
-Therefore, this time we will use Stripe, which is one of the billing SaaS.
-
-　**If you do not want to connect  Stripe, you can skip this step**
-
-From the side menu, click "External linkage".
-
-Enter your Stripe secret key and click the Save button.
-
-![](/img/tutorial/manage-rate-plans/manage-rate-plans-01.png)
-
-You are now ready to integrate with Stripe.  
-The price plan created above should be linked to Stripe.
-
-Also, if an operation is performed that involves a pricing plan, it will be linked to Stripe.
-
-As of now, pricing plan settings are complete.
-
-Apply this pricing plan to each tenant.
-
-### Applying Rate Plans to Tenants
+## Applying Rate Plans to Tenants
 
 Log in to the SaaS Operation Console and click Pricing Plan Settings.
 
@@ -113,4 +84,10 @@ This will change the pricing plan associated with the tenant. When working with 
 
 ![](/img/tutorial/manage-rate-plans/manage-rate-plans-04.png)
 
-Now, use the pricing and metering information set up so far to implement the first step of authorization processing in the application.
+:::info
+For details on how to set up Stripe integration,  
+please refer to the following Developer Console documentation:  
+[Setting Up Stripe Integration](/docs/saas-development-console/saasus-development-console-used-billing-with-association)
+:::
+
+Now, using the pricing plans and metering unit information you've configured, let’s implement the first step of authorization processing in the application.

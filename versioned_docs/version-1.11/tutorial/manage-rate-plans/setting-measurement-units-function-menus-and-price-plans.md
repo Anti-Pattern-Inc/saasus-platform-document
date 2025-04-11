@@ -31,6 +31,14 @@ First, create a metering unit that represents what to measure within your applic
 
 ![07](/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/setting-measurement-units-function-menus-and-price-plans-07.png)
 
+:::info
+The **"Calculation Method"** field is not visible in this screen,  
+but it becomes available when **Stripe integration is enabled**, allowing you to choose options such as `sum` (total) or `max` (maximum).
+
+For more details, see the following page:  
+[Meter Unit Setting](/docs/saas-development-console/usage-metering)
+:::
+
 ---
 
 ## Measurement Units
