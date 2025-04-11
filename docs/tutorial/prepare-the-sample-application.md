@@ -55,17 +55,19 @@ Once launched, try it out by accessing the URL below.
 
 ### Laravel + Blade Version
 
-- URL: [http://localhost/board](http://localhost/board<br/>)
-- Authentication Email: [user@example.com](mailto:user@example.com)
-- Password: password
+URL: [http://localhost/board](http://localhost/board)  
+Authentication  
+　Email: [user@example.com](mailto:user@example.com)  
+　Password: password
 
 ![サンプル](/img/tutorial/prepare-the-sample-application/prepare-the-sample-application-01.png)
 
 ### Express + EJS Version
 
-- URL: [http://localhost/login/](http://localhost/login/)
-- Authentication Email: [user@example.com](mailto:user@example.com)
-- Password: password
+URL: [http://localhost/login/](http://localhost/login/)  
+Authentication  
+　Email: [user@example.com](mailto:user@example.com)  
+　Password: password
 
 :::caution
 The Express + EJS version may take several minutes to build. If it doesn't display, wait a few minutes and try to view it again.
