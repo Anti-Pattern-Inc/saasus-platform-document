@@ -43,17 +43,19 @@ AWS の EC2 や Cloud9 を利用して、Blade 版の動作環境を作成する
 
 Blade 版
 
-URL: [http://localhost/board](http://localhost/board)
-認証用 Email: [user@example.com](mailto:user@example.com)  
-Password: password
+URL: [http://localhost/board](http://localhost/board)  
+認証情報  
+　Email: [user@example.com](mailto:user@example.com)  
+　Password: password
 
 ![サンプル](/ja/img/tutorial/prepare-the-sample-application/prepare-the-sample-application-01.png)
 
 Next.js 版
 
-URL: [http://localhost/login/](http://localhost/login/)
-認証用 Email: [user@example.com](mailto:user@example.com)  
-Password: password
+URL: [http://localhost/login/](http://localhost/login/)  
+認証情報  
+　Email: [user@example.com](mailto:user@example.com)  
+　Password: password
 
 ※ Next.js 版は、ビルドに数分掛かる可能性があります。表示できない場合は、数分待ってから再度表示してみてください。
 
