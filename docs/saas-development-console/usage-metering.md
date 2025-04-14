@@ -27,7 +27,19 @@ Define the meter unit that will be used as the measurement unit.
 | Unit Description      | Set up a description of the meter that people can easily understand.  |
 | Calculation Method    | Set any of the following. sum（Total value of usage during the period) or max（Maximum usage value during the period） | 
 
-    Set the above information and click the Save button.
+:::info
+The **"Calculation Method"** field only appears when **Stripe integration is enabled**.
+
+This setting specifies how the usage amount of the metering unit should be aggregated for billing,  
+such as `sum` (total usage during the period) or `max` (maximum daily usage during the period).  
+You can configure a different aggregation method for each metering unit.
+
+This setting is used as part of the billing configuration when integrated with Stripe.
+
+It is not required and will not appear when using SaaSus without Stripe integration.
+:::
+
+Set the above information and click the Save button.
 
 ## Set the meter unit to the measurement unit.
 When creating a measurement unit, you can set a meter unit.
