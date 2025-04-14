@@ -20,18 +20,18 @@ X-Saasus-Trace-Id ヘッダは、リクエスト時に指定することも出�
 
 
 API  
-[SaaSus Auth API Schema](./auth-api)  
+[SaaSus Auth API Schema](/ja/docs/reference/auth-api)  
 ユーザ情報、基本情報、認証情報、テナント情報、役割(ロール)情報などに関するAPI  
 (APIs related to user information, basic information, authentication information, tenant information, role information, etc.)
 
-[SaaSus Billing API Schema](./billing-api)  
+[SaaSus Billing API Schema](/ja/docs/reference/billing-api)  
 請求業務で使う外部SaaSとの連携情報の取得・更新・削除に関するAPI  
 (API for acquiring, updating, and deleting information linked with external SaaS used in billing operations)
 
-[SaaSus Pricing API Schema](./pricing-api)  
+[SaaSus Pricing API Schema](/ja/docs/reference/pricing-api)  
 プライシングユニット、機能メニュー、料金プラン、メータリングユニットカウントなど料金に関連するAPI  
 (Pricing-related APIs such as pricing units, feature menus, rate plans, metering unit counts, etc.)
 
-[SaaSus Integration API Schema](./integration)  
+[SaaSus Integration API Schema](/ja/docs/reference/integration)  
 Amazon EventBridge 連携に関連するAPI  
 (APIs related to Amazon EventBridge integration)
