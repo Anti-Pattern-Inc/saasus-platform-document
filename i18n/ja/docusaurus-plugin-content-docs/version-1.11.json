@@ -3,6 +3,14 @@
     "message": "1.11",
     "description": "The label for version 1.11"
   },
+  "sidebar.docsSidebar.category.Part I: Introduction": {
+    "message": "第I部：はじめに",
+    "description": "The label for category Part I: Introduction in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Part II: SaaS Fundamentals": {
+    "message": "第II部：SaaSの基礎知識",
+    "description": "The label for category Part II: SaaS Fundamentals in sidebar docsSidebar"
+  },
   "sidebar.tutorialSidebar.category.Getting Started": {
     "message": "はじめに",
     "description": "The label for category Getting Started in sidebar tutorialSidebar"
