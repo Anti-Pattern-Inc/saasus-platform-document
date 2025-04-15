@@ -1,4 +1,26 @@
 {
+  "docsSidebar": [
+    {
+      "type": "category",
+      "label": "Part I: Introduction",
+      "items": [
+        "part-1/purpose_and_overview"
+      ],
+      "collapsed": false,
+      "collapsible": false
+    },
+    {
+      "type": "category",
+      "label": "Part II: SaaS Fundamentals",
+      "collapsed": false,
+      "collapsible": true,
+      "items": [
+        "part-2/what_is_saas",
+        "part-2/what_is_saasus",
+        "part-2/cloud_computing_basics"
+      ]
+    }
+  ],
   "guideSidebar": [
     {
       "type": "category",
