@@ -7,27 +7,27 @@ createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
-### 1. 本マニュアルの目的
+## Purpose
 
-本マニュアルは、SaaS提供事業者が「SaaSus Platform」を用いて、SaaSサービスの開発・運用・管理を効率化するためのガイドです。  
-SaaSの基本概念から、プラットフォームの各機能の利用方法、そして運用時の注意点まで、幅広い内容をカバーします。
+This manual serves as a guide for SaaS providers to streamline the development, operation, and management of their SaaS services using the **SaaSus Platform**.  
+It covers a wide range of topics—from the fundamentals of SaaS to feature usage across the platform, as well as operational best practices and precautions.
 
-### 2. 対象読者と前提知識
+## Target Audience and Prerequisites
 
-- **対象読者**：  
-  SaaSサービスを提供しようとする事業者、システム管理者、開発者、マーケティング担当者など。
+- **Target Audience**:  
+  SaaS business operators, system administrators, developers, marketing professionals, and anyone involved in delivering SaaS services.
 
-- **前提知識**：  
-  基本的なWeb技術、クラウドコンピューティングの概念、SaaSの一般的なメリット・デメリットなど、IT業界の標準知識があることを前提としています。
+- **Prerequisites**:  
+  Basic knowledge of web technologies, cloud computing concepts, and general understanding of SaaS models (including their benefits and limitations) is assumed.
 
-### 3. マニュアルの構成
+## Structure
 
-本マニュアルは全7部から構成され、以下の内容を含みます。
+This manual consists of the following seven parts:
 
-- **第I部：はじめに**  
-- **第II部：SaaSの基礎知識**  
-- **第III部：SaaSus Platformの概要と導入準備**  
-- **第IV部：SaaSus Platformの使い方（SaaS開発コンソール 編）**  
-- **第V部：SaaSus Platformの使い方（SaaS運用コンソール 編）**  
-- **第VI部：トラブルシューティングとサポート** 
-- **第VII部：付録**
+- **Part I: Introduction**  
+- **Part II: SaaS Fundamentals**  
+- **Part III: Overview and Setup of the SaaSus Platform**  
+- **Part IV: Using the SaaSus Platform (Developer Console)**  
+- **Part V: Using the SaaSus Platform (Operation Console)**  
+- **Part VI: Troubleshooting and Support**  
+- **Part VII: Appendix**

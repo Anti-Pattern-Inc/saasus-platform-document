@@ -17,7 +17,79 @@
       "items": [
         "part-2/what_is_saas",
         "part-2/what_is_saasus",
-        "part-2/cloud_computing_basics"
+        "part-2/cloud_computing_basics",
+        "part-2/saas_advantages_and_disadvantages",
+        "part-2/saas_business_model",
+        "part-2/saas_technical_architecture",
+        "part-2/saas_operations",
+        "part-2/saas_development",
+        "part-2/saas_marketing",
+        "part-2/saas_security_and_compliance",
+        "part-2/saas_legal_issues"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Part III: Overview and Setup of the SaaSus Platform",
+      "collapsed": false,
+      "collapsible": true,
+      "items": [
+        "part-3/saasus_platform_architecture",
+        "part-3/getting_started",
+        "part-3/login_and_main_screen_overview"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Part IV: Using the SaaSus Platform (Developer Console)",
+      "collapsed": false,
+      "collapsible": true,
+      "items": [
+        "part-4/saas_development_console_overview",
+        "part-4/registering_and_configuring_applications",
+        "part-4/pricing_plan_and_billing_configuration",
+        "part-4/user_authentication_and_authorization_configuration",
+        "part-4/developer_sdk_api_overview",
+        "part-4/smart_api_gateway_features",
+        "part-4/event_handling_and_external_service_integration",
+        "part-4/infrastructure_updates_and_app_updates",
+        "part-4/marketplace_publication",
+        "part-4/account_settings"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Part V: Using the SaaSus Platform (Operation Console)",
+      "collapsed": false,
+      "collapsible": true,
+      "items": [
+        "part-5/operations_console_overview",
+        "part-5/tenant_management",
+        "part-5/user_management",
+        "part-5/pricing_plans_and_billing_management"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Part VI: Troubleshooting and Support",
+      "collapsed": false,
+      "collapsible": true,
+      "items": [
+        "part-6/faq",
+        "part-6/error_codes_and_countermeasures",
+        "part-6/support_and_escalation"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Part VII: Appendix",
+      "collapsed": false,
+      "collapsible": true,
+      "items": [
+        "part-7/glossary",
+        "part-7/reference",
+        "part-7/release_notes",
+        "part-7/index"
       ]
     }
   ],
