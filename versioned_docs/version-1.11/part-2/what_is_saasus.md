@@ -7,46 +7,59 @@ createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
-## 1. SaaSus Platformの概要
+## 1. SaaSus Platform Overview
 
-「SaaSus Platform」は、SaaSサービスに必要なコントロールプレーン（管理・運用に関わる機能群）を提供するプラットフォームです。  
-開発者向けのSaaS開発コンソールと、運用管理者向けの運用コンソールの2種類のコンソールから構成されています。
+The **SaaSus Platform** provides the control plane necessary for operating and managing SaaS services.  
+It consists of two main consoles: one for developers (**SaaS Development Console**) and one for operators (**SaaS Operation Console**).
 
-## 2. 提供される機能と特徴
+## 2. Features and Functionality of SaaSus Platform
 
-- **SaaS開発コンソール**：  
-  アプリケーション登録、基本設定、認証認可、料金プラン設定、SDK/APIの利用など。
+- **SaaS Development Console**:  
+  This console is used to configure and connect your own SaaS application with SaaSus.  
+  Key features include:
 
-- **SaaS運用コンソール**：  
-  テナント管理、ユーザー管理、請求・課金管理、ダッシュボード、レポート、フィードバック管理など。
+  - Basic integration settings (e.g., app name, domain, callback URLs)
+  - Authentication configuration
+  - Tenant and user management setup
+  - Pricing plan configuration
+  - Obtaining SDKs and API keys
+  - Integration with external services (e.g., Stripe)
 
-- **連携機能**：  
-  Stripeなど外部決済サービスとの連携、イベントハンドリング、API連携により、SaaSサービス全体の運用を支援します。
+- **SaaS Operation Console**:  
+  This console is designed for the ongoing management and operation of your SaaS service.  
+  Key features include:
 
-## 3. SaaSus Platformが解決する課題
+  - Managing tenants and users
+  - Viewing and configuring pricing plans per tenant
+  - Viewing service announcements and updates
+  - Viewing API request logs (helpful for error tracking and troubleshooting)
 
-SaaSを提供するにあたり、単一のアプリケーションでは実現が困難な以下の運用負荷を軽減します。
+- **Integration Features**:  
+  SaaSus integrates with services such as Stripe, Amazon EventBridge, API Gateway, and AWS Marketplace, enabling automation and extensibility of your SaaS offering.
 
-- **認証・認可管理の統一**：  
-  利用者ごとに異なる認証・認可基盤の構築が不要。
+## 3. Challenges Solved by SaaSus Platform
 
-- **料金・課金管理の自動化**：  
-  従量課金や定額課金の設定、請求書発行、支払い状況の確認が容易に。
+The SaaSus Platform helps reduce operational burdens that are difficult to address with a single SaaS application alone:
 
-- **テナント管理の効率化**：  
-  テナントごとの契約状況やオンボーディングの一元管理が可能。
+- **Unified Authentication and Authorization Management**:  
+  No need to build separate auth infrastructure for each tenant.
 
-## 4. 利用するメリットとROI
+- **Automated Billing and Usage Tracking**:  
+  Easily define pricing models and track usage for both fixed and usage-based billing.
 
-SaaSus Platformを利用することで得られるメリットは以下の通りです。
+- **Efficient Tenant Management**:  
+  Centralized management of tenant contracts and onboarding workflows.
 
-- **開発・運用コストの削減**：  
-  自社で複雑な機能を一から実装する必要がなく、リソースの再配分が可能。
+## 4. Benefits and ROI
 
-- **市場投入までの期間短縮**：  
-  必要な機能をパッケージ化して提供するため、迅速なサービス提供が実現。
+Using the SaaSus Platform brings the following business benefits:
 
-- **定量的メリット**：
-  - 初期開発コストの削減（例：従来の構築コストの30～50%削減）
-  - 運用負荷の低減に伴う人件費の節減
-  - 顧客離れ（チャーンレート）の低減とLTVの向上
+- **Reduced Development and Operational Costs**:  
+  Avoid building complex features from scratch and focus resources on your core product.
+
+- **Faster Time to Market**:  
+  Pre-packaged features allow for quick service launch and iteration.
+
+- **Quantifiable Gains**:  
+  - Lower initial development costs  
+  - Reduced staffing requirements through operational automation  

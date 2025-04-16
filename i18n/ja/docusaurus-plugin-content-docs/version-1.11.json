@@ -11,6 +11,26 @@
     "message": "第II部：SaaSの基礎知識",
     "description": "The label for category Part II: SaaS Fundamentals in sidebar docsSidebar"
   },
+  "sidebar.docsSidebar.category.Part III: Overview and Setup of the SaaSus Platform": {
+    "message": "第III部：SaaSus Platformの概要と導入準備",
+    "description": "The label for category Part III: Overview and Setup of the SaaSus Platform in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Part IV: Using the SaaSus Platform (Developer Console)": {
+    "message": "第IV部：SaaSus Platformの使い方（SaaS開発コンソール 編）",
+    "description": "The label for category Part IV: Using the SaaSus Platform (Developer Console) in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Part V: Using the SaaSus Platform (Operation Console)": {
+    "message": "第V部：SaaSus Platformの使い方（SaaS運用コンソール 編）",
+    "description": "The label for category Part V: Using the SaaSus Platform (Operation Console) in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Part VI: Troubleshooting and Support": {
+    "message": "第VI部：トラブルシューティングとサポート",
+    "description": "The label for category Part VI: Troubleshooting and Support in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Part VII: Appendix": {
+    "message": "第VII部：付録",
+    "description": "The label for category Part VII: Appendix in sidebar docsSidebar"
+  },
   "sidebar.tutorialSidebar.category.Getting Started": {
     "message": "はじめに",
     "description": "The label for category Getting Started in sidebar tutorialSidebar"
