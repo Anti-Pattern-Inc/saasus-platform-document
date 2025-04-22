@@ -19,6 +19,30 @@
     "message": "第IV部：SaaSus Platformの使い方（SaaS開発コンソール 編）",
     "description": "The label for category Part IV: Using the SaaSus Platform (Developer Console) in sidebar docsSidebar"
   },
+  "sidebar.docsSidebar.category.Smart API Gateway Features": {
+    "message": "Smart API Gateway 機能",
+    "description": "The label for category Smart API Gateway Features sidebar guideSidebar"
+  },
+  "sidebar.docsSidebar.category.AWS Marketplace Integration": {
+    "message": "AWS Marketplace 連携機能",
+    "description": "The label for category AWS Marketplace Integration in sidebar guideSidebar"
+  },
+  "sidebar.docsSidebar.category.About SaaS User Accounts": {
+    "message": "SaaS利用者（ユーザー）のアカウントについて",
+    "description": "The label for category About SaaS User Accounts in sidebar guideSidebar"
+  },
+  "sidebar.docsSidebar.category.Setting Up Disbursement methods From Seller Registration": {
+    "message": "セラー登録から支払い方法の設定",
+    "description": "The label for category Setting Up Disbursement methods From Seller Registration in sidebar guideSidebar"
+  },
+  "sidebar.docsSidebar.category.Registration of SaaS Product Information": {
+    "message": "SaaS製品情報の登録",
+    "description": "The label for category Registration of SaaS Product Information in sidebar guideSidebar"
+  },
+  "sidebar.docsSidebar.category.Supplementary": {
+    "message": "補足",
+    "description": "The label for category Supplementary in sidebar guideSidebar"
+  },
   "sidebar.docsSidebar.category.Part V: Using the SaaSus Platform (Operation Console)": {
     "message": "第V部：SaaSus Platformの使い方（SaaS運用コンソール 編）",
     "description": "The label for category Part V: Using the SaaSus Platform (Operation Console) in sidebar docsSidebar"
