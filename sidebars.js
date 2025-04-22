@@ -29,8 +29,6 @@ const sidebars = {
     {
         type: "category",
         label: "Part II: SaaS Fundamentals",
-        collapsed: false,
-        collapsible: true,
         items: [
             "part-2/what_is_saas",
             "part-2/what_is_saasus",
@@ -48,8 +46,6 @@ const sidebars = {
       {
         type: "category",
         label: "Part III: Overview and Setup of the SaaSus Platform",
-        collapsed: false,
-        collapsible: true,
         items: [
             "part-3/saasus_platform_architecture",
             "part-3/getting_started",
@@ -59,26 +55,93 @@ const sidebars = {
       {
         type: "category",
         label: "Part IV: Using the SaaSus Platform (Developer Console)",
-        collapsed: false,
-        collapsible: true,
         items: [
             "part-4/saas_development_console_overview",
             "part-4/registering_and_configuring_applications",
             "part-4/pricing_plan_and_billing_configuration",
             "part-4/user_authentication_and_authorization_configuration",
             "part-4/developer_sdk_api_overview",
-            "part-4/smart_api_gateway_features",
+            {
+                type: "category",
+                label: "Smart API Gateway Features",
+                link: {
+                  type: "doc",
+                  id: "part-4/smart_api_gateway_features/overview",
+                },
+                items: ["part-4/smart_api_gateway_features/manual"],
+            },
             "part-4/event_handling_and_external_service_integration",
             "part-4/infrastructure_updates_and_app_updates",
-            "part-4/marketplace_publication",
+            {
+                type: "category",
+                label: "AWS Marketplace Integration",
+                link: {
+                  type: "doc",
+                  id: "part-4/aws-marketplace-integration/aws-marketplace-integration",
+                },
+                items: [
+                  {
+                    type: "category",
+                    label: "Setting Up Disbursement methods From Seller Registration",
+                    link: {
+                      type: "doc",
+                      id: "part-4/aws-marketplace-integration/aws-marketplace-seller-registration",
+                    },
+                    items: [
+                      "part-4/aws-marketplace-integration/aws-marketplace-seller-registration/aws-marketplace-seller-registration",
+                      "part-4/aws-marketplace-integration/aws-marketplace-seller-registration/public-profile-settings",
+                      "part-4/aws-marketplace-integration/aws-marketplace-seller-registration/tax-information-interview",
+                      "part-4/aws-marketplace-integration/aws-marketplace-seller-registration/dac7-tax-survey",
+                      "part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account",
+                      "part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-disbursement-methods",
+                    ],
+                  },
+                  {
+                    type: "category",
+                    label: "Registration of SaaS Product Information",
+                    link: {
+                      type: "doc",
+                      id: "part-4/aws-marketplace-integration/product-submission",
+                    },
+                    items: [
+                      "part-4/aws-marketplace-integration/product-submission/generate-product-code",
+                      "part-4/aws-marketplace-integration/product-submission/step1-provide-product-information",
+                      "part-4/aws-marketplace-integration/product-submission/step2-configure-fulfillment-options",
+                      "part-4/aws-marketplace-integration/product-submission/step3-configure-product-pricing",
+                      "part-4/aws-marketplace-integration/product-submission/step4-set-prices",
+                      "part-4/aws-marketplace-integration/product-submission/step5-specify-refund-policy",
+                      "part-4/aws-marketplace-integration/product-submission/step6-configure-eula",
+                      "part-4/aws-marketplace-integration/product-submission/step7-configure-offer-availability",
+                      "part-4/aws-marketplace-integration/product-submission/step8-configure-allowlist",
+                    ],
+                  },
+                  "part-4/aws-marketplace-integration/embedding-products",
+                  {
+                    type: "category",
+                    label: "Supplementary",
+                    link: {
+                      type: "doc",
+                      id: "part-4/aws-marketplace-integration/supplementary",
+                    },
+                    items: [
+                      "part-4/aws-marketplace-integration/supplementary/integration-test",
+                      "part-4/aws-marketplace-integration/supplementary/self-up-setting",
+                      "part-4/aws-marketplace-integration/supplementary/user-judgment-method",
+                      "part-4/aws-marketplace-integration/supplementary/supplementary-1",
+                      "part-4/aws-marketplace-integration/supplementary/supplementary-2",
+                      "part-4/aws-marketplace-integration/supplementary/supplementary-3",
+                      "part-4/aws-marketplace-integration/supplementary/final-review-request",
+                      "part-4/aws-marketplace-integration/supplementary/public-request",
+                    ],
+                  },
+                ],
+            },
             "part-4/account_settings",
         ],
       },
       {
         type: "category",
         label: "Part V: Using the SaaSus Platform (Operation Console)",
-        collapsed: false,
-        collapsible: true,
         items: [
             "part-5/operations_console_overview",
             "part-5/tenant_management",
@@ -89,8 +152,6 @@ const sidebars = {
       {
         type: "category",
         label: "Part VI: Troubleshooting and Support",
-        collapsed: false,
-        collapsible: true,
         items: [
             "part-6/faq",
             "part-6/error_codes_and_countermeasures",
@@ -100,8 +161,6 @@ const sidebars = {
       {
         type: "category",
         label: "Part VII: Appendix",
-        collapsed: false,
-        collapsible: true,
         items: [
             "part-7/glossary",
             "part-7/reference",
