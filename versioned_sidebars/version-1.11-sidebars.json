@@ -55,7 +55,17 @@
             "part-4/smart_api_gateway_features/manual"
           ]
         },
-        "part-4/event_handling_and_external_service_integration",
+        {
+          "type": "category",
+          "label": "Integrate with Amazon EventBridge",
+          "link": {
+            "type": "doc",
+            "id": "part-4/integrate-with-amazon-eventbridge"
+          },
+          "items": [
+            "part-4/integrate-with-amazon-eventbridge/event-sample"
+          ]
+        },
         "part-4/infrastructure_updates_and_app_updates",
         {
           "type": "category",

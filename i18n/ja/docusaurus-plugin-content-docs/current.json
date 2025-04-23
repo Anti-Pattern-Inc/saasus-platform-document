@@ -23,6 +23,10 @@
     "message": "Smart API Gateway 機能",
     "description": "The label for category Smart API Gateway Features sidebar guideSidebar"
   },
+  "sidebar.docsSidebar.category.Integrate with Amazon EventBridge": {
+    "message": "Amazon EventBridge 連携機能",
+    "description": "The label for category Integrate with Amazon EventBridge in sidebar guideSidebar"
+  },
   "sidebar.docsSidebar.category.AWS Marketplace Integration": {
     "message": "AWS Marketplace 連携機能",
     "description": "The label for category AWS Marketplace Integration in sidebar guideSidebar"
