@@ -156,6 +156,36 @@ const sidebars = {
             "part-6/faq",
             "part-6/error_codes_and_countermeasures",
             "part-6/support_and_escalation",
+            {
+                type: "category",
+                label: "Usecase",
+                items: [
+                  {
+                    type: "category",
+                    label: "About SaaS User Accounts",
+                    link: {
+                      type: "doc",
+                      id: "part-6/usecase/about-saas-user-accounts",
+                    },
+                    items: [
+                      "part-6/usecase/about-saas-user-accounts/create-tenant",
+                      "part-6/usecase/about-saas-user-accounts/add-tenant-user",
+                    ],
+                  },
+                  {
+                    "type": "category",
+                    "label": "About Rate Plans",
+                    "link": {
+                      "type": "doc",
+                      "id": "part-6/usecase/about-rate-plans"
+                    },
+                    "items": [
+                      "part-6/usecase/about-rate-plans/basic-charge-preference"
+                    ]
+                  },
+                  "part-6/usecase/authentication-methods"
+                ],
+              },
           ],
       },
       {
