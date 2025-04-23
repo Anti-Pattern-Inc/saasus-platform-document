@@ -51,6 +51,14 @@
     "message": "第VI部：トラブルシューティングとサポート",
     "description": "The label for category Part VI: Troubleshooting and Support in sidebar docsSidebar"
   },
+  "sidebar.docsSidebar.category.Usecase": {
+    "message": "ユースケース",
+    "description": "The label for category Usecase in sidebar guideSidebar"
+  },
+  "sidebar.docsSidebar.category.About Rate Plans": {
+    "message": "複雑な料金プランについて",
+    "description": "The label for category About Rate Plans in sidebar guideSidebar"
+  },
   "sidebar.docsSidebar.category.Part VII: Appendix": {
     "message": "第VII部：付録",
     "description": "The label for category Part VII: Appendix in sidebar docsSidebar"
