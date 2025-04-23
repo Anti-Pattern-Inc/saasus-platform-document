@@ -143,6 +143,26 @@
         "part-6/support_and_escalation",
         {
           "type": "category",
+          "label": "Implementation Guide",
+          "items": [
+            "part-6/implementation-guide/implementing-authentication-using-saasus-platform-apiserver",
+            "part-6/implementation-guide/implementing-authentication-using-saasus-serverless",
+            {
+              "type": "category",
+              "label": "Metering API Implementation Sample and Examples of Use (Laravel)",
+              "link": {
+                "type": "doc",
+                "id": "part-6/implementation-guide/meteringapisamplelaravelandusecase"
+              },
+              "items": [
+                "part-6/implementation-guide/example_implementation_using_metering_api"
+              ]
+            },
+            "part-6/implementation-guide/implementing-multi-factor-authentication-apiserver"
+          ]
+        },
+        {
+          "type": "category",
           "label": "Usecase",
           "items": [
             {

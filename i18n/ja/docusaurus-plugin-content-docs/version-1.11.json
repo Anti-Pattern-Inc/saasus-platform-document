@@ -51,6 +51,14 @@
     "message": "第VI部：トラブルシューティングとサポート",
     "description": "The label for category Part VI: Troubleshooting and Support in sidebar docsSidebar"
   },
+  "sidebar.docsSidebar.category.Implementation Guide": {
+    "message": "実装ガイド",
+    "description": "The label for category Implementation Guide in sidebar guideSidebar"
+  },
+  "sidebar.docsSidebar.category.Metering API Implementation Sample and Examples of Use (Laravel)": {
+    "message": "メータリングAPIの実装サンプルと使用例(Laravel)",
+    "description": "The label for category Metering API Implementation Sample and Examples of Use (Laravel) in sidebar guideSidebar"
+  },
   "sidebar.docsSidebar.category.Usecase": {
     "message": "ユースケース",
     "description": "The label for category Usecase in sidebar guideSidebar"
