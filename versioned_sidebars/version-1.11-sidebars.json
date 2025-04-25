@@ -40,7 +40,34 @@
       "label": "Part IV: Using the SaaSus Platform (Developer Console)",
       "items": [
         "part-4/saas_development_console_overview",
-        "part-4/registering_and_configuring_applications",
+        {
+          "type": "category",
+          "label": "アプリケーションの登録と設定",
+          "link": {
+            "type": "generated-index",
+            "title": "アプリケーションの登録と設定",
+            "description": "SaaSusアプリケーションの構成に必要な各種設定を行います。",
+            "slug": "/part-4/application-settings"
+          },
+          "items": [
+            "part-4/application-settings/basic-app-settings",
+            "part-4/application-settings/domain-and-redirect-settings",
+            {
+              "type": "category",
+              "label": "Settings for Google Tag Manager",
+              "link": {
+                "type": "doc",
+                "id": "part-4/application-settings/googletagmanagersetting"
+              },
+              "items": [
+                "part-4/application-settings/googletagmanagersetting/googletagmanagercreateaccountandcontainer",
+                "part-4/application-settings/googletagmanagersetting/googletagmanagercontaineridsetting",
+                "part-4/application-settings/googletagmanagersetting/creategoogleanalyticsaccount",
+                "part-4/application-settings/googletagmanagersetting/googleanalyticsgoogletagmanagerlink"
+              ]
+            }
+          ]
+        },
         "part-4/pricing_plan_and_billing_configuration",
         "part-4/user_authentication_and_authorization_configuration",
         "part-4/developer_sdk_api_overview",
