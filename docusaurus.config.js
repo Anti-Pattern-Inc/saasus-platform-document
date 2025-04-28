@@ -2,6 +2,7 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 import { themes as prismThemes } from "prism-react-renderer";
+import llmsTxtPlugin from "./plugins/llms-txt-plugin";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -206,6 +207,7 @@ const config = {
     //     disableInDev: false,
     //   },
     // ],
+    llmsTxtPlugin,
     [
       require.resolve("docusaurus-plugin-image-zoom"),
       {
