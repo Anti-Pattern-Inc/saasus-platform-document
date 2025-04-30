@@ -7,6 +7,9 @@ hidden: false
 createdAt: "Thu Dec 07 2023 05:40:29 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Fri Dec 22 2023 06:01:24 GMT+0000 (Coordinated Universal Time)"
 ---
+
+> This guide explains how to embed Google Tag Manager in the authentication screen of your SaaS app to enable integration with tools such as Google Analytics.
+
 By setting up Google Tag Manager, you can embed Google Tag Manager tags in the login screen, and configure Google Analytics and other services.
 
 Marketing activities are crucial for SaaS operations, so let's set up Google Tag Manager to acquire information about users and traffic sources.

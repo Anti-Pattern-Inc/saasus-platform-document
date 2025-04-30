@@ -19,6 +19,22 @@
     "message": "第IV部：SaaSus Platformの使い方（SaaS開発コンソール 編）",
     "description": "The label for category Part IV: Using the SaaSus Platform (Developer Console) in sidebar docsSidebar"
   },
+  "sidebar.docsSidebar.category.Registering and Configuring Applications": {
+    "message": "アプリケーションの登録と設定",
+    "description": "The label for category Registering and Configuring Applications in sidebar docsSidebar"
+  },
+  "docs.part-4/application-settings._generated-index.title": {
+    "message": "アプリケーションの登録と設定",
+    "description": "The title of the generated index page for application settings"
+  },
+  "docs.part-4/application-settings._generated-index.description": {
+    "message": "SaaSus アプリケーションを構築するために必要な各種設定を行います。",
+    "description": "The description of the generated index page for application settings"
+  },
+  "sidebar.docsSidebar.category.Settings for Google Tag Manager": {
+    "message": "Google Tag Managerの設定",
+    "description": "The label for category Settings for Google Tag Manager in sidebar guideSidebar"
+  },
   "sidebar.docsSidebar.category.Smart API Gateway Features": {
     "message": "Smart API Gateway 機能",
     "description": "The label for category Smart API Gateway Features sidebar guideSidebar"

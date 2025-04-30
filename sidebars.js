@@ -59,11 +59,11 @@ const sidebars = {
             "part-4/saas_development_console_overview",
             {
               "type": "category",
-              "label": "アプリケーションの登録と設定",
+              "label": "Registering and Configuring Applications",
               "link": {
                 "type": "generated-index",
-                "title": "アプリケーションの登録と設定",
-                "description": "SaaSusアプリケーションの構成に必要な各種設定を行います。",
+                "title": "Registering and Configuring Applications",
+                "description": "Configure various settings required to build your SaaSus application.",
                 "slug": "/part-4/application-settings",
               },
               "items": [
@@ -81,8 +81,9 @@ const sidebars = {
                       "part-4/application-settings/googletagmanagersetting/googletagmanagercontaineridsetting",
                       "part-4/application-settings/googletagmanagersetting/creategoogleanalyticsaccount",
                       "part-4/application-settings/googletagmanagersetting/googleanalyticsgoogletagmanagerlink"
-                    ]
-                  }
+                    ]  
+                },
+                "part-4/application-settings/ip-restriction",
               ]
             },
             "part-4/pricing_plan_and_billing_configuration",
