@@ -18,7 +18,10 @@ const llmsTxtPlugin: Plugin = async function pluginLlmsTxt(context) {
           const fullPath = path.join(dir, entry.name);
           if (entry.isDirectory()) {
             await getMdxFiles(fullPath);
-          } else if (entry.name.endsWith(".mdx")) {
+          } else if (
+            entry.name.endsWith(".mdx") ||
+            entry.name.endsWith(".md")
+          ) {
             const content = await fs.promises.readFile(fullPath, "utf8");
 
             // extract title from frontmatter if it exists
@@ -36,7 +39,8 @@ const llmsTxtPlugin: Plugin = async function pluginLlmsTxt(context) {
             let urlPath = relativePath
               .replace(/^\d+-/, "")
               .replace(/\/\d+-/g, "/")
-              .replace(/\.mdx$/, "");
+              .replace(/\.mdx$/, "")
+              .replace(/\.md$/, "");
 
             // Construct the full URL
             const fullUrl = `https://www.prisma.io/docs/${urlPath}`;
