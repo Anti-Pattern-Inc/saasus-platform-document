@@ -1,0 +1,26 @@
+/**
+ * generated-index ページの title / description を
+ * 日本語ロケール（/ja/）のときだけ上書きするための定義マップ。
+ *
+ * - sidebar.js は英語のまま管理しつつ、
+ *   表示のみ日本語化したいという要件に対応。
+ * - キーは generated-index の permalink（/ja/docs を除いた英語ベース）
+ * - 各ロケールごとに title / description を定義可能（現在は ja のみ）
+ *
+ * 使用箇所: src/theme/DocCategoryGeneratedIndexPage/index.js
+ */
+export const generatedIndexOverrides = {
+    '/part-4/application-settings': {
+      ja: {
+        title: 'アプリケーションの登録と設定',
+        description: 'SaaSus アプリケーション構築に必要な設定をまとめたセクションです。',
+      }
+    },
+    '/part-4/user-authz-settings': {
+        ja: {
+          title: 'ユーザー認証・認可の設定',
+          description: 'ログイン方式、ユーザー属性、環境、ロールなど、ユーザー認証に関する設定をまとめます。',
+        }
+      },
+  };
+  
