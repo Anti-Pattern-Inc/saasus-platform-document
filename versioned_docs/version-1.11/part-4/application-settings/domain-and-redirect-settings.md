@@ -1,8 +1,11 @@
 ---
-title: "ドメイン・遷移先の設定"
+title: "Domain and Redirect Settings"
 slug: "domain-and-redirect-settings"
-excerpt: "SaaSアプリで使用するドメインや、ログイン後の遷移先URLを設定します。"
+description:: "Configure the domain used by your SaaS application and the redirect URL after login."
+excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
+
+> Configure the domain used by your SaaS application and the redirect URL after login.

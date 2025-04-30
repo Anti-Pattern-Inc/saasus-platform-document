@@ -8,6 +8,8 @@ createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
+> ログイン画面に表示されるサービス名やアイコン、利用規約リンクなどを設定します。
+
 このページでは、ログイン画面など認証関連画面で使用される情報（サービス名、アイコン、利用規約URL など）を設定します。
 
 サイドメニューの「認証詳細設定」から編集を行います。
