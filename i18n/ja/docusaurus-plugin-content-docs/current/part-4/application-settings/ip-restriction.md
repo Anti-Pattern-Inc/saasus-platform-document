@@ -2,7 +2,6 @@
 title: "IP制限"
 slug: "ip-restriction"
 description: "特定のIPアドレスからのみSaaSusコンソールやAPIにアクセスできるよう制限する機能です。対象プラン、申請方法、制限後の挙動を説明します。"
-
 excerpt: ""
 hidden: false
 createdAt: "Mon Mar 25 2024 14:00:00 GMT+0000 (Coordinated Universal Time)"

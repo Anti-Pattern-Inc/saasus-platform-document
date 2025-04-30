@@ -88,6 +88,22 @@ const sidebars = {
               ]
             },
             "part-4/pricing_plan_and_billing_configuration",
+            {
+                "type": "category",
+                "label": "User Authentication and Authorization Configuration",
+                "link": {
+                  "type": "generated-index",
+                  "title": "User Authentication and Authorization Configuration",
+                  "description": "Includes settings for login methods, user attributes, environments, roles, and notification emails related to user authentication and authorization.",
+                  "slug": "/part-4/user-authz-settings",
+                },
+                "items": [
+                  "part-4/user-authz-settings/declare-additional-attribute-to-user",
+                  "part-4/user-authz-settings/notifymailcustomize",
+                  "part-4/user-authz-settings/role-definition",
+                  "part-4/user-authz-settings/user-env-definition",
+                ]
+            },
             "part-4/user_authentication_and_authorization_configuration",
             "part-4/developer_sdk_api_overview",
             {
