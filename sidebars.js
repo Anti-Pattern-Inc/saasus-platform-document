@@ -84,6 +84,7 @@ const sidebars = {
                     ]  
                 },
                 "part-4/application-settings/ip-restriction",
+                "part-4/application-settings/declare-additional-attribute-to-tenant",
               ]
             },
             "part-4/pricing_plan_and_billing_configuration",
