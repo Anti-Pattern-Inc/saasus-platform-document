@@ -194,9 +194,38 @@
       "label": "Part V: Using the SaaSus Platform (Operation Console)",
       "items": [
         "part-5/operations_console_overview",
+        {
+          "type": "category",
+          "label": "User Management",
+          "link": {
+            "type": "generated-index",
+            "title": "User Management",
+            "description": "Manage users including registration, editing, and activity log review.",
+            "slug": "/part-5/user-management"
+          },
+          "items": [
+            "part-5/user-management/user-crud",
+            "part-5/user-management/user-activity-history-log"
+          ]
+        },
         "part-5/tenant_management",
-        "part-5/user_management",
-        "part-5/pricing_plans_and_billing_management"
+        "part-5/adding-role-to-user",
+        {
+          "type": "category",
+          "label": "Pricing Plan Settings",
+          "link": {
+            "type": "doc",
+            "id": "part-5/price-plan"
+          },
+          "items": [
+            "part-5/price-plan/price-plan-setting-000",
+            "part-5/price-plan/price-plan-setting-001",
+            "part-5/price-plan/price-plan-setting-002",
+            "part-5/price-plan/price-plan-setting-003",
+            "part-5/price-plan/price-plan-setting-004"
+          ]
+        },
+        "part-5/user-feedback"
       ]
     },
     {

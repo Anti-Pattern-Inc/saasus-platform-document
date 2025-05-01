@@ -5,7 +5,7 @@
   },
   "sidebar.docsSidebar.category.Part I: Introduction": {
     "message": "第I部：はじめに",
-    "description": "The label for category Part I: Introduction in sidebar docsSidebar"
+    "description": "The label for category Part I: Introductionv"
   },
   "sidebar.docsSidebar.category.Part II: SaaS Fundamentals": {
     "message": "第II部：SaaSの基礎知識",
@@ -25,47 +25,55 @@
   },
   "sidebar.docsSidebar.category.Settings for Google Tag Manager": {
     "message": "Google Tag Managerの設定",
-    "description": "The label for category Settings for Google Tag Manager in sidebar guideSidebar"
+    "description": "The label for category Settings for Google Tag Manager in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.User Authentication and Authorization Configuration": {
     "message": "ユーザー認証・認可の設定",
-    "description": "The label for category User Authentication and Authorization Configuration"
+    "description": "The label for category User Authentication and Authorization Configuration in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.Authentication Method Settings": {
     "message": "認証方式の設定",
-    "description": "The label for category Authentication Method Settings"
+    "description": "The label for category Authentication Method Settings in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.Smart API Gateway Features": {
     "message": "Smart API Gateway 機能",
-    "description": "The label for category Smart API Gateway Features sidebar guideSidebar"
+    "description": "The label for category Smart API Gateway Features in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.Integrate with Amazon EventBridge": {
     "message": "Amazon EventBridge 連携機能",
-    "description": "The label for category Integrate with Amazon EventBridge in sidebar guideSidebar"
+    "description": "The label for category Integrate with Amazon EventBridge in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.AWS Marketplace Integration": {
     "message": "AWS Marketplace 連携機能",
-    "description": "The label for category AWS Marketplace Integration in sidebar guideSidebar"
+    "description": "The label for category AWS Marketplace Integration in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.About SaaS User Accounts": {
     "message": "SaaS利用者（ユーザー）のアカウントについて",
-    "description": "The label for category About SaaS User Accounts in sidebar guideSidebar"
+    "description": "The label for category About SaaS User Accounts in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.Setting Up Disbursement methods From Seller Registration": {
     "message": "セラー登録から支払い方法の設定",
-    "description": "The label for category Setting Up Disbursement methods From Seller Registration in sidebar guideSidebar"
+    "description": "The label for category Setting Up Disbursement methods From Seller Registration in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.Registration of SaaS Product Information": {
     "message": "SaaS製品情報の登録",
-    "description": "The label for category Registration of SaaS Product Information in sidebar guideSidebar"
+    "description": "The label for category Registration of SaaS Product Information in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.Supplementary": {
     "message": "補足",
-    "description": "The label for category Supplementary in sidebar guideSidebar"
+    "description": "The label for category Supplementary in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.Part V: Using the SaaSus Platform (Operation Console)": {
     "message": "第V部：SaaSus Platformの使い方（SaaS運用コンソール 編）",
     "description": "The label for category Part V: Using the SaaSus Platform (Operation Console) in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.User Management": {
+    "message": "ユーザー管理",
+    "description": "The label for category User Management in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Pricing Plan Settings": {
+    "message": "料金プラン設定",
+    "description": "The label for category Pricing Plan Settings in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.Part VI: Troubleshooting and Support": {
     "message": "第VI部：トラブルシューティングとサポート",
@@ -73,19 +81,19 @@
   },
   "sidebar.docsSidebar.category.Implementation Guide": {
     "message": "実装ガイド",
-    "description": "The label for category Implementation Guide in sidebar guideSidebar"
+    "description": "The label for category Implementation Guide in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.Metering API Implementation Sample and Examples of Use (Laravel)": {
     "message": "メータリングAPIの実装サンプルと使用例(Laravel)",
-    "description": "The label for category Metering API Implementation Sample and Examples of Use (Laravel) in sidebar guideSidebar"
+    "description": "The label for category Metering API Implementation Sample and Examples of Use (Laravel) in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.Usecase": {
     "message": "ユースケース",
-    "description": "The label for category Usecase in sidebar guideSidebar"
+    "description": "The label for category Usecase in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.About Rate Plans": {
     "message": "複雑な料金プランについて",
-    "description": "The label for category About Rate Plans in sidebar guideSidebar"
+    "description": "The label for category About Rate Plans in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.Part VII: Appendix": {
     "message": "第VII部：付録",
