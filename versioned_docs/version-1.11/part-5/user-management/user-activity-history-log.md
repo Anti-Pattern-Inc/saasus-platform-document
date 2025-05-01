@@ -19,8 +19,8 @@ The user activity history log is only available to customers on the Advanced pla
 
 You can view the "action history log" in the Actions column of the SaaS Operations Console > User Management.
 
-![users](/img/part-5/user-activity-history-log/users.png)
-![activity-history-log](/img/part-5/user-activity-history-log/activity-history-log.png)
+![users](/img/part-5/user-management/user-activity-history-log/users.png)
+![activity-history-log](/img/part-5/user-management/user-activity-history-log/activity-history-log.png)
 
 The history of the screen transitions by users on the SaaS is displayed in chronological order.
 The log retention period is up to one month.

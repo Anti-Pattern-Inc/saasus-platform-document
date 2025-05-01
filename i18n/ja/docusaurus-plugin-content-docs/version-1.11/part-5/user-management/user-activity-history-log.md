@@ -20,8 +20,8 @@ import TabItem from "@theme/TabItem";
 SaaS運用コンソール > ユーザー管理 のActions内にある「行動履歴ログ」から閲覧することができます。
 
 
-![users](/ja/img/part-5/user-activity-history-log/users.png)
-![activity-history-log](/ja/img/part-5/user-activity-history-log/activity-history-log.png)
+![users](/ja/img/part-5/user-management/user-activity-history-log/users.png)
+![activity-history-log](/ja/img/part-5/user-management/user-activity-history-log/activity-history-log.png)
 
 ユーザーがSaaSの画面を遷移した履歴が時系列順に表示されます。
 ログの保持期間は最大1ヶ月です。
