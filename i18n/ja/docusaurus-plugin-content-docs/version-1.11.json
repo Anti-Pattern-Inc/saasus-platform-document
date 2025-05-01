@@ -31,6 +31,10 @@
     "message": "ユーザー認証・認可の設定",
     "description": "The label for category User Authentication and Authorization Configuration"
   },
+  "sidebar.docsSidebar.category.Authentication Method Settings": {
+    "message": "認証方式の設定",
+    "description": "The label for category Authentication Method Settings"
+  },
   "sidebar.docsSidebar.category.Smart API Gateway Features": {
     "message": "Smart API Gateway 機能",
     "description": "The label for category Smart API Gateway Features sidebar guideSidebar"

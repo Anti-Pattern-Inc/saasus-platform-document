@@ -14,6 +14,7 @@ import { generatedIndexOverrides } from '../../constants/i18nGeneratedIndexOverr
  * 想定対象:
  * - type: "generated-index" を使っている sidebar カテゴリ
  * - slug に対応する override エントリがある場合のみ上書き
+ * NOTE: ページ下部の「前へ／次へ」のタイトルが翻訳できない（Issue: https://github.com/facebook/docusaurus/issues/8118）
  */
 export default function DocCategoryGeneratedIndexPage(props) {
     // generated-index ページの metadata は props.categoryGeneratedIndex に存在
