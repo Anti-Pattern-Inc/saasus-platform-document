@@ -27,263 +27,292 @@ const sidebars = {
       collapsible: false,
     },
     {
-        type: "category",
-        label: "Part II: SaaS Fundamentals",
-        items: [
-            "part-2/what_is_saas",
-            "part-2/what_is_saasus",
-            "part-2/cloud_computing_basics",
-            "part-2/saas_advantages_and_disadvantages",
-            "part-2/saas_business_model",
-            "part-2/saas_technical_architecture",
-            "part-2/saas_operations",
-            "part-2/saas_development",
-            "part-2/saas_marketing",
-            "part-2/saas_security_and_compliance",
-            "part-2/saas_legal_issues",       
-        ],
-      },
-      {
-        type: "category",
-        label: "Part III: Overview and Setup of the SaaSus Platform",
-        items: [
-            "part-3/saasus_platform_architecture",
-            "part-3/getting_started",
-            "part-3/login_and_main_screen_overview",     
-        ],
-      },
-      {
-        type: "category",
-        label: "Part IV: Using the SaaSus Platform (Developer Console)",
-        items: [
-            "part-4/saas_development_console_overview",
+      type: "category",
+      label: "Part II: SaaS Fundamentals",
+      items: [
+        "part-2/what_is_saas",
+        "part-2/what_is_saasus",
+        "part-2/cloud_computing_basics",
+        "part-2/saas_advantages_and_disadvantages",
+        "part-2/saas_business_model",
+        "part-2/saas_technical_architecture",
+        "part-2/saas_operations",
+        "part-2/saas_development",
+        "part-2/saas_marketing",
+        "part-2/saas_security_and_compliance",
+        "part-2/saas_legal_issues",       
+      ],
+    },
+    {
+      type: "category",
+      label: "Part III: Overview and Setup of the SaaSus Platform",
+      items: [
+        "part-3/saasus_platform_architecture",
+        "part-3/getting_started",
+        "part-3/login_and_main_screen_overview",     
+      ],
+    },
+    {
+      type: "category",
+      label: "Part IV: Using the SaaSus Platform (Developer Console)",
+      items: [
+        "part-4/saas_development_console_overview",
+        {
+          "type": "category",
+          "label": "Registering and Configuring Applications",
+          "link": {
+            "type": "generated-index",
+            "title": "Registering and Configuring Applications",
+            "description": "Configure various settings required to build your SaaSus application.",
+            "slug": "/part-4/application-settings",
+          },
+          "items": [
+            "part-4/application-settings/basic-app-settings",
+            "part-4/application-settings/domain-and-redirect-settings",
             {
               "type": "category",
-              "label": "Registering and Configuring Applications",
+              "label": "Settings for Google Tag Manager",
               "link": {
-                "type": "generated-index",
-                "title": "Registering and Configuring Applications",
-                "description": "Configure various settings required to build your SaaSus application.",
-                "slug": "/part-4/application-settings",
+                "type": "doc",
+                "id": "part-4/application-settings/googletagmanagersetting"
               },
               "items": [
-                "part-4/application-settings/basic-app-settings",
-                "part-4/application-settings/domain-and-redirect-settings",
-                {
-                    "type": "category",
-                    "label": "Settings for Google Tag Manager",
-                    "link": {
-                      "type": "doc",
-                      "id": "part-4/application-settings/googletagmanagersetting"
-                    },
-                    "items": [
-                      "part-4/application-settings/googletagmanagersetting/googletagmanagercreateaccountandcontainer",
-                      "part-4/application-settings/googletagmanagersetting/googletagmanagercontaineridsetting",
-                      "part-4/application-settings/googletagmanagersetting/creategoogleanalyticsaccount",
-                      "part-4/application-settings/googletagmanagersetting/googleanalyticsgoogletagmanagerlink"
-                    ]  
-                },
-                "part-4/application-settings/ip-restriction",
-                "part-4/application-settings/declare-additional-attribute-to-tenant",
+                "part-4/application-settings/googletagmanagersetting/googletagmanagercreateaccountandcontainer",
+                "part-4/application-settings/googletagmanagersetting/googletagmanagercontaineridsetting",
+                "part-4/application-settings/googletagmanagersetting/creategoogleanalyticsaccount",
+                "part-4/application-settings/googletagmanagersetting/googleanalyticsgoogletagmanagerlink"
+              ]  
+            },
+            "part-4/application-settings/ip-restriction",
+            "part-4/application-settings/declare-additional-attribute-to-tenant",
+          ]
+        },
+        "part-4/pricing_plan_and_billing_configuration",
+        {
+          "type": "category",
+          "label": "User Authentication and Authorization Configuration",
+          "link": {
+            "type": "generated-index",
+            "title": "User Authentication and Authorization Configuration",
+            "description": "Includes settings for login methods, user attributes, environments, roles, and notification emails related to user authentication and authorization.",
+            "slug": "/part-4/user-authz-settings",
+          },
+          "items": [
+            {
+              type: "category",
+              label: "Authentication Method Settings",
+              link: {
+                type: "doc",
+                id: "part-4/user-authz-settings/authentication-method-settings"
+              },
+              items: [
+                "part-4/user-authz-settings/google-linkage"
+              ]
+          },
+          "part-4/user-authz-settings/declare-additional-attribute-to-user",
+          "part-4/user-authz-settings/notifymailcustomize",
+          "part-4/user-authz-settings/role-definition",
+          "part-4/user-authz-settings/user-env-definition",
+          ]
+        },
+        "part-4/developer_sdk_api_overview",
+        {
+          type: "category",
+          label: "Smart API Gateway Features",
+          link: {
+            type: "doc",
+            id: "part-4/smart_api_gateway_features/overview",
+          },
+          items: ["part-4/smart_api_gateway_features/manual"],
+        },
+        {
+          type: "category",
+          label: "Integrate with Amazon EventBridge",
+          link: {
+            type: "doc",
+            id: "part-4/integrate-with-amazon-eventbridge",
+          },
+          items: [
+            "part-4/integrate-with-amazon-eventbridge/event-sample",
+          ],
+        },
+        "part-4/single-tenant-management",
+        {
+          type: "category",
+          label: "AWS Marketplace Integration",
+          link: {
+            type: "doc",
+            id: "part-4/aws-marketplace-integration/aws-marketplace-integration",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Setting Up Disbursement methods From Seller Registration",
+              link: {
+                type: "doc",
+                id: "part-4/aws-marketplace-integration/aws-marketplace-seller-registration",
+              },
+              items: [
+                "part-4/aws-marketplace-integration/aws-marketplace-seller-registration/aws-marketplace-seller-registration",
+                "part-4/aws-marketplace-integration/aws-marketplace-seller-registration/public-profile-settings",
+                "part-4/aws-marketplace-integration/aws-marketplace-seller-registration/tax-information-interview",
+                "part-4/aws-marketplace-integration/aws-marketplace-seller-registration/dac7-tax-survey",
+                "part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account",
+                "part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-disbursement-methods",
+              ],
+            },
+            {
+              type: "category",
+              label: "Registration of SaaS Product Information",
+              link: {
+                type: "doc",
+                id: "part-4/aws-marketplace-integration/product-submission",
+              },
+              items: [
+                "part-4/aws-marketplace-integration/product-submission/generate-product-code",
+                "part-4/aws-marketplace-integration/product-submission/step1-provide-product-information",
+                "part-4/aws-marketplace-integration/product-submission/step2-configure-fulfillment-options",
+                "part-4/aws-marketplace-integration/product-submission/step3-configure-product-pricing",
+                "part-4/aws-marketplace-integration/product-submission/step4-set-prices",
+                "part-4/aws-marketplace-integration/product-submission/step5-specify-refund-policy",
+                "part-4/aws-marketplace-integration/product-submission/step6-configure-eula",
+                "part-4/aws-marketplace-integration/product-submission/step7-configure-offer-availability",
+                "part-4/aws-marketplace-integration/product-submission/step8-configure-allowlist",
+              ],
+            },
+            "part-4/aws-marketplace-integration/embedding-products",
+            {
+              type: "category",
+              label: "Supplementary",
+              link: {
+                type: "doc",
+                id: "part-4/aws-marketplace-integration/supplementary",
+              },
+              items: [
+                "part-4/aws-marketplace-integration/supplementary/integration-test",
+                "part-4/aws-marketplace-integration/supplementary/self-up-setting",
+                "part-4/aws-marketplace-integration/supplementary/user-judgment-method",
+                "part-4/aws-marketplace-integration/supplementary/supplementary-1",
+                "part-4/aws-marketplace-integration/supplementary/supplementary-2",
+                "part-4/aws-marketplace-integration/supplementary/supplementary-3",
+                "part-4/aws-marketplace-integration/supplementary/final-review-request",
+                "part-4/aws-marketplace-integration/supplementary/public-request",
+              ],
+            },
+          ],
+        },
+        "part-4/account_settings",
+      ],
+    },
+    {
+      type: "category",
+      label: "Part V: Using the SaaSus Platform (Operation Console)",
+      items: [
+        "part-5/operations_console_overview",
+        {
+          type: "category",
+          label: "User Management",
+          link: {
+            type: "generated-index",
+            title: "User Management",
+            description: "Manage users including registration, editing, and activity log review.",
+            slug: "/part-5/user-management",
+          },
+          items: [
+            "part-5/user-management/user-crud",
+            "part-5/user-management/user-activity-history-log",
+          ],  
+        },
+        "part-5/tenant_management",
+        "part-5/adding-role-to-user",
+        {
+          type: "category",
+          label: "Pricing Plan Settings",
+          link: {
+              type: "doc",
+              id: "part-5/price-plan",
+          },
+          items: [
+            "part-5/price-plan/price-plan-setting-000",
+            "part-5/price-plan/price-plan-setting-001",
+            "part-5/price-plan/price-plan-setting-002",
+            "part-5/price-plan/price-plan-setting-003",
+            "part-5/price-plan/price-plan-setting-004",
+          ],
+        },
+        "part-5/user-feedback",
+      ],
+    },
+    {
+      type: "category",
+      label: "Part VI: Troubleshooting and Support",
+      items: [
+        "part-6/faq",
+        "part-6/error_codes_and_countermeasures",
+        "part-6/support_and_escalation",
+        {
+          type: "category",
+          label: "Implementation Guide",
+          items: [
+            "part-6/implementation-guide/implementing-authentication-using-saasus-platform-apiserver",
+            "part-6/implementation-guide/implementing-authentication-using-saasus-serverless",
+            {
+              type: "category",
+              label:
+                "Metering API Implementation Sample and Examples of Use (Laravel)",
+              link: {
+                type: "doc",
+                id: "part-6/implementation-guide/meteringapisamplelaravelandusecase",
+              },
+              items: [
+                "part-6/implementation-guide/example_implementation_using_metering_api",
+              ],
+            },
+            "part-6/implementation-guide/implementing-multi-factor-authentication-apiserver",
+          ],
+        },
+        {
+          type: "category",
+          label: "Usecase",
+          items: [
+            {
+              type: "category",
+              label: "About SaaS User Accounts",
+              link: {
+                type: "doc",
+                id: "part-6/usecase/about-saas-user-accounts",
+              },
+              items: [
+                "part-6/usecase/about-saas-user-accounts/create-tenant",
+                "part-6/usecase/about-saas-user-accounts/add-tenant-user",
+              ],
+            },
+            {
+              "type": "category",
+              "label": "About Rate Plans",
+              "link": {
+                "type": "doc",
+                "id": "part-6/usecase/about-rate-plans"
+              },
+              "items": [
+                "part-6/usecase/about-rate-plans/basic-charge-preference"
               ]
             },
-            "part-4/pricing_plan_and_billing_configuration",
-            {
-                "type": "category",
-                "label": "User Authentication and Authorization Configuration",
-                "link": {
-                  "type": "generated-index",
-                  "title": "User Authentication and Authorization Configuration",
-                  "description": "Includes settings for login methods, user attributes, environments, roles, and notification emails related to user authentication and authorization.",
-                  "slug": "/part-4/user-authz-settings",
-                },
-                "items": [
-                    {
-                        type: "category",
-                        label: "Authentication Method Settings",
-                        link: {
-                          type: "doc",
-                          id: "part-4/user-authz-settings/authentication-method-settings"
-                        },
-                        items: [
-                          "part-4/user-authz-settings/google-linkage"
-                        ]
-                    },
-                    "part-4/user-authz-settings/declare-additional-attribute-to-user",
-                    "part-4/user-authz-settings/notifymailcustomize",
-                    "part-4/user-authz-settings/role-definition",
-                    "part-4/user-authz-settings/user-env-definition",
-                ]
-            },
-            "part-4/developer_sdk_api_overview",
-            {
-                type: "category",
-                label: "Smart API Gateway Features",
-                link: {
-                  type: "doc",
-                  id: "part-4/smart_api_gateway_features/overview",
-                },
-                items: ["part-4/smart_api_gateway_features/manual"],
-            },
-            {
-                type: "category",
-                label: "Integrate with Amazon EventBridge",
-                link: {
-                  type: "doc",
-                  id: "part-4/integrate-with-amazon-eventbridge",
-                },
-                items: [
-                  "part-4/integrate-with-amazon-eventbridge/event-sample",
-                ],
-            },
-            "part-4/single-tenant-management",
-            {
-                type: "category",
-                label: "AWS Marketplace Integration",
-                link: {
-                  type: "doc",
-                  id: "part-4/aws-marketplace-integration/aws-marketplace-integration",
-                },
-                items: [
-                  {
-                    type: "category",
-                    label: "Setting Up Disbursement methods From Seller Registration",
-                    link: {
-                      type: "doc",
-                      id: "part-4/aws-marketplace-integration/aws-marketplace-seller-registration",
-                    },
-                    items: [
-                      "part-4/aws-marketplace-integration/aws-marketplace-seller-registration/aws-marketplace-seller-registration",
-                      "part-4/aws-marketplace-integration/aws-marketplace-seller-registration/public-profile-settings",
-                      "part-4/aws-marketplace-integration/aws-marketplace-seller-registration/tax-information-interview",
-                      "part-4/aws-marketplace-integration/aws-marketplace-seller-registration/dac7-tax-survey",
-                      "part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account",
-                      "part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-disbursement-methods",
-                    ],
-                  },
-                  {
-                    type: "category",
-                    label: "Registration of SaaS Product Information",
-                    link: {
-                      type: "doc",
-                      id: "part-4/aws-marketplace-integration/product-submission",
-                    },
-                    items: [
-                      "part-4/aws-marketplace-integration/product-submission/generate-product-code",
-                      "part-4/aws-marketplace-integration/product-submission/step1-provide-product-information",
-                      "part-4/aws-marketplace-integration/product-submission/step2-configure-fulfillment-options",
-                      "part-4/aws-marketplace-integration/product-submission/step3-configure-product-pricing",
-                      "part-4/aws-marketplace-integration/product-submission/step4-set-prices",
-                      "part-4/aws-marketplace-integration/product-submission/step5-specify-refund-policy",
-                      "part-4/aws-marketplace-integration/product-submission/step6-configure-eula",
-                      "part-4/aws-marketplace-integration/product-submission/step7-configure-offer-availability",
-                      "part-4/aws-marketplace-integration/product-submission/step8-configure-allowlist",
-                    ],
-                  },
-                  "part-4/aws-marketplace-integration/embedding-products",
-                  {
-                    type: "category",
-                    label: "Supplementary",
-                    link: {
-                      type: "doc",
-                      id: "part-4/aws-marketplace-integration/supplementary",
-                    },
-                    items: [
-                      "part-4/aws-marketplace-integration/supplementary/integration-test",
-                      "part-4/aws-marketplace-integration/supplementary/self-up-setting",
-                      "part-4/aws-marketplace-integration/supplementary/user-judgment-method",
-                      "part-4/aws-marketplace-integration/supplementary/supplementary-1",
-                      "part-4/aws-marketplace-integration/supplementary/supplementary-2",
-                      "part-4/aws-marketplace-integration/supplementary/supplementary-3",
-                      "part-4/aws-marketplace-integration/supplementary/final-review-request",
-                      "part-4/aws-marketplace-integration/supplementary/public-request",
-                    ],
-                  },
-                ],
-            },
-            "part-4/account_settings",
-        ],
-      },
-      {
-        type: "category",
-        label: "Part V: Using the SaaSus Platform (Operation Console)",
-        items: [
-            "part-5/operations_console_overview",
-            "part-5/tenant_management",
-            "part-5/user_management",
-            "part-5/pricing_plans_and_billing_management",          
+            "part-6/usecase/authentication-methods"
           ],
-      },
-      {
-        type: "category",
-        label: "Part VI: Troubleshooting and Support",
-        items: [
-            "part-6/faq",
-            "part-6/error_codes_and_countermeasures",
-            "part-6/support_and_escalation",
-            {
-                type: "category",
-                label: "Implementation Guide",
-                items: [
-                  "part-6/implementation-guide/implementing-authentication-using-saasus-platform-apiserver",
-                  "part-6/implementation-guide/implementing-authentication-using-saasus-serverless",
-                  {
-                    type: "category",
-                    label:
-                      "Metering API Implementation Sample and Examples of Use (Laravel)",
-                    link: {
-                      type: "doc",
-                      id: "part-6/implementation-guide/meteringapisamplelaravelandusecase",
-                    },
-                    items: [
-                      "part-6/implementation-guide/example_implementation_using_metering_api",
-                    ],
-                  },
-                  "part-6/implementation-guide/implementing-multi-factor-authentication-apiserver",
-                ],  
-            },
-            {
-                type: "category",
-                label: "Usecase",
-                items: [
-                  {
-                    type: "category",
-                    label: "About SaaS User Accounts",
-                    link: {
-                      type: "doc",
-                      id: "part-6/usecase/about-saas-user-accounts",
-                    },
-                    items: [
-                      "part-6/usecase/about-saas-user-accounts/create-tenant",
-                      "part-6/usecase/about-saas-user-accounts/add-tenant-user",
-                    ],
-                  },
-                  {
-                    "type": "category",
-                    "label": "About Rate Plans",
-                    "link": {
-                      "type": "doc",
-                      "id": "part-6/usecase/about-rate-plans"
-                    },
-                    "items": [
-                      "part-6/usecase/about-rate-plans/basic-charge-preference"
-                    ]
-                  },
-                  "part-6/usecase/authentication-methods"
-                ],  
-            },
-          ],
-      },
-      {
-        type: "category",
-        label: "Part VII: Appendix",
-        items: [
-            "part-7/glossary",
-            "part-7/reference",
-            "part-7/release_notes",
-            "part-7/index",
-          ],
-      },
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Part VII: Appendix",
+      items: [
+        "part-7/glossary",
+        "part-7/reference",
+        "part-7/release_notes",
+        "part-7/index",
+      ],
+    },
   ],
   guideSidebar: [
     {

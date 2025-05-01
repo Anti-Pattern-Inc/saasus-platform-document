@@ -17,10 +17,16 @@ export const generatedIndexOverrides = {
       }
     },
     '/part-4/user-authz-settings': {
-        ja: {
-          title: 'ユーザー認証・認可の設定',
-          description: 'ログイン方式、ユーザー属性、環境、ロールなど、ユーザー認証に関する設定をまとめます。',
-        }
-      },
+      ja: {
+        title: 'ユーザー認証・認可の設定',
+        description: 'ログイン方式、ユーザー属性、環境、ロールなど、ユーザー認証に関する設定をまとめます。',
+      }
+    },
+    '/part-5/user-management': {
+      ja: {
+        title: 'ユーザー管理',
+        description: 'ユーザーの検索、作成、編集、削除、操作履歴の確認方法をまとめたセクションです。',
+      }
+    },
   };
   
