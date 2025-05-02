@@ -223,7 +223,7 @@ const sidebars = {
             "part-5/user-management/user-activity-history-log",
           ],  
         },
-        "part-5/tenant_management",
+        "part-5/tenant-management",
         "part-5/adding-role-to-user",
         {
           type: "category",
