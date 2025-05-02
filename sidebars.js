@@ -22,7 +22,7 @@ const sidebars = {
     {
       type: "category",
       label: "Part I: Introduction",
-      items: ["part-1/purpose_and_overview"],
+      items: ["part-1/purpose-and-overview"],
       collapsed: false,
       collapsible: false,
     },
@@ -30,33 +30,33 @@ const sidebars = {
       type: "category",
       label: "Part II: SaaS Fundamentals",
       items: [
-        "part-2/what_is_saas",
-        "part-2/what_is_saasus",
-        "part-2/cloud_computing_basics",
-        "part-2/saas_advantages_and_disadvantages",
-        "part-2/saas_business_model",
-        "part-2/saas_technical_architecture",
-        "part-2/saas_operations",
-        "part-2/saas_development",
-        "part-2/saas_marketing",
-        "part-2/saas_security_and_compliance",
-        "part-2/saas_legal_issues",       
+        "part-2/what-is-saas",
+        "part-2/what-is-saasus",
+        "part-2/cloud-computing-basics",
+        "part-2/saas-advantages-and-disadvantages",
+        "part-2/saas-business-model",
+        "part-2/saas-technical-architecture",
+        "part-2/saas-operations",
+        "part-2/saas-development",
+        "part-2/saas-marketing",
+        "part-2/saas-security-and-compliance",
+        "part-2/saas-legal-issues",       
       ],
     },
     {
       type: "category",
       label: "Part III: Overview and Setup of the SaaSus Platform",
       items: [
-        "part-3/saasus_platform_architecture",
-        "part-3/getting_started",
-        "part-3/login_and_main_screen_overview",     
+        "part-3/saasus-platform-architecture",
+        "part-3/getting-started",
+        "part-3/login-and-main-screen-overview",     
       ],
     },
     {
       type: "category",
       label: "Part IV: Using the SaaSus Platform (Developer Console)",
       items: [
-        "part-4/saas_development_console_overview",
+        "part-4/saas-development-console-overview",
         {
           "type": "category",
           "label": "Registering and Configuring Applications",
@@ -87,7 +87,7 @@ const sidebars = {
             "part-4/application-settings/declare-additional-attribute-to-tenant",
           ]
         },
-        "part-4/pricing_plan_and_billing_configuration",
+        "part-4/pricing-plan-and-billing-configuration",
         {
           "type": "category",
           "label": "User Authentication and Authorization Configuration",
@@ -115,15 +115,15 @@ const sidebars = {
           "part-4/user-authz-settings/user-env-definition",
           ]
         },
-        "part-4/developer_sdk_api_overview",
+        "part-4/developer-sdk-api-overview",
         {
           type: "category",
           label: "Smart API Gateway Features",
           link: {
             type: "doc",
-            id: "part-4/smart_api_gateway_features/overview",
+            id: "part-4/smart-api-gateway-features/overview",
           },
-          items: ["part-4/smart_api_gateway_features/manual"],
+          items: ["part-4/smart-api-gateway-features/manual"],
         },
         {
           type: "category",
@@ -201,14 +201,14 @@ const sidebars = {
             },
           ],
         },
-        "part-4/account_settings",
+        "part-4/account-settings",
       ],
     },
     {
       type: "category",
       label: "Part V: Using the SaaSus Platform (Operation Console)",
       items: [
-        "part-5/operations_console_overview",
+        "part-5/operations-console-overview",
         {
           type: "category",
           label: "User Management",
@@ -248,8 +248,8 @@ const sidebars = {
       label: "Part VI: Troubleshooting and Support",
       items: [
         "part-6/faq",
-        "part-6/error_codes_and_countermeasures",
-        "part-6/support_and_escalation",
+        "part-6/error-codes-and-countermeasures",
+        "part-6/support-and-escalation",
         {
           type: "category",
           label: "Implementation Guide",
@@ -265,7 +265,7 @@ const sidebars = {
                 id: "part-6/implementation-guide/meteringapisamplelaravelandusecase",
               },
               items: [
-                "part-6/implementation-guide/example_implementation_using_metering_api",
+                "part-6/implementation-guide/example-implementation-using-metering-api",
               ],
             },
             "part-6/implementation-guide/implementing-multi-factor-authentication-apiserver",
@@ -309,7 +309,7 @@ const sidebars = {
       items: [
         "part-7/glossary",
         "part-7/reference",
-        "part-7/release_notes",
+        "part-7/release-notes",
         "part-7/index",
       ],
     },
