@@ -45,7 +45,7 @@ Googleログインを有効にするには、事前に Google Cloud Console で�
 
 :::info
 この機能は、SaaSアプリケーションに**多要素認証（MFA）機能を実装している場合**にのみ有効です。  
-具体的なAPIの使い方や実装例は、[多要素認証の実装（APIサーバ）](/ja/docs/implementation-guide/implementing-mfa-apiserver) を参照してください。
+具体的なAPIの使い方や実装例は、[多要素認証の実装（APIサーバ）](/ja/docs/part-6/implementation-guide/implementing-multi-factor-authentication-apiserver) を参照してください。
 :::
 
 ユーザーの信頼済みデバイスを記憶するかどうかを設定します。  
