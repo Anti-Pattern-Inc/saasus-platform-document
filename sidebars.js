@@ -69,6 +69,7 @@ const sidebars = {
           "items": [
             "part-4/application-settings/basic-app-settings",
             "part-4/application-settings/domain-and-redirect-settings",
+            "part-4/application-settings/api-key-settings",
             {
               "type": "category",
               "label": "Settings for Google Tag Manager",
