@@ -47,3 +47,19 @@ SaaSus Platformでは、画面左上に表示されるセレクトボックス�
 ![コンソール切り替え](/ja/img/part-3/login-and-main-screen-overview/console-switching.png)
 
 この切り替えにより、目的に応じて必要な操作画面へ即座に遷移できます。
+
+## 6. SaaSus Platformアカウントへの多要素認証の設定手順
+
+1. 開発コンソールのヘッダー右にあるユーザーメニューをクリックします。
+2. `多要素認証の設定`をクリックします。
+3. `デバイスを追加`ボタンをクリックします。  
+   ![multi-factor-authentication-1](/ja/img/part-3/login-and-main-screen-overview/multi-factor-authentication-1.png)
+
+4. `QRコードを表示する`をクリックして、QRコードを表示します。  
+   ![multi-factor-authentication-2](/ja/img/part-3/login-and-main-screen-overview/multi-factor-authentication-2.png)
+
+5. 表示されたQRコードを、Google Authenticator、またはAuthyアプリでスキャンします。
+
+6. アプリで生成された6桁のコードを入力し、`認証`をクリックします。
+
+7. 多要素認証が有効になると、次回以降のログイン時に認証コードの入力が求められます。
