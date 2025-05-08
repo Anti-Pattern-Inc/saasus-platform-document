@@ -22,6 +22,12 @@ export const generatedIndexOverrides = {
         description: 'ログイン方式、ユーザー属性、環境、ロールなど、ユーザー認証に関する設定をまとめます。',
       }
     },
+    '/part-4/account-settings': {
+      ja: {
+        title: 'アカウント設定',
+        description: 'アカウント名やSaaSus Platformの料金プランの変更、SaaSusユーザーの招待を行えます。',
+      }
+    },
     '/part-5/user-management': {
       ja: {
         title: 'ユーザー管理',
