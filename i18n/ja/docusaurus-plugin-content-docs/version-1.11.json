@@ -63,6 +63,10 @@
     "message": "補足",
     "description": "The label for category Supplementary in sidebar docsSidebar"
   },
+  "sidebar.docsSidebar.category.Account Settings": {
+    "message": "アカウント設定",
+    "description": "The label for category Account Settings in sidebar docsSidebar"
+  },
   "sidebar.docsSidebar.category.Part V: Using the SaaSus Platform (Operation Console)": {
     "message": "第V部：SaaSus Platformの使い方（SaaS運用コンソール 編）",
     "description": "The label for category Part V: Using the SaaSus Platform (Operation Console) in sidebar docsSidebar"

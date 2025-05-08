@@ -202,7 +202,20 @@ const sidebars = {
             },
           ],
         },
-        "part-4/account-settings",
+        {
+          type: "category",
+          label: "Account Settings",
+          link: {
+            type: "generated-index",
+            title: "Account Settings",
+            description: "Change your account name, manage your SaaSus Platform subscription plan, and invite other users.",
+            slug: "/part-4/account-settings",
+          },
+          items: [
+            "part-4/account-settings/procedure-for-applying-for-a-paid-plan",
+            "part-4/account-settings/saasususerinvitation",
+          ],
+        }
       ],
     },
     {
