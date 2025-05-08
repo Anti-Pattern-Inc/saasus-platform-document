@@ -27,6 +27,10 @@
     "message": "Google Tag Managerの設定",
     "description": "The label for category Settings for Google Tag Manager in sidebar docsSidebar"
   },
+  "sidebar.docsSidebar.category.Pricing & Billing": {
+    "message": "料金プランと課金設定",
+    "description": "The label for category Pricing & Billing in sidebar docsSidebar"
+  },
   "sidebar.docsSidebar.category.User Authentication and Authorization Configuration": {
     "message": "ユーザー認証・認可の設定",
     "description": "The label for category User Authentication and Authorization Configuration in sidebar docsSidebar"
