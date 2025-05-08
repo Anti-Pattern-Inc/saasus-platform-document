@@ -22,6 +22,13 @@ export const generatedIndexOverrides = {
         description: 'ログイン方式、ユーザー属性、環境、ロールなど、ユーザー認証に関する設定をまとめます。',
       }
     },
+    "/part-4/pricing-and-billing": {
+      ja: {
+        title: "料金プランと課金設定",
+        description:
+          "料金体系の設計、従量課金単位、税率、Stripe連携など、課金に関する全体の設定方法をまとめます。",
+      },
+    },
     '/part-4/account-settings': {
       ja: {
         title: 'アカウント設定',

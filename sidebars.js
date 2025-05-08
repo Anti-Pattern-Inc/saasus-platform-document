@@ -88,7 +88,23 @@ const sidebars = {
             "part-4/application-settings/declare-additional-attribute-to-tenant",
           ]
         },
-        "part-4/pricing-plan-and-billing-configuration",
+        {
+          type: "category",
+          label: "Pricing & Billing",
+          link: {
+            type: "generated-index",
+            title: "Pricing & Billing",
+            description:
+              "Configure pricing models, usage-based meters, tax rates, and Stripe integration for billing.",
+            slug: "/part-4/pricing-and-billing",
+          },
+          items: [
+            "part-4/pricing-and-billing/pricing-plan-overview",
+            "part-4/pricing-and-billing/pricing-plan-creation",
+            "part-4/pricing-and-billing/tax-rate-settings",
+            "part-4/pricing-and-billing/stripe-integration",
+          ],
+        },
         {
           "type": "category",
           "label": "User Authentication and Authorization Configuration",
