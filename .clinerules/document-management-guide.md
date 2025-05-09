@@ -4,12 +4,13 @@
 
 ```
 saasus-platform-document/
-├── docs/                         # 英語版ドキュメント
+├── docs/                          # 英語版ドキュメント
 ├── i18n/
 │   └── ja/
 │       └── docusaurus-plugin-content-docs/
-│           └── current/         # 最新の日本語ドキュメント
-└── versioned_docs/              # バージョン管理されたドキュメント
+│           ├── version-{VERSION}  # バージョン管理された日本語ドキュメント
+│           └── current/           # 最新の日本語ドキュメント
+└── versioned_docs/                # バージョン管理された英語ドキュメント
     └── version-{VERSION}/
 ```
 
