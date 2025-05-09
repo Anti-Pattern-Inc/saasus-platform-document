@@ -35,7 +35,9 @@ docker exec -it {コンテナID} bash
 npm run start -- --host 0.0.0.0
 ```
 
-### Update Implementation
+### Update Implementation(Optional)
+
+※ この手順は、変更内容を自動で反映させたい場合に利用してください
 
 Roo Codeのプロンプトで
 
