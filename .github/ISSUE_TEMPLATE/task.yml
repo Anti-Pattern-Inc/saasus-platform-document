@@ -1,0 +1,40 @@
+name: Task
+description: 具体的な作業を記載するためのテンプレートです（実装・テスト・ドキュメントなど）。
+labels: ['task']
+projects: ['Anti-Pattern-Inc/40']
+
+body:
+  - type: textarea
+    id: what-to-do
+    attributes:
+      label: やること
+      description: このTaskで対応する作業内容を具体的に記載してください。
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: 受け入れ条件
+      description: 完了とみなすための具体的な条件を記載してください。
+      placeholder: |
+        - [ ] 1ページあたり最大20件のレコードが表示される
+        - [ ] ページを移動してもフィルターやソート状態が保持される
+        - [ ] 異常系（存在しないIDなど）に対して適切なステータスコードが返る
+    validations:
+      required: true
+
+  - type: textarea
+    id: considerations
+    attributes:
+      label: 注意点・補足事項
+      description: 実装や対応にあたって注意すべきこと、他の作業への影響などがあれば記載してください。
+
+  - type: textarea
+    id: links
+    attributes:
+      label: 関連リンク
+      description: 参考資料や関連Issueなどがあれば記載してください。
+      placeholder: |
+        - [関連Issue #123](https://github.com/org/repo/issues/123)
+        - [仕様書](https://example.com/spec)
