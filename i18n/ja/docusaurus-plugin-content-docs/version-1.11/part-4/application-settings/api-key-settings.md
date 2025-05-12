@@ -1,6 +1,6 @@
 ---
 title: "APIキーの確認"
-slug: "apy-key"
+slug: "api-key-settings"
 description: "SaaSus SDK / APIを連携するために必要なキーを確認・管理します。"
 excerpt: ""
 hidden: false
