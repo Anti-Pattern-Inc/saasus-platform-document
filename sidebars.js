@@ -100,9 +100,11 @@ const sidebars = {
           },
           items: [
             "part-4/pricing-and-billing/pricing-plan-overview",
+            "part-4/pricing-and-billing/tiered-unit",
             "part-4/pricing-and-billing/pricing-plan-creation",
             "part-4/pricing-and-billing/tax-rate-settings",
             "part-4/pricing-and-billing/stripe-integration",
+            "part-4/pricing-and-billing/usage-metering",
           ],
         },
         {
