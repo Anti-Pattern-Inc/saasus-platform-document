@@ -17,8 +17,9 @@ A multi-tenant architecture involves multiple tenants sharing common servers and
 
 The single-tenant management feature is a functionality on the SaaSus Platform that supports the construction of SaaS with a single-tenant architecture.
 
-:::info
-The single-tenant management feature is only available to customers on the Advanced plan or higher.
+:::warning
+The Single-Tenant Management feature is not available for customers on the legacy Starter or Standard plans.  
+To use this feature, please upgrade your subscription plan.
 :::
 
 In a single-tenant architecture, each tenant's data is physically isolated, reducing the risk of data leakage among other benefits. However, there is a disadvantage of increased management cost as servers and databases need to be prepared for each tenant.
