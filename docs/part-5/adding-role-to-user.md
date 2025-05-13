@@ -11,6 +11,8 @@ updatedAt: "Wed Apr 23 2024 06:16:19 GMT+0000 (Coordinated Universal Time)"
 
 Click "role Management" in the side menu.
 
+You can assign roles to users on a per-tenant basis. In this example, we assume the **General User** role has already been created. First, we’ll assign this role to **User 1-1** and **User 1-2** in **Tenant Sample 1**, and then do the same for **User 2-1** and **User 2-2** in **Sample App Tenant 2**.
+
 Select "Tenant Sample 1" from the "tenant" pulldown, and search for "General users" from the "role" pulldown.
 
 First, let's give User 1-1 and User 1-2 the role of "General User" in "Tenant Sample 1".
