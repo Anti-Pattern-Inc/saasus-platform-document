@@ -14,7 +14,7 @@ SaaSus Platformでは以下プランを現在用意しております。
   <thead>
     <tr>
       <th rowspan="2">プラン</th>
-      <th rowspan="2">料金（月額）</th>
+      <th rowspan="2">月額料金<br />（税別）</th>
       <th rowspan="2">環境数</th>
       <th rowspan="2">ユーザー数</th>
       <th rowspan="2">テナント数</th>
