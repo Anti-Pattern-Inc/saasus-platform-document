@@ -107,6 +107,11 @@
     "message": "第VII部：付録",
     "description": "The label for category Part VII: Appendix in sidebar docsSidebar"
   },
+  "sidebar.docsSidebar.link.Release Notes and Change History": {
+    "message": "リリースノートと変更履歴",
+    "description": "The label for link Release Notes and Change History in sidebar docsSidebar"
+  },
+
   "sidebar.tutorialSidebar.category.Getting Started": {
     "message": "はじめに",
     "description": "The label for category Getting Started in sidebar tutorialSidebar"

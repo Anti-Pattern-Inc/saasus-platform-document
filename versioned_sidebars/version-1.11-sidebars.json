@@ -324,7 +324,11 @@
       "items": [
         "part-7/glossary",
         "part-7/reference",
-        "part-7/release-notes",
+        {
+          "type": "link",
+          "label": "Release Notes and Change History",
+          "href": "/docs/changelog/20250314"
+        },
         "part-7/index"
       ]
     }

@@ -10,6 +10,21 @@
  */
 
 // @ts-check
+const fs = require('fs');
+const path = require('path');
+
+/** changelog フォルダ内の YYYYMMDD.md ファイルを昇順ソートして最新を返す */
+function getLatestChangelog() {
+  const dir = path.join(__dirname, 'docs', 'changelog');
+  return fs.readdirSync(dir)
+    .filter(f => /^\d{8}\.md$/.test(f))
+    .map(f => f.replace(/\.md$/, ''))
+    .sort()
+    .pop();
+}
+
+// 最新の日付文字列
+const latest = getLatestChangelog();
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
@@ -341,7 +356,11 @@ const sidebars = {
       items: [
         "part-7/glossary",
         "part-7/reference",
-        "part-7/release-notes",
+        {
+          type: 'link',
+          label: 'Release Notes and Change History',
+          href: `/docs/changelog/${latest}`,
+        },
         "part-7/index",
       ],
     },
