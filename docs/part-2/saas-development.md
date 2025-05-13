@@ -30,3 +30,6 @@ updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 
 - **Team Communication**:  
   Maintain transparency and alignment through regular meetings, reviews, and collaborative planning.
+
+## 4. Development and Update Process on SaaSus Platform
+  Coming soon.
