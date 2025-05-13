@@ -13,7 +13,7 @@ At SaaSus Platform, we currently offer the following plans. To apply for a paid 
   <thead>
     <tr>
       <th rowspan="2">Plan</th>
-      <th rowspan="2">Monthly Fee</th>
+      <th rowspan="2">Monthly Fee<br />(excluding tax)</th>
       <th rowspan="2">Environments</th>
       <th rowspan="2">Users</th>
       <th rowspan="2">Tenants</th>
