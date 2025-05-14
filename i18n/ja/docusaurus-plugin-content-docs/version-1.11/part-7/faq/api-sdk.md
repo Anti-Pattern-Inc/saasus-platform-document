@@ -7,4 +7,6 @@ createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
+> API / SDK 利用時 よくある質問
+
 ※現在準備中です。しばらくお待ちください。
