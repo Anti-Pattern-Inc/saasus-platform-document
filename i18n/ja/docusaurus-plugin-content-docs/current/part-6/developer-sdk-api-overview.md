@@ -53,7 +53,7 @@ curl https://api.saasus.io/v1/auth/credentials?code=${TEMP_CODE} \
 
 > 一時コード `code` はログインリダイレクト時にクエリパラメータとして渡されます。
 
-SDK 例は [JWT 取得 API 実装例](/ja/docs/implementation-guide/implementing-authentication-using-saasus-platform-apiserver#２１１jwt取得api) を参照。
+SDK 例は [JWT 取得 API 実装例](/ja/docs/part-6/implementation-guide/implementing-authentication-using-saasus-platform-apiserver#２１１jwt取得api) を参照。
 
 ```bash
 # 2) id\_token を使ったユーザー情報取得
@@ -61,7 +61,7 @@ curl https://api.saasus.io/v1/auth/userinfo?id_token=<ID_TOKEN> \
      -H "Authorization: SAASUSSIGV1 Sig=..., SaaSID=..., APIKey=..."
 ```
 
-SDK 例は [ユーザー情報取得 API 実装例](/ja/docs/implementation-guide/implementing-authentication-using-saasus-platform-apiserver#２１２ユーザ情報取得api) を参照。
+SDK 例は [ユーザー情報取得 API 実装例](/ja/docs/part-6/implementation-guide/implementing-authentication-using-saasus-platform-apiserver#２１２ユーザ情報取得api) を参照。
 
 ## 3. 代表ユースケース別リンク集
 
