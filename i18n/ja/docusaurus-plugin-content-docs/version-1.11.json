@@ -87,10 +87,6 @@
     "message": "第VI部：開発ドキュメント",
     "description": "The label for category Part VI: Development Documentation in sidebar docsSidebar"
   },
-  "sidebar.docsSidebar.category.Part VII: Troubleshooting and Support": {
-    "message": "第VII部：トラブルシューティングとサポート",
-    "description": "The label for category Part VI: Troubleshooting and Support in sidebar docsSidebar"
-  },
   "sidebar.docsSidebar.category.Implementation Guide": {
     "message": "実装ガイド",
     "description": "The label for category Implementation Guide in sidebar docsSidebar"
@@ -106,6 +102,14 @@
   "sidebar.docsSidebar.category.About Rate Plans": {
     "message": "複雑な料金プランについて",
     "description": "The label for category About Rate Plans in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Part VII: Troubleshooting and Support": {
+    "message": "第VII部：トラブルシューティングとサポート",
+    "description": "The label for category Part VI: Troubleshooting and Support in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.FAQ": {
+    "message": "よくある質問（FAQ）",
+    "description": "The label for FAQ in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.Part VIII: Appendix": {
     "message": "第VIII部：付録",
