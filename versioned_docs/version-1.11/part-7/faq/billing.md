@@ -1,6 +1,6 @@
 ---
-title: "Frequently Asked Questions (FAQ)"
-slug: "faq"
+title: "請求関連 FAQ"
+slug: "billing"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"

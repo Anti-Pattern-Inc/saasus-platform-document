@@ -351,7 +351,21 @@ const sidebars = {
       type: "category",
       label: "Part VII: Troubleshooting and Support",
       items: [
-        "part-7/faq",
+        {
+          type: 'category',
+          label: 'FAQ',
+          link: {
+            type: 'generated-index',
+            title: 'Frequently Asked Questions (FAQ)',
+            description: 'Find answers to common questions about SaaSus, organized by category.',
+            slug: "part-7/faq",
+          },
+          items: [
+            'part-7/faq/saasus-platform',
+            'part-7/faq/billing',
+            'part-7/faq/api-sdk',
+          ],
+        },        
         "part-7/support",
       ],
     },

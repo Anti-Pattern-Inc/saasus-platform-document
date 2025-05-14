@@ -41,5 +41,11 @@ export const generatedIndexOverrides = {
         description: 'ユーザーの検索、作成、編集、削除、操作履歴の確認方法をまとめたセクションです。',
       }
     },
+    '/part-7/faq': {
+      ja: {
+        title: 'よくある質問（FAQ）',
+        description: 'SaaSus に関する各種よくある質問をカテゴリ別にまとめています。',
+      }
+    },
   };
   
