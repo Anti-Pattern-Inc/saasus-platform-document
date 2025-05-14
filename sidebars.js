@@ -149,7 +149,6 @@ const sidebars = {
           "part-4/user-authz-settings/user-env-definition",
           ]
         },
-        "part-4/developer-sdk-api-overview",
         {
           type: "category",
           label: "Smart API Gateway Features",
@@ -292,11 +291,9 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Part VI: Troubleshooting and Support",
+      label: "Part VI: Development Documentation",
       items: [
-        "part-6/faq",
-        "part-6/error-codes-and-countermeasures",
-        "part-6/support-and-escalation",
+        "part-6/developer-sdk-api-overview",
         {
           type: "category",
           label: "Implementation Guide",
@@ -352,16 +349,22 @@ const sidebars = {
     },
     {
       type: "category",
-      label: "Part VII: Appendix",
+      label: "Part VII: Troubleshooting and Support",
       items: [
-        "part-7/glossary",
-        "part-7/reference",
+        "part-7/faq",
+        "part-7/support",
+      ],
+    },
+    {
+      type: "category",
+      label: "Part VIII: Appendix",
+      items: [
         {
           type: 'link',
           label: 'Release Notes and Change History',
           href: `/docs/changelog/${latest}`,
         },
-        "part-7/index",
+        "part-8/risk-assessment",
       ],
     },
   ],
