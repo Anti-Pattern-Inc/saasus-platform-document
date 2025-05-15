@@ -85,7 +85,7 @@ SaaS 運用コンソールにログインし、「料金プラン設定」をク
 
 :::info
 Stripe との連携設定については、以下の開発コンソールのドキュメントを参照してください。  
-[Stripe連携の設定](/docs/saas-development-console/saasus-development-console-used-billing-with-association)
+[Stripeとの連携設定](/docs/part-4/pricing-and-billing/stripe-integration)
 :::
 
 では、ここまで設定した、料金プランやメーターの情報の情報を活かして、アプリケーションに認可処理の一歩目を実装してみましょう。
