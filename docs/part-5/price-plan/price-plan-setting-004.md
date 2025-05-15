@@ -8,7 +8,7 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
 ## About canceling a scheduled change
 
-When setting, changing, or canceling a pricing plan, a schedule will be created if you select a reflection date after the next day.  
+A schedule will be created when you select "Date and time specification" as the reflection timing during pricing plan setup, change, or cancellation.  
 When the specified date and time comes, operations for setting, changing, and canceling rate plans are automatically performed based on the created schedule.  
 You can cancel the change up to 10 minutes before the specified date and time by following the steps below.
 
