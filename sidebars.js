@@ -297,6 +297,13 @@ const sidebars = {
         {
           type: "category",
           label: "Implementation Guide",
+          link: {
+            type: "generated-index",
+            slug: "/part-6/implementation-guide",
+            title: "Implementation Guide",
+            description:
+              "A collection of implementation samples built with the SaaSus SDK and API.",
+          },
           items: [
             "part-6/implementation-guide/implementing-authentication-using-saasus-platform-apiserver",
             "part-6/implementation-guide/implementing-authentication-using-saasus-serverless",

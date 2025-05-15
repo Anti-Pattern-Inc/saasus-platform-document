@@ -87,7 +87,7 @@ This will change the pricing plan associated with the tenant. When working with 
 :::info
 For details on how to set up Stripe integration,  
 please refer to the following Developer Console documentation:  
-[Setting Up Stripe Integration](/docs/saas-development-console/saasus-development-console-used-billing-with-association)
+[Stripe Integration](/docs/part-4/pricing-and-billing/stripe-integration)
 :::
 
 Now, using the pricing plans and metering unit information you've configured, let’s implement the first step of authorization processing in the application.

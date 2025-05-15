@@ -41,6 +41,12 @@ export const generatedIndexOverrides = {
         description: 'ユーザーの検索、作成、編集、削除、操作履歴の確認方法をまとめたセクションです。',
       }
     },
+    '/part-6/implementation-guide': {
+      ja: {
+        title: '実装ガイド',
+        description: 'SDK/API を使った実装サンプルをまとめています。',
+      }
+    },
     '/part-7/faq': {
       ja: {
         title: 'よくある質問（FAQ）',

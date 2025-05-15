@@ -1,6 +1,6 @@
 ---
 title: "Tenant Attributes"
-slug: "Define additional attributes for tenants managed in the SaaSus Platform—such as display name or notes—and retrieve them via the SaaSus SDK or API."
+slug: "declare-additional-attribute-to-tenant"
 excerpt: ""
 hidden: false
 createdAt: "Wed Apr 09 2024 05:02:32 GMT+0000 (Coordinated Universal Time)"
