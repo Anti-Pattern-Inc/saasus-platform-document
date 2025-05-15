@@ -36,7 +36,7 @@ The **"Calculation Method"** field is not visible in this screen,
 but it becomes available when **Stripe integration is enabled**, allowing you to choose options such as `sum` (total) or `max` (maximum).
 
 For more details, see the following page:  
-[Meter Unit Setting](/docs/saas-development-console/usage-metering)
+[Meter Unit Setting](/docs/part-4/pricing-and-billing/usage-metering)
 :::
 
 ---
