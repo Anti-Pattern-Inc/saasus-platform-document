@@ -15,11 +15,11 @@ Please note that no refunds will be given in that case.
 
 1. Go to Pricing Plan Settings in the SaaS Operations Console.
 2. Click "Release" for the tenant whose pricing plan you want to release.
-3. Set the current date for the reflection date.
+3. For Reflection Date, select "Reflected immediately".
 4. Click Unlock.
 5. A confirmation message will be displayed. Check the contents and click "Remove".
 
-**\*If you set the reflection date to the current day, the pricing plan will be canceled about 5 minutes after the operation date and time. **  
+**\*When "Reflected immediately" is selected, the pricing plan will take effect about 5 minutes after the operation.**  
 _Example, Cancellation setting of pricing plan at 9:00 am on December 28, 2022 → cancellation at 09:05:00 on December 28, 2022_
 
 ![plan-setting](/img/part-5/price-plan/price-plan-setting-003/plan-setting.png)
@@ -28,13 +28,10 @@ _Example, Cancellation setting of pricing plan at 9:00 am on December 28, 2022 �
 
 ***
 
-## Schedule pricing plan schedule for later date
+## Schedule Cancellation of Pricing Plan
 
 1. Go to Pricing Plan Settings in the SaaS Operations Console.
 2. Click "Release" for the tenant whose pricing plan you want to release.
-3. For the reflection date, set the date after the next day.
+3. For Reflection Date, select "Date and time specification", then specify the desired date and time.
 4. Click Unlock.
 5. A confirmation message will be displayed. Check the contents and click "Remove".
-
-**\*If you set the reflection date to the next day or later, the pricing plan settings will be canceled at midnight on the specified date. **  
-_Example, Specify a date of February 1, 2023 → Create a release schedule for 2023/02/01 00:00:00_
