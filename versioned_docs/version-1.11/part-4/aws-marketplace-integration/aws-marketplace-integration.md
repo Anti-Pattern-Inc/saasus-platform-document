@@ -30,11 +30,11 @@ Because it's hard to imagine from text, we will introduce the flow to listing in
 ### Entire Flow of Listing Procedure
 
 1. Seller registration (AWS)
-   1. [Seller Registration Guide](/docs/aws-marketplace-integration/aws-marketplace-seller-registration/aws-marketplace-seller-registration)
+   1. [Seller Registration Guide](/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/aws-marketplace-seller-registration)
 
 2. Setting of Public profile and disbursement methods (AMMP)
-   1. [Guide to setting the Public profile](/docs/aws-marketplace-integration/aws-marketplace-seller-registration/public-profile-settings)
-   2. [How to start setting the bank account and disbursement methods](/docs/aws-marketplace-integration/aws-marketplace-seller-registration/tax-information-interview)
+   1. [Guide to setting the Public profile](/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/public-profile-settings)
+   2. [How to start setting the bank account and disbursement methods](/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/tax-information-interview)
 
    ***
    ===**Start of Test Phase**===
@@ -42,13 +42,13 @@ Because it's hard to imagine from text, we will introduce the flow to listing in
 3. Preparation of SaaS product for testing (SaaSus Platform:: Staging environment)
 
 4. Registration of SaaS product for testing (AMMP)
-   1. [How to start registration](/docs/aws-marketplace-integration/product-submission)
+   1. [How to start registration](/docs/part-4/aws-marketplace-integration/product-submission)
 
 5. Preparation of API integration (SaaSus Platform:: Staging environment)
 
 6. Confirmation of  integration with AWS Marketplace
 
-   1. [Example of integration confirmation](/docs/aws-marketplace-integration/supplementary/integration-test)
+   1. [Example of integration confirmation](/docs/part-4/aws-marketplace-integration/supplementary/integration-test)
    
    ===**End of Test Phase**===
    
@@ -75,10 +75,10 @@ Because it's hard to imagine from text, we will introduce the flow to listing in
    ***
 
 11. Final review request for SaaS product for production
-    1. [How torequest](/docs/aws-marketplace-integration/supplementary/final-review-request)
+    1. [How torequest](/docs/part-4/aws-marketplace-integration/supplementary/final-review-request)
 
 12.  Public release request for SaaS product for production
-     1. [Request Method](/docs/aws-marketplace-integration/supplementary/public-request)
+     1. [Request Method](/docs/part-4/aws-marketplace-integration/supplementary/public-request)
 
 # Criteria for SaaS Products in Listing
 
@@ -90,8 +90,8 @@ There are criteria for listing SaaS products on the AWS Marketplace, which are p
 
 Based on the SaaS product guidelines, we will check from the SaaSus Platform whether the standards are met. We check it when using the AWS Marketplace integration function, but we will also post it in the document so please check it.
 
-- Self sign-up is enabled in SaaSus's authentication detail setting ([Reference](/docs/aws-marketplace-integration/supplementary/self-up-setting))  
+- Self sign-up is enabled in SaaSus's authentication detail setting ([Reference](/docs/part-4/aws-marketplace-integration/supplementary/self-up-setting))  
 - Users can check the plan they have contracted for on SaaS themselves  
 - There is a mechanism for users to contact support on SaaS  
-- Consideration of multitenancy is implemented when a user who already has an account purchases SaaS ([Reference](/docs/aws-marketplace-integration/embedding-products))  
-- Users who purchased from the AWS Marketplace cannot change the plan or withdraw on SaaS ([Reference](/docs/aws-marketplace-integration/supplementary/user-judgment-method))
+- Consideration of multitenancy is implemented when a user who already has an account purchases SaaS ([Reference](/docs/part-4/aws-marketplace-integration/embedding-products))  
+- Users who purchased from the AWS Marketplace cannot change the plan or withdraw on SaaS ([Reference](/docs/part-4/aws-marketplace-integration/supplementary/user-judgment-method))

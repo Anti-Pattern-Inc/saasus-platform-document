@@ -6,7 +6,7 @@ hidden: true
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
-The information you enter here can be checked in the [About the Contents Entered in Create Product and the Published Details](/docs/aws-marketplace-integration/supplementary/supplementary-1) to see what will be published on AWS Marketplace.
+The information you enter here can be checked in the [About the Contents Entered in Create Product and the Published Details](/docs/part-4/aws-marketplace-integration/supplementary/supplementary-1) to see what will be published on AWS Marketplace.
 
 ## Step1 : Provide product information
 

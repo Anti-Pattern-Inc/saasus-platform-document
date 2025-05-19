@@ -11,7 +11,7 @@ updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 :::caution
-Please ensure that your bank account setup is complete beforehand. If you haven't done this yet, refer to [Bank Account Setup](/docs/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account).
+Please ensure that your bank account setup is complete beforehand. If you haven't done this yet, refer to [Bank Account Setup](/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account).
 :::
 
 Click `Add disbursement method` under `Payment Information`.  
@@ -22,7 +22,7 @@ First, select the currency in which disbursements will be made. For available cu
 
 ![new-register-disbursement-methods-2](/img/part-4/aws-marketplace-integration/register-disbursement-methods/new-register-disbursement-methods-2.png)
 
-Next, select the bank account to receive disbursements. Among the bank accounts added in [Bank Account Setup](/docs/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account), only the accounts corresponding to the previously selected currency will be available as options.
+Next, select the bank account to receive disbursements. Among the bank accounts added in [Bank Account Setup](/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account), only the accounts corresponding to the previously selected currency will be available as options.
 
 ![new-register-disbursement-methods-3](/img/part-4/aws-marketplace-integration/register-disbursement-methods/new-register-disbursement-methods-3.png)
 

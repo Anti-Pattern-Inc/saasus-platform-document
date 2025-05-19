@@ -12,7 +12,7 @@ updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 
 :::caution
 あらかじめ銀行口座の設定が完了していることをご確認ください。
-まだお済みでない場合は、[銀行口座の設定](/docs/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account)を参考に設定を行ってください。
+まだお済みでない場合は、[銀行口座の設定](/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account)を参考に設定を行ってください。
 :::
 
 `Payment Information`より`Add disbursement method`を押下してください。
@@ -23,7 +23,7 @@ updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 
 ![new-register-disbursement-methods-2](/ja/img/part-4/aws-marketplace-integration/register-disbursement-methods/new-register-disbursement-methods-2.png)
 
-次に、支払いを受け取る銀行口座を選択します。[銀行口座の設定](/docs/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account)で追加した銀行口座の中で、直前に選択した通貨に対応している銀行口座が選択肢として選べるようになっています。
+次に、支払いを受け取る銀行口座を選択します。[銀行口座の設定](/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account)で追加した銀行口座の中で、直前に選択した通貨に対応している銀行口座が選択肢として選べるようになっています。
 
 ![new-register-disbursement-methods-3](/ja/img/part-4/aws-marketplace-integration/register-disbursement-methods/new-register-disbursement-methods-3.png)
 

@@ -9,7 +9,7 @@ metadata:
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
-[出品手順「11. 本番用SaaS製品の最終レビュー依頼」](/docs/aws-marketplace-integration/aws-marketplace-integration)が完了後、AWS Marketplaceサポートチームから公開依頼する手順について説明するメールが届きますので、それを元に公開依頼を行います。
+[出品手順「11. 本番用SaaS製品の最終レビュー依頼」](/docs/part-4/aws-marketplace-integration/aws-marketplace-integration)が完了後、AWS Marketplaceサポートチームから公開依頼する手順について説明するメールが届きますので、それを元に公開依頼を行います。
 
 :::caution
 事前に調査した内容から、公開依頼の方法についてドキュメントを作成していますが実際に届いたメールの内容が最新の方法となりますので、そちらの方法に従ってください。

@@ -6,7 +6,7 @@ hidden: true
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
-こちらで入力した内容は「[Create Productの入力内容と公開される内容について](/docs/aws-marketplace-integration/supplementary/supplementary-1)」にて  
+こちらで入力した内容は「[Create Productの入力内容と公開される内容について](/docs/part-4/aws-marketplace-integration/supplementary/supplementary-1)」にて  
 実際に AWS Marketplace上 で公開されるイメージを確認できます。
 
 ## Step1 : Provide product information
