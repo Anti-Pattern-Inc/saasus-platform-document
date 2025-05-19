@@ -1,6 +1,6 @@
 ---
 title: "段階ユニット、段階的使用量ユニットの料金計算の違いについて"
-slug: "tiered_unit"
+slug: "tiered-unit"
 excerpt: ""
 hidden: false
 createdAt: "Fri Oct 06 2023 05:47:21 GMT+0000 (Coordinated Universal Time)"
