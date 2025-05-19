@@ -6,7 +6,7 @@ hidden: true
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
-Once you have completed the [exhibition steps '10. Confirmation of integration with AWS Marketplace'](/docs/aws-marketplace-integration/aws-marketplace-integration), you can request a final review from the AWS Marketplace support team.
+Once you have completed the [exhibition steps '10. Confirmation of integration with AWS Marketplace'](/docs/part-4/aws-marketplace-integration/aws-marketplace-integration), you can request a final review from the AWS Marketplace support team.
 
 First, access the <a href="https://aws.amazon.com/marketplace/management/homepage" target="_blank">AWS Marketplace Management Portal</a> and open the product detail page you want to manage.
 

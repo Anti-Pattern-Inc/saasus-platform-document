@@ -11,7 +11,7 @@ updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 :::info
 
 入力する情報が多いため、あらかじめ入力情報を用意しておくとスムーズに入力を進めることが出来ます。  
-各入力項目の制限やAWS Marketplace上にどのように公開されるかは補足資料を用意していますので、ご確認ください。[公開例](/docs/aws-marketplace-integration/supplementary/supplementary-1)、[入力項目の詳細](/docs/aws-marketplace-integration/supplementary/supplementary-2)
+各入力項目の制限やAWS Marketplace上にどのように公開されるかは補足資料を用意していますので、ご確認ください。[公開例](/docs/part-4/aws-marketplace-integration/supplementary/supplementary-1)、[入力項目の詳細](/docs/part-4/aws-marketplace-integration/supplementary/supplementary-2)
 :::
 
 入力項目の概要について、以下に列挙しますので確認しながら入力を進めてください。

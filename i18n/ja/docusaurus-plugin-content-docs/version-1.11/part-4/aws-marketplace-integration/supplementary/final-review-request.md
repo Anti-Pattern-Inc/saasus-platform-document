@@ -6,7 +6,7 @@ hidden: true
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
-[出品手順「10. AWS Marketplaceとの連携確認」](/docs/aws-marketplace-integration/aws-marketplace-integration)が完了したら、AWS Marketplaceサポートチームへ最終レビューの依頼を行います。
+[出品手順「10. AWS Marketplaceとの連携確認」](/docs/part-4/aws-marketplace-integration/aws-marketplace-integration)が完了したら、AWS Marketplaceサポートチームへ最終レビューの依頼を行います。
 
 まず<a href="https://aws.amazon.com/marketplace/management/homepage" target="_blank">AWS Marketplace Management Portal</a>にアクセスしていただき、対象のプロダクト詳細ページを開きます。
 

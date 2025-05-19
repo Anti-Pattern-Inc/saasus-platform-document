@@ -9,7 +9,7 @@ metadata:
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
-Once you've completed the [Listing Procedure "11. Final Review Request of Production SaaS Product"](/docs/aws-marketplace-integration/aws-marketplace-integration), you will receive an email from the AWS Marketplace Support Team detailing the process to request publication. Follow these instructions to request your publication.
+Once you've completed the [Listing Procedure "11. Final Review Request of Production SaaS Product"](/docs/part-4/aws-marketplace-integration/aws-marketplace-integration), you will receive an email from the AWS Marketplace Support Team detailing the process to request publication. Follow these instructions to request your publication.
 
 :::caution
 While we have prepared a document regarding the publication request process based on our prior research, the actual instructions provided in the email you'll receive represents the most updated procedure and should be followed accordingly.
