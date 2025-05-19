@@ -1,6 +1,6 @@
 ---
 title: "The difference in rate calculation between Tiered units and Tiered usage units"
-slug: "tiered_unit"
+slug: "tiered-unit"
 excerpt: ""
 hidden: false
 createdAt: "Fri Oct 06 2023 05:47:21 GMT+0000 (Coordinated Universal Time)"
