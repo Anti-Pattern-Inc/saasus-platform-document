@@ -22,12 +22,13 @@ It covers a wide range of topics—from the fundamentals of SaaS to feature usag
 
 ## Structure
 
-This manual consists of the following seven parts:
+This manual consists of the following eight parts:
 
 - **Part I: Introduction**  
 - **Part II: SaaS Fundamentals**  
 - **Part III: Overview and Setup of the SaaSus Platform**  
 - **Part IV: Using the SaaSus Platform (Developer Console)**  
 - **Part V: Using the SaaSus Platform (Operation Console)**  
-- **Part VI: Troubleshooting and Support**  
-- **Part VII: Appendix**
+- **Part VI: Development Documentation**  
+- **Part VII: Troubleshooting and Support**  
+- **Part VIII: Appendix**
