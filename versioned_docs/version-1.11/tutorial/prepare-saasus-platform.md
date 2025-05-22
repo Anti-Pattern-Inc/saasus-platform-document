@@ -52,6 +52,23 @@ The automatically generated login screen can display your service name and icon,
 For customization instructions, please refer to [Customizing Authentication Pages such as Login Pages](../saas-development-console/authorization-screen-customize).
 :::
 
+### Setting destination URL after authentication
+
+Based on the domain name you configured, SaaSus Platform generates a login screen. After logging in, the authentication information is transferred to the SaaS side.<br/>
+The URL of the SaaS to be taken over must be registered as the Callback URL.
+
+Click "Transition destination after authentication" from the side menu to display the Callback URL setting screen.
+
+Typically, you set the Callback URL based on the URL of the SaaS offering.<br/>
+However, since we will be running the sample application locally this time, we will configure it as follows.
+
+- For Laravel: [http://localhost/callback](http://localhost/callback)
+- For Express: [http://localhost:3000/callback](http://localhost:3000/callback)
+
+![06](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-06.png)
+
+Once you have configured the Callback URL, there are a few additional settings that must be completed before continuing with the tutorial.
+
 :::caution Required Setup Before Starting the Tutorial
 To proceed smoothly with the upcoming tutorial steps, it is **essential** to define additional attributes for users and tenants, and to configure roles in advance.
 
