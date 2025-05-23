@@ -38,18 +38,18 @@ SaaSus Platform では、**トークンベース認証** を採用していま�
 
 # SaaSus Platform における認証
 SaaSus Platform では **トークンベース認証** を採用しています。<br/>
-トークンの生成および検証は、SaaSus Platform SDK を利用し、SaaSus Platform の API を呼び出すことで実施します。
+トークンの生成および検証は、SaaSus SDK を利用し、SaaSus Platform の API を呼び出すことで実施します。
 ![03](/ja/img/part-6/usecase/authentication-methods/authentication-methods-03.png)
 
 # 認証タイミングについて
 ログインが必要な処理を実行する場合、サーバがリクエストを受けたタイミングで認証を行う必要があります。
 
-SaaSus Platform では、SaaSus Platform SDK を利用し、リクエストごとに認証を実施します。<br/>
+SaaSus Platform では、SaaSus SDK を利用し、リクエストごとに認証を実施します。<br/>
 SDK の ユーザー情報取得処理 を実行することで、以下の情報を取得できます。<br/>
 ・トークンの検証<br/>
 ・ログインユーザの情報取得（ユーザ情報、テナント情報、権限）<br/>
 
-ログインが必要な処理が複数ある場合、各処理の先頭で SaaSus Platform SDK を利用し、ユーザー情報を取得することで、ログイン状態を確認する必要があります。
+ログインが必要な処理が複数ある場合、各処理の先頭で SaaSus SDK を利用し、ユーザー情報を取得することで、ログイン状態を確認する必要があります。
 ![04](/ja/img/part-6/usecase/authentication-methods/authentication-methods-04.png)
 
 処理数が増えると、個別に認証処理を実装することが困難になるため、フレームワークのミドルウェア機能を活用し、一律で認証をチェックする仕組みを導入することを推奨します。

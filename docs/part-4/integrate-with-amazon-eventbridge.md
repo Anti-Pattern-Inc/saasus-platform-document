@@ -72,7 +72,7 @@ After all settings are complete, click Create rule and confirm that the rule has
 
 ![14](/img/part-4/integrate-with-amazon-eventbridge/image-14.png)
 
-Now that we are ready to link events. Send a test event by returning to the SaaSus development console and clicking the Send Test button.
+Now that we are ready to link events. Send a test event by returning to the SaaS Development Console and clicking the Send Test button.
 
 ![15](/img/part-4/integrate-with-amazon-eventbridge/image-15.png)
 

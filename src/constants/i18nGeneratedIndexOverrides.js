@@ -13,7 +13,7 @@ export const generatedIndexOverrides = {
     '/part-4/application-settings': {
       ja: {
         title: 'アプリケーションの登録と設定',
-        description: 'SaaSus アプリケーション構築に必要な設定をまとめたセクションです。',
+        description: 'SaaSus Platform アプリケーション構築に必要な設定をまとめたセクションです。',
       }
     },
     '/part-4/user-authz-settings': {
@@ -32,7 +32,7 @@ export const generatedIndexOverrides = {
     '/part-4/account-settings': {
       ja: {
         title: 'アカウント設定',
-        description: 'アカウント名やSaaSus Platformの料金プランの変更、SaaSusユーザーの招待を行えます。',
+        description: 'アカウント名やSaaSus Platformの料金プランの変更、SaaSus Platformへのユーザーの招待を行えます。',
       }
     },
     '/part-5/user-management': {
@@ -50,7 +50,7 @@ export const generatedIndexOverrides = {
     '/part-7/faq': {
       ja: {
         title: 'よくある質問（FAQ）',
-        description: 'SaaSus に関する各種よくある質問をカテゴリ別にまとめています。',
+        description: 'SaaSus Platform に関する各種よくある質問をカテゴリ別にまとめています。',
       }
     },
   };

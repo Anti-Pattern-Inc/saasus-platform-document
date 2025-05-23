@@ -35,18 +35,18 @@ Session-based authentication **stores authentication information on the server**
 
 # Authentication in SaaSus Platform
 SaaSus Platform adopts **token-based authentication**.<br/>
-Token generation and validation are performed using the SaaSus Platform SDK, which calls the SaaSus Platform API.
+Token generation and validation are performed using the SaaSus SDK, which calls the SaaSus Platform API.
 ![03](/img/part-6/usecase/authentication-methods/authentication-methods-03.png)
 
 # Authentication Timing
 When executing processes that require login, authentication must be performed at the time the server receives the request.
 
-In SaaSus Platform, authentication is carried out for each request using the SaaSus Platform SDK.<br/>
+In SaaSus Platform, authentication is carried out for each request using the SaaSus SDK.<br/>
 By executing the user information retrieval process in the SDK, the following information can be obtained:<br/>
 ・Token validation<br/>
 ・Retrieval of logged-in user information (user data, tenant data, permissions)<br/>
 
-If there are multiple processes that require login, it is necessary to check the login status by retrieving user information using the SaaSus Platform SDK at the start of each process.
+If there are multiple processes that require login, it is necessary to check the login status by retrieving user information using the SaaSus SDK at the start of each process.
 ![04](/img/part-6/usecase/authentication-methods/authentication-methods-04.png)
 
 As the number of processes increases, implementing authentication individually becomes challenging.<br/>

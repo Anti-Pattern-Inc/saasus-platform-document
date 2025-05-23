@@ -97,7 +97,7 @@ AWS MarketplaceへSaaS製品を出品するための基準が設けられてお�
 SaaS製品ガイドラインを踏まえて、SaaSus Platformからも基準を満たしているかチェック致します。  
 AWS Marketplace連携機能を利用時にチェックする形になっていますが、ドキュメントにも掲載しておきますのでご確認ください。
 
-・SaaSusの認証詳細設定でセルフサインアップを有効にしている ([参考](/docs/part-4/aws-marketplace-integration/supplementary/self-up-setting))  
+・SaaSus Platformの認証詳細設定でセルフサインアップを有効にしている ([参考](/docs/part-4/aws-marketplace-integration/supplementary/self-up-setting))  
 ・ユーザー自身がSaaS上で契約しているプランを確認できるようになっている  
 ・ユーザー自身がSaaS上でサポートへ問い合わせできる動線が配置されている  
 ・既にアカウントを持っているユーザーがSaaSを購入した時のマルチテナントの考慮を実装している ([参考](/docs/part-4/aws-marketplace-integration/embedding-products))  

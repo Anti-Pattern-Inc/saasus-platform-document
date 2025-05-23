@@ -8,14 +8,14 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
 ## 概要説明
 
-Google連携を行うためには、Google Cloud PlatformのアカウントにOAuthクライアントを作成し、SaaSusと連携する設定を実施する必要があります。  
-SaaSusとの連携設定を行うことで、SaaSusのログイン画面に「Googleでログイン」のボタンが表示され、Google連携を利用することが出来るようになります  
+Google連携を行うためには、Google Cloud PlatformのアカウントにOAuthクライアントを作成し、SaaSus Platformと連携する設定を実施する必要があります。  
+SaaSus Platformとの連携設定を行うことで、ログイン画面に「Googleでログイン」のボタンが表示され、Google連携を利用することが出来るようになります  
 注意点として、一般公開するためにはGoogleに利用申請を行う必要があります。申請後の審査に1週間程度の時間を要します。（不備がある場合はメールで連絡があるので、対応を実施してください）
 
 Google連携の手順
 
 - Google Cloud PlatformのOAuthクライアント作成
-- Google Cloud PlatformとSaaSusアカウントの連携
+- Google Cloud PlatformとSaaSus Platformアカウントの連携
 - Google認証の動作確認
 - 利用申請
 
@@ -23,7 +23,7 @@ Google連携の手順
 
 #### Google連携用の情報を確認
 
-SaaSus管理コンソールにログイン  
+SaaS開発コンソールにログイン  
 認証詳細設定画面を開く  
 認証設定タブのGoogle連携を確認する
 
@@ -94,14 +94,14 @@ User Typeで「外部」を選択し、「作成」ボタンを押す
 
 - アプリケーションの種類：ウェブアプリケーション
 - 名前：GoogleOAuth（任意のわかりやすいもので大丈夫です）
-- 承認済みのJavaScript生成元：＜SaaSus管理コンソールで確認した値＞
-- 承認済みのリダイレクトURI：＜SaaSus管理コンソールで確認した値＞
+- 承認済みのJavaScript生成元：＜SaaS開発コンソールで確認した値＞
+- 承認済みのリダイレクトURI：＜SaaS開発コンソールで確認した値＞
 
 ![google-linkage-11](/ja/img/part-4/user-authz-settings/google-linkage/google-linkage-11.png)
 
 
 OAuthクライアントが作成されました  
-以下の項目をSaaSus管理コンソールに設定するのでメモします  
+以下の項目をSaaS開発コンソールに設定するのでメモします  
 ※「JSONをダウンロード」を選択し、ダウンロードして保管することをおすすめします
 
 - クライアントID
@@ -110,7 +110,7 @@ OAuthクライアントが作成されました
 ![google-linkage-12](/ja/img/part-4/user-authz-settings/google-linkage/google-linkage-12.png)
 
 
-### Google Cloud PlatformとSaaSusアカウントの連携
+### Google Cloud PlatformとSaaSus Platformアカウントの連携
 
 以下のとおり入力し、「保存」ボタンを選択
 

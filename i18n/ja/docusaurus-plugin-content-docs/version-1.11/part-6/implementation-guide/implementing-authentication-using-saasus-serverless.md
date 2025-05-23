@@ -27,7 +27,7 @@ import TabItem from '@theme/TabItem';
 
 #### １．１．１．認証後遷移先画面
 
-SaaSusが生成するログイン画面からログインを実施すると、認証後遷移先で設定したURLが呼び出されます。
+SaaSus Platformが生成するログイン画面からログインを実施すると、認証後遷移先で設定したURLが呼び出されます。
 
 本実装サンプルを使って動作確認を行うためには、  
 `http://localhost:3000/callback`　と設定してください。

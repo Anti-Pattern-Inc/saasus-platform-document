@@ -36,7 +36,7 @@ updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ## 4. Operational Data Viewable on the SaaSus Platform
 
 - **Tenant and User Status**:  
-  The SaaSus operation console allows you to view the current registration status and contract information for each tenant and user.
+  The SaaS Operations Console allows you to view the current registration status and contract information for each tenant and user.
 
 - **User Activity Logs**:  
-  By including the appropriate headers when calling SaaSus APIs from your SaaS application, user activity can be recorded and viewed through the operation console.
+  By including the appropriate headers when calling SaaSus APIs from your SaaS application, user activity can be recorded and viewed through the SaaS Operations Console.

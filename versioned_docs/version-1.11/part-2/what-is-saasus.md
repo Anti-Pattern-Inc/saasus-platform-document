@@ -15,7 +15,7 @@ It consists of two main consoles: one for developers (**SaaS Development Console
 ## 2. Features and Functionality of SaaSus Platform
 
 - **SaaS Development Console**:  
-  This console is used to configure and connect your own SaaS application with SaaSus.  
+  This console is used to configure and connect your SaaS application to the SaaSus Platform.  
   Key features include:
 
   - Basic integration settings (e.g., app name, domain, callback URLs)

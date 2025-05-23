@@ -71,7 +71,7 @@ AWSアカウントID の部分には、イベント送信先のAWSアカウン�
 
 ![14](/ja/img/part-4/integrate-with-amazon-eventbridge/image-14.png)
 
-これでイベントを連携する準備ができましたので、テストイベントを送信してみましょう。SaaSus 開発コンソールに戻り、テスト送信ボタンをクリックします。
+これでイベントを連携する準備ができましたので、テストイベントを送信してみましょう。SaaS開発コンソールに戻り、テスト送信ボタンをクリックします。
 
 ![15](/ja/img/part-4/integrate-with-amazon-eventbridge/image-15.png)
 

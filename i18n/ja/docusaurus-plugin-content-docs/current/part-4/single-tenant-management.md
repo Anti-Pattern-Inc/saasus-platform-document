@@ -26,14 +26,14 @@ SaaS のアーキテクチャとして、「シングルテナント」と「マ
 シングルテナントアーキテクチャでは各テナントのデータは物理的に分離されているため、データ漏洩のリスクが減る等のメリットがあります。
 一方で、テナント毎にサーバーや DB を用意する必要があるため、管理コストが大きくなるというデメリットがあります。
 
-シングルテナント管理機能では、SaaSus にテナントを作成した時に自動でお客様の AWS 環境に対してサーバーや DB を用意します。
+シングルテナント管理機能では、SaaSus Platform にテナントを作成した時に自動でお客様の AWS 環境に対してサーバーや DB を用意します。
 これによって管理・運用コストを下げることができます。
 
 ## 設定方法
 
 ### SaaSus Platform からのアクセス許可
 
-テナントオンボーディングする際、SaaSus からお客様の AWS 環境へアクセスが必要なため、その権限を SaaSus に付与する必要があります。
+テナントオンボーディングする際、SaaSus Platform からお客様の AWS 環境へアクセスが必要なため、その権限を SaaSus Platform に付与する必要があります。
 
 画面の指示に従って IAM Role を作成し、生成したロールの情報を登録してください、
 
@@ -43,7 +43,7 @@ SaaS のアーキテクチャとして、「シングルテナント」と「マ
 
 <a download="singletenant-cf-sample.yml" href="/ja/file/singletenant-cf-sample.yml"> Cloud Formation テンプレートのサンプル </a>
 
-SaaSus にテナントを作成した時、お客様の AWS 環境に対して Cloud Formation を実行し、テナント毎に環境を作成します。その時に使用する Cloud Formation テンプレートを登録する必要があります。
+SaaSus Platform にテナントを作成した時、お客様の AWS 環境に対して Cloud Formation を実行し、テナント毎に環境を作成します。その時に使用する Cloud Formation テンプレートを登録する必要があります。
 
 Cloud Formation の Outputs として、以下の項目を指定する必要があります。
 
@@ -67,7 +67,7 @@ Cloud Formation によって作成された DB に対して実行する SQL を�
 
 ### シングルテナント管理 の進行状況を確認する方法
 
-SaaS 運用コンソール - テナント管理画面 で対象テナントを表示し、TenantOnboardingStatus の値で進行情報の確認ができます。
+SaaS運用コンソール - テナント管理画面 で対象テナントを表示し、TenantOnboardingStatus の値で進行情報の確認ができます。
 
 | TenantOnboardingStatus | Situation                                  |
 | :--------------------- | :----------------------------------------- |

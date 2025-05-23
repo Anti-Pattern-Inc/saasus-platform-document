@@ -24,7 +24,7 @@ You will need to prepare the following for this procedure. Please prepare them i
 
 There are also the following restrictions related to the registration:
 
-- The only pricing model supported by SaaSus is SaaS contract. The contract period will be either 1 month or 1 year.
+- The only pricing model supported by SaaSus Platform is SaaS contract. The contract period will be either 1 month or 1 year.
 - The currency for the listing price must be in USD.
 - The product information must be registered in English.
 - You will need to undergo a review by the AWS Marketplace support team 2-3 times, each review will take around 3-5 business days.

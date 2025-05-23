@@ -36,7 +36,7 @@ You can configure a different aggregation method for each metering unit.
 
 This setting is used as part of the billing configuration when integrated with Stripe.
 
-It is not required and will not appear when using SaaSus without Stripe integration.
+It is not required and will not appear when using the SaaSus Platform without Stripe integration.
 :::
 
 Set the above information and click the Save button.

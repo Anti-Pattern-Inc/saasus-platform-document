@@ -223,7 +223,7 @@ This completes the configuration within the SaaS application.
 
 ### Step 5: Upload the ZIP File
 
-1. Access the Smart API Gateway feature screen in the SaaSus Platform Developer Console.
+1. Access the Smart API Gateway feature screen in the SaaS Development Console.
 
 2. Upload the generated ZIP file from the screen.
 
@@ -250,7 +250,7 @@ When the setup is complete, the infrastructure connecting the SaaSus Platform an
 
 #### How to Access the API
 
-- **API Key** is required to access the API. Generate an API Key in the **Tenant Management Screen** of the SaaSus Platform Operation Console and use it for access.
+- **API Key** is required to access the API. Generate an API Key in the **Tenant Management Screen** of the SaaS Operation Console and use it for access.
 - Check the API methods in **Throttling&Role** under the method path.
 - Access the domain of the API endpoint as follows:
 
@@ -286,9 +286,9 @@ $ curl -v -X GET https://xxxxxxxxxxxxxxxxxxxxx/inventory-controller/get-inventor
 
 ### Step 9: Authorization (Role) Settings
 
-- For testing, create a role called "general user" in the **Role Definitions** of the SaaSus Platform Developer Console.
-- Role-based authorization requires a user's **API Key**. Create a user in the **User Management Screen** of the SaaSus Platform Operation Console and issue an API Key.
-- From **Role Management** in the SaaSus Platform Operation Console, assign the created "general user" role to the user.
+- For testing, create a role called "general user" in the **Role Definitions** of the SaaS Development Console.
+- Role-based authorization requires a user's **API Key**. Create a user in the **User Management Screen** of the SaaS Operation Console and issue an API Key.
+- From **Role Management** in the SaaS Operation Console, assign the created "general user" role to the user.
 - From **Throttling&Role**, select the target method path and configure the SaaS administrator role.
 - Once the settings are complete, API access restrictions based on roles are applied.
 - Use the user's API key to check the operation of role-based authorization.
@@ -310,7 +310,7 @@ $ curl -v -X GET https://xxxxxxxxxxxxxxxxxxxxx/inventory-controller/get-inventor
 
 ### Step 11: IP Restriction Settings
 
-- Set IP restrictions in the **Tenant Management Screen** of the SaaSus Platform Operation Console.
+- Set IP restrictions in the **Tenant Management Screen** of the SaaS Operation Console.
 - After configuring IP restrictions, the API can only be accessed from the specified IP addresses.
 
 ### Deleting the Test Environment

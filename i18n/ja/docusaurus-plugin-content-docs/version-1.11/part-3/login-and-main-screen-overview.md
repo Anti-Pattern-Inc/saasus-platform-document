@@ -16,19 +16,19 @@ SaaSus Platform にアクセスすると、まずログイン画面が表示さ�
 
 ## 2. テナントとコンソール選択画面
 
-初回ログイン後、所属するテナントを選択し、開発コンソールまたは運用コンソールのどちらに進むかを選択する画面が表示されます。
+初回ログイン後、所属するテナントを選択し、SaaS開発コンソールまたはSaaS運用コンソールのどちらに進むかを選択する画面が表示されます。
 
 ![テナントとコンソール選択画面](/ja/img/part-3/login-and-main-screen-overview/select-environment.png)
 
 この画面から、目的に応じたコンソールに遷移できます：
 
-- 開発コンソール：SaaS機能の構成・設定
-- 運用コンソール：ユーザー・テナント・請求情報の確認と管理
+- SaaS開発コンソール：SaaS機能の構成・設定
+- SaaS運用コンソール：ユーザー・テナント・請求情報の確認と管理
 
 
 ## 3. SaaS開発コンソール画面
 
-開発コンソールでは、SaaSアプリケーションの基本構成、認証設定、料金プラン作成、外部連携の設定などを行います。
+SaaS開発コンソールでは、SaaSアプリケーションの基本構成、認証設定、料金プラン作成、外部連携の設定などを行います。
 
 ![開発コンソール画面_1](/ja/img/part-3/login-and-main-screen-overview/saas-development-console-01.png)
 ![開発コンソール画面_2](/ja/img/part-3/login-and-main-screen-overview/saas-development-console-02.png)
@@ -36,13 +36,13 @@ SaaSus Platform にアクセスすると、まずログイン画面が表示さ�
 
 ## 4. SaaS運用コンソール画面
 
-運用コンソールでは、テナントのユーザー管理、請求関連情報の確認、ロールの割り当てなど、日々の運用業務に必要な操作が行えます。
+SaaS運用コンソールでは、テナントのユーザー管理、請求関連情報の確認、ロールの割り当てなど、日々の運用業務に必要な操作が行えます。
 
 ![運用コンソール画面](/ja/img/part-3/login-and-main-screen-overview/saas-operation-console.png)
 
 ## 5. コンソールの切り替え方法
 
-SaaSus Platformでは、画面左上に表示されるセレクトボックスから、開発コンソールと運用コンソールを簡単に切り替えることができます。
+SaaSus Platformでは、画面左上に表示されるセレクトボックスから、SaaS開発コンソールとSaaS運用コンソールを簡単に切り替えることができます。
 
 ![コンソール切り替え](/ja/img/part-3/login-and-main-screen-overview/console-switching.png)
 
@@ -50,7 +50,7 @@ SaaSus Platformでは、画面左上に表示されるセレクトボックス�
 
 ## 6. SaaSus Platformアカウントへの多要素認証の設定手順
 
-1. 開発コンソールのヘッダー右にあるユーザーメニューをクリックします。
+1. SaaS開発コンソールのヘッダー右にあるユーザーメニューをクリックします。
 2. `多要素認証の設定`をクリックします。
 3. `デバイスを追加`ボタンをクリックします。  
    ![multi-factor-authentication-1](/ja/img/part-3/login-and-main-screen-overview/multi-factor-authentication-1.png)

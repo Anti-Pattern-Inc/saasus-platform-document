@@ -1,16 +1,17 @@
 ---
 title: "Procedure for Applying for a Paid Plan"
 slug: "procedure-for-applying-for-a-paid-plan"
-description: "Explains how to apply for a paid plan on the SaaSus Platform, either via the Developer Console or AWS Marketplace."
+description: "This page explains how to apply for a paid plan on the SaaSus Platform, either through the SaaS Development Console or via AWS Marketplace."
 excerpt: ""
 hidden: false
 createdAt: "Thu Jul 20 2023 04:44:09 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Tue Jan 09 2024 10:27:04 GMT+0000 (Coordinated Universal Time)"
 ---
 
-> Explains how to apply for a paid plan on the SaaSus Platform, either via the Developer Console or AWS Marketplace.
+> This page explains how to apply for a paid plan on the SaaSus Platform, either through the SaaS Development Console or via AWS Marketplace.
 
-At SaaSus Platform, we currently offer the following plans. To apply for a paid plan, you can apply on the platform or through AWS Marketplace.
+The SaaSus Platform currently offers the following plans.  
+To apply for a paid plan, you can either apply through the SaaS Development Console or via AWS Marketplace.
 
 | Plan       |                            Price | Number of Environments | User count | SaaSus Support |
 | --------- | ----------------------------: | --: | ----: | ---------: |
@@ -23,7 +24,7 @@ At SaaSus Platform, we currently offer the following plans. To apply for a paid 
 
 ## Applying for a Paid Plan from the SaaS Development Console
 
-To apply for a paid plan on the SaaSus Platform, sign in and go to 'Account Settings' and then 'Pricing Plans' in the SaaS Development Console. The period will be from today in monthly increments, and we will send you an invoice via Stripe. This plan is an automatic renewal on a monthly basis.
+To apply for a paid plan on the SaaSus Platform Console, sign in and go to 'Account Settings' and then 'Pricing Plans' in the SaaS Development Console. The period will be from today in monthly increments, and we will send you an invoice via Stripe. This plan is an automatic renewal on a monthly basis.
 
 ![0558e63-image](/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/0558e63-image.png)
 
