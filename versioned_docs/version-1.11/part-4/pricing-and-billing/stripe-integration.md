@@ -8,8 +8,6 @@ createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
-> Learn how to integrate with Stripe to automate billing operations and delegate invoice processing to an external service.
-
 This page explains how to integrate Stripe with the SaaS Development Console to streamline billing and invoice management.  
 Information such as pricing plans and tax rates configured in the SaaSus Platform will be automatically synced to Stripe and used in the invoicing process.
 

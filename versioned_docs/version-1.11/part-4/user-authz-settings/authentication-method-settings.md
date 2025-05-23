@@ -1,14 +1,11 @@
 ---
 title: "Authentication Method Settings"
 slug: "authentication-method-settings"
-description: "This page explains how to configure password requirements, Google login, self-signup, and trusted device memory."
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
-
-> This page explains how to configure password requirements, Google login, self-signup, and trusted device memory.
 
 This page describes how to configure the following authentication-related features in the **Authentication** tab of the **Advanced Settings** screen in the SaaSus Platform:
 

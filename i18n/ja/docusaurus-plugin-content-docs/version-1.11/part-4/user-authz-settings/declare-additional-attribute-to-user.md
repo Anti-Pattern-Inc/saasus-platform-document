@@ -1,14 +1,11 @@
 ---
 title: "ユーザー属性定義"
 slug: "declare-additional-attribute-to-user"
-description: "ユーザーに部署や役職などの属性を追加して管理できます。"
 excerpt: ""
 hidden: false
 createdAt: "Wed Apr 08 2024 14:34:47 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Wed Apr 08 2024 14:34:47 GMT+0000 (Coordinated Universal Time)"
 ---
-
-> ユーザーに部署や役職などの属性を追加して管理できます。
 
 ## ユーザに追加属性を定義する
 

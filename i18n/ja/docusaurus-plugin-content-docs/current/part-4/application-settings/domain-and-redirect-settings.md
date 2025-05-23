@@ -1,14 +1,11 @@
 ---
 title: "ドメイン・遷移先の設定"
 slug: "domain-and-redirect-settings"
-description: "SaaSアプリで使用するドメインや、ログイン後の遷移先URLを設定します。"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
-
-> ログイン画面に表示されるサービス名やアイコン、利用規約リンクなどを設定します。
 
 このページでは、ログイン画面の表示に使用する **独自ドメイン** および、ログイン後の **遷移先URL** の設定方法について説明します。いずれも「基本設定」画面から編集できます。
 

@@ -7,8 +7,6 @@ createdAt: "Wed Apr 09 2024 05:02:32 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Wed Apr 09 2024 05:02:32 GMT+0000 (Coordinated Universal Time)"
 ---
 
-> Define additional attributes for tenants managed in the SaaSus Platform—such as display name or notes—and retrieve them via the SaaSus SDK or API.
-
 ## Declare Additional Attribute To Tenant
 
 Select Tenant Attribute Definition to define additional attributes for the tenant.

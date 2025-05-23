@@ -1,14 +1,11 @@
 ---
 title: "Stripeとの連携設定"
 slug: "stripe-integration"
-description: "Stripeと連携し、課金処理や請求情報の管理を外部サービスに委ねる方法を説明します。"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
-
-> Stripeと連携し、課金処理や請求情報の管理を外部サービスに委ねる方法を説明します。
 
 このページでは、SaaS開発コンソールを用いて Stripe との外部連携を行い、課金処理や請求書発行を効率化する方法について説明します。  
 SaaSus Platform で作成した料金プランや税率設定の情報は、Stripe 側にも連携され、請求処理に活用されます。

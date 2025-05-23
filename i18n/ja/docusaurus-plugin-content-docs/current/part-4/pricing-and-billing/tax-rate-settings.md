@@ -1,14 +1,11 @@
 ---
 title: "税率設定"
 slug: "tax-rate-settings"
-description: "各テナントに適用する税率を設定する方法を説明します。"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
-
-> 各テナントに適用する税率を設定する方法を説明します。
 
 税率設定では、**テナントごとに料金プランに適用される税率（消費税など）の種類や比率を定義**します。  
 SaaS運用コンソールで**テナントに料金プランを設定する際、あわせて税率を指定**できます。

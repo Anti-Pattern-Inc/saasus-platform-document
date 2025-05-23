@@ -1,14 +1,11 @@
 ---
 title: "IP Restriction"
 slug: "ip-restriction"
-description: "Allows access to the SaaSus Platform Console and APIs only from specified IP addresses. Covers eligible plans, how to apply, and system behavior after restriction."
 excerpt: ""
 hidden: false
 createdAt: "Mon Mar 25 2024 14:00:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Mar 25 2024 14:00:00 GMT+0000 (Coordinated Universal Time)"
 ---
-
-> Allows access to the SaaSus Platform Console and APIs only from specified IP addresses. Covers eligible plans, how to apply, and system behavior after restriction.
 
 The IP restriction feature limits access to the SaaSus console and API requests by IP address.
 

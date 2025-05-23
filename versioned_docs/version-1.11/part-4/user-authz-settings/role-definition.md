@@ -8,8 +8,6 @@ createdAt: "Wed Apr 09 2024 10:12:41 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Wed Apr 09 2024 10:12:41 GMT+0000 (Coordinated Universal Time)"
 ---
 
-> Define and manage roles used in your SaaS application.
-
 ## Role Definition
 
 Let's define the roles.

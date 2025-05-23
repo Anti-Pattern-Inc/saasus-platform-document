@@ -1,14 +1,11 @@
 ---
 title: "有料プランの申し込み手順"
 slug: "procedure-for-applying-for-a-paid-plan"
-description: "SaaSus Platformの有料プランを申し込む方法を、SaaS 開発コンソールとAWS Marketplaceの2通りで説明します。"
 excerpt: ""
 hidden: false
 createdAt: "Thu Jul 20 2023 04:44:09 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Tue Jan 09 2024 10:27:04 GMT+0000 (Coordinated Universal Time)"
 ---
-
-> SaaSus Platformの有料プランを申し込む方法を、SaaS 開発コンソールとAWS Marketplaceの2通りで説明します。
 
 SaaSus Platformでは以下プランを現在用意しております。  
 有料プランを申し込むには、SaaSus Platform コンソールでの申し込みと、AWS Marketplace で申し込む方法がございます。

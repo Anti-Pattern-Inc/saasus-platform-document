@@ -1,14 +1,11 @@
 ---
 title: "API Key Settings"
 slug: "api-key-settings"
-description: "View and manage the keys required to integrate with the SaaSus SDK and API."
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
-
-> View and manage the keys required to integrate with the SaaSus SDK and API.
 
 This page explains how to check and reissue the **SaaS ID**, **API keys**, and **Client Secret**, which are required when using the SaaSus SDK or API.  
 These items can be accessed from the **API Key** section in the side menu.

@@ -1,14 +1,11 @@
 ---
 title: "認証方式の設定"
 slug: "authentication-method-settings"
-description: "パスワード要件、Googleログイン、セルフサインアップ、信頼済みデバイスの設定方法を説明します。"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
-
-> パスワード要件、Googleログイン、セルフサインアップ、信頼済みデバイスの設定方法を説明します。
 
 このページでは、SaaSus Platform の「認証詳細設定」画面の「認証設定」タブで行える以下の認証関連機能の設定について説明します。
 
