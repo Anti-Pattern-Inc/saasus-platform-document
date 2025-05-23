@@ -1,20 +1,20 @@
 ---
-title: "Inviting SaaSus Users"
+title: "Inviting Users"
 slug: "saasususerinvitation"
-description: "Describes how to invite additional users to SaaSus with appropriate roles when developing and operating as a team."
+description: "Describes how to invite additional users to SaaSus Platform with appropriate roles when developing and operating as a team."
 excerpt: ""
 hidden: false
 createdAt: "Thu Dec 28 2023 04:34:39 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Jan 22 2024 01:38:49 GMT+0000 (Coordinated Universal Time)"
 ---
 
-> Describes how to invite additional users to SaaSus with appropriate roles when developing and operating as a team.
+> Describes how to invite additional users to SaaSus Platform with appropriate roles when developing and operating as a team.
 
-If you are developing and operating SaaS with multiple people, it is advisable not to share a single SaaSus account. Instead, use the user invitation feature to grant appropriate permissions and manage the account.
+If you are developing and operating SaaS with multiple people, it is advisable not to share a single SaaSus Platform account. Instead, use the user invitation feature to grant appropriate permissions and manage the account.
 
 ## How to Invite Users
 
-1. From the development console menu, click on 'Account Settings'
+1. From the SaaS Development Console menu, click on 'Account Settings'
 
    ![saasususerinvitation-1](/img/part-4/account-settings/saasususerinvitation/saasususerinvitation-1.png)
 2. Click the 'Users' tab
@@ -30,7 +30,7 @@ If you are developing and operating SaaS with multiple people, it is advisable n
 
 ## To Check the Status of Invitations and Cancel
 
-1. From the development console menu, click on 'Account Settings'
+1. From the SaaS Development Console menu, click on 'Account Settings'
 2. Click the 'Users' tab
 3. Click the select box marked 'Users' to the left of the 'Invite' button, and select 'Invitations' from the dropdown
 4. The status of user invitations will be displayed, to cancel an invitation, click on the trash can icon at the right end of the target user

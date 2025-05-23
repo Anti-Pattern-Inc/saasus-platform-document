@@ -37,10 +37,10 @@ These metrics are key to understanding the health and growth potential of a SaaS
 The SaaSus Platform handles the design of pricing plans, as well as the recording and management of usage data. By integrating with payment services such as Stripe, it enables flexible and automated billing operations for SaaS businesses.
 
 - **Managing Pricing Plans and Usage Data**:  
-  SaaS applications send usage data such as feature access and operation counts via API. This data is recorded in SaaSus and used to calculate charges based on predefined pricing plans.
+  SaaS applications send usage data such as feature access and operation counts via API. This data is recorded in SaaSus Platform and used to calculate charges based on predefined pricing plans.
 
 - **Automated Billing with Stripe Integration**:  
   By simply registering a Stripe secret key, you can link your SaaSus pricing plans to Stripe price information, enabling automatic billing through Stripe.
 
 - **Plan Changes and Upgrades**:  
-  Pricing plans can be updated within SaaSus in response to customer needs or usage patterns. These changes are automatically reflected in the Stripe subscription.
+  Pricing plans can be updated within SaaSus Platform in response to customer needs or usage patterns. These changes are automatically reflected in the Stripe subscription.

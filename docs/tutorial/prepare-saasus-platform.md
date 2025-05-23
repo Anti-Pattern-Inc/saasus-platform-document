@@ -28,7 +28,7 @@ When you register with SaaSus Platform for the first time, we will create a tena
 
 ![03](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-03.png)
 
-### Logging into the Console
+### Logging into the SaaSus Platform Console
 
 When you log in after the tenant is created, you will be asked to enter user attributes as shown above, so please enter your company name and name.
 
@@ -40,7 +40,7 @@ After entering the information, a transition screen to each console of the tenan
 
 **SaaS Development Console** is a console for setting up SaaS construction.
 
-**SaaS Management Console** is a console for managing SaaS.
+**SaaS Operation Console** is a console for managing SaaS.
 
 :::info About Domain Settings
 By setting a domain on the SaaSus Platform, you can define the base domain used for automatically generating the login screen and for sending emails.  

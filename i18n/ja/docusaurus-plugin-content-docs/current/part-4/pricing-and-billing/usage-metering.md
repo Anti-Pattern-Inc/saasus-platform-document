@@ -11,7 +11,7 @@ updatedAt: "Mon Mar 11 2024 13:45:00 GMT+0000 (Coordinated Universal Time)"
 
 ## メーター単位設定
 
-1. **SaaS 開発コンソールから`メーター単位設定`を選択**
+1. **SaaS開発コンソールから`メーター単位設定`を選択**
 
 ![usage-metering-1](/ja/img/part-4/pricing-and-billing/usage-matering/usage-metering-1.png)
 
@@ -36,7 +36,7 @@ updatedAt: "Mon Mar 11 2024 13:45:00 GMT+0000 (Coordinated Universal Time)"
 
 この設定は、Stripe連携時の課金条件として利用されます。
 
-なお、SaaSus単体での利用時にはこの設定は不要なため、UI上には表示されません。
+なお、SaaSus Platform単体での利用時にはこの設定は不要なため、UI上には表示されません。
 :::
 
 上記内容を設定し保存ボタンをクリックします。

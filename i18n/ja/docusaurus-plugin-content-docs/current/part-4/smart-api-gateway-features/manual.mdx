@@ -227,7 +227,7 @@ java_files_archive.zip ファイルが作成されます。
 
 ### Step 5: ZIP ファイルのアップロード
 
-1. SaaSus Platform 開発コンソールの Smart API Gateway 機能画面にアクセスしてください。
+1. SaaS開発コンソールの Smart API Gateway 機能画面にアクセスしてください。
 
 2. 画面上から生成した ZIP ファイルをアップロードしてください。
 
@@ -254,7 +254,7 @@ java_files_archive.zip ファイルが作成されます。
 
 #### API アクセス方法
 
-- API のアクセスには **API Key** が必要です。SaaSus Platform 運用コンソールの **テナント管理画面**で API Key を発行し、アクセスに利用します。
+- API のアクセスには **API Key** が必要です。SaaS運用コンソールの **テナント管理画面**で API Key を発行し、アクセスに利用します。
 - API のメソッドは **Throttling&Role** のメソッドパスから確認をしてください。
 - API エンドポイントのドメインに対して、以下のようにアクセスしてください。
 
@@ -290,9 +290,9 @@ $ curl -v -X GET https://xxxxxxxxxxxxxxxxxxxxx/inventory-controller/get-inventor
 
 ### Step 9: 認可（ロール）設定
 
-- 検証のため、SaaSus Platform 開発コンソールの **役割定義**で一般ユーザーというロールを作成してください。
-- ロールによる認可にはユーザーの **API Key** が必要です。SaaSus Platform 運用コンソールの **ユーザー管理画面**でユーザーを作成し、API Key を発行してください。
-- SaaSus Platform 運用コンソールの**役割管理**から作成したユーザーに一般ユーザーのロールを設定してください。
+- 検証のため、SaaS開発コンソールの **役割定義**で一般ユーザーというロールを作成してください。
+- ロールによる認可にはユーザーの **API Key** が必要です。SaaS運用コンソールの **ユーザー管理画面**でユーザーを作成し、API Key を発行してください。
+- SaaS運用コンソールの**役割管理**から作成したユーザーに一般ユーザーのロールを設定してください。
 - **Throttling&Role**から対象の method path を選択し、SaaS 管理者ロールの設定を行ってください。
 - 設定が完了すると、API のアクセス制限が設定されます。
 - ユーザーの API key を使用して、ロールによる認可の動作を確認してください。
@@ -314,7 +314,7 @@ $ curl -v -X GET https://xxxxxxxxxxxxxxxxxxxxx/inventory-controller/get-inventor
 
 ### Step 11: IP 制限設定
 
-- SaaSus Platform 運用コンソールの **テナント管理画面**で IP 制限を設定してください。
+- SaaS運用コンソールの **テナント管理画面**で IP 制限を設定してください。
 - IP 制限設定後、設定した IP アドレスからのみアクセスが可能です。
 
 ### 検証環境の削除

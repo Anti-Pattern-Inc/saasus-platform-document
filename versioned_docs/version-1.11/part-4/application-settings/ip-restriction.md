@@ -1,14 +1,14 @@
 ---
 title: "IP Restriction"
 slug: "ip-restriction"
-description: "Allows access to the SaaSus Console and APIs only from specified IP addresses. Covers eligible plans, how to apply, and system behavior after restriction."
+description: "Allows access to the SaaSus Platform Console and APIs only from specified IP addresses. Covers eligible plans, how to apply, and system behavior after restriction."
 excerpt: ""
 hidden: false
 createdAt: "Mon Mar 25 2024 14:00:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Mar 25 2024 14:00:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
-> Allows access to the SaaSus Console and APIs only from specified IP addresses. Covers eligible plans, how to apply, and system behavior after restriction.
+> Allows access to the SaaSus Platform Console and APIs only from specified IP addresses. Covers eligible plans, how to apply, and system behavior after restriction.
 
 The IP restriction feature limits access to the SaaSus console and API requests by IP address.
 
@@ -24,9 +24,9 @@ Please contact us via Intercom.
 
 ### Application Details
 
-Send us the CIDR list of IP addresses that you would like to allow for both the SaaSus console and the API.
+Send us the CIDR list of IP addresses that you would like to allow for both the SaaSus Platform Console and the API.
 
-  SaaSus console
+  SaaSus Platform Console
   ```
   xxx.xxx.xxx.xxx/32, yyy.yyy.yyy.yyy/24
   ```

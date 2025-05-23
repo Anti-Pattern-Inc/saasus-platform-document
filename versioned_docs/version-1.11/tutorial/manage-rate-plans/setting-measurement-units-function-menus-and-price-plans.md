@@ -9,7 +9,7 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 
 # Step-by-Step Guide to Setting Up Pricing Plans
 
-This page explains how to configure the following items step by step using the SaaSus Developer Console:
+This page explains how to configure the following items step by step using the SaaS Development Console:
 
 - Metering Units
 - Measurement Units

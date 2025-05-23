@@ -8,12 +8,12 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
 ## Summary Explanation
 
-To incorporate Google linkage, it is necessary to create an OAuth client in your Google Cloud Platform account and set up the linkage with SaaSus. By setting up the linkage with SaaSus, the button 'Sign in with Google' will appear on the sign-in page of SaaSus, and Google linkage can be enabled. It should be noted that to make the app publicly available, it is necessary to apply to Google. It takes about one week to review the application after submission. (If there are any mistakes, guidance will be sent by email, so please take corrective action)
+To incorporate Google linkage, it is necessary to create an OAuth client in your Google Cloud Platform account and set up the linkage with SaaSus Platform. By setting up the linkage with SaaSus Platform, the button 'Sign in with Google' will appear on the sign-in page provided by the SaaSus Platform, and Google linkage can be enabled. It should be noted that to make the app publicly available, it is necessary to apply to Google. It takes about one week to review the application after submission. (If there are any mistakes, guidance will be sent by email, so please take corrective action)
 
 Google linkage procedure consists of:
 
 - Creating OAuth Client in Google Cloud Platform
-- Linking Google Cloud Platform and SaaSus account
+- Linking Google Cloud Platform and SaaSus Platform account
 - Confirmation on Google Authentication Performance
 - Application for Usage
 
@@ -21,7 +21,7 @@ Google linkage procedure consists of:
 
 ### Confirming the Information for Google Linkage
 
-Sign in to SaaSus management console. Open "Authentication Authorization" > "Advanced Settings". Check the Google linkage in Authentication tab.
+Sign in to the SaaS Development Console. Open "Authentication Authorization" > "Advanced Settings". Check the Google linkage in Authentication tab.
 
 
 ![google-linkage-1](/img/part-4/user-authz-settings/google-linkage/google-linkage-1.png)
@@ -90,14 +90,14 @@ Enter the following information and select 'Create' button:
 
 - Application type: Web Application
 - Name: GoogleOAuth (any easy-to-understand name is fine)
-- Authorized JavaScript origins: ＜the value confirmed on SaaSus management console＞
-- Authorized redirect URIs: ＜the value confirmed on SaaSus management console＞
+- Authorized JavaScript origins: ＜the value confirmed on SaaS Development Console＞
+- Authorized redirect URIs: ＜the value confirmed on SaaS Development Console＞
 
 ![google-linkage-11](/img/part-4/user-authz-settings/google-linkage/google-linkage-11.png)
 
 
 The OAuth client has been created.
-Make a note of the following items for setting up SaaSus management console.  
+Make a note of the following items for setting up SaaS Development Console.  
 ※ It is recommended to select 'Download JSON' and save the downloaded file.
 
 - Client ID
@@ -106,7 +106,7 @@ Make a note of the following items for setting up SaaSus management console.
 ![google-linkage-12](/img/part-4/user-authz-settings/google-linkage/google-linkage-12.png)
 
 
-## Linking Google Cloud Platform and SaaSus Account
+## Linking Google Cloud Platform and SaaSus Platform Account
 
 Enter the following and select 'Save' button:
 

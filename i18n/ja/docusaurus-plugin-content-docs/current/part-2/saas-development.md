@@ -30,6 +30,3 @@ updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 
 - **チームコミュニケーション**：  
   定期的なミーティングやレビューで、開発の透明性を維持。
-
-## 4. SaaSus Platformでの開発と更新の流れ
-  準備中

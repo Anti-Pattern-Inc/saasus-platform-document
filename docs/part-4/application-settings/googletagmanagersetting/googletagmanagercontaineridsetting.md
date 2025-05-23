@@ -22,7 +22,7 @@ Check the "GTM-XXXXXXXX" displayed at the top right of the screen.
 
 ## 2. Setting the Container ID
 
-1. Open the "Authentication Details Settings" in the SaaSus development console.
+1. Open the "Authentication Details Settings" in the SaaS development Console.
 
    ![googletagmanagercontaineridsetting-3](/img/part-4/application-settings/googletagmanagersetting/googletagmanagercontaineridsetting-3.png)
 2. In the "Basic Settings" at the bottom of the Authentication Details Settings screen, set the "Google Tag Manager Container ID" to your container ID and press the save button.

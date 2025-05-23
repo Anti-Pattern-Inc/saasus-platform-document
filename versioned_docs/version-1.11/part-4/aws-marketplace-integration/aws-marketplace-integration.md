@@ -90,7 +90,7 @@ There are criteria for listing SaaS products on the AWS Marketplace, which are p
 
 Based on the SaaS product guidelines, we will check from the SaaSus Platform whether the standards are met. We check it when using the AWS Marketplace integration function, but we will also post it in the document so please check it.
 
-- Self sign-up is enabled in SaaSus's authentication detail setting ([Reference](/docs/part-4/aws-marketplace-integration/supplementary/self-up-setting))  
+- Self sign-up is enabled in the authentication settings of the SaaSus Platform ([Reference](/docs/part-4/aws-marketplace-integration/supplementary/self-up-setting))  
 - Users can check the plan they have contracted for on SaaS themselves  
 - There is a mechanism for users to contact support on SaaS  
 - Consideration of multitenancy is implemented when a user who already has an account purchases SaaS ([Reference](/docs/part-4/aws-marketplace-integration/embedding-products))  

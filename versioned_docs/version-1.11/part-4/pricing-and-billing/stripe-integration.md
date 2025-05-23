@@ -10,8 +10,8 @@ updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 
 > Learn how to integrate with Stripe to automate billing operations and delegate invoice processing to an external service.
 
-This page explains how to integrate Stripe with the SaaSus Development Console to streamline billing and invoice management.  
-Information such as pricing plans and tax rates configured in SaaSus will be automatically synced to Stripe and used in the invoicing process.
+This page explains how to integrate Stripe with the SaaS Development Console to streamline billing and invoice management.  
+Information such as pricing plans and tax rates configured in the SaaSus Platform will be automatically synced to Stripe and used in the invoicing process.
 
 :::info
 If you do not use Stripe, this configuration is not required.
@@ -21,7 +21,7 @@ If you do not use Stripe, this configuration is not required.
 
 To enable Stripe integration, register your **Stripe secret key** in the SaaSus Platform.
 
-1. Go to the **External Integrations** menu from the Development Console  
+1. Go to the **External Integrations** menu from the SaaS Development Console  
 2. Enter your **Stripe Secret Key**  
 3. Click **Save**
 

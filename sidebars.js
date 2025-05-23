@@ -78,7 +78,7 @@ const sidebars = {
           "link": {
             "type": "generated-index",
             "title": "Registering and Configuring Applications",
-            "description": "Configure various settings required to build your SaaSus application.",
+            "description": "Configure various settings required to build your SaaSus Platform application.",
             "slug": "/part-4/application-settings",
           },
           "items": [
@@ -364,7 +364,7 @@ const sidebars = {
           link: {
             type: 'generated-index',
             title: 'Frequently Asked Questions (FAQ)',
-            description: 'Find answers to common questions about SaaSus, organized by category.',
+            description: 'Find answers to common questions about SaaSus Platform, organized by category.',
             slug: "part-7/faq",
           },
           items: [
