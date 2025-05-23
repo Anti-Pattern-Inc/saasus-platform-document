@@ -1,13 +1,11 @@
 ---
 title: "ユーザー環境定義の利用"
 slug: "user-env-definition"
-description: "開発・テスト・本番など、ユーザーが利用可能な環境を定義・管理します。"
 excerpt: ""
 hidden: false
 createdAt: "Mon Mar 25 2024 18:00:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Mar 25 2024 18:00:00 GMT+0000 (Coordinated Universal Time)"
 ---
-> 開発・テスト・本番など、ユーザーが利用可能な環境を定義・管理します。
 
 SaaSus Platformにて保持するユーザーの環境定義をすることができます。ここで定義する環境とは、SaaS（お客様）で構築している開発環境、テスト環境などを意味します。SaaSのフェーズに合わせてテスト環境の属性を持つことを検討してください。
 

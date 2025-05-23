@@ -1,14 +1,11 @@
 ---
 title: "Tax Rate Settings"
 slug: "tax-rate-settings"
-description: "Explains how to configure tax rates to be applied to each tenant's pricing plan."
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
-
-> Explains how to configure tax rates to be applied to each tenant's pricing plan.
 
 Tax rate settings define the type and percentage of taxes (such as consumption tax) applied to each tenant's pricing plan.  
 When configuring a pricing plan for a tenant in the SaaS Operation Console, you can select a tax rate along with the plan.

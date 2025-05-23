@@ -1,14 +1,11 @@
 ---
 title: "ユーザー招待"
 slug: "saasususerinvitation"
-description: "複数人で開発・運用する際に、適切な権限を付与したユーザーをSaaSus Platformに招待する手順を説明します。"
 excerpt: ""
 hidden: false
 createdAt: "Thu Dec 28 2023 04:34:39 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Jan 22 2024 01:38:49 GMT+0000 (Coordinated Universal Time)"
 ---
-
-> 複数人で開発・運用する際に、適切な権限を付与したユーザーをSaaSus Platformに招待する手順を説明します。
 
 SaaSの開発・運用は複数人で行う場合は一つのSaaSus Platformアカウントを共有せず、ユーザー招待機能を使用し適切な権限を与えてアカウントを管理しましょう。
 

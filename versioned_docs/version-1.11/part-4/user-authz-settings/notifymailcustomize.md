@@ -1,14 +1,11 @@
 ---
 title: "Notification Email Content"
 slug: "notifymailcustomize"
-description: "Edit the content of emails sent for password reset and user registration."
 excerpt: ""
 hidden: false
 createdAt: "Tue Dec 12 2023 05:46:38 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Dec 21 2023 02:21:05 GMT+0000 (Coordinated Universal Time)"
 ---
-
-> Edit the content of emails sent for password reset and user registration.
 
 In the E-Mail Content tab of the <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Authorization > Advanced Settings</a>, you can customize the emails that are sent to users on authentication pages such as the sign in page.
 

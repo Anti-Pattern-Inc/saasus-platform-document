@@ -24,6 +24,9 @@ updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
   - 料金プランの設定
   - SDK/APIキーの取得
   - 外部サービスとの連携設定（例：Stripe）
+  - AWS Marketplace連携機能（掲載のサポート）
+  - Smart API Gateway機能（SaaSサービスのAPI化） 
+  - APIリクエストログの確認（エラーの把握やトラブルシュートに活用）
 
 - **SaaS運用コンソール**：  
   提供中のSaaSサービスを運用・管理するためのコンソールです。  
@@ -32,10 +35,9 @@ updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
   - テナント・ユーザーの管理
   - テナントごとの料金プランの設定と確認
   - 機能追加や更新情報などのお知らせの確認
-  - APIリクエストログの確認（エラーの把握やトラブルシュートに活用）
 
-- **連携機能**：  
-  Stripe、Amazon EventBridge、API Gateway、AWS Marketplaceなどとの連携により、SaaSサービスの自動化と拡張が可能です。
+- **SDK / API の提供**：  
+  SaaSus SDKやAPIを通じて、SaaSアプリケーションと認証・テナント・料金プランといった機能を統合できます。
 
 ## 3. SaaSus Platformが解決する課題
 

@@ -1,7 +1,6 @@
 ---
 title: "User Activity History Log"
 slug: "user-activity-history-log"
-description: "The user activity log allows you to view the history of user actions within your SaaS application."
 excerpt: ""
 hidden: false
 createdAt: "Tue Jun 11 2024 00:47:10 GMT+0000 (Coordinated Universal Time)"
@@ -10,8 +9,6 @@ updatedAt: "Tue Jun 11 2024 00:47:10 GMT+0000 (Coordinated Universal Time)"
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
-
-> The user activity log allows you to view the history of user actions within your SaaS application.
 
 :::info
 The user activity history log is only available to customers on the Advanced plan or higher.

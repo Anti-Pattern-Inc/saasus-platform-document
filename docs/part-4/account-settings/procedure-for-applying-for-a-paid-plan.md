@@ -1,14 +1,11 @@
 ---
 title: "Procedure for Applying for a Paid Plan"
 slug: "procedure-for-applying-for-a-paid-plan"
-description: "This page explains how to apply for a paid plan on the SaaSus Platform, either through the SaaS Development Console or via AWS Marketplace."
 excerpt: ""
 hidden: false
 createdAt: "Thu Jul 20 2023 04:44:09 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Tue Jan 09 2024 10:27:04 GMT+0000 (Coordinated Universal Time)"
 ---
-
-> This page explains how to apply for a paid plan on the SaaSus Platform, either through the SaaS Development Console or via AWS Marketplace.
 
 The SaaSus Platform currently offers the following plans.  
 To apply for a paid plan, you can either apply through the SaaS Development Console or via AWS Marketplace.

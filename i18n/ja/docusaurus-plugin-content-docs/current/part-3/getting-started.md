@@ -16,7 +16,7 @@ SaaSus Platform を利用するには、最初にアカウント登録を行い�
 
 #### アカウントの新規作成
 
-1. [https://console.saasus.io](https://console.saasus.io) にアクセスします。
+1. [https://auth.saasus.io/sign-up](https://auth.saasus.io/sign-up)にアクセスします。
 2. 「アカウントを作成」ボタンをクリックします。  
    ![01](/ja/img/part-3/getting-started/getting_started-01.png)
 3. 必要事項を入力し、「新規登録」をクリックします。
@@ -99,4 +99,4 @@ SaaSus Platform では、Stripe を利用した請求機能の自動化に対応
    テナント管理やユーザー・テナント属性設定、料金プラン設定などが  
    正しく反映されていることを確認します。
 
-> 上記手順がご不明な場合は、[チュートリアル](/ja/docs/tutorial/tutorial-introduction) をご覧ください。
+ 上記手順がご不明な場合は、[チュートリアル](/ja/docs/tutorial/tutorial-introduction) をご覧ください。

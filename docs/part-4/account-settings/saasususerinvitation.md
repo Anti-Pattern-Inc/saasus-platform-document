@@ -1,14 +1,11 @@
 ---
 title: "Inviting Users"
 slug: "saasususerinvitation"
-description: "Describes how to invite additional users to SaaSus Platform with appropriate roles when developing and operating as a team."
 excerpt: ""
 hidden: false
 createdAt: "Thu Dec 28 2023 04:34:39 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Jan 22 2024 01:38:49 GMT+0000 (Coordinated Universal Time)"
 ---
-
-> Describes how to invite additional users to SaaSus Platform with appropriate roles when developing and operating as a team.
 
 If you are developing and operating SaaS with multiple people, it is advisable not to share a single SaaSus Platform account. Instead, use the user invitation feature to grant appropriate permissions and manage the account.
 

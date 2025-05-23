@@ -1,14 +1,11 @@
 ---
 title: "テナント属性定義"
 slug: "declare-additional-attribute-to-tenant"
-desctiption: "SaaSus Platform で管理するテナントに、呼び名やメモなどの追加属性を定義し、SaaSus SDK や API から取得できます。"
 excerpt: ""
 hidden: false
 createdAt: "Wed Apr 09 2024 05:02:32 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Wed Apr 09 2024 05:02:32 GMT+0000 (Coordinated Universal Time)"
 ---
-
-> SaaSus Platform で管理するテナントに、呼び名やメモなどの追加属性を定義し、SaaSus SDK や API から取得できます。
 
 ## テナントに追加属性を定義する
 

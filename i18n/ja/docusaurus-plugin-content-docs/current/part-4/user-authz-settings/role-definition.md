@@ -1,14 +1,11 @@
 ---
 title: "役割定義"
 slug: "role-definition"
-description: "SaaSアプリ内で使用する役割（ロール）を定義・管理します。"
 excerpt: ""
 hidden: false
 createdAt: "Wed Apr 09 2024 10:12:41 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Wed Apr 09 2024 10:12:41 GMT+0000 (Coordinated Universal Time)"
 ---
-
-> SaaSアプリ内で使用する役割（ロール）を定義・管理します。
 
 ## 役割の定義
 

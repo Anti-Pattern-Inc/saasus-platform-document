@@ -1,7 +1,6 @@
 ---
 title: "行動履歴ログ"
 slug: "user-activity-history-log"
-description: "行動履歴ログでは、ユーザーがSaaSを操作した履歴を確認することができます。"
 excerpt: ""
 hidden: false
 createdAt: "Tue Jun 11 2024 00:47:10 GMT+0000 (Coordinated Universal Time)"
@@ -10,8 +9,6 @@ updatedAt: "Tue Jun 11 2024 00:47:10 GMT+0000 (Coordinated Universal Time)"
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
-
-> 行動履歴ログでは、ユーザーがSaaSを操作した履歴を確認することができます。
 
 :::info
 行動履歴ログはアドバンスドプラン以上のお客様のみご利用いただけます。

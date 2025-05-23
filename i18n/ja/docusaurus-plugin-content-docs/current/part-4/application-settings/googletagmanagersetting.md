@@ -1,14 +1,11 @@
 ---
 title: "Google Tag Managerの設定"
 slug: "googletagmanagersetting"
-description: "認証画面に Google Tag Manager を埋め込み、Google Analytics などの外部ツールを連携させる方法を解説します。"
 excerpt: ""
 hidden: false
 createdAt: "Thu Dec 07 2023 05:40:29 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Fri Dec 22 2023 06:01:24 GMT+0000 (Coordinated Universal Time)"
 ---
-
-> 認証画面に Google Tag Manager を埋め込み、Google Analytics などの外部ツールを連携させる方法を解説します。
 
 Google Tag Managerを設定することで、ログイン画面にGoogle Tag Managerのタグが埋め込まれGoogle Analyticsなどが設定可能です。
 

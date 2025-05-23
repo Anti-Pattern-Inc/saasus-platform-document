@@ -7,8 +7,6 @@ createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
-> SaaSus Platform よくある質問
-
 **Q. サービスが停止した時の対策として、どのような対応が可能でしょうか？  
 切り替えて業務継続可能でしょうか？**  
 A. 東京リージョンには 3 つの Availability Zone があり、全てで同時に障害が発生しない限りサービスは停止しません。  
@@ -33,7 +31,8 @@ A.
 ---
 
 **Q. 対応ブラウザの制限はありますか？**  
-A. Chrome、Firefox、Edge、Safari など主要ブラウザ最新版で動作を確認しており、特別な制限はありません。
+A. 現時点での動作保証対象は macOS 上の Chrome のみです。  
+ただし、Firefox、Edge、Safari など主要ブラウザの最新版でも動作確認は行っており、特別な制限はありません。
 
 ---
 

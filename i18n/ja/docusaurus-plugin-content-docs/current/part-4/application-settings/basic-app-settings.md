@@ -1,14 +1,11 @@
 ---
 title: "基本情報の設定"
 slug: "basic-app-settings"
-description: "ログイン画面に表示されるサービス名やアイコン、利用規約リンクなどを設定します。"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
-
-> ログイン画面に表示されるサービス名やアイコン、利用規約リンクなどを設定します。
 
 このページでは、ログイン画面など認証関連画面で使用される情報（サービス名、アイコン、利用規約URL など）を設定します。
 
@@ -34,8 +31,6 @@ updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 例：ドメイン名を `sample.saasus.jp` と設定した場合、ログイン画面は `https://auth.sample.saasus.jp/` になります。
 
 :::info
-### 補足情報
-
 - 「**画面設定**」タブでは、新規登録／ログイン／パスワード変更画面に、利用規約とプライバシーポリシーのリンクを表示するかを設定できます。
 - 「**認証設定**」タブでは、ログイン方式やパスワードリセットに関する詳細設定を行うことができます。
 :::

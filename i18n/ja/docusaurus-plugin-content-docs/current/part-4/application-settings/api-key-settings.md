@@ -1,14 +1,11 @@
 ---
 title: "APIキーの確認"
 slug: "api-key-settings"
-description: "SaaSus SDK / APIを連携するために必要なキーを確認・管理します。"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
-
-> SaaSus SDK / APIを連携するために必要なキーを確認・管理します。
 
 このページでは、SaaSus SDK や API の利用時に必要となる「SaaS ID」「APIキー」「クライアントシークレット」の確認・再発行手順を説明します。  
 いずれもサイドメニューの「APIキー」から確認・操作できます。

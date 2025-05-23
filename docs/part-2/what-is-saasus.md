@@ -24,6 +24,9 @@ It consists of two main consoles: one for developers (**SaaS Development Console
   - Pricing plan configuration
   - Obtaining SDKs and API keys
   - Integration with external services (e.g., Stripe)
+  - AWS Marketplace Integration (support for product listing)  
+  - Smart API Gateway (convert your SaaS service into public APIs)
+  - Viewing API request logs (helpful for error tracking and troubleshooting)
 
 - **SaaS Operation Console**:  
   This console is designed for the ongoing management and operation of your SaaS service.  
@@ -32,10 +35,9 @@ It consists of two main consoles: one for developers (**SaaS Development Console
   - Managing tenants and users
   - Viewing and configuring pricing plans per tenant
   - Viewing service announcements and updates
-  - Viewing API request logs (helpful for error tracking and troubleshooting)
 
-- **Integration Features**:  
-  SaaSus integrates with services such as Stripe, Amazon EventBridge, API Gateway, and AWS Marketplace, enabling automation and extensibility of your SaaS offering.
+- **SDK / API Access**:  
+  Using the SaaSus SDK and API, you can integrate core features such as authentication, tenant management, and pricing plans into your SaaS application.
 
 ## 3. Challenges Solved by SaaSus Platform
 

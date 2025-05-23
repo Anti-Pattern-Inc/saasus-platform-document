@@ -1,14 +1,11 @@
 ---
 title: "User Attributes"
 slug: "declare-additional-attribute-to-user"
-description: "Add and manage user attributes such as department or role."
 excerpt: ""
 hidden: false
 createdAt: "Wed Apr 08 2024 14:34:47 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Wed Apr 08 2024 14:34:47 GMT+0000 (Coordinated Universal Time)"
 ---
-
-> Add and manage user attributes such as department or role.
 
 ## Declare Additional Attribute To User
 
