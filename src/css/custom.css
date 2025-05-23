@@ -28,3 +28,23 @@
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+.table-scroll {
+  overflow-x: auto;
+}
+.nowrap-table th,
+.nowrap-table td {
+  white-space: nowrap;
+}
+.custom-margin th {
+  margin-top: 16px;
+  margin-bottom: 24px;
+}
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
