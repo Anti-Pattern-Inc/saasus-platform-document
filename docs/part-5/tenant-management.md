@@ -40,7 +40,7 @@ Click the “+ Create Tenant” button in the top right to open the tenant creat
 
 - Choose from a list of registered user email addresses (autocomplete input)
 
-:::info Notes on Representative User
+:::info
 
 - The newly created representative user will be automatically assigned to the tenant with the `admin` role.
 - If Stripe is integrated, billing emails will be sent to the **Representative E-mail Address**.
@@ -62,7 +62,7 @@ Edits are divided into two sections:
 | Tenant Attributes          | Update predefined attributes (e.g., industry, contract type)            |
 | Representative E-mail Address       | Select a user associated with the tenant as the representative address  |
 
-:::info Notes on Representative Email
+:::info
 
 - If Stripe is integrated, billing emails will be sent to this address.
 
