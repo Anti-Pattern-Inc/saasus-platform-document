@@ -1,0 +1,281 @@
+---
+title: "Smart MCP Server チュートリアル"
+slug: "smart-mcp-server-tutorial"
+excerpt: ""
+hidden: false
+createdAt: "Sun May 26 2025 07:00:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Sun May 26 2025 07:00:00 GMT+0000 (Coordinated Universal Time)"
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+## Smart MCP Server チュートリアル
+
+このチュートリアルでは、Smart API Gateway機能で公開したAPIを、AIエージェントが利用できるMCPサーバーとして公開する手順を説明します。
+
+### 前提条件
+
+このチュートリアルを開始する前に、以下が完了していることを確認してください：
+
+- [Smart API Gateway機能](./manual.mdx)でAPIが公開済みであること
+- SaaSus Platform開発コンソールへのアクセス権限があること
+- API Keyが発行されていること
+
+:::info
+Smart MCP Server機能は、Smart API Gateway機能で公開されたAPIを自動的にMCPサーバーとして提供します。<br/>
+まだSmart API Gateway機能を設定していない場合は、先に[セットアップ手順](./manual.mdx)を完了してください。
+:::
+
+---
+
+## Step 1: SaaSus Platform開発コンソールにアクセス
+
+1. [SaaSus Platform開発コンソール](https://console.saasus.io)にログインします。
+2. 左側のメニューから **Smart API Gateway** を選択します。
+3. 既に公開されているAPIの一覧が表示されることを確認します。
+
+---
+
+## Step 2: Smart MCP Server機能を有効化
+
+1. Smart API Gateway機能の画面で、**MCP Server** タブをクリックします。
+2. **Smart MCP Server機能を有効化** トグルスイッチをONにします。
+3. 確認ダイアログが表示されたら、**有効化する** をクリックします。
+
+:::info
+有効化には数分かかる場合があります。ページをリロードして状態を確認してください。
+:::
+
+---
+
+## Step 3: MCPサーバーエンドポイントの確認
+
+MCPサーバーが正常に作成されると、以下の情報が表示されます：
+
+- **MCPサーバーURL**: AIエージェントが接続するためのエンドポイント
+- **接続ステータス**: サーバーの動作状態
+- **利用可能なツール**: 公開されているAPIの一覧
+
+### MCPサーバー情報例
+
+```
+MCPサーバーURL: https://mcp.saasus.io/your-saas-id
+ステータス: アクティブ
+利用可能なツール:
+  - getInventory: 在庫情報を取得
+  - updateProduct: 製品情報を更新
+  - getUserData: ユーザーデータを取得
+```
+
+---
+
+## Step 4: AIエージェントでの接続テスト
+
+### Claude Desktop での設定例
+
+Claude Desktop でMCPサーバーを利用する場合の設定例です：
+
+<Tabs>
+<TabItem value="claude-config" label="Claude Desktop設定" default>
+
+1. Claude Desktop の設定ファイル（`claude_desktop_config.json`）を開きます
+2. 以下の設定を追加します：
+
+```json
+{
+  "mcpServers": {
+    "saasus-api": {
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-fetch",
+        "https://mcp.saasus.io/your-saas-id"
+      ],
+      "env": {
+        "MCP_API_KEY": "your-api-key-here"
+      }
+    }
+  }
+}
+```
+
+3. Claude Desktop を再起動します
+
+</TabItem>
+<TabItem value="custom-client" label="カスタムMCPクライアント">
+
+独自のMCPクライアントで接続する場合の例：
+
+```typescript
+import { Client } from '@modelcontextprotocol/sdk/client/index.js';
+import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
+
+const client = new Client(
+  {
+    name: "saasus-mcp-client",
+    version: "1.0.0"
+  },
+  {
+    capabilities: {
+      tools: {}
+    }
+  }
+);
+
+// MCPサーバーに接続
+await client.connect(
+  new StdioClientTransport({
+    command: "npx",
+    args: [
+      "@modelcontextprotocol/server-fetch",
+      "https://mcp.saasus.io/your-saas-id"
+    ],
+    env: {
+      MCP_API_KEY: "your-api-key-here"
+    }
+  })
+);
+
+// 利用可能なツールを取得
+const tools = await client.listTools();
+console.log("利用可能なツール:", tools);
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+## Step 5: AIエージェントからのAPI呼び出しテスト
+
+### Claude でのテスト例
+
+Claude Desktop で以下のようにプロンプトを入力してテストしてください：
+
+```
+在庫情報を取得してください。テナントIDは "tenant-123" です。
+```
+
+Claude が自動的に `getInventory` ツールを使用して API を呼び出し、結果を返します。
+
+### 期待される応答例
+
+```
+在庫情報を取得しました：
+
+製品名: サンプル商品A
+在庫数: 150個
+最終更新: 2025-05-26 10:30:00
+
+製品名: サンプル商品B  
+在庫数: 75個
+最終更新: 2025-05-26 09:45:00
+```
+
+---
+
+## Step 6: エラーのトラブルシューティング
+
+### よくある問題と解決方法
+
+#### 1. MCPサーバーに接続できない
+
+**症状**: AIエージェントがMCPサーバーに接続できない
+
+**解決方法**:
+- API Keyが正しく設定されているか確認
+- MCPサーバーのステータスがアクティブか確認
+- ネットワーク接続を確認
+
+#### 2. API呼び出しが失敗する
+
+**症状**: MCPサーバー経由でのAPI呼び出しがエラーになる
+
+**解決方法**:
+- Smart API Gateway で直接APIが正常に動作するか確認
+- API Keyの権限設定を確認
+- スロットリング制限に達していないか確認
+
+#### 3. ツールが表示されない
+
+**症状**: AIエージェントでツールの一覧が表示されない
+
+**解決方法**:
+- Smart API Gateway でAPIが正常に公開されているか確認
+- MCPサーバーを一度無効化・再有効化してみる
+- ブラウザのキャッシュをクリアしてから再試行
+
+---
+
+## Step 7: 高度な設定
+
+### カスタムツール名の設定
+
+MCPサーバーで公開されるツール名をカスタマイズできます：
+
+1. Smart API Gateway の **MCP Server** タブで **高度な設定** を開きます
+2. 各APIエンドポイントに対してカスタムツール名を設定します
+3. **保存** をクリックして設定を適用します
+
+### ツールの説明文設定
+
+AIエージェントがツールを適切に理解できるよう、詳細な説明文を設定できます：
+
+```json
+{
+  "getInventory": {
+    "name": "在庫取得",
+    "description": "指定されたテナントの在庫情報を取得します。製品名、在庫数、最終更新日時が返されます。"
+  },
+  "updateProduct": {
+    "name": "製品更新", 
+    "description": "製品情報を更新します。製品ID、名前、価格、説明文を更新できます。"
+  }
+}
+```
+
+---
+
+## Step 8: セキュリティ設定
+
+### API Key管理
+
+MCPサーバー専用のAPI Keyを作成することを推奨します：
+
+1. SaaSus Platform運用コンソールの **テナント管理** に移動
+2. **新しいAPI Key** を作成
+3. 用途を「MCPサーバー」として識別しやすい名前を設定
+4. 必要最小限の権限のみを付与
+
+### IP制限設定
+
+AIエージェントが動作する環境のIPアドレスを制限できます：
+
+1. **テナント管理** → **IP制限** で設定
+2. AIエージェントが実行される環境のIPアドレスを許可リストに追加
+
+---
+
+## まとめ
+
+このチュートリアルでは、Smart MCP Server機能を使用してAPIをAIエージェント向けに公開する方法を学習しました。
+
+### 完了した内容
+
+- Smart MCP Server機能の有効化
+- MCPサーバーエンドポイントの確認
+- AIエージェント（Claude Desktop）での接続設定
+- API呼び出しのテスト
+- トラブルシューティング
+- 高度な設定とセキュリティ対策
+
+### 次のステップ
+
+- より複雑なAPIワークフローの自動化
+- 複数のAIエージェントでの利用
+- カスタムMCPクライアントの開発
+- ビジネスプロセスへの統合
+
+:::info
+Smart MCP Server機能に関するご質問やサポートが必要な場合は、[サポート申請フォーム](https://forms.gle/XhFD9fCQv1zVGyRT9)からお問い合わせください。
+:::
