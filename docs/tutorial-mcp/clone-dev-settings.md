@@ -1,5 +1,5 @@
 ---
-title: "Lastly"
+title: "Environment Information Acquisition Procedure"
 slug: "clone-dev-settings"
 excerpt: ""
 hidden: false
@@ -7,7 +7,7 @@ createdAt: "Fri Jan 20 2023 01:47:47 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Wed May 22 2024 15:16:11 GMT+0000 (Coordinated Universal Time)"
 ---
 
-# SaaSus Platform Environment Information Retrieval Procedure
+# SaaSus Platform Environment Information Acquisition Procedure
 
 ## Overview
 This is a procedure document for comprehensively retrieving various configuration information from SaaSus Platform and outputting it in JSON format.
