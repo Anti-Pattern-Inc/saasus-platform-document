@@ -76,74 +76,11 @@ SaaS運用コンソール→ユーザー管理の画面から、特定のユー�
   - **Authentication** : 控えておいた**APIキー**
   ![smart-mcp-server-tutorial-6](/ja/img/api-gateway-function/smart-mcp-server-tutorial-6.png)
 7. **Connect**を押下します
-8. 少し待つと、公開したAPI
-
-```json
-{
-  "name": "saasus_api_call",
-  "description": "SaaS運用コンソールのAPIを呼び出す",
-  "parameters": {
-    "type": "object",
-    "properties": {
-      "endpoint": {
-        "type": "string", 
-        "description": "呼び出すAPIエンドポイント（例: /tenants, /users）"
-      },
-      "method": {
-        "type": "string",
-        "enum": ["GET", "POST", "PUT", "DELETE"],
-        "description": "HTTPメソッド"
-      },
-      "payload": {
-        "type": "object",
-        "description": "リクエストボディ（POST/PUTの場合）"
-      },
-      "query_params": {
-        "type": "object", 
-        "description": "クエリパラメータ"
-      }
-    },
-    "required": ["endpoint", "method"]
-  }
-}
-```
-
-5. **Code** セクションで以下の関数実装を追加します：
-
-```javascript
-async function saasus_api_call({ endpoint, method, payload, query_params }) {
-  const baseUrl = "https://mcp.saasus.io/your-saas-id";
-  const url = new URL(endpoint, baseUrl);
-  
-  if (query_params) {
-    Object.entries(query_params).forEach(([key, value]) => {
-      url.searchParams.append(key, value);
-    });
-  }
-  
-  const options = {
-    method: method,
-    headers: {
-      'Authorization': 'Bearer your-api-key-here',
-      'Content-Type': 'application/json'
-    }
-  };
-  
-  if (payload && (method === 'POST' || method === 'PUT')) {
-    options.body = JSON.stringify(payload);
-  }
-  
-  try {
-    const response = await fetch(url.toString(), options);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    return { error: error.message };
-  }
-}
-```
-
-6. **Save** をクリックして設定を保存します
+8. 成功するとToolsに利用可能なAPI一覧が表示されます。
+　![smart-mcp-server-tutorial-7](/ja/img/api-gateway-function/smart-mcp-server-tutorial-7.png)
+9. **Add**を押下します
+10. **Tools** セクションに追加したMCP Serverが表示されていることを確認します
+　![smart-mcp-server-tutorial-8](/ja/img/api-gateway-function/smart-mcp-server-tutorial-8.png)
 
 </TabItem>
 </Tabs>
@@ -152,31 +89,16 @@ async function saasus_api_call({ endpoint, method, payload, query_params }) {
 
 ## Step 5: AIエージェントからのAPI呼び出しテスト
 
-### OpenAI Playground でのテスト例
+<Tabs>
+<TabItem value="openai-playground" label="OpenAI Playground" default>
 
-OpenAI Playground で以下のようにプロンプトを入力してテストしてください：
+1. チャットで、「**MCP Server名**を利用して、**APIエンドポイント**を呼び出して」と入力する
+2. 返答を待ち「Approve」が表示されたら、それを押下します
+3. 返答を待ち、APIが問題なく呼び出されているか確認します
 
-```
-在庫情報を取得してください。テナントIDは "tenant-123" です。
-```
+</TabItem>
+</Tabs>
 
-AIが自動的に `saasus_api_call` 関数を使用して API を呼び出し、結果を返します。
-
-### 期待される応答例
-
-```
-在庫情報を取得しました：
-
-製品名: サンプル商品A
-在庫数: 150個
-最終更新: 2025-05-26 10:30:00
-
-製品名: サンプル商品B  
-在庫数: 75個
-最終更新: 2025-05-26 09:45:00
-```
-
----
 
 ## Step 6: エラーのトラブルシューティング
 
@@ -219,17 +141,8 @@ AIが自動的に `saasus_api_call` 関数を使用して API を呼び出し、
 
 - Smart MCP Server機能の有効化
 - MCPサーバーエンドポイントの確認
-- AIエージェント（Claude Desktop）での接続設定
+- AIエージェント（OpenAI Playground）での接続設定
 - API呼び出しのテスト
-- トラブルシューティング
-- 高度な設定とセキュリティ対策
-
-### 次のステップ
-
-- より複雑なAPIワークフローの自動化
-- 複数のAIエージェントでの利用
-- カスタムMCPクライアントの開発
-- ビジネスプロセスへの統合
 
 :::info
 Smart MCP Server機能に関するご質問やサポートが必要な場合は、[サポート申請フォーム](https://forms.gle/XhFD9fCQv1zVGyRT9)からお問い合わせください。
