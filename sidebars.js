@@ -223,6 +223,20 @@ const sidebars = {
       },
       items: ["api-gateway-function/manual"],
     },
+    {
+      type: "category",
+      label: "SaaSus API MCP Server Usage Guide",
+      link: {
+        type: "doc",
+        id: "mcp-server/setup",
+      },
+      items: [
+        "mcp-server/bulk-user-registration",
+        "mcp-server/export-user-info-csv",
+        "mcp-server/export-tenant-user-info",
+        "mcp-server/clone-dev-settings",
+      ],
+    },
   ],
 
   tutorialSidebar: [
