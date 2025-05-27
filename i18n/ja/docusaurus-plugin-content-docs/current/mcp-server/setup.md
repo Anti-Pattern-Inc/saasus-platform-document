@@ -107,27 +107,23 @@ SaaSus API MCP Serverを使用するには、以下の環境変数を設定す�
 SaaSus API MCP Serverでは、SaaSus Platform の全APIエンドポイントが利用できます。  
 主な機能には以下が含まれます
 
-### 認証API (Auth API)
+### Auth API
 - 基本設定の取得・更新
 - ユーザー管理
 - テナント管理
 - 認証設定
 
-### 課金API (Billing API)
-- 料金プラン管理
+### Pricing API
 - メータリング
-- 税率設定
-
-### 価格設定API (Pricing API)
-- 価格単位管理
-- 価格メニュー管理
-- 価格プラン管理
+- 機能メニュー管理
+- プラン管理
 
 ### その他のAPI
-- 通信API (Communication API)
-- APIログAPI (API Log API)
+- Billing API
+- Communication API
+- API Log API
 - AWS Marketplace API
-- 統合API (Integration API)
+- Integration API
 
 ## トラブルシューティング
 

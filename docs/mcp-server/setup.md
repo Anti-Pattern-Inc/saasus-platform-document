@@ -113,17 +113,13 @@ Main features include:
 - Tenant management
 - Authentication settings
 
-### Billing API
-- Pricing plan management
-- Metering
-- Tax rate settings
-
 ### Pricing API
-- Pricing unit management
-- Pricing menu management
-- Pricing plan management
+- Metering
+- Feature menu management
+- Plan management
 
 ### Other APIs
+- Billing API
 - Communication API
 - API Log API
 - AWS Marketplace API
