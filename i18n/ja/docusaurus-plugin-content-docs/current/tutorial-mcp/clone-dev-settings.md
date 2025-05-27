@@ -1,5 +1,5 @@
 ---
-title: "Lastly"
+title: "環境情報取得手順"
 slug: "clone-dev-settings"
 excerpt: ""
 hidden: false
@@ -7,7 +7,7 @@ createdAt: "Fri Jan 20 2023 01:47:47 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Wed May 22 2024 15:16:11 GMT+0000 (Coordinated Universal Time)"
 ---
 
-# SaaSus Platform 環境情報取得手順書
+# SaaSus Platform 環境情報取得手順
 
 ## 概要
 SaaSus Platformの各種設定情報を包括的に取得し、JSON形式で出力する手順書です。
