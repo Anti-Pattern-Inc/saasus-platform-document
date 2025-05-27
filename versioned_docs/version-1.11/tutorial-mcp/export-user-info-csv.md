@@ -19,7 +19,7 @@ This is a procedure document for comprehensively retrieving user information reg
 
 ### Basic Request Text
 ```
-Please export the SaaSus user list to CSV.
+Please export the user list to CSV.
 
 [Output Settings]
 Output format = CSV
