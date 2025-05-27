@@ -14,8 +14,6 @@ SaaSus Platformの各種設定情報を包括的に取得し、JSON形式で出�
 
 ## 前提条件
 - SaaSus API MCP Serverが設定済みであること
-- 適切なAPIアクセス権限があること
-
 
 ## MCP Serverへの依頼文言
 
