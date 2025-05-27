@@ -10,7 +10,7 @@ updatedAt: "Wed May 22 2024 15:16:11 GMT+0000 (Coordinated Universal Time)"
 # SaaSus API MCP Server Setup Guide
 
 ## Overview
-SaaSus API MCP Server operates as a Model Context Protocol (MCP) server, enabling SaaSus Platform API to be used from MCP-compatible clients such as Claude Desktop and Cursor.
+SaaSus API MCP Server operates as a Model Context Protocol (MCP) server, enabling SaaSus API to be used from MCP-compatible clients such as Claude Desktop and Cursor.
 
 ## Prerequisites
 - Node.js (v16 or higher required, v20 or higher recommended)
@@ -93,7 +93,9 @@ Add the information obtained in steps 1 and 2 to the configuration file:
 }
 ```
 
-**Note:** Replace `mcpServer.js path` with the actual full path to the cloned directory.
+**Note:**  
+Replace `node path` with the full path.  
+Replace `mcpServer.js path` with the actual full path to the cloned directory.
 
 ### 4. Restart Claude Desktop
 Restart Claude Desktop to apply the configuration.
