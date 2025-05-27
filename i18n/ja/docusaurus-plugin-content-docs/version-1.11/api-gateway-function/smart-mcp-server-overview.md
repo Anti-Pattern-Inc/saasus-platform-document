@@ -168,12 +168,6 @@ Smart MCP Server機能では、これらの複雑な実装を自動化し、シ�
 - **エラーハンドリング**: APIエラーのMCP形式への変換
 - **パフォーマンス最適化**: 効率的なデータ転送とキャッシング
 
-#### 3. AI Agent Interface
-- **標準MCPプロトコル**: 業界標準に準拠したインターフェース
-- **複数エージェント対応**: Claude、GPT-4、カスタムエージェントとの互換性
-- **セキュアな通信**: HTTPS暗号化とAPI Key認証
-- **リアルタイム応答**: 低レイテンシでの高速処理
-
 ## Model Context Protocol（MCP）について
 
 ### MCPの概要
@@ -301,31 +295,31 @@ Smart MCP Server機能は、Smart API Gateway機能の拡張機能として提�
 
 Smart MCP Server機能は、AIエージェントとAPIの連携を簡素化する包括的な機能セットを提供します：
 
-### 1. ワンクリック公開
+### 1. 自動同時展開
 
-#### 簡単な有効化プロセス
-- **トグルスイッチ**: SaaSus Platformコンソールで設定をONにするだけ
-- **自動設定**: 必要なインフラが自動的に構築
-- **即座の利用開始**: 設定完了後すぐにMCPサーバーが利用可能
+#### シームレスな自動公開
+- **同時展開**: Smart API GatewayでAPIが公開されると、MCPサーバーも自動的に同時展開
+- **追加設定不要**: Smart API Gateway機能の設定完了と同時にMCPサーバーが利用可能
+- **即座の利用開始**: APIの公開完了後すぐにAIエージェントからアクセス可能
 
-#### 設定の簡素化
+#### 自動化されたプロセス
 ```yaml
-# 従来の手動設定（数百行の設定が必要）
-mcp_server:
-  name: "custom-api-server"
-  version: "1.0.0"
-  tools:
-    - name: "get_inventory"
-      endpoint: "/api/inventory"
-      method: "GET"
-      authentication:
-        type: "api_key"
-        header: "x-api-key"
-      # ... 詳細な設定が続く
+# Smart API Gateway でのAPI公開
+api_gateway:
+  enabled: true
+  endpoints:
+    - "/api/inventory"
+    - "/api/orders"
 
-# Smart MCP Server（設定不要）
-smart_mcp_server:
-  enabled: true  # これだけで完了
+# ↓ 自動的に以下が同時展開される
+
+# Smart MCP Server（自動生成・展開）
+mcp_server:
+  enabled: true  # 自動でtrue
+  endpoint: "https://mcp.saasus.io/your-saas-id"
+  tools:
+    - "get_inventory"  # 自動生成
+    - "create_order"   # 自動生成
 ```
 
 ### 2. 自動スキーマ変換
@@ -412,15 +406,40 @@ Smart API Gatewayでの変更が即座にMCPサーバーに反映：
 
 ## 利用シーン
 
-Smart MCP Server機能は、様々なビジネスシーンでAIエージェントの活用を可能にします：
+Smart MCP Server機能は、様々なAIエージェントプラットフォームとの統合により、ビジネスプロセスの自動化と効率化を実現します：
 
-### 1. AIエージェント統合
+### 1. OpenAI Playground での統合
 
-#### Claude Desktop での活用
+#### 設定方法
+OpenAI Playgroundでは、MCPサーバーを直接接続してAPIツールとして利用できます：
+
 ```json
 {
   "mcpServers": {
     "business-api": {
+      "url": "https://mcp.saasus.io/your-saas-id",
+      "headers": {
+        "Authorization": "Bearer your-api-key"
+      }
+    }
+  }
+}
+```
+
+#### 活用例
+- **データ分析**: 「過去3ヶ月の売上データを分析して、トレンドを教えて」
+- **レポート生成**: 「月次売上レポートを作成して、前年同月比較を含めて」
+- **顧客管理**: 「新規顧客の登録手続きを自動化して」
+
+### 2. Claude Desktop での統合
+
+#### 設定ファイル
+Claude Desktopでは、設定ファイルでMCPサーバーを登録します：
+
+```json
+{
+  "mcpServers": {
+    "saasus-api": {
       "command": "npx",
       "args": ["@modelcontextprotocol/server-fetch", "https://mcp.saasus.io/your-saas-id"],
       "env": {
@@ -431,114 +450,177 @@ Smart MCP Server機能は、様々なビジネスシーンでAIエージェン�
 }
 ```
 
-**活用例**:
-- **営業支援**: 顧客データの即座取得と分析
-- **カスタマーサポート**: 問い合わせ内容の自動分類と回答生成
-- **レポート作成**: ビジネスデータからの自動レポート生成
+#### 業務活用例
+- **営業支援**: 顧客情報の即座取得と商談履歴の分析
+- **カスタマーサポート**: 問い合わせ内容の自動分類と適切な回答生成
+- **在庫管理**: リアルタイム在庫状況の確認と自動発注提案
 
-### 2. データ取得自動化
+### 3. カスタムAIエージェントとの統合
 
-#### リアルタイムビジネス分析
-```typescript
-// AIエージェントによる自動データ分析
-interface BusinessAnalysis {
-  // 売上データの自動取得
-  getSalesData(period: string): Promise<SalesMetrics>;
+#### Python エージェントでの利用
+```python
+import asyncio
+from mcp import ClientSession, StdioServerParameters
+from mcp.client.stdio import stdio_client
+
+async def use_saasus_api():
+    server_params = StdioServerParameters(
+        command="npx",
+        args=["@modelcontextprotocol/server-fetch", "https://mcp.saasus.io/your-saas-id"],
+        env={"MCP_API_KEY": "your-api-key"}
+    )
+    
+    async with stdio_client(server_params) as (read, write):
+        async with ClientSession(read, write) as session:
+            # 利用可能なツールを取得
+            tools = await session.list_tools()
+            
+            # 在庫情報を取得
+            result = await session.call_tool("get_inventory", {
+                "tenantId": "tenant-123",
+                "includeHistory": True
+            })
+            
+            return result
+```
+
+#### Node.js エージェントでの利用
+```javascript
+import { Client } from '@modelcontextprotocol/sdk/client/index.js';
+import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
+
+class SaaSusAIAgent {
+  constructor() {
+    this.client = new Client({
+      name: "saasus-ai-agent",
+      version: "1.0.0"
+    }, {
+      capabilities: {}
+    });
+  }
   
-  // 在庫レベルの監視
-  monitorInventory(): Promise<InventoryAlert[]>;
+  async connectToSaaSus() {
+    const transport = new StdioClientTransport({
+      command: "npx",
+      args: ["@modelcontextprotocol/server-fetch", "https://mcp.saasus.io/your-saas-id"],
+      env: { MCP_API_KEY: "your-api-key" }
+    });
+    
+    await this.client.connect(transport);
+  }
   
-  // 顧客行動の分析
-  analyzeCustomerBehavior(segment: string): Promise<BehaviorInsights>;
-  
-  // 予測分析の実行
-  generateForecasts(metrics: string[]): Promise<ForecastResults>;
+  async analyzeBusinessData() {
+    // 売上データの取得
+    const salesData = await this.client.request({
+      method: "tools/call",
+      params: {
+        name: "get_sales_data",
+        arguments: { period: "3months" }
+      }
+    });
+    
+    // 在庫データの取得
+    const inventoryData = await this.client.request({
+      method: "tools/call", 
+      params: {
+        name: "get_inventory",
+        arguments: { includeHistory: true }
+      }
+    });
+    
+    return { sales: salesData, inventory: inventoryData };
+  }
 }
 ```
 
-### 3. ワークフロー自動化
+### 4. 業界特化型AIエージェント
 
-#### 業務プロセスの自動化
+#### Eコマース業界
 ```yaml
-# 自動化ワークフローの例
-workflow_name: "new_customer_onboarding"
-trigger: "customer_signup_event"
-steps:
-  - name: "create_tenant"
-    tool: "create_new_tenant"
-    inputs:
-      company_name: "{{event.company_name}}"
-      admin_email: "{{event.admin_email}}"
+# ECサイト運営支援エージェント
+agent_capabilities:
+  - name: "商品管理"
+    tools: ["get_products", "update_inventory", "manage_pricing"]
+    description: "商品情報の自動更新と在庫管理"
   
-  - name: "setup_initial_plan"
-    tool: "assign_pricing_plan"
-    inputs:
-      tenant_id: "{{steps.create_tenant.tenant_id}}"
-      plan_type: "starter"
+  - name: "顧客分析"
+    tools: ["get_customer_data", "analyze_behavior", "segment_customers"]
+    description: "購買行動分析と顧客セグメンテーション"
+  
+  - name: "売上予測"
+    tools: ["get_sales_history", "forecast_demand", "optimize_pricing"]
+    description: "AIによる需要予測と価格最適化"
 ```
 
-### 4. インテリジェントダッシュボード
+#### SaaS業界
+```yaml
+# SaaS運営支援エージェント
+agent_capabilities:
+  - name: "ユーザー管理"
+    tools: ["manage_tenants", "track_usage", "handle_billing"]
+    description: "テナント管理と使用量監視"
+  
+  - name: "チャーン予測"
+    tools: ["analyze_usage_patterns", "predict_churn", "suggest_interventions"]
+    description: "解約リスクの早期発見と対策提案"
+  
+  - name: "プロダクト最適化"
+    tools: ["collect_feedback", "analyze_features", "prioritize_development"]
+    description: "機能利用分析と開発優先度決定"
+```
 
-#### AI駆動の動的レポート
-AI がリアルタイムでビジネスデータを分析し、洞察と推奨アクションを自動生成します。
+### 5. マルチエージェントシステム
 
-## 注意事項
+#### 協調動作する複数エージェント
+```mermaid
+graph TD
+    A[マスターエージェント] --> B[データ分析エージェント]
+    A --> C[レポート生成エージェント]
+    A --> D[顧客対応エージェント]
+    
+    B --> E[SaaSus API<br/>via MCP Server]
+    C --> E
+    D --> E
+    
+    E --> F[Smart API Gateway]
+    F --> G[ビジネスAPI群]
+```
 
-Smart MCP Server機能の利用にあたり、以下の重要な点にご注意ください：
+#### エージェント間連携の例
+```typescript
+// マスターエージェントによる作業分散
+class MasterAgent {
+  async processBusinessRequest(request: string) {
+    // 1. データ分析エージェントにデータ取得を依頼
+    const analysisAgent = new DataAnalysisAgent();
+    const rawData = await analysisAgent.fetchBusinessData();
+    
+    // 2. レポート生成エージェントにレポート作成を依頼
+    const reportAgent = new ReportGenerationAgent();
+    const report = await reportAgent.generateReport(rawData);
+    
+    // 3. 顧客対応エージェントに結果の伝達を依頼
+    const customerAgent = new CustomerServiceAgent();
+    await customerAgent.notifyCustomer(report);
+    
+    return report;
+  }
+}
+```
 
-### システム要件と制限事項
+### 6. 実際の導入効果
 
-#### 1. MCPサーバーエンドポイント
-- **新規エンドポイント作成**: 専用のMCPサーバーエンドポイントが新たに作成されます
-- **追加料金なし**: MCPサーバー機能自体に追加の料金は発生しません
-- **ドメイン要件**: HTTPS必須、独自ドメインの設定推奨
-- **可用性**: 99.9%のSLA保証（Smart API Gatewayと同等）
+#### 導入前後の比較
 
-#### 2. API利用料金
-- **従量課金**: MCPサーバー経由でのAPI呼び出しも、通常のAPI利用と同じ料金体系が適用
-- **課金単位**: API呼び出し回数、データ転送量に基づく課金
-- **予算管理**: SaaSus Platform コンソールでの使用量監視と予算アラート設定可能
+| 項目 | 導入前 | 導入後 | 改善効果 |
+|------|--------|--------|----------|
+| データ取得時間 | 30分〜2時間 | 2〜5分 | **90%短縮** |
+| レポート作成工数 | 4〜8時間 | 30分〜1時間 | **85%削減** |
+| 人的エラー率 | 5〜10% | 1%未満 | **90%削減** |
+| 意思決定速度 | 1〜3日 | リアルタイム | **即時化** |
 
-#### 3. レート制限とスロットリング
-- **継承設定**: Smart API Gatewayで設定されたスロットリング設定がMCPサーバーにも適用
-- **AIエージェント考慮**: AI特有の高頻度アクセスパターンに対応した調整可能
-- **動的制限**: リアルタイムでの制限値調整とバースト対応
-
-### セキュリティ考慮事項
-
-#### 1. API Key管理
-- **専用キー推奨**: MCP用途専用のAPI Keyの作成を強く推奨
-- **最小権限**: 必要最小限の権限のみを付与
-- **定期ローテーション**: セキュリティ向上のため定期的なキー更新
-- **監査ログ**: 全てのAPI Key使用状況の詳細ログ記録
-
-#### 2. データプライバシー
-- **データ暗号化**: 転送時・保存時ともに暗号化
-- **ログ管理**: 個人情報を含むログの適切な管理と保持期間設定
-- **GDPR対応**: EU地域での利用時のGDPR準拠設定
-- **地域制限**: 特定地域からのアクセス制限機能
-
-### パフォーマンス最適化
-
-#### 1. キャッシング戦略
-- **レスポンスキャッシュ**: 頻繁にアクセスされるデータの効率的なキャッシング
-- **TTL設定**: データの鮮度に応じた適切なTime-To-Live設定
-- **キャッシュ無効化**: データ更新時の即座なキャッシュクリア
-
-#### 2. 並行処理制限
-- **同時接続数**: AIエージェントからの並行リクエスト数の制限
-- **リソース保護**: システムリソースの適切な分散と保護
-- **優先度制御**: 重要な処理の優先実行設定
-
-### 運用監視項目
-
-#### 1. 必須監視メトリクス
-- **可用性**: MCPサーバーの稼働時間とAPI応答時間
-- **パフォーマンス**: リクエストスループットとレスポンスレイテンシ
-- **セキュリティ**: 認証失敗や不審なアクセスパターンの検出
-- **ビジネス**: API使用量の増加とコスト効率の監視
-
-#### 2. アラート設定
-- **即座対応**: 重大な障害やセキュリティインシデントの即座通知
-- **予防保守**: 性能劣化やリソース不足の事前警告
-- **利用状況**: 使用量急増や予算上限接近の通知
+#### ROI（投資対効果）
+- **初期導入コスト**: 既存Smart API Gateway利用料のみ（追加費用なし）
+- **運用コスト削減**: 月間20〜40時間の工数削減
+- **意思決定の迅速化**: ビジネス機会の早期発見と対応
+- **品質向上**: 人的エラーの大幅削減による信頼性向上

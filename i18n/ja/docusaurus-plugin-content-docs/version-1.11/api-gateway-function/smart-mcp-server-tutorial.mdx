@@ -54,7 +54,55 @@ SaaS運用コンソール→ユーザー管理の画面から、特定のユー�
 
 ![smart-mcp-server-tutorial-3](/ja/img/api-gateway-function/smart-mcp-server-tutorial-3.png)
 
-## Step 4: AIエージェント体験サービスでの接続テスト
+## Step 4: OpenAI Playgroundの利用準備
+
+:::warning 重要な注意事項
+OpenAI Playgroundの利用には**有償のOpenAIアカウント**が必要です。無料アカウントでは利用できません。<br/>
+また、API呼び出しごとに利用料金が発生しますので、予算設定等の適切な管理を行ってください。
+:::
+
+### OpenAIアカウントの準備
+
+このステップでは、OpenAI Playgroundを利用するための前提条件を確認し、必要なアカウント設定を行います。
+
+#### 1. OpenAIアカウントの作成・ログイン
+
+1. [OpenAI](https://openai.com/) にアクセスします
+2. 「Sign up」または「Log in」からアカウントを作成・ログインします
+3. 電話番号認証などの必要な認証手続きを完了します
+
+#### 2. 支払い方法の設定（必須）
+
+:::danger 重要
+OpenAI Playgroundを利用するには、支払い方法の設定が**必須**です。
+:::
+
+1. OpenAI Platform（[platform.openai.com](https://platform.openai.com/)）にログインします
+2. 右上のアカウントメニューから「Billing」を選択します
+3. 「Payment methods」で有効なクレジットカードを追加します
+4. 必要に応じて使用制限（Usage limits）を設定します
+
+#### 3. APIクレジットの確認
+
+1. Billingページで現在のクレジット残高を確認します
+2. 残高が不足している場合は、適切な金額をチャージします
+3. 月次使用制限を設定して予期しない高額請求を防ぎます
+
+#### 4. OpenAI Playgroundへのアクセス確認
+
+1. [OpenAI Playground](https://platform.openai.com/playground) にアクセスします
+2. チャット画面が正常に表示されることを確認します
+3. 簡単なメッセージを送信してAPIが利用可能であることを確認します
+
+:::tip
+- 使用制限を適切に設定して予算を管理しましょう
+- テスト時は少ないトークン数で動作確認を行いましょう
+- 不要になったMCP Serverは削除してコストを抑えましょう
+:::
+
+---
+
+## Step 5: AIエージェント体験サービスでの接続テスト
 
 :::info
 現時点では、OpenAI Playgroundでの接続テストのみサポートしております。
@@ -86,7 +134,7 @@ SaaS運用コンソール→ユーザー管理の画面から、特定のユー�
 
 ---
 
-## Step 5: AIエージェント体験サービスからのAPI呼び出しテスト
+## Step 6: AIエージェント体験サービスからのAPI呼び出しテスト
 
 <Tabs>
 <TabItem value="openai-playground" label="OpenAI Playground" default>
@@ -99,7 +147,7 @@ SaaS運用コンソール→ユーザー管理の画面から、特定のユー�
 </Tabs>
 
 
-## Step 6: エラーのトラブルシューティング
+## Step 7: エラーのトラブルシューティング
 
 ### よくある問題と解決方法
 
