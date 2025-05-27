@@ -11,7 +11,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 
-このチュートリアルでは、Smart API Gateway機能で公開したAPIを、AIエージェントが利用できるMCPサーバーとして公開する手順を説明します。
+このチュートリアルでは、Smart API Gateway機能で公開したAPIを、AIエージェント体験サービスが利用できるMCPサーバーとして公開する手順を説明します。
 
 ### 前提条件
 
@@ -19,7 +19,6 @@ import TabItem from "@theme/TabItem";
 
 - [Smart API Gateway機能](./manual.mdx)でAPIが公開済みであること
 - SaaSus Platform開発コンソールへのアクセス権限があること
-- API Keyが発行されていること
 
 :::info
 Smart MCP Server機能は、Smart API Gateway機能で公開されたAPIを自動的にMCPサーバーとして提供します。<br/>
@@ -42,7 +41,7 @@ Smart MCP Server機能は、Smart API Gateway機能で公開されたAPIを自�
 
 Smart API Gateway機能でAPIが正常に公開されると、以下の情報が表示されますので控えてください。
 
-- **MCPサーバーエンドポイント**: AIエージェントが接続するためのエンドポイント
+- **MCPサーバーエンドポイント**: AIエージェント体験サービスが接続するためのエンドポイント
 
 ![smart-mcp-server-tutorial-2](/ja/img/api-gateway-function/smart-mcp-server-tutorial-2.png)
 
@@ -55,7 +54,7 @@ SaaS運用コンソール→ユーザー管理の画面から、特定のユー�
 
 ![smart-mcp-server-tutorial-3](/ja/img/api-gateway-function/smart-mcp-server-tutorial-3.png)
 
-## Step 4: AIエージェントでの接続テスト
+## Step 4: AIエージェント体験サービスでの接続テスト
 
 :::info
 現時点では、OpenAI Playgroundでの接続テストのみサポートしております。
@@ -87,7 +86,7 @@ SaaS運用コンソール→ユーザー管理の画面から、特定のユー�
 
 ---
 
-## Step 5: AIエージェントからのAPI呼び出しテスト
+## Step 5: AIエージェント体験サービスからのAPI呼び出しテスト
 
 <Tabs>
 <TabItem value="openai-playground" label="OpenAI Playground" default>
@@ -106,11 +105,10 @@ SaaS運用コンソール→ユーザー管理の画面から、特定のユー�
 
 #### 1. MCPサーバーに接続できない
 
-**症状**: AIエージェントがMCPサーバーに接続できない
+**症状**: AIエージェント体験サービスがMCPサーバーに接続できない
 
 **解決方法**:
 - API Keyが正しく設定されているか確認
-- MCPサーバーのステータスがアクティブか確認
 - ネットワーク接続を確認
 
 #### 2. API呼び出しが失敗する
@@ -124,24 +122,23 @@ SaaS運用コンソール→ユーザー管理の画面から、特定のユー�
 
 #### 3. ツールが表示されない
 
-**症状**: AIエージェントでツールの一覧が表示されない
+**症状**: AIエージェント体験サービスでツールの一覧が表示されない
 
 **解決方法**:
 - Smart API Gateway でAPIが正常に公開されているか確認
-- MCPサーバーを一度無効化・再有効化してみる
 - ブラウザのキャッシュをクリアしてから再試行
 
 ---
 
 ## まとめ
 
-このチュートリアルでは、Smart MCP Server機能を使用してAPIをAIエージェント向けに公開する方法を学習しました。
+このチュートリアルでは、Smart MCP Server機能を使用してAPIをAIエージェント体験サービス向けに公開する方法を学習しました。
 
 ### 完了した内容
 
 - Smart MCP Server機能の有効化
 - MCPサーバーエンドポイントの確認
-- AIエージェント（OpenAI Playground）での接続設定
+- AIエージェント体験サービス（OpenAI Playground）での接続設定
 - API呼び出しのテスト
 
 :::info
