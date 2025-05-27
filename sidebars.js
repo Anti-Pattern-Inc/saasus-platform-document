@@ -250,6 +250,16 @@ const sidebars = {
         "tutorial/summarize",
       ],
     },
+    {
+      type: "category",
+      label: "SaaSus API MCP Server Tutorial",
+      items: [
+        "tutorial-mcp/bulk-user-registration",
+        "tutorial-mcp/export-user-info-csv",
+        "tutorial-mcp/export-tenant-user-info",
+        "tutorial-mcp/clone-dev-settings",
+      ],
+    },
   ],
 
   apiDocSidebar: [

@@ -19,6 +19,10 @@
     "message": "料金プランの設定",
     "description": "The label for category Manage Rate Plans in sidebar tutorialSidebar"
   },
+  "sidebar.tutorialSidebar.category.SaaSus API MCP Server Tutorial": {
+    "message": "SaaSusAPI用ローカルMCPサーバ チュートリアル",
+    "description": "The label for category SaaSus API MCP Server Tutorial in sidebar tutorialSidebar"
+  },
   "sidebar.changelogSidebar.category.Changelog": {
     "message": "Changelog",
     "description": "The label for category Changelog in sidebar changelogSidebar"
