@@ -13,7 +13,7 @@ updatedAt: "Wed May 22 2024 15:16:11 GMT+0000 (Coordinated Universal Time)"
 SaaSus Platformの各種設定情報を包括的に取得し、JSON形式で出力する手順書です。
 
 ## 前提条件
-- SaaSus Local MCP Serverが設定済みであること
+- SaaSus API MCP Serverが設定済みであること
 - 適切なAPIアクセス権限があること
 
 
