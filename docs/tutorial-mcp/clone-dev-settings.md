@@ -13,7 +13,7 @@ updatedAt: "Wed May 22 2024 15:16:11 GMT+0000 (Coordinated Universal Time)"
 This is a procedure document for comprehensively retrieving various configuration information from SaaSus Platform and outputting it in JSON format.
 
 ## Prerequisites
-- SaaSus Local MCP Server must be configured
+- SaaSus API MCP Server must be configured
 - Appropriate API access permissions must be available
 
 
