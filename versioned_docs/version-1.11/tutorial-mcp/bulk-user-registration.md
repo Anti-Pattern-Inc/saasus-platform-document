@@ -19,16 +19,16 @@ A procedure guide for efficiently registering multiple users in bulk from CSV fi
 
 ### File Structure
 ```csv
-email,tenant_name,role,name
-user1@example.com,company_a,admin,John Tanaka
-user1@example.com,company_a,user,John Tanaka
-user2@example.com,company_a,user,Jane Sato
-user3@example.com,company_b,user,Jiro Suzuki
-user4@example.com,company_a,user,Saburo Yamada
-user4@example.com,company_a,viewer,Saburo Yamada
-user5@example.com,company_b,admin,Misaki Takahashi
-user5@example.com,company_a,user,Misaki Takahashi
-user5@example.com,company_b,user,Misaki Takahashi
+email,tenant_name,role,name,env
+user1@example.com,company_a,admin,John Tanaka,1
+user1@example.com,company_a,user,John Tanaka,1
+user2@example.com,company_a,user,Jane Sato,
+user3@example.com,company_b,user,Jiro Suzuki,2
+user4@example.com,company_a,user,Saburo Yamada,3
+user4@example.com,company_a,viewer,Saburo Yamada,3
+user5@example.com,company_b,admin,Misaki Takahashi,
+user5@example.com,company_a,user,Misaki Takahashi,
+user5@example.com,company_b,user,Misaki Takahashi,
 ```
 
 ### Column Descriptions
@@ -36,6 +36,7 @@ user5@example.com,company_b,user,Misaki Takahashi
 - **tenant_name**: Tenant name to belong to (required, separate rows for multiple tenants)
 - **role**: Role to assign (single role, separate rows for multiple roles)
 - **name**: User's name (set as attribute)
+- **env**: Environment ID (optional, defaults to production environment (3) if unspecified or empty)
 
 ### Handling Multiple Tenants and Roles
 - **Multiple Roles**: When a user has multiple roles, separate them into different rows
@@ -55,6 +56,7 @@ Please read the users.csv file and execute bulk user registration using the SaaS
    - tenant_name: Tenant name (separate rows for multiple tenants)
    - role: Role (single role, separate rows for multiple roles)
    - name: Name (set as attribute)
+   - env: Environment ID (optional, defaults to production environment (3) if unspecified or empty)
 
 2. Resource Verification and Automatic Creation
    - Check if tenant names listed in CSV exist, create new ones if they don't exist
@@ -65,7 +67,8 @@ Please read the users.csv file and execute bulk user registration using the SaaS
    - Pre-processing: Read entire CSV file and group data by email
    - User Creation: Create SaaS users on first occurrence of each email (no password, email notification)
    - Tenant Processing: Create tenant users on first occurrence of each email for each tenant and set name attribute
-   - Role Processing: Assign specified roles for each row (using env_id=3)
+   - Role Processing: Assign specified roles for each row
+   - Environment Setting: Execute role assignment in the environment specified by CSV env column (defaults to production environment (3) if unspecified)
    - Duplicate Avoidance: Skip creation of existing SaaS users and tenant users, execute only role addition
 
 4. Result Reporting

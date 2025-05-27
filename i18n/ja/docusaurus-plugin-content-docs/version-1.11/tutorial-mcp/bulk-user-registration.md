@@ -19,16 +19,16 @@ CSVファイルから複数のユーザーを効率的に一括登録する手�
 
 ### ファイル構造
 ```csv
-email,tenant_name,role,name
-user1@example.com,company_a,admin,田中太郎
-user1@example.com,company_a,user,田中太郎
-user2@example.com,company_a,user,佐藤花子
-user3@example.com,company_b,user,鈴木次郎
-user4@example.com,company_a,user,山田三郎
-user4@example.com,company_a,viewer,山田三郎
-user5@example.com,company_b,admin,高橋美咲
-user5@example.com,company_a,user,高橋美咲
-user5@example.com,company_b,user,高橋美咲
+email,tenant_name,role,name,env
+user1@example.com,company_a,admin,田中太郎,1
+user1@example.com,company_a,user,田中太郎,1
+user2@example.com,company_a,user,佐藤花子,
+user3@example.com,company_b,user,鈴木次郎,2
+user4@example.com,company_a,user,山田三郎,3
+user4@example.com,company_a,viewer,山田三郎,3
+user5@example.com,company_b,admin,高橋美咲,
+user5@example.com,company_a,user,高橋美咲,
+user5@example.com,company_b,user,高橋美咲,
 ```
 
 ### 列の説明
@@ -36,6 +36,7 @@ user5@example.com,company_b,user,高橋美咲
 - **tenant_name**: 所属するテナント名（必須、複数テナントの場合は行を分ける）
 - **role**: 割り当てるロール（単一ロール、複数ロールの場合は行を分ける）
 - **name**: ユーザーの名前（属性として設定）
+- **env**: 環境ID（オプション、未指定または空の場合は実利用環境(3)を使用）
 
 ### 複数テナント・複数ロールの扱い
 - **複数ロール**: 同一ユーザーが複数のロールを持つ場合は、行を分けて記載
@@ -46,7 +47,7 @@ user5@example.com,company_b,user,高橋美咲
 
 ### 基本的な依頼文
 ```
-users.csvファイルを読み込んで、SaaSus MCPサーバーを使用してユーザーの一括登録を実行してください。
+users.csvファイルを読み込んで、SaaSus API MCP Serverを使用してユーザーの一括登録を実行してください。
 
 【重要】以下の処理をすべて自動で実行してください：
 
@@ -55,17 +56,19 @@ users.csvファイルを読み込んで、SaaSus MCPサーバーを使用して�
    - tenant_name: テナント名（複数テナントの場合は行を分ける）
    - role: ロール（単一ロール、複数ロールの場合は行を分ける）
    - name: 名前（属性として設定）
+   - env: 環境ID（オプション、未指定または空の場合は実利用環境(3)を使用）
 
 2. 必要なリソースの確認と自動作成
    - CSVに記載されているテナント名が存在するか確認し、存在しない場合は新規作成
    - CSVに記載されているロールが存在するか確認し、存在しない場合は新規作成
    - ユーザー属性「name」が定義されているか確認し、存在しない場合は新規作成
 
-3. ユーザーの一括登録（修正版）
+3. ユーザーの一括登録
    - 事前処理: CSVファイル全体を読み込み、emailごとにデータをグループ化
    - ユーザー作成: 各emailについて初回出現時にSaaSユーザーを作成（パスワードなし、メール通知）
    - テナント処理: 各emailの各テナントについて初回出現時にテナントユーザーを作成し、name属性を設定
-   - ロール処理: 各行ごとに指定されたロールを割り当て（env_id=3を使用）
+   - ロール処理: 各行ごとに指定されたロールを割り当て
+   - 環境設定: CSVのenv列で指定された環境でロール割り当てを実行（未指定の場合は実利用環境(3)を使用）
    - 重複回避: 既存のSaaSユーザー・テナントユーザーは作成をスキップし、ロール追加のみ実行
 
 4. 結果の報告
