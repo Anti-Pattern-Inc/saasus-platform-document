@@ -208,6 +208,19 @@
       "items": [
         "api-gateway-function/manual"
       ]
+    },
+    {
+      "type": "category",
+      "label": "SaaSus API MCP Server Usage Guide",
+      "link": {
+        "type": "doc",
+        "id": "mcp-server/setup"
+      },
+      "items": [
+        "mcp-server/bulk-user-registration",
+        "mcp-server/export-user-info-csv",
+        "mcp-server/clone-dev-settings"
+      ]
     }
   ],
   "tutorialSidebar": [
@@ -233,16 +246,6 @@
         },
         "tutorial/implementation-of-authorization-based-on-tenant-information",
         "tutorial/summarize"
-      ]
-    },
-    {
-      "type": "category",
-      "label": "SaaSus API MCP Server Tutorial",
-      "items": [
-        "tutorial-mcp/bulk-user-registration",
-        "tutorial-mcp/export-user-info-csv",
-        "tutorial-mcp/export-tenant-user-info",
-        "tutorial-mcp/clone-dev-settings"
       ]
     }
   ],
