@@ -14,8 +14,6 @@ This is a procedure document for comprehensively retrieving various configuratio
 
 ## Prerequisites
 - SaaSus API MCP Server must be configured
-- Appropriate API access permissions must be available
-
 
 ## Request Text for MCP Server
 
