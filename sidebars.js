@@ -233,6 +233,7 @@ const sidebars = {
       items: [
         "mcp-server/bulk-user-registration",
         "mcp-server/export-user-info-csv",
+        "mcp-server/export-tenant-contract-info",
         "mcp-server/clone-dev-settings",
       ],
     },
