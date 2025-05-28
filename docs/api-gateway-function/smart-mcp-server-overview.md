@@ -216,9 +216,11 @@ OpenAI Playgroundを利用するには、支払い方法の設定が**必須**�
 
 ### OpenAI Playground
 
-1. チャットで、「**MCP Server名**を利用して、**APIエンドポイント**を呼び出して」と入力する
+1. チャットで、「**MCP Server名**でできる操作を教えて」と入力する
 2. 返答を待ち「Approve」が表示されたら、それを押下します
-3. 返答を待ち、APIが問題なく呼び出されているか確認します
+  ![smart-mcp-server-tutorial-9](/img/api-gateway-function/smart-mcp-server-tutorial-9.png)
+3. チャットで、「get-inventoryを呼び出して」と入力する
+  ![smart-mcp-server-tutorial-10](/img/api-gateway-function/smart-mcp-server-tutorial-10.png)
 
 ## Step 7: エラーのトラブルシューティング
 
