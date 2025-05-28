@@ -21,8 +21,10 @@ This guide provides procedures for comprehensively retrieving tenant contract in
 ```
 Please compile tenant contract information.
 
+Lines starting with (;) are commented out and excluded from processing
+
 [Output Settings]
-Output format = Table format
+Output format = CSV format (JSON format, table format, YAML format are also selectable)
 No intermediate deliverables required
 Script or program creation prohibited
 Output only result information
@@ -34,6 +36,7 @@ Tenant Name = true
 Current Plan = true
 Payment Method = true
 Payment Amount = true
+Currency = true
 Contract Start Date = true
 Tenant ID = true
 Representative Email = true
@@ -48,26 +51,11 @@ Tenant Name: Tenant name on SaaSus Platform
 Current Plan: Currently contracted pricing plan name, "Not Contracted" if no plan is contracted
 Payment Method: "AWS Marketplace" for tenants included in Awsmarketplace API GetCustomers, "Stripe" for others
 Payment Amount: Monthly fee
+Currency: Currency of the fee, "ー" if no plan
 Contract Start Date: Plan contract start date, "ー" if no plan
 Tenant ID: Tenant ID on SaaSus Platform
 Representative Email: Tenant representative email address, "ー" if no representative configured
 
-[Output Example]
-Company Name	Tenant Name	Current Plan	Payment Method	Payment Amount	Contract Start Date	Tenant ID	Representative Email
-Company1	Tenant1	Plan1	Stripe	¥5,000	2025/05/28	18cf9320-17b1-4805-a407-b418fc8fbd8b	user1-1@example.com
-```
-
-## Output Format
-
-### Table Header
-```
-Company Name	Tenant Name	Current Plan	Payment Method	Payment Amount	Contract Start Date	Tenant ID	Representative Email
-```
-
-### Data Row Examples
-```
-Tenant2	Tenant2	Plan2	Stripe	¥10,000	2025/05/28	952301d7-19cd-4bc3-bc90-20e28ab764b0	user1-1@example.com
-Company1	Tenant1	Plan1	Stripe	¥5,000	2025/05/28	18cf9320-17b1-4805-a407-b418fc8fbd8b	user1-1@example.com
 ```
 
 ## Retrieved Information
@@ -81,6 +69,7 @@ Company1	Tenant1	Plan1	Stripe	¥5,000	2025/05/28	18cf9320-17b1-4805-a407-b418fc8
 - **Current Plan**: Currently applied pricing plan
 - **Payment Method**: Determination of Stripe integration or AWS Marketplace integration
 - **Payment Amount**: Monthly fee
+- **Currency**: Currency of the fee
 - **Contract Start Date**: Plan application start date
 
 ## Notes
@@ -90,7 +79,7 @@ Company1	Tenant1	Plan1	Stripe	¥5,000	2025/05/28	18cf9320-17b1-4805-a407-b418fc8
 - Tenants not included in AWS Marketplace API GetCustomers will display "Stripe" as payment method
 - If billing information is not configured, company name will display the same value as tenant name
 - Contract start date is converted from Unix timestamp to date format
-- If no plan is configured, contract start date and payment amount will display "ー"
+- If no plan is configured, contract start date, payment amount, and currency will display "ー"
 
 ## Customization
 
