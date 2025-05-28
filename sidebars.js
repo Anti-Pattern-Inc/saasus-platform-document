@@ -231,9 +231,9 @@ const sidebars = {
         id: "mcp-server/setup",
       },
       items: [
-        "mcp-server/bulk-user-registration",
-        "mcp-server/export-user-info-csv",
         "mcp-server/clone-dev-settings",
+        "mcp-server/export-user-info-csv",
+        "mcp-server/bulk-user-registration",
       ],
     },
   ],
