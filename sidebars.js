@@ -221,7 +221,10 @@ const sidebars = {
         type: "doc",
         id: "api-gateway-function/overview",
       },
-      items: ["api-gateway-function/manual"],
+      items: [
+        "api-gateway-function/manual",
+        "api-gateway-function/smart-mcp-server-overview",
+      ],
     },
     {
       type: "category",
