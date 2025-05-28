@@ -224,7 +224,6 @@ const sidebars = {
       items: [
         "api-gateway-function/manual",
         "api-gateway-function/smart-mcp-server-overview",
-        "api-gateway-function/smart-mcp-server-tutorial"
       ],
     },
   ],
