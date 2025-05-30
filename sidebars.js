@@ -236,6 +236,19 @@ const sidebars = {
         },
         {
           type: "category",
+          label: "SaaSus API MCP Server Usage Guide",
+          link: {
+            type: "doc",
+            id: "part-4/mcp-server/setup",
+          },
+          items: [
+            "part-4/mcp-server/bulk-user-registration",
+            "part-4/mcp-server/export-user-info-csv",
+            "part-4/mcp-server/clone-dev-settings",
+          ],
+        },
+        {
+          type: "category",
           label: "Account Settings",
           link: {
             type: "generated-index",
