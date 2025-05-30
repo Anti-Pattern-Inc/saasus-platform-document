@@ -228,6 +228,10 @@
     "message": "Smart API Gateway 機能",
     "description": "The label for category Smart API Gateway Function sidebar guideSidebar"
   },
+  "sidebar.guideSidebar.category.SaaSus API MCP Server Usage Guide": {
+    "message": "SaaSus API MCP Server 設定ガイド",
+    "description": "The label for category SaaSus API MCP Server Usage Guide sidebar guideSidebar"
+  },
   "sidebar.changelogSidebar.doc.2024/03/13": {
     "message": "2024/03/13",
     "description": "The label for the doc item 2024/03/13 in sidebar changelogSidebar, linking to the doc changelog/20240313"
