@@ -51,7 +51,9 @@ curl https://api.saasus.io/v1/auth/credentials?code=${TEMP_CODE} \
      -H "Authorization: SAASUSSIGV1 Sig=..., SaaSID=..., APIKey=..."
 ````
 
-> 一時コード `code` はログインリダイレクト時にクエリパラメータとして渡されます。
+:::info
+一時コード `code` はログインリダイレクト時にクエリパラメータとして渡されます。
+:::
 
 SDK 例は [JWT 取得 API 実装例](/ja/docs/part-6/implementation-guide/implementing-authentication-using-saasus-platform-apiserver#２１１jwt取得api) を参照。
 

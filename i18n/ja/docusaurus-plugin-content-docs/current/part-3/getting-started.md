@@ -17,9 +17,8 @@ SaaSus Platform を利用するには、最初にアカウント登録を行い�
 #### アカウントの新規作成
 
 1. [https://auth.saasus.io/sign-up](https://auth.saasus.io/sign-up)にアクセスします。
-2. 「アカウントを作成」ボタンをクリックします。  
+2. 必要事項を入力し、「新規登録」をクリックします。 
    ![01](/ja/img/part-3/getting-started/getting_started-01.png)
-3. 必要事項を入力し、「新規登録」をクリックします。
 
 #### メール認証
 
@@ -47,7 +46,7 @@ SaaSus Platform を利用するには、最初にアカウント登録を行い�
 
 ![04](/ja/img/part-3/getting-started/getting_started-04.png)
 
-これらを入力し、「保存」をクリックすると、**テナントの各コンソールへの遷移画面**が表示されます。
+これらを入力し、「完了」をクリックすると、**テナントの各コンソールへの遷移画面**が表示されます。
 
 ![05](/ja/img/part-3/getting-started/getting_started-05.png)
 
