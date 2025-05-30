@@ -28,7 +28,7 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 
 ![03](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-03.png)
 
-### コンソールへのログイン
+### SaaSus Platformコンソールへのログイン
 
 テナントが作成されたのちに、ログインを行うと、このようにユーザ属性の入力が求められますので、会社名、名前を入力してください。
 
@@ -38,18 +38,18 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 
 ![05](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-05.png)
 
-**SaaS 開発コンソール**は、SaaS 構築のための設定を行うコンソールで、
+**SaaS開発コンソール**は、SaaS 構築のための設定を行うコンソールで、
 
-**SaaS 管理コンソール**は、SaaS を運用していくためのコンソールになります。
+**SaaS運用コンソール**は、SaaS を運用していくためのコンソールになります。
 
 :::info ドメイン設定について
 SaaSus Platformではドメインを設定することで、ログイン画面の自動生成やメール送信の際のベースドメインに設定することができます。<br/>
-ドメインの設定方法に関しては、[ドメイン名の設定](../saas-development-console/domain-name-preference)で確認してください。
+ドメインの設定方法に関しては、[ドメイン・遷移先の設定](/docs/part-4/application-settings/domain-and-redirect-settings)で確認してください。
 :::
 
 :::info ログイン画面のカスタマイズについて
 自動生成されたログイン画面はサービス名やアイコンを表示したり、利用規約やプライバシーポリシーのリンクを設定することができます。<br/>
-設定方法は、[ログイン画面など認証系画面のカスタマイズ](../saas-development-console/authorization-screen-customize)で確認してください。
+設定方法は、[基本情報の設定](/docs/part-4/application-settings/basic-app-settings)で確認してください。
 :::
 
 ### 認証後の遷移先 URL の設定
@@ -74,9 +74,9 @@ SaaSus Platformではドメインを設定することで、ログイン画面�
 
 以下の設定を事前に行ってください：
 
-- [ユーザに追加属性を定義する](../saas-development-console/declare-additional-attribute-to-user)
-- [テナントに追加属性を定義する](../saas-development-console/declare-additional-attribute-to-tenant)
-- [役割の定義](../saas-development-console/role-definition)
+- [ユーザー属性定義](/docs/part-4/user-authz-settings/declare-additional-attribute-to-user)
+- [テナント属性定義](/docs/part-4/application-settings/declare-additional-attribute-to-tenant)
+- [役割定義](/docs/part-4/user-authz-settings/role-definition)
 
 以降の手順は、これらの設定が完了していることを前提として進行します。
 :::
