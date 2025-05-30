@@ -3,6 +3,8 @@ title: "Step-by-Step Guide to Setting Up Pricing Plans"
 slug: "setting-measurement-units-function-menus-and-price-plans"
 excerpt: ""
 hidden: false
+pagination_next: null
+pagination_prev: null
 createdAt: "Fri Jan 20 2023 01:47:13 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
@@ -119,4 +121,6 @@ Finally, define pricing plans by combining feature menus.
 ![06](/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/setting-measurement-units-function-menus-and-price-plans-06.png)
 
 Please configure the Basic Plan in the same way as the Free Plan.
+
+[Return to the original procedure](./manage-rate-plans#applying-rate-plans-to-tenants)
 
