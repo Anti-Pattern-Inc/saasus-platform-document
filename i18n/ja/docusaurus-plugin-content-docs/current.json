@@ -67,6 +67,10 @@
     "message": "補足",
     "description": "The label for category Supplementary in sidebar docsSidebar"
   },
+  "sidebar.docsSidebar.category.SaaSus API MCP Server Usage Guide": {
+    "message": "SaaSus API MCP Server 設定ガイド",
+    "description": "The label for category SaaSus API MCP Server Usage Guide in sidebar docsSidebar"
+  },
   "sidebar.docsSidebar.category.Account Settings": {
     "message": "アカウント設定",
     "description": "The label for category Account Settings in sidebar docsSidebar"
