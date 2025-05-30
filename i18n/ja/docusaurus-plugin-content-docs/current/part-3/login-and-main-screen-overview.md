@@ -50,7 +50,7 @@ SaaSus Platformでは、画面左上に表示されるセレクトボックス�
 
 ## 6. SaaSus Platformアカウントへの多要素認証の設定手順
 
-1. SaaS開発コンソールのヘッダー右にあるユーザーメニューをクリックします。
+1. SaaS開発コンソールまたはSaaS運用コンソールの右上にあるユーザーメニューをクリックします。
 2. `多要素認証の設定`をクリックします。
 3. `デバイスを追加`ボタンをクリックします。  
    ![multi-factor-authentication-1](/ja/img/part-3/login-and-main-screen-overview/multi-factor-authentication-1.png)
