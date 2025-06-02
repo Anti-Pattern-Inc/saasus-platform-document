@@ -115,24 +115,9 @@ Refer to the following page to complete this setup:
 The following steps require programming knowledge.
 :::
 
-### Setting destination URL after authentication
-
-Based on the domain name you configured, SaaSus Platform generates a login screen. After logging in, the authentication information is transferred to the SaaS side.<br/>
-The URL of the SaaS to be taken over must be registered as the Callback URL.
-
-Click "Transition destination after authentication" from the side menu to display the Callback URL setting screen.
-
-Typically, you set the Callback URL based on the URL of the SaaS offering.<br/>
-However, since we will be running the sample application locally this time, we will configure it as follows.
-
-- For Laravel: [http://localhost/callback](http://localhost/callback)
-- For Express: [http://localhost:3000/callback](http://localhost:3000/callback)
-
-![08](/img/tutorial/authentication-preference/authentication-preference-08.png)
-
 ### Incorporating an Authentication Module
 
-Next, integrate the authentication module provided by the SaaSus Platform.
+Integrate the authentication module provided by the SaaSus Platform.
 
 In this application, all URI routes will require authentication. If a user is not authenticated, they will not be able to access the application.
 
