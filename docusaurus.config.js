@@ -4,154 +4,6 @@
 import { themes as prismThemes } from "prism-react-renderer";
 const locale = process.env.DOCUSAURUS_CURRENT_LOCALE || 'en';
 
-const redirectsEn = [
-  // 構造変更前のトップページが指定された場合のリダイレクト処理
-  {
-    from: '/docs/saasus-platform-document/',
-    to: '/docs/part-1/purpose-and-overview',
-  },
-  // AWS Marketplace Integration
-  {
-    to: '/docs/part-4/aws-marketplace-integration/aws-marketplace-integration',
-    from: ['/docs/aws-marketplace-integration/aws-marketplace-integration'],
-  },
-  {
-    to: '/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration',
-    from: ['/docs/aws-marketplace-integration/aws-marketplace-seller-registration'],
-  },
-  {
-    to: '/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/aws-marketplace-seller-registration',
-    from: ['/docs/aws-marketplace-integration/aws-marketplace-seller-registration/aws-marketplace-seller-registration'],
-  },
-  {
-    to: '/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/public-profile-settings',
-    from: ['/docs/aws-marketplace-integration/aws-marketplace-seller-registration/public-profile-settings'],
-  },
-  {
-    to: '/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/tax-information-interview',
-    from: ['/docs/aws-marketplace-integration/aws-marketplace-seller-registration/tax-information-interview'],
-  },
-  {
-    to: '/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/dac7-tax-survey',
-    from: ['/docs/aws-marketplace-integration/aws-marketplace-seller-registration/dac7-tax-survey'],
-  },
-  {
-    to: '/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account',
-    from: ['/docs/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account'],
-  },
-  {
-    to: '/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-disbursement-methods',
-    from: ['/docs/aws-marketplace-integration/aws-marketplace-seller-registration/register-disbursement-methods'],
-  },
-  {
-    to: '/docs/part-4/aws-marketplace-integration/product-submission',
-    from: ['/docs/aws-marketplace-integration/product-submission'],
-  },
-  {
-    to: '/docs/part-4/aws-marketplace-integration/product-submission/generate-product-code',
-    from: ['/docs/aws-marketplace-integration/product-submission/generate-product-code'],
-  },
-  {
-    to: '/docs/part-4/aws-marketplace-integration/product-submission/step1-provide-product-information',
-    from: ['/docs/aws-marketplace-integration/product-submission/step1-provide-product-information'],
-  },
-  {
-    to: '/docs/part-4/aws-marketplace-integration/product-submission/step2-configure-fulfillment-options',
-    from: ['/docs/aws-marketplace-integration/product-submission/step2-configure-fulfillment-options'],
-  },
-  {
-    to: '/docs/part-4/aws-marketplace-integration/product-submission/step3-configure-product-pricing',
-    from: ['/docs/aws-marketplace-integration/product-submission/step3-configure-product-pricing'],
-  },
-  {
-    to: '/docs/part-4/aws-marketplace-integration/product-submission/step4-set-prices',
-    from: ['/docs/aws-marketplace-integration/product-submission/step4-set-prices'],
-  },
-  {
-    to: '/docs/part-4/aws-marketplace-integration/product-submission/step5-specify-refund-policy',
-    from: ['/docs/aws-marketplace-integration/product-submission/step5-specify-refund-policy'],
-  },
-  {
-    to: '/docs/part-4/aws-marketplace-integration/product-submission/step6-configure-eula',
-    from: ['/docs/aws-marketplace-integration/product-submission/step6-configure-eula'],
-  },
-  {
-    to: '/docs/part-4/aws-marketplace-integration/product-submission/step7-configure-offer-availability',
-    from: ['/docs/aws-marketplace-integration/product-submission/step7-configure-offer-availability'],
-  },
-  {
-    to: '/docs/part-4/aws-marketplace-integration/product-submission/step8-configure-allowlist',
-    from: ['/docs/aws-marketplace-integration/product-submission/step8-configure-allowlist'],
-  },
-  {
-    to: '/docs/part-4/aws-marketplace-integration/embedding-products',
-    from: ['/docs/aws-marketplace-integration/embedding-products'],
-  },
-  {
-    to: '/docs/part-4/aws-marketplace-integration/supplementary',
-    from: ['/docs/aws-marketplace-integration/supplementary'],
-  },
-  {
-    to: '/docs/part-4/aws-marketplace-integration/supplementary/integration-test',
-    from: ['/docs/aws-marketplace-integration/supplementary/integration-test'],
-  },
-  {
-    to: '/docs/part-4/aws-marketplace-integration/supplementary/self-up-setting',
-    from: ['/docs/aws-marketplace-integration/supplementary/self-up-setting'],
-  },
-  {
-    to: '/docs/part-4/aws-marketplace-integration/supplementary/user-judgment-method',
-    from: ['/docs/aws-marketplace-integration/supplementary/user-judgment-method'],
-  },
-  {
-    to: '/docs/part-4/aws-marketplace-integration/supplementary/supplementary-1',
-    from: ['/docs/aws-marketplace-integration/supplementary/supplementary-1'],
-  },
-  {
-    to: '/docs/part-4/aws-marketplace-integration/supplementary/supplementary-2',
-    from: ['/docs/aws-marketplace-integration/suppplementary/supplementary-2'],
-  },
-  {
-    to: '/docs/part-4/aws-marketplace-integration/supplementary/supplementary-3',
-    from: ['/docs/aws-marketplace-integration/supplementary/supplementary-3'],
-  },
-  {
-    to: '/docs/part-4/aws-marketplace-integration/supplementary/final-review-request',
-    from: ['/docs/aws-marketplace-integration/supplementary/final-review-request'],
-  },
-  {
-    to: '/docs/part-4/aws-marketplace-integration/supplementary/public-request',
-    from: ['/docs/aws-marketplace-integration/supplementary/public-request'],
-  },
-  // Smart API Gateway Function
-  {
-    to: '/docs/part-4/smart-api-gateway-features/overview',
-    from: ['/docs/api-gateway-function/overview'],
-  },
-  {
-    to: '/docs/part-4/smart-api-gateway-features/manual',
-    from: ['/docs/api-gateway-function/manual'],
-  },
-  // Other redirects (e.g., from legacy URLs or structural changes)
-  {
-    to: '/docs/part-4/pricing-and-billing/tiered-unit',
-    from: ['/docs/saas-development-console/tiered_unit'],
-  },
-  {
-    to: '/docs/part-4/pricing-and-billing/tiered-unit',
-    from: ['/docs/saas-development-console/procedure-for-applying-for-a-paid-plan'],
-  },
-  
-  {
-    to: '/docs/part-5/user-management/user-activity-history-log',
-    from: ['/docs/saas-operation-console/user-activity-history-log'],
-  },
-  {
-    to: '/docs/part-5/price-plan',
-    from: ['/docs/saas-operation-console/price-plan'],
-  },
-];
-
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "Saasus Platform Document",
@@ -377,19 +229,177 @@ const config = {
       require.resolve('@docusaurus/plugin-client-redirects'),
       {
         // 英語ページのリダイレクト設定（固定で設定）
-        redirects: redirectsEn,
-
-        // 日本語ページ用の自動リダイレクト設定
-        createRedirects(existingPath) {
-          // パスが日本語ページのバージョン付きかをチェック（例: /ja/docs/1.11/...）
-          const match = existingPath.match(/^\/ja\/docs\/([^/]+)\/(.+)/);
-          if (!match) return;  // バージョン付き以外は処理しない
-
-          const pathWithoutVersion = match[2];  // バージョン部分を除去（例: part-4/...）
-          
-          // バージョン無しURL（旧URL）からバージョン付きURLへリダイレクトする
-          return [`/ja/docs/${pathWithoutVersion}`];
-        },
+        redirects: [
+        // 構造変更前のトップページが指定された場合のリダイレクト処理
+          {
+            from: '/docs/saasus-platform-document/',
+            to: '/docs/part-1/purpose-and-overview',
+          },
+          // AWS Marketplace Integration
+          {
+            to: '/docs/part-4/aws-marketplace-integration/aws-marketplace-integration',
+            from: ['/docs/aws-marketplace-integration/aws-marketplace-integration'],
+          },
+          {
+            to: '/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration',
+            from: ['/docs/aws-marketplace-integration/aws-marketplace-seller-registration'],
+          },
+          {
+            to: '/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/aws-marketplace-seller-registration',
+            from: ['/docs/aws-marketplace-integration/aws-marketplace-seller-registration/aws-marketplace-seller-registration'],
+          },
+          {
+            to: '/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/public-profile-settings',
+            from: ['/docs/aws-marketplace-integration/aws-marketplace-seller-registration/public-profile-settings'],
+          },
+          {
+            to: '/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/tax-information-interview',
+            from: ['/docs/aws-marketplace-integration/aws-marketplace-seller-registration/tax-information-interview'],
+          },
+          {
+            to: '/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/dac7-tax-survey',
+            from: ['/docs/aws-marketplace-integration/aws-marketplace-seller-registration/dac7-tax-survey'],
+          },
+          {
+            to: '/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account',
+            from: ['/docs/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account'],
+          },
+          {
+            to: '/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-disbursement-methods',
+            from: ['/docs/aws-marketplace-integration/aws-marketplace-seller-registration/register-disbursement-methods'],
+          },
+          {
+            to: '/docs/part-4/aws-marketplace-integration/product-submission',
+            from: ['/docs/aws-marketplace-integration/product-submission'],
+          },
+          {
+            to: '/docs/part-4/aws-marketplace-integration/product-submission/generate-product-code',
+            from: ['/docs/aws-marketplace-integration/product-submission/generate-product-code'],
+          },
+          {
+            to: '/docs/part-4/aws-marketplace-integration/product-submission/step1-provide-product-information',
+            from: ['/docs/aws-marketplace-integration/product-submission/step1-provide-product-information'],
+          },
+          {
+            to: '/docs/part-4/aws-marketplace-integration/product-submission/step2-configure-fulfillment-options',
+            from: ['/docs/aws-marketplace-integration/product-submission/step2-configure-fulfillment-options'],
+          },
+          {
+            to: '/docs/part-4/aws-marketplace-integration/product-submission/step3-configure-product-pricing',
+            from: ['/docs/aws-marketplace-integration/product-submission/step3-configure-product-pricing'],
+          },
+          {
+            to: '/docs/part-4/aws-marketplace-integration/product-submission/step4-set-prices',
+            from: ['/docs/aws-marketplace-integration/product-submission/step4-set-prices'],
+          },
+          {
+            to: '/docs/part-4/aws-marketplace-integration/product-submission/step5-specify-refund-policy',
+            from: ['/docs/aws-marketplace-integration/product-submission/step5-specify-refund-policy'],
+          },
+          {
+            to: '/docs/part-4/aws-marketplace-integration/product-submission/step6-configure-eula',
+            from: ['/docs/aws-marketplace-integration/product-submission/step6-configure-eula'],
+          },
+          {
+            to: '/docs/part-4/aws-marketplace-integration/product-submission/step7-configure-offer-availability',
+            from: ['/docs/aws-marketplace-integration/product-submission/step7-configure-offer-availability'],
+          },
+          {
+            to: '/docs/part-4/aws-marketplace-integration/product-submission/step8-configure-allowlist',
+            from: ['/docs/aws-marketplace-integration/product-submission/step8-configure-allowlist'],
+          },
+          {
+            to: '/docs/part-4/aws-marketplace-integration/embedding-products',
+            from: ['/docs/aws-marketplace-integration/embedding-products'],
+          },
+          {
+            to: '/docs/part-4/aws-marketplace-integration/supplementary',
+            from: ['/docs/aws-marketplace-integration/supplementary'],
+          },
+          {
+            to: '/docs/part-4/aws-marketplace-integration/supplementary/integration-test',
+            from: ['/docs/aws-marketplace-integration/supplementary/integration-test'],
+          },
+          {
+            to: '/docs/part-4/aws-marketplace-integration/supplementary/self-up-setting',
+            from: ['/docs/aws-marketplace-integration/supplementary/self-up-setting'],
+          },
+          {
+            to: '/docs/part-4/aws-marketplace-integration/supplementary/user-judgment-method',
+            from: ['/docs/aws-marketplace-integration/supplementary/user-judgment-method'],
+          },
+          {
+            to: '/docs/part-4/aws-marketplace-integration/supplementary/supplementary-1',
+            from: ['/docs/aws-marketplace-integration/supplementary/supplementary-1'],
+          },
+          {
+            to: '/docs/part-4/aws-marketplace-integration/supplementary/supplementary-2',
+            from: ['/docs/aws-marketplace-integration/suppplementary/supplementary-2'],
+          },
+          {
+            to: '/docs/part-4/aws-marketplace-integration/supplementary/supplementary-3',
+            from: ['/docs/aws-marketplace-integration/supplementary/supplementary-3'],
+          },
+          {
+            to: '/docs/part-4/aws-marketplace-integration/supplementary/final-review-request',
+            from: ['/docs/aws-marketplace-integration/supplementary/final-review-request'],
+          },
+          {
+            to: '/docs/part-4/aws-marketplace-integration/supplementary/public-request',
+            from: ['/docs/aws-marketplace-integration/supplementary/public-request'],
+          },
+          // Smart API Gateway Function
+          {
+            to: '/docs/part-4/smart-api-gateway-features/overview',
+            from: ['/docs/api-gateway-function/overview'],
+          },
+          {
+            to: '/docs/part-4/smart-api-gateway-features/manual',
+            from: ['/docs/api-gateway-function/manual'],
+          },
+          // Implementation Guide
+          {
+            to: '/docs/part-6/implementation-guide/implementing-authentication-using-saasus-platform-apiserver',
+            from: ['/docs/implementation-guide/implementing-authentication-using-saasus-platform-apiserver'],
+          },
+          {
+            to: '/docs/part-6/implementation-guide/implementing-authentication-using-saasus-serverless',
+            from: ['/docs/implementation-guide/implementing-authentication-using-saasus-serverless'],
+          },
+          {
+            to: '/docs/part-6/implementation-guide/metering-api-sample',
+            from: ['/docs/implementation-guide/metering-api-sample'],
+          },
+          {
+            to: '/docs/part-6/implementation-guide/implementing-multi-factor-authentication-apiserver',
+            from: ['/docs/implementation-guide/implementing-multi-factor-authentication-apiserver'],
+          },
+          // Other redirects (e.g., from legacy URLs or structural changes)
+          {
+            to: '/docs/part-6/developer-sdk-api-overview',
+            from: ['/docs/sdk-list'],
+          },
+          {
+            to: '/docs/part-7/faq',
+            from: ['/docs/faq'],
+          },
+          {
+            to: '/docs/part-4/pricing-and-billing/tiered-unit',
+            from: ['/docs/saas-development-console/tiered_unit'],
+          },
+          {
+            to: '/docs/part-4/pricing-and-billing/tiered-unit',
+            from: ['/docs/saas-development-console/procedure-for-applying-for-a-paid-plan'],
+          },
+          {
+            to: '/docs/part-5/user-management/user-activity-history-log',
+            from: ['/docs/saas-operation-console/user-activity-history-log'],
+          },
+          {
+            to: '/docs/part-5/price-plan',
+            from: ['/docs/saas-operation-console/price-plan'],
+          },
+        ]
       },
     ],
   ],
