@@ -52,6 +52,23 @@ SaaSus Platformではドメインを設定することで、ログイン画面�
 設定方法は、[ログイン画面など認証系画面のカスタマイズ](../saas-development-console/authorization-screen-customize)で確認してください。
 :::
 
+### 認証後の遷移先 URL の設定
+
+設定したドメイン名をベースにして、SaaSus Platform はログイン画面を生成します。<br/>
+ログイン後、SaaS 側に認証情報を引き継ぎます。この引き継ぎ先の SaaS の URL を、Callback URL として登録する必要があります。
+
+サイドメニューから「認証後遷移先」をクリックし、Callback URL 設定画面を表示します。
+
+通常は、提供している SaaS の URL をベースに Callback URL を設定します。<br/>
+ただし、今回はサンプルアプリケーションをローカルで動かすため、以下のように設定します。
+
+- Laravel の場合: [http://localhost/callback](http://localhost/callback)
+- Express の場合: [http://localhost:3000/callback](http://localhost:3000/callback)
+
+![06](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-06.png)
+
+このように Callback URL を設定した後は、引き続きチュートリアルを進めるために、以下の追加設定が必要です。
+
 :::caution チュートリアルを進める前に必要な設定です
 このあとのチュートリアルをスムーズに進めるためには、ユーザやテナントに関する追加情報の定義が **必須** です。
 
