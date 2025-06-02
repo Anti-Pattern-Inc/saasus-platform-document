@@ -188,7 +188,7 @@ const config = {
         docs: {
           // バージョンファイルを作成した後に、公開したいバージョンを指定する
           // docs:version　{ver} する場合はonlyIncludeVersionsに{ver}が含まれていたり、空配列だとエラーになる
-          onlyIncludeVersions: ["1.11","current"],
+          onlyIncludeVersions: ["1.11"],
           sidebarPath: require.resolve("./sidebars.js"),
         },
         blog: false,
