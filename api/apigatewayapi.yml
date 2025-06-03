@@ -1,22 +1,18 @@
 openapi: 3.0.0
 info:
-  description: "SaaSus Smart API Gateway API Schema"
-  version: "1.0.0"
-  title: "SaaSus Smart API Gateway API Schema"
+  description: SaaSus Smart API Gateway API Schema
+  version: 1.0.0
+  title: SaaSus Smart API Gateway API Schema
   contact:
-    name: "Anti-Pattern"
+    name: Anti-Pattern
 servers:
-  - url: "https://api.saasus.io/v1/apigateway"
+  - url: https://api.saasus.io/v1/apigateway
     description: Production API Server
 tags:
-  - name: "smartApiGateway"
+  - name: smartApiGateway
     description: SaaSus Smart API Gateway
     x-description-i18n:
-      jpn: "SaaSus Smart API Gateway"
-  - name: "error"
-    description: Error for Testing Purposes
-    x-description-i18n:
-      jpn: テスト用途のエラー
+      jpn: SaaSus Smart API Gateway
 security:
   - Bearer: []
 paths:
@@ -34,18 +30,18 @@ paths:
         jpn: |
           Smart API Gatewayの設定情報を取得
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiGatewaySettings"
-        500:
+                $ref: '#/components/schemas/ApiGatewaySettings'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
     patch:
       tags:
         - smartApiGateway
@@ -63,16 +59,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateApiGatewaySettingsParam"
+              $ref: '#/components/schemas/UpdateApiGatewaySettingsParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /create:
     post:
       tags:
@@ -87,14 +83,14 @@ paths:
         jpn: |
           API Gatewayを作成します
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /api-keys:
     get:
       tags:
@@ -111,13 +107,7 @@ paths:
         - If tenant_id, env_id, and user_id are specified, a complete match returns the API keys for the target user.
         - Additionally, searching is supported even when only env_id or only user_id are provided.
       x-description-i18n:
-        jpn:
-          クエリパラメータ tenant_id、env_id、user_id の組み合わせにより、取得内容が変わります。
-          - tenant_id が指定されない場合、全件の一覧が返されます。
-          - tenant_id のみ指定されると、指定されたテナント内のAPIキー一覧が返されます。
-          - tenant_id と env_id が指定されると、環境単位でフィルタリングして取得します。
-          - tenant_id, env_id, user_id の全てが指定される場合は、完全一致検索で対象ユーザーのAPIキーが取得されます。
-          - また、env_id のみ、user_id のみ指定された場合も検索が可能です。
+        jpn: クエリパラメータ tenant_id、env_id、user_id の組み合わせにより、取得内容が変わります。 - tenant_id が指定されない場合、全件の一覧が返されます。 - tenant_id のみ指定されると、指定されたテナント内のAPIキー一覧が返されます。 - tenant_id と env_id が指定されると、環境単位でフィルタリングして取得します。 - tenant_id, env_id, user_id の全てが指定される場合は、完全一致検索で対象ユーザーのAPIキーが取得されます。 - また、env_id のみ、user_id のみ指定された場合も検索が可能です。
       parameters:
         - name: tenant_id
           in: query
@@ -161,18 +151,18 @@ paths:
           schema:
             type: boolean
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiKeys"
-        "500":
+                $ref: '#/components/schemas/ApiKeys'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
     post:
       tags:
         - smartApiGateway
@@ -194,20 +184,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateApiKeyParam"
+              $ref: '#/components/schemas/CreateApiKeyParam'
       responses:
-        "201":
+        '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiKey"
-        "500":
+                $ref: '#/components/schemas/ApiKey'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /api-keys/{api_key}:
     get:
       tags:
@@ -232,18 +222,18 @@ paths:
             type: string
             example: 1234567890abcdef
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiKey"
-        "500":
+                $ref: '#/components/schemas/ApiKey'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /tenants/{tenant_id}/allowed-ips:
     patch:
       tags:
@@ -258,22 +248,22 @@ paths:
         jpn: |
           テナントの許可IPアドレスを更新します。
       parameters:
-        - $ref: "#/components/parameters/TenantId"
+        - $ref: '#/components/parameters/TenantId'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateAllowedIpsParam"
+              $ref: '#/components/schemas/UpdateAllowedIpsParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
     get:
       tags:
         - smartApiGateway
@@ -287,20 +277,20 @@ paths:
         jpn: |
           テナントの許可IPアドレスを取得します。
       parameters:
-        - $ref: "#/components/parameters/TenantId"
+        - $ref: '#/components/parameters/TenantId'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/AllowedIps"
-        500:
+                $ref: '#/components/schemas/AllowedIps'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /tenants/{tenant_id}:
     patch:
       tags:
@@ -315,22 +305,22 @@ paths:
         jpn: |
           テナント情報を更新します。
       parameters:
-        - $ref: "#/components/parameters/TenantId"
+        - $ref: '#/components/parameters/TenantId'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateTenantParam"
+              $ref: '#/components/schemas/UpdateTenantParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
     get:
       tags:
         - smartApiGateway
@@ -344,20 +334,20 @@ paths:
         jpn: |
           テナント情報を取得します。
       parameters:
-        - $ref: "#/components/parameters/TenantId"
+        - $ref: '#/components/parameters/TenantId'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiGatewayTenant"
-        500:
+                $ref: '#/components/schemas/ApiGatewayTenant'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /publish:
     post:
       tags:
@@ -372,14 +362,14 @@ paths:
         jpn: |
           API Gatewayを公開します
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /unpublish:
     post:
       tags:
@@ -394,14 +384,14 @@ paths:
         jpn: |
           API Gatewayを非公開にします
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /upload:
     post:
       tags:
@@ -419,16 +409,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ApiGatewayInputFile"
+              $ref: '#/components/schemas/ApiGatewayInputFile'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /cloudformation-launch-stack-link:
     get:
       tags:
@@ -443,38 +433,18 @@ paths:
         jpn: |
           CloudFormationのクイック作成リンクを取得します。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CloudFormationLaunchStackLink"
-        500:
+                $ref: '#/components/schemas/CloudFormationLaunchStackLink'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-  /errors/internal-server-error:
-    get:
-      tags:
-        - "error"
-      operationId: ReturnInternalServerError
-      summary: Return Internal Server Error
-      x-summary-i18n:
-        jpn: ステータスコード500でサーバーエラーを返却
-      description: |
-        This endpoint is used for testing purposes. Returns a server error with status code 500.
-      x-description-i18n:
-        jpn: |
-          テスト用途で使用するエンドポイントです。ステータスコード500でサーバーエラーを返却します。
-      responses:
-        500:
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
 components:
   securitySchemes:
     Bearer:
@@ -492,7 +462,7 @@ components:
         jpn: テナントID
       required: true
       schema:
-        $ref: "#/components/schemas/Uuid"
+        $ref: '#/components/schemas/Uuid'
     UserId:
       in: path
       name: user_id
@@ -501,7 +471,7 @@ components:
         jpn: ユーザーID
       required: true
       schema:
-        $ref: "#/components/schemas/Uuid"
+        $ref: '#/components/schemas/Uuid'
     EnvId:
       in: path
       name: env_id
@@ -510,7 +480,7 @@ components:
         jpn: 環境ID
       required: true
       schema:
-        $ref: "#/components/schemas/Id"
+        $ref: '#/components/schemas/Id'
   schemas:
     UpdateAllowedIpsParam:
       title: Update Allowed IPs Parameter
@@ -528,7 +498,9 @@ components:
           type: array
           items:
             type: string
-          example: ["192.168.0.0/24", "172.16.0.0/24"]
+          example:
+            - 192.168.0.0/24
+            - 172.16.0.0/24
       required:
         - allowed_ips
     AllowedIps:
@@ -547,7 +519,9 @@ components:
           type: array
           items:
             type: string
-          example: ["192.168.0.0/24", "172.16.0.0/24"]
+          example:
+            - 192.168.0.0/24
+            - 172.16.0.0/24
       required:
         - allowed_ips
     Error:
@@ -593,7 +567,7 @@ components:
           x-description-i18n:
             jpn: 自動生成されたopenapi定義ファイルのダウンロードURL。API Gatewayを構築するために使用されます。
           type: string
-          example: "https://presigned-url-test.s3.ap-northeast-1.amazonaws.com/test.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=xxxxxx%2F20230710%2Fap-northeast-1%2Fs3%2Faws4_request"
+          example: https://presigned-url-test.s3.ap-northeast-1.amazonaws.com/test.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=xxxxxx%2F20230710%2Fap-northeast-1%2Fs3%2Faws4_request
         internal_endpoint_mapping_file_download_url:
           title: internal endpoint mapping file download URL
           x-title-i18n:
@@ -602,7 +576,7 @@ components:
           x-description-i18n:
             jpn: 自動生成されたインターナルエンドポイントマッピングファイルのダウンロードURL。API Gatewayを構築するために使用されます。
           type: string
-          example: "https://presigned-url-test.s3.ap-northeast-1.amazonaws.com/test.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=xxxxxx%2F20230710%2Fap-northeast-1%2Fs3%2Faws4_request"
+          example: https://presigned-url-test.s3.ap-northeast-1.amazonaws.com/test.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=xxxxxx%2F20230710%2Fap-northeast-1%2Fs3%2Faws4_request
         status:
           title: status of creation
           x-title-i18n:
@@ -676,7 +650,9 @@ components:
           type: array
           items:
             type: string
-          example: ["subnet-1234567890abcdef0", "subnet-1234567890abcdef1"]
+          example:
+            - subnet-1234567890abcdef0
+            - subnet-1234567890abcdef1
         saas_vpc_id:
           title: SaaS VPC ID
           x-title-i18n:
@@ -699,17 +675,17 @@ components:
           x-description-i18n:
             jpn: DNSレコードの検証結果
         certificate_dns_record:
-          $ref: "#/components/schemas/DnsRecord"
+          $ref: '#/components/schemas/DnsRecord'
           description: Certificate Domain Name
           x-description-i18n:
             jpn: 代替ドメイン名
         cloud_front_dns_record:
-          $ref: "#/components/schemas/DnsRecord"
+          $ref: '#/components/schemas/DnsRecord'
           description: CloudFront DNS Records
           x-description-i18n:
             jpn: Cloud Front DNS レコード
         vpc_endpoint_dns_record:
-          $ref: "#/components/schemas/DnsRecord"
+          $ref: '#/components/schemas/DnsRecord'
           description: VPC Endpoint DNS Records
           x-description-i18n:
             jpn: VPC Endpoint DNS レコード
@@ -736,7 +712,7 @@ components:
           x-description-i18n:
             jpn: REST APIのエンドポイント
           type: string
-          example: "https://api.example.com"
+          example: https://api.example.com
         endpoint_settings_list:
           title: Endpoint Settings List
           x-title-i18n:
@@ -746,9 +722,9 @@ components:
             jpn: エンドポイント毎の設定一覧
           type: array
           items:
-            $ref: "#/components/schemas/EndpointSettings"
+            $ref: '#/components/schemas/EndpointSettings'
         tenant_routing_type:
-          $ref: "#/components/schemas/TenantRoutingType"
+          $ref: '#/components/schemas/TenantRoutingType'
       required:
         - generated_file_status
         - internal_endpoint_openapi_definition_file_download_url
@@ -856,7 +832,9 @@ components:
           type: array
           items:
             type: string
-          example: ["subnet-1234567890abcdef0", "subnet-1234567890abcdef1"]
+          example:
+            - subnet-1234567890abcdef0
+            - subnet-1234567890abcdef1
         saas_vpc_id:
           title: SaaS VPC ID
           x-title-i18n:
@@ -890,9 +868,9 @@ components:
             jpn: エンドポイント毎の設定一覧
           type: array
           items:
-            $ref: "#/components/schemas/EndpointSettings"
+            $ref: '#/components/schemas/EndpointSettings'
         tenant_routing_type:
-          $ref: "#/components/schemas/TenantRoutingType"
+          $ref: '#/components/schemas/TenantRoutingType'
     ApiGatewayInputFile:
       title: Api Gateway Input File
       x-title-i18n:
@@ -908,7 +886,7 @@ components:
             jpn: API Gatewayを作成するためにアップロードするファイルのコンテンツ
           type: string
           format: base64
-          example: "UEsDBBQACAAIAJr6oFQmTAuRfvOGAA=="
+          example: UEsDBBQACAAIAJr6oFQmTAuRfvOGAA==
       required:
         - content
     ApiKey:
@@ -927,17 +905,17 @@ components:
           type: string
           example: 1234567890abcdef
         tenant_id:
-          $ref: "#/components/schemas/Uuid"
+          $ref: '#/components/schemas/Uuid'
           description: Tenant ID
           x-description-i18n:
             jpn: テナントID
         env_id:
-          $ref: "#/components/schemas/Id"
+          $ref: '#/components/schemas/Id'
           description: Environment ID
           x-description-i18n:
             jpn: 環境ID
         user_id:
-          $ref: "#/components/schemas/Uuid"
+          $ref: '#/components/schemas/Uuid'
           description: User ID
           x-description-i18n:
             jpn: ユーザーID
@@ -954,17 +932,17 @@ components:
         api_keys:
           type: array
           items:
-            $ref: "#/components/schemas/ApiKey"
+            $ref: '#/components/schemas/ApiKey'
       example:
         api_keys:
-          - api_key: "ZDMiIHN0UmVmOmRvY3VtZW50SUQ9Inhtc"
-            tenant_id: "69e732d6-8ecc-45c4-c2eb-8438f7ffe775"
-            env_id: "1"
-            user_id: "f94bfffc-8be2-11ec-b41a-0242ac120004"
-          - api_key: "icFS9Hit7jZjeSKMbNZP2cmfqBseyxnJZ"
-            tenant_id: "69e732d6-8ecc-45c4-c2eb-8438f7ffe775"
-            env_id: "1"
-            user_id: "f94bfffc-8be2-11ec-b41a-0242ac120004"
+          - api_key: ZDMiIHN0UmVmOmRvY3VtZW50SUQ9Inhtc
+            tenant_id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+            env_id: '1'
+            user_id: f94bfffc-8be2-11ec-b41a-0242ac120004
+          - api_key: icFS9Hit7jZjeSKMbNZP2cmfqBseyxnJZ
+            tenant_id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+            env_id: '1'
+            user_id: f94bfffc-8be2-11ec-b41a-0242ac120004
       required:
         - api_keys
     CreateApiKeyParam:
@@ -974,19 +952,19 @@ components:
       type: object
       properties:
         tenant_id:
-          $ref: "#/components/schemas/Uuid"
+          $ref: '#/components/schemas/Uuid'
           description: Tenant ID
           x-description-i18n:
             jpn: テナントID
           example: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
         env_id:
-          $ref: "#/components/schemas/Id"
+          $ref: '#/components/schemas/Id'
           description: Environment ID
           x-description-i18n:
             jpn: 環境ID
           example: 1
         user_id:
-          $ref: "#/components/schemas/Uuid"
+          $ref: '#/components/schemas/Uuid'
           description: User ID
           x-description-i18n:
             jpn: ユーザーID
@@ -1002,7 +980,7 @@ components:
       properties:
         link:
           type: string
-          example: "https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create?stackName=sample&templateURL=https://s3.us-west-2.amazonaws.com/cloudformation-templates-sample.template"
+          example: https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create?stackName=sample&templateURL=https://s3.us-west-2.amazonaws.com/cloudformation-templates-sample.template
       required:
         - link
     DnsRecord:
@@ -1073,7 +1051,7 @@ components:
             - TRACE
           example: GET
         throttling:
-          $ref: "#/components/schemas/Throttling"
+          $ref: '#/components/schemas/Throttling'
         role_names:
           title: Role Names
           x-title-i18n:
@@ -1140,7 +1118,7 @@ components:
       type: object
       properties:
         routing:
-          $ref: "#/components/schemas/TenantRouting"
+          $ref: '#/components/schemas/TenantRouting'
     ApiGatewayTenant:
       title: Tenant
       x-title-i18n:
@@ -1148,12 +1126,12 @@ components:
       type: object
       properties:
         id:
-          $ref: "#/components/schemas/Uuid"
+          $ref: '#/components/schemas/Uuid'
           description: Tenant ID
           x-description-i18n:
             jpn: テナントID
         routing:
-          $ref: "#/components/schemas/TenantRouting"
+          $ref: '#/components/schemas/TenantRouting'
       required:
         - id
         - routing
