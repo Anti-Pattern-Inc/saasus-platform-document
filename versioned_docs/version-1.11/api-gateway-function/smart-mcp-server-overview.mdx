@@ -58,38 +58,32 @@ If you haven't completed the setup yet, please first complete the [Smart API Gat
 
 This tutorial explains the procedure for setting up APIs published via Smart API Gateway feature as MCP Servers that can be used by AI services.
 
+
 ---
 
-## Step 1: Access SaaS Development Console
+## Step 1: Confirm MCP Server Endpoint
 
 1. Log in to the [SaaS Development Console](https://settings.console.saasus.io/dashboard)
 2. Select **Smart API Gateway** from the left menu
 3. Confirm that the API is in a published state
-
-![smart-mcp-server-tutorial-1](/ja/img/api-gateway-function/smart-mcp-server-tutorial-1.png)
-
----
-
-## Step 2: Confirm MCP Server Endpoint
-
-When the API is successfully published via Smart API Gateway feature, the following information will be displayed, so please note it down:
+4. When you scroll down the screen, the following information will be displayed, so please note it down:
 
 - **MCP Server Endpoint**: The endpoint for AI services to connect to
 
-![smart-mcp-server-tutorial-2](/ja/img/api-gateway-function/smart-mcp-server-tutorial-2.png)
+![smart-mcp-server-tutorial-2](/img/api-gateway-function/smart-mcp-server-tutorial-2.png)
 
 ---
 
-## Step 3: Confirm API Key
+## Step 2: Confirm API Key
 
-1. Log in to the SaaS Operation Console
-2. Select **User Management** from the left menu
+1. Log in to the [SaaS Operation Console](https://saasadmin.console.saasus.io/dashboard)
+2. Select **Users** from the left menu
 3. Click the **API Key Management button** in the Actions column for a specific user
 4. Note down the API key displayed in the dialog (if not yet issued, please issue a new one)
 
-![smart-mcp-server-tutorial-3](/ja/img/api-gateway-function/smart-mcp-server-tutorial-3.png)
+![smart-mcp-server-tutorial-3](/img/api-gateway-function/smart-mcp-server-tutorial-3.png)
 
-## Step 4: Prepare OpenAI Playground
+## Step 3: Prepare OpenAI Playground
 
 :::warning Important Notice
 Using OpenAI Playground requires a **paid OpenAI account**. It cannot be used with a free account.<br/>
@@ -141,38 +135,38 @@ Currently, only operation verification with OpenAI Playground is supported.
 1. Access [OpenAI Playground](https://platform.openai.com/playground)
 2. Click **Create...** in the **Tools** section
 3. Select **MCP Server**
-  ![smart-mcp-server-tutorial-4](/ja/img/api-gateway-function/smart-mcp-server-tutorial-4.png)
+  ![smart-mcp-server-tutorial-4](/img/api-gateway-function/smart-mcp-server-tutorial-4.png)
 4. Select **Add New**
-  ![smart-mcp-server-tutorial-5](/ja/img/api-gateway-function/smart-mcp-server-tutorial-5.png)
+  ![smart-mcp-server-tutorial-5](/img/api-gateway-function/smart-mcp-server-tutorial-5.png)
 5. Enter values in the displayed form:
   - **URL**: The **MCP Server endpoint** you noted down
   - **Label**: Any label
   - **Authentication**: Select **Custom headers**
     - Key: **x-api-key**
     - Value: The **API key** you noted down
-  ![smart-mcp-server-tutorial-6](/ja/img/api-gateway-function/smart-mcp-server-tutorial-6.png)
+  ![smart-mcp-server-tutorial-6](/img/api-gateway-function/smart-mcp-server-tutorial-6.png)
 6. Click **Connect**
 7. Upon success, a list of available APIs will be displayed in Tools
-　![smart-mcp-server-tutorial-7](/ja/img/api-gateway-function/smart-mcp-server-tutorial-7.png)
+　![smart-mcp-server-tutorial-7](/img/api-gateway-function/smart-mcp-server-tutorial-7.png)
 8. Click **Add**
 9. Confirm that the added MCP Server is displayed in the **Tools** section
-　![smart-mcp-server-tutorial-8](/ja/img/api-gateway-function/smart-mcp-server-tutorial-8.png)
+　![smart-mcp-server-tutorial-8](/img/api-gateway-function/smart-mcp-server-tutorial-8.png)
 
 ---
 
-## Step 6: API Call Test from AI Services
+## Step 5: API Call Test from AI Services
 
 ### OpenAI Playground
 
 1. In the chat, enter "Tell me what operations are available with (**MCP Server name**)"
-  ![smart-mcp-server-tutorial-9](/ja/img/api-gateway-function/smart-mcp-server-tutorial-9.png)
+  ![smart-mcp-server-tutorial-9](/img/api-gateway-function/smart-mcp-server-tutorial-9.png)
 2. When you receive a response saying "I can retrieve inventory information based on the provided API key", instruct it to retrieve inventory information by providing the API key
 3. When the API to call and "Approve" button are displayed, click it
-  ![smart-mcp-server-tutorial-9](/ja/img/api-gateway-function/smart-mcp-server-tutorial-10.png)
+  ![smart-mcp-server-tutorial-9](/img/api-gateway-function/smart-mcp-server-tutorial-10.png)
 4. Confirm if the response is as expected
-  ![smart-mcp-server-tutorial-10](/ja/img/api-gateway-function/smart-mcp-server-tutorial-11.png)
+  ![smart-mcp-server-tutorial-10](/img/api-gateway-function/smart-mcp-server-tutorial-11.png)
 
-## Step 7: Error Troubleshooting
+## Step 6: Error Troubleshooting
 
 ### Common Issues and Solutions
 
