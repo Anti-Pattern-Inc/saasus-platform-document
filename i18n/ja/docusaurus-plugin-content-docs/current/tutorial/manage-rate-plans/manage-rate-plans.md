@@ -3,6 +3,7 @@ title: "料金プランの設定"
 slug: "manage-rate-plans"
 excerpt: ""
 hidden: false
+pagination_next: tutorial/implementation-of-authorization-based-on-tenant-information
 createdAt: "Wed Jan 11 2023 03:13:15 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Fri Dec 08 2023 02:28:54 GMT+0000 (Coordinated Universal Time)"
 ---
