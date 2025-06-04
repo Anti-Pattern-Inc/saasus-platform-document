@@ -1,5 +1,5 @@
 ---
-title: "Smart MCP Server 機能 β版"
+title: "Smart MCP Server Feature Beta"
 slug: "smart-mcp-server-overview"
 excerpt: ""
 hidden: false
@@ -7,226 +7,214 @@ createdAt: "Sun May 26 2025 07:00:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Sun May 26 2025 07:00:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
-Smart MCP Server機能は、Smart API Gateway機能で公開したAPIを、Model Context Protocol（MCP）サーバーとして自動的に提供する機能です。AIエージェントやLLM（大規模言語モデル）がAPIを直接呼び出すことができるリモートMCPサーバーを、Smart API GatewayによるAPI公開に合わせて利用できるようになります。これにより、既存のAPIをAIエージェントが利用可能な形式で即座に提供し、AI駆動のアプリケーション開発を加速させることができます。
+:::info Notice
+**This feature is provided as a Beta version**
 
-:::info
-サンプルデモ動画の視聴や Smart MCP Server 機能のデモンストレーション、チュートリアルのサポート、導入検討のための情報収集、実装に関する技術相談をご希望の方は、以下のサポート申請フォームよりお問い合わせください。
+- Features and specifications may change without notice
+- Use in production environments is not recommended
+- We welcome your feedback and opinions
 
-[Smart MCP Server β版 by SaaSus Platform サポート申請フォーム](https://forms.gle/DVDqrcNc525E9GG68)<br/>
+**Support**  
+If you would like to view sample demo videos, feature demonstrations, tutorial support, information gathering for implementation consideration, or technical consultation regarding implementation, please contact us through the support request form below.
+
+[Smart MCP Server Beta by SaaSus Platform Support Request Form](https://forms.gle/DVDqrcNc525E9GG68)
 :::
 
-## 機能概要
+## What is Smart MCP Server Feature
 
-### 自動MCPサーバー展開
-- **同時展開**: Smart API GatewayでAPIが公開されると、MCPサーバーも自動的に同時展開
-- **追加設定不要**: Smart API Gateway機能の設定完了と同時にMCPサーバーが利用可能
-- **スキーマ更新**: API定義の変更が自動でMCPツールに反映
+The Smart MCP Server feature automatically provides APIs published through the Smart API Gateway feature as Model Context Protocol (MCP) servers. This enables AI agents and LLMs (Large Language Models) to directly call APIs through remote MCP Servers that work in conjunction with API publishing via Smart API Gateway. This allows existing APIs to be instantly provided in a format usable by AI agents, accelerating AI-driven application development.
 
-## 利用可能な料金プラン
+## Feature Overview
 
-Smart MCP Server機能は **アドバンスドプラン** でのみ利用可能です。
+### Automatic MCP Server Deployment
+- **Simultaneous deployment**: When an API is published via Smart API Gateway, the MCP Server is automatically deployed simultaneously
+- **No additional configuration required**: MCP Server configuration is unnecessary once Smart API Gateway feature setup is complete
+- **Schema updates**: Changes to API definitions are automatically reflected in the MCP Server
 
-:::info
-詳細な料金体系については、[SaaSus Platform 料金ページ](https://www.saasus.io/pricing/)をご確認ください。
-:::
+## Supported AI Services
 
-## 検証できるAIサービス
-
-現在、以下のAIサービスでSmart MCP Server機能を検証・利用できます：
+Currently, the Smart MCP Server feature can be verified with the following AI services:
 
 ### OpenAI Playground
-- **対応状況**: ✅ 完全対応
-- **利用方法**: MCPサーバーとして直接接続可能
-- **注意事項**: 有償のOpenAIアカウントが必要
+- **Support status**: ✅ Verified working
+- **Usage method**: Add as MCP Server from Tools
+- **Note**: A paid OpenAI account is required
 
-## 次のステップ
+## Tutorial
 
-### チュートリアル概要
+### Overview
 
-**所要時間**: 約15〜20分  
-**前提条件**: Smart API Gateway機能でのAPI公開が必須
+**Duration**: Approximately 15-20 minutes  
+**Prerequisites**: API must already be published via Smart API Gateway feature
 
-:::warning 重要な前提条件
-このチュートリアルを開始する前に、Smart API Gateway機能でAPIが公開済みである必要があります。<br/>
-まだ設定が完了していない場合は、先に[Smart API Gateway機能の設定手順](./manual.mdx)を完了してください。
+:::warning Important Prerequisites
+Before starting this tutorial, you must have already published an API using the Smart API Gateway feature.<br/>
+If you haven't completed the setup yet, please first complete the [Smart API Gateway feature setup procedure](./manual.mdx).
 :::
 
 <details>
-<summary>📋 Smart MCP Serverチュートリアル（クリックして展開）</summary>
+<summary>📋 Smart MCP Server Feature Beta Tutorial (Click to expand)</summary>
 <div>
 
-このチュートリアルでは、Smart API Gateway機能で公開したAPIを、AIエージェント体験サービスが利用できるMCPサーバーとして公開する手順を説明します。
-
-### 前提条件
-
-このチュートリアルを開始する前に、以下が完了していることを確認してください：
-
-- Smart API Gateway機能でAPIが公開済みであること
-- SaaSus Platform開発コンソールへのアクセス権限があること
-
-:::info
-Smart MCP Server機能は、Smart API Gateway機能で公開されたAPIを自動的にMCPサーバーとして提供します。<br/>
-まだSmart API Gateway機能を設定していない場合は、先に[設定手順](./manual.mdx)を完了してください。
-:::
+This tutorial explains the procedure for setting up APIs published via Smart API Gateway feature as MCP Servers that can be used by AI services.
 
 ---
 
-## Step 1: SaaSus Platform開発コンソールにアクセス
+## Step 1: Access SaaS Development Console
 
-1. [SaaSus Platform開発コンソール](https://settings.console.saasus.io/dashboard)にログインします。
-2. 左側のメニューから **Smart API Gateway** を選択します。
-3. APIが公開されている状態であることを確認します。
+1. Log in to the [SaaS Development Console](https://settings.console.saasus.io/dashboard)
+2. Select **Smart API Gateway** from the left menu
+3. Confirm that the API is in a published state
 
 ![smart-mcp-server-tutorial-1](/ja/img/api-gateway-function/smart-mcp-server-tutorial-1.png)
 
 ---
 
-## Step 2: MCPサーバーエンドポイントの確認
+## Step 2: Confirm MCP Server Endpoint
 
-Smart API Gateway機能でAPIが正常に公開されると、以下の情報が表示されますので控えてください。
+When the API is successfully published via Smart API Gateway feature, the following information will be displayed, so please note it down:
 
-- **MCPサーバーエンドポイント**: AIエージェント体験サービスが接続するためのエンドポイント
+- **MCP Server Endpoint**: The endpoint for AI services to connect to
 
 ![smart-mcp-server-tutorial-2](/ja/img/api-gateway-function/smart-mcp-server-tutorial-2.png)
 
 ---
 
-## Step 3: APIキーの確認
+## Step 3: Confirm API Key
 
-SaaS運用コンソール→ユーザー管理の画面から、特定のユーザーのAction列のAPIキー管理ボタンを押下後
-ダイアログでAPIキーが表示されますので控えてください。（もし未発行の場合は、新しく発行してください）
+1. Log in to the SaaS Operation Console
+2. Select **User Management** from the left menu
+3. Click the **API Key Management button** in the Actions column for a specific user
+4. Note down the API key displayed in the dialog (if not yet issued, please issue a new one)
 
 ![smart-mcp-server-tutorial-3](/ja/img/api-gateway-function/smart-mcp-server-tutorial-3.png)
 
-## Step 4: OpenAI Playgroundの利用準備
+## Step 4: Prepare OpenAI Playground
 
-:::warning 重要な注意事項
-OpenAI Playgroundの利用には**有償のOpenAIアカウント**が必要です。無料アカウントでは利用できません。<br/>
-また、API呼び出しごとに利用料金が発生しますので、予算設定等の適切な管理を行ってください。
+:::warning Important Notice
+Using OpenAI Playground requires a **paid OpenAI account**. It cannot be used with a free account.<br/>
+Additionally, usage fees are incurred for each API call, so please manage your budget appropriately with proper settings.
 :::
 
-### OpenAIアカウントの準備
+### OpenAI Account Preparation
 
-このステップでは、OpenAI Playgroundを利用するための前提条件を確認し、必要なアカウント設定を行います。
+This step confirms the prerequisites for using OpenAI Playground and performs necessary account setup.
 
-#### 1. OpenAIアカウントの作成・ログイン
+#### 1. OpenAI Account Creation/Login
 
-1. [OpenAI](https://openai.com/) にアクセスします
-2. 「Sign up」または「Log in」からアカウントを作成・ログインします
-3. 電話番号認証などの必要な認証手続きを完了します
+1. Access [OpenAI Platform](https://platform.openai.com/)
+2. Navigate to the account creation screen from "Sign up"
+3. Enter required authentication information such as email address and password, and perform email verification
+4. Enter your name, date of birth, Organization name, and "What best describes you?"
+5. Fill in "Invite your team" and "Make your first API call" according to your situation
+6. For "Add some API credits", click "I'll buy credits later" as we'll set this up later
 
-#### 2. 支払い方法の設定（必須）
+Registration is now complete.
 
-:::danger 重要
-OpenAI Playgroundを利用するには、支払い方法の設定が**必須**です。
+#### 2. Payment Method Setup (Required)
+
+:::danger Important
+Setting up a payment method is **required** to use OpenAI Playground.
 :::
 
-1. OpenAI Platform（[platform.openai.com](https://platform.openai.com/)）にログインします
-2. 右上のアカウントメニューから「Billing」を選択します
-3. 「Payment methods」で有効なクレジットカードを追加します
-4. 必要に応じて使用制限（Usage limits）を設定します
+1. Log in to [OpenAI Platform](https://platform.openai.com/)
+2. Click the account icon in the upper right and select "Your Profile" from the displayed menu
+3. Select "Billing" from the side menu
+4. Add a valid credit card from "Add payment details" and charge credits
 
-#### 3. APIクレジットの確認
+#### 3. Confirm OpenAI Playground Access
 
-1. Billingページで現在のクレジット残高を確認します
-2. 残高が不足している場合は、適切な金額をチャージします
-3. 月次使用制限を設定して予期しない高額請求を防ぎます
-
-#### 4. OpenAI Playgroundへのアクセス確認
-
-1. [OpenAI Playground](https://platform.openai.com/playground) にアクセスします
-2. チャット画面が正常に表示されることを確認します
-3. 簡単なメッセージを送信してAPIが利用可能であることを確認します
-
-:::tip
-- 使用制限を適切に設定して予算を管理しましょう
-- テスト時は少ないトークン数で動作確認を行いましょう
-- 不要になったMCP Serverは削除してコストを抑えましょう
-:::
+1. Access [OpenAI Playground](https://platform.openai.com/playground)
+2. Confirm that the chat screen displays normally
+3. Send a simple message to confirm availability
 
 ---
 
-## Step 5: AIエージェント体験サービスでの接続テスト
+## Step 5: Operation Verification with AI Services
 
 :::info
-現時点では、OpenAI Playgroundでの接続テストのみサポートしております。
+Currently, only operation verification with OpenAI Playground is supported.
 :::
 
 ### OpenAI Playground
 
-1. [OpenAI Playground](https://platform.openai.com/playground) にアクセスします
-2. **Tools** セクションで **Create...** をクリックします
-3. **MCP Server** を選択します
+1. Access [OpenAI Playground](https://platform.openai.com/playground)
+2. Click **Create...** in the **Tools** section
+3. Select **MCP Server**
   ![smart-mcp-server-tutorial-4](/ja/img/api-gateway-function/smart-mcp-server-tutorial-4.png)
-4. **Add New** を選択します
+4. Select **Add New**
   ![smart-mcp-server-tutorial-5](/ja/img/api-gateway-function/smart-mcp-server-tutorial-5.png)
-5. 表示されたフォームにそれぞれ値を入力します
-  - **URL** : 控えておいた**MCPサーバーエンドポイント**
-  - **Label** : 任意のラベル
-  - **Authentication** : 控えておいた**APIキー**
+5. Enter values in the displayed form:
+  - **URL**: The **MCP Server endpoint** you noted down
+  - **Label**: Any label
+  - **Authentication**: Select **Custom headers**
+    - Key: **x-api-key**
+    - Value: The **API key** you noted down
   ![smart-mcp-server-tutorial-6](/ja/img/api-gateway-function/smart-mcp-server-tutorial-6.png)
-6. **Connect**を押下します
-7. 成功するとToolsに利用可能なAPI一覧が表示されます。
+6. Click **Connect**
+7. Upon success, a list of available APIs will be displayed in Tools
 　![smart-mcp-server-tutorial-7](/ja/img/api-gateway-function/smart-mcp-server-tutorial-7.png)
-8. **Add**を押下します
-9. **Tools** セクションに追加したMCP Serverが表示されていることを確認します
+8. Click **Add**
+9. Confirm that the added MCP Server is displayed in the **Tools** section
 　![smart-mcp-server-tutorial-8](/ja/img/api-gateway-function/smart-mcp-server-tutorial-8.png)
 
 ---
 
-## Step 6: AIエージェント体験サービスからのAPI呼び出しテスト
+## Step 6: API Call Test from AI Services
 
 ### OpenAI Playground
 
-1. チャットで、「**MCP Server名**でできる操作を教えて」と入力する
-2. 返答を待ち「Approve」が表示されたら、それを押下します
+1. In the chat, enter "Tell me what operations are available with (**MCP Server name**)"
   ![smart-mcp-server-tutorial-9](/ja/img/api-gateway-function/smart-mcp-server-tutorial-9.png)
-3. チャットで、「get-inventoryを呼び出して」と入力する
-  ![smart-mcp-server-tutorial-10](/ja/img/api-gateway-function/smart-mcp-server-tutorial-10.png)
+2. When you receive a response saying "I can retrieve inventory information based on the provided API key", instruct it to retrieve inventory information by providing the API key
+3. When the API to call and "Approve" button are displayed, click it
+  ![smart-mcp-server-tutorial-9](/ja/img/api-gateway-function/smart-mcp-server-tutorial-10.png)
+4. Confirm if the response is as expected
+  ![smart-mcp-server-tutorial-10](/ja/img/api-gateway-function/smart-mcp-server-tutorial-11.png)
 
-## Step 7: エラーのトラブルシューティング
+## Step 7: Error Troubleshooting
 
-### よくある問題と解決方法
+### Common Issues and Solutions
 
-#### 1. MCPサーバーに接続できない
+#### 1. Cannot connect to MCP Server
 
-**症状**: AIエージェント体験サービスがMCPサーバーに接続できない
+**Symptom**: AI service cannot connect to MCP Server
 
-**解決方法**:
-- API Keyが正しく設定されているか確認
-- ネットワーク接続を確認
+**Solution**:
+- Confirm that the API Key is set correctly
+- Check network connection
 
-#### 2. API呼び出しが失敗する
+#### 2. API call fails
 
-**症状**: MCPサーバー経由でのAPI呼び出しがエラーになる
+**Symptom**: API calls via MCP Server result in errors
 
-**解決方法**:
-- Smart API Gateway で直接APIが正常に動作するか確認
-- API Keyの権限設定を確認
-- スロットリング制限に達していないか確認
+**Solution**:
+- Confirm that the API published via Smart API Gateway feature works normally without going through MCP Server
+- Check API Key permission settings
+- Check if throttling limits have been reached
 
-#### 3. ツールが表示されない
+#### 3. Tools not displayed
 
-**症状**: AIエージェント体験サービスでツールの一覧が表示されない
+**Symptom**: Tool list is not displayed in AI service
 
-**解決方法**:
-- Smart API Gateway でAPIが正常に公開されているか確認
-- ブラウザのキャッシュをクリアしてから再試行
+**Solution**:
+- Confirm that the API is normally published via Smart API Gateway feature
+- Clear browser cache and retry
 
 ---
 
-## まとめ
+## Summary
 
-このチュートリアルでは、Smart MCP Server機能を使用してAPIをAIエージェント体験サービス向けに公開する方法を学習しました。
+In this tutorial, you learned how to publish APIs for AI services using the Smart MCP Server feature.
 
-### 完了した内容
+### Completed Content
 
-- MCPサーバーエンドポイントの確認
-- AIエージェント体験サービス（OpenAI Playground）での接続設定
-- API呼び出しのテスト
+- Confirming MCP Server endpoint
+- Connection setup in AI service (OpenAI Playground)
+- API call testing
 
 :::info
-Smart MCP Server機能に関するご質問やサポートが必要な場合は、[サポート申請フォーム](https://forms.gle/DVDqrcNc525E9GG68)からお問い合わせください。
+If you have questions about the Smart MCP Server feature or need support, please contact us through the [support request form](https://forms.gle/DVDqrcNc525E9GG68).
 :::
 
 </div>
