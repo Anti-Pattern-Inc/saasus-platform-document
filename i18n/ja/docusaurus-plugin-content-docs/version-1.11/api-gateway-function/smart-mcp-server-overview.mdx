@@ -60,19 +60,12 @@ Smart MCP Server機能は、Smart API Gateway機能で公開したAPIを、Model
 
 ---
 
-## Step 1: SaaS開発コンソールにアクセス
+## Step 1: MCP Server エンドポイントの確認
 
 1. [SaaS開発コンソール](https://settings.console.saasus.io/dashboard)にログインします
 2. 左側のメニューから **Smart API Gateway** を選択します
 3. APIが公開されている状態であることを確認します
-
-![smart-mcp-server-tutorial-1](/ja/img/api-gateway-function/smart-mcp-server-tutorial-1.png)
-
----
-
-## Step 2: MCP Server エンドポイントの確認
-
-Smart API Gateway機能でAPIが正常に公開されると、以下の情報が表示されますので控えてください：
+4. 画面をスクロールすると以下の情報が表示されますので控えてください：
 
 - **MCP Server エンドポイント**: AIサービスが接続するためのエンドポイント
 
@@ -80,16 +73,16 @@ Smart API Gateway機能でAPIが正常に公開されると、以下の情報が
 
 ---
 
-## Step 3: API Keyの確認
+## Step 2: API Keyの確認
 
-1. SaaS運用コンソールにログインします
+1. [SaaS運用コンソール](https://saasadmin.console.saasus.io/dashboard)にログインします
 2. 左側のメニューから **ユーザー管理** を選択します
 3. 特定のユーザーのActions列の **APIキー管理ボタン** を押下します
 4. ダイアログでAPIキーが表示されますので控えてください（もし未発行の場合は、新しく発行してください）
 
 ![smart-mcp-server-tutorial-3](/ja/img/api-gateway-function/smart-mcp-server-tutorial-3.png)
 
-## Step 4: OpenAI Playgroundの利用準備
+## Step 3: OpenAI Playgroundの利用準備
 
 :::warning 重要な注意事項
 OpenAI Playgroundの利用には**有償のOpenAIアカウント**が必要です。無料アカウントでは利用できません。<br/>
@@ -107,7 +100,7 @@ OpenAI Playgroundの利用には**有償のOpenAIアカウント**が必要で�
 3. メールアドレス、パスワードの必要な認証情報を入力してメール検証を行います
 4. 氏名と生年月日、Organization name、What best describes you?を入力してください
 5. Invite your team、Make your first API callはお客様の状況に合わせて入力してください
-6. Add some API creditsは後ほど設定するので、「I’ll buy credits later」を押下してください
+6. Add some API creditsは後ほど設定するので、「I'll buy credits later」を押下してください
 
 以上で登録は完了です。
 
@@ -130,7 +123,7 @@ OpenAI Playgroundを利用するには、支払い方法の設定が**必須**�
 
 ---
 
-## Step 5: AIサービスでの動作検証
+## Step 4: AIサービスでの動作検証
 
 :::info
 現時点では、OpenAI Playgroundでの動作検証のみサポートしております。
@@ -160,7 +153,7 @@ OpenAI Playgroundを利用するには、支払い方法の設定が**必須**�
 
 ---
 
-## Step 6: AIサービスからのAPI呼び出しテスト
+## Step 5: AIサービスからのAPI呼び出しテスト
 
 ### OpenAI Playground
 
@@ -172,7 +165,7 @@ OpenAI Playgroundを利用するには、支払い方法の設定が**必須**�
 4. 期待したレスポンスであるか確認します
   ![smart-mcp-server-tutorial-10](/ja/img/api-gateway-function/smart-mcp-server-tutorial-11.png)
 
-## Step 7: エラーのトラブルシューティング
+## Step 6: エラーのトラブルシューティング
 
 ### よくある問題と解決方法
 
