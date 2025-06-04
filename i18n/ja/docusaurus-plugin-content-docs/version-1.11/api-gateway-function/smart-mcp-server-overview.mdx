@@ -20,31 +20,32 @@ updatedAt: "Sun May 26 2025 07:00:00 GMT+0000 (Coordinated Universal Time)"
 [Smart MCP Server Beta版 by SaaSus Platform サポート申請フォーム](https://forms.gle/DVDqrcNc525E9GG68)
 :::
 
-Smart MCP Server機能は、Smart API Gateway機能で公開したAPIを、Model Context Protocol（MCP）サーバーとして自動的に提供する機能です。AIエージェントやLLM（大規模言語モデル）がAPIを直接呼び出すことができるリモートMCP Serverを、Smart API GatewayによるAPI公開に合わせて利用できるようになります。これにより、既存のAPIをAIエージェントが利用可能な形式で即座に提供し、AI駆動のアプリケーション開発を加速させることができます。
+## Smart MCP Server機能とは
 
+Smart MCP Server機能は、Smart API Gateway機能で公開したAPIを、Model Context Protocol（MCP）サーバーとして自動的に提供する機能です。AIエージェントやLLM（大規模言語モデル）がAPIを直接呼び出すことができるリモートMCP Serverを、Smart API GatewayによるAPI公開と連携して利用できるようになります。これにより、既存のAPIをAIエージェントが利用可能な形式で即座に提供し、AI駆動のアプリケーション開発を加速させることができます。
 
 ## 機能概要
 
 ### 自動MCP Server展開
-- **同時展開**: Smart API GatewayでAPIが公開されると、MCP Serverも自動的に同時展開
-- **追加設定不要**: Smart API Gateway機能の設定を完了することで、MCP Serverの設定は不要
-- **スキーマ更新**: API定義の変更が自動でMCP Serverに反映
+- **同時展開**: Smart API GatewayでAPIが公開されると、MCP Serverも自動的に同時展開されます
+- **追加設定不要**: Smart API Gateway機能の設定を完了するだけで、MCP Serverの設定は不要です
+- **スキーマ更新**: API定義の変更が自動でMCP Serverに反映されます
 
-## 検証できるAIサービス
+## 対応AIサービス
 
-現在、以下のAIサービスでSmart MCP Server機能を検証できます
+現在、以下のAIサービスでSmart MCP Server機能を検証できます：
 
 ### OpenAI Playground
-- **対応状況**: ✅ 動作確認可能
-- **利用方法**: Toolsから、MCP Serverとして追加する
-- **注意事項**: 有償のOpenAIアカウントが必要
+- **対応状況**: ✅ 動作確認済み
+- **利用方法**: Toolsから、MCP Serverとして追加
+- **注意事項**: 有償のOpenAIアカウントが必要です
 
-## 次のステップ
+## チュートリアル
 
-### チュートリアル概要
+### 概要
 
 **所要時間**: 約15〜20分  
-**前提条件**: Smart API Gateway機能でAPIを公開していること
+**前提条件**: Smart API Gateway機能でAPIが公開済みであること
 
 :::warning 重要な前提条件
 このチュートリアルを開始する前に、Smart API Gateway機能でAPIが公開済みである必要があります。<br/>
@@ -61,9 +62,9 @@ Smart MCP Server機能は、Smart API Gateway機能で公開したAPIを、Model
 
 ## Step 1: SaaS開発コンソールにアクセス
 
-1. [SaaS開発コンソール](https://settings.console.saasus.io/dashboard)にログインします。
-2. 左側のメニューから **Smart API Gateway** を選択します。
-3. APIが公開されている状態であることを確認します。
+1. [SaaS開発コンソール](https://settings.console.saasus.io/dashboard)にログインします
+2. 左側のメニューから **Smart API Gateway** を選択します
+3. APIが公開されている状態であることを確認します
 
 ![smart-mcp-server-tutorial-1](/ja/img/api-gateway-function/smart-mcp-server-tutorial-1.png)
 
@@ -71,7 +72,7 @@ Smart MCP Server機能は、Smart API Gateway機能で公開したAPIを、Model
 
 ## Step 2: MCP Server エンドポイントの確認
 
-Smart API Gateway機能でAPIが正常に公開されると、以下の情報が表示されますので控えてください。
+Smart API Gateway機能でAPIが正常に公開されると、以下の情報が表示されますので控えてください：
 
 - **MCP Server エンドポイント**: AIサービスが接続するためのエンドポイント
 
@@ -81,10 +82,10 @@ Smart API Gateway機能でAPIが正常に公開されると、以下の情報が
 
 ## Step 3: API Keyの確認
 
-1. SaaS運用コンソールにログインする
+1. SaaS運用コンソールにログインします
 2. 左側のメニューから **ユーザー管理** を選択します
 3. 特定のユーザーのActions列の **APIキー管理ボタン** を押下します
-4. ダイアログでAPIキーが表示されますので控えてください。（もし未発行の場合は、新しく発行してください）
+4. ダイアログでAPIキーが表示されますので控えてください（もし未発行の場合は、新しく発行してください）
 
 ![smart-mcp-server-tutorial-3](/ja/img/api-gateway-function/smart-mcp-server-tutorial-3.png)
 
@@ -103,7 +104,12 @@ OpenAI Playgroundの利用には**有償のOpenAIアカウント**が必要で�
 
 1. [OpenAI Platform](https://platform.openai.com/) にアクセスします
 2. 「Sign up」からアカウント作成画面に移動します
-3. メールアドレス、パスワードなどの必要な認証情報の登録手続きを進め、アカウントを作成します
+3. メールアドレス、パスワードの必要な認証情報を入力してメール検証を行います
+4. 氏名と生年月日、Organization name、What best describes you?を入力してください
+5. Invite your team、Make your first API callはお客様の状況に合わせて入力してください
+6. Add some API creditsは後ほど設定するので、「I’ll buy credits later」を押下してください
+
+以上で登録は完了です。
 
 #### 2. 支払い方法の設定（必須）
 
@@ -112,9 +118,9 @@ OpenAI Playgroundを利用するには、支払い方法の設定が**必須**�
 :::
 
 1. [OpenAI Platform](https://platform.openai.com/)にログインします
-2. 右上のアカウントメニューから「Billing」を選択します
-3. 「Payment methods」で有効なクレジットカードを追加します
-4. 必要に応じて使用制限（Usage limits）を設定します
+2. 右上のアカウントアイコンを押下して、表示された「Your Profile」を選択します
+3. サイドメニューから、「Billing」を選択します
+3. 「Add payment details」から有効なクレジットカードを追加し、クレジットをチャージします
 
 #### 3. OpenAI Playgroundへのアクセス確認
 
@@ -138,13 +144,15 @@ OpenAI Playgroundを利用するには、支払い方法の設定が**必須**�
   ![smart-mcp-server-tutorial-4](/ja/img/api-gateway-function/smart-mcp-server-tutorial-4.png)
 4. **Add New** を選択します
   ![smart-mcp-server-tutorial-5](/ja/img/api-gateway-function/smart-mcp-server-tutorial-5.png)
-5. 表示されたフォームにそれぞれ値を入力します
+5. 表示されたフォームにそれぞれ値を入力します：
   - **URL** : 控えておいた**MCP Serverエンドポイント**
   - **Label** : 任意のラベル
-  - **Authentication** : 控えておいた**APIキー**
+  - **Authentication** : **Custom headers** を選択
+    - キー : **x-api-key**
+    - 値 : **控えておいた**APIキー**
   ![smart-mcp-server-tutorial-6](/ja/img/api-gateway-function/smart-mcp-server-tutorial-6.png)
 6. **Connect**を押下します
-7. 成功するとToolsに利用可能なAPI一覧が表示されます。
+7. 成功するとToolsに利用可能なAPI一覧が表示されます
 　![smart-mcp-server-tutorial-7](/ja/img/api-gateway-function/smart-mcp-server-tutorial-7.png)
 8. **Add**を押下します
 9. **Tools** セクションに追加したMCP Serverが表示されていることを確認します
@@ -156,11 +164,13 @@ OpenAI Playgroundを利用するには、支払い方法の設定が**必須**�
 
 ### OpenAI Playground
 
-1. チャットで、「**MCP Server名**でできる操作を教えて」と入力する
-2. 返答を待ち「Approve」が表示されたら、それを押下します
+1. チャットで、「（**MCP Server名**）でできる操作を教えて」と入力します
   ![smart-mcp-server-tutorial-9](/ja/img/api-gateway-function/smart-mcp-server-tutorial-9.png)
-3. チャットで、「get-inventoryを呼び出して」と入力する
-  ![smart-mcp-server-tutorial-10](/ja/img/api-gateway-function/smart-mcp-server-tutorial-10.png)
+2. 「提供されたAPIキーを元に在庫情報を取得できる」と返答があったので、APIキーを提示して在庫情報を取得するように指示をします
+3. 呼び出すAPIと「Approve」ボタンが表示されたら押下します
+  ![smart-mcp-server-tutorial-9](/ja/img/api-gateway-function/smart-mcp-server-tutorial-10.png)
+4. 期待したレスポンスであるか確認します
+  ![smart-mcp-server-tutorial-10](/ja/img/api-gateway-function/smart-mcp-server-tutorial-11.png)
 
 ## Step 7: エラーのトラブルシューティング
 
@@ -171,25 +181,25 @@ OpenAI Playgroundを利用するには、支払い方法の設定が**必須**�
 **症状**: AIサービスがMCP Serverに接続できない
 
 **解決方法**:
-- API Keyが正しく設定されているか確認
-- ネットワーク接続を確認
+- API Keyが正しく設定されているか確認する
+- ネットワーク接続を確認する
 
 #### 2. API呼び出しが失敗する
 
 **症状**: MCP Server経由でのAPI呼び出しがエラーになる
 
 **解決方法**:
-- Smart API Gateway機能で公開したAPIが正常に動作するかをMCP Serverを経由せずに確認
-- API Keyの権限設定を確認
-- スロットリング制限に達していないか確認
+- Smart API Gateway機能で公開したAPIが正常に動作するかをMCP Serverを経由せずに確認する
+- API Keyの権限設定を確認する
+- スロットリング制限に達していないか確認する
 
 #### 3. ツールが表示されない
 
 **症状**: AIサービスでツールの一覧が表示されない
 
 **解決方法**:
-- Smart API Gateway機能でAPIが正常に公開されているか確認
-- ブラウザのキャッシュをクリアしてから再試行
+- Smart API Gateway機能でAPIが正常に公開されているか確認する
+- ブラウザのキャッシュをクリアしてから再試行する
 
 ---
 
