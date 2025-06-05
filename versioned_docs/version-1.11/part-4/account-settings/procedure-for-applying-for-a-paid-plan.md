@@ -116,6 +116,20 @@ To apply for a paid plan, you can either apply through the SaaS Development Cons
       <td>Advisory support on<br />SaaSus Platform usage<br />Design/implementation assistance with samples</td>
       <td>Best effort<br />Including architecture design support</td>
     </tr>
+    <tr>
+      <td>Enterprise</td>
+      <td className="text-right">¥1,200,000<br />or<br />3.7% of MRR, whichever is higher</td>
+      <td className="text-right">3</td>
+      <td className="text-right">Unlimited</td>
+      <td className="text-right">Unlimited</td>
+      <td className="text-right">7 years</td>
+      <td className="text-right">5,000 slots</td>
+      <td>Free up to 10k calls<br />¥7 per 10k calls after that</td>
+      <td>Up to 20/day free<br />¥20 per upload after</td>
+      <td>Slack Connect<br />Online meetings</td>
+      <td>Advisory support on<br />SaaSus Platform usage considering SaaS specifics<br />Design/implementation assistance with samples</td>
+      <td>Best effort<br />Including architecture design support</td>
+    </tr>
   </tbody>
 </table>
 </div>
