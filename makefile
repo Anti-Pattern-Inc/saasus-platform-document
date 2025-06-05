@@ -78,7 +78,7 @@ ja_sidebar:
 # copy api file(api)
 ########### 
 
-update_api_files: copy_api_files translate_ja
+update_api_files: copy_api_files filter_error_tags translate_ja
 
 copy_api_files:
 	rm -rf api
@@ -91,6 +91,17 @@ copy_api_files:
 	cp -f ../api/modules/v1/communication/controller/communicationapi/communicationapi.yml ./api/communicationapi.yml
 	cp -f ../api/modules/v1/apilog/controller/apilogapi/apilogapi.yml ./api/apilogapi.yml
 	cp -f ../api/modules/v1/apigateway/controller/apigatewayapi/apigatewayapi.yml ./api/apigatewayapi.yml
+
+# UI に表示させないため、テスト用 error エンドポイント／タグを削除
+filter_error_tags:
+	docker exec -it saasus-platform-document node scripts/filter-error-tag.js ./api/authapi.yml
+	docker exec -it saasus-platform-document node scripts/filter-error-tag.js ./api/integration.yml
+	docker exec -it saasus-platform-document node scripts/filter-error-tag.js ./api/pricingapi.yml
+	docker exec -it saasus-platform-document node scripts/filter-error-tag.js ./api/billingapi.yml
+	docker exec -it saasus-platform-document node scripts/filter-error-tag.js ./api/awsmarketplaceapi.yml
+	docker exec -it saasus-platform-document node scripts/filter-error-tag.js ./api/communicationapi.yml
+	docker exec -it saasus-platform-document node scripts/filter-error-tag.js ./api/apilogapi.yml
+	docker exec -it saasus-platform-document node scripts/filter-error-tag.js ./api/apigatewayapi.yml
 
 # CRLFにならないようにbashで実行
 translate_ja:
