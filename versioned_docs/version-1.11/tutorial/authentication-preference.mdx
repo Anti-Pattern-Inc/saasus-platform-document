@@ -21,7 +21,7 @@ Click “Tenant management” on the side menu.
 
 Click the “Creating a tenant” button to display a pop-up.
 
-The tenant name, addition of representative user, representative email address, representative temporary password, and other tenant attributes added in [Declare Additional Attribute To Tenant](../saas-development-console/declare-additional-attribute-to-tenant)introduced in Guides are displayed.
+The tenant name, addition of representative user, representative email address, representative temporary password, and other tenant attributes added in [Tenant Attributes](/docs/part-4/application-settings/declare-additional-attribute-to-tenant), introduced in Docs are displayed.
 
 
 First one
@@ -71,7 +71,7 @@ Now, let's register one user for each tenant.
 
 Click the "Create a new user" button in the upper right corner to display a popup.
 
-The email address, password, tenant, and other user attributes added in [Declare Additional Attribute To User](../saas-development-console/declare-additional-attribute-to-user), introduced in Guides, are displayed.
+The email address, password, tenant, and other user attributes added in [User Attributes](/docs/part-4/user-authz-settings/declare-additional-attribute-to-user), introduced in Docs, are displayed.
 
 For now, let's register 4 people.
 
@@ -108,31 +108,16 @@ To proceed smoothly with the following tutorial steps, it is essential to assign
 
 Refer to the following page to complete this setup:
 
-- [Adding Role To User](../saas-operation-console/adding-role-to-user)
+- [Roles](/docs/part-4/user-authz-settings/role-definition)
 :::
 
 :::info
 The following steps require programming knowledge.
 :::
 
-### Setting destination URL after authentication
-
-Based on the domain name you configured, SaaSus Platform generates a login screen. After logging in, the authentication information is transferred to the SaaS side.<br/>
-The URL of the SaaS to be taken over must be registered as the Callback URL.
-
-Click "Transition destination after authentication" from the side menu to display the Callback URL setting screen.
-
-Typically, you set the Callback URL based on the URL of the SaaS offering.<br/>
-However, since we will be running the sample application locally this time, we will configure it as follows.
-
-- For Laravel: [http://localhost/callback](http://localhost/callback)
-- For Express: [http://localhost:3000/callback](http://localhost:3000/callback)
-
-![08](/img/tutorial/authentication-preference/authentication-preference-08.png)
-
 ### Incorporating an Authentication Module
 
-Next, integrate the authentication module provided by the SaaSus Platform.
+Integrate the authentication module provided by the SaaSus Platform.
 
 In this application, all URI routes will require authentication. If a user is not authenticated, they will not be able to access the application.
 
@@ -284,7 +269,7 @@ router.get("/", getChats);
 
 ### Implementing the Callback URL Handler
 
-Earlier, you defined the callback URL in the SaaSus development console as:
+Earlier, you defined the callback URL in the SaaS Development Console as:
 
 - For Laravel: [http://localhost/callback](http://localhost/callback)
 - For Express: [http://localhost:3000/callback](http://localhost:3000/callback)
@@ -690,7 +675,7 @@ Now, let's log in and try it out.
 
 As before, log in from the login screen created with SaaSus Platform.
 
-When you log in, you will see that the tenant name has changed to the one you set earlier in the SaaS development console.
+When you log in, you will see that the tenant name has changed to the one you set earlier in the SaaS Development Console.
 
 ![10](/img/tutorial/authentication-preference/authentication-preference-10.png)
 
