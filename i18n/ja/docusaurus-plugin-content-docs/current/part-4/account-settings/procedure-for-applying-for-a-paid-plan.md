@@ -116,6 +116,20 @@ SaaSus Platformでは以下プランを現在用意しております。
       <td>SaaS固有の事情を考慮した、<br />SaaSus Platform活用方法の相談事項への回答<br />サンプル等を用いた設計・実装支援</td>
       <td>ベストエフォート<br />アーキテクチャ設計支援など含む</td>
     </tr>
+    <tr>
+      <td>エンタープライズ</td>
+      <td className="text-right">¥1,200,000円<br />or<br />MRRの3.7%の高い方</td>
+      <td className="text-right">3</td>
+      <td className="text-right">無制限</td>
+      <td className="text-right">無制限</td>
+      <td className="text-right">7 年</td>
+      <td className="text-right">5,000 個</td>
+      <td>1万コールまでは無料<br />それ以降7円/1万コール</td>
+      <td>20/dayまでは無料<br />それ以降20円/1回</td>
+      <td>Slack Connect<br />オンラインmeeting</td>
+      <td>SaaS固有の事情を考慮した、<br />SaaSus Platform活用方法の相談事項への回答<br />サンプル等を用いた設計・実装支援</td>
+      <td>ベストエフォート<br />アーキテクチャ設計支援など含む</td>
+    </tr>
   </tbody>
 </table>
 </div>
