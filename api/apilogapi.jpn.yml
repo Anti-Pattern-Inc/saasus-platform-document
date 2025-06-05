@@ -11,8 +11,6 @@ servers:
 tags:
   - name: apiLog
     description: api実行ログ
-  - name: error
-    description: テスト用途のエラー
 security:
   - Bearer: []
 paths:
@@ -79,21 +77,6 @@ paths:
               schema:
                 title: APIログ
                 $ref: "#/components/schemas/ApiLog"
-        "500":
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-  /errors/internal-server-error:
-    get:
-      tags:
-        - error
-      operationId: ReturnInternalServerError
-      summary: ステータスコード500でサーバーエラーを返却
-      description: |
-        テスト用途で使用するエンドポイントです。ステータスコード500でサーバーエラーを返却します。
-      responses:
         "500":
           description: Internal Server Error
           content:
