@@ -1,0 +1,336 @@
+---
+title: "SaaS利用者（ユーザー）のアカウントについて"
+slug: "about-saas-user-accounts"
+excerpt: ""
+hidden: false
+createdAt: "Tue Aug 15 2023 16:10:57 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Dec 21 2023 22:58:51 GMT+0000 (Coordinated Universal Time)"
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+SaaSus Platformにおける、SaaS利用者（ユーザー）のアカウントの扱いについて説明します。
+
+## １．アカウントの構成要素
+
+アカウントは以下の要素で構成されており、全てを設定することで利用可能になります。
+
+- SaaSユーザー  
+  SaaSに対する認証情報（ID、パスワード）を保持
+- テナントユーザー  
+  SaaSユーザーがどのテナントに所属するかを保持
+- 役割（ロール）  
+  テナントユーザーがどの権限を持っているかを保持
+
+## ２．リレーションについて
+
+SaaSユーザーは複数のテナントに所属することが出来ます。  
+また、テナントの中で複数の役割を持つことが出来ます。
+
+例）  
+ユーザーAはテナントAに所属しており、管理者の役割を持っている。  
+ユーザーAはテナントBにも所属しており、管理者と一般ユーザーの役割を持っている。  
+図で表現すると以下となります。
+
+
+![relation](/ja/img/part-6/usecase/about-saas-user-accounts/relation.svg)
+
+
+## ３．アカウント作成のパターンについて
+
+- セルフサインアップするケース  
+  例）  
+  SaaSを利用したいと思ったユーザーが、セルフサインアップ画面から自分でアカウントを作成する。  
+  アカウント作成時にテナントを作成し、そのテナントの管理者となる。
+- SaaSにユーザー作成機能が実装されているケース  
+  例）  
+  テナントの管理者がユーザー作成機能を利用し、役割【管理者、一般ユーザー】を作成する。
+- SaaS運用コンソールからアカウント作成するケース  
+  例）  
+  ユーザーからの申請を受けて、SaaS管理者がSaaS運用コンソールからアカウントを作成。  
+  メールやEventBridge連携などでログイン情報をユーザーに通知し、ユーザーが利用を開始する。
+
+### ３．１．セルフサインアップするケースの実装
+
+#### ３．１．１．ユーザーのセルフサインアップを許可します
+
+SaaS 開発コンソール - 認証詳細設定 - 認証設定タブ - セルフサインアップ（ユーザー自身による新規登録）の可否  
+ユーザーが自分でユーザー登録可能を有効にします
+
+![self-sign-up-setting](/ja/img/part-6/usecase/about-saas-user-accounts/self-sign-up-setting.png)
+
+セルフサインアップを許可すると、SaaSus Platformが生成するログイン画面に「新規登録はこちら」が表示されます
+
+![self-sign-up](/ja/img/part-6/usecase/about-saas-user-accounts/self-sign-up.png)
+
+
+このリンクからユーザーがアカウントの作成をすることが出来ます。  
+ここで作成されるのはアカウントの構成要素における、SaaSユーザーが作成されます。
+
+#### ３．１．２．セルフサインアップ後の処理を実装する
+
+セルフサインアップが完了すると、ユーザーはログイン状態でお客様のSaaSに遷移します。  
+※遷移先の画面  
+SaaS 開発コンソール - 認証後遷移先 - Callback URL
+
+セルフサインアップを許可している場合、Callback URL において以下の判定を行う必要があります。<br/>
+この判定は、SaaSus Platform から取得できる UserInfo配列内に tenants 情報が含まれているかどうかで確認できます。
+
+<Tabs>
+<TabItem value="php" label="PHP">
+
+```php
+        // テナント登録がされていない場合は、セルフサインアップ処理を実施
+        if (empty($request->userinfo['tenants']))
+```
+
+</TabItem>
+
+<TabItem value="nodejs" label="Node.js">
+
+```js
+        const userInfo = request.userInfo
+
+        // テナント登録がされていない場合は、セルフサインアップ処理を実施
+        if (!userInfo.tenants || userInfo.tenants.length === 0)
+```
+
+</TabItem>
+
+<TabItem value="go" label="Go">
+
+```go
+        userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
+
+        // テナント登録がされていない場合は、セルフサインアップ処理を実施
+        if len(userInfo.Tenants) == 0 
+```
+
+</TabItem>
+
+<TabItem value="python" label="Python">
+
+```python
+        // テナント登録がされていない場合は、セルフサインアップ処理を実施
+        if not auth_user.tenants:
+```
+
+</TabItem>
+
+<TabItem value="java" label="Java">
+
+```java
+        // テナント登録がされていない場合は、セルフサインアップ処理を実施
+        if (userInfo.getTenants() == null || userInfo.getTenants().isEmpty())
+```
+
+</TabItem>
+
+<TabItem value="csharp" label="C#(.Net8)">
+
+```csharp
+        // テナント登録がされていない場合は、セルフサインアップ処理を実施
+        if (userInfo.Tenants == null || !userInfo.Tenants.Any())
+```
+
+</TabItem>
+
+<TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
+
+```csharp
+        // テナント登録がされていない場合は、セルフサインアップ処理を実施
+        if (userInfo.Tenants == null || !userInfo.Tenants.Any())
+```
+
+</TabItem>
+</Tabs>
+
+#### ３．１．３．実装サンプル
+
+<a href="/ja/docs/part-6/usecase/about-saas-user-accounts/create-tenant" target="blank">テナントの作成</a>を参考に、テナント情報が登録できるよう修正してみましょう。
+
+テナント情報が登録できるようになったら、<a href="/ja/docs/part-6/usecase/about-saas-user-accounts/add-tenant-user" target="_blank">テナントにユーザーを紐づけロールを設定</a>してみましょう。
+
+テナントの作成とテナントユーザーの作成ができたら、UserInfo配列内の tenants に設定したテナント情報が出力されるか確認してみましょう。
+
+<Tabs>
+<TabItem value="php" label="PHP">
+
+```php
+dd($request->userinfo['tenants']);
+```
+
+</TabItem>
+
+<TabItem value="nodejs" label="Node.js">
+
+```js
+        const userInfo = request.userInfo
+        console.log(userInfo.tenants)
+```
+
+</TabItem>
+
+<TabItem value="go" label="Go">
+
+```go
+        fmt.Printf("Tenants: %+v\n", tenants)
+```
+
+</TabItem>
+
+<TabItem value="python" label="Python">
+
+```python
+        print(auth_user.tenants)
+```
+
+</TabItem>
+
+<TabItem value="java" label="Java">
+
+```java
+        UserInfo userInfo = null;
+        userInfo = userInfoApi.getUserInfo(getIDToken(request));
+        System.out.println(userInfo);
+```
+
+</TabItem>
+
+<TabItem value="csharp" label="C#(.Net8)">
+
+```csharp
+        var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig(), context);
+        var userInfoApi = new UserInfoApi(authApiClientConfig);
+        var userInfo = await userInfoApi.GetUserInfoAsync(token);
+        Console.WriteLine(string.Join("\n", userInfo.Tenants.Select(tenant => tenant.ToString())));
+```
+
+</TabItem>
+
+<TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
+
+```csharp
+        var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig());
+        var userInfoApi = new UserInfoApi(authApiClientConfig);
+        var userInfo = await userInfoApi.GetUserInfoAsync(token);
+        foreach (var tenant in userInfo.Tenants)
+        {
+            Console.WriteLine(tenant.ToString());
+        }
+```
+
+</TabItem>
+</Tabs>
+
+テナント情報が取得でき、テナントユーザーが作成されていることができたら、通常のログインフローでログインができるか試してみましょう。
+
+### ３．２．SaaSにユーザー作成機能が実装されているケースの実装
+
+セルフサインアップした管理者がユーザーを作成するケースを実装してみましょう。
+
+まずはSaaSにユーザー登録を行います。
+
+<Tabs>
+<TabItem value="php" label="PHP">
+
+```php
+        $client = new ApiClient();
+        $authApiClient = $client->getAuthClient();       
+
+        $createSaasUserParam = new CreateSaasUserParam();
+        $createSaasUserParam
+            ->setEmail($inputs['email'])
+            ->setPassword($inputs['password']);
+
+        $authApiClient->createSaasUser($createSaasUserParam);
+```
+
+</TabItem>
+
+<TabItem value="nodejs" label="Node.js">
+
+```js
+        const client = new AuthClient()
+
+        const createSaasUserParam: CreateSaasUserParam = {
+          email,
+          password
+        }
+
+        await client.saasUserApi.createSaasUser(createSaasUserParam)
+```
+
+</TabItem>
+
+<TabItem value="go" label="Go">
+
+```go
+        var authClient *authapi.ClientWithResponses
+
+        createSaasUserParam := authapi.CreateSaasUserJSONRequestBody{
+          Email:    email,
+          Password: password,
+        }
+
+        _, err = authClient.CreateSaasUser(context.Background(), createSaasUserParam)
+```
+
+</TabItem>
+
+<TabItem value="python" label="Python">
+
+```python
+        from saasus_sdk_python.src.auth import SaasUserApi, CreateSaasUserParam
+
+        api_client = SignedAuthApiClient()
+        
+        create_saas_user_param = CreateSaasUserParam(email=email, password=password)
+
+        SaasUserApi(api_client=api_client).create_saas_user(create_saas_user_param=create_saas_user_param)
+```
+
+</TabItem>
+
+<TabItem value="java" label="Java">
+
+```java
+        AuthApiClient apiClient = new Configuration().getAuthApiClient();
+        apiClient.setReferer(request.getHeader("Referer"));
+        
+        CreateSaasUserParam createSaasUserParam = new CreateSaasUserParam().email(email).password(password);
+        saasUserApi.createSaasUser(createSaasUserParam);
+```
+
+</TabItem>
+
+<TabItem value="csharp" label="C#(.Net8)">
+
+```csharp
+        var saasUserApi = new SaasUserApi(authApiClientConfig);
+
+        var createSaasUserParam = new CreateSaasUserParam(email, password);
+        
+        await saasUserApi.CreateSaasUserAsync(createSaasUserParam);
+```
+
+</TabItem>
+
+<TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
+
+```csharp
+        var saasUserApi = new SaasUserApi(authApiClientConfig);
+
+        var createSaasUserParam = new CreateSaasUserParam(email, password);
+        
+        await saasUserApi.CreateSaasUserAsync(createSaasUserParam);
+```
+
+</TabItem>
+</Tabs>
+
+SaaSにユーザー登録ができたら、登録者のUserInfo配列内の tenants からテナント情報を取得し、<a href="/ja/docs/part-6/usecase/about-saas-user-accounts/add-tenant-user" target="_blank">テナントにユーザーを紐づけロールを設定</a>してみましょう。
+
+### ３．３．SaaS運用コンソールからアカウント作成するケースの実装
+
+準備中

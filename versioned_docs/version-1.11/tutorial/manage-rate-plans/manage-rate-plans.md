@@ -9,7 +9,7 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
 ## Structure and Terminology of Pricing Plans
 
-In SaaSus, pricing plans are organized in the following **hierarchical structure**:
+In SaaSus Platform, pricing plans are organized in the following **hierarchical structure**:
 
 ![](/img/tutorial/manage-rate-plans/manage-rate-plans-05.png)
 
@@ -26,7 +26,7 @@ In SaaSus, pricing plans are organized in the following **hierarchical structure
 
 ---
 
-## Creating a Pricing Plan Using the SaaSus Developer Console
+## Creating a Pricing Plan Using the SaaS Development Console
 
 SaaSus Platform allows you to define pricing plans that support both subscription-based and usage-based billing models.
 
@@ -63,7 +63,7 @@ The Basic Plan combines a fixed monthly fee with tiered usage-based pricing for 
 
 You can create multiple measurement units, each of which can be linked to a metering unit as needed (not required for fixed unit).
 
-Based on this structure, you can use the SaaSus Developer Console to configure each component: metering units, measurement units, feature menus, and pricing plans.
+Based on this structure, you can use the SaaS Development Console to configure each component: metering units, measurement units, feature menus, and pricing plans.
 
 For detailed input steps and screenshots, please refer to the following guide:
 
@@ -87,8 +87,8 @@ This will change the pricing plan associated with the tenant. When working with 
 
 :::info
 For details on how to set up Stripe integration,  
-please refer to the following Developer Console documentation:  
-[Setting Up Stripe Integration](/docs/saas-development-console/saasus-development-console-used-billing-with-association)
+please refer to the following SaaS Development Console documentation:  
+[Stripe Integration](/docs/part-4/pricing-and-billing/stripe-integration)
 :::
 
 Now, using the pricing plans and metering unit information you've configured, let’s implement the first step of authorization processing in the application.
