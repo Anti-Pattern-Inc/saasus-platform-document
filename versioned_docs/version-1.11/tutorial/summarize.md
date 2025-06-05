@@ -12,7 +12,7 @@ Also, the hardest part of SaaS is operation rather than development. As you cont
 
 Currently, what the SaaS Platform can do is still only the basics of SaaS, but we plan to implement functions that will make SaaS operations smoother in the future. For example, we are working on providing a solution to the well known noisy neighbor problem where on a multi-tenant setup a large customer affects other tenants.
 
-Please refer to the [Implementation Guide](./../saasus-platform-document), which contains detailed settings for each item.
+Please refer to the [Implementation Guide](/docs/part-6/implementation-guide), which contains detailed settings for each item.
 
 Please look forward to the future of the SaaSus Platform.
 

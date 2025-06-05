@@ -1,22 +1,18 @@
 openapi: 3.0.0
 info:
-  description: "SaaSus AWS Marketplace API Schema"
-  version: "1.0.0"
-  title: "SaaSus AWS Marketplace API Schema"
+  description: SaaSus AWS Marketplace API Schema
+  version: 1.0.0
+  title: SaaSus AWS Marketplace API Schema
   contact:
-    name: "Anti-Pattern"
+    name: Anti-Pattern
 servers:
-  - url: "https://api.saasus.io/v1/awsmarketplace"
+  - url: https://api.saasus.io/v1/awsmarketplace
     description: Production API Server
 tags:
-  - name: "awsMarketplace"
+  - name: awsMarketplace
     description: Operations for AWS Marketplace resources
     x-description-i18n:
       jpn: AWS Marketplaceリソースの操作
-  - name: "error"
-    description: Error for Testing Purposes
-    x-description-i18n:
-      jpn: テスト用途のエラー
 security:
   - Bearer: []
 paths:
@@ -34,7 +30,7 @@ paths:
         jpn: |
           AWS Marketplaceの設定を取得します。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -42,8 +38,8 @@ paths:
                 title: AWS Marketplace Settings
                 x-title-i18n:
                   jpn: AWSMarketplace設定情報
-                $ref: "#/components/schemas/Settings"
-        500:
+                $ref: '#/components/schemas/Settings'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -65,11 +61,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateSettingsParam"
+              $ref: '#/components/schemas/UpdateSettingsParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -89,13 +85,13 @@ paths:
         jpn: |
           AWS Marketplaceの出品状況を取得します。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetListingStatusResult'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -117,11 +113,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateListingStatusParam"
+              $ref: '#/components/schemas/UpdateListingStatusParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -141,7 +137,7 @@ paths:
         jpn: |
           Marketplaceと連携するプラン情報を取得します。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -149,8 +145,8 @@ paths:
                 title: AWSMarketplace Linked Plan Information
                 x-title-i18n:
                   jpn: AWSMarketplace連携プラン情報
-                $ref: "#/components/schemas/Plans"
-        500:
+                $ref: '#/components/schemas/Plans'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -172,11 +168,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SavePlanParam"
+              $ref: '#/components/schemas/SavePlanParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -198,7 +194,7 @@ paths:
         jpn: |
           Marketplaceと連携するプラン情報を取得します。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -206,8 +202,8 @@ paths:
                 title: AWSMarketplace Linked Plan Information
                 x-title-i18n:
                   jpn: AWSMarketplace連携プラン情報
-                $ref: "#/components/schemas/Plan"
-        500:
+                $ref: '#/components/schemas/Plan'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -230,15 +226,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateCustomerParam"
+              $ref: '#/components/schemas/CreateCustomerParam'
       responses:
-        201:
+        '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Customer"
-        500:
+                $ref: '#/components/schemas/Customer'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -262,15 +258,16 @@ paths:
           description: 指定したテナントIDの顧客を取得する(Get customers with the specified tenant ID)
           schema:
             type: array
-            items: {$ref: "#/components/schemas/Uuid"}
+            items:
+              $ref: '#/components/schemas/Uuid'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Customers"
-        500:
+                $ref: '#/components/schemas/Customers'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -292,13 +289,13 @@ paths:
         jpn: |
           AWS Marketplaceに連携する顧客情報を取得します。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Customer"
-        500:
+                $ref: '#/components/schemas/Customer'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -320,9 +317,9 @@ paths:
         jpn: |
           AWS Marketplaceの顧客情報をSaaSusに同期します。
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -342,13 +339,13 @@ paths:
         jpn: |
           CloudFormationのクイック作成リンクを取得します。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CloudFormationLaunchStackLink'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -371,17 +368,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/VerifyRegistrationTokenParam"
+              $ref: '#/components/schemas/VerifyRegistrationTokenParam'
       responses:
-        200:
+        '200':
           description: OK
-        400:
+        '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        500:
+                $ref: '#/components/schemas/Error'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -401,33 +398,13 @@ paths:
         jpn: |
           AWS Marketplaceから商品の公開状況を取得します。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CatalogEntityVisibility'
-        500:
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /errors/internal-server-error:
-    get:
-      tags:
-        - "error"
-      operationId: ReturnInternalServerError
-      summary: Return Internal Server Error
-      x-summary-i18n:
-        jpn: ステータスコード500でサーバーエラーを返却
-      description: |
-        This endpoint is used for testing purposes. Returns a server error with status code 500.
-      x-description-i18n:
-        jpn: |
-          テスト用途で使用するエンドポイントです。ステータスコード500でサーバーエラーを返却します。
-      responses:
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -450,7 +427,7 @@ components:
         jpn: テナントID
       required: true
       schema:
-        $ref: "#/components/schemas/Uuid"
+        $ref: '#/components/schemas/Uuid'
     PlanName:
       in: path
       name: plan_name
@@ -569,7 +546,8 @@ components:
       properties:
         plans:
           type: array
-          items: { $ref: "#/components/schemas/Plan" }
+          items:
+            $ref: '#/components/schemas/Plan'
       required:
         - plans
     Plan:
@@ -579,10 +557,10 @@ components:
       type: object
       properties:
         plan_id:
-          $ref: "#/components/schemas/Uuid"
+          $ref: '#/components/schemas/Uuid'
         plan_name:
           type: string
-          example: "normal_plan_name_month"
+          example: normal_plan_name_month
       required:
         - plan_id
         - plan_name
@@ -593,10 +571,10 @@ components:
       type: object
       properties:
         plan_id:
-          $ref: "#/components/schemas/Uuid"
+          $ref: '#/components/schemas/Uuid'
         plan_name:
           type: string
-          example: "normal_plan_name_month"
+          example: normal_plan_name_month
       required:
         - plan_id
         - plan_name
@@ -608,12 +586,12 @@ components:
       properties:
         customer_identifier:
           type: string
-          example: "123456789012"
+          example: '123456789012'
         customer_aws_account_id:
           type: string
-          example: "123456789012"
+          example: '123456789012'
         tenant_id:
-          $ref: "#/components/schemas/Uuid"
+          $ref: '#/components/schemas/Uuid'
       required:
         - customer_identifier
         - customer_aws_account_id
@@ -626,7 +604,8 @@ components:
       properties:
         customers:
           type: array
-          items: { $ref: "#/components/schemas/Customer" }
+          items:
+            $ref: '#/components/schemas/Customer'
       required:
         - customers
     CreateCustomerParam:
@@ -636,10 +615,10 @@ components:
       type: object
       properties:
         tenant_id:
-          $ref: "#/components/schemas/Uuid"
+          $ref: '#/components/schemas/Uuid'
         registration_token:
           type: string
-          example: "registration_token"
+          example: registration_token
       required:
         - tenant_id
         - registration_token
@@ -667,7 +646,7 @@ components:
       type: object
       properties:
         listing_status:
-          $ref: "#/components/schemas/ListingStatus"
+          $ref: '#/components/schemas/ListingStatus'
       required:
         - listing_status
     UpdateListingStatusParam:
@@ -677,7 +656,7 @@ components:
       type: object
       properties:
         listing_status:
-          $ref: "#/components/schemas/ListingStatus"
+          $ref: '#/components/schemas/ListingStatus'
       required:
         - listing_status
     CloudFormationLaunchStackLink:
@@ -688,7 +667,7 @@ components:
       properties:
         link:
           type: string
-          example: "https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create?stackName=sample&templateURL=https://s3.us-west-2.amazonaws.com/cloudformation-templates-sample.template"
+          example: https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create?stackName=sample&templateURL=https://s3.us-west-2.amazonaws.com/cloudformation-templates-sample.template
       required:
         - link
     VerifyRegistrationTokenParam:
@@ -699,7 +678,7 @@ components:
       properties:
         registration_token:
           type: string
-          example: "registration_token"
+          example: registration_token
       required:
         - registration_token
     CatalogEntityVisibility:
@@ -709,7 +688,7 @@ components:
       type: object
       properties:
         visibility:
-          $ref: "#/components/schemas/VisibilityStatus"
+          $ref: '#/components/schemas/VisibilityStatus'
       required:
         - visibility
     VisibilityStatus:
