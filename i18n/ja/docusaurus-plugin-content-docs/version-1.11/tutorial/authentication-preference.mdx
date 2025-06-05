@@ -17,7 +17,7 @@ import TabItem from "@theme/TabItem";
 
 「テナント作成」ボタンをクリックしてポップアップを表示します。
 
-テナント名・代表者ユーザーの追加・代表者メールアドレス・代表者の仮パスワード、その他にGuidesでご紹介している[テナントに追加属性を定義する](../saas-development-console/declare-additional-attribute-to-tenant)で追加したテナント属性が表示されます。
+テナント名・代表者ユーザーの追加・代表者メールアドレス・代表者の仮パスワード、その他にDocsでご紹介している[テナント属性定義](/docs/part-4/application-settings/declare-additional-attribute-to-tenant)で追加したテナント属性が表示されます。
 
 
 １つ目
@@ -67,7 +67,7 @@ SaaS によっては、複数環境が不要な場合もありますので、単
 
 右上の「ユーザ作成」ボタンをクリックし、ポップアップを出します。
 
-メールアドレス・パスワード・テナント、その他にGuidesでご紹介している[ユーザに追加属性を定義する](../saas-development-console/declare-additional-attribute-to-user)で追加したユーザー属性が表示されます。
+メールアドレス・パスワード・テナント、その他にDocsでご紹介している[ユーザー属性定義](/docs/part-4/user-authz-settings/declare-additional-attribute-to-user)で追加したユーザー属性が表示されます。
 
 とりあえず、4 名登録してみましょう。
 
@@ -104,31 +104,16 @@ SaaS によっては、複数環境が不要な場合もありますので、単
 
 以下のページを参考に、事前に設定を行ってください：
 
-- [ユーザーに役割を追加](../saas-operation-console/adding-role-to-user)
+- [役割管理](/docs/part-5/adding-role-to-user)
 :::
 
 :::info
 以降の手順ではプログラミングの知識が必要となります。
 :::
 
-### 認証後の遷移先 URL の設定
-
-設定したドメイン名をベースにして、SaaSus Platform はログイン画面を生成します。<br/>
-ログイン後、SaaS 側に認証情報を引き継ぎます。この引き継ぎ先の SaaS の URL を、Callback URL として登録する必要があります。
-
-サイドメニューから「認証後遷移先」をクリックし、Callback URL 設定画面を表示します。
-
-通常は、提供している SaaS の URL をベースに Callback URL を設定します。<br/>
-ただし、今回はサンプルアプリケーションをローカルで動かすため、以下のように設定します。
-
-- Laravel の場合: [http://localhost/callback](http://localhost/callback)
-- Express の場合: [http://localhost:3000/callback](http://localhost:3000/callback)
-
-![08](/ja/img/tutorial/authentication-preference/authentication-preference-08.png)
-
 ### 認証モジュールの組み込み
 
-次に、 SaaSus Platform の認証モジュールを組み込みます。
+SaaSus Platform の認証モジュールを組み込みます。
 
 今回のアプリケーションでは、すべての URI のルートに認証を必要とします。認証されていない場合には、アプリケーションが利用できない仕様にします。
 
@@ -280,7 +265,7 @@ router.get("/", getChats);
 
 ### Callback URL の処理を実装する
 
-先ほど SaaSus 開発コンソールでコールバック先を 
+先ほど SaaS開発コンソールでコールバック先を 
 
 - Laravel の場合: [http://localhost/callback](http://localhost/callback) 
 - Express の場合: [http://localhost:3000/callback](http://localhost:3000/callback) 
@@ -687,7 +672,7 @@ const postChats = async (req: Request, res: Response) => {
 
 先ほどと同じように、SaaSus Platform で作成したログイン画面からログインを行います。
 
-ログインすると、テナント名が先ほど SaaS 開発コンソールで設定したものに変わっているのが確認できます。
+ログインすると、テナント名が先ほど SaaS開発コンソールで設定したものに変わっているのが確認できます。
 
 ![10](/ja/img/tutorial/authentication-preference/authentication-preference-10.png)
 

@@ -28,7 +28,7 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 
 ![03](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-03.png)
 
-### コンソールへのログイン
+### SaaSus Platformコンソールへのログイン
 
 テナントが作成されたのちに、ログインを行うと、このようにユーザ属性の入力が求められますので、会社名、名前を入力してください。
 
@@ -38,28 +38,45 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 
 ![05](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-05.png)
 
-**SaaS 開発コンソール**は、SaaS 構築のための設定を行うコンソールで、
+**SaaS開発コンソール**は、SaaS 構築のための設定を行うコンソールで、
 
-**SaaS 管理コンソール**は、SaaS を運用していくためのコンソールになります。
+**SaaS運用コンソール**は、SaaS を運用していくためのコンソールになります。
 
 :::info ドメイン設定について
 SaaSus Platformではドメインを設定することで、ログイン画面の自動生成やメール送信の際のベースドメインに設定することができます。<br/>
-ドメインの設定方法に関しては、[ドメイン名の設定](../saas-development-console/domain-name-preference)で確認してください。
+ドメインの設定方法に関しては、[ドメイン・遷移先の設定](/docs/part-4/application-settings/domain-and-redirect-settings)で確認してください。
 :::
 
 :::info ログイン画面のカスタマイズについて
 自動生成されたログイン画面はサービス名やアイコンを表示したり、利用規約やプライバシーポリシーのリンクを設定することができます。<br/>
-設定方法は、[ログイン画面など認証系画面のカスタマイズ](../saas-development-console/authorization-screen-customize)で確認してください。
+設定方法は、[基本情報の設定](/docs/part-4/application-settings/basic-app-settings)で確認してください。
 :::
+
+### 認証後の遷移先 URL の設定
+
+設定したドメイン名をベースにして、SaaSus Platform はログイン画面を生成します。<br/>
+ログイン後、SaaS 側に認証情報を引き継ぎます。この引き継ぎ先の SaaS の URL を、Callback URL として登録する必要があります。
+
+サイドメニューから「認証後遷移先」をクリックし、Callback URL 設定画面を表示します。
+
+通常は、提供している SaaS の URL をベースに Callback URL を設定します。<br/>
+ただし、今回はサンプルアプリケーションをローカルで動かすため、以下のように設定します。
+
+- Laravel の場合: [http://localhost/callback](http://localhost/callback)
+- Express の場合: [http://localhost:3000/callback](http://localhost:3000/callback)
+
+![06](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-06.png)
+
+このように Callback URL を設定した後は、引き続きチュートリアルを進めるために、以下の追加設定が必要です。
 
 :::caution チュートリアルを進める前に必要な設定です
 このあとのチュートリアルをスムーズに進めるためには、ユーザやテナントに関する追加情報の定義が **必須** です。
 
 以下の設定を事前に行ってください：
 
-- [ユーザに追加属性を定義する](../saas-development-console/declare-additional-attribute-to-user)
-- [テナントに追加属性を定義する](../saas-development-console/declare-additional-attribute-to-tenant)
-- [役割の定義](../saas-development-console/role-definition)
+- [ユーザー属性定義](/docs/part-4/user-authz-settings/declare-additional-attribute-to-user)
+- [テナント属性定義](/docs/part-4/application-settings/declare-additional-attribute-to-tenant)
+- [役割定義](/docs/part-4/user-authz-settings/role-definition)
 
 以降の手順は、これらの設定が完了していることを前提として進行します。
 :::
