@@ -13,19 +13,19 @@ function Home() {
     // 言語コードがURLに含まれているかチェック
     const languagePathMatch = path.match(/\/(ja)\//);
 
-    let redirectPath = '/docs/saasus-platform-document';
+    let redirectPath = '/docs/part-1/purpose-and-overview';
 
     if (languagePathMatch) {
-      redirectPath = `${languagePathMatch[0]}docs/saasus-platform-document`;
+      redirectPath = `${languagePathMatch[0]}docs/part-1/purpose-and-overview`;
     } else if (path.includes('/docs/')) {
-      redirectPath = '/docs/saasus-platform-document';
+      redirectPath = '/docs/part-1/purpose-and-overview';
     } else {
       // その他の場合はブラウザの言語設定に基づいてリダイレクト
       if (userLang.startsWith("ja")) {
-        redirectPath = '/ja/docs/saasus-platform-document';
+        redirectPath = '/ja/docs/part-1/purpose-and-overview';
       } else {
         // ブラウザの言語設定が英語またはその他の場合
-        redirectPath = '/docs/saasus-platform-document';
+        redirectPath = '/docs/part-1/purpose-and-overview';
       }
     }
 
