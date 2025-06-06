@@ -11,8 +11,6 @@ servers:
 tags:
   - name: smartApiGateway
     description: SaaSus Smart API Gateway
-  - name: error
-    description: テスト用途のエラー
 security:
   - Bearer: []
 paths:
@@ -352,21 +350,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CloudFormationLaunchStackLink'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /errors/internal-server-error:
-    get:
-      tags:
-        - error
-      operationId: ReturnInternalServerError
-      summary: ステータスコード500でサーバーエラーを返却
-      description: |
-        テスト用途で使用するエンドポイントです。ステータスコード500でサーバーエラーを返却します。
-      responses:
         '500':
           description: Internal Server Error
           content:
