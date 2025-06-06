@@ -15,10 +15,6 @@ tags:
     description: Eventbridge Resource Operations
     x-description-i18n:
       jpn: Eventbridgeリソースの操作
-  - name: error
-    description: Errors for testing purposes
-    x-description-i18n:
-      jpn: テスト用途のエラー
 security:
   - Bearer: []
 paths:
@@ -140,27 +136,6 @@ paths:
       responses:
         '201':
           description: Created
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /errors/internal-server-error:
-    get:
-      tags:
-        - error
-      operationId: ReturnInternalServerError
-      summary: Return Internal Server Error
-      x-summary-i18n:
-        jpn: ステータスコード500でサーバーエラーを返却
-      description: >
-        This endpoint is used for testing purposes. Returns a server error with
-        status code 500.
-      x-description-i18n:
-        jpn: |
-          テスト用途で使用するエンドポイントです。ステータスコード500でサーバーエラーを返却します。
-      responses:
         '500':
           description: Internal Server Error
           content:

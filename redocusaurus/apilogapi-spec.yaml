@@ -15,10 +15,6 @@ tags:
     description: API execution log
     x-description-i18n:
       jpn: api実行ログ
-  - name: error
-    description: Error for testing
-    x-description-i18n:
-      jpn: テスト用途のエラー
 security:
   - Bearer: []
 paths:
@@ -105,27 +101,6 @@ paths:
                 x-title-i18n:
                   jpn: APIログ
                 $ref: '#/components/schemas/ApiLog'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /errors/internal-server-error:
-    get:
-      tags:
-        - error
-      operationId: ReturnInternalServerError
-      summary: Returns a server error with status code 500
-      x-summary-i18n:
-        jpn: ステータスコード500でサーバーエラーを返却
-      description: >
-        This endpoint is used for testing purposes. Returns a server error with
-        status code 500.
-      x-description-i18n:
-        jpn: |
-          テスト用途で使用するエンドポイントです。ステータスコード500でサーバーエラーを返却します。
-      responses:
         '500':
           description: Internal Server Error
           content:
