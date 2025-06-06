@@ -1,0 +1,208 @@
+---
+title: "Smart MCP Server Feature"
+slug: "smart-mcp-server-overview"
+excerpt: ""
+hidden: false
+createdAt: "Sun May 26 2025 07:00:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Sun May 26 2025 07:00:00 GMT+0000 (Coordinated Universal Time)"
+---
+
+:::info Support
+If you would like to view sample demo videos, feature demonstrations, tutorial support, information gathering for implementation consideration, or technical consultation regarding implementation, please contact us through the support request form below.
+
+[Smart MCP Server by SaaSus Platform Support Request Form](https://forms.gle/DVDqrcNc525E9GG68)
+:::
+
+## What is Smart MCP Server Feature
+
+The Smart MCP Server feature automatically provides APIs published through the Smart API Gateway feature as Model Context Protocol (MCP) servers. This enables AI agents and LLMs (Large Language Models) to directly call APIs through remote MCP Servers that work in conjunction with API publishing via Smart API Gateway. This allows existing APIs to be instantly provided in a format usable by AI agents, accelerating AI-driven application development.
+
+## Feature Overview
+
+### Automatic MCP Server Deployment
+- **Simultaneous deployment**: When an API is published via Smart API Gateway, the MCP Server is automatically deployed simultaneously
+- **No additional configuration required**: MCP Server configuration is unnecessary once Smart API Gateway feature setup is complete
+- **Schema updates**: Changes to API definitions are automatically reflected in the MCP Server
+
+## Supported AI Services
+
+Currently, the Smart MCP Server feature can be verified with the following AI services:
+
+### OpenAI Playground
+- **Support status**: ✅ Verified working
+- **Usage method**: Add as MCP Server from Tools
+- **Note**: A paid OpenAI account is required
+
+## Tutorial
+
+### Overview
+
+**Duration**: Approximately 15-20 minutes  
+**Prerequisites**: API must already be published via Smart API Gateway feature
+
+:::warning Important Prerequisites
+Before starting this tutorial, you must have already published an API using the Smart API Gateway feature.<br/>
+If you haven't completed the setup yet, please first complete the [Smart API Gateway feature setup procedure](./manual.mdx).
+:::
+
+<details>
+<summary>📋 Smart MCP Server Feature Tutorial (Click to expand)</summary>
+<div>
+
+This tutorial explains the procedure for setting up APIs published via Smart API Gateway feature as MCP Servers that can be used by AI services.
+
+
+---
+
+## Step 1: Confirm MCP Server Endpoint
+
+1. Log in to the [SaaS Development Console](https://settings.console.saasus.io/dashboard)
+2. Select **Smart API Gateway** from the left menu
+3. Confirm that the API is in a published state
+4. When you scroll down the screen, the following information will be displayed, so please note it down:
+
+- **MCP Server Endpoint**: The endpoint for AI services to connect to
+
+![smart-mcp-server-tutorial-2](/img/api-gateway-function/smart-mcp-server-tutorial-2.png)
+
+---
+
+## Step 2: Confirm API Key
+
+1. Log in to the [SaaS Operation Console](https://saasadmin.console.saasus.io/dashboard)
+2. Select **Users** from the left menu
+3. Click the **API Key Management button** in the Actions column for a specific user
+4. Note down the API key displayed in the dialog (if not yet issued, please issue a new one)
+
+![smart-mcp-server-tutorial-3](/img/api-gateway-function/smart-mcp-server-tutorial-3.png)
+
+## Step 3: Prepare OpenAI Playground
+
+:::warning Important Notice
+Using OpenAI Playground requires a **paid OpenAI account**. It cannot be used with a free account.<br/>
+Additionally, usage fees are incurred for each API call, so please manage your budget appropriately with proper settings.
+:::
+
+### OpenAI Account Preparation
+
+This step confirms the prerequisites for using OpenAI Playground and performs necessary account setup.
+
+#### 1. OpenAI Account Creation/Login
+
+1. Access [OpenAI Platform](https://platform.openai.com/)
+2. Navigate to the account creation screen from "Sign up"
+3. Enter required authentication information such as email address and password, and perform email verification
+4. Enter your name, date of birth, Organization name, and "What best describes you?"
+5. Fill in "Invite your team" and "Make your first API call" according to your situation
+6. For "Add some API credits", click "I'll buy credits later" as we'll set this up later
+
+Registration is now complete.
+
+#### 2. Payment Method Setup (Required)
+
+:::danger Important
+Setting up a payment method is **required** to use OpenAI Playground.
+:::
+
+1. Log in to [OpenAI Platform](https://platform.openai.com/)
+2. Click the account icon in the upper right and select "Your Profile" from the displayed menu
+3. Select "Billing" from the side menu
+4. Add a valid credit card from "Add payment details" and charge credits
+
+#### 3. Confirm OpenAI Playground Access
+
+1. Access [OpenAI Playground](https://platform.openai.com/playground)
+2. Confirm that the chat screen displays normally
+3. Send a simple message to confirm availability
+
+---
+
+## Step 4: Operation Verification with AI Services
+
+:::info
+Currently, only operation verification with OpenAI Playground is supported.
+:::
+
+### OpenAI Playground
+
+1. Access [OpenAI Playground](https://platform.openai.com/playground)
+2. Click **Create...** in the **Tools** section
+3. Select **MCP Server**
+  ![smart-mcp-server-tutorial-4](/img/api-gateway-function/smart-mcp-server-tutorial-4.png)
+4. Select **Add New**
+  ![smart-mcp-server-tutorial-5](/img/api-gateway-function/smart-mcp-server-tutorial-5.png)
+5. Enter values in the displayed form:
+  - **URL**: The **MCP Server endpoint** you noted down
+  - **Label**: Any label
+  - **Authentication**: Select **Custom headers**
+    - Key: **x-api-key**
+    - Value: The **API key** you noted down
+  ![smart-mcp-server-tutorial-6](/img/api-gateway-function/smart-mcp-server-tutorial-6.png)
+6. Click **Connect**
+7. Upon success, a list of available APIs will be displayed in Tools
+　![smart-mcp-server-tutorial-7](/img/api-gateway-function/smart-mcp-server-tutorial-7.png)
+8. Click **Add**
+9. Confirm that the added MCP Server is displayed in the **Tools** section
+　![smart-mcp-server-tutorial-8](/img/api-gateway-function/smart-mcp-server-tutorial-8.png)
+
+---
+
+## Step 5: API Call Test from AI Services
+
+### OpenAI Playground
+
+1. In the chat, enter "Tell me what operations are available with (**MCP Server name**)"
+  ![smart-mcp-server-tutorial-9](/img/api-gateway-function/smart-mcp-server-tutorial-9.png)
+2. When you receive a response saying "Retrieves inventory information for a specific tenant based on the given inventory ID", instruct it to retrieve inventory information by providing the inventory ID
+3. When the API to call and "Approve" button are displayed, click it
+  ![smart-mcp-server-tutorial-9](/img/api-gateway-function/smart-mcp-server-tutorial-10.png)
+4. Confirm if the response is as expected
+  ![smart-mcp-server-tutorial-10](/img/api-gateway-function/smart-mcp-server-tutorial-11.png)
+
+## Step 6: Error Troubleshooting
+
+### Common Issues and Solutions
+
+#### 1. Cannot connect to MCP Server
+
+**Symptom**: AI service cannot connect to MCP Server
+
+**Solution**:
+- Confirm that the API Key is set correctly
+- Check network connection
+
+#### 2. API call fails
+
+**Symptom**: API calls via MCP Server result in errors
+
+**Solution**:
+- Confirm that the API published via Smart API Gateway feature works normally without going through MCP Server
+- Check API Key permission settings
+- Check if throttling limits have been reached
+
+#### 3. Tools not displayed
+
+**Symptom**: Tool list is not displayed in AI service
+
+**Solution**:
+- Confirm that the API is normally published via Smart API Gateway feature
+- Clear browser cache and retry
+
+---
+
+## Summary
+
+In this tutorial, you learned how to publish APIs for AI services using the Smart MCP Server feature.
+
+### Completed Content
+
+- Confirming MCP Server endpoint
+- Connection setup in AI service (OpenAI Playground)
+- API call testing
+
+:::info
+If you have questions about the Smart MCP Server feature or need support, please contact us through the [support request form](https://forms.gle/DVDqrcNc525E9GG68).
+:::
+
+</div>
+</details>
