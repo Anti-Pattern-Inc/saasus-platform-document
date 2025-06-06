@@ -124,7 +124,8 @@
             "id": "part-4/smart-api-gateway-features/overview"
           },
           "items": [
-            "part-4/smart-api-gateway-features/manual"
+            "part-4/smart-api-gateway-features/manual",
+            "part-4/smart-api-gateway-features/smart-mcp-server-overview"
           ]
         },
         {
