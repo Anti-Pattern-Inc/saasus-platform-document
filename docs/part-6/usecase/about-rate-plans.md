@@ -13,18 +13,42 @@ The SaaSus Platform also allows for complex pricing plans using subscription and
 
 - Individual plan
   - Fixed fee 3,000 yen
-  - Number of comments pay-as-you-go
+  - Comment count tiered usage pricing
     - Up to 10 comments, 5 yen per comment
-    - From 11 to 100 comments, 2 yen per comment
-    - 101 comments ~ 1 yen per comment
+    - 11 to 100 comments, 2 yen per comment
+    - 101 comments and above, 1 yen per comment
 - Enterprise plan
   - Fixed fee 50,000 yen
-  - Number of comments Free
+  - Comment count Free
 
-| Plan       | Basic Charge | Number of Comments                                                                                         |
-| :--------- | -----------: | :--------------------------------------------------------------------------------------------------------- |
-| Individual   |    3,000 yen | Pay-as-you-go (per comment)<br/> 5 yen: 0-10 comments<br/> 2 yen: 11-100 comments <br/> 1 yen: 101 comments ~ |
-| Enterprise |   50,000 Yen | Unlimited                                                                                                  |
+<div className="table-scroll">
+<table className="nowrap-table">
+  <thead>
+    <tr>
+      <th>Plan</th>
+      <th className="text-right">Base Fee</th>
+      <th>Comment Count Billing</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Individual</td>
+      <td className="text-right">3,000 yen</td>
+      <td className="no-p-margin">
+        Tiered usage pricing (per comment)<br />
+        0–10 items = 5 yen/item<br />
+        11–100 items = 2 yen/item<br />
+        101 items〜 = 1 yen/item
+      </td>
+    </tr>
+    <tr>
+      <td>Enterprise</td>
+      <td className="text-right">50,000 yen</td>
+      <td>Unlimited</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 \*This time we will use a complicated rate plan as an example, but please do not set up such a complicated rate plan unless there is a deep reason.
 SaaS usage fees should not be considered based on cost, but rather on how much value the customer will receive.

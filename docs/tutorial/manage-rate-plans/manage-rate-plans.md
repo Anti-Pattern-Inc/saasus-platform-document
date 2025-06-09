@@ -38,16 +38,40 @@ In this tutorial, we’ll walk through how to configure two example pricing plan
   - Number of comments Max 10
 - **Basic plan**
   - Fixed fee 500 yen
-  - Number of comments pay-as-you-go
+  - Comment count tiered pricing
     - Up to 10 comments, 500 yen
     - From 11 comments to 50 comments, 1000 yen
     - From 51 comments to 100 comments, 1500 yen
     - Max 100 comments
 
-| Plan       | Basic Charge | Number of Comments                                                                                         |
-| :--------- | -----------: | :--------------------------------------------------------------------------------------------------------- |
-| Free       |              | 10                                                                                                         |
-| Basic      |      500 yen | Pay-as-you-go<br/> 500 yen: Up to 10 comments<br/> 1000 yen: 11 to 50 comments<br/> 1500 yen: 51 to 100 comments<br/> Up to 100 comments          |
+<div className="table-scroll">
+<table className="nowrap-table">
+  <thead>
+    <tr>
+      <th>Plan</th>
+      <th>Base Fee</th>
+      <th>Comment Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Free</strong></td>
+      <td className="text-center">—</td>
+      <td>Max 10 comments</td>
+    </tr>
+    <tr>
+      <td><strong>Basic</strong></td>
+      <td className="text-right">500 yen</td>
+      <td className="no-p-margin">
+        Tiered pricing (Max 100 comments)<br />
+        0–10 items = 500 yen<br />
+        11–50 items = 1,000 yen<br />
+        51–100 items = 1,500 yen
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 ## Structure of the Free Plan
 
