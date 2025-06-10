@@ -188,7 +188,7 @@ const config = {
         style: "dark",
         links: [
           {
-            title: 'Service', // 2列目のタイトル
+            title: 'Service', // 1列目のタイトル
             items: [
               {
                 label: 'GitHub',
@@ -209,7 +209,7 @@ const config = {
             ],
           },
           {
-            title: 'Company information', // 3列目のタイトル
+            title: 'Company information', // 2列目のタイトル
             items: [
               {
                 label: 'Service Provider',
