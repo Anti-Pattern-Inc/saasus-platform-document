@@ -6,8 +6,8 @@ const locale = process.env.DOCUSAURUS_CURRENT_LOCALE || 'en';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Saasus Platform Document",
-  // tagline: 'Saasus Platform are cool',
+  title: "SaaSus Platform Document",
+  // tagline: 'SaaSus Platform are cool',
   favicon: "img/favicon.ico",
 
   // Set the production url of your site here
