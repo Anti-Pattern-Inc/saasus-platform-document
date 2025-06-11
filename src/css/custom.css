@@ -48,3 +48,9 @@
 .text-right {
   text-align: right;
 }
+.align-middle {
+  vertical-align: middle;
+}
+.no-p-margin p {
+  margin: 0;
+}
