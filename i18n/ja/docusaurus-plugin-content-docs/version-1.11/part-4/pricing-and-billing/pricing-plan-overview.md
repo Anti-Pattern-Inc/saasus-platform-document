@@ -22,12 +22,47 @@ updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (UTC)"
 
 ## 2. 計測単位 ― 4 つの課金モデル
 
-| タイプ | イメージ | 主なユースケース |
-|--------|---------|-----------------|
-| **固定ユニット** | 毎月 500 円 などの定額 | 月額基本料、保守費用 |
-| **使用量ユニット** | 1 API リクエスト = 0.1 円 | シンプルな従量課金 |
-| **段階ユニット** | 0–10 件 **= 500 円**<br />11–50 件 **= 1,000 円** | ステップ課金（携帯パケット従量など） |
-| **段階的使用量ユニット** | 0–10 件 **= 100 円/件**<br />11–20 件 **= 90 円/件** … | ボリュームディスカウント |
+<div className="table-scroll">
+<table className="nowrap-table">
+  <thead>
+    <tr>
+      <th>タイプ</th>
+      <th>イメージ</th>
+      <th>主なユースケース</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>固定ユニット</strong></td>
+      <td>毎月 500 円 などの定額</td>
+      <td>月額基本料、保守費用</td>
+    </tr>
+    <tr>
+      <td><strong>使用量ユニット</strong></td>
+      <td>1 API リクエスト = 0.1 円</td>
+      <td>シンプルな従量課金</td>
+    </tr>
+    <tr>
+      <td><strong>段階ユニット</strong></td>
+      <td className="no-p-margin">
+        0–10 件 = 500 円<br />
+        11–50 件 = 1,000 円<br />
+        など
+      </td>
+      <td>ステップ課金（携帯パケット従量など）</td>
+    </tr>
+    <tr>
+      <td><strong>段階的使用量ユニット</strong></td>
+      <td className="no-p-margin">
+        0–10 件 = 100 円/件<br />
+        11–20 件 = 90 円/件<br />
+        など
+      </td>
+      <td>ボリュームディスカウント</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 :::info
 **詳細な計算パターン** は  
@@ -50,11 +85,44 @@ updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (UTC)"
 
 ## 4. モデル別サンプル（Free / Basic / Enterprise）
 
-| プラン | 基本料金 | コメント数課金 |
-|--------|---------|----------------|
-| **Free**        | 0 円 | 10 件まで無料 |
-| **Basic**       | 500 円 | 段階課金（0–10 = 500 円／11–50 = 1,000 円／51–100 = 1,500 円） |
-| **Enterprise**  | 0 円 | 段階的使用量課金（0–1,000 = 50 円/件／1,001–5,000 = 40 円/件／5,001〜 = 30 円/件） |
+<div className="table-scroll">
+<table className="nowrap-table">
+  <thead>
+    <tr>
+      <th>プラン</th>
+      <th>基本料金</th>
+      <th>コメント数課金</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Free</strong></td>
+      <td className="text-right">0 円</td>
+      <td>10 件まで無料</td>
+    </tr>
+    <tr>
+      <td><strong>Basic</strong></td>
+      <td className="text-right">500 円</td>
+      <td className="no-p-margin">
+        段階課金<br />
+        0–10 件 = 500 円<br />
+        11–50 件 = 1,000 円<br />
+        51–100 件 = 1,500 円
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Enterprise</strong></td>
+      <td className="text-right">0 円</td>
+      <td className="no-p-margin">
+        段階的使用量課金<br />
+        0–1,000 件 = 50 円/件<br />
+        1,001–5,000 件 = 40 円/件<br />
+        5,001〜 = 30 円/件
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 ### Free プランの構成
 ![Free プラン構成図](/ja/img/part-4/pricing-and-billing/pricing-plan-overview/manage-rate-plans-06.png)
