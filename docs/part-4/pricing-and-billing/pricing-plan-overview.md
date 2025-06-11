@@ -21,12 +21,47 @@ A pricing plan is defined by combining the following **4 hierarchical layers**:
 
 ## 2. Measurement Units – 4 Billing Models
 
-| Type                      | Image                                                 | Typical Use Cases                |
-|---------------------------|--------------------------------------------------------|----------------------------------|
-| **Fixed Unit**            | Fixed price such as 500 JPY/month                     | Monthly base fee, maintenance cost |
-| **Usage Unit**      | 1 API request = 0.1 JPY                               | Simple pay-as-you-go             |
-| **Tiered Unit**           | 0–10 = **500 JPY**<br/>11–50 = **1,000 JPY**          | Step-based pricing (like mobile data plans) |
-| **Tiered Usage Unit** | 0–10 = **100 JPY/item**<br/>11–20 = **90 JPY/item** | Volume discount pricing          |
+<div className="table-scroll">
+<table className="nowrap-table">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Image</th>
+      <th>Main Use Cases</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Fixed Unit</strong></td>
+      <td>Fixed price such as 500 JPY per month</td>
+      <td>Monthly base fee, maintenance cost</td>
+    </tr>
+    <tr>
+      <td><strong>Usage Unit</strong></td>
+      <td>1 API request = 0.1 JPY</td>
+      <td>Simple pay-as-you-go</td>
+    </tr>
+    <tr>
+      <td><strong>Tiered Unit</strong></td>
+      <td className="no-p-margin">
+        0–10 items = 500 JPY<br />
+        11–50 items = 1,000 JPY<br />
+        etc.
+      </td>
+      <td>Step-based pricing (like mobile data plans)</td>
+    </tr>
+    <tr>
+      <td><strong>Tiered Usage Unit</strong></td>
+      <td className="no-p-margin">
+        0–10 items = 100 JPY/item<br />
+        11–20 items = 90 JPY/item<br />
+        etc.
+      </td>
+      <td>Volume discount pricing</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 :::info
 For **detailed calculation patterns**, see  
@@ -49,11 +84,44 @@ Use this model to define **flat fees unaffected by usage** (e.g., 1,000 JPY/mont
 
 ## 4. Model Samples (Free / Basic / Enterprise)
 
-| Plan         | Base Fee | Comment Count Billing |
-|--------------|----------|------------------------|
-| **Free**        | 0 JPY     | Free up to 10 items      |
-| **Basic**       | 500 JPY   | Tiered (0–10 = 500 JPY / 11–50 = 1,000 JPY / 51–100 = 1,500 JPY) |
-| **Enterprise**  | 0 JPY     | Tiered usage-based (0–1,000 = 50 JPY/item / 1,001–5,000 = 40 JPY/item / 5,001+ = 30 JPY/item) |
+<div className="table-scroll">
+<table className="nowrap-table">
+  <thead>
+    <tr>
+      <th>Plan</th>
+      <th>Base Fee</th>
+      <th>Comment Count Billing</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Free</strong></td>
+      <td className="text-right">0 JPY</td>
+      <td>Free up to 10 items</td>
+    </tr>
+    <tr>
+      <td><strong>Basic</strong></td>
+      <td className="text-right">500 JPY</td>
+      <td className="no-p-margin">
+        Tiered pricing<br />
+        0–10 items = 500 JPY<br />
+        11–50 items = 1,000 JPY<br />
+        51–100 items = 1,500 JPY
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Enterprise</strong></td>
+      <td className="text-right">0 JPY</td>
+      <td className="no-p-margin">
+        Tiered usage-based<br />
+        0–1,000 items = 50 JPY/item<br />
+        1,001–5,000 items = 40 JPY/item<br />
+        5,001〜 = 30 JPY/item
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 ### Free Plan Example  
 ![Free Plan Structure](/img/part-4/pricing-and-billing/pricing-plan-overview/manage-rate-plans-06.png)
