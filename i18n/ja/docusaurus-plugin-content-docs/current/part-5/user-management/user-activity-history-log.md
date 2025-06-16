@@ -10,8 +10,13 @@ updatedAt: "Tue Jun 11 2024 00:47:10 GMT+0000 (Coordinated Universal Time)"
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-:::info
-行動履歴ログはアドバンスドプラン以上のお客様のみご利用いただけます。
+## 概要
+
+行動履歴ログでは、ユーザーがSaaSを操作した履歴を確認することができます。
+
+:::warning
+「行動履歴ログ」は、旧スタータープランおよび旧スタンダードプランをご契約中の場合、ご利用いただけません。  
+本機能をご利用いただくには、新しい料金プランへの変更が必要です。
 :::
 
 SaaS運用コンソール > ユーザー管理 のActions内にある「行動履歴ログ」から閲覧することができます。

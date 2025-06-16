@@ -9,8 +9,9 @@ updatedAt: "Mon Mar 25 2024 14:00:00 GMT+0000 (Coordinated Universal Time)"
 
 The IP restriction feature limits access to the SaaSus console and API requests by IP address.
 
-:::info
-The IP restriction feature is available only to customers on the Advanced plan or higher.
+:::warning
+The IP Restriction feature is not available for customers on the legacy Starter or Standard plans.  
+To use this feature, you need to change to a new pricing plan.
 :::
 
 ## Applying for IP Restriction
