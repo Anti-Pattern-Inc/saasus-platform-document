@@ -19,7 +19,7 @@ The single-tenant management feature is a functionality on the SaaSus Platform t
 
 :::warning
 The Single-Tenant Management feature is not available for customers on the legacy Starter or Standard plans.  
-To use this feature, please upgrade your subscription plan.
+To use this feature, you need to change to a new pricing plan.
 :::
 
 In a single-tenant architecture, each tenant's data is physically isolated, reducing the risk of data leakage among other benefits. However, there is a disadvantage of increased management cost as servers and databases need to be prepared for each tenant.

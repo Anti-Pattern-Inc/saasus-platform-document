@@ -16,7 +16,7 @@ The user activity history log enables you to check the history of user operation
 
 :::warning
 The User Activity Log feature is not available for customers on the legacy Starter or Standard plans.  
-To use this feature, please upgrade your subscription plan.
+To use this feature, you need to change to a new pricing plan.
 
 :::
 

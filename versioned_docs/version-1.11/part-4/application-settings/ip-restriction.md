@@ -11,7 +11,7 @@ The IP restriction feature limits access to the SaaSus console and API requests 
 
 :::warning
 The IP Restriction feature is not available for customers on the legacy Starter or Standard plans.  
-To use this feature, please upgrade your subscription plan.
+To use this feature, you need to change to a new pricing plan.
 :::
 
 ## Applying for IP Restriction
