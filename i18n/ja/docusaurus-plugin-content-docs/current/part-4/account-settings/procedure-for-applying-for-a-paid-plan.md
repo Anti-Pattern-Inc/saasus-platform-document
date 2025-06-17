@@ -118,7 +118,7 @@ SaaSus Platformでは以下プランを現在用意しております。
     </tr>
     <tr>
       <td>エンタープライズ</td>
-      <td className="text-right">¥1,200,000円<br />or<br />MRRの3.7%の高い方</td>
+      <td className="text-left">サポートまで<br />お問い合わせください</td>
       <td className="text-right">3</td>
       <td className="text-right">無制限</td>
       <td className="text-right">無制限</td>
@@ -133,6 +133,8 @@ SaaSus Platformでは以下プランを現在用意しております。
   </tbody>
 </table>
 </div>
+
+***
 
 ## SaaS開発コンソールから有料プランの申し込み
 
@@ -152,7 +154,7 @@ AWS Marketplaceにて購入を希望される方は、Private Offerでのご契�
 
 AWS Marketplaceに製品を出品しており、そちらでも申し込みが可能です。もしAWS Marketplaceで申し込まれた場合、AWSの利用料と一緒に請求されることになります。  
 <a href="https://aws.amazon.com/marketplace/pp/prodview-2gr3qw7kp5qx6?sr=0-1&ref_=beagle&applicationId=AWSMPContess" target="_blank">SaaSus Platform</a>
-
+<!--
 ### 1.AWS Marketplaceの製品ページより`View purchase options`をクリックします
 
 ![f0ffc78-image](/ja/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/f0ffc78-image.png)
@@ -211,3 +213,4 @@ AWS Marketplaceに製品を出品しており、そちらでも申し込みが�
 有料化するアカウントを選択し`このアカウントで利用を開始する`をクリックします
 
 ![e15cc67-image](/ja/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/e15cc67-image.png)
+-->

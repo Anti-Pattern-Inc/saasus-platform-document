@@ -118,7 +118,7 @@ To apply for a paid plan, you can either apply through the SaaS Development Cons
     </tr>
     <tr>
       <td>Enterprise</td>
-      <td className="text-right">¥1,200,000<br />or<br />3.7% of MRR, whichever is higher</td>
+      <td className="text-left">Please contact our<br />sales team</td>
       <td className="text-right">3</td>
       <td className="text-right">Unlimited</td>
       <td className="text-right">Unlimited</td>
@@ -153,7 +153,7 @@ Please contact our support team for assistance.
 
 We have also listed our product on the AWS Marketplace, where you can also apply. If you apply via AWS Marketplace, you will be billed together with your AWS usage fees.  
 <a href="https://aws.amazon.com/marketplace/pp/prodview-2gr3qw7kp5qx6?sr=0-1&ref_=beagle&applicationId=AWSMPContess" target="_blank">SaaSus Platform</a>
-
+<!--
 ### 1.Click `View purchase options` from the AWS Marketplace product page
 
 ![f0ffc78-image](/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/f0ffc78-image.png)
@@ -212,3 +212,4 @@ After clicking on `Set up your account`, you will be directed to the new registr
 Select the account you want to pay for and click on 'Start using this account'.
 
 ![e15cc67-image](/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/e15cc67-image.png)
+-->
