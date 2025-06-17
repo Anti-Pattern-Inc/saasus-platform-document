@@ -3,6 +3,126 @@
     "message": "1.11",
     "description": "The label for version 1.11"
   },
+  "sidebar.docsSidebar.category.Part I: Introduction": {
+    "message": "第I部：はじめに",
+    "description": "The label for category Part I: Introductionv"
+  },
+  "sidebar.docsSidebar.category.Part II: SaaS Fundamentals": {
+    "message": "第II部：SaaSの基礎知識",
+    "description": "The label for category Part II: SaaS Fundamentals in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Part III: Overview and Setup of the SaaSus Platform": {
+    "message": "第III部：SaaSus Platformの概要と導入準備",
+    "description": "The label for category Part III: Overview and Setup of the SaaSus Platform in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Part IV: Using the SaaSus Platform (Developer Console)": {
+    "message": "第IV部：SaaSus Platformの使い方（SaaS開発コンソール 編）",
+    "description": "The label for category Part IV: Using the SaaSus Platform (Developer Console) in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Registering and Configuring Applications": {
+    "message": "アプリケーションの登録と設定",
+    "description": "The label for category Registering and Configuring Applications in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Settings for Google Tag Manager": {
+    "message": "Google Tag Managerの設定",
+    "description": "The label for category Settings for Google Tag Manager in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Pricing & Billing": {
+    "message": "料金プランと課金設定",
+    "description": "The label for category Pricing & Billing in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.User Authentication and Authorization Configuration": {
+    "message": "ユーザー認証・認可の設定",
+    "description": "The label for category User Authentication and Authorization Configuration in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Authentication Method Settings": {
+    "message": "認証方式の設定",
+    "description": "The label for category Authentication Method Settings in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Smart API Gateway Features": {
+    "message": "Smart API Gateway 機能",
+    "description": "The label for category Smart API Gateway Features in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Integrate with Amazon EventBridge": {
+    "message": "Amazon EventBridge 連携機能",
+    "description": "The label for category Integrate with Amazon EventBridge in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.AWS Marketplace Integration": {
+    "message": "AWS Marketplace 連携機能",
+    "description": "The label for category AWS Marketplace Integration in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.About SaaS User Accounts": {
+    "message": "SaaS利用者（ユーザー）のアカウントについて",
+    "description": "The label for category About SaaS User Accounts in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Setting Up Disbursement methods From Seller Registration": {
+    "message": "セラー登録から支払い方法の設定",
+    "description": "The label for category Setting Up Disbursement methods From Seller Registration in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Registration of SaaS Product Information": {
+    "message": "SaaS製品情報の登録",
+    "description": "The label for category Registration of SaaS Product Information in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Supplementary": {
+    "message": "補足",
+    "description": "The label for category Supplementary in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.SaaSus API MCP Server Usage Guide": {
+    "message": "SaaSus API MCP Server 設定ガイド",
+    "description": "The label for category SaaSus API MCP Server Usage Guide in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Account Settings": {
+    "message": "アカウント設定",
+    "description": "The label for category Account Settings in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Part V: Using the SaaSus Platform (Operation Console)": {
+    "message": "第V部：SaaSus Platformの使い方（SaaS運用コンソール 編）",
+    "description": "The label for category Part V: Using the SaaSus Platform (Operation Console) in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.User Management": {
+    "message": "ユーザー管理",
+    "description": "The label for category User Management in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Pricing Plan Settings": {
+    "message": "料金プラン設定",
+    "description": "The label for category Pricing Plan Settings in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Part VI: Development Documentation": {
+    "message": "第VI部：開発ドキュメント",
+    "description": "The label for category Part VI: Development Documentation in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Implementation Guide": {
+    "message": "実装ガイド",
+    "description": "The label for category Implementation Guide in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Metering API Implementation Sample and Examples of Use (Laravel)": {
+    "message": "メータリングAPIの実装サンプルと使用例(Laravel)",
+    "description": "The label for category Metering API Implementation Sample and Examples of Use (Laravel) in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Usecase": {
+    "message": "ユースケース",
+    "description": "The label for category Usecase in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.About Rate Plans": {
+    "message": "複雑な料金プランについて",
+    "description": "The label for category About Rate Plans in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Part VII: Troubleshooting and Support": {
+    "message": "第VII部：トラブルシューティングとサポート",
+    "description": "The label for category Part VI: Troubleshooting and Support in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.FAQ": {
+    "message": "よくある質問（FAQ）",
+    "description": "The label for FAQ in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Part VIII: Appendix": {
+    "message": "第VIII部：付録",
+    "description": "The label for category Part VII: Appendix in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.link.Release Notes and Change History": {
+    "message": "リリースノートと変更履歴",
+    "description": "The label for link Release Notes and Change History in sidebar docsSidebar"
+  },
   "sidebar.tutorialSidebar.category.Getting Started": {
     "message": "はじめに",
     "description": "The label for category Getting Started in sidebar tutorialSidebar"
@@ -46,70 +166,6 @@
   "sidebar.changelogSidebar.doc.Welcome to SaaSus Platform": {
     "message": "Welcome to SaaSus Platform",
     "description": "The label for the doc item Welcome to SaaSus Platform in sidebar changelogSidebar, linking to the doc changelog/welcome-to-saasus-platform"
-  },
-  "sidebar.guideSidebar.category.Getting Started": {
-    "message": "はじめに",
-    "description": "The label for category Getting Started in sidebar guideSidebar"
-  },
-  "sidebar.guideSidebar.category.Implementation Guide": {
-    "message": "実装ガイド",
-    "description": "The label for category Implementation Guide in sidebar guideSidebar"
-  },
-  "sidebar.guideSidebar.category.Usecase": {
-    "message": "ユースケース",
-    "description": "The label for category Usecase in sidebar guideSidebar"
-  },
-  "sidebar.guideSidebar.category.SaaS Development Console": {
-    "message": "SaaS 開発コンソール",
-    "description": "The label for category SaaS Development Console in sidebar guideSidebar"
-  },
-  "sidebar.guideSidebar.category.SaaS Operation Console": {
-    "message": "SaaS 運用コンソール",
-    "description": "The label for category SaaS Operation Console in sidebar guideSidebar"
-  },
-  "sidebar.guideSidebar.category.AWS Marketplace Integration": {
-    "message": "AWS Marketplace 連携機能",
-    "description": "The label for category AWS Marketplace Integration in sidebar guideSidebar"
-  },
-  "sidebar.guideSidebar.category.Metering API Implementation Sample and Examples of Use (Laravel)": {
-    "message": "メータリングAPIの実装サンプルと使用例(Laravel)",
-    "description": "The label for category Metering API Implementation Sample and Examples of Use (Laravel) in sidebar guideSidebar"
-  },
-  "sidebar.guideSidebar.category.Integrate with Amazon EventBridge": {
-    "message": "Amazon EventBridge 連携機能",
-    "description": "The label for category Integrate with Amazon EventBridge in sidebar guideSidebar"
-  },
-  "sidebar.guideSidebar.category.About SaaS User Accounts": {
-    "message": "SaaS利用者（ユーザー）のアカウントについて",
-    "description": "The label for category About SaaS User Accounts in sidebar guideSidebar"
-  },
-  "sidebar.guideSidebar.category.About Rate Plans": {
-    "message": "複雑な料金プランについて",
-    "description": "The label for category About Rate Plans in sidebar guideSidebar"
-  },
-  "sidebar.guideSidebar.category.Settings for Google Tag Manager": {
-    "message": "Google Tag Managerの設定",
-    "description": "The label for category Settings for Google Tag Manager in sidebar guideSidebar"
-  },
-  "sidebar.guideSidebar.category.Pricing Plan Setting": {
-    "message": "料金プラン設定",
-    "description": "The label for category Pricing Plan Setting in sidebar guideSidebar"
-  },
-  "sidebar.guideSidebar.category.Setting Up Disbursement methods From Seller Registration": {
-    "message": "セラー登録から支払い方法の設定",
-    "description": "The label for category Setting Up Disbursement methods From Seller Registration in sidebar guideSidebar"
-  },
-  "sidebar.guideSidebar.category.Registration of SaaS Product Information": {
-    "message": "SaaS製品情報の登録",
-    "description": "The label for category Registration of SaaS Product Information in sidebar guideSidebar"
-  },
-  "sidebar.guideSidebar.category.Supplementary": {
-    "message": "補足",
-    "description": "The label for category Supplementary in sidebar guideSidebar"
-  },
-  "sidebar.guideSidebar.category.Smart API Gateway Function": {
-    "message": "Smart API Gateway 機能",
-    "description": "The label for category Smart API Gateway Function sidebar guideSidebar"
   },
   "sidebar.changelogSidebar.doc.2024/03/13": {
     "message": "2024/03/13",

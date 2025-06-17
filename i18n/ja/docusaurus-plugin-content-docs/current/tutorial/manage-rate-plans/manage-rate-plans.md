@@ -3,12 +3,13 @@ title: "料金プランの設定"
 slug: "manage-rate-plans"
 excerpt: ""
 hidden: false
+pagination_next: tutorial/implementation-of-authorization-based-on-tenant-information
 createdAt: "Wed Jan 11 2023 03:13:15 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Fri Dec 08 2023 02:28:54 GMT+0000 (Coordinated Universal Time)"
 ---
 ## 料金プランの構成と用語の整理
 
-SaaSusでは、料金プランは以下のような**階層構造**で構成されます。
+SaaSus Platformででは、料金プランは以下のような**階層構造**で構成されます。
 
 
 ![](/ja/img/tutorial/manage-rate-plans/manage-rate-plans-05.png)
@@ -24,7 +25,7 @@ SaaSusでは、料金プランは以下のような**階層構造**で構成さ�
   - 機能メニューを複数まとめて構成します。
   - 各テナントは定義された料金プランを選んで使います。特定のテナント向けに専用プラン（プライベートプライシング）を作ることもできます。
 
-## SaaSus 開発コンソール を使った料金プランの作成
+## SaaS開発コンソール を使った料金プランの作成
 
 SaaSus Platformでは、サブスクリプション型および従量課金のモデルに対応した料金プランの作成が可能です。
 
@@ -36,15 +37,39 @@ SaaSus Platformでは、サブスクリプション型および従量課金の�
   - コメント数 Max 10
 - **Basic プラン**
   - 固定料金 500円
-  - コメント数 従量課金
+  - コメント数 段階課金
     - 10コメントまで、 500円
     - 11コメント〜50コメントまで、 1000円 
     - Max 100コメントまで、 1500円
 
-| プラン        |     基本料金 | コメント数                                                                             |
-| :--------- | -------: | :-------------------------------------------------------------------------------- |
-| Free       |          | 10                                                                                |
-| Basic      |    500 円 | 従量課金<br />　 500 円:10コメントまで<br />　1000 円:11コメント〜50コメント<br />　1500 円:51コメント〜　　最大 100コメントまで |
+<div className="table-scroll">
+<table className="nowrap-table">
+  <thead>
+    <tr>
+      <th>プラン</th>
+      <th>基本料金</th>
+      <th>コメント数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Free</strong></td>
+      <td className="text-center">―</td>
+      <td>最大 10 コメント</td>
+    </tr>
+    <tr>
+      <td><strong>Basic</strong></td>
+      <td className="text-right">500 円</td>
+      <td className="no-p-margin">
+        段階課金（最大 100 コメント）<br />
+        0–10 件 = 500 円<br />
+        11–50 件 = 1,000 円<br />
+        51–100 件 = 1,500 円
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 ## Freeプランの構成
 
@@ -61,7 +86,7 @@ Basicプランは、固定料金と段階的な従量課金の2種類を組み�
 このように、計測単位は複数作成可能で、それぞれの単位が必要に応じてメーター単位と結びつきます（固定課金は不要）。
 
 
-この構成を元に、実際にSaaSus開発コンソールを使って、各要素（メーター単位・計測単位・機能メニュー・料金プラン）を設定していきます。
+この構成を元に、実際にSaaS開発コンソールを使って、各要素（メーター単位・計測単位・機能メニュー・料金プラン）を設定していきます。
 
 設定画面の具体的な入力手順については、以下の手順ページをご覧ください。
 
@@ -69,7 +94,7 @@ Basicプランは、固定料金と段階的な従量課金の2種類を組み�
 
 ## テナントへの料金プランの適用
 
-SaaS 運用コンソールにログインし、「料金プラン設定」をクリックします。
+SaaS運用コンソールにログインし、「料金プラン設定」をクリックします。
 
 ![](/ja/img/tutorial/manage-rate-plans/manage-rate-plans-02.png)
 
@@ -84,8 +109,8 @@ SaaS 運用コンソールにログインし、「料金プラン設定」をク
 ![](/ja/img/tutorial/manage-rate-plans/manage-rate-plans-04.png)
 
 :::info
-Stripe との連携設定については、以下の開発コンソールのドキュメントを参照してください。  
-[Stripe連携の設定](/docs/saas-development-console/saasus-development-console-used-billing-with-association)
+Stripe との連携設定については、以下のSaaS開発コンソールのドキュメントを参照してください。  
+[Stripeとの連携設定](/docs/part-4/pricing-and-billing/stripe-integration)
 :::
 
 では、ここまで設定した、料金プランやメーターの情報の情報を活かして、アプリケーションに認可処理の一歩目を実装してみましょう。

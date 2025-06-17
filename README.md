@@ -35,6 +35,22 @@ docker exec -it {コンテナID} bash
 npm run start -- --host 0.0.0.0
 ```
 
+### Update Implementation(Optional)
+
+※ この手順は、変更内容を自動で反映させたい場合に利用してください
+
+Roo Codeのプロンプトで
+
+```
+i18n/ja/docusaurus-plugin-content-docs/current/
+配下で新規作成、修正されているファイルを対象として
+英語版とバージョン1.11（英語、日本語）に反映して
+
+方法は以下を参考にして
+.clinerules/document-management-guide.md
+```
+
+とすることで、修正内容を最新バージョンと英語版に反映させることが出来ます
 
 ### Build
 

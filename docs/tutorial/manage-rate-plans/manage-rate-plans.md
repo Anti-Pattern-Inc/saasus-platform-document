@@ -3,12 +3,13 @@ title: "Manage Rate Plans"
 slug: "manage-rate-plans"
 excerpt: ""
 hidden: false
+pagination_next: tutorial/implementation-of-authorization-based-on-tenant-information
 createdAt: "Fri Jan 20 2023 01:46:57 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
 ## Structure and Terminology of Pricing Plans
 
-In SaaSus, pricing plans are organized in the following **hierarchical structure**:
+In SaaSus Platform, pricing plans are organized in the following **hierarchical structure**:
 
 ![](/img/tutorial/manage-rate-plans/manage-rate-plans-05.png)
 
@@ -25,7 +26,7 @@ In SaaSus, pricing plans are organized in the following **hierarchical structure
 
 ---
 
-## Creating a Pricing Plan Using the SaaSus Developer Console
+## Creating a Pricing Plan Using the SaaS Development Console
 
 SaaSus Platform allows you to define pricing plans that support both subscription-based and usage-based billing models.
 
@@ -37,16 +38,40 @@ In this tutorial, we’ll walk through how to configure two example pricing plan
   - Number of comments Max 10
 - **Basic plan**
   - Fixed fee 500 yen
-  - Number of comments pay-as-you-go
+  - Comment count tiered pricing
     - Up to 10 comments, 500 yen
     - From 11 comments to 50 comments, 1000 yen
     - From 51 comments to 100 comments, 1500 yen
     - Max 100 comments
 
-| Plan       | Basic Charge | Number of Comments                                                                                         |
-| :--------- | -----------: | :--------------------------------------------------------------------------------------------------------- |
-| Free       |              | 10                                                                                                         |
-| Basic      |      500 yen | Pay-as-you-go<br/> 500 yen: Up to 10 comments<br/> 1000 yen: 11 to 50 comments<br/> 1500 yen: 51 to 100 comments<br/> Up to 100 comments          |
+<div className="table-scroll">
+<table className="nowrap-table">
+  <thead>
+    <tr>
+      <th>Plan</th>
+      <th>Base Fee</th>
+      <th>Comment Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Free</strong></td>
+      <td className="text-center">—</td>
+      <td>Max 10 comments</td>
+    </tr>
+    <tr>
+      <td><strong>Basic</strong></td>
+      <td className="text-right">500 yen</td>
+      <td className="no-p-margin">
+        Tiered pricing (Max 100 comments)<br />
+        0–10 items = 500 yen<br />
+        11–50 items = 1,000 yen<br />
+        51–100 items = 1,500 yen
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 ## Structure of the Free Plan
 
@@ -62,7 +87,7 @@ The Basic Plan combines a fixed monthly fee with tiered usage-based pricing for 
 
 You can create multiple measurement units, each of which can be linked to a metering unit as needed (not required for fixed unit).
 
-Based on this structure, you can use the SaaSus Developer Console to configure each component: metering units, measurement units, feature menus, and pricing plans.
+Based on this structure, you can use the SaaS Development Console to configure each component: metering units, measurement units, feature menus, and pricing plans.
 
 For detailed input steps and screenshots, please refer to the following guide:
 
@@ -86,8 +111,8 @@ This will change the pricing plan associated with the tenant. When working with 
 
 :::info
 For details on how to set up Stripe integration,  
-please refer to the following Developer Console documentation:  
-[Setting Up Stripe Integration](/docs/saas-development-console/saasus-development-console-used-billing-with-association)
+please refer to the following SaaS Development Console documentation:  
+[Stripe Integration](/docs/part-4/pricing-and-billing/stripe-integration)
 :::
 
 Now, using the pricing plans and metering unit information you've configured, let’s implement the first step of authorization processing in the application.

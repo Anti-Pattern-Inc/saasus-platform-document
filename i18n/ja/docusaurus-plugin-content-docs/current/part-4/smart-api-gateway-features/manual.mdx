@@ -1,0 +1,327 @@
+---
+title: "設定手順"
+slug: "manual"
+excerpt: ""
+hidden: false
+createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
+---
+
+import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
+
+## Smart API Gateway 利用手順
+
+SaaSus Platform の Smart API Gateway 機能を利用して、API を簡単に公開・管理するための設定手順を以下に示します。
+
+---
+
+### Step 1: 事前準備(SaaS 環境とアプリのセットアップ)
+
+- SaaSus Platform のアカウントを作成<br/>
+  本機能を利用するためには、SaaSus Platform のアカウントが必要です。<br/>
+  [SaaSus Platform](https://saasus.io/) にアクセスし、SaaSus Platform のアカウントを作成し、ログインしてください。
+
+- 検証に使用する AWS 環境の準備<br/>
+  本機能を利用するためには、AWS アカウントが必要です。<br/>
+  AWS アカウントをお持ちでない場合は、[AWS アカウントの作成](https://aws.amazon.com/jp/) にアクセスし、AWS アカウントを作成してください。
+
+- SaaS 環境とサンプルアプリ<br/>
+  CloudFormation で AWS に SaaS 環境とサンプルアプリを作成します。<br/>
+  今回検証に使用する AWS 環境にて以下の CloudFormation を実行してください。<br/>
+  実行後に CloudFormation の出力結果に記載されている URL にアクセスし、password を入力して VSCode の環境にログインしてください。<br/>
+  [SaaS 環境とサンプルアプリの作成](https://github.com/saasus-platform/implementation-sample-smart-api-gateway/blob/main/smart-gateway-sample-saas.yaml)
+
+  - サンプルアプリ<br/>
+    本手順で使用するサンプルアプリは以下です<br/>
+    [Smart API Gateway SaaS Sample](https://github.com/saasus-platform/implementation-sample-smart-api-gateway.git)
+
+  - SaaSus Java SDK<br/>
+    本手順で使用する SaaSus Java SDK は以下です。<br/>
+    [Java SDK](https://github.com/saasus-platform/saasus-sdk-java)
+
+- SDK のセットアップ
+  下記手順で SDK のセットアップを行っています。
+
+1. SaaSus Java SDK でパッケージを作成し、ローカルリポジトリにインストールしてください。
+
+```txt
+cd saasus-sdk-java
+mvn clean package
+mvn install:install-file -Dfile=target/saasus-sdk-java-1.0.0.jar -DgroupId=io.saasus -DartifactId=saasus-java -Dversion=0.0.1 -Dpackaging=jar
+```
+
+:::info[設定済み手順のため、何をしているかのみ確認をしてください]
+
+2. implementation-sample-smart-api-gateway/pom.xml の dependencies タグと profiles タグの中に下記を追記しています。
+
+```xml
+<!-- saasus platform sdk -->
+<dependency>
+	<groupId>io.saasus</groupId>
+	<artifactId>saasus-java</artifactId>
+	<version>0.0.1</version>
+</dependency>
+<!-- saasus platform sdk -->
+
+<!-- smart api gateway parameter setting -->
+<profiles>
+	<profile>
+	<id>with-parameters</id>
+	<build>
+		<plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>3.8.1</version>
+			<configuration>
+			<compilerArgs>
+				<arg>-parameters</arg>
+			</compilerArgs>
+			</configuration>
+		</plugin>
+		</plugins>
+	</build>
+	</profile>
+</profiles>
+<!-- smart api gateway parameter setting -->
+```
+
+:::
+
+3. implementation-sample-smart-api-gateway プロジェクトで設定を行ってください。
+
+```txt
+cd implementation-sample-smart-api-gateway
+mvn clean package
+
+cp .env.example .env
+vi .env
+
+SAASUS_SAAS_ID="xxxxxxxxxx"
+SAASUS_API_KEY="xxxxxxxxxx"
+SAASUS_SECRET_KEY="xxxxxxxxxx"
+
+docker compose up -d
+```
+
+:::info
+SAASUS_SAAS_ID,SAASUS_API_KEY,SAASUS_SECRET_KEYの取得方法は、下記をご参照ください。<br/>
+[SaaS ID と API キー、クライアントシークレットの再確認](/docs/tutorial/configuring-sdk-for-saasus-platform#saas-id-と-api-キークライアントシークレットの確認)
+:::
+
+---
+
+:::info[設定済み手順のため、何をしているかのみ確認をしてください]
+
+### Step 2: ソースコードへのアノテーション設定
+
+1. 公開対象のメソッドにアノテーションを追加し、API エンドポイントとして使用できるように設定します。
+
+   今回はサンプルとして <br/>
+   src/main/java/implementsample/service/InventoryService.java<br/>
+   getInventoryEntryPoint メソッドを API として呼び出します。<br/>
+
+   Smart API Gateway は static なメソッドを呼び出す仕様となります。<br/>
+   そのため Smart API Gateway から呼び出される static なメソッドを作成し、その中で TenantInventory を呼び出しています。<br/>
+   また、作成した static なメソッドに@SaaSusAPI のアノテーションを付与し、Smart API Gateway のエンドポイントとして利用することを宣言しています。
+
+```mdx-code-block
+<Tabs>
+<TabItem value="java" label="java" default>
+```
+
+```java
+package implementsample.service;
+
+import java.util.List;
+
+import implementsample.repository.InventoryRepository;
+import implementsample.util.TenantApiClient;
+import saasus.sdk.modules.SaaSusAPI;
+import implementsample.dto.InventoryDto;
+
+public class InventoryService {
+    public List<InventoryDto> getInventory(String tenantId) {
+        // テナントIDに対応する在庫情報取得
+        return InventoryRepository.TenantInventory.getOrDefault(tenantId,
+                InventoryRepository.TenantInventory.get("default"));
+    }
+
+    @SaaSusAPI(path = "getInventory")
+    public static List<InventoryDto> getInventoryEntryPoint(String inventoryId) {
+
+        TenantApiClient tenantClient = new TenantApiClient();
+        String tenantId = tenantClient.getTenantIdFromApiKey(inventoryId);
+
+        return InventoryRepository.TenantInventory.getOrDefault(tenantId,
+                InventoryRepository.TenantInventory.get("default"));
+    }
+}
+
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+---
+
+### Step 3: API Server の起動設定
+
+1. アプリケーションの起動時に `saasus-sdk` の API サーバーが起動するよう、src/main/java/implementsample/ApiServerListener.java クラスを追加しています。
+
+```mdx-code-block
+<Tabs>
+<TabItem value="java" label="java" default>
+```
+
+```txt
+// saasus api server
+import saasus.sdk.util.apiserver.ApiServer;
+
+...省略...
+
+            // Start the API server on port 8083
+            ApiServer.start(8083);
+
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+2. **Application Load Balancer** に対して、以下の設定が必要です。(CloudFormation で設定済みです)
+
+   - **リスナー**: ポート **8083**
+   - **ターゲットグループ**: ポート **8083** のターゲットグループを作成
+   - **セキュリティグループ**: ALB とアプリケーションにポート **8083** へのアクセスを許可
+
+:::
+
+---
+
+### Step 4: ソースコードの統合と圧縮
+
+対象のソースコードを Step 5 でアップロードするため、以下のシェルスクリプトでまとめ、ZIP ファイルに圧縮します。
+
+```sh
+bash java_files_collector.sh <アプリケーションのパス>
+```
+
+例:
+
+```sh
+cd /Workshop/implementation-sample-smart-api-gateway
+bash java_files_collector.sh src/main/java/implementsample
+```
+
+java_files_archive.zip ファイルが作成されます。
+ダウンロードしてください。
+
+以上が SaaS アプリ内での設定内容です。
+
+---
+
+### Step 5: ZIP ファイルのアップロード
+
+1. SaaS開発コンソールの Smart API Gateway 機能画面にアクセスしてください。
+
+2. 画面上から生成した ZIP ファイルをアップロードしてください。
+
+---
+
+### Step 6: 権限・インフラの設定
+
+1. **Permission タブ**に移動し、**Assume Role 用の CloudFormation** を作成します。
+2. 作成した **Role ARN** と **External ID** を登録します。
+3. PrivateLink(Network Load Balancer)を作成する VPC の **VPC ID** と **Subnet IDs** を登録します。
+4. Application Load Balancer の **ALB ARN** を登録します。
+   :::info
+   Subnet IDs には、必ず **複数の Subnet IDs** を入力してください。<br/>
+   :::
+
+設定が完了すると、SaaSus Platform とお客様の環境を接続するインフラが作成されます。
+
+---
+
+### Step 7: API の公開とアクセス
+
+1. API を公開
+2. API エンドポイントのドメインでアクセスが可能です。
+
+#### API アクセス方法
+
+- API のアクセスには **API Key** が必要です。SaaS運用コンソールの **テナント管理画面**で API Key を発行し、アクセスに利用します。
+- API のメソッドは **Throttling&Role** のメソッドパスから確認をしてください。
+- API エンドポイントのドメインに対して、以下のようにアクセスしてください。
+
+#### アクセス例
+
+```sh
+$ curl -v -X GET https://<ドメイン>/<api method path> -H 'x-api-key:<発行したAPI Key>'
+```
+
+#### Example
+
+```sh
+$ curl -v -X GET https://xxxxxxxxxxxxxxxxxxxxx/inventory-controller/get-inventory?inventoryId=d296b330-3cce-40b6-88c3-035a1d86981f -H 'x-api-key:azydsktcf1b93Mmjxuex7CEbEoV7OjrGk0RIqgzCQtc'
+```
+
+### Step 8: Throttling 設定
+
+- **Throttling&Role** から対象の method path を選択し、スロットリングの設定を行ってください。
+- 検証のため、**1 分間に 2 回のリクエスト**に制限を設定します。
+- 設定が完了すると、API のアクセス制限が設定されます。
+- 複数回アクセスをして、スロットリングの動作を確認してください。
+
+:::info
+
+- スロットリングの設定は、**range（秒）の時間内のリクエスト数**を設定できます。
+  - テナント単位のスロットリング
+    - テナントの API キー、ユーザーの API キーを使用した **すべての API コールの合計** に対して、発行数の制限を適用します。
+  - ユーザー単位のスロットリング
+    - テナントの API キーでは **無制限に API を発行可能** です。
+    - ユーザーの API キーを使用した場合、**各ユーザーごとに API コール数を制限** します。
+
+:::
+
+### Step 9: 認可（ロール）設定
+
+- 検証のため、SaaS開発コンソールの **役割定義**で一般ユーザーというロールを作成してください。
+- ロールによる認可にはユーザーの **API Key** が必要です。SaaS運用コンソールの **ユーザー管理画面**でユーザーを作成し、API Key を発行してください。
+- SaaS運用コンソールの**役割管理**から作成したユーザーに一般ユーザーのロールを設定してください。
+- **Throttling&Role**から対象の method path を選択し、SaaS 管理者ロールの設定を行ってください。
+- 設定が完了すると、API のアクセス制限が設定されます。
+- ユーザーの API key を使用して、ロールによる認可の動作を確認してください。
+
+:::info
+
+- ロールによる認可にはユーザーのロールによって制御を行うため、ユーザーの API Key のみが対象です。
+- ユーザーの API key を発行するにはユーザーがテナントに所属している必要があります。
+- テナントの API Key は、どのロールを設定していてもアクセス可能です。
+
+:::
+
+### Step 10: ドメイン設定
+
+- **Custom Domain**からドメインを設定してください。
+- 自身の DNS サーバーに表示された CNAME レコードを設定してください。
+- ドメイン設定が完了すると、API エンドポイントのドメインが更新されます。
+- ドメイン設定後、ドメインに対してアクセスが可能です。
+
+### Step 11: IP 制限設定
+
+- SaaS運用コンソールの **テナント管理画面**で IP 制限を設定してください。
+- IP 制限設定後、設定した IP アドレスからのみアクセスが可能です。
+
+### 検証環境の削除
+
+- VSCode の環境に再度ログインし、以下のコマンドを実行してください。
+- `t-<tenantid>-saasus-setup-private-link-on-saas` の CloudFormation のリソースから作成した vpc endpoint service id を取得する
+- aws cli を使用できるように、aws configure 等でアクセスキーとシークレットキーを設定する
+- `reject_vpc_endpoints.sh <vpc endpoint service id>` で vpc endpoint service id のエンドポイント接続を reject する（これを行わないと CloudFormation の削除がエラーになります）
+- `t-<tenantid>-saasus-setup-private-link-on-saas` の CloudFormation を削除する
+- saas sample の CloudFormation を削除する
