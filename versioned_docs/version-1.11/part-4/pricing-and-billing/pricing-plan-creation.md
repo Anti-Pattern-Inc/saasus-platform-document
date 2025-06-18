@@ -42,10 +42,42 @@ Details → [Meter Unit Settings](/docs/part-4/pricing-and-billing/usage-meterin
 
 ### 2-2. For Basic Plan (Fixed + Tiered Units)
 
-| Key               | Display Name             | Type             | Meter         | Pricing                        | Currency |
-|-------------------|--------------------------|------------------|----------------|--------------------------------|----------|
-| `basic_base`      | Basic Plan Basic Fee      | **Fixed Unit**    | —              | 500 JPY/month                 | JPY      |
-| `basic_comment`   | Number of comments for Basic plan   | **Tiered Unit**   | Comment Count | 0–10=500<br />11–50=1,000<br />51–100=1,500 | JPY |
+<div className="table-scroll">
+<table className="nowrap-table">
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Display Name</th>
+      <th>Type</th>
+      <th>Meter</th>
+      <th>Pricing</th>
+      <th>Currency</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>basic_base</code></td>
+      <td>Basic Plan Basic Fee</td>
+      <td><strong>Fixed Unit</strong></td>
+      <td className="text-center">—</td>
+      <td className="text-right">500 / month</td>
+      <td className="text-right">JPY</td>
+    </tr>
+    <tr>
+      <td><code>basic_comment</code></td>
+      <td>Number of comments for Basic plan</td>
+      <td><strong>Tiered Unit</strong></td>
+      <td>Comment Count</td>
+      <td className="text-right no-p-margin">
+        0-10=500<br />
+        11-50=1,000<br />
+        51-100=1,500
+      </td>
+      <td className="text-right">JPY</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 ![Basic Fixed Unit](/img/part-4/pricing-and-billing/pricing-plan-creation/setting-measurement-units-function-menus-and-price-plans-01.png)  
 ![Basic Tiered Unit](/img/part-4/pricing-and-billing/pricing-plan-creation/setting-measurement-units-function-menus-and-price-plans-03.png)
@@ -54,9 +86,34 @@ Details → [Meter Unit Settings](/docs/part-4/pricing-and-billing/usage-meterin
 
 ### 2-3. For Enterprise Plan (Tiered Usage Unit)
 
-| Key                   | Display Name               | Type                     | Meter         | Tiered Pricing                                              | Currency |
-|-----------------------|----------------------------|--------------------------|----------------|-------------------------------------------------------------|----------|
-| `enterprise_comment`  | Number of comments for Enterprise plan | **Tiered Usage Unit** | Comment Count | 0–1,000 = 50<br />1,001–5,000 = 40<br />5,001〜=30 | JPY      |
+<div className="table-scroll">
+<table className="nowrap-table">
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Display Name</th>
+      <th>Type</th>
+      <th>Meter</th>
+      <th>Tiered Pricing</th>
+      <th>Currency</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>enterprise_comment</code></td>
+      <td>Number of comments for Enterprise plan</td>
+      <td><strong>Tiered Usage Unit</strong></td>
+      <td>Comment Count</td>
+      <td className="text-right no-p-margin">
+    0-1,000=50 / item<br />
+    1,001-5,000=40 / item<br />
+    5,001〜=30 / item
+      </td>
+      <td className="text-right">JPY</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 ![Enterprise Measurement Unit](/img/part-4/pricing-and-billing/pricing-plan-creation/setting-measurement-units-function-menus-and-price-plans-08.png)
 

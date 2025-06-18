@@ -37,15 +37,39 @@ SaaSus Platformでは、サブスクリプション型および従量課金の�
   - コメント数 Max 10
 - **Basic プラン**
   - 固定料金 500円
-  - コメント数 従量課金
+  - コメント数 段階課金
     - 10コメントまで、 500円
     - 11コメント〜50コメントまで、 1000円 
     - Max 100コメントまで、 1500円
 
-| プラン        |     基本料金 | コメント数                                                                             |
-| :--------- | -------: | :-------------------------------------------------------------------------------- |
-| Free       |          | 10                                                                                |
-| Basic      |    500 円 | 従量課金<br />　 500 円:10コメントまで<br />　1000 円:11コメント〜50コメント<br />　1500 円:51コメント〜　　最大 100コメントまで |
+<div className="table-scroll">
+<table className="nowrap-table">
+  <thead>
+    <tr>
+      <th>プラン</th>
+      <th>基本料金</th>
+      <th>コメント数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Free</strong></td>
+      <td className="text-center">―</td>
+      <td>最大 10 コメント</td>
+    </tr>
+    <tr>
+      <td><strong>Basic</strong></td>
+      <td className="text-right">500 円</td>
+      <td className="no-p-margin">
+        段階課金（最大 100 コメント）<br />
+        0–10 件 = 500 円<br />
+        11–50 件 = 1,000 円<br />
+        51–100 件 = 1,500 円
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 ## Freeプランの構成
 
