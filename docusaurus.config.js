@@ -2,12 +2,15 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 import { themes as prismThemes } from "prism-react-renderer";
+import llmsTxtPlugin from "./plugins/llms-txt-plugin";
+
 const locale = process.env.DOCUSAURUS_CURRENT_LOCALE || 'en';
+
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Saasus Platform Document",
-  // tagline: 'Saasus Platform are cool',
+  title: "SaaSus Platform Document",
+  // tagline: 'SaaSus Platform are cool',
   favicon: "img/favicon.ico",
 
   // Set the production url of your site here
@@ -129,7 +132,18 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      // image: 'img/docusaurus-social-card.jpg',
+      image: 'https://docs.saasus.io/img/logo.png',
+
+      // サイトの基本的なメタ情報を設定
+      metadata: [
+        { name: 'og:type', content: 'website' },
+        { name: 'og:site_name', content: 'SaaSus Platform Documentation' },
+        { name: 'og:title', content: 'SaaSus Platform Documentation' },
+        { name: 'og:description', content: 'Official documentation for SaaSus Platform' },
+        { name: 'og:url', content: 'https://docs.saasus.io/' },
+        { name: 'og:image', content: 'https://docs.saasus.io/img/logo.png' },
+      ],
+
       navbar: {
         title: "",
         logo: {
@@ -177,11 +191,40 @@ const config = {
         style: "dark",
         links: [
           {
-            title: "Docs",
+            title: 'Service', // 1列目のタイトル
             items: [
               {
-                label: "Tutorial",
-                to: "/docs/part-1/purpose-and-overview",
+                label: 'GitHub',
+                href: 'https://github.com/saasus-platform/',
+              },
+              {
+                label: '10 Days SaaSification',
+                href: 'https://saasus.io/10-days-saasification',
+              },
+              {
+                label: 'Blog',
+                href: 'https://saasus.io/blog',
+              },
+              {
+                label: 'Case Studies',
+                href: 'https://saasus.io/customer-success-stories',
+              },
+            ],
+          },
+          {
+            title: 'Company information', // 2列目のタイトル
+            items: [
+              {
+                label: 'Service Provider',
+                href: 'https://anti-pattern.co.jp/',
+              },
+              {
+                label: 'Privacy Policy',
+                href: 'https://anti-pattern.co.jp/legal',
+              },
+              {
+                label: 'Terms of Service',
+                href: 'https://saasus.io/terms',
               },
             ],
           },
@@ -207,6 +250,7 @@ const config = {
     //     disableInDev: false,
     //   },
     // ],
+    llmsTxtPlugin,
     [
       require.resolve("docusaurus-plugin-image-zoom"),
       {

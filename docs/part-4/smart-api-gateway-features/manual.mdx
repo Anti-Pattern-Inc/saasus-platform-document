@@ -7,8 +7,8 @@ createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
-import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
 
 ## Smart API Gateway Usage Procedure
 
@@ -148,10 +148,10 @@ public class InventoryService {
     }
 
     @SaaSusAPI(path = "getInventory")
-    public static List<InventoryDto> getInventoryEntryPoint(String xApiKey) {
+    public static List<InventoryDto> getInventoryEntryPoint(String inventoryId) {
         // Retrieve the tenant ID from the API key
         TenantApiClient tenantClient = new TenantApiClient();
-        String tenantId = tenantClient.getTenantIdFromApiKey(xApiKey);
+        String tenantId = tenantClient.getTenantIdFromApiKey(inventoryId);
 
         return InventoryRepository.TenantInventory.getOrDefault(tenantId,
                 InventoryRepository.TenantInventory.get("default"));
@@ -263,7 +263,7 @@ $ curl -v -X GET https://<domain>/<api method path> -H 'x-api-key:<YourIssuedAPI
 #### Example
 
 ```bash
-$ curl -v -X GET https://xxxxxxxxxxxxxxxxxxxxx/inventory-controller/get-inventory?apiKey=d296b330-3cce-40b6-88c3-035a1d86981f -H 'x-api-key:azydsktcf1b93Mmjxuex7CEbEoV7OjrGk0RIqgzCQtc'
+$ curl -v -X GET https://xxxxxxxxxxxxxxxxxxxxx/inventory-controller/get-inventory?inventoryId=d296b330-3cce-40b6-88c3-035a1d86981f -H 'x-api-key:azydsktcf1b93Mmjxuex7CEbEoV7OjrGk0RIqgzCQtc'
 ```
 
 ### Step 8: Throttling Settings
