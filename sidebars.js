@@ -10,15 +10,16 @@
  */
 
 // @ts-check
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 /** changelog フォルダ内の YYYYMMDD.md ファイルを昇順ソートして最新を返す */
 function getLatestChangelog() {
-  const dir = path.join(__dirname, 'docs', 'changelog');
-  return fs.readdirSync(dir)
-    .filter(f => /^\d{8}\.md$/.test(f))
-    .map(f => f.replace(/\.md$/, ''))
+  const dir = path.join(__dirname, "docs", "changelog");
+  return fs
+    .readdirSync(dir)
+    .filter((f) => /^\d{8}\.md$/.test(f))
+    .map((f) => f.replace(/\.md$/, ""))
     .sort()
     .pop();
 }
@@ -55,7 +56,7 @@ const sidebars = {
         "part-2/saas-development",
         "part-2/saas-marketing",
         "part-2/saas-security-and-compliance",
-        "part-2/saas-legal-issues",       
+        "part-2/saas-legal-issues",
       ],
     },
     {
@@ -64,7 +65,7 @@ const sidebars = {
       items: [
         "part-3/saasus-platform-architecture",
         "part-3/getting-started",
-        "part-3/login-and-main-screen-overview",     
+        "part-3/login-and-main-screen-overview",
       ],
     },
     {
@@ -73,35 +74,36 @@ const sidebars = {
       items: [
         "part-4/saas-development-console-overview",
         {
-          "type": "category",
-          "label": "Registering and Configuring Applications",
-          "link": {
-            "type": "generated-index",
-            "title": "Registering and Configuring Applications",
-            "description": "Configure various settings required to build your SaaSus Platform application.",
-            "slug": "/part-4/application-settings",
+          type: "category",
+          label: "Registering and Configuring Applications",
+          link: {
+            type: "generated-index",
+            title: "Registering and Configuring Applications",
+            description:
+              "Configure various settings required to build your SaaSus Platform application.",
+            slug: "/part-4/application-settings",
           },
-          "items": [
+          items: [
             "part-4/application-settings/basic-app-settings",
             "part-4/application-settings/domain-and-redirect-settings",
             "part-4/application-settings/api-key-settings",
             {
-              "type": "category",
-              "label": "Settings for Google Tag Manager",
-              "link": {
-                "type": "doc",
-                "id": "part-4/application-settings/googletagmanagersetting"
+              type: "category",
+              label: "Settings for Google Tag Manager",
+              link: {
+                type: "doc",
+                id: "part-4/application-settings/googletagmanagersetting",
               },
-              "items": [
+              items: [
                 "part-4/application-settings/googletagmanagersetting/googletagmanagercreateaccountandcontainer",
                 "part-4/application-settings/googletagmanagersetting/googletagmanagercontaineridsetting",
                 "part-4/application-settings/googletagmanagersetting/creategoogleanalyticsaccount",
-                "part-4/application-settings/googletagmanagersetting/googleanalyticsgoogletagmanagerlink"
-              ]  
+                "part-4/application-settings/googletagmanagersetting/googleanalyticsgoogletagmanagerlink",
+              ],
             },
             "part-4/application-settings/ip-restriction",
             "part-4/application-settings/declare-additional-attribute-to-tenant",
-          ]
+          ],
         },
         {
           type: "category",
@@ -123,31 +125,30 @@ const sidebars = {
           ],
         },
         {
-          "type": "category",
-          "label": "User Authentication and Authorization Configuration",
-          "link": {
-            "type": "generated-index",
-            "title": "User Authentication and Authorization Configuration",
-            "description": "Includes settings for login methods, user attributes, environments, roles, and notification emails related to user authentication and authorization.",
-            "slug": "/part-4/user-authz-settings",
+          type: "category",
+          label: "User Authentication and Authorization Configuration",
+          link: {
+            type: "generated-index",
+            title: "User Authentication and Authorization Configuration",
+            description:
+              "Includes settings for login methods, user attributes, environments, roles, and notification emails related to user authentication and authorization.",
+            slug: "/part-4/user-authz-settings",
           },
-          "items": [
+          items: [
             {
               type: "category",
               label: "Authentication Method Settings",
               link: {
                 type: "doc",
-                id: "part-4/user-authz-settings/authentication-method-settings"
+                id: "part-4/user-authz-settings/authentication-method-settings",
               },
-              items: [
-                "part-4/user-authz-settings/google-linkage"
-              ]
-          },
-          "part-4/user-authz-settings/declare-additional-attribute-to-user",
-          "part-4/user-authz-settings/notifymailcustomize",
-          "part-4/user-authz-settings/role-definition",
-          "part-4/user-authz-settings/user-env-definition",
-          ]
+              items: ["part-4/user-authz-settings/google-linkage"],
+            },
+            "part-4/user-authz-settings/declare-additional-attribute-to-user",
+            "part-4/user-authz-settings/notifymailcustomize",
+            "part-4/user-authz-settings/role-definition",
+            "part-4/user-authz-settings/user-env-definition",
+          ],
         },
         {
           type: "category",
@@ -156,7 +157,10 @@ const sidebars = {
             type: "doc",
             id: "part-4/smart-api-gateway-features/overview",
           },
-          items: ["part-4/smart-api-gateway-features/manual"],
+          items: [
+            "part-4/smart-api-gateway-features/manual",
+            "part-4/smart-api-gateway-features/smart-mcp-server-overview",
+          ],
         },
         {
           type: "category",
@@ -165,9 +169,7 @@ const sidebars = {
             type: "doc",
             id: "part-4/integrate-with-amazon-eventbridge",
           },
-          items: [
-            "part-4/integrate-with-amazon-eventbridge/event-sample",
-          ],
+          items: ["part-4/integrate-with-amazon-eventbridge/event-sample"],
         },
         "part-4/single-tenant-management",
         {
@@ -254,14 +256,15 @@ const sidebars = {
           link: {
             type: "generated-index",
             title: "Account Settings",
-            description: "Change your account name, manage your SaaSus Platform subscription plan, and invite other users.",
+            description:
+              "Change your account name, manage your SaaSus Platform subscription plan, and invite other users.",
             slug: "/part-4/account-settings",
           },
           items: [
             "part-4/account-settings/procedure-for-applying-for-a-paid-plan",
             "part-4/account-settings/saasususerinvitation",
           ],
-        }
+        },
       ],
     },
     {
@@ -275,13 +278,14 @@ const sidebars = {
           link: {
             type: "generated-index",
             title: "User Management",
-            description: "Manage users including registration, editing, and activity log review.",
+            description:
+              "Manage users including registration, editing, and activity log review.",
             slug: "/part-5/user-management",
           },
           items: [
             "part-5/user-management/user-crud",
             "part-5/user-management/user-activity-history-log",
-          ],  
+          ],
         },
         "part-5/tenant-management",
         "part-5/adding-role-to-user",
@@ -289,8 +293,8 @@ const sidebars = {
           type: "category",
           label: "Pricing Plan Settings",
           link: {
-              type: "doc",
-              id: "part-5/price-plan",
+            type: "doc",
+            id: "part-5/price-plan",
           },
           items: [
             "part-5/price-plan/price-plan-setting-000",
@@ -353,17 +357,17 @@ const sidebars = {
               ],
             },
             {
-              "type": "category",
-              "label": "About Rate Plans",
-              "link": {
-                "type": "doc",
-                "id": "part-6/usecase/about-rate-plans"
+              type: "category",
+              label: "About Rate Plans",
+              link: {
+                type: "doc",
+                id: "part-6/usecase/about-rate-plans",
               },
-              "items": [
-                "part-6/usecase/about-rate-plans/basic-charge-preference"
-              ]
+              items: [
+                "part-6/usecase/about-rate-plans/basic-charge-preference",
+              ],
             },
-            "part-6/usecase/authentication-methods"
+            "part-6/usecase/authentication-methods",
           ],
         },
       ],
@@ -373,20 +377,21 @@ const sidebars = {
       label: "Part VII: Troubleshooting and Support",
       items: [
         {
-          type: 'category',
-          label: 'FAQ',
+          type: "category",
+          label: "FAQ",
           link: {
-            type: 'generated-index',
-            title: 'Frequently Asked Questions (FAQ)',
-            description: 'Find answers to common questions about SaaSus Platform, organized by category.',
+            type: "generated-index",
+            title: "Frequently Asked Questions (FAQ)",
+            description:
+              "Find answers to common questions about SaaSus Platform, organized by category.",
             slug: "part-7/faq",
           },
           items: [
-            'part-7/faq/saasus-platform',
-            'part-7/faq/billing',
-            'part-7/faq/api-sdk',
+            "part-7/faq/saasus-platform",
+            "part-7/faq/billing",
+            "part-7/faq/api-sdk",
           ],
-        },        
+        },
         "part-7/support",
       ],
     },
@@ -395,8 +400,8 @@ const sidebars = {
       label: "Part VIII: Appendix",
       items: [
         {
-          type: 'link',
-          label: 'Release Notes and Change History',
+          type: "link",
+          label: "Release Notes and Change History",
           href: `/docs/changelog/${latest}`,
         },
         "part-8/risk-assessment",
@@ -460,6 +465,11 @@ const sidebars = {
       type: "category",
       label: "Changelog",
       items: [
+        {
+          label: "2025/06/05",
+          type: "doc",
+          id: "changelog/20250605",
+        },
         {
           label: "2025/03/14",
           type: "doc",
