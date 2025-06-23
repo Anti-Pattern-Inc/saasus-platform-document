@@ -10,8 +10,13 @@ updatedAt: "Tue Jun 11 2024 00:47:10 GMT+0000 (Coordinated Universal Time)"
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-:::info
-The user activity history log is only available to customers on the Advanced plan or higher.
+## Overview
+
+The user activity history log enables you to check the history of user operations on the SaaS.
+
+:::warning
+The User Activity Log feature is not available for customers on the legacy Starter or Standard plans.  
+To use this feature, you need to change to a new pricing plan.
 :::
 
 You can view the "action history log" in the Actions column of the SaaS Operations Console > User Management.
