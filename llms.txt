@@ -1,0 +1,150 @@
+# SaaSus Platform Document
+
+## Docs
+
+- [Official Release on 2022/12/24](changelog/20221224): Thank you for trying out the SaaSus Platform.
+- [Update on 2023/11/05](changelog/20231105): We have released updates on the following features.
+- [Update on 2023/11/18](changelog/20231118): We have released updates on the following features.
+- [Update on 2023/11/23](changelog/20231123): We have released updates on the following features.
+- [Update on 2024/03/05](changelog/20240305): We have released updates on the following features.
+- [Update on 2024/03/13](changelog/20240313): We have released updates on the following features.
+- [Update on 2024/03/19](changelog/20240319): We have released updates on the following features.
+- [Update on 2024/04/02](changelog/20240402): We have released updates on the following features.
+- [Update on 2024/04/11](changelog/20240411): The following features have been released
+- [Update on 2024/04/23](changelog/20240423): We have released the following feature updates:
+- [Update on 2024/05/24](changelog/20240524): We have released the following new feature:
+- [Update on 2024/10/29](changelog/20241029): We have released the following new feature:
+- [Update on 2024/11/15](changelog/20241115): We have released the following new feature:
+- [Update on 2024/11/26](changelog/20241126): We have released the following new feature:
+- [Update on 2024/12/10](changelog/20241210): We have released the following features:
+- [Update on 2025/03/14](changelog/20250314): We have released the following feature.
+- [Update on 2025/06/05](changelog/20250605): We have released updates on the following features.
+- [Welcome to SaaSus Platform](changelog/welcome-to-saasus-platform): Release v0.10(final beta version) on 2022/12/10
+- [Purpose and Overview](part-1/purpose-and-overview): Purpose
+- [Cloud Computing Basics](part-2/cloud-computing-basics): 1. Differences between IaaS, PaaS, and SaaS
+- [Advantages and Disadvantages of SaaS](part-2/saas-advantages-and-disadvantages): 1. Advantages of SaaS
+- [SaaS Business Model](part-2/saas-business-model): 1. Subscription Model Basics
+- [SaaS Development](part-2/saas-development): 1. Continuous Integration/Continuous Delivery (CI/CD)
+- [Legal Issues in SaaS](part-2/saas-legal-issues): 1. Terms of Service, Privacy Policy, and Data Processing Agreement
+- [SaaS Marketing](part-2/saas-marketing): 1. Lead Generation and Conversion
+- [SaaS Operations](part-2/saas-operations): 1. SLA (Service Level Agreement) and Support
+- [SaaS Security and Compliance](part-2/saas-security-and-compliance): 1. Data Security Basics (Encryption, Access Control)
+- [SaaS Technical Architecture](part-2/saas-technical-architecture): 1. Multi-Tenant Architecture and Its Benefits
+- [What is SaaS?](part-2/what-is-saas): 1. SaaS Definition and Features
+- [What is the SaaSus Platform?](part-2/what-is-saasus): 1. SaaSus Platform Overview
+- [Getting Started with SaaSus Platform](part-3/getting-started): Getting Started
+- [Overview of Login Screen and Main Screen of SaaSus Platform](part-3/login-and-main-screen-overview): 1. Login Screen
+- [SaaSus Platform Architecture](part-3/saasus-platform-architecture): 1. Role and Components of the Control Plane
+- [Procedure for Applying for a Paid Plan](part-4/account-settings/procedure-for-applying-for-a-paid-plan): The SaaSus Platform currently offers the following plans.
+- [Inviting Users](part-4/account-settings/saasususerinvitation): If you are developing and operating SaaS with multiple people, it is advisable not to share a single SaaSus Platform account. Instead, use the user invitation feature to grant appropriate permissions and manage the account.
+- [API Key Settings](part-4/application-settings/api-key-settings): This page explains how to check and reissue the SaaS ID, API keys, and Client Secret, which are required when using the SaaSus SDK or API.
+- [Basic App Settings](part-4/application-settings/basic-app-settings): This page allows you to configure information used in authentication-related screens, such as the login screen (e.g., service name, icon, and terms of use URL).
+- [Tenant Attributes](part-4/application-settings/declare-additional-attribute-to-tenant): Declare Additional Attribute To Tenant
+- [Domain and Redirect Settings](part-4/application-settings/domain-and-redirect-settings): This page explains how to configure your custom domain used for the login screen and the post-login redirect URL. Both can be set from the Basic Settings screen.
+- [Google Tag Manager Settings](part-4/application-settings/googletagmanagersetting): By setting up Google Tag Manager, you can embed Google Tag Manager tags in the login screen, and configure Google Analytics and other services.
+- [Creating a Google Analytics Account](part-4/application-settings/googletagmanagersetting/creategoogleanalyticsaccount): This guide will walk you through the steps to create a Google Analytics account for setting up in Google Tag Manager.
+- [Linking Google Analytics with Google Tag Manager](part-4/application-settings/googletagmanagersetting/googleanalyticsgoogletagmanagerlink): This guide covers setting up Google Analytics tags in Google Tag Manager to analyze users accessing the login screen.
+- [Setting the Google Tag Manager Container ID](part-4/application-settings/googletagmanagersetting/googletagmanagercontaineridsetting): 1. Confirming the Container ID
+- [Creating a Google Tag Manager Account and Container](part-4/application-settings/googletagmanagersetting/googletagmanagercreateaccountandcontainer): Create your Google Tag Manager account and container with the following steps.
+- [IP Restriction](part-4/application-settings/ip-restriction): The IP restriction feature limits access to the SaaSus console and API requests by IP address.
+- [About AWS Marketplace Integration Function](part-4/aws-marketplace-integration/aws-marketplace-integration): The AWS Marketplace integration function supports the "AWS Marketplace listing process" carried out by the "SaaS created using the SaaSus Platform".
+- [Setting Up Disbursement methods From Seller Registration](part-4/aws-marketplace-integration/aws-marketplace-seller-registration): Preparation
+- [Seller Registration Guide](part-4/aws-marketplace-integration/aws-marketplace-seller-registration/aws-marketplace-seller-registration): You will register as a seller on AWS Marketplace.
+- [DAC7 Tax Survey](part-4/aws-marketplace-integration/aws-marketplace-seller-registration/dac7-tax-survey): DAC7 refers to the European Commission's directive regarding tax reporting by corporations.
+- [Hyperwallet Registration](part-4/aws-marketplace-integration/aws-marketplace-seller-registration/hyperwallet-registration): When you click on Sign up for Hyper wallet from the bank account registration, you will be directed to the following page.
+- [Public profile Setting Guide](part-4/aws-marketplace-integration/aws-marketplace-seller-registration/public-profile-settings): After seller registration, log into the AWS Marketplace Management Portal and set your Public profile.
+- [Setting Up a Bank Account](part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account): Next, click on Add bank account under Payment Information.
+- [Setting Up Disbursement Methods](part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-disbursement-methods): Please ensure that your bank account setup is complete beforehand. If you haven't done this yet, refer to Bank Account Setup.
+- [How to Start Setting Up Bank Account and Disbursement methods](part-4/aws-marketplace-integration/aws-marketplace-seller-registration/tax-information-interview): For Customers Based in Japan
+- [Embedding into SaaS Products (Association of Existing Users with Purchased Products)](part-4/aws-marketplace-integration/embedding-products): If you are offering a SaaS product on the SaaSus Platform, you will need to implement consideration for multitenant in the purchase flow by existing users.
+- [Registering SaaS Product Information](part-4/aws-marketplace-integration/product-submission): You will register the SaaS product information on the AWS Marketplace Management Portal.
+- [Getting Started with Registration - Generating Product Code](part-4/aws-marketplace-integration/product-submission/generate-product-code): To register SaaS product information, first access the AWS Marketplace Management Portal, and then proceed with registration as follows.
+- [Step 1: Provide Product Information](part-4/aws-marketplace-integration/product-submission/step1-provide-product-information): Next, you'll enter the information necessary to publish the SaaS product.
+- [Step 2: Configure Fulfillment Options](part-4/aws-marketplace-integration/product-submission/step2-configure-fulfillment-options): Next, enter the URL to which customers will be redirected upon purchasing the product on the AWS Marketplace.
+- [Step 3: Configure Product Pricing](part-4/aws-marketplace-integration/product-submission/step3-configure-product-pricing): Next, you'll input the pricing model and its type to be sold on the AWS Marketplace.
+- [Step 4: Set Prices](part-4/aws-marketplace-integration/product-submission/step4-set-prices): Next, enter the purchase options and contract duration for the product to be sold on the AWS Marketplace.
+- [Step 5: Specify Refund Policy](part-4/aws-marketplace-integration/product-submission/step5-specify-refund-policy): Next, input information about the refund policy.
+- [Step 6: Configure EULA](part-4/aws-marketplace-integration/product-submission/step6-configure-eula): Next, choose the end-user license agreement (EULA) for selling on the AWS Marketplace.
+- [Step 7: Configure Offer Availability](part-4/aws-marketplace-integration/product-submission/step7-configure-offer-availability): Next, you'll decide the countries in which to sell your SaaS product.
+- [Step 8: Configure Allowlist](part-4/aws-marketplace-integration/product-submission/step8-configure-allowlist): Next, you'll set up the AWS account ID to use for testing during partnership verification.
+- [Supplementary](part-4/aws-marketplace-integration/supplementary): This document collates additional information for seller registration, SaaS product information registration, and details related to AWS Marketplace integration functionality.
+- [How to Request a Final Review](part-4/aws-marketplace-integration/supplementary/final-review-request): Once you have completed the exhibition steps '10. Confirmation of integration with AWS Marketplace', you can request a final review from the AWS Marketplace support team.
+- [Examples of Integration Confirmation to be Done After API Integration](part-4/aws-marketplace-integration/supplementary/integration-test): Please check the URL of the product page that is privately published on AWS Marketplace in advance.
+- [How to Request for Publication](part-4/aws-marketplace-integration/supplementary/public-request): Once you've completed the Listing Procedure "11. Final Review Request of Production SaaS Product", you will receive an email from the AWS Marketplace Support Team detailing the process to request publication. Follow these instructions to request your publication.
+- [How to Set Self-Signup](part-4/aws-marketplace-integration/supplementary/self-up-setting): 1. Access Authentication Advanced Setting of SaaS Development Console.
+- [About the Contents Entered in Create Product and the Published Details](part-4/aws-marketplace-integration/supplementary/supplementary-1): Product Overview
+- [Details of Input Fields in Create Product](part-4/aws-marketplace-integration/supplementary/supplementary-2): The information you enter here can be checked in the About the Contents Entered in Create Product and the Published Details to see what will be published on AWS Marketplace.
+- [Procedure for Copying the Generated AWS Resources](part-4/aws-marketplace-integration/supplementary/supplementary-3): 1. Sign in to the AWS Management Console.
+- [How to Identify Users who Purchased from AWS Marketplace](part-4/aws-marketplace-integration/supplementary/user-judgment-method): We will use the SAASUS AWS MARKETPLACE API.
+- [Integrate with Amazon EventBridge](part-4/integrate-with-amazon-eventbridge): SaaSus Platform is integrated with Amazon EventBridge. Various events that occur on the SaaSus Platform can be sent to Amazon EventBridge in the SaaS-side AWS account as a partner event source. By leveraging this, SaaS can be built with an event-driven architecture that works in conjunction with SaaSus Platform.
+- [Event Samples](part-4/integrate-with-amazon-eventbridge/event-sample): These event samples are associated with Amazon EventBridge when creating tenants and users. You can check the information of both API request and response.
+- [Bulk User Registration Procedure](part-4/mcp-server/bulk-user-registration): Overview
+- [Environment Information Acquisition Procedure](part-4/mcp-server/clone-dev-settings): Overview
+- [User List CSV Export Procedure](part-4/mcp-server/export-user-info-csv): Overview
+- [SaaSus API MCP Server Setup Guide](part-4/mcp-server/setup): Overview
+- [Creating Pricing Plans](part-4/pricing-and-billing/pricing-plan-creation): This page walks you through how to configure the 4 key elements required in the SaaS Development Console—Meter Unit → Measurement Unit → Function Menu → Pricing Plan—using Free / Basic / Enterprise as examples.
+- [Pricing Plan Overview](part-4/pricing-and-billing/pricing-plan-overview): 1. The 4 Layers of a Pricing Plan
+- [Stripe Integration](part-4/pricing-and-billing/stripe-integration): Learn how to integrate with Stripe to automate billing operations and delegate invoice processing to an external service.
+- [Tax Rate Settings](part-4/pricing-and-billing/tax-rate-settings): Tax rate settings define the type and percentage of taxes (such as consumption tax) applied to each tenant's pricing plan.
+- [The difference in rate calculation between Tiered units and Tiered usage units](part-4/pricing-and-billing/tiered-unit): In unit measurement settings, you set the smallest unit of measurement which serves as the basis for rate calculation.
+- [Meter Unit Setting](part-4/pricing-and-billing/usage-metering): Define the meter unit that will be used as the measurement unit.
+- [Pricing Plans and Billing Configuration](part-4/pricing-plan-and-billing-configuration): 
+- [Overview of SaaS Development Console](part-4/saas-development-console-overview): 1. Role of the SaaS Development Console
+- [Single Tenant Management](part-4/single-tenant-management): Overview
+- [Setup Procedure](part-4/smart-api-gateway-features/manual): Smart API Gateway Usage Procedure
+- [Smart API Gateway Feature](part-4/smart-api-gateway-features/overview): Smart API Gateway Feature Overview
+- [Smart MCP Server Feature](part-4/smart-api-gateway-features/smart-mcp-server-overview): If you would like to view sample demo videos, feature demonstrations, tutorial support, information gathering for implementation consideration, or technical consultation regarding implementation, please contact us through the support request form below.
+- [Authentication Method Settings](part-4/user-authz-settings/authentication-method-settings): This page describes how to configure the following authentication-related features in the Authentication tab of the Advanced Settings screen in the SaaSus Platform:
+- [User Attributes](part-4/user-authz-settings/declare-additional-attribute-to-user): Declare Additional Attribute To User
+- [Google Linkage](part-4/user-authz-settings/google-linkage): Summary Explanation
+- [Notification Email Content](part-4/user-authz-settings/notifymailcustomize): In the E-Mail Content tab of the Authentication Authorization > Advanced Settings, you can customize the emails that are sent to users on authentication pages such as the sign in page.
+- [Roles](part-4/user-authz-settings/role-definition): Define and manage roles used in your SaaS application.
+- [User Environment Definitions](part-4/user-authz-settings/user-env-definition): On SaaSus Platform, it is possible to set up user environment definitions. The environments defined here refer to the development, testing, and other environments that you have set up in your SaaS (customer) environment. Consider assigning attributes to the test environment that are in line with your SaaS phase.
+- [Role Management](part-5/adding-role-to-user): Adding Role To User
+- [Operations Console Overview](part-5/operations-console-overview): 1. Purpose of the SaaS Operation Console
+- [Pricing Plan Setting](part-5/price-plan): In the pricing plan settings of the SaaS operation console, you can set, change, or cancel the tenant's pricing plan.
+- [Setting Billing Information for Tenants](part-5/price-plan/price-plan-setting-000): Setting Billing Address
+- [Set a Pricing Plan for Tenants](part-5/price-plan/price-plan-setting-001): Set Pricing Plan to take effect immediately
+- [Change Tenant Pricing Plan Settings](part-5/price-plan/price-plan-setting-002): Set Pricing Plan to take effect immediately
+- [Cancel the Tenant Pricing Plan](part-5/price-plan/price-plan-setting-003): Behavior when working with Stripe
+- [Canceling a Scheduled Change](part-5/price-plan/price-plan-setting-004): About canceling a scheduled change
+- [Tenant Management](part-5/tenant-management): Searching Tenants
+- [Feedback Management](part-5/user-feedback): Overview
+- [User Activity History Log](part-5/user-management/user-activity-history-log): Overview
+- [Search, Edit, Create, or Assign Users to Tenants](part-5/user-management/user-crud): Search Users
+- [Developer SDK/API Overview](part-6/developer-sdk-api-overview): 1. SaaSus SDK / API Capabilities and Use Cases
+- [Implementation Example Using Metering API](part-6/implementation-guide/example-implementation-using-metering-api): Overview
+- [Implementing Authentication Using SaaSus Platform (API Server)](part-6/implementation-guide/implementing-authentication-using-saasus-platform-apiserver): When configuring the backend as an API server, the following implementations are necessary:
+- [Implementation using SaaSus Platform (Serverless)](part-6/implementation-guide/implementing-authentication-using-saasus-serverless): When configuring the backend as serverless, the following implementations are required:
+- [Implementing Multi-Factor Authentication (API Server)](part-6/implementation-guide/implementing-multi-factor-authentication-apiserver): This document provides sample implementations for Multi-Factor Authentication (MFA) in a SaaS application.
+- [Metering API Implementation Sample and Examples of Use (Laravel)](part-6/implementation-guide/meteringapisamplelaravelandusecase): We will describe Laravel implementation samples for each Metering API using SDK and an example of a feature using the Metering API.
+- [About Rate Plans](part-6/usecase/about-rate-plans): The SaaSus Platform also allows for complex pricing plans using subscription and pay-as-you-go models.
+- [Step-by-Step Guide to Setting Up Complicated Pricing Plans](part-6/usecase/about-rate-plans/basic-charge-preference): Metering Units
+- [About SaaS User Accounts](part-6/usecase/about-saas-user-accounts): This document will explain how SaaS user accounts are managed on the SaaSus Platform.
+- [Assigning Users to Tenants and Setting Roles](part-6/usecase/about-saas-user-accounts/add-tenant-user): After a tenant has been created, you can then associate the self-signed up user with the tenant.
+- [Creating a Tenant](part-6/usecase/about-saas-user-accounts/create-tenant): Once self-signup is complete, the next step is to create a tenant.
+- [Authentication Methods](part-6/usecase/authentication-methods): In web applications, including SaaS, there are two main authentication methods:
+- [API / SDK FAQ](part-7/faq/api-sdk): Content coming soon. Please check back later.
+- [Billing FAQ](part-7/faq/billing): Using Stripe
+- [SaaSus Platform FAQ](part-7/faq/saasus-platform): Frequently Asked Questions
+- [Support](part-7/support): Support Channels
+- [Risk Assessment](part-8/risk-assessment): Risk Assessment Information
+- [ApiGateway API](reference/apigateway-api): 
+- [Apilog API](reference/apilog-api): 
+- [Auth API](reference/auth-api): 
+- [Awsmarketplace API](reference/awsmarketplace-api): 
+- [Billing API](reference/billing-api): 
+- [Communication API](reference/communication-api): 
+- [Getting Started](reference/getting-started-with-your-api): A signature is necessary to call the SaaSus API.
+- [Integration API](reference/integration): 
+- [Pricing API](reference/pricing-api): 
+- [Authentication Preference](tutorial/authentication-preference): Creating a SaaS consumer tenant
+- [Configuring SDK For SaaSus Platform](tutorial/configuring-sdk-for-saasus-platform): Check your SaaS ID, API key, and client secret
+- [Implementation of authorization based on tenant information](tutorial/implementation-of-authorization-based-on-tenant-information): Implementation of Authorization
+- [Manage Rate Plans](tutorial/manage-rate-plans/manage-rate-plans): Structure and Terminology of Pricing Plans
+- [Step-by-Step Guide to Setting Up Pricing Plans](tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans): This page explains how to configure the following items step by step using the SaaS Development Console:
+- [Prepare SaaS Platform](tutorial/prepare-saasus-platform): Creating a SaaSus Platform Account
+- [Prepare a Sample Application](tutorial/prepare-the-sample-application): In this tutorial, we will use SaaSus Platform to turn a simple chat system created as a web application that can post strings into SaaS (Software as a Service).
+- [Prepare a Sample Application(EC2)](tutorial/prepare-the-sample-application-ec2): Please follow these steps to create a Blade version operating environment using EC2 or Cloud9.
+- [Lastly](tutorial/summarize): Hopefully you have gone through the tutorial and have an idea of what you can do with the SaaSus Platform. In SaaS, there are many features that are not differentiating despite being important features. Instead of spending man-hours on these, use this time to focus on the original value of your company's SaaS.
+- [Introduction](tutorial/tutorial-introduction): This tutorial consists of eight steps.
