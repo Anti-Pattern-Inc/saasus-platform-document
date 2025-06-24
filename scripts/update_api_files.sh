@@ -11,6 +11,20 @@ for file in ./api/*.yml; do
   node scripts/filter-error-tag.js "$file"
 done
 
+echo "Copying error-tag-removed YAML files to static/file/saasus_api ..."
+
+OUTPUT_DIR="./static/file/saasus_api"
+mkdir -p "$OUTPUT_DIR"
+
+for file in ./api/*.yml; do
+  if [[ "$file" == *.jpn.yml ]]; then
+    continue
+  fi
+  base=$(basename "$file")
+  cp "$file" "$OUTPUT_DIR/$base"
+  echo "Copied: $file -> $OUTPUT_DIR/$base"
+done
+
 echo "Translating to Japanese..."
 
 for file in ./api/*.yml; do
