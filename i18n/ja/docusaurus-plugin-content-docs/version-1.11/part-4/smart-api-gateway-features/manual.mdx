@@ -136,29 +136,40 @@ package implementsample.service;
 
 import java.util.List;
 
-import implementsample.repository.InventoryRepository;
-import implementsample.util.TenantApiClient;
-import saasus.sdk.modules.SaaSusAPI;
 import implementsample.dto.InventoryDto;
+import implementsample.repository.InventoryRepository;
+import saasus.sdk.modules.SaaSusAPI;
+import saasus.sdk.util.apiserver.SaaSusIdentity;
 
 public class InventoryService {
-    public List<InventoryDto> getInventory(String tenantId) {
-        // テナントIDに対応する在庫情報取得
-        return InventoryRepository.TenantInventory.getOrDefault(tenantId,
-                InventoryRepository.TenantInventory.get("default"));
+
+    /**
+     * 在庫情報を取得するAPI
+     * @param identity SaaSusIdentity オブジェクト
+     * @return 在庫情報のリスト
+     */
+    @SaaSusAPI(path = "getInventory")
+    public static List<InventoryDto> getInventory(SaaSusIdentity identity) {
+        String tenantId = identity.getTenantId();
+        String envId = identity.getEnvId();
+
+        return InventoryRepository.getInventory(tenantId, envId);
     }
 
-    @SaaSusAPI(path = "getInventory")
-    public static List<InventoryDto> getInventoryEntryPoint(String inventoryId) {
+    /**
+     * ユーザごとの在庫情報を取得するAPI
+     * @param identity SaaSusIdentity オブジェクト
+     * @return 在庫情報のリスト
+     */
+    @SaaSusAPI(path = "getInventoryByUser")
+    public static List<InventoryDto> getInventoryByUser(SaaSusIdentity identity) {
+        String tenantId = identity.getTenantId();
+        String envId = identity.getEnvId();
+        String userId = identity.getUserId();
 
-        TenantApiClient tenantClient = new TenantApiClient();
-        String tenantId = tenantClient.getTenantIdFromApiKey(inventoryId);
-
-        return InventoryRepository.TenantInventory.getOrDefault(tenantId,
-                InventoryRepository.TenantInventory.get("default"));
+        return InventoryRepository.getInventoryByUser(tenantId, envId, userId);
     }
 }
-
 ```
 
 ```mdx-code-block
@@ -203,9 +214,43 @@ import saasus.sdk.util.apiserver.ApiServer;
 
 ---
 
-### Step 4: ソースコードの統合と圧縮
+### Step 4: コードの修正
 
-対象のソースコードを Step 5 でアップロードするため、以下のシェルスクリプトでまとめ、ZIP ファイルに圧縮します。
+該当箇所のコードを修正してください。
+**InventoryRepository.java で修正が必要な箇所：**
+
+1. **購入者ID定数の修正**
+   ```java
+   // 修正前
+   private static final String PURCHASER_A = "f47ac10b-58cc-4372-a567-0e02b2c3d479";
+   
+   // 修正後（実際のユーザーIDに変更）
+   private static final String PURCHASER_A = "実際のユーザーID";
+   ```
+
+2. **テナントIDの修正**
+   ```java
+   // 修正前
+   put("d296b330-3cce-40b6-88c3-035a1d86981f",
+   
+   // 修正後（実際のテナントIDに変更）
+   put("実際のテナントID",
+   ```
+
+**修正手順：**
+1. `src/main/java/implementsample/repository/InventoryRepository.java` を開く
+2. 上記の定数値を SaaSus Platform で作成した実際のユーザーID・テナントIDに変更する
+3. ファイルを保存する
+
+:::info
+実際のユーザーIDとテナントIDは、SaaSus Platform の管理画面から確認できます。
+:::
+
+---
+
+### Step 5: ソースコードの統合と圧縮
+
+対象のソースコードを Step 6 でアップロードするため、以下のシェルスクリプトでまとめ、ZIP ファイルに圧縮します。
 
 ```sh
 bash java_files_collector.sh <アプリケーションのパス>
@@ -225,7 +270,7 @@ java_files_archive.zip ファイルが作成されます。
 
 ---
 
-### Step 5: ZIP ファイルのアップロード
+### Step 6: ZIP ファイルのアップロード
 
 1. SaaS開発コンソールの Smart API Gateway 機能画面にアクセスしてください。
 
@@ -233,7 +278,7 @@ java_files_archive.zip ファイルが作成されます。
 
 ---
 
-### Step 6: 権限・インフラの設定
+### Step 7: 権限・インフラの設定
 
 1. **Permission タブ**に移動し、**Assume Role 用の CloudFormation** を作成します。
 2. 作成した **Role ARN** と **External ID** を登録します。
@@ -247,7 +292,7 @@ java_files_archive.zip ファイルが作成されます。
 
 ---
 
-### Step 7: API の公開とアクセス
+### Step 8: API の公開とアクセス
 
 1. API を公開
 2. API エンドポイントのドメインでアクセスが可能です。
@@ -258,19 +303,53 @@ java_files_archive.zip ファイルが作成されます。
 - API のメソッドは **Throttling&Role** のメソッドパスから確認をしてください。
 - API エンドポイントのドメインに対して、以下のようにアクセスしてください。
 
+#### SaaSus Identity との連携
+
+Smart API Gateway では、**SaaSus Identity** と連携することで、テナント ID、環境 ID（ENV ID）、ユーザー ID を活用した細かいアクセス制御とデータフィルタリングが可能です。
+
+- **テナント ID**: マルチテナント環境において、各テナント固有のデータにアクセスするために使用
+- **環境 ID（ENV ID）**: 開発、ステージング、本番環境などの環境別データアクセスに使用
+- **ユーザー ID**: 特定のユーザーに紐づくデータの取得や操作制限に使用
+
+実装例では、在庫管理 API において環境 ID "3"（本番環境）と特定の購入者 ID（ユーザー ID）を使用して、環境とユーザーに応じた在庫データのフィルタリングを行います。
+
 #### アクセス例
 
 ```sh
 $ curl -v -X GET https://<ドメイン>/<api method path> -H 'x-api-key:<発行したAPI Key>'
 ```
 
-#### Example
+#### API アクセス例
 
+以下は、SaaSus Identity との連携により、テナント ID、環境 ID、ユーザー ID を活用した API アクセスの例です：
+
+**全在庫取得（テナント・環境によるフィルタリング）:**
 ```sh
-$ curl -v -X GET https://xxxxxxxxxxxxxxxxxxxxx/inventory-controller/get-inventory?inventoryId=d296b330-3cce-40b6-88c3-035a1d86981f -H 'x-api-key:azydsktcf1b93Mmjxuex7CEbEoV7OjrGk0RIqgzCQtc'
+$ curl -X GET https://<ドメイン>/inventory-service/get-inventory -H 'x-api-key:<テナントAPI Key>'
 ```
 
-### Step 8: Throttling 設定
+**ユーザー固有の在庫取得（ユーザー ID によるフィルタリング）:**
+```sh
+$ curl -X GET https://<ドメイン>/inventory-service/get-inventory-by-user -H 'x-api-key:<ユーザーAPI Key>'
+```
+
+**レスポンス例:**
+```json
+[
+  {
+    "id": "inventory-001",
+    "name": "商品A",
+    "envId": "3",
+    "purchaserId": "e47ac10b-58cc-4372-a567-0e02b2c3d480",
+    "quantity": 10
+  }
+]
+```
+
+この例では、環境 ID "3"（本番環境）と特定のユーザー ID（purchaserId）に基づいて在庫データがフィルタリングされています。
+
+
+### Step 9: Throttling 設定
 
 - **Throttling&Role** から対象の method path を選択し、スロットリングの設定を行ってください。
 - 検証のため、**1 分間に 2 回のリクエスト**に制限を設定します。
@@ -288,7 +367,7 @@ $ curl -v -X GET https://xxxxxxxxxxxxxxxxxxxxx/inventory-controller/get-inventor
 
 :::
 
-### Step 9: 認可（ロール）設定
+### Step 10: 認可（ロール）設定
 
 - 検証のため、SaaS開発コンソールの **役割定義**で一般ユーザーというロールを作成してください。
 - ロールによる認可にはユーザーの **API Key** が必要です。SaaS運用コンソールの **ユーザー管理画面**でユーザーを作成し、API Key を発行してください。
@@ -305,14 +384,14 @@ $ curl -v -X GET https://xxxxxxxxxxxxxxxxxxxxx/inventory-controller/get-inventor
 
 :::
 
-### Step 10: ドメイン設定
+### Step 11: ドメイン設定
 
 - **Custom Domain**からドメインを設定してください。
 - 自身の DNS サーバーに表示された CNAME レコードを設定してください。
 - ドメイン設定が完了すると、API エンドポイントのドメインが更新されます。
 - ドメイン設定後、ドメインに対してアクセスが可能です。
 
-### Step 11: IP 制限設定
+### Step 12: IP 制限設定
 
 - SaaS運用コンソールの **テナント管理画面**で IP 制限を設定してください。
 - IP 制限設定後、設定した IP アドレスからのみアクセスが可能です。
