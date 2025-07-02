@@ -59,8 +59,8 @@ Workspace: saasus-auth-api-schema
 ## Claude Desktop Configuration
 
 :::caution
-On Claude Desktop Free, a large tool manifest may exceed the request limit and prevent operation.  
-Trim unused tools or switch to a paid plan.
+When using the free version of Claude Desktop, requests may fail if they exceed the size limit.  
+To continue using it reliably, consider upgrading to a paid plan.
 :::
 
 ### 1. Check Local Environment
