@@ -139,35 +139,33 @@ import java.util.List;
 import implementsample.dto.InventoryDto;
 import implementsample.repository.InventoryRepository;
 import saasus.sdk.modules.SaaSusAPI;
-import saasus.sdk.util.apiserver.SaaSusIdentity;
+import saasus.sdk.util.apiserver.SaasusIdentity;
 
 public class InventoryService {
 
     /**
      * 在庫情報を取得するAPI
-     * @param identity SaaSusIdentity オブジェクト
+     * @param identity SaasusIdentity オブジェクト
      * @return 在庫情報のリスト
      */
     @SaaSusAPI(path = "getInventory")
-    public static List<InventoryDto> getInventory(SaaSusIdentity identity) {
+    public static List<InventoryDto> getInventory(SaasusIdentity identity) {
         String tenantId = identity.getTenantId();
-        String envId = identity.getEnvId();
 
-        return InventoryRepository.getInventory(tenantId, envId);
+        return InventoryRepository.getInventory(tenantId);
     }
 
     /**
      * ユーザごとの在庫情報を取得するAPI
-     * @param identity SaaSusIdentity オブジェクト
+     * @param identity SaasusIdentity オブジェクト
      * @return 在庫情報のリスト
      */
     @SaaSusAPI(path = "getInventoryByUser")
-    public static List<InventoryDto> getInventoryByUser(SaaSusIdentity identity) {
+    public static List<InventoryDto> getInventoryByUser(SaasusIdentity identity) {
         String tenantId = identity.getTenantId();
-        String envId = identity.getEnvId();
         String userId = identity.getUserId();
 
-        return InventoryRepository.getInventoryByUser(tenantId, envId, userId);
+        return InventoryRepository.getInventoryByUser(tenantId, userId);
     }
 }
 ```
@@ -219,13 +217,13 @@ import saasus.sdk.util.apiserver.ApiServer;
 該当箇所のコードを修正してください。
 **InventoryRepository.java で修正が必要な箇所：**
 
-1. **購入者ID定数の修正**
+1. **在庫管理者ID定数の修正**
    ```java
    // 修正前
-   private static final String PURCHASER_A = "f47ac10b-58cc-4372-a567-0e02b2c3d479";
+   private static final String INVENTORY_MANAGER_A = "f47ac10b-58cc-4372-a567-0e02b2c3d479";
    
    // 修正後（実際のユーザーIDに変更）
-   private static final String PURCHASER_A = "実際のユーザーID";
+   private static final String INVENTORY_MANAGER_A = "実際のユーザーID";
    ```
 
 2. **テナントIDの修正**
@@ -311,7 +309,7 @@ Smart API Gateway では、**SaaSus Identity** と連携することで、テナ
 - **環境 ID（ENV ID）**: 開発、ステージング、本番環境などの環境別データアクセスに使用
 - **ユーザー ID**: 特定のユーザーに紐づくデータの取得や操作制限に使用
 
-実装例では、在庫管理 API において環境 ID "3"（本番環境）と特定の購入者 ID（ユーザー ID）を使用して、環境とユーザーに応じた在庫データのフィルタリングを行います。
+実装例では、在庫管理 API において SaasusIdentity オブジェクトから取得したテナント ID とユーザー ID を使用して、テナントとユーザーに応じた在庫データのフィルタリングを行います。
 
 #### アクセス例
 
@@ -321,9 +319,9 @@ $ curl -v -X GET https://<ドメイン>/<api method path> -H 'x-api-key:<発行�
 
 #### API アクセス例
 
-以下は、SaaSus Identity との連携により、テナント ID、環境 ID、ユーザー ID を活用した API アクセスの例です：
+以下は、SaaSus Identity との連携により、テナント ID、ユーザー ID を活用した API アクセスの例です：
 
-**全在庫取得（テナント・環境によるフィルタリング）:**
+**全在庫取得（テナントによるフィルタリング）:**
 ```sh
 $ curl -X GET https://<ドメイン>/inventory-service/get-inventory -H 'x-api-key:<テナントAPI Key>'
 ```
@@ -339,14 +337,13 @@ $ curl -X GET https://<ドメイン>/inventory-service/get-inventory-by-user -H 
   {
     "id": "inventory-001",
     "name": "商品A",
-    "envId": "3",
-    "purchaserId": "e47ac10b-58cc-4372-a567-0e02b2c3d480",
+    "inventoryManagerId": "e47ac10b-58cc-4372-a567-0e02b2c3d480",
     "quantity": 10
   }
 ]
 ```
 
-この例では、環境 ID "3"（本番環境）と特定のユーザー ID（purchaserId）に基づいて在庫データがフィルタリングされています。
+この例では、SaasusIdentity オブジェクトから取得したテナント ID とユーザー ID に基づいて在庫データがフィルタリングされています。
 
 
 ### Step 9: Throttling 設定
