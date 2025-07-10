@@ -138,35 +138,33 @@ import java.util.List;
 import implementsample.dto.InventoryDto;
 import implementsample.repository.InventoryRepository;
 import saasus.sdk.modules.SaaSusAPI;
-import saasus.sdk.util.apiserver.SaaSusIdentity;
+import saasus.sdk.util.apiserver.SaasusIdentity;
 
 public class InventoryService {
 
     /**
      * API for getting inventory information
-     * @param identity SaaSusIdentity object
+     * @param identity SaasusIdentity object
      * @return List of inventory information
      */
     @SaaSusAPI(path = "getInventory")
-    public static List<InventoryDto> getInventory(SaaSusIdentity identity) {
+    public static List<InventoryDto> getInventory(SaasusIdentity identity) {
         String tenantId = identity.getTenantId();
-        String envId = identity.getEnvId();
 
-        return InventoryRepository.getInventory(tenantId, envId);
+        return InventoryRepository.getInventory(tenantId);
     }
 
     /**
      * API for getting inventory information by user
-     * @param identity SaaSusIdentity object
+     * @param identity SaasusIdentity object
      * @return List of inventory information
      */
     @SaaSusAPI(path = "getInventoryByUser")
-    public static List<InventoryDto> getInventoryByUser(SaaSusIdentity identity) {
+    public static List<InventoryDto> getInventoryByUser(SaasusIdentity identity) {
         String tenantId = identity.getTenantId();
-        String envId = identity.getEnvId();
         String userId = identity.getUserId();
 
-        return InventoryRepository.getInventoryByUser(tenantId, envId, userId);
+        return InventoryRepository.getInventoryByUser(tenantId, userId);
     }
 }
 ```
@@ -217,13 +215,13 @@ import saasus.sdk.util.apiserver.ApiServer;
 Modify the code in the appropriate sections.
 **Areas that need modification in InventoryRepository.java:**
 
-1. **Modify purchaser ID constant**
+1. **Modify Inventory Manager ID constant**
    ```java
    // Before modification
-   private static final String PURCHASER_A = "f47ac10b-58cc-4372-a567-0e02b2c3d479";
+   private static final String INVENTORY_MANAGER_A = "f47ac10b-58cc-4372-a567-0e02b2c3d479";
    
    // After modification (change to actual user ID)
-   private static final String PURCHASER_A = "actual user ID";
+   private static final String INVENTORY_MANAGER_A = "actual user ID";
    ```
 
 2. **Modify tenant ID**
@@ -309,7 +307,7 @@ Smart API Gateway enables fine-grained access control and data filtering by inte
 - **Environment ID (ENV ID)**: Used for environment-specific data access such as development, staging, and production environments
 - **User ID**: Used for data retrieval and operation restrictions tied to specific users
 
-In the implementation example, the inventory management API uses environment ID "3" (production environment) and specific purchaser ID (user ID) to filter inventory data according to environment and user.
+In the implementation example, the inventory management API uses SaasusIdentity object to obtain tenant ID and user ID, enabling fine-grained access control and data filtering according to tenant and user.
 
 #### Access Example
 
@@ -319,9 +317,9 @@ $ curl -v -X GET https://<domain>/<api method path> -H 'x-api-key:<issued API Ke
 
 #### API Access Examples
 
-The following are examples of API access utilizing tenant ID, environment ID, and user ID through SaaSus Identity integration:
+The following are examples of API access utilizing tenant ID and user ID through SaaSus Identity integration:
 
-**Get all inventory (filtering by tenant and environment):**
+**Get all inventory (filtering by tenant):**
 ```sh
 $ curl -X GET https://<domain>/inventory-service/get-inventory -H 'x-api-key:<tenant API Key>'
 ```
@@ -337,14 +335,13 @@ $ curl -X GET https://<domain>/inventory-service/get-inventory-by-user -H 'x-api
   {
     "id": "inventory-001",
     "name": "Product A",
-    "envId": "3",
-    "purchaserId": "e47ac10b-58cc-4372-a567-0e02b2c3d480",
+    "inventoryManagerId": "e47ac10b-58cc-4372-a567-0e02b2c3d480",
     "quantity": 10
   }
 ]
 ```
 
-In this example, inventory data is filtered based on environment ID "3" (production environment) and specific user ID (purchaserId).
+In this example, inventory data is filtered based on tenant ID and user ID obtained from the SaasusIdentity object.
 
 
 ### Step 9: Throttling Settings
