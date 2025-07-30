@@ -62,8 +62,8 @@ Even large-scale user counts are supported. If you provide specific requirements
 
 ---
 
-**Q. Is there an SLA (Service Level Agreement)?**  
-A. No, SLA-backed plans are not currently offered.
+**Q. Is there an SLA (Service Level Agreement)?**
+A. Enterprise plans offer an SLA with 99.99% uptime guarantee. Pricing is available upon request. Please [contact us](https://saasus.io/pricing#support) for more information.
 
 ---
 
@@ -74,8 +74,8 @@ However, integration features such as Amazon EventBridge and AWS Marketplace are
 ---
 
 **Q. Are there any UI/UX restrictions?**  
-A. No. Frameworks like React, Vue.js, and server-side rendering are supported.  
-Contact us if you have specific frontend requirements.
+A. No. Frameworks like React, Vue.js, and server-side rendering are supported.
+Please [contact us](https://saasus.io/pricing#support) if you have specific frontend requirements.
 
 ---
 
