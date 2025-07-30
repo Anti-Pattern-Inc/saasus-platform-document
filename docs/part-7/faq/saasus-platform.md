@@ -75,7 +75,7 @@ However, integration features such as Amazon EventBridge and AWS Marketplace are
 ---
 
 **Q. Are there any UI/UX restrictions?**  
-A. No. Frameworks like React, Vue.js, and server-side rendering are supported.
+A. No. Frameworks like React, Vue.js, and server-side rendering are supported.  
 Please [contact us](https://saasus.io/pricing#support) if you have specific frontend requirements.
 
 ---
