@@ -63,7 +63,8 @@ Even large-scale user counts are supported. If you provide specific requirements
 ---
 
 **Q. Is there an SLA (Service Level Agreement)?**  
-A. Enterprise plans offer an SLA with 99.99% uptime guarantee. Pricing is available upon request. Please   [contact us](https://saasus.io/pricing#support) for more information.
+A. Enterprise plans offer an SLA with 99.99% uptime guarantee. Pricing is available upon request. Please  
+contact us](https://saasus.io/pricing#support) for more information.
 
 ---
 
