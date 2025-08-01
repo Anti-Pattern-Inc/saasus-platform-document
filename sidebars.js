@@ -142,7 +142,9 @@ const sidebars = {
                 type: "doc",
                 id: "part-4/user-authz-settings/authentication-method-settings",
               },
-              items: ["part-4/user-authz-settings/google-linkage"],
+              items: [
+                "part-4/user-authz-settings/google-linkage",
+                "part-4/user-authz-settings/saml-linkage"],
             },
             "part-4/user-authz-settings/declare-additional-attribute-to-user",
             "part-4/user-authz-settings/notifymailcustomize",
