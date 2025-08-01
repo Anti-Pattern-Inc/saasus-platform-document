@@ -22,7 +22,7 @@ SaaSus Platform で Microsoft Entra IDと連携させるためには、以下の
 APIを実行し**Entity ID**(`identity_provider_configuration.entity_id`)/**Reply URL**(`identity_provider_configuration.reply_url`)を取得します  
 https://docs.saasus.io/docs/reference/auth-api#tag/authInfo/operation/GetSignInSettings
 
-```Json
+```json
 {
     "identity_provider_configuration": {
         "domain": "xxxxxxxxxxxx.auth.ap-northeast-1.amazoncognito.com",
@@ -74,7 +74,7 @@ SaaSus PlatformのAPIを利用して、SAML連携の設定を行います。
 
 **API:** https://docs.saasus.io/docs/reference/auth-api#tag/tenant/operation/UpdateTenantIdentityProvider
 
-```Json
+```json
 {
   "provider_type": "SAML",
   "identity_provider_props": {
@@ -89,7 +89,7 @@ SaaSus PlatformのAPIを利用して、SAML連携の設定を行います。
 SaaSus PlatformのAPIを利用して、sign_in_urlを取得します。
 
 **API:** https://docs.saasus.io/docs/reference/auth-api#tag/tenant/operation/GetTenantIdentityProviders
-```Json
+```json
 {
     "saml": {
         "email_attribute": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress",
