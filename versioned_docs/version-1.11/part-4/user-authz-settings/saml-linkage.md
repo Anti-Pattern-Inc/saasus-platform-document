@@ -22,7 +22,7 @@ To integrate SaaSus Platform with Microsoft Entra ID, follow these steps:
 Execute the API to obtain **Entity ID** (`identity_provider_configuration.entity_id`) and **Reply URL** (`identity_provider_configuration.reply_url`)  
 https://docs.saasus.io/docs/reference/auth-api#tag/authInfo/operation/GetSignInSettings
 
-```Json
+```json
 {
     "identity_provider_configuration": {
         "domain": "xxxxxxxxxxxx.auth.ap-northeast-1.amazoncognito.com",
@@ -73,7 +73,7 @@ Pass the following information to the API to set up SAML integration:
 
 **API:** https://docs.saasus.io/docs/reference/auth-api#tag/tenant/operation/UpdateTenantIdentityProvider
 
-```Json
+```json
 {
   "provider_type": "SAML",
   "identity_provider_props": {
@@ -88,7 +88,7 @@ Pass the following information to the API to set up SAML integration:
 Use the SaaSus Platform API to obtain the sign_in_url.
 
 **API:** https://docs.saasus.io/docs/reference/auth-api#tag/tenant/operation/GetTenantIdentityProviders
-```Json
+```json
 {
     "saml": {
         "email_attribute": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress",
