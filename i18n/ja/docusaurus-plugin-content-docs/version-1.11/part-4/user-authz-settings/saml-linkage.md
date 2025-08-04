@@ -64,9 +64,9 @@ Microsoft Entra IDを利用してSAML連携を行うための設定を行いま�
 8. SAML 証明書の`アプリのフェデレーション メタデータ URL`を控えます。  
     ![saml-linkage-image-9](/ja/img/part-4/saml-linkage/saml-linkage-image-9.png)
 
-### 3. SaaSus Platformへの設定  
-SaaSus PlatformのAPIを利用して、SAML連携の設定を行います。  
-以下の情報をAPIに渡して、SAML連携を設定します。  
+### 3. SaaSus Platformへの設定
+SaaSus APIを利用して、SAML連携の設定を行います。
+以下の情報をAPIに渡して、SAML連携を設定します。
 
 - **provider_type**: "SAML"
 - **metadata_url**: Microsoft Entra IDのアプリのフェデレーション メタデータ URL
@@ -86,11 +86,11 @@ SaaSus PlatformのAPIを利用して、SAML連携の設定を行います。
 
 ### 4. SAML連携の動作確認
 1. SaaSus にログインユーザの作成  
-    SaaSus Platformの管理画面から、SAML連携を利用するテナントへユーザーを作成し役割を割り当てます。  
+    SaaS運用 コンソールから、SAML連携を利用するテナントへユーザーを作成し役割を割り当てます。  
     ユーザーのメールアドレスは、Microsoft Entra IDで設定したメールアドレスと一致させる必要があります。  
 
 2. sign_in_urlの確認  
-    SaaSus PlatformのAPIを利用して、sign_in_urlを取得します。  
+    SaaSus APIを利用して、sign_in_urlを取得します。  
 
 **API:** https://docs.saasus.io/docs/reference/auth-api#tag/tenant/operation/GetTenantIdentityProviders
 ```json
