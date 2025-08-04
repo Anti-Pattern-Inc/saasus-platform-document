@@ -100,8 +100,16 @@ const fetchPeriodOptions = async () => {
 };
 ```
 
-より詳細なバックエンド実装については、下記の[言語別サンプルコード一覧](#言語別サンプルコード一覧)セクションをご参照ください。
-さい。
+### 実装例リンク
+
+以下のリンク先に、本エンドポイントの実装が含まれています。  
+関数名で検索して該当箇所をご確認ください。
+
+- **Go (Echo)**: [`getPlanPeriods`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)
+- **Python (FastAPI)**: [`get_plan_periods`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)
+- **Java (Spring)**: [`getPlanPeriods`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)
+- **C# (.NET 8)**: [`GetPlanPeriods`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)
+- **C# (.NET Framework 4.8)**: [`GetPlanPeriods`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)
 
 ## ダッシュボード集計エンドポイント
 ### aggregate\_usage: **max** と **sum** の違い
@@ -161,7 +169,16 @@ func calculateAmountByUnitType(count float64, u map[string]interface{}) float64 
 ```
 ※ tiered / tiered_usage の詳細ロジックは calcTiered, calcTieredUsage を参照
 
-より詳細なバックエンド実装については、下記の[言語別サンプルコード一覧](#言語別サンプルコード一覧)セクションをご参照ください。
+### 実装例リンク
+
+以下のリンク先に、本エンドポイントの実装が含まれています。  
+関数名で検索して該当箇所をご確認ください。
+
+- **Go (Echo)**: [`getBillingDashboard`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)
+- **Python (FastAPI)**: [`get_billing_dashboard`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)
+- **Java (Spring)**: [`getBillingDashboard`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)
+- **C# (.NET 8)**: [`GetBillingDashboard`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)
+- **C# (.NET Framework 4.8)**: [`GetBillingDashboard`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)
 
 ## メータ更新
 
@@ -223,6 +240,17 @@ func updateCountOfNow(c echo.Context) error {
 インラインのプラス/マイナスボタンは、選択中の期間が「現在進行中」の場合のみ表示されます。
 :::
 
+### 実装例リンク
+
+以下のリンク先に、本エンドポイントの実装が含まれています。  
+関数名で検索して該当箇所をご確認ください。
+
+- **Go (Echo)**: [`updateCountOfNow`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)
+- **Python (FastAPI)**: [`update_count_of_now`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)
+- **Java (Spring)**: [`updateCountOfNow`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)
+- **C# (.NET 8)**: [`UpdateMeteringCountNow`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)
+- **C# (.NET Framework 4.8)**: [`UpdateMeteringCountNow`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)
+
 ### モーダル編集例（任意タイムスタンプで補正）
 
 ```go
@@ -280,121 +308,13 @@ func updateCountOfSpecifiedTS(c echo.Context) error {
 }
 ```
 
-より詳細なバックエンド実装については、次のセクションをご参照ください。
+### 実装例リンク
 
-## 言語別サンプルコード一覧
+以下のリンク先に、本エンドポイントの実装が含まれています。  
+関数名で検索して該当箇所をご確認ください。
 
-以下は、本ガイドで紹介した各エンドポイントに対応する**バックエンド実装のサンプルコード**です。  
-言語ごとにファイルへのリンクと、該当する関数名を記載しています。  
-リンク先で **Ctrl+F で関数名を検索**して該当実装をご確認ください。
-
-<div className="table-scroll">
-<table className="nowrap-table">
-  <thead>
-    <tr>
-      <th>エンドポイント</th>
-      <th>Go</th>
-      <th>Python</th>
-      <th>Java</th>
-      <th>C#(.NET 8)</th>
-      <th>C#(.NET Framework 4.8)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>/billing/plan_periods</code></td>
-      <td>
-        [billing.go](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)<br />
-        関数: <code>getPlanPeriods</code>
-      </td>
-      <td>
-        [billing_router.py](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)<br />
-        関数: <code>get_plan_periods</code>
-      </td>
-      <td>
-        [BillingController.java](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)<br />
-        関数: <code>getPlanPeriods</code>
-      </td>
-      <td>
-        [BillingController.cs](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)<br />
-        関数: <code>GetPlanPeriods</code>
-      </td>
-      <td>
-        [BillingController.cs](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)<br />
-        関数: <code>GetPlanPeriods</code>
-      </td>
-    </tr>
-    <tr>
-      <td><code>/billing/dashboard</code></td>
-      <td>
-        [billing.go](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)<br />
-        関数: <code>getBillingDashboard</code>
-      </td>
-      <td>
-        [billing_router.py](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)<br />
-        関数: <code>get_billing_dashboard</code>
-      </td>
-      <td>
-        [BillingController.java](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)<br />
-        関数: <code>getBillingDashboard</code>
-      </td>
-      <td>
-        [BillingController.cs](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)<br />
-        関数: <code>GetBillingDashboard</code>
-      </td>
-      <td>
-        [BillingController.cs](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)<br />
-        関数: <code>GetBillingDashboard</code>
-      </td>
-    </tr>
-    <tr>
-      <td><code>/billing/metering/&#123;tenant&#125;/&#123;unit&#125;</code></td>
-      <td>
-        [billing.go](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)<br />
-        関数: <code>updateCountOfNow</code>
-      </td>
-      <td>
-        [billing_router.py](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)<br />
-        関数: <code>update_count_of_now</code>
-      </td>
-      <td>
-        [BillingController.java](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)<br />
-        関数: <code>updateCountOfNow</code>
-      </td>
-      <td>
-        [BillingController.cs](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)<br />
-        関数: <code>UpdateMeteringCountNow</code>
-      </td>
-      <td>
-        [BillingController.cs](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)<br />
-        関数: <code>UpdateMeteringCountNow</code>
-      </td>
-    </tr>
-    <tr>
-      <td><code>/billing/metering/&#123;tenant&#125;/&#123;unit&#125;/&#123;ts&#125;</code></td>
-      <td>
-        [billing.go](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)<br />
-        関数: <code>updateCountOfSpecifiedTS</code>
-      </td>
-      <td>
-        [billing_router.py](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)<br />
-        関数: <code>update_count_of_specified_timestamp</code>
-      </td>
-      <td>
-        [BillingController.java](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)<br />
-        関数: <code>updateCountOfSpecifiedTimestamp</code>
-      </td>
-      <td>
-        [BillingController.cs](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)<br />
-        関数: <code>UpdateMeteringCount</code>
-      </td>
-      <td>
-        [BillingController.cs](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)<br />
-        関数: <code>UpdateMeteringCount</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
+- **Go (Echo)**: [`updateCountOfSpecifiedTS`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)
+- **Python (FastAPI)**: [`update_count_of_specified_timestamp`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)
+- **Java (Spring)**: [`updateCountOfSpecifiedTimestamp`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)
+- **C# (.NET 8)**: [`UpdateMeteringCount`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)
+- **C# (.NET Framework 4.8)**: [`UpdateMeteringCount`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)

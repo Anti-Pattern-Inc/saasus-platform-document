@@ -100,7 +100,16 @@ const fetchPeriodOptions = async () => {
 };
 ```
 
-For more detailed backend implementation, refer to the [Language-Specific Sample Code](#language-specific-sample-code) section below.
+### Example Implementations
+
+The following links point to repositories that include implementations of this endpoint.  
+Search by function name to locate the relevant code.
+
+- **Go (Echo)**: [`getPlanPeriods`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)
+- **Python (FastAPI)**: [`get_plan_periods`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)
+- **Java (Spring)**: [`getPlanPeriods`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)
+- **C# (.NET 8)**: [`GetPlanPeriods`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)
+- **C# (.NET Framework 4.8)**: [`GetPlanPeriods`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)
 
 ## Dashboard Aggregation Endpoint
 
@@ -162,7 +171,16 @@ func calculateAmountByUnitType(count float64, u map[string]interface{}) float64 
 
 See `calcTiered` and `calcTieredUsage` for details.
 
-For more detailed backend implementation, refer to the [Language-Specific Sample Code](#language-specific-sample-code) section below.
+### Example Implementations
+
+The following links point to repositories that include implementations of this endpoint.  
+Search by function name to locate the relevant code.
+
+- **Go (Echo)**: [`getBillingDashboard`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)
+- **Python (FastAPI)**: [`get_billing_dashboard`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)
+- **Java (Spring)**: [`getBillingDashboard`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)
+- **C# (.NET 8)**: [`GetBillingDashboard`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)
+- **C# (.NET Framework 4.8)**: [`GetBillingDashboard`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)
 
 ## Meter Updates
 
@@ -223,6 +241,17 @@ func updateCountOfNow(c echo.Context) error {
 The inline plus/minus buttons are only displayed when the selected period is currently ongoing.
 :::
 
+### Example Implementations
+
+The following links point to repositories that include implementations of this endpoint.  
+Search by function name to locate the relevant code.
+
+- **Go (Echo)**: [`updateCountOfNow`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)
+- **Python (FastAPI)**: [`update_count_of_now`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)
+- **Java (Spring)**: [`updateCountOfNow`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)
+- **C# (.NET 8)**: [`UpdateMeteringCountNow`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)
+- **C# (.NET Framework 4.8)**: [`UpdateMeteringCountNow`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)
+
 ### Modal Edit Example (Custom Timestamp)
 
 ```go
@@ -280,117 +309,13 @@ func updateCountOfSpecifiedTS(c echo.Context) error {
 }
 ```
 
-For more detailed backend implementation, refer to the next section.
+### Example Implementations
 
-## Language-Specific Sample Code
+The following links point to repositories that include implementations of this endpoint.  
+Search by function name to locate the relevant code.
 
-This section lists backend sample code by endpoint and language. After opening the link, use **Ctrl+F** to locate the function.
-
-<div className="table-scroll">
-<table className="nowrap-table">
-  <thead>
-    <tr>
-      <th>Endpoint</th>
-      <th>Go</th>
-      <th>Python</th>
-      <th>Java</th>
-      <th>C# (.NET 8)</th>
-      <th>C# (.NET Framework 4.8)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>/billing/plan_periods</code></td>
-      <td>
-        [billing.go](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)<br />
-        Function: <code>getPlanPeriods</code>
-      </td>
-      <td>
-        [billing_router.py](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)<br />
-        Function: <code>get_plan_periods</code>
-      </td>
-      <td>
-        [BillingController.java](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)<br />
-        Function: <code>getPlanPeriods</code>
-      </td>
-      <td>
-        [BillingController.cs](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)<br />
-        Function: <code>GetPlanPeriods</code>
-      </td>
-      <td>
-        [BillingController.cs](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)<br />
-        Function: <code>GetPlanPeriods</code>
-      </td>
-    </tr>
-    <tr>
-      <td><code>/billing/dashboard</code></td>
-      <td>
-        [billing.go](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)<br />
-        Function: <code>getBillingDashboard</code>
-      </td>
-      <td>
-        [billing_router.py](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)<br />
-        Function: <code>get_billing_dashboard</code>
-      </td>
-      <td>
-        [BillingController.java](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)<br />
-        Function: <code>getBillingDashboard</code>
-      </td>
-      <td>
-        [BillingController.cs](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)<br />
-        Function: <code>GetBillingDashboard</code>
-      </td>
-      <td>
-        [BillingController.cs](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)<br />
-        Function: <code>GetBillingDashboard</code>
-      </td>
-    </tr>
-    <tr>
-      <td><code>/billing/metering/&#123;tenant&#125;/&#123;unit&#125;</code></td>
-      <td>
-        [billing.go](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)<br />
-        Function: <code>updateCountOfNow</code>
-      </td>
-      <td>
-        [billing_router.py](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)<br />
-        Function: <code>update_count_of_now</code>
-      </td>
-      <td>
-        [BillingController.java](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)<br />
-        Function: <code>updateCountOfNow</code>
-      </td>
-      <td>
-        [BillingController.cs](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)<br />
-        Function: <code>UpdateMeteringCountNow</code>
-      </td>
-      <td>
-        [BillingController.cs](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)<br />
-        Function: <code>UpdateMeteringCountNow</code>
-      </td>
-    </tr>
-    <tr>
-      <td><code>/billing/metering/&#123;tenant&#125;/&#123;unit&#125;/&#123;ts&#125;</code></td>
-      <td>
-        [billing.go](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)<br />
-        Function: <code>updateCountOfSpecifiedTS</code>
-      </td>
-      <td>
-        [billing_router.py](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)<br />
-        Function: <code>update_count_of_specified_timestamp</code>
-      </td>
-      <td>
-        [BillingController.java](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)<br />
-        Function: <code>updateCountOfSpecifiedTimestamp</code>
-      </td>
-      <td>
-        [BillingController.cs](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)<br />
-        Function: <code>UpdateMeteringCount</code>
-      </td>
-      <td>
-        [BillingController.cs](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)<br />
-        Function: <code>UpdateMeteringCount</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
-</div>
+- **Go (Echo)**: [`updateCountOfSpecifiedTS`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)
+- **Python (FastAPI)**: [`update_count_of_specified_timestamp`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)
+- **Java (Spring)**: [`updateCountOfSpecifiedTimestamp`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)
+- **C# (.NET 8)**: [`UpdateMeteringCount`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)
+- **C# (.NET Framework 4.8)**: [`UpdateMeteringCount`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)
