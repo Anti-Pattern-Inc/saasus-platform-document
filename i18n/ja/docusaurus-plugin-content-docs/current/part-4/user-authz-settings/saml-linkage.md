@@ -85,8 +85,12 @@ SaaSus PlatformのAPIを利用して、SAML連携の設定を行います。
 ```
 
 ### 4. SAML連携の動作確認
-1. sign_in_urlの確認  
-SaaSus PlatformのAPIを利用して、sign_in_urlを取得します。
+1. SaaSus にログインユーザの作成  
+    SaaSus Platformの管理画面から、SAML連携を利用するテナントへユーザーを作成し役割を割り当てます。  
+    ユーザーのメールアドレスは、Microsoft Entra IDで設定したメールアドレスと一致させる必要があります。  
+
+2. sign_in_urlの確認  
+    SaaSus PlatformのAPIを利用して、sign_in_urlを取得します。  
 
 **API:** https://docs.saasus.io/docs/reference/auth-api#tag/tenant/operation/GetTenantIdentityProviders
 ```json
@@ -98,17 +102,14 @@ SaaSus PlatformのAPIを利用して、sign_in_urlを取得します。
     }
 }
 ```
-2. 外部アカウントでのログイン画面  
-    取得したsign_in_urlにアクセスします。
+3. 外部アカウントでのログイン画面  
+    取得したsign_in_urlにアクセスします。  
     ![saml-linkage-image-7](/ja/img/part-4/saml-linkage/saml-linkage-image-7.png)
 
-3. Microsoft Entra IDでログイン  
-    Microsoft Entra IDのログイン画面で、ユーザー名とパスワードを入力してログインします。
+4. Microsoft Entra IDでログイン  
+    Microsoft Entra IDのログイン画面で、ユーザー名とパスワードを入力してログインします。  
+    ログインが成功すると、SaaSにリダイレクトされます。  
     ![saml-linkage-image-8](/ja/img/part-4/saml-linkage/saml-linkage-image-8.png)
-
-4. SaaSus Platformへのリダイレクト  
-    ログインが成功すると、SaaSus Platformのダッシュボードにリダイレクトされます。  
-    ユーザー情報が正しく取得され、SaaSus Platformのユーザーアカウントが作成されていることを確認します。
 
 ## メモ
 
