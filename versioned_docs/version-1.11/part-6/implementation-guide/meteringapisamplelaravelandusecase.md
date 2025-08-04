@@ -1,5 +1,5 @@
 ---
-title: "Metering API Implementation Sample and Examples of Use (Laravel)"
+title: "Metering API Implementation Sample and Examples of Use"
 slug: "metering-api-sample"
 excerpt: ""
 hidden: false
@@ -9,11 +9,11 @@ updatedAt: "Wed Dec 27 2023 09:00:19 GMT+0000 (Coordinated Universal Time)"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-We will describe Laravel implementation samples for each Metering API using SDK and an example of a feature using the Metering API.
+We will describe Implementation samples for each Metering API using SDK and an example of a feature using the Metering API.
 
 Please check the API documentation for details of each API.
 
-# Laravel Implementation Sample
+# Implementation Sample
 
 ## Get the Metering Unit Count for a Specified Date
 
