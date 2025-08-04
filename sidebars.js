@@ -327,13 +327,13 @@ const sidebars = {
             {
               type: "category",
               label:
-                "Metering API Implementation Sample and Examples of Use (Laravel)",
+                "Billing Dashboard Implementation Guide",
               link: {
                 type: "doc",
-                id: "part-6/implementation-guide/meteringapisamplelaravelandusecase",
+                id: "part-6/implementation-guide/billing-dashboard-with-metering-api",
               },
               items: [
-                "part-6/implementation-guide/example-implementation-using-metering-api",
+                "part-6/implementation-guide/meteringapisamplelaravelandusecase",
               ],
             },
             "part-6/implementation-guide/implementing-multi-factor-authentication-apiserver",
