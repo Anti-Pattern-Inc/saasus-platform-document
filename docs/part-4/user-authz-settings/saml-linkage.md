@@ -65,8 +65,9 @@ Configure Microsoft Entra ID for SAML integration. Follow these steps:
     ![saml-linkage-image-9](/img/part-4/saml-linkage/saml-linkage-image-9.png)
 
 ### 3. SaaSus Platform Configuration
-Configure SAML integration using the SaaSus Platform API.  
+Configure SAML integration using the SaaSus API.  
 Pass the following information to the API to set up SAML integration:
+
 - **provider_type**: "SAML"
 - **metadata_url**: App Federation Metadata URL from Microsoft Entra ID
 - **email_attribute**: Claim name noted from Microsoft Entra ID (e.g., `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress`)
@@ -85,11 +86,11 @@ Pass the following information to the API to set up SAML integration:
 
 ### 4. Testing SAML Integration
 1. Create login user in SaaSus  
-    Create a user for the tenant that will use SAML integration from the SaaSus Platform management screen and assign roles.  
+    Create a user for the tenant that will use SAML integration from the SaaS operation console and assign roles.  
     The user's email address must match the email address set in Microsoft Entra ID.  
 
 2. Verify sign_in_url  
-    Use the SaaSus Platform API to obtain the sign_in_url.  
+    Use the SaaSus API to obtain the sign_in_url.  
 
 **API:** https://docs.saasus.io/docs/reference/auth-api#tag/tenant/operation/GetTenantIdentityProviders
 ```json
