@@ -16,7 +16,9 @@ This enables tenants to use single sign-on (SSO) functionality and leverage thei
 
 ## Configuration Steps
 
-To integrate SaaSus Platform with Microsoft Entra ID, follow these steps:
+The SaaSus Platform SAML integration feature can work with various SAML 2.0 compatible identity providers.  
+Here we explain the configuration steps using Microsoft Entra ID as a representative example of integration partners.  
+Even if you use other identity providers, the basic concepts and configuration items are common.  
 
 ### 1. Obtain Entity ID/Reply URL
 Execute the API to obtain **Entity ID** (`identity_provider_configuration.entity_id`) and **Reply URL** (`identity_provider_configuration.reply_url`)  
@@ -34,7 +36,8 @@ https://docs.saasus.io/docs/reference/auth-api#tag/authInfo/operation/GetSignInS
 ```
 ### 2. Microsoft Entra ID Configuration
 Configure Microsoft Entra ID for SAML integration. Follow these steps:
-1. Log in to Microsoft Entra ID
+
+1. Log in to Microsoft Entra ID  
 [Microsoft Entra Admin Center](https://entra.microsoft.com/#home)
 
 2. Create a new application  
@@ -42,31 +45,31 @@ Configure Microsoft Entra ID for SAML integration. Follow these steps:
     ![saml-linkage-image-1](/img/part-4/saml-linkage/saml-linkage-image-1.png)
 
 
-3. Set the application name and click `Create`.
+3. Set the application name and click `Create`.  
     ![saml-linkage-image-2](/img/part-4/saml-linkage/saml-linkage-image-2.png)
 
-4. Select Single sign-on.
+4. Select Single sign-on.  
     ![saml-linkage-image-3](/img/part-4/saml-linkage/saml-linkage-image-3.png)
 
-5. Select SAML.
+5. Select SAML.  
     ![saml-linkage-image-4](/img/part-4/saml-linkage/saml-linkage-image-4.png)
 
-6. Edit Basic SAML Configuration and enter the following information
+6. Edit Basic SAML Configuration and enter the following information  
    - **Identifier (Entity ID)**: Enter the Entity ID obtained earlier.
    - **Reply URL**: Enter the Reply URL obtained earlier.
 
     ![saml-linkage-image-5](/img/part-4/saml-linkage/saml-linkage-image-5.png)
 
-
-7. In Attributes & Claims settings, note the claim name set for `user.mail`.
+7. In Attributes & Claims settings, note the claim name set for `user.mail`.  
     ![saml-linkage-image-6](/img/part-4/saml-linkage/saml-linkage-image-6.png)
 
-8. Note the `App Federation Metadata URL` from the SAML Certificate section.
+8. Note the `App Federation Metadata URL` from the SAML Certificate section.  
     ![saml-linkage-image-9](/img/part-4/saml-linkage/saml-linkage-image-9.png)
 
-### 3. SaaSus Platform Configuration
+### 3. SaaSus Platform Configuration  
 Configure SAML integration using the SaaSus API.  
-Pass the following information to the API to set up SAML integration:
+Pass the following information to the API to set up SAML integration.  
+
 - **provider_type**: "SAML"
 - **metadata_url**: App Federation Metadata URL from Microsoft Entra ID
 - **email_attribute**: Claim name noted from Microsoft Entra ID (e.g., `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress`)
@@ -114,6 +117,6 @@ Pass the following information to the API to set up SAML integration:
 
 ### User Group Configuration  
 In Microsoft Entra ID, you can use the Users and Groups feature to assign users who will use SAML authentication to groups.  
-This allows you to control access so that only users belonging to specific groups can access the SaaS application.  
+This allows you to control access so that only users belonging to specific groups can access the SaaS application.
 
 From Microsoft Entra Admin Center > Enterprise Apps > `Created Application` > Users and Groups, assign users who will access SaaSus Platform to groups.

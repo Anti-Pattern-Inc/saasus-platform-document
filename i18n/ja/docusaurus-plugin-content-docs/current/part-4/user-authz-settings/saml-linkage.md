@@ -16,7 +16,9 @@ SAML（Security Assertion Markup Language）連携機能により、外部のア
 
 ## 設定手順
 
-SaaSus Platform で Microsoft Entra IDと連携させるためには、以下の手順を実行します。
+SaaSus Platform のSAML連携機能は、SAML 2.0に対応した様々なIDプロバイダーと連携できます。  
+ここでは連携先の代表例として、Microsoft Entra IDを利用した設定手順を説明します。  
+他のIDプロバイダーをご利用の場合でも、基本的な概念と設定項目は共通しています。  
 
 ### 1. Entity ID/Reply URLを取得
 APIを実行し**Entity ID**(`identity_provider_configuration.entity_id`)/**Reply URL**(`identity_provider_configuration.reply_url`)を取得します  
