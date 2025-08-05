@@ -70,7 +70,11 @@ Please [contact us](https://saasus.io/pricing#support) for more information.
 
 **Q. Can SaaSus Platform run on infrastructure other than AWS?**  
 A. Core features are cloud-agnostic.  
-However, integration features such as Amazon EventBridge and AWS Marketplace are AWS-only.
+However, the following features are AWS-only.  
+    - Amazon EventBridge integration
+    - AWS Marketplace integration
+    - SaaS infrastructure management
+    - Smart API Gateway features (Smart MCP Server features)
 
 ---
 

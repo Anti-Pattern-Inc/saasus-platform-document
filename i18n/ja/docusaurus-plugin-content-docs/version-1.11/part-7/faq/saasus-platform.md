@@ -67,7 +67,11 @@ A. エンタープライズプランでは、稼働率99.99%のSLA（サービ�
 
 **Q. AWS 以外の基盤で利用可能でしょうか？**  
 A. 基本機能はクラウド非依存で利用可能です。  
-ただし、Amazon EventBridge や AWS Marketplace 連携機能は AWS 環境のみ対応しています。
+ただし、以下機能の関しては AWS 環境のみ対応しています。  
+    - Amazon EventBridge 連携機能
+    - AWS Marketplace 連携機能
+    - SaaSインフラ管理機能
+    - Smart API Gateway 機能  (Smart MCP Server 機能)
 
 ---
 
