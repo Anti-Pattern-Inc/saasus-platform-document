@@ -10,7 +10,7 @@ updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 **Q. What countermeasures are available when the service goes down?  
 Is it possible to switch and continue business operations?**  
 A. The Tokyo region has 3 Availability Zones, and the service will not stop unless all of them experience simultaneous failures.  
-There has never been a case where all AZs in an AWS region stopped simultaneously, so we consider the risk extremely low.  
+AWS has never had a case where all AZs in a region stopped simultaneously, so we consider the risk extremely low.  
 A multi-region DR configuration using the Osaka region is also possible, but please consider human resource downtime and cost factors when making decisions based on your requirements.
 
 ---
@@ -72,7 +72,7 @@ However, Amazon EventBridge and AWS Marketplace integration functions are only s
 ---
 
 **Q. Are there any UI/UX constraints?**  
-A. There are no particular constraints. It supports React, Vue.js and other frontend implementations as well as server-side rendering.
+A. There are no particular constraints. It supports React, Vue.js and other frontend implementations as well as server-side rendering.  
 Please [contact us](https://saasus.io/pricing#support) if you have specific requirements.
 
 ---
@@ -107,4 +107,12 @@ A. For example, the following operations are possible:
 A. Yes, it is possible.  
 By default, detailed information such as addresses and phone numbers is not included,  
 but you can add necessary fields (e.g., address, phone number, contact person name, etc.) from "Tenant Attribute Definition" in the SaaS Development Console.  
-Added attributes can be retrieved via API or screen display, so they can be used as data for report printing.  
+Added attributes can be retrieved via API or screen display, so they can be used as data for report printing.
+
+---
+
+**Q. Are there limits on the number of tenants and users?**  
+A. Upper limits are set according to your plan.  
+For specific upper limits, please check the [plan details](https://saasus.io/pricing).  
+When the limit is reached, warnings will be displayed on the SaaS Operation Console.
+Notifications will also be sent to your registered email address, so please consider upgrading to a higher plan.
