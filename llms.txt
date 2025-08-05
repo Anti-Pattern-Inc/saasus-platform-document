@@ -99,6 +99,7 @@
 - [Google Linkage](part-4/user-authz-settings/google-linkage): Summary Explanation
 - [Notification Email Content](part-4/user-authz-settings/notifymailcustomize): In the E-Mail Content tab of the Authentication Authorization > Advanced Settings, you can customize the emails that are sent to users on authentication pages such as the sign in page.
 - [Roles](part-4/user-authz-settings/role-definition): Define and manage roles used in your SaaS application.
+- [SAML Integration](part-4/user-authz-settings/saml-linkage): Overview
 - [User Environment Definitions](part-4/user-authz-settings/user-env-definition): On SaaSus Platform, it is possible to set up user environment definitions. The environments defined here refer to the development, testing, and other environments that you have set up in your SaaS (customer) environment. Consider assigning attributes to the test environment that are in line with your SaaS phase.
 - [Role Management](part-5/adding-role-to-user): Adding Role To User
 - [Operations Console Overview](part-5/operations-console-overview): 1. Purpose of the SaaS Operation Console
