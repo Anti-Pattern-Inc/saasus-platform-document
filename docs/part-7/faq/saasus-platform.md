@@ -118,5 +118,4 @@ Added attributes can be retrieved via API or screen display, so they can be used
 **Q. Are there limits on the number of tenants and users?**  
 A. Upper limits are set according to your plan.  
 For specific upper limits, please check the [plan details](https://saasus.io/pricing).  
-When the limit is reached, warnings will be displayed on the SaaS Operation Console.
-Notifications will also be sent to your registered email address, so please consider upgrading to a higher plan.
+When the limit is reached, warnings will be displayed on the SaaS Operation Console and notifications will be sent to your registered email address. You can continue using the service for a certain period, but please consider upgrading to a higher plan.
