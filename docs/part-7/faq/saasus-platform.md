@@ -65,9 +65,13 @@ Pricing is based on individual estimates, so please [contact us](https://saasus.
 
 ---
 
-**Q. Can it be used on infrastructure other than AWS?**  
-A. Basic functions can be used cloud-independently.  
-However, Amazon EventBridge and AWS Marketplace integration functions are only supported in AWS environments.
+**Q. Can SaaSus Platform run on platforms other than AWS?**  
+A. Core features can be used without depending on cloud platforms.  
+However, the following features are only supported on AWS environments:  
+    - Amazon EventBridge integration
+    - AWS Marketplace integration
+    - SaaS infrastructure management
+    - Smart API Gateway features (Smart MCP Server features)
 
 ---
 
