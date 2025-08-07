@@ -39,9 +39,6 @@ DNSサービス例（Value Domainなど）では、以下のように設定し�
 
 登録したドメインは、`auth.ドメイン名` という形式でログイン画面のURLとして利用されます。
 
-ドメインを取得せずにログイン画面に遷移する場合は、サイドメニューの「認証詳細設定」からログイン画面のURLを確認できます。
-
-![認証詳細設定メニュー](/ja/img/part-4/application-settings/basic-app-settings/authorization-screen-customize-01.png)
 
 ### 2. 認証後の遷移先URLの設定
 

@@ -40,11 +40,6 @@ This completes the preparations for configuring the SaaS Platform.
 
 The registered domain will be used as the login screen URL in the format `auth.domain-name`.
 
-If you want to access the login screen without acquiring a domain, you can check the login screen URL from "Authentication Details" in the side menu.
-
-![Authentication Details Menu](/img/part-4/application-settings/basic-app-settings/authorization-screen-customize-01.png)
-
-SaaSus Platform automatically generates a login screen based on this domain.
 
 ### 2. Post-Login Redirect URL Settings
 
