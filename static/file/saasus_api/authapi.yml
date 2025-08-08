@@ -1,72 +1,68 @@
 openapi: 3.0.0
 info:
-  description: "Schema"
+  description: Schema
   x-description-i18n:
-    jpn: "スキーマ"
-  version: "1.0.0"
-  title: "SaaSus Auth API Schema"
+    jpn: スキーマ
+  version: 1.0.0
+  title: SaaSus Auth API Schema
   contact:
-    name: "Anti-Pattern"
+    name: Anti-Pattern
 servers:
-  - url: "https://api.saasus.io/v1/auth"
+  - url: https://api.saasus.io/v1/auth
     description: Production API Server
 tags:
-  - name: "basicInfo"
+  - name: basicInfo
     description: Basic Info
     x-description-i18n:
-      jpn: "基本情報"
-  - name: "authInfo"
+      jpn: 基本情報
+  - name: authInfo
     description: Auth Info
     x-description-i18n:
-      jpn: "認証情報"
-  - name: "saasUser"
+      jpn: 認証情報
+  - name: saasUser
     description: SaaS User
     x-description-i18n:
-      jpn: "SaaS単位のユーザー"
-  - name: "tenantUser"
+      jpn: SaaS単位のユーザー
+  - name: tenantUser
     description: Tenant User
     x-description-i18n:
-      jpn: "Tenant単位のユーザー"
-  - name: "userAttribute"
+      jpn: Tenant単位のユーザー
+  - name: userAttribute
     description: Additional User Attributes
     x-description-i18n:
-      jpn: "ユーザーの追加属性"
-  - name: "tenantAttribute"
+      jpn: ユーザーの追加属性
+  - name: tenantAttribute
     description: Additional Tenant Attributes
     x-description-i18n:
-      jpn: "テナントの追加属性"
-  - name: "role"
+      jpn: テナントの追加属性
+  - name: role
     description: Role
     x-description-i18n:
-      jpn: "役割(ロール)"
-  - name: "tenant"
+      jpn: 役割(ロール)
+  - name: tenant
     description: Tenant
     x-description-i18n:
-      jpn: "テナント"
-  - name: "saasusTenant"
+      jpn: テナント
+  - name: saasusTenant
     description: SaaSus Tenant
     x-description-i18n:
-      jpn: "SaaSusテナント"
-  - name: "env"
+      jpn: SaaSusテナント
+  - name: env
     description: Environment Info
     x-description-i18n:
-      jpn: "環境情報"
-  - name: "credential"
+      jpn: 環境情報
+  - name: credential
     description: Authentication/Authorization Info
     x-description-i18n:
-      jpn: "認証・認可情報"
-  - name: "invitation"
+      jpn: 認証・認可情報
+  - name: invitation
     description: Invitation
     x-description-i18n:
-      jpn: "招待"
-  - name: "singleTenant"
-    description: Single Tenant Management
+      jpn: 招待
+  - name: singleTenant
+    description: SaaS Infrastructure Management
     x-description-i18n:
-      jpn: "シングルテナント管理"
-  - name: "error"
-    description: Testing Purpose Error
-    x-description-i18n:
-      jpn: "テスト用途のエラー"
+      jpn: SaaSインフラ管理
 security:
   - Bearer: []
 paths:
@@ -99,7 +95,7 @@ paths:
           schema:
             type: string
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -107,14 +103,58 @@ paths:
                 title: User Info
                 x-title-i18n:
                   jpn: ユーザー情報
-                $ref: "#/components/schemas/UserInfo"
-        401:
+                $ref: '#/components/schemas/UserInfo'
+        '401':
           description: Unauthorized
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /userinfo/search/email:
+    get:
+      tags:
+        - userInfo
+      operationId: GetUserInfoByEmail
+      summary: Get User Info by Email
+      x-summary-i18n:
+        jpn: メールアドレスからユーザー情報取得
+      description: |
+        Get user information by email address.
+      x-description-i18n:
+        jpn: |
+          メールアドレスを条件にユーザー情報を取得します
+      parameters:
+        - in: query
+          name: email
+          description: Email
+          x-description-i18n:
+            jpn: メールアドレス
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: User Info
+                x-title-i18n:
+                  jpn: ユーザー情報
+                $ref: '#/components/schemas/UserInfo'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -136,7 +176,7 @@ paths:
           SaaS ID を元に設定されているドメイン名と CNAME レコードを取得します。
           取得した CNAME レコードを DNS に設定することで、ログイン画面を生成します。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -144,8 +184,8 @@ paths:
                 title: Basic Setting List
                 x-title-i18n:
                   jpn: 基本設定情報一覧
-                $ref: "#/components/schemas/BasicInfo"
-        500:
+                $ref: '#/components/schemas/BasicInfo'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -171,11 +211,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateBasicInfoParam"
+              $ref: '#/components/schemas/UpdateBasicInfoParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -197,7 +237,7 @@ paths:
           ログイン後に認証情報を渡す SaaS の URL を取得します。
           ここで取得した URL へ認証情報を渡し、SaaSus SDK を利用してこの Callback の実装をすることが可能となります。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -205,8 +245,8 @@ paths:
                 title: Basic Settings
                 x-title-i18n:
                   jpn: 基本設定情報一覧
-                $ref: "#/components/schemas/AuthInfo"
-        500:
+                $ref: '#/components/schemas/AuthInfo'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -230,11 +270,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateAuthInfoParam"
+              $ref: '#/components/schemas/UpdateAuthInfoParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -254,7 +294,7 @@ paths:
         jpn: |
           SaaSのユーザー全件を取得します。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -262,13 +302,13 @@ paths:
                 title: List of all SaaS users
                 x-title-i18n:
                   jpn: SaaS単位の全ユーザー一覧
-                $ref: "#/components/schemas/SaasUsers"
-        500:
+                $ref: '#/components/schemas/SaasUsers'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
     post:
       tags:
         - saasUser
@@ -278,16 +318,18 @@ paths:
         jpn: SaaSにユーザーを作成
       description: |
         Create SaaS User.
+        If attributes is empty, a temporary password will be sent to the registered email.
       x-description-i18n:
         jpn: |
           SaaSにユーザーを作成します。
+          passwordを空にした場合、登録されたメールアドレスに対して仮パスワードを送信します。
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateSaasUserParam"
+              $ref: '#/components/schemas/CreateSaasUserParam'
       responses:
-        201:
+        '201':
           description: OK
           content:
             application/json:
@@ -295,19 +337,19 @@ paths:
                 title: Created User
                 x-title-i18n:
                   jpn: 作成したユーザー
-                $ref: "#/components/schemas/SaasUser"
-        400:
+                $ref: '#/components/schemas/SaasUser'
+        '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        500:
+                $ref: '#/components/schemas/Error'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /users/{user_id}:
     get:
       tags:
@@ -324,19 +366,19 @@ paths:
       parameters:
         - $ref: '#/components/parameters/UserId'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SaasUser"
-        404:
+                $ref: '#/components/schemas/SaasUser'
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        500:
+                $ref: '#/components/schemas/Error'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -357,15 +399,15 @@ paths:
       parameters:
         - $ref: '#/components/parameters/UserId'
       responses:
-        200:
+        '200':
           description: OK
-        404:
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -390,11 +432,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateSaasUserPasswordParam"
+              $ref: '#/components/schemas/UpdateSaasUserPasswordParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -419,11 +461,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateSaasUserEmailParam"
+              $ref: '#/components/schemas/UpdateSaasUserEmailParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -454,11 +496,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/RequestEmailUpdateParam"
+              $ref: '#/components/schemas/RequestEmailUpdateParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -485,11 +527,40 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ConfirmEmailUpdateParam"
+              $ref: '#/components/schemas/ConfirmEmailUpdateParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users/{user_id}/attributes:
+    patch:
+      tags:
+        - saasUser
+      operationId: UpdateSaasUserAttributes
+      summary: Update SaaS User Attributes
+      x-summary-i18n:
+        jpn: SaaSユーザーの属性情報を更新
+      description: |
+        Update the additional attributes of the SaaS user.
+      x-description-i18n:
+        jpn: |
+          SaaSユーザーの追加属性を更新します。
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSaasUserAttributesParam'
+      responses:
+        '200':
+          description: OK
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -514,11 +585,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateSoftwareTokenParam"
+              $ref: '#/components/schemas/UpdateSoftwareTokenParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -543,15 +614,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateSecretCodeParam"
+              $ref: '#/components/schemas/CreateSecretCodeParam'
       responses:
-        201:
+        '201':
           description: Created
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/SoftwareTokenSecretCode'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -573,13 +644,13 @@ paths:
       parameters:
         - $ref: '#/components/parameters/UserId'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/MfaPreference'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -605,14 +676,14 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateUserMfaPreferenceParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                  $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Error'
   /users/{user_id}/providers/{provider_name}:
     delete:
       tags:
@@ -631,18 +702,18 @@ paths:
           name: provider_name
           schema:
             type: string
-            example: "Google"
+            example: Google
           required: true
         - $ref: '#/components/parameters/UserId'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                  $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Error'
   /tenants/all/users:
     get:
       tags:
@@ -661,18 +732,18 @@ paths:
           複数テナントに所属する同一ユーザーは別のオブジェクトとして返却されます。
           idは一意ではありません。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Users"
-        500:
+                $ref: '#/components/schemas/Users'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /tenants/all/users/{user_id}:
     get:
       tags:
@@ -691,24 +762,24 @@ paths:
       parameters:
         - $ref: '#/components/parameters/UserId'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Users"
-        404:
+                $ref: '#/components/schemas/Users'
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        500:
+                $ref: '#/components/schemas/Error'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /tenants/{tenant_id}/users:
     get:
       tags:
@@ -727,13 +798,13 @@ paths:
       parameters:
         - $ref: '#/components/parameters/TenantId'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Users"
-        500:
+                $ref: '#/components/schemas/Users'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -759,9 +830,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateTenantUserParam"
+              $ref: '#/components/schemas/CreateTenantUserParam'
       responses:
-        201:
+        '201':
           description: Created
           content:
             application/json:
@@ -769,8 +840,8 @@ paths:
                 title: Created User
                 x-title-i18n:
                   jpn: 作成されたユーザー
-                $ref: "#/components/schemas/User"
-        500:
+                $ref: '#/components/schemas/User'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -793,19 +864,19 @@ paths:
         - $ref: '#/components/parameters/TenantId'
         - $ref: '#/components/parameters/UserId'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
-        404:
+                $ref: '#/components/schemas/User'
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -830,17 +901,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateTenantUserParam"
+              $ref: '#/components/schemas/UpdateTenantUserParam'
       responses:
-        200:
+        '200':
           description: OK
-        404:
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -862,15 +933,15 @@ paths:
         - $ref: '#/components/parameters/TenantId'
         - $ref: '#/components/parameters/UserId'
       responses:
-        200:
+        '200':
           description: OK
-        404:
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -897,11 +968,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateTenantUserRolesParam"
+              $ref: '#/components/schemas/CreateTenantUserRolesParam'
       responses:
-        201:
+        '201':
           description: Created
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -926,15 +997,15 @@ paths:
         - $ref: '#/components/parameters/EnvId'
         - $ref: '#/components/parameters/RoleName'
       responses:
-        200:
+        '200':
           description: OK
-        404:
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -958,7 +1029,7 @@ paths:
           ここで定義した役割をユーザーに付与することによって、SaaS側で役割ベースの認可を実装することが用意になります。
           また、同じユーザーでも、属するテナント・環境ごとに持っている役割を変えることが可能です。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -966,8 +1037,8 @@ paths:
                 title: Roles
                 x-title-i18n:
                   jpn: 役割(ロール)一覧
-                $ref: "#/components/schemas/Roles"
-        500:
+                $ref: '#/components/schemas/Roles'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -993,9 +1064,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateRoleParam"
+              $ref: '#/components/schemas/CreateRoleParam'
       responses:
-        201:
+        '201':
           description: Created
           content:
             application/json:
@@ -1003,8 +1074,8 @@ paths:
                 title: Created roles
                 x-title-i18n:
                   jpn: 作成された役割(ロール)
-                $ref: "#/components/schemas/Role"
-        500:
+                $ref: '#/components/schemas/Role'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -1026,21 +1097,21 @@ paths:
       parameters:
         - $ref: '#/components/parameters/RoleName'
       responses:
-        200:
+        '200':
           description: OK
-        400:
+        '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        404:
+                $ref: '#/components/schemas/Error'
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -1064,7 +1135,7 @@ paths:
           例えば、ユーザー名を持たせる、誕生日を持たせるなど、ユーザーに紐付いた項目の定義を行うことができます。
           一方で、個人情報を SaaSus Platform 側に持たせたくない場合は、このユーザー属性定義を行わずに SaaS 側で個人情報を持つことを検討してください。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -1072,8 +1143,8 @@ paths:
                 title: User Attributes
                 x-title-i18n:
                   jpn: ユーザー属性一覧
-                $ref: "#/components/schemas/UserAttributes"
-        500:
+                $ref: '#/components/schemas/UserAttributes'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -1088,20 +1159,22 @@ paths:
         jpn: ユーザー属性の作成
       description: |
         Create additional user attributes to be kept on the SaaSus Platform.
+        You can give different values to each tenant.
         For example, you can define items associated with a user, such as user name, birthday, etc.
         If you don't want personal information on the SaaS Platform side, personal information can be kept on the SaaS side without user attribute definition.
       x-description-i18n:
         jpn: |
           SaaSus Platform にて保持するユーザーの追加属性を登録します。
+          テナント毎に異なる値を持たせることができます。
           例えば、ユーザー名を持たせる、誕生日を持たせるなど、ユーザーに紐付いた項目の定義を行うことができます。
           一方で、個人情報を SaaSus Platform 側に持たせたくない場合は、このユーザー属性定義を行わずに SaaS 側で個人情報を持つことを検討してください。
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateUserAttributeParam"
+              $ref: '#/components/schemas/CreateUserAttributeParam'
       responses:
-        201:
+        '201':
           description: Created
           content:
             application/json:
@@ -1109,8 +1182,8 @@ paths:
                 title: Created User Attribute
                 x-title-i18n:
                   jpn: 作成されたUserAttribute
-                $ref: "#/components/schemas/Attribute"
-        500:
+                $ref: '#/components/schemas/Attribute'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -1140,15 +1213,51 @@ paths:
             example: birthday
           required: true
       responses:
-        200:
+        '200':
           description: OK
-        404:
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /saas-user-attributes:
+    post:
+      tags:
+        - userAttribute
+      operationId: CreateSaasUserAttribute
+      summary: Create SaaS User Attributes
+      x-summary-i18n:
+        jpn: SaaSユーザー属性の作成
+      description: |
+        Create additional SaaS user attributes to be kept on the SaaSus Platform.
+        You can give common values to all tenants.
+      x-description-i18n:
+        jpn: |
+          SaaSus Platform にて保持するSaaSユーザーの追加属性を登録します。
+          すべてのテナントに対して共通の値を持たせることができます。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSaasUserAttributeParam'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                title: Created User Attribute
+                x-title-i18n:
+                  jpn: 作成されたUserAttribute
+                $ref: '#/components/schemas/Attribute'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -1170,7 +1279,7 @@ paths:
           SaaSus Platform で管理する、テナントの追加属性の定義を取得します。
           例えばテナントの呼び名やメモなどをを持たせることができ、SaaSからSaaSus SDK/APIを利用して取得することができます。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -1178,8 +1287,8 @@ paths:
                 title: Added Tenant Attributes
                 x-title-i18n:
                   jpn: テナント追加属性一覧
-                $ref: "#/components/schemas/TenantAttributes"
-        500:
+                $ref: '#/components/schemas/TenantAttributes'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -1203,9 +1312,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateTenantAttributeParam"
+              $ref: '#/components/schemas/CreateTenantAttributeParam'
       responses:
-        201:
+        '201':
           description: Created
           content:
             application/json:
@@ -1213,8 +1322,8 @@ paths:
                 title: Created Tenant Attribute
                 x-title-i18n:
                   jpn: 作成されたテナント属性情報
-                $ref: "#/components/schemas/Attribute"
-        500:
+                $ref: '#/components/schemas/Attribute'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -1244,15 +1353,15 @@ paths:
             example: birthday
           required: true
       responses:
-        200:
+        '200':
           description: OK
-        404:
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -1272,13 +1381,13 @@ paths:
         jpn: |
           SaaSus Platform で管理する、テナント情報の取得を行います。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Tenants"
-        500:
+                $ref: '#/components/schemas/Tenants'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -1300,9 +1409,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateTenantParam"
+              $ref: '#/components/schemas/CreateTenantParam'
       responses:
-        201:
+        '201':
           description: Created
           content:
             application/json:
@@ -1310,8 +1419,8 @@ paths:
                 title: Created Tenant
                 x-title-i18n:
                   jpn: 作成されたTenant
-                $ref: "#/components/schemas/Tenant"
-        500:
+                $ref: '#/components/schemas/Tenant'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -1333,7 +1442,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/TenantId'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -1341,14 +1450,14 @@ paths:
                 title: Tenant Details
                 x-title-i18n:
                   jpn: テナント情報
-                $ref: "#/components/schemas/TenantDetail"
-        404:
+                $ref: '#/components/schemas/TenantDetail'
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -1372,17 +1481,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateTenantParam"
+              $ref: '#/components/schemas/UpdateTenantParam'
       responses:
-        200:
+        '200':
           description: OK
-        404:
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -1403,9 +1512,9 @@ paths:
       parameters:
         - $ref: '#/components/parameters/TenantId'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -1430,23 +1539,23 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateTenantPlanParam"
+              $ref: '#/components/schemas/UpdateTenantPlanParam'
       responses:
-        200:
+        '200':
           description: OK
-        400:
+        '400':
           description: Bad Request
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        404:
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -1471,23 +1580,23 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateTenantBillingInfoParam"
+              $ref: '#/components/schemas/UpdateTenantBillingInfoParam'
       responses:
-        200:
+        '200':
           description: OK
-        400:
+        '400':
           description: Bad Request
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        404:
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -1509,7 +1618,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/TenantId'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -1517,8 +1626,8 @@ paths:
                 title: Invitations
                 x-title-i18n:
                   jpn: 招待一覧
-                $ref: "#/components/schemas/Invitations"
-        500:
+                $ref: '#/components/schemas/Invitations'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -1542,9 +1651,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateTenantInvitationParam"
+              $ref: '#/components/schemas/CreateTenantInvitationParam'
       responses:
-        201:
+        '201':
           description: Created
           content:
             application/json:
@@ -1552,19 +1661,19 @@ paths:
                 title: Created Invitation
                 x-title-i18n:
                   jpn: 作成された招待
-                $ref: "#/components/schemas/Invitation"
-        400:
+                $ref: '#/components/schemas/Invitation'
+        '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        500:
+                $ref: '#/components/schemas/Error'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /tenants/{tenant_id}/invitations/{invitation_id}:
     get:
       tags:
@@ -1582,22 +1691,22 @@ paths:
         - $ref: '#/components/parameters/TenantId'
         - $ref: '#/components/parameters/InvitationId'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
                 title: Invitation
                 x-title-i18n:
-                  jpn:  招待情報
-                $ref: "#/components/schemas/Invitation"
-        404:
+                  jpn: 招待情報
+                $ref: '#/components/schemas/Invitation'
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -1619,15 +1728,15 @@ paths:
         - $ref: '#/components/parameters/TenantId'
         - $ref: '#/components/parameters/InvitationId'
       responses:
-        200:
+        '200':
           description: OK
-        404:
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -1649,7 +1758,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/InvitationId'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -1657,14 +1766,14 @@ paths:
                 title: Invitation Validity
                 x-title-i18n:
                   jpn: 招待の有効性
-                $ref: "#/components/schemas/InvitationValidity"
-        404:
+                $ref: '#/components/schemas/InvitationValidity'
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -1689,28 +1798,28 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ValidateInvitationParam"
+              $ref: '#/components/schemas/ValidateInvitationParam'
       responses:
-        200:
+        '200':
           description: OK
-        400:
+        '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        404:
+                $ref: '#/components/schemas/Error'
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /tenants/{tenant_id}/identity-providers:
     get:
       tags:
@@ -1727,7 +1836,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/TenantId'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -1735,8 +1844,8 @@ paths:
                 title: Tenant Identity Providers
                 x-title-i18n:
                   jpn: テナント毎の外部IDプロバイダのサインイン情報
-                $ref: "#/components/schemas/TenantIdentityProviders"
-        500:
+                $ref: '#/components/schemas/TenantIdentityProviders'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -1760,11 +1869,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateTenantIdentityProviderParam"
+              $ref: '#/components/schemas/UpdateTenantIdentityProviderParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -1791,22 +1900,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/RequestExternalUserLinkParam"
+              $ref: '#/components/schemas/RequestExternalUserLinkParam'
       responses:
-        200:
+        '200':
           description: OK
-        400:
+        '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        500:
+                $ref: '#/components/schemas/Error'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /external-users/confirm:
     post:
       tags:
@@ -1824,22 +1933,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ConfirmExternalUserLinkParam"
+              $ref: '#/components/schemas/ConfirmExternalUserLinkParam'
       responses:
-        200:
+        '200':
           description: OK
-        400:
+        '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        500:
+                $ref: '#/components/schemas/Error'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /notification-messages:
     get:
       tags:
@@ -1854,7 +1963,7 @@ paths:
         jpn: |
           各種通知メールテンプレートを取得します。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -1862,8 +1971,8 @@ paths:
                 title: Notification Email Template
                 x-title-i18n:
                   jpn: 通知メールテンプレート
-                $ref: "#/components/schemas/NotificationMessages"
-        500:
+                $ref: '#/components/schemas/NotificationMessages'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -1885,11 +1994,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateNotificationMessagesParam"
+              $ref: '#/components/schemas/UpdateNotificationMessagesParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -1909,7 +2018,7 @@ paths:
         jpn: |
           cognitoに設定している外部プロバイダ経由のサインイン情報を取得します。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -1917,8 +2026,8 @@ paths:
                 title: Identity Providers
                 x-title-i18n:
                   jpn: 外部IDプロバイダのサインイン情報
-                $ref: "#/components/schemas/IdentityProviders"
-        500:
+                $ref: '#/components/schemas/IdentityProviders'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -1939,11 +2048,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateIdentityProviderParam"
+              $ref: '#/components/schemas/UpdateIdentityProviderParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -1965,7 +2074,7 @@ paths:
           ユーザーパスワードの要件設定を取得します。
           アルファベット、数字、記号の組み合わせで、桁数を長くすれば解読されづらい安全なパスワードを設定することが可能となります。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -1973,8 +2082,8 @@ paths:
                 title: Password Requirement
                 x-title-i18n:
                   jpn: パスワード要件
-                $ref: "#/components/schemas/SignInSettings"
-        500:
+                $ref: '#/components/schemas/SignInSettings'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -1998,11 +2107,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateSignInSettingsParam"
+              $ref: '#/components/schemas/UpdateSignInSettingsParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -2022,7 +2131,7 @@ paths:
         jpn: |
           認証系画面設定情報（新規登録・ログイン・パスワードリセット等）を取得します。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -2030,8 +2139,8 @@ paths:
                 title: Customized Page info
                 x-title-i18n:
                   jpn: カスタマイズ画面情報
-                $ref: "#/components/schemas/CustomizePages"
-        500:
+                $ref: '#/components/schemas/CustomizePages'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -2053,11 +2162,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateCustomizePagesParam"
+              $ref: '#/components/schemas/UpdateCustomizePagesParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -2077,7 +2186,7 @@ paths:
         jpn: |
           認証認可基本情報を取得します。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -2085,8 +2194,8 @@ paths:
                 title: Authentication Authorization Basic Information
                 x-title-i18n:
                   jpn: 認証認可基本情報
-                $ref: "#/components/schemas/CustomizePageSettings"
-        500:
+                $ref: '#/components/schemas/CustomizePageSettings'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -2108,11 +2217,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateCustomizePageSettingsParam"
+              $ref: '#/components/schemas/UpdateCustomizePageSettingsParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -2134,13 +2243,13 @@ paths:
           登録されている環境情報を取得します。
           連携のテストや開発用環境や実際の運用で利用する環境など複数の環境を定義することができます。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Envs"
-        500:
+                $ref: '#/components/schemas/Envs'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -2164,15 +2273,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateEnvParam"
+              $ref: '#/components/schemas/CreateEnvParam'
       responses:
-        201:
+        '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Env"
-        500:
+                $ref: '#/components/schemas/Env'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -2194,19 +2303,19 @@ paths:
         jpn: |
           環境情報の詳細を取得します。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Env"
-        404:
+                $ref: '#/components/schemas/Env'
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -2230,17 +2339,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateEnvParam"
+              $ref: '#/components/schemas/UpdateEnvParam'
       responses:
-        200:
+        '200':
           description: OK
-        404:
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -2261,15 +2370,15 @@ paths:
         jpn: |
           環境情報を削除します。idが3の環境は削除できません。
       responses:
-        200:
+        '200':
           description: OK
-        404:
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -2289,9 +2398,9 @@ paths:
         jpn: |
           billing経由でstripeへ初期情報を設定
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -2311,9 +2420,9 @@ paths:
         jpn: |
           stripe上の顧客情報・商品情報を削除します
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -2337,19 +2446,19 @@ paths:
         - $ref: '#/components/parameters/AuthFlow'
         - $ref: '#/components/parameters/RefreshToken'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Credentials'
-        404:
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -2375,25 +2484,25 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateAuthCredentialsParam'
       responses:
-        201:
+        '201':
           description: Created
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthorizationTempCode'
-        400:
+        '400':
           description: Bad Request
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        401:
+        '401':
           description: Unauthorized
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -2418,7 +2527,7 @@ paths:
             schema:
               $ref: '#/components/schemas/SignUpParam'
       responses:
-        201:
+        '201':
           description: Created
           content:
             application/json:
@@ -2426,8 +2535,8 @@ paths:
                 title: Created User
                 x-title-i18n:
                   jpn: 作成したユーザー
-                $ref: "#/components/schemas/SaasUser"
-        500:
+                $ref: '#/components/schemas/SaasUser'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -2452,9 +2561,9 @@ paths:
             schema:
               $ref: '#/components/schemas/ResendSignUpConfirmationEmailParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -2481,7 +2590,7 @@ paths:
             schema:
               $ref: '#/components/schemas/SignUpWithAwsMarketplaceParam'
       responses:
-        201:
+        '201':
           description: OK
           content:
             application/json:
@@ -2489,8 +2598,8 @@ paths:
                 title: Created User
                 x-title-i18n:
                   jpn: 作成したユーザー
-                $ref: "#/components/schemas/SaasUser"
-        500:
+                $ref: '#/components/schemas/SaasUser'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -2517,7 +2626,7 @@ paths:
             schema:
               $ref: '#/components/schemas/ConfirmSignUpWithAwsMarketplaceParam'
       responses:
-        201:
+        '201':
           description: Created
           content:
             application/json:
@@ -2525,8 +2634,8 @@ paths:
                 title: Created Tenant
                 x-title-i18n:
                   jpn: 作成したテナント
-                $ref: "#/components/schemas/Tenant"
-        500:
+                $ref: '#/components/schemas/Tenant'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -2553,9 +2662,9 @@ paths:
             schema:
               $ref: '#/components/schemas/LinkAwsMarketplaceParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -2579,9 +2688,9 @@ paths:
           テナントに連携されたプランとプラン定義を削除します。
           Stripe連携している場合、連携が解除されます。
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -2592,22 +2701,22 @@ paths:
       tags:
         - singleTenant
       operationId: GetCloudFormationLaunchStackLinkForSingleTenant
-      summary: Get CloudFormation Stack Launch Link For Single Tenant
+      summary: Get CloudFormation Stack Launch Link For SaaS Infrastructure Management
       x-summary-i18n:
-        jpn: SingleTenant用CloudFormationスタック起動リンク取得
+        jpn: SaaSインフラ管理用CloudFormationスタック起動リンク取得
       description: |
-        Get the CloudFormation stack activation link for Single Tenant.
-      x-description-i18n:  
+        Get the CloudFormation stack activation link for SaaS Infrastructure Management.
+      x-description-i18n:
         jpn: |
-          SingleTenant用CloudFormationスタック起動リンクを取得します。
+          SaaSインフラ管理用CloudFormationスタック起動リンクを取得します。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CloudFormationLaunchStackLink"
-        500:
+                $ref: '#/components/schemas/CloudFormationLaunchStackLink'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -2618,17 +2727,17 @@ paths:
       tags:
         - singleTenant
       operationId: GetSingleTenantSettings
-      summary: Retrieve the settings of the single tenant.
+      summary: Retrieve the settings of the SaaS Infrastructure Management.
       x-summary-i18n:
-        jpn: シングルテナント機能の設定情報を取得する
+        jpn: SaaSインフラ管理機能の設定情報を取得する
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SingleTenantSettings"
-        500:
+                $ref: '#/components/schemas/SingleTenantSettings'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -2638,58 +2747,68 @@ paths:
       tags:
         - singleTenant
       operationId: UpdateSingleTenantSettings
-      summary: Update configuration information for single-tenant functionality
+      summary: Update configuration information for SaaS Infrastructure Management
       x-summary-i18n:
-        jpn: シングルテナント機能の設定情報を更新する
+        jpn: SaaSインフラ管理機能の設定情報を更新する
       description: |
-        Updates configuration information for single-tenant functionality
-        Returns error if single tenant feature cannot be enabled.
+        Updates configuration information for SaaS Infrastructure Management
+        Returns error if SaaS Infrastructure Management feature cannot be enabled.
       x-description-i18n:
         jpn: |
-          シングルテナント機能の設定情報を更新します。
-          シングルテナント機能の有効化ができない場合はエラーを返します。
+          SaaSインフラ管理機能の設定情報を更新します。
+          SaaSインフラ管理機能の有効化ができない場合はエラーを返します。
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateSingleTenantSettingsParam'
       responses:
-        200:
+        '200':
           description: OK
-        400:
+        '400':
           description: Bad Request
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  
-  /errors/internal-server-error:
+  /tenants/{tenant_id}/stripe-customer:
     get:
       tags:
-        - "error"
-      operationId: ReturnInternalServerError
-      summary: Return Internal Server Error
+        - tenant
+      operationId: GetStripeCustomer
+      summary: Get Stripe Customer
       x-summary-i18n:
-        jpn: ステータスコード500でサーバーエラーを返却
+        jpn: Stripe顧客情報取得
       description: |
-        This endpoint is used for testing purposes. Returns a server error with status code 500.
+        Get the Stripe Customer information associated with the tenant, including their subscriptions.
       x-description-i18n:
         jpn: |
-          テスト用途で使用するエンドポイントです。ステータスコード500でサーバーエラーを返却します。
+          テナントに連携されているStripe顧客情報を取得します。
+          サブスクリプション情報も含まれます。
+      parameters:
+        - $ref: '#/components/parameters/TenantId'
       responses:
-        500:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: Stripe Customer
+                x-title-i18n:
+                  jpn: Stripe顧客情報
+                $ref: '#/components/schemas/StripeCustomer'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-
 components:
   securitySchemes:
     Bearer:
@@ -2725,7 +2844,7 @@ components:
         jpn: テナントID
       required: true
       schema:
-        $ref: "#/components/schemas/Uuid"
+        $ref: '#/components/schemas/Uuid'
     EnvId:
       in: path
       name: env_id
@@ -2734,7 +2853,7 @@ components:
         jpn: 環境ID
       required: true
       schema:
-        $ref: "#/components/schemas/Id"
+        $ref: '#/components/schemas/Id'
     ApiKey:
       in: path
       name: api_key
@@ -2797,7 +2916,7 @@ components:
       type: object
       properties:
         id:
-          $ref: "#/components/schemas/Uuid"
+          $ref: '#/components/schemas/Uuid'
           description: uuid
         email:
           type: string
@@ -2805,16 +2924,26 @@ components:
           x-description-i18n:
             jpn: メールアドレス
           example: hoge@example.com
+        user_attribute:
+          type: object
+          additionalProperties: true
+          example:
+            address: 東京都
+            employee_number: 100
+          description: user additional attributes
+          x-description-i18n:
+            jpn: ユーザー追加属性
         tenants:
           type: array
           items:
-            $ref: "#/components/schemas/UserAvailableTenant"
+            $ref: '#/components/schemas/UserAvailableTenant'
           description: Tenant Info
           x-description-i18n:
             jpn: テナント情報
       required:
         - id
         - email
+        - user_attribute
         - tenants
     BasicInfo:
       title: Basic Setting Info
@@ -2835,19 +2964,19 @@ components:
           x-description-i18n:
             jpn: DNSレコードの検証結果
         certificate_dns_record:
-          $ref: "#/components/schemas/DnsRecord"
+          $ref: '#/components/schemas/DnsRecord'
           description: Certificate Domain Name
           x-description-i18n:
             jpn: 代替ドメイン名
         cloud_front_dns_record:
-          $ref: "#/components/schemas/DnsRecord"
+          $ref: '#/components/schemas/DnsRecord'
           description: CloudFront DNS Records
           x-description-i18n:
             jpn: Cloud Front DNS レコード
         dkim_dns_records:
           type: array
           items:
-            $ref: "#/components/schemas/DnsRecord"
+            $ref: '#/components/schemas/DnsRecord'
           description: DKIM DNS Records
           x-description-i18n:
             jpn: DKIM DNS レコード
@@ -2936,7 +3065,7 @@ components:
       type: object
       properties:
         id:
-          $ref: "#/components/schemas/Uuid"
+          $ref: '#/components/schemas/Uuid'
           description: User ID
           x-description-i18n:
             jpn: ユーザーID
@@ -2946,9 +3075,22 @@ components:
           description: E-mail
           x-description-i18n:
             jpn: メールアドレス
+        attributes:
+          type: object
+          additionalProperties: true
+          example:
+            address: 東京都
+            birthday: 19940925
+            sex: 男
+          description: |
+            Attribute information
+          x-description-i18n:
+            jpn: |
+              属性情報
       required:
         - id
         - email
+        - attributes
     SaasUsers:
       title: SaaS Users
       x-title-i18n:
@@ -2958,7 +3100,7 @@ components:
         users:
           type: array
           items:
-            $ref: "#/components/schemas/SaasUser"
+            $ref: '#/components/schemas/SaasUser'
       required:
         - users
     CreateSaasUserParam:
@@ -2975,13 +3117,12 @@ components:
             jpn: メールアドレス
         password:
           type: string
-          example: "@Pass#Word1"
+          example: '@Pass#Word1'
           description: Password
           x-description-i18n:
             jpn: パスワード
       required:
         - email
-        - password
     User:
       title: User
       x-title-i18n:
@@ -2995,7 +3136,7 @@ components:
           x-description-i18n:
             jpn: ユーザーID
         tenant_id:
-          $ref: "#/components/schemas/Uuid"
+          $ref: '#/components/schemas/Uuid'
           description: Tenant ID
           x-description-i18n:
             jpn: テナントID
@@ -3014,7 +3155,10 @@ components:
         attributes:
           type: object
           additionalProperties: true
-          example: { address: "東京都", birthday: 19940925, sex: "男" }
+          example:
+            address: 東京都
+            birthday: 19940925
+            sex: 男
           description: |
             Attribute information (Get information set by defining user attributes in the SaaS development console)
           x-description-i18n:
@@ -3023,7 +3167,7 @@ components:
         envs:
           type: array
           items:
-            $ref: "#/components/schemas/UserEnv"
+            $ref: '#/components/schemas/UserEnv'
       required:
         - id
         - tenant_id
@@ -3040,7 +3184,7 @@ components:
         users:
           type: array
           items:
-            $ref: "#/components/schemas/User"
+            $ref: '#/components/schemas/User'
       required:
         - users
     UserEnv:
@@ -3050,7 +3194,7 @@ components:
       description: User env info, roles
       x-description-i18n:
         jpn: ユーザーの環境情報、役割(ロール)情報
-      $ref: "#/components/schemas/UserAvailableEnv"
+      $ref: '#/components/schemas/UserAvailableEnv'
     ApiKeys:
       title: API Key List
       x-title-i18n:
@@ -3098,7 +3242,7 @@ components:
       title: Update Authentication Information Parameter
       x-title-i18n:
         jpn: 認証情報の更新パラメータ
-      $ref: "#/components/schemas/AuthInfo"
+      $ref: '#/components/schemas/AuthInfo'
     CreateTenantUserParam:
       title: User Creation Parameters
       x-title-i18n:
@@ -3114,7 +3258,10 @@ components:
         attributes:
           type: object
           additionalProperties: true
-          example: { address: "東京都", birthday: 19940925, sex: "男" }
+          example:
+            address: 東京都
+            birthday: 19940925
+            sex: 男
           description: |
             Attribute information (Get information set by defining user attributes in the SaaS development console)
           x-description-i18n:
@@ -3132,7 +3279,10 @@ components:
         attributes:
           type: object
           additionalProperties: true
-          example: { address: "東京都", birthday: 19940925, sex: "男" }
+          example:
+            address: 東京都
+            birthday: 19940925
+            sex: 男
           description: |
             Attribute information (Get information set by defining user attributes in the SaaS development console)
           x-description-i18n:
@@ -3148,7 +3298,7 @@ components:
       properties:
         password:
           type: string
-          example: "@Pass#Word1"
+          example: '@Pass#Word1'
           description: Password
           x-description-i18n:
             jpn: パスワード
@@ -3199,7 +3349,7 @@ components:
           x-title-i18n:
             jpn: 検証コード
           type: string
-          example: "123456"
+          example: '123456'
         access_token:
           title: Access Token
           x-title-i18n:
@@ -3208,21 +3358,46 @@ components:
       required:
         - code
         - access_token
+    UpdateSaasUserAttributesParam:
+      title: Update SaaS User Attribute Parameters
+      x-title-i18n:
+        jpn: SaaSユーザー属性の更新パラメータ
+      type: object
+      properties:
+        attributes:
+          type: object
+          additionalProperties: true
+          example:
+            address: 東京都
+            birthday: 19940925
+            sex: 男
+          description: |
+            Attribute information
+          x-description-i18n:
+            jpn: |
+              属性情報
+      required:
+        - attributes
     CreateUserAttributeParam:
       title: Create User Attribute Parameter
       x-title-i18n:
         jpn: ユーザー属性の作成パラメータ
-      $ref: "#/components/schemas/Attribute"
+      $ref: '#/components/schemas/Attribute'
+    CreateSaasUserAttributeParam:
+      title: Create SaaS User Attribute Parameter
+      x-title-i18n:
+        jpn: SaaSユーザー属性の作成パラメータ
+      $ref: '#/components/schemas/Attribute'
     CreateTenantAttributeParam:
       title: Create Tenant Attribute Parameter
       x-title-i18n:
         jpn: テナント追加属性の作成パラメータ
-      $ref: "#/components/schemas/Attribute"
+      $ref: '#/components/schemas/Attribute'
     CreateRoleParam:
       title: Create Role Parameter
       x-title-i18n:
         jpn: 役割(ロール)の作成パラメータ
-      $ref: "#/components/schemas/Role"
+      $ref: '#/components/schemas/Role'
     CreateTenantUserRolesParam:
       title: Add Role to User Parameter
       x-title-i18n:
@@ -3262,7 +3437,7 @@ components:
           x-description-i18n:
             jpn: 表示名
         attribute_type:
-          $ref: "#/components/schemas/AttributeType"
+          $ref: '#/components/schemas/AttributeType'
       required:
         - attribute_name
         - display_name
@@ -3278,7 +3453,8 @@ components:
           description: User Attribute Definition
           x-description-i18n:
             jpn: ユーザー属性定義
-          items: { $ref: "#/components/schemas/Attribute" }
+          items:
+            $ref: '#/components/schemas/Attribute'
       required:
         - user_attributes
     TenantAttributes:
@@ -3292,7 +3468,8 @@ components:
           description: Tenant Attribute Definition
           x-description-i18n:
             jpn: テナント属性定義
-          items: { $ref: "#/components/schemas/Attribute" }
+          items:
+            $ref: '#/components/schemas/Attribute'
       required:
         - tenant_attributes
     AttributeType:
@@ -3312,12 +3489,12 @@ components:
       type: object
       properties:
         tenant_id:
-          $ref: "#/components/schemas/Uuid"
+          $ref: '#/components/schemas/Uuid'
           description: Tenant ID
           x-description-i18n:
             jpn: テナントID
         env_id:
-          $ref: "#/components/schemas/Id"
+          $ref: '#/components/schemas/Id'
           description: Environment ID
           x-description-i18n:
             jpn: 環境ID
@@ -3361,7 +3538,8 @@ components:
       properties:
         roles:
           type: array
-          items: {$ref: "#/components/schemas/Role"}
+          items:
+            $ref: '#/components/schemas/Role'
       required:
         - roles
     Tenant:
@@ -3370,47 +3548,47 @@ components:
         jpn: テナント情報
       type: object
       allOf:
-      - properties:
-          id:
-            $ref: "#/components/schemas/Uuid"
-            description: Tenant ID
-            x-description-i18n:
-              jpn: テナントID
-          plan_id:
-            $ref: "#/components/schemas/Uuid"
-            description: Plan ID
-            x-description-i18n:
-              jpn: 料金プランID
-          billing_info:
-            $ref: "#/components/schemas/BillingInfo"
-            description: billing info
-            x-description-i18n:
-              jpn: 請求先情報
-        required:
-          - id
-      - $ref: "#/components/schemas/TenantProps"
-      - $ref: "#/components/schemas/PlanReservation"
-      - $ref: "#/components/schemas/PlanHistories"
+        - properties:
+            id:
+              $ref: '#/components/schemas/Uuid'
+              description: Tenant ID
+              x-description-i18n:
+                jpn: テナントID
+            plan_id:
+              $ref: '#/components/schemas/Uuid'
+              description: Plan ID
+              x-description-i18n:
+                jpn: 料金プランID
+            billing_info:
+              $ref: '#/components/schemas/BillingInfo'
+              description: billing info
+              x-description-i18n:
+                jpn: 請求先情報
+          required:
+            - id
+        - $ref: '#/components/schemas/TenantProps'
+        - $ref: '#/components/schemas/PlanReservation'
+        - $ref: '#/components/schemas/PlanHistories'
     TenantDetail:
       title: Tenant Detail
       x-title-i18n:
         jpn: テナント詳細情報
       type: object
       allOf:
-      - properties:
-          current_plan_period_start:
-            type: integer
-            example: 1672531200
-            description: current plan period start
-            x-description-i18n:
-              jpn: 現在のプランの開始日時
-          current_plan_period_end:
-            type: integer
-            example: 1675209600
-            description: current plan period end
-            x-description-i18n:
-              jpn: 現在のプランの終了日時
-      - $ref: "#/components/schemas/Tenant"
+        - properties:
+            current_plan_period_start:
+              type: integer
+              example: 1672531200
+              description: current plan period start
+              x-description-i18n:
+                jpn: 現在のプランの開始日時
+            current_plan_period_end:
+              type: integer
+              example: 1675209600
+              description: current plan period end
+              x-description-i18n:
+                jpn: 現在のプランの終了日時
+        - $ref: '#/components/schemas/Tenant'
     TenantProps:
       type: object
       properties:
@@ -3423,7 +3601,9 @@ components:
         attributes:
           type: object
           additionalProperties: true
-          example: { address: "東京都", employee_number: 100 }
+          example:
+            address: 東京都
+            employee_number: 100
           description: attribute info
           x-description-i18n:
             jpn: 属性情報
@@ -3444,7 +3624,7 @@ components:
       type: object
       properties:
         next_plan_id:
-          $ref: "#/components/schemas/Uuid"
+          $ref: '#/components/schemas/Uuid'
           description: next billing plan ID
           x-description-i18n:
             jpn: 次回料金プランID
@@ -3457,7 +3637,7 @@ components:
             jpn: |
               次回料金プラン開始日時（stripe連携時、当月月初の0時（UTC）を指定すると当月月初開始のサブスクリプションを作成できます。ex. 2023年1月の場合は、1672531200 ）
         next_plan_tax_rate_id:
-          $ref: "#/components/schemas/Uuid"
+          $ref: '#/components/schemas/Uuid'
           description: Tax rate ID
           x-description-i18n:
             jpn: 税率ID
@@ -3497,8 +3677,8 @@ components:
       x-description-i18n:
         jpn: 請求書の言語
       enum:
-        - "ja-JP"
-        - "en-US"
+        - ja-JP
+        - en-US
     BillingAddress:
       title: Tenant Billing Address
       x-title-i18n:
@@ -3524,11 +3704,11 @@ components:
           example: 東京都
         country:
           type: string
-          pattern: '^[A-Z]{2}$'
+          pattern: ^[A-Z]{2}$
           description: Country of the address using ISO 3166-1 alpha-2 code.
           x-description-i18n:
             jpn: 住所の国を ISO 3166-1 alpha-2 コードで指定します。
-          example: "JP"
+          example: JP
         additional_address_info:
           type: string
           description: Additional information about the address, such as a building name, floor, or department name.
@@ -3540,7 +3720,7 @@ components:
           description: ZIP or postal code.
           x-description-i18n:
             jpn: 郵便番号
-          example: '123-4567'
+          example: 123-4567
       required:
         - street
         - city
@@ -3558,34 +3738,35 @@ components:
       properties:
         tenants:
           type: array
-          items: { $ref: "#/components/schemas/Tenant" }
+          items:
+            $ref: '#/components/schemas/Tenant'
       required:
         - tenants
     CreateTenantParam:
       title: Create Tenant Parameters
       x-title-i18n:
         jpn: テナントの新規作成パラメータ
-      $ref: "#/components/schemas/TenantProps"
+      $ref: '#/components/schemas/TenantProps'
     UpdateTenantParam:
       title: Update Tenant Parameters
       x-title-i18n:
         jpn: テナントの更新パラメータ
-      $ref: "#/components/schemas/TenantProps"
+      $ref: '#/components/schemas/TenantProps'
     UpdateTenantPlanParam:
       title: Update Tenant Plan Parameters
       x-title-i18n:
         jpn: テナントのプラン情報更新パラメータ
-      $ref: "#/components/schemas/PlanReservation"
+      $ref: '#/components/schemas/PlanReservation'
     UpdateTenantBillingInfoParam:
       title: Update Tenant Billing Info Parameters
       x-title-i18n:
         jpn: テナントの請求先情報更新パラメータ
-      $ref: "#/components/schemas/BillingInfo"
+      $ref: '#/components/schemas/BillingInfo'
     UserAvailableTenant:
       type: object
       properties:
         id:
-          $ref: "#/components/schemas/Uuid"
+          $ref: '#/components/schemas/Uuid'
           description: Tenant ID
           x-description-i18n:
             jpn: テナントID
@@ -3603,11 +3784,14 @@ components:
           description: environmental info, role info
           x-description-i18n:
             jpn: 環境情報、役割(ロール)情報
-          items: { $ref: "#/components/schemas/UserAvailableEnv" }
+          items:
+            $ref: '#/components/schemas/UserAvailableEnv'
         user_attribute:
           type: object
           additionalProperties: true
-          example: { address: "東京都", employee_number: 100 }
+          example:
+            address: 東京都
+            employee_number: 100
           description: user additional attributes
           x-description-i18n:
             jpn: ユーザー追加属性
@@ -3646,7 +3830,7 @@ components:
       type: object
       properties:
         id:
-          $ref: "#/components/schemas/Id"
+          $ref: '#/components/schemas/Id'
           description: env ID
           x-description-i18n:
             jpn: 環境ID
@@ -3667,7 +3851,8 @@ components:
           description: role info
           x-description-i18n:
             jpn: 役割(ロール)情報
-          items: { $ref: "#/components/schemas/Role" }
+          items:
+            $ref: '#/components/schemas/Role'
       required:
         - id
         - name
@@ -3683,7 +3868,8 @@ components:
         data:
           type: object
           additionalProperties: true
-          example: { sign_in_page_url: "auth.dev.saasus.io" }
+          example:
+            sign_in_page_url: auth.dev.saasus.io
       required:
         - type
         - message
@@ -3691,47 +3877,47 @@ components:
       type: object
       properties:
         sign_up:
-          $ref: "#/components/schemas/MessageTemplate"
+          $ref: '#/components/schemas/MessageTemplate'
           description: login email
           x-description-i18n:
             jpn: ログイン時メール
         create_user:
-          $ref: "#/components/schemas/MessageTemplate"
+          $ref: '#/components/schemas/MessageTemplate'
           description: send temporary password email to new users
           x-description-i18n:
             jpn: 新規ユーザーへの一時パスワード送信メール
         resend_code:
-          $ref: "#/components/schemas/MessageTemplate"
+          $ref: '#/components/schemas/MessageTemplate'
           description: confirmation code resend email for existing users
           x-description-i18n:
             jpn: 既存ユーザーへの確認コード再送メール
         forgot_password:
-          $ref: "#/components/schemas/MessageTemplate"
+          $ref: '#/components/schemas/MessageTemplate'
           description: confirmation code email for forgotten password request
           x-description-i18n:
             jpn: 忘れたパスワードのリクエスト用の確認コード送信メール
         update_user_attribute:
-          $ref: "#/components/schemas/MessageTemplate"
+          $ref: '#/components/schemas/MessageTemplate'
           description: confirmation code resend email for existing users
           x-description-i18n:
             jpn: 既存ユーザーへの確認コード再送メール
         verify_user_attribute:
-          $ref: "#/components/schemas/MessageTemplate"
+          $ref: '#/components/schemas/MessageTemplate'
           description: confirmation email
           x-description-i18n:
             jpn: 確認メール
         authentication_mfa:
-          $ref: "#/components/schemas/MessageTemplate"
+          $ref: '#/components/schemas/MessageTemplate'
           description: MFA code email for authentication
           x-description-i18n:
             jpn: 認証時の MFA コード送信メール
         invite_tenant_user:
-          $ref: "#/components/schemas/MessageTemplate"
+          $ref: '#/components/schemas/MessageTemplate'
           description: User invitation email to tenant
           x-description-i18n:
             jpn: テナントへのユーザー招待メール
         verify_external_user:
-          $ref: "#/components/schemas/MessageTemplate"
+          $ref: '#/components/schemas/MessageTemplate'
           description: External account user verification email
           x-description-i18n:
             jpn: 外部アカウントのユーザー検証メール
@@ -3767,56 +3953,55 @@ components:
       type: object
       properties:
         sign_up:
-          $ref: "#/components/schemas/MessageTemplate"
+          $ref: '#/components/schemas/MessageTemplate'
           description: Login email
           x-description-i18n:
             jpn: ログイン時メール
         create_user:
-          $ref: "#/components/schemas/MessageTemplate"
+          $ref: '#/components/schemas/MessageTemplate'
           description: Send temporary password email to new users
           x-description-i18n:
             jpn: 新規ユーザーへの一時パスワード送信メール
         resend_code:
-          $ref: "#/components/schemas/MessageTemplate"
+          $ref: '#/components/schemas/MessageTemplate'
           description: Confirmation code resend email for existing users
           x-description-i18n:
             jpn: 既存ユーザーへの確認コード再送メール
         forgot_password:
-          $ref: "#/components/schemas/MessageTemplate"
+          $ref: '#/components/schemas/MessageTemplate'
           description: Confirmation code email for forgotten password request
           x-description-i18n:
             jpn: 忘れたパスワードのリクエスト用の確認コード送信メール
         update_user_attribute:
-          $ref: "#/components/schemas/MessageTemplate"
+          $ref: '#/components/schemas/MessageTemplate'
           description: Confirmation code resend email for existing users
           x-description-i18n:
             jpn: 既存ユーザーへの確認コード再送メール
         verify_user_attribute:
-          $ref: "#/components/schemas/MessageTemplate"
+          $ref: '#/components/schemas/MessageTemplate'
           description: Confirmation email
           x-description-i18n:
             jpn: 確認メール
         authentication_mfa:
-          $ref: "#/components/schemas/MessageTemplate"
+          $ref: '#/components/schemas/MessageTemplate'
           description: MFA code email for authentication
           x-description-i18n:
             jpn: 認証時の MFA コード送信メール
         invite_tenant_user:
-          $ref: "#/components/schemas/MessageTemplate"
+          $ref: '#/components/schemas/MessageTemplate'
           description: User invitation email to tenant
           x-description-i18n:
             jpn: テナントへのユーザー招待メール
         verify_external_user:
-          $ref: "#/components/schemas/MessageTemplate"
+          $ref: '#/components/schemas/MessageTemplate'
           description: External account user verification email
           x-description-i18n:
             jpn: 外部アカウントのユーザー検証メール
-
     IdentityProviders:
       type: object
       properties:
         google:
-          $ref: "#/components/schemas/IdentityProviderProps"
+          $ref: '#/components/schemas/IdentityProviderProps'
       required:
         - google
     IdentityProviderProps:
@@ -3842,13 +4027,13 @@ components:
       type: object
       properties:
         provider:
-          $ref: "#/components/schemas/ProviderName"
+          $ref: '#/components/schemas/ProviderName'
         identity_provider_props:
           description: |
             If identity_provider_props is null, it deactivates the sign-in information for the external ID provider specified by provider.
           x-description-i18n:
             jpn: identity_provider_propsがnullの場合は、providerで指定された外部IDプロバイダのサインイン情報を無効化する。
-          $ref: "#/components/schemas/IdentityProviderProps"
+          $ref: '#/components/schemas/IdentityProviderProps'
       required:
         - provider
     ProviderName:
@@ -3870,13 +4055,13 @@ components:
         saml:
           type: object
           allOf:
-          - properties:
-              sign_in_url:
-                type: string
-                example: https://example.com/sign-in/saml/1234567890123456
-            required:
-              - sign_in_url
-          - $ref: "#/components/schemas/IdentityProviderSaml"
+            - properties:
+                sign_in_url:
+                  type: string
+                  example: https://example.com/sign-in/saml/1234567890123456
+              required:
+                - sign_in_url
+            - $ref: '#/components/schemas/IdentityProviderSaml'
     UpdateTenantIdentityProviderParam:
       title: Update Tenant Identity Providers Parameters
       x-title-i18n:
@@ -3889,9 +4074,9 @@ components:
           identity_provider_propsがnullの場合は、provider_typeで指定された外部IDプロバイダのサインイン情報を無効化します。
       properties:
         provider_type:
-          $ref: "#/components/schemas/ProviderType"
+          $ref: '#/components/schemas/ProviderType'
         identity_provider_props:
-          $ref: "#/components/schemas/TenantIdentityProviderProps"
+          $ref: '#/components/schemas/TenantIdentityProviderProps'
       required:
         - provider_type
     TenantIdentityProviderProps:
@@ -3900,7 +4085,7 @@ components:
         jpn: テナント毎の外部IDプロバイダ
       type: object
       oneOf:
-        - $ref: "#/components/schemas/IdentityProviderSaml"
+        - $ref: '#/components/schemas/IdentityProviderSaml'
     IdentityProviderSaml:
       title: SAML Identity Provider
       x-title-i18n:
@@ -3920,19 +4105,19 @@ components:
       type: object
       properties:
         password_policy:
-          $ref: "#/components/schemas/PasswordPolicy"
+          $ref: '#/components/schemas/PasswordPolicy'
         device_configuration:
-          $ref: "#/components/schemas/DeviceConfiguration"
+          $ref: '#/components/schemas/DeviceConfiguration'
         mfa_configuration:
-          $ref: "#/components/schemas/MfaConfiguration"
+          $ref: '#/components/schemas/MfaConfiguration'
         recaptcha_props:
-          $ref: "#/components/schemas/RecaptchaProps"
+          $ref: '#/components/schemas/RecaptchaProps'
         account_verification:
-          $ref: "#/components/schemas/AccountVerification"
+          $ref: '#/components/schemas/AccountVerification'
         self_regist:
-          $ref: "#/components/schemas/SelfRegist"
+          $ref: '#/components/schemas/SelfRegist'
         identity_provider_configuration:
-          $ref: "#/components/schemas/IdentityProviderConfiguration"
+          $ref: '#/components/schemas/IdentityProviderConfiguration'
       required:
         - password_policy
         - device_configuration
@@ -4003,7 +4188,7 @@ components:
           enum:
             - always
             - userOptIn
-            - "no"
+            - 'no'
           example: always
           description: |
             always: always remember
@@ -4064,17 +4249,17 @@ components:
       type: object
       properties:
         password_policy:
-          $ref: "#/components/schemas/PasswordPolicy"
+          $ref: '#/components/schemas/PasswordPolicy'
         device_configuration:
-          $ref: "#/components/schemas/DeviceConfiguration"
+          $ref: '#/components/schemas/DeviceConfiguration'
         mfa_configuration:
-          $ref: "#/components/schemas/MfaConfiguration"
+          $ref: '#/components/schemas/MfaConfiguration'
         recaptcha_props:
-          $ref: "#/components/schemas/RecaptchaProps"
+          $ref: '#/components/schemas/RecaptchaProps'
         account_verification:
-          $ref: "#/components/schemas/AccountVerification"
+          $ref: '#/components/schemas/AccountVerification'
         self_regist:
-          $ref: "#/components/schemas/SelfRegist"
+          $ref: '#/components/schemas/SelfRegist'
     MfaConfiguration:
       type: object
       description: |
@@ -4088,9 +4273,9 @@ components:
         mfa_configuration:
           type: string
           enum:
-            - "on"
+            - 'on'
             - optional
-          example: on
+          example: 'on'
           description: |
             on: apply when all users log in
             optional: apply to individual users with MFA factor enabled
@@ -4169,7 +4354,7 @@ components:
       title: Create Environment Parameters
       x-title-i18n:
         jpn: 環境の作成パラメータ
-      $ref: "#/components/schemas/Env"
+      $ref: '#/components/schemas/Env'
     UpdateEnvParam:
       title: Environment Update Parameters
       x-title-i18n:
@@ -4200,7 +4385,7 @@ components:
       type: object
       properties:
         id:
-          $ref: "#/components/schemas/Id"
+          $ref: '#/components/schemas/Id'
           description: env ID
           x-description-i18n:
             jpn: 環境ID
@@ -4230,24 +4415,25 @@ components:
       properties:
         envs:
           type: array
-          items: {$ref: "#/components/schemas/Env"}
+          items:
+            $ref: '#/components/schemas/Env'
       required:
         - envs
     CustomizePages:
       type: object
       properties:
         sign_up_page:
-          $ref: "#/components/schemas/CustomizePageProps"
+          $ref: '#/components/schemas/CustomizePageProps'
           description: new registration page
           x-description-i18n:
             jpn: 新規登録画面
         sign_in_page:
-          $ref: "#/components/schemas/CustomizePageProps"
+          $ref: '#/components/schemas/CustomizePageProps'
           description: login page
           x-description-i18n:
             jpn: ログイン画面
         password_reset_page:
-          $ref: "#/components/schemas/CustomizePageProps"
+          $ref: '#/components/schemas/CustomizePageProps'
           description: password reset page
           x-description-i18n:
             jpn: パスワードリセット画面
@@ -4288,17 +4474,17 @@ components:
       type: object
       properties:
         sign_up_page:
-          $ref: "#/components/schemas/CustomizePageProps"
+          $ref: '#/components/schemas/CustomizePageProps'
           description: new registration page
           x-description-i18n:
             jpn: 新規登録画面
         sign_in_page:
-          $ref: "#/components/schemas/CustomizePageProps"
+          $ref: '#/components/schemas/CustomizePageProps'
           description: login page
           x-description-i18n:
             jpn: ログイン画面
         password_reset_page:
-          $ref: "#/components/schemas/CustomizePageProps"
+          $ref: '#/components/schemas/CustomizePageProps'
           description: password reset page
           x-description-i18n:
             jpn: パスワードリセット画面
@@ -4348,50 +4534,50 @@ components:
     CustomizePageSettings:
       type: object
       allOf:
-      - properties:
-          icon:
-            type: string
-            example: http://icon.example.com
-            description: service icon
-            x-description-i18n:
-              jpn: サービスアイコン
-          favicon:
-            type: string
-            example: http://icon.example.com
-            description: favicon
-            x-description-i18n:
-              jpn: ファビコン
-        required:
-          - icon
-          - favicon
-      - $ref: "#/components/schemas/CustomizePageSettingsProps"
+        - properties:
+            icon:
+              type: string
+              example: http://icon.example.com
+              description: service icon
+              x-description-i18n:
+                jpn: サービスアイコン
+            favicon:
+              type: string
+              example: http://icon.example.com
+              description: favicon
+              x-description-i18n:
+                jpn: ファビコン
+          required:
+            - icon
+            - favicon
+        - $ref: '#/components/schemas/CustomizePageSettingsProps'
     UpdateCustomizePageSettingsParam:
       type: object
       allOf:
-      - properties:
-          icon:
-            type: string
-            format: base64
-            example: data:image/png;base64,ZDMiIHN0UmVmOmRvY3VtZW50SUQ9Inhtc==
-            description: service icon
-            x-description-i18n:
-              jpn: サービスアイコン
-          favicon:
-            type: string
-            format: base64
-            example: data:image/png;base64,ZDMiIHN0UmVmOmRvY3VtZW50SUQ9Inhtc==
-            description: favicon
-            x-description-i18n:
-              jpn: ファビコン
-        required:
-          - icon
-          - favicon
-      - $ref: "#/components/schemas/CustomizePageSettingsProps"
+        - properties:
+            icon:
+              type: string
+              format: base64
+              example: data:image/png;base64,ZDMiIHN0UmVmOmRvY3VtZW50SUQ9Inhtc==
+              description: service icon
+              x-description-i18n:
+                jpn: サービスアイコン
+            favicon:
+              type: string
+              format: base64
+              example: data:image/png;base64,ZDMiIHN0UmVmOmRvY3VtZW50SUQ9Inhtc==
+              description: favicon
+              x-description-i18n:
+                jpn: ファビコン
+          required:
+            - icon
+            - favicon
+        - $ref: '#/components/schemas/CustomizePageSettingsProps'
     PlanHistory:
       type: object
       properties:
         plan_id:
-          $ref: "#/components/schemas/Uuid"
+          $ref: '#/components/schemas/Uuid'
           description: Plan ID
           x-description-i18n:
             jpn: 料金プランID
@@ -4402,12 +4588,12 @@ components:
           x-description-i18n:
             jpn: 登録日時
         tax_rate_id:
-          $ref: "#/components/schemas/Uuid"
+          $ref: '#/components/schemas/Uuid'
           description: Tax rate ID
           x-description-i18n:
             jpn: 税率ID
         proration_behavior:
-          $ref: "#/components/schemas/ProrationBehavior"
+          $ref: '#/components/schemas/ProrationBehavior'
           description: Setting the behavior of the proportional allocation when the plan is changed.
           x-description-i18n:
             jpn: プラン変更時の比例配分の挙動設定
@@ -4424,7 +4610,8 @@ components:
       properties:
         plan_histories:
           type: array
-          items: {$ref: "#/components/schemas/PlanHistory"}
+          items:
+            $ref: '#/components/schemas/PlanHistory'
           description: Plan History
           x-description-i18n:
             jpn: 料金プラン履歴
@@ -4490,10 +4677,9 @@ components:
           description: Temp Code
           x-description-i18n:
             jpn: 一時コード
-          $ref: "#/components/schemas/Uuid"
+          $ref: '#/components/schemas/Uuid'
       required:
         - code
-
     CreateSecretCodeParam:
       title: Secret Code Creation Parameters for Authentication Application Registration
       x-title-i18n:
@@ -4728,7 +4914,7 @@ components:
           description: Invitation ID
           x-description-i18n:
             jpn: 招待ID
-          $ref: "#/components/schemas/Uuid"
+          $ref: '#/components/schemas/Uuid'
         email:
           title: Email Address
           x-title-i18n:
@@ -4749,7 +4935,8 @@ components:
           example: https://auth.dev.saasus.io/invite?id=69e732d6-8ecc-45c4-c2eb-8438f7ffe775
         envs:
           type: array
-          items: {$ref: "#/components/schemas/UserEnv"}
+          items:
+            $ref: '#/components/schemas/UserEnv'
         expired_at:
           title: Expiration Date
           x-title-i18n:
@@ -4766,7 +4953,7 @@ components:
           description: Invitation status
           x-description-i18n:
             jpn: 招待ステータス
-          $ref: "#/components/schemas/InvitationStatus"
+          $ref: '#/components/schemas/InvitationStatus'
       required:
         - id
         - email
@@ -4782,7 +4969,8 @@ components:
       properties:
         invitations:
           type: array
-          items: {$ref: "#/components/schemas/Invitation"}
+          items:
+            $ref: '#/components/schemas/Invitation'
           description: Invitation list
           x-description-i18n:
             jpn: 招待一覧
@@ -4826,7 +5014,7 @@ components:
                 description: Environment ID
                 x-description-i18n:
                   jpn: 環境ID
-                $ref: "#/components/schemas/Id"
+                $ref: '#/components/schemas/Id'
               role_names:
                 title: Role Name
                 x-title-i18n:
@@ -4905,7 +5093,7 @@ components:
       title: Proration Behavior When Changing Plans
       x-title-i18n:
         jpn: プラン変更時の比例配分の挙動
-      description:  |
+      description: |
         If you have a strine linkage, you can set the behavior of the proportional allocation when changing plans.
         When a plan is changed, you can set whether to prorate the billing amount and reflect it on the next invoice, to issue a prorated invoice immediately, or not to prorate at all.
       x-description-i18n:
@@ -4959,7 +5147,7 @@ components:
           x-title-i18n:
             jpn: 検証コード
           type: string
-          example: "123456"
+          example: '123456'
       required:
         - access_token
         - code
@@ -4974,22 +5162,22 @@ components:
           x-title-i18n:
             jpn: cloud formation launch dtack link
           type: string
-          example: "https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create?stackName=sample&templateURL=https://s3.us-west-2.amazonaws.com/cloudformation-templates-sample.template"
+          example: https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create?stackName=sample&templateURL=https://s3.us-west-2.amazonaws.com/cloudformation-templates-sample.template
       required:
         - link
     SingleTenantSettings:
-      title: Single Tenant settings
+      title: SaaS Infrastructure Management settings
       x-title-i18n:
-        jpn: シングルテナント設定
+        jpn: SaaSインフラ管理設定
       type: object
       properties:
         enabled:
-          title: Enable Single Tenant settings or Not
+          title: Enable SaaS Infrastructure Management settings or Not
           x-title-i18n:
-            jpn: シングルテナント設定を有効にするか否か
-          description: enable Single Tenant settings or not
+            jpn: SaaSインフラ管理設定を有効にするか否か
+          description: enable SaaS Infrastructure Management settings or not
           x-description-i18n:
-            jpn: シングルテナント設定を有効にするか否か
+            jpn: SaaSインフラ管理設定を有効にするか否か
           type: boolean
         role_arn:
           title: ARN of the role to be AssumeRole
@@ -5034,17 +5222,17 @@ components:
         - ddl_template_url
         - role_external_id
     UpdateSingleTenantSettingsParam:
-      title: Single Tenant settings update parameters
+      title: SaaS Infrastructure Management settings update parameters
       x-title-i18n:
-        jpn: シングルテナント設定更新パラメータ
+        jpn: SaaSインフラ管理設定更新パラメータ
       properties:
         enabled:
-          title: Enable Single Tenant settings or Not
+          title: Enable SaaS Infrastructure Management settings or Not
           x-title-i18n:
-            jpn: シングルテナント設定を有効にするか否か
-          description: enable Single Tenant settings or not
+            jpn: SaaSインフラ管理設定を有効にするか否か
+          description: enable SaaS Infrastructure Management settings or not
           x-description-i18n:
-            jpn: シングルテナント設定を有効にするか否か
+            jpn: SaaSインフラ管理設定を有効にするか否か
           type: boolean
         role_arn:
           title: ARN of the role to be AssumeRole
@@ -5084,3 +5272,30 @@ components:
             jpn: SaaSusがSaaSを操作するためにAssumeRoleする時に使用するexternal id
           type: string
           example: 1234567890
+    StripeCustomer:
+      title: Stripe Customer Information
+      x-title-i18n:
+        jpn: Stripeの顧客ID連携情報
+      type: object
+      properties:
+        customer_id:
+          title: Customer ID
+          x-title-i18n:
+            jpn: 顧客ID
+          description: stripe Customer ID
+          x-description-i18n:
+            jpn: stripeの顧客ID
+          type: string
+          example: cus_1234567890
+        subscription_schedule_id:
+          title: Subscription Schedule ID
+          x-title-i18n:
+            jpn: サブスクリプションスケジュールID
+          description: stripe Subscription Schedule ID
+          x-description-i18n:
+            jpn: stripeのサブスクリプションスケジュールID
+          type: string
+          example: cus_1234567890
+      required:
+        - customer_id
+        - subscription_schedule_id

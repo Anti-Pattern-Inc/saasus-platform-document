@@ -1,24 +1,20 @@
 openapi: 3.0.0
 info:
-  description: "SaaSus Billing API Schema"
-  version: "1.0.0"
-  title: "SaaSus Billing API Schema"
+  description: SaaSus Billing API Schema
+  version: 1.0.0
+  title: SaaSus Billing API Schema
   x-title-i18n:
-    jpn: "SaaSus Billing API スキーマ"
+    jpn: SaaSus Billing API スキーマ
   contact:
-    name: "Anti-Pattern"
+    name: Anti-Pattern
 servers:
-  - url: "https://api.saasus.io/v1/billing"
+  - url: https://api.saasus.io/v1/billing
     description: Production API Server
 tags:
-  - name: "stripe"
+  - name: stripe
     description: Stripe Resource Operations
     x-description-i18n:
       jpn: stripeリソースの操作
-  - name: "error"
-    description: Testing Purpose Error
-    x-description-i18n:
-      jpn: テスト用途のエラー
 security:
   - Bearer: []
 paths:
@@ -40,7 +36,7 @@ paths:
           現在は Stripe と連携が可能です。
           連携を行わない場合は、 SaaSus SDK/API を利用して請求処理を実装する必要があります。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -48,8 +44,8 @@ paths:
                 title: Stripe Connection Information
                 x-title-i18n:
                   jpn: Stripe連携情報
-                $ref: "#/components/schemas/StripeInfo"
-        500:
+                $ref: '#/components/schemas/StripeInfo'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -73,11 +69,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateStripeInfoParam"
+              $ref: '#/components/schemas/UpdateStripeInfoParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -96,41 +92,20 @@ paths:
         jpn: |
           請求業務で使う外部SaaSとの連携情報を削除します。
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /errors/internal-server-error:
-    get:
-      tags:
-        - "error"
-      operationId: ReturnInternalServerError
-      summary: Return Internal Server Error
-      x-summary-i18n:
-        jpn: ステータスコード500でサーバーエラーを返却
-      description: |
-        This endpoint is used for testing purposes. Returns a server error with status code 500.
-      x-description-i18n:
-        jpn: テスト用途で使用するエンドポイントです。ステータスコード500でサーバーエラーを返却します。
-      responses:
-        500:
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-
 components:
   securitySchemes:
     Bearer:
       type: http
       scheme: bearer
       description: Credentials or access token for API
-
   schemas:
     Error:
       properties:
