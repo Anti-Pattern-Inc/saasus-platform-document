@@ -1,5 +1,5 @@
 ---
-title: "SaaSインフラ管理"
+title: "SaaSインフラ管理機能"
 slug: "single-tenant-management"
 excerpt: ""
 hidden: false
