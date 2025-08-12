@@ -84,44 +84,38 @@ roles配列：
 
 #### ２．１．１．JWT取得API
 
-- [Go(echo)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L118")  
-  `e.GET("/credentials", getCredentials)`
-- [Python(FastAPI)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L85")  
-  `@app.get("/credentials")`
-- [Java(Maven)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L85")  
-  `@GetMapping(value = "/credentials", produces = "application/json")`
-- [C#(.NET 8)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs#L148")  
-  `app.MapGet("/credentials")`
-- [C#(.NET Framework 4.8)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs#L80")  
-  `[HttpGet, Route("credentials")]`
+以下のリンク先に、本APIの実装が含まれています。  
+関数名または定義を検索して、該当箇所をご確認ください。
+
+- **Go (Echo)**: [`getCredentials`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go)
+- **Python (FastAPI)**: [`get_credentials`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py)
+- **Java (Spring)**: [`getCredentials`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
+- **C# (.NET 8)**: [`app.MapGet("/credentials"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
+- **C# (.NET Framework 4.8)**: [`GetCredentials`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
 
 #### ２．１．２．ユーザ情報取得API
 
-- [Go(echo)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L180")  
-  `e.GET("/userinfo", getMe, authMiddleware)`
-- [Python(FastAPI)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L90")  
-  `@app.get("/userinfo")`
-- [Java(Maven)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L131")  
-  `@GetMapping(value = "/userinfo", produces = "application/json")`
-- [C#(.NET 8)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs#L195")  
-  `app.MapGet("/userinfo")`
-- [C#(.NET Framework 4.8)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs#L127")  
-  `[HttpGet, Route("userinfo")]`
+以下のリンク先に、本APIの実装が含まれています。  
+関数名または定義を検索して、該当箇所をご確認ください。
+
+- **Go (Echo)**: [`getMe`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go)
+- **Python (FastAPI)**: [`get_user_info`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py)
+- **Java (Spring)**: [`getMe`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
+- **C# (.NET 8)**: [`app.MapGet("/userinfo"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
+- **C# (.NET Framework 4.8)**: [`GetUserInfo`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
 
 #### 
 
 #### ２．１．３．セルフサインアップAPI
 
-- [Go(echo)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L618")  
-  `e.POST("/self_sign_up", selfSignup, authMiddleware)`
-- [Python(FastAPI)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L372")  
-  `@app.post("/self_sign_up")`
-- [Java(Maven)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L570")  
-  `@PostMapping(value = "/self_sign_up", produces = "application/json")`
-- [C#(.NET 8)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs#L632")  
-  `app.MapPost("/self_sign_up")`
-- [C#(.NET Framework 4.8)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs#L537")  
-  `[HttpPost, Route("self_sign_up")]`
+以下のリンク先に、本APIの実装が含まれています。  
+関数名または定義を検索して、該当箇所をご確認ください。
+
+- **Go (Echo)**: [`selfSignup`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go)
+- **Python (FastAPI)**: [`self_signup`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py)
+- **Java (Spring)**: [`selfSignUp`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
+- **C# (.NET 8)**: [`app.MapPost("/self_sign_up"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
+- **C# (.NET Framework 4.8)**: [`SelfSignUp`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
 
 APIリクエストがSaaSus Platformにログインしたユーザからのものであることを確認するため、  
 ユーザ情報取得を実施してログイン確認を必ず行ってください
@@ -135,16 +129,14 @@ c. ログインユーザをテナントの管理者に設定
 
 #### ２．１．４．ユーザ一覧取得API
 
-- [Go(echo)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L192")  
-  `e.GET("/users", getUsers, authMiddleware)`
-- [Python(FastAPI)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L95")  
-  `@app.get("/users")`
-- [Java(Maven)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L154")  
-  `@GetMapping(value = "/users", produces = "application/json")`
-- [C#(.NET 8)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs#L219")  
-  `app.MapGet("/users")`
-- [C#(.NET Framework 4.8)の実装サンプル](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs#L147")  
-  `[HttpGet, Route("users")]`
+以下のリンク先に、本APIの実装が含まれています。  
+関数名または定義を検索して、該当箇所をご確認ください。
+
+- **Go (Echo)**: [`getUsers`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go)
+- **Python (FastAPI)**: [`get_tenant_users`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py)
+- **Java (Spring)**: [`getUsers`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
+- **C# (.NET 8)**: [`app.MapGet("/users"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
+- **C# (.NET Framework 4.8)**: [`GetUsers`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
 
 #### 
 
@@ -155,7 +147,7 @@ APIリクエストがSaaSus Platformにログインしたユーザからのも�
 
 - [Go(echo)](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/README.md)
 - [Python(FastAPI)](https://github.com/saasus-platform/implementation-sample-api-python)
-- [Java(Maven)](https://github.com/saasus-platform/implementation-sample-api-java)
+- [Java(Spring)](https://github.com/saasus-platform/implementation-sample-api-java)
 - [C#(.NET 8)](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/README.md)
 - [C#(.NET Framework 4.8)](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/README.md)
 
