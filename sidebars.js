@@ -173,7 +173,7 @@ const sidebars = {
           },
           items: ["part-4/integrate-with-amazon-eventbridge/event-sample"],
         },
-        "part-4/single-tenant-management",
+        "part-4/saas-infra-management",
         {
           type: "category",
           label: "AWS Marketplace Integration",
