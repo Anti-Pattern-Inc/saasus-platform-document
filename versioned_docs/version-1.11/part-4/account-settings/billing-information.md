@@ -13,9 +13,9 @@ This page explains billing and payment methods for SaaSus Platform paid plans.
 
 SaaSus Platform offers flexible billing options to accommodate various business needs.
 
-- **Monthly billing cycles** - Starting from the subscription date
-- **Automatic renewal** - Continues unless cancelled
-- **Multiple payment methods** - Supports credit cards and AWS Marketplace
+- **Monthly billing cycles**: Starting from the subscription date
+- **Automatic renewal**: Continues unless cancelled
+- **Multiple payment methods**: Supports credit cards and AWS Marketplace
 
 ## Payment Methods
 
