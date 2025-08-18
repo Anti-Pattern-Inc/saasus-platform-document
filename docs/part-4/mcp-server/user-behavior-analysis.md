@@ -44,7 +44,8 @@ First Access Date = true
 Last Access Date = true
 
 [Output Conditions]
-; Minimum Access Count = 5
+; Analysis Period = From 2025/01 onwards to present
+; Analysis Period = 2025/01/01-2025/01/31
 
 [Field Descriptions]
 User ID: Actual user identifier (use real data retrieved from API)
@@ -81,7 +82,8 @@ First Access Date = true
 Last Access Date = true
 
 [Output Conditions]
-; Minimum Access Count = 10
+; Analysis Period = From 2025/01 onwards to present
+; Analysis Period = 2025/01/01-2025/01/31
 ; Minimum Unique User Count = 3
 
 [Field Descriptions]
@@ -111,9 +113,9 @@ Last Access Date: Last access date with the corresponding referrer (YYYY-MM-DD f
 ## Important Notes
 
 - Output data is the latest information at the time of execution
-- Log retention period is up to 1 month
-- Data older than 1 month is automatically deleted and cannot be retrieved
-- Analysis period is effectively limited to approximately the past 30 days
+- Log retention period varies by plan. Please see the [pricing plan page](https://saasus.io/pricing) for details
+- Data older than the retention period is automatically deleted and cannot be retrieved
+- Analysis period is limited to the retention period of your contracted plan
 - Actual user IDs are used to retrieve data
 - Handle analysis results with care and implement appropriate access control
 
@@ -130,4 +132,9 @@ Minimum Unique User Count = 3
 ```
 
 ### Changing Analysis Period
-If you want to change the analysis period, specify the period in the request statement. However, due to log retention period limitations, you can only specify up to approximately 30 days.
+If you want to change the analysis period, specify the period in the request statement. You can specify in the following formats:
+
+- `From 2025/01 onwards to present`: Period from the specified year/month onwards to present
+- `2025/01/01-2025/01/31`: Period from the specified start date to end date
+
+However, due to log retention period limitations, you can only specify up to the retention period of your contracted plan. Please see the [pricing plan page](https://saasus.io/pricing) for details.
