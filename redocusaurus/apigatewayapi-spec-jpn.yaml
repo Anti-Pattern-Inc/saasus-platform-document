@@ -57,6 +57,87 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /settings/open-api-definition:
+    put:
+      tags:
+        - smartApiGateway
+      operationId: UpdateOpenApiDefinition
+      summary: OpenAPI定義ファイルを更新
+      description: |
+        OpenAPI定義ファイルを更新します。OpenAPI定義ファイルは、自動生成されるドキュメントに使用されます。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOpenApiDefinitionParam'
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /draft/settings:
+    get:
+      tags:
+        - smartApiGateway
+      operationId: GetDraftApiGatewaySettings
+      summary: Smart API Gatewayのドラフト設定情報を取得
+      description: |
+        Smart API Gatewayのドラフト設定情報を取得します。
+        アップロードしたソースコードから生成された設定を、適用する前に確認することができます。
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DraftApiGatewaySettings'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /draft/settings/apply:
+    post:
+      tags:
+        - smartApiGateway
+      operationId: ApplyDraftApiGatewaySettings
+      summary: Smart API Gatewayのドラフト設定情報を適用
+      description: |
+        Smart API Gatewayのドラフト設定情報を適用します。
+        ドラフト設定で行った変更を実際のSmart API Gatewayに反映します。
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /draft/settings/cancel:
+    post:
+      tags:
+        - smartApiGateway
+      operationId: CancelDraftApiGatewaySettings
+      summary: Smart API Gatewayのドラフト設定情報をキャンセル
+      description: |
+        Smart API Gatewayのドラフト設定情報をキャンセルします。
+        ドラフト設定で行った変更を実際のSmart API Gatewayに反映せずにキャンセルします。
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /create:
     post:
       tags:
@@ -185,47 +266,29 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /tenants/{tenant_id}/allowed-ips:
-    patch:
+  /api-keys/{api_key}/client-secret:
+    post:
       tags:
         - smartApiGateway
-      operationId: UpdateAllowedIps
-      summary: テナントの許可IPアドレスを更新
+      operationId: RefreshClientSecret
+      summary: APIキーのクライアントシークレットを更新
       description: |
-        テナントの許可IPアドレスを更新します。
+        APIキーのクライアントシークレットを更新します。
       parameters:
-        - $ref: '#/components/parameters/TenantId'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateAllowedIpsParam'
-      responses:
-        '200':
-          description: OK
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-    get:
-      tags:
-        - smartApiGateway
-      operationId: GetAllowedIps
-      summary: テナントの許可IPアドレスを取得
-      description: |
-        テナントの許可IPアドレスを取得します。
-      parameters:
-        - $ref: '#/components/parameters/TenantId'
+        - in: path
+          name: api_key
+          description: APIキー
+          required: true
+          schema:
+            type: string
+            example: 1234567890abcdef
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AllowedIps'
+                $ref: '#/components/schemas/ApiKey'
         '500':
           description: Internal Server Error
           content:
@@ -385,36 +448,6 @@ components:
       schema:
         $ref: '#/components/schemas/Id'
   schemas:
-    UpdateAllowedIpsParam:
-      title: 許可IPアドレス更新パラメータ
-      type: object
-      properties:
-        allowed_ips:
-          title: 許可されたIPアドレス一覧
-          description: CIDR形式で指定された許可IPアドレス一覧
-          type: array
-          items:
-            type: string
-          example:
-            - 192.168.0.0/24
-            - 172.16.0.0/24
-      required:
-        - allowed_ips
-    AllowedIps:
-      title: 許可IPアドレス
-      type: object
-      properties:
-        allowed_ips:
-          title: 許可されたIPアドレス一覧
-          description: CIDR形式で指定された許可IPアドレス一覧
-          type: array
-          items:
-            type: string
-          example:
-            - 192.168.0.0/24
-            - 172.16.0.0/24
-      required:
-        - allowed_ips
     Error:
       properties:
         type:
@@ -445,12 +478,6 @@ components:
         internal_endpoint_openapi_definition_file_download_url:
           title: openapi定義ファイルのダウンロードURL
           description: 自動生成されたopenapi定義ファイルのダウンロードURL。API Gatewayを構築するために使用されます。
-          type: string
-          example: >-
-            https://presigned-url-test.s3.ap-northeast-1.amazonaws.com/test.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=xxxxxx%2F20230710%2Fap-northeast-1%2Fs3%2Faws4_request
-        internal_endpoint_mapping_file_download_url:
-          title: インターナルエンドポイントマッピングファイルのダウンロードURL
-          description: 自動生成されたインターナルエンドポイントマッピングファイルのダウンロードURL。API Gatewayを構築するために使用されます。
           type: string
           example: >-
             https://presigned-url-test.s3.ap-northeast-1.amazonaws.com/test.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=xxxxxx%2F20230710%2Fap-northeast-1%2Fs3%2Faws4_request
@@ -543,10 +570,19 @@ components:
             $ref: '#/components/schemas/EndpointSettings'
         tenant_routing_type:
           $ref: '#/components/schemas/TenantRoutingType'
+        docs_cloud_front_fqdn:
+          title: Smart API Gatewayドキュメント用のCloudFront FQDN
+          description: Smart API Gatewayドキュメント用のCloudFront FQDN
+          type: string
+          example: 0123456789abc.cloudfront.net
+        mcp_server_url:
+          title: MCPサーバーURL
+          description: Smart API Gateway用のMCP（Model Context Protocol）サーバーのURL
+          type: string
+          example: https://mcp.example.com
       required:
         - generated_file_status
         - internal_endpoint_openapi_definition_file_download_url
-        - internal_endpoint_mapping_file_download_url
         - status
         - role_arn
         - role_external_id
@@ -566,6 +602,26 @@ components:
         - rest_api_endpoint
         - endpoint_settings_list
         - tenant_routing_type
+        - docs_cloud_front_fqdn
+        - mcp_server_url
+    DraftApiGatewaySettings:
+      title: ドラフトAPI Gateway設定
+      type: object
+      properties:
+        internal_endpoint_openapi_definition_file_download_url:
+          title: openapi定義ファイルのダウンロードURL
+          description: 自動生成されたopenapi定義ファイルのダウンロードURL。API Gatewayを構築するために使用されます。
+          type: string
+          example: >-
+            https://presigned-url-test.s3.ap-northeast-1.amazonaws.com/test.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=xxxxxx%2F20230710%2Fap-northeast-1%2Fs3%2Faws4_request
+        endpoint_settings_list:
+          title: エンドポイント設定一覧
+          description: エンドポイント毎の設定一覧
+          type: array
+          items:
+            $ref: '#/components/schemas/EndpointSettings'
+      required:
+        - endpoint_settings_list
     TenantRoutingType:
       title: テナントルーティングタイプ
       description: テナントルーティングタイプ
@@ -660,7 +716,12 @@ components:
       properties:
         api_key:
           title: APIキー
-          description: 作成されたAPIキー
+          description: APIキー
+          type: string
+          example: 1234567890abcdef
+        client_secret:
+          title: クライアントシークレット
+          description: クライアントシークレット
           type: string
           example: 1234567890abcdef
         tenant_id:
@@ -674,6 +735,7 @@ components:
           description: ユーザーID
       required:
         - api_key
+        - client_secret
         - tenant_id
         - env_id
     ApiKeys:
@@ -687,10 +749,12 @@ components:
       example:
         api_keys:
           - api_key: ZDMiIHN0UmVmOmRvY3VtZW50SUQ9Inhtc
+            client_secret: ZDMiIHN0UmVmOmRvY3VtZW50SUQ9Inhtc
             tenant_id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
             env_id: '1'
             user_id: f94bfffc-8be2-11ec-b41a-0242ac120004
           - api_key: icFS9Hit7jZjeSKMbNZP2cmfqBseyxnJZ
+            client_secret: icFS9Hit7jZjeSKMbNZP2cmfqBseyxnJZ
             tenant_id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
             env_id: '1'
             user_id: f94bfffc-8be2-11ec-b41a-0242ac120004
@@ -734,6 +798,7 @@ components:
           description: CNAMEリソースレコード
           enum:
             - CNAME
+            - TXT
           example: CNAME
         name:
           type: string
@@ -772,8 +837,14 @@ components:
             - OPTIONS
             - TRACE
           example: GET
-        throttling:
-          $ref: '#/components/schemas/Throttling'
+        throttlings:
+          title: スロットリング設定一覧
+          description: |
+            targetごとのスロットリング設定
+            TODO: 今後の実装で複数設定できるようにする
+          type: array
+          items:
+            $ref: '#/components/schemas/Throttling'
         role_names:
           title: 役割(ロール)名
           description: エンドポイントにアクセスできる役割名
@@ -781,9 +852,16 @@ components:
           items:
             type: string
             example: admin
+        mapping_endpoint_id:
+          title: マッピングエンドポイントID
+          description: APIコール時に実行される関数を識別するためのID
+          type: string
+          example: implementsample.service.UserService/getById
       required:
         - path
         - method
+        - throttlings
+        - mapping_endpoint_id
     Throttling:
       title: スロットリング設定
       type: object
@@ -817,6 +895,15 @@ components:
       title: テナント更新パラメータ
       type: object
       properties:
+        allowed_ips:
+          title: 許可されたIPアドレス一覧
+          description: CIDR形式で指定された許可IPアドレス一覧
+          type: array
+          items:
+            type: string
+          example:
+            - 192.168.0.0/24
+            - 172.16.0.0/24
         routing:
           $ref: '#/components/schemas/TenantRouting'
     ApiGatewayTenant:
@@ -826,10 +913,20 @@ components:
         id:
           $ref: '#/components/schemas/Uuid'
           description: テナントID
+        allowed_ips:
+          title: 許可されたIPアドレス一覧
+          description: CIDR形式で指定された許可IPアドレス一覧
+          type: array
+          items:
+            type: string
+          example:
+            - 192.168.0.0/24
+            - 172.16.0.0/24
         routing:
           $ref: '#/components/schemas/TenantRouting'
       required:
         - id
+        - allowed_ips
         - routing
     TenantRouting:
       title: テナントルーティング
@@ -858,3 +955,15 @@ components:
           description: テナント毎のホスト名
           type: string
           example: tenantid.api.samplesaas.saasus.io
+    UpdateOpenApiDefinitionParam:
+      title: OpenAPI定義更新パラメータ
+      type: object
+      properties:
+        content:
+          title: OpenAPI定義ファイルのコンテンツ
+          description: OpenAPI定義ファイルのコンテンツ
+          type: string
+          format: base64
+          example: UEsDBBQACAAIAJr6oFQmTAuRfvOGAA==
+      required:
+        - content

@@ -1,22 +1,18 @@
 openapi: 3.0.0
 info:
-  description: "SaaSus Analysis API Schema"
-  version: "1.0.0"
-  title: "SaaSus Analysis API Schema"
+  description: SaaSus Analysis API Schema
+  version: 1.0.0
+  title: SaaSus Analysis API Schema
   contact:
-    name: "Anti-Pattern"
+    name: Anti-Pattern
 servers:
-  - url: "https://api.saasus.io/v1/analysis"
+  - url: https://api.saasus.io/v1/analysis
     description: Production API Server
 tags:
-  - name: "userAnalysis"
+  - name: userAnalysis
     description: User Behavior Analysis
     x-description-i18n:
       jpn: ユーザの行動分析
-  - name: "error"
-    description: Error for Testing Purposes
-    x-description-i18n:
-      jpn: テスト用途のエラー
 security:
   - Bearer: []
 paths:
@@ -37,11 +33,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateUserBehaviorHistoriesByDayParam"
+              $ref: '#/components/schemas/UpdateUserBehaviorHistoriesByDayParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -63,33 +59,13 @@ paths:
       parameters:
         - $ref: '#/components/parameters/UserId'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserBehaviorHistories"
-        500:
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /errors/internal-server-error:
-    get:
-      tags:
-        - "error"
-      operationId: ReturnInternalServerError
-      summary: Return Internal Server Error
-      x-summary-i18n:
-        jpn: ステータスコード500でサーバーエラーを返却
-      description: |
-        This endpoint is used for testing purposes. Returns a server error with status code 500.
-      x-description-i18n:
-        jpn: |
-          テスト用途で使用するエンドポイントです。ステータスコード500でサーバーエラーを返却します。
-      responses:
-        500:
+                $ref: '#/components/schemas/UserBehaviorHistories'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -113,7 +89,7 @@ components:
       schema:
         type: string
         example: f94bfffc-8be2-11ec-b41a-0242ac120004
-      required: true  
+      required: true
   schemas:
     Error:
       properties:
@@ -150,10 +126,11 @@ components:
           description: User ID
           x-description-i18n:
             jpn: ユーザーID
-          $ref: "#/components/schemas/Uuid"
+          $ref: '#/components/schemas/Uuid'
         histories:
           type: array
-          items: {$ref: "#/components/schemas/UserBehaviorHistory"}
+          items:
+            $ref: '#/components/schemas/UserBehaviorHistory'
           description: user behavior history list
           x-description-i18n:
             jpn: ユーザの行動履歴一覧
@@ -193,7 +170,8 @@ components:
       properties:
         histories:
           type: array
-          items: {$ref: "#/components/schemas/DailyBehaviorHistory"}
+          items:
+            $ref: '#/components/schemas/DailyBehaviorHistory'
           description: user behavior history list
           x-description-i18n:
             jpn: ユーザの行動履歴一覧
@@ -204,7 +182,7 @@ components:
       x-title-i18n:
         jpn: 日毎のユーザ行動履歴
       type: object
-      properties:        
+      properties:
         behaved_at:
           title: Action History Date
           x-title-i18n:
@@ -216,7 +194,8 @@ components:
           example: 1640995200
         histories:
           type: array
-          items: {$ref: "#/components/schemas/UserBehaviorHistory"}
+          items:
+            $ref: '#/components/schemas/UserBehaviorHistory'
           description: user behavior history list
           x-description-i18n:
             jpn: ユーザの行動履歴一覧

@@ -90,7 +90,7 @@
 - [Meter Unit Setting](part-4/pricing-and-billing/usage-metering): Define the meter unit that will be used as the measurement unit.
 - [Pricing Plans and Billing Configuration](part-4/pricing-plan-and-billing-configuration): 
 - [Overview of SaaS Development Console](part-4/saas-development-console-overview): 1. Role of the SaaS Development Console
-- [Single Tenant Management](part-4/single-tenant-management): Overview
+- [SaaS Infrastructure Management](part-4/single-tenant-management): Overview
 - [Setup Procedure](part-4/smart-api-gateway-features/manual): Smart API Gateway Usage Procedure
 - [Smart API Gateway Feature](part-4/smart-api-gateway-features/overview): Smart API Gateway Feature Overview
 - [Smart MCP Server Feature](part-4/smart-api-gateway-features/smart-mcp-server-overview): If you would like to view sample demo videos, feature demonstrations, tutorial support, information gathering for implementation consideration, or technical consultation regarding implementation, please contact us through the support request form below.
@@ -130,6 +130,7 @@
 - [SaaSus Platform FAQ](part-7/faq/saasus-platform): Q. What countermeasures are available when the service goes down?
 - [Support](part-7/support): Support Channels
 - [Risk Assessment](part-8/risk-assessment): Risk Assessment Information
+- [Analysis API](reference/analysis-api): 
 - [ApiGateway API](reference/apigateway-api): 
 - [Apilog API](reference/apilog-api): 
 - [Auth API](reference/auth-api): 
