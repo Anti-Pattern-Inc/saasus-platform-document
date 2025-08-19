@@ -1,6 +1,6 @@
 ---
 title: "SaaSインフラ管理機能"
-slug: "single-tenant-management"
+slug: "saas-infra-management"
 excerpt: ""
 hidden: false
 createdAt: "Thu May 08 2024 14:00:00 GMT+0000 (Coordinated Universal Time)"
@@ -20,7 +20,7 @@ SaaS のデプロイモデルとして、「サイロモデル」と「プール
 SaaSインフラ管理機能は、SaaSus Platform でサイロモデルの SaaS の構築をサポートするための機能です。
 
 :::warning
-「SaaSインフラ管理機能」は、旧スタータープランおよび旧スタンダードプランをご契約中の場合、ご利用いただけません。
+「SaaSインフラ管理機能」は、旧スタータープランおよび旧スタンダードプランをご契約中の場合、ご利用いただけません。  
 本機能をご利用いただくには、新しい料金プランへの変更が必要です。
 :::
 
@@ -38,11 +38,11 @@ SaaSインフラ管理機能では、SaaSus Platform にテナントを作成し
 
 画面の指示に従って IAM Role を作成し、生成したロールの情報を登録してください、
 
-![settings-role](/ja/img/part-4/single-tenant-management/settings-role.png)
+![settings-role](/ja/img/part-4/saas-infra-management/settings-role.png)
 
 ### Cloud Formation テンプレート
 
-<a download="singletenant-cf-sample.yml" href="/ja/file/singletenant-cf-sample.yml"> Cloud Formation テンプレートのサンプル </a>
+<a download="saas-infra-management-cf-sample.yml" href="/ja/file/saas-infra-management-cf-sample.yml"> Cloud Formation テンプレートのサンプル </a>
 
 SaaSus Platform にテナントを作成した時、お客様の AWS 環境に対して Cloud Formation を実行し、テナント毎に環境を作成します。その時に使用する Cloud Formation テンプレートを登録する必要があります。
 
@@ -62,7 +62,7 @@ Cloud Formation の Outputs として、以下の項目を指定する必要が�
 
 ### SQL ファイル
 
-<a download="singletenant-sample.sql" href="/ja/file/singletenant-sample.sql"> SQL ファイルのサンプル </a>
+<a download="saas-infra-management-sample.sql" href="/ja/file/saas-infra-management-sample.sql"> SQL ファイルのサンプル </a>
 
 Cloud Formation によって作成された DB に対して実行する SQL を登録します。DB のテーブル定義や初期データを保存するための SQL を登録してください。
 
