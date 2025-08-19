@@ -1060,6 +1060,138 @@ Essential for SaaS monetization—**rate‑plan definition** and **billing proce
 
 ---
 
+# Billing and Payment Methods
+
+URL: https://www.prisma.io/docs/part-4/account-settings/billing-information
+
+This page explains billing and payment methods for SaaSus Platform paid plans.
+
+## Billing Overview
+
+SaaSus Platform offers flexible billing options to accommodate various business needs.
+
+- **Monthly billing cycles**: Starting from the subscription date
+- **Automatic renewal**: Continues unless cancelled
+- **Multiple payment methods**: Supports credit cards and AWS Marketplace
+
+## Payment Methods
+
+### Credit Card Payment (via Stripe)
+
+When you subscribe to a paid plan through the SaaS Development Console, payments are processed securely through Stripe.
+
+- **Accepted cards**: Visa, Mastercard, American Express, JCB
+- **Automatic billing**: Monthly billing from registration date
+- **Invoice delivery**: Digital invoices sent via email
+- **Currency**: Japanese Yen (¥) - All prices exclude tax
+
+### AWS Marketplace Payment
+
+- **Consolidated billing**: Charges appear on your AWS bill
+- **AWS payment methods**: Use your existing AWS payment setup
+- **Private offers**: Enterprise plans can be set with custom pricing
+- **Currency**: Billing follows your AWS account currency settings
+
+## Invoice Management
+
+### Viewing Invoices
+
+1. **Stripe customers**: Access invoices through the billing portal in Account Settings
+2. **AWS Marketplace customers**: View charges in your AWS billing dashboard
+
+### Invoice Details
+
+Each invoice includes the following:
+- SaaSus Platform base fees
+- Usage-based charges (Smart API Gateway calls, uploads)
+- Monthly Active User (MAU) charges (Starter plan)
+- Tax calculations (where applicable)
+- Detailed usage breakdowns
+
+### Billing Process (Stripe)
+
+For paid plans subscribed through the SaaS Development Console, billing works as follows:
+
+Example) If you subscribe to the Starter plan on August 1, 2025:  
+Initial billing date: August 1, 2025  
+One hour after contract, an invoice for ¥5,500 will be issued.  
+Payment due date (invoice due date): August 30, 2025  
+The payment due date is 30 days after the billing date, and payment will be processed on the day you register your card information with Stripe.
+
+#### Billing for subsequent months
+
+For the credit card registered during the initial billing, charges will be made on the same date each month and automatic deduction will be executed.  
+Billing date: Same date of the following month as the initial billing date (e.g., August 1, 2025)  
+※ For months without the corresponding date (e.g., months without the 31st), the last day of that month becomes the billing date.
+
+#### Usage-based billing
+
+Regarding usage-based billing:
+For example, the August 1, 2025 bill includes the monthly fee of ¥5,500 for August 1, 2025 to September 1, 2025, and usage-based charges for July 1, 2025 to August 1, 2025.
+
+## Usage-Based Billing
+
+### Upload Charges
+
+- **Free uploads**: Limits vary by plan
+- **Overage rates**: ¥20-¥50 per upload beyond limits
+- **Usage monitoring**: Monitor uploads in the SaaS Operations Console (development, staging, production environments)
+- **Target services**: Smart API Gateway
+
+※ For details, please check the [pricing plan page](https://saasus.io/pricing).
+
+### API Call Count
+
+- **Free tier**: 10,000 calls per month included in all paid plans
+- **Overage rates**: Vary by plan (¥7-¥20 per 10,000 calls)
+- **Usage monitoring**: Monitor usage in the SaaS Operations Console (development, staging, production environments)
+- **Target services**: Smart API Gateway / Smart MCP Server
+
+※ For details, please check the [pricing plan page](https://saasus.io/pricing).
+
+### Monthly Active Users (MAU)
+
+For Starter plan:
+- **Base fee**: ¥5,500 per month
+- **MAU charge**: ¥800 per active user per month
+- **Definition**: Users who authenticate at least once during the billing period (production environment)
+- **Usage monitoring**: Monitor usage in the SaaS Operations Console (production environment)
+
+※ For details, please check the [pricing plan page](https://saasus.io/pricing).
+
+## Tax Information
+
+### Consumption Tax
+
+- **Rate**: 10% consumption tax applies to customers
+- **Invoice display**: Tax shown separately on invoices
+
+## Invoice Information
+
+### Billing Information
+
+- **Invoice downloads**: All invoices are available in PDF format.
+- **Retention period**: Billing data is retained for 7 years.
+
+## Support and Contact
+
+For billing-related inquiries, please contact our support team through the following methods:
+
+- **Starter**: Submit inquiries through the admin console
+- **Standard/Standard Plus/Advanced Plus/Enterprise**: Contact via Slack Connect or scheduled meetings
+
+### Required Information
+
+When contacting support about billing, please provide the following information:
+- Account ID or email address
+- Invoice number (if applicable)
+- Detailed description of the issue
+
+---
+
+**Note**: Billing terms and conditions are subject to change. Please refer to the latest Terms of Service for complete details.
+---
+
 # Procedure for Applying for a Paid Plan
 
 URL: https://www.prisma.io/docs/part-4/account-settings/procedure-for-applying-for-a-paid-plan
@@ -3847,7 +3979,7 @@ When you log in to the SaaS Development Console, a navigation menu appears on th
 
 # SaaS Infrastructure Management
 
-URL: https://www.prisma.io/docs/part-4/single-tenant-management
+URL: https://www.prisma.io/docs/part-4/saas-infra-management
 
 ## Overview
 
@@ -3876,11 +4008,11 @@ When onboarding a tenant, since the SaaSus Platform needs to access your AWS env
 
 Follow the instructions on the screen to create an IAM Role and register the details of the created role.
 
-![settings-role](/img/part-4/single-tenant-management/settings-role.png)
+![settings-role](/img/part-4/saas-infra-management/settings-role.png)
 
 ### Cloud Formation Template
 
-<a download="singletenant-cf-sample.yml" href="/file/singletenant-cf-sample.yml"> Cloud Formation Template Sample </a>
+<a download="saas-infra-management-cf-sample.yml" href="/file/saas-infra-management-cf-sample.yml"> Cloud Formation Template Sample </a>
 
 When you create a tenant on the SaaSus Platform, a Cloud Formation is executed in your AWS environment to create an environment for each tenant. You need to register the Cloud Formation template that will be used at this time.
 
@@ -3900,7 +4032,7 @@ The Cloud Formation's Outputs should specify the following items:
 
 ### SQL File
 
-<a download="singletenant-sample.sql" href="/file/singletenant-sample.sql"> SQL File Sample </a>
+<a download="saas-infra-management-sample.sql" href="/file/saas-infra-management-sample.sql"> SQL File Sample </a>
 
 You will need to register SQL file that will be executed against the DB created by the Cloud Formation. Register the SQL for the table definitions and initial data of the DB.
 
