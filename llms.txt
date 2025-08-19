@@ -35,6 +35,7 @@
 - [Getting Started with SaaSus Platform](part-3/getting-started): Getting Started
 - [Overview of Login Screen and Main Screen of SaaSus Platform](part-3/login-and-main-screen-overview): 1. Login Screen
 - [SaaSus Platform Architecture](part-3/saasus-platform-architecture): 1. Role and Components of the Control Plane
+- [Billing and Payment Methods](part-4/account-settings/billing-information): This page explains billing and payment methods for SaaSus Platform paid plans.
 - [Procedure for Applying for a Paid Plan](part-4/account-settings/procedure-for-applying-for-a-paid-plan): The SaaSus Platform currently offers the following plans.
 - [Inviting Users](part-4/account-settings/saasususerinvitation): If you are developing and operating SaaS with multiple people, it is advisable not to share a single SaaSus Platform account. Instead, use the user invitation feature to grant appropriate permissions and manage the account.
 - [API Key Settings](part-4/application-settings/api-key-settings): This page explains how to check and reissue the SaaS ID, API keys, and Client Secret, which are required when using the SaaSus SDK or API.
@@ -90,7 +91,7 @@
 - [Meter Unit Setting](part-4/pricing-and-billing/usage-metering): Define the meter unit that will be used as the measurement unit.
 - [Pricing Plans and Billing Configuration](part-4/pricing-plan-and-billing-configuration): 
 - [Overview of SaaS Development Console](part-4/saas-development-console-overview): 1. Role of the SaaS Development Console
-- [SaaS Infrastructure Management](part-4/single-tenant-management): Overview
+- [SaaS Infrastructure Management](part-4/saas-infra-management): Overview
 - [Setup Procedure](part-4/smart-api-gateway-features/manual): Smart API Gateway Usage Procedure
 - [Smart API Gateway Feature](part-4/smart-api-gateway-features/overview): Smart API Gateway Feature Overview
 - [Smart MCP Server Feature](part-4/smart-api-gateway-features/smart-mcp-server-overview): If you would like to view sample demo videos, feature demonstrations, tutorial support, information gathering for implementation consideration, or technical consultation regarding implementation, please contact us through the support request form below.
