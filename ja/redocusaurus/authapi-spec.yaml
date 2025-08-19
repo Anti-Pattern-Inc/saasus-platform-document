@@ -60,9 +60,9 @@ tags:
     x-description-i18n:
       jpn: 招待
   - name: singleTenant
-    description: Single Tenant Management
+    description: SaaS Infrastructure Management
     x-description-i18n:
-      jpn: シングルテナント管理
+      jpn: SaaSインフラ管理
 security:
   - Bearer: []
 paths:
@@ -2780,14 +2780,15 @@ paths:
       tags:
         - singleTenant
       operationId: GetCloudFormationLaunchStackLinkForSingleTenant
-      summary: Get CloudFormation Stack Launch Link For Single Tenant
+      summary: Get CloudFormation Stack Launch Link For SaaS Infrastructure Management
       x-summary-i18n:
-        jpn: SingleTenant用CloudFormationスタック起動リンク取得
-      description: |
-        Get the CloudFormation stack activation link for Single Tenant.
+        jpn: SaaSインフラ管理用CloudFormationスタック起動リンク取得
+      description: >
+        Get the CloudFormation stack activation link for SaaS Infrastructure
+        Management.
       x-description-i18n:
         jpn: |
-          SingleTenant用CloudFormationスタック起動リンクを取得します。
+          SaaSインフラ管理用CloudFormationスタック起動リンクを取得します。
       responses:
         '200':
           description: OK
@@ -2806,9 +2807,9 @@ paths:
       tags:
         - singleTenant
       operationId: GetSingleTenantSettings
-      summary: Retrieve the settings of the single tenant.
+      summary: Retrieve the settings of the SaaS Infrastructure Management.
       x-summary-i18n:
-        jpn: シングルテナント機能の設定情報を取得する
+        jpn: SaaSインフラ管理機能の設定情報を取得する
       responses:
         '200':
           description: OK
@@ -2826,16 +2827,18 @@ paths:
       tags:
         - singleTenant
       operationId: UpdateSingleTenantSettings
-      summary: Update configuration information for single-tenant functionality
+      summary: Update configuration information for SaaS Infrastructure Management
       x-summary-i18n:
-        jpn: シングルテナント機能の設定情報を更新する
-      description: |
-        Updates configuration information for single-tenant functionality
-        Returns error if single tenant feature cannot be enabled.
+        jpn: SaaSインフラ管理機能の設定情報を更新する
+      description: >
+        Updates configuration information for SaaS Infrastructure Management
+
+        Returns error if SaaS Infrastructure Management feature cannot be
+        enabled.
       x-description-i18n:
         jpn: |
-          シングルテナント機能の設定情報を更新します。
-          シングルテナント機能の有効化ができない場合はエラーを返します。
+          SaaSインフラ管理機能の設定情報を更新します。
+          SaaSインフラ管理機能の有効化ができない場合はエラーを返します。
       requestBody:
         content:
           application/json:
@@ -5297,18 +5300,18 @@ components:
       required:
         - link
     SingleTenantSettings:
-      title: Single Tenant settings
+      title: SaaS Infrastructure Management settings
       x-title-i18n:
-        jpn: シングルテナント設定
+        jpn: SaaSインフラ管理設定
       type: object
       properties:
         enabled:
-          title: Enable Single Tenant settings or Not
+          title: Enable SaaS Infrastructure Management settings or Not
           x-title-i18n:
-            jpn: シングルテナント設定を有効にするか否か
-          description: enable Single Tenant settings or not
+            jpn: SaaSインフラ管理設定を有効にするか否か
+          description: enable SaaS Infrastructure Management settings or not
           x-description-i18n:
-            jpn: シングルテナント設定を有効にするか否か
+            jpn: SaaSインフラ管理設定を有効にするか否か
           type: boolean
         role_arn:
           title: ARN of the role to be AssumeRole
@@ -5361,17 +5364,17 @@ components:
         - ddl_template_url
         - role_external_id
     UpdateSingleTenantSettingsParam:
-      title: Single Tenant settings update parameters
+      title: SaaS Infrastructure Management settings update parameters
       x-title-i18n:
-        jpn: シングルテナント設定更新パラメータ
+        jpn: SaaSインフラ管理設定更新パラメータ
       properties:
         enabled:
-          title: Enable Single Tenant settings or Not
+          title: Enable SaaS Infrastructure Management settings or Not
           x-title-i18n:
-            jpn: シングルテナント設定を有効にするか否か
-          description: enable Single Tenant settings or not
+            jpn: SaaSインフラ管理設定を有効にするか否か
+          description: enable SaaS Infrastructure Management settings or not
           x-description-i18n:
-            jpn: シングルテナント設定を有効にするか否か
+            jpn: SaaSインフラ管理設定を有効にするか否か
           type: boolean
         role_arn:
           title: ARN of the role to be AssumeRole

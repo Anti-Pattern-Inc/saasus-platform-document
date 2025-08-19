@@ -1,0 +1,156 @@
+openapi: 3.0.0
+info:
+  description: SaaSus Analysis API Schema
+  version: 1.0.0
+  title: SaaSus Analysis API Schema
+  contact:
+    name: Anti-Pattern
+servers:
+  - url: https://api.saasus.io/v1/analysis
+    description: Production API Server
+tags:
+  - name: userAnalysis
+    description: ユーザの行動分析
+security:
+  - Bearer: []
+paths:
+  /user-behavior-day:
+    put:
+      tags:
+        - userAnalysis
+      operationId: UpdateUserBehaviorHistoriesByDay
+      summary: 当日のユーザ行動履歴を更新
+      description: |
+        当日のユーザ行動履歴を更新します。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserBehaviorHistoriesByDayParam'
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users/{user_id}/behavior-histories:
+    get:
+      tags:
+        - userAnalysis
+      operationId: GetUserBehaviorHistories
+      summary: 過去1ヶ月のユーザ行動履歴を取得します
+      description: |
+        過去1ヶ月のユーザ行動履歴を取得します
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserBehaviorHistories'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      description: APIへのアクセス情報または認証情報
+  parameters:
+    UserId:
+      in: path
+      name: user_id
+      description: ユーザーID
+      schema:
+        type: string
+        example: f94bfffc-8be2-11ec-b41a-0242ac120004
+      required: true
+  schemas:
+    Error:
+      properties:
+        type:
+          type: string
+          example: permission_denied
+        message:
+          type: string
+          example: エラーメッセージ
+      required:
+        - type
+        - message
+    Uuid:
+      type: string
+      example: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+    UpdateUserBehaviorHistoriesByDayParam:
+      type: object
+      properties:
+        timestamp:
+          title: 更新対象日
+          description: 更新対象日
+          type: integer
+          example: 1640995200
+        user_id:
+          title: ユーザーID
+          description: ユーザーID
+          $ref: '#/components/schemas/Uuid'
+        histories:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserBehaviorHistory'
+          description: ユーザの行動履歴一覧
+      required:
+        - timestamp
+        - user_id
+        - histories
+    UserBehaviorHistory:
+      type: object
+      properties:
+        timestamp:
+          title: 行動履歴のタイムスタンプ
+          description: 行動履歴のタイムスタンプ
+          type: integer
+          example: 1640995200
+        referer:
+          title: リファラー
+          description: リクエスト元のURL
+          type: string
+          example: https://examaple.com/examaple
+      required:
+        - timestamp
+        - referer
+    UserBehaviorHistories:
+      title: ユーザ行動履歴
+      type: object
+      properties:
+        histories:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyBehaviorHistory'
+          description: ユーザの行動履歴一覧
+      required:
+        - histories
+    DailyBehaviorHistory:
+      title: 日毎のユーザ行動履歴
+      type: object
+      properties:
+        behaved_at:
+          title: 行動履歴日
+          description: 行動履歴日
+          type: integer
+          example: 1640995200
+        histories:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserBehaviorHistory'
+          description: ユーザの行動履歴一覧
+      required:
+        - behaved_at
+        - histories
