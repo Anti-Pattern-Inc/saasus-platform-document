@@ -262,7 +262,17 @@ const sidebars = {
             slug: "/part-4/account-settings",
           },
           items: [
-            "part-4/account-settings/procedure-for-applying-for-a-paid-plan",
+            {
+              type: "category",
+              label: "Procedure for Applying for a Paid Plan",
+              link: {
+                type: "doc",
+                id: "part-4/account-settings/procedure-for-applying-for-a-paid-plan",
+              },
+              items: [
+                "part-4/account-settings/billing-information",
+              ],
+            },
             "part-4/account-settings/saasususerinvitation",
           ],
         },
