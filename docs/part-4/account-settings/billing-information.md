@@ -55,18 +55,20 @@ Each invoice includes the following:
 
 For paid plans subscribed through the SaaS Development Console, billing works as follows:
 
-Example) If you subscribe to the Starter plan on August 1, 2025:
-Initial billing date: August 1, 2025
-One hour after contract, an invoice for ¥5,500 will be issued.
-Payment due date (invoice due date): August 30, 2025
+Example) If you subscribe to the Starter plan on August 1, 2025:  
+Initial billing date: August 1, 2025  
+One hour after contract, an invoice for ¥5,500 will be issued.  
+Payment due date (invoice due date): August 30, 2025  
 The payment due date is 30 days after the billing date, and payment will be processed on the day you register your card information with Stripe.
 
 #### Billing for subsequent months
-For the credit card registered during the initial billing, charges will be made on the same date each month and automatic deduction will be executed.
-Billing date: Same date of the following month as the initial billing date (e.g., August 1, 2025)
+
+For the credit card registered during the initial billing, charges will be made on the same date each month and automatic deduction will be executed.  
+Billing date: Same date of the following month as the initial billing date (e.g., August 1, 2025)  
 ※ For months without the corresponding date (e.g., months without the 31st), the last day of that month becomes the billing date.
 
 #### Usage-based billing
+
 Regarding usage-based billing:
 For example, the August 1, 2025 bill includes the monthly fee of ¥5,500 for August 1, 2025 to September 1, 2025, and usage-based charges for July 1, 2025 to August 1, 2025.
 
@@ -77,6 +79,8 @@ For example, the August 1, 2025 bill includes the monthly fee of ¥5,500 for Aug
 - **Free uploads**: Limits vary by plan
 - **Overage rates**: ¥20-¥50 per upload beyond limits
 - **Usage monitoring**: Monitor uploads in the SaaS Operations Console (development, staging, production environments)
+- **Target services**: Smart API Gateway
+
 ※ For details, please check the [pricing plan page](https://saasus.io/pricing).
 
 ### API Call Count
@@ -85,6 +89,7 @@ For example, the August 1, 2025 bill includes the monthly fee of ¥5,500 for Aug
 - **Overage rates**: Vary by plan (¥7-¥20 per 10,000 calls)
 - **Usage monitoring**: Monitor usage in the SaaS Operations Console (development, staging, production environments)
 - **Target services**: Smart API Gateway / Smart MCP Server
+
 ※ For details, please check the [pricing plan page](https://saasus.io/pricing).
 
 ### Monthly Active Users (MAU)
@@ -94,6 +99,7 @@ For Starter plan:
 - **MAU charge**: ¥800 per active user per month
 - **Definition**: Users who authenticate at least once during the billing period (production environment)
 - **Usage monitoring**: Monitor usage in the SaaS Operations Console (production environment)
+
 ※ For details, please check the [pricing plan page](https://saasus.io/pricing).
 
 ## Tax Information
