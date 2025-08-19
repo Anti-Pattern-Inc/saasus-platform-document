@@ -28,5 +28,20 @@ APIs pertaining to obtaining, updating, and deleting information related to exte
 [SaaSus Pricing API Schema](/docs/reference/pricing-api)  
 APIs related to pricing units, feature menus, pricing plans, metering unit count, etc.
 
+[SaaSus Communication API Schema](/docs/reference/communication-api)  
+APIs for submitting and retrieving user feedback.
+
+[SaaSus Apilog API Schema](/docs/reference/apilog-api)  
+APIs for retrieving and analyzing API execution logs.
+
+[SaaSus Awsmarketplace API Schema](/docs/reference/awsmarketplace-api)  
+APIs related to AWS Marketplace integration, customer information management, and plan information management.
+
 [SaaSus Integration API Schema](/docs/reference/integration)  
 APIs related to Amazon EventBridge integration.
+
+[SaaSus ApiGateway API Schema](/docs/reference/apigateway-api)  
+APIs for configuring, managing, and publishing API Gateway features.
+
+[SaaSus Analysis API Schema](/docs/reference/analysis-api)  
+APIs for analyzing user behavior history and data collection.
