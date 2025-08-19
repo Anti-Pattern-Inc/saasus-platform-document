@@ -290,6 +290,11 @@ const config = {
             from: '/docs/saasus-platform-document/',
             to: '/docs/part-1/purpose-and-overview',
           },
+          // SaaS Infra Management
+          {
+            to: '/docs/part-4/saas-infra-management',
+            from: ['/docs/part-4/single-tenant-management'],
+          },
           // AWS Marketplace Integration
           {
             to: '/docs/part-4/aws-marketplace-integration/aws-marketplace-integration',
