@@ -418,7 +418,8 @@
         "reference/apilog-api",
         "reference/awsmarketplace-api",
         "reference/integration",
-        "reference/apigateway-api"
+        "reference/apigateway-api",
+        "reference/analysis-api"
       ]
     }
   ],

@@ -1,39 +1,34 @@
 openapi: 3.0.0
 info:
-  description: "SaaSus Pricing API Schema"
-  version: "1.0.0"
-  title: "SaaSus Pricing API Schema"
+  description: SaaSus Pricing API Schema
+  version: 1.0.0
+  title: SaaSus Pricing API Schema
   contact:
-    name: "Anti-Pattern"
+    name: Anti-Pattern
 servers:
-  - url: "https://api.saasus.io/v1/pricing"
+  - url: https://api.saasus.io/v1/pricing
     description: Production API Server
 tags:
-  - name: "pricingUnits"
+  - name: pricingUnits
     description: Pricing Units
     x-description-i18n:
       jpn: プライシングユニット
-  - name: "pricingMenus"
+  - name: pricingMenus
     description: Pricing Menus
     x-description-i18n:
       jpn: プライシング機能メニュー
-  - name: "pricingPlans"
+  - name: pricingPlans
     description: Pricing Plans
     x-description-i18n:
       jpn: 料金プラン
-  - name: "metering"
+  - name: metering
     description: Metering
     x-description-i18n:
       jpn: 計測
-  - name: "taxRate"
+  - name: taxRate
     description: Tax Rate
     x-description-i18n:
       jpn: 税率
-  - name: "error"
-    description: Testing Purpose Error
-    x-description-i18n:
-      jpn: テスト用途のエラー
-
 security:
   - Bearer: []
 paths:
@@ -59,7 +54,7 @@ paths:
           「段階ユニット」(type=tiered)は携帯電話の段階的パケット料金のように利用量の段階ごとに一定の料金の単位、
           「段階的使用量ユニット」(type=tiered_usage)はボリュームディスカウントのように利用量に応じて１単位あたりの料金が変化していく単位、となります。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -67,13 +62,13 @@ paths:
                 title: Pricing Units
                 x-title-i18n:
                   jpn: プライシングユニット一覧
-                $ref: "#/components/schemas/PricingUnits"
-        500:
+                $ref: '#/components/schemas/PricingUnits'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
     post:
       tags:
         - pricingUnits
@@ -90,9 +85,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreatePricingUnitParam"
+              $ref: '#/components/schemas/CreatePricingUnitParam'
       responses:
-        201:
+        '201':
           description: Created
           content:
             application/json:
@@ -100,13 +95,13 @@ paths:
                 title: Created Pricing Unit
                 x-title-i18n:
                   jpn: 作成されたプライシングユニット
-                $ref: "#/components/schemas/PricingUnit"
-        500:
+                $ref: '#/components/schemas/PricingUnit'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /units/{pricing_unit_id}:
     get:
       tags:
@@ -121,9 +116,9 @@ paths:
         jpn: |
           プライシングユニットを取得します。
       parameters:
-        - $ref: "#/components/parameters/PricingUnitId"
+        - $ref: '#/components/parameters/PricingUnitId'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -131,13 +126,13 @@ paths:
                 title: Pricing Unit
                 x-title-i18n:
                   jpn: プライシングユニット
-                $ref: "#/components/schemas/PricingUnit"
-        500:
+                $ref: '#/components/schemas/PricingUnit'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
     delete:
       tags:
         - pricingUnits
@@ -151,16 +146,16 @@ paths:
         jpn: |
           プライシングユニットを削除します。
       parameters:
-        - $ref: "#/components/parameters/PricingUnitId"
+        - $ref: '#/components/parameters/PricingUnitId'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
     patch:
       tags:
         - pricingUnits
@@ -174,22 +169,21 @@ paths:
         jpn: |
           プライシングユニット情報を更新します。
       parameters:
-        - $ref: "#/components/parameters/PricingUnitId"
+        - $ref: '#/components/parameters/PricingUnitId'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdatePricingUnitParam"
+              $ref: '#/components/schemas/UpdatePricingUnitParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-
+                $ref: '#/components/schemas/Error'
   /menus:
     get:
       tags:
@@ -204,7 +198,7 @@ paths:
         jpn: |
           機能メニュー一覧を取得します。計測単位を複数まとめて、１つの機能メニューとして定義します。ここで定義した機能メニューを複数合わせ１つの料金プランとします。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -212,13 +206,13 @@ paths:
                 title: Pricing Feature Menus
                 x-title-i18n:
                   jpn: プライシング機能メニュー一覧
-                $ref: "#/components/schemas/PricingMenus"
-        500:
+                $ref: '#/components/schemas/PricingMenus'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
     post:
       tags:
         - pricingMenus
@@ -235,9 +229,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreatePricingMenuParam"
+              $ref: '#/components/schemas/CreatePricingMenuParam'
       responses:
-        201:
+        '201':
           description: Created
           content:
             application/json:
@@ -245,14 +239,13 @@ paths:
                 title: Created Pricing Feature Menu
                 x-title-i18n:
                   jpn: 作成されたプライシング機能メニュー
-                $ref: "#/components/schemas/PricingMenu"
-        500:
+                $ref: '#/components/schemas/PricingMenu'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-
+                $ref: '#/components/schemas/Error'
   /menus/{menu_id}:
     get:
       tags:
@@ -267,9 +260,9 @@ paths:
         jpn: |
           プライシング機能メニューを取得します。
       parameters:
-        - $ref: "#/components/parameters/MenuId"
+        - $ref: '#/components/parameters/MenuId'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -277,13 +270,13 @@ paths:
                 title: Pricing Feature Menu
                 x-title-i18n:
                   jpn: プライシング機能メニュー
-                $ref: "#/components/schemas/PricingMenu"
-        500:
+                $ref: '#/components/schemas/PricingMenu'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
     delete:
       tags:
         - pricingMenus
@@ -297,22 +290,22 @@ paths:
         jpn: |
           プライシング機能メニューを削除します。
       parameters:
-        - $ref: "#/components/parameters/MenuId"
+        - $ref: '#/components/parameters/MenuId'
       responses:
-        200:
+        '200':
           description: OK
-        404:
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        500:
+                $ref: '#/components/schemas/Error'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
     patch:
       tags:
         - pricingMenus
@@ -326,21 +319,21 @@ paths:
         jpn: |
           プライシング機能メニューを更新します。
       parameters:
-        - $ref: "#/components/parameters/MenuId"
+        - $ref: '#/components/parameters/MenuId'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdatePricingMenuParam"
+              $ref: '#/components/schemas/UpdatePricingMenuParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /plans:
     get:
       tags:
@@ -355,7 +348,7 @@ paths:
         jpn: |
           料金プラン一覧を取得します。機能メニューを複数まとめて、１つの料金プランとして定義します。ここで定義した料金プランを各テナントは選ぶことができます。もし特定テナント特有の料金（プライベートプライシング）がある場合は、そのテナント専用の料金プランを作成して結びつけます。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -363,13 +356,13 @@ paths:
                 title: Pricing Plans
                 x-title-i18n:
                   jpn: 料金プランの一覧
-                $ref: "#/components/schemas/PricingPlans"
-        500:
+                $ref: '#/components/schemas/PricingPlans'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
     post:
       tags:
         - pricingPlans
@@ -386,9 +379,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreatePricingPlanParam"
+              $ref: '#/components/schemas/CreatePricingPlanParam'
       responses:
-        201:
+        '201':
           description: Created
           content:
             application/json:
@@ -396,14 +389,13 @@ paths:
                 title: Created Pricing Plan
                 x-title-i18n:
                   jpn: 作成された料金プラン
-                $ref: "#/components/schemas/PricingPlan"
-        500:
+                $ref: '#/components/schemas/PricingPlan'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-
+                $ref: '#/components/schemas/Error'
   /plans/{plan_id}:
     get:
       tags:
@@ -418,9 +410,9 @@ paths:
         jpn: |
           料金プランを取得します。
       parameters:
-        - $ref: "#/components/parameters/PlanId"
+        - $ref: '#/components/parameters/PlanId'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -428,13 +420,13 @@ paths:
                 title: Pricing Plan
                 x-title-i18n:
                   jpn: 料金プラン
-                $ref: "#/components/schemas/PricingPlan"
-        500:
+                $ref: '#/components/schemas/PricingPlan'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
     delete:
       tags:
         - pricingPlans
@@ -448,22 +440,22 @@ paths:
         jpn: |
           料金プランを削除します。
       parameters:
-        - $ref: "#/components/parameters/PlanId"
+        - $ref: '#/components/parameters/PlanId'
       responses:
-        200:
+        '200':
           description: OK
-        404:
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        500:
+                $ref: '#/components/schemas/Error'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
     patch:
       tags:
         - pricingPlans
@@ -477,21 +469,21 @@ paths:
         jpn: |
           料金プランを更新します。
       parameters:
-        - $ref: "#/components/parameters/PlanId"
+        - $ref: '#/components/parameters/PlanId'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdatePricingPlanParam"
+              $ref: '#/components/schemas/UpdatePricingPlanParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /plans/used:
     patch:
       tags:
@@ -509,17 +501,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdatePricingPlansUsedParam"
+              $ref: '#/components/schemas/UpdatePricingPlansUsedParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-
+                $ref: '#/components/schemas/Error'
   /stripe/init:
     patch:
       tags:
@@ -534,15 +525,14 @@ paths:
         jpn: |
           stripeへ情報を連携します。
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-
+                $ref: '#/components/schemas/Error'
   /stripe:
     delete:
       tags:
@@ -557,15 +547,14 @@ paths:
         jpn: |
           stripe上の商品情報を削除します。
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-
+                $ref: '#/components/schemas/Error'
   /metering/tenants/{tenant_id}/units/{metering_unit_name}/date/{date}:
     get:
       tags:
@@ -580,11 +569,11 @@ paths:
         jpn: |
           指定した日付のメータリングユニットカウントを取得します。
       parameters:
-        - $ref: "#/components/parameters/TenantId"
-        - $ref: "#/components/parameters/MeteringUnitName"
-        - $ref: "#/components/parameters/DateString"
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/MeteringUnitName'
+        - $ref: '#/components/parameters/DateString'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -592,14 +581,13 @@ paths:
                 title: Metering Unit
                 x-title-i18n:
                   jpn: メータリングユニット
-                $ref: "#/components/schemas/MeteringUnitDateCount"
-        500:
+                $ref: '#/components/schemas/MeteringUnitDateCount'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-
+                $ref: '#/components/schemas/Error'
   /metering/tenants/{tenant_id}/units/{metering_unit_name}/timestamp/{timestamp}:
     put:
       tags:
@@ -613,16 +601,16 @@ paths:
       x-description-i18n:
         jpn: 指定したタイムスタンプのメータリングユニットカウントを更新します。
       parameters:
-        - $ref: "#/components/parameters/TenantId"
-        - $ref: "#/components/parameters/MeteringUnitName"
-        - $ref: "#/components/parameters/Timestamp"
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/MeteringUnitName'
+        - $ref: '#/components/parameters/Timestamp'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateMeteringUnitTimestampCountParam"
+              $ref: '#/components/schemas/UpdateMeteringUnitTimestampCountParam'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -630,14 +618,13 @@ paths:
                 title: Metering Unit
                 x-title-i18n:
                   jpn: メータリングユニット
-                $ref: "#/components/schemas/MeteringUnitTimestampCount"
-        500:
+                $ref: '#/components/schemas/MeteringUnitTimestampCount'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-
+                $ref: '#/components/schemas/Error'
     delete:
       tags:
         - metering
@@ -650,19 +637,18 @@ paths:
       x-description-i18n:
         jpn: 指定したタイムスタンプのメータリングユニットカウントを削除します。
       parameters:
-        - $ref: "#/components/parameters/TenantId"
-        - $ref: "#/components/parameters/MeteringUnitName"
-        - $ref: "#/components/parameters/Timestamp"
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/MeteringUnitName'
+        - $ref: '#/components/parameters/Timestamp'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-
+                $ref: '#/components/schemas/Error'
   /metering/tenants/{tenant_id}/units/{metering_unit_name}/today:
     get:
       tags:
@@ -674,13 +660,12 @@ paths:
       description: |
         Get the metering unit count for the current day.
       x-description-i18n:
-        jpn: 
-          当日のメータリングユニットカウントを取得します。
+        jpn: 当日のメータリングユニットカウントを取得します。
       parameters:
-        - $ref: "#/components/parameters/TenantId"
-        - $ref: "#/components/parameters/MeteringUnitName"
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/MeteringUnitName'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -688,13 +673,13 @@ paths:
                 title: Metering unit
                 x-title-i18n:
                   jpn: メータリングユニット
-                $ref: "#/components/schemas/MeteringUnitDateCount"
-        500:
+                $ref: '#/components/schemas/MeteringUnitDateCount'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /metering/tenants/{tenant_id}/units/{metering_unit_name}/now:
     put:
       tags:
@@ -708,15 +693,15 @@ paths:
       x-description-i18n:
         jpn: 現在時刻のメータリングユニットカウントを更新します。
       parameters:
-        - $ref: "#/components/parameters/TenantId"
-        - $ref: "#/components/parameters/MeteringUnitName"
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/MeteringUnitName'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateMeteringUnitTimestampCountNowParam"
+              $ref: '#/components/schemas/UpdateMeteringUnitTimestampCountNowParam'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -724,13 +709,13 @@ paths:
                 title: Metering Unit
                 x-title-i18n:
                   jpn: メータリングユニット
-                $ref: "#/components/schemas/MeteringUnitTimestampCount"
-        500:
+                $ref: '#/components/schemas/MeteringUnitTimestampCount'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /metering/tenants/{tenant_id}/units/{metering_unit_name}/thismonth:
     get:
       tags:
@@ -744,10 +729,10 @@ paths:
       x-description-i18n:
         jpn: 当月のメータリングユニットカウントを取得します。
       parameters:
-        - $ref: "#/components/parameters/TenantId"
-        - $ref: "#/components/parameters/MeteringUnitName"
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/MeteringUnitName'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -755,13 +740,13 @@ paths:
                 title: Metering Unit
                 x-title-i18n:
                   jpn: メータリングユニット
-                $ref: "#/components/schemas/MeteringUnitMonthCount"
-        500:
+                $ref: '#/components/schemas/MeteringUnitMonthCount'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /metering/tenants/{tenant_id}/units/{metering_unit_name}/month/{month}:
     get:
       tags:
@@ -776,11 +761,11 @@ paths:
         jpn: |
           指定した月のメータリングユニットカウントを取得します。
       parameters:
-        - $ref: "#/components/parameters/TenantId"
-        - $ref: "#/components/parameters/MeteringUnitName"
-        - $ref: "#/components/parameters/MonthString"
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/MeteringUnitName'
+        - $ref: '#/components/parameters/MonthString'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -788,14 +773,13 @@ paths:
                 title: Metering Unit
                 x-title-i18n:
                   jpn: メータリングユニット
-                $ref: "#/components/schemas/MeteringUnitMonthCount"
-        500:
+                $ref: '#/components/schemas/MeteringUnitMonthCount'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-
+                $ref: '#/components/schemas/Error'
   /metering/tenants/{tenant_id}/units/date/{date}:
     get:
       tags:
@@ -810,10 +794,10 @@ paths:
         jpn: |
           指定した日の全メータリングユニットカウントを取得します。
       parameters:
-        - $ref: "#/components/parameters/TenantId"
-        - $ref: "#/components/parameters/DateString"
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/DateString'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -821,14 +805,13 @@ paths:
                 title: Metering Unit
                 x-title-i18n:
                   jpn: メータリングユニット
-                $ref: "#/components/schemas/MeteringUnitDateCounts"
-        500:
+                $ref: '#/components/schemas/MeteringUnitDateCounts'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-
+                $ref: '#/components/schemas/Error'
   /metering/tenants/{tenant_id}/units/month/{month}:
     get:
       tags:
@@ -843,10 +826,10 @@ paths:
         jpn: |
           指定した月の全メータリングユニットカウントを取得します。
       parameters:
-        - $ref: "#/components/parameters/TenantId"
-        - $ref: "#/components/parameters/MonthString"
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/MonthString'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -854,14 +837,13 @@ paths:
                 title: Metering Unit
                 x-title-i18n:
                   jpn: メータリングユニット
-                $ref: "#/components/schemas/MeteringUnitMonthCounts"
-        500:
+                $ref: '#/components/schemas/MeteringUnitMonthCounts'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-
+                $ref: '#/components/schemas/Error'
   /plans-initialization:
     delete:
       tags:
@@ -876,15 +858,14 @@ paths:
         jpn: |
           無条件に全料金プラン、メニュー、ユニット、メーター、税率を削除します。
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-
+                $ref: '#/components/schemas/Error'
   /tax-rates:
     post:
       tags:
@@ -902,26 +883,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateTaxRateParam"
+              $ref: '#/components/schemas/CreateTaxRateParam'
       responses:
-        201:
+        '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/TaxRate"
-        400:
+                $ref: '#/components/schemas/TaxRate'
+        '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        500:
+                $ref: '#/components/schemas/Error'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
     get:
       tags:
         - taxRate
@@ -935,7 +916,7 @@ paths:
         jpn: |
           税率を取得します。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -943,14 +924,13 @@ paths:
                 title: Tax Rates
                 x-title-i18n:
                   jpn: 税率一覧
-                $ref: "#/components/schemas/TaxRates"
-        500:
+                $ref: '#/components/schemas/TaxRates'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-
+                $ref: '#/components/schemas/Error'
   /tax-rates/{tax_rate_id}:
     patch:
       tags:
@@ -965,28 +945,27 @@ paths:
         jpn: |
           税率を更新します。
       parameters:
-        - $ref: "#/components/parameters/TaxRateId"
+        - $ref: '#/components/parameters/TaxRateId'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateTaxRateParam"
+              $ref: '#/components/schemas/UpdateTaxRateParam'
       responses:
-        200:
+        '200':
           description: OK
-        400:
+        '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        500:
+                $ref: '#/components/schemas/Error'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-
+                $ref: '#/components/schemas/Error'
   /metering/tenants/{tenant_id}/units/{metering_unit_name}/date-period:
     get:
       tags:
@@ -1001,12 +980,12 @@ paths:
         jpn: |
           指定した日時期間のメータリングユニットカウントを取得します。
       parameters:
-        - $ref: "#/components/parameters/TenantId"
-        - $ref: "#/components/parameters/MeteringUnitName"
-        - $ref: "#/components/parameters/StartTimestamp"
-        - $ref: "#/components/parameters/EndTimestamp"
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/MeteringUnitName'
+        - $ref: '#/components/parameters/StartTimestamp'
+        - $ref: '#/components/parameters/EndTimestamp'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -1014,14 +993,13 @@ paths:
                 title: Metering unit
                 x-title-i18n:
                   jpn: メータリングユニット
-                $ref: "#/components/schemas/MeteringUnitDatePeriodCounts"
-        500:
+                $ref: '#/components/schemas/MeteringUnitDatePeriodCounts'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-
+                $ref: '#/components/schemas/Error'
   /metering/units:
     post:
       tags:
@@ -1039,26 +1017,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateMeteringUnitParam"
+              $ref: '#/components/schemas/CreateMeteringUnitParam'
       responses:
-        201:
+        '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/MeteringUnit"
-        400:
+                $ref: '#/components/schemas/MeteringUnit'
+        '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        500:
+                $ref: '#/components/schemas/Error'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
     get:
       tags:
         - metering
@@ -1072,7 +1050,7 @@ paths:
         jpn: |
           全てのメータリングユニットを取得します。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -1080,14 +1058,13 @@ paths:
                 title: Metering Unit list
                 x-title-i18n:
                   jpn: メータリングユニットリスト
-                $ref: "#/components/schemas/MeteringUnits"
-        500:
+                $ref: '#/components/schemas/MeteringUnits'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-
+                $ref: '#/components/schemas/Error'
   /metering/units/{metering_unit_id}:
     patch:
       tags:
@@ -1102,27 +1079,27 @@ paths:
         jpn: |
           メータリングユニットを更新します。
       parameters:
-        - $ref: "#/components/parameters/MeteringUnitId"
+        - $ref: '#/components/parameters/MeteringUnitId'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateMeteringUnitParam"
+              $ref: '#/components/schemas/UpdateMeteringUnitParam'
       responses:
-        200:
+        '200':
           description: OK
-        400:
+        '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        500:
+                $ref: '#/components/schemas/Error'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
     delete:
       tags:
         - metering
@@ -1136,43 +1113,22 @@ paths:
         jpn: |
           メータリングユニットを削除します。
       parameters:
-        - $ref: "#/components/parameters/MeteringUnitId"
+        - $ref: '#/components/parameters/MeteringUnitId'
       responses:
-        200:
+        '200':
           description: OK
-        404:
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        500:
+                $ref: '#/components/schemas/Error'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-  /errors/internal-server-error:
-    get:
-      tags:
-        - "error"
-      operationId: ReturnInternalServerError
-      summary: Return Internal Server Error
-      x-summary-i18n:
-        jpn: ステータスコード500でサーバーエラーを返却
-      description: |
-        This endpoint is used for testing purposes. Returns a server error with status code 500.
-      x-description-i18n:
-        jpn:
-          テスト用途で使用するエンドポイントです。ステータスコード500でサーバーエラーを返却します。
-      responses:
-        500:
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-
+                $ref: '#/components/schemas/Error'
 components:
   securitySchemes:
     Bearer:
@@ -1187,7 +1143,7 @@ components:
       x-description-i18n:
         jpn: ユニットID
       schema:
-        $ref: "#/components/schemas/Uuid"
+        $ref: '#/components/schemas/Uuid'
       required: true
     MenuId:
       in: path
@@ -1196,7 +1152,7 @@ components:
       x-description-i18n:
         jpn: メニューID
       schema:
-        $ref: "#/components/schemas/Uuid"
+        $ref: '#/components/schemas/Uuid'
       required: true
     PlanId:
       in: path
@@ -1205,7 +1161,7 @@ components:
       x-description-i18n:
         jpn: 料金プランID
       schema:
-        $ref: "#/components/schemas/Uuid"
+        $ref: '#/components/schemas/Uuid'
       required: true
     TaxRateId:
       in: path
@@ -1214,7 +1170,7 @@ components:
       x-description-i18n:
         jpn: 税率ID
       schema:
-        $ref: "#/components/schemas/Uuid"
+        $ref: '#/components/schemas/Uuid'
       required: true
     TenantId:
       in: path
@@ -1254,7 +1210,7 @@ components:
         jpn: 日
       schema:
         type: string
-        example: "2022-01-01"
+        example: '2022-01-01'
       required: true
     Timestamp:
       in: path
@@ -1296,7 +1252,6 @@ components:
         type: string
         example: 46af35b5-60de-4cd8-9412-19a3a5d1f838
       required: true
-
   schemas:
     Error:
       properties:
@@ -1362,9 +1317,9 @@ components:
         - month
         - year
     CreatePricingUnitParam:
-      $ref: "#/components/schemas/PricingUnitForSave"
+      $ref: '#/components/schemas/PricingUnitForSave'
     UpdatePricingUnitParam:
-      $ref: "#/components/schemas/PricingUnitForSave"
+      $ref: '#/components/schemas/PricingUnitForSave'
     PricingTieredUsageUnit:
       title: Tiered Usage Unit
       x-title-i18n:
@@ -1373,14 +1328,14 @@ components:
       allOf:
         - properties:
             id:
-              $ref: "#/components/schemas/Uuid"
+              $ref: '#/components/schemas/Uuid'
             metering_unit_id:
-              $ref: "#/components/schemas/Uuid"
+              $ref: '#/components/schemas/Uuid'
               description: Metering unit ID
               x-description-i18n:
                 jpn: メータリングユニットID
             recurring_interval:
-              $ref: "#/components/schemas/RecurringInterval"
+              $ref: '#/components/schemas/RecurringInterval'
             used:
               type: boolean
               example: false
@@ -1392,7 +1347,7 @@ components:
             - metering_unit_id
             - recurring_interval
             - used
-        - $ref: "#/components/schemas/PricingTieredUsageUnitForSave"
+        - $ref: '#/components/schemas/PricingTieredUsageUnitForSave'
     PricingTieredUnit:
       title: Tiered Unit
       x-title-i18n:
@@ -1401,14 +1356,14 @@ components:
       allOf:
         - properties:
             id:
-              $ref: "#/components/schemas/Uuid"
+              $ref: '#/components/schemas/Uuid'
             metering_unit_id:
-              $ref: "#/components/schemas/Uuid"
+              $ref: '#/components/schemas/Uuid'
               description: Metering unit ID
               x-description-i18n:
                 jpn: メータリングユニットID
             recurring_interval:
-              $ref: "#/components/schemas/RecurringInterval"
+              $ref: '#/components/schemas/RecurringInterval'
             used:
               type: boolean
               example: false
@@ -1420,7 +1375,7 @@ components:
             - metering_unit_id
             - recurring_interval
             - used
-        - $ref: "#/components/schemas/PricingTieredUnitForSave"
+        - $ref: '#/components/schemas/PricingTieredUnitForSave'
     PricingUsageUnit:
       title: Usage Unit
       x-title-i18n:
@@ -1429,14 +1384,14 @@ components:
       allOf:
         - properties:
             id:
-              $ref: "#/components/schemas/Uuid"
+              $ref: '#/components/schemas/Uuid'
             metering_unit_id:
-              $ref: "#/components/schemas/Uuid"
+              $ref: '#/components/schemas/Uuid'
               description: Metering unit ID
               x-description-i18n:
                 jpn: メータリングユニットID
             recurring_interval:
-              $ref: "#/components/schemas/RecurringInterval"
+              $ref: '#/components/schemas/RecurringInterval'
             used:
               type: boolean
               example: false
@@ -1445,7 +1400,7 @@ components:
             - metering_unit_id
             - recurring_interval
             - used
-        - $ref: "#/components/schemas/PricingUsageUnitForSave"
+        - $ref: '#/components/schemas/PricingUsageUnitForSave'
     PricingFixedUnit:
       title: Fixed Unit
       x-title-i18n:
@@ -1454,14 +1409,14 @@ components:
       allOf:
         - properties:
             id:
-              $ref: "#/components/schemas/Uuid"
+              $ref: '#/components/schemas/Uuid'
             used:
               type: boolean
               example: false
           required:
             - id
             - used
-        - $ref: "#/components/schemas/PricingFixedUnitForSave"
+        - $ref: '#/components/schemas/PricingFixedUnitForSave'
     PricingUnitBaseProps:
       title: Pricing Unit Basic Information
       x-title-i18n:
@@ -1487,9 +1442,9 @@ components:
           x-description-i18n:
             jpn: 説明
         type:
-          $ref: "#/components/schemas/UnitType"
+          $ref: '#/components/schemas/UnitType'
         currency:
-          $ref: "#/components/schemas/Currency"
+          $ref: '#/components/schemas/Currency'
       required:
         - name
         - display_name
@@ -1517,12 +1472,12 @@ components:
               x-description-i18n:
                 jpn: 計測ユニット名
             aggregate_usage:
-              $ref: "#/components/schemas/AggregateUsage"
+              $ref: '#/components/schemas/AggregateUsage'
           required:
             - upper_count
             - metering_unit_name
-        - $ref: "#/components/schemas/PricingUnitBaseProps"
-        - $ref: "#/components/schemas/PricingTiers"
+        - $ref: '#/components/schemas/PricingUnitBaseProps'
+        - $ref: '#/components/schemas/PricingTiers'
     PricingTieredUnitForSave:
       title: Tiered Unit Save Parameters
       x-title-i18n:
@@ -1544,12 +1499,12 @@ components:
               x-description-i18n:
                 jpn: 計測ユニット名
             aggregate_usage:
-              $ref: "#/components/schemas/AggregateUsage"
+              $ref: '#/components/schemas/AggregateUsage'
           required:
             - upper_count
             - metering_unit_name
-        - $ref: "#/components/schemas/PricingUnitBaseProps"
-        - $ref: "#/components/schemas/PricingTiers"
+        - $ref: '#/components/schemas/PricingUnitBaseProps'
+        - $ref: '#/components/schemas/PricingTiers'
     PricingUsageUnitForSave:
       title: Usage Unit Save Parameter
       x-title-i18n:
@@ -1578,12 +1533,12 @@ components:
               x-description-i18n:
                 jpn: 計測ユニット名
             aggregate_usage:
-              $ref: "#/components/schemas/AggregateUsage"
+              $ref: '#/components/schemas/AggregateUsage'
           required:
             - upper_count
             - unit_amount
             - metering_unit_name
-        - $ref: "#/components/schemas/PricingUnitBaseProps"
+        - $ref: '#/components/schemas/PricingUnitBaseProps'
     PricingFixedUnitForSave:
       title: Fixed Unit Save Parameters
       x-title-i18n:
@@ -1599,11 +1554,11 @@ components:
               x-description-i18n:
                 jpn: 料金
             recurring_interval:
-              $ref: "#/components/schemas/RecurringInterval"
+              $ref: '#/components/schemas/RecurringInterval'
           required:
             - unit_amount
             - recurring_interval
-        - $ref: "#/components/schemas/PricingUnitBaseProps"
+        - $ref: '#/components/schemas/PricingUnitBaseProps'
     PricingUnit:
       title: Pricing Unit Info
       x-title-i18n:
@@ -1612,15 +1567,15 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          tiered_usage: "#/components/schemas/PricingTieredUsageUnit"
-          tiered: "#/components/schemas/PricingTieredUnit"
-          usage: "#/components/schemas/PricingUsageUnit"
-          fixed: "#/components/schemas/PricingFixedUnit"
+          tiered_usage: '#/components/schemas/PricingTieredUsageUnit'
+          tiered: '#/components/schemas/PricingTieredUnit'
+          usage: '#/components/schemas/PricingUsageUnit'
+          fixed: '#/components/schemas/PricingFixedUnit'
       oneOf:
-        - $ref: "#/components/schemas/PricingTieredUsageUnit"
-        - $ref: "#/components/schemas/PricingTieredUnit"
-        - $ref: "#/components/schemas/PricingUsageUnit"
-        - $ref: "#/components/schemas/PricingFixedUnit"
+        - $ref: '#/components/schemas/PricingTieredUsageUnit'
+        - $ref: '#/components/schemas/PricingTieredUnit'
+        - $ref: '#/components/schemas/PricingUsageUnit'
+        - $ref: '#/components/schemas/PricingFixedUnit'
     PricingUnitForSave:
       title: Pricing Unit Save Parameters
       x-title-i18n:
@@ -1634,10 +1589,10 @@ components:
           usage: '#/components/schemas/PricingUsageUnitForSave'
           fixed: '#/components/schemas/PricingFixedUnitForSave'
       oneOf:
-        - $ref: "#/components/schemas/PricingTieredUsageUnitForSave"
-        - $ref: "#/components/schemas/PricingTieredUnitForSave"
-        - $ref: "#/components/schemas/PricingUsageUnitForSave"
-        - $ref: "#/components/schemas/PricingFixedUnitForSave"
+        - $ref: '#/components/schemas/PricingTieredUsageUnitForSave'
+        - $ref: '#/components/schemas/PricingTieredUnitForSave'
+        - $ref: '#/components/schemas/PricingUsageUnitForSave'
+        - $ref: '#/components/schemas/PricingFixedUnitForSave'
     PricingUnits:
       title: Pricing Unit List
       x-title-i18n:
@@ -1646,7 +1601,8 @@ components:
       properties:
         units:
           type: array
-          items: { $ref: "#/components/schemas/PricingUnit" }
+          items:
+            $ref: '#/components/schemas/PricingUnit'
       required:
         - units
     PricingTiers:
@@ -1657,7 +1613,8 @@ components:
       properties:
         tiers:
           type: array
-          items: { $ref: "#/components/schemas/PricingTier" }
+          items:
+            $ref: '#/components/schemas/PricingTier'
       required:
         - tiers
     PricingTier:
@@ -1733,11 +1690,11 @@ components:
             - display_name
             - description
             - used
-        - $ref: "#/components/schemas/PricingUnits"
+        - $ref: '#/components/schemas/PricingUnits'
     CreatePricingMenuParam:
-      $ref: "#/components/schemas/SavePricingMenuParam"
+      $ref: '#/components/schemas/SavePricingMenuParam'
     UpdatePricingMenuParam:
-      $ref: "#/components/schemas/SavePricingMenuParam"
+      $ref: '#/components/schemas/SavePricingMenuParam'
     SavePricingMenuParam:
       title: Pricing Feature Menu Save Parameters
       x-title-i18n:
@@ -1764,7 +1721,8 @@ components:
             jpn: メニュー説明
         unit_ids:
           type: array
-          items: { $ref: "#/components/schemas/Uuid" }
+          items:
+            $ref: '#/components/schemas/Uuid'
           description: Unit IDs to add
           x-description-i18n:
             jpn: 追加するユニットID
@@ -1781,13 +1739,13 @@ components:
       allOf:
         - properties:
             id:
-              $ref: "#/components/schemas/Uuid"
+              $ref: '#/components/schemas/Uuid'
               description: Menu ID
               x-description-i18n:
                 jpn: メニューID
           required:
             - id
-        - $ref: "#/components/schemas/PricingMenuProps"
+        - $ref: '#/components/schemas/PricingMenuProps'
     PricingMenus:
       title: Pricing Feature Menu List
       x-title-i18n:
@@ -1796,10 +1754,10 @@ components:
       properties:
         pricing_menus:
           type: array
-          items: { $ref: "#/components/schemas/PricingMenu" }
+          items:
+            $ref: '#/components/schemas/PricingMenu'
       required:
         - pricing_menus
-
     PricingPlanProps:
       title: Pricing Plan Basic Information
       x-title-i18n:
@@ -1836,11 +1794,11 @@ components:
             - display_name
             - description
             - used
-        - $ref: "#/components/schemas/PricingMenus"
+        - $ref: '#/components/schemas/PricingMenus'
     CreatePricingPlanParam:
-      $ref: "#/components/schemas/SavePricingPlanParam"
+      $ref: '#/components/schemas/SavePricingPlanParam'
     UpdatePricingPlanParam:
-      $ref: "#/components/schemas/SavePricingPlanParam"
+      $ref: '#/components/schemas/SavePricingPlanParam'
     SavePricingPlanParam:
       title: Pricing Plan Save Parameters
       x-title-i18n:
@@ -1867,7 +1825,8 @@ components:
             jpn: 料金プラン説明
         menu_ids:
           type: array
-          items: { $ref: "#/components/schemas/Uuid" }
+          items:
+            $ref: '#/components/schemas/Uuid'
           description: Menu ID to be added to the pricing plan
           x-description-i18n:
             jpn: メニューID（料金プランに追加するメニューID）
@@ -1884,13 +1843,13 @@ components:
       allOf:
         - properties:
             id:
-              $ref: "#/components/schemas/Uuid"
+              $ref: '#/components/schemas/Uuid'
               description: Pricing plan ID
               x-description-i18n:
                 jpn: 料金プランID
           required:
             - id
-        - $ref: "#/components/schemas/PricingPlanProps"
+        - $ref: '#/components/schemas/PricingPlanProps'
     PricingPlans:
       title: Pricing Plan List
       x-title-i18n:
@@ -1899,7 +1858,8 @@ components:
       properties:
         pricing_plans:
           type: array
-          items: { $ref: "#/components/schemas/PricingPlan" }
+          items:
+            $ref: '#/components/schemas/PricingPlan'
       required:
         - pricing_plans
     UpdatePricingPlansUsedParam:
@@ -1910,10 +1870,10 @@ components:
       properties:
         plan_ids:
           type: array
-          items: { $ref: "#/components/schemas/Uuid" }
+          items:
+            $ref: '#/components/schemas/Uuid'
       required:
         - plan_ids
-
     MeteringUnitTimestampCount:
       title: Metering Unit Count Information for Each Timestamp
       x-title-i18n:
@@ -1956,7 +1916,7 @@ components:
             jpn: 計測ユニット名
         date:
           type: string
-          example: "2022-01-01"
+          example: '2022-01-01'
           description: Date
           x-description-i18n:
             jpn: 日
@@ -2006,7 +1966,8 @@ components:
       properties:
         counts:
           type: array
-          items: { $ref: "#/components/schemas/MeteringUnitDateCount" }
+          items:
+            $ref: '#/components/schemas/MeteringUnitDateCount'
       required:
         - counts
     MeteringUnitMonthCounts:
@@ -2017,7 +1978,8 @@ components:
       properties:
         counts:
           type: array
-          items: { $ref: "#/components/schemas/MeteringUnitMonthCount" }
+          items:
+            $ref: '#/components/schemas/MeteringUnitMonthCount'
       required:
         - counts
     MeteringUnitDatePeriodCounts:
@@ -2034,11 +1996,11 @@ components:
             jpn: 計測ユニット名
         counts:
           type: array
-          items: { $ref: "#/components/schemas/MeteringUnitCount" }
+          items:
+            $ref: '#/components/schemas/MeteringUnitCount'
       required:
         - metering_unit_name
         - counts
-
     UpdateMeteringUnitTimestampCountParam:
       title: Metering Unit Count Update Information for Specified Timestamp
       x-title-i18n:
@@ -2046,7 +2008,7 @@ components:
       type: object
       properties:
         method:
-          $ref: "#/components/schemas/UpdateMeteringUnitTimestampCountMethod"
+          $ref: '#/components/schemas/UpdateMeteringUnitTimestampCountMethod'
         count:
           type: integer
           example: 10000
@@ -2056,7 +2018,6 @@ components:
       required:
         - method
         - count
-
     UpdateMeteringUnitTimestampCountNowParam:
       title: Metering Unit Count Update Information for the Current Time
       x-title-i18n:
@@ -2064,7 +2025,7 @@ components:
       type: object
       properties:
         method:
-          $ref: "#/components/schemas/UpdateMeteringUnitTimestampCountMethod"
+          $ref: '#/components/schemas/UpdateMeteringUnitTimestampCountMethod'
         count:
           type: integer
           example: 10000
@@ -2074,7 +2035,6 @@ components:
       required:
         - method
         - count
-
     UpdateMeteringUnitTimestampCountMethod:
       title: Metering Unit Count Update Method
       x-title-i18n:
@@ -2096,7 +2056,6 @@ components:
           add: 加算
           sub: 減算
           direct: 上書き
-
     TaxRateProps:
       title: Tax Rate Basic Information
       x-title-i18n:
@@ -2105,13 +2064,13 @@ components:
       properties:
         name:
           type: string
-          example: "japanese_consumption_tax_inclusive"
+          example: japanese_consumption_tax_inclusive
           description: Name of tax rate
           x-description-i18n:
             jpn: 税率の名前
         display_name:
           type: string
-          example: "消費税(外税)"
+          example: 消費税(外税)
           description: Display name
           x-description-i18n:
             jpn: 表示名
@@ -2130,14 +2089,14 @@ components:
             jpn: 内税かどうか
         country:
           type: string
-          pattern: "^[A-Z]{2}$"
-          example: "JP"
+          pattern: ^[A-Z]{2}$
+          example: JP
           description: Country code of ISO 3166-1 alpha-2
           x-description-i18n:
             jpn: ISO 3166-1 alpha-2 の国コード
         description:
           type: string
-          example: "SaaSusとの連携用の税率"
+          example: SaaSusとの連携用の税率
           description: Description
           x-description-i18n:
             jpn: 説明
@@ -2148,7 +2107,6 @@ components:
         - inclusive
         - country
         - description
-
     TaxRate:
       title: Tax Rate Information
       x-title-i18n:
@@ -2157,20 +2115,18 @@ components:
       allOf:
         - properties:
             id:
-              $ref: "#/components/schemas/Uuid"
+              $ref: '#/components/schemas/Uuid'
               description: Tax rate ID
               x-description-i18n:
                 jpn: 税率ID
           required:
             - id
-        - $ref: "#/components/schemas/TaxRateProps"
-
+        - $ref: '#/components/schemas/TaxRateProps'
     CreateTaxRateParam:
       title: Create Tax Rate Parameter
       x-title-i18n:
         jpn: 税率作成パラメータ
-      $ref: "#/components/schemas/TaxRateProps"
-
+      $ref: '#/components/schemas/TaxRateProps'
     UpdateTaxRateParam:
       title: Update Tax Rate Parameter
       x-title-i18n:
@@ -2179,20 +2135,19 @@ components:
       properties:
         display_name:
           type: string
-          example: "消費税(外税)"
+          example: 消費税(外税)
           description: Display name
           x-description-i18n:
             jpn: 表示名
         description:
           type: string
-          example: "SaaSusとの連携用の税率"
+          example: SaaSusとの連携用の税率
           description: Description
           x-description-i18n:
             jpn: 説明
       required:
         - display_name
         - description
-
     TaxRates:
       title: Tax Rate List
       x-title-i18n:
@@ -2201,10 +2156,10 @@ components:
       properties:
         tax_rates:
           type: array
-          items: { $ref: "#/components/schemas/TaxRate" }
+          items:
+            $ref: '#/components/schemas/TaxRate'
       required:
         - tax_rates
-
     AggregateUsage:
       type: string
       description: |
@@ -2219,7 +2174,6 @@ components:
       enum:
         - sum
         - max
-
     MeteringUnitCount:
       title: Metering Unit Count Information
       x-title-i18n:
@@ -2241,7 +2195,6 @@ components:
       required:
         - timestamp
         - count
-
     MeteringUnits:
       title: Metering Unit List
       x-title-i18n:
@@ -2250,10 +2203,10 @@ components:
       properties:
         units:
           type: array
-          items: { $ref: "#/components/schemas/MeteringUnit" }
+          items:
+            $ref: '#/components/schemas/MeteringUnit'
       required:
         - units
-
     MeteringUnit:
       title: Metering Unit Information
       x-title-i18n:
@@ -2262,7 +2215,7 @@ components:
       allOf:
         - properties:
             id:
-              $ref: "#/components/schemas/Uuid"
+              $ref: '#/components/schemas/Uuid'
               description: Metering unit ID
               x-description-i18n:
                 jpn: メータリングユニットID
@@ -2275,8 +2228,7 @@ components:
           required:
             - id
             - used
-        - $ref: "#/components/schemas/MeteringUnitProps"
-
+        - $ref: '#/components/schemas/MeteringUnitProps'
     MeteringUnitProps:
       title: Metering Unit Basic Information
       x-title-i18n:
@@ -2290,7 +2242,7 @@ components:
           x-description-i18n:
             jpn: 計測ユニット名
         aggregate_usage:
-          $ref: "#/components/schemas/AggregateUsage"
+          $ref: '#/components/schemas/AggregateUsage'
           description: Aggregate usage method
           x-description-i18n:
             jpn: 使用量の集計方法
@@ -2310,15 +2262,13 @@ components:
         - unit_name
         - display_name
         - description
-
     CreateMeteringUnitParam:
       title: Metering Unit Creation Information
       x-title-i18n:
         jpn: メータリングユニット作成情報
-      $ref: "#/components/schemas/MeteringUnitProps"
-
+      $ref: '#/components/schemas/MeteringUnitProps'
     UpdateMeteringUnitParam:
       title: Metering Unit Update Information
       x-title-i18n:
         jpn: メータリングユニット更新情報
-      $ref: "#/components/schemas/MeteringUnitProps"
+      $ref: '#/components/schemas/MeteringUnitProps'
