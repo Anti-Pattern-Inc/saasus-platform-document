@@ -154,7 +154,7 @@ AWS Marketplaceにて購入を希望される方は、Private Offerでのご契�
 
 AWS Marketplaceに製品を出品しており、そちらでも申し込みが可能です。もしAWS Marketplaceで申し込まれた場合、AWSの利用料と一緒に請求されることになります。  
 <a href="https://aws.amazon.com/marketplace/pp/prodview-2gr3qw7kp5qx6?sr=0-1&ref_=beagle&applicationId=AWSMPContess" target="_blank">SaaSus Platform</a>
-<!-- 
+<!--
 ### 1.AWS Marketplaceの製品ページより`View purchase options`をクリックします
 
 ![f0ffc78-image](/ja/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/f0ffc78-image.png)
