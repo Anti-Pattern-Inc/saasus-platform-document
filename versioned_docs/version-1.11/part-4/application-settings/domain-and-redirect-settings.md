@@ -38,7 +38,8 @@ This completes the preparations for configuring the SaaS Platform.
 
 ![03](/img/part-4/application-settings/domain-and-redirect-settings/domain-name-preference-03.png)
 
-SaaSus Platform automatically generates a login screen based on this domain.
+The registered domain will be used as the login screen URL in the format `auth.domain-name`.
+
 
 ### 2. Post-Login Redirect URL Settings
 
