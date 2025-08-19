@@ -92,6 +92,10 @@ const config = {
             spec: "./api/apigatewayapi.yml",
           },
           {
+            id: "analysisapi-spec",
+            spec: "./api/analysisapi.yml",
+          },
+          {
             id: "pricingapi-spec-jpn",
             spec: "./api/pricingapi.jpn.yml",
           },
@@ -122,6 +126,10 @@ const config = {
           {
             id: "apigatewayapi-spec-jpn",
             spec: "./api/apigatewayapi.jpn.yml",
+          },
+          {
+            id: "analysisapi-spec-jpn",
+            spec: "./api/analysisapi.jpn.yml",
           },
         ],
         theme: {

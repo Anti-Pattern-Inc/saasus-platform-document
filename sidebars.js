@@ -458,6 +458,7 @@ const sidebars = {
         "reference/awsmarketplace-api",
         "reference/integration",
         "reference/apigateway-api",
+        "reference/analysis-api",
       ],
     },
   ],
