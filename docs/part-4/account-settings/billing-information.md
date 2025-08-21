@@ -48,7 +48,7 @@ Each invoice includes the following:
 - SaaSus Platform base fees
 - Usage-based charges (Smart API Gateway calls, uploads)
 - Monthly Active User (MAU) charges (Starter plan)
-- Tax calculations (where applicable)
+- Tax calculations
 - Detailed usage breakdowns
 
 ### Billing Process (Stripe)
@@ -58,13 +58,13 @@ For paid plans subscribed through the SaaS Development Console, billing works as
 Example) If you subscribe to the Starter plan on August 1, 2025:  
 Initial billing date: August 1, 2025  
 One hour after contract, an invoice for ¥5,500 will be issued.  
-Payment due date (invoice due date): August 30, 2025  
+Payment due date (invoice due date): August 31, 2025  
 The payment due date is 30 days after the billing date, and payment will be processed on the day you register your card information with Stripe.
 
 #### Billing for subsequent months
 
-For the credit card registered during the initial billing, charges will be made on the same date each month and automatic deduction will be executed.  
-Billing date: Same date of the following month as the initial billing date (e.g., August 1, 2025)  
+For the credit card registered during the initial billing, charges will be made on the same date each month and automatic payment will be executed.  
+Billing date: Same date of the following month as the initial billing date (e.g., September 1, 2025)  
 ※ For months without the corresponding date (e.g., months without the 31st), the last day of that month becomes the billing date.
 
 #### Usage-based billing
