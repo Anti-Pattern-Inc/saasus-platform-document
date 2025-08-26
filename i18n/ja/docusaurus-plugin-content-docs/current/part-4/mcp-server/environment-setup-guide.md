@@ -12,7 +12,7 @@ updatedAt: "Wed May 22 2024 15:16:11 GMT+0000 (Coordinated Universal Time)"
 ## 概要
 SaaSus API MCP Serverを使用する前に、適切な環境設定を行う必要があります。このガイドでは、SaaSus Platformの基本設定をSaaSus API MCP Serverを利用して作成する手順となります。
 
-本手順は [チュートリアルを進める前に必要な設定](https://docs.saasus.io/ja/docs/tutorial/prepare-saas-platform) 、 [SaaS 利用者テナントの作成](https://docs.saasus.io/ja/docs/tutorial/authentication-preference#saas-%E5%88%A9%E7%94%A8%E8%80%85%E3%83%86%E3%83%8A%E3%83%B3%E3%83%88%E3%81%AE%E4%BD%9C%E6%88%90)、[SaaS 利用ユーザーの作成](https://docs.saasus.io/ja/docs/tutorial/authentication-preference#saas-%E5%88%A9%E7%94%A8%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%81%AE%E4%BD%9C%E6%88%90) 、[料金プラン設定の手順](https://docs.saasus.io/ja/docs/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans) で必要な項目を作成しています。
+本手順は [チュートリアルを進める前に必要な設定](https://docs.saasus.io/ja/docs/tutorial/prepare-saas-platform) 、 [SaaS 利用者テナントの作成](https://docs.saasus.io/ja/docs/tutorial/authentication-preference#saas-%E5%88%A9%E7%94%A8%E8%80%85%E3%83%86%E3%83%8A%E3%83%B3%E3%83%88%E3%81%AE%E4%BD%9C%E6%88%90)、[SaaS 利用ユーザーの作成](https://docs.saasus.io/ja/docs/tutorial/authentication-preference#saas-%E5%88%A9%E7%94%A8%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%81%AE%E4%BD%9C%E6%88%90) 、[料金プラン設定の手順](https://docs.saasus.io/ja/docs/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans)、[テナントへの料金プランの適用](https://docs.saasus.io/ja/docs/tutorial/manage-rate-plans/manage-rate-plans#%E3%83%86%E3%83%8A%E3%83%B3%E3%83%88%E3%81%B8%E3%81%AE%E6%96%99%E9%87%91%E3%83%97%E3%83%A9%E3%83%B3%E3%81%AE%E9%81%A9%E7%94%A8) で必要な項目を作成しています。
 
 また、登録内容はCSVでも登録可能です。本手順は分かりやすくするため以下の表現を利用しています。
 
@@ -126,7 +126,7 @@ SaaSus Platform に以下の情報を作成してください。
 ```
 
 ## 料金プラン
-本手順は [料金プラン設定の手順](https://docs.saasus.io/ja/docs/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans) を元に行なっております。
+本手順は [料金プラン設定の手順](https://docs.saasus.io/ja/docs/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans) 、[テナントへの料金プランの適用](https://docs.saasus.io/ja/docs/tutorial/manage-rate-plans/manage-rate-plans#%E3%83%86%E3%83%8A%E3%83%B3%E3%83%88%E3%81%B8%E3%81%AE%E6%96%99%E9%87%91%E3%83%97%E3%83%A9%E3%83%B3%E3%81%AE%E9%81%A9%E7%94%A8) を元に行なっております。
 
 ### メーター
 #### MCP Serverへの依頼文言
@@ -217,18 +217,21 @@ SaaSus Platform に以下のプランを作成してください。
 機能メニュー: free_menu
 ```
 
-### 税率
+### テナントへの料金プランの適用
 #### MCP Serverへの依頼文言
 ```
-SaaSus Platform に以下の税率を作成してください。
+SaaSus Platform に以下の情報を作成してください。
 エラーが発生した場合、それ以降の作成は中止して、実行した内容とエラーの情報を出力してください。
 
-税率名:tax-exclusive-10
-表示名:消費税 10% 外税
-説明:消費税 10% 外税
-パーセント:10
-国:日本
-内税/外税:外税
+テナント:テナントサンプルその１
+料金プラン: free_plan
+反映日:現在時刻から5分後
+
+テナント:サンプルアプリテナント２
+料金プラン: basic_plan
+反映日: 現在時刻から5分後
+
+まず、テナントと料金プランの情報を取得してから、現在時刻から5分後（秒は0にリセット）のUTCタイムスタンプを計算し、テナントの料金プランを更新してください。
 ```
 
 ## 削除
