@@ -1,6 +1,6 @@
 ---
-title: "シングルテナント管理"
-slug: "single-tenant-management"
+title: "SaaSインフラ管理機能"
+slug: "saas-infra-management"
 excerpt: ""
 hidden: false
 createdAt: "Thu May 08 2024 14:00:00 GMT+0000 (Coordinated Universal Time)"
@@ -9,24 +9,25 @@ updatedAt: "Thu May 08 2024 14:00:00 GMT+0000 (Coordinated Universal Time)"
 
 ## 概要
 
-SaaS のアーキテクチャとして、「シングルテナント」と「マルチテナント」があります。
+SaaS のデプロイモデルとして、「サイロモデル」と「プールモデル」があります。
 
-シングルテナントアーキテクチャとは、SaaS を利用する顧客（テナント）毎に異なるサーバー・DB を持つようなアーキテクチャです。
+サイロモデルとは、SaaS を利用する顧客（テナント）毎に異なるサーバー・DB を用意するデプロイモデルです。
 各テナントは完全に分離された環境を持ちます。
 
-マルチテナントアーキテクチャとは、複数のテナントが共通のサーバー・DB を持つようなアーキテクチャです。
+プールモデルとは、複数のテナントに共通のサーバー・DB を用意するデプロイモデルです。
 データはテナントごとに区分されていますが、物理的なリソースは共有されます。
 
-シングルテナント管理機能は、SaaSus Platform でシングルテナントアーキテクチャの SaaS の構築をサポートするための機能です。
+SaaSインフラ管理機能は、SaaSus Platform でサイロモデルの SaaS の構築をサポートするための機能です。
 
-:::info
-シングルテナント管理機能はアドバンスドプラン以上のお客様のみご利用いただけます。
+:::warning
+「SaaSインフラ管理機能」は、旧スタータープランおよび旧スタンダードプランをご契約中の場合、ご利用いただけません。  
+本機能をご利用いただくには、新しい料金プランへの変更が必要です。
 :::
 
-シングルテナントアーキテクチャでは各テナントのデータは物理的に分離されているため、データ漏洩のリスクが減る等のメリットがあります。
+サイロモデルでは各テナントのデータは物理的に分離されているため、データ漏洩のリスクが減る等のメリットがあります。
 一方で、テナント毎にサーバーや DB を用意する必要があるため、管理コストが大きくなるというデメリットがあります。
 
-シングルテナント管理機能では、SaaSus Platform にテナントを作成した時に自動でお客様の AWS 環境に対してサーバーや DB を用意します。
+SaaSインフラ管理機能では、SaaSus Platform にテナントを作成した時に自動でお客様の AWS 環境に対してサーバーや DB を用意します。
 これによって管理・運用コストを下げることができます。
 
 ## 設定方法
@@ -37,11 +38,11 @@ SaaS のアーキテクチャとして、「シングルテナント」と「マ
 
 画面の指示に従って IAM Role を作成し、生成したロールの情報を登録してください、
 
-![settings-role](/ja/img/part-4/single-tenant-management/settings-role.png)
+![settings-role](/ja/img/part-4/saas-infra-management/settings-role.png)
 
 ### Cloud Formation テンプレート
 
-<a download="singletenant-cf-sample.yml" href="/ja/file/singletenant-cf-sample.yml"> Cloud Formation テンプレートのサンプル </a>
+<a download="saas-infra-management-cf-sample.yml" href="/ja/file/saas-infra-management-cf-sample.yml"> Cloud Formation テンプレートのサンプル </a>
 
 SaaSus Platform にテナントを作成した時、お客様の AWS 環境に対して Cloud Formation を実行し、テナント毎に環境を作成します。その時に使用する Cloud Formation テンプレートを登録する必要があります。
 
@@ -61,11 +62,11 @@ Cloud Formation の Outputs として、以下の項目を指定する必要が�
 
 ### SQL ファイル
 
-<a download="singletenant-sample.sql" href="/ja/file/singletenant-sample.sql"> SQL ファイルのサンプル </a>
+<a download="saas-infra-management-sample.sql" href="/ja/file/saas-infra-management-sample.sql"> SQL ファイルのサンプル </a>
 
 Cloud Formation によって作成された DB に対して実行する SQL を登録します。DB のテーブル定義や初期データを保存するための SQL を登録してください。
 
-### シングルテナント管理 の進行状況を確認する方法
+### SaaSインフラ管理 の進行状況を確認する方法
 
 SaaS運用コンソール - テナント管理画面 で対象テナントを表示し、TenantOnboardingStatus の値で進行情報の確認ができます。
 

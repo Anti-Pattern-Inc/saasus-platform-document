@@ -107,7 +107,8 @@
                 "id": "part-4/user-authz-settings/authentication-method-settings"
               },
               "items": [
-                "part-4/user-authz-settings/google-linkage"
+                "part-4/user-authz-settings/google-linkage",
+                "part-4/user-authz-settings/saml-linkage"
               ]
             },
             "part-4/user-authz-settings/declare-additional-attribute-to-user",
@@ -124,7 +125,8 @@
             "id": "part-4/smart-api-gateway-features/overview"
           },
           "items": [
-            "part-4/smart-api-gateway-features/manual"
+            "part-4/smart-api-gateway-features/manual",
+            "part-4/smart-api-gateway-features/smart-mcp-server-overview"
           ]
         },
         {
@@ -138,7 +140,7 @@
             "part-4/integrate-with-amazon-eventbridge/event-sample"
           ]
         },
-        "part-4/single-tenant-management",
+        "part-4/saas-infra-management",
         {
           "type": "category",
           "label": "AWS Marketplace Integration",
@@ -227,7 +229,17 @@
             "slug": "/part-4/account-settings"
           },
           "items": [
-            "part-4/account-settings/procedure-for-applying-for-a-paid-plan",
+            {
+              "type": "category",
+              "label": "Procedure for Applying for a Paid Plan",
+              "link": {
+                "type": "doc",
+                "id": "part-4/account-settings/procedure-for-applying-for-a-paid-plan"
+              },
+              "items": [
+                "part-4/account-settings/billing-information"
+              ]
+            },
             "part-4/account-settings/saasususerinvitation"
           ]
         }
@@ -364,7 +376,7 @@
         {
           "type": "link",
           "label": "Release Notes and Change History",
-          "href": "/docs/changelog/20250314"
+          "href": "/docs/changelog/20250605"
         },
         "part-8/risk-assessment"
       ]
@@ -417,7 +429,8 @@
         "reference/apilog-api",
         "reference/awsmarketplace-api",
         "reference/integration",
-        "reference/apigateway-api"
+        "reference/apigateway-api",
+        "reference/analysis-api"
       ]
     }
   ],
@@ -426,6 +439,11 @@
       "type": "category",
       "label": "Changelog",
       "items": [
+        {
+          "label": "2025/06/05",
+          "type": "doc",
+          "id": "changelog/20250605"
+        },
         {
           "label": "2025/03/14",
           "type": "doc",
