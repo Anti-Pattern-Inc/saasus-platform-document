@@ -12,7 +12,7 @@ updatedAt: "Wed May 22 2024 15:16:11 GMT+0000 (Coordinated Universal Time)"
 ## Overview
 Before using the SaaSus API MCP Server, you need to configure the appropriate environment settings. This guide provides the procedure for creating basic SaaSus Platform settings using the SaaSus API MCP Server.
 
-This procedure creates the necessary items for [Settings Required Before Proceeding with the Tutorial](https://docs.saasus.io/docs/tutorial/prepare-saas-platform), [Creating SaaS User Tenants](https://docs.saasus.io/docs/tutorial/authentication-preference#creating-saas-user-tenants), [Creating SaaS Users](https://docs.saasus.io/docs/tutorial/authentication-preference#creating-saas-users), and [Pricing Plan Configuration Procedures](https://docs.saasus.io/docs/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans).
+This procedure creates the necessary items for [Settings Required Before Proceeding with the Tutorial](https://docs.saasus.io/docs/tutorial/prepare-saas-platform), [Creating SaaS User Tenants](https://docs.saasus.io/docs/tutorial/authentication-preference#creating-saas-user-tenants), [Creating SaaS Users](https://docs.saasus.io/docs/tutorial/authentication-preference#creating-saas-users), [Pricing Plan Configuration Procedures](https://docs.saasus.io/docs/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans), and [Applying Rate Plans to Tenants](https://docs.saasus.io/docs/tutorial/manage-rate-plans/manage-rate-plans#applying-rate-plans-to-tenants).
 
 Additionally, registration content can also be registered via CSV. This procedure uses the following expressions for clarity.
 
@@ -125,7 +125,7 @@ Role: user
 ```
 
 ## Pricing Plan
-This procedure is based on [Pricing Plan Configuration Procedures](https://docs.saasus.io/docs/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans).
+This procedure is based on [Pricing Plan Configuration Procedures](https://docs.saasus.io/docs/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans) and [Applying Rate Plans to Tenants](https://docs.saasus.io/docs/tutorial/manage-rate-plans/manage-rate-plans#applying-rate-plans-to-tenants).
 
 ### Meter
 #### Request Message to MCP Server
@@ -216,18 +216,22 @@ Pricing Plan Description: Free Plan
 Feature Menu: free_menu
 ```
 
-### Tax Rate
+### Applying Rate Plans to Tenants
 #### Request Message to MCP Server
 ```
 Please create the following tax rate in SaaSus Platform.
 If an error occurs, stop creating subsequent items and output the executed content and error information.
 
-Tax Rate Name: tax-exclusive-10
-Display Name: Consumption Tax 10% Exclusive
-Description: Consumption Tax 10% Exclusive
-Percentage: 10
-Country: Japan
-Inclusive/Exclusive: Exclusive
+Tenant: Tenant Sample 1
+Pricing Plan: free_plan
+Effective Date: 5 minutes from the current time
+
+Tenant: Sample App Tenant 2
+Pricing Plan: basic_plan
+Effective Date: 5 minutes from the current time
+
+Instructions:
+First, retrieve the tenant and pricing plan information. Then, calculate the UTC timestamp for 5 minutes from the current time (with seconds reset to 0) and update the tenant's pricing plan accordingly.
 ```
 
 ## Deletion
