@@ -1,24 +1,20 @@
 openapi: 3.0.0
 info:
-  description: "SaaSus Eventbridge API Schema"
-  version: "1.0.0"
-  title: "SaaSus Eventbridge API Schema"
+  description: SaaSus Eventbridge API Schema
+  version: 1.0.0
+  title: SaaSus Eventbridge API Schema
   x-title-i18n:
-    jpn: "SaaSus Eventbridge API スキーマ"
+    jpn: SaaSus Eventbridge API スキーマ
   contact:
-    name: "Anti-Pattern"
+    name: Anti-Pattern
 servers:
-  - url: "https://api.saasus.io/v1/integration"
+  - url: https://api.saasus.io/v1/integration
     description: Production API Server
 tags:
-  - name: "eventBridge"
+  - name: eventBridge
     description: Eventbridge Resource Operations
     x-description-i18n:
       jpn: Eventbridgeリソースの操作
-  - name: "error"
-    description: Errors for testing purposes
-    x-description-i18n:
-      jpn: テスト用途のエラー
 security:
   - Bearer: []
 paths:
@@ -36,13 +32,13 @@ paths:
         jpn: |
           監視対象となっている全ホストの状態をリアルタイムにAmazon EventBridge 経由で提供するための設定を取得します。
       responses:
-        200: 
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/EventBridgeSettings"
-        500:
+                $ref: '#/components/schemas/EventBridgeSettings'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -64,11 +60,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SaveEventBridgeSettingsParam"
+              $ref: '#/components/schemas/SaveEventBridgeSettingsParam'
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -87,9 +83,9 @@ paths:
         jpn: |
           ホストの状態を Amazon EventBridge 経由で提供するための設定を解除します。
       responses:
-        200:
+        '200':
           description: OK
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -112,11 +108,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateEventBridgeEventParam"
+              $ref: '#/components/schemas/CreateEventBridgeEventParam'
       responses:
-        201:
+        '201':
           description: Created
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -136,35 +132,14 @@ paths:
         jpn: |
           Amazon EventBridge との連携をテストする為のイベントを送信します。
       responses:
-        201:
+        '201':
           description: Created
-        500:
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /errors/internal-server-error:
-    get:
-      tags:
-        - "error"
-      operationId: ReturnInternalServerError
-      summary: Return Internal Server Error
-      x-summary-i18n:
-        jpn: ステータスコード500でサーバーエラーを返却
-      description: |
-        This endpoint is used for testing purposes. Returns a server error with status code 500.
-      x-description-i18n:
-        jpn: |
-          テスト用途で使用するエンドポイントです。ステータスコード500でサーバーエラーを返却します。
-      responses:
-        500:
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-
 components:
   securitySchemes:
     Bearer:
@@ -226,18 +201,19 @@ components:
           x-description-i18n:
             jpn: AWSアカウントID
         aws_region:
-          $ref: "#/components/schemas/AwsRegion"
+          $ref: '#/components/schemas/AwsRegion'
       required:
         - aws_account_id
         - aws_region
     SaveEventBridgeSettingsParam:
-      $ref: "#/components/schemas/EventBridgeSettings"
+      $ref: '#/components/schemas/EventBridgeSettings'
     CreateEventBridgeEventParam:
       type: object
       properties:
         event_messages:
           type: array
-          items: {$ref: "#/components/schemas/EventMessage"}
+          items:
+            $ref: '#/components/schemas/EventMessage'
           description: event message
           x-description-i18n:
             jpn: イベントメッセージ
@@ -249,19 +225,19 @@ components:
       properties:
         event_type:
           type: string
-          example: "api_call"
+          example: api_call
           description: event type
           x-description-i18n:
             jpn: イベントタイプ
         event_detail_type:
           type: string
-          example: "create_user"
+          example: create_user
           description: detailed event type
           x-description-i18n:
             jpn: 詳細イベントタイプ
         message:
           type: string
-          example: "{id:8b79528a-ec3b-4f68-b7c4-d793e3894561,name:test222}"
+          example: '{id:8b79528a-ec3b-4f68-b7c4-d793e3894561,name:test222}'
           description: event message
           x-description-i18n:
             jpn: イベントメッセージ
@@ -269,4 +245,3 @@ components:
         - event_type
         - event_detail_type
         - message
-

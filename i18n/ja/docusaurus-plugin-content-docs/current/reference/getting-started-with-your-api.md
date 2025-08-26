@@ -32,6 +32,26 @@ API
 プライシングユニット、機能メニュー、料金プラン、メータリングユニットカウントなど料金に関連するAPI  
 (Pricing-related APIs such as pricing units, feature menus, rate plans, metering unit counts, etc.)
 
+[SaaSus Communication API Schema](/ja/docs/reference/communication-api)  
+ユーザーフィードバックの送信・取得に関するAPI  
+(APIs for submitting and retrieving user feedback)
+
+[SaaSus Apilog API Schema](/ja/docs/reference/apilog-api)  
+API実行ログの取得、分析に関するAPI  
+(APIs for retrieving and analyzing API execution logs)
+
+[SaaSus Awsmarketplace API Schema](/ja/docs/reference/awsmarketplace-api)  
+AWS Marketplace連携、顧客情報管理、プラン情報管理に関するAPI  
+(APIs related to AWS Marketplace integration, customer information management, and plan information management)
+
 [SaaSus Integration API Schema](/ja/docs/reference/integration)  
 Amazon EventBridge 連携に関連するAPI  
 (APIs related to Amazon EventBridge integration)
+
+[SaaSus ApiGateway API Schema](/ja/docs/reference/apigateway-api)  
+API Gateway機能の設定、管理、公開に関するAPI  
+(APIs for configuring, managing, and publishing API Gateway features)
+
+[SaaSus Analysis API Schema](/ja/docs/reference/analysis-api)  
+ユーザー行動履歴の分析、データ収集に関するAPI  
+(APIs for analyzing user behavior history and data collection)

@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 // Usage: node scripts/filter-error-tag.js <target.yml>
 
-import fs from 'fs';
-import yaml from 'js-yaml';
-import path from 'path';
+const fs = require('fs');
+const yaml = require('js-yaml');
+const path = require('path');
 
 // --- 引数チェック -------------------------------------------------------
 const file = process.argv[2];
