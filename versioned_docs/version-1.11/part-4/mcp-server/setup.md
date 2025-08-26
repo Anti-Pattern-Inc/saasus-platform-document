@@ -12,6 +12,11 @@ updatedAt: "Wed May 22 2024 15:16:11 GMT+0000 (Coordinated Universal Time)"
 ## Overview
 SaaSus API MCP Server operates as a Model Context Protocol (MCP) server, enabling SaaSus API to be used from MCP-compatible clients such as Claude Desktop and Cursor.
 
+:::caution
+Request-size and daily-quota limits vary by MCP client and plan.  
+Large requests can be rejected on Free plans.
+:::
+
 ## Prerequisites
 - Node.js (v16 or higher required, v20 or higher recommended)
 - npm (included with Node)
@@ -52,6 +57,11 @@ Workspace: saasus-auth-api-schema
 ```
 
 ## Claude Desktop Configuration
+
+:::caution
+When using the free version of Claude Desktop, requests may fail if they exceed the size limit.  
+To continue using it reliably, consider upgrading to a paid plan.
+:::
 
 ### 1. Check Local Environment
 
@@ -145,6 +155,7 @@ Main features include:
 - Verify the path in Claude Desktop or Cursor configuration file is correct
 - Check if the configuration file JSON format is valid
 - Restart the application
+- MCP clients may fail when a request exceeds plan-specific limits or when the tool manifest is too large.
 
 ### Check Tool List
 To check available tools:

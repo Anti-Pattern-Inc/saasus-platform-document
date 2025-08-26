@@ -1,6 +1,6 @@
 ---
-title: "Single Tenant Management"
-slug: "single-tenant-management"
+title: "SaaS Infrastructure Management"
+slug: "saas-infra-management"
 excerpt: ""
 hidden: false
 createdAt: "Thu May 08 2024 14:00:00 GMT+0000 (Coordinated Universal Time)"
@@ -9,21 +9,22 @@ updatedAt: "Thu May 08 2024 14:00:00 GMT+0000 (Coordinated Universal Time)"
 
 ## Overview
 
-In SaaS architecture, there are "single-tenant" and "multi-tenant" models.
+In SaaS deployment models, there are "silo model" and "pool model".
 
-A single-tenant architecture means that each customer (tenant) using the SaaS has a separate server and database. Each tenant maintains a completely isolated environment.
+A silo model is a deployment model where different servers and databases are prepared for each customer (tenant) using the SaaS. Each tenant has a completely isolated environment.
 
-A multi-tenant architecture involves multiple tenants sharing common servers and databases. Data is partitioned by tenant, but physical resources are shared.
+A pool model is a deployment model where common servers and databases are prepared for multiple tenants. Data is partitioned by tenant, but physical resources are shared.
 
-The single-tenant management feature is a functionality on the SaaSus Platform that supports the construction of SaaS with a single-tenant architecture.
+The SaaS Infrastructure Management feature is a functionality on the SaaSus Platform that supports the construction of SaaS with a silo model.
 
-:::info
-The single-tenant management feature is only available to customers on the Advanced plan or higher.
+:::warning
+The "SaaS Infrastructure Management feature" is not available for customers on the legacy Starter or Standard plans.
+To use this feature, you need to change to a new pricing plan.
 :::
 
-In a single-tenant architecture, each tenant's data is physically isolated, reducing the risk of data leakage among other benefits. However, there is a disadvantage of increased management cost as servers and databases need to be prepared for each tenant.
+In a silo model, each tenant's data is physically isolated, reducing the risk of data leakage among other benefits. However, there is a disadvantage of increased management cost as servers and databases need to be prepared for each tenant.
 
-The single-tenant management feature automatically prepares servers and databases in your AWS environment when you create a tenant on SaaSus Platform. This can reduce the costs of management and operations.
+The SaaS Infrastructure Management feature automatically prepares servers and databases in your AWS environment when you create a tenant on SaaSus Platform. This can reduce the costs of management and operations.
 
 ## Setup Method
 
@@ -33,11 +34,11 @@ When onboarding a tenant, since the SaaSus Platform needs to access your AWS env
 
 Follow the instructions on the screen to create an IAM Role and register the details of the created role.
 
-![settings-role](/img/part-4/single-tenant-management/settings-role.png)
+![settings-role](/img/part-4/saas-infra-management/settings-role.png)
 
 ### Cloud Formation Template
 
-<a download="singletenant-cf-sample.yml" href="/file/singletenant-cf-sample.yml"> Cloud Formation Template Sample </a>
+<a download="saas-infra-management-cf-sample.yml" href="/file/saas-infra-management-cf-sample.yml"> Cloud Formation Template Sample </a>
 
 When you create a tenant on the SaaSus Platform, a Cloud Formation is executed in your AWS environment to create an environment for each tenant. You need to register the Cloud Formation template that will be used at this time.
 
@@ -57,11 +58,11 @@ The Cloud Formation's Outputs should specify the following items:
 
 ### SQL File
 
-<a download="singletenant-sample.sql" href="/file/singletenant-sample.sql"> SQL File Sample </a>
+<a download="saas-infra-management-sample.sql" href="/file/saas-infra-management-sample.sql"> SQL File Sample </a>
 
 You will need to register SQL file that will be executed against the DB created by the Cloud Formation. Register the SQL for the table definitions and initial data of the DB.
 
-### How to check the progress
+### How to check the progress of SaaS Infrastructure Management
 
 In the SaaS Operation Console - Tenant Management screen, display the target tenant, and you can check the progress information by the value of TenantOnboardingStatus.
 

@@ -41,7 +41,7 @@ Resources:
     #   DBInstanceIdentifier: !Sub "${TenantId}-${DbName}"
       DBName: !Ref DbName
       Engine: 'mysql'
-      EngineVersion: '8.0.35'
+      EngineVersion: '8.0'
       MasterUsername: !Ref DbUser
       MasterUserPassword: !Ref DbPass
       DBInstanceClass: !Ref DatabaseInstanceClass

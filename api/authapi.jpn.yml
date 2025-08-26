@@ -34,7 +34,7 @@ tags:
   - name: invitation
     description: 招待
   - name: singleTenant
-    description: シングルテナント管理
+    description: SaaSインフラ管理
 security:
   - Bearer: []
 paths:
@@ -2166,9 +2166,9 @@ paths:
       tags:
         - singleTenant
       operationId: GetCloudFormationLaunchStackLinkForSingleTenant
-      summary: SingleTenant用CloudFormationスタック起動リンク取得
+      summary: SaaSインフラ管理用CloudFormationスタック起動リンク取得
       description: |
-        SingleTenant用CloudFormationスタック起動リンクを取得します。
+        SaaSインフラ管理用CloudFormationスタック起動リンクを取得します。
       responses:
         "200":
           description: OK
@@ -2187,7 +2187,7 @@ paths:
       tags:
         - singleTenant
       operationId: GetSingleTenantSettings
-      summary: シングルテナント機能の設定情報を取得する
+      summary: SaaSインフラ管理機能の設定情報を取得する
       responses:
         "200":
           description: OK
@@ -2205,10 +2205,10 @@ paths:
       tags:
         - singleTenant
       operationId: UpdateSingleTenantSettings
-      summary: シングルテナント機能の設定情報を更新する
+      summary: SaaSインフラ管理機能の設定情報を更新する
       description: |
-        シングルテナント機能の設定情報を更新します。
-        シングルテナント機能の有効化ができない場合はエラーを返します。
+        SaaSインフラ管理機能の設定情報を更新します。
+        SaaSインフラ管理機能の有効化ができない場合はエラーを返します。
       requestBody:
         content:
           application/json:
@@ -3935,12 +3935,12 @@ components:
       required:
         - link
     SingleTenantSettings:
-      title: シングルテナント設定
+      title: SaaSインフラ管理設定
       type: object
       properties:
         enabled:
-          title: シングルテナント設定を有効にするか否か
-          description: シングルテナント設定を有効にするか否か
+          title: SaaSインフラ管理設定を有効にするか否か
+          description: SaaSインフラ管理設定を有効にするか否か
           type: boolean
         role_arn:
           title: AssumeRoleするためのロールのARN
@@ -3970,11 +3970,11 @@ components:
         - ddl_template_url
         - role_external_id
     UpdateSingleTenantSettingsParam:
-      title: シングルテナント設定更新パラメータ
+      title: SaaSインフラ管理設定更新パラメータ
       properties:
         enabled:
-          title: シングルテナント設定を有効にするか否か
-          description: シングルテナント設定を有効にするか否か
+          title: SaaSインフラ管理設定を有効にするか否か
+          description: SaaSインフラ管理設定を有効にするか否か
           type: boolean
         role_arn:
           title: AssumeRoleするためのロールのARN
