@@ -12015,6 +12015,13 @@ A.
 
 ---
 
+**Q. Is the login screen using a DV certificate? Is the security adequate?**  
+A. Yes, we use a DV (Domain Validation) certificate.  
+Communication is encrypted, so the security of login information is ensured.  
+There is no difference in encryption strength compared to OV certificates.
+
+---
+
 **Q. Is backup and restore possible from the SaaSus Platform console?**  
 A. The SaaSus Platform console does not provide arbitrary backup/point-in-time restore functions, so please consider backup via API if needed.
 
