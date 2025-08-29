@@ -7,10 +7,10 @@ createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
-**Q. Does the "Usage Aggregation" setting (sum/max) for meter units affect the metering information that can be retrieved via API?**  
-A. Yes, it does.
+**Q. What is the "Calculation Method" setting (sum/max) for meter units?**  
+A. The "Calculation Method" setting for meter units is a function that specifies how metering data is aggregated.
 
-When Stripe integration is enabled, the "Usage Aggregation" method (sum or max) that can be configured in the UI not only calculates billing amounts to Stripe but also determines how the count values are calculated in metering-related APIs.
+When Stripe integration is enabled, the "Calculation Method" (sum or max) that can be configured in the UI not only calculates billing amounts to Stripe but also determines how the count values are calculated in metering-related APIs.
 
 Note that when Stripe integration is not enabled, this setting item is not displayed in the UI, but the aggregation method defaults to sum (total).
 
