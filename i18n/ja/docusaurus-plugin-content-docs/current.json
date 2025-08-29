@@ -99,9 +99,13 @@
     "message": "実装ガイド",
     "description": "The label for category Implementation Guide in sidebar docsSidebar"
   },
-  "sidebar.docsSidebar.category.Metering API Implementation Sample and Examples of Use (Laravel)": {
-    "message": "メータリングAPIの実装サンプルと使用例(Laravel)",
-    "description": "The label for category Metering API Implementation Sample and Examples of Use (Laravel) in sidebar docsSidebar"
+  "sidebar.docsSidebar.category.Metering API Implementation Sample and Examples of Use": {
+    "message": "メータリングAPIの実装サンプルと使用例",
+    "description": "The label for category Metering API Implementation Sample and Examples of Use in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Billing Dashboard Implementation Guide": {
+    "message": "課金ダッシュボード実装ガイド",
+    "description": "The label for category Billing Dashboard Implementation Guide in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.Usecase": {
     "message": "ユースケース",
