@@ -1,6 +1,6 @@
 ---
 title: "Single Tenant Management"
-slug: "single-tenant-management"
+slug: "saas-infra-management"
 excerpt: ""
 hidden: false
 createdAt: "Thu May 08 2024 14:00:00 GMT+0000 (Coordinated Universal Time)"
@@ -33,11 +33,11 @@ When onboarding a tenant, since SaaSus needs to access your AWS environment, you
 
 Follow the instructions on the screen to create an IAM Role and register the details of the created role.
 
-![settings-role](/img/saas-development-console/single-tenant-management/settings-role.png)
+![settings-role](/img/saas-development-console/saas-infra-management/settings-role.png)
 
 ### Cloud Formation Template
 
-<a download="singletenant-cf-sample.yml" href="/file/singletenant-cf-sample.yml"> Cloud Formation Template Sample </a>
+<a download="saas-infra-management-cf-sample.yml" href="/file/saas-infra-management-cf-sample.yml"> Cloud Formation Template Sample </a>
 
 When you create a tenant on SaaSus, a Cloud Formation is executed in your AWS environment to create an environment for each tenant. You need to register the Cloud Formation template that will be used at this time.
 
@@ -57,7 +57,7 @@ The Cloud Formation's Outputs should specify the following items:
 
 ### SQL File
 
-<a download="singletenant-sample.sql" href="/file/singletenant-sample.sql"> SQL File Sample </a>
+<a download="saas-infra-management-sample.sql" href="/file/saas-infra-management-sample.sql"> SQL File Sample </a>
 
 You will need to register SQL file that will be executed against the DB created by the Cloud Formation. Register the SQL for the table definitions and initial data of the DB.
 
