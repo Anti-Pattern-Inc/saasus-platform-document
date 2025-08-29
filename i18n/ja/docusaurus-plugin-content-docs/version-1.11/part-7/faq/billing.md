@@ -7,8 +7,8 @@ createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
-**Q. メータ単位の「使用量の集計」設定（sum/max）は、APIで取得できるメータリング情報に影響しますか？**  
-A. はい、影響します。
+**Q. メータ単位の「使用量の集計」設定（sum/max）はどのような機能でしょうか？**  
+A. メータ単位の「使用量の集計」設定は、メータリングデータの集計方法を指定する機能です。
 
 Stripe連携を有効にしている場合にUI上で設定できる「使用量の集計」方法（sumまたはmax）は、Stripeへの請求額を計算するだけでなく、メータリング関連APIで取得できるcountの値の計算方法も決定します。
 
