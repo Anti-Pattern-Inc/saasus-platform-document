@@ -311,7 +311,8 @@
                 "part-6/implementation-guide/example-implementation-using-metering-api"
               ]
             },
-            "part-6/implementation-guide/implementing-multi-factor-authentication-apiserver"
+            "part-6/implementation-guide/implementing-multi-factor-authentication-apiserver",
+            "part-6/implementation-guide/implementing-activity-history-log"
           ]
         },
         {
