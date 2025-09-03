@@ -349,6 +349,7 @@ const sidebars = {
               ],
             },
             "part-6/implementation-guide/implementing-multi-factor-authentication-apiserver",
+            "part-6/implementation-guide/implementing-activity-history-log",
           ],
         },
         {
