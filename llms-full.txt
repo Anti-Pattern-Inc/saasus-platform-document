@@ -1567,7 +1567,8 @@ This completes the preparations for configuring the SaaS Platform.
 
 ![03](/img/part-4/application-settings/domain-and-redirect-settings/domain-name-preference-03.png)
 
-SaaSus Platform automatically generates a login screen based on this domain.
+The registered domain will be used as the login screen URL in the format `auth.domain-name`.
+
 
 ### 2. Post-Login Redirect URL Settings
 
@@ -11963,11 +11964,29 @@ URL: https://www.prisma.io/docs/part-7/faq/api-sdk
 
 URL: https://www.prisma.io/docs/part-7/faq/billing
 
-## Using Stripe  
-*Content coming soon. Please check back later.*
+**Q. What is the "Calculation Method" setting (sum/max) for meter units?**  
+A. The "Calculation Method" setting for meter units is a function that specifies how metering data is aggregated.
 
-## Without Stripe  
-*Content coming soon. Please check back later.*
+When Stripe integration is enabled, the "Calculation Method" (sum or max) that can be configured in the UI not only calculates billing amounts to Stripe but also determines how the count values are calculated in metering-related APIs.
+
+Note that when Stripe integration is not enabled, this setting item is not displayed in the UI, but the aggregation method defaults to sum (total).
+
+Specifically, the count values returned by the following APIs change according to the aggregation settings:
+
+- [Get Metering Unit Count for Specific Date](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountByTenantIdAndUnitNameAndDate)  
+- [Get Metering Unit Count for the Current Day](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountByTenantIdAndUnitNameToday)  
+- [Get Metering Unit Count for the Current Month](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountByTenantIdAndUnitNameThisMonth)  
+- [Get the Metering Unit Count for the Specified Month](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountByTenantIdAndUnitNameAndMonth)  
+- [Get All Metering Unit Counts for a Specified Date](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountsByTenantIdAndDate)  
+- [Get All Metering Unit Counts for the Specified Month](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountsByTenantIdAndMonth)  
+
+**Differences in count values based on aggregation method**
+
+**When sum (total) is set:**  
+The API returns a count that is the sum of metering values recorded within the specified period (daily or monthly).
+
+**When max (maximum) is set:**  
+The API returns a count that is the maximum value of metering values recorded within the specified period (daily or monthly).
 ---
 
 # SaaSus Platform FAQ
@@ -12747,7 +12766,9 @@ Log in from SaaSus Platform and check the operation.
 
 Display the login screen created with SaaSus Platform.
 
-Please display the login screen of the domain you have set, such as [https://auth.sample.saasus.jp](https://auth.sample.saasus.jp).
+You can find the login screen URL in the "Authentication Details" section of the side menu.
+![15](/img/tutorial/authentication-preference/authentication-preference-15.png)
+
 
 ![09](/img/tutorial/authentication-preference/authentication-preference-09.png)
 
@@ -13005,7 +13026,7 @@ I have confirmed that the username is also displayed.
 
 Now go back to the login screen, log in as [user1-2@example.com](mailto:user1-2@example.com), and try posting some posts.
 
-![12](/img/tutorial/authentication-preference/authentication-preference-14.png)
+![12](/img/tutorial/authentication-preference/authentication-preference-12.png)
 
 Of course it will be reflected on the screen.
 
@@ -13109,7 +13130,7 @@ First, copy the `.env.example` file in the `api` directory to create a `.env` fi
 cp api/.env.example api/.env
 ```
 
-Next, open the newly created `.env` file and enter the following values:
+Open the newly created `.env` file and enter the following values:
 
 ---
 
@@ -13126,6 +13147,10 @@ You can find these values in the SaaSus development console:
 
 - On the **Basics > API Key** screen: `SAASUS_SAAS_ID`, `SAASUS_API_KEY`, `SAASUS_SECRET_KEY`
 - On the **Authentication Authorization > Advanced Settings** screen: `SAASUS_LOGIN_URL`
+
+※You can check the login screen URL from "Authentication Details" in the side menu for `SAASUS_LOGIN_URL`
+
+![03](/img/tutorial/configuring-sdk-for-saasus-platform/configuring-sdk-for-saasus-platform-03.png)
 
 With this, the basic setup of the SDK is complete.
 ---
@@ -13605,8 +13630,10 @@ After entering the information, a transition screen to each console of the tenan
 **SaaS Operation Console** is a console for managing SaaS.
 
 :::info About Domain Settings
-By setting a domain on the SaaSus Platform, you can define the base domain used for automatically generating the login screen and for sending emails.  
+By setting a domain on the SaaSus Platform, you can define the base domain used for automatically generating the login screen and for sending emails.
 For details on how to set a domain, please see [Domain and Redirect Settings](/docs/part-4/application-settings/domain-and-redirect-settings).
+
+※It is possible to proceed with the tutorial without setting up a domain.
 :::
 
 :::info About Customizing the Login Screen

@@ -127,7 +127,7 @@
 - [Creating a Tenant](part-6/usecase/about-saas-user-accounts/create-tenant): Once self-signup is complete, the next step is to create a tenant.
 - [Authentication Methods](part-6/usecase/authentication-methods): In web applications, including SaaS, there are two main authentication methods:
 - [API / SDK FAQ](part-7/faq/api-sdk): Content coming soon. Please check back later.
-- [Billing FAQ](part-7/faq/billing): Using Stripe
+- [Billing FAQ](part-7/faq/billing): Q. What is the "Calculation Method" setting (sum/max) for meter units?
 - [SaaSus Platform FAQ](part-7/faq/saasus-platform): Q. What countermeasures are available when the service goes down?
 - [Support](part-7/support): Support Channels
 - [Risk Assessment](part-8/risk-assessment): Risk Assessment Information
