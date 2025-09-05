@@ -102,3 +102,9 @@ const handleDeleteUser = async (userId: string) => {
 ```
 
 This approach creates logs that clearly show the flow: "user opened the user list page (multiple logs), then executed deletion (action log)," making them easy to analyze.
+
+## Output Example
+
+The following shows an example of activity history logs recorded by the above implementation:
+
+![Activity History Log Output Example](/img/part-6/implementation-guide/implementing-activity-history-log/image-01.png)
