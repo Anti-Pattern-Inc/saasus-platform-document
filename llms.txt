@@ -116,6 +116,7 @@
 - [Search, Edit, Create, or Assign Users to Tenants](part-5/user-management/user-crud): Search Users
 - [Developer SDK/API Overview](part-6/developer-sdk-api-overview): 1. SaaSus SDK / API Capabilities and Use Cases
 - [Implementation Example Using Metering API](part-6/implementation-guide/example-implementation-using-metering-api): Overview
+- [Implementation of Activity History Logs](part-6/implementation-guide/implementing-activity-history-log): This guide explains implementation patterns and methods for effectively utilizing activity history logs.
 - [Implementing Authentication Using SaaSus Platform (API Server)](part-6/implementation-guide/implementing-authentication-using-saasus-platform-apiserver): When configuring the backend as an API server, the following implementations are necessary:
 - [Implementation using SaaSus Platform (Serverless)](part-6/implementation-guide/implementing-authentication-using-saasus-serverless): When configuring the backend as serverless, the following implementations are required:
 - [Implementing Multi-Factor Authentication (API Server)](part-6/implementation-guide/implementing-multi-factor-authentication-apiserver): This document provides sample implementations for Multi-Factor Authentication (MFA) in a SaaS application.
