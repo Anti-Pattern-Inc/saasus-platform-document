@@ -102,3 +102,9 @@ const handleDeleteUser = async (userId: string) => {
 ```
 
 これにより、「ユーザーがユーザー一覧ページを開き（複数ログ）、その後、削除を実行した（アクションログ）」という一連の流れが明確にわかる、分析しやすいログになります。
+
+## 出力例
+
+上記の実装により記録される行動履歴ログの出力例は以下のようになります。
+
+![行動履歴ログの出力例](/ja/img/part-6/implementation-guide/implementing-activity-history-log/image-01.png)
