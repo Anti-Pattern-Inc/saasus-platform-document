@@ -12228,6 +12228,14 @@ When the limit is reached, warnings will be displayed on the SaaS Operation Cons
 
 ---
 
+**Q. I received a notification about scheduled SaaSus Platform account deletion. What should I do?**  
+A. This email is sent when SaaS users have not logged in for more than one month.  
+To avoid account deletion, please log in from the SaaS login screen created by SaaSus Platform.  
+The SaaS login URL can be found in the "Authentication Settings" section of the SaaSus Platform Development Console.  
+※ Please note that this is not a login to the [SaaSus Platform Console](https://auth.saasus.io).  
+
+---
+
 # Support
 
 URL: https://www.prisma.io/docs/part-7/support
