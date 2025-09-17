@@ -54,3 +54,428 @@
 .no-p-margin p {
   margin: 0;
 }
+
+/* Ask AI カスタマイズ - 最小限のスタイルのみ */
+.ask-ai-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.ask-ai-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.ask-ai-modal-content {
+  background: var(--ifm-color-emphasis-0);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 800px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* ダークモード対応 */
+[data-theme='dark'] .ask-ai-modal-content {
+  background: var(--ifm-background-color);
+  border-color: var(--ifm-color-emphasis-200);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.ask-ai-header {
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+}
+
+/* ダークモード対応 */
+[data-theme='dark'] .ask-ai-header {
+  border-bottom-color: var(--ifm-color-emphasis-200);
+}
+
+body.modal-open {
+  overflow: hidden !important;
+}
+
+.ask-ai-modal * {
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .ask-ai-modal-content {
+    height: 90vh;
+    max-width: 95vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .ask-ai-modal-content {
+    height: 100vh;
+    max-width: 100vw;
+    border-radius: 0;
+  }
+}
+
+
+.ask-ai-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: var(--ifm-color-emphasis-200);
+  border: none;
+  border-radius: 6px;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.ask-ai-back-btn:hover {
+  background: var(--ifm-color-emphasis-300);
+}
+
+.ask-ai-back-btn svg {
+  width: 12px;
+  height: 12px;
+}
+
+
+
+/* チャット形式のスタイル */
+.ask-ai-chat-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.ask-ai-message {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.ask-ai-message.user-message {
+  align-items: flex-end;
+}
+
+.ask-ai-message.ai-message {
+  align-items: flex-start;
+}
+
+.ask-ai-message .message-content {
+  max-width: 80%;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.ask-ai-message.user-message .message-content {
+  background: var(--ifm-color-emphasis-200);
+  color: var(--ifm-font-color-base);
+  border-bottom-right-radius: 0;
+}
+
+.ask-ai-message.ai-message .message-content {
+  background: var(--ifm-color-emphasis-100);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  color: var(--ifm-font-color-base);
+  border-bottom-left-radius: 0;
+}
+
+.ask-ai-message.ai-message .message-content.error {
+  background: var(--ifm-color-danger-lightest);
+  color: var(--ifm-color-danger-dark);
+}
+
+.ask-ai-message.loading .message-content {
+  color: var(--ifm-color-emphasis-600);
+  font-style: italic;
+}
+
+
+.ask-ai-input-container {
+  padding: 1rem;
+  border-top: 1px solid var(--ifm-color-emphasis-300);
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+
+/* ダークモード対応 */
+[data-theme='dark'] .ask-ai-input-container {
+  border-top-color: var(--ifm-color-emphasis-200);
+}
+
+.ask-ai-input {
+  flex: 1;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-size: 14px;
+  resize: none;
+  min-height: 60px;
+  max-height: 120px;
+  outline: none;
+  background: var(--ifm-color-emphasis-0);
+  color: var(--ifm-font-color-base);
+  font-family: inherit;
+}
+
+/* ダークモード対応 */
+[data-theme='dark'] .ask-ai-input {
+  border-color: var(--ifm-color-emphasis-200);
+  background: var(--ifm-background-color);
+}
+
+.ask-ai-send-btn {
+  background: var(--ifm-color-emphasis-200);
+  border: none;
+  border-radius: 50%;
+  color: var(--ifm-color-emphasis-600);
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  transition: background-color 0.2s;
+}
+
+.ask-ai-send-btn:hover {
+  background: var(--ifm-color-emphasis-300);
+}
+
+.ask-ai-send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+/* Markdown スタイル */
+.ask-ai-markdown {
+  line-height: 1.6;
+}
+
+.ask-ai-markdown h1,
+.ask-ai-markdown h2,
+.ask-ai-markdown h3 {
+  margin: 16px 0 8px 0;
+  font-weight: 600;
+}
+
+.ask-ai-markdown h1 {
+  font-size: 1.5em;
+}
+
+.ask-ai-markdown h2 {
+  font-size: 1.3em;
+}
+
+.ask-ai-markdown h3 {
+  font-size: 1.1em;
+}
+
+.ask-ai-markdown p {
+  margin: 8px 0;
+}
+
+.ask-ai-markdown ol,
+.ask-ai-markdown ul {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.ask-ai-markdown li {
+  margin: 4px 0;
+}
+
+.ask-ai-markdown .inline-code {
+  background: var(--ifm-color-emphasis-200);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.9em;
+}
+
+
+
+/* コードブロックスタイル */
+.ask-ai-message .code-block {
+  margin: 16px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--ifm-color-emphasis-100);
+  border: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.ask-ai-message .code-block-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--ifm-color-emphasis-200);
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.ask-ai-message .code-block-language {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ifm-color-emphasis-700);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ask-ai-message .code-block-copy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ifm-color-emphasis-600);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ask-ai-message .code-block-copy:hover {
+  background: var(--ifm-color-emphasis-300);
+  color: var(--ifm-font-color-base);
+}
+
+
+.ask-ai-message .code-block-content {
+  padding: 0;
+  background: var(--ifm-color-emphasis-0);
+  overflow-x: auto;
+}
+
+.ask-ai-message .code-block-content pre {
+  margin: 0;
+  padding: 16px;
+  background: transparent;
+  overflow-x: auto;
+}
+
+.ask-ai-message .code-block-content code {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ifm-font-color-base);
+  white-space: pre;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* Prism.js シンタックスハイライト用のダークテーマ */
+.ask-ai-message .code-block .token.comment,
+.ask-ai-message .code-block .token.prolog,
+.ask-ai-message .code-block .token.doctype,
+.ask-ai-message .code-block .token.cdata {
+  color: #6a9955;
+}
+
+.ask-ai-message .code-block .token.punctuation {
+  color: #d4d4d4;
+}
+
+.ask-ai-message .code-block .token.property,
+.ask-ai-message .code-block .token.tag,
+.ask-ai-message .code-block .token.boolean,
+.ask-ai-message .code-block .token.number,
+.ask-ai-message .code-block .token.constant,
+.ask-ai-message .code-block .token.symbol,
+.ask-ai-message .code-block .token.deleted {
+  color: #b5cea8;
+}
+
+.ask-ai-message .code-block .token.selector,
+.ask-ai-message .code-block .token.attr-name,
+.ask-ai-message .code-block .token.string,
+.ask-ai-message .code-block .token.char,
+.ask-ai-message .code-block .token.builtin,
+.ask-ai-message .code-block .token.inserted {
+  color: #ce9178;
+}
+
+.ask-ai-message .code-block .token.operator,
+.ask-ai-message .code-block .token.entity,
+.ask-ai-message .code-block .token.url,
+.ask-ai-message .code-block .language-css .token.string,
+.ask-ai-message .code-block .style .token.string {
+  color: #d4d4d4;
+}
+
+.ask-ai-message .code-block .token.atrule,
+.ask-ai-message .code-block .token.attr-value,
+.ask-ai-message .code-block .token.keyword {
+  color: #569cd6;
+}
+
+.ask-ai-message .code-block .token.function,
+.ask-ai-message .code-block .token.class-name {
+  color: #dcdcaa;
+}
+
+.ask-ai-message .code-block .token.regex,
+.ask-ai-message .code-block .token.important,
+.ask-ai-message .code-block .token.variable {
+  color: #d16969;
+}
+
+/* ダークモード対応 */
+[data-theme='dark'] .ask-ai-message .code-block {
+  background: #1e1e1e;
+  border-color: #404040;
+}
+
+[data-theme='dark'] .ask-ai-message .code-block-header {
+  background: #2a2a2a;
+  border-bottom-color: #404040;
+}
+
+[data-theme='dark'] .ask-ai-message .code-block-language {
+  color: #9ca3af;
+}
+
+[data-theme='dark'] .ask-ai-message .code-block-copy {
+  color: #9ca3af;
+}
+
+[data-theme='dark'] .ask-ai-message .code-block-copy:hover {
+  background: #404040;
+  color: #ffffff;
+}
+
+[data-theme='dark'] .ask-ai-message .code-block-content {
+  background: #1e1e1e;
+}
+
+[data-theme='dark'] .ask-ai-message .code-block-content code {
+  color: #d4d4d4;
+}
+
