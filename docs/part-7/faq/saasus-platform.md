@@ -127,6 +127,8 @@ A. Upper limits are set according to your plan.
 For specific upper limits, please check the [plan details](https://saasus.io/pricing).  
 When the limit is reached, warnings will be displayed on the SaaS Operation Console and notifications will be sent to your registered email address. You can continue using the service for a certain period, but please consider upgrading to a higher plan.
 
+---
+
 **Q. I received a notification about scheduled SaaSus Platform account deletion. What should I do?**  
 A. This email is sent when SaaS users have not logged in for more than one month.  
 To avoid account deletion, please log in from the SaaS login screen created by SaaSus Platform.  
