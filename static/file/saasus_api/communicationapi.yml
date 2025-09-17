@@ -1,22 +1,18 @@
 openapi: 3.0.0
 info:
-  description: "SaaSus Communication API Schema"
-  version: "1.0.0"
-  title: "SaaSus Communication API Schema"
+  description: SaaSus Communication API Schema
+  version: 1.0.0
+  title: SaaSus Communication API Schema
   contact:
-    name: "Anti-Pattern"
+    name: Anti-Pattern
 servers:
-  - url: "https://api.saasus.io/v1/communication"
+  - url: https://api.saasus.io/v1/communication
     description: Production API Server
 tags:
-  - name: "feedback"
+  - name: feedback
     description: Feedback
     x-description-i18n:
       jpn: フィードバック
-  - name: "error"
-    description: Error for testing
-    x-description-i18n:
-      jpn: テスト用途のエラー
 security:
   - Bearer: []
 paths:
@@ -35,20 +31,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateFeedbackParam"
+              $ref: '#/components/schemas/CreateFeedbackParam'
       responses:
-        201:
+        '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Feedback"
-        500:
+                $ref: '#/components/schemas/Feedback'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
     get:
       tags:
         - feedback
@@ -60,18 +56,18 @@ paths:
       x-description-i18n:
         jpn: フィードバックの一覧を取得します。
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Feedbacks"
-        500:
+                $ref: '#/components/schemas/Feedbacks'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /feedbacks/{feedback_id}:
     patch:
       tags:
@@ -84,27 +80,27 @@ paths:
       x-description-i18n:
         jpn: フィードバックの編集をします。
       parameters:
-        - $ref: "#/components/parameters/FeedbackId"
+        - $ref: '#/components/parameters/FeedbackId'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateFeedbackParam"
+              $ref: '#/components/schemas/UpdateFeedbackParam'
       responses:
-        200:
+        '200':
           description: OK
-        404:
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        500:
+                $ref: '#/components/schemas/Error'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
     get:
       tags:
         - feedback
@@ -116,26 +112,26 @@ paths:
       x-description-i18n:
         jpn: フィードバックの取得をします。
       parameters:
-        - $ref: "#/components/parameters/FeedbackId"
+        - $ref: '#/components/parameters/FeedbackId'
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Feedback"
-        404:
+                $ref: '#/components/schemas/Feedback'
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        500:
+                $ref: '#/components/schemas/Error'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
     delete:
       tags:
         - feedback
@@ -147,22 +143,22 @@ paths:
       x-description-i18n:
         jpn: フィードバックを削除します。
       parameters:
-        - $ref: "#/components/parameters/FeedbackId"
+        - $ref: '#/components/parameters/FeedbackId'
       responses:
-        200:
+        '200':
           description: OK
-        404:
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        500:
+                $ref: '#/components/schemas/Error'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /feedbacks/{feedback_id}/status:
     patch:
       tags:
@@ -175,27 +171,27 @@ paths:
       x-description-i18n:
         jpn: フィードバックのステータスを更新します。
       parameters:
-        - $ref: "#/components/parameters/FeedbackId"
+        - $ref: '#/components/parameters/FeedbackId'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateFeedbackStatusParam"
+              $ref: '#/components/schemas/UpdateFeedbackStatusParam'
       responses:
-        200:
+        '200':
           description: OK
-        404:
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        500:
+                $ref: '#/components/schemas/Error'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /feedbacks/{feedback_id}/votes/users:
     post:
       tags:
@@ -208,31 +204,31 @@ paths:
       x-description-i18n:
         jpn: フィードバックへの投票をします。
       parameters:
-        - $ref: "#/components/parameters/FeedbackId"
+        - $ref: '#/components/parameters/FeedbackId'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateVoteUserParam"
+              $ref: '#/components/schemas/CreateVoteUserParam'
       responses:
-        201:
+        '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Votes"
-        404:
+                $ref: '#/components/schemas/Votes'
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        500:
+                $ref: '#/components/schemas/Error'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /feedbacks/{feedback_id}/votes/users/{user_id}:
     delete:
       tags:
@@ -245,23 +241,23 @@ paths:
       x-description-i18n:
         jpn: フィードバックへの投票の取消をします。
       parameters:
-        - $ref: "#/components/parameters/FeedbackId"
-        - $ref: "#/components/parameters/UserId"
+        - $ref: '#/components/parameters/FeedbackId'
+        - $ref: '#/components/parameters/UserId'
       responses:
-        200:
+        '200':
           description: OK
-        404:
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        500:
+                $ref: '#/components/schemas/Error'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /feedbacks/{feedback_id}/comments:
     post:
       tags:
@@ -274,31 +270,31 @@ paths:
       x-description-i18n:
         jpn: フィードバックへのコメントを投稿します。
       parameters:
-        - $ref: "#/components/parameters/FeedbackId"
+        - $ref: '#/components/parameters/FeedbackId'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateFeedbackCommentParam"
+              $ref: '#/components/schemas/CreateFeedbackCommentParam'
       responses:
-        201:
+        '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Comment"
-        404:
+                $ref: '#/components/schemas/Comment'
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        500:
+                $ref: '#/components/schemas/Error'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /feedbacks/{feedback_id}/comments/{comment_id}:
     get:
       tags:
@@ -311,27 +307,27 @@ paths:
       x-description-i18n:
         jpn: フィードバックへのコメントを取得します。
       parameters:
-        - $ref: "#/components/parameters/FeedbackId"
-        - $ref: "#/components/parameters/CommentId"
+        - $ref: '#/components/parameters/FeedbackId'
+        - $ref: '#/components/parameters/CommentId'
       responses:
-        200:
+        '200':
           description: Ok
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Comment"
-        404:
+                $ref: '#/components/schemas/Comment'
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        500:
+                $ref: '#/components/schemas/Error'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
     patch:
       tags:
         - feedback
@@ -343,28 +339,28 @@ paths:
       x-description-i18n:
         jpn: フィードバックへのコメントを編集します。
       parameters:
-        - $ref: "#/components/parameters/FeedbackId"
-        - $ref: "#/components/parameters/CommentId"
+        - $ref: '#/components/parameters/FeedbackId'
+        - $ref: '#/components/parameters/CommentId'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateFeedbackCommentParam"
+              $ref: '#/components/schemas/UpdateFeedbackCommentParam'
       responses:
-        200:
+        '200':
           description: OK
-        404:
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        500:
+                $ref: '#/components/schemas/Error'
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
     delete:
       tags:
         - feedback
@@ -376,38 +372,18 @@ paths:
       x-description-i18n:
         jpn: フィードバックへのコメントを削除します。
       parameters:
-        - $ref: "#/components/parameters/FeedbackId"
-        - $ref: "#/components/parameters/CommentId"
+        - $ref: '#/components/parameters/FeedbackId'
+        - $ref: '#/components/parameters/CommentId'
       responses:
-        200:
+        '200':
           description: OK
-        404:
+        '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-        500:
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-  /errors/internal-server-error:
-    get:
-      tags:
-        - "error"
-      operationId: ReturnInternalServerError
-      summary: Return Internal Server Error
-      x-summary-i18n:
-        jpn: ステータスコード500でサーバーエラーを返却
-      description: |
-        This endpoint is used for testing purposes. Returns a server error with status code 500.
-      x-description-i18n:
-        jpn: |
-          テスト用途で使用するエンドポイントです。ステータスコード500でサーバーエラーを返却します。
-      responses:
-        500:
+                $ref: '#/components/schemas/Error'
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -424,19 +400,19 @@ components:
       in: path
       name: feedback_id
       schema:
-        $ref: "#/components/schemas/Uuid"
+        $ref: '#/components/schemas/Uuid'
       required: true
     CommentId:
       in: path
       name: comment_id
       schema:
-        $ref: "#/components/schemas/Uuid"
+        $ref: '#/components/schemas/Uuid'
       required: true
     UserId:
       in: path
       name: user_id
       schema:
-        $ref: "#/components/schemas/Uuid"
+        $ref: '#/components/schemas/Uuid'
       required: true
   schemas:
     Error:
@@ -478,16 +454,16 @@ components:
       allOf:
         - properties:
             user_id:
-              $ref: "#/components/schemas/Uuid"
+              $ref: '#/components/schemas/Uuid'
           required:
             - user_id
-        - $ref: "#/components/schemas/FeedbackSaveProps"
+        - $ref: '#/components/schemas/FeedbackSaveProps'
     UpdateFeedbackParam:
       title: Update Feedback Parameter
       x-title-i18n:
         jpn: フィードバック作成パラメータ
       allOf:
-        - $ref: "#/components/schemas/FeedbackSaveProps"
+        - $ref: '#/components/schemas/FeedbackSaveProps'
     Feedback:
       title: Feedback
       x-title-i18n:
@@ -496,9 +472,9 @@ components:
       allOf:
         - properties:
             id:
-              $ref: "#/components/schemas/Uuid"
+              $ref: '#/components/schemas/Uuid'
             user_id:
-              $ref: "#/components/schemas/Uuid"
+              $ref: '#/components/schemas/Uuid'
             created_at:
               title: Post Date
               x-title-i18n:
@@ -506,15 +482,15 @@ components:
               type: integer
               example: 1640995200
             status:
-              $ref: "#/components/schemas/Status"
+              $ref: '#/components/schemas/Status'
           required:
             - id
             - user_id
             - created_at
             - status
-        - $ref: "#/components/schemas/FeedbackSaveProps"
-        - $ref: "#/components/schemas/Comments"
-        - $ref: "#/components/schemas/Votes"
+        - $ref: '#/components/schemas/FeedbackSaveProps'
+        - $ref: '#/components/schemas/Comments'
+        - $ref: '#/components/schemas/Votes'
     Comment:
       title: Comment
       x-title-i18n:
@@ -523,7 +499,7 @@ components:
       allOf:
         - properties:
             id:
-              $ref: "#/components/schemas/Uuid"
+              $ref: '#/components/schemas/Uuid'
             created_at:
               title: Post Date
               x-title-i18n:
@@ -547,7 +523,7 @@ components:
       type: object
       properties:
         user_id:
-          $ref: "#/components/schemas/Uuid"
+          $ref: '#/components/schemas/Uuid'
       required:
         - user_id
     Users:
@@ -558,7 +534,8 @@ components:
       properties:
         users:
           type: array
-          items: { $ref: "#/components/schemas/User" }
+          items:
+            $ref: '#/components/schemas/User'
       required:
         - users
     Feedbacks:
@@ -569,7 +546,8 @@ components:
       properties:
         feedbacks:
           type: array
-          items: { $ref: "#/components/schemas/Feedback" }
+          items:
+            $ref: '#/components/schemas/Feedback'
       required:
         - feedbacks
     Status:
@@ -587,7 +565,8 @@ components:
       properties:
         comments:
           type: array
-          items: { $ref: "#/components/schemas/Comment" }
+          items:
+            $ref: '#/components/schemas/Comment'
       required:
         - comments
     Votes:
@@ -606,7 +585,7 @@ components:
               example: 1
           required:
             - count
-        - $ref: "#/components/schemas/Users"
+        - $ref: '#/components/schemas/Users'
     UpdateFeedbackStatusParam:
       title: Edit Feedback Status Parameter
       x-title-i18n:
@@ -614,7 +593,7 @@ components:
       type: object
       properties:
         status:
-          $ref: "#/components/schemas/Status"
+          $ref: '#/components/schemas/Status'
       required:
         - status
     CreateFeedbackCommentParam:
@@ -652,6 +631,6 @@ components:
       type: object
       properties:
         user_id:
-          $ref: "#/components/schemas/Uuid"
+          $ref: '#/components/schemas/Uuid'
       required:
         - user_id
