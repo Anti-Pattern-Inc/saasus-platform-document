@@ -142,7 +142,9 @@ const sidebars = {
                 type: "doc",
                 id: "part-4/user-authz-settings/authentication-method-settings",
               },
-              items: ["part-4/user-authz-settings/google-linkage"],
+              items: [
+                "part-4/user-authz-settings/google-linkage",
+                "part-4/user-authz-settings/saml-linkage"],
             },
             "part-4/user-authz-settings/declare-additional-attribute-to-user",
             "part-4/user-authz-settings/notifymailcustomize",
@@ -171,7 +173,7 @@ const sidebars = {
           },
           items: ["part-4/integrate-with-amazon-eventbridge/event-sample"],
         },
-        "part-4/single-tenant-management",
+        "part-4/saas-infra-management",
         {
           type: "category",
           label: "AWS Marketplace Integration",
@@ -244,10 +246,11 @@ const sidebars = {
             id: "part-4/mcp-server/setup",
           },
           items: [
-            "part-4/mcp-server/clone-dev-settings",
-            "part-4/mcp-server/export-user-info-csv",
             "part-4/mcp-server/bulk-user-registration",
+            "part-4/mcp-server/export-user-info-csv",
+            "part-4/mcp-server/clone-dev-settings",
             "part-4/mcp-server/environment-setup-guide",
+            "part-4/mcp-server/user-behavior-analysis",
           ],
         },
         {
@@ -261,7 +264,17 @@ const sidebars = {
             slug: "/part-4/account-settings",
           },
           items: [
-            "part-4/account-settings/procedure-for-applying-for-a-paid-plan",
+            {
+              type: "category",
+              label: "Procedure for Applying for a Paid Plan",
+              link: {
+                type: "doc",
+                id: "part-4/account-settings/procedure-for-applying-for-a-paid-plan",
+              },
+              items: [
+                "part-4/account-settings/billing-information",
+              ],
+            },
             "part-4/account-settings/saasususerinvitation",
           ],
         },
@@ -338,6 +351,7 @@ const sidebars = {
               ],
             },
             "part-6/implementation-guide/implementing-multi-factor-authentication-apiserver",
+            "part-6/implementation-guide/implementing-activity-history-log",
           ],
         },
         {
@@ -457,6 +471,7 @@ const sidebars = {
         "reference/awsmarketplace-api",
         "reference/integration",
         "reference/apigateway-api",
+        "reference/analysis-api",
       ],
     },
   ],

@@ -50,6 +50,9 @@ const config = {
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
+        googleTagManager: {
+          containerId: 'GTM-5T68ML2',
+        },
       }),
     ],
     [
@@ -89,6 +92,10 @@ const config = {
             spec: "./api/apigatewayapi.yml",
           },
           {
+            id: "analysisapi-spec",
+            spec: "./api/analysisapi.yml",
+          },
+          {
             id: "pricingapi-spec-jpn",
             spec: "./api/pricingapi.jpn.yml",
           },
@@ -119,6 +126,10 @@ const config = {
           {
             id: "apigatewayapi-spec-jpn",
             spec: "./api/apigatewayapi.jpn.yml",
+          },
+          {
+            id: "analysisapi-spec-jpn",
+            spec: "./api/analysisapi.jpn.yml",
           },
         ],
         theme: {
@@ -278,6 +289,11 @@ const config = {
           {
             from: '/docs/saasus-platform-document/',
             to: '/docs/part-1/purpose-and-overview',
+          },
+          // SaaS Infra Management
+          {
+            to: '/docs/part-4/saas-infra-management',
+            from: ['/docs/part-4/single-tenant-management'],
           },
           // AWS Marketplace Integration
           {

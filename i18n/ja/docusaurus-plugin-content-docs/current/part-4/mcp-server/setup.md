@@ -12,6 +12,11 @@ updatedAt: "Wed May 22 2024 15:16:11 GMT+0000 (Coordinated Universal Time)"
 ## 概要
 SaaSus API MCP Serverは、Model Context Protocol (MCP) サーバーとして動作し、SaaSus APIをClaude DesktopやCursorなどのMCP互換クライアントから利用できるようにします。
 
+:::caution
+MCP クライアントの送信上限と日次上限はプランごとに異なります。  
+Free プランでは、大きなリクエストが拒否されることがあります。
+:::
+
 ## 前提条件
 - Node.js（v16以上必須、v20以上推奨）
 - npm（Nodeに含まれています）
@@ -52,6 +57,11 @@ Workspace: saasus-auth-api-schema
 ```
 
 ## Claude Desktop での設定
+
+:::caution
+Claude Desktop の無料版をご利用の場合、送信上限を超えるとエラーとなり動作しないことがあります。  
+継続してご利用いただくには、有料プランへの切り替えをご検討ください。
+:::
 
 ### 1. ローカル環境の確認
 
@@ -145,6 +155,7 @@ SaaSus API MCP Serverでは、SaaSus Platform の全APIエンドポイントが�
 - Claude Desktop または Cursor の設定ファイルのパスが正しいか確認してください
 - 設定ファイルのJSON形式が正しいか確認してください
 - アプリケーションを再起動してください
+- MCP クライアントは、プランやツール定義の大きさによって送信上限を超え失敗する場合があります。
 
 ### ツール一覧の確認
 利用可能なツールを確認するには：

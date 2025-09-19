@@ -426,7 +426,9 @@ const getChats = async (req: Request, res: Response) => {
 
 SaaSus Platform で作成したログイン画面を表示します。
 
-[https://auth.sample.saasus.jp](https://auth.sample.saasus.jp) など、ご自身で設定したドメインのログイン画面を表示してください。
+ログイン画面のURLはサイドメニューの「認証詳細設定」からログイン画面で確認できます。
+![15](/ja/img/tutorial/authentication-preference/authentication-preference-15.png)
+
 
 ![09](/ja/img/tutorial/authentication-preference/authentication-preference-09.png)
 
@@ -525,7 +527,7 @@ array:3 [▼
 ### サンプルアプリケーションのマルチテナント化
 
 - Laravel の場合は、`api/app/Http/Controllers/MessageController.php` が
-- Express の場合は、`api/controllers/api/board.ts` が
+- Express の場合は、`api/controllers/chat.ts` が
 
 メインの処理なので、ここにマルチテナント対応にするための処理を入れてみましょう。
 
