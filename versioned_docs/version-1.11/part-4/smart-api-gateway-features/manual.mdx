@@ -135,26 +135,36 @@ package implementsample.service;
 
 import java.util.List;
 
-import implementsample.repository.InventoryRepository;
-import implementsample.util.TenantApiClient;
-import saasus.sdk.modules.SaaSusAPI;
 import implementsample.dto.InventoryDto;
+import implementsample.repository.InventoryRepository;
+import saasus.sdk.modules.SaaSusAPI;
+import saasus.sdk.util.apiserver.SaasusIdentity;
 
 public class InventoryService {
-    public List<InventoryDto> getInventory(String tenantId) {
-        // Retrieve inventory information for the corresponding tenant ID
-        return InventoryRepository.TenantInventory.getOrDefault(tenantId,
-                InventoryRepository.TenantInventory.get("default"));
+
+    /**
+     * API for getting inventory information
+     * @param identity SaasusIdentity object
+     * @return List of inventory information
+     */
+    @SaaSusAPI(path = "getInventory")
+    public static List<InventoryDto> getInventory(SaasusIdentity identity) {
+        String tenantId = identity.getTenantId();
+
+        return InventoryRepository.getInventory(tenantId);
     }
 
-    @SaaSusAPI(path = "getInventory")
-    public static List<InventoryDto> getInventoryEntryPoint(String inventoryId) {
-        // Retrieve the tenant ID from the API key
-        TenantApiClient tenantClient = new TenantApiClient();
-        String tenantId = tenantClient.getTenantIdFromApiKey(inventoryId);
+    /**
+     * API for getting inventory information by user
+     * @param identity SaasusIdentity object
+     * @return List of inventory information
+     */
+    @SaaSusAPI(path = "getInventoryByUser")
+    public static List<InventoryDto> getInventoryByUser(SaasusIdentity identity) {
+        String tenantId = identity.getTenantId();
+        String userId = identity.getUserId();
 
-        return InventoryRepository.TenantInventory.getOrDefault(tenantId,
-                InventoryRepository.TenantInventory.get("default"));
+        return InventoryRepository.getInventoryByUser(tenantId, userId);
     }
 }
 ```
@@ -175,14 +185,15 @@ public class InventoryService {
 <TabItem value="java" label="java" default>
 ```
 
-```java
+```txt
 // saasus api server
 import saasus.sdk.util.apiserver.ApiServer;
 
 ...omitted...
 
-// Start the API server on port 8083
-ApiServer.start(8083);
+            // Start the API server on port 8083
+            ApiServer.start(8083);
+
 ```
 
 ```mdx-code-block
@@ -199,9 +210,43 @@ ApiServer.start(8083);
 
 ---
 
-### Step 4: Integrate and Compress Source Code
+### Step 4: Code Modifications
 
-Because the source code will be uploaded in Step 5, collect and compress it into a ZIP file using the shell script below.
+Modify the code in the appropriate sections.
+**Areas that need modification in InventoryRepository.java:**
+
+1. **Modify Inventory Manager ID constant**
+   ```java
+   // Before modification
+   private static final String INVENTORY_MANAGER_A = "f47ac10b-58cc-4372-a567-0e02b2c3d479";
+   
+   // After modification (change to actual user ID)
+   private static final String INVENTORY_MANAGER_A = "actual user ID";
+   ```
+
+2. **Modify tenant ID**
+   ```java
+   // Before modification
+   put("d296b330-3cce-40b6-88c3-035a1d86981f",
+   
+   // After modification (change to actual tenant ID)
+   put("actual tenant ID",
+   ```
+
+**Modification steps:**
+1. Open `src/main/java/implementsample/repository/InventoryRepository.java`
+2. Change the above constant values to the actual user ID and tenant ID created in SaaSus Platform
+3. Save the file
+
+:::info
+The actual user ID and tenant ID can be confirmed from the SaaSus Platform management screen.
+:::
+
+---
+
+### Step 5: Integrate and Compress Source Code
+
+Because the source code will be uploaded in Step 6, collect and compress it into a ZIP file using the shell script below.
 
 ```bash
 bash java_files_collector.sh <path to your application>
@@ -221,7 +266,7 @@ This completes the configuration within the SaaS application.
 
 ---
 
-### Step 5: Upload the ZIP File
+### Step 6: Upload the ZIP File
 
 1. Access the Smart API Gateway feature screen in the SaaS Development Console.
 
@@ -229,7 +274,7 @@ This completes the configuration within the SaaS application.
 
 ---
 
-### Step 6: Permission & Infrastructure Settings
+### Step 7: Permission & Infrastructure Settings
 
 1. Go to the **Permission tab** and create **CloudFormation for Assume Role**.
 2. Register the **Role ARN** and **External ID** you created.
@@ -243,7 +288,7 @@ When the setup is complete, the infrastructure connecting the SaaSus Platform an
 
 ---
 
-### Step 7: Publish and Access the API
+### Step 8: Publish and Access the API
 
 1. **Publish the API**
 2. You can access it via the domain for the API endpoint.
@@ -254,19 +299,52 @@ When the setup is complete, the infrastructure connecting the SaaSus Platform an
 - Check the API methods in **Throttling&Role** under the method path.
 - Access the domain of the API endpoint as follows:
 
+#### SaaSus Identity Integration
+
+Smart API Gateway enables fine-grained access control and data filtering by integrating with **SaaSus Identity**, utilizing tenant ID, environment ID (ENV ID), and user ID.
+
+- **Tenant ID**: Used to access tenant-specific data in a multi-tenant environment
+- **Environment ID (ENV ID)**: Used for environment-specific data access such as development, staging, and production environments
+- **User ID**: Used for data retrieval and operation restrictions tied to specific users
+
+In the implementation example, the inventory management API uses SaasusIdentity object to obtain tenant ID and user ID, enabling fine-grained access control and data filtering according to tenant and user.
+
 #### Access Example
 
-```bash
-$ curl -v -X GET https://<domain>/<api method path> -H 'x-api-key:<YourIssuedAPIKey>'
+```sh
+$ curl -v -X GET https://<domain>/<api method path> -H 'x-api-key:<issued API Key>'
 ```
 
-#### Example
+#### API Access Examples
 
-```bash
-$ curl -v -X GET https://xxxxxxxxxxxxxxxxxxxxx/inventory-controller/get-inventory?inventoryId=d296b330-3cce-40b6-88c3-035a1d86981f -H 'x-api-key:azydsktcf1b93Mmjxuex7CEbEoV7OjrGk0RIqgzCQtc'
+The following are examples of API access utilizing tenant ID and user ID through SaaSus Identity integration:
+
+**Get all inventory (filtering by tenant):**
+```sh
+$ curl -X GET https://<domain>/inventory-service/get-inventory -H 'x-api-key:<tenant API Key>'
 ```
 
-### Step 8: Throttling Settings
+**Get user-specific inventory (filtering by user ID):**
+```sh
+$ curl -X GET https://<domain>/inventory-service/get-inventory-by-user -H 'x-api-key:<user API Key>'
+```
+
+**Response example:**
+```json
+[
+  {
+    "id": "inventory-001",
+    "name": "Product A",
+    "inventoryManagerId": "e47ac10b-58cc-4372-a567-0e02b2c3d480",
+    "quantity": 10
+  }
+]
+```
+
+In this example, inventory data is filtered based on tenant ID and user ID obtained from the SaasusIdentity object.
+
+
+### Step 9: Throttling Settings
 
 - From **Throttling&Role**, select the target method path and configure the throttling settings.
 - For testing, set a limit of **2 requests per 1 minute**.
@@ -284,7 +362,7 @@ $ curl -v -X GET https://xxxxxxxxxxxxxxxxxxxxx/inventory-controller/get-inventor
 
 :::
 
-### Step 9: Authorization (Role) Settings
+### Step 10: Authorization (Role) Settings
 
 - For testing, create a role called "general user" in the **Role Definitions** of the SaaS Development Console.
 - Role-based authorization requires a user's **API Key**. Create a user in the **User Management Screen** of the SaaS Operation Console and issue an API Key.
@@ -301,14 +379,14 @@ $ curl -v -X GET https://xxxxxxxxxxxxxxxxxxxxx/inventory-controller/get-inventor
 
 :::
 
-### Step 10: Domain Settings
+### Step 11: Domain Settings
 
 - Configure the domain from **Custom Domain**.
 - Add the displayed CNAME record to your own DNS server.
 - After domain configuration is complete, the domain for the API endpoint is updated.
 - You can then access the API via the newly configured domain.
 
-### Step 11: IP Restriction Settings
+### Step 12: IP Restriction Settings
 
 - Set IP restrictions in the **Tenant Management Screen** of the SaaS Operation Console.
 - After configuring IP restrictions, the API can only be accessed from the specified IP addresses.
