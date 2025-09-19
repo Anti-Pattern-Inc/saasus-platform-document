@@ -43,8 +43,10 @@ After entering the information, a transition screen to each console of the tenan
 **SaaS Operation Console** is a console for managing SaaS.
 
 :::info About Domain Settings
-By setting a domain on the SaaSus Platform, you can define the base domain used for automatically generating the login screen and for sending emails.  
+By setting a domain on the SaaSus Platform, you can define the base domain used for automatically generating the login screen and for sending emails.
 For details on how to set a domain, please see [Domain and Redirect Settings](/docs/part-4/application-settings/domain-and-redirect-settings).
+
+※It is possible to proceed with the tutorial without setting up a domain.
 :::
 
 :::info About Customizing the Login Screen
