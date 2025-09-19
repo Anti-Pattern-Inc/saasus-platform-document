@@ -237,6 +237,7 @@
                 "id": "part-4/account-settings/procedure-for-applying-for-a-paid-plan"
               },
               "items": [
+                "part-4/account-settings/aws-marketplace-subscription-procedure",
                 "part-4/account-settings/billing-information"
               ]
             },
