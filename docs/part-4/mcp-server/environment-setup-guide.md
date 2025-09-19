@@ -224,14 +224,15 @@ If an error occurs, stop creating subsequent items and output the executed conte
 
 Tenant: Tenant Sample 1
 Pricing Plan: free_plan
-Effective Date: 6 minutes from the current time
+Reflection Date: Reflected immediately
 
 Tenant: Sample App Tenant 2
 Pricing Plan: basic_plan
-Effective Date: 6 minutes from the current time
+Reflection Date: Reflected immediately
 
 Instructions:
-First, retrieve the tenant and pricing plan information. Then, calculate the UTC timestamp for 6 minutes from the current time (with seconds reset to 0) and update the tenant's pricing plan accordingly.
+First, retrieve the tenant and pricing plan information. Then, update the tenant's pricing plan accordingly.
+When the Reflection Date is "Reflected immediately", make the request without setting the using_next_plan_from parameter.
 ```
 
 ## Deletion
