@@ -251,7 +251,7 @@ const sidebars = {
             "part-4/mcp-server/bulk-user-registration",
             "part-4/mcp-server/export-user-info-csv",
             "part-4/mcp-server/user-behavior-analysis",
-            "part-4/mcp-server/export-tenant-contract-info"ß
+            "part-4/mcp-server/export-tenant-contract-info"
           ],
         },
         {
