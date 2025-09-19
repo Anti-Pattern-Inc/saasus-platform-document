@@ -45,6 +45,8 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 :::info ドメイン設定について
 SaaSus Platformではドメインを設定することで、ログイン画面の自動生成やメール送信の際のベースドメインに設定することができます。<br/>
 ドメインの設定方法に関しては、[ドメイン・遷移先の設定](/docs/part-4/application-settings/domain-and-redirect-settings)で確認してください。
+
+※チュートリアルではドメインは設定しなくても先に進めることは可能です。
 :::
 
 :::info ログイン画面のカスタマイズについて
