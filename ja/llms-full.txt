@@ -3035,43 +3035,61 @@ URL: https://www.prisma.io/docs/part-4/mcp-server/bulk-user-registration
 ## Overview
 A procedure guide for efficiently registering multiple users in bulk from CSV files. Supports multiple tenant and role combinations with fully automated resource creation.
 
+**[CSV files exported using the User List CSV Export Procedure](./export-user-info-csv.md) can be used directly.**
+
+### Key Use Cases
+This feature is particularly useful for user migration between environments such as:
+- **Development → Staging Environment**: Replicate user configurations created and tested in development environment to staging environment
+- **Staging → Production Environment**: Deploy verified user configurations from staging environment to production environment
+- **Environment Reset**: Migrate existing environment user configurations to another environment for reset
+
 ## Prerequisites
 - SaaSus API MCP Server must be configured
+- CSV file must be prepared in the appropriate format (files exported using [User List CSV Export Procedure](./export-user-info-csv.md) are recommended)
+
+### Important Prerequisites
+**The destination environment must have the same resources defined as the CSV export source environment:**
+- **Tenant Names**: All tenant names listed in the CSV must exist in the destination environment
+- **Environments**: Environment names listed in the CSV must exist in the destination environment
+- **Roles**: All role names listed in the CSV must be defined in the destination environment
+- **Custom Attributes**: Custom attributes (including name) included in the CSV must be defined in the destination environment
+
+If these resources do not exist, the corresponding rows will be skipped or errors will occur.
 
 ## MCP Server Request Statement
 
 ### Basic Request Statement
 ```
-Please read the users.csv file and execute bulk user registration using the SaaSus API MCP Server.
+Please read the saasus_users.csv file and execute bulk user registration using the SaaSus API MCP Server.
 
 【Important】Please execute all of the following processes automatically:
 
 1. CSV File Reading
-   - email: Email address (required)
-   - tenant_name: Tenant name (required, separate rows for multiple tenants)
-   - role: Role (required, single role, separate rows for multiple roles)
-   - env: Environment ID (required)
-   - name: Name (set as attribute, optional)
-   - Custom attributes: All columns to the right of env are treated as custom attributes (optional)
+   - Email Address: User's email address (required)
+   - Tenant Name: Tenant name (required, separate rows for multiple tenants)
+   - Environment: Environment name (required, string like prod/dev/test)
+   - Role: Role name (required, single role, separate rows for multiple roles)
+   - Name: Name (set as attribute, optional)
+   - Custom Attributes: All columns to the right of role are treated as custom attributes (optional)
 
 2. Resource Verification and Validation (Optimized Processing)
    - Check if custom attributes (including name) in CSV headers are defined, error at CSV reading time if they don't exist
    - For each row, check in the following order and stop checking other items once skip is determined:
      1. Check if tenant name exists, skip the row if it doesn't exist
-     2. Check if role exists, skip the row if it doesn't exist
-     3. Check if environment ID exists, skip the row if it doesn't exist
+     2. Check if role name exists, skip the row if it doesn't exist
+     3. Get environment ID from environment name, skip the row if it doesn't exist
 
 3. Bulk User Registration
-   - Pre-processing: Read entire CSV file, execute validation, then group data by email
-   - User Creation: Create SaaS users on first occurrence of each email (no password, email notification)
-   - Tenant Processing: Create tenant users on first occurrence of each email for each tenant and set name attribute
+   - Pre-processing: Read entire CSV file, execute validation, then group data by email address
+   - User Creation: Create SaaS users on first occurrence of each email address (no password, email notification)
+   - Tenant Processing: Create tenant users on first occurrence of each email address for each tenant and set name attribute
    - Role Processing: Assign specified roles for each row
-   - Environment Setting: Execute role assignment in the environment specified by CSV env column
+   - Environment Setting: Get environment ID from environment name specified in CSV environment column and execute role assignment
    - Duplicate Avoidance: Skip creation of existing SaaS users and tenant users, execute only role addition
 
 4. Result Reporting
    - Details of processed CSV rows and success/skip/failure counts
-   - Reasons for skipped rows (non-existent tenant, role, environment ID)
+   - Reasons for skipped rows (non-existent tenant, role, environment name)
    - Details of successfully registered users
    - Detailed error information if any errors occurred
 
@@ -3082,30 +3100,73 @@ Please execute all processes automatically and provide a detailed report at the 
 
 ### File Structure
 ```csv
-email,tenant_name,role,env,name
-user1@example.com,company_a,admin,3,John Tanaka
-user1@example.com,company_a,user,3,John Tanaka
-user2@example.com,company_a,user,3,Jane Sato
-user3@example.com,company_b,user,3,Jiro Suzuki
-user4@example.com,company_a,user,3,Saburo Yamada
-user4@example.com,company_a,viewer,3,Saburo Yamada
-user5@example.com,company_b,admin,3,Misaki Takahashi
-user5@example.com,company_a,user,3,Misaki Takahashi
-user5@example.com,company_b,user,3,Misaki Takahashi
+email,tenant_name,environment,role,name
+user1@example.com,company_a,prod,admin,John Tanaka
+user1@example.com,company_a,prod,user,John Tanaka
+user2@example.com,company_a,prod,user,Jane Sato
+user3@example.com,company_b,prod,user,Jiro Suzuki
+user4@example.com,company_a,prod,user,Saburo Yamada
+user4@example.com,company_a,prod,viewer,Saburo Yamada
+user5@example.com,company_b,prod,admin,Misaki Takahashi
+user5@example.com,company_a,prod,user,Misaki Takahashi
+user5@example.com,company_b,prod,user,Misaki Takahashi
 ```
 
 ### Column Descriptions
 - **email**: User's email address (required)
 - **tenant_name**: Tenant name to belong to (required, separate rows for multiple tenants, skip if doesn't exist)
-- **role**: Role to assign (required, single role, separate rows for multiple roles, skip if doesn't exist)
-- **env**: Environment ID (required, skip if doesn't exist)
+- **environment**: Environment name (required, string like prod/dev/test, skip if doesn't exist)
+- **role**: Role name to assign (required, single role, separate rows for multiple roles, skip if doesn't exist)
 - **name**: User's name (set as attribute, optional)
-- **Custom attributes**: All columns to the right of env are treated as custom attributes (optional, error at CSV reading time if attribute doesn't exist)
+- **Custom Attributes**: All columns to the right of role are treated as custom attributes (optional, error at CSV reading time if attribute doesn't exist)
 
 ### Handling Multiple Tenants and Roles
 - **Multiple Roles**: When a user has multiple roles, separate them into different rows
 - **Multiple Tenants**: When a user belongs to multiple tenants, separate them into different rows
 - **Combinations**: For multiple tenants × multiple roles, list all combinations in separate rows
+
+## Integration with Export Function
+
+### CSV File Preparation
+CSV files exported using [User List CSV Export Procedure](./export-user-info-csv.md) can be used directly. The CSV exported by the export function is fully compatible with the format expected by this bulk registration function.
+
+**Important**: When using the export function, ensure the following required items for bulk registration are configured to be output:
+- Email Address = true
+- Tenant Name = true
+- Environment = true
+- Role = true
+
+If these items are not included, errors may occur during bulk registration processing.
+
+### Recommended Workflow
+
+#### For Environment Migration
+1. **CSV Export from Source Environment**: Use [User List CSV Export Procedure](./export-user-info-csv.md) to export user information from the source environment (e.g., development environment) as CSV
+2. **Verify Destination Environment Preparation**: Confirm that necessary resources (tenants, roles, custom attributes) are defined in the destination environment (e.g., staging environment)
+3. **Edit CSV (if necessary)**: Edit the CSV file if environment-specific adjustments are needed
+4. **Execute Bulk Registration**: Use this procedure to execute bulk registration in the destination environment
+
+#### For Adding Users to Existing Environment
+1. **Check Existing Users**: Use [User List CSV Export Procedure](./export-user-info-csv.md) to export current user information as CSV
+2. **Edit CSV**: Add new users, change roles, etc.
+3. **Execute Bulk Registration**: Use this procedure to execute bulk registration with the edited CSV file
+
+## Important Notes
+
+### About Environment Names
+- The export function outputs environment names as strings (e.g., prod, dev, test)
+- During bulk registration, the corresponding environment ID is automatically retrieved from this environment name for processing
+- If a non-existent environment name is specified, the corresponding row will be skipped
+
+### Data Consistency
+- When the same user belongs to multiple tenants, they are processed as separate rows for each tenant
+- When the same user has multiple roles, they are processed as separate rows for each role
+- Existing users and tenant users are not duplicated, only new roles are added
+
+### Error Handling
+- Rows with non-existent tenant names, role names, or environment names are automatically skipped
+- If custom attributes are not defined, an error occurs at CSV reading time
+- Processing results are provided as detailed reports, allowing confirmation of success, skip, and failure details
 
 ---
 
@@ -3450,6 +3511,249 @@ Email Address: user2-2@example.com
 - Verify that the SaaSus API MCP Server is running correctly
 - Verify that environment variables are correctly configured
 
+---
+
+# Metering Data CSV Export Procedure
+
+URL: https://www.prisma.io/docs/part-4/mcp-server/export-metering-data
+
+# SaaSus Platform Metering Data CSV Export Procedure
+
+## Overview
+This document describes the procedure for retrieving metering values for each tenant and month in SaaSus Platform and exporting them in CSV format.
+
+## Prerequisites
+- SaaSus API MCP Server must be configured
+
+## Request Text for MCP Server
+
+### Basic Request Text
+```
+Please export metering data to CSV.
+
+[Export Settings]
+Output format = CSV
+Filename = saasus_metering_data.csv
+Intermediate deliverables not required
+Output the result CSV file directly
+Output each tenant's metering data for each period as separate rows
+Period unit = Day or Month (change as needed)
+Do not use cache, always retrieve the latest information
+
+[Data Retrieval Method]
+
+[Required Requirements]
+Execute complete data retrieval without omissions.
+
+[Retrieval Steps]
+1. Retrieve all tenants: Get all tenant list using `gettenants` API
+2. Retrieve all metering units: Get all metering unit list using `getmeteringunits` API
+3. Efficient data retrieval:
+   
+   For daily units:
+   - Execute `getmeteringunitdatecountsbytenantidanddate` API for each tenant ID × each date combination
+   
+   For monthly units:
+   - Execute `getmeteringunitmonthcountsbytenantidandmonth` API for each tenant ID × each month combination
+   
+   - Only include data in CSV if it actually exists
+   - Skip tenant × period combinations if data does not exist (counts array is empty)
+4. Data verification: Check the contents of counts array in each API response and only adopt data if it is not an empty array
+
+[Field Settings]
+Tenant ID = true
+Tenant Name = true
+Meter Name = true
+Usage = true
+Period = true
+; If there are other custom attributes, please add them below
+; Custom Attribute 1 = true
+; Custom Attribute 2 = true
+
+[Field Descriptions]
+Tenant ID: Unique identifier for the tenant
+Tenant Name: Display name of the tenant
+Meter Name: Display name of the metering unit (display_name)
+Usage: Usage amount for the specified period
+Period: Metering target period (monthly: 2025-8, daily: 2025-08-15)
+
+[Export Conditions]
+; Set filter conditions when exporting metering data
+; Example: To export metering data for a specific tenant only, set as follows:
+; Tenant Name = Specific tenant name
+; Example: To export metering data for a specific period only, set as follows:
+; Period = 2025-8
+;
+; Monthly example:
+; Period unit = Month
+; Period Start = 2025-6
+; Period End = 2025-8
+; Daily example:
+; Period unit = Day
+; Period Start = 2025-08-01
+; Period End = 2025-08-31
+; Example: To export metering data for a specific meter only, set as follows:
+; Meter Name = API Calls
+Period unit = Month
+Period Start = 2025-6
+Period End = 2025-8
+
+[Output Example]
+; Below is an example of the output CSV (monthly case)
+; Tenant ID,Tenant Name,Meter Name,Usage,Period
+; tenant-001,Sample Tenant 1,Active Users,13,2025-08-27
+; tenant-001,Sample Tenant 1,Comments,3,2025-08-27
+; tenant-002,Sample Tenant 2,Test Usage,5,2025-08-27
+
+; Below is an example of daily output (daily case)
+; Tenant ID,Tenant Name,Meter Name,Usage,Period
+; tenant-001,Sample Tenant 1,API Calls,1200,2025-7
+; tenant-001,Sample Tenant 1,Storage,550,2025-7
+; tenant-002,Sample Tenant 2,API Calls,850,2025-7
+; tenant-002,Sample Tenant 2,Storage,320,2025-7
+
+[Important Notes]
+1. Complete combination check: Execute data existence confirmation for all tenant × all period combinations
+2. API usage priority: 
+   - Daily: `getmeteringunitdatecountsbytenantidanddate` (get all meters for the target day in one call)
+   - Monthly: `getmeteringunitmonthcountsbytenantidandmonth` (get all meters for the target month in one call)
+   - Avoid individual meter unit retrieval for efficiency
+3. Data quality assurance: Distinguish between cases where usage is 0 and cases where data does not exist
+4. Progress reporting: Show progress like "Processing ○th/Total ○ tenant × period combinations" during data retrieval
+```
+
+## Output File Format
+
+### CSV Header
+```csv
+Tenant ID,Tenant Name,Meter Name,Usage,Period
+```
+
+### Data Row Examples (Monthly)
+```csv
+tenant-001,Sample Tenant 1,Active Users,13,2025-08-27
+tenant-001,Sample Tenant 1,Comments,3,2025-08-27
+tenant-002,Sample Tenant 2,Test Usage,5,2025-08-27
+```
+
+### Data Row Examples (Daily)
+```csv
+tenant-001,Sample Tenant 1,API Calls,1200,2025-7
+tenant-001,Sample Tenant 1,Storage,550,2025-7
+tenant-002,Sample Tenant 2,API Calls,850,2025-7
+tenant-002,Sample Tenant 2,Storage,320,2025-7
+```
+
+## Important Notes
+
+- If a single tenant uses multiple meters, they will be output as separate rows for each meter
+- If a single tenant has data for multiple periods, they will be output as separate rows for each period
+- When a period range is specified, data for all periods within the specified range will be output
+- When outputting in daily units, the number of rows may increase significantly (e.g., approximately 30 rows × number of tenants × number of meters for one month)
+- When filter conditions are specified, only metering data that matches the conditions will be output
+- The output data is the latest information at the time of execution (cache is not used)
+
+## Customization
+
+### Adding Fields
+If you want to include custom attributes in the output, set the corresponding items to `true` in the [Field Settings] section.
+
+### Changing Filter Conditions
+To filter metering data by specific conditions, specify the conditions in the [Export Conditions] section. It is also possible to combine multiple conditions.
+---
+
+# Tenant Contract Information Retrieval Guide
+
+URL: https://www.prisma.io/docs/part-4/mcp-server/export-tenant-contract-info
+
+# SaaSus Platform Tenant Contract Information Retrieval Guide
+
+## Overview
+This guide provides procedures for comprehensively retrieving tenant contract information registered in the SaaSus Platform and outputting it in table format.
+
+## Prerequisites
+- SaaSus API MCP Server must be configured
+
+## MCP Server Request Statement
+
+### Basic Request Statement
+```
+Please compile tenant contract information.
+
+Lines starting with (;) are commented out and excluded from processing
+
+[Output Settings]
+Output format = CSV format (JSON format, table format, YAML format are also selectable)
+No intermediate deliverables required
+Script or program creation prohibited
+Output only result information
+Do not use cache, always retrieve latest information
+
+[Field Settings]
+Company Name = true
+Tenant Name = true
+Current Plan = true
+Payment Method = true
+Payment Amount = true
+Currency = true
+Contract Start Date = true
+Tenant ID = true
+Representative Email = true
+
+[Output Conditions]
+; Current Plan = Plan1
+; Payment Method = Stripe
+
+[Field Descriptions]
+Company Name: Tenant name listed on invoices, output tenant name if not configured
+Tenant Name: Tenant name on SaaSus Platform
+Current Plan: Currently contracted pricing plan name, "Not Contracted" if no plan is contracted
+Payment Method: "AWS Marketplace" for tenants included in Awsmarketplace API GetCustomers, "Stripe" for others
+Payment Amount: Monthly fee
+Currency: Currency of the fee, "ー" if no plan
+Contract Start Date: Plan contract start date, "ー" if no plan
+Tenant ID: Tenant ID on SaaSus Platform
+Representative Email: Tenant representative email address, "ー" if no representative configured
+
+```
+
+## Retrieved Information
+
+### Tenant Basic Information
+- **Tenant Name**: Tenant name managed on SaaSus Platform
+- **Tenant ID**: Unique tenant identifier
+- **Representative Email**: Tenant administrator email address
+
+### Contract and Pricing Information
+- **Current Plan**: Currently applied pricing plan
+- **Payment Method**: Determination of Stripe integration or AWS Marketplace integration
+- **Payment Amount**: Monthly fee
+- **Currency**: Currency of the fee
+- **Contract Start Date**: Plan application start date
+
+## Notes
+
+- Output data is the latest information at execution time
+- Tenants without pricing plans configured will display "Not Contracted"
+- Tenants not included in AWS Marketplace API GetCustomers will display "Stripe" as payment method
+- If billing information is not configured, company name will display the same value as tenant name
+- Contract start date is converted from Unix timestamp to date format
+- If no plan is configured, contract start date, payment amount, and currency will display "ー"
+
+## Customization
+
+### Adding Filter Conditions
+To filter tenants by specific conditions, add conditions to the request statement.
+
+Example:
+```
+[Output Conditions]
+Current Plan = Plan1
+Payment Method = Stripe
+```
+
+### Retrieving Additional Information
+To include tenant attribute information or custom settings, add them to the field settings.
 ---
 
 # User List CSV Export Procedure
