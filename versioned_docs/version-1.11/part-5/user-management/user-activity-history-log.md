@@ -17,7 +17,6 @@ The user activity history log enables you to check the history of user operation
 :::warning
 The User Activity Log feature is not available for customers on the legacy Starter or Standard plans.  
 To use this feature, you need to change to a new pricing plan.
-
 :::
 
 You can view the "action history log" in the Actions column of the SaaS Operations Console > User Management.
@@ -256,19 +255,23 @@ if __name__ == "__main__":
 </TabItem>
 </Tabs>
 ```
----
 
 When sending HTTP requests from the SaaS screen to the SaaS, set the `Referer` or `X-SaaSus-Referer` header.
 
 The `Referer` header is automatically set by the browser, but the path part of the URL may be omitted.
 If the expected value is not set, manually set the `X-SaaSus-Referer` header.
 
-```js
-await fetch(url, {
-  headers: {
-    'X-SaaSus-Referer': window.location.href.split('?')[0]
-  }
-});
-```
-
 The activity history log displays the history of `GetUserInfo` executed with `Referer` or `X-SaaSus-Referer` headers. Therefore if a HTTP request is not sent to the SaaS or only HTTP requests that do not execute `GetUserInfo` are sent when navigating to a certain screen, the transition to that screen will not be recorded.
+
+## Implementation Details
+
+For detailed information on implementing activity history logs, recommended patterns, and SPA implementation examples, please refer to the following dedicated page:
+
+**[Implementation of Activity History Logs](/docs/part-6/implementation-guide/implementing-activity-history-log)**
+
+This page provides detailed explanations of the following:
+
+- Implementation points and recommended patterns
+- How to use the `X-SaaSus-Referer` header
+- Implementation Points for Frontend
+- Methods for recording page views and in-page actions

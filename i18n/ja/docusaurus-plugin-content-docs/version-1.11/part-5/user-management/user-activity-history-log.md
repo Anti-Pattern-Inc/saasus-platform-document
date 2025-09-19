@@ -18,6 +18,7 @@ import TabItem from "@theme/TabItem";
 「行動履歴ログ」は、旧スタータープランおよび旧スタンダードプランをご契約中の場合、ご利用いただけません。  
 本機能をご利用いただくには、新しい料金プランへの変更が必要です。
 :::
+
 SaaS運用コンソール > ユーザー管理 のActions内にある「行動履歴ログ」から閲覧することができます。
 
 
@@ -257,19 +258,22 @@ if __name__ == "__main__":
 </Tabs>
 ```
 
----
-
 SaaSの画面からSaaSへHTTPリクエストを送信する際に `Referer` または `X-SaaSus-Referer` ヘッダーを設定します。
 
 `Referer` ヘッダーはブラウザが自動で設定しますが、URLのパス部分が省略されている場合があります。
 期待した値が設定されない場合は `X-SaaSus-Referer` ヘッダーを手動で設定します。
 
-```js
-await fetch(url, {
-  headers: {
-    'X-SaaSus-Referer': window.location.href.split('?')[0]
-  }
-});
-```
-
 行動履歴ログで表示されるのは `Referer` または `X-SaaSus-Referer` ヘッダーを付与して実行した `GetUserInfo` の履歴になります。そのため、ある画面に遷移した時、SaaSへHTTPリクエストを送信しない場合や `GetUserInfo` を実行しないHTTPリクエストのみを送信する場合、その画面への遷移は記録されません。
+
+## 実装の詳細
+
+行動履歴ログの実装に関する詳細な情報、推奨パターン、SPAでの実装例については、以下の専用ページをご参照ください：
+
+**[行動履歴ログの実装](/docs/part-6/implementation-guide/implementing-activity-history-log)**
+
+このページでは以下の内容を詳しく解説しています：
+
+- 実装のポイントと推奨パターン
+- `X-SaaSus-Referer`ヘッダーの利用方法
+- フロントエンドでの実装のポイント
+- ページ表示とページ内アクションの記録方法
