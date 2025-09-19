@@ -81,8 +81,10 @@
 - [Event Samples](part-4/integrate-with-amazon-eventbridge/event-sample): These event samples are associated with Amazon EventBridge when creating tenants and users. You can check the information of both API request and response.
 - [Bulk User Registration Procedure](part-4/mcp-server/bulk-user-registration): Overview
 - [Environment Information Acquisition Procedure](part-4/mcp-server/clone-dev-settings): Overview
+- [Environment Setup Guide](part-4/mcp-server/environment-setup-guide): Overview
 - [User List CSV Export Procedure](part-4/mcp-server/export-user-info-csv): Overview
 - [SaaSus API MCP Server Setup Guide](part-4/mcp-server/setup): Overview
+- [User Behavior History Analysis Procedure](part-4/mcp-server/user-behavior-analysis): Overview
 - [Creating Pricing Plans](part-4/pricing-and-billing/pricing-plan-creation): This page walks you through how to configure the 4 key elements required in the SaaS Development Console—Meter Unit → Measurement Unit → Function Menu → Pricing Plan—using Free / Basic / Enterprise as examples.
 - [Pricing Plan Overview](part-4/pricing-and-billing/pricing-plan-overview): 1. The 4 Layers of a Pricing Plan
 - [Stripe Integration](part-4/pricing-and-billing/stripe-integration): Learn how to integrate with Stripe to automate billing operations and delegate invoice processing to an external service.
