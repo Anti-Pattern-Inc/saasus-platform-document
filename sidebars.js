@@ -246,9 +246,12 @@ const sidebars = {
             id: "part-4/mcp-server/setup",
           },
           items: [
+            "part-4/mcp-server/environment-setup-guide",
             "part-4/mcp-server/clone-dev-settings",
-            "part-4/mcp-server/export-user-info-csv",
             "part-4/mcp-server/bulk-user-registration",
+            "part-4/mcp-server/export-user-info-csv",
+            "part-4/mcp-server/user-behavior-analysis",
+            "part-4/mcp-server/export-tenant-contract-info"
           ],
         },
         {
@@ -349,6 +352,7 @@ const sidebars = {
               ],
             },
             "part-6/implementation-guide/implementing-multi-factor-authentication-apiserver",
+            "part-6/implementation-guide/implementing-activity-history-log",
           ],
         },
         {
