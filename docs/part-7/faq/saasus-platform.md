@@ -48,6 +48,13 @@ A.
 
 ---
 
+**Q. Is the login screen using a DV certificate? Is the security adequate?**  
+A. Yes, we use a DV (Domain Validation) certificate.  
+Communication is encrypted, so the security of login information is ensured.  
+There is no difference in encryption strength compared to OV certificates.
+
+---
+
 **Q. Is backup and restore possible from the SaaSus Platform console?**  
 A. The SaaSus Platform console does not provide arbitrary backup/point-in-time restore functions, so please consider backup via API if needed.
 
@@ -119,3 +126,11 @@ Added attributes can be retrieved via API or screen display, so they can be used
 A. Upper limits are set according to your plan.  
 For specific upper limits, please check the [plan details](https://saasus.io/pricing).  
 When the limit is reached, warnings will be displayed on the SaaS Operation Console and notifications will be sent to your registered email address. You can continue using the service for a certain period, but please consider upgrading to a higher plan.
+
+---
+
+**Q. I received a notification about scheduled SaaSus Platform account deletion. What should I do?**  
+A. This email is sent when SaaS users have not logged in for more than one month.  
+To avoid account deletion, please log in from the SaaS login screen created by SaaSus Platform.  
+The SaaS login URL can be found in the "Authentication Settings" section of the SaaSus Platform Development Console.  
+※ Please note that this is not a login to the [SaaSus Platform Console](https://auth.saasus.io).  
