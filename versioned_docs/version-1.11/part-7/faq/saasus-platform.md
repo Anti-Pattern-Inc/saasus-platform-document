@@ -137,7 +137,7 @@ The SaaS login URL can be found in the "Authentication Settings" section of the 
 
 ---
 
-**Q. What happens to my account if I enter the wrong password multiple times?**
+**Q. What happens to my account if I enter the wrong password multiple times?**  
 A. For enhanced security, accounts are temporarily locked when passwords are entered incorrectly multiple times in succession.
  - When the password is incorrect
 The authentication request returns "Incorrect username or password." At this point, the account is not yet locked.
