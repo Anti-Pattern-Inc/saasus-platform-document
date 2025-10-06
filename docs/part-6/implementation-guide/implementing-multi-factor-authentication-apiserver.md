@@ -967,6 +967,6 @@ def disable_mfa(auth_user: dict = Depends(fastapi_auth)):
 
 - [Go (Echo)](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/README.md)
 - [Python(FastAPI)](https://github.com/saasus-platform/implementation-sample-api-python)
-- [Java(Maven)](https://github.com/saasus-platform/implementation-sample-api-java)
+- [Java(Spring)](https://github.com/saasus-platform/implementation-sample-api-java)
 - [C#(.NET 8)](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/README.md)
 - [C#(.NET Framework 4.8)](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/README.md)
