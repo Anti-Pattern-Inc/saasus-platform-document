@@ -6850,553 +6850,323 @@ See the SDK example in
 
 ---
 
-# Implementation Example Using Metering API
+# Billing Dashboard Implementation Guide
 
-URL: https://www.prisma.io/docs/part-6/implementation-guide/example-implementation-using-metering-api
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
+URL: https://www.prisma.io/docs/part-6/implementation-guide/billing-dashboard-with-metering-api
 ## Overview
 
-Let's consider a SaaS with plans set up for metered billing based on the number of users and active users.
+This guide explains how to implement a **tenant-based real-time billing dashboard** by combining the SaaSus Metering API and Pricing API, based on the sample app *Billing Dashboard*.
 
-We will create a feature that allows tenant administrators to check the usage based on the date and metering units.
+Screenshot of the billing dashboard:
 
-<details>
-<br /><summary>Creating the Pricing Plan for This Implementation Example</summary>
+![](/img/part-6/implementation-guide/billing-dashboard-with-metering-api/image-01.png)
 
-## Creating the Pricing Plan
+## Backend Endpoint Summary
 
-### Creating Meter Units
+<div className="table-scroll">
+  <table className="nowrap-table">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Method &amp; Path</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Plan Period Candidates</td>
+        <td><code>GET /billing/plan_periods?tenant_id=</code></td>
+        <td>Returns monthly or yearly periods based on the tenant’s plan history. Used for generating a select box.</td>
+      </tr>
+      <tr>
+        <td>Dashboard Aggregation</td>
+        <td><code>GET /billing/dashboard</code></td>
+        <td>Retrieves metering summaries, billing amounts, and plan information in one response.</td>
+      </tr>
+      <tr>
+        <td>Meter Update (Current Time)</td>
+        <td><code>POST /billing/metering/&#123;tenant_id&#125;/&#123;unit&#125;</code></td>
+        <td>Applies immediate metering updates using <code>add / sub / direct</code> method.</td>
+      </tr>
+      <tr>
+        <td>Meter Update (Custom Timestamp)</td>
+        <td><code>POST /billing/metering/&#123;tenant_id&#125;/&#123;unit&#125;/&#123;ts&#125;</code></td>
+        <td>Updates metering values using a specified timestamp. Useful for corrections.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-We will create Meter units for the number of users and active users.
+:::info
+Plan history can be obtained from the `plan_histories` array in the response of [Get Tenant Details](/docs/reference/auth-api#tag/tenant/operation/GetTenant) in the Auth API.
+:::
 
-1. Go to Pricing Plan -> Metering Units from the SaaS Development Console.
-2. Click on "Metering Unit" at the top right.
-3. Create meter units for the number of users and active users.
+## Plan Period Candidates Endpoint
 
-    ![](/img/part-6/implementation-guide/example-implementation-using-metering-api/image-09.png)
+### Implementing a Period Select Box
 
-    ![](/img/part-6/implementation-guide/example-implementation-using-metering-api/image-10.png)
+The backend splits plan periods into *monthly* or *yearly* segments and returns labels and Unix timestamps (seconds) for the frontend.
 
-### Creating Pricing Units
+:::info
+Use the `plan_histories` array (which contains `plan_id` and `plan_applied_at`) from the response of [Get Tenant Details](/docs/reference/auth-api#tag/tenant/operation/GetTenant) in the Auth API to determine the plan application timing. Treat `current_plan_period_end` as the final boundary. Exclude entries with an empty `plan_id`.
+:::
 
-We will create pricing units for the number of users and active users.
+:::info
+The following implementation flow and code samples assume a Go backend and a React frontend.
+:::
 
-In this example, we are creating usage units, but when actually operating, consider creating tiered units or tiered usage units as referenced in the link below.
+**Implementation Flow**
 
-[About the Difference in Billing Calculation between Tiered Units and Tiered Usage Units](/docs/part-4/pricing-and-billing/tiered-unit)
+1. **Get Tenant Info** — Retrieve `planHistories` and `currentPlanPeriodEnd` from the Auth API.
+2. **Create Boundary Edges** — Sort `planAppliedAt` chronologically to form `edge` array.
+3. **Define Final Boundary** — Use `currentPlanPeriodEnd` (or now if unavailable) minus 1 second as the final edge.
+4. **Split Periods** — Determine if the interval is monthly or yearly, then generate `PlanPeriodOption` using `step()` loop.
+5. **Sort by Latest First** — Sort by `Start` in descending order and return to frontend.
 
-1. Go to Pricing Plan -> Pricing Unit Settings from the SaaS Development Console.
-2. In the Pricing Unit Settings screen, click the "▼" next to "Create Fixed Unit Pricing" and select "Create Usage Unit Pricing", then click the "Create Usage Unit Pricing" button.
-
-   ![](/img/part-6/implementation-guide/example-implementation-using-metering-api/image-03.png)
-3. Set the pricing units for the number of users and active users.
-
-   ![](/img/part-6/implementation-guide/example-implementation-using-metering-api/image-04.png)
-
-   ![](/img/part-6/implementation-guide/example-implementation-using-metering-api/image-05.png)
-
-### Creating Feature Menus
-
-Create feature menus to set the created pricing units.
-
-1. Go to Pricing Plan -> Feature Menu Settings from the SaaS Development Console.
-2. Click on "Create Feature Menu" at the top right.
-3. Create a feature menu with the pricing units for the number of users and active users set.
-
-   ![](/img/part-6/implementation-guide/example-implementation-using-metering-api/image-06.png)
-
-### Creating the Pricing Plan
-
-Create a pricing plan with the created feature menus set.
-
-1. Go to Pricing Plan -> Pricing Plan Settings from the SaaS Development Console.
-2. Click on "Create Pricing Plan" at the top right.
-3. Create a pricing plan with the created feature menus set.
-
-   ![](/img/part-6/implementation-guide/example-implementation-using-metering-api/image-07.png)
-
-## Applying the Pricing Plan
-
-Apply the pricing plan from the SaaS Operation Console.
-
-1. Click on Pricing Plan Settings in the SaaS Operation Console.
-2. Click the "Plan Settings" button in the row of the tenant you want to apply the pricing plan to.
-3. Set the created pricing plan and save it with the application date set to immediate effect.
-
-   ![](/img/part-6/implementation-guide/example-implementation-using-metering-api/image-08.png)
-
-After this, the pricing plan will be applied in 5 minutes.
-
-</details>
-
-## Implementation Sample
-
-In the Laravel implementation sample, APIs for obtaining login user information and tenant information are omitted.
-
-<details>
-<br /><summary>React Implementation Sample</summary>
-
-<Tabs>
-<TabItem value="typescript" label="App.tsx">
-
-```typescript
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-
-import Auth from "./components/route/Auth.tsx";
-import Tenant from "./components/route/Tenant.tsx";
-import Callback from "./pages/Callback";
-import UsageCheck from "./pages/UsageCheck.tsx";
-
-function App() {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/callback" element={<Callback />} />
-                <Route path="/" element={<Auth />}>
-                    <Route path="/tenants/:tenantId" element={<Tenant />}>
-                        <Route path="usage-check" element={<UsageCheck />} />
-                    </Route>
-                </Route>
-            </Routes>
-        </BrowserRouter>
-    );
+```go
+// Step 2 & 4: Create edges and split by month/year
+type edge struct { PlanID string; Time time.Time }
+// ...populate edge array sorted by Time ascending...
+for cur := periodStart; !cur.After(periodEnd); {
+    next := step(cur)        // +1M for month, +1Y for year
+    end  := next.Add(-1 * time.Second)
+    results = append(results, PlanPeriodOption{ Label: label(cur,end), PlanID: e.PlanID, Start: cur.Unix(), End: end.Unix() })
+    if end.Equal(periodEnd) { break }
+    cur = end.Add(time.Second)
 }
-
-export default App;
 ```
 
-</TabItem>
-</Tabs>
+On the frontend, bind these to a `<select>` element and refetch the dashboard on change:
 
-<Tabs>
-<TabItem value="typescript" label="Auth.tsx">
-
-```typescript
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
-
-const LOGIN_URL = import.meta.env.VITE_LOGIN_URL;
-const API_ENDPOINT = import.meta.env.VITE_API_URL;
-
-const Auth: React.FC = () => {
-    const [authUser, setAuthUser] = useState<User>()
-    const [authUserFetching, setAuthUserFetching] = useState(true);
-    // Fetching information of the logged-in user
-    const getUserInfo = async () => {
-        try {
-            const jwtToken = window.localStorage.getItem("SaaSusIdToken");
-            const res = await axios.get<User>(`${API_ENDPOINT}/api/userinfo`, {
-                headers: {
-                    "X-Requested-With": "XMLHttpRequest",
-                    Authorization: `Bearer ${jwtToken}`,
-                },
-                withCredentials: true,
-            });
-            // If unable to fetch logged-in user information (login not confirmed), redirect to login screen
-            if (!res) {
-                window.location.href = LOGIN_URL;
-            } else {
-                setAuthUser(res.data)
-                setAuthUserFetching(false);
-            }
-        } catch {
-            window.location.href = LOGIN_URL;
-        }
-    };
-
-    useEffect(() => {
-        (async () => {
-            await getUserInfo();
-        })()
-    }, []);
-
-    // Passing logged-in user information and user info update function as Outlet Context
-    return authUserFetching ? <></> : <Outlet context={{ authUser, getUserInfo }} />;
+```tsx
+// BillingDashboard.tsx (excerpt)
+const fetchPeriodOptions = async () => {
+  const res = await axios.get<PlanPeriodOption[]>("/billing/plan_periods", { params:{ tenant_id } });
+  setPeriodOptions(res.data);
+  setSelectedPeriod(toState(res.data[0]));
 };
-
-export default Auth;
-
 ```
 
-</TabItem>
-</Tabs>
+### Example Implementations
 
-<Tabs>
-<TabItem value="typescript" label="UsageCheck.tsx">
+The following links point to repositories that include implementations of this endpoint.  
+Search by function name to locate the relevant code.
 
-```typescript
-import React, { useEffect, useState } from 'react';
-import axios, { isAxiosError } from "axios";
-import { useOutletContext } from "react-router-dom";
-import { DateTime } from 'luxon';
-import styled from "styled-components";
-import { SubmitHandler, useForm, useWatch } from "react-hook-form";
+- **Go (Echo)**: [`getPlanPeriods`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)
+- **Python (FastAPI)**: [`get_plan_periods`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)
+- **Java (Spring)**: [`getPlanPeriods`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)
+- **C# (.NET 8)**: [`GetPlanPeriods`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)
+- **C# (.NET Framework 4.8)**: [`GetPlanPeriods`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)
 
-// Defining interface for usage counts
-interface UsageCount {
-    count: number;
-    date: string | undefined;
-    month: string | undefined;
-    timestamp: number | undefined;
-    meteringUnitName: 'user_count' | 'active_user_count'; // Target meter names defined in the pricing plan creation
+## Dashboard Aggregation Endpoint
+
+### Difference Between `max` and `sum` in `aggregate_usage`
+
+| Mode            | Typical Use Case            | Aggregation Method          |
+| --------------- | --------------------------- | --------------------------- |
+| `sum` (default) | API call counts / traffic   | Use total value in period   |
+| `max`           | Concurrent users / sessions | Use maximum value in period |
+
+In `calculateMeteringUnitBillings`, the function checks `aggregate_usage` and uses the max or sum accordingly:
+
+```go
+if aggUsage == "max" {
+    for _, c := range resp.JSON200.Counts {
+        if float64(c.Count) > count { count = float64(c.Count) }
+    }
+} else { // sum
+    for _, c := range resp.JSON200.Counts { count += float64(c.Count) }
 }
+```
 
-// Defining form schemas for different search types
-interface MonthSearchFormSchema {
-    type: 'month';
-    month: string;
-    date: null | undefined;
-    meteringUnitName: null | undefined;
+:::info
+The `aggregate_usage` setting is only visible in the UI when Stripe integration is enabled.  
+It is hidden when using the platform standalone.
+:::
+
+### Billing Logic by `unit_type`
+
+Metering units have a `type` that determines the billing logic as follows:
+
+| type           | Measurement Unit  | Billing Logic                      |
+| -------------- | ----------------- | ---------------------------------- |
+| `fixed`        | Fixed Unit        | Use fixed price as is              |
+| `usage`        | Usage Unit        | `count × price`                    |
+| `tiered`       | Tiered Unit       | Add prices based on matching tier  |
+| `tiered_usage` | Tiered Usage Unit | Accumulate from lower tiers upward |
+
+```go
+func calculateAmountByUnitType(count float64, u map[string]interface{}) float64 {
+  unitType, _ := u["type"].(string)
+  price, _ := u["unit_amount"].(float64)
+
+  switch unitType {
+  case "fixed":
+    return price
+  case "usage":
+    return count * price
+  case "tiered":
+    return calcTiered(count, u)
+  case "tiered_usage":
+    return calcTieredUsage(count, u)
+  default:
+    // Fallback: treat unknown type as usage
+    return count * price
+  }
 }
+```
 
-interface MonthMeteringUnitNameSearchFormSchema {
-    type: 'month';
-    month: string;
-    meteringUnitName: string;
-    date: null | undefined;
-}
+See `calcTiered` and `calcTieredUsage` for details.
 
-interface DateSearchFormSchema {
-    type: 'date';
-    date: string;
-    month: null | undefined;
-    meteringUnitName: null | undefined;
-}
+### Example Implementations
 
-interface DateMeteringUnitNameSearchFormSchema {
-    type: 'date';
-    date: string;
-    meteringUnitName: string;
-    month: null | undefined;
-}
+The following links point to repositories that include implementations of this endpoint.  
+Search by function name to locate the relevant code.
 
-type SearchFormSchema = MonthMeteringUnitNameSearchFormSchema | MonthSearchFormSchema | DateMeteringUnitNameSearchFormSchema | DateSearchFormSchema;
+- **Go (Echo)**: [`getBillingDashboard`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)
+- **Python (FastAPI)**: [`get_billing_dashboard`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)
+- **Java (Spring)**: [`getBillingDashboard`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)
+- **C# (.NET 8)**: [`GetBillingDashboard`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)
+- **C# (.NET Framework 4.8)**: [`GetBillingDashboard`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)
 
-// Dictionary for metering unit names
-const METERING_UNIT_NAME_DICT_ARRAY = [
-    {
-        key: 'user_count', // Target meter name for user count defined in the pricing plan creation
-        displayName: 'Number of Users', // Display name for user count
-    },
-    {
-        key: 'active_user_count', // Target meter name for active user count defined in the pricing plan creation
-        displayName: 'Number of Active Users', // Display name for active user count
-    },
-]
+## Meter Updates
 
-const LOGIN_URL = import.meta.env.VITE_LOGIN_URL;
-const API_ENDPOINT = import.meta.env.VITE_API_URL ?? "";
+The dashboard allows metering updates in two scenarios: inline edits (current time) and modal edits (specific timestamp).
 
-const UsageCheck: React.FC = () => {
-    const { tenant } = useOutletContext<UserRouterContext & TenantRouterContext>();
-    const [meteringUnitCountList, setMeteringUnitCountList] = useState<Array<UsageCount>>([]);
-    const [targetMonthOrDate, setTargetMonthOrDate] = useState('');
-    const jwtToken = window.localStorage.getItem("SaaSusIdToken");
-    const { register, control, handleSubmit, formState: { isDirty, isValid }, getValues } = useForm<SearchFormSchema>();
-    const searchType = useWatch({ control, name: 'type' });
+### Inline Edit Example (Current Time)
 
-    /**
-     * Retrieve the metering unit count for the specified date
-     * @param date
-     * @param meteringUnitName
-     */
-    const fetchUsageCountOfSpecifiedDate = async (date: string, meteringUnitName: string) => {
-        try {
-            const res = await axios.get<UsageCount>(`${API_ENDPOINT}/api/tenants/${tenant.id}/metering/${meteringUnitName}/date/${date}/count`, {
-                headers: {
-                    "X-Requested-With": "XMLHttpRequest",
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${jwtToken}`,
-                },
-            })
-            setMeteringUnitCountList([res.data]);
-        } catch (e) {
-            if (isAxiosError<{type: string, message: string}>(e) && e.response && e.response.data.type === 'token_validation_error_expired') {
-                window.location.href = LOGIN_URL;
-            }
-        }
+```go
+func updateCountOfNow(c echo.Context) error {
+    tenantId := c.Param("tenantId")
+    unitName := c.Param("unit")
+
+    userInfo, _ := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
+    if !hasBillingAccess(userInfo, tenantId) {
+        return c.String(http.StatusForbidden, "Insufficient permissions")
     }
 
-    /**
-     * Retrieve all metering unit counts for the specified month
-     * @param month
-     */
-    const fetchAllUsageCountOfSpecifiedMonth = async (month: string) => {
-        try {
-            const res = await axios.get<Array<UsageCount>>(`${API_ENDPOINT}/api/tenants/${tenant.id}/metering/month/${month}/count`, {
-                headers: {
-                    "X-Requested-With": "XMLHttpRequest",
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${jwtToken}`,
-                },
-            })
-            setMeteringUnitCountList(res.data);
-        } catch (e) {
-            if (isAxiosError<{type: string, message: string}>(e) && e.response && e.response.data.type === 'token_validation_error_expired') {
-                window.location.href = LOGIN_URL;
-            }
-        }
+    var body struct {
+        Method string `json:"method"` // add | sub | direct
+        Count  int    `json:"count"`
+    }
+    if err := c.Bind(&body); err != nil {
+        return c.String(http.StatusBadRequest, "invalid JSON body")
+    }
+    if body.Count < 0 {
+        return c.String(http.StatusBadRequest, "count must be >= 0")
     }
 
-    /**
-     * Retrieve all metering unit counts for the specified date
-     * @param date
-     */
-    const fetchAllUsageCountOfSpecifiedDate = async (date: string) => {
-        try {
-            const res = await axios.get<Array<UsageCount>>(`${API_ENDPOINT}/api/tenants/${tenant.id}/metering/date/${date}/count`, {
-                headers: {
-                    "X-Requested-With": "XMLHttpRequest",
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${jwtToken}`,
-                },
-            })
-            setMeteringUnitCountList(res.data);
-        } catch (e) {
-            if (isAxiosError<{type: string, message: string}>(e) && e.response && e.response.data.type === 'token_validation_error_expired') {
-                window.location.href = LOGIN_URL;
-            }
-        }
+    method := pricingapi.UpdateMeteringUnitTimestampCountMethod(body.Method)
+    switch method {
+    case pricingapi.Add, pricingapi.Sub, pricingapi.Direct:
+        // OK
+    default:
+        return c.String(http.StatusBadRequest, "method must be add, sub, or direct")
     }
 
-    /**
-     * Retrieve the metering unit count for the specified month
-     * @param month
-     * @param meteringUnitName
-     */
-    const fetchUsageCountOfSpecifiedMonth = async (month: string, meteringUnitName: string) => {
-        try {
-            const res = await axios.get<UsageCount>(`${API_ENDPOINT}/api/tenants/${tenant.id}/metering/${meteringUnitName}/month/${month}/count`, {
-                headers: {
-                    "X-Requested-With": "XMLHttpRequest",
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${jwtToken}`,
-                },
-            })
-            setMeteringUnitCountList([res.data]);
-        } catch (e) {
-            if (isAxiosError<{type: string, message: string}>(e) && e.response && e.response.data.type === 'token_validation_error_expired') {
-                window.location.href = LOGIN_URL;
-            }
-        }
+    param := pricingapi.UpdateMeteringUnitTimestampCountNowParam{
+        Method: method,
+        Count:  body.Count,
     }
 
-    useEffect(() => {
-        const month = DateTime.now().toFormat('yyyy-MM');
-        setTargetMonthOrDate(month);
-        fetchAllUsageCountOfSpecifiedMonth(month);
-    }, []);
-
-    const onSearchSubmit: SubmitHandler<SearchFormSchema> = async (data) => {
-        if (data.type === 'month') {
-            if (!data.meteringUnitName) {
-                await fetchAllUsageCountOfSpecifiedMonth(data.month);
-            } else {
-                await fetchUsageCountOfSpecifiedMonth(data.month, data.meteringUnitName);
-            }
-            setTargetMonthOrDate(data.month);
-        } else {
-            if (!data.meteringUnitName) {
-                await fetchAllUsageCountOfSpecifiedDate(data.date);
-            } else {
-                await fetchUsageCountOfSpecifiedDate(data.date, data.meteringUnitName);
-            }
-            setTargetMonthOrDate(data.date);
-        }
-    }
-
-    return (
-        <div>
-            <h2>Usage Check</h2>
-            <form onSubmit={handleSubmit(onSearchSubmit)}>
-                <label>Method of Specifying Search Target</label>
-                <select {...register('type', {required: 'Please select.'})}>
-                    <option></option>
-                    <option value="month">Year-Month</option>
-                    <option value="date">Year-Month-Day</option>
-                </select>
-                {searchType && (
-                    <>
-                        <label>{searchType === 'month' ? 'Target Year-Month' : 'Target Year-Month-Day'}</label>
-                        <input {...register(searchType, { required: 'Required' })} />
-                        <label>Metering Unit Name</label>
-                        <select {...register('meteringUnitName')}>
-                            <option></option>
-                            {METERING_UNIT_NAME_DICT_ARRAY.map(({ key, displayName }) => (
-                                <option key={key} value={key}>{displayName}</option>
-                            ))}
-                        </select>
-                    </>
-                )}
-                <button type="submit" disabled={!isDirty || !isValid}>Search</button>
-            </form>
-
-            <h3>Search Target Date: {targetMonthOrDate}</h3>
-            {METERING_UNIT_NAME_DICT_ARRAY.map(({key, displayName}) => {
-                const formMeteringUnitName = getValues('meteringUnitName')
-                return (!formMeteringUnitName || formMeteringUnitName && formMeteringUnitName === key) && (
-                    <UsageCountWrapper key={key}>
-                        <p>{displayName}：{meteringUnitCountList.find(({meteringUnitName}) => key === meteringUnitName)?.count ?? 0} cases</p>
-                    </UsageCountWrapper>
-                );
-            })}
-        </div>
+    resp, err := pricingClient.UpdateMeteringUnitTimestampCountNowWithResponse(
+        c.Request().Context(), tenantId, unitName, param,
     )
-}
+    if err != nil {
+        log.Printf("pricing API error: %v", err)
+        return c.String(http.StatusInternalServerError, "pricing API error")
+    }
+    if resp.JSON200 == nil {
+        return c.String(resp.StatusCode(), string(resp.Body))
+    }
 
-
-const UsageCountWrapper = styled.div`
-    border-bottom: 1px solid #333;
-`
-
-export default UsageCheck;
-
-```
-
-</TabItem>
-</Tabs>
-
-</details>
-
-<details>
-<br /><summary>Laravel Implementation Sample</summary>
-
-<Tabs>
-<TabItem value="php" label="routes/api.php">
-
-```php
-Route::middleware(\AntiPatternInc\Saasus\Laravel\Middleware\Auth::class)->group(function () {
-    Route::get('/userinfo', 'App\Http\Controllers\UserinfoController@index')->name('userinfo.index');
-    
-    Route::get('/tenant/{tenantId}', 'App\Http\Controllers\TenantController@show')->name('tenant.index');
-
-    Route::get('/tenants/{tenantId}/metering/{meteringUnitName}/date/{date}/count', 'App\Http\Controllers\MeteringController@getCountOfSpecifiedDate')->name('metering.get-count-of-specified-date');
-    Route::get('/tenants/{tenantId}/metering/{meteringUnitName}/month/{month}/count', 'App\Http\Controllers\MeteringController@getCountOfSpecifiedMonth')->name('metering.get-count-of-specified-month');
-    Route::get('/tenants/{tenantId}/metering/date/{date}/count', 'App\Http\Controllers\MeteringController@getAllMeteringCountOfSpecifiedDate')->name('metering.get-all-unit-count-of-specified-date');
-    Route::get('/tenants/{tenantId}/metering/month/{month}/count', 'App\Http\Controllers\MeteringController@getAllMeteringCountOfSpecifiedMonth')->name('metering.get-all-unit-count-of-specified-month');  
+    return c.JSON(http.StatusOK, resp.JSON200)
 }
 ```
 
-</TabItem>
-</Tabs>
+:::info
+The inline plus/minus buttons are only displayed when the selected period is currently ongoing.
+:::
 
-<Tabs>
-<TabItem value="php" label="MeteringController.php">
+### Example Implementations
 
-```php
-<?php
+The following links point to repositories that include implementations of this endpoint.  
+Search by function name to locate the relevant code.
 
-namespace App\Http\Controllers;
+- **Go (Echo)**: [`updateCountOfNow`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)
+- **Python (FastAPI)**: [`update_count_of_now`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)
+- **Java (Spring)**: [`updateCountOfNow`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)
+- **C# (.NET 8)**: [`UpdateMeteringCountNow`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)
+- **C# (.NET Framework 4.8)**: [`UpdateMeteringCountNow`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)
 
-use AntiPatternInc\Saasus\Sdk\Pricing\Model\MeteringUnitMonthCount;
+### Modal Edit Example (Custom Timestamp)
 
-class MeteringController extends Controller
-{
-    /**
-     * Retrieve the unit count for the specified date
-     *
-     * @param string $tenantId
-     * @param string $meteringUnitName
-     * @param string $date
-     * @return array
-     */
-    public function getCountOfSpecifiedDate(string $tenantId, string $meteringUnitName, string $date)
-    {
-        $client = new \AntiPatternInc\Saasus\Api\Client();
-        $pricingApi = $client->getPricingClient();
-        $unitCount = $pricingApi->getMeteringUnitDateCountByTenantIdAndUnitNameAndDate(
-            $tenantId,
-            $meteringUnitName,
-            $date
-        );
+```go
+func updateCountOfSpecifiedTS(c echo.Context) error {
+    tenantId := c.Param("tenantId")
+    unitName := c.Param("unit")
+    tsStr := c.Param("ts")
 
-        return [
-            'count' => $unitCount->getCount(),
-            'date' => $unitCount->getDate(),
-            'meteringUnitName' => $unitCount->getMeteringUnitName(),
-        ];
+    userInfo, _ := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
+    if !hasBillingAccess(userInfo, tenantId) {
+        return c.String(http.StatusForbidden, "Insufficient permissions")
     }
 
-    /**
-     * Retrieve the unit count for the specified month
-     *
-     * @param string $tenantId
-     * @param string $meteringUnitName
-     * @param string $month
-     * @return array
-     */
-    public function getCountOfSpecifiedMonth(string $tenantId, string $meteringUnitName, string $month)
-    {
-        $client = new \AntiPatternInc\Saasus\Api\Client();
-        $pricingApi = $client->getPricingClient();
-        $unitCount = $pricingApi->getMeteringUnitMonthCountByTenantIdAndUnitNameAndMonth(
-            $tenantId, $meteringUnitName, $month
-        );
-
-        return [
-            'count' => $unitCount->getCount(),
-            'month' => $unitCount->getMonth(),
-            'meteringUnitName' => $unitCount->getMeteringUnitName(),
-        ];
+    ts, err := strconv.ParseInt(tsStr, 10, 64)
+    if err != nil {
+        return c.String(http.StatusBadRequest, "ts must be 10-digit unix seconds")
     }
 
-    /**
-     * Retrieve all unit counts for the specified date
-     *
-     * @param string $tenantId
-     * @param string $date
-     * @return \AntiPatternInc\Saasus\Sdk\Pricing\Model\MeteringUnitDateCount[]
-     */
-    public function getAllMeteringCountOfSpecifiedDate(string $tenantId, string $date)
-    {
-        $client = new \AntiPatternInc\Saasus\Api\Client();
-        $pricingApi = $client->getPricingClient();
-        $allMeteringCount = $pricingApi->getMeteringUnitDateCountsByTenantIdAndDate(
-            $tenantId, $date
-        );
-
-        return array_map(function ($unitCount) {
-            return [
-                'count' => $unitCount->getCount(),
-                'date' => $unitCount->getDate(),
-                'meteringUnitName' => $unitCount->getMeteringUnitName(),
-            ];
-        }, $allMeteringCount->getCounts());
+    var body struct {
+        Method string `json:"method"` // add | sub | direct
+        Count  int    `json:"count"`
+    }
+    if err := c.Bind(&body); err != nil {
+        return c.String(http.StatusBadRequest, "invalid JSON body")
+    }
+    if body.Count < 0 {
+        return c.String(http.StatusBadRequest, "count must be >= 0")
     }
 
-    /**
-     * Retrieve all unit counts for the specified month
-     *
-     * @param string $tenantId
-     * @param string $month
-     * @return MeteringUnitMonthCount[]
-     */
-    public function getAllMeteringCountOfSpecifiedMonth(string $tenantId, string $month)
-    {
-        $client = new \AntiPatternInc\Saasus\Api\Client();
-        $pricingApi = $client->getPricingClient();
-        $allMeteringCount = $pricingApi->getMeteringUnitMonthCountsByTenantIdAndMonth(
-            $tenantId, $month
-        );
-
-        return array_map(function ($unitCount) {
-            return [
-                'count' => $unitCount->getCount(),
-                'month' => $unitCount->getMonth(),
-                'meteringUnitName' => $unitCount->getMeteringUnitName(),
-            ];
-        }, $allMeteringCount->getCounts());
+    method := pricingapi.UpdateMeteringUnitTimestampCountMethod(body.Method)
+    switch method {
+    case pricingapi.Add, pricingapi.Sub, pricingapi.Direct:
+        // OK
+    default:
+        return c.String(http.StatusBadRequest, "method must be add, sub, or direct")
     }
+
+    param := pricingapi.UpdateMeteringUnitTimestampCountParam{
+        Method: method,
+        Count:  body.Count,
+    }
+
+    resp, err := pricingClient.UpdateMeteringUnitTimestampCountWithResponse(
+        c.Request().Context(), tenantId, unitName, int(ts), param,
+    )
+    if err != nil {
+        log.Printf("pricing API error: %v", err)
+        return c.String(http.StatusInternalServerError, "pricing API error")
+    }
+    if resp.JSON200 == nil {
+        return c.String(resp.StatusCode(), string(resp.Body))
+    }
+
+    return c.JSON(http.StatusOK, resp.JSON200)
 }
 ```
 
-</TabItem>
-</Tabs>
+### Example Implementations
 
-</details>
+The following links point to repositories that include implementations of this endpoint.  
+Search by function name to locate the relevant code.
+
+- **Go (Echo)**: [`updateCountOfSpecifiedTS`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)
+- **Python (FastAPI)**: [`update_count_of_specified_timestamp`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)
+- **Java (Spring)**: [`updateCountOfSpecifiedTimestamp`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)
+- **C# (.NET 8)**: [`UpdateMeteringCount`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)
+- **C# (.NET Framework 4.8)**: [`UpdateMeteringCount`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)
+
 ---
 
 # Implementation of Activity History Logs
@@ -7586,41 +7356,37 @@ Regarding the use of user information obtained from the /userinfo endpoint:
 ### 2.1. Description of the Implementation Sample
 
 #### 2.1.1. JWT Retrieval API
-- [Go(echo) implementation sample](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L118)  
-  `e.GET("/credentials", getCredentials)`
-- [Python(FastAPI) implementation sample](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L85)  
-  `@app.get("/credentials")`
-- [Java(Maven) implementation sample](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L85)  
-  `@GetMapping(value = "/credentials", produces = "application/json")`
-- [C#(.NET 8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs#L148)  
-  `app.MapGet("/credentials")`
-- [C#(.NET Framework 4.8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs#L80)  
-  `[HttpGet, Route("credentials")]`
+
+The following links contain implementations of this API.  
+Search for the function name or route definition to locate the relevant code.
+
+- **Go (Echo)**: [`getCredentials`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go)
+- **Python (FastAPI)**: [`get_credentials`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py)
+- **Java (Spring)**: [`getCredentials`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
+- **C# (.NET 8)**: [`app.MapGet("/credentials"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
+- **C# (.NET Framework 4.8)**: [`GetCredentials`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
 
 #### 2.1.2. User Information Retrieval API
-- [Go(echo) implementation sample](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L180)  
-  `e.GET("/userinfo", getMe, authMiddleware)`
-- [Python(FastAPI) implementation sample](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L90)  
-  `@app.get("/userinfo")`
-- [Java(Maven) implementation sample](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L131)  
-  `@GetMapping(value = "/userinfo", produces = "application/json")`
-- [C#(.NET 8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs#L195)  
-  `app.MapGet("/userinfo")`
-- [C#(.NET Framework 4.8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs#L127)  
-  `[HttpGet, Route("userinfo")]`
+
+The following links contain implementations of this API.  
+Search for the function name or route definition to locate the relevant code.
+
+- **Go (Echo)**: [`getMe`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go)
+- **Python (FastAPI)**: [`get_user_info`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py)
+- **Java (Spring)**: [`getMe`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
+- **C# (.NET 8)**: [`app.MapGet("/userinfo"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
+- **C# (.NET Framework 4.8)**: [`GetUserInfo`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
 
 #### 2.1.3. Self-Signup API
 
-- [Go(echo) implementation sample](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L618")  
-  `e.POST("/self_sign_up", selfSignup, authMiddleware)`
-- [Python(FastAPI) implementation sample](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L372")  
-  `@app.post("/self_sign_up")`
-- [Java(Maven) implementation sample](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L570")  
-  `@PostMapping(value = "/self_sign_up", produces = "application/json")`
-- [C#(.NET 8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs#L632")  
-  `app.MapPost("/self_sign_up")`
-- [C#(.NET Framework 4.8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs#L537")  
-  `[HttpPost, Route("self_sign_up")]`
+The following links contain implementations of this API.  
+Search for the function name or route definition to locate the relevant code.
+
+- **Go (Echo)**: [`selfSignup`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go)
+- **Python (FastAPI)**: [`self_signup`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py)
+- **Java (Spring)**: [`selfSignUp`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
+- **C# (.NET 8)**: [`app.MapPost("/self_sign_up"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
+- **C# (.NET Framework 4.8)**: [`SelfSignUp`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
 
 In order to confirm that the API request is from the user who logged into the SaaSus Platform, it is always necessary to confirm the login by retrieving the user information. The self-signup process is as follows:
   - Prerequisite) The user who self-signs up becomes the administrator of the new tenant:
@@ -7629,23 +7395,22 @@ In order to confirm that the API request is from the user who logged into the Sa
     - c. Set the logged-in user as the admin of the tenant
 
 #### 2.1.4. User List Retrieval API
-- [Go(echo) implementation sample](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go#L192)  
-  `e.GET("/users", getUsers, authMiddleware)`
-- [Python(FastAPI) implementation sample](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py#L95)  
-  `@app.get("/users")`
-- [Java(Maven) implementation sample](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java#L154)  
-  `@GetMapping(value = "/users", produces = "application/json")`
-- [C#(.NET 8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs#L219)  
-  `app.MapGet("/users")`
-- [C#(.NET Framework 4.8) implementation sample](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs#L147)  
-  `[HttpGet, Route("users")]`
+
+The following links contain implementations of this API.  
+Search for the function name or route definition to locate the relevant code.
+
+- **Go (Echo)**: [`getUsers`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go)
+- **Python (FastAPI)**: [`get_tenant_users`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py)
+- **Java (Spring)**: [`getUsers`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
+- **C# (.NET 8)**: [`app.MapGet("/users"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
+- **C# (.NET Framework 4.8)**: [`GetUsers`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
 
 It is always necessary to confirm the login by retrieving the user information to verify that the API request originates from the user that is logged into SaaSus Platform.
 
 #### 2.2. How to use the implementation example
 - [Go(echo)](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/README.md)
 - [Python(FastAPI)](https://github.com/saasus-platform/implementation-sample-api-python)
-- [Java(Maven)](https://github.com/saasus-platform/implementation-sample-api-java)
+- [Java(Spring)](https://github.com/saasus-platform/implementation-sample-api-java)
 - [C#(.NET 8)](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/README.md)
 - [C#(.NET Framework 4.8)](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/README.md)
 
@@ -8847,23 +8612,23 @@ def disable_mfa(auth_user: dict = Depends(fastapi_auth)):
 
 - [Go (Echo)](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/README.md)
 - [Python(FastAPI)](https://github.com/saasus-platform/implementation-sample-api-python)
-- [Java(Maven)](https://github.com/saasus-platform/implementation-sample-api-java)
+- [Java(Spring)](https://github.com/saasus-platform/implementation-sample-api-java)
 - [C#(.NET 8)](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/README.md)
 - [C#(.NET Framework 4.8)](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/README.md)
 
 ---
 
-# Metering API Implementation Sample and Examples of Use (Laravel)
+# Metering API Implementation Sample and Examples of Use
 
 URL: https://www.prisma.io/docs/part-6/implementation-guide/meteringapisamplelaravelandusecase
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-We will describe Laravel implementation samples for each Metering API using SDK and an example of a feature using the Metering API.
+We will describe Implementation samples for each Metering API using SDK and an example of a feature using the Metering API.
 
 Please check the API documentation for details of each API.
 
-# Laravel Implementation Sample
+# Implementation Sample
 
 ## Get the Metering Unit Count for a Specified Date
 
