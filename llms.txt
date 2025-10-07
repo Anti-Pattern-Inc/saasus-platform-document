@@ -119,12 +119,12 @@
 - [User Activity History Log](part-5/user-management/user-activity-history-log): Overview
 - [Search, Edit, Create, or Assign Users to Tenants](part-5/user-management/user-crud): Search Users
 - [Developer SDK/API Overview](part-6/developer-sdk-api-overview): 1. SaaSus SDK / API Capabilities and Use Cases
-- [Implementation Example Using Metering API](part-6/implementation-guide/example-implementation-using-metering-api): Overview
+- [Billing Dashboard Implementation Guide](part-6/implementation-guide/billing-dashboard-with-metering-api): Overview
 - [Implementation of Activity History Logs](part-6/implementation-guide/implementing-activity-history-log): This guide explains implementation patterns and methods for effectively utilizing activity history logs.
 - [Implementing Authentication Using SaaSus Platform (API Server)](part-6/implementation-guide/implementing-authentication-using-saasus-platform-apiserver): When configuring the backend as an API server, the following implementations are necessary:
 - [Implementation using SaaSus Platform (Serverless)](part-6/implementation-guide/implementing-authentication-using-saasus-serverless): When configuring the backend as serverless, the following implementations are required:
 - [Implementing Multi-Factor Authentication (API Server)](part-6/implementation-guide/implementing-multi-factor-authentication-apiserver): This document provides sample implementations for Multi-Factor Authentication (MFA) in a SaaS application.
-- [Metering API Implementation Sample and Examples of Use (Laravel)](part-6/implementation-guide/meteringapisamplelaravelandusecase): We will describe Laravel implementation samples for each Metering API using SDK and an example of a feature using the Metering API.
+- [Metering API Implementation Sample and Examples of Use](part-6/implementation-guide/meteringapisamplelaravelandusecase): We will describe Implementation samples for each Metering API using SDK and an example of a feature using the Metering API.
 - [About Rate Plans](part-6/usecase/about-rate-plans): The SaaSus Platform also allows for complex pricing plans using subscription and pay-as-you-go models.
 - [Step-by-Step Guide to Setting Up Complicated Pricing Plans](part-6/usecase/about-rate-plans/basic-charge-preference): Metering Units
 - [About SaaS User Accounts](part-6/usecase/about-saas-user-accounts): This document will explain how SaaS user accounts are managed on the SaaSus Platform.
