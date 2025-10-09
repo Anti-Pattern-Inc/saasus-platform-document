@@ -47,6 +47,12 @@ export const generatedIndexOverrides = {
         description: 'SDK/API を使った実装サンプルをまとめています。',
       }
     },
+    '/part-6/implementation-guide/sample-application': {
+      ja: {
+        title: 'サンプルアプリケーション（APIサーバ）',
+        description: 'SaaSus PlatformのAPIサーバ方式を使用した実装例',
+      }
+    },
     '/part-7/faq': {
       ja: {
         title: 'よくある質問（FAQ）',
