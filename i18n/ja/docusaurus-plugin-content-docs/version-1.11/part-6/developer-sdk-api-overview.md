@@ -23,7 +23,7 @@ updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 
 ## 2. 認証情報の取得と利用方法
 
-SaaSus API では **すべてのリクエストで `SAASUSSIGV1` 署名ヘッダーが必須**です。以下のフローで署名を生成し、ID トークン（`id_token`）を取得・利用します。
+SaaSus API では **すべてのリクエストで `SAASUSSIGV1` 形式の署名ヘッダーが必須**です。以下のフローで署名を生成し、ID トークン（`id_token`）を取得・利用します。
 
 ### 2.1 署名ヘッダー `SAASUSSIGV1` の作り方
 
@@ -40,8 +40,8 @@ Authorization: SAASUSSIGV1 Sig=<署名>, SaaSID=<SaaS ID>, APIKey=<API Key>
 
 ### 2.2 ID トークン (`id_token`) の取得と利用
 
-1. 署名付きで **`GET /v1/auth/credentials`** を呼び、`id_token`・`client_id`・`client_secret` を取得します。
-2. `id_token` は **JWT 形式**。ブラウザの `localStorage` などに保存します。
+1. 署名付きで [GET /v1/auth/credentials](https://docs.saasus.io/docs/reference/auth-api#tag/credential/operation/GetAuthCredentials) を呼び、`id_token`・`access_token`・`refresh_token` を取得します。
+2. `id_token` は **JWT 形式**で取得できます。HTTP Only の Cookie やブラウザの localStorage 、ブラウザのメモリなど、適切な場所に保存します。
 3. **ユーザー情報 API** (`GET /v1/auth/user-info` など) で `id_token` をパラメータとして渡します。
 
 ````bash
@@ -58,7 +58,7 @@ curl https://api.saasus.io/v1/auth/credentials?code=${TEMP_CODE} \
 SDK 例は [JWT 取得 API 実装例](/ja/docs/part-6/implementation-guide/implementing-authentication-using-saasus-platform-apiserver#２１１jwt取得api) を参照。
 
 ```bash
-# 2) id\_token を使ったユーザー情報取得
+# 2) id_token を使ったユーザー情報取得
 curl https://api.saasus.io/v1/auth/userinfo?id_token=<ID_TOKEN> \
      -H "Authorization: SAASUSSIGV1 Sig=..., SaaSID=..., APIKey=..."
 ```
