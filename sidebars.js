@@ -340,6 +340,9 @@ const sidebars = {
           items: [
             "part-6/implementation-guide/implementing-authentication-using-saasus-platform-apiserver",
             "part-6/implementation-guide/implementing-authentication-using-saasus-serverless",
+            "part-6/implementation-guide/implementing-multi-factor-authentication-apiserver",
+            "part-6/implementation-guide/implementing-activity-history-log",
+            "part-6/implementation-guide/plan-change-implementation",
             {
               type: "category",
               label:
@@ -352,8 +355,7 @@ const sidebars = {
                 "part-6/implementation-guide/meteringapisamplelaravelandusecase",
               ],
             },
-            "part-6/implementation-guide/implementing-multi-factor-authentication-apiserver",
-            "part-6/implementation-guide/implementing-activity-history-log",
+
           ],
         },
         {

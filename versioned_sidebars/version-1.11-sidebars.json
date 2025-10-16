@@ -219,7 +219,8 @@
             "part-4/mcp-server/export-user-info-csv",
             "part-4/mcp-server/export-metering-data",
             "part-4/mcp-server/user-behavior-analysis",
-            "part-4/mcp-server/export-tenant-contract-info"          ]
+            "part-4/mcp-server/export-tenant-contract-info"
+          ]
         },
         {
           "type": "category",
@@ -303,6 +304,9 @@
           "items": [
             "part-6/implementation-guide/implementing-authentication-using-saasus-platform-apiserver",
             "part-6/implementation-guide/implementing-authentication-using-saasus-serverless",
+            "part-6/implementation-guide/implementing-multi-factor-authentication-apiserver",
+            "part-6/implementation-guide/implementing-activity-history-log",
+            "part-6/implementation-guide/plan-change-implementation",
             {
               "type": "category",
               "label": "Billing Dashboard Implementation Guide",
@@ -313,9 +317,7 @@
               "items": [
                 "part-6/implementation-guide/meteringapisamplelaravelandusecase"
               ]
-            },
-            "part-6/implementation-guide/implementing-multi-factor-authentication-apiserver",
-            "part-6/implementation-guide/implementing-activity-history-log"
+            }
           ]
         },
         {
