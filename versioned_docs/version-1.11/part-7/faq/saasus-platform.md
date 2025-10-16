@@ -145,9 +145,8 @@ The authentication request returns "Incorrect username or password." At this poi
  - When password attempt limit is exceeded
 When authentication failures continue for a certain number of times, the account is locked for security reasons. In this state, authentication requests return "Password attempts exceeded" and sign-in becomes impossible.
 
-The specific number of attempts is not disclosed, but the lockout period is automatically adjusted according to the number of unauthorized attempts, and is usually automatically released after a certain period of time.
+The specific number of attempts is not disclosed, but the lockout period is automatically adjusted according to the number of unauthorized attempts, and is usually automatically released after a certain period of time.  
 To prevent long-term lockouts, please use the password reset function if you are unsure of the correct password.
-
 
 
 
