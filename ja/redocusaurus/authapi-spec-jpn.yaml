@@ -2016,6 +2016,70 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /sign-in:
+    post:
+      tags:
+        - saasUser
+      operationId: SignIn
+      summary: ログイン
+      description: |
+        ユーザーがログインを試行します。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignInParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignInResult'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /sign-in/challenge:
+    post:
+      tags:
+        - saasUser
+      operationId: RespondToSignInChallenge
+      summary: ログインチャレンジへの応答
+      description: |
+        ログインチャレンジに応答します。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RespondToSignInChallengeParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespondToSignInChallengeResult'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /sign-up:
     post:
       tags:
@@ -2621,6 +2685,9 @@ components:
           type: string
           example: '@Pass#Word1'
           description: パスワード
+        temporary:
+          type: boolean
+          description: true を指定すると新しいパスワードを一時パスワードとして設定します（次回サインイン時に変更が必要）
       required:
         - password
     UpdateSaasUserEmailParam:
@@ -2865,8 +2932,13 @@ components:
           type: integer
           example: 1640995200
           description: >
-            次回料金プラン開始日時（stripe連携時、当月月初の0時（UTC）を指定すると当月月初開始のサブスクリプションを作成できます。ex.
-            2023年1月の場合は、1672531200 ）
+            このパラメータは、料金プランの変更を将来の日時で予約する場合に設定します。即時反映の場合は設定不要です。
+
+            次回の料金プラン開始日時を指定する際は、現在時刻より5分後以降の日時を指定してください。
+
+            Stripe連携時の注意点: 当月の月初（0時
+            UTC）を開始日時として指定すると、その月の初日から開始されるサブスクリプションを作成できます。 （例: 2023年1月1日 00:00
+            UTC を指定する場合 → 1672531200）
         next_plan_tax_rate_id:
           $ref: '#/components/schemas/Uuid'
           description: 税率ID
@@ -4023,3 +4095,117 @@ components:
       required:
         - customer_id
         - subscription_schedule_id
+    SignInParam:
+      title: ログインに必要なパラメータ
+      description: |
+        ユーザーのログインに必要なパラメータ。
+        sign_in_flowごとに必要なパラメータが変わります。
+      properties:
+        sign_in_flow:
+          title: ログインフロー
+          description: |
+            認証に使用するログインフロー。
+            現在はUSER_SRP_AUTHのみ使用可能です。
+          type: string
+          enum:
+            - USER_SRP_AUTH
+        sign_in_parameters:
+          title: ログインパラメータ
+          description: |
+            sign_in_flowごとに必要なパラメータが変わります。
+            USER_SRP_AUTH:
+              USERNAME: メールアドレス
+              SRP_A: SRP認証で使用するAの値
+          type: object
+          additionalProperties:
+            type: string
+      required:
+        - sign_in_flow
+    SignInResult:
+      title: ログイン結果
+      description: |
+        ログイン試行後に返される結果
+      type: object
+      properties:
+        challenge_name:
+          $ref: '#/components/schemas/ChallengeName'
+        challenge_parameters:
+          title: チャレンジパラメータ
+          description: |
+            チャレンジを完了するために必要なパラメータ
+          type: object
+          additionalProperties:
+            type: string
+        session:
+          title: セッション
+          description: |
+            チャレンジのセッション識別子。
+            もし次のチャレンジが必要な場合、このセッションを次回のRespondToSignInChallengeの呼び出しに渡す必要があります。
+          type: string
+    ChallengeName:
+      title: チャレンジ名
+      description: チャレンジ名
+      type: string
+      enum:
+        - SMS_MFA
+        - EMAIL_OTP
+        - SOFTWARE_TOKEN_MFA
+        - SELECT_MFA_TYPE
+        - MFA_SETUP
+        - PASSWORD_VERIFIER
+        - CUSTOM_CHALLENGE
+        - SELECT_CHALLENGE
+        - DEVICE_SRP_AUTH
+        - DEVICE_PASSWORD_VERIFIER
+        - ADMIN_NO_SRP_AUTH
+        - NEW_PASSWORD_REQUIRED
+        - SMS_OTP
+        - PASSWORD
+        - WEB_AUTHN
+        - PASSWORD_SRP
+    RespondToSignInChallengeParam:
+      title: ログインチャレンジ応答パラメータ
+      description: |
+        ログインチャレンジに応答するために必要なパラメータ
+      type: object
+      properties:
+        challenge_name:
+          $ref: '#/components/schemas/ChallengeName'
+        challenge_responses:
+          title: チャレンジ応答
+          description: |
+            チャレンジへの応答。
+            challenge_nameごとに必要なパラメータが変わります。
+          type: object
+          additionalProperties:
+            type: string
+        session:
+          title: セッション
+          description: |
+            チャレンジのセッション識別子。
+          type: string
+      required:
+        - challenge_name
+    RespondToSignInChallengeResult:
+      title: ログインチャレンジ応答結果
+      description: |
+        ログインチャレンジに応答した後に返される結果
+      type: object
+      properties:
+        credentials:
+          $ref: '#/components/schemas/Credentials'
+        challenge_name:
+          $ref: '#/components/schemas/ChallengeName'
+        challenge_parameters:
+          title: チャレンジパラメータ
+          description: |
+            次のチャレンジに必要なパラメータ。
+          type: object
+          additionalProperties:
+            type: string
+        session:
+          title: セッション
+          description: |
+            チャレンジのセッション識別子。
+            もし次のチャレンジが必要な場合、このセッションを次回のRespondToSignInChallengeの呼び出しに渡す必要があります。
+          type: string
