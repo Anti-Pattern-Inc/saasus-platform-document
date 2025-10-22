@@ -131,9 +131,9 @@ A. ご利用のプランに応じて上限数が設定されています。
 
 **Q. SaaSus Platformのアカウント削除予定メールが届きました。どうすればいいですか？**  
 A. このメールは、SaaSのユーザーが1ヶ月以上ログインされていない場合に届きます。  
-アカウントの削除を回避するには、SaaSus Platformで作成したSaaSのログイン画面からログインしてください。  
+アカウントの削除を回避するには、SaaSus Platform にログインするか、
+SaaSus Platformで作成したSaaSのログイン画面からログインしてください。  
 SaaSのログインURLは、SaaSus Platform開発コンソールの「認証詳細設定」から確認できます。  
-※ [SaaSus Platformコンソール](https://auth.saasus.io)へのログインではありませんので、ご注意ください。  
 
 ---
 
