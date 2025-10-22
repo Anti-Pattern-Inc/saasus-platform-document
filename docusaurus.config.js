@@ -419,7 +419,7 @@ const config = {
           },
           // Implementation Guide
           {
-            to: '/docs/part-6/implementation-guide/implementing-authentication-using-saasus-platform-apiserver',
+            to: '/docs/part-6/implementation-guide/sample-application/overview',
             from: ['/docs/implementation-guide/implementing-authentication-using-saasus-platform-apiserver'],
           },
           {
@@ -427,11 +427,11 @@ const config = {
             from: ['/docs/implementation-guide/implementing-authentication-using-saasus-serverless'],
           },
           {
-            to: '/docs/part-6/implementation-guide/metering-api-sample',
+            to: '/docs/part-6/implementation-guide/sample-application/metering-api',
             from: ['/docs/implementation-guide/metering-api-sample'],
           },
           {
-            to: '/docs/part-6/implementation-guide/implementing-multi-factor-authentication-apiserver',
+            to: '/docs/part-6/implementation-guide/sample-application/multi-factor-authentication',
             from: ['/docs/implementation-guide/implementing-multi-factor-authentication-apiserver'],
           },
           // Other redirects (e.g., from legacy URLs or structural changes)
