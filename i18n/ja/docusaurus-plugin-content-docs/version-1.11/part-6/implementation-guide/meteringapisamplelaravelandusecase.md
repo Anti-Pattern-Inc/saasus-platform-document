@@ -1,5 +1,5 @@
 ---
-title: "メータリングAPIの実装サンプルと使用例(Laravel)"
+title: "メータリングAPIの実装サンプルと使用例"
 slug: "metering-api-sample"
 excerpt: ""
 hidden: false
@@ -9,11 +9,11 @@ updatedAt: "Wed Dec 27 2023 09:00:19 GMT+0000 (Coordinated Universal Time)"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-SDKを使用した各メータリングAPIのLaravel実装サンプルとメータリングAPIを利用した機能の一例を記載します。
+SDKを使用した各メータリングAPIの実装サンプルとメータリングAPIを利用した機能の一例を記載します。
 
 それぞれのAPIの詳細はAPIドキュメントをご確認ください。
 
-# Laravel実装サンプル
+# 実装サンプル
 
 ## 指定した日付のメータリングユニットカウントを取得
 

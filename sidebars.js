@@ -246,10 +246,13 @@ const sidebars = {
             id: "part-4/mcp-server/setup",
           },
           items: [
+            "part-4/mcp-server/environment-setup-guide",
+            "part-4/mcp-server/clone-dev-settings",
             "part-4/mcp-server/bulk-user-registration",
             "part-4/mcp-server/export-user-info-csv",
-            "part-4/mcp-server/clone-dev-settings",
+            "part-4/mcp-server/export-metering-data",
             "part-4/mcp-server/user-behavior-analysis",
+            "part-4/mcp-server/export-tenant-contract-info"
           ],
         },
         {
@@ -341,13 +344,13 @@ const sidebars = {
             {
               type: "category",
               label:
-                "Metering API Implementation Sample and Examples of Use (Laravel)",
+                "Billing Dashboard Implementation Guide",
               link: {
                 type: "doc",
-                id: "part-6/implementation-guide/meteringapisamplelaravelandusecase",
+                id: "part-6/implementation-guide/billing-dashboard-with-metering-api",
               },
               items: [
-                "part-6/implementation-guide/example-implementation-using-metering-api",
+                "part-6/implementation-guide/meteringapisamplelaravelandusecase",
               ],
             },
             "part-6/implementation-guide/implementing-multi-factor-authentication-apiserver",
