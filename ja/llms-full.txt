@@ -1060,6 +1060,86 @@ Essential for SaaS monetization—**rate‑plan definition** and **billing proce
 
 ---
 
+# AWS Marketplace Paid Plan Subscription Procedure
+
+URL: https://www.prisma.io/docs/part-4/account-settings/aws-marketplace-subscription-procedure
+
+### 1. Contact Support
+
+If you wish to purchase through AWS Marketplace, please first contact our support team.
+
+### 2. Contract Discussion
+
+Discuss the contract details with our support team to determine your desired plan and conditions.
+
+### 3. Private Offer Creation
+
+After the contract details are finalized, a Private Offer will be created on AWS Marketplace, and an email will be sent from AWS Marketplace.
+
+### 4. Access Contract Details Page from Email
+
+Click the link included in the sent email to access the AWS Marketplace contract details page.
+
+**Example notification email:**
+
+```markdown
+Subject: You have a new Private Offer
+Dear Customer.
+A Marketplace Private Offer has been published for AWS account xxxx.
+You have until [expiration date] to accept the offer.
+Please review and subscribe to the offer on AWS Marketplace using the appropriate credentials for the above AWS account.
+```
+The "AWS Marketplace" section in this email is the link to the contract details page.
+
+### 5. Contract by Subscription
+
+Review the details on the contract details page and click `Subscribe` to complete the contract.
+
+![](/img/part-4/account-settings/aws-marketplace-subscription-procedure/image01.png)
+
+*Top of the contract details page*
+
+Scroll down the page to find the subscribe button.
+
+![](/img/part-4/account-settings/aws-marketplace-subscription-procedure/image02.png)
+
+*Bottom where the subscribe button is displayed*
+
+### 6. Contract Completion and Account Setup
+
+After clicking `Subscribe` to complete the contract, an `Set up your account` link will be displayed on the contract details page. Click this button to proceed.
+
+![](/img/part-4/account-settings/aws-marketplace-subscription-procedure/image03.png)
+
+**The procedure differs depending on whether you are creating a new account or upgrading an existing account to paid**
+
+For creating a new account, see step 7-1-1  
+For upgrading an existing account to paid, see step 7-2-1
+
+### 7-1-1. SaaSus Platform Login (Create New Account)
+
+After clicking `Set up your account`, you will be redirected to the new registration screen via AWS Marketplace. If no account exists in SaaSus Platform, enter your account name and email address to register a new account and follow the screen instructions to create your account.
+
+![915e21a-image](/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/915e21a-image.png)
+
+***
+
+### 7-2-1. SaaSus Platform Login (Upgrade Existing Account)
+
+After clicking `Set up your account`, you will be redirected to the new registration screen via AWS Marketplace. If an account already exists in SaaSus Platform, click `Already registered? Click here to log in` to navigate to the AWS Marketplace login screen and log in with your existing account.
+
+![a677094-image](/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/a677094-image.png)
+
+![f3eaabf-image](/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/f3eaabf-image.png)
+
+### 7-2-2. Select Account to Upgrade
+
+Select the account you want to upgrade to paid and click `Start using this account`
+
+![e15cc67-image](/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/e15cc67-image.png)
+
+---
+
 # Billing and Payment Methods
 
 URL: https://www.prisma.io/docs/part-4/account-settings/billing-information
@@ -1340,68 +1420,8 @@ If you wish to purchase via the AWS Marketplace, it will be handled as a Private
 Please contact our support team for assistance.
 :::
 
-We have also listed our product on the AWS Marketplace, where you can also apply. If you apply via AWS Marketplace, you will be billed together with your AWS usage fees.  
-<a href="https://aws.amazon.com/marketplace/pp/prodview-2gr3qw7kp5qx6?sr=0-1&ref_=beagle&applicationId=AWSMPContess" target="_blank">SaaSus Platform</a>
-<!--
-### 1.Click `View purchase options` from the AWS Marketplace product page
+For detailed procedures, please refer to [here](./aws-marketplace-subscription-procedure).
 
-![f0ffc78-image](/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/f0ffc78-image.png)
-
-### 2.Set the terms of your software contract
-
-① Select contract period  
-  Choose between 1 month / 1 year
-
-② Set contract renewal  
-  Yes: Automatically renew the contract / No: Do not renew automatically
-
-③ Contract options  
-  Select the Standard Plan
-
-④ Create a contract  
-  Click on `Create contract`
-
-![b2e6294-image](/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/b2e6294-image.png)
-
-### 3.Confirmation dialog
-
-Please click on `Pay now` when the confirmation dialog appears
-
-![50544ef-image](/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/50544ef-image.png)
-
-### 4.Contract completion dialog
-
-If the contract is successfully completed, a dialog like the one below will appear. Please click on `Set up your account` to proceed.
-
-![8b0f660-image](/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/8b0f660-image.png)
-
-**The procedure differs depending on whether you are creating a new account or paying for an existing account**
-
-If you are creating a new account, refer to step 5-1-1.  
-If you are paying for an existing account, refer to step 5-2-1.
-
-### 5-1-1. Sign in to SaaSus Platform (Creating a New Account)
-
-After clicking on `Set up your account`, you will be directed to the new registration page via AWS Marketplace. If you don't have an account on SaaSus Platform, please fill in your account name and email address as prompted and create a new account.
-
-![915e21a-image](/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/915e21a-image.png)
-
-***
-
-### 5-2-1. Sign in to SaaSus Platform (Paying for an existing account)
-
-After clicking on `Set up your account`, you will be directed to the new registration page via AWS Marketplace. If you have an account on SaaSus Platform, click on 'Already registered and want to sign in' to go to the sign-in page via AWS Marketplace, and then sign in with your existing account.
-
-![a677094-image](/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/a677094-image.png)
-
-![f3eaabf-image](/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/f3eaabf-image.png)
-
-### 5-2-1. Selecting an account to be paid for
-
-Select the account you want to pay for and click on 'Start using this account'.
-
-![e15cc67-image](/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/e15cc67-image.png)
--->
 
 ---
 

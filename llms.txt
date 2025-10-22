@@ -35,6 +35,7 @@
 - [Getting Started with SaaSus Platform](part-3/getting-started): Getting Started
 - [Overview of Login Screen and Main Screen of SaaSus Platform](part-3/login-and-main-screen-overview): 1. Login Screen
 - [SaaSus Platform Architecture](part-3/saasus-platform-architecture): 1. Role and Components of the Control Plane
+- [AWS Marketplace Paid Plan Subscription Procedure](part-4/account-settings/aws-marketplace-subscription-procedure): 1. Contact Support
 - [Billing and Payment Methods](part-4/account-settings/billing-information): This page explains billing and payment methods for SaaSus Platform paid plans.
 - [Procedure for Applying for a Paid Plan](part-4/account-settings/procedure-for-applying-for-a-paid-plan): The SaaSus Platform currently offers the following plans.
 - [Inviting Users](part-4/account-settings/saasususerinvitation): If you are developing and operating SaaS with multiple people, it is advisable not to share a single SaaSus Platform account. Instead, use the user invitation feature to grant appropriate permissions and manage the account.
