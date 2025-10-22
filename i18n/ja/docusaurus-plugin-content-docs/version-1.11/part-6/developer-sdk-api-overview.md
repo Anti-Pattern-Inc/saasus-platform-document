@@ -55,7 +55,7 @@ curl https://api.saasus.io/v1/auth/credentials?code=${TEMP_CODE} \
 一時コード `code` はログインリダイレクト時にクエリパラメータとして渡されます。
 :::
 
-SDK 例は [JWT 取得 API 実装例](/ja/docs/part-6/implementation-guide/implementing-authentication-using-saasus-platform-apiserver#２１１jwt取得api) を参照。
+SDK 例は [JWT 取得 API 実装例](/ja/docs/part-6/implementation-guide/sample-application/authentication#jwt取得api) を参照。
 
 ```bash
 # 2) id_token を使ったユーザー情報取得
@@ -63,7 +63,7 @@ curl https://api.saasus.io/v1/auth/userinfo?id_token=<ID_TOKEN> \
      -H "Authorization: SAASUSSIGV1 Sig=..., SaaSID=..., APIKey=..."
 ```
 
-SDK 例は [ユーザー情報取得 API 実装例](/ja/docs/part-6/implementation-guide/implementing-authentication-using-saasus-platform-apiserver#２１２ユーザ情報取得api) を参照。
+SDK 例は [ユーザー情報取得 API 実装例](/ja/docs/part-6/implementation-guide/sample-application/authentication#ユーザ情報取得api) を参照。
 
 ## 3. 代表ユースケース別リンク集
 
@@ -71,7 +71,7 @@ SDK 例は [ユーザー情報取得 API 実装例](/ja/docs/part-6/implementati
 | ------------ | ---------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
 | **テナント作成**   | [Auth API – CreateTenant](/ja/docs/reference/auth-api#tag/tenant/operation/CreateTenant)      | [テナントの作成](/ja/docs/part-6/usecase/about-saas-user-accounts/create-tenant)   |
 | **ユーザー作成**   | [Auth API – CreateSaasUser](/ja/docs/reference/auth-api#tag/saasUser/operation/CreateSaasUser)                | [SaaSにユーザー作成機能が実装されているケースの実装](/ja/docs/part-6/usecase/about-saas-user-accounts#%EF%BC%93%EF%BC%92saas%E3%81%AB%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E4%BD%9C%E6%88%90%E6%A9%9F%E8%83%BD%E3%81%8C%E5%AE%9F%E8%A3%85%E3%81%95%E3%82%8C%E3%81%A6%E3%81%84%E3%82%8B%E3%82%B1%E3%83%BC%E3%82%B9%E3%81%AE%E5%AE%9F%E8%A3%85)              |
-| **メータリング関連** | [Pricing API – metering タグ一覧](/ja/docs/reference/pricing-api#tag/metering) | [メータリングAPIの実装サンプルと使用例(Laravel)](/ja/docs/part-6/implementation-guide/metering-api-sample) |
+| **メータリング関連** | [Pricing API – metering タグ一覧](/ja/docs/reference/pricing-api#tag/metering) | [メータリングAPI実装サンプル](/ja/docs/part-6/implementation-guide/sample-application/metering-api) |
 
 
 ## 4. SDK リスト

@@ -267,7 +267,7 @@ The activity history log displays the history of `GetUserInfo` executed with `Re
 
 For detailed information on implementing activity history logs, recommended patterns, and SPA implementation examples, please refer to the following dedicated page:
 
-**[Implementation of Activity History Logs](/docs/part-6/implementation-guide/implementing-activity-history-log)**
+**[Implementation of Activity History Logs](/docs/part-6/implementation-guide/sample-application/activity-history-log)**
 
 This page provides detailed explanations of the following:
 
