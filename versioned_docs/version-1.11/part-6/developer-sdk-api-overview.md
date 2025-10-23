@@ -57,7 +57,7 @@ The temporary code `code` is included as a query parameter during login redirect
 :::
 
 See the SDK example in  
-[Implementing JWT Retrieval API](/docs/part-6/implementation-guide/implementing-authentication-using-saasus-platform-apiserver#211-jwt-retrieval-api)
+[Implementing JWT Retrieval API](/docs/part-6/implementation-guide/sample-application/authentication#jwt-retrieval-api)
 
 ```bash
 # 2) Use id_token to retrieve user info
@@ -66,7 +66,7 @@ curl https://api.saasus.io/v1/auth/userinfo?id_token=<ID_TOKEN> \
 ```
 
 See the SDK example in  
-[User Info Retrieval API Example](/docs/part-6/implementation-guide/implementing-authentication-using-saasus-platform-apiserver#212-user-information-retrieval-api)
+[User Info Retrieval API Example](/docs/part-6/implementation-guide/sample-application/authentication#user-information-retrieval-api)
 
 ## 3. Use Case Reference Links
 
@@ -74,7 +74,7 @@ See the SDK example in
 |----------------------|------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
 | **Create Tenant**     | [Auth API – CreateTenant](/docs/reference/auth-api#tag/tenant/operation/CreateTenant)      | [Creating a Tenant](/docs/part-6/usecase/about-saas-user-accounts/create-tenant) |
 | **Create User**       | [Auth API – CreateSaasUser](/docs/reference/auth-api#tag/saasUser/operation/CreateSaasUser) | [Implementation: Creating Users in SaaS App](/docs/part-6/usecase/about-saas-user-accounts#32-implementation-for-the-case-where-saas-have-user-creation-feature) |
-| **Metering-related** | [Pricing API – metering tag list](/docs/reference/pricing-api#tag/metering)                 | [Metering API Sample & Usage (Laravel)](/docs/part-6/implementation-guide/metering-api-sample) |
+| **Metering-related** | [Pricing API – metering tag list](/docs/reference/pricing-api#tag/metering)                 | [Metering API Implementation Samples](/docs/part-6/implementation-guide/sample-application/metering-api) |
 
 ## 4. SDK List
 

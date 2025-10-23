@@ -41,7 +41,7 @@ You can choose whether users can register themselves from the login screen.
 
 :::info
 This feature is only valid when **multi-factor authentication (MFA)** is implemented in your SaaS application.  
-For details on API usage and implementation examples, see [Implementing MFA (API Server)](/docs/part-6/implementation-guide/implementing-multi-factor-authentication-apiserver).
+For details on API usage and implementation examples, see [Metering API Implementation Samples](/docs/part-6/implementation-guide/sample-application/multi-factor-authentication).
 :::
 
 You can configure whether to remember a user’s trusted device.  
