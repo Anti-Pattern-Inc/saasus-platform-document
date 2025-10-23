@@ -131,9 +131,9 @@ When the limit is reached, warnings will be displayed on the SaaS Operation Cons
 
 **Q. I received a notification about scheduled SaaSus Platform account deletion. What should I do?**  
 A. This email is sent when SaaS users have not logged in for more than one month.  
-To avoid account deletion, please log in from the SaaS login screen created by SaaSus Platform.  
+To avoid account deletion, please log in to SaaSus Platform or  
+log in from the SaaS login screen created by SaaSus Platform.  
 The SaaS login URL can be found in the "Authentication Settings" section of the SaaSus Platform Development Console.  
-※ Please note that this is not a login to the [SaaSus Platform Console](https://auth.saasus.io).  
 
 ---
 
@@ -147,7 +147,6 @@ When authentication failures continue for a certain number of times, the account
 
 The specific number of attempts is not disclosed, but the lockout period is automatically adjusted according to the number of unauthorized attempts, and is usually automatically released after a certain period of time.  
 To prevent long-term lockouts, please use the password reset function if you are unsure of the correct password.
-
 
 
 
