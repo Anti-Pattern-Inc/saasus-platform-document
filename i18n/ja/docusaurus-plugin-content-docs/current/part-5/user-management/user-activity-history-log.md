@@ -269,7 +269,7 @@ SaaSの画面からSaaSへHTTPリクエストを送信する際に `Referer` ま
 
 行動履歴ログの実装に関する詳細な情報、推奨パターン、SPAでの実装例については、以下の専用ページをご参照ください：
 
-**[行動履歴ログの実装](/docs/part-6/implementation-guide/implementing-activity-history-log)**
+**[行動履歴ログの実装](/docs/part-6/implementation-guide/sample-application/activity-history-log)**
 
 このページでは以下の内容を詳しく解説しています：
 
