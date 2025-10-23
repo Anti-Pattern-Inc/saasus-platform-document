@@ -5497,7 +5497,7 @@ You can choose whether users can register themselves from the login screen.
 
 :::info
 This feature is only valid when **multi-factor authentication (MFA)** is implemented in your SaaS application.  
-For details on API usage and implementation examples, see [Implementing MFA (API Server)](/docs/part-6/implementation-guide/implementing-multi-factor-authentication-apiserver).
+For details on API usage and implementation examples, see [Metering API Implementation Samples](/docs/part-6/implementation-guide/sample-application/multi-factor-authentication).
 :::
 
 You can configure whether to remember a user’s trusted device.  
@@ -6676,7 +6676,7 @@ The activity history log displays the history of `GetUserInfo` executed with `Re
 
 For detailed information on implementing activity history logs, recommended patterns, and SPA implementation examples, please refer to the following dedicated page:
 
-**[Implementation of Activity History Logs](/docs/part-6/implementation-guide/implementing-activity-history-log)**
+**[Implementation of Activity History Logs](/docs/part-6/implementation-guide/sample-application/activity-history-log)**
 
 This page provides detailed explanations of the following:
 
@@ -6838,7 +6838,7 @@ The temporary code `code` is included as a query parameter during login redirect
 :::
 
 See the SDK example in  
-[Implementing JWT Retrieval API](/docs/part-6/implementation-guide/implementing-authentication-using-saasus-platform-apiserver#211-jwt-retrieval-api)
+[Implementing JWT Retrieval API](/docs/part-6/implementation-guide/sample-application/authentication#jwt-retrieval-api)
 
 ```bash
 # 2) Use id_token to retrieve user info
@@ -6847,7 +6847,7 @@ curl https://api.saasus.io/v1/auth/userinfo?id_token=<ID_TOKEN> \
 ```
 
 See the SDK example in  
-[User Info Retrieval API Example](/docs/part-6/implementation-guide/implementing-authentication-using-saasus-platform-apiserver#212-user-information-retrieval-api)
+[User Info Retrieval API Example](/docs/part-6/implementation-guide/sample-application/authentication#user-information-retrieval-api)
 
 ## 3. Use Case Reference Links
 
@@ -6855,7 +6855,7 @@ See the SDK example in
 |----------------------|------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
 | **Create Tenant**     | [Auth API – CreateTenant](/docs/reference/auth-api#tag/tenant/operation/CreateTenant)      | [Creating a Tenant](/docs/part-6/usecase/about-saas-user-accounts/create-tenant) |
 | **Create User**       | [Auth API – CreateSaasUser](/docs/reference/auth-api#tag/saasUser/operation/CreateSaasUser) | [Implementation: Creating Users in SaaS App](/docs/part-6/usecase/about-saas-user-accounts#32-implementation-for-the-case-where-saas-have-user-creation-feature) |
-| **Metering-related** | [Pricing API – metering tag list](/docs/reference/pricing-api#tag/metering)                 | [Metering API Sample & Usage (Laravel)](/docs/part-6/implementation-guide/metering-api-sample) |
+| **Metering-related** | [Pricing API – metering tag list](/docs/reference/pricing-api#tag/metering)                 | [Metering API Implementation Samples](/docs/part-6/implementation-guide/sample-application/metering-api) |
 
 ## 4. SDK List
 
@@ -6867,572 +6867,6 @@ See the SDK example in
 | Java        | [Java SDK GitHub](https://github.com/saasus-platform/saasus-sdk-java) |
 | PHP         | [PHP SDK GitHub](https://github.com/saasus-platform/saasus-sdk-php) |
 | C#          | [C# SDK GitHub](https://github.com/saasus-platform/saasus-sdk-csharp) |
-
----
-
-# Billing Dashboard Implementation Guide
-
-URL: https://www.prisma.io/docs/part-6/implementation-guide/billing-dashboard-with-metering-api
-## Overview
-
-This guide explains how to implement a **tenant-based real-time billing dashboard** by combining the SaaSus Metering API and Pricing API, based on the sample app *Billing Dashboard*.
-
-Screenshot of the billing dashboard:
-
-![](/img/part-6/implementation-guide/billing-dashboard-with-metering-api/image-01.png)
-
-## Backend Endpoint Summary
-
-<div className="table-scroll">
-  <table className="nowrap-table">
-    <thead>
-      <tr>
-        <th>Category</th>
-        <th>Method &amp; Path</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Plan Period Candidates</td>
-        <td><code>GET /billing/plan_periods?tenant_id=</code></td>
-        <td>Returns monthly or yearly periods based on the tenant’s plan history. Used for generating a select box.</td>
-      </tr>
-      <tr>
-        <td>Dashboard Aggregation</td>
-        <td><code>GET /billing/dashboard</code></td>
-        <td>Retrieves metering summaries, billing amounts, and plan information in one response.</td>
-      </tr>
-      <tr>
-        <td>Meter Update (Current Time)</td>
-        <td><code>POST /billing/metering/&#123;tenant_id&#125;/&#123;unit&#125;</code></td>
-        <td>Applies immediate metering updates using <code>add / sub / direct</code> method.</td>
-      </tr>
-      <tr>
-        <td>Meter Update (Custom Timestamp)</td>
-        <td><code>POST /billing/metering/&#123;tenant_id&#125;/&#123;unit&#125;/&#123;ts&#125;</code></td>
-        <td>Updates metering values using a specified timestamp. Useful for corrections.</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-:::info
-Plan history can be obtained from the `plan_histories` array in the response of [Get Tenant Details](/docs/reference/auth-api#tag/tenant/operation/GetTenant) in the Auth API.
-:::
-
-## Plan Period Candidates Endpoint
-
-### Implementing a Period Select Box
-
-The backend splits plan periods into *monthly* or *yearly* segments and returns labels and Unix timestamps (seconds) for the frontend.
-
-:::info
-Use the `plan_histories` array (which contains `plan_id` and `plan_applied_at`) from the response of [Get Tenant Details](/docs/reference/auth-api#tag/tenant/operation/GetTenant) in the Auth API to determine the plan application timing. Treat `current_plan_period_end` as the final boundary. Exclude entries with an empty `plan_id`.
-:::
-
-:::info
-The following implementation flow and code samples assume a Go backend and a React frontend.
-:::
-
-**Implementation Flow**
-
-1. **Get Tenant Info** — Retrieve `planHistories` and `currentPlanPeriodEnd` from the Auth API.
-2. **Create Boundary Edges** — Sort `planAppliedAt` chronologically to form `edge` array.
-3. **Define Final Boundary** — Use `currentPlanPeriodEnd` (or now if unavailable) minus 1 second as the final edge.
-4. **Split Periods** — Determine if the interval is monthly or yearly, then generate `PlanPeriodOption` using `step()` loop.
-5. **Sort by Latest First** — Sort by `Start` in descending order and return to frontend.
-
-```go
-// Step 2 & 4: Create edges and split by month/year
-type edge struct { PlanID string; Time time.Time }
-// ...populate edge array sorted by Time ascending...
-for cur := periodStart; !cur.After(periodEnd); {
-    next := step(cur)        // +1M for month, +1Y for year
-    end  := next.Add(-1 * time.Second)
-    results = append(results, PlanPeriodOption{ Label: label(cur,end), PlanID: e.PlanID, Start: cur.Unix(), End: end.Unix() })
-    if end.Equal(periodEnd) { break }
-    cur = end.Add(time.Second)
-}
-```
-
-On the frontend, bind these to a `<select>` element and refetch the dashboard on change:
-
-```tsx
-// BillingDashboard.tsx (excerpt)
-const fetchPeriodOptions = async () => {
-  const res = await axios.get<PlanPeriodOption[]>("/billing/plan_periods", { params:{ tenant_id } });
-  setPeriodOptions(res.data);
-  setSelectedPeriod(toState(res.data[0]));
-};
-```
-
-### Example Implementations
-
-The following links point to repositories that include implementations of this endpoint.  
-Search by function name to locate the relevant code.
-
-- **Go (Echo)**: [`getPlanPeriods`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)
-- **Python (FastAPI)**: [`get_plan_periods`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)
-- **Java (Spring)**: [`getPlanPeriods`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)
-- **C# (.NET 8)**: [`GetPlanPeriods`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)
-- **C# (.NET Framework 4.8)**: [`GetPlanPeriods`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)
-
-## Dashboard Aggregation Endpoint
-
-### Difference Between `max` and `sum` in `aggregate_usage`
-
-| Mode            | Typical Use Case            | Aggregation Method          |
-| --------------- | --------------------------- | --------------------------- |
-| `sum` (default) | API call counts / traffic   | Use total value in period   |
-| `max`           | Concurrent users / sessions | Use maximum value in period |
-
-In `calculateMeteringUnitBillings`, the function checks `aggregate_usage` and uses the max or sum accordingly:
-
-```go
-if aggUsage == "max" {
-    for _, c := range resp.JSON200.Counts {
-        if float64(c.Count) > count { count = float64(c.Count) }
-    }
-} else { // sum
-    for _, c := range resp.JSON200.Counts { count += float64(c.Count) }
-}
-```
-
-:::info
-The `aggregate_usage` setting is only visible in the UI when Stripe integration is enabled.  
-It is hidden when using the platform standalone.
-:::
-
-### Billing Logic by `unit_type`
-
-Metering units have a `type` that determines the billing logic as follows:
-
-| type           | Measurement Unit  | Billing Logic                      |
-| -------------- | ----------------- | ---------------------------------- |
-| `fixed`        | Fixed Unit        | Use fixed price as is              |
-| `usage`        | Usage Unit        | `count × price`                    |
-| `tiered`       | Tiered Unit       | Add prices based on matching tier  |
-| `tiered_usage` | Tiered Usage Unit | Accumulate from lower tiers upward |
-
-```go
-func calculateAmountByUnitType(count float64, u map[string]interface{}) float64 {
-  unitType, _ := u["type"].(string)
-  price, _ := u["unit_amount"].(float64)
-
-  switch unitType {
-  case "fixed":
-    return price
-  case "usage":
-    return count * price
-  case "tiered":
-    return calcTiered(count, u)
-  case "tiered_usage":
-    return calcTieredUsage(count, u)
-  default:
-    // Fallback: treat unknown type as usage
-    return count * price
-  }
-}
-```
-
-See `calcTiered` and `calcTieredUsage` for details.
-
-### Example Implementations
-
-The following links point to repositories that include implementations of this endpoint.  
-Search by function name to locate the relevant code.
-
-- **Go (Echo)**: [`getBillingDashboard`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)
-- **Python (FastAPI)**: [`get_billing_dashboard`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)
-- **Java (Spring)**: [`getBillingDashboard`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)
-- **C# (.NET 8)**: [`GetBillingDashboard`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)
-- **C# (.NET Framework 4.8)**: [`GetBillingDashboard`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)
-
-## Meter Updates
-
-The dashboard allows metering updates in two scenarios: inline edits (current time) and modal edits (specific timestamp).
-
-### Inline Edit Example (Current Time)
-
-```go
-func updateCountOfNow(c echo.Context) error {
-    tenantId := c.Param("tenantId")
-    unitName := c.Param("unit")
-
-    userInfo, _ := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
-    if !hasBillingAccess(userInfo, tenantId) {
-        return c.String(http.StatusForbidden, "Insufficient permissions")
-    }
-
-    var body struct {
-        Method string `json:"method"` // add | sub | direct
-        Count  int    `json:"count"`
-    }
-    if err := c.Bind(&body); err != nil {
-        return c.String(http.StatusBadRequest, "invalid JSON body")
-    }
-    if body.Count < 0 {
-        return c.String(http.StatusBadRequest, "count must be >= 0")
-    }
-
-    method := pricingapi.UpdateMeteringUnitTimestampCountMethod(body.Method)
-    switch method {
-    case pricingapi.Add, pricingapi.Sub, pricingapi.Direct:
-        // OK
-    default:
-        return c.String(http.StatusBadRequest, "method must be add, sub, or direct")
-    }
-
-    param := pricingapi.UpdateMeteringUnitTimestampCountNowParam{
-        Method: method,
-        Count:  body.Count,
-    }
-
-    resp, err := pricingClient.UpdateMeteringUnitTimestampCountNowWithResponse(
-        c.Request().Context(), tenantId, unitName, param,
-    )
-    if err != nil {
-        log.Printf("pricing API error: %v", err)
-        return c.String(http.StatusInternalServerError, "pricing API error")
-    }
-    if resp.JSON200 == nil {
-        return c.String(resp.StatusCode(), string(resp.Body))
-    }
-
-    return c.JSON(http.StatusOK, resp.JSON200)
-}
-```
-
-:::info
-The inline plus/minus buttons are only displayed when the selected period is currently ongoing.
-:::
-
-### Example Implementations
-
-The following links point to repositories that include implementations of this endpoint.  
-Search by function name to locate the relevant code.
-
-- **Go (Echo)**: [`updateCountOfNow`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)
-- **Python (FastAPI)**: [`update_count_of_now`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)
-- **Java (Spring)**: [`updateCountOfNow`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)
-- **C# (.NET 8)**: [`UpdateMeteringCountNow`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)
-- **C# (.NET Framework 4.8)**: [`UpdateMeteringCountNow`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)
-
-### Modal Edit Example (Custom Timestamp)
-
-```go
-func updateCountOfSpecifiedTS(c echo.Context) error {
-    tenantId := c.Param("tenantId")
-    unitName := c.Param("unit")
-    tsStr := c.Param("ts")
-
-    userInfo, _ := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
-    if !hasBillingAccess(userInfo, tenantId) {
-        return c.String(http.StatusForbidden, "Insufficient permissions")
-    }
-
-    ts, err := strconv.ParseInt(tsStr, 10, 64)
-    if err != nil {
-        return c.String(http.StatusBadRequest, "ts must be 10-digit unix seconds")
-    }
-
-    var body struct {
-        Method string `json:"method"` // add | sub | direct
-        Count  int    `json:"count"`
-    }
-    if err := c.Bind(&body); err != nil {
-        return c.String(http.StatusBadRequest, "invalid JSON body")
-    }
-    if body.Count < 0 {
-        return c.String(http.StatusBadRequest, "count must be >= 0")
-    }
-
-    method := pricingapi.UpdateMeteringUnitTimestampCountMethod(body.Method)
-    switch method {
-    case pricingapi.Add, pricingapi.Sub, pricingapi.Direct:
-        // OK
-    default:
-        return c.String(http.StatusBadRequest, "method must be add, sub, or direct")
-    }
-
-    param := pricingapi.UpdateMeteringUnitTimestampCountParam{
-        Method: method,
-        Count:  body.Count,
-    }
-
-    resp, err := pricingClient.UpdateMeteringUnitTimestampCountWithResponse(
-        c.Request().Context(), tenantId, unitName, int(ts), param,
-    )
-    if err != nil {
-        log.Printf("pricing API error: %v", err)
-        return c.String(http.StatusInternalServerError, "pricing API error")
-    }
-    if resp.JSON200 == nil {
-        return c.String(resp.StatusCode(), string(resp.Body))
-    }
-
-    return c.JSON(http.StatusOK, resp.JSON200)
-}
-```
-
-### Example Implementations
-
-The following links point to repositories that include implementations of this endpoint.  
-Search by function name to locate the relevant code.
-
-- **Go (Echo)**: [`updateCountOfSpecifiedTS`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)
-- **Python (FastAPI)**: [`update_count_of_specified_timestamp`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)
-- **Java (Spring)**: [`updateCountOfSpecifiedTimestamp`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)
-- **C# (.NET 8)**: [`UpdateMeteringCount`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)
-- **C# (.NET Framework 4.8)**: [`UpdateMeteringCount`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)
-
----
-
-# Implementation of Activity History Logs
-
-URL: https://www.prisma.io/docs/part-6/implementation-guide/implementing-activity-history-log
-
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
-This guide explains implementation patterns and methods for effectively utilizing activity history logs.
-
-Activity history logs are records of calls to `GetUserInfo` with `Referer` or `X-SaaSus-Referer` headers. By properly setting these headers in the frontend, you can enhance the value of the logs.
-
-## Implementation Points and Recommended Patterns
-
-### Using the `X-SaaSus-Referer` Header
-
-The `Referer` header automatically set by browsers may omit URL path portions due to privacy settings. When the expected value is not set, we recommend manually setting the `X-SaaSus-Referer` header from the frontend.
-
-```js
-await fetch(url, {
-  headers: {
-    'Authorization': `Bearer ${jwtToken}`,
-    'X-SaaSus-Referer': window.location.pathname
-  }
-});
-```
-
-### Implementation Points for Frontend
-
-Here are the recommended implementation patterns for effectively utilizing activity history logs in frontend applications. We use React sample code here, but the same concepts can be applied to other frameworks and traditional multi-page applications.
-
-Note that activity history logs are recorded when GetUserInfo is executed, so please ensure that GetUserInfo is executed at each endpoint.
-
-#### Basic: Recording Page Views
-
-In SPAs, it's common to send multiple API requests to display a single page. In such cases, setting the same page path in `X-SaaSus-Referer` for all API requests ensures that activity history logs are correctly recorded as "pages the user accessed," making them easy to understand.
-
-Using the `useLocation` hook from `react-router-dom`, define common headers as shown below and reuse them for API requests related to page display.
-
-```tsx
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import axios from "axios";
-
-const UserPage = () => {
-  const location = useLocation();
-  const pagePath = location.pathname; // Example: "/users"
-  const jwtToken = localStorage.getItem("SaaSusIdToken");
-
-  // Define headers to be used commonly within the page
-  const commonHeaders = {
-    "X-Requested-With": "XMLHttpRequest",
-    Authorization: `Bearer ${jwtToken}`,
-    "X-SaaSus-Referer": pagePath,
-  };
-
-  // Use these common headers for each API request executed when displaying the page
-  useEffect(() => {
-    const fetchData = async () => {
-      await axios.get('/users', { headers: commonHeaders });
-      await axios.get('/user_attributes', { headers: commonHeaders });
-    };
-    fetchData();
-  }, []);
-
-  // ...
-};
-```
-
-By implementing this way, all API requests related to displaying `UserPage` will be consistently recorded in the logs as access to `/users`. Since multiple APIs are called when displaying a page, the same path will be recorded multiple times in a short period in the logs, but this is intended normal behavior. This ensures that "the user was active on this page at this time" is recorded.
-
-#### Advanced: Recording Page Actions
-
-Beyond page views, recording specific actions within pages such as "which button was pressed" further increases the value of the logs.
-
-In such cases, we recommend adding query parameters like `?action=...` to the URL set in `X-SaaSus-Referer` to express context.
-
-```tsx
-// Continuation of UserPage component
-
-const handleDeleteUser = async (userId: string) => {
-  // Define headers specific to this delete action
-  const actionHeaders = {
-    ...commonHeaders, // Copy commonHeaders and
-    // Overwrite Referer with action information
-    "X-SaaSus-Referer": `${pagePath}?action=delete_user`, 
-  };
-
-  try {
-    await axios.delete(`/users/${userId}`, {
-      headers: actionHeaders, // Use action-specific headers
-    });
-    // ... Success handling
-  } catch (error) {
-    // ... Error handling
-  }
-};
-```
-
-This approach creates logs that clearly show the flow: "user opened the user list page (multiple logs), then executed deletion (action log)," making them easy to analyze.
-
-## Output Example
-
-The following shows an example of activity history logs recorded by the above implementation:
-
-![Activity History Log Output Example](/img/part-6/implementation-guide/implementing-activity-history-log/image-01.png)
-
----
-
-# Implementing Authentication Using SaaSus Platform (API Server)
-
-URL: https://www.prisma.io/docs/part-6/implementation-guide/implementing-authentication-using-saasus-platform-apiserver
-When configuring the backend as an API server, the following implementations are necessary:
-- Store the token (JWT), which is the authentication information for the SaaSus Platform, in the browser's local storage.
-- SaaS Platform users authenticate themselves using JWT.
-- The frontend is implemented with React, etc.
-- The backend API server is implemented in PHP / TypeScript / Go / Python / C# / JAVA, etc.
-
-# Process Flow (Login to User List Display)
-
-![SaaSus Platform API Process Flow](/img/part-6/implementation-guide/implementing-authentication-using-saasus-platform-apiserver/SaaSus_PlatformAPI.png)
-
-
-# Implementation Sample
-
-## 1. Frontend Implementation
-
-### 1.1. Description of the Implementation Sample
-
-#### 1.1.1. Post-Authentication Redirect Screen
-
-- [React implementation sample](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/pages/Callback.tsx)
-
-When you log in from the login screen generated by the SaaSus Platform, the URL set as the post-authentication redirect is called.
-
-To perform a test run using this implementation sample, set it as `http://localhost:3000/callback`.
-
-![Post-Authentication Redirect](/img/part-6/implementation-guide/implementing-authentication-using-saasus-platform-apiserver/image-02.png)
-
-At the post-authentication redirect, a temporary code necessary for obtaining authentication information is passed in the query parameter (code=xxxxx). Implement the process to obtain JWT using this temporary code and save it in local storage.
-
-#### 1.1.2. Self-Signup Screen
-
-- [React implementation sample](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/pages/SelfSignUp.tsx)
-
-It is necessary to check if the user is logged in, so call the API to get user information and confirm that the user is logged in.  
-Use the JWT stored in local storage for the API call.  
-By being able to obtain user information, you can confirm that the user is logged in.
-
-The process for self-signup should be implemented according to whether self-signup is used or not.  
-If self-signup is not used, the screen for self-signup is not needed.
-
-If self-signup is used, the process for self-signup will only be executed during the first login.  
-Whether it is the first login can be determined by whether the logging-in user is linked to a tenant.
-
-#### 1.1.3. User List Screen (Homepage)
-
-- [React implementation sample](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/pages/UserPage.tsx)
-
-Regarding the use of user information obtained from the /userinfo endpoint:
-
-- **tenants array**:  
-  In the design of your SaaS,  
-  if it is fixed to 1 tenant per 1 user, use `tenants[0]` fixed.  
-  If a user belongs to multiple tenants, it is necessary to decide which tenant to use.  
-  Example: Users linked to multiple tenants will see a tenant selection screen after logging in to choose a tenant.
-
-- **envs array**:  
-  id(name)【1(dev), 2(stg), 3(prod)】  
-  dev, stg, prod do not refer to your SaaS's environments.  
-  Example: In your SaaS's production environment, if users use test users as a sandbox, use 1(dev), 2(stg). Normally, use 3(prod).
-
-- **roles array**:  
-  In the design of your SaaS,  
-  if it is fixed to 1 role per 1 user, use `roles[0]` fixed.  
-  If a user has multiple roles, an implementation to check all roles is needed.  
-  Example: If it is possible to assign two permissions such as a general user and administrator,  
-  when displaying an admin-only management screen, an implementation to reference all roles is needed.
-
-### 1.2. How to Use the Implementation Sample
-
-- [React](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/README.md)
-
-## 2. Backend Implementation
-
-### 2.1. Description of the Implementation Sample
-
-#### 2.1.1. JWT Retrieval API
-
-The following links contain implementations of this API.  
-Search for the function name or route definition to locate the relevant code.
-
-- **Go (Echo)**: [`getCredentials`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go)
-- **Python (FastAPI)**: [`get_credentials`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py)
-- **Java (Spring)**: [`getCredentials`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
-- **C# (.NET 8)**: [`app.MapGet("/credentials"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
-- **C# (.NET Framework 4.8)**: [`GetCredentials`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
-
-#### 2.1.2. User Information Retrieval API
-
-The following links contain implementations of this API.  
-Search for the function name or route definition to locate the relevant code.
-
-- **Go (Echo)**: [`getMe`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go)
-- **Python (FastAPI)**: [`get_user_info`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py)
-- **Java (Spring)**: [`getMe`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
-- **C# (.NET 8)**: [`app.MapGet("/userinfo"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
-- **C# (.NET Framework 4.8)**: [`GetUserInfo`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
-
-#### 2.1.3. Self-Signup API
-
-The following links contain implementations of this API.  
-Search for the function name or route definition to locate the relevant code.
-
-- **Go (Echo)**: [`selfSignup`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go)
-- **Python (FastAPI)**: [`self_signup`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py)
-- **Java (Spring)**: [`selfSignUp`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
-- **C# (.NET 8)**: [`app.MapPost("/self_sign_up"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
-- **C# (.NET Framework 4.8)**: [`SelfSignUp`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
-
-In order to confirm that the API request is from the user who logged into the SaaSus Platform, it is always necessary to confirm the login by retrieving the user information. The self-signup process is as follows:
-  - Prerequisite) The user who self-signs up becomes the administrator of the new tenant:
-    - a. Tenant creation
-    - b. Link the logged-in user to the created tenant
-    - c. Set the logged-in user as the admin of the tenant
-
-#### 2.1.4. User List Retrieval API
-
-The following links contain implementations of this API.  
-Search for the function name or route definition to locate the relevant code.
-
-- **Go (Echo)**: [`getUsers`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go)
-- **Python (FastAPI)**: [`get_tenant_users`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py)
-- **Java (Spring)**: [`getUsers`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
-- **C# (.NET 8)**: [`app.MapGet("/users"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
-- **C# (.NET Framework 4.8)**: [`GetUsers`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
-
-It is always necessary to confirm the login by retrieving the user information to verify that the API request originates from the user that is logged into SaaSus Platform.
-
-#### 2.2. How to use the implementation example
-- [Go(echo)](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/README.md)
-- [Python(FastAPI)](https://github.com/saasus-platform/implementation-sample-api-python)
-- [Java(Spring)](https://github.com/saasus-platform/implementation-sample-api-java)
-- [C#(.NET 8)](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/README.md)
-- [C#(.NET Framework 4.8)](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/README.md)
 
 ---
 
@@ -7668,979 +7102,641 @@ please always perform a login check by retrieving user information.
 
 ---
 
-# Implementing Multi-Factor Authentication (API Server)
+# Activity History Log Implementation
 
-URL: https://www.prisma.io/docs/part-6/implementation-guide/implementing-multi-factor-authentication-apiserver
+URL: https://www.prisma.io/docs/part-6/implementation-guide/sample-application/activity-history-log
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This document provides sample implementations for Multi-Factor Authentication (MFA) in a SaaS application.
+This guide explains implementation patterns and methods for effectively utilizing activity history logs.
 
-For detailed API specifications, please refer to the API Documentation.
+Activity history logs are records of calls to `GetUserInfo` with `Referer` or `X-SaaSus-Referer` headers. By properly setting these headers in the frontend, you can enhance the value of the logs.
 
-# **MFA Implementation Samples**
+## Implementation Points and Recommended Patterns
 
-## **1. Frontend Implementation**
+### Using the `X-SaaSus-Referer` Header
 
-### **1.1. Added Components**
-
-To manage MFA authentication settings, the following components have been added.
-
-#### **1.1.1. MFA Settings Dialog**
-- [React Sample Implementation](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/components/dialogs/UserMfaSettingDialog.tsx)  
-  → A dialog component that allows users to enable/disable MFA and check MFA status.
-
-#### **1.1.2. Header User Menu**
-- [React Sample Implementation](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/components/header/HeaderUserbox.tsx)  
-  → Added an item to open the MFA settings dialog in the user menu.
-
-### 1.2. How to Use the Sample Implementation
-
-- <a href="https://github.com/saasus-platform/implementation-sample-front-react/blob/main/README.md" target="_blank">React</a>
-
-## **2. Backend Implementation**
-
-To implement MFA functionality, the following endpoints have been added.
-
-### **2.1. Added Endpoints**
-
-#### **2.1.1. Get MFA Status API**
+The `Referer` header automatically set by browsers may omit URL path portions due to privacy settings. When the expected value is not set, we recommend manually setting the `X-SaaSus-Referer` header from the frontend.
 
 <Tabs>
-<TabItem value="go" label="Go" default>
+<TabItem value="typescript" label="TypeScript" default>
 
-`e.GET("/mfa_status", getMfaStatus, authMiddleware)`
-
-```go
-// Retrieve MFA status (enabled/disabled)
-func getMfaStatus(c echo.Context) error {
-	// Retrieve user information from context
-	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
-	if !ok {
-		c.Logger().Error("Failed to get user info")
-		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
-	}
-
-	// Use the SaaSus API to get the user's MFA status
-	response, err := authClient.GetUserMfaPreferenceWithResponse(context.Background(), userInfo.Id)
-	if err != nil || response.JSON200 == nil {
-		c.Logger().Errorf("Failed to get MFA status: %v", err)
-		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve MFA status"})
-	}
-
-	// Return MFA enabled/disabled status
-	return c.JSON(http.StatusOK, map[string]bool{"enabled": response.JSON200.Enabled})
-}
-```
-
-</TabItem>
-
-<TabItem value="python" label="Python">
-
-`@app.get("/mfa_status")`
-
-```python
-# Retrieve MFA status (enabled/disabled)
-def get_mfa_status(auth_user: dict = Depends(fastapi_auth), request: Request = None):
-    try:
-        # Use the SaaSus API to retrieve the user's MFA preference
-        response = SaasUserApi(api_client=api_client).get_user_mfa_preference(user_id=auth_user.id)
-        # Return the MFA enabled/disabled status
-        return {"enabled": response.enabled}
-    except Exception as e:
-        print(e)
-        raise HTTPException(status_code=500, detail=str(e))
-```
-
-</TabItem>
-
-<TabItem value="java" label="Java">
-
-`@GetMapping(value = "/mfa_status", produces = "application/json")`
-
-```java
-    /**
-     * Retrieve MFA status (enabled/disabled)
-     */
-    public ResponseEntity<?> getMfaStatus(HttpServletRequest request) {
-        try {
-            // Initialize the SaaSus API client
-            AuthApiClient apiClient = new Configuration().getAuthApiClient();
-            apiClient.setReferer(request.getHeader("X-Saasus-Referer"));
-
-            // Retrieve user information
-            UserInfoApi userInfoApi = new UserInfoApi(apiClient);
-            UserInfo userInfo = userInfoApi.getUserInfo(getIDToken(request));
-
-            // Retrieve MFA status
-            SaasUserApi saasUserApi = new SaasUserApi(apiClient);
-            Boolean enabled = saasUserApi.getUserMfaPreference(userInfo.getId()).getEnabled();
-
-            Map<String, Boolean> result = new HashMap<>();
-            result.put("enabled", enabled);
-            return ResponseEntity.ok(result);
-        } catch (ApiException e) {
-            System.err.println("API Exception: " + e.getMessage());
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
-        } catch (Exception e) {
-            System.err.println("Unexpected Exception: " + e.getMessage());
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
-        }
-    }
-```
-
-</TabItem>
-
-<TabItem value="csharp" label="C#(.Net8)">
-
-`app.MapGet("/mfa_status")`
-```csharp
-            app.MapGet("/mfa_status", async (HttpContext context) =>
-            {
-                // Get bearer token from Authorization header
-                var token = GetBearerToken(context);
-                if (string.IsNullOrEmpty(token))
-                {
-                    return Results.Unauthorized();
-                }
-
-                try
-                {
-                    // Initialize SaaSus API client and retrieve user info
-                    var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig(), context);
-                    var userInfoApi = new UserInfoApi(authApiClientConfig);
-                    var userInfo = await userInfoApi.GetUserInfoAsync(token);
-
-                    // Retrieve MFA preference
-                    var saasUserApi = new SaasUserApi(authApiClientConfig);
-                    var mfaPref = await saasUserApi.GetUserMfaPreferenceAsync(userInfo.Id);
-
-                    // Return result in JSON
-                    return Results.Json(new { enabled = mfaPref.Enabled });
-                }
-                catch (Exception ex)
-                {
-                    return HandleApiException(ex);
-                }
-            });
-```
-
-</TabItem>
-
-<TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
-
-`[HttpGet, Route("mfa_status")]`
-
-```csharp
-        // Retrieve MFA status (enabled/disabled)
-        public async Task<IHttpActionResult> GetMfaStatus()
-        {
-            try
-            {
-                // Get bearer token from Authorization header
-                var token = GetBearerToken(Request);
-
-                // Initialize the SaaSus API client
-                var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig());
-
-                // Retrieve user information
-                var userInfoApi = new UserInfoApi(authApiClientConfig);
-                var userInfo = await userInfoApi.GetUserInfoAsync(token);
-
-                // Retrieve MFA preference
-                var saasUserApi = new SaasUserApi(authApiClientConfig);
-                var mfaPref = await saasUserApi.GetUserMfaPreferenceAsync(userInfo.Id);
-
-                // Return result
-                return Ok(new { enabled = mfaPref.Enabled });
-            }
-            catch (Exception ex)
-            {
-                return HandleApiException(ex);
-            }
-        }
+```js
+await fetch(url, {
+  headers: {
+    'Authorization': `Bearer ${jwtToken}`,
+    'X-SaaSus-Referer': window.location.pathname
+  }
+});
 ```
 
 </TabItem>
 </Tabs>
 
-#### **2.1.2. Generate Secret Code for MFA App Registration API**
+### Implementation Points for Frontend
+
+Here are the recommended implementation patterns for effectively utilizing activity history logs in frontend applications. We use React sample code here, but the same concepts can be applied to other frameworks and traditional multi-page applications.
+
+Note that activity history logs are recorded when GetUserInfo is executed, so please ensure that GetUserInfo is executed at each endpoint.
+
+#### Basic: Recording Page Views
+
+In SPAs, it's common to send multiple API requests to display a single page. In such cases, setting the same page path in `X-SaaSus-Referer` for all API requests ensures that activity history logs are correctly recorded as "pages the user accessed," making them easy to understand.
+
+Using the `useLocation` hook from `react-router-dom`, define common headers as shown below and reuse them for API requests related to page display.
 
 <Tabs>
-<TabItem value="go" label="Go" default>
+<TabItem value="typescript" label="TypeScript" default>
 
-`e.GET("/mfa_setup", getMfaSetup, authMiddleware)`
+```tsx
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
 
-```go
-// Retrieve MFA setup information (generate QR code)
-// The frontend application must include X-Access-Token in the request header
-func getMfaSetup(c echo.Context) error {
-	// Retrieve X-Access-Token from the request header
-	accessToken := c.Request().Header.Get("X-Access-Token")
-	if accessToken == "" {
-		return c.JSON(http.StatusUnauthorized, map[string]string{"error": "Access token is missing"})
-	}
+const UserPage = () => {
+  const location = useLocation();
+  const pagePath = location.pathname; // Example: "/users"
+  const jwtToken = localStorage.getItem("SaaSusIdToken");
 
-	// Retrieve user information from context
-	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
-	if !ok {
-		c.Logger().Error("Failed to get user info")
-		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
-	}
+  // Define headers to be used commonly within the page
+  const commonHeaders = {
+    "X-Requested-With": "XMLHttpRequest",
+    Authorization: `Bearer ${jwtToken}`,
+    "X-SaaSus-Referer": pagePath,
+  };
 
-	// Use the SaaSus API to generate a secret code for MFA authentication app registration
-	response, err := authClient.CreateSecretCodeWithResponse(context.Background(), userInfo.Id, authapi.CreateSecretCodeJSONRequestBody{
-		AccessToken: accessToken,
-	})
-	if err != nil || response.JSON201 == nil {
-		c.Logger().Errorf("Failed to create secret code: %v", err)
-		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to generate QR code"})
-	}
+  // Use these common headers for each API request executed when displaying the page
+  useEffect(() => {
+    const fetchData = async () => {
+      await axios.get('/users', { headers: commonHeaders });
+      await axios.get('/user_attributes', { headers: commonHeaders });
+    };
+    fetchData();
+  }, []);
 
-	// Generate a QR code URL for Google Authenticator and other authentication apps
-	qrCodeUrl := "otpauth://totp/SaaSusPlatform:" + userInfo.Email + "?secret=" + response.JSON201.SecretCode + "&issuer=SaaSusPlatform"
-
-	// Return the QR code URL
-	return c.JSON(http.StatusOK, map[string]string{
-		"qrCodeUrl": qrCodeUrl,
-	})
-}
-```
-
-</TabItem>
-<TabItem value="python" label="Python">
-
-`@app.get("/mfa_setup")`
-
-```python
-# Retrieve MFA setup information (generate QR code)
-# The frontend application must include X-Access-Token in the request header
-def get_mfa_setup(request: Request, auth_user: dict = Depends(fastapi_auth)):
-    # Get X-Access-Token from request headers
-    access_token = request.headers.get("X-Access-Token")
-    if not access_token:
-        # Return 401 if access token is missing
-        raise HTTPException(status_code=401, detail="Access token is missing")
-
-    try:
-        create_secret_code_param = CreateSecretCodeParam(access_token=access_token)
-        # Use the SaaSus API to generate a secret code for MFA authentication app registration
-        response = SaasUserApi(api_client=api_client).create_secret_code(user_id=auth_user.id, create_secret_code_param=create_secret_code_param)
-        # Generate a QR code URL for Google Authenticator and other authentication apps
-        qr_code_url = f"otpauth://totp/SaaSusPlatform:{auth_user.email}?secret={response.secret_code}&issuer=SaaSusPlatform"
-        # Return the QR code URL
-        return {"qrCodeUrl": qr_code_url}
-    except Exception as e:
-        print(e)
-        raise HTTPException(status_code=500, detail=str(e))
-```
-
-</TabItem>
-
-<TabItem value="java" label="Java">
-
-`@GetMapping(value = "/mfa_setup", produces = "application/json")`
-
-```java
-    /**
-     * Retrieve MFA setup information (generate QR code)
-     */
-    public ResponseEntity<?> getMfaSetup(HttpServletRequest request) {
-        try {
-            // Get access token from request header
-            String accessToken = request.getHeader("X-Access-Token");
-            if (accessToken == null || accessToken.isEmpty()) {
-                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Access token is missing");
-            }
-
-            // Initialize the SaaSus API client and retrieve user info
-            AuthApiClient apiClient = new Configuration().getAuthApiClient();
-            apiClient.setReferer(request.getHeader("X-Saasus-Referer"));
-            UserInfoApi userInfoApi = new UserInfoApi(apiClient);
-            UserInfo userInfo = userInfoApi.getUserInfo(getIDToken(request));
-
-            // Generate secret code
-            SaasUserApi saasUserApi = new SaasUserApi(apiClient);
-            SoftwareTokenSecretCode code = saasUserApi.createSecretCode(
-                userInfo.getId(),
-                new CreateSecretCodeParam().accessToken(accessToken)
-            );
-
-            // Generate a QR code URL for Google Authenticator and other authentication apps
-            String qrCodeUrl = "otpauth://totp/SaaSusPlatform:" + userInfo.getEmail() +
-                    "?secret=" + code.getSecretCode() + "&issuer=SaaSusPlatform";
-                    
-            Map<String, String> result = new HashMap<>();
-            result.put("qrCodeUrl", qrCodeUrl);
-            return ResponseEntity.ok(result);
-        } catch (ApiException e) {
-            System.err.println("API Exception: " + e.getMessage());
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
-        } catch (Exception e) {
-            System.err.println("Unexpected Exception: " + e.getMessage());
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
-        }
-    }
-```
-
-</TabItem>
-
-<TabItem value="csharp" label="C#(.Net8)">
-
-`app.MapGet("/mfa_setup")`
-
-```csharp
-            app.MapGet("/mfa_setup", async (HttpContext context) =>
-            {
-                // Get access token and ID token
-                var token = GetBearerToken(context);
-                var accessToken = context.Request.Headers["X-Access-Token"].FirstOrDefault();
-                if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(accessToken))
-                {
-                    return Results.Unauthorized();
-                }
-
-                try
-                {
-                    // Initialize API client and retrieve user info
-                    var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig(), context);
-                    var userInfoApi = new UserInfoApi(authApiClientConfig);
-                    var userInfo = await userInfoApi.GetUserInfoAsync(token);
-
-                    // Generate secret code
-                    var saasUserApi = new SaasUserApi(authApiClientConfig);
-                    var secretCode = await saasUserApi.CreateSecretCodeAsync(
-                        userInfo.Id,
-                        new CreateSecretCodeParam(accessToken)
-                    );
-
-                    // Generate a QR code URL for Google Authenticator and other authentication apps
-                    var qrCodeUrl = $"otpauth://totp/SaaSusPlatform:{userInfo.Email}?secret={secretCode.SecretCode}&issuer=SaaSusPlatform";
-
-                    return Results.Json(new { qrCodeUrl });
-                }
-                catch (Exception ex)
-                {
-                    return HandleApiException(ex);
-                }
-            });
-```
-
-</TabItem>
-
-<TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
-
-`[HttpGet, Route("mfa_setup")]`
-
-```csharp
-        // Retrieve MFA setup information (generate QR code)
-        public async Task<IHttpActionResult> SetupMfa()
-        {
-            try
-            {
-                // Get token and access token
-                var token = GetBearerToken(Request);
-                var accessToken = HttpContext.Current.Request.Headers.Get("X-Access-Token");
-
-                if (string.IsNullOrEmpty(accessToken))
-                {
-                    return Content(HttpStatusCode.Unauthorized, "Missing X-Access-Token header");
-                }
-
-                // Initialize API client
-                var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig());
-
-                // Retrieve user info
-                var userInfoApi = new UserInfoApi(authApiClientConfig);
-                var userInfo = await userInfoApi.GetUserInfoAsync(token);
-
-                // Generate secret code
-                var saasUserApi = new SaasUserApi(authApiClientConfig);
-                var secretCode = await saasUserApi.CreateSecretCodeAsync(
-                    userInfo.Id,
-                    new CreateSecretCodeParam(accessToken)
-                );
-
-                // Generate a QR code URL for Google Authenticator and other authentication apps
-                var qrCodeUrl = $"otpauth://totp/SaaSusPlatform:{userInfo.Email}?secret={secretCode.SecretCode}&issuer=SaaSusPlatform";
-
-                return Ok(new { qrCodeUrl });
-            }
-            catch (Exception ex)
-            {
-                return HandleApiException(ex);
-            }
-        }
+  // ...
+};
 ```
 
 </TabItem>
 </Tabs>
 
-#### **2.1.3. Verify MFA Authentication Code API**
+By implementing this way, all API requests related to displaying `UserPage` will be consistently recorded in the logs as access to `/users`. Since multiple APIs are called when displaying a page, the same path will be recorded multiple times in a short period in the logs, but this is intended normal behavior. This ensures that "the user was active on this page at this time" is recorded.
+
+#### Advanced: Recording Page Actions
+
+Beyond page views, recording specific actions within pages such as "which button was pressed" further increases the value of the logs.
+
+In such cases, we recommend adding query parameters like `?action=...` to the URL set in `X-SaaSus-Referer` to express context.
 
 <Tabs>
-<TabItem value="go" label="Go" default>
+<TabItem value="typescript" label="TypeScript" default>
 
-`e.POST("/mfa_verify", verifyMfa, authMiddleware)`
+```tsx
+// Continuation of UserPage component
 
-```go
-// Verify the user's MFA authentication code
-// The frontend application must include X-Access-Token in the request header
-func verifyMfa(c echo.Context) error {
-	// Retrieve user information from context
-	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
-	if !ok {
-		c.Logger().Error("Failed to get user info")
-		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
-	}
+const handleDeleteUser = async (userId: string) => {
+  // Define headers specific to this delete action
+  const actionHeaders = {
+    ...commonHeaders, // Copy commonHeaders and
+    // Overwrite Referer with action information
+    "X-SaaSus-Referer": `${pagePath}?action=delete_user`,
+  };
 
-	// Retrieve X-Access-Token from the request header
-	accessToken := c.Request().Header.Get("X-Access-Token")
-	if accessToken == "" {
-		return c.JSON(http.StatusUnauthorized, map[string]string{"error": "Access token is missing"})
-	}
-
-	// Retrieve the verification code from the request body
-	var requestBody struct {
-		VerificationCode string `json:"verification_code"`
-	}
-	if err := c.Bind(&requestBody); err != nil {
-		return c.JSON(http.StatusBadRequest, map[string]string{"error": "Invalid request: malformed JSON or incorrect parameters"})
-	}
-	if requestBody.VerificationCode == "" {
-		return c.JSON(http.StatusBadRequest, map[string]string{"error": "Verification code is required"})
-	}
-
-	// Use the SaaSus API to register the authentication application
-	response, err := authClient.UpdateSoftwareTokenWithResponse(context.Background(), userInfo.Id, authapi.UpdateSoftwareTokenJSONRequestBody{
-		AccessToken:      accessToken,
-		VerificationCode: requestBody.VerificationCode,
-	})
-	if err != nil || response.StatusCode() != http.StatusOK {
-		c.Logger().Errorf("MFA verification failed: Status Code %d, Response %s", response.StatusCode(), string(response.Body))
-		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "MFA verification failed"})
-	}
-
-	return c.JSON(http.StatusOK, map[string]string{"message": "MFA verification successful"})
-}
-```
-
-</TabItem>
-
-<TabItem value="python" label="Python">
-
-`@app.post("/mfa_verify")`
-
-```python
-# Verify the user's MFA authentication code
-# The frontend application must include X-Access-Token in the request header
-def verify_mfa(request: Request, mfa_request: VerifyMfaRequest, auth_user: dict = Depends(fastapi_auth)):
-    # Get X-Access-Token from request headers
-    access_token = request.headers.get("X-Access-Token")
-    if not access_token:
-        # Return 401 if access token is missing
-        raise HTTPException(status_code=401, detail="Access token is missing")
-
-    try:
-        update_software_token_param = UpdateSoftwareTokenParam(
-            access_token=access_token,
-            verification_code=mfa_request.verification_code
-        )
-
-        # Use the SaaSus API to register the authentication application
-        SaasUserApi(api_client=api_client).update_software_token(
-            user_id=auth_user.id, 
-            update_software_token_param=update_software_token_param
-        )
-
-        return {"message": "MFA verification successful"}
-    except Exception as e:
-        print(e)
-        raise HTTPException(status_code=500, detail=str(e))
-```
-
-</TabItem>
-
-<TabItem value="java" label="Java">
-
-`@PostMapping(value = "/mfa_verify", produces = "application/json")`
-
-```java
-    /**
-     * Verify the user's MFA authentication code
-     */
-    public ResponseEntity<?> verifyMfa(@RequestBody Map<String, String> requestBody, HttpServletRequest request) {
-        try {
-            // Get access token and verification code
-            String accessToken = request.getHeader("X-Access-Token");
-            if (accessToken == null || accessToken.isEmpty()) {
-                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Access token is missing");
-            }
-
-            String verificationCode = requestBody.get("verification_code");
-            if (verificationCode == null || verificationCode.isEmpty()) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Verification code is required");
-            }
-
-            // Initialize the SaaSus API client and retrieve user info
-            AuthApiClient apiClient = new Configuration().getAuthApiClient();
-            apiClient.setReferer(request.getHeader("X-Saasus-Referer"));
-            UserInfoApi userInfoApi = new UserInfoApi(apiClient);
-            UserInfo userInfo = userInfoApi.getUserInfo(getIDToken(request));
-
-            // Use the SaaSus API to verify the code and register the software token
-            SaasUserApi saasUserApi = new SaasUserApi(apiClient);
-            saasUserApi.updateSoftwareToken(
-                userInfo.getId(),
-                new UpdateSoftwareTokenParam()
-                    .accessToken(accessToken)
-                    .verificationCode(verificationCode)
-            );
-
-            Map<String, String> successResponse = new HashMap<>();
-            successResponse.put("message", "MFA verification successful");
-            return ResponseEntity.ok(successResponse);
-        } catch (ApiException e) {
-            System.err.println("API Exception: " + e.getMessage());
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
-        } catch (Exception e) {
-            System.err.println("Unexpected Exception: " + e.getMessage());
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
-        }
-    }
-```
-
-</TabItem>
-
-<TabItem value="csharp" label="C#(.Net8)">
-
-`app.MapPost("/mfa_verify")`
-
-```csharp
-            app.MapPost("/mfa_verify", async ([FromBody] MfaVerifyRequest requestBody, HttpContext context) =>
-            {
-                // Get tokens and verification code
-                var token = GetBearerToken(context);
-                var accessToken = context.Request.Headers["X-Access-Token"].FirstOrDefault(); 
-                string verificationCode = requestBody.VerificationCode;
-
-                if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(accessToken) || string.IsNullOrEmpty(verificationCode))
-                {
-                    return Results.BadRequest("Missing required information.");
-                }
-
-                try
-                {
-                    // Initialize API client and retrieve user info
-                    var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig(), context);
-                    var userInfoApi = new UserInfoApi(authApiClientConfig);
-                    var userInfo = await userInfoApi.GetUserInfoAsync(token);
-
-                    // Use the SaaSus API to verify the code and register the software token
-                    var saasUserApi = new SaasUserApi(authApiClientConfig);
-                    await saasUserApi.UpdateSoftwareTokenAsync(
-                        userInfo.Id,
-                        new UpdateSoftwareTokenParam(accessToken, verificationCode)
-                    );
-
-                    return Results.Ok(new { message = "MFA verification successful" });
-                }
-                catch (Exception ex)
-                {
-                    return HandleApiException(ex);
-                }
-            });
-```
-
-</TabItem>
-
-<TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
-
-`[HttpPost, Route("mfa_verify")]`
-
-```csharp
-        // Verify the user's MFA authentication code
-        public async Task<IHttpActionResult> VerifyMfa([FromBody] MfaVerifyRequest request)
-        {
-            try
-            {
-                // Get token and access token
-                var token = GetBearerToken(Request);
-                var accessToken = HttpContext.Current.Request.Headers.Get("X-Access-Token");
-                var verificationCode = request.VerificationCode;
-
-                if (string.IsNullOrEmpty(accessToken) || string.IsNullOrEmpty(verificationCode))
-                {
-                    return BadRequest("Missing accessToken or verificationCode");
-                }
-
-                // Initialize API client and retrieve user info
-                var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig());
-                var userInfoApi = new UserInfoApi(authApiClientConfig);
-                var userInfo = await userInfoApi.GetUserInfoAsync(token);
-
-                // Use the SaaSus API to verify the code and register the software token
-                var saasUserApi = new SaasUserApi(authApiClientConfig);
-                await saasUserApi.UpdateSoftwareTokenAsync(
-                    userInfo.Id,
-                    new UpdateSoftwareTokenParam(accessToken, verificationCode)
-                );
-
-                return Ok(new { message = "MFA verification successful" });
-            }
-            catch (Exception ex)
-            {
-                return HandleApiException(ex);
-            }
-        }
+  try {
+    await axios.delete(`/users/${userId}`, {
+      headers: actionHeaders, // Use action-specific headers
+    });
+    // ... Success handling
+  } catch (error) {
+    // ... Error handling
+  }
+};
 ```
 
 </TabItem>
 </Tabs>
 
-#### **2.1.4. Enable MFA API**
+This approach creates logs that clearly show the flow: "user opened the user list page (multiple logs), then executed deletion (action log)," making them easy to analyze.
 
-<Tabs>
-<TabItem value="go" label="Go" default>
+## Output Example
 
-`e.POST("/mfa_enable", enableMfa, authMiddleware)`
+The following shows an example of activity history logs recorded by the above implementation:
 
-```go
-// Enable MFA for the user
-func enableMfa(c echo.Context) error {
-	// Retrieve user information from context
-	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
-	if !ok {
-		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
-	}
-
-	// Create request body to enable MFA
-	method := authapi.SoftwareToken
-	requestBody := authapi.UpdateUserMfaPreferenceJSONRequestBody{
-		Enabled: true,
-		Method:  &method,
-	}
-
-	// Use the SaaSus API to enable MFA
-	_, err := authClient.UpdateUserMfaPreferenceWithResponse(context.Background(), userInfo.Id, requestBody)
-	if err != nil {
-		c.Logger().Errorf("Failed to enable MFA: %v", err)
-		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to enable MFA"})
-	}
-
-	return c.JSON(http.StatusOK, map[string]string{"message": "MFA has been enabled"})
-}
-```
-
-</TabItem>
-
-<TabItem value="python" label="Python">
-
-`@app.post("/mfa_enable")`
-
-```python
-# Enable MFA for the user
-def enable_mfa(auth_user: dict = Depends(fastapi_auth)):
-    try:
-        # Create request body to enable MFA
-        body = MfaPreference(enabled=True, method='softwareToken')
-
-        # Use the SaaSus API to enable MFA
-        SaasUserApi(api_client=api_client).update_user_mfa_preference(user_id=auth_user.id, body=body)
-
-        return {"message": "MFA has been enabled"}
-    except Exception as e:
-        print(e)
-        raise HTTPException(status_code=500, detail=str(e))
-```
-
-</TabItem>
-
-<TabItem value="java" label="Java">
-
-`@PostMapping(value = "/mfa_enable", produces = "application/json")`
-
-```java
-    /**
-     * Enable MFA for the user
-     */
-    public ResponseEntity<?> enableMfa(HttpServletRequest request) {
-        try {
-            // Initialize the SaaSus API client and retrieve user info
-            AuthApiClient apiClient = new Configuration().getAuthApiClient();
-            apiClient.setReferer(request.getHeader("X-Saasus-Referer"));
-            UserInfoApi userInfoApi = new UserInfoApi(apiClient);
-            UserInfo userInfo = userInfoApi.getUserInfo(getIDToken(request));
-
-            // Create request body to enable MFA
-            MfaPreference mfaPreference = new MfaPreference()
-                .enabled(true)
-                .method(MfaPreference.MethodEnum.SOFTWARETOKEN);
-
-            SaasUserApi saasUserApi = new SaasUserApi(apiClient);
-            saasUserApi.updateUserMfaPreference(userInfo.getId(), mfaPreference);
-
-            Map<String, String> successResponse = new HashMap<>();
-            successResponse.put("message", "MFA has been enabled");
-            return ResponseEntity.ok(successResponse);
-        } catch (ApiException e) {
-            System.err.println("API Exception: " + e.getMessage());
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
-        } catch (Exception e) {
-            System.err.println("Unexpected Exception: " + e.getMessage());
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
-        }
-    }
-```
-
-</TabItem>
-
-<TabItem value="csharp" label="C#(.Net8)">
-
-`app.MapPost("/mfa_enable")`
-
-```csharp
-            app.MapPost("/mfa_enable", async (HttpContext context) =>
-            {
-                // Retrieve ID token
-                var token = GetBearerToken(context);
-                if (string.IsNullOrEmpty(token))
-                {
-                    return Results.Unauthorized();
-                }
-
-                try
-                {
-                    // Initialize API client and retrieve user info
-                    var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig(), context);
-                    var userInfoApi = new UserInfoApi(authApiClientConfig);
-                    var userInfo = await userInfoApi.GetUserInfoAsync(token);
-
-                    // Send request to enable MFA
-                    var saasUserApi = new SaasUserApi(authApiClientConfig);
-                    var mfaPreference = new MfaPreference(enabled: true, method: MfaPreference.MethodEnum.SoftwareToken);
-                    await saasUserApi.UpdateUserMfaPreferenceAsync(userInfo.Id, mfaPreference);
-
-                    return Results.Ok(new { message = "MFA has been enabled" });
-                }
-                catch (Exception ex)
-                {
-                    return HandleApiException(ex);
-                }
-            });
-```
-
-</TabItem>
-
-<TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
-
-`[HttpPost, Route("mfa_enable")]`
-
-```csharp
-        // Enable MFA endpoint
-        public async Task<IHttpActionResult> EnableMfa()
-        {
-            try
-            {
-                var token = GetBearerToken(Request);
-                var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig());
-                var userInfoApi = new UserInfoApi(authApiClientConfig);
-                var userInfo = await userInfoApi.GetUserInfoAsync(token);
-
-                var saasUserApi = new SaasUserApi(authApiClientConfig);
-                var mfaPreference = new MfaPreference(enabled: true, method: MfaPreference.MethodEnum.SoftwareToken);
-                await saasUserApi.UpdateUserMfaPreferenceAsync(userInfo.Id, mfaPreference);
-
-                return Ok(new { message = "MFA has been enabled" });
-            }
-            catch (Exception ex)
-            {
-                return HandleApiException(ex);
-            }
-        }
-```
-
-</TabItem>
-</Tabs>
-
-#### **2.1.5. Disable MFA API**
-
-<Tabs>
-<TabItem value="go" label="Go" default>
-
-`e.POST("/mfa_disable", disableMfa, authMiddleware)`
-
-```go
-// Disable MFA for the user
-func disableMfa(c echo.Context) error {
-	// Retrieve user information from context
-	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
-	if !ok {
-		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
-	}
-
-	// Create request body to disable MFA
-	method := authapi.SoftwareToken
-	requestBody := authapi.UpdateUserMfaPreferenceJSONRequestBody{
-		Enabled: false,
-		Method:  &method,
-	}
-
-	// Use the SaaSus API to disable MFA
-	_, err := authClient.UpdateUserMfaPreferenceWithResponse(context.Background(), userInfo.Id, requestBody)
-	if err != nil {
-		c.Logger().Errorf("Failed to disable MFA: %v", err)
-		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to disable MFA"})
-	}
-
-	return c.JSON(http.StatusOK, map[string]string{"message": "MFA has been disabled"})
-}
-```
-
-</TabItem>
-
-<TabItem value="python" label="Python">
-
-`@app.post("/mfa_disable")`
-```python
-# Disable MFA for the user
-def disable_mfa(auth_user: dict = Depends(fastapi_auth)):
-    try:
-        # Create request body to disable MFA
-        body = MfaPreference(enabled=False, method='softwareToken')
-
-        # Use the SaaSus API to disable MFA
-        SaasUserApi(api_client=api_client).update_user_mfa_preference(user_id=auth_user.id, body=body)
-
-        return {"message": "MFA has been disabled"}
-    except Exception as e:
-        print(e)
-        raise HTTPException(status_code=500, detail=str(e))
-```
-
-</TabItem>
-
-<TabItem value="java" label="Java">
-
-`@PostMapping(value = "/mfa_disable", produces = "application/json")`
-
-```java
-    /**
-     * Disable MFA for the user
-     */
-    public ResponseEntity<?> disableMfa(HttpServletRequest request) {
-        try {
-            // Initialize the SaaSus API client and retrieve user info
-            AuthApiClient apiClient = new Configuration().getAuthApiClient();
-            apiClient.setReferer(request.getHeader("X-Saasus-Referer"));
-            UserInfoApi userInfoApi = new UserInfoApi(apiClient);
-            UserInfo userInfo = userInfoApi.getUserInfo(getIDToken(request));
-
-            // Create request body to disable MFA
-            MfaPreference mfaPreference = new MfaPreference()
-                .enabled(false)
-                .method(MfaPreference.MethodEnum.SOFTWARETOKEN);
-
-            SaasUserApi saasUserApi = new SaasUserApi(apiClient);
-            saasUserApi.updateUserMfaPreference(userInfo.getId(), mfaPreference);
-
-            Map<String, String> successResponse = new HashMap<>();
-            successResponse.put("message", "MFA has been disabled");
-            return ResponseEntity.ok(successResponse);
-        } catch (ApiException e) {
-            System.err.println("API Exception: " + e.getMessage());
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
-        } catch (Exception e) {
-            System.err.println("Unexpected Exception: " + e.getMessage());
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
-        }
-    }
-```
-
-</TabItem>
-
-<TabItem value="csharp" label="C#(.Net8)">
-
-`app.MapPost("/mfa_disable")`
-
-```csharp
-            app.MapPost("/mfa_disable", async (HttpContext context) =>
-            {
-                // Retrieve ID token
-                var token = GetBearerToken(context);
-                if (string.IsNullOrEmpty(token))
-                {
-                    return Results.Unauthorized();
-                }
-
-                try
-                {
-                    // Initialize API client and retrieve user info
-                    var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig(), context);
-                    var userInfoApi = new UserInfoApi(authApiClientConfig);
-                    var userInfo = await userInfoApi.GetUserInfoAsync(token);
-
-                    // Send request to disable MFA
-                    var saasUserApi = new SaasUserApi(authApiClientConfig);
-                    var mfaPreference = new MfaPreference(enabled: false, method: MfaPreference.MethodEnum.SoftwareToken);
-                    await saasUserApi.UpdateUserMfaPreferenceAsync(userInfo.Id, mfaPreference);
-
-                    return Results.Ok(new { message = "MFA has been disabled" });
-                }
-                catch (Exception ex)
-                {
-                    return HandleApiException(ex);
-                }
-            });
-```
-
-</TabItem>
-
-<TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
-
-`[HttpPost, Route("mfa_disable")]`
-
-```csharp
-        // Disable MFA endpoint
-        public async Task<IHttpActionResult> DisableMfa()
-        {
-            try
-            {
-                var token = GetBearerToken(Request);
-                var authApiClientConfig = CreateClientConfiguration(c => c.GetAuthApiClientConfig());
-                var userInfoApi = new UserInfoApi(authApiClientConfig);
-                var userInfo = await userInfoApi.GetUserInfoAsync(token);
-
-                var saasUserApi = new SaasUserApi(authApiClientConfig);
-                var mfaPreference = new MfaPreference(enabled: false, method: MfaPreference.MethodEnum.SoftwareToken);
-                await saasUserApi.UpdateUserMfaPreferenceAsync(userInfo.Id, mfaPreference);
-
-                return Ok(new { message = "MFA has been disabled" });
-            }
-            catch (Exception ex)
-            {
-                return HandleApiException(ex);
-            }
-        }
-```
-
-</TabItem>
-</Tabs>
-
-## **3. How to Use the Sample Implementation**
-
-- [Go (Echo)](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/README.md)
-- [Python(FastAPI)](https://github.com/saasus-platform/implementation-sample-api-python)
-- [Java(Spring)](https://github.com/saasus-platform/implementation-sample-api-java)
-- [C#(.NET 8)](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/README.md)
-- [C#(.NET Framework 4.8)](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/README.md)
+![Activity History Log Output Example](/img/part-6/implementation-guide/implementing-activity-history-log/image-01.png)
 
 ---
 
-# Metering API Implementation Sample and Examples of Use
+# Authentication Flow Implementation
 
-URL: https://www.prisma.io/docs/part-6/implementation-guide/meteringapisamplelaravelandusecase
+URL: https://www.prisma.io/docs/part-6/implementation-guide/sample-application/authentication
+This page explains the implementation methods for authentication flow in the API server version, using the sample application's authentication features as examples.
+
+:::info
+For comparisons of implementation approaches and overall process flows, please refer to the [Sample Application Overview](/docs/part-6/implementation-guide/sample-application/overview).
+:::
+
+## Frontend Implementation
+
+### Post-Authentication Redirect Screen (Callback)
+
+- [Callback.tsx](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/pages/Callback.tsx)
+
+When you log in from the login screen generated by the SaaSus Platform, the URL set as the post-authentication redirect is called.
+
+To perform a test run using this implementation sample, set it as `http://localhost:3000/callback`.
+
+![Post-Authentication Redirect](/img/part-6/implementation-guide/sample-application/authentication/image-02.png)
+
+At the post-authentication redirect, a temporary code necessary for obtaining authentication information is passed in the query parameter (code=xxxxx). Implement the process to obtain JWT using this temporary code and save it in local storage.
+
+#### Post-Authentication Screen Navigation Logic
+
+The sample application checks user information after JWT acquisition and navigates to the appropriate screen using the following logic:
+
+1. **User not belonging to any tenant**: Navigate to the self-signup screen
+2. **User belonging to multiple tenants**: Navigate to the tenant list screen
+3. **User belonging to a single tenant**: Navigate to the user list screen (main screen)
+
+This navigation logic ensures that users are directed to the most appropriate screen based on their current status.
+
+### Self-Signup Screen
+
+- [SelfSignUp.tsx](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/pages/SelfSignUp.tsx)
+
+It is necessary to check if the user is logged in, so call the API to get user information and confirm that the user is logged in.  
+Use the JWT stored in local storage for the API call.  
+By being able to obtain user information, you can confirm that the user is logged in.
+
+The process for self-signup should be implemented according to whether self-signup is used or not.  
+If self-signup is not used, the screen for self-signup is not needed.
+
+If self-signup is used, the process for self-signup will only be executed during the first login.  
+Whether it is the first login can be determined by whether the logging-in user is linked to a tenant.
+
+### User List Screen (Homepage)
+
+- [UserPage.tsx](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/pages/UserPage.tsx)
+
+The user list screen displays information about authenticated users and all users within the tenant. This screen serves as the central hub for user management.
+
+## Backend Implementation
+
+### JWT Retrieval API
+
+The following links contain implementations of this API.
+Search for the function name or route definition to locate the relevant code.
+
+- **Go (Echo)**: [`getCredentials`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go)
+- **Python (FastAPI)**: [`get_credentials`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py)
+- **Java (Spring)**: [`getCredentials`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
+- **C# (.NET 8)**: [`app.MapGet("/credentials"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
+- **C# (.NET Framework 4.8)**: [`GetCredentials`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
+
+### User Information Retrieval API
+
+The following links contain implementations of this API.
+Search for the function name or route definition to locate the relevant code.
+
+- **Go (Echo)**: [`getMe`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go)
+- **Python (FastAPI)**: [`get_user_info`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py)
+- **Java (Spring)**: [`getMe`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
+- **C# (.NET 8)**: [`app.MapGet("/userinfo"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
+- **C# (.NET Framework 4.8)**: [`GetUserInfo`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
+
+This API internally calls the SaaSus API's [Get User Info](https://docs.saasus.io/docs/reference/auth-api#tag/userInfo). For detailed information on how to utilize the response data, please refer to [SaaSus API userInfo Response Data](#saasus-api-userinfo-response-data).
+
+### Self-Signup API
+
+The following links contain implementations of this API.
+Search for the function name or route definition to locate the relevant code.
+
+- **Go (Echo)**: [`selfSignup`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go)
+- **Python (FastAPI)**: [`self_signup`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py)
+- **Java (Spring)**: [`selfSignUp`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
+- **C# (.NET 8)**: [`app.MapPost("/self_sign_up"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
+- **C# (.NET Framework 4.8)**: [`SelfSignUp`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
+
+In order to confirm that the API request is from the user who logged into the SaaSus Platform, it is always necessary to confirm the login by retrieving the user information.
+
+The self-signup process is as follows:  
+Prerequisite: The user who self-signs up becomes the administrator of the new tenant
+
+a. Tenant creation  
+b. Link the logged-in user to the created tenant  
+c. Set the logged-in user as the admin of the tenant
+
+### User List Retrieval API
+
+The following links contain implementations of this API.
+Search for the function name or route definition to locate the relevant code.
+
+- **Go (Echo)**: [`getUsers`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go)
+- **Python (FastAPI)**: [`get_tenant_users`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py)
+- **Java (Spring)**: [`getUsers`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
+- **C# (.NET 8)**: [`app.MapGet("/users"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
+- **C# (.NET Framework 4.8)**: [`GetUsers`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
+
+It is always necessary to confirm the login by retrieving the user information to verify that the API request originates from the user that is logged into SaaSus Platform.
+
+## SaaSus API userInfo Response Data
+
+The [Get User Info API](https://docs.saasus.io/docs/reference/auth-api#tag/userInfo) response includes tenant information (tenants), environment information (envs), and role information (roles) as arrays. Understanding how to process this information is essential for implementing the navigation logic and access control in your SaaS application.
+
+- **tenants array:**
+  In the design of your SaaS,
+  if it is fixed to 1 tenant per 1 user, use `tenants[0]` fixed.
+  If a user belongs to multiple tenants, it is necessary to decide which tenant to use.
+  Example: Users linked to multiple tenants will see a tenant selection screen after logging in to choose a tenant.
+
+- **envs array:**
+  id(name)【1(dev), 2(stg), 3(prod)】
+  dev, stg, prod do not refer to your SaaS's environments.
+  They are SaaSus Platform's internal environment settings.
+  Example: When users in your SaaS's production environment use sandbox functionality with test users, they would use 1(dev) or 2(stg). Normally, 3(prod) is used.
+
+- **roles array:**
+  In the design of your SaaS,
+  if it is fixed to 1 role per 1 user, use `roles[0]` fixed.
+  If a user has multiple roles, implementation to check all roles is necessary.
+  Example: In a design where a user can have both general user and administrator permissions, when displaying an admin screen that only administrators can see, implementation to reference all roles is required.
+
+---
+
+# Billing Dashboard Implementation
+
+URL: https://www.prisma.io/docs/part-6/implementation-guide/sample-application/billing-dashboard
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+## Overview
+
+This guide explains how to implement a **tenant-based real-time billing dashboard** by combining the SaaSus Metering API and Pricing API, based on the sample app *Billing Dashboard*.
+
+Screenshot of the billing dashboard:
+
+![](/img/part-6/implementation-guide/billing-dashboard-with-metering-api/image-01.png)
+
+## Frontend Implementation
+
+### Example Implementations
+
+The following links point to repositories that include implementations of the frontend.
+
+- **React**: [`BillingDashboard.tsx`](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/pages/BillingDashboard.tsx)
+
+## Backend Implementation
+
+### Endpoint Summary
+
+<div className="table-scroll">
+  <table className="nowrap-table">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Method &amp; Path</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Plan Period Candidates</td>
+        <td><code>GET /billing/plan_periods?tenant_id=</code></td>
+        <td>Returns monthly or yearly periods based on the tenant's plan history. Used for generating a select box.</td>
+      </tr>
+      <tr>
+        <td>Dashboard Aggregation</td>
+        <td><code>GET /billing/dashboard</code></td>
+        <td>Retrieves metering summaries, billing amounts, and plan information in one response.</td>
+      </tr>
+      <tr>
+        <td>Meter Update (Current Time)</td>
+        <td><code>POST /billing/metering/&#123;tenant_id&#125;/&#123;unit&#125;</code></td>
+        <td>Applies immediate metering updates using <code>add / sub / direct</code> method.</td>
+      </tr>
+      <tr>
+        <td>Meter Update (Custom Timestamp)</td>
+        <td><code>POST /billing/metering/&#123;tenant_id&#125;/&#123;unit&#125;/&#123;ts&#125;</code></td>
+        <td>Updates metering values using a specified timestamp. Useful for corrections.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+:::info
+Plan history can be obtained from the `plan_histories` array in the response of [Get Tenant Details](/docs/reference/auth-api#tag/tenant/operation/GetTenant) in the Auth API.
+:::
+
+### Plan Period Candidates Endpoint
+
+#### Implementing a Period Select Box
+
+The backend splits plan periods into *monthly* or *yearly* segments and returns labels and Unix timestamps (seconds) for the frontend.
+
+:::info
+Use the `plan_histories` array (which contains `plan_id` and `plan_applied_at`) from the response of [Get Tenant Details](/docs/reference/auth-api#tag/tenant/operation/GetTenant) in the Auth API to determine the plan application timing. Treat `current_plan_period_end` as the final boundary. Exclude entries with an empty `plan_id`.
+:::
+
+:::info
+The following implementation flow and code samples assume a Go backend and a React frontend.
+:::
+
+**Implementation Flow**
+
+1. **Get Tenant Info** — Retrieve `planHistories` and `currentPlanPeriodEnd` from the Auth API.
+2. **Create Boundary Edges** — Sort `planAppliedAt` chronologically to form `edge` array.
+3. **Define Final Boundary** — Use `currentPlanPeriodEnd` (or now if unavailable) minus 1 second as the final edge.
+4. **Split Periods** — Determine if the interval is monthly or yearly, then generate `PlanPeriodOption` using `step()` loop.
+5. **Sort by Latest First** — Sort by `Start` in descending order and return to frontend.
+
+<Tabs>
+<TabItem value="go" label="Go" default>
+
+```go
+// Step 2 & 4: Create edges and split by month/year
+type edge struct { PlanID string; Time time.Time }
+// ...populate edge array sorted by Time ascending...
+for cur := periodStart; !cur.After(periodEnd); {
+    next := step(cur)        // +1M for month, +1Y for year
+    end  := next.Add(-1 * time.Second)
+    results = append(results, PlanPeriodOption{ Label: label(cur,end), PlanID: e.PlanID, Start: cur.Unix(), End: end.Unix() })
+    if end.Equal(periodEnd) { break }
+    cur = end.Add(time.Second)
+}
+```
+
+</TabItem>
+</Tabs>
+
+On the frontend, bind these to a `<select>` element and refetch the dashboard on change:
+
+<Tabs>
+<TabItem value="typescript" label="TypeScript" default>
+
+```tsx
+// BillingDashboard.tsx (excerpt)
+const fetchPeriodOptions = async () => {
+  const res = await axios.get<PlanPeriodOption[]>("/billing/plan_periods", { params:{ tenant_id } });
+  setPeriodOptions(res.data);
+  setSelectedPeriod(toState(res.data[0]));
+};
+```
+
+</TabItem>
+</Tabs>
+
+#### Example Implementations
+
+The following links point to repositories that include implementations of this endpoint.  
+Search by function name to locate the relevant code.
+
+- **Go (Echo)**: [`getPlanPeriods`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)
+- **Python (FastAPI)**: [`get_plan_periods`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)
+- **Java (Spring)**: [`getPlanPeriods`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)
+- **C# (.NET 8)**: [`GetPlanPeriods`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)
+- **C# (.NET Framework 4.8)**: [`GetPlanPeriods`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)
+
+### Dashboard Aggregation Endpoint
+
+#### Difference Between `max` and `sum` in `aggregate_usage`
+
+| Mode            | Typical Use Case            | Aggregation Method          |
+| --------------- | --------------------------- | --------------------------- |
+| `sum` (default) | API call counts / traffic   | Use total value in period   |
+| `max`           | Concurrent users / sessions | Use maximum value in period |
+
+In `calculateMeteringUnitBillings`, the function checks `aggregate_usage` and uses the max or sum accordingly:
+
+<Tabs>
+<TabItem value="go" label="Go" default>
+
+```go
+if aggUsage == "max" {
+    for _, c := range resp.JSON200.Counts {
+        if float64(c.Count) > count { count = float64(c.Count) }
+    }
+} else { // sum
+    for _, c := range resp.JSON200.Counts { count += float64(c.Count) }
+}
+```
+
+</TabItem>
+</Tabs>
+
+:::info
+The `aggregate_usage` setting is only visible in the UI when Stripe integration is enabled.  
+It is hidden when using the platform standalone.
+:::
+
+#### Billing Logic by `unit_type`
+
+Metering units have a `type` that determines the billing logic as follows:
+
+| type           | Measurement Unit  | Billing Logic                      |
+| -------------- | ----------------- | ---------------------------------- |
+| `fixed`        | Fixed Unit        | Use fixed price as is              |
+| `usage`        | Usage Unit        | `count × price`                    |
+| `tiered`       | Tiered Unit       | Add prices based on matching tier  |
+| `tiered_usage` | Tiered Usage Unit | Accumulate from lower tiers upward |
+
+<Tabs>
+<TabItem value="go" label="Go" default>
+
+```go
+func calculateAmountByUnitType(count float64, u map[string]interface{}) float64 {
+  unitType, _ := u["type"].(string)
+  price, _ := u["unit_amount"].(float64)
+
+  switch unitType {
+  case "fixed":
+    return price
+  case "usage":
+    return count * price
+  case "tiered":
+    return calcTiered(count, u)
+  case "tiered_usage":
+    return calcTieredUsage(count, u)
+  default:
+    // Fallback: treat unknown type as usage
+    return count * price
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+See `calcTiered` and `calcTieredUsage` for details.
+
+#### Example Implementations
+
+The following links point to repositories that include implementations of this endpoint.  
+Search by function name to locate the relevant code.
+
+- **Go (Echo)**: [`getBillingDashboard`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)
+- **Python (FastAPI)**: [`get_billing_dashboard`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)
+- **Java (Spring)**: [`getBillingDashboard`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)
+- **C# (.NET 8)**: [`GetBillingDashboard`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)
+- **C# (.NET Framework 4.8)**: [`GetBillingDashboard`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)
+
+### Meter Updates
+
+The dashboard allows metering updates in two scenarios: inline edits (current time) and modal edits (specific timestamp).
+
+#### Inline Edit Example (Current Time)
+
+<Tabs>
+<TabItem value="go" label="Go" default>
+
+```go
+func updateCountOfNow(c echo.Context) error {
+    tenantId := c.Param("tenantId")
+    unitName := c.Param("unit")
+
+    userInfo, _ := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
+    if !hasBillingAccess(userInfo, tenantId) {
+        return c.String(http.StatusForbidden, "Insufficient permissions")
+    }
+
+    var body struct {
+        Method string `json:"method"` // add | sub | direct
+        Count  int    `json:"count"`
+    }
+    if err := c.Bind(&body); err != nil {
+        return c.String(http.StatusBadRequest, "invalid JSON body")
+    }
+    if body.Count < 0 {
+        return c.String(http.StatusBadRequest, "count must be >= 0")
+    }
+
+    method := pricingapi.UpdateMeteringUnitTimestampCountMethod(body.Method)
+    switch method {
+    case pricingapi.Add, pricingapi.Sub, pricingapi.Direct:
+        // OK
+    default:
+        return c.String(http.StatusBadRequest, "method must be add, sub, or direct")
+    }
+
+    param := pricingapi.UpdateMeteringUnitTimestampCountNowParam{
+        Method: method,
+        Count:  body.Count,
+    }
+
+    resp, err := pricingClient.UpdateMeteringUnitTimestampCountNowWithResponse(
+        c.Request().Context(), tenantId, unitName, param,
+    )
+    if err != nil {
+        log.Printf("pricing API error: %v", err)
+        return c.String(http.StatusInternalServerError, "pricing API error")
+    }
+    if resp.JSON200 == nil {
+        return c.String(resp.StatusCode(), string(resp.Body))
+    }
+
+    return c.JSON(http.StatusOK, resp.JSON200)
+}
+```
+
+</TabItem>
+</Tabs>
+
+:::info
+The inline plus/minus buttons are only displayed when the selected period is currently ongoing.
+:::
+
+#### Example Implementations
+
+The following links point to repositories that include implementations of this endpoint.  
+Search by function name to locate the relevant code.
+
+- **Go (Echo)**: [`updateCountOfNow`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)
+- **Python (FastAPI)**: [`update_count_of_now`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)
+- **Java (Spring)**: [`updateCountOfNow`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)
+- **C# (.NET 8)**: [`UpdateMeteringCountNow`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)
+- **C# (.NET Framework 4.8)**: [`UpdateMeteringCountNow`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)
+
+#### Modal Edit Example (Custom Timestamp)
+
+<Tabs>
+<TabItem value="go" label="Go" default>
+
+```go
+func updateCountOfSpecifiedTS(c echo.Context) error {
+    tenantId := c.Param("tenantId")
+    unitName := c.Param("unit")
+    tsStr := c.Param("ts")
+
+    userInfo, _ := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
+    if !hasBillingAccess(userInfo, tenantId) {
+        return c.String(http.StatusForbidden, "Insufficient permissions")
+    }
+
+    ts, err := strconv.ParseInt(tsStr, 10, 64)
+    if err != nil {
+        return c.String(http.StatusBadRequest, "ts must be 10-digit unix seconds")
+    }
+
+    var body struct {
+        Method string `json:"method"` // add | sub | direct
+        Count  int    `json:"count"`
+    }
+    if err := c.Bind(&body); err != nil {
+        return c.String(http.StatusBadRequest, "invalid JSON body")
+    }
+    if body.Count < 0 {
+        return c.String(http.StatusBadRequest, "count must be >= 0")
+    }
+
+    method := pricingapi.UpdateMeteringUnitTimestampCountMethod(body.Method)
+    switch method {
+    case pricingapi.Add, pricingapi.Sub, pricingapi.Direct:
+        // OK
+    default:
+        return c.String(http.StatusBadRequest, "method must be add, sub, or direct")
+    }
+
+    param := pricingapi.UpdateMeteringUnitTimestampCountParam{
+        Method: method,
+        Count:  body.Count,
+    }
+
+    resp, err := pricingClient.UpdateMeteringUnitTimestampCountWithResponse(
+        c.Request().Context(), tenantId, unitName, int(ts), param,
+    )
+    if err != nil {
+        log.Printf("pricing API error: %v", err)
+        return c.String(http.StatusInternalServerError, "pricing API error")
+    }
+    if resp.JSON200 == nil {
+        return c.String(resp.StatusCode(), string(resp.Body))
+    }
+
+    return c.JSON(http.StatusOK, resp.JSON200)
+}
+```
+
+</TabItem>
+</Tabs>
+
+#### Example Implementations
+
+The following links point to repositories that include implementations of this endpoint.  
+Search by function name to locate the relevant code.
+
+- **Go (Echo)**: [`updateCountOfSpecifiedTS`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)
+- **Python (FastAPI)**: [`update_count_of_specified_timestamp`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)
+- **Java (Spring)**: [`updateCountOfSpecifiedTimestamp`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)
+- **C# (.NET 8)**: [`UpdateMeteringCount`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)
+- **C# (.NET Framework 4.8)**: [`UpdateMeteringCount`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)
+
+
+---
+
+# Metering API Implementation Samples
+
+URL: https://www.prisma.io/docs/part-6/implementation-guide/sample-application/metering-api
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -10434,6 +9530,853 @@ public async Task<IHttpActionResult> GetAllUnitsMonthCount(
 
 </TabItem>
 </Tabs>
+
+---
+
+# Multi-Factor Authentication
+
+URL: https://www.prisma.io/docs/part-6/implementation-guide/sample-application/multi-factor-authentication
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+This page explains how to implement Multi-Factor Authentication (MFA) functionality using the SaaSus Auth API, based on the sample application's MFA settings feature.
+
+Below is a screenshot of the multi-factor authentication settings dialog.
+
+![](/img/part-6/implementation-guide/sample-application/multi-factor-authentication/mfa-setting-dialog.png)
+※This QR code is dummy data for demonstration purposes. It cannot be used for actual authentication.
+
+The MFA functionality provides the following features:
+
+- Check MFA settings status
+- Register authentication applications (Google Authenticator, etc.)
+- Enable/disable MFA
+- Easy setup with QR codes
+
+## Frontend Implementation
+
+### Example Implementations
+
+The following links point to repositories that include implementations of the frontend.
+
+- **React**: [`UserMfaSettingDialog.tsx`](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/components/dialogs/UserMfaSettingDialog.tsx) - MFA Settings Dialog Component
+- **React**: [`HeaderUserbox.tsx`](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/components/header/HeaderUserbox.tsx) - Header User Menu
+
+## Backend Implementation
+
+### Endpoint Summary
+
+<div className="table-scroll">
+  <table className="nowrap-table">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Method &amp; Path</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>MFA Status Check</td>
+        <td><code>GET /mfa_status</code></td>
+        <td>Retrieves the user's MFA enabled/disabled status.</td>
+      </tr>
+      <tr>
+        <td>MFA Setup</td>
+        <td><code>GET /mfa_setup</code></td>
+        <td>Generates QR code URL for authentication app registration.</td>
+      </tr>
+      <tr>
+        <td>MFA Code Verification</td>
+        <td><code>POST /mfa_verify</code></td>
+        <td>Verifies authentication code from authentication app and registers MFA.</td>
+      </tr>
+      <tr>
+        <td>MFA Enable</td>
+        <td><code>POST /mfa_enable</code></td>
+        <td>Enables MFA for the user.</td>
+      </tr>
+      <tr>
+        <td>MFA Disable</td>
+        <td><code>POST /mfa_disable</code></td>
+        <td>Disables MFA for the user.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+:::info
+The following code samples assume Go for the backend.
+:::
+
+### MFA Status Check Endpoint
+
+<Tabs>
+<TabItem value="go" label="Go" default>
+
+```go
+// Retrieve MFA status (enabled/disabled)
+func getMfaStatus(c echo.Context) error {
+	// Retrieve user information from context
+	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
+	if !ok {
+		c.Logger().Error("Failed to get user info")
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
+	}
+
+	// Use the SaaSus API to get the user's MFA status
+	response, err := authClient.GetUserMfaPreferenceWithResponse(context.Background(), userInfo.Id)
+	if err != nil || response.JSON200 == nil {
+		c.Logger().Errorf("failed to get MFA status: %v", err)
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve MFA status"})
+	}
+
+	// Return MFA enabled/disabled status
+	return c.JSON(http.StatusOK, map[string]bool{"enabled": response.JSON200.Enabled})
+}
+```
+
+</TabItem>
+</Tabs>
+
+#### Implementation Example Links
+
+The following links contain implementations of this endpoint.
+Search for the function name to find the relevant section.
+
+- **Go (Echo)**: [`getMfaStatus`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go)
+- **Python (FastAPI)**: [`get_mfa_status`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py)
+- **Java (Spring)**: [`getMfaStatus`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
+- **C# (.NET 8)**: [`app.MapGet("/mfa_status"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
+- **C# (.NET Framework 4.8)**: [`GetMfaStatus`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
+
+### MFA Setup Endpoint
+
+<Tabs>
+<TabItem value="go" label="Go" default>
+
+```go
+// Retrieve MFA setup information (generate QR code)
+// The frontend application must include X-Access-Token in the request header
+func getMfaSetup(c echo.Context) error {
+	// Retrieve X-Access-Token from the request header
+	accessToken := c.Request().Header.Get("X-Access-Token")
+	if accessToken == "" {
+		// Return authentication error if access token is missing
+		return c.JSON(http.StatusUnauthorized, map[string]string{"error": "Access token is missing"})
+	}
+
+	// Retrieve user information from context
+	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
+	if !ok {
+		c.Logger().Error("failed to get user info")
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
+	}
+
+	// Use the SaaSus API to generate a secret code for MFA authentication app registration
+	response, err := authClient.CreateSecretCodeWithResponse(context.Background(), userInfo.Id, authapi.CreateSecretCodeJSONRequestBody{
+		AccessToken: accessToken,
+	})
+	if err != nil || response.JSON201 == nil {
+		c.Logger().Errorf("failed to create secret code: %v", err)
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to generate QR code"})
+	}
+
+	// Generate a QR code URL for Google Authenticator and other authentication apps
+	qrCodeUrl := "otpauth://totp/SaaSusPlatform:" + userInfo.Email + "?secret=" + response.JSON201.SecretCode + "&issuer=SaaSusPlatform"
+
+	// Return the QR code URL
+	return c.JSON(http.StatusOK, map[string]string{
+		"qrCodeUrl": qrCodeUrl,
+	})
+}
+```
+
+</TabItem>
+</Tabs>
+
+#### Implementation Example Links
+
+The following links contain implementations of this endpoint.
+Search for the function name to find the relevant section.
+
+- **Go (Echo)**: [`getMfaSetup`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go)
+- **Python (FastAPI)**: [`get_mfa_setup`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py)
+- **Java (Spring)**: [`getMfaSetup`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
+- **C# (.NET 8)**: [`app.MapGet("/mfa_setup"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
+- **C# (.NET Framework 4.8)**: [`SetupMfa`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
+
+### MFA Authentication Code Verification Endpoint
+
+<Tabs>
+<TabItem value="go" label="Go" default>
+
+```go
+// Verify the user's MFA authentication code
+// The frontend application must include X-Access-Token in the request header
+func verifyMfa(c echo.Context) error {
+	// Retrieve user information from context
+	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
+	if !ok {
+		c.Logger().Error("Failed to get user info")
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
+	}
+
+	// Retrieve X-Access-Token from the request header
+	accessToken := c.Request().Header.Get("X-Access-Token")
+	if accessToken == "" {
+		return c.JSON(http.StatusUnauthorized, map[string]string{"error": "Access token is missing"})
+	}
+
+	// Retrieve the verification code from the request body
+	var requestBody struct {
+		VerificationCode string `json:"verification_code"`
+	}
+	if err := c.Bind(&requestBody); err != nil {
+		return c.JSON(http.StatusBadRequest, map[string]string{"error": "Invalid request: malformed JSON or incorrect parameters"})
+	}
+	if requestBody.VerificationCode == "" {
+		return c.JSON(http.StatusBadRequest, map[string]string{"error": "Verification code is required"})
+	}
+
+	// Use the SaaSus API to register the authentication application
+	response, err := authClient.UpdateSoftwareTokenWithResponse(context.Background(), userInfo.Id, authapi.UpdateSoftwareTokenJSONRequestBody{
+		AccessToken:      accessToken,
+		VerificationCode: requestBody.VerificationCode,
+	})
+	if err != nil || response.StatusCode() != http.StatusOK {
+		c.Logger().Errorf("MFA verification failed: Status Code %d, Response %s", response.StatusCode(), string(response.Body))
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "MFA verification failed"})
+	}
+
+	return c.JSON(http.StatusOK, map[string]string{"message": "MFA verification successful"})
+}
+```
+
+</TabItem>
+</Tabs>
+
+#### Implementation Example Links
+
+The following links contain implementations of this endpoint.
+Search for the function name to find the relevant section.
+
+- **Go (Echo)**: [`verifyMfa`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go)
+- **Python (FastAPI)**: [`verify_mfa`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py)
+- **Java (Spring)**: [`verifyMfa`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
+- **C# (.NET 8)**: [`app.MapPost("/mfa_verify"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
+- **C# (.NET Framework 4.8)**: [`VerifyMfa`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
+
+### MFA Enable Endpoint
+
+<Tabs>
+<TabItem value="go" label="Go" default>
+
+```go
+// Enable MFA for the user
+func enableMfa(c echo.Context) error {
+	// Retrieve user information from context
+	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
+	if !ok {
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
+	}
+
+	// Create request body to enable MFA
+	method := authapi.SoftwareToken
+	requestBody := authapi.UpdateUserMfaPreferenceJSONRequestBody{
+		Enabled: true,
+		Method:  &method,
+	}
+
+	// Use the SaaSus API to enable MFA
+	_, err := authClient.UpdateUserMfaPreferenceWithResponse(context.Background(), userInfo.Id, requestBody)
+	if err != nil {
+		c.Logger().Errorf("Failed to enable MFA: %v", err)
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to enable MFA"})
+	}
+
+	return c.JSON(http.StatusOK, map[string]string{"message": "MFA has been enabled"})
+}
+```
+
+</TabItem>
+</Tabs>
+
+#### Implementation Example Links
+
+The following links contain implementations of this endpoint.
+Search for the function name to find the relevant section.
+
+- **Go (Echo)**: [`enableMfa`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go)
+- **Python (FastAPI)**: [`enable_mfa`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py)
+- **Java (Spring)**: [`enableMfa`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
+- **C# (.NET 8)**: [`app.MapPost("/mfa_enable"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
+- **C# (.NET Framework 4.8)**: [`EnableMfa`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
+
+### MFA Disable Endpoint
+
+<Tabs>
+<TabItem value="go" label="Go" default>
+
+```go
+// Disable MFA for the user
+func disableMfa(c echo.Context) error {
+	// Retrieve user information from context
+	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
+	if !ok {
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
+	}
+
+	// Create request body to disable MFA
+	method := authapi.SoftwareToken
+	requestBody := authapi.UpdateUserMfaPreferenceJSONRequestBody{
+		Enabled: false,
+		Method:  &method,
+	}
+
+	// Use the SaaSus API to disable MFA
+	_, err := authClient.UpdateUserMfaPreferenceWithResponse(context.Background(), userInfo.Id, requestBody)
+	if err != nil {
+		c.Logger().Errorf("Failed to disable MFA: %v", err)
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to disable MFA"})
+	}
+
+	return c.JSON(http.StatusOK, map[string]string{"message": "MFA has been disabled"})
+}
+```
+
+</TabItem>
+</Tabs>
+
+#### Implementation Example Links
+
+The following links contain implementations of this endpoint.
+Search for the function name to find the relevant section.
+
+- **Go (Echo)**: [`disableMfa`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go)
+- **Python (FastAPI)**: [`disable_mfa`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/main.py)
+- **Java (Spring)**: [`disableMfa`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
+- **C# (.NET 8)**: [`app.MapPost("/mfa_disable"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
+- **C# (.NET Framework 4.8)**: [`DisableMfa`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
+
+---
+
+# Sample Application Overview
+
+URL: https://www.prisma.io/docs/part-6/implementation-guide/sample-application/overview
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+This is an implementation example of an actual SaaS application using SaaSus Platform.
+You can learn by running essential SaaS features such as authentication, tenant management, and billing functionality.
+
+### Key Features
+- **Practical**: Covers features used in actual SaaS applications
+- **React + TypeScript**: Uses React for the frontend
+- **Multi-language Support**: Implementation examples in Go, Python, Java, and C#
+
+## Implementation Approach
+
+This sample application is implemented as an **API Server version**.
+
+### API Server Version Characteristics
+
+This is an implementation approach where the backend is configured as an API server, with the following characteristics:
+- Store the token (JWT), which is the authentication information for the SaaSus Platform, in the browser's local storage
+- SaaS Platform users authenticate themselves using JWT
+- The frontend is implemented with React
+- The backend API server is implemented in Go / Python / Java / C#
+
+**Process Flow (Login to User List Display)**
+
+![API Server Version Process Flow](/img/part-6/implementation-guide/sample-application/overview/SaaSus_PlatformAPI.png)
+
+## Implemented Screens and Features
+
+### Authentication-Related Screens
+
+#### [`Callback.tsx`](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/pages/Callback.tsx) - Post-authentication Redirect Screen
+
+- Receives authentication information from SaaSus Platform
+- Saves JWT token to local storage
+- Automatically redirects to appropriate screen based on user role
+- ※Not displayed to users as it's a redirect process
+
+#### [`SelfSignUp.tsx`](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/pages/SelfSignUp.tsx) - Self Sign-up Screen
+
+![Self Sign-up Screen](/img/part-6/implementation-guide/sample-application/overview/self-signup.png)
+
+- New users can create their own tenant
+- Tenant name input
+- User attribute and tenant attribute settings
+- Input fields by attribute type (string, number, boolean, date)
+
+### User & Tenant Management Screens
+
+#### [`TenantList.tsx`](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/pages/TenantList.tsx) - Tenant List Screen
+
+![Tenant List Screen](/img/part-6/implementation-guide/sample-application/overview/tenant-list.png)
+
+- For users belonging to multiple tenants
+- Display tenant attributes (configured/unconfigured display)
+- Navigation to user list screen for each tenant
+
+#### [`UserPage.tsx`](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/pages/UserPage.tsx) - User List Screen (Main Screen)
+
+![User List Screen](/img/part-6/implementation-guide/sample-application/overview/user-page.png)
+
+- **Login User Information Display**: Tenant name, name, email address, role, pricing plan
+- **User List Table**: Display all users within tenant
+- **User Attribute Display**: Dynamic display of custom attributes
+- **Admin Function Links**: Links to functions displayed only to administrators
+- **User Deletion Function**: User deletion with administrator privileges
+
+### User Management Functions
+
+#### [`UserRegister.tsx`](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/pages/UserRegister.tsx) - User Registration Screen
+
+![User Registration Screen](/img/part-6/implementation-guide/sample-application/overview/user-register.png)
+
+- Email address and password input
+- User attribute settings
+- Input field support by attribute type
+
+#### [`UserInvitation.tsx`](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/pages/UserInvitation.tsx) - User Invitation Screen
+
+![User Invitation Screen](/img/part-6/implementation-guide/sample-application/overview/user-invitation.png)
+
+- Send invitations via email address
+- Display invitation list (email, invitation link, role, status, expiration date)
+- Invitation status management
+
+#### [`DeleteUserLog.tsx`](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/pages/DeleteUserLog.tsx) - User Deletion Log Screen
+
+![User Deletion Log Screen](/img/part-6/implementation-guide/sample-application/overview/delete-user-log.png)
+
+- Display history of deleted users
+- Tenant ID, User ID, email address, deletion date and time
+
+### Billing & Metering Functions
+
+#### [`PlanSettings.tsx`](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/pages/PlanSettings.tsx) - Plan Settings Screen
+
+![Plan Settings Screen](/img/part-6/implementation-guide/sample-application/overview/plan-settings.png)
+
+- **Current Plan Display**: Plan name, tax rate, change reservation information
+- **Plan Change Function**: New plan selection, tax rate settings
+- **Effective Date Settings**: Immediate reflection (5 minutes later) or date/time specification
+- **Plan Cancellation Function**: Cancellation of current plan
+- **Reservation Management**: Cancellation of plan change reservations
+- **Edit Restrictions**: Edit lock when changes are scheduled soon
+
+#### [`BillingDashboard.tsx`](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/pages/BillingDashboard.tsx) - Billing Information Dashboard
+
+![Billing Information Dashboard](/img/part-6/implementation-guide/sample-application/overview/billing-dashboard.png)
+
+- **Billing Summary**: Total amount by currency, number of measurement units
+- **Pricing Plan Information**: Plan details, tax rate information
+- **Period Selection**: Monthly/yearly billing period selection
+- **Billing Information by Measurement Unit**: Detailed display of usage and billing amounts
+- **Real-time Meter Updates**: Inline editing (+/- buttons)
+- **Meter Update Modal**: Increase/decrease with arbitrary values, history correction
+
+### Security Functions
+
+#### [`UserMfaSettingDialog.tsx`](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/components/dialogs/UserMfaSettingDialog.tsx) - Multi-Factor Authentication Settings Dialog
+
+![Multi-Factor Authentication Settings Dialog](/img/part-6/implementation-guide/sample-application/overview/mfa-setting-dialog.png)
+*This QR code contains dummy data for demonstration purposes only and cannot be used for actual authentication.
+
+- **MFA Status Check**: Check enabled/disabled status
+- **QR Code Generation**: Display QR code for Google Authenticator etc.
+- **Authentication Code Verification**: Verification of 6-digit codes generated by authenticator apps
+- **MFA Enable/Disable**: Toggle settings
+- **Device Re-registration**: Setup on new devices
+
+
+## Implemented Features
+
+### Custom Attribute Functions
+- Flexible setting and display of user and tenant attributes
+- Support for various attribute types such as string, number, boolean, date
+- Automatic validation of attribute values
+
+### Metering
+- Real-time usage updates
+- Simple increase/decrease operations through inline editing
+- Function to correct past usage data
+
+### Permission Control
+- Function restrictions and display control by role
+- Implementation of functions accessible only to administrators
+- Screen display switching according to user permissions
+
+### Activity History Log
+- Detailed behavior tracking through `X-SaaSus-Referer` header
+- Distinction between page display and action execution
+
+## Setup Instructions
+
+### Prerequisites
+- **Node.js**: 16 or higher
+- **Development Environment**: Development environment for each language (Go, Python, Java, C#)
+- **SaaSus Platform**: Account and project setup
+
+### Setup Instructions
+
+#### 1. SaaSus Platform Configuration
+1. Set post-authentication redirect URL in SaaS development console (`http://localhost:3000/callback`)
+2. Obtain required configuration values:
+   - Login screen URL
+   - API keys and other authentication information
+
+#### 2. Frontend Setup
+```bash
+# Clone repository
+git clone https://github.com/saasus-platform/implementation-sample-front-react.git
+cd implementation-sample-front-react
+
+# Environment variable setup
+cp .env.example .env
+vi .env
+```
+
+Configure the following in the `.env` file:
+```bash
+# Set the login URL obtained from SaaSus Platform Management Console
+REACT_APP_LOGIN_URL=https://auth.xxxxxxxxxx.com
+```
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm start
+```
+
+#### 3. Backend Setup
+Select and set up the appropriate repository for each language.
+Please refer to the README of each repository for detailed setup instructions:
+
+- **Go (Echo)**: [Setup Instructions](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/README.md)
+- **Python (FastAPI)**: [Setup Instructions](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/README.md)
+- **Java (Spring)**: [Setup Instructions](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/README.md)
+- **C# (.NET)**: [Setup Instructions](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/README.md)
+
+#### 4. Operation Verification
+1. Access [frontend](http://localhost:3000)
+2. Verify login functionality
+3. Verify each feature operation
+
+### Other Implementation Approaches
+For serverless version implementation, please refer to the following document:
+- [Implementation using SaaSus Platform (Serverless)](/docs/part-6/implementation-guide/implementing-authentication-using-saasus-serverless)
+
+---
+
+# Plan Change Implementation
+
+URL: https://www.prisma.io/docs/part-6/implementation-guide/sample-application/plan-change-implementation
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+## Overview
+
+This page explains how to implement tenant pricing plan change functionality by combining SaaSus Auth API and Pricing API, using the plan change feature of the sample application as an example.
+
+Below is a screenshot of the plan settings screen.
+
+![](/img/part-6/implementation-guide/plan-change-implementation/image-01.png)
+
+The plan change functionality provides the following features:
+
+- Display current plan information
+- Display plan change reservation information
+- Execute plan changes
+
+## Frontend Implementation
+
+### Example Implementations
+
+The following links point to repositories that include implementations of the frontend.
+
+- **React**: [`PlanSettings.tsx`](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/pages/PlanSettings.tsx)
+
+## Backend Implementation
+
+### Endpoint Summary
+
+<div className="table-scroll">
+  <table className="nowrap-table">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Method &amp; Path</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Current Plan Information</td>
+        <td><code>GET /tenants/&#123;tenantId&#125;/plan</code></td>
+        <td>Retrieves the tenant's current plan information and history.</td>
+      </tr>
+      <tr>
+        <td>Plan List</td>
+        <td><code>GET /pricing_plans</code></td>
+        <td>Retrieves a list of all pricing plans.</td>
+      </tr>
+      <tr>
+        <td>Tax Rate List</td>
+        <td><code>GET /tax_rates</code></td>
+        <td>Retrieves a list of available tax rates.</td>
+      </tr>
+      <tr>
+        <td>Plan Change Execution</td>
+        <td><code>PUT /tenants/&#123;tenantId&#125;/plan</code></td>
+        <td>Changes the tenant's pricing plan.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+:::info
+The following code samples assume Go for the backend.
+:::
+
+### Current Plan Information Retrieval Endpoint
+
+#### Implementation Example (Retrieving Current Tax Rate Settings from History)
+
+<Tabs>
+<TabItem value="go" label="Go" default>
+
+```go
+func getTenantPlanInfo(c echo.Context) error {
+    tenantId := c.Param("tenant_id")
+    if tenantId == "" {
+        return c.JSON(http.StatusBadRequest, echo.Map{"error": "tenant_id is required"})
+    }
+
+    userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
+    if !ok {
+        c.Logger().Error("failed to get user info")
+        return c.JSON(http.StatusInternalServerError, echo.Map{"error": "Internal server error"})
+    }
+
+    // Check admin permissions
+    if !hasBillingAccess(userInfo, tenantId) {
+        return c.JSON(http.StatusForbidden, echo.Map{"error": "Insufficient permissions"})
+    }
+
+    // Retrieve tenant detail information
+    tenantDetailResp, err := authClient.GetTenantWithResponse(context.Background(), authapi.TenantId(tenantId))
+    if err != nil {
+        c.Logger().Errorf("Failed to retrieve tenant detail: %v", err)
+        return c.JSON(http.StatusInternalServerError, echo.Map{"error": "Failed to retrieve tenant detail"})
+    }
+
+    if tenantDetailResp.StatusCode() != http.StatusOK {
+        c.Logger().Errorf("Failed to retrieve tenant detail: status %d", tenantDetailResp.StatusCode())
+        return c.JSON(http.StatusInternalServerError, echo.Map{"error": "Failed to retrieve tenant detail"})
+    }
+
+    if tenantDetailResp.JSON200 == nil {
+        return c.JSON(http.StatusNotFound, echo.Map{"error": "Tenant not found"})
+    }
+
+    // Get current tax rate settings (from the latest entry in plan history)
+    var currentTaxRateId *string
+    if len(tenantDetailResp.JSON200.PlanHistories) > 0 {
+        latestPlanHistory := tenantDetailResp.JSON200.PlanHistories[len(tenantDetailResp.JSON200.PlanHistories)-1]
+        if latestPlanHistory.TaxRateId != nil {
+            taxRateIdStr := string(*latestPlanHistory.TaxRateId)
+            currentTaxRateId = &taxRateIdStr
+        }
+    }
+
+    // Build response
+    response := echo.Map{
+        "id":               tenantDetailResp.JSON200.Id,
+        "name":             tenantDetailResp.JSON200.Name,
+        "plan_id":          tenantDetailResp.JSON200.PlanId,
+        "tax_rate_id":      currentTaxRateId,
+        "plan_reservation": nil,
+    }
+
+    // Add reservation information if available
+    if tenantDetailResp.JSON200.NextPlanId != nil {
+        planReservation := echo.Map{
+            "next_plan_id":          *tenantDetailResp.JSON200.NextPlanId,
+            "using_next_plan_from":  tenantDetailResp.JSON200.UsingNextPlanFrom,
+            "next_plan_tax_rate_id": tenantDetailResp.JSON200.NextPlanTaxRateId,
+        }
+        response["plan_reservation"] = planReservation
+    }
+
+    return c.JSON(http.StatusOK, response)
+}
+```
+
+</TabItem>
+</Tabs>
+
+#### Example Implementations
+
+The following links point to repositories that include implementations of this endpoint.
+Search by function name to locate the relevant code.
+
+- **Go (Echo)**: [`getTenantPlanInfo`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)
+- **Python (FastAPI)**: [`get_tenant_plan_info`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)
+- **Java (Spring)**: [`getTenantPlanInfo`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)
+- **C# (.NET 8)**: [`GetTenantPlanInfo`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)
+- **C# (.NET Framework 4.8)**: [`GetTenantPlanInfo`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)
+
+### Plan List Retrieval Endpoint
+
+#### Plan Change Select Box Implementation
+
+Display plans that users can select in a select box.  
+Use the plan list retrieved from this endpoint to build the UI.
+
+#### Example Implementations
+
+The following links point to repositories that include implementations of this endpoint.
+Search by function name to locate the relevant code.
+
+- **Go (Echo)**: [`getPricingPlans`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)
+- **Python (FastAPI)**: [`get_pricing_plans`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)
+- **Java (Spring)**: [`getPricingPlans`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)
+- **C# (.NET 8)**: [`GetPricingPlans`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)
+- **C# (.NET Framework 4.8)**: [`GetPricingPlans`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)
+
+### Tax Rate List Retrieval Endpoint
+
+#### Tax Rate Selection Select Box Implementation
+
+Display available tax rates in a select box so users can select the tax rate to apply when changing plans.  
+Use the tax rate list retrieved from this endpoint to build the UI.
+
+#### Example Implementations
+
+The following links point to repositories that include implementations of this endpoint.
+Search by function name to locate the relevant code.
+
+- **Go (Echo)**: [`getTaxRates`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)
+- **Python (FastAPI)**: [`get_tax_rates`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)
+- **Java (Spring)**: [`getTaxRates`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)
+- **C# (.NET 8)**: [`GetTaxRates`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)
+- **C# (.NET Framework 4.8)**: [`GetTaxRates`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)
+
+### Plan Change Execution Endpoint
+
+#### Operations by Request Parameters
+
+The following operations are possible with the same endpoint `PUT /tenants/{tenantId}/plan`:
+
+#### Plan Change Reservation
+```json
+{
+  "nextPlanId": "plan-id",
+  "taxRateId": "tax-rate-id",
+  "usingNextPlanFrom": 1640995200
+}
+```
+
+#### Plan Cancellation
+```json
+{
+  "nextPlanId": "",
+  "usingNextPlanFrom": 1640995200
+}
+```
+
+#### Reservation Cancellation
+```json
+{}
+```
+
+#### Backend Processing Logic
+
+<Tabs>
+<TabItem value="go" label="Go" default>
+
+```go
+func updateTenantPlan(c echo.Context) error {
+    tenantId := c.Param("tenant_id")
+    if tenantId == "" {
+        return c.JSON(http.StatusBadRequest, echo.Map{"error": "tenant_id is required"})
+    }
+
+    var request UpdateTenantPlanRequest
+    if err := c.Bind(&request); err != nil {
+        return c.JSON(http.StatusBadRequest, echo.Map{"error": "Invalid request"})
+    }
+    nextPlanId := request.NextPlanId
+    taxRateId := request.TaxRateId
+    usingNextPlanFrom := request.UsingNextPlanFrom
+
+    userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
+    if !ok {
+        c.Logger().Error("failed to get user info")
+        return c.String(http.StatusInternalServerError, "internal server error")
+    }
+
+    // Check admin permissions
+    if !hasBillingAccess(userInfo, tenantId) {
+        return c.String(http.StatusForbidden, "Insufficient permissions")
+    }
+
+    // Update tenant plan
+    updateTenantPlanParam := authapi.UpdateTenantPlanParam{
+        NextPlanId: (*authapi.Uuid)(&nextPlanId),
+    }
+
+    // Set tax rate ID only if specified
+    if taxRateId != nil && *taxRateId != "" {
+        updateTenantPlanParam.NextPlanTaxRateId = (*authapi.Uuid)(taxRateId)
+    }
+
+    // Set using_next_plan_from only if specified
+    if usingNextPlanFrom != nil && *usingNextPlanFrom > 0 {
+        usingNextPlanFromInt := int(*usingNextPlanFrom)
+        updateTenantPlanParam.UsingNextPlanFrom = &usingNextPlanFromInt
+    }
+
+    resp, err := authClient.UpdateTenantPlanWithResponse(context.Background(), tenantId, updateTenantPlanParam)
+    if err != nil {
+        c.Logger().Errorf("failed to update tenant plan: %v", err)
+        return c.JSON(http.StatusInternalServerError, echo.Map{"error": "Failed to update tenant plan"})
+    }
+
+    // Check response status code
+    if resp.StatusCode() != http.StatusOK {
+        c.Logger().Errorf("tenant plan update failed with status %d: %s", resp.StatusCode(), string(resp.Body))
+        return c.JSON(resp.StatusCode(), echo.Map{"error": "Failed to update tenant plan"})
+    }
+
+    return c.JSON(http.StatusOK, echo.Map{"message": "Tenant plan updated successfully"})
+}
+```
+
+</TabItem>
+</Tabs>
+
+#### Example Implementations
+
+The following links point to repositories that include implementations of this endpoint.
+Search by function name to locate the relevant code.
+
+- **Go (Echo)**: [`updateTenantPlan`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/billing.go)
+- **Python (FastAPI)**: [`update_tenant_plan`](https://github.com/saasus-platform/implementation-sample-api-python/blob/main/billing_router.py)
+- **Java (Spring)**: [`updateTenantPlan`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/BillingController.java)
+- **C# (.NET 8)**: [`UpdateTenantPlan`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)
+- **C# (.NET Framework 4.8)**: [`UpdateTenantPlan`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)
+
 
 ---
 

@@ -120,12 +120,14 @@
 - [User Activity History Log](part-5/user-management/user-activity-history-log): Overview
 - [Search, Edit, Create, or Assign Users to Tenants](part-5/user-management/user-crud): Search Users
 - [Developer SDK/API Overview](part-6/developer-sdk-api-overview): 1. SaaSus SDK / API Capabilities and Use Cases
-- [Billing Dashboard Implementation Guide](part-6/implementation-guide/billing-dashboard-with-metering-api): Overview
-- [Implementation of Activity History Logs](part-6/implementation-guide/implementing-activity-history-log): This guide explains implementation patterns and methods for effectively utilizing activity history logs.
-- [Implementing Authentication Using SaaSus Platform (API Server)](part-6/implementation-guide/implementing-authentication-using-saasus-platform-apiserver): When configuring the backend as an API server, the following implementations are necessary:
 - [Implementation using SaaSus Platform (Serverless)](part-6/implementation-guide/implementing-authentication-using-saasus-serverless): When configuring the backend as serverless, the following implementations are required:
-- [Implementing Multi-Factor Authentication (API Server)](part-6/implementation-guide/implementing-multi-factor-authentication-apiserver): This document provides sample implementations for Multi-Factor Authentication (MFA) in a SaaS application.
-- [Metering API Implementation Sample and Examples of Use](part-6/implementation-guide/meteringapisamplelaravelandusecase): We will describe Implementation samples for each Metering API using SDK and an example of a feature using the Metering API.
+- [Activity History Log Implementation](part-6/implementation-guide/sample-application/activity-history-log): This guide explains implementation patterns and methods for effectively utilizing activity history logs.
+- [Authentication Flow Implementation](part-6/implementation-guide/sample-application/authentication): This page explains the implementation methods for authentication flow in the API server version, using the sample application's authentication features as examples.
+- [Billing Dashboard Implementation](part-6/implementation-guide/sample-application/billing-dashboard): Overview
+- [Metering API Implementation Samples](part-6/implementation-guide/sample-application/metering-api): We will describe Implementation samples for each Metering API using SDK and an example of a feature using the Metering API.
+- [Multi-Factor Authentication](part-6/implementation-guide/sample-application/multi-factor-authentication): This page explains how to implement Multi-Factor Authentication (MFA) functionality using the SaaSus Auth API, based on the sample application's MFA settings feature.
+- [Sample Application Overview](part-6/implementation-guide/sample-application/overview): This is an implementation example of an actual SaaS application using SaaSus Platform.
+- [Plan Change Implementation](part-6/implementation-guide/sample-application/plan-change-implementation): Overview
 - [About Rate Plans](part-6/usecase/about-rate-plans): The SaaSus Platform also allows for complex pricing plans using subscription and pay-as-you-go models.
 - [Step-by-Step Guide to Setting Up Complicated Pricing Plans](part-6/usecase/about-rate-plans/basic-charge-preference): Metering Units
 - [About SaaS User Accounts](part-6/usecase/about-saas-user-accounts): This document will explain how SaaS user accounts are managed on the SaaSus Platform.
