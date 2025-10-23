@@ -219,7 +219,8 @@
             "part-4/mcp-server/export-user-info-csv",
             "part-4/mcp-server/export-metering-data",
             "part-4/mcp-server/user-behavior-analysis",
-            "part-4/mcp-server/export-tenant-contract-info"          ]
+            "part-4/mcp-server/export-tenant-contract-info"
+          ]
         },
         {
           "type": "category",
@@ -302,21 +303,35 @@
             "description": "A collection of implementation samples built with the SaaSus SDK and API."
           },
           "items": [
-            "part-6/implementation-guide/implementing-authentication-using-saasus-platform-apiserver",
-            "part-6/implementation-guide/implementing-authentication-using-saasus-serverless",
             {
               "type": "category",
-              "label": "Billing Dashboard Implementation Guide",
+              "label": "Sample Application (API Server)",
               "link": {
-                "type": "doc",
-                "id": "part-6/implementation-guide/billing-dashboard-with-metering-api"
+                "type": "generated-index",
+                "title": "Sample Application (API Server)",
+                "description": "Implementation examples using SaaSus Platform with API server approach.",
+                "slug": "/part-6/implementation-guide/sample-application"
               },
               "items": [
-                "part-6/implementation-guide/meteringapisamplelaravelandusecase"
+                "part-6/implementation-guide/sample-application/overview",
+                "part-6/implementation-guide/sample-application/authentication",
+                "part-6/implementation-guide/sample-application/multi-factor-authentication",
+                "part-6/implementation-guide/sample-application/activity-history-log",
+                "part-6/implementation-guide/sample-application/plan-change-implementation",
+                {
+                  "type": "category",
+                  "label": "Billing Dashboard",
+                  "link": {
+                    "type": "doc",
+                    "id": "part-6/implementation-guide/sample-application/billing-dashboard"
+                  },
+                  "items": [
+                    "part-6/implementation-guide/sample-application/metering-api"
+                  ]
+                }
               ]
             },
-            "part-6/implementation-guide/implementing-multi-factor-authentication-apiserver",
-            "part-6/implementation-guide/implementing-activity-history-log"
+            "part-6/implementation-guide/implementing-authentication-using-saasus-serverless"
           ]
         },
         {
