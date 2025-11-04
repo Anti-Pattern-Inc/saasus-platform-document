@@ -130,6 +130,8 @@ import {
   createOptionsResponse,
   getQueryParameter,
   getHttpMethod,
+  getReferer,
+  getXSaaSusReferer,
   logRequest,
   logError,
   logSuccess,
@@ -156,8 +158,13 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       return createErrorResponse('Authorization code not found', 400);
     }
 
+    // RefererとX-SaaSus-Refererヘッダーを取得
+    const referer = getReferer(event.headers);
+    const xSaaSusReferer = getXSaaSusReferer(event.headers);
+
     // SaaSus認証クライアントを初期化
-    const authClient = new AuthClient();
+    // @ts-ignore - AuthClientコンストラクタはrefererとxSaaSusRefererを受け取る
+    const authClient = new AuthClient(referer, xSaaSusReferer);
     
     // 認証情報を取得
     const credentialsResponse = await authClient.credentialApi.getAuthCredentials(code);
@@ -211,6 +218,8 @@ import {
   createOptionsResponse,
   extractTokenFromHeader,
   getHttpMethod,
+  getReferer,
+  getXSaaSusReferer,
   logRequest,
   logError,
   logSuccess,
@@ -237,8 +246,13 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       return createErrorResponse('No valid authorization header found', 401);
     }
 
+    // RefererとX-SaaSus-Refererヘッダーを取得
+    const referer = getReferer(event.headers);
+    const xSaaSusReferer = getXSaaSusReferer(event.headers);
+
     // SaaSus認証クライアントを初期化
-    const authClient = new AuthClient();
+    // @ts-ignore - AuthClientコンストラクタはrefererとxSaaSusRefererを受け取る
+    const authClient = new AuthClient(referer, xSaaSusReferer);
     
     // ユーザー情報を取得
     const userInfoResponse = await authClient.userInfoApi.getUserInfo(token);
@@ -294,6 +308,8 @@ import {
   parseRequestBody,
   convertAttributeValues,
   getHttpMethod,
+  getReferer,
+  getXSaaSusReferer,
   logRequest,
   logError,
   logSuccess,
@@ -326,8 +342,13 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     // 統一された認証処理
     const userInfo = await getAuthenticatedUserInfo(event.headers);
 
+    // RefererとX-SaaSus-Refererヘッダーを取得
+    const referer = getReferer(event.headers);
+    const xSaaSusReferer = getXSaaSusReferer(event.headers);
+
     // SaaSus認証クライアントを初期化
-    const authClient = new AuthClient();
+    // @ts-ignore - AuthClientコンストラクタはrefererとxSaaSusRefererを受け取る
+    const authClient = new AuthClient(referer, xSaaSusReferer);
 
     // テナント属性情報の取得と型変換
     const tenantAttributesResponse = await authClient.tenantAttributeApi.getTenantAttributes();
@@ -430,6 +451,8 @@ import {
   createOptionsResponse,
   getQueryParameter,
   getHttpMethod,
+  getReferer,
+  getXSaaSusReferer,
   logRequest,
   logError,
   logSuccess,
@@ -468,8 +491,13 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       return createErrorResponse('Tenant that does not belong', 403);
     }
 
+    // RefererとX-SaaSus-Refererヘッダーを取得
+    const referer = getReferer(event.headers);
+    const xSaaSusReferer = getXSaaSusReferer(event.headers);
+
     // SaaSus認証クライアントを初期化
-    const authClient = new AuthClient();
+    // @ts-ignore - AuthClientコンストラクタはrefererとxSaaSusRefererを受け取る
+    const authClient = new AuthClient(referer, xSaaSusReferer);
     
     // テナントユーザー一覧を取得
     const usersResponse = await authClient.tenantUserApi.getTenantUsers(tenantId);

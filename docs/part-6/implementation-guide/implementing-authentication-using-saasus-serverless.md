@@ -125,6 +125,8 @@ import {
   createOptionsResponse,
   getQueryParameter,
   getHttpMethod,
+  getReferer,
+  getXSaaSusReferer,
   logRequest,
   logError,
   logSuccess,
@@ -151,8 +153,13 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       return createErrorResponse('Authorization code not found', 400);
     }
 
+    // Get Referer and X-SaaSus-Referer headers
+    const referer = getReferer(event.headers);
+    const xSaaSusReferer = getXSaaSusReferer(event.headers);
+
     // Initialize SaaSus authentication client
-    const authClient = new AuthClient();
+    // @ts-ignore - AuthClient constructor accepts referer and xSaaSusReferer
+    const authClient = new AuthClient(referer, xSaaSusReferer);
     
     // Get authentication information
     const credentialsResponse = await authClient.credentialApi.getAuthCredentials(code);
@@ -206,6 +213,8 @@ import {
   createOptionsResponse,
   extractTokenFromHeader,
   getHttpMethod,
+  getReferer,
+  getXSaaSusReferer,
   logRequest,
   logError,
   logSuccess,
@@ -232,8 +241,13 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       return createErrorResponse('No valid authorization header found', 401);
     }
 
+    // Get Referer and X-SaaSus-Referer headers
+    const referer = getReferer(event.headers);
+    const xSaaSusReferer = getXSaaSusReferer(event.headers);
+
     // Initialize SaaSus authentication client
-    const authClient = new AuthClient();
+    // @ts-ignore - AuthClient constructor accepts referer and xSaaSusReferer
+    const authClient = new AuthClient(referer, xSaaSusReferer);
     
     // Get user information
     const userInfoResponse = await authClient.userInfoApi.getUserInfo(token);
@@ -288,6 +302,8 @@ import {
   parseRequestBody,
   convertAttributeValues,
   getHttpMethod,
+  getReferer,
+  getXSaaSusReferer,
   logRequest,
   logError,
   logSuccess,
@@ -320,8 +336,13 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     // Unified authentication processing
     const userInfo = await getAuthenticatedUserInfo(event.headers);
 
+    // Get Referer and X-SaaSus-Referer headers
+    const referer = getReferer(event.headers);
+    const xSaaSusReferer = getXSaaSusReferer(event.headers);
+
     // Initialize SaaSus authentication client
-    const authClient = new AuthClient();
+    // @ts-ignore - AuthClient constructor accepts referer and xSaaSusReferer
+    const authClient = new AuthClient(referer, xSaaSusReferer);
 
     // Get and convert tenant attribute information
     const tenantAttributesResponse = await authClient.tenantAttributeApi.getTenantAttributes();
@@ -424,6 +445,8 @@ import {
   createOptionsResponse,
   getQueryParameter,
   getHttpMethod,
+  getReferer,
+  getXSaaSusReferer,
   logRequest,
   logError,
   logSuccess,
@@ -462,8 +485,13 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       return createErrorResponse('Tenant that does not belong', 403);
     }
 
+    // Get Referer and X-SaaSus-Referer headers
+    const referer = getReferer(event.headers);
+    const xSaaSusReferer = getXSaaSusReferer(event.headers);
+
     // Initialize SaaSus authentication client
-    const authClient = new AuthClient();
+    // @ts-ignore - AuthClient constructor accepts referer and xSaaSusReferer
+    const authClient = new AuthClient(referer, xSaaSusReferer);
     
     // Get tenant user list
     const usersResponse = await authClient.tenantUserApi.getTenantUsers(tenantId);
