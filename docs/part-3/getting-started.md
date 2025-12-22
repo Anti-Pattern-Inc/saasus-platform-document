@@ -30,10 +30,10 @@ Enter the temporary password along with your new password and click "Set a new p
 #### After First Login
 
 When you first register on the SaaSus Platform, a dedicated tenant will be created for you.
-Since this involves creating a dedicated AWS account, it can take up to an hour.
+Since this involves creating a dedicated AWS account, it can take anywhere from a few minutes to an hour.
 Once setup is complete, a notification will be sent to your registered email.
 
-![03](/img/part-3/getting-started/getting_started-03.png)
+![03](/img/part-3/getting-started/getting_started-03-2025-12-18.png)
 
 #### Initial Login After Tenant Creation
 
