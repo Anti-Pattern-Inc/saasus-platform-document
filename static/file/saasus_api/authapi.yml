@@ -1082,6 +1082,46 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
   /roles/{role_name}:
+    patch:
+      tags:
+        - role
+      operationId: UpdateRole
+      summary: Update Role
+      x-summary-i18n:
+        jpn: 役割(ロール)を更新
+      description: |
+        Update role display name.
+      x-description-i18n:
+        jpn: |
+          役割(ロール)の表示名を更新します。
+      parameters:
+        - $ref: '#/components/parameters/RoleName'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRoleParam'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
     delete:
       tags:
         - role
@@ -3477,6 +3517,20 @@ components:
       x-title-i18n:
         jpn: 役割(ロール)の作成パラメータ
       $ref: '#/components/schemas/Role'
+    UpdateRoleParam:
+      title: Update Role Parameter
+      x-title-i18n:
+        jpn: 役割(ロール)の更新パラメータ
+      type: object
+      properties:
+        display_name:
+          type: string
+          example: 管理者
+          description: role display name
+          x-description-i18n:
+            jpn: 役割(ロール)表示名
+      required:
+        - display_name
     CreateTenantUserRolesParam:
       title: Add Role to User Parameter
       x-title-i18n:
