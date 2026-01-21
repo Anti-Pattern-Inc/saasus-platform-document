@@ -313,6 +313,58 @@ We have released updates on the following features.
 
 ---
 
+# Update on 2025/12/12
+
+URL: https://www.prisma.io/docs/changelog/20251212
+
+We have released updates on the following features.
+
+- Dashboard Feature Release (Usage Metrics)  
+  We have added a "Dashboard" feature that visualizes service usage and growth trends.  
+  Simply by using the authentication and authorization features of the SaaSus Platform, metrics are automatically aggregated and graphed based on accumulated data.  
+  This enables customers to intuitively grasp daily user growth and tenant acquisition trends as business growth indicators, without any additional implementation or special configuration.
+
+  Main features
+
+  - Tenant count trend display  
+    Displays a graph showing the trend of tenants created by date.  
+    You can see at a glance the growth trend of adopting companies in B2B SaaS.
+
+  - User count trend display  
+    Displays a graph showing the trend of users created by date.  
+    You can visualize the service scale expansion status and user registration growth curve to support current situation analysis.
+
+  We have released the above two metrics as the first phase. We plan to sequentially add various indicators that can be utilized for business decision-making going forward.
+---
+
+# Update on 2025/12/23
+
+URL: https://www.prisma.io/docs/changelog/20251223
+
+We have released updates on the following features.
+
+Dashboard Feature Expansion (Usage Metrics)  
+Page-by-Page Access Statistics  
+We have added "Page-by-Page Access Statistics" to the "Dashboard" feature that visualizes service growth trends.  
+In addition to the previous tenant count and user count trends, visualizing the usage status of each page within the application enables more multifaceted service analysis.  
+In environments where the SaaSus Platform is implemented, you can immediately start analysis based on accumulated data without any special configuration or additional implementation.  
+
+  Main features  
+  - Page-by-page usage visualization. 
+    Access counts for each page (URL path) within the application are aggregated and can be checked on the dashboard.  
+    You can identify which features are most utilized and use this information to optimize your service.  
+  - Flexible aggregation period selection. 
+    Statistical data can be displayed by specifying any period, such as daily, weekly, or monthly.
+　　By comparing trends across different periods, you can identify the effects of new feature releases and changes in user behavior.  
+  - Automatic reflection when pages are added  
+    When new pages are added, the SaaSus Platform automatically detects them and includes them in the statistics, allowing you to always grasp the latest situation without operational costs.  
+  - Automatic data updates  
+    Statistical data is automatically updated regularly, enabling you to monitor the latest usage status in near real-time.
+
+With this update, you can now grasp the health status of your service from both business metrics (tenant and user counts) and activity metrics (page access) perspectives.  
+We will continue to sequentially expand indicators that are useful for analysis going forward.  
+---
+
 # Welcome to SaaSus Platform
 
 URL: https://www.prisma.io/docs/changelog/welcome-to-saasus-platform
@@ -823,7 +875,7 @@ Enter the temporary password along with your new password and click "Set a new p
 #### After First Login
 
 When you first register on the SaaSus Platform, a dedicated tenant will be created for you.
-Since this involves creating a dedicated AWS account, it can take up to an hour.
+Since this involves creating a dedicated AWS account, it can take around an hour.
 Once setup is complete, a notification will be sent to your registered email.
 
 ![03](/img/part-3/getting-started/getting_started-03.png)
@@ -14197,7 +14249,7 @@ A temporary password will be sent to the email address you entered. Enter the te
 
 ![02](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-02.png)
 
-When you register with SaaSus Platform for the first time, we will create a tenant exclusively for you. This will take at least an hour as we are creating an AWS account specifically for you. Once your account creation is complete, you will receive instructions at the email address you provided earlier.
+When you register with SaaSus Platform for the first time, we will create a tenant exclusively for you. This will take around an hour as we are creating an AWS account specifically for you. Once your account creation is complete, you will receive instructions at the email address you provided earlier.
 
 ![03](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-03.png)
 
