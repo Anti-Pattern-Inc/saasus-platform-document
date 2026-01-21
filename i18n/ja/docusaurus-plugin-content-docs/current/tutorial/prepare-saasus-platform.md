@@ -24,7 +24,7 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 
 ![02](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-02.png)
 
-はじめて SaaSus Platform に登録した時には、登録していただいた方専用のテナントを作成します。これは、お客様専用の AWS アカウントを作成しているため、最短で１時間ほどお時間がかかります。アカウント作成が完了次第、先ほどのメールアドレスにご案内が届きます。
+はじめて SaaSus Platform に登録した時には、登録していただいた方専用のテナントを作成します。これは、お客様専用の AWS アカウントを作成しているため、1時間程度お時間がかかる場合があります。アカウント作成が完了次第、先ほどのメールアドレスにご案内が届きます。
 
 ![03](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-03.png)
 
