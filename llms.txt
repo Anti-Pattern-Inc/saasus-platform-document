@@ -19,6 +19,8 @@
 - [Update on 2024/12/10](changelog/20241210): We have released the following features:
 - [Update on 2025/03/14](changelog/20250314): We have released the following feature.
 - [Update on 2025/06/05](changelog/20250605): We have released updates on the following features.
+- [Update on 2025/12/12](changelog/20251212): We have released updates on the following features.
+- [Update on 2025/12/23](changelog/20251223): We have released updates on the following features.
 - [Welcome to SaaSus Platform](changelog/welcome-to-saasus-platform): Release v0.10(final beta version) on 2022/12/10
 - [Purpose and Overview](part-1/purpose-and-overview): Purpose
 - [Cloud Computing Basics](part-2/cloud-computing-basics): 1. Differences between IaaS, PaaS, and SaaS

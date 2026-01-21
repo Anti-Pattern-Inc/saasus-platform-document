@@ -11,6 +11,8 @@ servers:
 tags:
   - name: userAnalysis
     description: ユーザの行動分析
+  - name: metrics
+    description: メトリクス分析
 security:
   - Bearer: []
 paths:
@@ -59,6 +61,106 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /metrics/aggregated:
+    get:
+      tags:
+        - metrics
+      operationId: GetAggregatedMetrics
+      summary: 集計されたメトリクスを取得
+      description: |
+        メトリクスタイプと期間を指定して集計されたメトリクスを取得します。
+      parameters:
+        - $ref: '#/components/parameters/MetricsType'
+        - $ref: '#/components/parameters/StartDate'
+        - $ref: '#/components/parameters/EndDate'
+        - $ref: '#/components/parameters/TenantIds'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AggregatedMetrics'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /metrics/page-statistics:
+    get:
+      tags:
+        - metrics
+      operationId: GetPageStatistics
+      summary: ページ統計情報を取得
+      description: |
+        指定された期間のページ統計情報を取得します。
+      parameters:
+        - in: query
+          name: start_timestamp
+          description: Start timestamp of statistics period (UNIX timestamp)
+          required: true
+          schema:
+            type: integer
+            example: 1701388800
+        - in: query
+          name: end_timestamp
+          description: End timestamp of statistics period (UNIX timestamp)
+          required: true
+          schema:
+            type: integer
+            example: 1704067199
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: ページ統計情報
+                $ref: '#/components/schemas/PageStatistics'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /userinfo/aggregated:
+    get:
+      tags:
+        - metrics
+      operationId: GetAggregatedUserInfo
+      summary: テナント別のGetUserInfo実行数を取得
+      description: |
+        期間とテナントIDを指定してGetUserInfo APIの日別実行数を取得します。
+      parameters:
+        - $ref: '#/components/parameters/StartDate'
+        - $ref: '#/components/parameters/EndDate'
+        - $ref: '#/components/parameters/TenantIds'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AggregatedUserInfoMetrics'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   securitySchemes:
     Bearer:
@@ -74,6 +176,44 @@ components:
         type: string
         example: f94bfffc-8be2-11ec-b41a-0242ac120004
       required: true
+    MetricsType:
+      in: query
+      name: metrics_type
+      description: メトリクスタイプ
+      required: true
+      schema:
+        type: string
+        enum:
+          - create_tenant
+          - create_saas_user
+          - create_tenant_user
+        example: create_tenant
+    StartDate:
+      in: query
+      name: start_date
+      description: 開始日（YYYY-MM-DD）
+      required: true
+      schema:
+        type: string
+        example: '2025-01-01'
+    EndDate:
+      in: query
+      name: end_date
+      description: 終了日（YYYY-MM-DD）
+      required: true
+      schema:
+        type: string
+        example: '2025-01-31'
+    TenantIds:
+      in: query
+      name: tenant_ids
+      description: テナントID
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+          example: f94bfffc-8be2-11ec-b41a-0242ac120004
   schemas:
     Error:
       properties:
@@ -154,3 +294,124 @@ components:
       required:
         - behaved_at
         - histories
+    AggregatedMetrics:
+      title: 集計されたメトリクス
+      type: object
+      properties:
+        metrics:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyMetric'
+          description: 日別メトリクス一覧
+      required:
+        - metrics
+    DailyMetric:
+      title: 日別メトリクス
+      type: object
+      properties:
+        date:
+          title: 日付
+          description: 日付（YYYY-MM-DD）
+          type: string
+          example: '2025-01-01'
+        count:
+          title: 件数
+          description: その日の総件数
+          type: integer
+          example: 100
+        details:
+          title: テナント別詳細
+          description: テナントID別の詳細（create_tenant_userのみ）
+          type: object
+          additionalProperties:
+            type: integer
+          example:
+            19045586-d4b0-418a-8e51-b6346380cd63: 40
+            fa3018b1-1be3-49ca-9ea7-d6d657d0f878: 60
+      required:
+        - date
+        - count
+    PageStatistics:
+      title: ページ統計情報
+      type: object
+      properties:
+        start_date:
+          type: integer
+          description: Start date of statistics period (UNIX timestamp)
+          example: 1701388800
+        end_date:
+          type: integer
+          description: End date of statistics period (UNIX timestamp)
+          example: 1704067199
+        total_page_views:
+          type: integer
+          description: Total page views during the period
+          example: 15420
+        total_unique_users:
+          type: integer
+          description: Number of unique users during the period
+          example: 1234
+        page_statistics:
+          type: array
+          description: Statistics for each page
+          items:
+            $ref: '#/components/schemas/PageStatistic'
+      required:
+        - start_date
+        - end_date
+        - total_page_views
+        - total_unique_users
+        - page_statistics
+    PageStatistic:
+      title: ページ統計
+      type: object
+      properties:
+        page_url:
+          type: string
+          description: Page URL
+          example: https://example.com/dashboard
+        total_views:
+          type: integer
+          description: Page views
+          example: 3450
+        unique_users:
+          type: integer
+          description: Unique users
+          example: 856
+      required:
+        - page_url
+        - total_views
+        - unique_users
+    AggregatedUserInfoMetrics:
+      title: 集計されたGetUserInfo実行数
+      type: object
+      properties:
+        metrics:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyUserInfoMetric'
+          description: 日別GetUserInfo実行数一覧
+      required:
+        - metrics
+    DailyUserInfoMetric:
+      title: 日別GetUserInfo実行数
+      type: object
+      properties:
+        date:
+          title: 日付
+          description: 日付（YYYY-MM-DD）
+          type: string
+          example: '2025-01-01'
+        details:
+          title: テナント別詳細
+          description: テナントID別のGetUserInfo実行数
+          type: object
+          additionalProperties:
+            type: integer
+          example:
+            00000000-0000-0000-0000-000000000000: 1460
+            0d7de8a8-1234-5678-9abc-def012345678: 1040
+            252a9f83-1234-5678-9abc-def012345678: 930
+      required:
+        - date
+        - details
