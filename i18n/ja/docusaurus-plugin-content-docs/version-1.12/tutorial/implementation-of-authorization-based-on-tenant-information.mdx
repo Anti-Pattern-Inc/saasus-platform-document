@@ -1,0 +1,208 @@
+---
+title: "テナントの情報をもとにした認可の実装"
+slug: "implementation-of-authorization-based-on-tenant-information"
+excerpt: ""
+hidden: false
+pagination_prev: tutorial/manage-rate-plans/manage-rate-plans
+createdAt: "Wed Jan 11 2023 03:13:22 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+## 認可の実装
+
+### 料金プランの計測単位に基づいたコメント上限の実装
+
+さきほどのサンプルアプリケーションにさらに手を加えていき、認可の一歩目を実装してみます。
+
+ここまでのSaaSus Platformの設定で、どのユーザがログインしていて、そのユーザはどのテナントに属していてどんな役割で、そのテナントがどの料金プランを選択していて、どんなメニューが使えるのか？というのがアプリケーションから取得できる状態になっています。その情報を使って、アプリケーションに制限をかけていきます。
+
+ここでは、料金プランの中の計測単位の一部である「コメント数」に注目してみましょう。
+
+さきほど、料金プランごとにコメント数の上限値が異なっている設定を行いました。
+
+- Free プランでは、コメント数上限 10
+- Basic プランでは、コメント数上限 100
+
+という設定を行っています。
+
+では、この料金プランに紐付いた上限数をテナントごとに取得して、制限をかけてみましょう。
+
+- Laravel では、`api/app/Http/Controllers/MessageController.php` の`post`メソッドを書き換えてみましょう。
+- Express では、`api/controllers/chat.ts` へ`import文`を追加し、`postChats`メソッドを書き換えてみましょう。
+
+<Tabs>
+<TabItem value="php" label="Laravel (PHP)">
+
+```php
+   public function post(Request $request)
+   {
+        $validated = $request->validate([
+            'message' => 'required|max:255'
+        ]);
+
+        $tenant_id = $request->userinfo['tenants'][0]['id'];
+        $plan_id = $request->userinfo['tenants'][0]['plan_id'];
+
+        // SaaSus SDKを使ってSaaSus APIを叩いて、各種情報を取得し、判断に使う
+        $client = new \AntiPatternInc\Saasus\Api\Client();
+        $pricingApi = $client->getPricingClient();
+        $res = $pricingApi->getPricingPlan($plan_id, $pricingApi::FETCH_RESPONSE);
+        $plan = json_decode($res->getBody(), true);
+
+        // メータリングのメータ、comment_count(コメント数)を使う
+        $meteringUnitName = "comment_count";
+        $res = $pricingApi->getMeteringUnitDateCountByTenantIdAndUnitNameToday($tenant_id, $meteringUnitName, $pricingApi::FETCH_RESPONSE);
+        // 今回は、１日ごとの上限コメント数として扱う
+        $count = json_decode($res->getBody(), true);
+
+        // メータリングの上限コメント数を取得
+        $upper = \AntiPatternInc\Saasus\Api\Lib::findUpperCountByMeteringUnitName($plan, $meteringUnitName);
+
+        // 現在契約中の料金プランの上限コメント数を超えていたら、投稿できなくする
+        if ($count['count'] < $upper || $upper === 0) {
+            $message = Message::create([
+                'tenant_id' => $tenant_id,
+                'user_id' => $request->userinfo['tenants'][0]['user_attribute']['username'],
+                'message' => $request->message,
+            ]);
+            // メータリングAPIで、コメント数に１を足す
+            $param = new \AntiPatternInc\Saasus\Sdk\Pricing\Model\UpdateMeteringUnitTimestampCountNowParam();
+            $param->setMethod('add');
+            $param->setCount(1);
+            $res = $pricingApi->updateMeteringUnitTimestampCountNow($request->userinfo['tenants'][0]['id'], $meteringUnitName, $param, $pricingApi::FETCH_RESPONSE);
+        }
+
+        $request->session()->regenerateToken();
+        return redirect()->route('board');
+   }
+```
+
+</TabItem>
+
+<TabItem value="typescript" label="Express (TS)">
+```js
+import { UpdateMeteringUnitTimestampCountNowParam } from "saasus-sdk/dist/generated/Pricing";
+import { findUpperCountByMeteringUnitName, PricingClient } from "saasus-sdk";
+
+// 他のコードは省略
+
+const postChats = async (req: Request, res: Response) => {
+  const mes = req.body.message;
+  const tenantId = req.userInfo?.tenants[0].id || "";
+  const planId = req.userInfo?.tenants[0].plan_id || "";
+  const userName =
+    req.userInfo?.tenants[0].user_attribute.username;
+  try {
+    const pricingClient = new PricingClient();
+    const pricingPlan = await pricingClient.pricingPlansApi.getPricingPlan(
+      planId
+    );
+
+    // メータリングのメータ、comment_count(コメント数)を使う
+    const meteringUnitName = "comment_count";
+    const meteringUnitCountData =
+      await pricingClient.meteringApi.getMeteringUnitDateCountByTenantIdAndUnitNameToday(
+        tenantId,
+        meteringUnitName
+      );
+    
+    // メータリングの上限コメント数を取得
+    const upper = findUpperCountByMeteringUnitName(
+      pricingPlan.data,
+      meteringUnitName
+    );
+
+    // 現在契約中の料金プランの上限コメント数を超えていたら、投稿できなくする
+    if (meteringUnitCountData.data.count < upper || upper === 0) {
+      await db.Messages.create({
+        tenant_id: tenantId,
+        user_id: userName,
+        message: mes,
+      });
+
+      // メータリングAPIで、コメント数に１を足す
+      let param: UpdateMeteringUnitTimestampCountNowParam = {
+        method: "add",
+        count: 1,
+      };
+      const res =
+        await pricingClient.meteringApi.updateMeteringUnitTimestampCountNow(
+          tenantId,
+          meteringUnitName,
+          param
+        );
+    }
+  } catch (error) {
+    console.error(error);
+  }
+  res.redirect("/chat");
+};
+```
+</TabItem>
+</Tabs>
+
+先ほどのコードに加えて、コメント数の対象メーター “comment_count” をベースにしてコメント数の上限を確認しています。
+
+先ほど、計測単位は以下の画面のようにどの料金プランの計測単位でも  “comment_count” をベースに設定していると思います。
+
+![](/ja/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-1.png)
+
+そこでコード上では、
+
+テナントに紐付いている**料金プラン**を取得し、
+
+対象メーター “comment_count” の**現在の値**を取得し、
+
+料金プランに紐付いている上限値 “comment_count” の **上限値**を確認しています
+
+そして、もし現在の値が上限値を超えていなければ、
+
+コメント書き込み処理を通常通り行い、
+
+対象メーター “comment_count” の**現在の値**に１を足して更新します。
+
+このようにすることで、料金プランごとの上限値を超えた場合には書き込みを行わせない、ということを実現できます。
+
+今回は処理をシンプルにするために、書き込みが行えないということにとどめていますが、実際はエラーメッセージを出したり、アップセルを促すメッセージを出すことになると思います。
+
+しかし、機能によっては上限値で完全に止めてしまうとSaaSの価値が損なわれる場合があります。  
+たとえば、今回のようにコメントに上限をもうけて、そこで完全に書き込みができなくなってしまうと、これはチャットとして成り立たなくなってしまいます。  
+そうした場合、このメーターがリセットされるまで、このSaaSは使われなくなってしまう可能性があります。  
+その後、ずっと使われなくなってしまう可能性ももちろんあります。  
+そのため、完全に止めるのではなく、書き込みはできるが警告を出したり、保存期間を調整するなどこのSaaS自体の価値が失われないようにすることが重要です。
+
+今回はチュートリアルですので、無情にも完全に書き込みができない状態にしました。では、ちゃんと上限で書き込みができなくなっているか試してみましょう。
+
+まず、最初にアプリケーションを初期化したときのように、 init.sh を実行してアプリケーションをまっさらな状態に戻しましょう。
+
+そして、テナント１の方にはFreeプランを設定し、[user1-1@example.com](mailto:user1-1@example.com) でログインして、１０件以上の書き込みを行ってみましょう。
+
+フリープラン設定後の書き込みが、１０件までしかできないことが確認できたと思います。
+
+:::info
+今回はメーター設定後の書き込みのみをカウントする実装としています。<br/>設定前の書き込みも考慮したい場合は、メーターの値を直接更新する方法もあります。
+:::
+
+![](/ja/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-2.png)
+
+では、次にテナント２のユーザー [user2-1@example.com](mailto:user2-1@example.com) でログインして、１０件以上の書き込みを行ってみましょう。
+
+こちらは上限が100件になっているので、１０件以上の書き込みができたはずです。
+
+![](/ja/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-3.png)
+
+さらに、テナント１の方がプランのアップグレードをした想定で、FreeプランからBasicプランに設定を変更して、再度 [user1-1@example.com](mailto:user1-1@example.com) でログインして、１０件以上の書き込みを行ってみましょう。  
+(設定変更後反映には５分ほど時間がかかります。)
+
+![](/ja/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-4.png)
+
+今度は書き込みができるようになっているかと思います。
+
+![](/ja/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-5.png)
+
+このような形で、料金プランに応じたメータリングや制限ができるようになりました。
+
+制限はSaaSusと連携後から1件とカウントします。  
+APIとしてカウントの制限値を変更する機能など提供しております。
