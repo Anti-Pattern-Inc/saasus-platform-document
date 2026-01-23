@@ -75,6 +75,77 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /active-users:
+    get:
+      tags:
+        - userAnalysis
+      operationId: GetActiveUsers
+      summary: Get daily or monthly active users
+      x-summary-i18n:
+        jpn: 日次または月次のアクティブユーザー数を取得
+      description: |
+        Get daily or monthly active users information.
+      x-description-i18n:
+        jpn: |
+          日次または月次のアクティブユーザー数を取得します。
+      parameters:
+        - $ref: '#/components/parameters/ActiveUsersType'
+        - $ref: '#/components/parameters/DateFrom'
+        - $ref: '#/components/parameters/DateTo'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/EnvId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActiveUsers'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+        - userAnalysis
+      operationId: UpdateActiveUsers
+      summary: Update or insert active users data
+      x-summary-i18n:
+        jpn: アクティブユーザーデータの追加・更新
+      description: |
+        Update or insert daily or monthly active users data.
+      x-description-i18n:
+        jpn: |
+          日次または月次のアクティブユーザーデータを追加・更新します。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateActiveUsersParam'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /metrics/aggregated:
     get:
       tags:
@@ -211,6 +282,56 @@ components:
         type: string
         example: f94bfffc-8be2-11ec-b41a-0242ac120004
       required: true
+    ActiveUsersType:
+      in: query
+      name: type
+      description: Type of active users data (monthly or daily)
+      x-description-i18n:
+        jpn: アクティブユーザーデータのタイプ（月次または日次）
+      schema:
+        type: string
+        enum:
+          - monthly
+          - daily
+      required: true
+    DateFrom:
+      in: query
+      name: date_from
+      description: Start date (YYYY-MM for monthly, YYYY-MM-DD for daily)
+      x-description-i18n:
+        jpn: 開始日（月次の場合はYYYY-MM、日次の場合はYYYY-MM-DD）
+      schema:
+        type: string
+        example: 2025-01
+      required: true
+    DateTo:
+      in: query
+      name: date_to
+      description: End date (YYYY-MM for monthly, YYYY-MM-DD for daily). Optional.
+      x-description-i18n:
+        jpn: 終了日（月次の場合はYYYY-MM、日次の場合はYYYY-MM-DD）。任意。
+      schema:
+        type: string
+        example: 2025-12
+      required: false
+    TenantId:
+      in: query
+      name: tenant_id
+      description: Tenant ID (optional)
+      x-description-i18n:
+        jpn: テナントID（任意）
+      schema:
+        $ref: '#/components/schemas/Uuid'
+      required: false
+    EnvId:
+      in: query
+      name: env_id
+      description: Environment ID (optional, requires tenant_id)
+      x-description-i18n:
+        jpn: 環境ID（任意、tenant_idが必要）
+      schema:
+        $ref: '#/components/schemas/Id'
+      required: false
     MetricsType:
       in: query
       name: metrics_type
@@ -271,6 +392,10 @@ components:
       required:
         - type
         - message
+    Id:
+      type: integer
+      x-go-type: uint64
+      example: 1
     Uuid:
       type: string
       example: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
@@ -369,6 +494,112 @@ components:
       required:
         - behaved_at
         - histories
+    ActiveUsers:
+      title: Active Users
+      x-title-i18n:
+        jpn: アクティブユーザー
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActiveUserData'
+          description: Active users data list
+          x-description-i18n:
+            jpn: アクティブユーザーデータ一覧
+      required:
+        - data
+    ActiveUserData:
+      title: Active User Data
+      x-title-i18n:
+        jpn: アクティブユーザーデータ
+      type: object
+      properties:
+        date:
+          title: Date
+          x-title-i18n:
+            jpn: 日付
+          description: Date (YYYY-MM for monthly, YYYY-MM-DD for daily)
+          x-description-i18n:
+            jpn: 日付（月次の場合はYYYY-MM、日次の場合はYYYY-MM-DD）
+          type: string
+          example: 2025-01
+        tenant_id:
+          $ref: '#/components/schemas/Uuid'
+          description: Tenant ID
+          x-description-i18n:
+            jpn: テナントID
+        env_id:
+          $ref: '#/components/schemas/Id'
+          description: Environment ID
+          x-description-i18n:
+            jpn: 環境ID
+        active_users:
+          title: Active Users Count
+          x-title-i18n:
+            jpn: アクティブユーザー数
+          description: Number of active users
+          x-description-i18n:
+            jpn: アクティブユーザー数
+          type: integer
+          example: 100
+      required:
+        - date
+        - tenant_id
+        - env_id
+        - active_users
+    UpdateActiveUsersParam:
+      title: Update Active Users Parameter
+      x-title-i18n:
+        jpn: アクティブユーザー更新パラメータ
+      type: object
+      properties:
+        type:
+          title: Type
+          x-title-i18n:
+            jpn: タイプ
+          description: Type of active users data (monthly or daily)
+          x-description-i18n:
+            jpn: アクティブユーザーデータのタイプ（月次または日次）
+          type: string
+          enum:
+            - daily
+            - monthly
+          example: daily
+        date:
+          title: Date
+          x-title-i18n:
+            jpn: 日付
+          description: Date (YYYY-MM for monthly, YYYY-MM-DD for daily)
+          x-description-i18n:
+            jpn: 日付（月次の場合はYYYY-MM、日次の場合はYYYY-MM-DD）
+          type: string
+          example: '2025-01-01'
+        tenant_id:
+          $ref: '#/components/schemas/Uuid'
+          description: Tenant ID
+          x-description-i18n:
+            jpn: テナントID
+        env_id:
+          $ref: '#/components/schemas/Id'
+          description: Environment ID
+          x-description-i18n:
+            jpn: 環境ID
+        active_users:
+          title: Active Users Count
+          x-title-i18n:
+            jpn: アクティブユーザー数
+          description: Number of active users
+          x-description-i18n:
+            jpn: アクティブユーザー数
+          type: integer
+          example: 100
+      required:
+        - type
+        - date
+        - tenant_id
+        - env_id
+        - active_users
     AggregatedMetrics:
       title: Aggregated Metrics
       x-title-i18n:
