@@ -1,0 +1,405 @@
+---
+title: "Setup Procedure"
+slug: "manual"
+excerpt: ""
+hidden: false
+createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
+---
+
+import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
+
+## Smart API Gateway Usage Procedure
+
+Below is the procedure for configuring the SaaSus Platform Smart API Gateway feature to easily publish and manage your APIs.
+
+---
+
+### Step 1: Preliminary Steps (Setup of SaaS Environment and App)
+
+- **Create a SaaSus Platform Account**  
+  You need a SaaSus Platform account to use this feature.  
+  Access [SaaSus Platform](https://saasus.io/), create a SaaSus Platform account, and log in.
+
+- **Prepare the AWS Environment for Testing**  
+  You need an AWS account to use this feature.  
+  If you do not have one, access [Create an AWS Account](https://aws.amazon.com/jp/) to sign up for AWS.
+
+- **SaaS Environment and Sample App**  
+  Use CloudFormation to create a SaaS environment and sample app in AWS.  
+  In the AWS environment you will use for verification, run the CloudFormation below.  
+  After execution, access the URL listed in the CloudFormation outputs, enter the password, and log in to the VSCode environment.  
+  [Create a SaaS Environment and Sample App](https://github.com/saasus-platform/implementation-sample-smart-api-gateway/blob/main/smart-gateway-sample-saas.yaml)
+
+  - **Sample App**  
+    The sample app used in this procedure is:  
+    [Smart API Gateway SaaS Sample](https://github.com/saasus-platform/implementation-sample-smart-api-gateway.git)
+
+  - **SaaSus Java SDK**  
+    The SaaSus Java SDK used in this procedure is:  
+    [Java SDK](https://github.com/saasus-platform/saasus-sdk-java)
+
+- **SDK Setup**  
+  The SDK setup is performed using the following steps:
+
+1. Build a package with the SaaSus Java SDK and install it in your local repository.
+
+   ```bash
+   cd saasus-sdk-java
+   mvn clean package
+   mvn install:install-file -Dfile=target/saasus-sdk-java-1.0.0.jar -DgroupId=io.saasus -DartifactId=saasus-java -Dversion=0.0.1 -Dpackaging=jar
+   ```
+
+   :::info[Since the steps have already been configured, just verify what is being done]
+   :::
+
+2. In the `implementation-sample-smart-api-gateway/pom.xml` file, add the following under the `dependencies` tag and the `profiles` tag.
+
+   ```xml
+   <!-- saasus platform sdk -->
+   <dependency>
+     <groupId>io.saasus</groupId>
+     <artifactId>saasus-java</artifactId>
+     <version>0.0.1</version>
+   </dependency>
+   <!-- saasus platform sdk -->
+
+   <!-- smart api gateway parameter setting -->
+   <profiles>
+     <profile>
+       <id>with-parameters</id>
+       <build>
+         <plugins>
+           <plugin>
+             <groupId>org.apache.maven.plugins</groupId>
+             <artifactId>maven-compiler-plugin</artifactId>
+             <version>3.8.1</version>
+             <configuration>
+               <compilerArgs>
+                 <arg>-parameters</arg>
+               </compilerArgs>
+             </configuration>
+           </plugin>
+         </plugins>
+       </build>
+     </profile>
+   </profiles>
+   <!-- smart api gateway parameter setting -->
+   ```
+
+3. Make the necessary configurations in the `implementation-sample-smart-api-gateway` project.
+
+   ```bash
+   cd implementation-sample-smart-api-gateway
+   mvn clean package
+
+   cp .env.example .env
+   vi .env
+
+   SAASUS_SAAS_ID="xxxxxxxxxx"
+   SAASUS_API_KEY="xxxxxxxxxx"
+   SAASUS_SECRET_KEY="xxxxxxxxxx"
+
+   docker compose up -d
+   ```
+
+   :::info
+   For details on how to obtain `SAASUS_SAAS_ID`, `SAASUS_API_KEY`, and `SAASUS_SECRET_KEY`, please see:  
+   [Reconfirming SaaS ID, API Key, and Client Secret](/docs/tutorial/configuring-sdk-for-saasus-platform#check-your-saas-id-api-key-and-client-secret)
+   :::
+
+---
+
+:::info[Since the steps have already been configured, just verify what is being done]
+
+### Step 2: Annotation Settings in Source Code
+
+1. Add annotations to the methods you want to publish so that they can be used as API endpoints.
+
+   As an example this time,  
+   `src/main/java/implementsample/service/InventoryService.java`  
+   we will call the `getInventoryEntryPoint` method via the API.
+
+   Smart API Gateway is designed to call `static` methods.  
+   Therefore, we create a `static` method that will be called from Smart API Gateway, inside which we call `TenantInventory`.  
+   Then, we add the `@SaaSusAPI` annotation to the newly created `static` method to declare its use as an endpoint of the Smart API Gateway.
+
+```mdx-code-block
+<Tabs>
+<TabItem value="java" label="java" default>
+```
+
+```java
+package implementsample.service;
+
+import java.util.List;
+
+import implementsample.dto.InventoryDto;
+import implementsample.repository.InventoryRepository;
+import saasus.sdk.modules.SaaSusAPI;
+import saasus.sdk.util.apiserver.SaasusIdentity;
+
+public class InventoryService {
+
+    /**
+     * API for getting inventory information
+     * @param identity SaasusIdentity object
+     * @return List of inventory information
+     */
+    @SaaSusAPI(path = "getInventory")
+    public static List<InventoryDto> getInventory(SaasusIdentity identity) {
+        String tenantId = identity.getTenantId();
+
+        return InventoryRepository.getInventory(tenantId);
+    }
+
+    /**
+     * API for getting inventory information by user
+     * @param identity SaasusIdentity object
+     * @return List of inventory information
+     */
+    @SaaSusAPI(path = "getInventoryByUser")
+    public static List<InventoryDto> getInventoryByUser(SaasusIdentity identity) {
+        String tenantId = identity.getTenantId();
+        String userId = identity.getUserId();
+
+        return InventoryRepository.getInventoryByUser(tenantId, userId);
+    }
+}
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+---
+
+### Step 3: API Server Startup Settings
+
+1. We added the `src/main/java/implementsample/ApiServerListener.java` class so that the `saasus-sdk` API server starts when the application starts.
+
+```mdx-code-block
+<Tabs>
+<TabItem value="java" label="java" default>
+```
+
+```txt
+// saasus api server
+import saasus.sdk.util.apiserver.ApiServer;
+
+...omitted...
+
+            // Start the API server on port 8083
+            ApiServer.start(8083);
+
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+2. The following settings are required for **Application Load Balancer** (already configured in CloudFormation):
+   - **Listener**: Port **8083**
+   - **Target Group**: Create a target group for port **8083**
+   - **Security Group**: Allow access on port **8083** between the ALB and the application
+
+:::
+
+---
+
+### Step 4: Code Modifications
+
+Modify the code in the appropriate sections.
+**Areas that need modification in InventoryRepository.java:**
+
+1. **Modify Inventory Manager ID constant**
+   ```java
+   // Before modification
+   private static final String INVENTORY_MANAGER_A = "f47ac10b-58cc-4372-a567-0e02b2c3d479";
+   
+   // After modification (change to actual user ID)
+   private static final String INVENTORY_MANAGER_A = "actual user ID";
+   ```
+
+2. **Modify tenant ID**
+   ```java
+   // Before modification
+   put("d296b330-3cce-40b6-88c3-035a1d86981f",
+   
+   // After modification (change to actual tenant ID)
+   put("actual tenant ID",
+   ```
+
+**Modification steps:**
+1. Open `src/main/java/implementsample/repository/InventoryRepository.java`
+2. Change the above constant values to the actual user ID and tenant ID created in SaaSus Platform
+3. Save the file
+
+:::info
+The actual user ID and tenant ID can be confirmed from the SaaSus Platform management screen.
+:::
+
+---
+
+### Step 5: Integrate and Compress Source Code
+
+Because the source code will be uploaded in Step 6, collect and compress it into a ZIP file using the shell script below.
+
+```bash
+bash java_files_collector.sh <path to your application>
+```
+
+Example:
+
+```bash
+cd /Workshop/implementation-sample-smart-api-gateway
+bash java_files_collector.sh src/main/java/implementsample
+```
+
+A `java_files_archive.zip` file is created.  
+Please download this file.
+
+This completes the configuration within the SaaS application.
+
+---
+
+### Step 6: Upload the ZIP File
+
+1. Access the Smart API Gateway feature screen in the SaaS Development Console.
+
+2. Upload the generated ZIP file from the screen.
+
+---
+
+### Step 7: Permission & Infrastructure Settings
+
+1. Go to the **Permission tab** and create **CloudFormation for Assume Role**.
+2. Register the **Role ARN** and **External ID** you created.
+3. Register the **VPC ID** and **Subnet IDs** of the VPC in which you will create PrivateLink (Network Load Balancer).
+4. Register the **ALB ARN** of your Application Load Balancer.  
+   :::info
+   Make sure you enter **multiple Subnet IDs** for the Subnet IDs.  
+   :::
+
+When the setup is complete, the infrastructure connecting the SaaSus Platform and your environment will be created.
+
+---
+
+### Step 8: Publish and Access the API
+
+1. **Publish the API**
+2. You can access it via the domain for the API endpoint.
+
+#### How to Access the API
+
+- **API Key** is required to access the API. Generate an API Key in the **Tenant Management Screen** of the SaaS Operation Console and use it for access.
+- Check the API methods in **Throttling&Role** under the method path.
+- Access the domain of the API endpoint as follows:
+
+#### SaaSus Identity Integration
+
+Smart API Gateway enables fine-grained access control and data filtering by integrating with **SaaSus Identity**, utilizing tenant ID, environment ID (ENV ID), and user ID.
+
+- **Tenant ID**: Used to access tenant-specific data in a multi-tenant environment
+- **Environment ID (ENV ID)**: Used for environment-specific data access such as development, staging, and production environments
+- **User ID**: Used for data retrieval and operation restrictions tied to specific users
+
+In the implementation example, the inventory management API uses SaasusIdentity object to obtain tenant ID and user ID, enabling fine-grained access control and data filtering according to tenant and user.
+
+#### Access Example
+
+```sh
+$ curl -v -X GET https://<domain>/<api method path> -H 'x-api-key:<issued API Key>'
+```
+
+#### API Access Examples
+
+The following are examples of API access utilizing tenant ID and user ID through SaaSus Identity integration:
+
+**Get all inventory (filtering by tenant):**
+```sh
+$ curl -X GET https://<domain>/inventory-service/get-inventory -H 'x-api-key:<tenant API Key>'
+```
+
+**Get user-specific inventory (filtering by user ID):**
+```sh
+$ curl -X GET https://<domain>/inventory-service/get-inventory-by-user -H 'x-api-key:<user API Key>'
+```
+
+**Response example:**
+```json
+[
+  {
+    "id": "inventory-001",
+    "name": "Product A",
+    "inventoryManagerId": "e47ac10b-58cc-4372-a567-0e02b2c3d480",
+    "quantity": 10
+  }
+]
+```
+
+In this example, inventory data is filtered based on tenant ID and user ID obtained from the SaasusIdentity object.
+
+
+### Step 9: Throttling Settings
+
+- From **Throttling&Role**, select the target method path and configure the throttling settings.
+- For testing, set a limit of **2 requests per 1 minute**.
+- When the settings are complete, the API access restriction is applied.
+- Make multiple accesses to verify that throttling works.
+
+:::info
+
+- Throttling settings can be applied by setting the **number of requests within a specified range (seconds)**.
+  - **Tenant-based throttling**
+    - The limit is applied to the **total number of API calls** made with both the tenant's API key and the user's API key.
+  - **User-based throttling**
+    - With the tenant's API key, **API calls can be made without limit**.
+    - When using a user's API key, **the number of API calls per user** is restricted.
+
+:::
+
+### Step 10: Authorization (Role) Settings
+
+- For testing, create a role called "general user" in the **Role Definitions** of the SaaS Development Console.
+- Role-based authorization requires a user's **API Key**. Create a user in the **User Management Screen** of the SaaS Operation Console and issue an API Key.
+- From **Role Management** in the SaaS Operation Console, assign the created "general user" role to the user.
+- From **Throttling&Role**, select the target method path and configure the SaaS administrator role.
+- Once the settings are complete, API access restrictions based on roles are applied.
+- Use the user's API key to check the operation of role-based authorization.
+
+:::info
+
+- Role-based authorization is controlled by the user's role, so it only applies to the user's API Key.
+- To issue a user's API key, the user must belong to a tenant.
+- The tenant's API Key can be used to access the API regardless of the assigned role.
+
+:::
+
+### Step 11: Domain Settings
+
+- Configure the domain from **Custom Domain**.
+- Add the displayed CNAME record to your own DNS server.
+- After domain configuration is complete, the domain for the API endpoint is updated.
+- You can then access the API via the newly configured domain.
+
+### Step 12: IP Restriction Settings
+
+- Set IP restrictions in the **Tenant Management Screen** of the SaaS Operation Console.
+- After configuring IP restrictions, the API can only be accessed from the specified IP addresses.
+
+### Deleting the Test Environment
+
+- Log back in to the VSCode environment and run the following commands:
+- Retrieve the `vpc endpoint service id` created from the `t-<tenantid>-saasus-setup-private-link-on-saas` CloudFormation resource
+- Configure `aws cli` (for example, using `aws configure`) to set your access key and secret key
+- Execute `reject_vpc_endpoints.sh <vpc endpoint service id>` to reject the endpoint connection for that `vpc endpoint service id` (failing to do so will result in an error when deleting CloudFormation)
+- Delete the CloudFormation stack `t-<tenantid>-saasus-setup-private-link-on-saas`
+- Delete the CloudFormation stack for the SaaS sample
+
+```
+
+```
