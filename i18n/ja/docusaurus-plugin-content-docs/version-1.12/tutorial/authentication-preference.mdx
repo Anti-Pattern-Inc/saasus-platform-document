@@ -1,0 +1,709 @@
+---
+sidebar_position: 3
+title: "認証の設定"
+slug: "authentication-preference"
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+### SaaS 利用者テナントの作成
+
+ではまず、サンプルアプリケーション用に、テナントを２つ作成してみましょう。
+
+サイドメニューの「テナント管理」をクリックします。
+
+![01](/ja/img/tutorial/authentication-preference/authentication-preference-01.png)
+
+「テナント作成」ボタンをクリックしてポップアップを表示します。
+
+テナント名・代表者ユーザーの追加・代表者メールアドレス・代表者の仮パスワード、その他にDocsでご紹介している[テナント属性定義](/docs/part-4/application-settings/declare-additional-attribute-to-tenant)で追加したテナント属性が表示されます。
+
+
+１つ目
+
+- 名前：テナントサンプルその１
+- メモ：テナント属性で定義した属性情報となり、自由に設定可能となります
+- 代表ユーザーの追加：新規でユーザーを作成
+- 代表者メールアドレス： [saasus-sample-tenant1@example.com](mailto:saasus-sample-tenant1@example.com)
+- 代表者のパスワード： G@2qYPQq などパスワード要件を満たすもの
+
+![02](/ja/img/tutorial/authentication-preference/authentication-preference-02.png)
+
+２つ目
+
+- 名前：サンプルアプリテナント２
+- メモ：テナント属性で定義した属性情報となり、自由に設定可能となります
+- 代表ユーザーの追加：新規でユーザーを作成
+- 代表者メールアドレス： [saasus-sample-tenant2@example.com](mailto:saasus-sample-tenant2@example.com)
+- 代表者のパスワード： irG_l88r などパスワード要件を満たすもの
+
+（特に決まりではないので、他の値を入れていただいても OK です）
+
+![03](/ja/img/tutorial/authentication-preference/authentication-preference-03.png)
+
+これで、テナントの作成と、そのテナントに属する各１名のユーザーが作成されました。
+
+### SaaS 利用ユーザーの作成
+
+では、ユーザー一覧を見てみましょう。サイドメニューから「ユーザー管理」をクリックします。
+
+先ほど作成したユーザーが、各テナント、各環境の admin（SaaS 管理者）の役割として登録されています。
+
+![04](/ja/img/tutorial/authentication-preference/authentication-preference-04.png)
+
+SaaSus Platform では、SaaS 利用者のテナントに「環境」という概念が利用できます。
+
+たとえば、Stripe のように API をメインで使う SaaS では、SaaS 利用者は連携のテストや開発時用の環境が必要になります。<br/>
+これらを行うために 開発環境 という環境を使い、実際の運用では 本番環境 という環境を使うというように SaaS 管理者は複数の環境を定義することができるようになっています。
+
+![05](/ja/img/tutorial/authentication-preference/authentication-preference-05.png)
+
+:::info
+SaaS によっては、複数環境が不要な場合もありますので、単一環境を使う場合は 本番環境 だけ意識していただければ大丈夫です。
+:::
+
+では、各テナントごとに１名づつユーザーを登録してみましょう。
+
+右上の「ユーザ作成」ボタンをクリックし、ポップアップを出します。
+
+メールアドレス・パスワード・テナント、その他にDocsでご紹介している[ユーザー属性定義](/docs/part-4/user-authz-settings/declare-additional-attribute-to-user)で追加したユーザー属性が表示されます。
+
+とりあえず、4 名登録してみましょう。
+
+メールアドレス: [user1-1@example.com](mailto:user1-1@example.com)  
+パスワード： パスワード要件を満たすもの  
+テナント： テナントサンプルその１  
+ユーザ名： ユーザー1-1
+
+![06](/ja/img/tutorial/authentication-preference/authentication-preference-06.png)
+
+メールアドレス: [user1-2@example.com](mailto:user1-2@example.com)  
+パスワード： パスワード要件を満たすもの  
+テナント： テナントサンプルその１  
+ユーザ名： ユーザー1-2
+
+メールアドレス: [user2-1@example.com](mailto:user2-1@example.com)  
+パスワード： パスワード要件を満たすもの  
+テナント： サンプルアプリテナント２  
+ユーザ名： ユーザー2-1
+
+メールアドレス: [user2-2@example.com](mailto:user2-2@example.com)  
+パスワード： パスワード要件を満たすもの  
+テナント： サンプルアプリテナント２  
+ユーザ名： ユーザー2-2
+
+![07](/ja/img/tutorial/authentication-preference/authentication-preference-07.png)
+
+4 名追加でユーザ登録できました。
+
+以下の手順で、これらのユーザーに役割を設定してください。
+
+:::caution チュートリアルの前提として必要な設定です
+ユーザーに適切な役割を設定しておくことで、このあとのチュートリアルを正しく進めることができます。
+
+以下のページを参考に、事前に設定を行ってください：
+
+- [役割管理](/docs/part-5/adding-role-to-user)
+:::
+
+:::info
+以降の手順ではプログラミングの知識が必要となります。
+:::
+
+### 認証モジュールの組み込み
+
+SaaSus Platform の認証モジュールを組み込みます。
+
+今回のアプリケーションでは、すべての URI のルートに認証を必要とします。認証されていない場合には、アプリケーションが利用できない仕様にします。
+
+現状は、
+
+- Laravel の場合は `api/routes/web.php`
+- Express の場合は `api/app.ts`
+
+にて認証機能が利用されているので、SaaSus の認証機能に置き換えます。
+
+```mdx-code-block
+<Tabs>
+<TabItem value="php" label="Laravel (PHP)" default>
+```
+
+```php
+Route::middleware('auth')->group(function () {
+   Route::get('/', function () {
+       return view('welcome');
+   });
+   Route::get('/dispatch', 'App\Http\Controllers\DispatchController@index')->name('dispatch');
+   Route::get('/board', 'App\Http\Controllers\MessageController@index')->name('board');
+   Route::post('/post', 'App\Http\Controllers\MessageController@post')->name('post');
+});
+
+require __DIR__ . '/auth.php';
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="typescript" label="Express (TS)">
+```
+
+```js
+app.use(
+  session({
+    secret: "secret",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+を
+
+```mdx-code-block
+<Tabs>
+<TabItem value="php" label="Laravel (PHP)" default>
+```
+
+```php
+// Route::middleware('auth')->group(function () {
+//     Route::get('/', function () {
+//         return view('welcome');
+//     });
+// SaaSus SDK標準のAuth Middlewareを利用する
+Route::middleware(\AntiPatternInc\Saasus\Laravel\Middleware\Auth::class)->group(function () {
+   Route::get('/dispatch', 'App\Http\Controllers\DispatchController@index')->name('dispatch');
+   Route::get('/board', 'App\Http\Controllers\MessageController@index')->name('board');
+   Route::post('/post', 'App\Http\Controllers\MessageController@post')->name('post');
+
+   Route::redirect('/', '/board');
+});
+
+// require __DIR__ . '/auth.php';
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="typescript" label="Express (TS)">
+```
+
+```js
+import { AuthMiddleware } from "saasus-sdk";
+...
+// app.use(
+//   session({
+//     secret: "secret",
+//     resave: false,
+//     saveUninitialized: false,
+//   })
+// );
+app.use(
+  ["/chat", "/api/board", "/api/post", "/api/plan", "/api/tenant"],
+  AuthMiddleware
+);
+// app.use(passport.initialize());
+// app.use(passport.session());
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+### 個別の認証処理の削除（Express）
+
+Express はルートごとに個別の認証処理があったため、それらを削除します。
+
+- Laravel の場合（変更不要）
+- Express の場合は `api/routes/chat.ts`
+
+```mdx-code-block
+<Tabs>
+<TabItem value="typescript" label="Express (TS)">
+```
+
+```ts
+router.get(
+  "/",
+  (req: Request, res: Response, next: NextFunction) => {
+    if (req.isAuthenticated()) {
+      next();
+    } else {
+      res.redirect(302, "/login");
+    }
+  },
+  getChats
+);
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+を
+
+```mdx-code-block
+<Tabs>
+<TabItem value="typescript" label="Express (TS)">
+```
+
+```ts
+router.get("/", getChats);
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+### Callback URL の処理を実装する
+
+先ほど SaaS開発コンソールでコールバック先を 
+
+- Laravel の場合: [http://localhost/callback](http://localhost/callback) 
+- Express の場合: [http://localhost:3000/callback](http://localhost:3000/callback) 
+
+と定義したので、 `/callback` で受け取れるようにします。
+
+- Laravel の場合は、
+`api/routes/web.php` の最後の行に以下を追加します。
+
+```mdx-code-block
+<Tabs>
+<TabItem value="php" label="Laravel (PHP)">
+```
+
+```php
+// SaaSus SDK標準のCallback Controllerを利用して、JWTをCookieやLocal Storageに入れる
+Route::get('/callback', 'AntiPatternInc\Saasus\Laravel\Controllers\CallbackController@index');
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+さらに、SaaSus SDK が提供する View を使えるように 
+
+`api/config/view.php` にパスを追加します。
+
+```mdx-code-block
+<Tabs>
+<TabItem value="php" label="Laravel (PHP)" default>
+```
+
+```php
+   'paths' => [
+       resource_path('views'),
+       # ↓この行を追加：SaaSus SDKが提供するViewのディレクトリ
+       resource_path('../vendor/saasus-platform/saasus-sdk-php/src/Laravel/Views'),
+   ],
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+- Express の場合は、
+`api/app.ts` に `import文` と `app.use` を追加し、`/callback` パスのリクエストを処理するルーターを組み込みます。
+
+```mdx-code-block
+<Tabs>
+<TabItem value="typescript" label="Express (TS)">
+```
+
+```js
+import { router as callbackRouter } from "./routes/callback";
+
+// 他のコードは省略
+
+app.use("/callback", callbackRouter);
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+`api/routes/callback.ts` を作成し、SaaSus SDK が提供する `CallbackRouteFunction` を使って `/callback` の GET リクエストを処理します。
+
+```mdx-code-block
+<Tabs>
+<TabItem value="typescript" label="Express (TS)">
+```
+
+```js
+import express from "express";
+const router = express.Router();
+import { CallbackRouteFunction } from "saasus-sdk";
+
+router.get("/", CallbackRouteFunction);
+
+export { router };
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+ログイン後に遷移する画面として `views/callback.ejs` を作成します（今回は `/chat` へリダイレクト）。
+
+```mdx-code-block
+<Tabs>
+<TabItem value="ejs" label="Express (EJS)">
+```
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Auth Callback</title>
+  </head>
+
+  <body>
+    <script>
+      location.href = "/chat";
+    </script>
+  </body>
+</html>
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+ここまで設定すると、 アプリケーションの Controller にたどり着いた時点で、SaaSus Platform で設定した認証情報が request の一部として渡ってくるようになります。
+
+- Laravel の場合は、`api/app/Http/Controllers/MessageController.php` の `index` メソッドの引数に `Request` を追加し、`dd` を使って `$request` に `userinfo` が含まれているか確認してみましょう。  
+- Express の場合は、`api/controllers/chat.ts` の `getChats` メソッド内で `console.log` を使い、`req` に `userinfo` が渡されているか確認してみましょう。
+
+```mdx-code-block
+<Tabs>
+<TabItem value="php" label="Laravel (PHP)" default>
+```
+
+```php
+   public function index(Request $request)
+   {
+       // SaaSus Platformからユーザ情報が渡ってきているかを確認する
+       dd($request->userinfo);
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="typescript" label="Express (TS)">
+```
+
+```js
+const getChats = async (req: Request, res: Response) => {
+  // SaaSus Platformからユーザ情報が渡ってきているかを確認する
+  console.dir(req.userInfo,{depth:null});
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+ここまでで連携の基本ができました。
+
+実際に SaaSus Platform からログインして動作を確認します。
+
+### SaaSus SDK 組み込みの確認
+
+SaaSus Platform で作成したログイン画面を表示します。
+
+ログイン画面のURLはサイドメニューの「認証詳細設定」からログイン画面で確認できます。
+![15](/ja/img/tutorial/authentication-preference/authentication-preference-15.png)
+
+
+![09](/ja/img/tutorial/authentication-preference/authentication-preference-09.png)
+
+先ほど作成したユーザのメールアドレスとパスワードでログインすると、Callback URL で設定した URL に、認証情報とともにリダイレクトされます。
+
+たとえば、 [user1-1@example.com](mailto:user1-1@example.com) でログインしてみましょう。
+
+- Laravel の場合、実際に先ほどのコードが動作していれば、ログイン後にユーザー情報が画面に表示されるはずです。
+- Express の場合は、まずターミナルで以下のコマンドを実行してログを確認できる状態にしてから、ログインを行ってください。
+
+```bash
+repo$ docker compose logs -f
+```
+
+```mdx-code-block
+<Tabs>
+<TabItem value="php" label="Laravel (PHP)" default>
+```
+
+```php
+array:3 [▼
+  "email" => "user1-1@example.com"
+  "id" => "f6a02019-1306-431f-b93d-3a756b312481"
+  "tenants" => array:1 [▼
+    0 => array:7 [▼
+      "back_office_staff_email" => "saasus-sample-tenant1@example.com"
+      "completed_sign_up" => true
+      "envs" => array:1 [▼
+        0 => array:3 [▼
+          "id" => 1
+          "name" => "dev"
+          "roles" => array:1 [▼
+            0 => array:2 [▼
+              "display_name" => "一般利用者"
+              "role_name" => "user"
+            ]
+          ]
+        ]
+      ]
+      "id" => "7b639774-6fba-4b26-b580-f3d755876a4b"
+      "name" => "テナントのサンプルその１"
+      "plan_id" => "bc011444-a9f1-41c0-8251-bc8928b09ee7"
+      "user_attribute" => array:1 [▼
+        "username" => "user1-1"
+      ]
+    ]
+  ]
+]
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="express-logs" label="Express (Dockerログ)">
+```
+
+```js
+{
+  email: 'user1-1@example.com',
+  id: '951fe2e3-b89b-40cf-95db-2fc11f09cbdf',
+  tenants: [
+    {
+      back_office_staff_email: 'saasus-sample-tenant1@example.com',
+      completed_sign_up: true,
+      envs: [
+        {
+          id: 3,
+          name: 'prod',
+          roles: [ { display_name: '一般利用者', role_name: 'user' } ]
+        }
+      ],
+      id: '2d76c5ed-8462-4de0-b107-97bb97b7e9e2',
+      is_paid: true,
+      name: 'テナントサンプルその１',
+      plan_id: 'ddb8b9e9-5fe4-48cc-846e-b9031552877a',
+      user_attribute: { username: 'ユーザ１−１' }
+    }
+  ],
+  user_attribute: {}
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+アプリケーション側で、先ほど SaaSus Platform で設定したユーザ情報、テナント情報が取得できているのがわかります。
+
+リダイレクト先の URL は、今回 SaaSus SDK 標準の Callback 処理で受けるようになっており([http://localhost/callback](http://localhost/callback))、その処理の中で ブラウザの Local Storage や Cookie の中に認証情報を記憶します。
+
+そして、 SaaSus SDK の Auth Middleware で、SaaSus Platform を利用し認証情報を検証しユーザ情報を取得して Request オブジェクトに詰めます。
+
+そのあと、アプリケーションのコントローラに処理が移るので、この時点ですでにアプリケーションはログインした人の情報を持っていることになります。
+
+では、この情報を使って、掲示板アプリケーションをマルチテナント対応にしてみましょう。
+
+### サンプルアプリケーションのマルチテナント化
+
+- Laravel の場合は、`api/app/Http/Controllers/MessageController.php` が
+- Express の場合は、`api/controllers/chat.ts` が
+
+メインの処理なので、ここにマルチテナント対応にするための処理を入れてみましょう。
+
+まず、表示の部分を変更します。  
+下記の部分をまるごと書き換えてみましょう。
+
+```mdx-code-block
+<Tabs>
+<TabItem value="php" label="Laravel (PHP)" default>
+```
+
+```php
+   public function index(Request $request)
+   {
+       // $request->userinfo に各種ユーザ情報、テナント情報が入ってくるので、それを使う
+       $messages = Message::where('tenant_id', $request->userinfo['tenants'][0]['id'])->get();
+       return view('messageBoard.index', ['messages' => $messages, 'plans' => $this::PLANS, 'tenant_name' => $request->userinfo['tenants'][0]['name']]);
+   }
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="typescript" label="Express (TS)">
+```
+
+```js
+const getChats = async (req: Request, res: Response) => {
+  try {
+    const messages = await db.Messages.findAll({
+      where: {
+        tenant_id: req.userInfo?.tenants[0].id,
+      },
+    });
+    res.render("chat", {
+      messages: messages,
+      plans: PLANS,
+      tenant_name: req.userInfo?.tenants[0].name,
+    });
+  } catch (error) {
+    console.error(error);
+    res.redirect("/chat");
+  }
+};
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+このようにして、渡ってきたテナント ID をもとに DB を検索するようにします。
+
+次に投稿の部分です。
+
+```mdx-code-block
+<Tabs>
+<TabItem value="php" label="Laravel (PHP)" default>
+```
+
+```php
+   public function post(Request $request)
+   {
+       $validated = $request->validate([
+           'message' => 'required|max:255'
+       ]);
+
+       // $request の userinfo から各種情報を取得し、判断に使う
+       $message = Message::create([
+            'tenant_id' => $request->userinfo['tenants'][0]['id'],
+            'user_id' => $request->userinfo['tenants'][0]['user_attribute']['username'],
+            'message' => $request->message,
+        ]);
+
+       $request->session()->regenerateToken();
+       return redirect()->route('board');
+   }
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="typescript" label="Express (TS)">
+```
+
+```js
+const postChats = async (req: Request, res: Response) => {
+  const mes = req.body.message;
+  const tenantId = req.userInfo?.tenants[0].id || "";
+  const userName =
+    req.userInfo?.tenants[0].user_attribute.username;
+  try {
+    await db.Messages.create({
+      tenant_id: tenantId,
+      user_id: userName,
+      message: mes,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+  res.redirect("/chat");
+};
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+渡ってきたユーザ属性をもとに、テナント ID、ユーザ名をセットで格納します。
+
+画面表示の部分も、ユーザ ID を表示するようにしてみます。
+
+- Express の場合（変更不要）
+- Laravel の場合は、`api/resources/views/messageBoard/index.blade.php` を編集します。
+
+32 行目あたりの、この `$message->user->name` の部分を `$message->user_id` に変更します。
+
+修正前：
+
+```html
+                   <div class="mt-4">
+                       <p>
+                           {{ $message->user->name }}
+                           <span class="text-xs text-gray-500">
+                               {{ $message->created_at->format('Y/m/d H:i') }}
+                           </span>
+                       </p>
+```
+
+修正後：
+
+```html
+                   <div class="mt-4">
+                       <p>
+                           {{ $message->user_id }}
+                           <span class="text-xs text-gray-500">
+                               {{ $message->created_at->format('Y/m/d H:i') }}
+                           </span>
+                       </p>
+```
+
+これでマルチテナント対応ができました。
+
+では、早速ログインして試してみましょう。
+
+先ほどと同じように、SaaSus Platform で作成したログイン画面からログインを行います。
+
+ログインすると、テナント名が先ほど SaaS開発コンソールで設定したものに変わっているのが確認できます。
+
+![10](/ja/img/tutorial/authentication-preference/authentication-preference-10.png)
+
+まだデータが無いので、いくつか投稿をしてみましょう。
+
+![11](/ja/img/tutorial/authentication-preference/authentication-preference-11.png)
+
+ユーザ名も表示されていることが確認できました。
+
+では、もう一度ログイン画面に戻り、 [user1-2@example.com](mailto:user1-2@example.com) でログインして、いくつか投稿してみましょう。
+
+![12](/ja/img/tutorial/authentication-preference/authentication-preference-12.png)
+
+当然画面に反映されます。
+
+では、もうひとつのテナントのユーザ、 [user2-1@example.com](mailto:user2-1@example.com) でログインしてみましょう。
+
+![13](/ja/img/tutorial/authentication-preference/authentication-preference-13.png)
+
+テナント名の表示が変わり、内容が空になっていることが確認できます。
+
+自分のテナントの情報にしかアクセスできないことが確認できました。
+
+では、同じようにいくつか投稿をした後に、 [user2-2@example.com](mailto:user2-2@example.com) でログインし、同一テナントの情報が表示できることを確認します。
+
+![14](/ja/img/tutorial/authentication-preference/authentication-preference-14.png)
+
+このように、テナントごとの分離が完了しました。
+
+今回の分離方式としては、プール型モデルで同一 DB 内での分離を行いシンプルな方式でテナント分離を行いました。スキーマ分離、データベース分離など、要件に応じてテナント分離の方式を選択する場合においても、同様に SaaSus SDK を利用してテナント情報を取得し実装することができます。
+
+テナント分離ができたので、今度は料金関係の機能の実装をしてみましょう。
