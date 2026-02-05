@@ -4,7 +4,7 @@ slug: "billing"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Wed Feb 05 2026 05:09:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 **Q. What is the "Calculation Method" setting (sum/max) for meter units?**  
@@ -30,3 +30,40 @@ The API returns a count that is the sum of metering values recorded within the s
 
 **When max (maximum) is set:**  
 The API returns a count that is the maximum value of metering values recorded within the specified period (daily or monthly).
+
+---
+
+**Q. What is the role division between SaaSus Platform and Stripe?**  
+A. SaaSus Platform manages "usage plans" while Stripe handles "payment and billing operations." The extent to which SaaSus features can be utilized depends on the sales model (self-serve vs sales-led).
+
+- **Self-serve (automation recommended)**: Subscription creation and updates can be automatically executed based on SaaSus pricing plan definitions.
+- **Sales-led (manual handling)**: SaaSus only handles customer ID (Stripe Customer) linking, while specific invoice creation and complex pricing configurations are done directly from the Stripe dashboard.
+
+---
+
+**Q. How should billing information (company name and address) be registered and managed?**  
+A. The registration path varies depending on the sales model, but information is synchronized to Stripe via SaaSus. To minimize security risks, credit card information is not stored on the SaaSus side but is entered directly on Stripe screens.
+
+- **Self-serve**: End users register through input screens in the app.
+- **Sales-led**: Sales representatives enter information on behalf of customers from the "SaaS Operations Console."
+
+---
+
+**Q. Are payment screens such as 3D Secure (authentication) provided by SaaSus?**  
+A. No, SaaSus does not have any functionality to display payment authentication screens (popups, etc.). While backend payment creation instructions are performed, when browser authentication is required, you need to integrate Stripe-provided features (such as Hosted Invoice Page).
+
+---
+
+**Q. We want to send thank-you emails when payments are completed. Does SaaSus send webhook notifications?**  
+A. No, SaaSus Platform does not relay Stripe webhook events. For real-time processing such as immediate email sending upon payment completion or refund detection, you need to implement direct Stripe Webhook reception on your own server.
+
+---
+
+**Q. Can refund processing, invoice reissuing, and coupon application be done from the console?**  
+A. No, these irregular operations and individual responses need to be handled directly from the Stripe dashboard.
+
+- **Refunds and invoice reissuing**: Since SaaSus does not have these features, please handle them directly on the Stripe side.
+- **Invoice payments**: Invoice sending for non-credit card payments (bank transfers, etc.) also needs to be done on the Stripe side.
+- **Coupons (discounts)**: Individual discounts for specific tenants should be linked to the target Customer or subscription from the Stripe dashboard.
+
+---
