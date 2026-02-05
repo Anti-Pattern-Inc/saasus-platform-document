@@ -21,6 +21,7 @@
 - [Update on 2025/06/05](changelog/20250605): We have released updates on the following features.
 - [Update on 2025/12/12](changelog/20251212): We have released updates on the following features.
 - [Update on 2025/12/23](changelog/20251223): We have released updates on the following features.
+- [Update on 2026/01/23](changelog/20260123): We have released updates on the following features.
 - [Welcome to SaaSus Platform](changelog/welcome-to-saasus-platform): Release v0.10(final beta version) on 2022/12/10
 - [Purpose and Overview](part-1/purpose-and-overview): Purpose
 - [Cloud Computing Basics](part-2/cloud-computing-basics): 1. Differences between IaaS, PaaS, and SaaS
@@ -136,7 +137,7 @@
 - [Assigning Users to Tenants and Setting Roles](part-6/usecase/about-saas-user-accounts/add-tenant-user): After a tenant has been created, you can then associate the self-signed up user with the tenant.
 - [Creating a Tenant](part-6/usecase/about-saas-user-accounts/create-tenant): Once self-signup is complete, the next step is to create a tenant.
 - [Authentication Methods](part-6/usecase/authentication-methods): In web applications, including SaaS, there are two main authentication methods:
-- [API / SDK FAQ](part-7/faq/api-sdk): Content coming soon. Please check back later.
+- [API / SDK FAQ](part-7/faq/api-sdk): Q. When I execute the invitation API, I get an error "Both DNS and SES must be validated...". What is the cause?
 - [Billing FAQ](part-7/faq/billing): Q. What is the "Calculation Method" setting (sum/max) for meter units?
 - [SaaSus Platform FAQ](part-7/faq/saasus-platform): Q. What countermeasures are available when the service goes down?
 - [Support](part-7/support): Support Channels
