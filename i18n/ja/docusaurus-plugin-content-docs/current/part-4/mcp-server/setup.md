@@ -136,6 +136,7 @@ SaaSus API MCP Serverでは、SaaSus Platform の全APIエンドポイントが�
 - API Log API
 - AWS Marketplace API
 - Integration API
+- Analysis API
 
 ## トラブルシューティング
 

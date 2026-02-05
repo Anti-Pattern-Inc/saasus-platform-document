@@ -136,6 +136,7 @@ Main features include:
 - API Log API
 - AWS Marketplace API
 - Integration API
+- Analysis API
 
 ## Troubleshooting
 

@@ -44,7 +44,7 @@ Roo Codeのプロンプトで
 ```
 i18n/ja/docusaurus-plugin-content-docs/current/
 配下で新規作成、修正されているファイルを対象として
-英語版とバージョン1.11（英語、日本語）に反映して
+英語版とバージョン1.12（英語、日本語）に反映して
 
 方法は以下を参考にして
 .clinerules/document-management-guide.md
