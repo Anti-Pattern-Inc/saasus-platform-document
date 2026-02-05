@@ -365,6 +365,27 @@ With this update, you can now grasp the health status of your service from both 
 We will continue to sequentially expand indicators that are useful for analysis going forward.  
 ---
 
+# Update on 2026/01/23
+
+URL: https://www.prisma.io/docs/changelog/20260123
+
+We have released updates on the following features.
+
+Authentication API  
+We have added an "Authentication API" that allows users to authenticate using an email address and password from the SaaS's own login screen.  
+In addition to the standard login screen previously provided by the SaaSus Platform, support for authentication via API enables you to build a login experience that is completely integrated with your service's design and brand.  
+
+  Main features  
+  - Email/password authentication with custom UI  
+    Login processing can be executed by calling the SaaSus API from the backend based on information entered from the SaaS's own screen (frontend). This realizes a seamless user experience that does not compromise the service's look and feel.  
+  - Optimization for mobile app integration  
+    Since authentication is completed via API, it is now easier to flexibly implement login functions in native apps such as iOS and Android.  
+  - Support for secure authentication protocol (SRP)  
+    The authentication flow complies with USER_SRP_AUTH. Since verification is performed using a hash value   calculated on the client side, authentication can be completed safely while keeping the password itself secret.
+  - Direct retrieval of various tokens  
+    Upon successful authentication, the ID token, access token, and refresh token are immediately returned from the SaaSus Platform. You can smoothly perform subsequent authorization controls and API requests using the obtained tokens.  
+---
+
 # Welcome to SaaSus Platform
 
 URL: https://www.prisma.io/docs/changelog/welcome-to-saasus-platform
@@ -4059,6 +4080,7 @@ Main features include:
 - API Log API
 - AWS Marketplace API
 - Integration API
+- Analysis API
 
 ## Troubleshooting
 
@@ -12571,7 +12593,27 @@ catch (Exception ex)
 
 URL: https://www.prisma.io/docs/part-7/faq/api-sdk
 
-*Content coming soon. Please check back later.*
+**Q. When I execute the invitation API, I get an error "Both DNS and SES must be validated...". What is the cause?**  
+A. This is caused by incomplete domain configuration or the domain not being validated (verified) for sending authentication emails (invitation emails).
+
+To send invitation emails to users, DKIM authentication with a domain owned by the customer is mandatory from the perspective of security and deliverability.
+
+**Solution**  
+Please enable the domain by following these steps:
+
+1. **Domain Registration**  
+   Register the domain to be used as the sender from "Common Settings" > "Domain" in the SaaS Development Console.
+
+2. **Obtain and Configure DNS Records**  
+   Configure the DKIM record information (CNAME, etc.) displayed after registration to your DNS server (Route 53, Cloudflare, etc.).
+
+3. **Verify Completion**  
+   After configuration, the system will verify the domain. It may take up to 2-3 days for the changes to be reflected.
+
+**Ready to Use Status**  
+When the status "Authentication email delivery by custom domain is enabled." is displayed on the domain configuration page of the SaaS Development Console, the invitation function will work properly through the API.
+
+---
 ---
 
 # Billing FAQ
