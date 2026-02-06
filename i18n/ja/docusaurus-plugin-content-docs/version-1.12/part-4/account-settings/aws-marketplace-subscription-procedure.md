@@ -4,7 +4,7 @@ slug: "aws-marketplace-subscription-procedure"
 excerpt: ""
 hidden: false
 createdAt: "Thu Sep 18 2025 00:00:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Sep 18 2025 00:00:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Feb 06 2026 08:44:30 GMT+0000 (Coordinated Universal Time)"
 ---
 
 ### 1.サポートへの問い合わせ
@@ -54,29 +54,40 @@ Please review and subscribe to the offer on AWS Marketplace using the appropriat
 
 ![](/ja/img/part-4/account-settings/aws-marketplace-subscription-procedure/image03.png)
 
-**新規アカウントを作成する場合と既存アカウントに対して有料化を行う場合で手順が異なります**
+### 7. アカウント設定手順
 
-新規アカウントを作成する場合、手順7-1-1  
-既存アカウントを有料化する場合、手順7-2-1 を参照してください
+**新規アカウントを作成する場合と、既存アカウントを対象に有料プランへの移行（有償化）を行う場合で手順が異なります。**
 
-### 7-1-1.SaaSus Platform のログイン (新規アカウントを作成)
+新規アカウントを作成する場合、手順 **7-1** を参照してください。  
+既存アカウントを有料プランへ移行する場合、手順 **7-2** を参照してください。
 
-`アカウントを設定`をクリック後はAWS Marketplace経由 新規登録画面に遷移します、SaaSus Platform にアカウントが存在しない場合はそのまま、アカウント名、メールアドレスを入力して新規お登録を行い画面の指示に従いアカウントを作成してください。
+### 7-1. 新規アカウント作成
+
+#### 7-1-1. SaaSus Platform への新規登録
+
+「アカウントを設定」をクリックすると、AWS Marketplace経由で新規登録画面に遷移します。SaaSus Platformのアカウントをまだお持ちでない場合は、そのまま画面の指示に従い、アカウント名、メールアドレスを入力して新規登録を行い、アカウントを作成してください。
 
 ![915e21a-image](/ja/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/915e21a-image.png)
 
-***
+### 7-2. 既存アカウントを有料プランへ移行する
 
-### 7-2-1.SaaSus Platform のログイン (既存アカウントの有料化)
+#### 7-2-1. SaaSus Platform へのログイン（既存アカウントの利用）
 
-`アカウントを設定`をクリック後はAWS Marketplace経由 新規登録画面に遷移します、SaaSus Platform にアカウントが存在する場合、`すでに登録済みでログインする方はこちら`をクリックして AWS Marketplac経由 ログイン画面へ遷移して既存のアカウントでログインします。
+「アカウントを設定」をクリックすると、AWS Marketplace経由で新規登録画面に遷移します。すでにSaaSus Platformのアカウントをお持ちの場合は、「すでに登録済みでログインする方はこちら」をクリックしてください。AWS Marketplace経由のログイン画面へ遷移しますので、既存のアカウントでログインを行ってください。
 
 ![a677094-image](/ja/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/a677094-image.png)
 
 ![f3eaabf-image](/ja/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/f3eaabf-image.png)
 
-### 7-2-2.有料化を行うアカウントの選択
+#### 7-2-2. 有料プランを適用するアカウントの選択
 
-有料化するアカウントを選択し`このアカウントで利用を開始する`をクリックします
+有料プランを適用するアカウントを選択し、「このアカウントで利用を開始する」をクリックします。
 
 ![e15cc67-image](/ja/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/e15cc67-image.png)
+
+### 8. 解約手続きについて
+
+SaaSus Platformを契約しているAWSアカウントで以下のURLにアクセスしてください。  
+[AWS Marketplace - SaaSus Platform](https://aws.amazon.com/marketplace/procurement?productId=2d9172be-cc5c-4c63-8d45-cfad683a3a4d&offerId=2p49zz9z2uvjbjxdhgluptglp)
+
+契約の詳細ページにて自動更新の設定が可能となります。自動更新を「OFF」に設定すると、解約（サブスクリプションのキャンセル）となります。
