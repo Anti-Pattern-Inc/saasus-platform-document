@@ -4,7 +4,7 @@ slug: "aws-marketplace-subscription-procedure"
 excerpt: ""
 hidden: false
 createdAt: "Thu Sep 18 2025 00:00:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Sep 18 2025 00:00:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Feb 06 2026 08:44:30 GMT+0000 (Coordinated Universal Time)"
 ---
 
 ### 1. Contact Support
@@ -54,29 +54,40 @@ After clicking `Subscribe` to complete the contract, an `Set up your account` li
 
 ![](/img/part-4/account-settings/aws-marketplace-subscription-procedure/image03.png)
 
-**The procedure differs depending on whether you are creating a new account or upgrading an existing account to paid**
+### 7. Account Setup Procedure
 
-For creating a new account, see step 7-1-1  
-For upgrading an existing account to paid, see step 7-2-1
+**The procedure differs depending on whether you are creating a new account or upgrading an existing account to a paid plan.**
 
-### 7-1-1. SaaSus Platform Login (Create New Account)
+For creating a new account, refer to step **7-1**.  
+For upgrading an existing account to a paid plan, refer to step **7-2**.
 
-After clicking `Set up your account`, you will be redirected to the new registration screen via AWS Marketplace. If no account exists in SaaSus Platform, enter your account name and email address to register a new account and follow the screen instructions to create your account.
+### 7-1. Create New Account
+
+#### 7-1-1. New Registration to SaaSus Platform
+
+After clicking "Set up your account", you will be redirected to the new registration screen via AWS Marketplace. If you do not have a SaaSus Platform account yet, follow the on-screen instructions to enter your account name and email address to register a new account and create your account.
 
 ![915e21a-image](/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/915e21a-image.png)
 
-***
+### 7-2. Upgrade Existing Account to Paid Plan
 
-### 7-2-1. SaaSus Platform Login (Upgrade Existing Account)
+#### 7-2-1. Login to SaaSus Platform (Using Existing Account)
 
-After clicking `Set up your account`, you will be redirected to the new registration screen via AWS Marketplace. If an account already exists in SaaSus Platform, click `Already registered? Click here to log in` to navigate to the AWS Marketplace login screen and log in with your existing account.
+After clicking "Set up your account", you will be redirected to the new registration screen via AWS Marketplace. If you already have a SaaSus Platform account, click "Already registered? Click here to log in". You will be redirected to the login screen via AWS Marketplace, so please log in with your existing account.
 
 ![a677094-image](/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/a677094-image.png)
 
 ![f3eaabf-image](/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/f3eaabf-image.png)
 
-### 7-2-2. Select Account to Upgrade
+#### 7-2-2. Select Account to Apply Paid Plan
 
-Select the account you want to upgrade to paid and click `Start using this account`
+Select the account to which you want to apply the paid plan and click "Start using this account".
 
 ![e15cc67-image](/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/e15cc67-image.png)
+
+### 8. Cancellation Procedure
+
+Please access the following URL with the AWS account that has the SaaSus Platform contract:  
+[AWS Marketplace - SaaSus Platform](https://aws.amazon.com/marketplace/procurement?productId=2d9172be-cc5c-4c63-8d45-cfad683a3a4d&offerId=2p49zz9z2uvjbjxdhgluptglp)
+
+On the contract details page, you can configure auto-renewal settings. Setting auto-renewal to "OFF" will result in cancellation (subscription cancellation).
