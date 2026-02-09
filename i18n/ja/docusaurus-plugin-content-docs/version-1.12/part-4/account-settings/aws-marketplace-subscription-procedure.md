@@ -4,7 +4,7 @@ slug: "aws-marketplace-subscription-procedure"
 excerpt: ""
 hidden: false
 createdAt: "Thu Sep 18 2025 00:00:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Feb 06 2026 08:44:30 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Sun Feb 09 2026 10:31:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 ### 1.サポートへの問い合わせ
@@ -90,4 +90,4 @@ Please review and subscribe to the offer on AWS Marketplace using the appropriat
 SaaSus Platformを契約しているAWSアカウントで以下のURLにアクセスしてください。  
 [AWS Marketplace - SaaSus Platform](https://aws.amazon.com/marketplace/procurement?productId=2d9172be-cc5c-4c63-8d45-cfad683a3a4d&offerId=2p49zz9z2uvjbjxdhgluptglp)
 
-契約の詳細ページにて自動更新の設定が可能となります。自動更新を「OFF」に設定すると、解約（サブスクリプションのキャンセル）となります。
+契約の詳細ページにて自動更新の設定が可能となります。自動更新を「この契約を自動的に更新しない」に設定すると、現在の契約満了日に自動的に解約（サブスクリプションのキャンセル）となります。
