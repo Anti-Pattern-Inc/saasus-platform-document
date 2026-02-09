@@ -4,7 +4,7 @@ slug: "saasus-platform"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Feb 06 2026 09:39:04 GMT+0000 (Coordinated Universal Time)"
 ---
 
 **Q. What countermeasures are available when the service goes down?  
@@ -148,5 +148,19 @@ When authentication failures continue for a certain number of times, the account
 The specific number of attempts is not disclosed, but the lockout period is automatically adjusted according to the number of unauthorized attempts, and is usually automatically released after a certain period of time.  
 To prevent long-term lockouts, please use the password reset function if you are unsure of the correct password.
 
+---
 
+**Q: Please explain SaaSus user count methodology**
+
+A. In SaaSus, **general users (end users) who use your SaaS application** are counted. Administrator accounts registered in the SaaSus Development Console (management screen) are not included.
+
+However, the count definition differs by plan as follows:
+
+| Plan | Count Definition | Target Numbers |
+| :--- | :--- | :--- |
+| **Starter** | **Monthly Active Users** | Only users who actually logged in are counted as "pay-per-use" targets |
+| **Standard and above** | **Registered User Count** | All registered users, regardless of login activity, are counted toward "plan limit" targets |
+
+**■ Important Notes**
+For Standard plans and above, **"the number of people who hold accounts"** is applied to the contract plan restriction limit (upper limit), not "whether they actually used it".
 
