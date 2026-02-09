@@ -4,7 +4,7 @@ slug: "aws-marketplace-subscription-procedure"
 excerpt: ""
 hidden: false
 createdAt: "Thu Sep 18 2025 00:00:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Feb 06 2026 08:44:30 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Sun Feb 09 2026 10:31:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 ### 1. Contact Support
