@@ -334,10 +334,7 @@ paths:
           content:
             application/json:
               schema:
-                title: Created User
-                x-title-i18n:
-                  jpn: 作成したユーザー
-                $ref: '#/components/schemas/SaasUser'
+                $ref: '#/components/schemas/CreatedSaasUser'
         '400':
           description: Bad Request
           content:
@@ -393,14 +390,20 @@ paths:
         jpn: ユーザー情報を削除
       description: |
         Delete all users with matching user ID from the tenant and SaaS.
+        Returns user information before deletion.
       x-description-i18n:
         jpn: |
           ユーザーIDを元に一致するユーザーをテナントからすべて削除し、SaaSからも削除します。
+          削除前のユーザー情報を返却します。
       parameters:
         - $ref: '#/components/parameters/UserId'
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserInfo'
         '404':
           description: Not Found
           content:
@@ -3186,9 +3189,23 @@ components:
         email:
           type: string
           example: hoge@example.com
-          description: E-mail
+          description: |
+            E-mail.
+            For sign-in ID authentication users, this field is not set.
           x-description-i18n:
-            jpn: メールアドレス
+            jpn: |
+              メールアドレス。
+              ログインID認証ユーザーの場合は設定されません。
+        sign_in_id:
+          type: string
+          example: user123
+          description: |
+            Sign-in ID.
+            For email authentication users, this field is not set.
+          x-description-i18n:
+            jpn: |
+              ログインID。
+              メールアドレス認証ユーザーの場合は設定されません。
         attributes:
           type: object
           additionalProperties: true
@@ -3204,7 +3221,15 @@ components:
       required:
         - id
         - email
+        - sign_in_id
         - attributes
+      example:
+        id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+        email: tanaka@example.com
+        sign_in_id: ''
+        attributes:
+          department: development
+          employee_number: 10
     SaasUsers:
       title: SaaS Users
       x-title-i18n:
@@ -3217,11 +3242,44 @@ components:
             $ref: '#/components/schemas/SaasUser'
       required:
         - users
+    CreatedSaasUser:
+      title: Created SaaS User
+      x-title-i18n:
+        jpn: 作成されたSaaSユーザー
+      allOf:
+        - $ref: '#/components/schemas/SaasUser'
+        - type: object
+          properties:
+            password:
+              type: string
+              description: |
+                Auto-generated password (only when sign_in_id authentication and password not specified)
+              x-description-i18n:
+                jpn: |
+                  自動生成されたパスワード（ログインID認証かつパスワード未指定の場合のみ）
+      example:
+        id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+        email: ''
+        sign_in_id: user12345
+        attributes: {}
     CreateSaasUserParam:
       title: SaaS User-Created Parameters
       x-title-i18n:
         jpn: SaaSユーザー作成パラメータ
       type: object
+      description: |
+        Either email or sign_in_id must be specified, but not both.
+        - If email is specified: Email authentication user will be created.
+          When password is not specified, a temporary password will be sent by email.
+        - If sign_in_id is specified: Sign-in ID authentication user will be created.
+          When password is not specified, it will be auto-generated and returned in the response.
+      x-description-i18n:
+        jpn: |
+          emailまたはsign_in_idのどちらか一方を指定します。両方指定することはできません。
+          - emailを指定した場合: メールアドレス認証ユーザーが作成されます。
+            passwordを指定しない場合、仮パスワードがメールで送信されます。
+          - sign_in_idを指定した場合: ログインID認証ユーザーが作成されます。
+            passwordを指定しない場合、自動生成され、レスポンスに含まれます。
       properties:
         email:
           type: string
@@ -3229,14 +3287,30 @@ components:
           description: E-mail
           x-description-i18n:
             jpn: メールアドレス
+        sign_in_id:
+          type: string
+          example: user123
+          description: |
+            Sign-in ID (alphanumeric and symbols -_ only, max 50 characters)
+          x-description-i18n:
+            jpn: |
+              ログインID（英数字と記号-_のみ、最大50文字）
         password:
           type: string
           example: '@Pass#Word1'
-          description: Password
+          description: |
+            Password.
+            For email authentication, if not specified, a temporary password will be sent by email.
+            For sign-in ID authentication, if not specified, password will be auto-generated and returned.
           x-description-i18n:
-            jpn: パスワード
-      required:
-        - email
+            jpn: |
+              パスワード。
+              メールアドレス認証の場合、指定しない場合は仮パスワードがメールで送信されます。
+              ログインID認証の場合、指定しない場合は自動生成されてレスポンスに含まれます。
+      example:
+        email: null
+        sign_in_id: user12345
+        password: '@Pass#Word1'
     User:
       title: User
       x-title-i18n:
@@ -3263,9 +3337,23 @@ components:
         email:
           type: string
           example: hoge@example.com
-          description: E-mail
+          description: |
+            E-mail.
+            For sign-in ID authentication users, this field is not set.
           x-description-i18n:
-            jpn: メールアドレス
+            jpn: |
+              メールアドレス。
+              ログインID認証ユーザーの場合は設定されません。
+        sign_in_id:
+          type: string
+          example: user123
+          description: |
+            Sign-in ID.
+            For email authentication users, this field is not set.
+          x-description-i18n:
+            jpn: |
+              ログインID。
+              メールアドレス認証ユーザーの場合は設定されません。
         attributes:
           type: object
           additionalProperties: true
@@ -3287,8 +3375,25 @@ components:
         - tenant_id
         - tenant_name
         - email
+        - sign_in_id
         - attributes
         - envs
+      example:
+        id: f94bfffc-8be2-11ec-b41a-0242ac120004
+        tenant_id: d1234567-89ab-cdef-0123-456789abcdef
+        tenant_name: saasus
+        email: test@example.com
+        sign_in_id: ''
+        attributes:
+          address: 東京都
+          birthday: 19940925
+        envs:
+          - id: 1
+            name: dev
+            display_name: Development
+            roles:
+              - role_name: admin
+                display_name: Administrator
     Users:
       title: Users
       x-title-i18n:
@@ -3362,6 +3467,11 @@ components:
       x-title-i18n:
         jpn: ユーザーの作成パラメータ
       type: object
+      description: |
+        Either email or sign_in_id must be specified, but not both.
+      x-description-i18n:
+        jpn: |
+          emailまたはsign_in_idのどちらか一方を指定します。両方指定することはできません。
       properties:
         email:
           type: string
@@ -3369,6 +3479,14 @@ components:
           description: E-mail
           x-description-i18n:
             jpn: メールアドレス
+        sign_in_id:
+          type: string
+          example: user123
+          description: |
+            Sign-in ID (alphanumeric and symbols -_ only, max 50 characters)
+          x-description-i18n:
+            jpn: |
+              ログインID（英数字と記号-_のみ、最大50文字）
         attributes:
           type: object
           additionalProperties: true
@@ -3382,8 +3500,13 @@ components:
             jpn: |
               属性情報（SaaS 開発コンソールでユーザー属性定義を行い設定された情報を取得します）
       required:
-        - email
         - attributes
+      example:
+        email: test@example.com
+        sign_in_id: null
+        attributes:
+          address: 東京都
+          birthday: 19940925
     UpdateTenantUserParam:
       title: Update User Parameters
       x-title-i18n:
