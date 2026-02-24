@@ -91,3 +91,4 @@ Please access the following URL with the AWS account that has the SaaSus Platfor
 [AWS Marketplace - SaaSus Platform](https://aws.amazon.com/marketplace/procurement?productId=2d9172be-cc5c-4c63-8d45-cfad683a3a4d&offerId=2p49zz9z2uvjbjxdhgluptglp)
 
 On the contract details page, you can configure auto-renewal settings. Setting auto-renewal to "Do not automatically renew this contract" will result in automatic cancellation (subscription cancellation) on the current contract expiration date.
+![image04](/img/part-4/account-settings/aws-marketplace-subscription-procedure/image04.png)
