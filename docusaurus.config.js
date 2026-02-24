@@ -417,6 +417,11 @@ const config = {
             to: '/docs/part-4/smart-api-gateway-features/manual',
             from: ['/docs/api-gateway-function/manual'],
           },
+          // Integrate with Amazon EventBridge
+          {
+            to: '/docs/part-4/integrate-with-amazon-eventbridge/',
+            from: ['/docs/integrate-with-amazon-eventbridge'],
+          },
           // Implementation Guide
           {
             to: '/docs/part-6/implementation-guide/sample-application/overview',
