@@ -331,6 +331,20 @@
                 }
               ]
             },
+            {
+              "type": "category",
+              "label": "Authentication API",
+              "link": {
+                "type": "generated-index",
+                "title": "Authentication API",
+                "description": "Implementation guide for custom login UI using SaaSus Authentication API.",
+                "slug": "/part-6/implementation-guide/auth"
+              },
+              "items": [
+                "part-6/implementation-guide/auth/overview",
+                "part-6/implementation-guide/auth/sign-in"
+              ]
+            },
             "part-6/implementation-guide/implementing-authentication-using-saasus-serverless"
           ]
         },
