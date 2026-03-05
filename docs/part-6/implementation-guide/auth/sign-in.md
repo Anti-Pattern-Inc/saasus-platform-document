@@ -1,16 +1,16 @@
 ---
-title: "Sign-in Implementation"
+title: "Login Implementation"
 slug: "sign-in"
-excerpt: "Frontend and backend implementation guide for sign-in using SaaSus Authentication API"
+excerpt: "Frontend and backend implementation guide for login using SaaSus Platform Login API"
 hidden: false
 createdAt: "Tue Mar 03 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Mar 03 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Mar 05 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
-This document explains the implementation of sign-in functionality using the Authentication API sample application.
+This document explains the implementation of login functionality using the Login API sample application.
 
 :::info
-For an overview of the Authentication API and its flow, see [Authentication API Implementation Guide Overview](/docs/part-6/implementation-guide/auth/overview).
+For an overview of the Login API and its flow, see [Login API Implementation Guide Overview](/docs/part-6/implementation-guide/auth/overview).
 :::
 
 ## Frontend Implementation
@@ -118,17 +118,17 @@ After token storage is complete, navigate to the main page (e.g., user list page
 
 ## Backend Implementation
 
-The backend receives requests from the frontend, communicates with the SaaSus Auth API, and processes the sign-in flow.
+The backend receives requests from the frontend, communicates with the SaaSus Platform Auth API, and processes the login flow.
 
 ### POST /sign-in Endpoint
 
-Calls the SaaSus Auth API `/sign-in` using the email address (or ID) and password received from the frontend.
+Calls the SaaSus Platform Auth API `/sign-in` using the email address (or ID) and password received from the frontend.
 
 #### Processing Flow
 
 1. Extract email address (or ID) and password from the request body
 2. **ID/Email conversion**: If the input doesn't contain `@`, append a dummy domain to convert to email format
-3. Calculate SRP_A and call the SaaSus Auth API `/sign-in`
+3. Calculate SRP_A and call the SaaSus Platform Auth API `/sign-in`
 4. Return the challenge response (`PASSWORD_VERIFIER`, etc.) to the frontend
 
 ```go
@@ -146,7 +146,7 @@ func signIn(c echo.Context) error {
         email = req.Identifier + "@example.auth"
     }
 
-    // Call SaaSus Auth API /sign-in
+    // Call SaaSus Platform Auth API /sign-in
     // Calculates and sends SRP_A
     resp, err := authClient.SignIn(email, req.Password)
     if err != nil {
@@ -164,7 +164,7 @@ When using ID-based login, ensure the dummy domain matches the one used when reg
 
 ### POST /sign-in/challenge Endpoint
 
-Calls the SaaSus Auth API `/sign-in/challenge` using the challenge response received from the frontend. Processes are branched based on the challenge type.
+Calls the SaaSus Platform Auth API `/sign-in/challenge` using the challenge response received from the frontend. Processes are branched based on the challenge type.
 
 #### PASSWORD_VERIFIER Case
 
@@ -178,7 +178,7 @@ func signInChallenge(c echo.Context) error {
         return c.JSON(http.StatusBadRequest, map[string]string{"error": "invalid request"})
     }
 
-    // Call SaaSus Auth API /sign-in/challenge
+    // Call SaaSus Platform Auth API /sign-in/challenge
     resp, err := authClient.RespondToChallenge(req)
     if err != nil {
         return c.JSON(http.StatusUnauthorized, map[string]string{"error": "challenge failed"})
@@ -206,13 +206,13 @@ func signInChallenge(c echo.Context) error {
 
 #### NEW_PASSWORD_REQUIRED Case
 
-Handles the case where a password change is required on first login. Receives the new password and sends it to the SaaSus Auth API.
+Handles the case where a password change is required on first login. Receives the new password and sends it to the SaaSus Platform Auth API.
 
 ```go
 // New password setting handler
 // Called when challenge_name is NEW_PASSWORD_REQUIRED
 func handleNewPasswordRequired(c echo.Context, req ChallengeRequest) error {
-    // Send new password to SaaSus Auth API
+    // Send new password to SaaSus Platform Auth API
     resp, err := authClient.RespondToNewPasswordChallenge(
         req.Session,
         req.NewPassword,
@@ -339,7 +339,7 @@ const handleLogout = async () => {
 
 ## Summary
 
-This document explained the implementation of sign-in functionality using the SaaSus Authentication API. Key points:
+This document explained the implementation of login functionality using the SaaSus Platform Login API. Key points:
 
 - **SRP protocol-based two-step authentication flow**: Obtain a challenge via `/sign-in` and respond via `/sign-in/challenge`
 - **Hybrid ID/Email login**: Implement conversion logic with a dummy domain on the backend
