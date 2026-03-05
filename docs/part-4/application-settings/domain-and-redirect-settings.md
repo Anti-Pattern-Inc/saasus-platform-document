@@ -43,11 +43,6 @@ Please register all email sending CNAME records (there may be multiple) displaye
 
 ![CNAME Display](/img/part-4/application-settings/domain-and-redirect-settings/domain-name-preference-02.png)
 
-#### DNS Service Example
-For Value Domain, configure as follows:
-
-![DNS Configuration Example](/img/part-4/application-settings/domain-and-redirect-settings/domain-name-preference-03.png)
-
 #### Status Verification
 
 When DNS configuration is performed correctly, "Operating normally" will be displayed on the screen.
