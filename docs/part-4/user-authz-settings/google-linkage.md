@@ -4,7 +4,7 @@ slug: "google-linkage"
 excerpt: ""
 hidden: false
 createdAt: "Sun May 21 2023 05:12:10 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Wed Mar 05 2026 06:48:39 GMT+0000 (Coordinated Universal Time)"
 ---
 ## Summary Explanation
 
@@ -12,6 +12,7 @@ To incorporate Google linkage, it is necessary to create an OAuth client in your
 
 Google linkage procedure consists of:
 
+- Confirm that [domain settings](/docs/part-4/application-settings/domain-and-redirect-settings) are completed on SaaSus Platform
 - Creating OAuth Client in Google Cloud Platform
 - Linking Google Cloud Platform and SaaSus Platform account
 - Confirmation on Google Authentication Performance
@@ -127,7 +128,6 @@ We will confirm the operation of the 'Sign with Google' button displayed on the 
 
 ![google-linkage-15](/img/part-4/user-authz-settings/google-linkage/google-linkage-15.png)
 
-
 About 'Sign in with Google' operation:
 
 - Screen Displayed
@@ -138,6 +138,12 @@ About 'Sign in with Google' operation:
     If the account does not exist, an account will be created automatically and signed in.
   - If self-sign-up is not enabled  
     If the account does not exist, it will not sign in.
+
+:::warning warning
+If you encounter an error during login, it is possible that the domain settings have not been configured correctly.
+
+Please go to the Domain Settings screen in the SaaS development console and re-confirm that both the DNS record verification and SES (Email Sending Domain) authentication have been successfully completed.
+:::
 
 ## Application for Use
 

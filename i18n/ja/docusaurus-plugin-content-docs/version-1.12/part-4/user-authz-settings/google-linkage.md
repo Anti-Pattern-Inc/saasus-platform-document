@@ -4,7 +4,7 @@ slug: "google-linkage"
 excerpt: ""
 hidden: false
 createdAt: "Sun May 21 2023 05:12:10 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Wed Mar 05 2026 06:48:39 GMT+0000 (Coordinated Universal Time)"
 ---
 ## 概要説明
 
@@ -14,6 +14,7 @@ SaaSus Platformとの連携設定を行うことで、ログイン画面に「Go
 
 Google連携の手順
 
+- SaaSus Platformで[ドメインの設定](/ja/docs/part-4/application-settings/domain-and-redirect-settings) が完了していることを確認
 - Google Cloud PlatformのOAuthクライアント作成
 - Google Cloud PlatformとSaaSus Platformアカウントの連携
 - Google認証の動作確認
@@ -131,7 +132,6 @@ OAuthクライアントが作成されました
 
 ![google-linkage-15](/ja/img/part-4/user-authz-settings/google-linkage/google-linkage-15.png)
 
-
 「Googleでログイン」の動作について
 
 - 表示される画面
@@ -142,6 +142,12 @@ OAuthクライアントが作成されました
     アカウントが存在しない場合はアカウントが自動的に作成され、ログインされます
   - セルフサインアップを有効にしていない場合  
     アカウントが存在しない場合はログインされません
+
+:::warning 注意
+ログイン時にエラーが発生する場合、ドメインの設定が正しく完了していない可能性があります。
+
+SaaS開発コンソールのドメイン設定画面にて、DNSレコードの検証とSES（メール送信ドメイン）の認証が、どちらも正常に完了しているか再度ご確認ください。
+:::
 
 ### 利用申請
 
