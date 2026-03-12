@@ -2085,6 +2085,78 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  /device/confirm:
+    post:
+      tags:
+        - saasUser
+      operationId: ConfirmDevice
+      summary: デバイスの確認
+      description: |
+        デバイス記憶のためにデバイスを確認します。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConfirmDeviceParam"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConfirmDeviceResult"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /device/status:
+    post:
+      tags:
+        - saasUser
+      operationId: UpdateDeviceStatus
+      summary: デバイスステータスの更新
+      description: |
+        デバイスのステータスを更新します。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateDeviceStatusParam"
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
   /sign-in/challenge:
     post:
       tags:
@@ -3883,6 +3955,7 @@ components:
           type: string
           enum:
             - softwareToken
+            - email
       required:
         - enabled
     UpdateUserMfaPreferenceParam:
@@ -4332,4 +4405,100 @@ components:
             チャレンジのセッション識別子。
             もし次のチャレンジが必要な場合、このセッションを次回のRespondToSignInChallengeの呼び出しに渡す必要があります。
           type: string
+        new_device_metadata:
+          $ref: "#/components/schemas/NewDeviceMetadata"
+    NewDeviceMetadata:
+      title: 新規デバイスメタデータ
+      description: |
+        認証中に登録された新規デバイスのメタデータ。
+      type: object
+      properties:
+        device_key:
+          title: デバイスキー
+          description: デバイスキー識別子
+          type: string
+        device_group_key:
+          title: デバイスグループキー
+          description: デバイスグループキー識別子
+          type: string
+    DeviceSecretVerifierConfig:
+      title: デバイスシークレット検証設定
+      description: |
+        デバイスシークレット検証の設定。
+      type: object
+      properties:
+        password_verifier:
+          title: パスワード検証子
+          description: ユーザーデバイスのパスワード検証子。SRP認証に使用されます。
+          type: string
+        salt:
+          title: ソルト
+          description: ユーザーデバイスとのSRP認証に使用するソルト。
+          type: string
+    ConfirmDeviceParam:
+      title: デバイス確認パラメータ
+      description: |
+        デバイスを確認するために必要なパラメータ。
+      type: object
+      properties:
+        access_token:
+          title: アクセストークン
+          description: 有効なアクセストークン。
+          type: string
+        device_key:
+          title: デバイスキー
+          description: デバイスの一意識別子。
+          type: string
+        device_name:
+          title: デバイス名
+          description: デバイスのフレンドリー名。
+          type: string
+        device_secret_verifier_config:
+          $ref: "#/components/schemas/DeviceSecretVerifierConfig"
+      required:
+        - access_token
+        - device_key
+    ConfirmDeviceResult:
+      title: デバイス確認結果
+      description: |
+        デバイス確認後に返される結果。
+      type: object
+      properties:
+        user_confirmation_necessary:
+          title: ユーザー確認の要否
+          description: |
+            trueの場合、ユーザーがデバイスを記憶するか確認する必要があります。
+            falseの場合、デバイスは即座に記憶されます。
+          type: boolean
+      required:
+        - user_confirmation_necessary
+    DeviceRememberedStatus:
+      title: デバイス記憶ステータス
+      description: |
+        デバイスが記憶されているかどうかのステータス。
+        "remembered"はデバイス認証を有効にし、"not_remembered"は無効にします。
+      type: string
+      enum:
+        - remembered
+        - not_remembered
+    UpdateDeviceStatusParam:
+      title: デバイスステータス更新パラメータ
+      description: |
+        デバイスのステータスを更新するために必要なパラメータ。
+      type: object
+      properties:
+        access_token:
+          title: アクセストークン
+          description: 有効なアクセストークン。
+          type: string
+        device_key:
+          title: デバイスキー
+          description: デバイスの一意識別子。
+          type: string
+        device_remembered_status:
+          $ref: "#/components/schemas/DeviceRememberedStatus"
+      required:
+        - access_token
+        - device_key
+        - device_remembered_status
 
