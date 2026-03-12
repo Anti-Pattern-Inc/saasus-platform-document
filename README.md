@@ -52,6 +52,15 @@ i18n/ja/docusaurus-plugin-content-docs/current/
 
 とすることで、修正内容を最新バージョンと英語版に反映させることが出来ます
 
+※ ファイルを指定するばあいは、ファイルパスを指定してください
+
+```
+i18n/ja/docusaurus-plugin-content-docs/current/part-4/user-authz-settings/google-linkage.md
+ファイルを対象として英語版とバージョン1.12（英語、日本語）に反映して
+
+方法は以下を参考にして
+.clinerules/document-management-guide.md
+```
 ### Build
 
 ```
