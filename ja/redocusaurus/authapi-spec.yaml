@@ -2662,6 +2662,88 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /device/confirm:
+    post:
+      tags:
+        - saasUser
+      operationId: ConfirmDevice
+      summary: Confirm Device
+      x-summary-i18n:
+        jpn: デバイスの確認
+      description: |
+        Confirms a device for remembering.
+      x-description-i18n:
+        jpn: |
+          デバイス記憶のためにデバイスを確認します。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfirmDeviceParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfirmDeviceResult'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /device/status:
+    post:
+      tags:
+        - saasUser
+      operationId: UpdateDeviceStatus
+      summary: Update Device Status
+      x-summary-i18n:
+        jpn: デバイスステータスの更新
+      description: |
+        Updates the device status.
+      x-description-i18n:
+        jpn: |
+          デバイスのステータスを更新します。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDeviceStatusParam'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /sign-in/challenge:
     post:
       tags:
@@ -5155,6 +5237,7 @@ components:
           type: string
           enum:
             - softwareToken
+            - email
       required:
         - enabled
     UpdateUserMfaPreferenceParam:
@@ -5909,3 +5992,176 @@ components:
 
               もし次のチャレンジが必要な場合、このセッションを次回のRespondToSignInChallengeの呼び出しに渡す必要があります。
           type: string
+        new_device_metadata:
+          $ref: '#/components/schemas/NewDeviceMetadata'
+    NewDeviceMetadata:
+      title: New Device Metadata
+      x-title-i18n:
+        jpn: 新規デバイスメタデータ
+      description: |
+        Metadata for a new device registered during authentication.
+      x-description-i18n:
+        jpn: |
+          認証中に登録された新規デバイスのメタデータ。
+      type: object
+      properties:
+        device_key:
+          title: Device Key
+          x-title-i18n:
+            jpn: デバイスキー
+          description: Device key identifier
+          x-description-i18n:
+            jpn: デバイスキー識別子
+          type: string
+        device_group_key:
+          title: Device Group Key
+          x-title-i18n:
+            jpn: デバイスグループキー
+          description: Device group key identifier
+          x-description-i18n:
+            jpn: デバイスグループキー識別子
+          type: string
+    DeviceSecretVerifierConfig:
+      title: Device Secret Verifier Config
+      x-title-i18n:
+        jpn: デバイスシークレット検証設定
+      description: |
+        The configuration of the device secret verifier.
+      x-description-i18n:
+        jpn: |
+          デバイスシークレット検証の設定。
+      type: object
+      properties:
+        password_verifier:
+          title: Password Verifier
+          x-title-i18n:
+            jpn: パスワード検証子
+          description: A password verifier for a user's device. Used in SRP authentication.
+          x-description-i18n:
+            jpn: ユーザーデバイスのパスワード検証子。SRP認証に使用されます。
+          type: string
+        salt:
+          title: Salt
+          x-title-i18n:
+            jpn: ソルト
+          description: The salt for SRP authentication with the user's device.
+          x-description-i18n:
+            jpn: ユーザーデバイスとのSRP認証に使用するソルト。
+          type: string
+    ConfirmDeviceParam:
+      title: Confirm Device Parameters
+      x-title-i18n:
+        jpn: デバイス確認パラメータ
+      description: |
+        Parameters required to confirm a device.
+      x-description-i18n:
+        jpn: |
+          デバイスを確認するために必要なパラメータ。
+      type: object
+      properties:
+        access_token:
+          title: Access Token
+          x-title-i18n:
+            jpn: アクセストークン
+          description: A valid access token.
+          x-description-i18n:
+            jpn: 有効なアクセストークン。
+          type: string
+        device_key:
+          title: Device Key
+          x-title-i18n:
+            jpn: デバイスキー
+          description: The unique identifier of the device.
+          x-description-i18n:
+            jpn: デバイスの一意識別子。
+          type: string
+        device_name:
+          title: Device Name
+          x-title-i18n:
+            jpn: デバイス名
+          description: A friendly name for the device.
+          x-description-i18n:
+            jpn: デバイスのフレンドリー名。
+          type: string
+        device_secret_verifier_config:
+          $ref: '#/components/schemas/DeviceSecretVerifierConfig'
+      required:
+        - access_token
+        - device_key
+    ConfirmDeviceResult:
+      title: Confirm Device Result
+      x-title-i18n:
+        jpn: デバイス確認結果
+      description: |
+        Result returned after confirming a device.
+      x-description-i18n:
+        jpn: |
+          デバイス確認後に返される結果。
+      type: object
+      properties:
+        user_confirmation_necessary:
+          title: User Confirmation Necessary
+          x-title-i18n:
+            jpn: ユーザー確認の要否
+          description: >
+            When true, the user must confirm that they want to remember the
+            device.
+
+            When false, the device is immediately set as remembered.
+          x-description-i18n:
+            jpn: |
+              trueの場合、ユーザーがデバイスを記憶するか確認する必要があります。
+              falseの場合、デバイスは即座に記憶されます。
+          type: boolean
+      required:
+        - user_confirmation_necessary
+    DeviceRememberedStatus:
+      title: Device Remembered Status
+      x-title-i18n:
+        jpn: デバイス記憶ステータス
+      description: >
+        The status of whether a device is remembered.
+
+        "remembered" enables device authentication, "not_remembered" disables
+        it.
+      x-description-i18n:
+        jpn: |
+          デバイスが記憶されているかどうかのステータス。
+          "remembered"はデバイス認証を有効にし、"not_remembered"は無効にします。
+      type: string
+      enum:
+        - remembered
+        - not_remembered
+    UpdateDeviceStatusParam:
+      title: Update Device Status Parameters
+      x-title-i18n:
+        jpn: デバイスステータス更新パラメータ
+      description: |
+        Parameters required to update a device status.
+      x-description-i18n:
+        jpn: |
+          デバイスのステータスを更新するために必要なパラメータ。
+      type: object
+      properties:
+        access_token:
+          title: Access Token
+          x-title-i18n:
+            jpn: アクセストークン
+          description: A valid access token.
+          x-description-i18n:
+            jpn: 有効なアクセストークン。
+          type: string
+        device_key:
+          title: Device Key
+          x-title-i18n:
+            jpn: デバイスキー
+          description: The unique identifier of the device.
+          x-description-i18n:
+            jpn: デバイスの一意識別子。
+          type: string
+        device_remembered_status:
+          $ref: '#/components/schemas/DeviceRememberedStatus'
+      required:
+        - access_token
+        - device_key
+        - device_remembered_status
