@@ -4,7 +4,7 @@ slug: "procedure-for-applying-for-a-paid-plan"
 excerpt: ""
 hidden: false
 createdAt: "Thu Jul 20 2023 04:44:09 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Jan 09 2024 10:27:04 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Mar 13 2026 02:53:18 GMT+0000 (Coordinated Universal Time)"
 ---
 
 SaaSus Platformでは以下プランを現在用意しております。  
@@ -64,9 +64,9 @@ SaaSus Platformでは以下プランを現在用意しております。
       <td>スタンダード</td>
       <td className="text-right">¥100,000</td>
       <td className="text-right">3</td>
-      <td className="text-right">300</td>
+      <td className="text-right">5,000</td>
       <td className="text-right">20</td>
-      <td className="text-right">90 日</td>
+      <td className="text-right">1 年</td>
       <td className="text-right">1 個</td>
       <td>1万コールまでは無料<br />それ以降15円/1万コール</td>
       <td>7/day までは無料<br />それ以降50円/1回</td>
@@ -78,9 +78,9 @@ SaaSus Platformでは以下プランを現在用意しております。
       <td>スタンダードプラス</td>
       <td className="text-right">¥600,000</td>
       <td className="text-right">3</td>
-      <td className="text-right">300</td>
+      <td className="text-right">5,000</td>
       <td className="text-right">20</td>
-      <td className="text-right">90 日</td>
+      <td className="text-right">1 年</td>
       <td className="text-right">1 個</td>
       <td>1万コールまでは無料<br />それ以降15円/1万コール</td>
       <td>7/dayまでは無料<br />それ以降50円/1回</td>
