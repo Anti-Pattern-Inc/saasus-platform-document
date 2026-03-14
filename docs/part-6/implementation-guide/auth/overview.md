@@ -4,7 +4,7 @@ slug: "overview"
 excerpt: "Overview of implementing custom login UI using SaaSus Platform Login API"
 hidden: false
 createdAt: "Tue Mar 03 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Mar 05 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Wed Mar 11 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 This document provides an overview of implementing login functionality using the SaaSus Platform Login API with a custom login UI.
@@ -37,45 +37,47 @@ The Login API is based on a **two-step authentication flow** using the Secure Re
 
 ### Authentication Flow Overview
 
-```
-Frontend (React)            Backend (Go)               SaaSus Auth API
-     |                           |                           |
-     | 1. email + password       |                           |
-     |-------------------------->|                           |
-     |                           | 2. POST /sign-in          |
-     |                           |  (Calculate & send SRP_A) |
-     |                           |-------------------------->|
-     |                           |                           |
-     |                           | 3. Challenge response      |
-     |                           |  (PASSWORD_VERIFIER, etc.) |
-     |                           |<--------------------------|
-     | 4. Challenge parameters   |                           |
-     |<--------------------------|                           |
-     |                           |                           |
-     | 5. Send challenge response|                           |
-     |-------------------------->|                           |
-     |                           | 6. POST /sign-in/challenge |
-     |                           |-------------------------->|
-     |                           |                           |
-     |                           | 7. Return tokens          |
-     |                           |<--------------------------|
-     | 8. Tokens (Cookie)        |                           |
-     |<--------------------------|                           |
+```mermaid
+sequenceDiagram
+    actor U as User
+    participant F as Frontend(React)
+    participant B as Backend(Go)
+    participant A as SaaSus Platform Auth API
+
+    U->>F: Input email & password
+    Note over F: Generate SRP_A
+    
+    rect rgba(232, 245, 233, 1)
+      F->>B: 1. Start sign-in (Send SRP_A)
+      Note right of F: *Password is NOT sent
+      B->>A: 2. POST /sign-in (SRP_A)
+      A-->>B: 3. Return challenge info (SRP_B, SALT, etc.)
+      B-->>F: 4. Forward challenge info
+    end
+
+    Note over F: Generate signature<br/>(PASSWORD_CLAIM_SIGNATURE)
+
+    rect rgba(232, 245, 233, 1)
+      F->>B: 5. Send signature
+      B->>A: 6. POST /sign-in/challenge (Signature)
+      A-->>B: 7. Return tokens
+      B-->>F: 8. Return tokens (HttpOnly Cookie)
+    end
 ```
 
 ### Flow Details
 
-1. **Authentication Start**: The frontend sends the email address (or ID) and password to the backend.
-2. **SRP Calculation**: The backend calculates SRP_A and calls the SaaSus Auth API `/sign-in`.
-3. **Challenge Received**: A challenge (e.g., `PASSWORD_VERIFIER`) is returned from the SaaSus Auth API.
-4. **Challenge Forwarded**: The backend returns the challenge parameters to the frontend.
-5. **Challenge Response**: The frontend sends the challenge response (e.g., `PASSWORD_CLAIM_SIGNATURE`) to the backend.
-6. **Challenge Verification**: The backend calls the SaaSus Auth API `/sign-in/challenge`.
-7. **Token Issued**: Upon successful authentication, ID token, access token, and refresh token are returned.
+1. **Authentication Start**: Enter the email address (or ID) and password on the frontend, generate SRP_A, and send it to the backend (the password is **not** sent).
+2. **Challenge Info Acquisition**: The backend sends SRP_A to the SaaSus Platform Auth API's `/sign-in`.
+3. **Challenge Info Received**: Challenge information (SRP_B, SALT, SECRET_BLOCK, etc.) is returned from the SaaSus Platform Auth API to the backend.
+4. **Challenge Info Forwarded**: The backend returns the challenge information to the frontend.
+5. **Signature Generation and Transmission**: The frontend generates a signature (`PASSWORD_CLAIM_SIGNATURE`, etc.) using the received challenge information and sends it to the backend.
+6. **Verification Request**: The backend sends the signature and challenge information to the SaaSus Platform Auth API's `/sign-in/challenge`.
+7. **Token Issuance**: Upon successful authentication, ID token, access token, and refresh token are returned to the backend.
 8. **Token Storage**: The backend returns the tokens to the frontend via HttpOnly Cookies.
 
 :::info Benefits of SRP Protocol
-The SRP (Secure Remote Password) protocol never transmits the password in plaintext over the network. Authentication is performed through hashing and SRP calculations, making it secure even against man-in-the-middle attacks. Since completing SRP calculations on the frontend alone is complex, a backend-mediated architecture for SaaSus API communication is recommended.
+The SRP (Secure Remote Password) protocol never transmits the password in plaintext over the network. Authentication is performed through hashing and SRP calculations, making it secure even against man-in-the-middle attacks. Since completing SRP calculations on the frontend alone is complex, this sample application demonstrates an architecture where the frontend handles SRP_A and signature generation, while the backend mediates communication with the SaaSus Platform API.
 :::
 
 ### Challenge Types and Branching Logic
