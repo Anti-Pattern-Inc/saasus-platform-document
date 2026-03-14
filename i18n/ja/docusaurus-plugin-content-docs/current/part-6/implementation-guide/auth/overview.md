@@ -4,7 +4,7 @@ slug: "overview"
 excerpt: "SaaSus Platform ログインAPIを使った独自ログイン画面の実装概要"
 hidden: false
 createdAt: "Tue Mar 03 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Mar 05 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Wed Mar 11 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 SaaSus Platform ログインAPIを使って、独自のログイン画面からログイン処理を実装するための概要を説明します。
@@ -37,45 +37,47 @@ SaaSus Platform 標準ログイン画面を利用せず、自社ブランドの 
 
 ### 認証フロー概要
 
-```
-Frontend (React)            Backend (Go)               SaaSus Platform Auth API
-     |                           |                           |
-     | 1. email + password       |                           |
-     |-------------------------->|                           |
-     |                           | 2. POST /sign-in          |
-     |                           |  (SRP_A を計算して送信)     |
-     |                           |-------------------------->|
-     |                           |                           |
-     |                           | 3. チャレンジレスポンス      |
-     |                           |  (PASSWORD_VERIFIER 等)    |
-     |                           |<--------------------------|
-     | 4. チャレンジパラメータ     |                           |
-     |<--------------------------|                           |
-     |                           |                           |
-     | 5. チャレンジレスポンス送信  |                           |
-     |-------------------------->|                           |
-     |                           | 6. POST /sign-in/challenge |
-     |                           |-------------------------->|
-     |                           |                           |
-     |                           | 7. トークン返却            |
-     |                           |<--------------------------|
-     | 8. トークン (Cookie)      |                           |
-     |<--------------------------|                           |
+```mermaid
+sequenceDiagram
+    actor U as ユーザー
+    participant F as フロントエンド(React)
+    participant B as バックエンド(Go)
+    participant A as SaaSus Platform Auth API
+
+    U->>F: メールアドレス・パスワード入力
+    Note over F: SRP_A を生成
+    
+    rect rgba(232, 245, 233, 1)
+      F->>B: 1. サインイン開始 (SRP_A を送信)
+      Note right of F: ※パスワードは送信しない
+      B->>A: 2. POST /sign-in (SRP_A)
+      A-->>B: 3. チャレンジ情報返却 (SRP_B, SALT 等)
+      B-->>F: 4. チャレンジ情報を転送
+    end
+
+    Note over F: 署名(PASSWORD_CLAIM_SIGNATURE)を生成
+
+    rect rgba(232, 245, 233, 1)
+      F->>B: 5. 署名を送信
+      B->>A: 6. POST /sign-in/challenge (署名)
+      A-->>B: 7. トークン発行
+      B-->>F: 8. トークンを返却 (HttpOnly Cookie)
+    end
 ```
 
 ### フローの詳細
 
-1. **認証開始**: フロントエンドからバックエンドにメールアドレス（または ID）とパスワードを送信します。
-2. **SRP 計算**: バックエンドが SRP_A を計算し、SaaSus Platform Auth API の `/sign-in` を呼び出します。
-3. **チャレンジ受信**: SaaSus Platform Auth API からチャレンジ（`PASSWORD_VERIFIER` など）が返されます。
-4. **チャレンジ転送**: バックエンドがチャレンジパラメータをフロントエンドに返却します。
-5. **チャレンジ応答**: フロントエンドがチャレンジレスポンス（`PASSWORD_CLAIM_SIGNATURE` など）をバックエンドに送信します。
-6. **チャレンジ検証**: バックエンドが SaaSus Platform Auth API の `/sign-in/challenge` を呼び出します。
-7. **トークン発行**: 認証成功時、ID トークン・アクセストークン・リフレッシュトークンが返却されます。
+1. **認証開始**: フロントエンドでメールアドレス（または ID）とパスワードを入力し、SRP_A を生成してバックエンドに送信します（パスワードは送信しません）。
+2. **チャレンジ情報取得**: バックエンドが SRP_A を SaaSus Platform Auth API の `/sign-in` に送信します。
+3. **チャレンジ情報受信**: SaaSus Platform Auth API からチャレンジ情報（SRP_B, SALT, SECRET_BLOCK など）がバックエンドに返されます。
+4. **チャレンジ情報転送**: バックエンドがチャレンジ情報をフロントエンドに返却します。
+5. **署名生成と送信**: フロントエンドが署名（`PASSWORD_CLAIM_SIGNATURE` など）を生成し、バックエンドに送信します。
+6. **検証の依頼**: バックエンドが署名とチャレンジ情報を SaaSus Platform Auth API の `/sign-in/challenge` に送信します。
+7. **トークン発行**: 認証成功時、ID トークン・アクセストークン・リフレッシュトークンがバックエンドに返却されます。
 8. **トークン保存**: バックエンドが HttpOnly Cookie でトークンをフロントエンドに返します。
 
 :::info SRP プロトコルのメリット
-SRP（Secure Remote Password）プロトコルでは、パスワードそのものをネットワーク上に平文で送信しません。ハッシュ化や SRP 計算を通じて認証を行うため、中間者攻撃に対してもセキュアな認証が実現できます。フロントエンドだけで SRP 計算を完結させるのは複雑なため、バックエンドが SaaSus Platform API との通信を仲介する構成が推奨されます。
+SRP（Secure Remote Password）プロトコルでは、パスワードそのものをネットワーク上に平文で送信しません。ハッシュ化や SRP 計算を通じて認証を行うため、中間者攻撃に対してもセキュアな認証が実現できます。フロントエンドだけで SRP 計算を完結させるのは複雑なため、本サンプルアプリケーションでは、フロントエンドで SRP_A や署名の生成を行い、バックエンドが SaaSus Platform API との通信を仲介する構成をとっています。
 :::
 
 ### チャレンジの種類と分岐処理
