@@ -4,7 +4,7 @@ slug: "billing"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Mar 27 2026 13:30:30 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Mar 27 2026 14:04:44 GMT+0000 (Coordinated Universal Time)"
 ---
 
 **Q. What is the "Calculation Method" setting (sum/max) for meter units?**  
