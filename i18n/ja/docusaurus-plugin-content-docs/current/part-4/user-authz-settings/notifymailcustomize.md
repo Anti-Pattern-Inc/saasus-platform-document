@@ -4,7 +4,7 @@ slug: "notifymailcustomize"
 excerpt: ""
 hidden: false
 createdAt: "Tue Dec 12 2023 05:46:38 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Dec 21 2023 02:21:05 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Mar 27 2026 07:03:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 <a href="https://settings.console.saasus.io/customize" target="_blank">認証詳細設定画面</a>の通知メール内容タブでは、ログイン画面などの認証系ページでユーザーに送信するメールをカスタマイズすることができます。
@@ -19,6 +19,7 @@ updatedAt: "Thu Dec 21 2023 02:21:05 GMT+0000 (Coordinated Universal Time)"
   <thead>
     <tr>
       <th>No</th>
+      <th>※ 1</th>
       <th>メールタイプ</th>
       <th>名前</th>
       <th>送信条件(API等)</th>
@@ -29,14 +30,16 @@ updatedAt: "Thu Dec 21 2023 02:21:05 GMT+0000 (Coordinated Universal Time)"
   <tbody>
     <tr>
       <td>1</td>
+      <td>⚪︎</td>
       <td><strong>signUp</strong></td>
-      <td>ユーザー登録通知</td>
+      <td>新規登録時の仮パスワード送信メール<br />(signUp)</td>
       <td>`SignUp`<br />`createUser`</td>
       <td>`{username}` ユーザーID<br />`{####}` 仮パスワード</td>
       <td>-</td>
     </tr>
     <tr>
       <td>2</td>
+      <td>×</td>
       <td><strong>createUser</strong></td>
       <td>(利用不可)ユーザー作成通知</td>
       <td></td>
@@ -45,22 +48,25 @@ updatedAt: "Thu Dec 21 2023 02:21:05 GMT+0000 (Coordinated Universal Time)"
     </tr>
     <tr>
       <td>3</td>
+      <td>⚪︎</td>
       <td><strong>resendCode</strong></td>
-      <td>ユーザー登録再送信通知</td>
+      <td>新規登録時の仮パスワード再送メール<br />(resendCode)</td>
       <td>`ResendSignUpConfirmationEmail`</td>
       <td>`{username}` ユーザーID<br />`{####}` 仮パスワード</td>
       <td>-</td>
     </tr>
     <tr>
       <td>4</td>
+      <td>⚪︎</td>
       <td><strong>forgotPassword</strong></td>
-      <td>パスワードリセット通知</td>
+      <td>パスワードリセット用の検証コード送信メール<br />(forgotPassword)</td>
       <td>ログイン画面からパスワードを忘れた方はこちら</td>
       <td>`{####}` リセットコード</td>
       <td>-</td>
     </tr>
     <tr>
       <td>5</td>
+      <td>×</td>
       <td><strong>verifyUserAttribute</strong></td>
       <td>(利用不可)ユーザー属性検証通知</td>
       <td></td>
@@ -69,6 +75,7 @@ updatedAt: "Thu Dec 21 2023 02:21:05 GMT+0000 (Coordinated Universal Time)"
     </tr>
     <tr>
       <td>6</td>
+      <td>×</td>
       <td><strong>authenticationMfa</strong></td>
       <td>MFA認証通知</td>
       <td>`UpdateUserMfaPreference` を利用して<br />"method"="email" に設定後ログインする</td>
@@ -77,6 +84,7 @@ updatedAt: "Thu Dec 21 2023 02:21:05 GMT+0000 (Coordinated Universal Time)"
     </tr>
     <tr>
       <td>7</td>
+      <td>×</td>
       <td><strong>updateUserAttribute</strong></td>
       <td>ユーザー属性更新通知</td>
       <td>`RequestEmailUpdate`</td>
@@ -85,6 +93,7 @@ updatedAt: "Thu Dec 21 2023 02:21:05 GMT+0000 (Coordinated Universal Time)"
     </tr>
     <tr>
       <td>8</td>
+      <td>×</td>
       <td><strong>inviteTenantUser</strong></td>
       <td>テナントユーザー招待通知</td>
       <td>`CreateTenantInvitation`</td>
@@ -93,6 +102,7 @@ updatedAt: "Thu Dec 21 2023 02:21:05 GMT+0000 (Coordinated Universal Time)"
     </tr>
     <tr>
       <td>9</td>
+      <td>×</td>
       <td><strong>verifyExternalUser</strong></td>
       <td>外部ユーザー検証通知</td>
       <td>`RequestExternalUserLink`</td>
@@ -101,11 +111,17 @@ updatedAt: "Thu Dec 21 2023 02:21:05 GMT+0000 (Coordinated Universal Time)"
     </tr>
   </tbody>
 </table>
+※ 1: ⚪︎は、<a href="https://settings.console.saasus.io/customize" target="_blank">認証詳細設定画面</a>の通知メール内容タブで件名と本文を編集できます。<br />
+　　 ×は<a href="https://docs.saasus.io/ja/docs/reference/auth-api#tag/basicInfo/operation/UpdateNotificationMessages" target="_blank">通知メールテンプレートを更新API</a>を利用して直接変更する必要があります。<br />
 </div>
 
 ## メール本文のカスタマイズ方法
 
-### ユーザー登録通知メール (signUp)
+### 新規登録時の仮パスワード送信メール (signUp)
+
+:::info 情報
+本項目はSaaS運用コンソールにてカスタマイズが可能です。カスタマイズ方法の詳細は<a href="https://settings.console.saasus.io/customize" target="_blank">認証詳細設定画面</a>の通知メール内容タブをご確認ください。
+:::
 
 `{####}` と `{username}` という文字列が必要になります。
 
@@ -141,7 +157,11 @@ updatedAt: "Thu Dec 21 2023 02:21:05 GMT+0000 (Coordinated Universal Time)"
 
 ```
 
-### ユーザー登録再送信メール (resendCode)
+### 新規登録時の仮パスワード再送メール (resendCode)
+
+:::info 情報
+本項目はSaaS運用コンソールにてカスタマイズが可能です。カスタマイズ方法の詳細は<a href="https://settings.console.saasus.io/customize" target="_blank">認証詳細設定画面</a>の通知メール内容タブをご確認ください。
+:::
 
 `{####}` と `{username}` という文字列が必要になります。
 
@@ -177,7 +197,11 @@ updatedAt: "Thu Dec 21 2023 02:21:05 GMT+0000 (Coordinated Universal Time)"
 ※このメールは自動送信されています。
 ```
 
-### パスワードリセットメール (forgotPassword)
+### パスワードリセット用の検証コード送信メール (forgotPassword)
+
+:::info 情報
+本項目はSaaS運用コンソールにてカスタマイズが可能です。カスタマイズ方法の詳細は<a href="https://settings.console.saasus.io/customize" target="_blank">認証詳細設定画面</a>の通知メール内容タブをご確認ください。
+:::
 
 `{####}` と `{username}` という文字列が必要になります。
 
@@ -209,7 +233,11 @@ updatedAt: "Thu Dec 21 2023 02:21:05 GMT+0000 (Coordinated Universal Time)"
 リセット画面: https://auth.your.domain/recover-password-confirm
 ```
 
-### MFA認証メール (authenticationMfa)
+### MFA認証通知 (authenticationMfa)
+
+:::warning 警告
+本設定を行うには<a href="https://docs.saasus.io/ja/docs/reference/auth-api#tag/basicInfo/operation/UpdateNotificationMessages" target="_blank">通知メールテンプレートを更新API</a>を利用して直接更新する必要があります。
+:::
 
 `{####}` と `{username}` という文字列が必要になります。
 
@@ -241,7 +269,11 @@ updatedAt: "Thu Dec 21 2023 02:21:05 GMT+0000 (Coordinated Universal Time)"
 ※このコードを他人に教えないでください
 ```
 
-### ユーザー属性更新確認メール (updateUserAttribute)
+### ユーザー属性更新通知 (updateUserAttribute)
+
+:::warning 警告
+本設定を行うには<a href="https://docs.saasus.io/ja/docs/reference/auth-api#tag/basicInfo/operation/UpdateNotificationMessages" target="_blank">通知メールテンプレートを更新API</a>を利用して直接更新する必要があります。
+:::
 
 `{####}` という文字列が必要になります。
 
@@ -279,7 +311,11 @@ updatedAt: "Thu Dec 21 2023 02:21:05 GMT+0000 (Coordinated Universal Time)"
 ・メールアドレスの変更
 ```
 
-### テナントユーザー招待メール (inviteTenantUser)
+### テナントユーザー招待通知 (inviteTenantUser)
+
+:::warning 警告
+本設定を行うには<a href="https://docs.saasus.io/ja/docs/reference/auth-api#tag/basicInfo/operation/UpdateNotificationMessages" target="_blank">通知メールテンプレートを更新API</a>を利用して直接更新する必要があります。
+:::
 
 `{tenant_name}` と `{invitation_url}` という文字列が必要になります。また、件名では `{tenant_name}` が使用可能です。
 
@@ -330,7 +366,11 @@ ABC株式会社 のメンバーとしてあなたをお招きいたします。
 ご質問がございましたら、招待者またはサポートまでお問い合わせください。
 ```
 
-### 外部ユーザー検証メール (verifyExternalUser)
+### 外部ユーザー検証通知 (verifyExternalUser)
+
+:::warning 警告
+本設定を行うには<a href="https://docs.saasus.io/ja/docs/reference/auth-api#tag/basicInfo/operation/UpdateNotificationMessages" target="_blank">通知メールテンプレートを更新API</a>を利用して直接更新する必要があります。
+:::
 
 `{####}` という文字列が必要になります。
 
