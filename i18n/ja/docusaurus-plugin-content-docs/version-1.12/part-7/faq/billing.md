@@ -4,7 +4,7 @@ slug: "billing"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Mar 27 2026 14:04:44 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Sun Mar 30 2026 05:30:44 GMT+0000 (Coordinated Universal Time)"
 ---
 
 **Q. メータ単位の「使用量の集計」設定（sum/max）はどのような機能でしょうか？**  
@@ -213,3 +213,8 @@ A. SaaSus Platform では、Stripe の機能を利用した日割り計算（プ
 **Q. 利用実績がない従量課金メニュー（0円）を、Stripe の請求書から非表示にすることはできますか？**
 
 A. いいえ、現在の SaaSus Platform および連携先の Stripe の仕様により、利用がない項目（0円）を請求書から非表示にすることはできません。
+
+---
+
+**Q. 年次契約のプランに、月額固定のオプションや従量課金（使用量ユニット）を組み合わせることはできますか？**  
+A. 請求の透明性と一貫性を保つため、SaaSus Platform（および連携するStripe）では、1つのサブスクリプション内で異なる請求サイクル（年次と月次など）を組み合わせることはできません。
