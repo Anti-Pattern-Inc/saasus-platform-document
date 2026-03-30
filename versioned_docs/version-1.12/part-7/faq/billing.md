@@ -4,7 +4,7 @@ slug: "billing"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Sun Mar 30 2026 05:30:44 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Sun Mar 30 2026 05:47:46 GMT+0000 (Coordinated Universal Time)"
 ---
 
 **Q. What is the "Calculation Method" setting (sum/max) for meter units?**  
@@ -72,13 +72,21 @@ A. No, these irregular operations and individual responses need to be handled di
 
 A. Data inconsistency may have occurred between SaaSus Platform and Stripe. Particularly when resources are directly manipulated from the Stripe console, errors can occur due to the following causes:
 
- - **Duplicate meter (measurement item) names**  
+- **Main Causes**
+
+  - **Duplicate meter (measurement item) names**
 If a meter name you are trying to define in SaaSus Platform (e.g., project_count) already exists with the same name on the Stripe side, plan creation will fail. In this case, please delete the corresponding meter on the Stripe side or try creating a different meter name on SaaSus Platform.
 
- - **Impact of direct operations in Stripe**  
+  - **Impact of direct operations in Stripe**
 If you directly create subscriptions, set coupons, or initialize plans from the Stripe management console without going through SaaSus Platform, synchronization between the two systems may not work correctly.
 
- - **Recommended operations**  
+- **Solution**
+To resolve data inconsistencies, you may need to disconnect and reconnect the Stripe integration. This allows you to attempt synchronization with the correct status again.
+:::warning Important Notice for Production Environments
+When disconnecting and reconnecting in a production environment, please be careful as it may affect existing customer data and billing status.
+:::
+
+- **Recommended Operations**
 To prevent configuration inconsistencies, we recommend performing operations such as defining pricing plans and meters and managing subscriptions from the SaaSus Development Console whenever possible.
 
 ---
