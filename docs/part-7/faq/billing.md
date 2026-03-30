@@ -4,7 +4,7 @@ slug: "billing"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Feb 05 2026 10:18:42 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Mar 27 2026 10:18:13 GMT+0000 (Coordinated Universal Time)"
 ---
 
 **Q. What is the "Calculation Method" setting (sum/max) for meter units?**  
@@ -67,3 +67,6 @@ A. No, these irregular operations and individual responses need to be handled di
 - **Coupons (discounts)**: Individual discounts for specific tenants should be linked to the target Customer or subscription from the Stripe dashboard.
 
 ---
+
+**Q. Can annual contract plans be combined with monthly fixed options or usage-based charges (usage units)?**
+A. To maintain billing transparency and consistency, SaaSus Platform (and its integrated Stripe) cannot combine different billing cycles (such as annual and monthly) within a single subscription.
