@@ -213,3 +213,8 @@ When changing plans using the [Update Tenant Plan Information API](https://docs.
 **Q. Can unused pay-as-you-go menu items (0 yen) be hidden from Stripe invoices?**
 
 A. No, due to the current specifications of SaaSus Platform and the integrated Stripe, items with no usage (0 yen) cannot be hidden from invoices.
+
+---
+
+**Q. Can annual contract plans be combined with monthly fixed options or usage-based charges (usage units)?**
+A. To maintain billing transparency and consistency, SaaSus Platform (and its integrated Stripe) cannot combine different billing cycles (such as annual and monthly) within a single subscription.
