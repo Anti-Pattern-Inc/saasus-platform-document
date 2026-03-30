@@ -4,7 +4,7 @@ slug: "saasus-platform"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Mar 27 2026 10:36:11 GMT+0000 (Coordinated Universal Time)"
 ---
 
 **Q. What countermeasures are available when the service goes down?  
@@ -148,7 +148,23 @@ When authentication failures continue for a certain number of times, the account
 The specific number of attempts is not disclosed, but the lockout period is automatically adjusted according to the number of unauthorized attempts, and is usually automatically released after a certain period of time.  
 To prevent long-term lockouts, please use the password reset function if you are unsure of the correct password.
 
+---
 
+**Q. Please tell me the recommended configuration for improving API response speed.**  
+A. SaaSus Platform currently provides services in **ap-northeast-1 (Tokyo Region)**. To maximize performance, we recommend deploying your application servers in the same Tokyo region.
 
+ - Optimization through region matching  
+ By placing your application servers and SaaSus Platform in the same Tokyo region, you can minimize network latency (communication delay) due to physical distance and achieve high-speed responses.
 
+ - About connections from overseas regions  
+ When calling SaaSus APIs from overseas regions such as us-west-2 (US West), delays due to geographical distance may occur and affect user experience.  
+ For services targeting users in Japan, please consider operating in the Tokyo region.
 
+---
+
+**Q. Can SaaSus Platform be used as an IDP (Identity Provider)?**  
+A. SaaSus Platform is an authentication and authorization platform specialized for SaaS development and operations, and plays a role in integrating authentication by linking with external IDPs.  
+Therefore, SaaSus itself does not have the function to provide authentication information to other services as an IDP, but it is possible to implement single sign-on (SSO) by linking with external IDPs such as Microsoft Entra ID (formerly Azure AD).
+
+ - External IDP integration features  
+Microsoft Entra ID and Google can be connected using SAML integration or OIDC (OpenID Connect) to provide end users with a secure and seamless login experience.
