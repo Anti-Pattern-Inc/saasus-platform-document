@@ -6,8 +6,8 @@
 <title data-rh="true">SaaSus Platform関連のFAQ | SaaSus Platform Document</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docs.saasus.io/img/logo.png"><meta data-rh="true" name="twitter:image" content="https://docs.saasus.io/img/logo.png"><meta data-rh="true" property="og:url" content="https://docs.saasus.io/ja/docs/part-7/faq/saasus-platform"><meta data-rh="true" property="og:locale" content="ja"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="ja"><meta data-rh="true" name="docsearch:language" content="ja"><meta data-rh="true" name="og:type" content="website"><meta data-rh="true" name="og:site_name" content="SaaSus Platform Documentation"><meta data-rh="true" name="og:title" content="SaaSus Platform Documentation"><meta data-rh="true" name="og:description" content="Official documentation for SaaSus Platform"><meta data-rh="true" name="og:url" content="https://docs.saasus.io/"><meta data-rh="true" name="og:image" content="https://docs.saasus.io/img/logo.png"><meta data-rh="true" name="docusaurus_version" content="1.12"><meta data-rh="true" name="docusaurus_tag" content="docs-default-1.12"><meta data-rh="true" name="docsearch:version" content="1.12"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-1.12"><meta data-rh="true" property="og:title" content="SaaSus Platform関連のFAQ | SaaSus Platform Document"><meta data-rh="true" name="description" content="Q. サービスが停止した時の対策として、どのような対応が可能でしょうか？"><meta data-rh="true" property="og:description" content="Q. サービスが停止した時の対策として、どのような対応が可能でしょうか？"><link data-rh="true" rel="icon" href="/ja/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.saasus.io/ja/docs/part-7/faq/saasus-platform"><link data-rh="true" rel="alternate" href="https://docs.saasus.io/ja/docs/part-7/faq/saasus-platform" hreflang="ja"><link data-rh="true" rel="alternate" href="https://docs.saasus.io/docs/part-7/faq/saasus-platform" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.saasus.io/docs/part-7/faq/saasus-platform" hreflang="x-default"><link rel="preconnect" href="https://www.googletagmanager.com">
 <script>window.dataLayer=window.dataLayer||[]</script>
 <script>!function(e,t,a,n){e[n]=e[n]||[],e[n].push({"gtm.start":(new Date).getTime(),event:"gtm.js"});var g=t.getElementsByTagName(a)[0],m=t.createElement(a);m.async=!0,m.src="https://www.googletagmanager.com/gtm.js?id=GTM-5T68ML2",g.parentNode.insertBefore(m,g)}(window,document,"script","dataLayer")</script><link rel="stylesheet" href="/ja/assets/css/styles.1dba29be.css">
-<script src="/ja/assets/js/runtime~main.c2117ead.js" defer="defer"></script>
-<script src="/ja/assets/js/main.dd76abfd.js" defer="defer"></script>
+<script src="/ja/assets/js/runtime~main.191bb482.js" defer="defer"></script>
+<script src="/ja/assets/js/main.0ccfc204.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5T68ML2" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -138,28 +138,166 @@
 <!-- -->A. セキュリティ強化のため、パスワードを複数回連続して間違えると、アカウントが一時的にロックされます。</p>
 <ul>
 <li>
-<p>パスワードが間違っている場合
-認証リクエストに対して、Incorrect username or password. という結果が返されます。この時点ではまだアカウントはロックされていません。</p>
+<p><strong>パスワードが間違っている場合</strong><br>
+<!-- -->認証リクエストに対して、Incorrect username or password. という結果が返されます。この時点ではまだアカウントはロックされていません。</p>
 </li>
 <li>
-<p>パスワードの試行回数を超過した場合
-認証失敗が一定回数続くと、セキュリティ上の理由からアカウントがロックされます。この状態では、認証リクエストに対してPassword attempts exceededという結果が返され、サインインができなくなります。</p>
+<p><strong>パスワードの試行回数を超過した場合</strong><br>
+<!-- -->認証失敗が一定回数続くと、セキュリティ上の理由からアカウントがロックされます。この状態では、認証リクエストに対してPassword attempts exceededという結果が返され、サインインができなくなります。</p>
 </li>
 </ul>
 <p>具体的な試行回数は公開していませんが、ロックアウトの期間は不正な試行回数に応じて自動的に調整され、通常は一定時間が経過すると自動的に解除されます。<br>
 <!-- -->長時間のロックアウトを防ぐため、正しいパスワードがご不明な場合は、パスワードリセット機能をご利用ください。</p>
 <hr>
+<p><strong>Q. Google などの外部 ID プロバイダ連携を設定しましたが、ログイン時にエラーが発生します。</strong></p>
+<p>A. 外部 ID プロバイダを利用した認証を行うには、セキュリティおよび信頼性確保のため、**「ドメイン設定」**と **「メール送信設定（SES）」**の両方の検証が完了している必要があります。 以下の設定状況をご確認ください。</p>
+<ul>
+<li>
+<p><strong>ドメインの検証ステータス</strong><br>
+<!-- -->[基本設定] ＞ [ドメイン] 画面にて、登録されているドメインのステータスが <strong>「有効（検証済み）」</strong>、 <strong>「独自ドメインによる認証メールの配信 が有効になっています。」</strong> になっているかご確認ください。<br>
+<!-- -->未検証の場合は、表示されている DNS レコードをお使いの DNS サーバー（AWS Route 53 など）に正しく設定し、検証を完了させる必要があります。</p>
+</li>
+<li>
+<p><strong>設定反映までの待ち時間</strong><br>
+<!-- -->DNS 設定および独自ドメインによる認証メール配信の有効化には、システム内での処理とネットワークへの浸透のため、最大で 2〜3 日ほどお時間をいただく場合がございます。<br>
+<!-- -->コンソール上に <strong>「独自ドメインによる認証メールの配信が有効になっています」</strong> と表示されるまで、今しばらくお待ちください。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q. ローカル開発環境（localhost）で Google ログインなどの動作確認を行うことはできますか？</strong></p>
+<p>A. はい、可能です。本番ドメインの設定（検証）が完了していれば、コールバック先をローカル環境の URL に指定することで動作を確認いただけます。</p>
+<ul>
+<li><strong>コールバック URL の追加設定</strong><br>
+<!-- -->[認証設定] ＞ [外部IDプロバイダ連携] の編集画面にて、コールバック URL にローカル環境の URL（例: <code>http://localhost:3000/callback</code>）を追加してください。</li>
+</ul>
+<hr>
 <p><strong>Q. APIのレスポンス速度を向上させるための推奨構成を教えてください。</strong><br>
 <!-- -->A. SaaSus Platformは現在、<strong>ap-northeast-1（東京リージョン）</strong> でサービスを提供しております。パフォーマンスを最大限に引き出すため、お客様のアプリケーションサーバーも同じ東京リージョンにデプロイしていただく構成を推奨しております。</p>
 <ul>
 <li>
-<p>リージョンの一致による最適化<br>
+<p><strong>リージョンの一致による最適化</strong><br>
 <!-- -->アプリケーションサーバーとSaaSus Platformを同じ東京リージョンに配置することで、物理的な距離によるネットワークレイテンシ（通信遅延）を最小限に抑え、高速なレスポンスを実現できます。</p>
 </li>
 <li>
-<p>海外リージョンからの接続について<br>
+<p><strong>海外リージョンからの接続について</strong><br>
 <!-- -->us-west-2（米国西部）などの海外リージョンからSaaSus APIを呼び出す場合、地理的な距離に起因する遅延が発生し、ユーザーエクスペリエンスに影響を与える可能性があります。<br>
 <!-- -->日本国内のユーザーを対象とするサービスの場合は、東京リージョンでの運用をご検討ください。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q. 外部サービスとの連携を解除する機能を実装する際の注意点はありますか？</strong></p>
+<p>A. 外部連携の解除には <a href="https://docs.saasus.io/ja/docs/reference/auth-api#tag/saasUser/operation/UnlinkProvider" target="_blank" rel="noopener noreferrer">Unlink Provider API</a> を使用します。ユーザー自身が連携解除をリクエストする画面などで、IDトークンから現在の連携ステータスを判定し、ボタンの表示・非表示を切り替えるような実装を推奨しております。</p>
+<hr>
+<p><strong>Q. ログイン中のユーザーが Google などの外部サービスと連携済みかどうかを判定する方法はありますか？</strong></p>
+<p>A. 認証時に取得できる IDトークン（idToken）をデコード することで、連携済みの外部プロバイダ情報を確認することが可能です。<br>
+<!-- -->デコードした IDトークン内の identities フィールドに連携情報が含まれています。<br>
+<!-- -->providerName というフィールドに &quot;Google&quot; などのプロバイダ名が含まれている場合、そのアカウントは外部サービスと連携済みであると判定できます。</p>
+<hr>
+<p><strong>Q. 開発効率向上のため、IDトークンの有効期限を延長する設定はありますか？</strong></p>
+<p>A. セキュリティ上の理由から、IDトークン自体の有効期限を直接延長する設定は提供しておりません。<br>
+<!-- -->短期間で無効になる IDトークンの特性を補完し、再ログインの手間を省く方法として、リフレッシュトークンを利用した自動更新の実装を推奨しております。</p>
+<ul>
+<li>
+<p><strong>リフレッシュトークンの役割</strong><br>
+<!-- -->IDトークンの期限が切れた際、ユーザーに再度ログイン画面を表示させることなく、バックグラウンドで新しい IDトークンを再取得することが可能です。<br>
+<!-- -->これにより、セキュアな状態を維持したまま、開発時や利用時の利便性を大幅に向上させることができます。</p>
+</li>
+<li>
+<p><strong>実装方法の参照</strong><br>
+<!-- -->具体的なリフレッシュトークンの活用手順については、公式ドキュメントの<a href="https://docs.saasus.io/ja/docs/part-6/usecase/authentication-methods#%E3%83%AA%E3%83%95%E3%83%AC%E3%83%83%E3%82%B7%E3%83%A5%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3" target="_blank" rel="noopener noreferrer">リフレッシュトークンによる認証情報の更新</a> をご参照ください。</p>
+</li>
+<li>
+<p><strong>運用のヒント</strong><br>
+<!-- -->API開発などで頻繁にトークンが必要になる場合は、リフレッシュトークンによる更新処理を共通の認証ライブラリやミドルウェアに組み込むことで、開発者が意識することなく有効なトークンを使い続ける環境を構築できます。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q. テナントごとのメータリング（計量項目）の利用状況や、日次の推移を確認することはできますか？</strong></p>
+<p>A. SaaSus Platform では、各テナントの現在の計量値をコンソールや API からご確認いただけます。また、詳細な利用推移を可視化するダッシュボード機能についても、現在提供を計画しております。</p>
+<ul>
+<li>
+<p><strong>現在の利用状況の確認</strong><br>
+<!-- -->SaaSus 開発コンソールの「テナント詳細」画面、または SaaSus SDK/API を通じて、各テナントの最新の計量値をリアルタイムに参照可能です。</p>
+</li>
+<li>
+<p><strong>Stripe コンソールによる確認</strong><br>
+<!-- -->Stripe 連携を利用されている場合は、Stripe の管理コンソールからも各顧客（テナント）に紐づく計量状況や、請求に関連する利用統計を確認することが可能です。</p>
+</li>
+<li>
+<p><strong>Amazon EventBridge 連携機能による分析</strong><br>
+<!-- -->Amazon EventBridge 連携機能を活用することで、メータリングの更新イベントをお客様の AWS 環境へリアルタイムに通知できます。通知されたデータをデータベースに蓄積し、BI ツール等と組み合わせることで、「どの日にどれくらい利用量が増減したか」といった詳細な変更履歴の可視化や、独自の分析レポート作成を柔軟に行うことも可能です。</p>
+</li>
+<li>
+<p><strong>ダッシュボード機能の提供計画</strong><br>
+<!-- -->利用状況をグラフィカルに一覧表示できるダッシュボード機能および統計機能については、現在開発を計画中です。今後のアップデートによるさらなる機能拡充にご期待ください。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q. ログイン画面の配色を自社のブランドカラーに合わせたり、デザインを自由にカスタマイズしたりすることはできますか？</strong></p>
+<p>A. SaaSus Platform が標準で提供しているログイン画面については、現在カラーカスタマイズや独自デザイン の反映には対応しておりません。</p>
+<ul>
+<li>
+<p><strong>自由なデザインを実現する方法</strong><br>
+<!-- -->自社の SaaS の世界観に合わせた独自デザインのログイン画面を実現したい場合は、SaaSus Platform が提供する 認証 API を活用したログイン機能の独自実装を推奨しております。</p>
+</li>
+<li>
+<p><strong>SRP認証によるセキュアな独自実装</strong><br>
+<!-- -->SaaSus Platform の認証 API は、SRP（Secure Remote Password）認証を採用した極めてセキュアな設計となっています。<br>
+<!-- -->サーバー側にパスワードを送信することなく認証を行うこの仕組みを利用することで、独自にログイン画面を構築する場合でも、最高水準のセキュリティレベルを維持したまま、HTML/CSS による自由なスタイリングを実現できます。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q. ログイン画面にメンテナンス情報やシステムからのお知らせを表示することはできますか？</strong></p>
+<p>A. SaaSus Platform が標準で提供しているログイン画面については、現在テキストやお知らせを任意に追加・編集する機能には対応しておりません。</p>
+<ul>
+<li>
+<p><strong>お知らせを表示する方法</strong><br>
+<!-- -->利用可能な時間帯やメンテナンス情報などを自由に表示したい場合は、SaaSus Platform が提供する 認証 API を活用したログイン機能の独自実装を推奨しております。</p>
+</li>
+<li>
+<p><strong>独自実装による柔軟な情報発信</strong><br>
+<!-- -->認証 API を利用してログイン画面を独自に構築いただくことで、HTML/CSS による自由なレイアウトが可能になります。これにより、メンテナンス予告のバナー表示や、緊急のお知らせなどをサービスのデザインに合わせた最適な形で掲載できるようになります。</p>
+</li>
+<li>
+<p><strong>SRP認証によるセキュアな基盤</strong><br>
+<!-- -->独自実装を行う場合でも、SaaSus Platform の認証 API は SRP（Secure Remote Password）認証 を採用しているため、最高水準のセキュリティを維持したまま、運用の利便性を高めることが可能です。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q. サービス提供範囲を日本国内に限定したいのですが、SaaSusの標準ログイン画面で地域制限（ジオブロッキング）を設定することはできますか？</strong></p>
+<p>A. 現在、SaaSus Platform が標準で提供しているログイン画面（CloudFront）に対して、お客様側で直接「地理的制限（Geographic Restrictions）」を設定する機能は提供しておりません。</p>
+<ul>
+<li><strong>日本国内限定を実現する方法</strong><br>
+<!-- -->アクセス元を日本国内に限定したい場合は、SaaSus Platform の 認証 API を活用し、お客様独自の CloudFront 経由でログイン画面を構築・配信する構成を推奨しております。</li>
+</ul>
+<hr>
+<p><strong>Q. 新規ユーザーに対して初期パスワードを発行し、初回ログイン時に任意のパスワードへ変更を促す運用は可能ですか？</strong></p>
+<p>A. はい、SaaSus Platform のユーザー作成 API を活用することで実現可能です。</p>
+<ul>
+<li>
+<p><strong>初期パスワード設定の仕組み</strong><br>
+<!-- -->ユーザー作成 API（<a href="https://docs.saasus.io/ja/docs/reference/auth-api#tag/saasUser/operation/CreateSaasUser" target="_blank" rel="noopener noreferrer">CreateUser API</a>）を呼び出す際に、パスワードを未設定（空）の状態でコールしてください。この状態でユーザーを作成すると、システムから「パスワード設定用メール」が自動送信されます。</p>
+</li>
+<li>
+<p><strong>初回ログイン時のフロー</strong><br>
+<!-- -->利用者は届いたメール内のリンクから、自身で任意のパスワードを設定した上でサービスへログインすることができます。これにより、管理者側で一時的なパスワードを発行・管理する手間を省きつつ、利用者が自ら安全なパスワードを設定して利用を開始するフローを構築できます。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q. ユーザー一覧画面などで、CSVアップロードなどによるユーザーの一括登録を行うことはできますか？</strong></p>
+<p>A. 現在、SaaSus Platform の開発コンソール上には、画面から直接ファイルをアップロードしてユーザーを一括登録する機能は提供しておりません。</p>
+<ul>
+<li>
+<p><strong>大量のユーザーを効率的に登録する方法</strong><br>
+<!-- -->数百名〜数千名規模のユーザーを登録する必要がある場合は、SaaSus Platform が提供する ユーザー作成 API（<a href="https://docs.saasus.io/ja/docs/reference/auth-api#tag/saasUser/operation/CreateSaasUser" target="_blank" rel="noopener noreferrer">CreateUser API</a>） を活用したスクリプトによる一括処理を推奨しております。</p>
+</li>
+<li>
+<p><strong>APIを活用した自動化のメリット</strong><br>
+<!-- -->API を利用することで、既存システムのデータベースや CSV ファイルからユーザー情報を読み取り、SaaSus Platform へ自動で流し込むプログラムを簡単に作成できます。手動による入力ミスを防げるだけでなく、将来的なユーザー追加の自動化（自社サービス側の会員登録機能との連動など）もスムーズに行えます。</p>
+</li>
+<li>
+<p><strong>初期パスワード設定との組み合わせ</strong><br>
+<!-- -->一括登録時にパスワードを未設定（空）の状態で API をコールすることで、各ユーザーにパスワード設定用メールを一斉送信する運用も可能です。これにより、管理  者が個別にパスワードを発行する手間を最小限に抑えられます。</p>
 </li>
 </ul>
 <hr>
@@ -167,7 +305,7 @@
 <!-- -->A. SaaSus Platform は、SaaSの開発・運用に特化した認証・認可プラットフォームであり、外部の IDP と連携して認証を統合する役割を担います。<br>
 <!-- -->そのため、SaaSus 自体を IDP として他のサービスへ認証情報を提供する機能はございませんが、Microsoft Entra ID (旧 Azure AD) などの外部 IDP と連携したシングルサインオン (SSO) の実装が可能です。</p>
 <ul>
-<li>外部 IDP との連携機能<br>
+<li><strong>外部 IDP との連携機能</strong><br>
 <!-- -->Microsoft Entra ID や Google などの IDP と SAML 連携 や OIDC (OpenID Connect) を利用して接続することで、エンドユーザーに対してセキュアでシームレスなログイン体験を提供できます。</li>
 </ul></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="ドキュメントページ"><a class="pagination-nav__link pagination-nav__link--prev" href="/ja/docs/part-7/faq"><div class="pagination-nav__sublabel">前へ</div><div class="pagination-nav__label">FAQ</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/ja/docs/part-7/faq/billing"><div class="pagination-nav__sublabel">次へ</div><div class="pagination-nav__label">請求関連のFAQ</div></a></nav></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Service</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/saasus-platform/" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://saasus.io/10-days-saasification" target="_blank" rel="noopener noreferrer" class="footer__link-item">10 Days SaaSification<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://saasus.io/blog" target="_blank" rel="noopener noreferrer" class="footer__link-item">Blog<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://saasus.io/customer-success-stories" target="_blank" rel="noopener noreferrer" class="footer__link-item">Case Studies<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">Company information</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://anti-pattern.co.jp/" target="_blank" rel="noopener noreferrer" class="footer__link-item">Service Provider<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://anti-pattern.co.jp/legal" target="_blank" rel="noopener noreferrer" class="footer__link-item">Privacy Policy<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://saasus.io/terms" target="_blank" rel="noopener noreferrer" class="footer__link-item">Terms of Service<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Anti-Pattern Inc.</div></div></div></footer></div>
 </body>

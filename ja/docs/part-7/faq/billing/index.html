@@ -6,8 +6,8 @@
 <title data-rh="true">請求関連のFAQ | SaaSus Platform Document</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docs.saasus.io/img/logo.png"><meta data-rh="true" name="twitter:image" content="https://docs.saasus.io/img/logo.png"><meta data-rh="true" property="og:url" content="https://docs.saasus.io/ja/docs/part-7/faq/billing"><meta data-rh="true" property="og:locale" content="ja"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="ja"><meta data-rh="true" name="docsearch:language" content="ja"><meta data-rh="true" name="og:type" content="website"><meta data-rh="true" name="og:site_name" content="SaaSus Platform Documentation"><meta data-rh="true" name="og:title" content="SaaSus Platform Documentation"><meta data-rh="true" name="og:description" content="Official documentation for SaaSus Platform"><meta data-rh="true" name="og:url" content="https://docs.saasus.io/"><meta data-rh="true" name="og:image" content="https://docs.saasus.io/img/logo.png"><meta data-rh="true" name="docusaurus_version" content="1.12"><meta data-rh="true" name="docusaurus_tag" content="docs-default-1.12"><meta data-rh="true" name="docsearch:version" content="1.12"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-1.12"><meta data-rh="true" property="og:title" content="請求関連のFAQ | SaaSus Platform Document"><meta data-rh="true" name="description" content="Q. メータ単位の「使用量の集計」設定（sum/max）はどのような機能でしょうか？"><meta data-rh="true" property="og:description" content="Q. メータ単位の「使用量の集計」設定（sum/max）はどのような機能でしょうか？"><link data-rh="true" rel="icon" href="/ja/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.saasus.io/ja/docs/part-7/faq/billing"><link data-rh="true" rel="alternate" href="https://docs.saasus.io/ja/docs/part-7/faq/billing" hreflang="ja"><link data-rh="true" rel="alternate" href="https://docs.saasus.io/docs/part-7/faq/billing" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.saasus.io/docs/part-7/faq/billing" hreflang="x-default"><link rel="preconnect" href="https://www.googletagmanager.com">
 <script>window.dataLayer=window.dataLayer||[]</script>
 <script>!function(e,t,a,n){e[n]=e[n]||[],e[n].push({"gtm.start":(new Date).getTime(),event:"gtm.js"});var g=t.getElementsByTagName(a)[0],m=t.createElement(a);m.async=!0,m.src="https://www.googletagmanager.com/gtm.js?id=GTM-5T68ML2",g.parentNode.insertBefore(m,g)}(window,document,"script","dataLayer")</script><link rel="stylesheet" href="/ja/assets/css/styles.1dba29be.css">
-<script src="/ja/assets/js/runtime~main.c2117ead.js" defer="defer"></script>
-<script src="/ja/assets/js/main.dd76abfd.js" defer="defer"></script>
+<script src="/ja/assets/js/runtime~main.191bb482.js" defer="defer"></script>
+<script src="/ja/assets/js/main.0ccfc204.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5T68ML2" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -77,6 +77,145 @@
 <li><strong>請求書払い</strong>: クレジットカード決済以外（銀行振込等）の請求書送付も、Stripe側で行う必要があります。</li>
 <li><strong>クーポン（割引）</strong>: 特定のテナントへの個別割引は、Stripeダッシュボードにて対象のCustomerやサブスクリプションに紐付けてください。</li>
 </ul>
+<hr>
+<p><strong>Q. 料金プランを作成しようとすると internal error が発生します。解決方法はありますか？</strong></p>
+<p>A. SaaSus Platform と Stripe の間でデータの不整合が発生している可能性があります。特に、Stripe コンソール側で直接リソースを操作した場合に、以下のような原因でエラーが発生することがあります。</p>
+<ul>
+<li>
+<p><strong>主な原因</strong></p>
+<ul>
+<li>
+<p><strong>メーター（計量項目）名の重複</strong><br>
+<!-- -->SaaSus Platform で定義しようとしているメーター名（例：project_count など）が、既に Stripe 側に同名で存在している場合、プランの作成に失敗します。この場合は、Stripe 側の該当メーターを削除するか、SaaSus Platform 上で別のメ ーター名を作成してお試しください。</p>
+</li>
+<li>
+<p><strong>Stripe での直接操作による影響</strong><br>
+<!-- -->SaaSus Platform を介さずに Stripe 管理画面から直接サブスクリプションの作成や、クーポン設定、プランの初期化などを行った場合、両システム間での同期が正しく行われなくなることがあります。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>解決方法</strong><br>
+<!-- -->データの不整合を解消するために、Stripe 連携を一度解除し、再接続を行う対応が必要になる場合があります。これにより、改めて正しいステータスで同期を試みることが可能です。</p>
+</li>
+</ul>
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>本番環境での実施に関する注意</div><div class="admonitionContent_BuS1"><p>本番環境で連携解除・再接続を行う場合は、既存の顧客データや請求ステータスに影響が出る可能性があるため十分に注意して作業を行ってください。</p></div></div>
+<ul>
+<li><strong>推奨される運用</strong><br>
+<!-- -->設定の不整合を防ぐため、料金プランやメーターの定義、サブスクリプションの管理などは、可能な限り SaaSus 開発コンソール側から操作を行うことを推奨しております。</li>
+</ul>
+<hr>
+<p><strong>Q. 特定の顧客に対して「最初の数ヶ月間無料」や「期間限定の割引」などのキャンペーンを適用することはできますか？</strong></p>
+<p>A. 現在、SaaSus Platform では Stripe が提供している「クーポン」や「初回限定割引」などのプロモーション機能には対応しておりません。</p>
+<ul>
+<li>
+<p><strong>対応している計測単位</strong><br>
+<!-- -->SaaSus Platform では、以下の4つの計測単位に基づいた料金プランの設計が可能です。</p>
+<ul>
+<li>固定ユニット (fixed): 月額基本料金などの固定額</li>
+<li>使用量ユニット (usage): 1単位（ユーザー数など）ごとに加算される従量料金</li>
+<li>段階ユニット (tiered): 利用量に応じて段階的に設定される定額料金</li>
+<li>段階的使用量ユニット (tiered_usage): 利用量が増えるほど単価が変化するボリュームディスカウント形式</li>
+</ul>
+</li>
+<li>
+<p><strong>Stripe コンソールでの直接操作と注意点</strong><br>
+<!-- -->SaaSus Platform で作成されたサブスクリプションに対して、Stripe の管理コンソールから直接割引を適用するなどの変更を行うことは技術的に可能です。<br>
+<!-- -->ただし、サブスクリプションの「計測単位（単位や計算ロジック）」自体を変更する操作は絶対に行わないでください。
+SaaSus Platform と Stripe の間でデータの整合性が取れなくなり、正しい請求やメーターの更新ができなくなる恐れがあります。</p>
+</li>
+<li>
+<p><strong>割引・キャンペーン運用の代替案</strong><br>
+<!-- -->「初月無料」や「特定期間の割引」を実現したい場合は、SaaSus 開発コンソールにて、基本料金を「0円」に設定したキャンペーン専用の料金プランを別途作成し、対象となるテナントへ割り当てる運用をご検討ください。</p>
+</li>
+<li>
+<p><strong>今後の提供計画</strong><br>
+<!-- -->Stripe のプロモーション機能との直接的な連携については、お客様からのニーズに合わせて今後の機能拡充のロー ドマップにて検討を進めております。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q. SaaSus Platformで、銀行振込を有効にすることはできますか？</strong></p>
+<p>A. 現在、SaaSus Platform の管理画面上から直接「銀行振込」を有効化する機能は提供しておりません。ただし、連携している Stripe の管理コンソールから直接設定を変更いただくことで、銀行振込による決済が可能になります。</p>
+<ul>
+<li>
+<p><strong>設定の手順と注意点</strong><br>
+<!-- -->SaaSus Platform で料金プランを設定（サブスクリプション作成）した後、Stripe 側でサブスクリプションが確定するまでの間（約1時間以内）に、Stripe コンソールから対象のサブスクリプションに対して「銀行振込」を許可する設定を行ってください。</p>
+</li>
+<li>
+<p><strong>計測単位に関する重要な制限</strong><br>
+<!-- -->Stripe コンソールから直接設定を変更する場合、SaaSus Platform で連携・定義されている「計測単位（単位や計算ロジック）」自体は絶対に変更しないでください。<br>
+<!-- -->計測単位を変更してしまうと、SaaSus Platform と Stripe の間でデータの不整合が発生し、正しくメーターの更新や請求が行えなくなる恐れがあります。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q. 将来的に米国（US）や欧州（EU）へのグローバル展開を予定していますが、各国の現地通貨での決済に対応していますか？</strong></p>
+<p>A. SaaSus Platform では、主要な決済通貨である**日本円（JPY）および米ドル（USD）**に対応した料金プランの作成が可能です。</p>
+<ul>
+<li>
+<p><strong>Stripe連携による通貨運用</strong><br>
+<!-- -->Stripe と連携することで、日本国内向けの展開だけでなく、米ドル（USD）を利用した広範なグローバルビジネスの収益化モデルを SaaSus コンソールから一元管理できます。</p>
+</li>
+<li>
+<p><strong>提供エリアとコンプライアンスについて</strong><br>
+<!-- -->現在は ap-northeast-1（東京リージョン） を中心としたサービス提供を行っております。 米国（US）など多くの地域からは共通のエンドポイントをご利用いただけますが、欧州（EU）圏内につきましては、GDPR（一般データ保護規則）への厳格な対応およびセキュリティガバナンスの観点から、現在は API アクセスをブロックさせていただいております。</p>
+</li>
+<li>
+<p><strong>今後の展開について</strong><br>
+<!-- -->お客様のビジネス成長に合わせたサポートエリアや対応通貨の拡大については、各国の法規制の動向を注視しつつ、順次検討を進めております。特定の地域での利用計画や法規制への対応に関するご要望がございましたら、個別に対応を検討させていただきますので、お問い合わせください。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q. 計測の単位を「ユーザー単位」に設定し、個別の利用状況を分析することはできますか？</strong></p>
+<p>A. いいえ、SaaSus Platform のメータリング機能（計量項目）は、現在テナント単位での集計のみに対応しております。ユーザー個別の利用状況を直接計測・集計する機能は提供しておりません。</p>
+<p><strong>ユーザー単位の分析を実現する方法</strong><br>
+<!-- -->特定のユーザーによるリソース消費量や行動ログを詳細に分析したい場合は、SaaSus Platform の外部（お客様のアプリケーション側）でログを蓄積・集計する仕組みの構築を推奨しております。</p>
+<hr>
+<p><strong>Q. SaaSus Platformの管理コンソールから、過去の領収書や請求書をダウンロードすることはできますか？</strong></p>
+<p>A. 現在 、SaaSus Platform の管理コンソール内には、お客様ご自身で直接領収書をダウンロードできる画面は提供しておりません。お手数ですが、以下の方法にてご確認・取得をお願いいたします。</p>
+<ul>
+<li>
+<p><strong>自動送信メールによる確認</strong><br>
+<!-- -->お支払い完了時に、連携している Stripe より領収書メールが自動送信されます。まずは、ご登録いただいているメールアドレスの受信ボックスをご確認ください。<br>
+<!-- -->※Stripe の管理コンソール内（設定 ＞ メール）にて、「支払いの成功」時にお客様へメールを送信する設定が有効になっている必要があります。届いていない場合は、Stripe 側の設定をご確認ください。<br>
+<!-- -->なお、Stripe の仕様変更により、設定項目の名称や場所が変更される可能性がありますので、最新の Stripe ドキュメントも併せてご参照ください。</p>
+</li>
+<li>
+<p><strong>Stripe 管理コンソールからのダウンロード</strong><br>
+<!-- -->管理者の皆様におかれましては、連携済みの Stripe 管理コンソールへログインいただくことで、対象の支払い（Payment）に関連付けられた領収書や請求書をいつでも PDF 形式でダウンロードすることが可能です。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q. 月の途中でプランのアップグレードやダウングレードを行った場合、請求や日割り計算はどうなりますか？</strong></p>
+<p>A. SaaSus Platform では、Stripe の機能を利用した日割り計算に対応しています。<br>
+<!-- -->運用コンソールからの操作、または API のパラメータ設定により、差額の請求タイミングをコントロールすることが可能です。<br>
+<!-- -->※ 運用コンソールからの操作は即時請求となります。</p>
+<ol>
+<li>日割り計算のロジック （計算例）<br>
+<!-- -->計算は Stripe の標準ロジック（秒単位計算）に基づきます。<br>
+<!-- -->例：3月1日に プランA（25,000円） を契約し、3月21日に プランB（28,000円） へ変更した場合（3月は31日間）</li>
+</ol>
+<ul>
+<li>
+<p>アップグレードの場合 (プランA → プランB)<br>
+<!-- -->プランA（旧）の未使用分払い戻し：約 -8,064円<br>
+<!-- -->プランB（新）の残り期間利用分：約 +9,032円<br>
+<!-- -->差額（調整額）：+968円 が発生します。</p>
+</li>
+<li>
+<p>ダウングレードの場合 (プランB → プランA)<br>
+<!-- -->差額が -968円 となり、このマイナス分は「未使用のクレジット」として Stripe 内に保持されます。<br>
+<!-- -->次回の定期請求（4月1日分）の際に、このクレジットが充当されます。<br>
+<!-- -->例：4月分 25,000円 - クレジット 968円 = 請求額 24,032円</p>
+</li>
+</ul>
+<ol start="2">
+<li>プラン変更時の挙動設定（proration_behavior）<br>
+<a href="https://docs.saasus.io/ja/docs/reference/auth-api#tag/tenant/operation/UpdateTenantPlan" target="_blank" rel="noopener noreferrer">テナントのプラン情報を更新API</a>を使用してプランを変更する際、パラメータ proration_behavior(プラン変更時の比例配分の挙動) の値によって、請求のタイミングを指定できます。</li>
+</ol>
+<div><table><thead><tr><th>proration_behavior</th><th>請求方法</th><th>詳細</th></tr></thead><tbody><tr><td>always_invoice</td><td>即時請求</td><td>プラン変更した瞬間に、日割り計算された差額分の請求書が発行・決済されます。</td></tr><tr><td>create_prorations</td><td>次回合算</td><td>差額は計算されますが、即時請求はされません。次回の定期請求タイミングで合算されます。</td></tr><tr><td>none</td><td>日割りなし</td><td>変更時点での日割り計算を行いません。次回の定期請求から新プランの定額料金が適用されます。</td></tr></tbody></table></div>
+<hr>
+<p><strong>Q. 利用実績がない従量課金メニュー（0円）を、Stripe の請求書から非表示にすることはできますか？</strong></p>
+<p>A. いいえ、現在の SaaSus Platform および連携先の Stripe の仕様により、利用がない項目（0円）を請求書から非表示にすることはできません。</p>
 <hr>
 <p><strong>Q. 年次契約のプランに、月額固定のオプションや従量課金（使用量ユニット）を組み合わせることはできますか？</strong><br>
 <!-- -->A. 請求の透明性と一貫性を保つため、SaaSus Platform（および連携するStripe）では、1つのサブスクリプション内で異なる請求サイクル（年次と月次など）を組み合わせることはできません。</p></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="ドキュメントページ"><a class="pagination-nav__link pagination-nav__link--prev" href="/ja/docs/part-7/faq/saasus-platform"><div class="pagination-nav__sublabel">前へ</div><div class="pagination-nav__label">SaaSus Platform関連のFAQ</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/ja/docs/part-7/faq/api-sdk"><div class="pagination-nav__sublabel">次へ</div><div class="pagination-nav__label">API / SDK 利用時のFAQ</div></a></nav></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Service</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/saasus-platform/" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://saasus.io/10-days-saasification" target="_blank" rel="noopener noreferrer" class="footer__link-item">10 Days SaaSification<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://saasus.io/blog" target="_blank" rel="noopener noreferrer" class="footer__link-item">Blog<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://saasus.io/customer-success-stories" target="_blank" rel="noopener noreferrer" class="footer__link-item">Case Studies<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">Company information</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://anti-pattern.co.jp/" target="_blank" rel="noopener noreferrer" class="footer__link-item">Service Provider<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://anti-pattern.co.jp/legal" target="_blank" rel="noopener noreferrer" class="footer__link-item">Privacy Policy<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://saasus.io/terms" target="_blank" rel="noopener noreferrer" class="footer__link-item">Terms of Service<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Anti-Pattern Inc.</div></div></div></footer></div>
