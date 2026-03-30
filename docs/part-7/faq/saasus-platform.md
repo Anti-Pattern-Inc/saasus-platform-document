@@ -4,7 +4,7 @@ slug: "saasus-platform"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Mar 27 2026 13:41:09 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Sun Mar 30 2026 05:10:59 GMT+0000 (Coordinated Universal Time)"
 ---
 
 **Q. What countermeasures are available when the service goes down?  
@@ -139,10 +139,11 @@ The SaaS login URL can be found in the "Authentication Settings" section of the 
 
 **Q. What happens to my account if I enter the wrong password multiple times?**  
 A. For enhanced security, accounts are temporarily locked when passwords are entered incorrectly multiple times in succession.
- - When the password is incorrect
+
+ - **When the password is incorrect**
 The authentication request returns "Incorrect username or password." At this point, the account is not yet locked.
 
- - When password attempt limit is exceeded
+ - **When password attempt limit is exceeded**  
 When authentication failures continue for a certain number of times, the account is locked for security reasons. In this state, authentication requests return "Password attempts exceeded" and sign-in becomes impossible.
 
 The specific number of attempts is not disclosed, but the lockout period is automatically adjusted according to the number of unauthorized attempts, and is usually automatically released after a certain period of time.
@@ -154,11 +155,11 @@ To prevent long-term lockouts, please use the password reset function if you are
 
 A. To use authentication via an external ID provider, both **"Domain Settings"** and **"Email Sending Settings (SES)"** must be verified for security and reliability. Please check the following settings:
 
- - **Domain Verification Status**
+ - **Domain Verification Status**  
 In the [Basic Settings] > [Domain] screen, please check if the status of the registered domain is **"Valid (Verified)"** and **"Authentication email delivery via custom domain is enabled."**
 If not verified, you need to correctly set the displayed DNS records in your DNS server (such as AWS Route 53) and complete the verification.
 
- - **Wait Time for Settings to Take Effect**
+ - **Wait Time for Settings to Take Effect**  
 DNS settings and enabling authentication email delivery via custom domain may take up to 2-3 days for processing within the system and propagation across the network.
 Please wait until **"Authentication email delivery via custom domain is enabled"** is displayed in the console.
 
@@ -168,7 +169,7 @@ Please wait until **"Authentication email delivery via custom domain is enabled"
 
 A. Yes, you can. If the production domain settings (verification) are complete, you can verify operations by specifying a local environment URL as the callback destination.
 
- - **Adding Callback URL Settings**
+ - **Adding Callback URL Settings**  
 In the [Authentication Settings] > [External ID Provider Integration] edit screen, please add your local environment URL (e.g., `http://localhost:3000/callback`) to the callback URL.
 
 ---
@@ -176,8 +177,14 @@ In the [Authentication Settings] > [External ID Provider Integration] edit scree
 **Q. Please tell me the recommended configuration for improving API response speed.**  
 A. SaaSus Platform currently provides services in **ap-northeast-1 (Tokyo Region)**. To maximize performance, we recommend deploying your application servers in the same Tokyo region.
 
- - Optimization through region matching  
+ - **Optimization through region matching**  
  By placing your application servers and SaaSus Platform in the same Tokyo region, you can minimize network latency (communication delay) due to physical distance and achieve high-speed responses.
+
+ - **About connections from overseas regions**  
+ When calling SaaSus APIs from overseas regions such as us-west-2 (US West), delays due to geographical distance may occur and affect user experience.  
+ For services targeting users in Japan, please consider operating in the Tokyo region.
+
+---
 
 **Q. Are there any precautions when implementing a feature to unlink integration with external services?**
 
@@ -198,14 +205,14 @@ If the providerName field contains a provider name such as "Google", you can det
 A. For security reasons, we do not provide a setting to directly extend the expiration time of ID tokens themselves.
 To compensate for the characteristic of ID tokens becoming invalid in a short period and save the trouble of re-login, we recommend implementing automatic renewal using refresh tokens.
 
- - **Role of Refresh Tokens**
+ - **Role of Refresh Tokens**  
 When an ID token expires, it is possible to re-obtain a new ID token in the background without displaying the login screen to the user again.
 This allows you to significantly improve convenience during development and use while maintaining a secure state.
 
- - **Implementation Method Reference**
+ - **Implementation Method Reference**  
 For specific procedures on using refresh tokens, please refer to [Updating Authentication Information Using Refresh Tokens](https://docs.saasus.io/docs/part-6/usecase/authentication-methods#%E3%83%AA%E3%83%95%E3%83%AC%E3%83%83%E3%82%B7%E3%83%A5%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3) in the official documentation.
 
- - **Operational Tips**
+ - **Operational Tips**  
 When tokens are frequently needed for API development, you can build an environment where developers can continue using valid tokens without being aware of it by incorporating refresh token renewal processing into a common authentication library or middleware.
 
 ---
@@ -214,16 +221,16 @@ When tokens are frequently needed for API development, you can build an environm
 
 A. SaaSus Platform allows you to check the current metering values for each tenant from the console or API. We are also currently planning to provide a dashboard function that visualizes detailed usage trends.
 
- - **Checking Current Usage Status**
+ - **Checking Current Usage Status**  
 The latest metering values for each tenant can be referenced in real-time through the "Tenant Details" screen in the SaaSus Development Console or through the SaaSus SDK/API.
 
- - **Checking via Stripe Console**
+ - **Checking via Stripe Console**  
 If you are using Stripe integration, you can also check metering status and billing-related usage statistics linked to each customer (tenant) from the Stripe management console.
 
- - **Analysis Using Amazon EventBridge Integration**
+ - **Analysis Using Amazon EventBridge Integration**  
 By utilizing the Amazon EventBridge integration feature, metering update events can be notified to your AWS environment in real-time. By accumulating the notified data in a database and combining it with BI tools, you can flexibly visualize detailed change history such as "how much usage increased or decreased on which day" and create custom analysis reports.
 
- - **Dashboard Function Provision Plan**
+ - **Dashboard Function Provision Plan**  
 We are currently planning to develop a dashboard function and statistical function that can graphically display usage status in a list. Please look forward to further feature enhancements in future updates.
 
 ---
@@ -232,10 +239,10 @@ We are currently planning to develop a dashboard function and statistical functi
 
 A. The login screen provided as standard by SaaSus Platform does not currently support color customization or applying custom designs.
 
- - **Method to Achieve Free Design**
+ - **Method to Achieve Free Design**  
 If you want to achieve a custom design login screen that matches the worldview of your SaaS, we recommend custom implementation of login functionality using the authentication API provided by SaaSus Platform.
 
- - **Secure Custom Implementation with SRP Authentication**
+ - **Secure Custom Implementation with SRP Authentication**  
 SaaSus Platform's authentication API adopts SRP (Secure Remote Password) authentication with an extremely secure design.
 By using this mechanism that performs authentication without sending passwords to the server, even when building a custom login screen, you can achieve free styling with HTML/CSS while maintaining the highest level of security.
 
@@ -245,13 +252,13 @@ By using this mechanism that performs authentication without sending passwords t
 
 A. The login screen provided as standard by SaaSus Platform does not currently support adding or editing text or announcements arbitrarily.
 
- - **Method to Display Announcements**
+ - **Method to Display Announcements**  
 If you want to freely display available hours, maintenance information, etc., we recommend custom implementation of login functionality using the authentication API provided by SaaSus Platform.
 
- - **Flexible Information Dissemination Through Custom Implementation**
+ - **Flexible Information Dissemination Through Custom Implementation**  
 By building a custom login screen using the authentication API, free layout with HTML/CSS becomes possible. This allows you to post maintenance announcement banners, urgent notices, etc. in the optimal form that matches your service design.
 
- - **Secure Foundation with SRP Authentication**
+ - **Secure Foundation with SRP Authentication**  
 Even when performing custom implementation, SaaSus Platform's authentication API adopts SRP (Secure Remote Password) authentication, so it is possible to enhance operational convenience while maintaining the highest level of security.
 
 ---
@@ -260,7 +267,7 @@ Even when performing custom implementation, SaaSus Platform's authentication API
 
 A. Currently, we do not provide a function for customers to directly set "Geographic Restrictions" on the login screen (CloudFront) provided as standard by SaaSus Platform.
 
- - **Method to Achieve Japan-Only Access**
+ - **Method to Achieve Japan-Only Access**  
 If you want to limit access origins to within Japan, we recommend a configuration where you build and distribute the login screen via your own CloudFront using the authentication API of SaaSus Platform.
 
 ---
@@ -269,10 +276,10 @@ If you want to limit access origins to within Japan, we recommend a configuratio
 
 A. Yes, this can be achieved by utilizing the SaaSus Platform user creation API.
 
- - **Initial Password Setting Mechanism**
+ - **Initial Password Setting Mechanism**  
 When calling the user creation API ([CreateUser API](https://docs.saasus.io/docs/reference/auth-api#tag/saasUser/operation/CreateSaasUser)), please call with the password unset (empty). When a user is created in this state, a "password setup email" is automatically sent from the system.
 
- - **First Login Flow**
+ - **First Login Flow**  
 Users can log in to the service after setting their own arbitrary password from the link in the received email. This allows you to build a flow where users set up safe passwords themselves and start using the service, while saving the administrator the trouble of issuing and managing temporary passwords.
 
 ---
@@ -281,18 +288,14 @@ Users can log in to the service after setting their own arbitrary password from 
 
 A. Currently, the SaaSus Platform development console does not provide a function to upload files directly from the screen for bulk user registration.
 
- - **Method to Efficiently Register Large Numbers of Users**
+ - **Method to Efficiently Register Large Numbers of Users**  
 When you need to register hundreds to thousands of users, we recommend batch processing using scripts that utilize the user creation API ([CreateUser API](https://docs.saasus.io/docs/reference/auth-api#tag/saasUser/operation/CreateSaasUser)) provided by SaaSus Platform.
 
- - **Benefits of Automation Using API**
+ - **Benefits of Automation Using API**  
 By using the API, you can easily create programs that read user information from existing system databases or CSV files and automatically import it into SaaSus Platform. This not only prevents manual input errors but also allows smooth future automation of user additions (such as integration with member registration functions on your own service side).
 
- - **Combination with Initial Password Settings**
+ - **Combination with Initial Password Settings**  
 When performing bulk registration, by calling the API with the password unset (empty), it is possible to send password setup emails to all users at once. This minimizes the effort for administrators to issue individual passwords.
-
- - About connections from overseas regions  
- When calling SaaSus APIs from overseas regions such as us-west-2 (US West), delays due to geographical distance may occur and affect user experience.  
- For services targeting users in Japan, please consider operating in the Tokyo region.
 
 ---
 
@@ -300,5 +303,5 @@ When performing bulk registration, by calling the API with the password unset (e
 A. SaaSus Platform is an authentication and authorization platform specialized for SaaS development and operations, and plays a role in integrating authentication by linking with external IDPs.  
 Therefore, SaaSus itself does not have the function to provide authentication information to other services as an IDP, but it is possible to implement single sign-on (SSO) by linking with external IDPs such as Microsoft Entra ID (formerly Azure AD).
 
- - External IDP integration features  
+ - **External IDP integration features**  
 Microsoft Entra ID and Google can be connected using SAML integration or OIDC (OpenID Connect) to provide end users with a secure and seamless login experience.
