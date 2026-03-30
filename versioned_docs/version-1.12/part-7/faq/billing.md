@@ -4,7 +4,7 @@ slug: "billing"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Mar 27 2026 14:04:44 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Sun Mar 30 2026 05:30:44 GMT+0000 (Coordinated Universal Time)"
 ---
 
 **Q. What is the "Calculation Method" setting (sum/max) for meter units?**  
@@ -213,3 +213,8 @@ When changing plans using the [Update Tenant Plan Information API](https://docs.
 **Q. Can unused pay-as-you-go menu items (0 yen) be hidden from Stripe invoices?**
 
 A. No, due to the current specifications of SaaSus Platform and the integrated Stripe, items with no usage (0 yen) cannot be hidden from invoices.
+
+---
+
+**Q. Can annual contract plans be combined with monthly fixed options or usage-based charges (usage units)?**
+A. To maintain billing transparency and consistency, SaaSus Platform (and its integrated Stripe) cannot combine different billing cycles (such as annual and monthly) within a single subscription.
