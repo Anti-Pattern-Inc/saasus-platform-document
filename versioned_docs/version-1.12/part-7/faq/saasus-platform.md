@@ -4,7 +4,7 @@ slug: "saasus-platform"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Mar 31 2026 10:24:10 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Mon Mar 31 2026 11:08:50 GMT+0000 (Coordinated Universal Time)"
 ---
 
 **Q. What countermeasures are available when the service goes down?  
@@ -167,10 +167,11 @@ Please wait until **"Authentication email delivery via custom domain is enabled"
 
 **Q. Can I test Google login and other operations in a local development environment (localhost)?**
 
-A. Yes, you can. If the production domain settings (verification) are complete, you can verify operations by specifying a local environment URL as the callback destination.
+A. Yes, you can. You can verify operations by specifying a local environment URL (such as http://localhost:3000/callback) as the post-authentication redirect destination.
+When performing verification, please note the following:
 
- - **Adding Callback URL Settings**  
-In the [Authentication Settings] > [External ID Provider Integration] edit screen, please add your local environment URL (e.g., `http://localhost:3000/callback`) to the callback URL.
+ - **Domain Verification Status**
+In the [Basic Settings] > [Domain] screen, please check if the status of the registered domain is **"Valid (Verified)"** and **"Authentication email delivery via custom domain is enabled."**
 
 ---
 
