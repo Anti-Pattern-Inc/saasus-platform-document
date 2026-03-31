@@ -4,7 +4,7 @@ slug: "saasus-platform"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Sun Mar 30 2026 05:10:59 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Mon Mar 31 2026 11:08:50 GMT+0000 (Coordinated Universal Time)"
 ---
 
 **Q. What countermeasures are available when the service goes down?  
@@ -167,10 +167,11 @@ Please wait until **"Authentication email delivery via custom domain is enabled"
 
 **Q. Can I test Google login and other operations in a local development environment (localhost)?**
 
-A. Yes, you can. If the production domain settings (verification) are complete, you can verify operations by specifying a local environment URL as the callback destination.
+A. Yes, you can. You can verify operations by specifying a local environment URL (such as http://localhost:3000/callback) as the post-authentication redirect destination.
+When performing verification, please note the following:
 
- - **Adding Callback URL Settings**  
-In the [Authentication Settings] > [External ID Provider Integration] edit screen, please add your local environment URL (e.g., `http://localhost:3000/callback`) to the callback URL.
+ - **Domain Verification Status**
+In the [Basic Settings] > [Domain] screen, please check if the status of the registered domain is **"Valid (Verified)"** and **"Authentication email delivery via custom domain is enabled."**
 
 ---
 
@@ -274,13 +275,36 @@ If you want to limit access origins to within Japan, we recommend a configuratio
 
 **Q. Is it possible to issue an initial password for new users and prompt them to change it to an arbitrary password on first login?**
 
-A. Yes, this can be achieved by utilizing the SaaSus Platform user creation API.
+A. Yes, SaaSus Platform offers two main methods to enable users to set their own passwords, eliminating the need for administrators to issue initial passwords.
 
- - **Initial Password Setting Mechanism**  
-When calling the user creation API ([CreateUser API](https://docs.saasus.io/docs/reference/auth-api#tag/saasUser/operation/CreateSaasUser)), please call with the password unset (empty). When a user is created in this state, a "password setup email" is automatically sent from the system.
+1. **Using the "Tenant Invitation Feature"**
+You can invite users using the [Tenant Invitation Feature](https://docs.saasus.io/docs/reference/auth-api#tag/invitation). This feature also provides functionality to manage the status of users being invited. Users can set their own passwords through the link in the invitation email.
 
- - **First Login Flow**  
-Users can log in to the service after setting their own arbitrary password from the link in the received email. This allows you to build a flow where users set up safe passwords themselves and start using the service, while saving the administrator the trouble of issuing and managing temporary passwords.
+   - **Behavior**
+When an administrator sends an invitation by specifying an email address, the user receives an "invitation email." At this point, user creation is not yet complete, and the user is managed with an "invited" status on the SaaSus Platform.
+
+   - **Login Flow**
+Users access a dedicated screen from the link in the email and set their password. Account creation and login are completed the moment they set their password.
+This flow sets the actual password from the beginning, without going through a temporary password.
+
+   - **Benefits**
+Since SaaSus Platform manages user states such as "invited," "accepted," and "expired," it is ideal for organizational operations.
+Additionally, since you can assign "roles" at the time of invitation, you can automate permission settings after login.
+
+2. Using the User Creation API
+When calling the [CreateUser API](https://docs.saasus.io/docs/reference/auth-api#tag/saasUser/operation/CreateSaasUser), please make the request with the password unset (empty).
+
+   - **Behavior**
+When a user is created with an empty password, the system automatically sends a "password setup email" to the target user.
+
+   - **Login Flow**
+Users log in to the service using the temporary password in the email.
+After login is complete, a password change screen is automatically displayed, forcing them to change to an arbitrary password.
+
+   - **Benefits and Considerations**
+Eliminates the effort for administrators to issue and manage (notify) temporary passwords.
+Since users set the temporary password from the email, they can start using the service securely from their first login.
+However, unlike the invitation feature, you need to independently implement "role assignment" and "tenant allocation" by combining additional APIs.
 
 ---
 
