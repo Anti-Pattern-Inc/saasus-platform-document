@@ -6,8 +6,8 @@
 <title data-rh="true">SaaSus Platform FAQ | SaaSus Platform Document</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docs.saasus.io/img/logo.png"><meta data-rh="true" name="twitter:image" content="https://docs.saasus.io/img/logo.png"><meta data-rh="true" property="og:url" content="https://docs.saasus.io/docs/part-7/faq/saasus-platform"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="ja"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="og:type" content="website"><meta data-rh="true" name="og:site_name" content="SaaSus Platform Documentation"><meta data-rh="true" name="og:title" content="SaaSus Platform Documentation"><meta data-rh="true" name="og:description" content="Official documentation for SaaSus Platform"><meta data-rh="true" name="og:url" content="https://docs.saasus.io/"><meta data-rh="true" name="og:image" content="https://docs.saasus.io/img/logo.png"><meta data-rh="true" name="docusaurus_version" content="1.12"><meta data-rh="true" name="docusaurus_tag" content="docs-default-1.12"><meta data-rh="true" name="docsearch:version" content="1.12"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-1.12"><meta data-rh="true" property="og:title" content="SaaSus Platform FAQ | SaaSus Platform Document"><meta data-rh="true" name="description" content="Q. What countermeasures are available when the service goes down?"><meta data-rh="true" property="og:description" content="Q. What countermeasures are available when the service goes down?"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.saasus.io/docs/part-7/faq/saasus-platform"><link data-rh="true" rel="alternate" href="https://docs.saasus.io/ja/docs/part-7/faq/saasus-platform" hreflang="ja"><link data-rh="true" rel="alternate" href="https://docs.saasus.io/docs/part-7/faq/saasus-platform" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.saasus.io/docs/part-7/faq/saasus-platform" hreflang="x-default"><link rel="preconnect" href="https://www.googletagmanager.com">
 <script>window.dataLayer=window.dataLayer||[]</script>
 <script>!function(e,t,a,n){e[n]=e[n]||[],e[n].push({"gtm.start":(new Date).getTime(),event:"gtm.js"});var g=t.getElementsByTagName(a)[0],m=t.createElement(a);m.async=!0,m.src="https://www.googletagmanager.com/gtm.js?id=GTM-5T68ML2",g.parentNode.insertBefore(m,g)}(window,document,"script","dataLayer")</script><link rel="stylesheet" href="/assets/css/styles.1dba29be.css">
-<script src="/assets/js/runtime~main.75304614.js" defer="defer"></script>
-<script src="/assets/js/main.602cd8ff.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.7825e7b0.js" defer="defer"></script>
+<script src="/assets/js/main.bc6e037b.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5T68ML2" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -165,10 +165,11 @@ Please wait until <strong>&quot;Authentication email delivery via custom domain 
 </ul>
 <hr>
 <p><strong>Q. Can I test Google login and other operations in a local development environment (localhost)?</strong></p>
-<p>A. Yes, you can. If the production domain settings (verification) are complete, you can verify operations by specifying a local environment URL as the callback destination.</p>
+<p>A. Yes, you can. You can verify operations by specifying a local environment URL (such as <a href="http://localhost:3000/callback" target="_blank" rel="noopener noreferrer">http://localhost:3000/callback</a>) as the post-authentication redirect destination.
+When performing verification, please note the following:</p>
 <ul>
-<li><strong>Adding Callback URL Settings</strong><br>
-<!-- -->In the [Authentication Settings] &gt; [External ID Provider Integration] edit screen, please add your local environment URL (e.g., <code>http://localhost:3000/callback</code>) to the callback URL.</li>
+<li><strong>Domain Verification Status</strong>
+In the [Basic Settings] &gt; [Domain] screen, please check if the status of the registered domain is <strong>&quot;Valid (Verified)&quot;</strong> and <strong>&quot;Authentication email delivery via custom domain is enabled.&quot;</strong></li>
 </ul>
 <hr>
 <p><strong>Q. Please tell me the recommended configuration for improving API response speed.</strong><br>
@@ -272,17 +273,50 @@ By using this mechanism that performs authentication without sending passwords t
 </ul>
 <hr>
 <p><strong>Q. Is it possible to issue an initial password for new users and prompt them to change it to an arbitrary password on first login?</strong></p>
-<p>A. Yes, this can be achieved by utilizing the SaaSus Platform user creation API.</p>
+<p>A. Yes, SaaSus Platform offers two main methods to enable users to set their own passwords, eliminating the need for administrators to issue initial passwords.</p>
+<ol>
+<li>
+<p><strong>Using the &quot;Tenant Invitation Feature&quot;</strong>
+You can invite users using the <a href="https://docs.saasus.io/docs/reference/auth-api#tag/invitation" target="_blank" rel="noopener noreferrer">Tenant Invitation Feature</a>. This feature also provides functionality to manage the status of users being invited. Users can set their own passwords through the link in the invitation email.</p>
 <ul>
 <li>
-<p><strong>Initial Password Setting Mechanism</strong><br>
-<!-- -->When calling the user creation API (<a href="https://docs.saasus.io/docs/reference/auth-api#tag/saasUser/operation/CreateSaasUser" target="_blank" rel="noopener noreferrer">CreateUser API</a>), please call with the password unset (empty). When a user is created in this state, a &quot;password setup email&quot; is automatically sent from the system.</p>
+<p><strong>Behavior</strong>
+When an administrator sends an invitation by specifying an email address, the user receives an &quot;invitation email.&quot; At this point, user creation is not yet complete, and the user is managed with an &quot;invited&quot; status on the SaaSus Platform.</p>
 </li>
 <li>
-<p><strong>First Login Flow</strong><br>
-<!-- -->Users can log in to the service after setting their own arbitrary password from the link in the received email. This allows you to build a flow where users set up safe passwords themselves and start using the service, while saving the administrator the trouble of issuing and managing temporary passwords.</p>
+<p><strong>Login Flow</strong>
+Users access a dedicated screen from the link in the email and set their password. Account creation and login are completed the moment they set their password.
+This flow sets the actual password from the beginning, without going through a temporary password.</p>
+</li>
+<li>
+<p><strong>Benefits</strong>
+Since SaaSus Platform manages user states such as &quot;invited,&quot; &quot;accepted,&quot; and &quot;expired,&quot; it is ideal for organizational operations.
+Additionally, since you can assign &quot;roles&quot; at the time of invitation, you can automate permission settings after login.</p>
 </li>
 </ul>
+</li>
+<li>
+<p>Using the User Creation API
+When calling the <a href="https://docs.saasus.io/docs/reference/auth-api#tag/saasUser/operation/CreateSaasUser" target="_blank" rel="noopener noreferrer">CreateUser API</a>, please make the request with the password unset (empty).</p>
+<ul>
+<li>
+<p><strong>Behavior</strong>
+When a user is created with an empty password, the system automatically sends a &quot;password setup email&quot; to the target user.</p>
+</li>
+<li>
+<p><strong>Login Flow</strong>
+Users log in to the service using the temporary password in the email.
+After login is complete, a password change screen is automatically displayed, forcing them to change to an arbitrary password.</p>
+</li>
+<li>
+<p><strong>Benefits and Considerations</strong>
+Eliminates the effort for administrators to issue and manage (notify) temporary passwords.
+Since users set the temporary password from the email, they can start using the service securely from their first login.
+However, unlike the invitation feature, you need to independently implement &quot;role assignment&quot; and &quot;tenant allocation&quot; by combining additional APIs.</p>
+</li>
+</ul>
+</li>
+</ol>
 <hr>
 <p><strong>Q. Can I perform bulk user registration via CSV upload on the user list screen, etc.?</strong></p>
 <p>A. Currently, the SaaSus Platform development console does not provide a function to upload files directly from the screen for bulk user registration.</p>
