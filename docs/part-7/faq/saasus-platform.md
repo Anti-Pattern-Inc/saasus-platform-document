@@ -291,7 +291,7 @@ Since SaaSus Platform manages user states such as "invited," "accepted," and "ex
 Additionally, since you can assign "roles" at the time of invitation, you can automate permission settings after login.
 
 2. Using the User Creation API
-When calling the [CreateUser API](https://docs.saasus.io/docs/reference/auth-api#tag/saasUser/operation/CreateSaasUser), please make the request with the password **unset (empty)**.
+When calling the [CreateUser API](https://docs.saasus.io/docs/reference/auth-api#tag/saasUser/operation/CreateSaasUser), please make the request with the password unset (empty).
 
    - **Behavior**
 When a user is created with an empty password, the system automatically sends a "password setup email" to the target user.
