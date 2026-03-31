@@ -6,8 +6,8 @@
 <title data-rh="true">SaaSus Platform関連のFAQ | SaaSus Platform Document</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docs.saasus.io/img/logo.png"><meta data-rh="true" name="twitter:image" content="https://docs.saasus.io/img/logo.png"><meta data-rh="true" property="og:url" content="https://docs.saasus.io/ja/docs/part-7/faq/saasus-platform"><meta data-rh="true" property="og:locale" content="ja"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="ja"><meta data-rh="true" name="docsearch:language" content="ja"><meta data-rh="true" name="og:type" content="website"><meta data-rh="true" name="og:site_name" content="SaaSus Platform Documentation"><meta data-rh="true" name="og:title" content="SaaSus Platform Documentation"><meta data-rh="true" name="og:description" content="Official documentation for SaaSus Platform"><meta data-rh="true" name="og:url" content="https://docs.saasus.io/"><meta data-rh="true" name="og:image" content="https://docs.saasus.io/img/logo.png"><meta data-rh="true" name="docusaurus_version" content="1.12"><meta data-rh="true" name="docusaurus_tag" content="docs-default-1.12"><meta data-rh="true" name="docsearch:version" content="1.12"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-1.12"><meta data-rh="true" property="og:title" content="SaaSus Platform関連のFAQ | SaaSus Platform Document"><meta data-rh="true" name="description" content="Q. サービスが停止した時の対策として、どのような対応が可能でしょうか？"><meta data-rh="true" property="og:description" content="Q. サービスが停止した時の対策として、どのような対応が可能でしょうか？"><link data-rh="true" rel="icon" href="/ja/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.saasus.io/ja/docs/part-7/faq/saasus-platform"><link data-rh="true" rel="alternate" href="https://docs.saasus.io/ja/docs/part-7/faq/saasus-platform" hreflang="ja"><link data-rh="true" rel="alternate" href="https://docs.saasus.io/docs/part-7/faq/saasus-platform" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.saasus.io/docs/part-7/faq/saasus-platform" hreflang="x-default"><link rel="preconnect" href="https://www.googletagmanager.com">
 <script>window.dataLayer=window.dataLayer||[]</script>
 <script>!function(e,t,a,n){e[n]=e[n]||[],e[n].push({"gtm.start":(new Date).getTime(),event:"gtm.js"});var g=t.getElementsByTagName(a)[0],m=t.createElement(a);m.async=!0,m.src="https://www.googletagmanager.com/gtm.js?id=GTM-5T68ML2",g.parentNode.insertBefore(m,g)}(window,document,"script","dataLayer")</script><link rel="stylesheet" href="/ja/assets/css/styles.1dba29be.css">
-<script src="/ja/assets/js/runtime~main.191bb482.js" defer="defer"></script>
-<script src="/ja/assets/js/main.0ccfc204.js" defer="defer"></script>
+<script src="/ja/assets/js/runtime~main.3b13bc56.js" defer="defer"></script>
+<script src="/ja/assets/js/main.ee1ec14c.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5T68ML2" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -165,14 +165,15 @@
 </ul>
 <hr>
 <p><strong>Q. ローカル開発環境（localhost）で Google ログインなどの動作確認を行うことはできますか？</strong></p>
-<p>A. はい、可能です。本番ドメインの設定（検証）が完了していれば、コールバック先をローカル環境の URL に指定することで動作を確認いただけます。</p>
+<p>A. はい、可能です。認証後遷移先にローカル環境の URL (<a href="http://localhost:3000/callback" target="_blank" rel="noopener noreferrer">http://localhost:3000/callback</a> など) を指定することで動作を確認いただけます。<br>
+<!-- -->検証を行う際は、以下の点にご注意ください。</p>
 <ul>
-<li><strong>コールバック URL の追加設定</strong><br>
-<!-- -->[認証設定] ＞ [外部IDプロバイダ連携] の編集画面にて、コールバック URL にローカル環境の URL（例: <code>http://localhost:3000/callback</code>）を追加してください。</li>
+<li><strong>ドメインの検証ステータス</strong><br>
+<!-- -->[基本設定] ＞ [ドメイン] 画面にて、登録されているドメインのステータスが <strong>「有効（検証済み）」</strong>、 <strong>「独自ドメインによる認証メールの配信が有効になっています。」</strong> になっているかご確認ください。</li>
 </ul>
 <hr>
 <p><strong>Q. APIのレスポンス速度を向上させるための推奨構成を教えてください。</strong><br>
-<!-- -->A. SaaSus Platformは現在、<strong>ap-northeast-1（東京リージョン）</strong> でサービスを提供しております。パフォーマンスを最大限に引き出すため、お客様のアプリケーションサーバーも同じ東京リージョンにデプロイしていただく構成を推奨しております。</p>
+<!-- -->A. SaaSus Platformは現在、<strong>ap-northeast-1（東京リージョン）</strong> でサービスを提供しております。パフォーマンスを最大限に引き  出すため、お客様のアプリケーションサーバーも同じ東京リージョンにデプロイしていただく構成を推奨しております。</p>
 <ul>
 <li>
 <p><strong>リージョンの一致による最適化</strong><br>
@@ -208,20 +209,20 @@
 </li>
 <li>
 <p><strong>運用のヒント</strong><br>
-<!-- -->API開発などで頻繁にトークンが必要になる場合は、リフレッシュトークンによる更新処理を共通の認証ライブラリやミドルウェアに組み込むことで、開発者が意識することなく有効なトークンを使い続ける環境を構築できます。</p>
+<!-- -->API開発などで頻繁にトークンが必要になる場合は、リフレッシュトークンによる更新処理を共通の認証ライブラリやミドルウェアに組み込むことで、開発者が意識することなく有効なトークンを使い続ける環境を構築で  きます。</p>
 </li>
 </ul>
 <hr>
 <p><strong>Q. テナントごとのメータリング（計量項目）の利用状況や、日次の推移を確認することはできますか？</strong></p>
-<p>A. SaaSus Platform では、各テナントの現在の計量値をコンソールや API からご確認いただけます。また、詳細な利用推移を可視化するダッシュボード機能についても、現在提供を計画しております。</p>
+<p>A. SaaSus Platform では、各テナントの現在の計量値をStripeダッシュボードや APIで取得してご確認いただけます。また、詳細な利用推移を可視化するダッシュボード機能についても、現在提供を計画しております。</p>
 <ul>
 <li>
 <p><strong>現在の利用状況の確認</strong><br>
-<!-- -->SaaSus 開発コンソールの「テナント詳細」画面、または SaaSus SDK/API を通じて、各テナントの最新の計量値をリアルタイムに参照可能です。</p>
+<!-- -->SaaSus SDK/API を通じて、各テナントの最新の計量値を参照可能です。</p>
 </li>
 <li>
-<p><strong>Stripe コンソールによる確認</strong><br>
-<!-- -->Stripe 連携を利用されている場合は、Stripe の管理コンソールからも各顧客（テナント）に紐づく計量状況や、請求に関連する利用統計を確認することが可能です。</p>
+<p><strong>Stripeダッシュボードによる確認</strong><br>
+<!-- -->Stripe 連携を利用されている場合は、Stripeダッシュボードからも各顧客（テナント）に紐づく計量状況や、請求に関連する利用統計を確認することが可能です。</p>
 </li>
 <li>
 <p><strong>Amazon EventBridge 連携機能による分析</strong><br>
@@ -233,8 +234,8 @@
 </li>
 </ul>
 <hr>
-<p><strong>Q. ログイン画面の配色を自社のブランドカラーに合わせたり、デザインを自由にカスタマイズしたりすることはできますか？</strong></p>
-<p>A. SaaSus Platform が標準で提供しているログイン画面については、現在カラーカスタマイズや独自デザイン の反映には対応しておりません。</p>
+<p><strong>Q. ログイン画面の配色を自社のブランドカラーに合わせたり、デザインを自由にカスタマイズしたりすることはできます  か？</strong></p>
+<p>A. SaaSus Platform が標準で提供しているログイン画面については、現在カラーカスタマイズや独自デザインの反映には対応しておりません。</p>
 <ul>
 <li>
 <p><strong>自由なデザインを実現する方法</strong><br>
@@ -272,17 +273,50 @@
 </ul>
 <hr>
 <p><strong>Q. 新規ユーザーに対して初期パスワードを発行し、初回ログイン時に任意のパスワードへ変更を促す運用は可能ですか？</strong></p>
-<p>A. はい、SaaSus Platform のユーザー作成 API を活用することで実現可能です。</p>
+<p>A. はい、可能です。SaaSus Platformでは主に2つの方法で、ユーザー自身にパスワードを設定させる（＝初期パスワード発行の手間をなくす）運用が実現できます。</p>
+<ol>
+<li>
+<p><strong>「テナント招待機能」を利用する方法</strong><br>
+<a href="https://docs.saasus.io/ja/docs/reference/auth-api#tag/invitation" target="_blank" rel="noopener noreferrer">テナント招待機能</a>を利用してユーザーを招待することが可能です。テナント招待機能は招待中のユーザ  ーの状態を管理する機能も提供しております。招待メール内のリンクからユーザー自身がパスワードを設定できるフローが構築できます。</p>
 <ul>
 <li>
-<p><strong>初期パスワード設定の仕組み</strong><br>
-<!-- -->ユーザー作成 API（<a href="https://docs.saasus.io/ja/docs/reference/auth-api#tag/saasUser/operation/CreateSaasUser" target="_blank" rel="noopener noreferrer">CreateUser API</a>）を呼び出す際に、パスワードを未設定（空）の状態でコールしてください。この状態でユーザーを作成すると、システムから「パスワード設定用メール」が自動送信されます。</p>
+<p><strong>挙動</strong><br>
+<!-- -->管理者がメールアドレスを指定して招待を送ると、ユーザーに「招待メール」が届きます。この時点ではユーザー作成は完了しておらず、SaaSus Platform上で「招待中」というステータスで管理されます。</p>
 </li>
 <li>
-<p><strong>初回ログイン時のフロー</strong><br>
-<!-- -->利用者は届いたメール内のリンクから、自身で任意のパスワードを設定した上でサービスへログインすることができます。これにより、管理者側で一時的なパスワードを発行・管理する手間を省きつつ、利用者が自ら安全なパスワードを設定して利用を開始するフローを構築できます。</p>
+<p><strong>ログインフロー</strong><br>
+<!-- -->ユーザーはメール内のリンクから専用画面へアクセスし、自身でパスワードを設定した瞬間にアカウント作成とログインが完了します。<br>
+<!-- -->一時パスワードを経由せず、最初から本パスワードを設定するフローとなります。</p>
+</li>
+<li>
+<p><strong>メリット</strong><br>
+<!-- -->「招待中」「承認済み」「期限切れ」といったユーザーの状態をSaaSus Platform側で管理できるため、組織運用に最適です。<br>
+<!-- -->また、招待時に「役割（ロール）」を付与できるため、ログイン後の権限設定まで自動化できます。</p>
 </li>
 </ul>
+</li>
+<li>
+<p>ユーザー作成APIを利用する方法<br>
+<a href="https://docs.saasus.io/ja/docs/reference/auth-api#tag/saasUser/operation/CreateSaasUser" target="_blank" rel="noopener noreferrer">CreateUser API</a> を呼び出す際、パスワードを未設定（空）の状態でリクエストしてください。</p>
+<ul>
+<li>
+<p><strong>挙動</strong><br>
+<!-- -->パスワードが空の状態で作成されると、システムから対象ユーザーへ「パスワード設定用メール」が自動送信されます。</p>
+</li>
+<li>
+<p><strong>ログインフロー</strong><br>
+<!-- -->ユーザーはメール内の一時パスワードを使用してサービスへログインします。<br>
+<!-- -->ログイン完了後、自動的  にパスワード変更画面が表示され、任意のパスワードへの変更が強制される仕組みになっています。</p>
+</li>
+<li>
+<p><strong>メリット・注意点</strong><br>
+<!-- -->管理者が一時パスワードを発行・管理（通知）する手間が省けます。<br>
+<!-- -->ユーザーはメール内の一時パスワードを設定するため、初回ログイン時から安全な状態で利用を開始できます。<br>
+<!-- -->ただし、招待機能とは異なり、「役割（ロール）の付与」や「テナントへの割り当て」については、別途APIを組み合わせて独自に実装する必要があります。</p>
+</li>
+</ul>
+</li>
+</ol>
 <hr>
 <p><strong>Q. ユーザー一覧画面などで、CSVアップロードなどによるユーザーの一括登録を行うことはできますか？</strong></p>
 <p>A. 現在、SaaSus Platform の開発コンソール上には、画面から直接ファイルをアップロードしてユーザーを一括登録する機能は提供しておりません。</p>
@@ -297,7 +331,7 @@
 </li>
 <li>
 <p><strong>初期パスワード設定との組み合わせ</strong><br>
-<!-- -->一括登録時にパスワードを未設定（空）の状態で API をコールすることで、各ユーザーにパスワード設定用メールを一斉送信する運用も可能です。これにより、管理  者が個別にパスワードを発行する手間を最小限に抑えられます。</p>
+<!-- -->一括登録時にパスワードを未設定（空）の状態で API をコールすることで、各ユーザーにパスワード設定用メールを一斉送信する運用も可能です。これにより、管理者が個別にパスワードを発行する手間を最小限に抑えられます。</p>
 </li>
 </ul>
 <hr>
