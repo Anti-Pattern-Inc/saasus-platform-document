@@ -4,7 +4,7 @@ slug: "sign-in"
 excerpt: "Frontend and backend implementation guide for login using SaaSus Platform Login API"
 hidden: false
 createdAt: "Tue Mar 03 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Mar 05 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Wed Apr 02 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 This document explains the implementation of login functionality using the Login API sample application.
@@ -337,12 +337,201 @@ const handleLogout = async () => {
 };
 ```
 
+## ID Login Extension
+
+You can implement an ID authentication method that uses **username + tenant ID** instead of an email address.
+
+ID login can be implemented on its own or alongside email login. The SRP authentication calculation and token verification (`POST /verify`) mechanism is the same as email login; only the challenge request endpoint and parameters differ.
+
+### Overview and Prerequisites
+
+ID login leverages the `login_domain` tenant attribute configured in SaaSus Platform. The backend retrieves tenant information and concatenates `username + login_domain` (e.g., `taro` + `@example.com` = `taro@example.com`) before sending it to the SaaSus Platform Auth API.
+
+#### Prerequisites
+
+- The tenant attribute `login_domain` must be defined in the SaaS Operation Console (e.g., `@example.com`)
+- The target tenant must have a `login_domain` value configured
+- Users must be registered in SaaSus Platform in the format `username + login_domain`
+
+### Frontend Input Fields
+
+For ID login, the frontend accepts the following inputs:
+
+- **Username**: The part before `@` in the email address (e.g., `taro`)
+- **Tenant ID**: The tenant ID to log in to
+- **Password**: The user's password (used only for SRP calculation, never sent to the server)
+
+The tenant ID can also be pre-specified via the URL query parameter `?tenant_id=xxx`. This enables use cases such as distributing tenant-specific login URLs.
+
+### Challenge Request
+
+For ID login, call the `/challenge-id` endpoint instead of the `/challenge` endpoint used for email login.
+
+```typescript
+// Challenge request for ID login
+const challengeResponse = await apiClient.post('/challenge-id', {
+  user_id: userId,
+  tenant_id: tenantId,
+  srp_a: srpA,
+});
+```
+
+The processing after obtaining the challenge (SRP signature calculation, token retrieval via `POST /verify`) is the same as email login.
+
+### POST /challenge-id Endpoint
+
+The challenge endpoint for ID authentication. It accepts `user_id` and `tenant_id` instead of an email address.
+
+#### Request Structure
+
+```go
+// ChallengeIdRequest is the request structure for ID authentication challenge
+type ChallengeIdRequest struct {
+	UserID   string `json:"user_id" binding:"required"`
+	TenantID string `json:"tenant_id" binding:"required"`
+	SrpA     string `json:"srp_a" binding:"required"`
+}
+```
+
+#### Processing Flow
+
+1. Extract `user_id`, `tenant_id`, and `srp_a` from the request body
+2. **Retrieve tenant information**: Get tenant info via the SaaSus Platform Auth API and read the `login_domain` from tenant attributes
+3. **Construct USERNAME**: Concatenate `user_id + login_domain` (e.g., `taro` + `@example.com` = `taro@example.com`)
+4. Call the SaaSus Platform Auth API `/sign-in` to initiate SRP authentication
+5. Return challenge parameters to the frontend
+
+```go
+func challengeId(c echo.Context) error {
+	var req ChallengeIdRequest
+	if err := c.Bind(&req); err != nil {
+		return c.JSON(http.StatusBadRequest, ChallengeResponse{
+			Success: false,
+			Message: "Invalid request format",
+		})
+	}
+
+	ctx := context.Background()
+
+	// Retrieve tenant information and read login_domain attribute
+	tenantResponse, err := authClient.GetTenantWithResponse(ctx, req.TenantID)
+	if err != nil || tenantResponse.JSON200 == nil {
+		return c.JSON(http.StatusBadRequest, ChallengeResponse{
+			Success: false,
+			Message: "Tenant not found",
+		})
+	}
+
+	// Get login_domain from tenant attributes
+	tenant := tenantResponse.JSON200
+	loginDomain := ""
+	if tenant.Attributes != nil {
+		if domain, ok := tenant.Attributes["login_domain"]; ok {
+			if domainStr, ok := domain.(string); ok {
+				loginDomain = domainStr
+			}
+		}
+	}
+
+	if loginDomain == "" {
+		return c.JSON(http.StatusBadRequest, ChallengeResponse{
+			Success: false,
+			Message: "Tenant does not have login_domain attribute configured",
+		})
+	}
+
+	// Construct USERNAME from user_id + login_domain
+	// e.g., "taro" + "@example.com" = "taro@example.com"
+	username := req.UserID + loginDomain
+
+	// Send SignIn request to SaaSus Platform Auth API
+	signInParam := authapi.SignInParam{
+		SignInFlow: authapi.USERSRPAUTH,
+		SignInParameters: &map[string]string{
+			"USERNAME": username,
+			"SRP_A":    req.SrpA,
+		},
+	}
+
+	signInResponse, err := authClient.SignInWithResponse(ctx, signInParam)
+	if err != nil || signInResponse.JSON200 == nil {
+		return c.JSON(http.StatusInternalServerError, ChallengeResponse{
+			Success: false,
+			Message: "SignIn challenge failed",
+		})
+	}
+
+	// Return challenge parameters (subsequent verify flow is shared with email login)
+	signInResult := signInResponse.JSON200
+	challengeParameters := *signInResult.ChallengeParameters
+
+	session := ""
+	if signInResult.Session != nil {
+		session = *signInResult.Session
+	}
+
+	return c.JSON(http.StatusOK, ChallengeResponse{
+		Success:     true,
+		Message:     "Challenge parameters retrieved",
+		SrpB:        challengeParameters["SRP_B"],
+		Salt:        challengeParameters["SALT"],
+		SecretBlock: challengeParameters["SECRET_BLOCK"],
+		PoolName:    challengeParameters["POOL_NAME"],
+		Username:    challengeParameters["USER_ID_FOR_SRP"],
+		Session:     session,
+	})
+}
+```
+
+:::tip Configuring the login_domain Tenant Attribute
+Set `login_domain` in a format that includes `@` and the domain (e.g., `@example.com`). This ensures that when concatenated with `user_id`, it forms a valid email address format.
+:::
+
+### ID Login Processing Flow
+
+```
+Frontend (React)            Backend (Go)               SaaSus Platform Auth API
+     |                           |                           |
+     | 1. user_id + tenant_id    |                           |
+     |    + srp_a                |                           |
+     |-------------------------->|                           |
+     |                           | 2. GetTenant(tenant_id)   |
+     |                           |-------------------------->|
+     |                           |                           |
+     |                           | 3. Get login_domain       |
+     |                           |<--------------------------|
+     |                           |                           |
+     |                           | 4. POST /sign-in          |
+     |                           |  USERNAME=user_id+domain   |
+     |                           |-------------------------->|
+     |                           |                           |
+     |                           | 5. Challenge response      |
+     |                           |<--------------------------|
+     | 6. Challenge parameters   |                           |
+     |<--------------------------|                           |
+     |                           |                           |
+     | 7. SRP signature calc     |                           |
+     |    (in browser)           |                           |
+     |                           |                           |
+     | 8. POST /verify (shared)  |                           |
+     |-------------------------->|                           |
+     |                           | 9. RespondToAuthChallenge  |
+     |                           |-------------------------->|
+     |                           |                           |
+     |                           | 10. Return tokens         |
+     |                           |<--------------------------|
+     | 11. Tokens (Cookie)       |                           |
+     |<--------------------------|                           |
+```
+
+The main difference from email login is in **steps 2–4**. The process of retrieving `login_domain` from tenant information and concatenating it with `user_id` to construct the USERNAME is added. Steps 7 onward (SRP signature calculation and token retrieval via `POST /verify`) are shared.
+
 ## Summary
 
 This document explained the implementation of login functionality using the SaaSus Platform Login API. Key points:
 
 - **SRP protocol-based two-step authentication flow**: Obtain a challenge via `/sign-in` and respond via `/sign-in/challenge`
-- **Hybrid ID/Email login**: Implement conversion logic with a dummy domain on the backend
+- **ID login extension**: Leverage the `login_domain` tenant attribute to enable login with username + tenant ID
 - **`NEW_PASSWORD_REQUIRED` handling**: Implement the password change flow for first-time login
 - **Secure token management with HttpOnly Cookies**: Store tokens in cookies as XSS protection
 - **CSRF protection and logout**: Protection via SameSite attribute and CSRF tokens, session termination via cookie clearing

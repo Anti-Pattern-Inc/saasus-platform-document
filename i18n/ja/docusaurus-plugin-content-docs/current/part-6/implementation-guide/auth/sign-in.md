@@ -4,7 +4,7 @@ slug: "sign-in"
 excerpt: "SaaSus Platform ログインAPIを使ったログイン処理のフロントエンド・バックエンド実装ガイド"
 hidden: false
 createdAt: "Tue Mar 03 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Mar 05 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Wed Apr 02 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 ログインAPIサンプルアプリケーションを題材に、独自ログイン画面からのログイン処理の実装方法を解説します。
@@ -337,12 +337,200 @@ const handleLogout = async () => {
 };
 ```
 
+## IDログイン方式の拡張
+
+メールアドレスの代わりに、**ユーザー名＋テナントID** でログインするID認証方式を実装できます。
+
+IDログインは単独で実装することも、メールアドレスログインと併用することもできます。SRP認証の計算処理やトークン検証（`POST /verify`）の仕組みはメールアドレスログインと同じで、チャレンジリクエストのエンドポイントとパラメータのみが異なります。
+
+### 概要と前提条件
+
+IDログインでは、SaaSus Platform のテナント属性に設定された `login_domain` を利用します。バックエンドがテナント情報を取得し、`ユーザー名 + login_domain`（例: `taro` + `@example.com` = `taro@example.com`）を結合して SaaSus Platform Auth API に送信します。
+
+#### 前提条件
+
+- SaaS運用コンソールでテナント属性 `login_domain` を定義済みであること（例: `@example.com`）
+- 対象テナントに `login_domain` の値が設定済みであること
+- ユーザーが `ユーザー名 + login_domain` の形式でSaaSus Platformに登録済みであること
+
+### フロントエンドの入力項目
+
+IDログインでは、フロントエンドで以下の入力を受け付けます：
+
+- **ユーザー名**: メールアドレスの `@` より前の部分（例: `taro`）
+- **テナントID**: ログイン対象のテナントID
+- **パスワード**: ユーザーのパスワード（SRP計算にのみ使用し、サーバーには送信しない）
+
+テナントIDは、URLクエリパラメータ `?tenant_id=xxx` で事前に指定することもできます。これにより、テナント固有のログインURLを配布するといった運用が可能です。
+
+### チャレンジリクエスト
+
+IDログインでは、メールアドレスログインの `/challenge` の代わりに `/challenge-id` エンドポイントを呼び出します。
+
+```typescript
+// IDログイン時のチャレンジリクエスト
+const challengeResponse = await apiClient.post('/challenge-id', {
+  user_id: userId,
+  tenant_id: tenantId,
+  srp_a: srpA,
+});
+```
+
+チャレンジ取得以降の処理（SRP署名計算、`POST /verify` によるトークン取得）はメールアドレスログインと同じです。
+
+### POST /challenge-id エンドポイント
+
+ID認証用のチャレンジエンドポイントです。メールアドレスの代わりに `user_id` と `tenant_id` を受け取ります。
+
+#### リクエスト構造体
+
+```go
+// ChallengeIdRequest はID認証用チャレンジリクエストの構造体
+type ChallengeIdRequest struct {
+	UserID   string `json:"user_id" binding:"required"`
+	TenantID string `json:"tenant_id" binding:"required"`
+	SrpA     string `json:"srp_a" binding:"required"`
+}
+```
+
+#### 処理の流れ
+
+1. リクエストボディから `user_id`、`tenant_id`、`srp_a` を取得
+2. **テナント情報を取得**: SaaSus Platform Auth API でテナント情報を取得し、テナント属性から `login_domain` を読み取る
+3. **USERNAME を構成**: `user_id + login_domain` を結合（例: `taro` + `@example.com` = `taro@example.com`）
+4. SaaSus Platform Auth API の `/sign-in` を呼び出し、SRP認証を開始
+5. チャレンジパラメータをフロントエンドに返却
+
+```go
+func challengeId(c echo.Context) error {
+	var req ChallengeIdRequest
+	if err := c.Bind(&req); err != nil {
+		return c.JSON(http.StatusBadRequest, ChallengeResponse{
+			Success: false,
+			Message: "Invalid request format",
+		})
+	}
+
+	ctx := context.Background()
+
+	// テナント情報を取得してlogin_domain属性を読み取る
+	tenantResponse, err := authClient.GetTenantWithResponse(ctx, req.TenantID)
+	if err != nil || tenantResponse.JSON200 == nil {
+		return c.JSON(http.StatusBadRequest, ChallengeResponse{
+			Success: false,
+			Message: "Tenant not found",
+		})
+	}
+
+	// テナント属性からlogin_domainを取得
+	tenant := tenantResponse.JSON200
+	loginDomain := ""
+	if tenant.Attributes != nil {
+		if domain, ok := tenant.Attributes["login_domain"]; ok {
+			if domainStr, ok := domain.(string); ok {
+				loginDomain = domainStr
+			}
+		}
+	}
+
+	if loginDomain == "" {
+		return c.JSON(http.StatusBadRequest, ChallengeResponse{
+			Success: false,
+			Message: "Tenant does not have login_domain attribute configured",
+		})
+	}
+
+	// user_id + login_domain でUSERNAMEを構成
+	// 例: "taro" + "@example.com" = "taro@example.com"
+	username := req.UserID + loginDomain
+
+	// SaaSus Platform Auth API にSignInリクエストを送信
+	signInParam := authapi.SignInParam{
+		SignInFlow: authapi.USERSRPAUTH,
+		SignInParameters: &map[string]string{
+			"USERNAME": username,
+			"SRP_A":    req.SrpA,
+		},
+	}
+
+	signInResponse, err := authClient.SignInWithResponse(ctx, signInParam)
+	if err != nil || signInResponse.JSON200 == nil {
+		return c.JSON(http.StatusInternalServerError, ChallengeResponse{
+			Success: false,
+			Message: "SignIn challenge failed",
+		})
+	}
+
+	// チャレンジパラメータを返却（以降はメールアドレスログインと同じverifyフロー）
+	signInResult := signInResponse.JSON200
+	challengeParameters := *signInResult.ChallengeParameters
+
+	session := ""
+	if signInResult.Session != nil {
+		session = *signInResult.Session
+	}
+
+	return c.JSON(http.StatusOK, ChallengeResponse{
+		Success:     true,
+		Message:     "Challenge parameters retrieved",
+		SrpB:        challengeParameters["SRP_B"],
+		Salt:        challengeParameters["SALT"],
+		SecretBlock: challengeParameters["SECRET_BLOCK"],
+		PoolName:    challengeParameters["POOL_NAME"],
+		Username:    challengeParameters["USER_ID_FOR_SRP"],
+		Session:     session,
+	})
+}
+```
+
+:::tip テナント属性 login_domain の設定
+`login_domain` にはメールアドレスの `@` 以降を含む形式で設定します（例: `@example.com`）。これにより `user_id` と結合した際に有効なメールアドレス形式になります。
+:::
+
+### IDログインの処理フロー
+
+```
+Frontend (React)            Backend (Go)               SaaSus Platform Auth API
+     |                           |                           |
+     | 1. user_id + tenant_id    |                           |
+     |    + srp_a                |                           |
+     |-------------------------->|                           |
+     |                           | 2. GetTenant(tenant_id)   |
+     |                           |-------------------------->|
+     |                           |                           |
+     |                           | 3. login_domain 取得       |
+     |                           |<--------------------------|
+     |                           |                           |
+     |                           | 4. POST /sign-in          |
+     |                           |  USERNAME=user_id+domain   |
+     |                           |-------------------------->|
+     |                           |                           |
+     |                           | 5. チャレンジレスポンス      |
+     |                           |<--------------------------|
+     | 6. チャレンジパラメータ     |                           |
+     |<--------------------------|                           |
+     |                           |                           |
+     | 7. SRP署名計算 (ブラウザ内) |                           |
+     |                           |                           |
+     | 8. POST /verify（共通）    |                           |
+     |-------------------------->|                           |
+     |                           | 9. RespondToAuthChallenge  |
+     |                           |-------------------------->|
+     |                           |                           |
+     |                           | 10. トークン返却           |
+     |                           |<--------------------------|
+     | 11. トークン (Cookie)     |                           |
+     |<--------------------------|                           |
+```
+
+メールアドレスログインとの主な差分は **ステップ2〜4** です。テナント情報から `login_domain` を取得し、`user_id` と結合して USERNAME を構成する処理が追加されています。ステップ7以降の SRP 署名計算とトークン取得（`POST /verify`）は共通です。
+
 ## まとめ
 
 本ドキュメントでは、SaaSus Platform ログインAPIを使ったログイン処理の実装方法を解説しました。主なポイントは以下の通りです：
 
 - **SRP プロトコルベースの 2 段階認証フロー**: `/sign-in` でチャレンジを取得し、`/sign-in/challenge` でレスポンスを返す
-- **ID/メールアドレスの併用ログイン**: バックエンドでダミードメインを付与する変換ロジックを実装
+- **IDログイン方式の拡張**: テナント属性 `login_domain` を活用し、ユーザー名＋テナントIDによるログインを実現
 - **`NEW_PASSWORD_REQUIRED` への対応**: 初回ログイン時のパスワード変更フローを実装
 - **HttpOnly Cookie によるセキュアなトークン管理**: XSS 対策としてトークンを Cookie に保存
 - **CSRF 対策とログアウト処理**: SameSite 属性と CSRF トークンによる保護、Cookie クリアによるセッション終了
