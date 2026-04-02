@@ -4,7 +4,7 @@ slug: "overview"
 excerpt: "Overview of implementing custom login UI using SaaSus Platform Login API"
 hidden: false
 createdAt: "Tue Mar 03 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Mar 05 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Wed Apr 02 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 This document provides an overview of implementing login functionality using the SaaSus Platform Login API with a custom login UI.
@@ -102,9 +102,10 @@ The sample application in this implementation guide is built with the following 
 
 ### Implemented Screens and Features
 
-- **Login Screen**: Email address (or ID) + password input form
+- **Login Screen**: Tab UI supporting both email login and ID login
 - **New Password Screen**: Password change on first login
 - **Login API**: SRP authentication flow with SaaSus Platform Auth API
+- **ID Login**: Login with username + tenant ID using the `login_domain` tenant attribute
 - **Token Management**: Secure token storage via HttpOnly Cookies
 - **Logout**: Session termination via cookie clearing
 
