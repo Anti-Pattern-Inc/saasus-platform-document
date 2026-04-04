@@ -333,6 +333,10 @@ app.use("/callback", callbackRouter);
 </Tabs>
 ```
 
+:::caution
+Express ではミドルウェアとルートは登録された順番に処理されます。`app.use("/callback", callbackRouter)` は、`app.ts` 内の 404 ハンドラやエラーハンドラよりも**前**に追加してください。404 ハンドラが先に登録されていると、`/callback` へのリクエストが 404 に吸収され、ログイン時にエラーが発生します。
+:::
+
 `api/routes/callback.ts` を作成し、SaaSus SDK が提供する `CallbackRouteFunction` を使って `/callback` の GET リクエストを処理します。
 
 ```mdx-code-block

@@ -337,6 +337,10 @@ app.use("/callback", callbackRouter);
 </Tabs>
 ```
 
+:::caution
+In Express, middleware and routes are processed in the order they are registered. Make sure to add `app.use("/callback", callbackRouter)` **before** any 404 catch-all handlers or error handlers in `app.ts`. If a 404 handler is registered first, the `/callback` request will be caught by it and will never reach the callback router, causing a login error.
+:::
+
 To handle GET requests to `/callback`, create `api/routes/callback.ts` and use the `CallbackRouteFunction` provided by the SaaSus SDK.
 
 ```mdx-code-block
