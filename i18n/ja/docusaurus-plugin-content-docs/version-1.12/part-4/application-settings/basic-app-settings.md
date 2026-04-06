@@ -4,7 +4,7 @@ slug: "basic-app-settings"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Mon Apr 06 2026 05:28:53 GMT+0000 (Coordinated Universal Time)"
 ---
 
 このページでは、ログイン画面など認証関連画面で使用される情報（サービス名、アイコン、利用規約URL など）を設定します。
@@ -22,6 +22,8 @@ updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 | **アイコン** | ログイン画面左上に表示されるアプリのアイコン画像（推奨サイズ：128px以上の正方形） |
 | **利用規約URL** | ログイン画面下部に表示される「利用規約」リンク先 |
 | **プライバシーポリシーURL** | 同様に「プライバシーポリシー」へのリンク先 |
+| **Google Tag Manager コンテナ ID** | Google Tag Managerのコンテナ IDを設定します。詳しくは[Google Tag Manager 設定](/ja/docs/part-4/application-settings/googletagmanagersetting)をご参照ください。 |
+| **ログインID** | ID認証で作成したユーザーがログインIDでログインするために必要な設定です。このスイッチをONにすると、ログイン画面の入力項目ラベルが「メールアドレス / ログインID」に変更されます。初期状態は「OFF」です。 |
 
 ![編集画面例](/ja/img/part-4/application-settings/basic-app-settings/authorization-screen-customize-02.png)
 

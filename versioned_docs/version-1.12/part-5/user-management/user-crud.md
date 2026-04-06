@@ -4,7 +4,7 @@ slug: "user-crud"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Mon Apr 06 2026 05:28:53 GMT+0000 (Coordinated Universal Time)"
 ---
 
 ## Search Users
@@ -13,7 +13,7 @@ You can filter and search users using the following criteria:
 
 **Available search filters:**
 
-- **ID, Email Address, or Tenant Name**: Text input
+- **ID, Email Address, Login ID, or Tenant Name**: Text input
 - **Tenant**: Text box with autocomplete
 - **Environment**: Select box
 - **Role**: Select box
@@ -24,19 +24,23 @@ You can filter and search users using the following criteria:
 ## Create a New User
 
 Click the "Add User" button at the top right of the screen to open the user registration window.  
-This button is implemented as a select box that allows you to choose from the following actions:
+At the top of the user registration window, you can select one of the following tabs:
 
-- **Add User**: Register a new user in the SaaSus Platform
-- **Add to Tenant**: Assign an already registered user to an additional tenant
+- Create With E-Mail Address: Create a user with email address authentication
+- Create With Sign-In ID: Create a user with login ID authentication
 
-This section explains the input fields when using the **Add User** option.
+The input fields change depending on the selected tab, and only one of "Email Address" or "Login ID" is shown.
+
+This section explains the input fields.
 
 **Input fields:**
 
 | Field           | Description                                                                 |
 |----------------|-----------------------------------------------------------------------------|
-| E-mail Address  | Used as the user's login ID                                                 |
-| Password        | Password for login                                                          |
+| Creation Method | Select the **Create With E-Mail Address** or **Create With Sign-In ID** tab |
+| E-mail Address  | Displayed when **Create With E-Mail Address** is selected. Used for user login |
+| Login ID        | Displayed when **Create With Sign-In ID** is selected (allowed: alphanumeric characters, hyphen (-), underscore (_); max 50 characters) |
+| Password (Optional) | Enter a password for login. If left blank, a temporary password is issued |
 | Tenant          | Select the tenant to associate the user with                                |
 | User Attributes | Fill in predefined user attributes (e.g., Username, Department, Role, etc.) |
 
@@ -45,7 +49,7 @@ This section explains the input fields when using the **Add User** option.
 
 ## Add Existing User to Tenant
 
-Select **"Add to Tenant"** from the dropdown on the "Add User" button to open the tenant assignment window.
+Select **"Add Existing User to Tenant"** from the select box on the "Add User" button to open the tenant assignment window.
 
 This allows you to associate an already registered user with another tenant.
 
@@ -53,7 +57,7 @@ This allows you to associate an already registered user with another tenant.
 
 | Field           | Description                                                               |
 |----------------|---------------------------------------------------------------------------|
-| E-mail Address  | Email address of the existing user to be added                            |
+| E-mail Address / Login ID | Email address or login ID of the existing user to be added       |
 | Tenant          | Select the tenant to assign the user to                                   |
 | User Attributes | Fill in predefined user attributes (e.g., Username, etc.)                 |
 
@@ -69,9 +73,15 @@ Clicking the edit icon opens a window where user information can be modified.
 
 **Editable fields:**
 
-- E-mail Address  
+- E-mail Address (when email address authentication is used)
+- Login ID (when login ID authentication is used)
 - Password (re-entry)
 - User Attributes (e.g., Username, Department, etc.)
+
+**Available actions:**
+
+- Password reset (invalidates the current password and sets a new one)
+- Unlink MFA (the button is shown at the bottom only for users who have MFA configured)
 
 ![Edit screen](/img/part-5/user-management/user-crud/user-edit.png)
 

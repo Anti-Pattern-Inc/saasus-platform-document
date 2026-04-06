@@ -4,7 +4,7 @@ slug: "saasus-platform"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Mar 31 2026 11:08:50 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Mon Apr 06 2026 05:28:53 GMT+0000 (Coordinated Universal Time)"
 ---
 
 **Q. What countermeasures are available when the service goes down?  
@@ -22,7 +22,24 @@ Implementation with a custom frontend is also possible, but it is not recommende
 
 ---
 
-**Q. What is the relationship between user IDs and tenants?**  
+**Q. Can both "Email Address Authentication" and "ID Authentication" be used as user authentication methods?**  
+A. Yes. By selecting the authentication method when creating a user, you can use both email address authentication and ID authentication (login ID authentication).
+
+ - **Email Address Authentication**  
+This is the conventional user authentication using an email address.
+
+ - **ID Authentication (Login ID Authentication)**  
+This method uses any string as a login ID (allowed: alphanumeric characters, hyphen (-), underscore (_); max 50 characters). It supports operations for users without email addresses.
+
+ - **How to Use Both Methods**  
+When creating a user, you can choose either "Email Address" or "Login ID" based on your service requirements. Both methods can coexist within the same tenant.
+
+ - **Login Screen Label Customization**  
+This setting is required for users created with ID authentication to log in using a login ID. By turning ON **Basic Settings > Login ID**, the login input label changes to "Email Address / Login ID".
+
+---
+
+**Q. What is the relationship between users and tenants?**  
 A.  
 - One user can belong to multiple tenants  
 - One tenant can have multiple users registered  
