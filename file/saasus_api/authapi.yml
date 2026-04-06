@@ -160,6 +160,52 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /userinfo/search/sign-in-id:
+    get:
+      tags:
+        - userInfo
+      operationId: GetUserInfoBySignInId
+      summary: Get User Info by Sign-in ID
+      x-summary-i18n:
+        jpn: ログインIDからユーザー情報取得
+      description: |
+        Get user information by sign-in ID.
+      x-description-i18n:
+        jpn: |
+          ログインIDを条件にユーザー情報を取得します
+      parameters:
+        - in: query
+          name: sign_in_id
+          description: |
+            Sign-in ID.
+          x-description-i18n:
+            jpn: |
+              ログインID。
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: User Info
+                x-title-i18n:
+                  jpn: ユーザー情報
+                $ref: '#/components/schemas/UserInfo'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /basic-info:
     get:
       tags:
@@ -445,6 +491,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /users/{user_id}/password/reset:
+    post:
+      tags:
+        - saasUser
+      operationId: ResetSaasUserPassword
+      summary: Reset Password
+      x-summary-i18n:
+        jpn: パスワードをリセット
+      description: |
+        Reset user's login password.
+        The current password will be invalidated and a temporary password will be issued.
+      x-description-i18n:
+        jpn: |
+          ユーザーのログインパスワードをリセットします。
+          現在のパスワードは無効化され、一時パスワードが発行されます。
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaasUserResetPasswordResult'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /users/{user_id}/email:
     patch:
       tags:
@@ -455,9 +537,13 @@ paths:
         jpn: メールアドレスを変更
       description: |
         Change user's email.
+        The user must be an email authentication user.
+        Sign-in ID authentication users cannot change their email.
       x-description-i18n:
         jpn: |
           ユーザーのメールアドレスを変更します。
+          メールアドレス認証のユーザーのみ変更可能です。
+          ログインID認証のユーザーはメールアドレスを変更できません。
       parameters:
         - $ref: '#/components/parameters/UserId'
       requestBody:
@@ -465,6 +551,35 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateSaasUserEmailParam'
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users/{user_id}/sign-in-id:
+    patch:
+      tags:
+        - saasUser
+      operationId: UpdateSaasUserSignInId
+      summary: Change Sign-in ID
+      x-summary-i18n:
+        jpn: ログインIDを変更
+      description: |
+        Change user's sign-in ID.
+      x-description-i18n:
+        jpn: |
+          ユーザーのログインIDを変更します。
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSaasUserSignInIdParam'
       responses:
         '200':
           description: OK
@@ -487,12 +602,14 @@ paths:
         Sends a verification code to the requested email address.
         Requires the user's access token.
         The verification code is valid for 24 hours.
+        This API is only available for email-authenticated users. Sign-in ID authentication users cannot use this API.
       x-description-i18n:
         jpn: |
           ユーザーのメールアドレス変更を要求します。
           要求されたメールアドレスに対して検証コードを送信します。
           ユーザーのアクセストークンが必要です。
           検証コードの有効期限は24時間です。
+          このAPIはメールアドレス認証のユーザーのみ利用可能です。ログインID認証のユーザーは利用できません。
       parameters:
         - $ref: '#/components/parameters/UserId'
       requestBody:
@@ -3119,10 +3236,24 @@ components:
           description: uuid
         email:
           type: string
-          description: E-mail
+          description: |
+            E-mail.
+            For sign-in ID authentication users, this field is an empty string.
           x-description-i18n:
-            jpn: メールアドレス
+            jpn: |
+              メールアドレス。
+              ログインID認証ユーザーの場合は空文字列になります。
           example: hoge@example.com
+        sign_in_id:
+          type: string
+          example: user123
+          description: |
+            Sign-in ID.
+            For email authentication users, this field is an empty string.
+          x-description-i18n:
+            jpn: |
+              ログインID。
+              メールアドレス認証ユーザーの場合は空文字列になります。
         user_attribute:
           type: object
           additionalProperties: true
@@ -3142,8 +3273,33 @@ components:
       required:
         - id
         - email
+        - sign_in_id
         - user_attribute
         - tenants
+      example:
+        id: f94bfffc-8be2-11ec-b41a-0242ac120004
+        email: test@example.com
+        sign_in_id: ''
+        user_attribute:
+          address: 東京都
+          employee_number: 100
+        tenants:
+          - id: d1234567-89ab-cdef-0123-456789abcdef
+            name: Anti-Pattern Inc.
+            completed_sign_up: true
+            envs:
+              - id: 1
+                name: dev
+                display_name: Development
+                roles:
+                  - role_name: admin
+                    display_name: Administrator
+            user_attribute:
+              address: 東京都
+              employee_number: 100
+            back_office_staff_email: test@example.com
+            plan_id: f94bfffc-8be2-11ec-b41a-0242ac120005
+            is_paid: true
     BasicInfo:
       title: Basic Setting Info
       x-title-i18n:
@@ -3273,21 +3429,21 @@ components:
           example: hoge@example.com
           description: |
             E-mail.
-            For sign-in ID authentication users, this field is not set.
+            For sign-in ID authentication users, this field is an empty string.
           x-description-i18n:
             jpn: |
               メールアドレス。
-              ログインID認証ユーザーの場合は設定されません。
+              ログインID認証ユーザーの場合は空文字列になります。
         sign_in_id:
           type: string
           example: user123
           description: |
             Sign-in ID.
-            For email authentication users, this field is not set.
+            For email authentication users, this field is an empty string.
           x-description-i18n:
             jpn: |
               ログインID。
-              メールアドレス認証ユーザーの場合は設定されません。
+              メールアドレス認証ユーザーの場合は空文字列になります。
         attributes:
           type: object
           additionalProperties: true
@@ -3421,21 +3577,21 @@ components:
           example: hoge@example.com
           description: |
             E-mail.
-            For sign-in ID authentication users, this field is not set.
+            For sign-in ID authentication users, this field is an empty string.
           x-description-i18n:
             jpn: |
               メールアドレス。
-              ログインID認証ユーザーの場合は設定されません。
+              ログインID認証ユーザーの場合は空文字列になります。
         sign_in_id:
           type: string
           example: user123
           description: |
             Sign-in ID.
-            For email authentication users, this field is not set.
+            For email authentication users, this field is an empty string.
           x-description-i18n:
             jpn: |
               ログインID。
-              メールアドレス認証ユーザーの場合は設定されません。
+              メールアドレス認証ユーザーの場合は空文字列になります。
         attributes:
           type: object
           additionalProperties: true
@@ -3628,6 +3784,19 @@ components:
             jpn: true を指定すると新しいパスワードを一時パスワードとして設定します（次回サインイン時に変更が必要）
       required:
         - password
+    SaasUserResetPasswordResult:
+      title: SaaS User Reset Password Result
+      x-title-i18n:
+        jpn: SaaSユーザーパスワードリセット結果
+      type: object
+      properties:
+        password:
+          type: string
+          description: |
+            Auto-generated temporary password
+          x-description-i18n:
+            jpn: |
+              自動生成された一時パスワード
     UpdateSaasUserEmailParam:
       title: User E-mail Update Parameter
       x-title-i18n:
@@ -3642,6 +3811,20 @@ components:
             jpn: メールアドレス
       required:
         - email
+    UpdateSaasUserSignInIdParam:
+      title: User Sign-in ID Update Parameter
+      x-title-i18n:
+        jpn: ユーザーのログインID更新パラメータ
+      type: object
+      properties:
+        sign_in_id:
+          type: string
+          example: user_name_01
+          description: Sign-in ID
+          x-description-i18n:
+            jpn: ログインID
+      required:
+        - sign_in_id
     RequestEmailUpdateParam:
       title: Request User Email Update Parameter
       x-title-i18n:
@@ -4868,6 +5051,12 @@ components:
           description: Google Tag Manager container ID
           x-description-i18n:
             jpn: Google Tag Manager コンテナ ID
+        is_sign_in_id_enabled:
+          type: boolean
+          example: false
+          description: display setting for sign-in ID on the sign-in screen
+          x-description-i18n:
+            jpn: ログインIDのログイン画面での表示設定
       required:
         - title
         - terms_of_service_url
