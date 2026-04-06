@@ -4,7 +4,7 @@ slug: "export-user-info-csv"
 excerpt: ""
 hidden: false
 createdAt: "Mon May 27 2024 08:41:59 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon May 27 2024 08:41:59 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Mon Apr 06 2026 05:28:53 GMT+0000 (Coordinated Universal Time)"
 ---
 
 # SaaSus Platform User List CSV Export Procedure
@@ -30,7 +30,7 @@ If the same user has multiple tenants or roles, output as separate rows
 Do not use cache, always retrieve the latest information
 
 [Field Settings]
-Email address = true
+Email address / Login ID = true
 Tenant name = true
 Environment = true
 Role = true
@@ -40,7 +40,7 @@ Role = true
 ; Custom attribute 2 = true
 
 [Field Descriptions]
-Email address: User's email address
+Email address / Login ID: User's email address or login ID (if it contains @, email authentication; if no @, login ID authentication)
 Tenant name: Name of the tenant the user belongs to
 Environment: Environment the user is using (e.g., production, development, test, etc.)
 Role: Role assigned to the user (e.g., administrator, user, guest, etc.)
@@ -62,7 +62,7 @@ Tenant name = Tenant2
 
 [Output Example]
 ; The following is an example of the output CSV
-; Email address,Tenant name,Environment,Role,Name
+; Email address / Login ID,Tenant name,Environment,Role,Name
 ; user1-1@example.com,Tenant1,prod,administrator,User1-1
 ; user1-1@example.com,Tenant1,prod,general user,User1-1
 ; user1-2@example.com,Tenant1,prod,administrator,User1-2
@@ -73,7 +73,7 @@ Tenant name = Tenant2
 
 ### CSV Header
 ```csv
-Email address,Tenant name,Environment,Role
+Email address / Login ID,Tenant name,Environment,Role
 ```
 
 ### Example Data Rows

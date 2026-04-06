@@ -4,7 +4,7 @@ slug: "basic-app-settings"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Mon Apr 06 2026 05:28:53 GMT+0000 (Coordinated Universal Time)"
 ---
 
 This page allows you to configure information used in authentication-related screens, such as the login screen (e.g., service name, icon, and terms of use URL).
@@ -21,6 +21,8 @@ The following items can be edited:
 | **Icon**                 | App icon displayed in the top-left of the login screen (recommended size: square, at least 128px) |
 | **Terms of Use URL**     | URL linked from the “Terms of Use” text at the bottom of the login screen |
 | **Privacy Policy URL**   | URL linked from the “Privacy Policy” text at the bottom of the login screen |
+| **Google Tag Manager Container ID** | Sets the Google Tag Manager container ID. For details, see [Google Tag Manager Settings](/docs/part-4/application-settings/googletagmanagersetting). |
+| **Login ID**             | Required setting for users created with ID authentication to log in using a login ID. When this switch is ON, the login input label changes to “Email Address / Login ID”. The default is OFF. |
 
 ![Example Edit Screen](/img/part-4/application-settings/basic-app-settings/authorization-screen-customize-02.png)
 
