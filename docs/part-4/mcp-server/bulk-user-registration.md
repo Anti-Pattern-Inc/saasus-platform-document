@@ -42,7 +42,7 @@ Please read the saasus_users.csv file and execute bulk user registration using t
 【Important】Please execute all of the following processes automatically:
 
 1. CSV File Reading
-   - Email Address / Login ID: User's email address or login ID (required; if it contains @, registered as email authentication; if no @, registered as login ID authentication)
+   - Email Address / Sign-in ID: User's email address or sign-in ID (required; if it contains @, registered as email authentication; if no @, registered as sign-in ID authentication)
    - Tenant Name: Tenant name (required, separate rows for multiple tenants)
    - Environment: Environment name (required, string like prod/dev/test)
    - Role: Role name (required, single role, separate rows for multiple roles)
@@ -57,9 +57,9 @@ Please read the saasus_users.csv file and execute bulk user registration using t
      3. Get environment ID from environment name, skip the row if it doesn't exist
 
 3. Bulk User Registration
-   - Pre-processing: Read entire CSV file, execute validation, then group data by email address / login ID
-   - User Creation: Create SaaS users on first occurrence of each email address / login ID (for email address: no password, email notification; for login ID: temporary password issued)
-   - Tenant Processing: Create tenant users on first occurrence of each email address / login ID for each tenant and set name attribute
+   - Pre-processing: Read entire CSV file, execute validation, then group data by email address / sign-in ID
+   - User Creation: Create SaaS users on first occurrence of each email address / sign-in ID (for email address: no password, email notification; for sign-in ID: temporary password issued)
+   - Tenant Processing: Create tenant users on first occurrence of each email address / sign-in ID for each tenant and set name attribute
    - Role Processing: Assign specified roles for each row
    - Environment Setting: Get environment ID from environment name specified in CSV environment column and execute role assignment
    - Duplicate Avoidance: Skip creation of existing SaaS users and tenant users, execute only role addition
@@ -77,7 +77,7 @@ Please execute all processes automatically and provide a detailed report at the 
 
 ### File Structure
 ```csv
-email_or_login_id,tenant_name,environment,role,name
+Email address / Sign-in ID,Tenant name,Environment,Role,Name
 user1@example.com,company_a,prod,admin,John Tanaka
 user1@example.com,company_a,prod,user,John Tanaka
 user2@example.com,company_a,prod,user,Jane Sato
@@ -90,11 +90,11 @@ user5@example.com,company_b,prod,user,Misaki Takahashi
 ```
 
 ### Column Descriptions
-- **email_or_login_id**: User's email address or login ID (required; if it contains @, registered as email authentication; if no @, registered as login ID authentication)
-- **tenant_name**: Tenant name to belong to (required, separate rows for multiple tenants, skip if doesn't exist)
-- **environment**: Environment name (required, string like prod/dev/test, skip if doesn't exist)
-- **role**: Role name to assign (required, single role, separate rows for multiple roles, skip if doesn't exist)
-- **name**: User's name (set as attribute, optional)
+- **Email address / Sign-in ID**: User's email address or sign-in ID (required; if it contains @, registered as email authentication; if no @, registered as sign-in ID authentication)
+- **Tenant name**: Tenant name to belong to (required, separate rows for multiple tenants, skip if doesn't exist)
+- **Environment**: Environment name (required, string like prod/dev/test, skip if doesn't exist)
+- **Role**: Role name to assign (required, single role, separate rows for multiple roles, skip if doesn't exist)
+- **Name**: User's name (set as attribute, optional)
 - **Custom Attributes**: All columns to the right of role are treated as custom attributes (optional, error at CSV reading time if attribute doesn't exist)
 
 ### Handling Multiple Tenants and Roles
@@ -108,7 +108,7 @@ user5@example.com,company_b,prod,user,Misaki Takahashi
 CSV files exported using [User List CSV Export Procedure](./export-user-info-csv.md) can be used directly. The CSV exported by the export function is fully compatible with the format expected by this bulk registration function.
 
 **Important**: When using the export function, ensure the following required items for bulk registration are configured to be output:
-- Email Address / Login ID = true
+- Email Address / Sign-in ID = true
 - Tenant Name = true
 - Environment = true
 - Role = true

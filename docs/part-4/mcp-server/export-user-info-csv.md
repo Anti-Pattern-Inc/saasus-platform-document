@@ -30,7 +30,7 @@ If the same user has multiple tenants or roles, output as separate rows
 Do not use cache, always retrieve the latest information
 
 [Field Settings]
-Email address / Login ID = true
+Email address / Sign-in ID = true
 Tenant name = true
 Environment = true
 Role = true
@@ -40,7 +40,7 @@ Role = true
 ; Custom attribute 2 = true
 
 [Field Descriptions]
-Email address / Login ID: User's email address or login ID (if it contains @, email authentication; if no @, login ID authentication)
+Email address / Sign-in ID: User's email address or sign-in ID (if it contains @, email authentication; if no @, sign-in ID authentication)
 Tenant name: Name of the tenant the user belongs to
 Environment: Environment the user is using (e.g., production, development, test, etc.)
 Role: Role assigned to the user (e.g., administrator, user, guest, etc.)
@@ -62,7 +62,7 @@ Tenant name = Tenant2
 
 [Output Example]
 ; The following is an example of the output CSV
-; Email address / Login ID,Tenant name,Environment,Role,Name
+; Email address / Sign-in ID,Tenant name,Environment,Role,Name
 ; user1-1@example.com,Tenant1,prod,administrator,User1-1
 ; user1-1@example.com,Tenant1,prod,general user,User1-1
 ; user1-2@example.com,Tenant1,prod,administrator,User1-2
@@ -73,7 +73,7 @@ Tenant name = Tenant2
 
 ### CSV Header
 ```csv
-Email address / Login ID,Tenant name,Environment,Role
+Email address / Sign-in ID,Tenant name,Environment,Role
 ```
 
 ### Example Data Rows

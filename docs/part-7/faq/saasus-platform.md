@@ -32,10 +32,10 @@ This is the conventional user authentication using an email address.
 This method uses any string as a login ID (allowed: alphanumeric characters, hyphen (-), underscore (_); max 50 characters). It supports operations for users without email addresses.
 
  - **How to Use Both Methods**  
-When creating a user, you can choose either "Email Address" or "Login ID" based on your service requirements. Both methods can coexist within the same tenant.
+When creating a user, you can choose either "Email Address" or "Sign-in ID" based on your service requirements. Both methods can coexist within the same tenant.
 
  - **Login Screen Label Customization**  
-This setting is required for users created with ID authentication to log in using a login ID. By turning ON **Basic Settings > Login ID**, the login input label changes to "Email Address / Login ID".
+This setting is required for users created with ID authentication to log in using a sign-in ID. By turning ON **Basic Settings > Sign-in ID**, the login input label changes to "Email Address / Sign-in ID".
 
 ---
 

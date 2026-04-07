@@ -79,7 +79,7 @@ Secure access control to your SaaS application.
   When a user logs in, ID, access, and refresh tokens are issued. Subsequent API requests include these tokens for authentication.
 
 - **Selectable login methods**  
-  Standard authentication with email address or Login ID and password is available, as well as Google social login.
+  Standard authentication with email address or Sign-in ID and password is available, as well as Google social login.
 
 - **Role‑based user permissions**  
   Define roles (e.g., administrator, general user) so only authorized users can perform privileged actions.

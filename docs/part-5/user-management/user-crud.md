@@ -13,7 +13,7 @@ You can filter and search users using the following criteria:
 
 **Available search filters:**
 
-- **ID, Email Address, Login ID, or Tenant Name**: Text input
+- **ID, Email Address, Sign-in ID, or Tenant Name**: Text input
 - **Tenant**: Text box with autocomplete
 - **Environment**: Select box
 - **Role**: Select box
@@ -29,7 +29,7 @@ At the top of the user registration window, you can select one of the following 
 - Create With E-Mail Address: Create a user with email address authentication
 - Create With Sign-In ID: Create a user with login ID authentication
 
-The input fields change depending on the selected tab, and only one of "Email Address" or "Login ID" is shown.
+The input fields change depending on the selected tab, and only one of "Email Address" or "Sign-in ID" is shown.
 
 This section explains the input fields.
 
@@ -39,7 +39,7 @@ This section explains the input fields.
 |----------------|-----------------------------------------------------------------------------|
 | Creation Method | Select the **Create With E-Mail Address** or **Create With Sign-In ID** tab |
 | E-mail Address  | Displayed when **Create With E-Mail Address** is selected. Used for user login |
-| Login ID        | Displayed when **Create With Sign-In ID** is selected (allowed: alphanumeric characters, hyphen (-), underscore (_); max 50 characters) |
+| Sign-in ID      | Displayed when **Create With Sign-In ID** is selected (allowed: alphanumeric characters, hyphen (-), underscore (_); max 50 characters) |
 | Password (Optional) | Enter a password for login. If left blank, a temporary password is issued |
 | Tenant          | Select the tenant to associate the user with                                |
 | User Attributes | Fill in predefined user attributes (e.g., Username, Department, Role, etc.) |
@@ -74,7 +74,7 @@ Clicking the edit icon opens a window where user information can be modified.
 **Editable fields:**
 
 - E-mail Address (when email address authentication is used)
-- Login ID (when login ID authentication is used)
+- Sign-in ID (when login ID authentication is used)
 - Password (re-entry)
 - User Attributes (e.g., Username, Department, etc.)
 
