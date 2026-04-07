@@ -27,9 +27,16 @@ Click the "Add User" button at the top right of the screen to open the user regi
 At the top of the user registration window, you can select one of the following tabs:
 
 - Create With E-Mail Address: Create a user with email address authentication
-- Create With Sign-In ID: Create a user with login ID authentication
+- Create With Sign-In ID: Create a user with sign-in ID authentication
 
 The input fields change depending on the selected tab, and only one of "Email Address" or "Sign-in ID" is shown.
+
+:::warning Important
+To allow users created with "Create With Sign-In ID" to log in, you need to turn ON
+**Advanced Settings > Basics > Sign-in ID** and enable
+**"Add Sign-in ID label"**.
+If this is OFF, ID authentication users can be created, but they cannot log in with sign-in ID on the login screen.
+:::
 
 This section explains the input fields.
 
@@ -57,7 +64,7 @@ This allows you to associate an already registered user with another tenant.
 
 | Field           | Description                                                               |
 |----------------|---------------------------------------------------------------------------|
-| E-mail Address / Login ID | Email address or login ID of the existing user to be added       |
+| E-mail Address / Sign-in ID | Email address or sign-in ID of the existing user to be added       |
 | Tenant          | Select the tenant to assign the user to                                   |
 | User Attributes | Fill in predefined user attributes (e.g., Username, etc.)                 |
 
@@ -74,7 +81,7 @@ Clicking the edit icon opens a window where user information can be modified.
 **Editable fields:**
 
 - E-mail Address (when email address authentication is used)
-- Sign-in ID (when login ID authentication is used)
+- Sign-in ID (when sign-in ID authentication is used)
 - Password (re-entry)
 - User Attributes (e.g., Username, Department, etc.)
 
