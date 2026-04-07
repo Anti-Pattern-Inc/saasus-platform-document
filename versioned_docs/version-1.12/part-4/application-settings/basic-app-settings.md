@@ -22,7 +22,7 @@ The following items can be edited:
 | **Terms of Use URL**     | URL linked from the “Terms of Use” text at the bottom of the login screen |
 | **Privacy Policy URL**   | URL linked from the “Privacy Policy” text at the bottom of the login screen |
 | **Google Tag Manager Container ID** | Sets the Google Tag Manager container ID. For details, see [Google Tag Manager Settings](/docs/part-4/application-settings/googletagmanagersetting). |
-| **Login ID**             | Required setting for users created with ID authentication to log in using a login ID. When this switch is ON, the login input label changes to “Email Address / Login ID”. The default is OFF. |
+| **Sign-in ID**             | Required setting for users created with ID authentication to log in using a sign-in ID. When this switch is ON, the login input label changes to “Email Address / Sign-in ID”. The default is OFF. |
 
 ![Example Edit Screen](/img/part-4/application-settings/basic-app-settings/authorization-screen-customize-02.png)
 
