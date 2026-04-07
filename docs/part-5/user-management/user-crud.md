@@ -47,7 +47,7 @@ This section explains the input fields.
 | Creation Method | Select the **Create With E-Mail Address** or **Create With Sign-In ID** tab |
 | E-mail Address  | Displayed when **Create With E-Mail Address** is selected. Used for user login |
 | Sign-in ID      | Displayed when **Create With Sign-In ID** is selected (allowed: alphanumeric characters, hyphen (-), underscore (_); max 50 characters) |
-| Password (Optional) | Enter a password for login. If left blank, a temporary password is issued |
+| Password (Optional) | Enter a password for login. If left blank, a temporary password is issued<br/>When **Create With E-Mail Address** is selected, if the password is left blank, a temporary password will be sent to that email address |
 | Tenant          | Select the tenant to associate the user with                                |
 | User Attributes | Fill in predefined user attributes (e.g., Username, Department, Role, etc.) |
 
