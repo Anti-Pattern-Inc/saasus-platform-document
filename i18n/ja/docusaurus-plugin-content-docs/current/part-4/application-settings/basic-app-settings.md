@@ -23,7 +23,7 @@ updatedAt: "Mon Apr 06 2026 05:28:53 GMT+0000 (Coordinated Universal Time)"
 | **利用規約URL** | ログイン画面下部に表示される「利用規約」リンク先 |
 | **プライバシーポリシーURL** | 同様に「プライバシーポリシー」へのリンク先 |
 | **Google Tag Manager コンテナ ID** | Google Tag Managerのコンテナ IDを設定します。詳しくは[Google Tag Manager 設定](/ja/docs/part-4/application-settings/googletagmanagersetting)をご参照ください。 |
-| **ログインID** | ID認証で作成したユーザーがログインIDでログインするために必要な設定です。このスイッチをONにすると、ログイン画面の入力項目ラベルが「メールアドレス / ログインID」に変更されます。初期状態は「OFF」です。 |
+| **ログインID** | 「ログインIDでの認証を許可する」 スイッチをONにすると、ログイン画面の入力ラベルが「メールアドレス / ログインID」に変更されます。<br /> OFFの場合、ログインIDが設定されているユーザーであっても、ログイン画面でログインIDを利用することはできません。|
 
 ![編集画面例](/ja/img/part-4/application-settings/basic-app-settings/authorization-screen-customize-02.png)
 

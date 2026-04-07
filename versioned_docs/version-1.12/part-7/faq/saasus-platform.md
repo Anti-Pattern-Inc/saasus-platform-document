@@ -23,19 +23,17 @@ Implementation with a custom frontend is also possible, but it is not recommende
 ---
 
 **Q. Can both "Email Address Authentication" and "ID Authentication" be used as user authentication methods?**  
-A. Yes. By selecting the authentication method when creating a user, you can use both email address authentication and ID authentication (login ID authentication).
+A. Yes. By selecting the authentication method when creating a user, you can use both email address authentication and ID authentication (sign-in ID authentication).
 
  - **Email Address Authentication**  
 This is the conventional user authentication using an email address.
 
- - **ID Authentication (Login ID Authentication)**  
-This method uses any string as a login ID (allowed: alphanumeric characters, hyphen (-), underscore (_); max 50 characters). It supports operations for users without email addresses.
+ - **ID Authentication (Sign-in ID Authentication)**  
+This method uses any string as a sign-in ID (allowed: alphanumeric characters, hyphen (-), underscore (_); max 50 characters). It supports use cases for users without email addresses or when you do not want to use an email address as the login input method.  
+To log in using ID authentication, you need to turn ON the "Add Sign-in ID label" switch under Advanced Settings > Basics > Sign-in ID.
 
  - **How to Use Both Methods**  
 When creating a user, you can choose either "Email Address" or "Sign-in ID" based on your service requirements. Both methods can coexist within the same tenant.
-
- - **Login Screen Label Customization**  
-This setting is required for users created with ID authentication to log in using a sign-in ID. By turning ON **Basic Settings > Sign-in ID**, the login input label changes to "Email Address / Sign-in ID".
 
 ---
 
