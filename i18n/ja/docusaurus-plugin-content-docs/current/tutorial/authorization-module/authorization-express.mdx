@@ -1,0 +1,83 @@
+---
+sidebar_position: 2
+title: "Express"
+slug: "authorization-express"
+pagination_prev: tutorial/implementation-of-authorization-based-on-tenant-information
+pagination_next: tutorial/summarize
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+### Express 実装例
+
+`api/controllers/chat.ts` へ `import文` を追加し、`postChats` メソッドを書き換えます。
+
+```mdx-code-block
+<Tabs>
+<TabItem value="express" label="Express" default>
+```
+
+```js
+import { UpdateMeteringUnitTimestampCountNowParam } from "saasus-sdk/dist/generated/Pricing";
+import { findUpperCountByMeteringUnitName, PricingClient } from "saasus-sdk";
+
+// 他のコードは省略
+
+const postChats = async (req: Request, res: Response) => {
+  const mes = req.body.message;
+  const tenantId = req.userInfo?.tenants[0].id || "";
+  const planId = req.userInfo?.tenants[0].plan_id || "";
+  const userName =
+    req.userInfo?.tenants[0].user_attribute.username;
+  try {
+    const pricingClient = new PricingClient();
+    const pricingPlan = await pricingClient.pricingPlansApi.getPricingPlan(
+      planId
+    );
+
+    // メータリングのメータ、comment_count(コメント数)を使う
+    const meteringUnitName = "comment_count";
+    const meteringUnitCountData =
+      await pricingClient.meteringApi.getMeteringUnitDateCountByTenantIdAndUnitNameToday(
+        tenantId,
+        meteringUnitName
+      );
+
+    // メータリングの上限コメント数を取得
+    const upper = findUpperCountByMeteringUnitName(
+      pricingPlan.data,
+      meteringUnitName
+    );
+
+    // 現在契約中の料金プランの上限コメント数を超えていたら、投稿できなくする
+    if (meteringUnitCountData.data.count < upper || upper === 0) {
+      await db.Messages.create({
+        tenant_id: tenantId,
+        user_id: userName,
+        message: mes,
+      });
+
+      // メータリングAPIで、コメント数に１を足す
+      let param: UpdateMeteringUnitTimestampCountNowParam = {
+        method: "add",
+        count: 1,
+      };
+      const res =
+        await pricingClient.meteringApi.updateMeteringUnitTimestampCountNow(
+          tenantId,
+          meteringUnitName,
+          param
+        );
+    }
+  } catch (error) {
+    console.error(error);
+  }
+  res.redirect("/chat");
+};
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
