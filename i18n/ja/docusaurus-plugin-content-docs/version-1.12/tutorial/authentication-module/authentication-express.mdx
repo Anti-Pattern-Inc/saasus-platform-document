@@ -118,7 +118,11 @@ router.get("/", getChats);
 
 先ほど SaaS開発コンソールでコールバック先を [http://localhost/callback](http://localhost/callback) と定義したので、`/callback` で受け取れるようにします。
 
-`api/app.ts` に `import文` と `app.use` を追加し、`/callback` パスのリクエストを処理するルーターを組み込みます。
+`api/app.ts` に `import文` と `app.use("/callback", callbackRouter)` を追加し、`404` ハンドラーより前に `/callback` パスのリクエストを処理するルーターを組み込みます。
+
+:::caution
+Express ではミドルウェアとルートは登録された順番に処理されます。`app.use("/callback", callbackRouter)` は、`app.ts` 内の 404 ハンドラやエラーハンドラよりも**前**に追加してください。404 ハンドラが先に登録されていると、`/callback` へのリクエストが 404 に吸収され、ログイン時にエラーが発生します。
+:::
 
 ```mdx-code-block
 <Tabs>
@@ -130,7 +134,12 @@ import { router as callbackRouter } from "./routes/callback";
 
 // 他のコードは省略
 
+app.use("/login", loginRouter);
 app.use("/callback", callbackRouter);
+
+app.use((req: Request, res: Response, next: NextFunction) => {
+  next(createError(404));
+});
 ```
 
 ```mdx-code-block
