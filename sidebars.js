@@ -451,6 +451,20 @@ const sidebars = {
         "tutorial/authentication-preference",
         {
           type: "category",
+          label: "Incorporating Authentication Module",
+          link: {
+            type: "generated-index",
+            title: "Incorporating Authentication Module",
+            description: "Select your framework and follow the authentication integration steps.",
+            slug: "/tutorial/authentication-module",
+          },
+          items: [
+            "tutorial/authentication-module/authentication-laravel",
+            "tutorial/authentication-module/authentication-express",
+          ],
+        },
+        {
+          type: "category",
           label: "Manage Rate Plans",
           link: {
             type: "doc",
@@ -460,7 +474,18 @@ const sidebars = {
             "tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans",
           ],
         },
-        "tutorial/implementation-of-authorization-based-on-tenant-information",
+        {
+          type: "category",
+          label: "Implementation of authorization based on tenant information",
+          link: {
+            type: "doc",
+            id: "tutorial/implementation-of-authorization-based-on-tenant-information",
+          },
+          items: [
+            "tutorial/authorization-module/authorization-laravel",
+            "tutorial/authorization-module/authorization-express",
+          ],
+        },
         "tutorial/summarize",
       ],
     },
