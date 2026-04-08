@@ -119,7 +119,7 @@ router.get("/", getChats);
 
 Earlier, you defined the callback URL in the SaaS Development Console as:
 
-- [http://localhost:3000/callback](http://localhost:3000/callback)
+- [http://localhost/callback](http://localhost/callback)
 
 Add an `import` statement and `app.use` to `api/app.ts` to include the router that handles requests to the `/callback` path.
 
@@ -283,7 +283,7 @@ repo$ docker compose logs -f
 
 You can see that the user information and tenant information that were set in SaaSus Platform earlier can be obtained on the application side.
 
-The redirect destination URL is now received by the SaaSus SDK standard Callback process ([http://localhost:3000/callback](http://localhost:3000/callback)), and in that process, the browser's Local Storage or remember authentication information in a cookie.
+The redirect destination URL is now received by the SaaSus SDK standard Callback process ([http://localhost/callback](http://localhost/callback)), and in that process, the browser's Local Storage or remember authentication information in a cookie.
 
 Then, the SaaSus SDK's Auth Middleware uses the SaaSus Platform to verify the authentication information, retrieve the user information, and pack it into the Request object.
 
