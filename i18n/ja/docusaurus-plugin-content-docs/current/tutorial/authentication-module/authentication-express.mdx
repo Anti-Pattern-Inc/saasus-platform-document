@@ -116,7 +116,7 @@ router.get("/", getChats);
 
 ### Callback URL の処理を実装する
 
-先ほど SaaS開発コンソールでコールバック先を [http://localhost:3000/callback](http://localhost:3000/callback) と定義したので、`/callback` で受け取れるようにします。
+先ほど SaaS開発コンソールでコールバック先を [http://localhost/callback](http://localhost/callback) と定義したので、`/callback` で受け取れるようにします。
 
 `api/app.ts` に `import文` と `app.use` を追加し、`/callback` パスのリクエストを処理するルーターを組み込みます。
 
@@ -280,7 +280,7 @@ repo$ docker compose logs -f
 
 アプリケーション側で、先ほど SaaSus Platform で設定したユーザ情報、テナント情報が取得できているのがわかります。
 
-リダイレクト先の URL は、今回 SaaSus SDK 標準の Callback 処理で受けるようになっており([http://localhost:3000/callback](http://localhost:3000/callback))、その処理の中でブラウザの Local Storage や Cookie の中に認証情報を記憶します。
+リダイレクト先の URL は、今回 SaaSus SDK 標準の Callback 処理で受けるようになっており([http://localhost/callback](http://localhost/callback))、その処理の中でブラウザの Local Storage や Cookie の中に認証情報を記憶します。
 
 そして、SaaSus SDK の Auth Middleware で、SaaSus Platform を利用し認証情報を検証しユーザ情報を取得して Request オブジェクトに詰めます。
 
