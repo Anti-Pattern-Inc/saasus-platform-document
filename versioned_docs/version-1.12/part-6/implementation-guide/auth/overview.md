@@ -1,27 +1,27 @@
 ---
-title: "Login API Implementation Guide Overview"
+title: "Auth API Implementation Guide Overview"
 slug: "overview"
-excerpt: "Overview of implementing custom login UI using SaaSus Platform Login API"
+excerpt: "Overview of implementing custom login UI using SaaSus Platform Auth API"
 hidden: false
 createdAt: "Tue Mar 03 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Wed Apr 02 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
-This document provides an overview of implementing login functionality using the SaaSus Platform Login API with a custom login UI.
+This document provides an overview of implementing login functionality using the SaaSus Platform Auth API with a custom login UI.
 
 :::info
 For detailed implementation code, see [Login Implementation](/docs/part-6/implementation-guide/auth/sign-in).
 :::
 
-## What is the Login API?
+## What is the Auth API?
 
-The Login API allows SaaS providers to implement login functionality from their own custom-built UI, without using the standard hosted login screen provided by SaaSus Platform.
+The Auth API allows SaaS providers to implement login functionality from their own custom-built UI, without using the standard hosted login screen provided by SaaSus Platform.
 
 By calling the SaaSus Platform Auth API (`/sign-in` and `/sign-in/challenge`) from your server-side application, you can obtain ID tokens, access tokens, and refresh tokens for subsequent API calls and authorization.
 
-This document explains how to implement login functionality using a custom login UI with the Login API.
+This document explains how to implement login functionality using a custom login UI with the Auth API.
 
-## What You Can Do with the Login API
+## What You Can Do with the Auth API
 
 ### Custom Login UI with Email + Password Authentication
 
@@ -33,7 +33,7 @@ Upon successful authentication, you can obtain the tokens required for SaaSus Pl
 
 ## Authentication Flow and Architecture
 
-The Login API is based on a **two-step authentication flow** using the Secure Remote Password (SRP) protocol. Instead of simply sending a password, it performs authentication securely through a challenge-and-response mechanism.
+The Auth API is based on a **two-step authentication flow** using the Secure Remote Password (SRP) protocol. Instead of simply sending a password, it performs authentication securely through a challenge-and-response mechanism.
 
 ### Authentication Flow Overview
 
@@ -104,7 +104,7 @@ The sample application in this implementation guide is built with the following 
 
 - **Login Screen**: Tab UI supporting both email login and ID login
 - **New Password Screen**: Password change on first login
-- **Login API**: SRP authentication flow with SaaSus Platform Auth API
+- **Auth API**: SRP authentication flow with SaaSus Platform Auth API
 - **ID Login**: Login with username + tenant ID using the `login_domain` tenant attribute
 - **Token Management**: Secure token storage via HttpOnly Cookies
 - **Logout**: Session termination via cookie clearing
