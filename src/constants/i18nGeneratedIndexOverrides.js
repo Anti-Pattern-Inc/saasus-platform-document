@@ -55,8 +55,8 @@ export const generatedIndexOverrides = {
     },
     '/part-6/implementation-guide/auth': {
       ja: {
-        title: 'ログインAPI',
-        description: 'SaaSus Platform ログインAPIを使った独自ログイン画面の実装ガイド',
+        title: '認証API',
+        description: 'SaaSus Platform認証APIを使った独自ログイン画面の実装ガイド',
       }
     },
     '/part-7/faq': {

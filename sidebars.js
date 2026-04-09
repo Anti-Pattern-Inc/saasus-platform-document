@@ -370,12 +370,12 @@ const sidebars = {
             },
             {
               type: "category",
-              label: "Login API",
+              label: "Auth API",
               link: {
                 type: "generated-index",
-                title: "Login API",
+                title: "Auth API",
                 description:
-                  "Implementation guide for custom login UI using SaaSus Platform Login API.",
+                  "Implementation guide for custom login UI using SaaSus Platform Auth API.",
                 slug: "/part-6/implementation-guide/auth",
               },
               items: [
