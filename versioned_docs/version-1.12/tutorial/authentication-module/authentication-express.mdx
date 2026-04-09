@@ -121,10 +121,10 @@ Earlier, you defined the callback URL in the SaaS Development Console as:
 
 - [http://localhost/callback](http://localhost/callback)
 
-Add an `import` statement and `app.use("/callback", callbackRouter)` to `api/app.ts` so that the router handling `/callback` is registered before the `404` handler.
+Add an `import` statement and `app.use("/callback", callbackRouter)` to `api/app.ts`, placing it immediately after `app.use("/login", loginRouter);` and before the 404 handler.
 
 :::caution
-In Express, middleware and routes are processed in the order they are registered. Make sure to add `app.use("/callback", callbackRouter)` **before** any 404 catch-all handlers or error handlers in `app.ts`. If a 404 handler is registered first, the `/callback` request will be caught by it and will never reach the callback router, causing a login error.
+In Express, middleware and routes are processed in the order they are registered. If a 404 handler is registered first, the `/callback` request will be caught by it and will never reach the callback router, causing a login error.
 :::
 
 ```mdx-code-block
