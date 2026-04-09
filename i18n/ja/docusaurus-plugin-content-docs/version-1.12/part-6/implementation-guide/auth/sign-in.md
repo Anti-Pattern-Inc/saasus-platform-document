@@ -1,16 +1,16 @@
 ---
 title: "ログイン処理の実装"
 slug: "sign-in"
-excerpt: "SaaSus Platform ログインAPIを使ったログイン処理のフロントエンド・バックエンド実装ガイド"
+excerpt: "SaaSus Platform 認証APIを使ったログイン処理のフロントエンド・バックエンド実装ガイド"
 hidden: false
 createdAt: "Tue Mar 03 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Wed Apr 02 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
-ログインAPIサンプルアプリケーションを題材に、独自ログイン画面からのログイン処理の実装方法を解説します。
+認証APIサンプルアプリケーションを題材に、独自ログイン画面からのログイン処理の実装方法を解説します。
 
 :::info
-ログインAPIの概要やフローについては、[ログインAPI実装ガイド概要](/docs/part-6/implementation-guide/auth/overview)をご参照ください。
+認証APIの概要やフローについては、[認証API実装ガイド概要](/docs/part-6/implementation-guide/auth/overview)をご参照ください。
 :::
 
 ## フロントエンド実装
@@ -489,45 +489,41 @@ func challengeId(c echo.Context) error {
 
 ### IDログインの処理フロー
 
-```
-Frontend (React)            Backend (Go)               SaaSus Platform Auth API
-     |                           |                           |
-     | 1. user_id + tenant_id    |                           |
-     |    + srp_a                |                           |
-     |-------------------------->|                           |
-     |                           | 2. GetTenant(tenant_id)   |
-     |                           |-------------------------->|
-     |                           |                           |
-     |                           | 3. login_domain 取得       |
-     |                           |<--------------------------|
-     |                           |                           |
-     |                           | 4. POST /sign-in          |
-     |                           |  USERNAME=user_id+domain   |
-     |                           |-------------------------->|
-     |                           |                           |
-     |                           | 5. チャレンジレスポンス      |
-     |                           |<--------------------------|
-     | 6. チャレンジパラメータ     |                           |
-     |<--------------------------|                           |
-     |                           |                           |
-     | 7. SRP署名計算 (ブラウザ内) |                           |
-     |                           |                           |
-     | 8. POST /verify（共通）    |                           |
-     |-------------------------->|                           |
-     |                           | 9. RespondToAuthChallenge  |
-     |                           |-------------------------->|
-     |                           |                           |
-     |                           | 10. トークン返却           |
-     |                           |<--------------------------|
-     | 11. トークン (Cookie)     |                           |
-     |<--------------------------|                           |
+```mermaid
+sequenceDiagram
+    participant F as フロントエンド(React)
+    participant B as バックエンド(Go)
+    participant A as SaaSus Platform Auth API
+
+    F->>B: 1. user_id + tenant_id + srp_a を送信
+
+    rect rgba(232, 245, 233, 1)
+      B->>A: 2. GetTenant(tenant_id)
+      A-->>B: 3. login_domain 取得
+    end
+
+    rect rgba(232, 245, 233, 1)
+      B->>A: 4. POST /sign-in (USERNAME=user_id+domain)
+      A-->>B: 5. チャレンジレスポンス
+    end
+
+    B-->>F: 6. チャレンジパラメータ
+
+    Note over F: 7. SRP署名計算 (ブラウザ内)
+
+    rect rgba(232, 245, 233, 1)
+      F->>B: 8. POST /verify（共通）
+      B->>A: 9. RespondToAuthChallenge
+      A-->>B: 10. トークン返却
+      B-->>F: 11. トークン (Cookie)
+    end
 ```
 
 メールアドレスログインとの主な差分は **ステップ2〜4** です。テナント情報から `login_domain` を取得し、`user_id` と結合して USERNAME を構成する処理が追加されています。ステップ7以降の SRP 署名計算とトークン取得（`POST /verify`）は共通です。
 
 ## まとめ
 
-本ドキュメントでは、SaaSus Platform ログインAPIを使ったログイン処理の実装方法を解説しました。主なポイントは以下の通りです：
+本ドキュメントでは、SaaSus Platform 認証APIを使ったログイン処理の実装方法を解説しました。主なポイントは以下の通りです：
 
 - **SRP プロトコルベースの 2 段階認証フロー**: `/sign-in` でチャレンジを取得し、`/sign-in/challenge` でレスポンスを返す
 - **IDログイン方式の拡張**: テナント属性 `login_domain` を活用し、ユーザー名＋テナントIDによるログインを実現
