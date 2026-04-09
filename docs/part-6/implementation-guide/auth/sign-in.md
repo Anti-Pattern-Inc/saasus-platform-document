@@ -1,16 +1,16 @@
 ---
 title: "Login Implementation"
 slug: "sign-in"
-excerpt: "Frontend and backend implementation guide for login using SaaSus Platform Login API"
+excerpt: "Frontend and backend implementation guide for login using SaaSus Platform Auth API"
 hidden: false
 createdAt: "Tue Mar 03 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Wed Apr 02 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
-This document explains the implementation of login functionality using the Login API sample application.
+This document explains the implementation of login functionality using the Auth API sample application.
 
 :::info
-For an overview of the Login API and its flow, see [Login API Implementation Guide Overview](/docs/part-6/implementation-guide/auth/overview).
+For an overview of the Auth API and its flow, see [Auth API Implementation Guide Overview](/docs/part-6/implementation-guide/auth/overview).
 :::
 
 ## Frontend Implementation
@@ -489,46 +489,41 @@ Set `login_domain` in a format that includes `@` and the domain (e.g., `@example
 
 ### ID Login Processing Flow
 
-```
-Frontend (React)            Backend (Go)               SaaSus Platform Auth API
-     |                           |                           |
-     | 1. user_id + tenant_id    |                           |
-     |    + srp_a                |                           |
-     |-------------------------->|                           |
-     |                           | 2. GetTenant(tenant_id)   |
-     |                           |-------------------------->|
-     |                           |                           |
-     |                           | 3. Get login_domain       |
-     |                           |<--------------------------|
-     |                           |                           |
-     |                           | 4. POST /sign-in          |
-     |                           |  USERNAME=user_id+domain   |
-     |                           |-------------------------->|
-     |                           |                           |
-     |                           | 5. Challenge response      |
-     |                           |<--------------------------|
-     | 6. Challenge parameters   |                           |
-     |<--------------------------|                           |
-     |                           |                           |
-     | 7. SRP signature calc     |                           |
-     |    (in browser)           |                           |
-     |                           |                           |
-     | 8. POST /verify (shared)  |                           |
-     |-------------------------->|                           |
-     |                           | 9. RespondToAuthChallenge  |
-     |                           |-------------------------->|
-     |                           |                           |
-     |                           | 10. Return tokens         |
-     |                           |<--------------------------|
-     | 11. Tokens (Cookie)       |                           |
-     |<--------------------------|                           |
+```mermaid
+sequenceDiagram
+    participant F as Frontend (React)
+    participant B as Backend (Go)
+    participant A as SaaSus Platform Auth API
+
+    F->>B: 1. Send user_id + tenant_id + srp_a
+
+    rect rgba(232, 245, 233, 1)
+      B->>A: 2. GetTenant(tenant_id)
+      A-->>B: 3. Get login_domain
+    end
+
+    rect rgba(232, 245, 233, 1)
+      B->>A: 4. POST /sign-in (USERNAME=user_id+domain)
+      A-->>B: 5. Challenge response
+    end
+
+    B-->>F: 6. Challenge parameters
+
+    Note over F: 7. SRP signature calc (in browser)
+
+    rect rgba(232, 245, 233, 1)
+      F->>B: 8. POST /verify (shared)
+      B->>A: 9. RespondToAuthChallenge
+      A-->>B: 10. Return tokens
+      B-->>F: 11. Tokens (Cookie)
+    end
 ```
 
 The main difference from email login is in **steps 2–4**. The process of retrieving `login_domain` from tenant information and concatenating it with `user_id` to construct the USERNAME is added. Steps 7 onward (SRP signature calculation and token retrieval via `POST /verify`) are shared.
 
 ## Summary
 
-This document explained the implementation of login functionality using the SaaSus Platform Login API. Key points:
+This document explained the implementation of login functionality using the SaaSus Platform Auth API. Key points:
 
 - **SRP protocol-based two-step authentication flow**: Obtain a challenge via `/sign-in` and respond via `/sign-in/challenge`
 - **ID login extension**: Leverage the `login_domain` tenant attribute to enable login with username + tenant ID
