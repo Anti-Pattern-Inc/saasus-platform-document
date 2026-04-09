@@ -64,8 +64,7 @@ Click "Transition destination after authentication" from the side menu to displa
 Typically, you set the Callback URL based on the URL of the SaaS offering.<br/>
 However, since we will be running the sample application locally this time, we will configure it as follows.
 
-- For Laravel: [http://localhost/callback](http://localhost/callback)
-- For Express: [http://localhost:3000/callback](http://localhost:3000/callback)
+[http://localhost/callback](http://localhost/callback)
 
 ![06](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-06.png)
 

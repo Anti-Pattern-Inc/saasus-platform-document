@@ -4,11 +4,10 @@ slug: "implementation-of-authorization-based-on-tenant-information"
 excerpt: ""
 hidden: false
 pagination_prev: tutorial/manage-rate-plans/manage-rate-plans
+pagination_next: tutorial/summarize
 createdAt: "Wed Jan 11 2023 03:13:22 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 ## 認可の実装
 
@@ -29,119 +28,10 @@ import TabItem from '@theme/TabItem';
 
 では、この料金プランに紐付いた上限数をテナントごとに取得して、制限をかけてみましょう。
 
-- Laravel では、`api/app/Http/Controllers/MessageController.php` の`post`メソッドを書き換えてみましょう。
-- Express では、`api/controllers/chat.ts` へ`import文`を追加し、`postChats`メソッドを書き換えてみましょう。
+実装コードは利用するフレームワークを選択して参照してください。
 
-<Tabs>
-<TabItem value="php" label="Laravel (PHP)">
-
-```php
-   public function post(Request $request)
-   {
-        $validated = $request->validate([
-            'message' => 'required|max:255'
-        ]);
-
-        $tenant_id = $request->userinfo['tenants'][0]['id'];
-        $plan_id = $request->userinfo['tenants'][0]['plan_id'];
-
-        // SaaSus SDKを使ってSaaSus APIを叩いて、各種情報を取得し、判断に使う
-        $client = new \AntiPatternInc\Saasus\Api\Client();
-        $pricingApi = $client->getPricingClient();
-        $res = $pricingApi->getPricingPlan($plan_id, $pricingApi::FETCH_RESPONSE);
-        $plan = json_decode($res->getBody(), true);
-
-        // メータリングのメータ、comment_count(コメント数)を使う
-        $meteringUnitName = "comment_count";
-        $res = $pricingApi->getMeteringUnitDateCountByTenantIdAndUnitNameToday($tenant_id, $meteringUnitName, $pricingApi::FETCH_RESPONSE);
-        // 今回は、１日ごとの上限コメント数として扱う
-        $count = json_decode($res->getBody(), true);
-
-        // メータリングの上限コメント数を取得
-        $upper = \AntiPatternInc\Saasus\Api\Lib::findUpperCountByMeteringUnitName($plan, $meteringUnitName);
-
-        // 現在契約中の料金プランの上限コメント数を超えていたら、投稿できなくする
-        if ($count['count'] < $upper || $upper === 0) {
-            $message = Message::create([
-                'tenant_id' => $tenant_id,
-                'user_id' => $request->userinfo['tenants'][0]['user_attribute']['username'],
-                'message' => $request->message,
-            ]);
-            // メータリングAPIで、コメント数に１を足す
-            $param = new \AntiPatternInc\Saasus\Sdk\Pricing\Model\UpdateMeteringUnitTimestampCountNowParam();
-            $param->setMethod('add');
-            $param->setCount(1);
-            $res = $pricingApi->updateMeteringUnitTimestampCountNow($request->userinfo['tenants'][0]['id'], $meteringUnitName, $param, $pricingApi::FETCH_RESPONSE);
-        }
-
-        $request->session()->regenerateToken();
-        return redirect()->route('board');
-   }
-```
-
-</TabItem>
-
-<TabItem value="typescript" label="Express (TS)">
-```js
-import { UpdateMeteringUnitTimestampCountNowParam } from "saasus-sdk/dist/generated/Pricing";
-import { findUpperCountByMeteringUnitName, PricingClient } from "saasus-sdk";
-
-// 他のコードは省略
-
-const postChats = async (req: Request, res: Response) => {
-  const mes = req.body.message;
-  const tenantId = req.userInfo?.tenants[0].id || "";
-  const planId = req.userInfo?.tenants[0].plan_id || "";
-  const userName =
-    req.userInfo?.tenants[0].user_attribute.username;
-  try {
-    const pricingClient = new PricingClient();
-    const pricingPlan = await pricingClient.pricingPlansApi.getPricingPlan(
-      planId
-    );
-
-    // メータリングのメータ、comment_count(コメント数)を使う
-    const meteringUnitName = "comment_count";
-    const meteringUnitCountData =
-      await pricingClient.meteringApi.getMeteringUnitDateCountByTenantIdAndUnitNameToday(
-        tenantId,
-        meteringUnitName
-      );
-    
-    // メータリングの上限コメント数を取得
-    const upper = findUpperCountByMeteringUnitName(
-      pricingPlan.data,
-      meteringUnitName
-    );
-
-    // 現在契約中の料金プランの上限コメント数を超えていたら、投稿できなくする
-    if (meteringUnitCountData.data.count < upper || upper === 0) {
-      await db.Messages.create({
-        tenant_id: tenantId,
-        user_id: userName,
-        message: mes,
-      });
-
-      // メータリングAPIで、コメント数に１を足す
-      let param: UpdateMeteringUnitTimestampCountNowParam = {
-        method: "add",
-        count: 1,
-      };
-      const res =
-        await pricingClient.meteringApi.updateMeteringUnitTimestampCountNow(
-          tenantId,
-          meteringUnitName,
-          param
-        );
-    }
-  } catch (error) {
-    console.error(error);
-  }
-  res.redirect("/chat");
-};
-```
-</TabItem>
-</Tabs>
+- [Laravel の実装例（ソースコード）](/docs/tutorial/authorization-module/authorization-laravel)
+- [Express の実装例（ソースコード）](/docs/tutorial/authorization-module/authorization-express)
 
 先ほどのコードに加えて、コメント数の対象メーター “comment_count” をベースにしてコメント数の上限を確認しています。
 

@@ -1,0 +1,355 @@
+---
+sidebar_position: 1
+title: "Laravel"
+slug: "authentication-laravel"
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+### Incorporating an Authentication Module
+
+Integrate the authentication module provided by the SaaSus Platform.
+
+In this application, all URI routes will require authentication. If a user is not authenticated, they will not be able to access the application.
+
+Currently, authentication is handled in `api/routes/web.php`.
+
+You will replace the existing authentication logic with the one provided by SaaSus.
+
+```mdx-code-block
+<Tabs>
+<TabItem value="laravel" label="Laravel" default>
+```
+
+```php
+Route::middleware('auth')->group(function () {
+   Route::get('/', function () {
+       return view('welcome');
+   });
+   Route::get('/dispatch', 'App\Http\Controllers\DispatchController@index')->name('dispatch');
+   Route::get('/board', 'App\Http\Controllers\MessageController@index')->name('board');
+   Route::post('/post', 'App\Http\Controllers\MessageController@post')->name('post');
+});
+
+require __DIR__ . '/auth.php';
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+change
+
+```mdx-code-block
+<Tabs>
+<TabItem value="laravel" label="Laravel" default>
+```
+
+```php
+// Route::middleware('auth')->group(function () {
+//     Route::get('/', function () {
+//         return view('welcome');
+//     });
+// Use SaaSus SDK standard Auth Middleware
+Route::middleware(\AntiPatternInc\Saasus\Laravel\Middleware\Auth::class)->group(function () {
+   Route::get('/dispatch', 'App\Http\Controllers\DispatchController@index')->name('dispatch');
+   Route::get('/board', 'App\Http\Controllers\MessageController@index')->name('board');
+   Route::post('/post', 'App\Http\Controllers\MessageController@post')->name('post');
+
+   Route::redirect('/', '/board');
+});
+
+// require __DIR__ . '/auth.php';
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+### Implementing the Callback URL Handler
+
+Earlier, you defined the callback URL in the SaaS Development Console as:
+
+- [http://localhost/callback](http://localhost/callback)
+
+Add the following line to the end of `api/routes/web.php`.
+
+```mdx-code-block
+<Tabs>
+<TabItem value="laravel" label="Laravel" default>
+```
+
+```php
+// Use the SaaSus SDK standard Callback Controller to put the JWT into Cookies or Local Storage
+Route::get('/callback', 'AntiPatternInc\Saasus\Laravel\Controllers\CallbackController@index');
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+Furthermore, to be able to use the View provided by the SaaSus SDK,
+
+Add the path to `api/config/view.php`.
+
+```mdx-code-block
+<Tabs>
+<TabItem value="laravel" label="Laravel" default>
+```
+
+```php
+   'paths' => [
+       resource_path('views'),
+       # ↓Add this line: Directory of views provided by SaaSus SDK
+       resource_path('../vendor/saasus-platform/saasus-sdk-php/src/Laravel/Views'),
+   ],
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+Once everything is set up, the authentication information configured in the SaaSus Platform will be passed as part of the request when it reaches your application's controller.
+
+Add `Request` as a parameter to the `index` method in `api/app/Http/Controllers/MessageController.php`, and use `dd` to check if `userinfo` is included in `$request`.
+
+```mdx-code-block
+<Tabs>
+<TabItem value="laravel" label="Laravel" default>
+```
+
+```php
+   public function index(Request $request)
+   {
+       // Check whether user information is being passed from SaaSus Platform
+       dd($request->userinfo);
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+Up to this point, we have established the basics of collaboration.
+
+Log in from SaaSus Platform and check the operation.
+
+### Verify SaaSus SDK integration
+
+Display the login screen created with SaaSus Platform.
+
+You can find the login screen URL in the "Authentication Details" section of the side menu.
+![15](/img/tutorial/authentication-preference/authentication-preference-15.png)
+
+![09](/img/tutorial/authentication-preference/authentication-preference-09.png)
+
+When you log in with the user email address and password you created earlier, you will be redirected to the URL you set in Callback URL along with your credentials.
+
+For example, let's log in as [user1-1@example.com](mailto:user1-1@example.com).
+
+If the previous code is working correctly, the user information should be displayed on the screen after login.
+
+```mdx-code-block
+<Tabs>
+<TabItem value="laravel" label="Laravel" default>
+```
+
+```php
+array:3 [▼
+  "email" => "user1-1@example.com"
+  "id" => "f6a02019-1306-431f-b93d-3a756b312481"
+  "tenants" => array:1 [▼
+    0 => array:7 [▼
+      "back_office_staff_email" => "saasus-sample-tenant1@example.com"
+      "completed_sign_up" => true
+      "envs" => array:1 [▼
+        0 => array:3 [▼
+          "id" => 1
+          "name" => "dev"
+          "roles" => array:1 [▼
+            0 => array:2 [▼
+              "display_name" => "General users"
+              "role_name" => "user"
+            ]
+          ]
+        ]
+      ]
+      "id" => "7b639774-6fba-4b26-b580-f3d755876a4b"
+      "name" => "Tenant sample 1"
+      "plan_id" => "bc011444-a9f1-41c0-8251-bc8928b09ee7"
+      "user_attribute" => array:1 [▼
+        "username" => "user1-1"
+      ]
+    ]
+  ]
+]
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+You can see that the user information and tenant information that were set in SaaSus Platform earlier can be obtained on the application side.
+
+The redirect destination URL is now received by the SaaSus SDK standard Callback process ([http://localhost/callback](http://localhost/callback)), and in that process, the browser's Local Storage or remember authentication information in a cookie.
+
+Then, the SaaSus SDK's Auth Middleware uses the SaaSus Platform to verify the authentication information, retrieve the user information, and pack it into the Request object.
+
+Processing then moves to the application's controller, so at this point the application already has information about the logged-in person.
+
+Now, let's use this information to make our bulletin board application multi-tenant-enabled.
+
+### Multi-tenancy of sample application
+
+`api/app/Http/Controllers/MessageController.php` is the main process, so let's add the process to make it multi-tenant compatible here.
+
+First, change the display part.
+Let's rewrite the whole part below.
+
+```mdx-code-block
+<Tabs>
+<TabItem value="laravel" label="Laravel" default>
+```
+
+```php
+   public function index(Request $request)
+   {
+       // Various user information and tenant information are entered in $request->userinfo, so use it
+       $messages = Message::where('tenant_id', $request->userinfo['tenants'][0]['id'])->get();
+       return view('messageBoard.index', ['messages' => $messages, 'plans' => $this::PLANS, 'tenant_name' => $request->userinfo['tenants'][0]['name']]);
+   }
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+In this way, the DB will be searched based on the tenant ID that has been passed.
+
+Next is the posting part.
+
+```mdx-code-block
+<Tabs>
+<TabItem value="laravel" label="Laravel" default>
+```
+
+```php
+   public function post(Request $request)
+   {
+       $validated = $request->validate([
+           'message' => 'required|max:255'
+       ]);
+
+       // Get various information from userinfo of $request and use it for judgment
+       $message = Message::create([
+            'tenant_id' => $request->userinfo['tenants'][0]['id'],
+            'user_id' => $request->userinfo['tenants'][0]['user_attribute']['username'],
+            'message' => $request->message,
+        ]);
+
+       $request->session()->regenerateToken();
+       return redirect()->route('board');
+   }
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+Based on the passed user attributes, the tenant ID and user name are stored as a set.
+
+Let's try displaying the user ID on the screen display as well.
+
+Edit `api/resources/views/messageBoard/index.blade.php`.
+
+Around line 32, change `$message->user->name` to `$message->user_id`.
+
+Before correction：
+
+```mdx-code-block
+<Tabs>
+<TabItem value="blade" label="Laravel (Blade)" default>
+```
+
+```html
+                   <div class="mt-4">
+                       <p>
+                           {{ $message->user->name }}
+                           <span class="text-xs text-gray-500">
+                               {{ $message->created_at->format('Y/m/d H:i') }}
+                           </span>
+                       </p>
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+After correction：
+
+```mdx-code-block
+<Tabs>
+<TabItem value="blade" label="Laravel (Blade)" default>
+```
+
+```html
+                   <div class="mt-4">
+                       <p>
+                           {{ $message->user_id }}
+                           <span class="text-xs text-gray-500">
+                               {{ $message->created_at->format('Y/m/d H:i') }}
+                           </span>
+                       </p>
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+Multi-tenant support is now possible.
+
+Now, let's log in and try it out.
+
+As before, log in from the login screen created with SaaSus Platform.
+
+When you log in, you will see that the tenant name has changed to the one you set earlier in the SaaS Development Console.
+
+![10](/img/tutorial/authentication-preference/authentication-preference-10.png)
+
+I don't have any data yet, so I'll post some.
+
+![11](/img/tutorial/authentication-preference/authentication-preference-11.png)
+
+I have confirmed that the username is also displayed.
+
+Now go back to the login screen, log in as [user1-2@example.com](mailto:user1-2@example.com), and try posting some posts.
+
+![12](/img/tutorial/authentication-preference/authentication-preference-12.png)
+
+Of course it will be reflected on the screen.
+
+Now, let's log in as the user of the other tenant [user2-1@example.com](mailto:user2-1@example.com).
+
+![13](/img/tutorial/authentication-preference/authentication-preference-13.png)
+
+You can see that the tenant name display has changed and the contents are now empty.
+
+I have confirmed that I can only access information for my own tenant.
+
+Now, after making a few posts in the same way, log in as [user2-2@example.com](mailto:user2-2@example.com) and check that you can display information for the same tenant.
+
+![14](/img/tutorial/authentication-preference/authentication-preference-14.png)
+
+In this way, separation of each tenant is completed.
+
+As for the separation method this time, we used a pool type model to perform separation within the same DB and perform tenant separation using a simple method. Even if you select a tenant separation method according to your requirements, such as schema separation or database separation, you can similarly obtain and implement tenant information using the SaaSus SDK.
