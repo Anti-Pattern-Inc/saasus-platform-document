@@ -117,14 +117,10 @@ router.get("/", getChats);
 
 ### Implementing the Callback URL Handler
 
-Earlier, you defined the callback URL in the SaaS Development Console as:
-
-- [http://localhost/callback](http://localhost/callback)
-
-Add an `import` statement and `app.use("/callback", callbackRouter)` to `api/app.ts`, placing it immediately after `app.use("/login", loginRouter);` and before the 404 handler.
+Earlier, you defined the callback destination in the SaaS Development Console as [http://localhost/callback](http://localhost/callback), so configure the app to receive it at `/callback`.
 
 :::caution
-In Express, middleware and routes are processed in the order they are registered. If a 404 handler is registered first, the `/callback` request will be caught by it and will never reach the callback router, causing a login error.
+In Express, middleware and routes are processed in registration order, so if the 404 handler is registered first, requests to `/callback` return a 404 error and login fails.
 :::
 
 ```mdx-code-block
@@ -133,12 +129,13 @@ In Express, middleware and routes are processed in the order they are registered
 ```
 
 ```js
-import { router as callbackRouter } from "./routes/callback";
+import { router as tenantRouter } from "./routes/tenant";
+import { router as callbackRouter } from "./routes/callback"; // Add this below ./routes/tenant
 
 // Other code omitted
 
 app.use("/login", loginRouter);
-app.use("/callback", callbackRouter);
+app.use("/callback", callbackRouter); // Add this below app.use("/login", loginRouter);
 
 app.use((req: Request, res: Response, next: NextFunction) => {
   next(createError(404));
