@@ -152,6 +152,14 @@
     "message": "料金プランの設定",
     "description": "The label for category Manage Rate Plans in sidebar tutorialSidebar"
   },
+  "sidebar.tutorialSidebar.category.Incorporating Authentication Module": {
+    "message": "認証モジュールの組み込み",
+    "description": "The label for category Incorporating Authentication Module in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Implementation of authorization based on tenant information": {
+    "message": "テナントの情報をもとにした認可の実装",
+    "description": "The label for category Implementation of authorization based on tenant information in sidebar tutorialSidebar"
+  },
   "sidebar.changelogSidebar.category.Changelog": {
     "message": "Changelog",
     "description": "The label for category Changelog in sidebar changelogSidebar"
