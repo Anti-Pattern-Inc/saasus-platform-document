@@ -1,0 +1,83 @@
+---
+sidebar_position: 2
+title: "Express"
+slug: "authorization-express"
+pagination_prev: tutorial/implementation-of-authorization-based-on-tenant-information
+pagination_next: tutorial/summarize
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+### Express implementation
+
+Add an `import` statement to `api/controllers/chat.ts` and modify the `postChats` method.
+
+```mdx-code-block
+<Tabs>
+<TabItem value="express" label="Express" default>
+```
+
+```js
+import { UpdateMeteringUnitTimestampCountNowParam } from "saasus-sdk/dist/generated/Pricing";
+import { findUpperCountByMeteringUnitName, PricingClient } from "saasus-sdk";
+
+// Other code omitted
+
+const postChats = async (req: Request, res: Response) => {
+  const mes = req.body.message;
+  const tenantId = req.userInfo?.tenants[0].id || "";
+  const planId = req.userInfo?.tenants[0].plan_id || "";
+  const userName =
+    req.userInfo?.tenants[0].user_attribute.username;
+  try {
+    const pricingClient = new PricingClient();
+    const pricingPlan = await pricingClient.pricingPlansApi.getPricingPlan(
+      planId
+    );
+
+    // use metering meter, comment_count
+    const meteringUnitName = "comment_count";
+    const meteringUnitCountData =
+      await pricingClient.meteringApi.getMeteringUnitDateCountByTenantIdAndUnitNameToday(
+        tenantId,
+        meteringUnitName
+      );
+
+    // This time, treat it as the maximum number of comments per day
+    const upper = findUpperCountByMeteringUnitName(
+      pricingPlan.data,
+      meteringUnitName
+    );
+
+    // Disable posting if the number of comments exceeds the maximum number of comments for the current contracted price plan
+    if (meteringUnitCountData.data.count < upper || upper === 0) {
+      await db.Messages.create({
+        tenant_id: tenantId,
+        user_id: userName,
+        message: mes,
+      });
+
+      // add 1 to the number of comments in the metering API
+      let param: UpdateMeteringUnitTimestampCountNowParam = {
+        method: "add",
+        count: 1,
+      };
+      const res =
+        await pricingClient.meteringApi.updateMeteringUnitTimestampCountNow(
+          tenantId,
+          meteringUnitName,
+          param
+        );
+    }
+  } catch (error) {
+    console.error(error);
+  }
+  res.redirect("/chat");
+};
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```

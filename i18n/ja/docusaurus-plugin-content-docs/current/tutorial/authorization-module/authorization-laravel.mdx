@@ -1,0 +1,68 @@
+---
+sidebar_position: 1
+title: "Laravel"
+slug: "authorization-laravel"
+pagination_prev: tutorial/implementation-of-authorization-based-on-tenant-information
+pagination_next: tutorial/authorization-module/authorization-express
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+### Laravel 実装例
+
+`api/app/Http/Controllers/MessageController.php` の `post` メソッドを書き換えます。
+
+```mdx-code-block
+<Tabs>
+<TabItem value="laravel" label="Laravel" default>
+```
+
+```php
+   public function post(Request $request)
+   {
+        $validated = $request->validate([
+            'message' => 'required|max:255'
+        ]);
+
+        $tenant_id = $request->userinfo['tenants'][0]['id'];
+        $plan_id = $request->userinfo['tenants'][0]['plan_id'];
+
+        // SaaSus SDKを使ってSaaSus APIを叩いて、各種情報を取得し、判断に使う
+        $client = new \AntiPatternInc\Saasus\Api\Client();
+        $pricingApi = $client->getPricingClient();
+        $res = $pricingApi->getPricingPlan($plan_id, $pricingApi::FETCH_RESPONSE);
+        $plan = json_decode($res->getBody(), true);
+
+        // メータリングのメータ、comment_count(コメント数)を使う
+        $meteringUnitName = "comment_count";
+        $res = $pricingApi->getMeteringUnitDateCountByTenantIdAndUnitNameToday($tenant_id, $meteringUnitName, $pricingApi::FETCH_RESPONSE);
+        // 今回は、１日ごとの上限コメント数として扱う
+        $count = json_decode($res->getBody(), true);
+
+        // メータリングの上限コメント数を取得
+        $upper = \AntiPatternInc\Saasus\Api\Lib::findUpperCountByMeteringUnitName($plan, $meteringUnitName);
+
+        // 現在契約中の料金プランの上限コメント数を超えていたら、投稿できなくする
+        if ($count['count'] < $upper || $upper === 0) {
+            $message = Message::create([
+                'tenant_id' => $tenant_id,
+                'user_id' => $request->userinfo['tenants'][0]['user_attribute']['username'],
+                'message' => $request->message,
+            ]);
+            // メータリングAPIで、コメント数に１を足す
+            $param = new \AntiPatternInc\Saasus\Sdk\Pricing\Model\UpdateMeteringUnitTimestampCountNowParam();
+            $param->setMethod('add');
+            $param->setCount(1);
+            $res = $pricingApi->updateMeteringUnitTimestampCountNow($request->userinfo['tenants'][0]['id'], $meteringUnitName, $param, $pricingApi::FETCH_RESPONSE);
+        }
+
+        $request->session()->regenerateToken();
+        return redirect()->route('board');
+   }
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
