@@ -22,6 +22,9 @@
 - [Update on 2025/12/12](changelog/20251212): We have released updates on the following features.
 - [Update on 2025/12/23](changelog/20251223): We have released updates on the following features.
 - [Update on 2026/01/23](changelog/20260123): We have released updates on the following features.
+- [Update on 2026/02/13](changelog/20260213): We have released updates on the following features.
+- [Update on 2026/03/06](changelog/20260306): We have released updates on the following features.
+- [Update on 2026/04/02](changelog/20260402): We have released updates on the following features.
 - [Welcome to SaaSus Platform](changelog/welcome-to-saasus-platform): Release v0.10(final beta version) on 2022/12/10
 - [Purpose and Overview](part-1/purpose-and-overview): Purpose
 - [Cloud Computing Basics](part-2/cloud-computing-basics): 1. Differences between IaaS, PaaS, and SaaS
@@ -152,7 +155,11 @@
 - [Getting Started](reference/getting-started-with-your-api): A signature is necessary to call the SaaSus API.
 - [Integration API](reference/integration): 
 - [Pricing API](reference/pricing-api): 
-- [Authentication Preference](tutorial/authentication-preference): Creating a SaaS consumer tenant
+- [Express](tutorial/authentication-module/authentication-express): Incorporating an Authentication Module
+- [Laravel](tutorial/authentication-module/authentication-laravel): Incorporating an Authentication Module
+- [Tenant and User Preparation](tutorial/authentication-preference): Creating a SaaS consumer tenant
+- [Express](tutorial/authorization-module/authorization-express): Express implementation
+- [Laravel](tutorial/authorization-module/authorization-laravel): Laravel implementation
 - [Configuring SDK For SaaSus Platform](tutorial/configuring-sdk-for-saasus-platform): Check your SaaS ID, API key, and client secret
 - [Implementation of authorization based on tenant information](tutorial/implementation-of-authorization-based-on-tenant-information): Implementation of Authorization
 - [Manage Rate Plans](tutorial/manage-rate-plans/manage-rate-plans): Structure and Terminology of Pricing Plans
