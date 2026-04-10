@@ -4,7 +4,7 @@ slug: "googletagmanagercontaineridsetting"
 excerpt: ""
 hidden: false
 createdAt: "Thu Dec 07 2023 06:43:12 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Fri Dec 22 2023 06:01:24 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Mon Apr 06 2026 05:28:53 GMT+0000 (Coordinated Universal Time)"
 ---
 ## 1. Confirming the Container ID
 
@@ -25,7 +25,7 @@ Check the "GTM-XXXXXXXX" displayed at the top right of the screen.
 1. Open the "Authentication Details Settings" in the SaaS development Console.
 
    ![googletagmanagercontaineridsetting-3](/img/part-4/application-settings/googletagmanagersetting/googletagmanagercontaineridsetting-3.png)
-2. In the "Basic Settings" at the bottom of the Authentication Details Settings screen, set the "Google Tag Manager Container ID" to your container ID and press the save button.
+2. In "Basic Settings" on the Authentication Details Settings screen, set the "Google Tag Manager Container ID" to your container ID and click Save.
 
    ![googletagmanagercontaineridsetting-4](/img/part-4/application-settings/googletagmanagersetting/googletagmanagercontaineridsetting-4.png)
 
