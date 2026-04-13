@@ -4,7 +4,7 @@ slug: "getting-started-with-your-api"
 excerpt: "This page will help you get started with SaaSus API."
 hidden: false
 createdAt: "Thu Jul 21 2022 04:42:58 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Dec 07 2023 01:43:51 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Wed Feb 05 2026 08:17:50 GMT+0000 (Coordinated Universal Time)"
 ---
 A signature is necessary to call the SaaSus API.
 
@@ -45,3 +45,15 @@ APIs for configuring, managing, and publishing API Gateway features.
 
 [SaaSus Analysis API Schema](/docs/reference/analysis-api)  
 APIs for analyzing user behavior history and data collection.
+
+## SaaSus API Postman  
+We publish the Postman collection for SaaSus Platform API.
+
+Please create a fork of [📋 SaaSus API Postman](https://www.postman.com/anti-pattern-inc/saasus-platform) from the public workspace.
+
+### How to use  
+1. Fork the collection  
+2. Set up authentication information (API Key, SaaS ID, etc.)  
+For details, please refer to the SaaSus API Postman Guide published on Postman.
+
+The Postman collection includes all SaaSus API endpoints and enables quick API testing.

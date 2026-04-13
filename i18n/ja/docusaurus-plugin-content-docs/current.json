@@ -99,6 +99,10 @@
     "message": "実装ガイド",
     "description": "The label for category Implementation Guide in sidebar docsSidebar"
   },
+  "sidebar.docsSidebar.category.Auth API": {
+    "message": "認証API",
+    "description": "The label for category Auth API in sidebar docsSidebar"
+  },
   "sidebar.docsSidebar.category.Sample Application (API Server)": {
     "message": "サンプルアプリケーション（APIサーバ）",
     "description": "The label for category Sample Application (API Server) in sidebar docsSidebar"
@@ -151,6 +155,14 @@
   "sidebar.tutorialSidebar.category.Manage Rate Plans": {
     "message": "料金プランの設定",
     "description": "The label for category Manage Rate Plans in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Incorporating Authentication Module": {
+    "message": "認証モジュールの組み込み",
+    "description": "The label for category Incorporating Authentication Module in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Implementation of authorization based on tenant information": {
+    "message": "テナントの情報をもとにした認可の実装",
+    "description": "The label for category Implementation of authorization based on tenant information in sidebar tutorialSidebar"
   },
   "sidebar.changelogSidebar.category.Changelog": {
     "message": "Changelog",

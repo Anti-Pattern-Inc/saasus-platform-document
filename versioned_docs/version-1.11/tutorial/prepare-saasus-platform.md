@@ -24,7 +24,7 @@ A temporary password will be sent to the email address you entered. Enter the te
 
 ![02](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-02.png)
 
-When you register with SaaSus Platform for the first time, we will create a tenant exclusively for you. This will take at least an hour as we are creating an AWS account specifically for you. Once your account creation is complete, you will receive instructions at the email address you provided earlier.
+When you register with SaaSus Platform for the first time, we will create a tenant exclusively for you. This will take around an hour as we are creating an AWS account specifically for you. Once your account creation is complete, you will receive instructions at the email address you provided earlier.
 
 ![03](/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-03.png)
 

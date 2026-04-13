@@ -4,7 +4,7 @@ slug: "getting-started-with-your-api"
 excerpt: "This page will help you get started with SaaSus API."
 hidden: false
 createdAt: "Thu Jul 21 2022 04:42:58 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Dec 07 2023 01:43:51 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Wed Feb 05 2026 08:06:16 GMT+0000 (Coordinated Universal Time)"
 ---
 SaaSus APIを呼ぶには、署名 が必要です。
 
@@ -55,3 +55,15 @@ API Gateway機能の設定、管理、公開に関するAPI
 [SaaSus Analysis API Schema](/ja/docs/reference/analysis-api)  
 ユーザー行動履歴の分析、データ収集に関するAPI  
 (APIs for analyzing user behavior history and data collection)
+
+## SaaSus API Postman  
+SaaSus Platform APIのPostmanコレクションを公開しています。
+
+[📋 SaaSus API Postman](https://www.postman.com/anti-pattern-inc/saasus-platform) をパブリックワークスペースからフォークを作成してください。
+
+### 使用方法  
+1. コレクションのフォーク  
+2. 認証情報の取得（API Key、SaaS IDなど）を設定  
+詳細はPostmanで公開しているSaaSus API Postman ガイドをご参照ください。
+
+Postmanコレクションには全てのSaaSus APIエンドポイントが含まれており、素早くAPIテストが可能です。
