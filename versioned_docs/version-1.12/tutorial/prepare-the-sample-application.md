@@ -29,10 +29,7 @@ In either setup, it is possible to use Next.js as the frontend with additional c
 However, Next.js is not used in this tutorial.
 
 ### Prerequisites
-- PHP 8 must be installed (for Laravel + Blade).
-- Composer must be installed (for Laravel + Blade).
-- PostgreSQL 13 must be installed and properly configured.
-- Node.js and npm must be installed (for Express + EJS).
+- Docker and Docker Compose must be installed.
 
 First, clone the sample application from the repository below.
 
