@@ -65,5 +65,11 @@ export const generatedIndexOverrides = {
         description: 'SaaSus Platform に関する各種よくある質問をカテゴリ別にまとめています。',
       }
     },
+    '/tutorial/authentication-module': {
+      ja: {
+        title: '認証モジュールの組み込み',
+        description: '利用するフレームワークを選択して、認証連携の手順を進めます。',
+      }
+    },
   };
   
