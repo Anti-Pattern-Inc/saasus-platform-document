@@ -111,6 +111,42 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  /userinfo/search/sign-in-id:
+    get:
+      tags:
+        - userInfo
+      operationId: GetUserInfoBySignInId
+      summary: ログインIDからユーザー情報取得
+      description: |
+        ログインIDを条件にユーザー情報を取得します
+      parameters:
+        - in: query
+          name: sign_in_id
+          description: |
+            ログインID。
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: ユーザー情報
+                $ref: "#/components/schemas/UserInfo"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
   /basic-info:
     get:
       tags:
@@ -243,8 +279,7 @@ paths:
           content:
             application/json:
               schema:
-                title: 作成したユーザー
-                $ref: "#/components/schemas/SaasUser"
+                $ref: "#/components/schemas/CreatedSaasUser"
         "400":
           description: Bad Request
           content:
@@ -293,11 +328,16 @@ paths:
       summary: ユーザー情報を削除
       description: |
         ユーザーIDを元に一致するユーザーをテナントからすべて削除し、SaaSからも削除します。
+        削除前のユーザー情報を返却します。
       parameters:
         - $ref: "#/components/parameters/UserId"
       responses:
         "200":
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserInfo"
         "404":
           description: Not Found
           content:
@@ -334,6 +374,36 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  "/users/{user_id}/password/reset":
+    post:
+      tags:
+        - saasUser
+      operationId: ResetSaasUserPassword
+      summary: パスワードをリセット
+      description: |
+        ユーザーのログインパスワードをリセットします。
+        現在のパスワードは無効化され、一時パスワードが発行されます。
+      parameters:
+        - $ref: "#/components/parameters/UserId"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SaasUserResetPasswordResult"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
   "/users/{user_id}/email":
     patch:
       tags:
@@ -342,6 +412,8 @@ paths:
       summary: メールアドレスを変更
       description: |
         ユーザーのメールアドレスを変更します。
+        メールアドレス認証のユーザーのみ変更可能です。
+        ログインID認証のユーザーはメールアドレスを変更できません。
       parameters:
         - $ref: "#/components/parameters/UserId"
       requestBody:
@@ -349,6 +421,30 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/UpdateSaasUserEmailParam"
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/users/{user_id}/sign-in-id":
+    patch:
+      tags:
+        - saasUser
+      operationId: UpdateSaasUserSignInId
+      summary: ログインIDを変更
+      description: |
+        ユーザーのログインIDを変更します。
+      parameters:
+        - $ref: "#/components/parameters/UserId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSaasUserSignInIdParam"
       responses:
         "200":
           description: OK
@@ -369,6 +465,7 @@ paths:
         要求されたメールアドレスに対して検証コードを送信します。
         ユーザーのアクセストークンが必要です。
         検証コードの有効期限は24時間です。
+        このAPIはメールアドレス認証のユーザーのみ利用可能です。ログインID認証のユーザーは利用できません。
       parameters:
         - $ref: "#/components/parameters/UserId"
       requestBody:
@@ -855,6 +952,41 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
   "/roles/{role_name}":
+    patch:
+      tags:
+        - role
+      operationId: UpdateRole
+      summary: 役割(ロール)を更新
+      description: |
+        役割(ロール)の表示名を更新します。
+      parameters:
+        - $ref: "#/components/parameters/RoleName"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateRoleParam"
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
     delete:
       tags:
         - role
@@ -2046,6 +2178,78 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  /device/confirm:
+    post:
+      tags:
+        - saasUser
+      operationId: ConfirmDevice
+      summary: デバイスの確認
+      description: |
+        デバイス記憶のためにデバイスを確認します。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConfirmDeviceParam"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConfirmDeviceResult"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /device/status:
+    post:
+      tags:
+        - saasUser
+      operationId: UpdateDeviceStatus
+      summary: デバイスステータスの更新
+      description: |
+        デバイスのステータスを更新します。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateDeviceStatusParam"
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
   /sign-in/challenge:
     post:
       tags:
@@ -2405,8 +2609,16 @@ components:
           description: uuid
         email:
           type: string
-          description: メールアドレス
+          description: |
+            メールアドレス。
+            ログインID認証ユーザーの場合は空文字列になります。
           example: hoge@example.com
+        sign_in_id:
+          type: string
+          example: user123
+          description: |
+            ログインID。
+            メールアドレス認証ユーザーの場合は空文字列になります。
         user_attribute:
           type: object
           additionalProperties: true
@@ -2422,8 +2634,33 @@ components:
       required:
         - id
         - email
+        - sign_in_id
         - user_attribute
         - tenants
+      example:
+        id: f94bfffc-8be2-11ec-b41a-0242ac120004
+        email: test@example.com
+        sign_in_id: ""
+        user_attribute:
+          address: 東京都
+          employee_number: 100
+        tenants:
+          - id: d1234567-89ab-cdef-0123-456789abcdef
+            name: Anti-Pattern Inc.
+            completed_sign_up: true
+            envs:
+              - id: 1
+                name: dev
+                display_name: Development
+                roles:
+                  - role_name: admin
+                    display_name: Administrator
+            user_attribute:
+              address: 東京都
+              employee_number: 100
+            back_office_staff_email: test@example.com
+            plan_id: f94bfffc-8be2-11ec-b41a-0242ac120005
+            is_paid: true
     BasicInfo:
       title: 基本設定情報
       type: object
@@ -2515,7 +2752,15 @@ components:
         email:
           type: string
           example: hoge@example.com
-          description: メールアドレス
+          description: |
+            メールアドレス。
+            ログインID認証ユーザーの場合は空文字列になります。
+        sign_in_id:
+          type: string
+          example: user123
+          description: |
+            ログインID。
+            メールアドレス認証ユーザーの場合は空文字列になります。
         attributes:
           type: object
           additionalProperties: true
@@ -2528,7 +2773,15 @@ components:
       required:
         - id
         - email
+        - sign_in_id
         - attributes
+      example:
+        id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+        email: tanaka@example.com
+        sign_in_id: ""
+        attributes:
+          department: development
+          employee_number: 10
     SaasUsers:
       title: SaaSユーザー一覧
       type: object
@@ -2539,20 +2792,51 @@ components:
             $ref: "#/components/schemas/SaasUser"
       required:
         - users
+    CreatedSaasUser:
+      title: 作成されたSaaSユーザー
+      allOf:
+        - $ref: "#/components/schemas/SaasUser"
+        - type: object
+          properties:
+            password:
+              type: string
+              description: |
+                自動生成されたパスワード（ログインID認証かつパスワード未指定の場合のみ）
+      example:
+        id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+        email: ""
+        sign_in_id: user12345
+        attributes: {}
     CreateSaasUserParam:
       title: SaaSユーザー作成パラメータ
       type: object
+      description: |
+        emailまたはsign_in_idのどちらか一方を指定します。両方指定することはできません。
+        - emailを指定した場合: メールアドレス認証ユーザーが作成されます。
+          passwordを指定しない場合、仮パスワードがメールで送信されます。
+        - sign_in_idを指定した場合: ログインID認証ユーザーが作成されます。
+          passwordを指定しない場合、自動生成され、レスポンスに含まれます。
       properties:
         email:
           type: string
           example: hoge@example.com
           description: メールアドレス
+        sign_in_id:
+          type: string
+          example: user123
+          description: |
+            ログインID（英数字と記号-_のみ、最大50文字）
         password:
           type: string
           example: "@Pass#Word1"
-          description: パスワード
-      required:
-        - email
+          description: |
+            パスワード。
+            メールアドレス認証の場合、指定しない場合は仮パスワードがメールで送信されます。
+            ログインID認証の場合、指定しない場合は自動生成されてレスポンスに含まれます。
+      example:
+        email: null
+        sign_in_id: user12345
+        password: "@Pass#Word1"
     User:
       title: ユーザー
       type: object
@@ -2571,7 +2855,15 @@ components:
         email:
           type: string
           example: hoge@example.com
-          description: メールアドレス
+          description: |
+            メールアドレス。
+            ログインID認証ユーザーの場合は空文字列になります。
+        sign_in_id:
+          type: string
+          example: user123
+          description: |
+            ログインID。
+            メールアドレス認証ユーザーの場合は空文字列になります。
         attributes:
           type: object
           additionalProperties: true
@@ -2590,8 +2882,25 @@ components:
         - tenant_id
         - tenant_name
         - email
+        - sign_in_id
         - attributes
         - envs
+      example:
+        id: f94bfffc-8be2-11ec-b41a-0242ac120004
+        tenant_id: d1234567-89ab-cdef-0123-456789abcdef
+        tenant_name: saasus
+        email: test@example.com
+        sign_in_id: ""
+        attributes:
+          address: 東京都
+          birthday: 19940925
+        envs:
+          - id: 1
+            name: dev
+            display_name: Development
+            roles:
+              - role_name: admin
+                display_name: Administrator
     Users:
       title: ユーザー一覧
       type: object
@@ -2643,11 +2952,18 @@ components:
     CreateTenantUserParam:
       title: ユーザーの作成パラメータ
       type: object
+      description: |
+        emailまたはsign_in_idのどちらか一方を指定します。両方指定することはできません。
       properties:
         email:
           type: string
           example: hoge@example.com
           description: メールアドレス
+        sign_in_id:
+          type: string
+          example: user123
+          description: |
+            ログインID（英数字と記号-_のみ、最大50文字）
         attributes:
           type: object
           additionalProperties: true
@@ -2658,8 +2974,13 @@ components:
           description: |
             属性情報（SaaS 開発コンソールでユーザー属性定義を行い設定された情報を取得します）
       required:
-        - email
         - attributes
+      example:
+        email: test@example.com
+        sign_in_id: null
+        attributes:
+          address: 東京都
+          birthday: 19940925
     UpdateTenantUserParam:
       title: ユーザーの更新パラメータ
       type: object
@@ -2688,6 +3009,14 @@ components:
           description: true を指定すると新しいパスワードを一時パスワードとして設定します（次回サインイン時に変更が必要）
       required:
         - password
+    SaasUserResetPasswordResult:
+      title: SaaSユーザーパスワードリセット結果
+      type: object
+      properties:
+        password:
+          type: string
+          description: |
+            自動生成された一時パスワード
     UpdateSaasUserEmailParam:
       title: ユーザーのメールアドレス更新パラメータ
       type: object
@@ -2698,6 +3027,16 @@ components:
           description: メールアドレス
       required:
         - email
+    UpdateSaasUserSignInIdParam:
+      title: ユーザーのログインID更新パラメータ
+      type: object
+      properties:
+        sign_in_id:
+          type: string
+          example: user_name_01
+          description: ログインID
+      required:
+        - sign_in_id
     RequestEmailUpdateParam:
       title: ユーザーのメールアドレス変更要求パラメータ
       type: object
@@ -2753,6 +3092,16 @@ components:
     CreateRoleParam:
       title: 役割(ロール)の作成パラメータ
       $ref: "#/components/schemas/Role"
+    UpdateRoleParam:
+      title: 役割(ロール)の更新パラメータ
+      type: object
+      properties:
+        display_name:
+          type: string
+          example: 管理者
+          description: 役割(ロール)表示名
+      required:
+        - display_name
     CreateTenantUserRolesParam:
       title: ユーザーの役割(ロール)追加パラメータ
       type: object
@@ -3589,6 +3938,10 @@ components:
           type: string
           example: GTM-XXXXXXX
           description: Google Tag Manager コンテナ ID
+        is_sign_in_id_enabled:
+          type: boolean
+          example: false
+          description: ログインIDのログイン画面での表示設定
       required:
         - title
         - terms_of_service_url
@@ -3750,6 +4103,7 @@ components:
           type: string
           enum:
             - softwareToken
+            - email
       required:
         - enabled
     UpdateUserMfaPreferenceParam:
@@ -4199,4 +4553,100 @@ components:
             チャレンジのセッション識別子。
             もし次のチャレンジが必要な場合、このセッションを次回のRespondToSignInChallengeの呼び出しに渡す必要があります。
           type: string
+        new_device_metadata:
+          $ref: "#/components/schemas/NewDeviceMetadata"
+    NewDeviceMetadata:
+      title: 新規デバイスメタデータ
+      description: |
+        認証中に登録された新規デバイスのメタデータ。
+      type: object
+      properties:
+        device_key:
+          title: デバイスキー
+          description: デバイスキー識別子
+          type: string
+        device_group_key:
+          title: デバイスグループキー
+          description: デバイスグループキー識別子
+          type: string
+    DeviceSecretVerifierConfig:
+      title: デバイスシークレット検証設定
+      description: |
+        デバイスシークレット検証の設定。
+      type: object
+      properties:
+        password_verifier:
+          title: パスワード検証子
+          description: ユーザーデバイスのパスワード検証子。SRP認証に使用されます。
+          type: string
+        salt:
+          title: ソルト
+          description: ユーザーデバイスとのSRP認証に使用するソルト。
+          type: string
+    ConfirmDeviceParam:
+      title: デバイス確認パラメータ
+      description: |
+        デバイスを確認するために必要なパラメータ。
+      type: object
+      properties:
+        access_token:
+          title: アクセストークン
+          description: 有効なアクセストークン。
+          type: string
+        device_key:
+          title: デバイスキー
+          description: デバイスの一意識別子。
+          type: string
+        device_name:
+          title: デバイス名
+          description: デバイスのフレンドリー名。
+          type: string
+        device_secret_verifier_config:
+          $ref: "#/components/schemas/DeviceSecretVerifierConfig"
+      required:
+        - access_token
+        - device_key
+    ConfirmDeviceResult:
+      title: デバイス確認結果
+      description: |
+        デバイス確認後に返される結果。
+      type: object
+      properties:
+        user_confirmation_necessary:
+          title: ユーザー確認の要否
+          description: |
+            trueの場合、ユーザーがデバイスを記憶するか確認する必要があります。
+            falseの場合、デバイスは即座に記憶されます。
+          type: boolean
+      required:
+        - user_confirmation_necessary
+    DeviceRememberedStatus:
+      title: デバイス記憶ステータス
+      description: |
+        デバイスが記憶されているかどうかのステータス。
+        "remembered"はデバイス認証を有効にし、"not_remembered"は無効にします。
+      type: string
+      enum:
+        - remembered
+        - not_remembered
+    UpdateDeviceStatusParam:
+      title: デバイスステータス更新パラメータ
+      description: |
+        デバイスのステータスを更新するために必要なパラメータ。
+      type: object
+      properties:
+        access_token:
+          title: アクセストークン
+          description: 有効なアクセストークン。
+          type: string
+        device_key:
+          title: デバイスキー
+          description: デバイスの一意識別子。
+          type: string
+        device_remembered_status:
+          $ref: "#/components/schemas/DeviceRememberedStatus"
+      required:
+        - access_token
+        - device_key
+        - device_remembered_status
 
