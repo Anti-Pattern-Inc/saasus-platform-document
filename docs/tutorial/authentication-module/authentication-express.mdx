@@ -119,6 +119,8 @@ router.get("/", getChats);
 
 Earlier, you defined the callback destination in the SaaS Development Console as [http://localhost/callback](http://localhost/callback), so configure the app to receive it at `/callback`.
 
+Edit `api/app.ts`.
+
 :::caution
 In Express, middleware and routes are processed in registration order, so if the 404 handler is registered first, requests to `/callback` return a 404 error and login fails.
 :::
