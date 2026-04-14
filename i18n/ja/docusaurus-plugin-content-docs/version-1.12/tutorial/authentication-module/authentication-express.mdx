@@ -118,6 +118,8 @@ router.get("/", getChats);
 
 先ほど SaaS開発コンソールでコールバック先を [http://localhost/callback](http://localhost/callback) と定義したので、`/callback` で受け取れるようにします。
 
+`api/app.ts` を修正します。
+
 :::caution
 Express ではミドルウェアとルートは登録された順番に処理されるため、404 ハンドラが先に登録されていると、/callback へのリクエストが 404 エラーになり、ログインに失敗します。
 :::
