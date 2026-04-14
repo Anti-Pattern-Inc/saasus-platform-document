@@ -126,6 +126,8 @@
 - [User Activity History Log](part-5/user-management/user-activity-history-log): Overview
 - [Search, Edit, Create, or Assign Users to Tenants](part-5/user-management/user-crud): Search Users
 - [Developer SDK/API Overview](part-6/developer-sdk-api-overview): 1. SaaSus SDK / API Capabilities and Use Cases
+- [Auth API Implementation Guide Overview](part-6/implementation-guide/auth/overview): This document provides an overview of implementing login functionality using the SaaSus Platform Auth API with a custom login UI.
+- [Login Implementation](part-6/implementation-guide/auth/sign-in): This document explains the implementation of login functionality using the Auth API sample application.
 - [Implementation using SaaSus Platform (Serverless)](part-6/implementation-guide/implementing-authentication-using-saasus-serverless): When configuring the backend as serverless, the following implementations are required:
 - [Activity History Log Implementation](part-6/implementation-guide/sample-application/activity-history-log): This guide explains implementation patterns and methods for effectively utilizing activity history logs.
 - [Authentication Flow Implementation](part-6/implementation-guide/sample-application/authentication): This page explains the implementation methods for authentication flow in the API server version, using the sample application's authentication features as examples.
