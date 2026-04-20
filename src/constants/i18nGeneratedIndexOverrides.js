@@ -53,6 +53,12 @@ export const generatedIndexOverrides = {
         description: 'SaaSus PlatformのAPIサーバ方式を使用した実装例',
       }
     },
+    '/part-6/implementation-guide/auth': {
+      ja: {
+        title: '認証API',
+        description: 'SaaSus Platform認証APIを使った独自ログイン画面の実装ガイド',
+      }
+    },
     '/part-7/faq': {
       ja: {
         title: 'よくある質問（FAQ）',
