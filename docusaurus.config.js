@@ -10,6 +10,10 @@ const locale = process.env.DOCUSAURUS_CURRENT_LOCALE || 'en';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "SaaSus Platform Document",
+  customFields: {
+    // LaunchDarkly Client-side ID
+    ldClientId: '636a8c5b9d373510aae2dbed',
+  },
   // tagline: 'SaaSus Platform are cool',
   favicon: "img/favicon.ico",
 
@@ -186,6 +190,11 @@ const config = {
             position: "left",
             sidebarId: "changelogSidebar",
             label: "Changelog",
+          },
+          {
+            to: "/status",
+            position: "left",
+            label: "Status",
           },
           {
             type: "localeDropdown",
