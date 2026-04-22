@@ -1,4 +1,52 @@
 {
+  "status.title": {
+    "message": "ステータス",
+    "description": "Status page title"
+  },
+  "status.description": {
+    "message": "SaaSus Platform サービスステータス",
+    "description": "Status page meta description"
+  },
+  "status.heading": {
+    "message": "SaaSus Platform ステータス",
+    "description": "Status page heading"
+  },
+  "status.subheading": {
+    "message": "システムの稼働状況を確認できます",
+    "description": "Status page subheading"
+  },
+  "status.operational": {
+    "message": "すべてのシステムが正常に稼働しています",
+    "description": "All systems operational message"
+  },
+  "status.outage": {
+    "message": "システムで問題が発生しています",
+    "description": "System outage message"
+  },
+  "status.incident.title": {
+    "message": "障害情報",
+    "description": "Incident info section title"
+  },
+  "status.incident.message": {
+    "message": "現在、一部のサービスで問題が発生しています。エンジニアチームが復旧作業を行っており、できる限り早く通常の状態に戻るよう対応しております。ご不便をおかけして申し訳ございません。",
+    "description": "Incident description message"
+  },
+  "status.incident.startTime": {
+    "message": "発生時刻:",
+    "description": "Incident start time label"
+  },
+  "status.incident.affectedServices": {
+    "message": "影響範囲:",
+    "description": "Affected services label"
+  },
+  "status.incident.statusText": {
+    "message": "対応状況:",
+    "description": "Status text label"
+  },
+  "status.contact": {
+    "message": "お問い合わせ: support@saasus-platform.com",
+    "description": "Contact info"
+  },
   "theme.ErrorPageContent.title": {
     "message": "エラーが発生しました",
     "description": "The title of the fallback page when the page crashed"
