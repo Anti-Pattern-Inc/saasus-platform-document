@@ -22,8 +22,8 @@ If you are using AWS EC2 or Cloud9 to create an operating environment for the Bl
 
 This simple chat system comes with two configuration options:
 
-1. Laravel + Blade (PHP 8 / Laravel 9 / PostgreSQL 13)  
-2. Express + EJS (Node.js / Express 4.16.x / PostgreSQL 13)
+1. Laravel + Blade (PHP / Laravel / PostgreSQL)  
+2. Express + EJS (Node.js / Express / PostgreSQL)
 
 In either setup, it is possible to use Next.js as the frontend with additional configuration.  
 However, Next.js is not used in this tutorial.
