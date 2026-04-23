@@ -292,6 +292,51 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  /users/search:
+    get:
+      tags:
+        - saasUser
+      operationId: SearchSaasUsers
+      summary: SaaSユーザー検索
+      description: |
+        ユーザーID、メールアドレス、またはログインIDでSaaSユーザーを検索します。
+      parameters:
+        - in: query
+          name: id
+          schema:
+            $ref: "#/components/schemas/Uuid"
+          description: ユーザーID
+        - in: query
+          name: email
+          schema:
+            type: string
+          description: メールアドレス前方一致
+        - in: query
+          name: sign_in_id
+          schema:
+            type: string
+          description: ログインID前方一致
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchSaasUsersResult"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
   "/users/{user_id}":
     get:
       tags:
@@ -671,6 +716,68 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Users"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /tenants/all/users/search:
+    get:
+      tags:
+        - tenantUser
+      operationId: SearchTenantUsers
+      summary: テナントユーザー検索
+      description: |
+        ユーザーID、テナントID、メールアドレス、ログインID、環境、ロールでテナントユーザーを検索します。
+      parameters:
+        - in: query
+          name: tenant_id
+          schema:
+            $ref: "#/components/schemas/Uuid"
+          description: テナントID
+        - in: query
+          name: id
+          schema:
+            $ref: "#/components/schemas/Uuid"
+          description: ユーザーID
+        - in: query
+          name: email
+          schema:
+            type: string
+          description: メールアドレス前方一致
+        - in: query
+          name: sign_in_id
+          schema:
+            type: string
+          description: ログインID前方一致
+        - in: query
+          name: env_id
+          schema:
+            type: integer
+            x-go-type: uint64
+            minimum: 1
+          description: 環境ID
+        - in: query
+          name: role_id
+          schema:
+            type: string
+          description: ロールID
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchTenantUsersResult"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
         "500":
           description: Internal Server Error
           content:
@@ -2599,6 +2706,21 @@ components:
       required: true
       schema:
         $ref: "#/components/schemas/Uuid"
+    Limit:
+      in: query
+      name: limit
+      schema:
+        type: integer
+        format: int64
+        minimum: 1
+        maximum: 100
+      description: 取得する最大数
+    Cursor:
+      in: query
+      name: cursor
+      schema:
+        type: string
+      description: カーソルページネーション用のカーソル
   schemas:
     UserInfo:
       title: ユーザー情報
@@ -2909,6 +3031,32 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/User"
+      required:
+        - users
+    SearchTenantUsersResult:
+      title: テナントユーザー検索結果
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: "#/components/schemas/User"
+        cursor:
+          type: string
+          description: 次ページ取得用のカーソル
+      required:
+        - users
+    SearchSaasUsersResult:
+      title: SaaSユーザー検索結果
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: "#/components/schemas/SaasUser"
+        cursor:
+          type: string
+          description: 次ページ取得用のカーソル
       required:
         - users
     UserEnv:
