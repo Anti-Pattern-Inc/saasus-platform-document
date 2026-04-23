@@ -411,6 +411,62 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /users/search:
+    get:
+      tags:
+        - saasUser
+      operationId: SearchSaasUsers
+      summary: Search SaaS Users
+      x-summary-i18n:
+        jpn: SaaSユーザー検索
+      description: |
+        Search SaaS users by user ID, email, or sign-in ID.
+      x-description-i18n:
+        jpn: |
+          ユーザーID、メールアドレス、またはログインIDでSaaSユーザーを検索します。
+      parameters:
+        - in: query
+          name: id
+          schema:
+            $ref: '#/components/schemas/Uuid'
+          description: User ID
+          x-description-i18n:
+            jpn: ユーザーID
+        - in: query
+          name: email
+          schema:
+            type: string
+          description: Email prefix
+          x-description-i18n:
+            jpn: メールアドレス前方一致
+        - in: query
+          name: sign_in_id
+          schema:
+            type: string
+          description: Sign-in ID prefix
+          x-description-i18n:
+            jpn: ログインID前方一致
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchSaasUsersResult'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /users/{user_id}:
     get:
       tags:
@@ -886,6 +942,86 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Users'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /tenants/all/users/search:
+    get:
+      tags:
+        - tenantUser
+      operationId: SearchTenantUsers
+      summary: Search Tenant Users
+      x-summary-i18n:
+        jpn: テナントユーザー検索
+      description: >
+        Search tenant users by user id, tenant id, email, sign-in ID, env, or
+        role.
+      x-description-i18n:
+        jpn: |
+          ユーザーID、テナントID、メールアドレス、ログインID、環境、ロールでテナントユーザーを検索します。
+      parameters:
+        - in: query
+          name: tenant_id
+          schema:
+            $ref: '#/components/schemas/Uuid'
+          description: Tenant ID
+          x-description-i18n:
+            jpn: テナントID
+        - in: query
+          name: id
+          schema:
+            $ref: '#/components/schemas/Uuid'
+          description: User ID
+          x-description-i18n:
+            jpn: ユーザーID
+        - in: query
+          name: email
+          schema:
+            type: string
+          description: Email prefix
+          x-description-i18n:
+            jpn: メールアドレス前方一致
+        - in: query
+          name: sign_in_id
+          schema:
+            type: string
+          description: Sign-in ID prefix
+          x-description-i18n:
+            jpn: ログインID前方一致
+        - in: query
+          name: env_id
+          schema:
+            type: integer
+            x-go-type: uint64
+            minimum: 1
+          description: Environment ID
+          x-description-i18n:
+            jpn: 環境ID
+        - in: query
+          name: role_id
+          schema:
+            type: string
+          description: Role ID
+          x-description-i18n:
+            jpn: ロールID
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchTenantUsersResult'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '500':
           description: Internal Server Error
           content:
@@ -3318,6 +3454,25 @@ components:
       required: true
       schema:
         $ref: '#/components/schemas/Uuid'
+    Limit:
+      in: query
+      name: limit
+      schema:
+        type: integer
+        format: int64
+        minimum: 1
+        maximum: 100
+      description: Maximum number of items to retrieve
+      x-description-i18n:
+        jpn: 取得する最大数
+    Cursor:
+      in: query
+      name: cursor
+      schema:
+        type: string
+      description: Cursor for cursor pagination
+      x-description-i18n:
+        jpn: カーソルページネーション用のカーソル
   schemas:
     UserInfo:
       title: User Info
@@ -3744,6 +3899,40 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/User'
+      required:
+        - users
+    SearchTenantUsersResult:
+      title: Search Tenant Users Result
+      x-title-i18n:
+        jpn: テナントユーザー検索結果
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        cursor:
+          type: string
+          description: Pagination cursor for the next page
+          x-description-i18n:
+            jpn: 次ページ取得用のカーソル
+      required:
+        - users
+    SearchSaasUsersResult:
+      title: Search SaaS Users Result
+      x-title-i18n:
+        jpn: SaaSユーザー検索結果
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/SaasUser'
+        cursor:
+          type: string
+          description: Pagination cursor for the next page
+          x-description-i18n:
+            jpn: 次ページ取得用のカーソル
       required:
         - users
     UserEnv:
