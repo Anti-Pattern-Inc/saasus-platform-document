@@ -22,8 +22,8 @@ AWS の EC2 や Cloud9 を利用して、Blade 版の動作環境を作成する
 
 この簡易チャットシステムは、以下の2種類の構成が用意されています。
 
-1. **Laravel + Blade**（PHP 8 / Laravel 9 / PostgreSQL 13）
-2. **Express + EJS**（Node.js / Express 4.16.x / PostgreSQL 13）
+1. **Laravel + Blade**（PHP / Laravel / PostgreSQL）
+2. **Express + EJS**（Node.js / Express / PostgreSQL）
 
 どちらの構成でも、設定によってNext.jsをフロントエンドとして利用可能ですが、このチュートリアルではNext.jsは使用しません。
 
