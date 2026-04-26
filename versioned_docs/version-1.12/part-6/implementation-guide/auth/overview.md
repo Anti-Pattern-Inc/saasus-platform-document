@@ -107,6 +107,7 @@ The technology stack is as follows:
 ### Implemented Screens and Features
 
 - **Login screen**: Tabbed UI with email login and ID login
+![Login Screen](/img/part-6/implementation-guide/auth/overview/login-screen.png)
 - **New password screen**: Password change on first login
 - **Auth API**: SRP authentication flow with the SaaSus Platform Auth API
 - **ID login**: Login using username + tenant ID via the `login_domain` tenant attribute
