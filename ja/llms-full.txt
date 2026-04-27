@@ -7357,149 +7357,282 @@ See the SDK example in
 
 ---
 
-# Auth API Implementation Guide Overview
+# Advanced Example Using the Auth API (ID Login)
 
-URL: https://www.prisma.io/docs/part-6/implementation-guide/auth/overview
+URL: https://www.prisma.io/docs/part-6/implementation-guide/auth/advanced-sign-in
 
-This document provides an overview of implementing login functionality using the SaaSus Platform Auth API with a custom login UI.
+This document explains how to implement an ID-based authentication method that uses **username + tenant ID** instead of email.
+
+ID login can be implemented standalone or alongside email login. The SRP authentication computation and token verification (`POST /verify`) are the same as email login; only the challenge request endpoint and parameters differ.
 
 :::info
-For detailed implementation code, see [Login Implementation](/docs/part-6/implementation-guide/auth/sign-in).
+For the basic email login implementation, see [Basic Implementation Using the Auth API](/docs/part-6/implementation-guide/auth/basic-sign-in). For an overview of the Auth API, see [Auth API Implementation Guide](/docs/part-6/implementation-guide/auth/overview).
 :::
 
-## What is the Auth API?
+## Overview
 
-The Auth API allows SaaS providers to implement login functionality from their own custom-built UI, without using the standard hosted login screen provided by SaaSus Platform.
+ID login leverages the `login_domain` value set in the SaaSus Platform tenant attributes. The backend retrieves tenant information and concatenates `username + login_domain` (e.g., `taro` + `@example.com` = `taro@example.com`) before sending to the SaaSus Platform Auth API.
 
-By calling the SaaSus Platform Auth API (`/sign-in` and `/sign-in/challenge`) from your server-side application, you can obtain ID tokens, access tokens, and refresh tokens for subsequent API calls and authorization.
+This allows users to sign in with just a username and tenant ID, without needing to remember a full email address. It is particularly useful for SaaS that operate multiple tenants and want to provide a tenant-isolated login experience.
 
-This document explains how to implement login functionality using a custom login UI with the Auth API.
+## Prerequisites
 
-## What You Can Do with the Auth API
+To implement ID login, all of the following prerequisites must be satisfied.
 
-### Custom Login UI with Email + Password Authentication
+### 1. SaaSus Platform configuration
 
-Perform login from your own branded UI without using the SaaSus Platform standard login screen. You have full control over the login screen design and UX.
+#### The `login_domain` tenant attribute must be defined
 
-### Token Acquisition (ID / Access / Refresh Tokens)
+In the SaaS Operation Console under "Tenant attributes", add a tenant attribute named `login_domain`.
 
-Upon successful authentication, you can obtain the tokens required for SaaSus Platform API calls.
+- **Attribute name**: `login_domain`
+- **Attribute type**: string
+- **Value format**: A domain part starting with `@` (e.g., `@example.com`, `@tenant1.example.com`)
 
-## Authentication Flow and Architecture
+:::tip About the value format
+Set `login_domain` in a format that **includes the `@` and everything after** the email's local part (e.g., `@example.com`). This ensures that simple concatenation with `user_id` results in a valid email format. If the value omits the `@`, the concatenated string will not be a valid email and authentication will fail.
+:::
 
-The Auth API is based on a **two-step authentication flow** using the Secure Remote Password (SRP) protocol. Instead of simply sending a password, it performs authentication securely through a challenge-and-response mechanism.
+#### The target tenant must have a `login_domain` value set
 
-### Authentication Flow Overview
+Each tenant that should support ID login must have a value configured for the `login_domain` attribute defined above. ID login will fail for tenants where this value is not set.
+
+#### Users must be registered in SaaSus Platform as `username + login_domain`
+
+For example, if a tenant's `login_domain` is `@example.com` and you want users to log in with the ID `taro`, the user must be registered in SaaSus Platform with the email `taro@example.com`.
+
+### 2. Application prerequisites
+
+#### The basic email login implementation must be in place
+
+ID login builds on top of the basic email login mechanism (`POST /sign-in` and `POST /sign-in/challenge`). Complete [Basic Implementation Using the Auth API](/docs/part-6/implementation-guide/auth/basic-sign-in) first.
+
+Specifically, the following must be working:
+
+- SRP_A generation and transmission from the frontend
+- The backend's `POST /sign-in` endpoint
+- SRP signature computation and token retrieval (`POST /verify` or `POST /sign-in/challenge`)
+- HttpOnly Cookie–based token management
+
+#### An API key with permission to retrieve tenant information must be configured
+
+The backend calls the SaaSus Platform Auth API's `GetTenant`, so the application must be configured with an API key that has tenant read permission.
+
+### 3. UI prerequisites
+
+#### Users must have a way to know their tenant ID
+
+ID login requires the user to enter a tenant ID, so you must provide one of the following so the user knows which tenant ID to use:
+
+- Distribute tenant-specific login URLs (e.g., `https://app.example.com/login?tenant_id=xxx`)
+- Provide a tenant ID input field on the login screen
+- Provide a tenant selection screen before login
+
+The sample application supports both pre-specifying via the URL query parameter `?tenant_id=xxx` and direct form entry.
+
+## Frontend
+
+### Input fields
+
+For ID login, the frontend accepts the following inputs:
+
+- **Username**: The local part of the email, before `@` (e.g., `taro`)
+- **Tenant ID**: The target tenant ID for login
+- **Password**: The user's password (used only for SRP calculation; not sent to the server)
+
+The tenant ID can also be pre-specified via the URL query parameter `?tenant_id=xxx`. This enables operations such as distributing tenant-specific login URLs.
+
+### Challenge request
+
+For ID login, call the `/challenge-id` endpoint instead of the email login's `/challenge`.
+
+```typescript
+// Challenge request for ID login
+const challengeResponse = await apiClient.post('/challenge-id', {
+  user_id: userId,
+  tenant_id: tenantId,
+  srp_a: srpA,
+});
+```
+
+The processing after obtaining the challenge (SRP signature computation and token acquisition via `POST /verify`) is the same as email login.
+
+## Backend
+
+### POST /challenge-id endpoint
+
+This is the challenge endpoint for ID-based authentication. It accepts `user_id` and `tenant_id` instead of an email.
+
+#### Request struct
+
+```go
+// ChallengeIdRequest represents an ID-based challenge request
+type ChallengeIdRequest struct {
+	UserID   string `json:"user_id" binding:"required"`
+	TenantID string `json:"tenant_id" binding:"required"`
+	SrpA     string `json:"srp_a" binding:"required"`
+}
+```
+
+#### Processing flow
+
+1. Get `user_id`, `tenant_id`, and `srp_a` from the request body
+2. **Get tenant info**: Retrieve tenant info from the SaaSus Platform Auth API and read `login_domain` from the tenant attributes
+3. **Build USERNAME**: Concatenate `user_id + login_domain` (e.g., `taro` + `@example.com` = `taro@example.com`)
+4. Call the SaaSus Platform Auth API's `/sign-in` to begin SRP authentication
+5. Return the challenge parameters to the frontend
+
+```go
+func challengeId(c echo.Context) error {
+	var req ChallengeIdRequest
+	if err := c.Bind(&req); err != nil {
+		return c.JSON(http.StatusBadRequest, ChallengeResponse{
+			Success: false,
+			Message: "Invalid request format",
+		})
+	}
+
+	ctx := context.Background()
+
+	// Get tenant info to read the login_domain attribute
+	tenantResponse, err := authClient.GetTenantWithResponse(ctx, req.TenantID)
+	if err != nil || tenantResponse.JSON200 == nil {
+		return c.JSON(http.StatusBadRequest, ChallengeResponse{
+			Success: false,
+			Message: "Tenant not found",
+		})
+	}
+
+	// Read login_domain from tenant attributes
+	tenant := tenantResponse.JSON200
+	loginDomain := ""
+	if tenant.Attributes != nil {
+		if domain, ok := tenant.Attributes["login_domain"]; ok {
+			if domainStr, ok := domain.(string); ok {
+				loginDomain = domainStr
+			}
+		}
+	}
+
+	if loginDomain == "" {
+		return c.JSON(http.StatusBadRequest, ChallengeResponse{
+			Success: false,
+			Message: "Tenant does not have login_domain attribute configured",
+		})
+	}
+
+	// Build USERNAME as user_id + login_domain
+	// e.g., "taro" + "@example.com" = "taro@example.com"
+	username := req.UserID + loginDomain
+
+	// Send a SignIn request to the SaaSus Platform Auth API
+	signInParam := authapi.SignInParam{
+		SignInFlow: authapi.USERSRPAUTH,
+		SignInParameters: &map[string]string{
+			"USERNAME": username,
+			"SRP_A":    req.SrpA,
+		},
+	}
+
+	signInResponse, err := authClient.SignInWithResponse(ctx, signInParam)
+	if err != nil || signInResponse.JSON200 == nil {
+		return c.JSON(http.StatusInternalServerError, ChallengeResponse{
+			Success: false,
+			Message: "SignIn challenge failed",
+		})
+	}
+
+	// Return challenge parameters (the rest is the same verify flow as email login)
+	signInResult := signInResponse.JSON200
+	challengeParameters := *signInResult.ChallengeParameters
+
+	session := ""
+	if signInResult.Session != nil {
+		session = *signInResult.Session
+	}
+
+	return c.JSON(http.StatusOK, ChallengeResponse{
+		Success:     true,
+		Message:     "Challenge parameters retrieved",
+		SrpB:        challengeParameters["SRP_B"],
+		Salt:        challengeParameters["SALT"],
+		SecretBlock: challengeParameters["SECRET_BLOCK"],
+		PoolName:    challengeParameters["POOL_NAME"],
+		Username:    challengeParameters["USER_ID_FOR_SRP"],
+		Session:     session,
+	})
+}
+```
+
+## ID Login Processing Flow
 
 ```mermaid
 sequenceDiagram
-    actor U as User
-    participant F as Frontend(React)
-    participant B as Backend(Go)
+    participant F as Frontend (React)
+    participant B as Backend (Go)
     participant A as SaaSus Platform Auth API
 
-    U->>F: Input email & password
-    Note over F: Generate SRP_A
-    
+    F->>B: 1. Send user_id + tenant_id + srp_a
+
     rect rgba(232, 245, 233, 1)
-      F->>B: 1. Start sign-in (Send SRP_A)
-      Note right of F: *Password is NOT sent
-      B->>A: 2. POST /sign-in (SRP_A)
-      A-->>B: 3. Return challenge info (SRP_B, SALT, etc.)
-      B-->>F: 4. Forward challenge info
+      B->>A: 2. GetTenant(tenant_id)
+      A-->>B: 3. Get login_domain
     end
 
-    Note over F: Generate signature<br/>(PASSWORD_CLAIM_SIGNATURE)
+    rect rgba(232, 245, 233, 1)
+      B->>A: 4. POST /sign-in (USERNAME=user_id+domain)
+      A-->>B: 5. Challenge response
+    end
+
+    B-->>F: 6. Challenge parameters
+
+    Note over F: 7. SRP signature calc (in browser)
 
     rect rgba(232, 245, 233, 1)
-      F->>B: 5. Send signature
-      B->>A: 6. POST /sign-in/challenge (Signature)
-      A-->>B: 7. Return tokens
-      B-->>F: 8. Return tokens (HttpOnly Cookie)
+      F->>B: 8. POST /verify (shared)
+      B->>A: 9. RespondToAuthChallenge
+      A-->>B: 10. Return tokens
+      B-->>F: 11. Tokens (Cookie)
     end
 ```
 
-### Flow Details
-
-1. **Authentication Start**: Enter the email address (or ID) and password on the frontend, generate SRP_A, and send it to the backend (the password is **not** sent).
-2. **Challenge Info Acquisition**: The backend sends SRP_A to the SaaSus Platform Auth API's `/sign-in`.
-3. **Challenge Info Received**: Challenge information (SRP_B, SALT, SECRET_BLOCK, etc.) is returned from the SaaSus Platform Auth API to the backend.
-4. **Challenge Info Forwarded**: The backend returns the challenge information to the frontend.
-5. **Signature Generation and Transmission**: The frontend generates a signature (`PASSWORD_CLAIM_SIGNATURE`, etc.) using the received challenge information and sends it to the backend.
-6. **Verification Request**: The backend sends the signature and challenge information to the SaaSus Platform Auth API's `/sign-in/challenge`.
-7. **Token Issuance**: Upon successful authentication, ID token, access token, and refresh token are returned to the backend.
-8. **Token Storage**: The backend returns the tokens to the frontend via HttpOnly Cookies.
-
-:::info Benefits of SRP Protocol
-The SRP (Secure Remote Password) protocol never transmits the password in plaintext over the network. Authentication is performed through hashing and SRP calculations, making it secure even against man-in-the-middle attacks. Since completing SRP calculations on the frontend alone is complex, this sample application demonstrates an architecture where the frontend handles SRP_A and signature generation, while the backend mediates communication with the SaaSus Platform API.
-:::
-
-### Challenge Types and Branching Logic
-
-The following challenge types may be returned from the SaaSus Platform Auth API:
-
-| Challenge Name | Description | Action |
-|---|---|---|
-| `PASSWORD_VERIFIER` | Standard password verification | Send challenge response to obtain tokens |
-| `NEW_PASSWORD_REQUIRED` | Password change required on first login | Prompt for new password and send challenge again |
-
-## Sample Application Structure
-
-The sample application in this implementation guide is built with the following stack:
-
-| Component | Technology |
-|---|---|
-| Frontend | React + TypeScript |
-| Backend | Go |
-| Token Management | HttpOnly Cookie |
-| Security | CSRF Protection |
-
-### Implemented Screens and Features
-
-- **Login Screen**: Tab UI supporting both email login and ID login
-- **New Password Screen**: Password change on first login
-- **Auth API**: SRP authentication flow with SaaSus Platform Auth API
-- **ID Login**: Login with username + tenant ID using the `login_domain` tenant attribute
-- **Token Management**: Secure token storage via HttpOnly Cookies
-- **Logout**: Session termination via cookie clearing
-
-For detailed implementation, see [Login Implementation](/docs/part-6/implementation-guide/auth/sign-in).
+The main difference from email login is **steps 2–4**. The process of retrieving `login_domain` from tenant information and concatenating it with `user_id` to construct the USERNAME is added. Steps 7 onward (SRP signature calculation and token retrieval via `POST /verify`) are shared.
 
 ---
 
-# Login Implementation
+# Basic Implementation Using the Auth API
 
-URL: https://www.prisma.io/docs/part-6/implementation-guide/auth/sign-in
+URL: https://www.prisma.io/docs/part-6/implementation-guide/auth/basic-sign-in
 
-This document explains the implementation of login functionality using the Auth API sample application.
+This document explains how to implement sign-in and sign-out from a custom login UI, based on the Auth API sample application.
 
 :::info
-For an overview of the Auth API and its flow, see [Auth API Implementation Guide Overview](/docs/part-6/implementation-guide/auth/overview).
+For an overview of the Auth API and its flow, see [Auth API Implementation Guide](/docs/part-6/implementation-guide/auth/overview).
 :::
 
-## Frontend Implementation
+## Frontend
 
 ### Login Screen Component
 
 The login screen implements the following elements:
 
-- **Email address (or ID) input field**: Enter the user identifier
-- **Password input field**: Enter the user password
-- **Login button**: Initiate the sign-in process
-- **Error message area**: Display authentication error messages
+- **Email (or ID) input field**: Enter the user's identifier
+- **Password input field**: Enter the user's password
+- **Login button**: Start the login process
+- **Error message area**: Display authentication errors
 
-<!-- TODO: Add login screen screenshot -->
+<!-- TODO: Add a screenshot of the login screen -->
 
-### Login Flow
+### Login Processing Flow
 
-The frontend login flow is implemented as follows:
+The frontend login is implemented in the following sequence:
 
-#### 1. Initiate Sign-in
+#### 1. Start sign-in
 
-Send the user-entered email address (or ID) and password to the backend `POST /sign-in` endpoint.
+Send the email (or ID) and password entered by the user to the backend's `POST /sign-in` endpoint.
 
 ```typescript
-// Login form submission handler
+// Login form submission
 const handleLogin = async (identifier: string, password: string) => {
   try {
     const response = await fetch("/sign-in", {
@@ -7511,7 +7644,7 @@ const handleLogin = async (identifier: string, password: string) => {
     const data = await response.json();
 
     if (data.challenge_name) {
-      // Challenge returned, proceed to next step
+      // If a challenge is returned, proceed to the next step
       await handleChallenge(data);
     }
   } catch (error) {
@@ -7520,39 +7653,39 @@ const handleLogin = async (identifier: string, password: string) => {
 };
 ```
 
-#### 2. Handle Challenge Response
+#### 2. Handle challenge response
 
-Using the challenge parameters returned from the backend, send the challenge response to the backend `POST /sign-in/challenge`.
+Use the challenge parameters returned from the backend to send the challenge response to `POST /sign-in/challenge`.
 
 ```typescript
 const handleChallenge = async (challengeData: ChallengeResponse) => {
   if (challengeData.challenge_name === "NEW_PASSWORD_REQUIRED") {
-    // First login: navigate to new password setting page
+    // First login: navigate to the new password screen
     navigateToNewPasswordPage(challengeData);
     return;
   }
 
-  // For PASSWORD_VERIFIER: send challenge response
+  // PASSWORD_VERIFIER: send the challenge response
   const response = await fetch("/sign-in/challenge", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       challenge_name: challengeData.challenge_name,
-      // Forward challenge parameters received from backend
+      // Forward the challenge parameters received from the backend
       ...challengeData.challenge_parameters,
     }),
   });
 
   if (response.ok) {
-    // Login successful: tokens are automatically saved in HttpOnly cookies
+    // On success: tokens are saved automatically in HttpOnly Cookies
     navigateToMainPage();
   }
 };
 ```
 
-#### 3. New Password Setting (First Login)
+#### 3. Set new password (first login)
 
-When a `NEW_PASSWORD_REQUIRED` challenge is returned, prompt the user for a new password and send it to the backend.
+When the `NEW_PASSWORD_REQUIRED` challenge is returned, prompt the user for a new password and send it to the backend.
 
 ```typescript
 const handleNewPassword = async (
@@ -7570,30 +7703,30 @@ const handleNewPassword = async (
   });
 
   if (response.ok) {
-    // Navigate to main page after successful password change
+    // After password change, navigate to the main screen
     navigateToMainPage();
   }
 };
 ```
 
-#### 4. Post-Login Navigation
+#### 4. Navigate after login
 
-After token storage is complete, navigate to the main page (e.g., user list page). Since tokens are stored in HttpOnly Cookies, there is no need to handle tokens directly on the frontend.
+Once tokens are saved, navigate to the main screen (e.g., user list). Tokens are stored in HttpOnly Cookies, so the frontend does not need to handle them directly.
 
-## Backend Implementation
+## Backend
 
-The backend receives requests from the frontend, communicates with the SaaSus Platform Auth API, and processes the login flow.
+The backend receives requests from the frontend and communicates with the SaaSus Platform Auth API to perform login.
 
-### POST /sign-in Endpoint
+### POST /sign-in endpoint
 
-Calls the SaaSus Platform Auth API `/sign-in` using the email address (or ID) and password received from the frontend.
+Use the email (or ID) and password received from the frontend to call the SaaSus Platform Auth API's `/sign-in`.
 
-#### Processing Flow
+#### Processing flow
 
-1. Extract email address (or ID) and password from the request body
-2. **ID/Email conversion**: If the input doesn't contain `@`, append a dummy domain to convert to email format
-3. Calculate SRP_A and call the SaaSus Platform Auth API `/sign-in`
-4. Return the challenge response (`PASSWORD_VERIFIER`, etc.) to the frontend
+1. Get the email (or ID) and password from the request body
+2. **ID/email conversion**: If the input does not contain `@`, append a dummy domain to convert it into email format
+3. Compute SRP_A and call the SaaSus Platform Auth API's `/sign-in`
+4. Return the challenge response (e.g., `PASSWORD_VERIFIER`) to the frontend
 
 ```go
 // POST /sign-in handler
@@ -7603,36 +7736,36 @@ func signIn(c echo.Context) error {
         return c.JSON(http.StatusBadRequest, map[string]string{"error": "invalid request"})
     }
 
-    // ID/email conversion
+    // ID / email conversion
     email := req.Identifier
     if !strings.Contains(req.Identifier, "@") {
-        // For ID format, append dummy domain
+        // For ID format, append a dummy domain
         email = req.Identifier + "@example.auth"
     }
 
-    // Call SaaSus Platform Auth API /sign-in
-    // Calculates and sends SRP_A
+    // Call the SaaSus Platform Auth API /sign-in
+    // Compute and send SRP_A
     resp, err := authClient.SignIn(email, req.Password)
     if err != nil {
         return c.JSON(http.StatusUnauthorized, map[string]string{"error": "authentication failed"})
     }
 
-    // Return challenge parameters to frontend
+    // Return challenge parameters to the frontend
     return c.JSON(http.StatusOK, resp)
 }
 ```
 
-:::tip ID Conversion Note
-When using ID-based login, ensure the dummy domain matches the one used when registering users in SaaSus Platform. It is recommended to manage this via environment variables.
+:::tip ID conversion tips
+When using ID-style login, make sure this dummy domain matches the domain used when registering users on SaaSus Platform. Managing it via environment variables is recommended.
 :::
 
-### POST /sign-in/challenge Endpoint
+### POST /sign-in/challenge endpoint
 
-Calls the SaaSus Platform Auth API `/sign-in/challenge` using the challenge response received from the frontend. Processes are branched based on the challenge type.
+Use the challenge response received from the frontend to call the SaaSus Platform Auth API's `/sign-in/challenge`. Branch handling based on the challenge type.
 
-#### PASSWORD_VERIFIER Case
+#### PASSWORD_VERIFIER
 
-The standard password verification flow. Send the challenge response to obtain tokens.
+A normal password verification flow. Send the challenge response and obtain tokens.
 
 ```go
 // POST /sign-in/challenge handler
@@ -7642,7 +7775,7 @@ func signInChallenge(c echo.Context) error {
         return c.JSON(http.StatusBadRequest, map[string]string{"error": "invalid request"})
     }
 
-    // Call SaaSus Platform Auth API /sign-in/challenge
+    // Call the SaaSus Platform Auth API /sign-in/challenge
     resp, err := authClient.RespondToChallenge(req)
     if err != nil {
         return c.JSON(http.StatusUnauthorized, map[string]string{"error": "challenge failed"})
@@ -7650,12 +7783,12 @@ func signInChallenge(c echo.Context) error {
 
     switch resp.ChallengeName {
     case "":
-        // Authentication complete: set tokens in HttpOnly cookies
+        // Authentication complete: set tokens in HttpOnly Cookies
         setTokenCookies(c, resp.Tokens)
         return c.JSON(http.StatusOK, map[string]string{"status": "authenticated"})
 
     case "NEW_PASSWORD_REQUIRED":
-        // First login: new password setting required
+        // First login: a new password is required
         return c.JSON(http.StatusOK, map[string]interface{}{
             "challenge_name":       "NEW_PASSWORD_REQUIRED",
             "session":              resp.Session,
@@ -7668,15 +7801,15 @@ func signInChallenge(c echo.Context) error {
 }
 ```
 
-#### NEW_PASSWORD_REQUIRED Case
+#### NEW_PASSWORD_REQUIRED
 
-Handles the case where a password change is required on first login. Receives the new password and sends it to the SaaSus Platform Auth API.
+This is the case where a password change is required on first login. Receive the new password and send it to the SaaSus Platform Auth API.
 
 ```go
-// New password setting handler
+// New password handling
 // Called when challenge_name is NEW_PASSWORD_REQUIRED
 func handleNewPasswordRequired(c echo.Context, req ChallengeRequest) error {
-    // Send new password to SaaSus Platform Auth API
+    // Send the new password to the SaaSus Platform Auth API
     resp, err := authClient.RespondToNewPasswordChallenge(
         req.Session,
         req.NewPassword,
@@ -7685,24 +7818,185 @@ func handleNewPasswordRequired(c echo.Context, req ChallengeRequest) error {
         return c.JSON(http.StatusBadRequest, map[string]string{"error": "password change failed"})
     }
 
-    // Set tokens in HttpOnly cookies after successful password change
+    // After successful password change, set tokens in HttpOnly Cookies
     setTokenCookies(c, resp.Tokens)
     return c.JSON(http.StatusOK, map[string]string{"status": "authenticated"})
 }
 ```
 
-:::caution Note for ID-based Login
-Even in the `NEW_PASSWORD_REQUIRED` flow, if the user logged in with an ID format, you need to correctly handle the email address with the appended dummy domain. It is recommended to persist the converted value in the session from the initial sign-in step.
+:::caution Notes for ID login
+Even in the `NEW_PASSWORD_REQUIRED` flow, when a user logs in with ID format, you must correctly handle the email constructed with the dummy domain. We recommend persisting the converted value (e.g., in session state) at sign-in start.
 :::
 
-## Security Implementation
+## Sign-out
 
-### Token Management with HttpOnly Cookies
+On sign-out, clear all tokens stored in HttpOnly Cookies.
 
-Store obtained tokens in **HttpOnly Cookies**. Compared to storing in localStorage, this reduces the risk of token theft through XSS (Cross-Site Scripting) attacks.
+### Backend
 
 ```go
-// Function to set tokens in HttpOnly cookies
+// POST /sign-out handler
+func signOut(c echo.Context) error {
+    // Delete each token cookie (set MaxAge to -1)
+    for _, name := range []string{"access_token", "refresh_token", "id_token"} {
+        c.SetCookie(&http.Cookie{
+            Name:     name,
+            Value:    "",
+            Path:     "/",
+            HttpOnly: true,
+            Secure:   true,
+            SameSite: http.SameSiteStrictMode,
+            MaxAge:   -1, // Delete the cookie immediately
+        })
+    }
+
+    return c.JSON(http.StatusOK, map[string]string{"status": "signed_out"})
+}
+```
+
+### Frontend
+
+```typescript
+const handleLogout = async () => {
+  await fetch("/sign-out", { method: "POST" });
+  // Navigate to the login screen
+  navigateToLoginPage();
+};
+```
+
+---
+
+# Auth API Implementation Guide
+
+URL: https://www.prisma.io/docs/part-6/implementation-guide/auth/overview
+
+This document provides an overview of implementing login functionality using the SaaSus Platform Auth API with a custom login UI.
+
+:::info
+For concrete code in the basic implementation, see [Basic Implementation Using the Auth API](/docs/part-6/implementation-guide/auth/basic-sign-in). For an advanced example, see [Advanced Example Using the Auth API (ID Login)](/docs/part-6/implementation-guide/auth/advanced-sign-in). For security implementation, see [Authentication Security & Policy Implementation](/docs/part-6/implementation-guide/auth/security).
+:::
+
+## What is the Auth API?
+
+The Auth API allows SaaS providers to implement login functionality from their own custom-built UI, without using the standard hosted login screen provided by SaaSus Platform.
+
+By calling the SaaSus Platform Auth API (`/sign-in` and `/sign-in/challenge`) from the server side, you can obtain ID tokens, access tokens, and refresh tokens for subsequent API calls and authorization.
+
+This document explains how to implement login functionality using a custom login UI with the Auth API.
+
+## What You Can Do with the Auth API
+
+### Email + Password Authentication from a Custom Login Screen
+
+You can perform login from your own branded UI without using the SaaSus Platform standard login screen. The login screen design and UX can be customized.
+
+### Token Acquisition (ID / Access / Refresh Tokens)
+
+When authentication completes successfully, you can obtain the various tokens needed for SaaSus Platform API calls.
+
+## Authentication Flow and Architecture
+
+The Auth API is based on a **two-step authentication flow** using the Secure Remote Password (SRP) protocol. Instead of simply sending a password, it performs authentication securely through a challenge-and-response mechanism.
+
+### Authentication Flow Overview
+
+```mermaid
+sequenceDiagram
+    actor U as User
+    participant F as Frontend (React)
+    participant B as Backend (Go)
+    participant A as SaaSus Platform Auth API
+
+    U->>F: Enter email & password
+    Note over F: Generate SRP_A
+    
+    rect rgba(232, 245, 233, 1)
+      F->>B: 1. Start sign-in (send SRP_A)
+      Note right of F: * Password is not sent
+      B->>A: 2. POST /sign-in (SRP_A)
+      A-->>B: 3. Return challenge (SRP_B, SALT, etc.)
+      B-->>F: 4. Forward challenge info
+    end
+
+    Note over F: Generate signature (PASSWORD_CLAIM_SIGNATURE)
+
+    rect rgba(232, 245, 233, 1)
+      F->>B: 5. Send signature
+      B->>A: 6. POST /sign-in/challenge (signature)
+      A-->>B: 7. Issue tokens
+      B-->>F: 8. Return tokens (HttpOnly Cookie)
+    end
+```
+
+### Flow Details
+
+1. **Start authentication**: Enter email (or ID) and password on the frontend, generate SRP_A, and send it to the backend (the password is not sent).
+2. **Get challenge info**: The backend sends SRP_A to the SaaSus Platform Auth API's `/sign-in`.
+3. **Receive challenge info**: The SaaSus Platform Auth API returns challenge info (SRP_B, SALT, SECRET_BLOCK, etc.) to the backend.
+4. **Forward challenge info**: The backend returns the challenge info to the frontend.
+5. **Generate and send signature**: The frontend generates the signature (`PASSWORD_CLAIM_SIGNATURE`, etc.) and sends it to the backend.
+6. **Request verification**: The backend sends the signature and challenge info to the SaaSus Platform Auth API's `/sign-in/challenge`.
+7. **Issue tokens**: On successful authentication, ID, access, and refresh tokens are returned to the backend.
+8. **Save tokens**: The backend returns the tokens to the frontend in HttpOnly Cookies.
+
+:::info Benefits of the SRP Protocol
+The SRP (Secure Remote Password) protocol does not transmit the password itself in plain text over the network. Authentication is performed via hashing and SRP calculations, providing secure authentication even against man-in-the-middle attacks. Because completing SRP calculations entirely on the frontend is complex, this sample application generates SRP_A and signatures on the frontend while the backend mediates communication with the SaaSus Platform API.
+:::
+
+### Challenge Types and Branching
+
+The challenges returned from the SaaSus Platform Auth API include:
+
+| Challenge name | Description | Handling |
+|---|---|---|
+| `PASSWORD_VERIFIER` | Normal password verification | Send the challenge response and obtain tokens |
+| `NEW_PASSWORD_REQUIRED` | Password change on first login | Prompt for new password and re-send the challenge |
+
+## Sample Application Structure
+
+The sample application for this implementation guide is published in the following repository.
+
+- GitHub: [saasus-platform/implementation-sample-auth-api](https://github.com/saasus-platform/implementation-sample-auth-api)
+
+The technology stack is as follows:
+
+| Item | Stack |
+|---|---|
+| Frontend | React + TypeScript |
+| Backend | Go |
+| Token management | HttpOnly Cookie |
+| Security | CSRF protection |
+
+### Implemented Screens and Features
+
+- **Login screen**: Tabbed UI with email login and ID login
+![Login Screen](/img/part-6/implementation-guide/auth/overview/login-screen.png)
+- **New password screen**: Password change on first login
+- **Auth API**: SRP authentication flow with the SaaSus Platform Auth API
+- **ID login**: Login using username + tenant ID via the `login_domain` tenant attribute
+- **Token management**: Secure token storage with HttpOnly Cookies
+- **Sign-out**: Session termination by clearing cookies
+
+For details on the implementation, see [Basic Implementation Using the Auth API](/docs/part-6/implementation-guide/auth/basic-sign-in).
+
+---
+
+# Authentication Security & Policy Implementation
+
+URL: https://www.prisma.io/docs/part-6/implementation-guide/auth/security
+
+This document explains how to implement security for tokens obtained via the Auth API.
+
+:::info
+For an overview of the Auth API, see [Auth API Implementation Guide](/docs/part-6/implementation-guide/auth/overview). For login implementation, see [Basic Implementation Using the Auth API](/docs/part-6/implementation-guide/auth/basic-sign-in).
+:::
+
+## Token Management with HttpOnly Cookies
+
+Store the obtained tokens in **HttpOnly Cookies**. Compared to storing tokens in local storage, this reduces the risk of token theft from XSS (cross-site scripting) attacks.
+
+```go
+// Function to set tokens in HttpOnly Cookies
 func setTokenCookies(c echo.Context, tokens Tokens) {
     // Access token
     c.SetCookie(&http.Cookie{
@@ -7739,261 +8033,33 @@ func setTokenCookies(c echo.Context, tokens Tokens) {
 }
 ```
 
-#### Cookie Attribute Configuration
+### Cookie attribute settings
 
 | Attribute | Value | Description |
 |---|---|---|
-| `HttpOnly` | `true` | Prevents JavaScript access, protecting tokens from XSS attacks |
-| `Secure` | `true` | Only sends cookies over HTTPS connections (required in production) |
-| `SameSite` | `Strict` | Prevents cookie transmission in cross-site requests |
-| `Path` | `/` | Makes cookies available across the entire application |
+| `HttpOnly` | `true` | Prevents JavaScript access; protects tokens from XSS |
+| `Secure` | `true` | Sends Cookies only over HTTPS (required in production) |
+| `SameSite` | `Strict` | Prevents Cookie sending on cross-site requests |
+| `Path` | `/` | Allows Cookie use across the entire application |
 
-:::info Development Environment Note
-In local development environments (`http://localhost`), you may need to set the `Secure` attribute to `false`. It is recommended to make this configurable via environment variables.
+:::info Note for development environments
+In local development (`http://localhost`), you may need to set `Secure` to `false`. We recommend making this switchable via environment variables.
 :::
 
-### CSRF Protection
+## CSRF Protection
 
-When using HttpOnly Cookies, CSRF (Cross-Site Request Forgery) protection is required. This sample combines the following measures:
+When using HttpOnly Cookies, CSRF (cross-site request forgery) protection is required. The sample application combines the following measures:
 
-1. **SameSite Cookie Attribute**: Set `SameSite=Strict` to prevent cookie transmission from cross-site requests
-2. **CSRF Token**: Generate a CSRF token on the server side, pass it to the frontend, and verify it in the request header
+1. **SameSite Cookie attribute**: `SameSite=Strict` to prevent Cookies from being sent across sites
+2. **CSRF token**: A server-issued CSRF token sent to the frontend and verified via a request header
 
 ```go
-// CSRF middleware configuration example
+// Example CSRF middleware configuration
 e.Use(middleware.CSRFWithConfig(middleware.CSRFConfig{
     TokenLookup: "header:X-CSRF-Token",
     CookiePath:  "/",
 }))
 ```
-
-### Logout
-
-On logout, clear all tokens stored in HttpOnly Cookies.
-
-```go
-// POST /sign-out handler
-func signOut(c echo.Context) error {
-    // Delete each token cookie (set MaxAge to -1)
-    for _, name := range []string{"access_token", "refresh_token", "id_token"} {
-        c.SetCookie(&http.Cookie{
-            Name:     name,
-            Value:    "",
-            Path:     "/",
-            HttpOnly: true,
-            Secure:   true,
-            SameSite: http.SameSiteStrictMode,
-            MaxAge:   -1, // Delete cookie immediately
-        })
-    }
-
-    return c.JSON(http.StatusOK, map[string]string{"status": "signed_out"})
-}
-```
-
-Frontend logout call:
-
-```typescript
-const handleLogout = async () => {
-  await fetch("/sign-out", { method: "POST" });
-  // Navigate to login page
-  navigateToLoginPage();
-};
-```
-
-## ID Login Extension
-
-You can implement an ID authentication method that uses **username + tenant ID** instead of an email address.
-
-ID login can be implemented on its own or alongside email login. The SRP authentication calculation and token verification (`POST /verify`) mechanism is the same as email login; only the challenge request endpoint and parameters differ.
-
-### Overview and Prerequisites
-
-ID login leverages the `login_domain` tenant attribute configured in SaaSus Platform. The backend retrieves tenant information and concatenates `username + login_domain` (e.g., `taro` + `@example.com` = `taro@example.com`) before sending it to the SaaSus Platform Auth API.
-
-#### Prerequisites
-
-- The tenant attribute `login_domain` must be defined in the SaaS Operation Console (e.g., `@example.com`)
-- The target tenant must have a `login_domain` value configured
-- Users must be registered in SaaSus Platform in the format `username + login_domain`
-
-### Frontend Input Fields
-
-For ID login, the frontend accepts the following inputs:
-
-- **Username**: The part before `@` in the email address (e.g., `taro`)
-- **Tenant ID**: The tenant ID to log in to
-- **Password**: The user's password (used only for SRP calculation, never sent to the server)
-
-The tenant ID can also be pre-specified via the URL query parameter `?tenant_id=xxx`. This enables use cases such as distributing tenant-specific login URLs.
-
-### Challenge Request
-
-For ID login, call the `/challenge-id` endpoint instead of the `/challenge` endpoint used for email login.
-
-```typescript
-// Challenge request for ID login
-const challengeResponse = await apiClient.post('/challenge-id', {
-  user_id: userId,
-  tenant_id: tenantId,
-  srp_a: srpA,
-});
-```
-
-The processing after obtaining the challenge (SRP signature calculation, token retrieval via `POST /verify`) is the same as email login.
-
-### POST /challenge-id Endpoint
-
-The challenge endpoint for ID authentication. It accepts `user_id` and `tenant_id` instead of an email address.
-
-#### Request Structure
-
-```go
-// ChallengeIdRequest is the request structure for ID authentication challenge
-type ChallengeIdRequest struct {
-	UserID   string `json:"user_id" binding:"required"`
-	TenantID string `json:"tenant_id" binding:"required"`
-	SrpA     string `json:"srp_a" binding:"required"`
-}
-```
-
-#### Processing Flow
-
-1. Extract `user_id`, `tenant_id`, and `srp_a` from the request body
-2. **Retrieve tenant information**: Get tenant info via the SaaSus Platform Auth API and read the `login_domain` from tenant attributes
-3. **Construct USERNAME**: Concatenate `user_id + login_domain` (e.g., `taro` + `@example.com` = `taro@example.com`)
-4. Call the SaaSus Platform Auth API `/sign-in` to initiate SRP authentication
-5. Return challenge parameters to the frontend
-
-```go
-func challengeId(c echo.Context) error {
-	var req ChallengeIdRequest
-	if err := c.Bind(&req); err != nil {
-		return c.JSON(http.StatusBadRequest, ChallengeResponse{
-			Success: false,
-			Message: "Invalid request format",
-		})
-	}
-
-	ctx := context.Background()
-
-	// Retrieve tenant information and read login_domain attribute
-	tenantResponse, err := authClient.GetTenantWithResponse(ctx, req.TenantID)
-	if err != nil || tenantResponse.JSON200 == nil {
-		return c.JSON(http.StatusBadRequest, ChallengeResponse{
-			Success: false,
-			Message: "Tenant not found",
-		})
-	}
-
-	// Get login_domain from tenant attributes
-	tenant := tenantResponse.JSON200
-	loginDomain := ""
-	if tenant.Attributes != nil {
-		if domain, ok := tenant.Attributes["login_domain"]; ok {
-			if domainStr, ok := domain.(string); ok {
-				loginDomain = domainStr
-			}
-		}
-	}
-
-	if loginDomain == "" {
-		return c.JSON(http.StatusBadRequest, ChallengeResponse{
-			Success: false,
-			Message: "Tenant does not have login_domain attribute configured",
-		})
-	}
-
-	// Construct USERNAME from user_id + login_domain
-	// e.g., "taro" + "@example.com" = "taro@example.com"
-	username := req.UserID + loginDomain
-
-	// Send SignIn request to SaaSus Platform Auth API
-	signInParam := authapi.SignInParam{
-		SignInFlow: authapi.USERSRPAUTH,
-		SignInParameters: &map[string]string{
-			"USERNAME": username,
-			"SRP_A":    req.SrpA,
-		},
-	}
-
-	signInResponse, err := authClient.SignInWithResponse(ctx, signInParam)
-	if err != nil || signInResponse.JSON200 == nil {
-		return c.JSON(http.StatusInternalServerError, ChallengeResponse{
-			Success: false,
-			Message: "SignIn challenge failed",
-		})
-	}
-
-	// Return challenge parameters (subsequent verify flow is shared with email login)
-	signInResult := signInResponse.JSON200
-	challengeParameters := *signInResult.ChallengeParameters
-
-	session := ""
-	if signInResult.Session != nil {
-		session = *signInResult.Session
-	}
-
-	return c.JSON(http.StatusOK, ChallengeResponse{
-		Success:     true,
-		Message:     "Challenge parameters retrieved",
-		SrpB:        challengeParameters["SRP_B"],
-		Salt:        challengeParameters["SALT"],
-		SecretBlock: challengeParameters["SECRET_BLOCK"],
-		PoolName:    challengeParameters["POOL_NAME"],
-		Username:    challengeParameters["USER_ID_FOR_SRP"],
-		Session:     session,
-	})
-}
-```
-
-:::tip Configuring the login_domain Tenant Attribute
-Set `login_domain` in a format that includes `@` and the domain (e.g., `@example.com`). This ensures that when concatenated with `user_id`, it forms a valid email address format.
-:::
-
-### ID Login Processing Flow
-
-```mermaid
-sequenceDiagram
-    participant F as Frontend (React)
-    participant B as Backend (Go)
-    participant A as SaaSus Platform Auth API
-
-    F->>B: 1. Send user_id + tenant_id + srp_a
-
-    rect rgba(232, 245, 233, 1)
-      B->>A: 2. GetTenant(tenant_id)
-      A-->>B: 3. Get login_domain
-    end
-
-    rect rgba(232, 245, 233, 1)
-      B->>A: 4. POST /sign-in (USERNAME=user_id+domain)
-      A-->>B: 5. Challenge response
-    end
-
-    B-->>F: 6. Challenge parameters
-
-    Note over F: 7. SRP signature calc (in browser)
-
-    rect rgba(232, 245, 233, 1)
-      F->>B: 8. POST /verify (shared)
-      B->>A: 9. RespondToAuthChallenge
-      A-->>B: 10. Return tokens
-      B-->>F: 11. Tokens (Cookie)
-    end
-```
-
-The main difference from email login is in **steps 2–4**. The process of retrieving `login_domain` from tenant information and concatenating it with `user_id` to construct the USERNAME is added. Steps 7 onward (SRP signature calculation and token retrieval via `POST /verify`) are shared.
-
-## Summary
-
-This document explained the implementation of login functionality using the SaaSus Platform Auth API. Key points:
-
-- **SRP protocol-based two-step authentication flow**: Obtain a challenge via `/sign-in` and respond via `/sign-in/challenge`
-- **ID login extension**: Leverage the `login_domain` tenant attribute to enable login with username + tenant ID
-- **`NEW_PASSWORD_REQUIRED` handling**: Implement the password change flow for first-time login
-- **Secure token management with HttpOnly Cookies**: Store tokens in cookies as XSS protection
-- **CSRF protection and logout**: Protection via SameSite attribute and CSRF tokens, session termination via cookie clearing
 
 ---
 
@@ -16368,8 +16434,8 @@ If you are using AWS EC2 or Cloud9 to create an operating environment for the Bl
 
 This simple chat system comes with two configuration options:
 
-1. Laravel + Blade (PHP 8 / Laravel 9 / PostgreSQL 13)  
-2. Express + EJS (Node.js / Express 4.16.x / PostgreSQL 13)
+1. Laravel + Blade (PHP / Laravel / PostgreSQL)  
+2. Express + EJS (Node.js / Express / PostgreSQL)
 
 In either setup, it is possible to use Next.js as the frontend with additional configuration.  
 However, Next.js is not used in this tutorial.
