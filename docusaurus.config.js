@@ -12,7 +12,7 @@ const config = {
   title: "SaaSus Platform Document",
   customFields: {
     // LaunchDarkly Client-side ID
-    ldClientId: '636a8c5b9d373510aae2dbed',
+    ldClientId: '636a8a550da45a0d8779e236',
   },
   // tagline: 'SaaSus Platform are cool',
   favicon: "img/favicon.ico",
