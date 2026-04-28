@@ -6,17 +6,7 @@ pagination_prev: tutorial/implementation-of-authorization-based-on-tenant-inform
 pagination_next: tutorial/summarize
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
 ### Express 実装例
-
-`api/controllers/chat.ts` へ `import文` を追加し、`postChats` メソッドを書き換えます。
-
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
 
 ```js
 import { UpdateMeteringUnitTimestampCountNowParam } from "saasus-sdk/dist/generated/Pricing";
@@ -75,9 +65,4 @@ const postChats = async (req: Request, res: Response) => {
   }
   res.redirect("/chat");
 };
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
 ```

@@ -4,9 +4,6 @@ title: "Express"
 slug: "authentication-express"
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
 ### Incorporating an Authentication Module
 
 Integrate the authentication module provided by the SaaSus Platform.
@@ -16,11 +13,6 @@ In this application, all URI routes will require authentication. If a user is no
 Currently, authentication is handled in `api/app.ts`.
 
 You will replace the existing authentication logic with the one provided by SaaSus.
-
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
 
 ```js
 app.use(
@@ -34,17 +26,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 change
-
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
 
 ```js
 import { AuthMiddleware } from "saasus-sdk";
@@ -64,21 +46,11 @@ app.use(
 // app.use(passport.session());
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 ### Removing Individual Authentication Logic
 
 In Express, individual authentication logic was implemented for each route. These need to be removed.
 
 Modify `api/routes/chat.ts`.
-
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
 
 ```ts
 router.get(
@@ -94,25 +66,10 @@ router.get(
 );
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 change
-
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
 
 ```ts
 router.get("/", getChats);
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
 ```
 
 ### Implementing the Callback URL Handler
@@ -125,36 +82,19 @@ Edit `api/app.ts`.
 In Express, middleware and routes are processed in registration order, so if the 404 handler is registered first, requests to `/callback` return a 404 error and login fails.
 :::
 
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
+Add the following below `import { router as tenantRouter } from "./routes/tenant";`:
 
 ```js
-import { router as tenantRouter } from "./routes/tenant";
-import { router as callbackRouter } from "./routes/callback"; // Add this below ./routes/tenant
-
-// Other code omitted
-
-app.use("/login", loginRouter);
-app.use("/callback", callbackRouter); // Add this below app.use("/login", loginRouter);
-
-app.use((req: Request, res: Response, next: NextFunction) => {
-  next(createError(404));
-});
+import { router as callbackRouter } from "./routes/callback";
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
+Add the following below `app.use("/login", loginRouter);`:
+
+```js
+app.use("/callback", callbackRouter);
 ```
 
 To handle GET requests to `/callback`, create `api/routes/callback.ts` and use the `CallbackRouteFunction` provided by the SaaSus SDK.
-
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
 
 ```js
 import express from "express";
@@ -166,17 +106,7 @@ router.get("/", CallbackRouteFunction);
 export { router };
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 Create `views/callback.ejs` as the screen to display after login (in this case, it will redirect to `/chat`).
-
-```mdx-code-block
-<Tabs>
-<TabItem value="ejs" label="Express (EJS)" default>
-```
 
 ```html
 <!DOCTYPE html>
@@ -196,29 +126,16 @@ Create `views/callback.ejs` as the screen to display after login (in this case, 
 </html>
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 Once everything is set up, the authentication information configured in the SaaSus Platform will be passed as part of the request when it reaches your application's controller.
 
-Inside the `getChats` method in `api/controllers/chat.ts`, use `console.log` to check if `userinfo` is present in `req`.
+Inside the `getChats` method in `api/controllers/chat.ts`, use console.log to check if userinfo is present in req.
 
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
+Add the following below `const getChats = async (req: Request, res: Response) => {`:
 
 ```js
 const getChats = async (req: Request, res: Response) => {
   // Check whether user information is being passed from SaaSus Platform
   console.dir(req.userInfo,{depth:null});
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
 ```
 
 Up to this point, we have established the basics of collaboration.
@@ -240,23 +157,8 @@ For example, let's log in as [user1-1@example.com](mailto:user1-1@example.com).
 
 First run the following command in the terminal to enable log output, then proceed to log in.
 
-```mdx-code-block
-<Tabs>
-<TabItem value="command" label="Command" default>
-```
-
 ```bash
-repo$ docker compose logs -f
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
-```mdx-code-block
-<Tabs>
-<TabItem value="docker-log" label="Express (Docker logs)" default>
+docker compose logs -f
 ```
 
 ```js
@@ -284,11 +186,6 @@ repo$ docker compose logs -f
   user_attribute: {}
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 You can see that the user information and tenant information that were set in SaaSus Platform earlier can be obtained on the application side.
 
 The redirect destination URL is now received by the SaaSus SDK standard Callback process ([http://localhost/callback](http://localhost/callback)), and in that process, the browser's Local Storage or remember authentication information in a cookie.
@@ -306,16 +203,12 @@ Now, let's use this information to make our bulletin board application multi-ten
 First, change the display part.
 Let's rewrite the whole part below.
 
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
-
 ```js
 const getChats = async (req: Request, res: Response) => {
   try {
     const messages = await db.Messages.findAll({
       where: {
+        // Use the tenant information stored in req.userInfo
         tenant_id: req.userInfo?.tenants[0].id,
       },
     });
@@ -331,23 +224,14 @@ const getChats = async (req: Request, res: Response) => {
 };
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 In this way, the DB will be searched based on the tenant ID that has been passed.
 
 Next is the posting part.
 
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
-
 ```js
 const postChats = async (req: Request, res: Response) => {
   const mes = req.body.message;
+  // Get tenant and user information from req.userInfo and use it
   const tenantId = req.userInfo?.tenants[0].id || "";
   const userName =
     req.userInfo?.tenants[0].user_attribute.username;
@@ -362,11 +246,6 @@ const postChats = async (req: Request, res: Response) => {
   }
   res.redirect("/chat");
 };
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
 ```
 
 Based on the passed user attributes, the tenant ID and user name are stored as a set.
