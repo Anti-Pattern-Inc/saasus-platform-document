@@ -5,9 +5,6 @@ slug: "authentication-laravel"
 pagination_next: tutorial/manage-rate-plans/manage-rate-plans
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
 ### 認証モジュールの組み込み
 
 SaaSus Platform の認証モジュールを組み込みます。
@@ -15,11 +12,6 @@ SaaSus Platform の認証モジュールを組み込みます。
 今回のアプリケーションでは、すべての URI のルートに認証を必要とします。認証されていない場合には、アプリケーションが利用できない仕様にします。
 
 現状は `api/routes/web.php` にて認証機能が利用されているので、SaaSus の認証機能に置き換えます。
-
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel" label="Laravel" default>
-```
 
 ```php
 Route::middleware('auth')->group(function () {
@@ -34,17 +26,7 @@ Route::middleware('auth')->group(function () {
 require __DIR__ . '/auth.php';
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 を
-
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel" label="Laravel" default>
-```
 
 ```php
 // Route::middleware('auth')->group(function () {
@@ -63,38 +45,18 @@ Route::middleware(\AntiPatternInc\Saasus\Laravel\Middleware\Auth::class)->group(
 // require __DIR__ . '/auth.php';
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 ### Callback URL の処理を実装する
 
 先ほど SaaS開発コンソールでコールバック先を [http://localhost/callback](http://localhost/callback) と定義したので、`/callback` で受け取れるようにします。
 
 `api/routes/web.php` の最後の行に以下を追加します。
 
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel" label="Laravel" default>
-```
-
 ```php
 // SaaSus SDK標準のCallback Controllerを利用して、JWTをCookieやLocal Storageに入れる
 Route::get('/callback', 'AntiPatternInc\Saasus\Laravel\Controllers\CallbackController@index');
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 さらに、SaaSus SDK が提供する View を使えるように `api/config/view.php` にパスを追加します。
-
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel" label="Laravel" default>
-```
 
 ```php
    'paths' => [
@@ -104,30 +66,15 @@ Route::get('/callback', 'AntiPatternInc\Saasus\Laravel\Controllers\CallbackContr
    ],
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 ここまで設定すると、アプリケーションの Controller にたどり着いた時点で、SaaSus Platform で設定した認証情報が request の一部として渡ってくるようになります。
 
 `api/app/Http/Controllers/MessageController.php` の `index` メソッドの引数に `Request` を追加し、`dd` を使って `$request` に `userinfo` が含まれているか確認してみましょう。
-
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel" label="Laravel" default>
-```
 
 ```php
    public function index(Request $request)
    {
        // SaaSus Platformからユーザ情報が渡ってきているかを確認する
        dd($request->userinfo);
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
 ```
 
 ここまでで連携の基本ができました。
@@ -148,11 +95,6 @@ SaaSus Platform で作成したログイン画面を表示します。
 たとえば、 [user1-1@example.com](mailto:user1-1@example.com) でログインしてみましょう。
 
 実際に先ほどのコードが動作していれば、ログイン後にユーザー情報が画面に表示されるはずです。
-
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel" label="Laravel" default>
-```
 
 ```php
 array:3 [▼
@@ -185,11 +127,6 @@ array:3 [▼
 ]
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 アプリケーション側で、先ほど SaaSus Platform で設定したユーザ情報、テナント情報が取得できているのがわかります。
 
 リダイレクト先の URL は、今回 SaaSus SDK 標準の Callback 処理で受けるようになっており([http://localhost/callback](http://localhost/callback))、その処理の中でブラウザの Local Storage や Cookie の中に認証情報を記憶します。
@@ -206,11 +143,6 @@ array:3 [▼
 
 まず、表示の部分を変更します。下記の部分をまるごと書き換えてみましょう。
 
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel" label="Laravel" default>
-```
-
 ```php
    public function index(Request $request)
    {
@@ -220,19 +152,9 @@ array:3 [▼
    }
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 このようにして、渡ってきたテナント ID をもとに DB を検索するようにします。
 
 次に投稿の部分です。
-
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel" label="Laravel" default>
-```
 
 ```php
    public function post(Request $request)
@@ -253,11 +175,6 @@ array:3 [▼
    }
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 渡ってきたユーザ属性をもとに、テナント ID、ユーザ名をセットで格納します。
 
 画面表示の部分も、ユーザ ID を表示するようにしてみます。
@@ -267,11 +184,6 @@ array:3 [▼
 32 行目あたりの、この `$message->user->name` の部分を `$message->user_id` に変更します。
 
 修正前：
-
-```mdx-code-block
-<Tabs>
-<TabItem value="blade" label="Laravel (Blade)" default>
-```
 
 ```html
                    <div class="mt-4">
@@ -283,17 +195,7 @@ array:3 [▼
                        </p>
 ```
 
-              ```mdx-code-block
-              </TabItem>
-              </Tabs>
-              ```
-
 修正後：
-
-```mdx-code-block
-<Tabs>
-<TabItem value="blade" label="Laravel (Blade)" default>
-```
 
 ```html
                    <div class="mt-4">
@@ -304,11 +206,6 @@ array:3 [▼
                            </span>
                        </p>
 ```
-
-              ```mdx-code-block
-              </TabItem>
-              </Tabs>
-              ```
 
 これでマルチテナント対応ができました。
 
