@@ -6,17 +6,9 @@ pagination_prev: tutorial/implementation-of-authorization-based-on-tenant-inform
 pagination_next: tutorial/authorization-module/authorization-express
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
 ### Laravel 実装例
 
 `api/app/Http/Controllers/MessageController.php` の `post` メソッドを書き換えます。
-
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel" label="Laravel" default>
-```
 
 ```php
    public function post(Request $request)
@@ -60,9 +52,4 @@ import TabItem from "@theme/TabItem";
         $request->session()->regenerateToken();
         return redirect()->route('board');
    }
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
 ```
