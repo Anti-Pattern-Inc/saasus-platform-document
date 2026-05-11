@@ -23,3 +23,7 @@ yarn-error.log*
 
 # AI reference generated docs
 /merged-*.md
+
+# Local handoff/verification artifacts (not for repo)
+/issue-277-handoff-prompt.md
+.tmp-verification/
