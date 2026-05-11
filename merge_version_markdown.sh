@@ -118,6 +118,15 @@ if [[ -d "$api_dir" ]]; then
 fi
 
 {
+  # Frontmatter for Docusaurus:
+  #   - unlisted: true  → exclude from sidebar, search, sitemap (3.0+ feature)
+  #   - title: set explicitly so Docusaurus doesn't try to infer from the first H1
+  printf -- '---\n'
+  printf -- 'unlisted: true\n'
+  printf -- 'title: AI Reference Knowledge\n'
+  printf -- 'sidebar_class_name: hidden\n'
+  printf -- '---\n\n'
+
   printf '# Merged Markdown\n\n'
   printf -- '- Version: `%s`\n' "$version_dir"
   printf -- '- Locale: `%s`\n' "$locale"
@@ -132,6 +141,12 @@ fi
 
     printf '\n\n---\n\n'
     printf '## %s\n\n' "$rel_path"
+
+    # Wrap each source file's body in a 4-backtick fence so MDX/JSX inside
+    # (e.g. `<Tabs>`, `import` statements, `<TabItem>`) is treated as literal
+    # text and never parsed by Docusaurus's MDX compiler.
+    # Inner 3-backtick code blocks in the source remain valid.
+    printf '````markdown\n'
 
     awk '
       BEGIN {
@@ -152,6 +167,8 @@ fi
         print
       }
     ' "$file"
+
+    printf '````\n'
   done
 
   if [[ "${#api_files[@]}" -gt 0 ]]; then
@@ -186,11 +203,20 @@ if [[ "$input_version" == "current" ]]; then
     if [[ -z "$latest_version" ]]; then
       echo "Warning: versions.json has no entries; skipping secondary placement" >&2
     else
-      secondary_dir="$SCRIPT_DIR/i18n/$locale/$plugin_dir/version-$latest_version/ai-reference"
-      mkdir -p "$secondary_dir"
-      secondary_path="$secondary_dir/knowledge.md"
-      cp "$output_abs" "$secondary_path"
-      printf 'Also copied to %s\n' "$secondary_path"
+      # AI reference is mirrored to four locations so that Docusaurus
+      # (defaultLocale=en) registers the route and the ja translation is picked up.
+      # The English copies use the same content (Japanese) because the AI
+      # consumer doesn't care about UI locale.
+      copy_targets=(
+        "$SCRIPT_DIR/i18n/$locale/$plugin_dir/version-$latest_version/ai-reference/knowledge.md"
+        "$SCRIPT_DIR/docs/ai-reference/knowledge.md"
+        "$SCRIPT_DIR/versioned_docs/version-$latest_version/ai-reference/knowledge.md"
+      )
+      for target in "${copy_targets[@]}"; do
+        mkdir -p "$(dirname "$target")"
+        cp "$output_abs" "$target"
+        printf 'Also copied to %s\n' "$target"
+      done
     fi
   fi
 fi
