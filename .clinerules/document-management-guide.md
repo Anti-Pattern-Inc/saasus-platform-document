@@ -134,6 +134,27 @@ make down
 
 このコマンドで Docker コンテナを停止します。
 
+## AI 参照用ドキュメントの更新
+
+AIエージェント（Gemini Gems 等）が参照する単一の `knowledge.md` を生成・配置します。
+
+```bash
+make merge_gem
+```
+
+このコマンドは以下を実行します：
+
+1. `i18n/ja/docusaurus-plugin-content-docs/current/` 配下の全 `.md` / `.mdx` を結合
+2. `api/` 配下の API spec yml を末尾に追記
+3. 結果を `current/ai-reference/knowledge.md` に書き出し
+4. 同一内容を `version-<最新>/ai-reference/knowledge.md`（`versions.json` の先頭バージョン）にもコピー
+
+### 挙動メモ
+
+- ファイル名は固定（`knowledge.md`）で、再実行のたびに上書きされる
+- `*/ai-reference/*` パスは結合元の探索から除外される（出力が再帰的に取り込まれないように）
+- `versions.json` の先頭要素を最新バージョンとして自動採用するため、バージョン上げ時もスクリプト改修は不要
+
 ## ファイルメタデータ管理
 
 ### ファイルヘッダーの管理ルール
