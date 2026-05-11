@@ -380,7 +380,9 @@ const sidebars = {
               },
               items: [
                 "part-6/implementation-guide/auth/overview",
-                "part-6/implementation-guide/auth/sign-in",
+                "part-6/implementation-guide/auth/basic-sign-in",
+                "part-6/implementation-guide/auth/advanced-sign-in",
+                "part-6/implementation-guide/auth/security",
               ],
             },
             "part-6/implementation-guide/implementing-authentication-using-saasus-serverless",

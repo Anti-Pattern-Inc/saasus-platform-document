@@ -5,9 +5,6 @@ slug: "authentication-express"
 pagination_prev: tutorial/authentication-preference
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
 ### 認証モジュールの組み込み
 
 SaaSus Platform の認証モジュールを組み込みます。
@@ -15,11 +12,6 @@ SaaSus Platform の認証モジュールを組み込みます。
 今回のアプリケーションでは、すべての URI のルートに認証を必要とします。認証されていない場合には、アプリケーションが利用できない仕様にします。
 
 現状は `api/app.ts` にて認証機能が利用されているので、SaaSus の認証機能に置き換えます。
-
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
 
 ```js
 app.use(
@@ -33,17 +25,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 を
-
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
 
 ```js
 import { AuthMiddleware } from "saasus-sdk";
@@ -63,21 +45,9 @@ app.use(
 // app.use(passport.session());
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 ### 個別の認証処理の削除
 
 Express はルートごとに個別の認証処理があったため、それらを削除します。
-
-`api/routes/chat.ts` を修正します。
-
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
 
 ```ts
 router.get(
@@ -93,25 +63,10 @@ router.get(
 );
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 を
-
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
 
 ```ts
 router.get("/", getChats);
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
 ```
 
 ### Callback URL の処理を実装する
@@ -124,36 +79,19 @@ router.get("/", getChats);
 Express ではミドルウェアとルートは登録された順番に処理されるため、404 ハンドラが先に登録されていると、/callback へのリクエストが 404 エラーになり、ログインに失敗します。
 :::
 
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
+`import { router as tenantRouter } from "./routes/tenant";` の下に追加します。
 
 ```js
-import { router as tenantRouter } from "./routes/tenant";
-import { router as callbackRouter } from "./routes/callback";　//./routes/tenant の下に追加
-
-// 他のコードは省略
-
-app.use("/login", loginRouter);
-app.use("/callback", callbackRouter);　//app.use("/login", loginRouter);の下に追加
-
-app.use((req: Request, res: Response, next: NextFunction) => {
-  next(createError(404));
-});
+import { router as callbackRouter } from "./routes/callback";
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
+`app.use("/login", loginRouter);` の下に追加します。
+
+```js
+app.use("/callback", callbackRouter);
 ```
 
 `api/routes/callback.ts` を作成し、SaaSus SDK が提供する `CallbackRouteFunction` を使って `/callback` の GET リクエストを処理します。
-
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
 
 ```js
 import express from "express";
@@ -165,17 +103,7 @@ router.get("/", CallbackRouteFunction);
 export { router };
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 ログイン後に遷移する画面として `views/callback.ejs` を作成します（今回は `/chat` へリダイレクト）。
-
-```mdx-code-block
-<Tabs>
-<TabItem value="ejs" label="Express (EJS)" default>
-```
 
 ```html
 <!DOCTYPE html>
@@ -195,29 +123,16 @@ export { router };
 </html>
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 ここまで設定すると、アプリケーションの Controller にたどり着いた時点で、SaaSus Platform で設定した認証情報が request の一部として渡ってくるようになります。
 
-`api/controllers/chat.ts` の `getChats` メソッド内で `console.log` を使い、`req` に `userinfo` が渡されているか確認してみましょう。
+`api/controllers/chat.ts` の `getChats` メソッド内で console.log を使い、req に userinfo が渡されているか確認してみましょう。
 
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
+`const getChats = async (req: Request, res: Response) => {` の下に追加してください。
 
 ```js
 const getChats = async (req: Request, res: Response) => {
   // SaaSus Platformからユーザ情報が渡ってきているかを確認する
   console.dir(req.userInfo,{depth:null});
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
 ```
 
 ここまでで連携の基本ができました。
@@ -239,23 +154,8 @@ SaaSus Platform で作成したログイン画面を表示します。
 
 まずターミナルで以下のコマンドを実行してログを確認できる状態にしてから、ログインを行ってください。
 
-```mdx-code-block
-<Tabs>
-<TabItem value="command" label="Command" default>
-```
-
 ```bash
-repo$ docker compose logs -f
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
-```mdx-code-block
-<Tabs>
-<TabItem value="docker-log" label="Express (Dockerログ)" default>
+docker compose logs -f
 ```
 
 ```js
@@ -283,11 +183,6 @@ repo$ docker compose logs -f
   user_attribute: {}
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 アプリケーション側で、先ほど SaaSus Platform で設定したユーザ情報、テナント情報が取得できているのがわかります。
 
 リダイレクト先の URL は、今回 SaaSus SDK 標準の Callback 処理で受けるようになっており([http://localhost/callback](http://localhost/callback))、その処理の中でブラウザの Local Storage や Cookie の中に認証情報を記憶します。
@@ -304,16 +199,12 @@ repo$ docker compose logs -f
 
 まず、表示の部分を変更します。下記の部分をまるごと書き換えてみましょう。
 
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
-
 ```js
 const getChats = async (req: Request, res: Response) => {
   try {
     const messages = await db.Messages.findAll({
       where: {
+        // req.userInfo にテナント情報が入ってくるので、それを使う
         tenant_id: req.userInfo?.tenants[0].id,
       },
     });
@@ -329,23 +220,14 @@ const getChats = async (req: Request, res: Response) => {
 };
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 このようにして、渡ってきたテナント ID をもとに DB を検索するようにします。
 
 次に投稿の部分です。
 
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
-
 ```js
 const postChats = async (req: Request, res: Response) => {
   const mes = req.body.message;
+  // req.userInfo からテナント情報、ユーザ情報を取得し、判断に使う
   const tenantId = req.userInfo?.tenants[0].id || "";
   const userName =
     req.userInfo?.tenants[0].user_attribute.username;
@@ -360,11 +242,6 @@ const postChats = async (req: Request, res: Response) => {
   }
   res.redirect("/chat");
 };
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
 ```
 
 渡ってきたユーザ属性をもとに、テナント ID、ユーザ名をセットで格納します。

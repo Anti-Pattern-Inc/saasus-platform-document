@@ -4,9 +4,6 @@ title: "Laravel"
 slug: "authentication-laravel"
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
 ### Incorporating an Authentication Module
 
 Integrate the authentication module provided by the SaaSus Platform.
@@ -16,11 +13,6 @@ In this application, all URI routes will require authentication. If a user is no
 Currently, authentication is handled in `api/routes/web.php`.
 
 You will replace the existing authentication logic with the one provided by SaaSus.
-
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel" label="Laravel" default>
-```
 
 ```php
 Route::middleware('auth')->group(function () {
@@ -35,17 +27,7 @@ Route::middleware('auth')->group(function () {
 require __DIR__ . '/auth.php';
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 change
-
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel" label="Laravel" default>
-```
 
 ```php
 // Route::middleware('auth')->group(function () {
@@ -64,11 +46,6 @@ Route::middleware(\AntiPatternInc\Saasus\Laravel\Middleware\Auth::class)->group(
 // require __DIR__ . '/auth.php';
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 ### Implementing the Callback URL Handler
 
 Earlier, you defined the callback URL in the SaaS Development Console as:
@@ -77,29 +54,14 @@ Earlier, you defined the callback URL in the SaaS Development Console as:
 
 Add the following line to the end of `api/routes/web.php`.
 
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel" label="Laravel" default>
-```
-
 ```php
 // Use the SaaSus SDK standard Callback Controller to put the JWT into Cookies or Local Storage
 Route::get('/callback', 'AntiPatternInc\Saasus\Laravel\Controllers\CallbackController@index');
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 Furthermore, to be able to use the View provided by the SaaSus SDK,
 
 Add the path to `api/config/view.php`.
-
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel" label="Laravel" default>
-```
 
 ```php
    'paths' => [
@@ -109,30 +71,15 @@ Add the path to `api/config/view.php`.
    ],
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 Once everything is set up, the authentication information configured in the SaaSus Platform will be passed as part of the request when it reaches your application's controller.
 
 Add `Request` as a parameter to the `index` method in `api/app/Http/Controllers/MessageController.php`, and use `dd` to check if `userinfo` is included in `$request`.
-
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel" label="Laravel" default>
-```
 
 ```php
    public function index(Request $request)
    {
        // Check whether user information is being passed from SaaSus Platform
        dd($request->userinfo);
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
 ```
 
 Up to this point, we have established the basics of collaboration.
@@ -153,11 +100,6 @@ When you log in with the user email address and password you created earlier, yo
 For example, let's log in as [user1-1@example.com](mailto:user1-1@example.com).
 
 If the previous code is working correctly, the user information should be displayed on the screen after login.
-
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel" label="Laravel" default>
-```
 
 ```php
 array:3 [▼
@@ -190,11 +132,6 @@ array:3 [▼
 ]
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 You can see that the user information and tenant information that were set in SaaSus Platform earlier can be obtained on the application side.
 
 The redirect destination URL is now received by the SaaSus SDK standard Callback process ([http://localhost/callback](http://localhost/callback)), and in that process, the browser's Local Storage or remember authentication information in a cookie.
@@ -212,11 +149,6 @@ Now, let's use this information to make our bulletin board application multi-ten
 First, change the display part.
 Let's rewrite the whole part below.
 
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel" label="Laravel" default>
-```
-
 ```php
    public function index(Request $request)
    {
@@ -226,19 +158,9 @@ Let's rewrite the whole part below.
    }
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 In this way, the DB will be searched based on the tenant ID that has been passed.
 
 Next is the posting part.
-
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel" label="Laravel" default>
-```
 
 ```php
    public function post(Request $request)
@@ -259,11 +181,6 @@ Next is the posting part.
    }
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 Based on the passed user attributes, the tenant ID and user name are stored as a set.
 
 Let's try displaying the user ID on the screen display as well.
@@ -272,12 +189,7 @@ Edit `api/resources/views/messageBoard/index.blade.php`.
 
 Around line 32, change `$message->user->name` to `$message->user_id`.
 
-Before correction：
-
-```mdx-code-block
-<Tabs>
-<TabItem value="blade" label="Laravel (Blade)" default>
-```
+Before correction:
 
 ```html
                    <div class="mt-4">
@@ -289,17 +201,7 @@ Before correction：
                        </p>
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
-After correction：
-
-```mdx-code-block
-<Tabs>
-<TabItem value="blade" label="Laravel (Blade)" default>
-```
+After correction:
 
 ```html
                    <div class="mt-4">
@@ -309,11 +211,6 @@ After correction：
                                {{ $message->created_at->format('Y/m/d H:i') }}
                            </span>
                        </p>
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
 ```
 
 Multi-tenant support is now possible.
