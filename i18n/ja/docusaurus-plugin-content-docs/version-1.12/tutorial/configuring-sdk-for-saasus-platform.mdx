@@ -4,8 +4,6 @@ title: "SaaSus PlatformのSDKの設定"
 slug: "configuring-sdk-for-saasus-platform"
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
 
 ### SaaS ID と API キー、クライアントシークレットの確認
 
@@ -38,38 +36,28 @@ import TabItem from "@theme/TabItem";
 
 まず、 SaaSus Platform を使うためには、 SaaSus SDK をアプリケーションに組み込みます。
 
-- Laravel なら **Composer**
-- Express なら **npm**
-
-を使います。
-
 ターミナルを開き、SDKのセットアップを行います。
 
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel-bash" label="Laravel (Bash)" default>
+#### Laravel
+
+```bash
+docker compose exec php bash
 ```
 
 ```bash
-repo$ docker compose exec php bash
-root@xxx:/var/www# cd api
-root@xxx:/var/www/api# composer require saasus-platform/saasus-sdk-php
+cd api
+composer require saasus-platform/saasus-sdk-php
 ```
 
-```mdx-code-block
-</TabItem>
-<TabItem value="express-bash" label="Express (Bash)">
+#### Express
+
+```bash
+docker compose exec node bash
 ```
 
 ```bash
-repo$ docker compose exec node bash
-root@xxx:/app# npm install saasus-sdk
-root@xxx:/app# exit
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
+npm install saasus-sdk
+exit
 ```
 
 ## 環境変数の設定

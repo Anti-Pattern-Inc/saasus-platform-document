@@ -6,17 +6,9 @@ pagination_prev: tutorial/implementation-of-authorization-based-on-tenant-inform
 pagination_next: tutorial/authorization-module/authorization-express
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
 ### Laravel implementation
 
 Modify the `post` method in `api/app/Http/Controllers/MessageController.php`.
-
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel" label="Laravel" default>
-```
 
 ```php
    public function post(Request $request)
@@ -59,9 +51,4 @@ Modify the `post` method in `api/app/Http/Controllers/MessageController.php`.
         $request->session()->regenerateToken();
         return redirect()->route('board');
    }
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
 ```
