@@ -153,3 +153,12 @@ uncomment_versions:
 	docker exec -it saasus-platform-document /bin/bash -c "mv docusaurus.config.js.bak docusaurus.config.js"
 
 .PHONY: remove_version
+
+###########
+# AI reference document (for Gemini Gems etc.)
+###########
+
+merge_gem:
+	./merge_version_markdown.sh current
+
+.PHONY: merge_gem

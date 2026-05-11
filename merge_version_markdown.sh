@@ -7,23 +7,30 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage() {
   cat <<'EOF'
 Usage:
-  ./merge_version_markdown.sh <version> [output_file] [locale] [plugin_dir]
+  ./merge_version_markdown.sh <version|current> [output_file] [locale] [plugin_dir]
 
 Arguments:
-  version      Required. Accepts either "1.12" or "version-1.12".
-  output_file  Optional. Default: merged-<version>.md
+  version      Required. Accepts "current", "1.12", or "version-1.12".
+  output_file  Optional. Default depends on version:
+                 - current     : i18n/<locale>/<plugin_dir>/current/ai-reference/knowledge.md
+                 - version-X.Y : merged-<version>.md (script dir)
   locale       Optional. Default: ja
   plugin_dir   Optional. Default: docusaurus-plugin-content-docs
 
+Behavior:
+  - Merges .md and .mdx under the target docs directory.
+  - Skips any path matching */ai-reference/* (so this tool's own output
+    never feeds back into the next run).
+  - Appends API spec files under api/.
+  - For locale=ja, *.jpn.yml is preferred; if no Japanese file exists, *.yml is used.
+  - For version="current", additionally copies the generated knowledge.md to:
+      i18n/<locale>/<plugin_dir>/version-{LATEST}/ai-reference/knowledge.md
+    where LATEST is the first entry in versions.json.
+
 Examples:
+  ./merge_version_markdown.sh current
   ./merge_version_markdown.sh 1.12
   ./merge_version_markdown.sh version-1.11 output/version-1.11.md
-  ./merge_version_markdown.sh 1.10 merged.md en docusaurus-plugin-content-docs
-
-Notes:
-  - Merges .md and .mdx under the versioned docs directory.
-  - Also appends API spec files under api/.
-  - For locale=ja, *.jpn.yml is preferred; if no Japanese file exists, *.yml is used.
 EOF
 }
 
@@ -33,16 +40,27 @@ if [[ "${1:-}" == "" ]] || [[ "${1:-}" == "-h" ]] || [[ "${1:-}" == "--help" ]];
 fi
 
 input_version="$1"
-version_dir="$input_version"
-if [[ "$version_dir" != version-* ]]; then
-  version_dir="version-$version_dir"
+
+if [[ "$input_version" == "current" ]]; then
+  version_dir="current"
+else
+  version_dir="$input_version"
+  if [[ "$version_dir" != version-* ]]; then
+    version_dir="version-$version_dir"
+  fi
 fi
 
 locale="${3:-ja}"
 plugin_dir="${4:-docusaurus-plugin-content-docs}"
 target_dir="$SCRIPT_DIR/i18n/$locale/$plugin_dir/$version_dir"
-output_file="${2:-$SCRIPT_DIR/merged-$version_dir.md}"
 api_dir="$SCRIPT_DIR/api"
+
+if [[ "$input_version" == "current" ]]; then
+  default_output="$SCRIPT_DIR/i18n/$locale/$plugin_dir/current/ai-reference/knowledge.md"
+else
+  default_output="$SCRIPT_DIR/merged-$version_dir.md"
+fi
+output_file="${2:-$default_output}"
 
 if [[ ! -d "$target_dir" ]]; then
   echo "Target directory not found: $target_dir" >&2
@@ -54,8 +72,14 @@ output_dir="$(dirname "$output_file")"
 mkdir -p "$output_dir"
 output_abs="$(cd "$output_dir" && pwd)/$(basename "$output_file")"
 
-mapfile -d '' files < <(
-  find "$target_abs" -type f \( -name '*.md' -o -name '*.mdx' \) ! -path "$output_abs" -print0 | sort -z
+files=()
+while IFS= read -r file; do
+  files+=("$file")
+done < <(
+  find "$target_abs" -type f \( -name '*.md' -o -name '*.mdx' \) \
+    ! -path "$output_abs" \
+    -not -path "*/ai-reference/*" \
+    | LC_ALL=C sort
 )
 
 if [[ "${#files[@]}" -eq 0 ]]; then
@@ -150,3 +174,23 @@ fi
 
 printf 'Created %s from %d docs files and %d API files\n' \
   "$output_abs" "${#files[@]}" "${#api_files[@]}"
+
+if [[ "$input_version" == "current" ]]; then
+  versions_json="$SCRIPT_DIR/versions.json"
+  if [[ ! -f "$versions_json" ]]; then
+    echo "Warning: versions.json not found at $versions_json; skipping secondary placement" >&2
+  elif ! command -v jq >/dev/null 2>&1; then
+    echo "Warning: jq not found; skipping secondary placement" >&2
+  else
+    latest_version="$(jq -r '.[0] // empty' "$versions_json")"
+    if [[ -z "$latest_version" ]]; then
+      echo "Warning: versions.json has no entries; skipping secondary placement" >&2
+    else
+      secondary_dir="$SCRIPT_DIR/i18n/$locale/$plugin_dir/version-$latest_version/ai-reference"
+      mkdir -p "$secondary_dir"
+      secondary_path="$secondary_dir/knowledge.md"
+      cp "$output_abs" "$secondary_path"
+      printf 'Also copied to %s\n' "$secondary_path"
+    fi
+  fi
+fi
