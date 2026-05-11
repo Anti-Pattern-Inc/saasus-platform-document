@@ -24,7 +24,7 @@ function StatusContent() {
 
   useEffect(() => {
     if (!ldClient) return;
-    ldClient.waitForInitialization().then(() => setIsReady(true));
+    ldClient.waitForInitialization().then(() => setIsReady(true)).catch(() => setIsReady(true));
   }, [ldClient]);
 
   const incident: IncidentFlag | null | undefined = !isReady ? undefined : saasusPlatformMaintenancemode?.enabled ? saasusPlatformMaintenancemode : null;
