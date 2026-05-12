@@ -14800,9 +14800,6 @@ import ApiDocMdx from "@theme/ApiDocMdx";
 
 URL: https://www.prisma.io/docs/tutorial/authentication-module/authentication-express
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
 ### Incorporating an Authentication Module
 
 Integrate the authentication module provided by the SaaSus Platform.
@@ -14812,11 +14809,6 @@ In this application, all URI routes will require authentication. If a user is no
 Currently, authentication is handled in `api/app.ts`.
 
 You will replace the existing authentication logic with the one provided by SaaSus.
-
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
 
 ```js
 app.use(
@@ -14830,17 +14822,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 change
-
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
 
 ```js
 import { AuthMiddleware } from "saasus-sdk";
@@ -14860,21 +14842,11 @@ app.use(
 // app.use(passport.session());
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 ### Removing Individual Authentication Logic
 
 In Express, individual authentication logic was implemented for each route. These need to be removed.
 
 Modify `api/routes/chat.ts`.
-
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
 
 ```ts
 router.get(
@@ -14890,25 +14862,10 @@ router.get(
 );
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 change
-
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
 
 ```ts
 router.get("/", getChats);
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
 ```
 
 ### Implementing the Callback URL Handler
@@ -14921,36 +14878,19 @@ Edit `api/app.ts`.
 In Express, middleware and routes are processed in registration order, so if the 404 handler is registered first, requests to `/callback` return a 404 error and login fails.
 :::
 
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
+Add the following below `import { router as tenantRouter } from "./routes/tenant";`:
 
 ```js
-import { router as tenantRouter } from "./routes/tenant";
-import { router as callbackRouter } from "./routes/callback"; // Add this below ./routes/tenant
-
-// Other code omitted
-
-app.use("/login", loginRouter);
-app.use("/callback", callbackRouter); // Add this below app.use("/login", loginRouter);
-
-app.use((req: Request, res: Response, next: NextFunction) => {
-  next(createError(404));
-});
+import { router as callbackRouter } from "./routes/callback";
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
+Add the following below `app.use("/login", loginRouter);`:
+
+```js
+app.use("/callback", callbackRouter);
 ```
 
 To handle GET requests to `/callback`, create `api/routes/callback.ts` and use the `CallbackRouteFunction` provided by the SaaSus SDK.
-
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
 
 ```js
 import express from "express";
@@ -14962,17 +14902,7 @@ router.get("/", CallbackRouteFunction);
 export { router };
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 Create `views/callback.ejs` as the screen to display after login (in this case, it will redirect to `/chat`).
-
-```mdx-code-block
-<Tabs>
-<TabItem value="ejs" label="Express (EJS)" default>
-```
 
 ```html
 <!DOCTYPE html>
@@ -14992,29 +14922,16 @@ Create `views/callback.ejs` as the screen to display after login (in this case, 
 </html>
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 Once everything is set up, the authentication information configured in the SaaSus Platform will be passed as part of the request when it reaches your application's controller.
 
-Inside the `getChats` method in `api/controllers/chat.ts`, use `console.log` to check if `userinfo` is present in `req`.
+Inside the `getChats` method in `api/controllers/chat.ts`, use console.log to check if userinfo is present in req.
 
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
+Add the following below `const getChats = async (req: Request, res: Response) => {`:
 
 ```js
 const getChats = async (req: Request, res: Response) => {
   // Check whether user information is being passed from SaaSus Platform
   console.dir(req.userInfo,{depth:null});
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
 ```
 
 Up to this point, we have established the basics of collaboration.
@@ -15036,23 +14953,8 @@ For example, let's log in as [user1-1@example.com](mailto:user1-1@example.com).
 
 First run the following command in the terminal to enable log output, then proceed to log in.
 
-```mdx-code-block
-<Tabs>
-<TabItem value="command" label="Command" default>
-```
-
 ```bash
-repo$ docker compose logs -f
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
-```mdx-code-block
-<Tabs>
-<TabItem value="docker-log" label="Express (Docker logs)" default>
+docker compose logs -f
 ```
 
 ```js
@@ -15080,11 +14982,6 @@ repo$ docker compose logs -f
   user_attribute: {}
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 You can see that the user information and tenant information that were set in SaaSus Platform earlier can be obtained on the application side.
 
 The redirect destination URL is now received by the SaaSus SDK standard Callback process ([http://localhost/callback](http://localhost/callback)), and in that process, the browser's Local Storage or remember authentication information in a cookie.
@@ -15102,16 +14999,12 @@ Now, let's use this information to make our bulletin board application multi-ten
 First, change the display part.
 Let's rewrite the whole part below.
 
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
-
 ```js
 const getChats = async (req: Request, res: Response) => {
   try {
     const messages = await db.Messages.findAll({
       where: {
+        // Use the tenant information stored in req.userInfo
         tenant_id: req.userInfo?.tenants[0].id,
       },
     });
@@ -15127,23 +15020,14 @@ const getChats = async (req: Request, res: Response) => {
 };
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 In this way, the DB will be searched based on the tenant ID that has been passed.
 
 Next is the posting part.
 
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
-
 ```js
 const postChats = async (req: Request, res: Response) => {
   const mes = req.body.message;
+  // Get tenant and user information from req.userInfo and use it
   const tenantId = req.userInfo?.tenants[0].id || "";
   const userName =
     req.userInfo?.tenants[0].user_attribute.username;
@@ -15158,11 +15042,6 @@ const postChats = async (req: Request, res: Response) => {
   }
   res.redirect("/chat");
 };
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
 ```
 
 Based on the passed user attributes, the tenant ID and user name are stored as a set.
@@ -15211,9 +15090,6 @@ As for the separation method this time, we used a pool type model to perform sep
 
 URL: https://www.prisma.io/docs/tutorial/authentication-module/authentication-laravel
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
 ### Incorporating an Authentication Module
 
 Integrate the authentication module provided by the SaaSus Platform.
@@ -15223,11 +15099,6 @@ In this application, all URI routes will require authentication. If a user is no
 Currently, authentication is handled in `api/routes/web.php`.
 
 You will replace the existing authentication logic with the one provided by SaaSus.
-
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel" label="Laravel" default>
-```
 
 ```php
 Route::middleware('auth')->group(function () {
@@ -15242,17 +15113,7 @@ Route::middleware('auth')->group(function () {
 require __DIR__ . '/auth.php';
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 change
-
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel" label="Laravel" default>
-```
 
 ```php
 // Route::middleware('auth')->group(function () {
@@ -15271,11 +15132,6 @@ Route::middleware(\AntiPatternInc\Saasus\Laravel\Middleware\Auth::class)->group(
 // require __DIR__ . '/auth.php';
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 ### Implementing the Callback URL Handler
 
 Earlier, you defined the callback URL in the SaaS Development Console as:
@@ -15284,29 +15140,14 @@ Earlier, you defined the callback URL in the SaaS Development Console as:
 
 Add the following line to the end of `api/routes/web.php`.
 
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel" label="Laravel" default>
-```
-
 ```php
 // Use the SaaSus SDK standard Callback Controller to put the JWT into Cookies or Local Storage
 Route::get('/callback', 'AntiPatternInc\Saasus\Laravel\Controllers\CallbackController@index');
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 Furthermore, to be able to use the View provided by the SaaSus SDK,
 
 Add the path to `api/config/view.php`.
-
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel" label="Laravel" default>
-```
 
 ```php
    'paths' => [
@@ -15316,30 +15157,15 @@ Add the path to `api/config/view.php`.
    ],
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 Once everything is set up, the authentication information configured in the SaaSus Platform will be passed as part of the request when it reaches your application's controller.
 
 Add `Request` as a parameter to the `index` method in `api/app/Http/Controllers/MessageController.php`, and use `dd` to check if `userinfo` is included in `$request`.
-
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel" label="Laravel" default>
-```
 
 ```php
    public function index(Request $request)
    {
        // Check whether user information is being passed from SaaSus Platform
        dd($request->userinfo);
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
 ```
 
 Up to this point, we have established the basics of collaboration.
@@ -15360,11 +15186,6 @@ When you log in with the user email address and password you created earlier, yo
 For example, let's log in as [user1-1@example.com](mailto:user1-1@example.com).
 
 If the previous code is working correctly, the user information should be displayed on the screen after login.
-
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel" label="Laravel" default>
-```
 
 ```php
 array:3 [▼
@@ -15397,11 +15218,6 @@ array:3 [▼
 ]
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 You can see that the user information and tenant information that were set in SaaSus Platform earlier can be obtained on the application side.
 
 The redirect destination URL is now received by the SaaSus SDK standard Callback process ([http://localhost/callback](http://localhost/callback)), and in that process, the browser's Local Storage or remember authentication information in a cookie.
@@ -15419,11 +15235,6 @@ Now, let's use this information to make our bulletin board application multi-ten
 First, change the display part.
 Let's rewrite the whole part below.
 
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel" label="Laravel" default>
-```
-
 ```php
    public function index(Request $request)
    {
@@ -15433,19 +15244,9 @@ Let's rewrite the whole part below.
    }
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 In this way, the DB will be searched based on the tenant ID that has been passed.
 
 Next is the posting part.
-
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel" label="Laravel" default>
-```
 
 ```php
    public function post(Request $request)
@@ -15466,11 +15267,6 @@ Next is the posting part.
    }
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 Based on the passed user attributes, the tenant ID and user name are stored as a set.
 
 Let's try displaying the user ID on the screen display as well.
@@ -15479,12 +15275,7 @@ Edit `api/resources/views/messageBoard/index.blade.php`.
 
 Around line 32, change `$message->user->name` to `$message->user_id`.
 
-Before correction：
-
-```mdx-code-block
-<Tabs>
-<TabItem value="blade" label="Laravel (Blade)" default>
-```
+Before correction:
 
 ```html
                    <div class="mt-4">
@@ -15496,17 +15287,7 @@ Before correction：
                        </p>
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
-After correction：
-
-```mdx-code-block
-<Tabs>
-<TabItem value="blade" label="Laravel (Blade)" default>
-```
+After correction:
 
 ```html
                    <div class="mt-4">
@@ -15516,11 +15297,6 @@ After correction：
                                {{ $message->created_at->format('Y/m/d H:i') }}
                            </span>
                        </p>
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
 ```
 
 Multi-tenant support is now possible.
@@ -15566,9 +15342,6 @@ As for the separation method this time, we used a pool type model to perform sep
 # Tenant and User Preparation
 
 URL: https://www.prisma.io/docs/tutorial/authentication-preference
-
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
 
 ### Creating a SaaS consumer tenant
 
@@ -15686,17 +15459,7 @@ The following steps involve programming. Please select your framework to continu
 
 URL: https://www.prisma.io/docs/tutorial/authorization-module/authorization-express
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
 ### Express implementation
-
-Add an `import` statement to `api/controllers/chat.ts` and modify the `postChats` method.
-
-```mdx-code-block
-<Tabs>
-<TabItem value="express" label="Express" default>
-```
 
 ```js
 import { UpdateMeteringUnitTimestampCountNowParam } from "saasus-sdk/dist/generated/Pricing";
@@ -15757,28 +15520,15 @@ const postChats = async (req: Request, res: Response) => {
 };
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 ---
 
 # Laravel
 
 URL: https://www.prisma.io/docs/tutorial/authorization-module/authorization-laravel
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
 ### Laravel implementation
 
 Modify the `post` method in `api/app/Http/Controllers/MessageController.php`.
-
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel" label="Laravel" default>
-```
 
 ```php
    public function post(Request $request)
@@ -15823,19 +15573,12 @@ Modify the `post` method in `api/app/Http/Controllers/MessageController.php`.
    }
 ```
 
-```mdx-code-block
-</TabItem>
-</Tabs>
-```
-
 ---
 
 # Configuring SDK For SaaSus Platform
 
 URL: https://www.prisma.io/docs/tutorial/configuring-sdk-for-saasus-platform
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
 
 ### Check your SaaS ID, API key, and client secret
 
@@ -15869,36 +15612,28 @@ As mentioned at the beginning, the docker container has been started using `init
 
 First, to use the SaaSus Platform, you need to integrate the SaaSus SDK into your application.
 
-- For Laravel, use **Composer**.
-- For Express, use **npm**.
-
 Open a terminal and set up the SDK.
 
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel-bash" label="Laravel (Bash)" default>
+#### Laravel
+
+```bash
+docker compose exec php bash
 ```
 
 ```bash
-repo$ docker compose exec php bash
-root@xxx:/var/www# cd api
-root@xxx:/var/www/api# composer require saasus-platform/saasus-sdk-php
+cd api
+composer require saasus-platform/saasus-sdk-php
 ```
 
-```mdx-code-block
-</TabItem>
-<TabItem value="express-bash" label="Express (Bash)">
+#### Express
+
+```bash
+docker compose exec node bash
 ```
 
 ```bash
-repo$ docker compose exec node bash
-root@xxx:/app# npm install saasus-sdk
-root@xxx:/app# exit
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
+npm install saasus-sdk
+exit
 ```
 
 ## Setting Environment Variables
