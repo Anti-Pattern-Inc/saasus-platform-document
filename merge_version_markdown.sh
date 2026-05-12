@@ -148,6 +148,11 @@ fi
     # Inner 3-backtick code blocks in the source remain valid.
     printf '````markdown\n'
 
+    # 1) awk: strip YAML frontmatter
+    # 2) perl: strip every markdown link/image/autolink/reference-style link
+    #    so that knowledge.md never re-exposes broken hrefs from source docs.
+    #    Docusaurus' brokenLinks extractor sees raw href targets even when the
+    #    content is inside a code fence, so we remove all link syntax up-front.
     awk '
       BEGIN {
         in_frontmatter = 0
@@ -166,7 +171,22 @@ fi
       {
         print
       }
-    ' "$file"
+    ' "$file" | perl -pe '
+      # image: ![alt](src "title")  ->  alt
+      s/!\[([^\]]*)\]\([^)]*\)/$1/g;
+      # inline link: [text](url "title")  ->  text
+      s/\[([^\]]*)\]\([^)]*\)/$1/g;
+      # reference link: [text][ref]  ->  text
+      s/\[([^\]]*)\]\[[^\]]*\]/$1/g;
+      # link reference definition: [ref]: url  ->  drop entire line
+      s/^\s*\[[^\]]+\]:\s*\S.*$//;
+      # autolink: <https://...> or <http://...>  ->  the URL as plain text
+      s/<((?:https?|mailto):[^>]+)>/$1/g;
+      # HTML anchor on a single line: <a ...>text</a>  ->  text
+      s/<a\s[^>]*>([^<]*)<\/a>/$1/gi;
+      # Self-closing or empty HTML anchor: <a ... />  ->  drop
+      s/<a\s[^>]*\/>//gi;
+    '
 
     printf '````\n'
   done
