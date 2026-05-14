@@ -159,6 +159,7 @@ uncomment_versions:
 ###########
 
 merge_gem:
-	./merge_version_markdown.sh current
+	./scripts/merge_version_markdown.sh en
+	./scripts/merge_version_markdown.sh ja
 
 .PHONY: merge_gem
