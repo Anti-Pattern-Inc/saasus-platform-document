@@ -3,46 +3,62 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 usage() {
   cat <<'EOF'
 Usage:
-  ./merge_version_markdown.sh <version> [output_file] [locale] [plugin_dir]
+  ./merge_version_markdown.sh [locale]
 
 Arguments:
-  version      Required. Accepts either "1.12" or "version-1.12".
-  output_file  Optional. Default: merged-<version>.md
   locale       Optional. Default: ja
-  plugin_dir   Optional. Default: docusaurus-plugin-content-docs
+               - ja: Output to static/ja/ai-reference/knowledge.txt
+               - en: Output to static/ai-reference/knowledge.txt
+
+Behavior:
+  - Always extracts from "current" version
+  - Merges .md and .mdx under i18n/<locale>/docusaurus-plugin-content-docs/current/
+  - Skips any path matching */ai-reference/*
+  - Appends API spec files under api/
+  - For locale=ja, *.jpn.yml is preferred; if no Japanese file exists, *.yml is used
+  - Output is fixed to static/[ja/]ai-reference/knowledge.txt
 
 Examples:
-  ./merge_version_markdown.sh 1.12
-  ./merge_version_markdown.sh version-1.11 output/version-1.11.md
-  ./merge_version_markdown.sh 1.10 merged.md en docusaurus-plugin-content-docs
-
-Notes:
-  - Merges .md and .mdx under the versioned docs directory.
-  - Also appends API spec files under api/.
-  - For locale=ja, *.jpn.yml is preferred; if no Japanese file exists, *.yml is used.
+  ./merge_version_markdown.sh           # Japanese version
+  ./merge_version_markdown.sh ja        # Japanese version
+  ./merge_version_markdown.sh en        # English version
 EOF
 }
 
-if [[ "${1:-}" == "" ]] || [[ "${1:-}" == "-h" ]] || [[ "${1:-}" == "--help" ]]; then
+if [[ "${1:-}" == "-h" ]] || [[ "${1:-}" == "--help" ]]; then
   usage
   exit 0
 fi
 
-input_version="$1"
-version_dir="$input_version"
-if [[ "$version_dir" != version-* ]]; then
-  version_dir="version-$version_dir"
+# Fixed to "current" version
+version_dir="current"
+
+# locale parameter (default: ja)
+locale="${1:-ja}"
+plugin_dir="docusaurus-plugin-content-docs"
+
+# Set target directory based on locale
+if [[ "$locale" == "en" ]]; then
+  # English is the default language, stored in docs/
+  target_dir="$PROJECT_ROOT/docs"
+else
+  # Other languages are stored in i18n/<locale>/
+  target_dir="$PROJECT_ROOT/i18n/$locale/$plugin_dir/$version_dir"
 fi
 
-locale="${3:-ja}"
-plugin_dir="${4:-docusaurus-plugin-content-docs}"
-target_dir="$SCRIPT_DIR/i18n/$locale/$plugin_dir/$version_dir"
-output_file="${2:-$SCRIPT_DIR/merged-$version_dir.md}"
-api_dir="$SCRIPT_DIR/api"
+api_dir="$PROJECT_ROOT/api"
+
+# Fixed output path based on locale
+if [[ "$locale" == "ja" ]]; then
+  output_file="$PROJECT_ROOT/static/ja/ai-reference/knowledge.txt"
+else
+  output_file="$PROJECT_ROOT/static/ai-reference/knowledge.txt"
+fi
 
 if [[ ! -d "$target_dir" ]]; then
   echo "Target directory not found: $target_dir" >&2
@@ -54,8 +70,14 @@ output_dir="$(dirname "$output_file")"
 mkdir -p "$output_dir"
 output_abs="$(cd "$output_dir" && pwd)/$(basename "$output_file")"
 
-mapfile -d '' files < <(
-  find "$target_abs" -type f \( -name '*.md' -o -name '*.mdx' \) ! -path "$output_abs" -print0 | sort -z
+files=()
+while IFS= read -r file; do
+  files+=("$file")
+done < <(
+  find "$target_abs" -type f \( -name '*.md' -o -name '*.mdx' \) \
+    ! -path "$output_abs" \
+    -not -path "*/ai-reference/*" \
+    | LC_ALL=C sort
 )
 
 if [[ "${#files[@]}" -eq 0 ]]; then
@@ -97,9 +119,9 @@ fi
   printf '# Merged Markdown\n\n'
   printf -- '- Version: `%s`\n' "$version_dir"
   printf -- '- Locale: `%s`\n' "$locale"
-  printf -- '- Docs source: `%s`\n' "${target_dir#$SCRIPT_DIR/}"
+  printf -- '- Docs source: `%s`\n' "${target_dir#$PROJECT_ROOT/}"
   if [[ -d "$api_dir" ]]; then
-    printf -- '- API source: `%s`\n' "${api_dir#$SCRIPT_DIR/}"
+    printf -- '- API source: `%s`\n' "${api_dir#$PROJECT_ROOT/}"
   fi
   printf -- '- Generated: `%s`\n\n' "$(date '+%Y-%m-%d %H:%M:%S %z')"
 
@@ -108,6 +130,8 @@ fi
 
     printf '\n\n---\n\n'
     printf '## %s\n\n' "$rel_path"
+
+    printf '````markdown\n'
 
     awk '
       BEGIN {
@@ -128,6 +152,7 @@ fi
         print
       }
     ' "$file"
+    printf '````\n'
   done
 
   if [[ "${#api_files[@]}" -gt 0 ]]; then
@@ -135,7 +160,7 @@ fi
     printf '## API Specs\n'
 
     for file in "${api_files[@]}"; do
-      rel_path="${file#"$SCRIPT_DIR"/}"
+      rel_path="${file#"$PROJECT_ROOT"/}"
 
       printf '\n\n---\n\n'
       printf '### %s\n\n' "$rel_path"
