@@ -368,6 +368,23 @@ const sidebars = {
                 },
               ],
             },
+            {
+              type: "category",
+              label: "Auth API",
+              link: {
+                type: "generated-index",
+                title: "Auth API",
+                description:
+                  "Implementation guide for custom login UI using SaaSus Platform Auth API.",
+                slug: "/part-6/implementation-guide/auth",
+              },
+              items: [
+                "part-6/implementation-guide/auth/overview",
+                "part-6/implementation-guide/auth/basic-sign-in",
+                "part-6/implementation-guide/auth/advanced-sign-in",
+                "part-6/implementation-guide/auth/security",
+              ],
+            },
             "part-6/implementation-guide/implementing-authentication-using-saasus-serverless",
           ],
         },
@@ -451,6 +468,20 @@ const sidebars = {
         "tutorial/authentication-preference",
         {
           type: "category",
+          label: "Incorporating Authentication Module",
+          link: {
+            type: "generated-index",
+            title: "Incorporating Authentication Module",
+            description: "Select your framework and follow the authentication integration steps.",
+            slug: "/tutorial/authentication-module",
+          },
+          items: [
+            "tutorial/authentication-module/authentication-laravel",
+            "tutorial/authentication-module/authentication-express",
+          ],
+        },
+        {
+          type: "category",
           label: "Manage Rate Plans",
           link: {
             type: "doc",
@@ -460,7 +491,18 @@ const sidebars = {
             "tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans",
           ],
         },
-        "tutorial/implementation-of-authorization-based-on-tenant-information",
+        {
+          type: "category",
+          label: "Implementation of authorization based on tenant information",
+          link: {
+            type: "doc",
+            id: "tutorial/implementation-of-authorization-based-on-tenant-information",
+          },
+          items: [
+            "tutorial/authorization-module/authorization-laravel",
+            "tutorial/authorization-module/authorization-express",
+          ],
+        },
         "tutorial/summarize",
       ],
     },
@@ -497,6 +539,21 @@ const sidebars = {
       type: "category",
       label: "Changelog",
       items: [
+        {
+          label: "2026/04/02",
+          type: "doc",
+          id: "changelog/20260402",
+        },
+        {
+          label: "2026/03/06",
+          type: "doc",
+          id: "changelog/20260306",
+        },
+        {
+          label: "2026/02/13",
+          type: "doc",
+          id: "changelog/20260213",
+        },
         {
           label: "2026/01/23",
           type: "doc",

@@ -10,6 +10,10 @@ const locale = process.env.DOCUSAURUS_CURRENT_LOCALE || 'en';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "SaaSus Platform Document",
+  customFields: {
+    // LaunchDarkly Client-side ID
+    ldClientId: '636a8a550da45a0d8779e236',
+  },
   // tagline: 'SaaSus Platform are cool',
   favicon: "img/favicon.ico",
 
@@ -188,6 +192,11 @@ const config = {
             label: "Changelog",
           },
           {
+            to: "/status",
+            position: "left",
+            label: "Status",
+          },
+          {
             type: "localeDropdown",
             position: "right",
           },
@@ -248,6 +257,12 @@ const config = {
         additionalLanguages: ["php", "java", "scala", "csharp"],
       },
     }),
+
+  themes: ['@docusaurus/theme-mermaid'],
+
+  markdown: {
+    mermaid: true,
+  },
 
   plugins: [
     // [
