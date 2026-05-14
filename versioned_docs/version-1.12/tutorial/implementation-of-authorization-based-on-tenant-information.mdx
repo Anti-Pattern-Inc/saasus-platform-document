@@ -7,8 +7,6 @@ pagination_prev: tutorial/manage-rate-plans/manage-rate-plans
 createdAt: "Fri Jan 20 2023 01:47:33 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 ## Implementation of Authorization
 
@@ -27,118 +25,8 @@ Earlier, we set a different upper limit for the number of comments for each pric
 
 Now, get the maximum number associated with this pricing plan for each tenant and set a limit.
 
-- For Laravel, let’s modify the `post` method in `api/app/Http/Controllers/MessageController.php`.
-- For Express, let’s add an `import` statement to `api/controllers/chat.ts` and modify the `postChats` method.
-
-<Tabs>
-<TabItem value="php" label="Laravel (PHP)">
-
-```php
-   public function post(Request $request)
-   {
-        $validated = $request->validate([
-            'message' => 'required|max:255'
-        ]);
-
-        $tenant_id = $request->userinfo['tenants'][0]['id'];
-        $plan_id = $request->userinfo['tenants'][0]['plan_id'];
-
-        // Use the SaaSus SDK to hit the SaaSus API, acquire various information, and use it for judgment
-        $client = new \AntiPatternInc\Saasus\Api\Client();
-        $pricingApi = $client->getPricingClient();
-        $res = $pricingApi->getPricingPlan($plan_id, $pricingApi::FETCH_RESPONSE);
-        $plan = json_decode($res->getBody(), true);
-
-        // use metering meter, comment_count
-        $meteringUnitName = "comment_count";
-        $res = $pricingApi->getMeteringUnitDateCountByTenantIdAndUnitNameToday($tenant_id, $meteringUnitName, $pricingApi::FETCH_RESPONSE);
-        // This time, treat it as the maximum number of comments per day
-        $count = json_decode($res->getBody(), true);
-
-        $upper = \AntiPatternInc\Saasus\Api\Lib::findUpperCountByMeteringUnitName($plan, $meteringUnitName);
-
-        // Disable posting if the number of comments exceeds the maximum number of comments for the current contracted price plan
-        if ($count['count'] < $upper || $upper === 0) {
-            $message = Message::create([
-                'tenant_id' => $tenant_id,
-                'user_id' => $request->userinfo['tenants'][0]['user_attribute']['username'],
-                'message' => $request->message,
-            ]);
-            // add 1 to the number of comments in the metering API
-            $param = new \AntiPatternInc\Saasus\Sdk\Pricing\Model\UpdateMeteringUnitTimestampCountNowParam();
-            $param->setMethod('add');
-            $param->setCount(1);
-            $res = $pricingApi->updateMeteringUnitTimestampCountNow($request->userinfo['tenants'][0]['id'], $meteringUnitName, $param, $pricingApi::FETCH_RESPONSE);
-        }
-
-        $request->session()->regenerateToken();
-        return redirect()->route('board');
-   }
-```
-
-</TabItem>
-
-<TabItem value="typescript" label="Express (TS)">
-```js
-import { UpdateMeteringUnitTimestampCountNowParam } from "saasus-sdk/dist/generated/Pricing";
-import { findUpperCountByMeteringUnitName, PricingClient } from "saasus-sdk";
-
-// Other code omitted
-
-const postChats = async (req: Request, res: Response) => {
-  const mes = req.body.message;
-  const tenantId = req.userInfo?.tenants[0].id || "";
-  const planId = req.userInfo?.tenants[0].plan_id || "";
-  const userName =
-    req.userInfo?.tenants[0].user_attribute.username;
-  try {
-    const pricingClient = new PricingClient();
-    const pricingPlan = await pricingClient.pricingPlansApi.getPricingPlan(
-      planId
-    );
-
-    // use metering meter, comment_count
-    const meteringUnitName = "comment_count";
-    const meteringUnitCountData =
-      await pricingClient.meteringApi.getMeteringUnitDateCountByTenantIdAndUnitNameToday(
-        tenantId,
-        meteringUnitName
-      );
-    
-    // This time, treat it as the maximum number of comments per day
-    const upper = findUpperCountByMeteringUnitName(
-      pricingPlan.data,
-      meteringUnitName
-    );
-
-    // Disable posting if the number of comments exceeds the maximum number of comments for the current contracted price plan
-    if (meteringUnitCountData.data.count < upper || upper === 0) {
-      await db.Messages.create({
-        tenant_id: tenantId,
-        user_id: userName,
-        message: mes,
-      });
-
-      // add 1 to the number of comments in the metering API
-      let param: UpdateMeteringUnitTimestampCountNowParam = {
-        method: "add",
-        count: 1,
-      };
-      const res =
-        await pricingClient.meteringApi.updateMeteringUnitTimestampCountNow(
-          tenantId,
-          meteringUnitName,
-          param
-        );
-    }
-  } catch (error) {
-    console.error(error);
-  }
-  res.redirect("/chat");
-};
-```
-</TabItem>
-</Tabs>
+- [Laravel (source code)](/docs/tutorial/authorization-module/authorization-laravel)
+- [Express (source code)](/docs/tutorial/authorization-module/authorization-express)
 
 
 In addition to the previous code, check the maximum number of comments based on the comment count target meter “comment_count”.

@@ -4,7 +4,7 @@ slug: "saasus-platform-architecture"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Mon Apr 06 2026 05:28:53 GMT+0000 (Coordinated Universal Time)"
 ---
 
 
@@ -79,7 +79,7 @@ Secure access control to your SaaS application.
   When a user logs in, ID, access, and refresh tokens are issued. Subsequent API requests include these tokens for authentication.
 
 - **Selectable login methods**  
-  Standard email/password login and Google social login are available.
+  Standard authentication with email address or Sign-in ID and password is available, as well as Google social login.
 
 - **Role‑based user permissions**  
   Define roles (e.g., administrator, general user) so only authorized users can perform privileged actions.

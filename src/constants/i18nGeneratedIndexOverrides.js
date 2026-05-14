@@ -53,10 +53,22 @@ export const generatedIndexOverrides = {
         description: 'SaaSus PlatformのAPIサーバ方式を使用した実装例',
       }
     },
+    '/part-6/implementation-guide/auth': {
+      ja: {
+        title: '認証API',
+        description: 'SaaSus Platform認証APIを使った独自ログイン画面の実装ガイド',
+      }
+    },
     '/part-7/faq': {
       ja: {
         title: 'よくある質問（FAQ）',
         description: 'SaaSus Platform に関する各種よくある質問をカテゴリ別にまとめています。',
+      }
+    },
+    '/tutorial/authentication-module': {
+      ja: {
+        title: '認証モジュールの組み込み',
+        description: '利用するフレームワークを選択して、認証連携の手順を進めます。',
       }
     },
   };

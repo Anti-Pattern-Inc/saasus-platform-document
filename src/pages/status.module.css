@@ -1,0 +1,91 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+.main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+.heading {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.subheading {
+  color: var(--ifm-color-secondary-darkest);
+  margin-bottom: 2rem;
+}
+
+.loading {
+  color: var(--ifm-color-secondary-darkest);
+}
+
+/* 正常時 */
+.operationalCard {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 2px solid #bbf7d0;
+  background: #f0fdf4;
+}
+
+.operationalText {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #16a34a;
+}
+
+/* 障害時 */
+.outageCard {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 2px solid #fecaca;
+  background: #fef2f2;
+  margin-bottom: 1.5rem;
+}
+
+.outageText {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #dc2626;
+}
+
+.incidentCard {
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+}
+
+.incidentTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #7f1d1d;
+  margin-bottom: 0.75rem;
+}
+
+.incidentMessage {
+  color: #991b1b;
+  margin-bottom: 1rem;
+}
+
+.incidentDetails {
+  font-size: 0.875rem;
+  color: #991b1b;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.incidentDetails p {
+  margin: 0;
+}

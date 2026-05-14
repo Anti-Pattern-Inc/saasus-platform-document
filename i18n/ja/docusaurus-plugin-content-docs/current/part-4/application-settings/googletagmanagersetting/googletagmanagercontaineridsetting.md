@@ -4,7 +4,7 @@ slug: "googletagmanagercontaineridsetting"
 excerpt: ""
 hidden: false
 createdAt: "Thu Dec 07 2023 06:43:12 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Fri Dec 22 2023 06:01:24 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Mon Apr 06 2026 05:28:53 GMT+0000 (Coordinated Universal Time)"
 ---
 ## 1. コンテナIDの確認
 
@@ -25,7 +25,7 @@ updatedAt: "Fri Dec 22 2023 06:01:24 GMT+0000 (Coordinated Universal Time)"
 1. SaaS開発コンソールの「認証詳細設定」を開く
 
    ![googletagmanagercontaineridsetting-3](/ja/img/part-4/application-settings/googletagmanagersetting/googletagmanagercontaineridsetting-3.png)
-2. 認証詳細設定画面の「基本設定」最下部にある「Google Tag Manager コンテナ ID」にコンテナIDを設定し保存ボタンを押す
+2. 認証詳細設定画面の「基本設定」にある「Google Tag Manager コンテナ ID」にコンテナIDを設定し保存ボタンを押す
 
    ![googletagmanagercontaineridsetting-4](/ja/img/part-4/application-settings/googletagmanagersetting/googletagmanagercontaineridsetting-4.png)
 
