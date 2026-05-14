@@ -134,6 +134,35 @@ make down
 
 このコマンドで Docker コンテナを停止します。
 
+## AI 参照用ドキュメントの更新
+
+AIエージェント（Gemini Gems 等）が参照する単一の `knowledge.md` を生成・配置します。
+
+```bash
+make merge_gem
+```
+
+このコマンドは以下を実行します：
+
+1. `i18n/ja/docusaurus-plugin-content-docs/current/` 配下の全 `.md` / `.mdx` を結合
+2. `api/` 配下の API spec yml を末尾に追記
+3. ファイル先頭に `unlisted: true` フロントマターを付与（Docusaurus がナビ/検索/sitemap から除外）
+4. 各ソースファイルの本文を 4-バッククォートのコードフェンスで囲む（MDX の `import` 文や JSX タグが Docusaurus でパースエラーを起こさないため）
+5. 以下4箇所に同一内容で書き出し：
+   - `i18n/ja/docusaurus-plugin-content-docs/current/ai-reference/knowledge.md`
+   - `i18n/ja/docusaurus-plugin-content-docs/version-<最新>/ai-reference/knowledge.md`
+   - `docs/ai-reference/knowledge.md`（defaultLocale=en のため、英語側にもファイルが必要）
+   - `versioned_docs/version-<最新>/ai-reference/knowledge.md`
+
+### 挙動メモ
+
+- ファイル名は固定（`knowledge.md`）で、再実行のたびに上書きされる
+- 4箇所すべてが完全に同一内容（diff空）。AI 参照用なので英語側も日本語コンテンツのままで問題なし
+- `*/ai-reference/*` パスは結合元の探索から除外される（出力が再帰的に取り込まれないように）
+- `versions.json` の先頭要素を最新バージョンとして自動採用するため、バージョン上げ時もスクリプト改修は不要
+- `unlisted: true` により、URL 直指定（例: `/ja/docs/ai-reference/knowledge`）でのみアクセス可。ページ上部に「非公開のページ」バナーが表示される
+- 検証は `bash scripts/verify_merge_gem.sh`（13項目の自律チェック）で再現可能
+
 ## ファイルメタデータ管理
 
 ### ファイルヘッダーの管理ルール
