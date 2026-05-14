@@ -63,7 +63,7 @@ i18n/ja/docusaurus-plugin-content-docs/current/part-4/user-authz-settings/google
 ```
 ### AI 参照用ドキュメント生成（Gemini Gems 用）
 
-AI エージェントが参照するためのナレッジファイル `knowledge.md` を生成し、Docusaurus 配下4箇所にミラー配置します。
+AI エージェントが参照するためのナレッジファイル `knowledge.txt` を生成し、Docusaurus 静的ディレクトリに配置します。
 
 ```
 make merge_gem
@@ -71,20 +71,10 @@ make merge_gem
 
 出力先（既存ファイルは上書き）：
 
-- `i18n/ja/docusaurus-plugin-content-docs/current/ai-reference/knowledge.md`
-- `i18n/ja/docusaurus-plugin-content-docs/version-<最新>/ai-reference/knowledge.md`
-- `docs/ai-reference/knowledge.md`（英語側プレースホルダ、内容はjaと同一）
-- `versioned_docs/version-<最新>/ai-reference/knowledge.md`（同上、バージョン側）
+- `static/ai-reference/knowledge.txt` --- AI 参照用ドキュメント（英語版）
+- `static/ja/ai-reference/knowledge.txt` --- AI 参照用ドキュメント（日本語版）
 
-「最新バージョン」は `versions.json` の先頭要素から動的に取得されます。
-
-生成された各ファイルには `unlisted: true` のフロントマターが付与され、以下の挙動になります：
-
-- サイドバー・検索インデックス・sitemap から除外される
-- URL 直指定（例: `/ja/docs/ai-reference/knowledge`）でのみアクセス可能
-- ページ上部に「非公開のページ」バナーが表示される
-
-検証スクリプトは `bash scripts/verify_merge_gem.sh`（13項目チェック）。
+`current` から生成
 
 ### Build
 
