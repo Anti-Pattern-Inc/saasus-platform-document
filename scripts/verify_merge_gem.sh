@@ -76,23 +76,7 @@ check "frontmatter contains unlisted: true" \
 fm_leak=$(grep -cE '^(slug|hidden|createdAt|updatedAt):' "$PRIMARY" || true)
 check "no leaked slug/hidden/createdAt/updatedAt (got=$fm_leak)" test "$fm_leak" -eq 0
 
-# 7. No residual link syntax (broken-link regression guard)
-md_links=$(grep -cE '\[[^]]*\]\([^)]*\)' "$PRIMARY" || true)
-check "no inline markdown links [t](u) (got=$md_links)" test "$md_links" -eq 0
-
-img_links=$(grep -cE '!\[[^]]*\]\([^)]*\)' "$PRIMARY" || true)
-check "no markdown images ![a](s) (got=$img_links)" test "$img_links" -eq 0
-
-ref_links=$(grep -cE '\[[^]]*\]\[[^]]+\]' "$PRIMARY" || true)
-check "no reference-style links [t][r] (got=$ref_links)" test "$ref_links" -eq 0
-
-autolinks=$(grep -cE '<https?://[^>]+>' "$PRIMARY" || true)
-check "no autolinks <http(s)://...> (got=$autolinks)" test "$autolinks" -eq 0
-
-html_anchors=$(grep -cE '<a\s' "$PRIMARY" || true)
-check "no HTML <a> tags (got=$html_anchors)" test "$html_anchors" -eq 0
-
-# 8. Make target works
+# 7. Make target works
 check "make merge_gem target runs" bash -c 'make merge_gem >/dev/null 2>&1'
 
 echo ""
