@@ -21,7 +21,7 @@ Behavior:
   - Skips any path matching */ai-reference/*
   - Appends API spec files under api/
   - For locale=ja, *.jpn.yml is preferred; if no Japanese file exists, *.yml is used
-  - Output is fixed to static/ai-reference/knowledge[ja.].txt
+  - Output is fixed to static/ai-reference/knowledge.[ja.]txt
 
 Examples:
   ./merge_version_markdown.sh           # Japanese version
