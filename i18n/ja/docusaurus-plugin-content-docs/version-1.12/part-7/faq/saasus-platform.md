@@ -4,7 +4,7 @@ slug: "saasus-platform"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Apr 06 2026 05:28:53 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu May 15 2026 03:41:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 **Q. サービスが停止した時の対策として、どのような対応が可能でしょうか？  
@@ -343,3 +343,12 @@ A. SaaSus Platform は、SaaSの開発・運用に特化した認証・認可プ
 
  - **外部 IDP との連携機能**  
 Microsoft Entra ID や Google などの IDP と SAML 連携 や OIDC (OpenID Connect) を利用して接続することで、エンドユーザーに対してセキュアでシームレスなログイン体験を提供できます。
+
+---
+
+**Q. 登録している請求先（社名、住所など）を変更するにはどうすればよいですか？**
+
+A. SaaS開発コンソールからお客様ご自身で変更いただけます。  
+以下のメニューより、新しい請求先情報を入力して保存してください。  
+設定箇所:  
+SaaS開発コンソール ＞ アカウント設定 ＞ 請求情報
