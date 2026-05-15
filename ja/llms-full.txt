@@ -14558,6 +14558,15 @@ Microsoft Entra ID and Google can be connected using SAML integration or OIDC (O
 
 ---
 
+**Q. How can I change my registered billing information (company name, address, etc.)?**
+
+A. You can change it yourself from the SaaS Development Console.  
+Please enter and save the new billing information from the following menu.  
+Configuration location:  
+SaaS Development Console > Account Settings > Billing Information
+
+---
+
 # Support
 
 URL: https://www.prisma.io/docs/part-7/support
