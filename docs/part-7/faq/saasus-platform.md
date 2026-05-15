@@ -4,7 +4,7 @@ slug: "saasus-platform"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Apr 06 2026 05:28:53 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu May 15 2026 03:41:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 **Q. What countermeasures are available when the service goes down?  
@@ -344,3 +344,12 @@ Therefore, SaaSus itself does not have the function to provide authentication in
 
  - **External IDP integration features**  
 Microsoft Entra ID and Google can be connected using SAML integration or OIDC (OpenID Connect) to provide end users with a secure and seamless login experience.
+
+---
+
+**Q. How can I change my registered billing information (company name, address, etc.)?**
+
+A. You can change it yourself from the SaaS Development Console.  
+Please enter and save the new billing information from the following menu.  
+Configuration location:  
+SaaS Development Console > Account Settings > Billing Information
