@@ -2,7 +2,6 @@
 
 ## Docs
 
-- [AI Reference Knowledge](ai-reference/knowledge): - Version: current
 - [Official Release on 2022/12/24](changelog/20221224): Thank you for trying out the SaaSus Platform.
 - [Update on 2023/11/05](changelog/20231105): We have released updates on the following features.
 - [Update on 2023/11/18](changelog/20231118): We have released updates on the following features.
