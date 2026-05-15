@@ -72,7 +72,7 @@ make merge_gem
 出力先（既存ファイルは上書き）：
 
 - `static/ai-reference/knowledge.txt` --- AI 参照用ドキュメント（英語版）
-- `static/ja/ai-reference/knowledge.txt` --- AI 参照用ドキュメント（日本語版）
+- `static/ai-reference/knowledge.ja.txt` --- AI 参照用ドキュメント（日本語版）
 
 `current` から生成
 

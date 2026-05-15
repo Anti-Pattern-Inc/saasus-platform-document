@@ -153,18 +153,18 @@ make merge_gem
    - 日本語: `*.jpn.yml` 優先、対応する日本語版が無いものは `*.yml`
 3. 以下2箇所に出力（既存ファイルは上書き）：
    - `static/ai-reference/knowledge.txt` --- 英語版
-   - `static/ja/ai-reference/knowledge.txt` --- 日本語版
+   - `static/ai-reference/knowledge.ja.txt` --- 日本語版
 
 ### 挙動メモ
 
 - 拡張子は `.txt`。Docusaurus は `static/` 配下の `.txt` を **そのまま静的配信する** ため、
   MDX としてパースされず、broken link / broken anchor / MDX import の検証対象外
 - 生成物はリポジトリに commit する運用（ドキュメント更新時に `make merge_gem` で再生成して PR に含める）
-- ファイル名は固定（`knowledge.txt`）で、再実行のたびに上書きされる
+- ファイル名は固定（`knowledge.txt`, `knowledge.ja.txt`）で、再実行のたびに上書きされる
 - `*/ai-reference/*` パスは結合元の探索から除外される（出力が再帰的に取り込まれないように）
 - URL アクセス例（dev / build とも同パス）：
   - `http://localhost:3001/ai-reference/knowledge.txt`
-  - `http://localhost:3001/ja/ai-reference/knowledge.txt`
+  - `http://localhost:3001/ai-reference/knowledge.ja.txt`
 - 検証は `bash scripts/verify_merge_gem.sh` で再現可能（exit code 連動）
 
 ## ファイルメタデータ管理
