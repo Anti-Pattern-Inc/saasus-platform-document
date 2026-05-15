@@ -12,7 +12,7 @@ Usage:
 
 Arguments:
   locale       Optional. Default: ja
-               - ja: Output to static/ja/ai-reference/knowledge.txt
+               - ja: Output to static/ai-reference/knowledge.ja.txt
                - en: Output to static/ai-reference/knowledge.txt
 
 Behavior:
@@ -21,7 +21,7 @@ Behavior:
   - Skips any path matching */ai-reference/*
   - Appends API spec files under api/
   - For locale=ja, *.jpn.yml is preferred; if no Japanese file exists, *.yml is used
-  - Output is fixed to static/[ja/]ai-reference/knowledge.txt
+  - Output is fixed to static/ai-reference/knowledge.[ja.]txt
 
 Examples:
   ./merge_version_markdown.sh           # Japanese version
@@ -55,7 +55,7 @@ api_dir="$PROJECT_ROOT/api"
 
 # Fixed output path based on locale
 if [[ "$locale" == "ja" ]]; then
-  output_file="$PROJECT_ROOT/static/ja/ai-reference/knowledge.txt"
+  output_file="$PROJECT_ROOT/static/ai-reference/knowledge.ja.txt"
 else
   output_file="$PROJECT_ROOT/static/ai-reference/knowledge.txt"
 fi
