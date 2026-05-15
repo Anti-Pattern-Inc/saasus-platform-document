@@ -116,20 +116,20 @@ if [[ -d "$api_dir" ]]; then
 fi
 
 {
-  printf '# Merged Markdown\n\n'
+  printf '# Merged Markdown\n'
   printf -- '- Version: `%s`\n' "$version_dir"
   printf -- '- Locale: `%s`\n' "$locale"
   printf -- '- Docs source: `%s`\n' "${target_dir#$PROJECT_ROOT/}"
   if [[ -d "$api_dir" ]]; then
     printf -- '- API source: `%s`\n' "${api_dir#$PROJECT_ROOT/}"
   fi
-  printf -- '- Generated: `%s`\n\n' "$(date '+%Y-%m-%d %H:%M:%S %z')"
+  printf -- '- Generated: `%s`\n' "$(date '+%Y-%m-%d %H:%M:%S %z')"
 
   for file in "${files[@]}"; do
     rel_path="${file#"$target_abs"/}"
 
-    printf '\n\n---\n\n'
-    printf '## %s\n\n' "$rel_path"
+    printf '\n---\n'
+    printf '## %s\n' "$rel_path"
 
     printf '````markdown\n'
 
@@ -149,28 +149,42 @@ fi
         next
       }
       {
-        print
+        # 行末のスペース・タブを削除
+        gsub(/[ \t]+$/, "")
+        
+        # 空行（空白のみの行を含む）を削除
+        if ($0 != "") {
+          print
+        }
       }
     ' "$file"
     printf '````\n'
   done
 
   if [[ "${#api_files[@]}" -gt 0 ]]; then
-    printf '\n\n---\n\n'
+    printf '\n---\n'
     printf '## API Specs\n'
 
     for file in "${api_files[@]}"; do
       rel_path="${file#"$PROJECT_ROOT"/}"
 
-      printf '\n\n---\n\n'
-      printf '### %s\n\n' "$rel_path"
+      printf '\n---\n'
+      printf '### %s\n' "$rel_path"
       printf '```yaml\n'
-      cat "$file"
+      awk '
+        {
+          # 行末のスペース・タブを削除
+          gsub(/[ \t]+$/, "")
+          
+          # 空行（空白のみの行を含む）を削除
+          if ($0 != "") {
+            print
+          }
+        }
+      ' "$file"
       printf '\n```\n'
     done
   fi
-
-  printf '\n'
 } > "$output_abs"
 
 printf 'Created %s from %d docs files and %d API files\n' \
