@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-05-15 13:29:53 +0900`
+- Generated: `2026-05-18 16:41:00 +0900`
 
 ---
 ## changelog/20221224.md
@@ -10958,55 +10958,6 @@ These details are disclosed individually **only when required** for risk assessm
 ````
 
 ---
-## reference/analysis-api.mdx
-````markdown
-import ApiDocMdx from "@theme/ApiDocMdx";
-<ApiDocMdx id="analysisapi-spec" />
-````
-
----
-## reference/apigateway-api.mdx
-````markdown
-import ApiDocMdx from "@theme/ApiDocMdx";
-<ApiDocMdx id="apigatewayapi-spec" />
-````
-
----
-## reference/apilog-api.mdx
-````markdown
-import ApiDocMdx from "@theme/ApiDocMdx";
-<ApiDocMdx id="apilogapi-spec" />
-````
-
----
-## reference/auth-api.mdx
-````markdown
-import ApiDocMdx from "@theme/ApiDocMdx";
-<ApiDocMdx id="authapi-spec" />
-````
-
----
-## reference/awsmarketplace-api.mdx
-````markdown
-import ApiDocMdx from "@theme/ApiDocMdx";
-<ApiDocMdx id="awsmarketplaceapi-spec" />
-````
-
----
-## reference/billing-api.mdx
-````markdown
-import ApiDocMdx from "@theme/ApiDocMdx";
-<ApiDocMdx id="billingapi-spec" />
-````
-
----
-## reference/communication-api.mdx
-````markdown
-import ApiDocMdx from "@theme/ApiDocMdx";
-<ApiDocMdx id="communicationapi-spec" />
-````
-
----
 ## reference/getting-started-with-your-api.md
 ````markdown
 A signature is necessary to call the SaaSus API.
@@ -11044,20 +10995,6 @@ Please create a fork of [📋 SaaSus API Postman](https://www.postman.com/anti-p
 2. Set up authentication information (API Key, SaaS ID, etc.)
 For details, please refer to the SaaSus API Postman Guide published on Postman.
 The Postman collection includes all SaaSus API endpoints and enables quick API testing.
-````
-
----
-## reference/integration.mdx
-````markdown
-import ApiDocMdx from "@theme/ApiDocMdx";
-<ApiDocMdx id="integration-spec" />
-````
-
----
-## reference/pricing-api.mdx
-````markdown
-import ApiDocMdx from "@theme/ApiDocMdx";
-<ApiDocMdx id="pricingapi-spec" />
 ````
 
 ---
