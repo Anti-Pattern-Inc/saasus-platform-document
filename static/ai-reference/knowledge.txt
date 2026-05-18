@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-05-18 16:41:00 +0900`
+- Generated: `2026-05-18 18:24:20 +0900`
 
 ---
 ## changelog/20221224.md
@@ -10653,6 +10653,16 @@ A. No, due to the current specifications of SaaSus Platform and the integrated S
 ---
 **Q. Can annual contract plans be combined with monthly fixed options or usage-based charges (usage units)?**
 A. To maintain billing transparency and consistency, SaaSus Platform (and its integrated Stripe) cannot combine different billing cycles (such as annual and monthly) within a single subscription.
+---
+**Q. Can I delete a pricing plan that I have created?**
+A. The ability to delete pricing plans depends on your environment.
+**For development and staging environments**
+You can initialize (delete) pricing plans using the pricing plan initialization feature.
+This initialization operation can be performed not only through the SaaSus API (DELETE /v1/pricing/plans-initialization)
+but also directly from the SaaS Development Console screen.
+**For production environments**
+Once metering units, feature menus, and pricing plans have been used, they cannot be deleted.
+When setting and applying pricing plans in a production environment, please thoroughly review the configuration in advance.
 ````
 
 ---
