@@ -4,7 +4,7 @@ slug: "billing"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Sun May 18 2026 09:07:11 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Sun May 18 2026 11:25:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 **Q. What is the "Calculation Method" setting (sum/max) for meter units?**  
@@ -234,7 +234,7 @@ A. The ability to delete pricing plans depends on your environment.
 
 **For development and staging environments**  
 Once metering units, feature menus, and pricing plans have been used, they cannot be deleted.  
-However, for development and staging environments only, you can initialize the entire pricing plan. This initialization operation can be performed not only through the SaaSus API (DELETE /v1/pricing/plans-initialization)
+However, for development and staging environments only, you can initialize the entire pricing plan. This initialization operation can be performed not only through the SaaSus API（PUT /auth/plans/reset）
 but also directly from the SaaS Development Console screen.
 
 **For production environments**  
