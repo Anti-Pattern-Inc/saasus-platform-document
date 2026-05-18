@@ -19,6 +19,7 @@ Behavior:
   - Always extracts from "current" version
   - Merges .md and .mdx under i18n/<locale>/docusaurus-plugin-content-docs/current/
   - Skips any path matching */ai-reference/*
+  - Skips any path matching */reference/*.mdx
   - Appends API spec files under api/
   - For locale=ja, *.jpn.yml is preferred; if no Japanese file exists, *.yml is used
   - Output is fixed to static/ai-reference/knowledge.[ja.]txt
@@ -77,6 +78,7 @@ done < <(
   find "$target_abs" -type f \( -name '*.md' -o -name '*.mdx' \) \
     ! -path "$output_abs" \
     -not -path "*/ai-reference/*" \
+    -not -path "*/reference/*.mdx" \
     | LC_ALL=C sort
 )
 

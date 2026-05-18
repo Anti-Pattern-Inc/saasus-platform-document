@@ -3,7 +3,7 @@
 - Locale: `ja`
 - Docs source: `i18n/ja/docusaurus-plugin-content-docs/current`
 - API source: `api`
-- Generated: `2026-05-15 13:29:54 +0900`
+- Generated: `2026-05-18 16:41:00 +0900`
 
 ---
 ## changelog/20221224.md
@@ -11001,55 +11001,6 @@ SaaSus Platform では、ご契約プランに応じて Intercom や Slack Conne
 ````
 
 ---
-## reference/analysis-api.mdx
-````markdown
-import ApiDocMdx from "@theme/ApiDocMdx";
-<ApiDocMdx id="analysisapi-spec-jpn" />
-````
-
----
-## reference/apigateway-api.mdx
-````markdown
-import ApiDocMdx from "@theme/ApiDocMdx";
-<ApiDocMdx id="apigatewayapi-spec-jpn" />
-````
-
----
-## reference/apilog-api.mdx
-````markdown
-import ApiDocMdx from "@theme/ApiDocMdx";
-<ApiDocMdx id="apilogapi-spec-jpn" />
-````
-
----
-## reference/auth-api.mdx
-````markdown
-import ApiDocMdx from "@theme/ApiDocMdx";
-<ApiDocMdx id="authapi-spec-jpn" />
-````
-
----
-## reference/awsmarketplace-api.mdx
-````markdown
-import ApiDocMdx from "@theme/ApiDocMdx";
-<ApiDocMdx id="awsmarketplaceapi-spec-jpn" />
-````
-
----
-## reference/billing-api.mdx
-````markdown
-import ApiDocMdx from "@theme/ApiDocMdx";
-<ApiDocMdx id="billingapi-spec-jpn" />
-````
-
----
-## reference/communication-api.mdx
-````markdown
-import ApiDocMdx from "@theme/ApiDocMdx";
-<ApiDocMdx id="communicationapi-spec-jpn" />
-````
-
----
 ## reference/getting-started-with-your-api.md
 ````markdown
 SaaSus APIを呼ぶには、署名 が必要です。
@@ -11096,20 +11047,6 @@ SaaSus Platform APIのPostmanコレクションを公開しています。
 2. 認証情報の取得（API Key、SaaS IDなど）を設定
 詳細はPostmanで公開しているSaaSus API Postman ガイドをご参照ください。
 Postmanコレクションには全てのSaaSus APIエンドポイントが含まれており、素早くAPIテストが可能です。
-````
-
----
-## reference/integration.mdx
-````markdown
-import ApiDocMdx from "@theme/ApiDocMdx";
-<ApiDocMdx id="integration-spec-jpn" />
-````
-
----
-## reference/pricing-api.mdx
-````markdown
-import ApiDocMdx from "@theme/ApiDocMdx";
-<ApiDocMdx id="pricingapi-spec-jpn" />
 ````
 
 ---
