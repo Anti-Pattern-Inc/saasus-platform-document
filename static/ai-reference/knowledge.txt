@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-05-18 18:24:20 +0900`
+- Generated: `2026-05-18 20:34:53 +0900`
 
 ---
 ## changelog/20221224.md
@@ -10657,8 +10657,8 @@ A. To maintain billing transparency and consistency, SaaSus Platform (and its in
 **Q. Can I delete a pricing plan that I have created?**
 A. The ability to delete pricing plans depends on your environment.
 **For development and staging environments**
-You can initialize (delete) pricing plans using the pricing plan initialization feature.
-This initialization operation can be performed not only through the SaaSus API (DELETE /v1/pricing/plans-initialization)
+Once metering units, feature menus, and pricing plans have been used, they cannot be deleted.
+However, for development and staging environments only, you can initialize the entire pricing plan. This initialization operation can be performed not only through the SaaSus API（PUT /auth/plans/reset）
 but also directly from the SaaS Development Console screen.
 **For production environments**
 Once metering units, feature menus, and pricing plans have been used, they cannot be deleted.
