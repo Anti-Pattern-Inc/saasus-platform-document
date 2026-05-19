@@ -1,0 +1,3784 @@
+# Merged Markdown (part-4)
+- Locale: `ja`
+- Generated: `2026-05-19 23:43:33 +0900`
+
+---
+## part-4/account-settings/aws-marketplace-subscription-procedure.md
+````markdown
+### 1.サポートへの問い合わせ
+AWS Marketplaceでの購入をご希望の方は、まずサポートまでお問い合わせください。
+### 2.契約内容の相談
+サポートチームと契約内容について相談し、ご希望のプランや条件を決定します。
+### 3.Private Offerの作成
+契約内容が決定後、AWS MarketplaceにてPrivate Offerが作成され、AWS Marketplaceからメールが送信されます。
+### 4.メールから契約の詳細ページへアクセス
+送信されたメールに含まれるリンクをクリックして、AWS Marketplaceの契約の詳細ページにアクセスします。
+**通知メールの例:**
+```markdown
+件名: You have a new Private Offer
+Dear Customer.
+A Marketplace Private Offer has been published for AWS account xxxx.
+You have until [有効期限] to accept the offer.
+Please review and subscribe to the offer on AWS Marketplace using the appropriate credentials for the above AWS account.
+```
+このメール内の「AWS Marketplace」の部分が契約の詳細ページへのリンクとなっています。
+### 5.サブスクライブによる契約
+契約の詳細ページで内容を確認し、`サブスクライブ`をクリックして契約を完了します。
+![](/ja/img/part-4/account-settings/aws-marketplace-subscription-procedure/image01.png)
+*契約の詳細ページの上部*
+ページを下にスクロールして、サブスクライブボタンを探します。
+![](/ja/img/part-4/account-settings/aws-marketplace-subscription-procedure/image02.png)
+*サブスクライブボタンが表示される下部*
+### 6.契約の完了とアカウントを設定
+`サブスクライブ`をクリックして契約が完了すると、契約の詳細ページに`アカウントを設定`のリンクが表示されます。このボタンをクリックして次に進んでください。
+![](/ja/img/part-4/account-settings/aws-marketplace-subscription-procedure/image03.png)
+### 7. アカウント設定手順
+**新規アカウントを作成する場合と、既存アカウントを対象に有料プランへの移行（有償化）を行う場合で手順が異なります。**
+新規アカウントを作成する場合、手順 **7-1** を参照してください。
+既存アカウントを有料プランへ移行する場合、手順 **7-2** を参照してください。
+### 7-1. 新規アカウント作成
+#### 7-1-1. SaaSus Platform への新規登録
+「アカウントを設定」をクリックすると、AWS Marketplace経由で新規登録画面に遷移します。SaaSus Platformのアカウントをまだお持ちでない場合は、そのまま画面の指示に従い、アカウント名、メールアドレスを入力して新規登録を行い、アカウントを作成してください。
+![915e21a-image](/ja/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/915e21a-image.png)
+### 7-2. 既存アカウントを有料プランへ移行する
+#### 7-2-1. SaaSus Platform へのログイン（既存アカウントの利用）
+「アカウントを設定」をクリックすると、AWS Marketplace経由で新規登録画面に遷移します。すでにSaaSus Platformのアカウントをお持ちの場合は、「すでに登録済みでログインする方はこちら」をクリックしてください。AWS Marketplace経由のログイン画面へ遷移しますので、既存のアカウントでログインを行ってください。
+![a677094-image](/ja/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/a677094-image.png)
+![f3eaabf-image](/ja/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/f3eaabf-image.png)
+#### 7-2-2. 有料プランを適用するアカウントの選択
+有料プランを適用するアカウントを選択し、「このアカウントで利用を開始する」をクリックします。
+![e15cc67-image](/ja/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/e15cc67-image.png)
+### 8. 解約手続きについて
+SaaSus Platformを契約しているAWSアカウントで以下のURLにアクセスしてください。
+[AWS Marketplace - SaaSus Platform](https://aws.amazon.com/marketplace/procurement?productId=2d9172be-cc5c-4c63-8d45-cfad683a3a4d&offerId=2p49zz9z2uvjbjxdhgluptglp)
+契約の詳細ページにて自動更新の設定が可能となります。自動更新を「この契約を自動的に更新しない」に設定すると、現在の契約満了日に自動的に解約（サブスクリプションのキャンセル）となります。
+![image04](/ja/img/part-4/account-settings/aws-marketplace-subscription-procedure/image04.png)
+````
+
+---
+## part-4/account-settings/billing-information.md
+````markdown
+このページでは、SaaSus Platform有料プランの請求、支払い方法について説明します。
+## 請求の概要
+SaaSus Platformでは、さまざまなビジネスニーズに対応する柔軟な請求オプションを提供しています。
+- **月次請求サイクル**: 申し込み日から開始
+- **自動更新**: キャンセルされない限り継続
+- **複数の支払い方法**: クレジットカードやAWS Marketplaceに対応
+## 支払い方法
+### クレジットカード決済（Stripe経由）
+SaaS開発コンソールから有料プランを申し込む場合、Stripeを通じて安全に決済処理されます。
+- **対応カード**: Visa、Mastercard、American Express、JCB
+- **自動請求**: 登録日から毎月請求
+- **請求書配信**: デジタル請求書をメールで送信
+- **通貨**: 日本円（¥） - すべての価格は税別
+### AWS Marketplace決済
+- **統合請求**: AWSの請求書に料金が表示
+- **AWS支払い方法**: 既存のAWS支払い設定を使用
+- **プライベートオファー**: エンタープライズプランはカスタム価格にて設定
+- **通貨**: AWSアカウントの通貨設定に従って請求
+## 請求書管理
+### 請求書の確認
+1. **Stripeのお客様**: アカウント設定の請求ポータルから請求書にアクセス
+2. **AWS Marketplaceのお客様**: AWS請求ダッシュボードで料金を確認
+### 請求書の詳細
+各請求書には以下が含まれます。
+- SaaSus Platformの基本料金
+- 使用量ベースの料金（Smart API Gatewayコール、アップロード）
+- 月間アクティブユーザー（MAU）料金（スタータープラン）
+- 税金計算
+- 詳細な使用量内訳
+### 請求処理(Stripe)
+SaaS 開発コンソールから有料プランを申し込んだ場合の請求は以下の通りです。
+例) 2025年8月1日 にスタータープランを申し込んだ場合
+初回請求日: 2025年8月1日
+ご契約の1時間後に、5,500円の請求書が発行されます。
+支払い期限（請求書期日）: 2025年8月31日
+請求日の30日後が支払い期限となり、Stripeにカード情報をご登録いただいた日に、決済が行われます。
+#### 翌月以降の請求について
+初回請求で登録したクレジットカードに対して、毎月同日に請求が行われ自動的に決済が行われます。
+請求日: 初回請求日の翌月の同日（例：2025年9月1日）
+※　該当する日がない月（例：31日がない月）は、その月の最終日が請求日となります。
+#### 従量課金分の請求
+従量課金分の請求について
+例えば、2025年8月1日の請求では、2025年8月1日〜2025年9月1日までの月額料金5,500円と、
+2025年7月1日〜2025年8月1日にご利用いただいた従量課金分が請求されます。
+## 使用量ベース請求
+### アップロード料金
+- **無料アップロード**: プランによって制限が異なる
+- **超過料金**: 制限を超えた場合、1回あたり¥20-¥50
+- **使用量監視**: SaaS 運用コンソールでアップロードを監視（開発環境、ステージング環境、本番環境）
+- **対象サービス**: Smart API Gateway
+※ 詳細は[料金プランページ](https://saasus.io/pricing)にて確認してください。
+### API コール数
+- **無料枠**: すべての有料プランで月間10,000コールが含まれる
+- **超過料金**: プランによって異なる（10,000コールあたり¥7-¥20）
+- **使用量監視**: SaaS 運用コンソールで使用量を監視（開発環境、ステージング環境、本番環境）
+- **対象サービス**: Smart API Gateway / Smart MCP Server
+※ 詳細は[料金プランページ](https://saasus.io/pricing)にて確認してください。
+### 月間アクティブユーザー（MAU）
+スタータープランの場合
+- **基本料金**: 月額¥5,500
+- **MAU料金**: アクティブユーザー1人あたり月額¥800
+- **定義**: 請求期間中に少なくとも1回認証したユーザー（本番環境）
+- **使用量監視**: SaaS 運用コンソールで使用量を監視（本番環境）
+※ 詳細は[料金プランページ](https://saasus.io/pricing)にて確認してください。
+## 税金情報
+### 消費税
+- **税率**: お客様には10%の消費税が適用
+- **請求書表示**: 請求書に税金が別途表示
+## 請求書情報
+### 請求情報
+- **請求書ダウンロード**: すべての請求書はPDF形式が利用可能。
+- **保持期間**: 請求データは7年間保持。
+## サポートと連絡先
+請求関連のお問い合わせは、以下の方法でサポートチームにご連絡ください。
+- **スターター**: 管理コンソールからお問い合わせを送信
+- **スタンダードプラン/スタンダードプラス/アドバンスドプラス/エンタープライズ**: Slack Connectまたは予定された会議で連絡
+### 必要な情報
+請求についてサポートに連絡する際は、以下の情報を提供してください。
+- アカウントIDまたはメールアドレス
+- 請求書番号（該当する場合）
+- 問題の詳細な説明
+---
+**注意**: 請求条件は変更される場合があります。完全な詳細については、最新のサービス利用規約をご参照ください。
+````
+
+---
+## part-4/account-settings/procedure-for-applying-for-a-paid-plan.md
+````markdown
+SaaSus Platformでは以下プランを現在用意しております。
+有料プランを申し込むには、SaaSus Platform コンソールでの申し込みと、AWS Marketplace で申し込む方法がございます。
+<div className="table-scroll">
+<table className="nowrap-table">
+  <thead>
+    <tr>
+      <th rowspan="2">プラン</th>
+      <th rowspan="2">月額料金<br />（税別）</th>
+      <th rowspan="2">環境数</th>
+      <th rowspan="2">ユーザー数</th>
+      <th rowspan="2">テナント数</th>
+      <th rowspan="2">ログの<br />保持期間</th>
+      <th rowspan="2">IP制限<br />設定数</th>
+      <th colspan="2">Smart API Gateway</th>
+      <th rowspan="2">サポート連絡手段</th>
+      <th rowspan="2">サポート対応範囲</th>
+      <th rowspan="2">サポートレベル</th>
+    </tr>
+    <tr>
+      <th>呼び出しあたりの料金</th>
+      <th>アップロード回数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>フリー</td>
+      <td className="text-right">¥0</td>
+      <td className="text-right">1</td>
+      <td className="text-right">5</td>
+      <td className="text-right">5</td>
+      <td className="text-right">7 日</td>
+      <td className="text-right">1 個</td>
+      <td>無料</td>
+      <td>3/week</td>
+      <td>問い合わせ<br />管理画面</td>
+      <td>SaaSus Platformの機能についての<br />一般的な回答</td>
+      <td>ベストエフォート<br />製品に関するサポートのみ</td>
+    </tr>
+    <tr>
+      <td>スターター</td>
+      <td className="text-right">¥5,500<br />MAU1人あたり¥800</td>
+      <td className="text-right">3</td>
+      <td className="text-right">無制限</td>
+      <td className="text-right">5</td>
+      <td className="text-right">7 日</td>
+      <td className="text-right">1 個</td>
+      <td>1万コールまでは無料<br />それ以降20円/1万コール</td>
+      <td>7/week</td>
+      <td>問い合わせ<br />管理画面</td>
+      <td>SaaSus Platformの機能についての<br />一般的な回答</td>
+      <td>ベストエフォート<br />製品に関するサポートのみ</td>
+    </tr>
+    <tr>
+      <td>スタンダード</td>
+      <td className="text-right">¥100,000</td>
+      <td className="text-right">3</td>
+      <td className="text-right">5,000</td>
+      <td className="text-right">20</td>
+      <td className="text-right">1 年</td>
+      <td className="text-right">1 個</td>
+      <td>1万コールまでは無料<br />それ以降15円/1万コール</td>
+      <td>7/day までは無料<br />それ以降50円/1回</td>
+      <td>Slack Connect</td>
+      <td>SaaS固有の事情を考慮した、<br />SaaSus Platform活用方法の相談事項への回答</td>
+      <td>ベストエフォート<br />製品に関するサポートのみ</td>
+    </tr>
+    <tr>
+      <td>スタンダードプラス</td>
+      <td className="text-right">¥600,000</td>
+      <td className="text-right">3</td>
+      <td className="text-right">5,000</td>
+      <td className="text-right">20</td>
+      <td className="text-right">1 年</td>
+      <td className="text-right">1 個</td>
+      <td>1万コールまでは無料<br />それ以降15円/1万コール</td>
+      <td>7/dayまでは無料<br />それ以降50円/1回</td>
+      <td>Slack Connect<br />オンラインmeeting</td>
+      <td>SaaS固有の事情を考慮した、<br />SaaSus Platform活用方法の相談事項への回答<br />サンプル等を用いた設計・実装支援</td>
+      <td>ベストエフォート<br />アーキテクチャ設計支援など含む</td>
+   </tr>
+    <tr>
+      <td>アドバンスド</td>
+      <td className="text-right">¥300,000</td>
+      <td className="text-right">3</td>
+      <td className="text-right">300,000</td>
+      <td className="text-right">100</td>
+      <td className="text-right">5 年</td>
+      <td className="text-right">50 個</td>
+      <td>1万コールまでは無料<br />それ以降10円/1万コール</td>
+      <td>20/dayまでは無料<br />それ以降30円/1回</td>
+      <td>Slack Connect</td>
+      <td>SaaS固有の事情を考慮した、<br />SaaSus Platform活用方法の相談事項への回答</td>
+      <td>ベストエフォート<br />製品に関するサポートのみ</td>
+    </tr>
+    <tr>
+      <td>アドバンスドプラス</td>
+      <td className="text-right">¥800,000</td>
+      <td className="text-right">3</td>
+      <td className="text-right">300,000</td>
+      <td className="text-right">100</td>
+      <td className="text-right">5 年</td>
+      <td className="text-right">50 個</td>
+      <td>1万コールまでは無料<br />それ以降10円/1万コール</td>
+      <td>20/dayまでは無料<br />それ以降30円/1回</td>
+      <td>Slack Connect<br />オンラインmeeting</td>
+      <td>SaaS固有の事情を考慮した、<br />SaaSus Platform活用方法の相談事項への回答<br />サンプル等を用いた設計・実装支援</td>
+      <td>ベストエフォート<br />アーキテクチャ設計支援など含む</td>
+    </tr>
+    <tr>
+      <td>エンタープライズ</td>
+      <td className="text-left">サポートまで<br />お問い合わせください</td>
+      <td className="text-right">3</td>
+      <td className="text-right">無制限</td>
+      <td className="text-right">無制限</td>
+      <td className="text-right">7 年</td>
+      <td className="text-right">5,000 個</td>
+      <td>1万コールまでは無料<br />それ以降7円/1万コール</td>
+      <td>20/dayまでは無料<br />それ以降20円/1回</td>
+      <td>Slack Connect<br />オンラインmeeting</td>
+      <td>SaaS固有の事情を考慮した、<br />SaaSus Platform活用方法の相談事項への回答<br />サンプル等を用いた設計・実装支援</td>
+      <td>ベストエフォート<br />アーキテクチャ設計支援など含む</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+***
+## SaaS開発コンソールから有料プランの申し込み
+SaaSus Platformコンソールにログインいただき、SaaS開発コンソール、アカウント設定->料金プランをページにて有料プランの申し込みとなります。
+期間は本日から１ヶ月単位となりStripeにて請求書を送付いたします。
+本プランは１ヶ月単位の自動継続となります。
+![0558e63-image](/ja/img/part-4/account-settings/procedure-for-applying-for-a-paid-plan/0558e63-image.png)
+## AWS Marketplaceから有料プランの申し込み
+:::warning
+AWS Marketplaceにて購入を希望される方は、Private Offerでのご契約となります。サポートまでお問い合わせください
+:::
+詳細な手順については[こちら](./aws-marketplace-subscription-procedure)をご参照ください。
+````
+
+---
+## part-4/account-settings/saasususerinvitation.md
+````markdown
+SaaSの開発・運用は複数人で行う場合は一つのSaaSus Platformアカウントを共有せず、ユーザー招待機能を使用し適切な権限を与えてアカウントを管理しましょう。
+## ユーザーの招待方法
+1. SaaS開発コンソールのメニューから「アカウント設定」をクリックします
+   ![saasususerinvitation-1](/ja/img/part-4/account-settings/saasususerinvitation/saasususerinvitation-1.png)
+2. 「ユーザー管理」タブをクリックします
+3. 「招待」ボタンをクリックします
+   ![saasususerinvitation-2](/ja/img/part-4/account-settings/saasususerinvitation/saasususerinvitation-2.png)
+4. 招待するユーザーのメールアドレスの入力と権限の選択をし、「招待」ボタンのクリックします
+   ![saasususerinvitation-3](/ja/img/part-4/account-settings/saasususerinvitation/saasususerinvitation-3.png)
+   権限は複数選択可能です
+5. 招待が完了すると入力されたメールアドレス宛にURLが記載されたメールが送信されますので、URLをクリックし会員登録することでユーザーが追加されます
+## 招待状況の確認・キャンセル
+1. SaaS開発コンソールのメニューから「アカウント設定」をクリックします
+2. 「ユーザー管理」タブをクリックします
+3. 「招待」ボタンの左にある「ユーザー」と記載されているセレクトボックスをクリックし、プルダウンから「招待」を選択します
+4. ユーザーの招待状況が表示されるので、キャンセルを行う場合は対象ユーザーの右端にあるゴミ箱のマークをクリックしてください
+   ![saasususerinvitation-4](/ja/img/part-4/account-settings/saasususerinvitation/saasususerinvitation-4.png)
+````
+
+---
+## part-4/application-settings/api-key-settings.md
+````markdown
+このページでは、SaaSus SDK や API の利用時に必要となる「SaaS ID」「APIキー」「クライアントシークレット」の確認・再発行手順を説明します。
+いずれもサイドメニューの「APIキー」から確認・操作できます。
+## SaaS ID の確認・再発行
+**SaaS ID** は、SaaSを一意に識別するための ID です。
+- SaaS ID は通常変更の必要はありません。
+- 必要に応じて「SaaS ID の再発行」ボタンから再発行が可能です。
+## APIキーの確認・発行
+**APIキー** は、SDK や API を用いたリクエストにおいて必要な認証情報です。
+- 最大 2 件まで発行可能で、**キーのローテーション利用が推奨**されます。
+- 「APIキーの発行」ボタンをクリックすると、新しいキーが生成されます。
+- セキュリティの観点から、**キーの漏洩や不正利用に注意**してください。
+## クライアントシークレットの再発行
+**クライアントシークレット** は、リクエストの署名に使用される機密情報です。ネットワーク上に送信されることはありません。
+- API コール時の署名生成に使用されます。
+- 「クライアントシークレットの再発行」ボタンをクリックして、新しいシークレットを取得できます。
+![APIキー画面](/ja/img/part-4/application-settings/api-key-settings/api-key.png)
+````
+
+---
+## part-4/application-settings/basic-app-settings.md
+````markdown
+このページでは、ログイン画面など認証関連画面で使用される情報（サービス名、アイコン、利用規約URL など）を設定します。
+サイドメニューの「認証詳細設定」から編集を行います。
+![認証詳細設定メニュー](/ja/img/part-4/application-settings/basic-app-settings/authorization-screen-customize-01.png)
+以下の項目が編集可能です：
+| 項目 | 説明 |
+|------|------|
+| **サービス名** | ログイン画面上部に表示されるテキストです（例：SaaSus Platform へようこそ） |
+| **アイコン** | ログイン画面左上に表示されるアプリのアイコン画像（推奨サイズ：128px以上の正方形） |
+| **利用規約URL** | ログイン画面下部に表示される「利用規約」リンク先 |
+| **プライバシーポリシーURL** | 同様に「プライバシーポリシー」へのリンク先 |
+| **Google Tag Manager コンテナ ID** | Google Tag Managerのコンテナ IDを設定します。詳しくは[Google Tag Manager 設定](/ja/docs/part-4/application-settings/googletagmanagersetting)をご参照ください。 |
+| **ログインID** | 「ログインIDでの認証を許可する」 スイッチをONにすると、ログイン画面の入力ラベルが「メールアドレス / ログインID」に変更されます。<br /> OFFの場合、ログインIDが設定されているユーザーであっても、ログイン画面でログインIDを利用することはできません。|
+![編集画面例](/ja/img/part-4/application-settings/basic-app-settings/authorization-screen-customize-02.png)
+「保存」ボタンを押すことで変更内容が反映されます。画面が生成されるまで数分かかることがあります。
+ログイン画面のURLは、設定したドメイン名に `auth.` を付けたものになります。
+例：ドメイン名を `sample.saasus.jp` と設定した場合、ログイン画面は `https://auth.sample.saasus.jp/` になります。
+:::info
+- 「**画面設定**」タブでは、新規登録／ログイン／パスワード変更画面に、利用規約とプライバシーポリシーのリンクを表示するかを設定できます。
+- 「**認証設定**」タブでは、ログイン方式やパスワードリセットに関する詳細設定を行うことができます。
+:::
+````
+
+---
+## part-4/application-settings/declare-additional-attribute-to-tenant.md
+````markdown
+## テナントに追加属性を定義する
+「テナント属性定義」を選択し、テナントの追加属性を定義します。
+ここで言う「テナント」とは、マルチテナントSaaSにおける利用者の組織の単位（契約の単位）を指します。
+各テナントで必要になるであろう追加属性を定義してください。
+「＋テナント属性の作成」をクリックして、追加の属性を定義します。
+今回は、そのテナントに関するメモを入力できるようにします。
+- 属性名： memo
+- 表示名： メモ
+- タイプ： 文字列
+入力が完了したら、「作成」ボタンをクリックします。
+![01](/ja/img/part-4/application-settings/declare-additional-attribute-to-tenant/declare-additional-attribute-to-tenant-01.png)
+テナント属性が追加されました。
+![01](/ja/img/part-4/application-settings/declare-additional-attribute-to-tenant/declare-additional-attribute-to-tenant-02.png)
+````
+
+---
+## part-4/application-settings/domain-and-redirect-settings.md
+````markdown
+このページでは、ログイン画面の表示に使用する **独自ドメイン** および、ログイン後の **遷移先URL** の設定方法について説明します。いずれも「基本設定」画面から編集できます。
+## 1. ドメイン・メール送信ドメイン認証設定
+SaaSアプリに使用するドメインを設定します。ログイン画面や各種通知メールの送信元ドメインにも使用される重要な設定です。
+メール送信ドメイン認証設定により、通知メールの到達率を高め、なりすましを防ぐことができます。
+### 設定手順
+1. SaaS開発コンソールにログインします。
+2. サイドメニューから「ドメイン」を選択します。
+3. 使用するドメイン名を入力し、登録を行います。
+※ DNS設定が可能なドメインをご利用ください。
+![ドメイン入力画面](/ja/img/part-4/application-settings/domain-and-redirect-settings/domain-name-preference-01.png)
+### DNS 設定
+ドメインの登録後、画面下部に以下の設定情報が表示されます。ご利用のDNSサービスにて、指定されたレコードを追加してください。
+#### ドメイン所有権の確認と（CNAME）
+表示された CNAMEレコード をDNSに登録します。これにより、独自ドメインの所有権確認が行われ、安全な認証画面が提供されます。
+#### メール送信ドメイン認証（DKIM）
+:::warning 注意
+Google認証、招待機能を利用する場合、メール送信ドメイン認証の設定が必要になります。
+ログイン画面のURLを独自ドメインに設定するだけの場合は、メール送信ドメイン認証の設定は不要です。
+:::
+画面に表示されるメール送信用のCNAMEレコード（複数ある場合があります）をすべてDNSに登録してください。
+![CNAME表示](/ja/img/part-4/application-settings/domain-and-redirect-settings/domain-name-preference-02.png)
+#### DNSサービス例
+Value Domain では、以下のように設定します。
+![DNS設定例](/ja/img/part-4/application-settings/domain-and-redirect-settings/domain-name-preference-03.png)
+#### 状態の確認
+DNS設定が正しく行われると、画面上に「正常に動作中です」と表示されます。
+メール送信ドメイン認証（DKIM）が正常に完了すると、画面上に「独自ドメインによる認証メールの配信が有効になっています。」と表示されます。
+ただし、メール送信ドメイン認証（DKIM）設定については、DNSの反映に1〜2日ほど時間を要する場合があります。 設定直後に反映されない場合は、しばらく時間を置いてから再度ご確認ください。
+![DNS検証完了画面](/ja/img/part-4/application-settings/domain-and-redirect-settings/domain-name-preference-04.png)
+#### ログイン画面URL
+登録したドメインは、`auth.ドメイン名` という形式でログイン画面のURLとして利用されます。
+SaaS開発コンソールの「認証認可」→「認証詳細設定」画面で確認できます。
+## 2. 認証後の遷移先URLの設定
+ログイン完了後に、ユーザーをリダイレクトする先のURL（自社SaaSアプリのトップページなど）を指定します。
+![遷移先URL設定画面](/ja/img/part-4/application-settings/domain-and-redirect-settings/authentication-preference-redirect-url.png)
+この URL に認証情報（トークンなど）が渡されます。
+SaaSus SDK を使って、このURLでの認証受け取り処理（コールバック）を実装することができます。
+````
+
+---
+## part-4/application-settings/googletagmanagersetting.md
+````markdown
+Google Tag Managerを設定することで、ログイン画面にGoogle Tag Managerのタグが埋め込まれGoogle Analyticsなどが設定可能です。
+SaaSの運用にはマーケティング活動が重要になるので、ユーザーの情報や流入元などの情報を取得するために設定していきましょう。
+まずは、Google Tag Managerのアカウントとコンテナを作ります。
+[Google Tag Managerのアカウントとコンテナの作成](/docs/part-4/application-settings/googletagmanagersetting/googletagmanagercreateaccountandcontainer)
+Google Tag Managerのアカウントとコンテナの作成が完了したら、実際にSaaSにGoogle Tag Managerを設定します。
+[Google Tag Manager コンテナ IDを設定](/docs/part-4/application-settings/googletagmanagersetting/googletagmanagercontaineridsetting)
+以上で、ログイン画面にGoogle Tag Managerのタグがログイン画面に埋め込まれるようになりましたので、Google Analyticsと連携してユーザー行動を取得していきます。
+Google Analyticsのアカウント作成がまだの方は以下のリンク先ドキュメントをご確認ください。
+[Google Analyticsアカウント作成](/docs/part-4/application-settings/googletagmanagersetting/creategoogleanalyticsaccount)
+Google Analyticsのアカウント作成済みの方ないしアカウント作成が完了した方は、以下のドキュメントからGoogle AnalyticsとGoogle Tag Managerを設定しましょう。
+[Google AnalyticsとGoogle Tag Managerを連携する](/docs/part-4/application-settings/googletagmanagersetting/googleanalyticsgoogletagmanagerlink)
+今回はGoogle Analyticsを使用しましたが、Google Tag Managerがサポートしているタグその他のタグや第三者によって提供されているテンプレート等で様々なタグの利用が可能です。
+詳細は以下のリンク先をご確認ください。
+<a href="https://support.google.com/tagmanager/answer/6106924" target="_blank">Google Tag Managerがサポートしているタグ</a>
+<a href="https://tagmanager.google.com/gallery" target="_blank">Google Tag Manager Community Template Gallery</a>
+<a href="https://support.google.com/tagmanager/answer/9334084" target="_blank">カスタムテンプレートについて</a>
+<a href="https://support.google.com/tagmanager/answer/6107167" target="_blank">カスタムタグについて</a>
+````
+
+---
+## part-4/application-settings/googletagmanagersetting/creategoogleanalyticsaccount.md
+````markdown
+Google Tag Managerに設定するためにGoogle Analyticsアカウントを作成していきます。
+1. <a href="https://analytics.google.com/analytics/web" target="_blank">Google Analytics</a>にアクセスし、「測定を開始」を押す
+2. アカウント名の入力とアカウントのデータ共有設定し、次へを押す
+   ![creategoogleanalyticsaccount-1](/ja/img/part-4/application-settings/googletagmanagersetting/creategoogleanalyticsaccount-1.png)
+   - アカウント名：任意
+   - データ共有設定：内容を確認し、共有する項目をチェック
+3. プロパティを作成し、次へを押す
+   ![creategoogleanalyticsaccount-2](/ja/img/part-4/application-settings/googletagmanagersetting/creategoogleanalyticsaccount-2.png)
+   - プロパティ名：任意
+   - レポートのタイムゾーン：対象となる国を選択（基本的には日本）
+   - 通貨：対象となる通貨を選択（基本的には日本円）
+4. ビジネスの詳細を設定し、次へを押す
+   ![creategoogleanalyticsaccount-3](/ja/img/part-4/application-settings/googletagmanagersetting/creategoogleanalyticsaccount-3.png)
+   - 業種：当てはまるものを選択
+   - ビジネスの規模：当てはまるものを選択
+5. ビジネス目標を選択し、作成を押す
+   ![creategoogleanalyticsaccount-4](/ja/img/part-4/application-settings/googletagmanagersetting/creategoogleanalyticsaccount-4.png)
+6. データの収集を開始するで「ウェブ」を選択
+   ![creategoogleanalyticsaccount-5](/ja/img/part-4/application-settings/googletagmanagersetting/creategoogleanalyticsaccount-5.png)
+7. データストリームの設定を行いストリームを作成を押す
+   ![creategoogleanalyticsaccount-6](/ja/img/part-4/application-settings/googletagmanagersetting/creategoogleanalyticsaccount-6.png)
+   ストリーム作成後に表示されるウェブストリームの詳細の測定IDはGoogle Tag Managerで使用しますので、このタイミングでひかえておくことをお勧めします。
+以上でGoogle Analyticsのアカウントが作成されます。
+````
+
+---
+## part-4/application-settings/googletagmanagersetting/googleanalyticsgoogletagmanagerlink.md
+````markdown
+Google AnalyticsのタグをGoogle Tag Managerに設定し、ログイン画面へアクセスしたユーザーの分析をします。
+## 1. Google Analyticsの測定IDを確認
+1. <a href="https://analytics.google.com/analytics/web" target="_blank">Google Analytics</a>にアクセス
+2. 左下の歯車から「管理」画面に移動
+3. 「データの収集と修正」内の「データ ストリーム」を押す
+4. 対象のストリームを選択
+5. 測定IDが表示されるので確認する
+   ![googleanalyticsgoogletagmanagerlink-1](/ja/img/part-4/application-settings/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-1.png)
+## 2. Google Tag ManagerでGoogle Analyticsを設定
+1. <a href="https://tagmanager.google.com/?hl=JA" target="_blank">Google Tag Managerのホームページ</a>にアクセス
+2. 「新しいタグを追加」を押す
+   ![googleanalyticsgoogletagmanagerlink-2](/ja/img/part-4/application-settings/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-2.png)
+3. 「タグの設定」から「Googleアナリティクス」> 「Googleタグ」を選択
+   ![googleanalyticsgoogletagmanagerlink-3](/ja/img/part-4/application-settings/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-3.png)
+4. タグIDにGoogle Analyticsの測定IDを入力
+   ![googleanalyticsgoogletagmanagerlink-4](/ja/img/part-4/application-settings/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-4.png)
+5. トリガーにInitialization - All Pagesを選択
+   ![googleanalyticsgoogletagmanagerlink-5](/ja/img/part-4/application-settings/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-5.png)
+6. 左上の入力項目にタグの名前を入力し、保存を押す
+7. コンテナページ右上の公開を押す
+   ![googleanalyticsgoogletagmanagerlink-6](/ja/img/part-4/application-settings/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-6.png)
+8. バージョンの公開と作成の項目を入力し公開を押す
+   ![googleanalyticsgoogletagmanagerlink-7](/ja/img/part-4/application-settings/googletagmanagersetting/googleanalyticsgoogletagmanagerlink-7.png)
+   - バージョン名：任意（未入力での可能）
+   - バージョンの説明：任意（未入力での可能）
+以上でGoogle AnalyticsとGoogle Tag Managerが連携されましたので、ログイン画面にアクセスするとGoogle Analyticsに情報が反映されます。
+なお、Google Analyticsへの反映は24~48時間かかる場合があります。詳細は<a href="https://support.google.com/analytics/answer/7084038?hl=ja&sjid=9555982415879226311-AP#zippy=%2C%E3%81%93%E3%81%AE%E8%A8%98%E4%BA%8B%E3%81%AE%E5%86%85%E5%AE%B9" target="_blank">Google Analyticsのドキュメント</a>をご確認ください。
+````
+
+---
+## part-4/application-settings/googletagmanagersetting/googletagmanagercontaineridsetting.md
+````markdown
+## 1. コンテナIDの確認
+### Google Tag Managerホームページから確認
+コンテナ一覧に表示される「コンテナID」列に表示される「GTM-XXXXXXXX」を確認してください。
+![googletagmanagercontaineridsetting-1](/ja/img/part-4/application-settings/googletagmanagersetting/googletagmanagercontaineridsetting-1.png)
+### コンテナページから確認
+画面右上の「GTM-XXXXXXXX」を確認してください。
+![googletagmanagercontaineridsetting-2](/ja/img/part-4/application-settings/googletagmanagersetting/googletagmanagercontaineridsetting-2.png)
+## 2. コンテナIDを設定
+1. SaaS開発コンソールの「認証詳細設定」を開く
+   ![googletagmanagercontaineridsetting-3](/ja/img/part-4/application-settings/googletagmanagersetting/googletagmanagercontaineridsetting-3.png)
+2. 認証詳細設定画面の「基本設定」にある「Google Tag Manager コンテナ ID」にコンテナIDを設定し保存ボタンを押す
+   ![googletagmanagercontaineridsetting-4](/ja/img/part-4/application-settings/googletagmanagersetting/googletagmanagercontaineridsetting-4.png)
+以上でログイン画面にGoogle Tag Managerのタグが埋め込まれます。
+````
+
+---
+## part-4/application-settings/googletagmanagersetting/googletagmanagercreateaccountandcontainer.md
+````markdown
+Google Tag Managerのアカウントとコンテナを作成します。
+既にアカウントを作成済みの場合は「2. コンテナから作成」をご覧ください。
+## 1. アカウントから作成
+1. <a href="https://tagmanager.google.com/?hl=JA" target="_blank">Google Tag Managerのホームページ</a>にアクセス
+2. 「アカウントを作成」ボタンを押す
+   ![googletagmanagercreateaccountandcontainer-1](/ja/img/part-4/application-settings/googletagmanagersetting/googletagmanagercreateaccountandcontainer-1.png)
+3. 「アカウントの設定」及び「コンテナの設定」項目を入力し、「作成」を押す
+   - アカウント名：任意
+   - 国：任意
+   - Google や他の人と匿名でデータを共有：任意
+   - コンテナ名：任意
+   - ターゲットプラットフォーム：ウェブ
+   ![googletagmanagercreateaccountandcontainer-2](/ja/img/part-4/application-settings/googletagmanagersetting/googletagmanagercreateaccountandcontainer-2.png)
+4. Google タグ マネージャー利用規約を確認し、問題なければ「はい」を押す
+以上でアカウントとコンテナが作成され、コンテナページが表示されます。
+## 2. コンテナから作成
+1. <a href="https://tagmanager.google.com/?hl=JA" target="_blank">Google Tag Managerのホームページ</a>にアクセス
+2. コンテナ一覧の右側のドットメニューから「コンテナを作成」を押す
+   ![googletagmanagercreateaccountandcontainer-3](/ja/img/part-4/application-settings/googletagmanagersetting/googletagmanagercreateaccountandcontainer-3.png)
+3. 「コンテナの設定」項目を入力し、右上の「作成」を押す
+   - コンテナ名：任意
+   - ターゲットプラットフォーム：ウェブ
+   ![googletagmanagercreateaccountandcontainer-4](/ja/img/part-4/application-settings/googletagmanagersetting/googletagmanagercreateaccountandcontainer-4.png)
+以上でコンテナが作成され、コンテナページが表示されます。
+````
+
+---
+## part-4/application-settings/ip-restriction.md
+````markdown
+IP制限機能は、SaaSus PlatformコンソールおよびAPIへのリクエストにIP制限を行う機能です。
+:::warning
+「IP制限機能」は、旧スタータープランおよび旧スタンダードプランをご契約中の場合、ご利用いただけません。
+本機能をご利用いただくには、新しい料金プランへの変更が必要です。
+:::
+## IP制限申請
+### 申請方法
+Intercomからお問い合わせください。
+### 申請内容
+SaaSus PlatformコンソールとAPIそれぞれに対して、許可したいIPのCIDRリストをお送りください。
+  SaaSus Platformコンソール
+  ```
+  xxx.xxx.xxx.xxx/32, yyy.yyy.yyy.yyy/24
+  ```
+  API
+  ```
+  aaa.aaa.aaa.aaa/32, bbb.bbb.bbb.bbb/24
+  ```
+## IP制限設定後の挙動
+IP制限設定後は、以下のようにアクセスが制限されます。
+1. **対象外のIPからログインしようとした場合**
+   ![ip-restriction-1](/ja/img/part-4/application-settings/ip-restriction/ip-restriction-1.png)
+2. **対象外のIPからAPIアクセスしようとした場合**
+   APIのレスポンスボディは以下のようになります。
+   ```
+   {
+       "message": "IP address: xxx.xxx.xxx.xxx is not allowed",
+       "type": "ip_restricted"
+   }
+   ```
+````
+
+---
+## part-4/aws-marketplace-integration/aws-marketplace-integration.md
+````markdown
+AWS Marketplace 連携機能は、「SaaSus Platform を利用して作られた SaaS」が実施する「AWS Marketplace への出品プロセス」をサポートする機能です。
+:::caution
+SaaSus Platform 内の操作だけで出品が完了するものではないのであらかじめご了承ください。
+:::
+# SaaSus Platform による出品手続きの流れ
+出品手続きでは、3つのサービスで画面操作が必要になります。どのサービスで手続きを行うか注意しながら進めてください。
+- AWS
+- AWS Marketplace Management Portal
+- SaaSus Platform
+まず、AWS上でセラー登録という手続きを行ってください。セラー登録にはAWSアカウントが必要なため、あらかじめご用意ください。
+登録後、AWS Marketplace Management Portal（AMMP）にアクセスできるようになるので、公開するプロフィールや振込先の銀行口座を設定します。
+以上の手続きが完了したら、SaaSus PlatformでAWS Marketplace連携機能を使って出品手続きを進めることになります。
+以降は、SaaSus Platformが提供するステージング環境、本番環境を介した手続きとなります。
+文章ではイメージしずらいと思いますので、ここからは出品までの流れを全体図と関連ドキュメントと共に紹介します。
+![the whole picture](/ja/img/part-4/aws-marketplace-integration/the-whole-picture.png)
+### 出品手順全体の流れ
+1. セラー登録(AWS)
+   1. [セラー登録ガイド](/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/aws-marketplace-seller-registration)
+2. Public profileと支払い方法の設定(AMMP)
+   1. [Public profileの設定ガイド](/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/public-profile-settings)
+   2. [銀行口座・支払い方法設定の始め方](/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/tax-information-interview)
+   ***
+   ===**テストフェーズ開始**===
+3. テスト用SaaS製品の準備(SaaSus Platform::ステージング環境)
+4. テスト用SaaS製品の登録(AMMP)
+   1. [登録の始め方](/docs/part-4/aws-marketplace-integration/product-submission)
+5. API統合の準備(SaaSus Platform::ステージング環境)
+6. AWS Marketplaceとの連携確認(AWS)
+   1. [連携確認の例](/docs/part-4/aws-marketplace-integration/supplementary/integration-test)
+   ===**テストフェーズ終了**===
+  :::info
+  テストフェーズでは、出品直前の連携確認環境を作ることになります。
+  プロダクションフェーズでも同様の環境を作ることにはなりますが、こちらの環境は出品手続きが完了しても、そのままテストに利用できるため、追加機能の開発や不具合発生時の調査にご利用いただくことができます。
+  :::
+   ***
+   ===**プロダクションフェーズ開始**===
+7. 本番用SaaS製品の準備(SaaSus Platform::本番環境)
+8. 本番用SaaS製品の登録(AMMP)
+9. API統合の準備(SaaSus Platform::本番環境)
+10.  AWS Marketplaceとの連携確認
+    ===**プロダクションフェーズ終了**===
+    :::info
+  プロダクションフェーズでは、本番環境で出品に必要な環境を作ることになります。テストフェーズでの連携確認が済んでいれば、スムーズに進めることが出来ます。出品手続きが完了すると実際に料金が発生するようになるため、もし本番環境で動作確認したい場合はSaaS製品を非公開にする必要があります。
+  :::
+   ***
+11.   本番用SaaS製品の最終レビュー依頼
+      1. [依頼方法](/docs/part-4/aws-marketplace-integration/supplementary/final-review-request)
+12.   本番用SaaS製品の公開依頼
+      1. [依頼方法](/docs/part-4/aws-marketplace-integration/supplementary/public-request)
+# 出品におけるSaaS製品の基準
+AWS MarketplaceへSaaS製品を出品するための基準が設けられており、公式ドキュメントにて公開されていますので
+あらかじめご確認ください。
+[SaaS 製品ガイドライン](https://docs.aws.amazon.com/ja_jp/marketplace/latest/userguide/saas-guidelines.html)
+## SaaSus Platform のチェック
+SaaS製品ガイドラインを踏まえて、SaaSus Platformからも基準を満たしているかチェック致します。
+AWS Marketplace連携機能を利用時にチェックする形になっていますが、ドキュメントにも掲載しておきますのでご確認ください。
+・SaaSus Platformの認証詳細設定でセルフサインアップを有効にしている ([参考](/docs/part-4/aws-marketplace-integration/supplementary/self-up-setting))
+・ユーザー自身がSaaS上で契約しているプランを確認できるようになっている
+・ユーザー自身がSaaS上でサポートへ問い合わせできる動線が配置されている
+・既にアカウントを持っているユーザーがSaaSを購入した時のマルチテナントの考慮を実装している ([参考](/docs/part-4/aws-marketplace-integration/embedding-products))
+・AWS Marketplaceから購入したユーザーは、SaaS上ではプランの変更、退会をできないようにしている ([参考](/docs/part-4/aws-marketplace-integration/supplementary/user-judgment-method))
+````
+
+---
+## part-4/aws-marketplace-integration/aws-marketplace-seller-registration.md
+````markdown
+### 事前準備
+AWS Marketplace用にAWSアカウントを用意してください。
+### 全体の流れ
+出品手続きを始めるにあたって、まずお客様自身で以下の手続きを実施していただく必要があります。
+AWS Marketplaceへの出品に必要な登録、設定となるため忘れずに実施してください。
+1. セラー登録
+2. Public profileの設定
+3. 税務情報に関するインタビュー
+4. DAC7の税務アンケート
+5. 銀行口座の設定
+6. 支払い方法の設定
+````
+
+---
+## part-4/aws-marketplace-integration/aws-marketplace-seller-registration/aws-marketplace-seller-registration.md
+````markdown
+<a href="https://aws.amazon.com/marketplace/partners/management-tour" target="_blank">AWS Marketplace</a>へ出品者として登録をします。
+上記リンクで表示されるページの`Register now`から登録を開始してください。
+![aws-marketplace-seller-registration-1](/ja/img/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/aws-marketplace-seller-registration-1.png)
+AWS Marketplaceのセラー登録の画面へ遷移しますので、
+商号、利用規約、登録者の情報を設定して登録してください。
+![aws-marketplace-seller-registration-2](/ja/img/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/aws-marketplace-seller-registration-2.png)
+![aws-marketplace-seller-registration-3](/ja/img/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/aws-marketplace-seller-registration-3.png)
+入力が完了後、登録ボタンを押下してください。
+![aws-marketplace-seller-registration-4](/ja/img/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/aws-marketplace-seller-registration-4.png)
+![aws-marketplace-seller-registration-5](/ja/img/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/aws-marketplace-seller-registration-5.png)
+登録後はPublic profileの設定に進みます。
+![aws-marketplace-seller-registration-6](/ja/img/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/aws-marketplace-seller-registration-6.png)
+````
+
+---
+## part-4/aws-marketplace-integration/aws-marketplace-seller-registration/dac7-tax-survey.md
+````markdown
+DAC7とは企業からの課税報告に関する欧州委員会指令のことです。
+この指令は、欧州連合内の子会社、支配企業、持分法適用会社、共同事業体、および分散会社による課税報告義務を課しています。
+海外の支配下の企業での事業拡大や新規事業の開始によって国内の課税軽減を図ることを防ぐため、課税に関する情報の共有が必要とされています。
+DAC7の税務アンケートの開始を押下します
+![dac7-tax-survey-1](/ja/img/part-4/aws-marketplace-integration/dac7-tax-survey/dac7-tax-survey-1.png)
+貴社の状況に合わせ以下アンケートをお答えください。
+![dac7-tax-survey-2](/ja/img/part-4/aws-marketplace-integration/dac7-tax-survey/dac7-tax-survey-2.png)
+アンケート回答後署名して送信ボタンを押下しアンケートを終了します。
+![dac7-tax-survey-3](/ja/img/part-4/aws-marketplace-integration/dac7-tax-survey/dac7-tax-survey-3.png)
+クライアントダッシュボードで`インタビューを終了`を押下して税務情報に関するインタビューを終了します。
+![dac7-tax-survey-4](/ja/img/part-4/aws-marketplace-integration/dac7-tax-survey/dac7-tax-survey-4.png)
+````
+
+---
+## part-4/aws-marketplace-integration/aws-marketplace-seller-registration/hyperwallet-registration.md
+````markdown
+銀行口座の登録から`Sign up for Hyper wallet`を押下すると以下画面に遷移します。
+アカウントの確認方法、有効コードを押下します。
+![hyperwallet-registration-1](/ja/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-1.png)
+有効コードの入力となるので、遷移前の画面の`Sign up for Hyper wallet`下にある`Pin Code`を入力して続けるボタンを押下してください。
+![hyperwallet-registration-2](/ja/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-2.png)
+入力後アカウントタイプの入力を求められるので環境に合わせて選択してください。
+![hyperwallet-registration-3](/ja/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-3.png)
+職種を選択すると、プロフィール情報の入力を求められるので、企業情報、会社住所等を入力してください。
+![hyperwallet-registration-4](/ja/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-4.png)
+内容を入力後は`続ける`を押下してください。
+![hyperwallet-registration-5](/ja/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-5.png)
+引き続き、会社連絡先情報、会社連絡先住所等を入力してください。
+![hyperwallet-registration-6](/ja/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-6.png)
+内容を入力後は`続ける`を押下してください。
+![hyperwallet-registration-7](/ja/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-7.png)
+引き続き、Eメールアドレスとパスワード、秘密の質問、法的契約等を入力してください。
+![hyperwallet-registration-8](/ja/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-8.png)
+内容を入力後は`確認`を押下してください。
+![hyperwallet-registration-9](/ja/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-9.png)
+`確認`すると`アカウントが正常に有効化されました`と表示されます。
+有効になったら`Add　Trunsfer Method`を押下します。
+![hyperwallet-registration-10](/ja/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-10.png)
+転送先の口座を指定して`Continue`を押下します。
+![hyperwallet-registration-11](/ja/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-11.png)
+遷移後転送先の銀行口座情報を入力後`Submit`を押下します。
+![hyperwallet-registration-12](/ja/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-12.png)
+`Submit`後米国の預金口座が作成されます。
+![hyperwallet-registration-13](/ja/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-13.png)
+登録後、銀行口座の設定に戻ります。
+````
+
+---
+## part-4/aws-marketplace-integration/aws-marketplace-seller-registration/public-profile-settings.md
+````markdown
+セラー登録後、<a href="https://aws.amazon.com/marketplace/management/homepage" target="_blank">AWS Marketplace Management Portal</a>にログインしてPublic profileを設定します。
+Settingsの`Add public profile`から設定を始めてください。
+![public-profile-settings-1](/ja/img/part-4/aws-marketplace-integration/public-profile-settings/public-profile-settings-1.png)
+ここで設定する内容は、AWS Marketplaceで公開される企業情報（Public profile）となります。
+![public-profile-settings-2](/ja/img/part-4/aws-marketplace-integration/public-profile-settings/public-profile-settings-2.png)
+企業情報を設定後、送信ボタンを押下して設定します。
+![public-profile-settings-3](/ja/img/part-4/aws-marketplace-integration/public-profile-settings/public-profile-settings-3.png)
+Public profileの設定が完了した後は、銀行口座の設定を始めてください
+![public-profile-settings-4](/ja/img/part-4/aws-marketplace-integration/public-profile-settings/public-profile-settings-4.png)
+````
+
+---
+## part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account.md
+````markdown
+続いて`Payment Information`より`Add bank account`を押下してください。
+![new-register-bank-account-1](/ja/img/part-4/aws-marketplace-integration/register-bank-account/new-register-bank-account-1.png)
+最初に、支払い方法を選択する必要があります。米国ベースのACHアカウント、SWIFTアカウント、またはHyperwalletアカウントを選択できます。SWIFTアカウントは、対応するすべての通貨（AUD、EUR、GBP、JPY、USD）で使用できますが、米国ベースのACHおよびHyperwalletアカウントはUSDのみ使用可能です。
+:::info
+日本の銀行口座を設定したい場合は、海外送金・外貨送金の受け取りが可能な銀行口座をご用意いただき
+SWIFTアカウントによる支払い方法を選択する必要があります。
+:::
+本ドキュメントでは、SWIFTアカウントによる設定手順を解説いたします。
+まず、`Payment Method`の選択肢から`SWIFT account`を選択してください。
+![new-register-bank-account-2](/ja/img/part-4/aws-marketplace-integration/register-bank-account/new-register-bank-account-2.png)
+SWIFTアカウントでは、以下の三つの項目を入力します。SWIFT codeはご利用の銀行に問い合わせください。
+- Bank account holder name
+- BIC (SWIFT code)
+- Account number
+![new-register-bank-account-3](/ja/img/part-4/aws-marketplace-integration/register-bank-account/new-register-bank-account-3.png)
+次に、請求先住所を入力します。
+![new-register-bank-account-4](/ja/img/part-4/aws-marketplace-integration/register-bank-account/new-register-bank-account-4.png)
+全ての入力を終えたら、`Add bank account`を押下します。
+![new-register-bank-account-5](/ja/img/part-4/aws-marketplace-integration/register-bank-account/new-register-bank-account-5.png)
+問題なければ、`Payment Information`にて追加した銀行口座をご確認いただけます。
+![new-register-bank-account-6](/ja/img/part-4/aws-marketplace-integration/register-bank-account/new-register-bank-account-6.png)
+:::caution
+この時点では、まだ出品に必要な設定が完了していません。
+次ページの`支払い方法の設定`をご確認ください。
+:::
+````
+
+---
+## part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-disbursement-methods.md
+````markdown
+:::caution
+あらかじめ銀行口座の設定が完了していることをご確認ください。
+まだお済みでない場合は、[銀行口座の設定](/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account)を参考に設定を行ってください。
+:::
+`Payment Information`より`Add disbursement method`を押下してください。
+![new-register-disbursement-methods-1](/ja/img/part-4/aws-marketplace-integration/register-disbursement-methods/new-register-disbursement-methods-1.png)
+最初に、支払われる通貨を選択します。利用可能な通貨は[公式ドキュメント](https://docs.aws.amazon.com/ja_jp/marketplace/latest/userguide/disbursement.html#currency)を参照してください。
+![new-register-disbursement-methods-2](/ja/img/part-4/aws-marketplace-integration/register-disbursement-methods/new-register-disbursement-methods-2.png)
+次に、支払いを受け取る銀行口座を選択します。[銀行口座の設定](/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account)で追加した銀行口座の中で、直前に選択した通貨に対応している銀行口座が選択肢として選べるようになっています。
+![new-register-disbursement-methods-3](/ja/img/part-4/aws-marketplace-integration/register-disbursement-methods/new-register-disbursement-methods-3.png)
+最後に支払いスケジュールを設定してください。AWS が販売者の銀行口座に支払うスケジュールになります。
+以下のスクショは、毎月 1 日に支払われる設定になります。`Daily`を選択する場合は、出品者は支払いを受け取るために残高がプラスである必要があります。
+![new-register-disbursement-methods-4](/ja/img/part-4/aws-marketplace-integration/register-disbursement-methods/new-register-disbursement-methods-4.png)
+全ての入力を終えたら、`Add disbursement method`を押下します。
+![new-register-disbursement-methods-5](/ja/img/part-4/aws-marketplace-integration/register-disbursement-methods/new-register-disbursement-methods-5.png)
+問題なければ、`Payment Information`にて追加した支払い方法をご確認いただけます。
+![new-register-disbursement-methods-6](/ja/img/part-4/aws-marketplace-integration/register-disbursement-methods/new-register-disbursement-methods-6.png)
+:::warning
+Public Offer では USD のみ対応しているため、通貨が USD の支払い方法を必ず設定する必要があります。
+Private Offer を日本円のみで作成することを想定しているお客様でも USD、JPY の 2 種類の支払い方法が設定されている状態にしてください。
+:::
+以上で、出品手続きを始めるために必要な設定は完了になります。
+````
+
+---
+## part-4/aws-marketplace-integration/aws-marketplace-seller-registration/tax-information-interview.md
+````markdown
+## 日本を拠点とするお客様の場合
+<a href="https://aws.amazon.com/marketplace/management/seller-settings/account" target="_blank">AWS Marketplace Management Portal</a>のSettingsページから
+`Payment Information`を確認してください。
+以下のようにエラーが表示され、先の手続きを進めることができないと思います。
+![tax-information-interview-1](/ja/img/part-4/aws-marketplace-integration/tax-information-interview/tax-information-interview-1.png)
+解消する方法については、<a href="https://aws.amazon.com/jp/legal/awsjp/" target="_blank">JP SOR FAQ</a>に載っており、それについて抜粋したものが以下になります。
+![tax-information-interview-2](/ja/img/part-4/aws-marketplace-integration/tax-information-interview/tax-information-interview-2.png)
+## 日本を拠点とするお客様が行う手続き
+上記より、まずは<a href="https://aws.amazon.com/marketplace/management/seller-settings/account#:~:text=aws%2Djp%2Dmarketplace%40amazon.co.jp" target="_blank">aws-jp-marketplace@amazon.co.jp</a>に対してAWS Marketplaceへ掲載する旨をメールでお伝えください。アマゾン ウェブ サービス ジャパン合同会社より、返信が返ってきますので指示に従い、追加情報を提出してください。アマゾン ウェブ サービス ジャパン合同会社との手続きが終わると、AWS Marketplace Management PortalのSettingsページの`Payment Information`が表示されるようになります。
+## 始めに行うこと（税務情報に関するインタビュー）
+<a href="https://aws.amazon.com/marketplace/management/seller-settings/account" target="_blank">AWS Marketplace Management Portal</a>のSettingsページから、`Payment Information`を開いてください。
+`Go to tax dashboard`を押下して税務情報に関するインタビューの入力を始めます。
+![tax-information-interview-3](/ja/img/part-4/aws-marketplace-integration/tax-information-interview/tax-information-interview-3.png)
+`Select Language`にて`Japanese`を選択することで日本語表記で入力を進めることが出来ます。
+![tax-information-interview-4](/ja/img/part-4/aws-marketplace-integration/tax-information-interview/tax-information-interview-4.png)
+税務情報に関するインタビューで`開始`ボタンを押下します。
+![tax-information-interview-5](/ja/img/part-4/aws-marketplace-integration/tax-information-interview/tax-information-interview-5.png)
+質問項目を入力していきます。
+![tax-information-interview-6](/ja/img/part-4/aws-marketplace-integration/tax-information-interview/tax-information-interview-6.png)
+税務上の身元情報の設定
+![tax-information-interview-7](/ja/img/part-4/aws-marketplace-integration/tax-information-interview/tax-information-interview-7.png)
+![tax-information-interview-8](/ja/img/part-4/aws-marketplace-integration/tax-information-interview/tax-information-interview-8.png)
+署名（氏名を入力）しプレビューにて内容を確認します。
+![tax-information-interview-9](/ja/img/part-4/aws-marketplace-integration/tax-information-interview/tax-information-interview-9.png)
+**米国で課税されないように、日本の納税者である事を申告するフォーム**
+![tax-information-interview-10](/ja/img/part-4/aws-marketplace-integration/tax-information-interview/tax-information-interview-10.png)
+内容確認後、`フォームを送信`ボタンを押下し提出します。
+![tax-information-interview-11](/ja/img/part-4/aws-marketplace-integration/tax-information-interview/tax-information-interview-11.png)
+送信完了し、税務情報に関するインタビューを終了します。
+![tax-information-interview-12](/ja/img/part-4/aws-marketplace-integration/tax-information-interview/tax-information-interview-12.png)
+````
+
+---
+## part-4/aws-marketplace-integration/embedding-products.mdx
+````markdown
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+SaaSus Platform でSaas製品を出品する場合、既存ユーザーによる購入フローにマルチテナントを考慮した実装が必要になります。
+:::caution
+テストフェーズの「AWS Marketplaceとの連携確認」までには実装を完了してください。最終的にはAWS Marketpalce サポートチームによるレビュー対象となるため未実装の場合、出品の許可が出ません。
+:::
+既存ユーザーがAWS Marketplace  から製品を購入しお客様のSaaSにログインした際、まだ既存ユーザーと購入した製品との紐付けが完了していません。
+理由は、購入した製品はテナントに対して紐付けが行う必要があるためです。SaaSus Platformの仕様上、既存ユーザーは複数のテナントに所属している可能性があります。SaaSus Platform側でそれを把握することはできないため、お客様側で購入した製品とユーザーの所属するテナントを紐づける実装をしていただく形になっています。
+## 実装の流れ
+１．既存ユーザーがAWS Marketplace で製品を購入してログイン、Callbackページへ来た場合の判定処理を実装
+AWS Marketplace で製品を購入してログイン、Callbackページへ来た場合は、お客様に設定していただいた Callback URLに対してregistration_tokenパラメータを付与しています。その有無を判定して分岐する処理を実装します。
+`https://example.com/defaultcallback?code=xxxxxx-xxxx-xxxx-xxxx-xxxxxxxx&registration_token=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
+２．利用するアカウント選択画面を作成
+registration_tokenパラメータは存在する場合、以下のような購入するアカウントを選択する画面が表示されるようにしてください。
+![account select page](/ja/img/part-4/aws-marketplace-integration/account-select-page.png)
+Select Box の内容はリクエストしてきたユーザ情報`$request->userinfo`から作成します。
+<Tabs>
+<TabItem value="php" label="PHP">
+```php
+// Callback先
+function index(Request $request)
+{
+  // $request->userinfo に各種ユーザ情報、テナント情報が設定される
+  return view('selectAccount.index', ['tenants' => $request->userinfo["tenants"]]);
+}
+```
+</TabItem>
+</Tabs>
+View 側で `tenants`を利用してselect box を作成、選択したアカウント情報を利用するため`tenant["id"]`を Value へ設定します。
+<Tabs>
+<TabItem value="html" label="HTML">
+```html
+<select name="tenant_id">
+@foreach ($tenants as $tenant)
+    <option value="{{ $tenant["id"] }}">{{ $tenant["name"] }}</option>
+@endforeach
+</select>
+```
+</TabItem>
+</Tabs>
+３．選択したアカウントに対してSAASUS AUTH APIの[LinkAwsMarketplace](/docs/reference/auth-api#tag/saasUser/operation/LinkAwsMarketplace)を実行
+アカウントを選択後`LinkAwsMarketplace`を呼び出す
+<Tabs>
+<TabItem value="php" label="PHP">
+```php
+// このアカウントで利用を開始するを押下した処理
+function post(Request $request)
+{
+  // SaaSus SDK 利用
+  $client = new ApiClient();
+  $auth_api_client = $client->getAuthClient();
+  // AWS Marketplaceとテナントの連携パラメータ設定
+  $link_marketplace_param = new CreateLinkAwsMarketplaceParam();
+  //アカウント選択画面から送信されたテナントID
+  $link_marketplace_param->setTenantId($request->tenant_id);
+  $link_marketplace_param->setAccessToken($request->_token);
+  //Callback時に受け取ったregistration_token
+  $link_marketplace_param->setRegistrationToken($request->registration_token);
+  // 購入した製品とテナントとの紐付け
+  $auth_api_client->LinkAWSMarketplace($link_marketplace_param);
+  // プロダクトの画面へ遷移
+  return view('xxxxxxxxxxx.index', ['xxxxx' => $xxxxxx]);
+}
+```
+</TabItem>
+</Tabs>
+````
+
+---
+## part-4/aws-marketplace-integration/product-submission.md
+````markdown
+AWS Marketplace Management Portalにて、SaaS製品情報を登録します。
+:::caution
+本手順を実施する前に[セラー登録から支払い方法の設定](/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration)の手続きが完了していることをご確認ください。
+:::
+本手順では以下の内容を準備する必要がありますので、あらかじめご準備ください。
+- 公開者の情報、プロダクトの説明・概要等
+- エンドユーザー使用許諾契約、AWS Marketplaceで定義してる規約を利用するか、独自で作成した規約を利用するかを選択します。独自で用意した規約を利用する場合`ELUA URL`を指定する必要があります。
+- プロダクトに関してのサポート情報、サポートを行うための方法、メールやサポートするためのフォームなど準備する必要があります。
+- 返金ポリシーに関しての情報、返金ポリシーの内容、記載したページ等のURLなど
+また、登録に関して以下の制約があります。
+- SaaSus Platformがサポートする料金モデルはSaaS契約のみです。契約期間は1ヶ月か1年となります
+- 出品価格として登録できる通貨はUSDとなります
+- 製品情報は全て英語での登録となります
+- AWS Marketplace サポートチームのレビューを2\~3度受ける必要があります、1回につき3\~5営業日掛かります。
+入力内容等は `AWS Marketplace` 上で公開されます、各入力内容と表示例は[こちら](/docs/part-4/aws-marketplace-integration/supplementary/supplementary-1)をご確認ください。（[補足１](/docs/part-4/aws-marketplace-integration/supplementary/supplementary-1)）（[補足２](/docs/part-4/aws-marketplace-integration/supplementary/supplementary-2)）
+````
+
+---
+## part-4/aws-marketplace-integration/product-submission/generate-product-code.md
+````markdown
+SaaS製品情報を登録するには、まず<a href="https://aws.amazon.com/marketplace/management/homepage" target="_blank">AWS Marketplace Management Portal</a>にアクセスしていただき、以下の手順で登録を進めてください。
+`AWS Marketplace Management Portal`にて`Product`メニューから`SaaS`を選択します。
+![](/ja/img/part-4/aws-marketplace-integration/product-submission/generate-product-code/generate-product-code-1.png)
+遷移後、画面右側にある`Create SaaS product`ボタンより`SaaS product`を選択します。
+![](/ja/img/part-4/aws-marketplace-integration/product-submission/generate-product-code/generate-product-code-2.png)
+プロダクトID・プロダクトコードの生成を確認するダイアログが表示されるので、`Generate product ID and product code` を押下します。
+![](/ja/img/part-4/aws-marketplace-integration/product-submission/generate-product-code/generate-product-code-3.png)
+10秒ほど経つと、product IDとproduct codeが生成され、`Continue` ボタンが活性化するので押下し次へ進みます。
+![](/ja/img/part-4/aws-marketplace-integration/product-submission/generate-product-code/generate-product-code-4.png)
+````
+
+---
+## part-4/aws-marketplace-integration/product-submission/step1-provide-product-information.md
+````markdown
+続いて、SaaS製品を公開するための情報を**英語**で入力していきます。
+:::info
+入力する情報が多いため、あらかじめ入力情報を用意しておくとスムーズに入力を進めることが出来ます。
+各入力項目の制限やAWS Marketplace上にどのように公開されるかは補足資料を用意していますので、ご確認ください。[公開例](/docs/part-4/aws-marketplace-integration/supplementary/supplementary-1)、[入力項目の詳細](/docs/part-4/aws-marketplace-integration/supplementary/supplementary-2)
+:::
+入力項目の概要について、以下に列挙しますので確認しながら入力を進めてください。
+`Product title`：
+  - テストフェーズ時：**Test Product(お客様SaaSの製品名)**
+  - プロダクションフェーズ時：お客様SaaSの製品名
+:::caution
+テストフェーズの場合は、Titleを「Test Product(お客様SaaSの製品名)」と入力してください。本番用と区別するために必要です。
+:::
+`SKU`：AWS Marketplace Management Portal上で製品を区別するための固有文字列
+`Product logo S3 URL`：製品のロゴURL
+`Short description`：製品の概要
+`Long description`：製品の説明
+`Product video URL`：製品の紹介動画などのURL
+`Highlight 1-3`：製品ページに載せる機能や特徴など
+`Support details`：製品に関するサポートについて
+`Product categories`：製品のカテゴリー情報、AWS Marketplaceでカテゴリー検索する際に利用されます
+`Keywords for search results`：製品の検索キーワード情報、AWS Marketplaceで検索する際に利用されます
+製品に関する入力が完了した後`Next`を押下して次に進みます。
+![](/ja/img/part-4/aws-marketplace-integration/product-submission/step1-provide-product-information/step1-provide-product-information-1.png)
+![](/ja/img/part-4/aws-marketplace-integration/product-submission/step1-provide-product-information/step1-provide-product-information-2.png)
+![](/ja/img/part-4/aws-marketplace-integration/product-submission/step1-provide-product-information/step1-provide-product-information-3.png)
+````
+
+---
+## part-4/aws-marketplace-integration/product-submission/step2-configure-fulfillment-options.md
+````markdown
+続いて、AWS Marketplace上で商品を購入した際にリダイレクトされるURLを入力していきます。
+SaaSus PlatformのAWS Marketplace連携機能で出力された指示書に入力するURLが表示されていますので、コピーしてFulfillment URLの入力エリアにペーストしてください。
+:::caution
+必ず指示書に従って入力してください。
+[AWS Marketplace連携機能ページ](https://settings.console.saasus.io/integrations/aws-marketplace)から出品手続きを開始していただき、`ステップ1-4:SaaS製品情報の登録`まで進めていだたくと指示書を確認できるようになります。
+![](/ja/img/part-4/aws-marketplace-integration/product-submission/step2-configure-fulfillment-options/step2-configure-fulfillment-options-1.png)
+:::
+![](/ja/img/part-4/aws-marketplace-integration/product-submission/step2-configure-fulfillment-options/step2-configure-fulfillment-options-2.png)
+入力が完了した後`Next`を押下して次に進みます。
+````
+
+---
+## part-4/aws-marketplace-integration/product-submission/step3-configure-product-pricing.md
+````markdown
+続いて、AWS Marketplace上で販売する料金モデルとその種類を入力していきます。
+まず、料金モデルは`Contract-based pricing`を選択します。
+:::caution
+他の料金モデルには対応していないため、必ず`Contract-based pricing`を選択してください。
+:::
+![](/ja/img/part-4/aws-marketplace-integration/product-submission/step3-configure-product-pricing/step3-configure-product-pricing-1.png)
+次にSaaS製品の利用単位、契約の種類を入力していきます。
+`Dimension unit type`は`Units`を選択します。
+契約の種類はAWS Marketplace連携機能で出力された指示書に従って、`Contract dimensions` に対して指示書に合わせて１〜Xまで入力してください。
+`API identifier`：API上で取り扱う料金プラン識別子
+`Display name`：料金プランの表示名
+`Description`：料金プランの説明
+:::caution
+必ず指示書に従って入力してください。
+[AWS Marketplace連携機能ページ](https://settings.console.saasus.io/integrations/aws-marketplace)から出品手続きを開始していただき、`ステップ1-4:SaaS製品情報の登録`まで進めていだたくと指示書を確認できるようになります。
+![](/ja/img/part-4/aws-marketplace-integration/product-submission/step3-configure-product-pricing/step3-configure-product-pricing-2.png)
+:::
+![](/ja/img/part-4/aws-marketplace-integration/product-submission/step3-configure-product-pricing/step3-configure-product-pricing-3.png)
+入力が完了した後`Next`を押下して次に進みます。
+````
+
+---
+## part-4/aws-marketplace-integration/product-submission/step4-set-prices.md
+````markdown
+続いて、AWS Marketplace上で販売する製品の購入オプションと契約期間を入力していきます。
+AWS Marketplace連携機能で出力された指示書に従って、`Purchasing options`と`Contract duration options`を入力してください。
+:::caution
+必ず指示書に従って入力してください。
+[AWS Marketplace連携機能ページ](https://settings.console.saasus.io/integrations/aws-marketplace)から出品手続きを開始していただき、`ステップ1-4:SaaS製品情報の登録`まで進めていだたくと指示書を確認できるようになります。
+![](/ja/img/part-4/aws-marketplace-integration/product-submission/step4-set-prices/step4-set-prices-1.png)
+:::
+![](/ja/img/part-4/aws-marketplace-integration/product-submission/step4-set-prices/step4-set-prices-2.png)
+入力が完了した後`Next`を押下して次に進みます。
+````
+
+---
+## part-4/aws-marketplace-integration/product-submission/step5-specify-refund-policy.md
+````markdown
+続いて、返金ポリシーに関しての情報を入力していきます。
+AWS Marketplace上でSaaS製品を販売する際の返金ポリシーを入力します。こちらの入力に関しては、出品者自身で用意する必要があります。
+:::info
+AWS Marketplace上でSaaS製品を販売する際の返金について補足する[ドキュメント](https://docs.aws.amazon.com/marketplace/latest/userguide/refunds.html)がありますので、ご一読ください。
+:::
+![](/ja/img/part-4/aws-marketplace-integration/product-submission/step5-specify-refund-policy/step5-specify-refund-policy-1.png)
+入力が完了した後`Next`を押下して次に進みます。
+````
+
+---
+## part-4/aws-marketplace-integration/product-submission/step6-configure-eula.md
+````markdown
+続いて、AWS Marketplace上で販売する際のエンドユーザー使用許諾契約について選択していきます。
+AWS Marketplaceで定義してる規約を利用する場合は`Standard Contract for AWS Marketplace (SCMP)`を選択してください。
+:::info
+AWS Marketplace側で事前に用意しているEULAは[こちら](https://docs.aws.amazon.com/marketplace/latest/userguide/standardized-license-terms.html#standard-contracts)です。
+:::
+![](/ja/img/part-4/aws-marketplace-integration/product-submission/step6-configure-eula/step6-configure-eula-1.png)
+独自で作成した規約を利用する場合は`Custom EULA`を選択して、URLを入力します。
+![](/ja/img/part-4/aws-marketplace-integration/product-submission/step6-configure-eula/step6-configure-eula-2.png)
+入力が完了した後`Next`を押下して次に進みます。
+````
+
+---
+## part-4/aws-marketplace-integration/product-submission/step7-configure-offer-availability.md
+````markdown
+続いて、SaaS製品の販売する国を決めていきます。
+販売する国についてはお客様の事業内容に応じて、入力を進めてください。
+全ての国を対象にする場合は、`All contries`を選択します。
+![](/ja/img/part-4/aws-marketplace-integration/product-submission/step7-configure-offer-availability/step7-configure-offer-availability-1.png)
+対象外にする国を指定する場合は、`All countries with exclusions`を選択して国を選びます。
+![](/ja/img/part-4/aws-marketplace-integration/product-submission/step7-configure-offer-availability/step7-configure-offer-availability-2.png)
+対象にする国を指定する場合は、`Allowlisted countries only`を選択して国を選びます。
+![](/ja/img/part-4/aws-marketplace-integration/product-submission/step7-configure-offer-availability/step7-configure-offer-availability-3.png)
+入力が完了した後`Next`を押下して次に進みます。
+````
+
+---
+## part-4/aws-marketplace-integration/product-submission/step8-configure-allowlist.md
+````markdown
+続いて、連携確認時のテストに使うAWS アカウント IDを設定します。
+SaaS製品が限定公開時は、対象のアカウントのみが商品を参照し購入することが可能となります。
+:::info
+テスト時に一度購入するとすぐには契約解除できません。テストアカウントの追加をAWS Marketplace Management Portalから申請できますが反映までに3~5営業日かかるため、新規購入時の再テストに備えてに最低5つ以上はAWSアカウントを登録しておくことをお勧めします。
+:::
+![](/ja/img/part-4/aws-marketplace-integration/product-submission/step8-configure-allowlist/step8-configure-allowlist-1.png)
+入力が完了した後`Submit`を押下します。
+以上でSaaS製品情報の登録は完了です。
+````
+
+---
+## part-4/aws-marketplace-integration/supplementary.md
+````markdown
+セラー登録、SaaS製品情報の登録を行う際の補足や、AWS Marketplace連携機能の補足を
+まとめています。
+````
+
+---
+## part-4/aws-marketplace-integration/supplementary/final-review-request.md
+````markdown
+[出品手順「10. AWS Marketplaceとの連携確認」](/docs/part-4/aws-marketplace-integration/aws-marketplace-integration)が完了したら、AWS Marketplaceサポートチームへ最終レビューの依頼を行います。
+まず<a href="https://aws.amazon.com/marketplace/management/homepage" target="_blank">AWS Marketplace Management Portal</a>にアクセスしていただき、対象のプロダクト詳細ページを開きます。
+次に画面上部に表示されているアラートの右側の`Update visibility`を押下します。
+![final-review-request-1](/ja/img/part-4/aws-marketplace-integration/supplementary/final-review-request-1.png)
+遷移後にVisibility optionsを`public`に設定します。
+![final-review-request-2](/ja/img/part-4/aws-marketplace-integration/supplementary/final-review-request-2.png)
+追加で契約金額を入力するフォームが追加で表示されるので、正規の金額を入力した後`Submit`を押下します。
+![final-review-request-3](/ja/img/part-4/aws-marketplace-integration/supplementary/final-review-request-3.png)
+以上で最終レビュー依頼は完了です。
+> 📘 補足事項
+>
+> AWS Marketplace 販売者オペレーション チームによって製品の検証と公開が行われます。約 7 ～ 10 営業日ほどで公開されます。詳しくは[こちら](https://docs.aws.amazon.com/marketplace/latest/userguide/product-submission.html#timing-and-expectations)
+````
+
+---
+## part-4/aws-marketplace-integration/supplementary/integration-test.md
+````markdown
+事前にAWS Marketplace上に限定公開されている製品ページのURLを確認してください。
+### 製品ページURLの確認方法
+1. AWS Marketplace Management Portalへログインする。
+2. こちらの<a href="https://aws.amazon.com/marketplace/management/products/saas?#" target="_blank">リンク</a>
+3. 限定公開状態のSaaS製品の一覧が表示されるので確認したいSaaS製品を選択する。
+4. 詳細ページが表示されますので、ページ右上の「View on AWS Marketplace」のボタンから製品ページのURLを確認することができます。
+![integration-test-1](/ja/img/part-4/aws-marketplace-integration/supplementary/integration-test-1.png)
+## 連携確認方法について
+AWS Marketplaceとの連携を確認するには、全部で3つのユースケースを実施する必要があります。
+### 購入後、サインアップをして新規アカウントを作った場合
+サインアップ後に生成されるアカウントに対して、正しく購入した契約が同期されていることを確認してください。
+確認例
+1. テストアカウントで、AWS Marketplace上の製品ページへアクセス
+2. 特定の契約を選択し購入する
+<!----->
+1. 購入後に表示される動線から、SaaSのサインアップ画面へ遷移
+2. SaaSのサインアップを実施後そのアカウントでSaaSへログインする
+3. 契約情報を確認できるページへ移動して、契約内容を確認する
+### 購入後、既存ユーザーでサインインをした場合
+既にSaaSにアカウントを持っているユーザーが、購入した際に正しく契約が同期されていることを確認してください。
+確認例
+1. 既にSaaS上にアカウントを持っているテストアカウントで、AWS Marketplace上の製品ページへアクセス
+2. 特定の契約を選択し購入する
+3. 購入後に表示される動線から、SaaSのサインアップ画面→サインイン画面と遷移する
+4. SaaSのサインインを実施後そのアカウントでSaaSへログインする
+5. 契約情報を確認できるページへ移動して、契約内容を確認する
+### 購入後、AWS Marketplaceの製品契約ページで契約を変更した場合
+既にAWS Marketplace上で契約していた場合、製品契約ページで契約を変更した際に正しく契約が同期されることを確認してください。
+確認例
+1. AWS Marketplace上の製品契約ページへアクセス
+2. 特定の契約を選択し、契約を更新する
+3. SaaSにログインする
+4. 契約情報を確認できるページへ移動して、契約内容を確認する
+````
+
+---
+## part-4/aws-marketplace-integration/supplementary/public-request.md
+````markdown
+[出品手順「11. 本番用SaaS製品の最終レビュー依頼」](/docs/part-4/aws-marketplace-integration/aws-marketplace-integration)が完了後、AWS Marketplaceサポートチームから公開依頼する手順について説明するメールが届きますので、それを元に公開依頼を行います。
+:::caution
+事前に調査した内容から、公開依頼の方法についてドキュメントを作成していますが実際に届いたメールの内容が最新の方法となりますので、そちらの方法に従ってください。
+:::
+まず、AWS Marketplace Management Portalで公開依頼のリクエストを行う必要があります。
+1. <a href="https://aws.amazon.com/marketplace/management/homepage" target="_blank">AWS Marketplace Management Portal</a>にアクセスします
+2. Requestsページへ移動後、公開するSaaS製品のリクエストを選択します
+3. 公開依頼できる状態であれば、「Review your Product Listing」というタイトルのページが表示されます
+   ![public-request-1](/ja/img/part-4/aws-marketplace-integration/supplementary/public-request-1.png)
+4. Status「Approve」を選択して、「Submit」ボタンを押下してください
+以上で公開依頼のリクエストは完了です。
+最後に、**「Action Required: AWS Marketplace SaaS Contract Next Steps [ thread::XXXXXXXXXX:: ]」**というメールに対して「SaaS製品を公開してください」という旨の**英文**を書いて返信してください。返信が完了したら公開依頼は完了となります。
+3~5営業日以内には、サポートチームによってSaaS製品がAWS Marketplace上に公開されることになります。
+````
+
+---
+## part-4/aws-marketplace-integration/supplementary/self-up-setting.md
+````markdown
+1. <a href="https://settings.console.saasus.io/customize" target="_blank">SaaS 開発コンソールの認証詳細設定</a>にアクセスします。
+2. 「認証設定」タブをクリックしてください。
+3. スクロールして、セルフサインアップ（ユーザー自身による新規登録）の可否の項目を見つけてください。
+4. トグルボタンをONにして、保存ボタンを押してください。
+![self-up-setting-1](/ja/img/part-4/aws-marketplace-integration/supplementary/self-up-setting-1.png)
+以上で設定完了です。数分後に実際の画面に反映されます。
+````
+
+---
+## part-4/aws-marketplace-integration/supplementary/supplementary-1.md
+````markdown
+## Product Overview
+Step1 : Provide product informationにて入力した`Product title`、`Short description`、`Long description`、`Product logo S3 URL`等は、プロダクト公開時に `Product Overview`として表示されます。
+![supplementary-1-1](/ja/img/part-4/aws-marketplace-integration/supplementary/supplementary-1-1.png)
+## Pricing Information　
+Step3 : Configure product pricingにて入力した`API Identifier`、`Display name`、`Description`、Step4 : Set pricesにて入力した`1 month price`、`12 month price`等は、プロダクト公開時に `Pricing Information`として表示されます。
+![supplementary-1-2](/ja/img/part-4/aws-marketplace-integration/supplementary/supplementary-1-2.png)
+## Usage Information
+Step6 : Configure EULAにて入力した`EULA`は、プロダクト公開時に `Usage Information`として表示されます。
+![supplementary-1-3](/ja/img/part-4/aws-marketplace-integration/supplementary/supplementary-1-3.png)
+## Support Information
+Step1 : Provide product informationにて入力した`Support details`、Step5 : Specify refund policyにて入力した`Refund Policy`は、プロダクト公開時に `Support Information`として表示されます。
+![supplementary-1-4](/ja/img/part-4/aws-marketplace-integration/supplementary/supplementary-1-4.png)
+## Product Category
+Step1 : Provide product informationにて入力した `AWS Marketplace discoverability`はエンドユーザが`AWS Marketplace`上でプロダクトを探すためのカテゴリーとして利用されます。
+![supplementary-1-5](/ja/img/part-4/aws-marketplace-integration/supplementary/supplementary-1-5.png)
+````
+
+---
+## part-4/aws-marketplace-integration/supplementary/supplementary-2.md
+````markdown
+こちらで入力した内容は「[Create Productの入力内容と公開される内容について](/docs/part-4/aws-marketplace-integration/supplementary/supplementary-1)」にて
+実際に AWS Marketplace上 で公開されるイメージを確認できます。
+## Step1 : Provide product information
+| 入力項目                        | 説明                                                                                                                                                                                                                                                  | 必須 | 入力種別       | 入力制限                                              |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -- | ---------- | ------------------------------------------------- |
+| Product title               | 製品の名前                                                                                                                                                                                                                   | 必須 | Text       | 1文字以上、最大72文字                                      |
+| SKU                         | 製品の一意の識別子 <br /> 商品リストごとに一意である必要があります <br /> Ex: CloudPower_0001                                                                                               |    | Text       | 1文字以上、最大72文字                                      |
+| Product logo S3 URL         | 商品画像のURL <br /> タイトル処理とロゴはテキストよりも適切に表示されます                                                                                                   | 必須 | Text       | アスペクト比 2:1から1:1の間 最長辺が 110 ピクセル以上 png形式もしくは jpg形式 |
+| Short description           | EC2 コンソールの AWS Marketplace で使用される製品の簡単な説明                                                                                                                          | 必須 | Text       | 1文字以上、最大1000文字                                    |
+| Long description            | 製品の説明                                                                                                                                                                                                            | 必須 | Text Area  | 1文字以上、最大5000文字                                    |
+| Product Video Link          | 製品のビデオのURL <br /> 製品ページの上部に「製品ビデオを見る」リンクとして表示されます                                                                                   |    | Text       | 有効なURL                                            |
+| Highlight 1                 | 製品の主な特徴１、表示は箇条書き形式で表示されます                                                                                                                                                               | 必須 | Text       | 1文字以上、最大500文字                                     |
+| Highlight 2                 | 製品の主な特徴２、表示は箇条書き形式で表示されます                                                                                                                                                               |    | Text       | 1文字以上、最大500文字                                     |
+| Highlight 3                 | 製品の主な特徴３、表示は箇条書き形式で表示されます                                                                                                                                                               |    | Text       | 1文字以上、最大500文字                                     |
+| Support details             | 提供されるサポートの説明                                                                                                                                                                                          |    | Text       | 1文字以上、最大2000文字                                    |
+| Product Categories          | 検索や参照用のためのマーケットプレイスカテゴリ                                                                                                                                                      | 必須 | Select Box | 選択肢から選ぶ（約50種）                                     |
+| Keywords for search results | 最大250文字までのカンマ区切りのキーワードを入力してください <br /> 注意：販売者名、商品名、およびすべてのカテゴリは自動的に検索キーワードとして追加されます | 必須 | Text       | カンマ区切りで1文字以上、最大250文字                              |
+## Step2 : Configure fulfillment options
+| 入力項目            | 説明                                                                                                                                                                                                            | 必須 | 入力種別 | 入力制限                                          |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -- | ---- | --------------------------------------------- |
+| Fulfillment URL | 製品のURL <br /> **SaaSus Platformで出力された入力指示書に従い内容を設定してください** | 必須 | Text | 1文字以上、最大500文字 http:// もしくは https:// から必ず始まる |
+## Step3 : Configure product pricing
+| 入力項目                | 説明                                                                                                                                                                                                                                                                              | 必須 | 入力種別       | 入力制限                        |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -- | ---------- | --------------------------- |
+| Dimension unit type | 製品の使用単位カテゴリを設定(**SaaSus Platformで出力された入力指示書に従い内容を設定してください**) | 必須 | Select Box | 選択肢から選ぶ（9種類）                |
+| API Identifier      | API上で取り扱う料金プラン名(**SaaSus Platformで出力された入力指示書に従い内容を設定してください**)               | 必須 | Text       | 最大36文字 アルファベットもしくはアンダースコアのみ |
+| Display name        | 料金プランの表示名(**SaaSus Platformで出力された入力指示書に従い内容を設定してください**)                                                                                                                      | 必須 | Text       | 最大24文字                      |
+| Description         | 料金プランの説明(**SaaSus Platformで出力された入力指示書に従い内容を設定してください**)                                                                                                                                 | 必須 | Text       | 最大70文字                      |
+## Step4 : Set prices
+| 入力項目                                                      | 説明                                                                                                                                                                                                                                                                                           | 必須 | 入力種別       | 入力制限                                                             |
+| --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -- | ---------- | ---------------------------------------------------------------- |
+| Purchasing options                                        | 提供したい契約タイプを選択(**SaaSus Platformで出力された入力指示書に従い内容を設定してください**) | 必須 | Select Box | Multiple dimension per contract or Single dimension per contract |
+| Contract duration options                                 | 提供する契約期間(**SaaSus Platformで出力された入力指示書に従い内容を設定してください**)                                                                                                                                                                                           | 必須 | Check Box  | 1month, 12 months, 24 months, 36 months（複数選択可能）                  |
+| 1 month price(Contract Durrationで1 monthを選択した場合、入力必要)     | 月単位の価格 <br /> (**SaaSus Platformで出力された入力指示書に従い内容を設定してください**)                                                                                                                                                                                                                                          | 必須 | Text       | 数値                                                               |
+| 12 month price (Contract Durrationで12 monthsを選択した場合、入力必要) | 年単位の価格 <br /> (**SaaSus Platformで出力された入力指示書に従い内容を設定してください**)                                                                                                                                                                                                                                          | 必須 | Text       | 数値                                                               |
+| 24 month price (Contract Durrationで24 monthsを選択した場合、入力必要) | ２年単位の価格 <br /> (**SaaSus Platformで出力された入力指示書に従い内容を設定してください**)                                                                                                                                                                                                                                         | 必須 | Text       | 数値                                                               |
+| 36 month price(Contract Durrationで36 monthsを選択した場合、入力必要)  | ３年単位の価格 <br /> (**SaaSus Platformで出力された入力指示書に従い内容を設定してください**)                                                                                                                                                                                                                                         | 必須 | Text       | 数値                                                               |
+## Step5 : Specify refund policy
+| 入力項目          | 説明                                                                                                                                                                                                                                                              | 必須 | 入力種別 | 入力制限          |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -- | ---- | ------------- |
+| Refund Policy | ソフトウェア料金の返金ポリシー <br />「返金不可」とされた場合であっても、いかなる形でも返金することを推奨しており、返金方法や連絡先情報を提供する必要があります | 必須 | Text | 1文字以上、最大500文字 |
+## Step6 : Configure EULA
+| 入力項目                                            | 説明                                                                                                                | 必須 | 入力種別         | 入力制限                                                        |
+| ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | -- | ------------ | ----------------------------------------------------------- |
+| EULA                                            | AWS Marketplace の標準契約を使用するか、独自の EULA を使用するか | 必須 | Radio Button | Standard Contract for AWS Marketplace or <br /> Custom EULA |
+| Custom EULA URL（EULAで「Custom EULA」を選択した場合、入力必要） | 製品のエンド ユーザー ライセンス契約の URL を入力します         | 必須 | Text         | 有効なURL                                                      |
+## Step7 : Configure offer availability
+| 入力項目                                                                         | 説明                                                                               | 必須 | 入力種別         | 入力制限                                                                                                                                                                 |
+| ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Offer availability by country                                                | どの地域の顧客をターゲットにするかを選択 | 必須 | Radio Button | 「All countries」、「All countries with exclusions」、「Allowlisted  countries only」どれか |
+| Select All countries with exclusions or Allowlisted  countries onlyの場合、入力可能） | 対象国を選択                                            |    | Select Box   | 選択肢から選ぶ（国）                                                                                                                                                           |
+## Step8 : Configure allowlist
+| 入力項目                     | 説明                                                                                                                                                                                             | 必須 | 入力種別 | 入力制限           |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -- | ---- | -------------- |
+| Allow-list test accounts | テストアカウントの許可設定 <br /> AWS アカウント IDを設定します |    | Text | カンマ区切りでアカウントID |
+````
+
+---
+## part-4/aws-marketplace-integration/supplementary/supplementary-3.md
+````markdown
+1. AWS マネジメントコンソールへログインします。
+2. こちらの<a href="https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks?filteringText=&filteringStatus=active&viewNested=true" target="_blank">リンク</a> へアクセスしてください。
+3. 以下のページが表示されますので、スタック「AWS-Marketplace-seller-Resource」を選択してください。
+   1. ![supplementary-3-1](/ja/img/part-4/aws-marketplace-integration/supplementary/supplementary-3-1.png)
+4. 画面右側に表示されるタブのうち、「出力」を選んでください。
+5. エクスポート名に表示されている名前を確認して、その値をコピーしてください。
+   1. ![supplementary-3-2](/ja/img/part-4/aws-marketplace-integration/supplementary/supplementary-3-2.png)
+6. コピーしてきた値のエクスポート名と同じフォーム項目にペーストしてください。
+   1. ![supplementary-3-3](/ja/img/part-4/aws-marketplace-integration/supplementary/supplementary-3-3.png)
+````
+
+---
+## part-4/aws-marketplace-integration/supplementary/user-judgment-method.md
+````markdown
+SAASUS AWS MARKETPLACE APIを利用します。
+[GetCustomers](/docs/reference/awsmarketplace-api#tag/awsMarketplace/operation/GetCustomers)というエンドポイントを利用します。仕様はドキュメントを参照してください。
+## 判定までの流れ
+1. getUserInfoで取得したtenant_idを、GetCustomersのパラメーターtenant_idsに設定し実行する
+2. 返却値が空であるかをチェックする
+3. 空でない場合は、AWS Marketplaceから購入したユーザーであると判定することができます。
+````
+
+---
+## part-4/integrate-with-amazon-eventbridge.md
+````markdown
+SaaSus Platform は、 Amazon EventBridge と統合されています。 SaaSus Platform で起こった各種イベントをパートナーイベントソースとして、 SaaS 側 AWS アカウントの Amazon EventBridge に送信することができます。これを活用することにより、 SaaSus Platform と連携したイベント駆動のアーキテクチャを採用し SaaS を構築することができます。
+例えば、SaaSのテナントが作成されたときにテナントオンボーディング処理をトリガーする、ユーザが削除されたときに付随するデータを削除する処理をトリガーするなどに活用できます。現在は、全ての SaaSus API のイベントを取得することができます。各APIの内容は、<a href="/ja/docs/reference/getting-started-with-your-api" target="_blank">APIリファレンス</a>を確認してください。
+また、イベントメッセージの内容は<a href="/ja/docs/part-4/integrate-with-amazon-eventbridge/event-sample" target="_blank">イベントサンプル</a>でご確認ください。
+## 設定と動作の確認
+<a href="https://settings.console.saasus.io/integrations/event" target="_blank">SaaS 開発コンソールのイベント連携画面</a>を開きます。
+![01](/ja/img/part-4/integrate-with-amazon-eventbridge/image-01.png)
+AWSアカウントID の部分には、イベント送信先のAWSアカウントID(SaaSを構築しているAWSアカウントの12桁のID)を入力します。また、通知を受け取るAWSリージョンも選択します。そして保存ボタンを押します。
+![02](/ja/img/part-4/integrate-with-amazon-eventbridge/image-02.png)
+上記で設定したAWSアカウント上に、パートナーイベントパスが作成されます。該当AWSアカウントにログインした後に、<a href="https://ap-northeast-1.console.aws.amazon.com/events/home#/partners" target="_blank">Amazon EventBridgeのパートナーイベントソースのコンソール</a>を開き、パートナーイベントソースが作成されていることを確認してください。
+![03](/ja/img/part-4/integrate-with-amazon-eventbridge/image-03.png)
+作成されたパートナーイベントソースを選択し、「イベントバスと関連付ける」を行ってください。すると、他のイベントソースと同様にイベントバスで利用することができるようになります。
+![04](/ja/img/part-4/integrate-with-amazon-eventbridge/image-04.png)
+次に、イベントの送信を試してみましょう。<a href="https://ap-northeast-1.console.aws.amazon.com/events/home#/rules" target="_blank">Amazon EventBridgeのバスのルールのページ</a>を開きます。ここ画面で、先ほどのパートナーイベントソースがイベントバスとして選択できる状態になっているはずです。
+![05](/ja/img/part-4/integrate-with-amazon-eventbridge/image-05.png)
+このイベントバスをベースにルールを作成します。以下の画面のように設定していきましょう。
+まずは、SaaSus Platformのイベントバスを選択し、ルールを作成をクリックします。各画面では、以下の画面を参考に入力してみてください。
+![06](/ja/img/part-4/integrate-with-amazon-eventbridge/image-06.png)
+![07](/ja/img/part-4/integrate-with-amazon-eventbridge/image-07.png)
+![08](/ja/img/part-4/integrate-with-amazon-eventbridge/image-08.png)
+イベントパターンの部分には、まずは全てのSaaSus Platformのイベントを取得するために、以下のパターンを記載します。「パターンを編集」ボタンをクリックし、以下のJSONを直接記載します。
+![09](/ja/img/part-4/integrate-with-amazon-eventbridge/image-09.png)
+![10](/ja/img/part-4/integrate-with-amazon-eventbridge/image-10.png)
+```json
+{
+  "source": [{
+    "prefix": "aws.partner/saasus.io"
+  }]
+}
+```
+今回は全てのイベントを取得していますが、もちろん特定のAPIコールに対するイベントのみの取得するようなフィルターをかけることも出来ます。
+今回はどのようなイベントが届くのかを確認するために、全てのイベントを CloudWatch Logs に出力してみましょう。
+![11](/ja/img/part-4/integrate-with-amazon-eventbridge/image-11.png)
+![12](/ja/img/part-4/integrate-with-amazon-eventbridge/image-12.png)
+全ての設定が終わったら、ルールの作成をクリックし、ルールが作成されたことを確認してください。
+![13](/ja/img/part-4/integrate-with-amazon-eventbridge/image-13.png)
+![14](/ja/img/part-4/integrate-with-amazon-eventbridge/image-14.png)
+これでイベントを連携する準備ができましたので、テストイベントを送信してみましょう。SaaS開発コンソールに戻り、テスト送信ボタンをクリックします。
+![15](/ja/img/part-4/integrate-with-amazon-eventbridge/image-15.png)
+イベントが正常に届くと、CloudWatch Logsにイベントの内容が記録されているはずです。確認してみましょう。
+![16](/ja/img/part-4/integrate-with-amazon-eventbridge/image-16.png)
+このような形でイベントが取得できることができました。
+今回はCloudWatch Logsに連携していますが、Lambdaや他のAPIなどいろいろなターゲットにイベント連携することができます。これを活用することにより、イベント駆動のアーキテクチャを適用することができるようになり、どこからSaaSus APIが呼ばれたか・いつ呼ばれたかということと、その結果何をいつすべきか、ということを分離することができます。
+"detail" 項目には "trace_id" が含まれています。 これは、 SaaSus API のリクエスト時に指定したもの、もしくは自動的に生成されたものと同一なので、どのAPIコールによるイベントなのか？をトレースすることができます。
+````
+
+---
+## part-4/integrate-with-amazon-eventbridge/event-sample.md
+````markdown
+テナント、ユーザー作成時にAmazon EventBridge に連携されたイベントのサンプルとなります。
+APIのリクエストの情報とレスポンスの情報を確認することができます。
+:::note
+イベントメッセージの項目について、既存項目の削除や項目名の変更、値の形式変更は基本的に実施しませんが、SaaSus Platformの機能追加などにより項目が追加される場合があります。項目の追加が発生することを前提とした実装を行ってください。
+:::
+:::caution
+Amazon EventBridge 連携機能を利用してSaaS側のDBにデータ連携を行う場合、イベントメッセージの `time` 項目を用いた処理順序の制御を実装してください。
+イベントメッセージ連携による非同期処理のため、例えばユーザー作成→ロール付与という順序で操作を行った場合でも、SaaS側でロール付与→ユーザー作成の順にイベントが処理される可能性があります。以下の実装イメージを参考に、正しい順序でデータが反映されるよう制御してください。
+1. イベント連携の `time` 項目をデータベースに保管する
+2. 次回のイベント処理時に、イベント連携の `time` とデータベースに保管した日時を比較し、イベント連携の日時が新しい場合のみ処理を行う
+:::
+# create_tenant
+作成したテナント情報が`response_body`に設定されます。
+APIリファレンス : <a href="/ja/docs/reference/auth-api#tag/tenant/operation/CreateTenant" target="_blank">Create Tenant</a>
+```json
+{
+    "version": "0",
+    "id": "71e793dd-3177-ac6b-7baf-ae54615a3bb3",
+    "detail-type": "api_call",
+    "source": "aws.partner/saasus.io/d8753ef8-8604-4b7d-8a44-cf9a64433209-1/event",
+    "account": "899411123005",
+    "time": "2026-05-19T02:22:58Z",
+    "region": "ap-northeast-1",
+    "resources": [],
+    "detail": {
+        "event_type": "create_tenant",
+        "event": "{\"log_id\":\"5270362b-fb34-4b71-bb4c-f5bfaf24415d\",\"date_time\":\"2026-05-19T02:22:58Z\",\"date\":\"2026-05-19\",\"ttl\":\"2033-05-19T02:22:58Z\",\"http_status\":\"201\",\"uri\":\"/v1/auth/tenants\",\"ip_address\":\"127.0.0.1:44896\",\"referer\":\"https://saasadmin.console.saasus.io/tenants\",\"request_method\":\"POST\",\"saas_id\":\"sample_saas_id_sample\",\"api_key\":\"sample_api_key_sample\",\"request_body\":\"{\\\"attributes\\\":{\\\"memo\\\":\\\"AmazonEventBridgeTest\\\"},\\\"back_office_staff_email\\\":\\\"AmazonEventBridgeTest@example.com\\\",\\\"name\\\":\\\"AmazonEventBridgeTest\\\"}\",\"response_body\":\"{\\\"attributes\\\":{\\\"memo\\\":\\\"AmazonEventBridgeTest\\\"},\\\"back_office_staff_email\\\":\\\"AmazonEventBridgeTest@example.com\\\",\\\"id\\\":\\\"fc84307d-e285-4854-8c16-21a6871a2a13\\\",\\\"name\\\":\\\"AmazonEventBridgeTest\\\",\\\"plan_histories\\\":[]}\"}",
+        "trace_id": "6aae5af4-7ee4-4de3-bd1d-5ebf13767cbf"
+    }
+}
+```
+# create_saas_user
+作成したユーザー情報が`response_body`に設定されます。
+APIリファレンス : <a href="/docs/reference/auth-api#tag/saasUser/operation/CreateSaasUser" target="_blank">Create SaaS User</a>
+```json
+{
+    "version": "0",
+    "id": "ef78f744-c0b6-1328-990a-cb3c7a389f29",
+    "detail-type": "api_call",
+    "source": "aws.partner/saasus.io/d8753ef8-8604-4b7d-8a44-cf9a64433209-1/event",
+    "account": "899411123005",
+    "time": "2026-05-19T01:55:23Z",
+    "region": "ap-northeast-1",
+    "resources": [],
+    "detail": {
+        "event_type": "create_saas_user",
+        "event": "{\"log_id\":\"1e925d22-f84e-4f49-871d-b793d3005535\",\"date_time\":\"2026-05-19T01:55:23Z\",\"date\":\"2026-05-19\",\"ttl\":\"2033-05-19T01:55:23Z\",\"http_status\":\"201\",\"uri\":\"/v1/auth/users\",\"ip_address\":\"127.0.0.1:48282\",\"referer\":\"https://saasadmin.console.saasus.io/users\",\"request_method\":\"POST\",\"saas_id\":\"sample_saas_id_sample\",\"api_key\":\"sample_api_key_sample\",\"request_body\":\"{\\\"email\\\":\\\"AmazonEventBridgeTest@example.com\\\",\\\"password\\\":\\\"xxxxx\\\"}\",\"response_body\":\"{\\\"attributes\\\":{},\\\"email\\\":\\\"AmazonEventBridgeTest@example.com\\\",\\\"id\\\":\\\"66ccc133-67ea-4be4-9c1d-7bddf325a790\\\",\\\"sign_in_id\\\":\\\"\\\"}\"}",
+        "trace_id": "e6295edf-039f-4296-bdad-6d2409d1ad0d"
+    }
+}
+```
+各APIの内容は、<a href="/ja/docs/reference/getting-started-with-your-api" target="_blank">APIリファレンス</a>を確認してください。
+````
+
+---
+## part-4/mcp-server/bulk-user-registration.md
+````markdown
+# SaaSus Platform ユーザー一括登録手順
+## 概要
+CSVファイルから複数のユーザーを効率的に一括登録する手順書です。複数テナント・複数ロールの組み合わせに対応し、必要なリソースの自動作成も含めて完全自動化されています。
+**[ユーザー一覧CSV出力手順](./export-user-info-csv.md)で出力されたCSVファイルをそのまま使用できます。**
+### 主要なユースケース
+この機能は特に以下のような環境間でのユーザー移行に便利です：
+- **開発環境 → ステージング環境**: 開発環境で作成・テストしたユーザー構成をステージング環境に複製
+- **ステージング環境 → 本番環境**: ステージング環境で検証済みのユーザー構成を本番環境に展開
+- **環境のリセット**: 既存環境のユーザー構成を別の環境に移行してリセット
+## 前提条件
+- SaaSus API MCP Serverが設定済みであること
+- CSVファイルが適切な形式で準備されていること（[ユーザー一覧CSV出力手順](./export-user-info-csv.md)で出力されたファイルを推奨）
+### 重要な前提条件
+**登録先環境には、CSV出力元環境と同じリソースが定義されている必要があります：**
+- **テナント名**: CSVに記載されているすべてのテナント名が登録先環境に存在すること
+- **環境**: CSVに記載されている環境名が登録先環境に存在すること
+- **役割**: CSVに記載されているすべての役割名が登録先環境に定義されていること
+- **カスタム属性**: CSVに含まれるカスタム属性（名前含む）が登録先環境で定義されていること
+これらのリソースが存在しない場合、該当する行はスキップされるか、エラーが発生します。
+## MCP Serverへの依頼文言
+### 基本的な依頼文
+```
+saasus_users.csvファイルを読み込んで、SaaSus API MCP Serverを使用してユーザーの一括登録を実行してください。
+【重要】以下の処理をすべて自動で実行してください：
+1. CSVファイルの読み込み
+   - メールアドレス / ログインID: ユーザーのメールアドレスまたはログインID（必須、@を含む場合はメールアドレス認証、@なしの場合はログインID認証として登録）
+   - テナント名: テナント名（必須、複数テナントの場合は行を分ける）
+   - 環境: 環境名（必須、prod/dev/test等の文字列）
+   - 役割: ロール名（必須、単一ロール、複数ロールの場合は行を分ける）
+   - 名前: 名前（属性として設定、オプション）
+   - カスタム属性: 役割より右の列はすべてカスタム属性として扱う（オプション）
+2. 必要なリソースの確認とバリデーション（効率化処理）
+   - CSVヘッダーのカスタム属性（名前含む）が定義されているか確認し、存在しない場合はCSV読み込み時点でエラー
+   - 各行について以下の順序でチェックし、スキップが確定した時点で他の項目はチェックしない：
+     1. テナント名が存在するか確認し、存在しない場合はその行をスキップ
+     2. ロール名が存在するか確認し、存在しない場合はその行をスキップ
+     3. 環境名から環境IDを取得し、存在しない場合はその行をスキップ
+3. ユーザーの一括登録
+   - 事前処理: CSVファイル全体を読み込み、バリデーションを実行してからメールアドレス / ログインIDごとにデータをグループ化
+   - ユーザー作成: 各メールアドレス / ログインIDについて初回出現時にSaaSユーザーを作成（メールアドレスの場合：パスワードなし・メール通知 / ログインIDの場合：一時パスワード発行）
+   - テナント処理: 各メールアドレス / ログインIDの各テナントについて初回出現時にテナントユーザーを作成し、名前属性を設定
+   - ロール処理: 各行ごとに指定されたロールを割り当て
+   - 環境設定: CSVの環境列で指定された環境名から環境IDを取得してロール割り当てを実行
+   - 重複回避: 既存のSaaSユーザー・テナントユーザーは作成をスキップし、ロール追加のみ実行
+4. 結果の報告
+   - 処理されたCSV行数と成功/スキップ/失敗の詳細
+   - スキップされた行の理由（存在しないテナント、ロール、環境名）
+   - 登録成功したユーザーの詳細
+   - エラーがあった場合の詳細情報
+すべての処理を自動で実行し、最後に詳細なレポートを提供してください。
+```
+## CSVファイル形式
+### ファイル構造
+```csv
+メールアドレス / ログインID,テナント名,環境,役割,名前
+user1@example.com,company_a,prod,admin,田中太郎
+user1@example.com,company_a,prod,user,田中太郎
+user2@example.com,company_a,prod,user,佐藤花子
+user3@example.com,company_b,prod,user,鈴木次郎
+user4@example.com,company_a,prod,user,山田三郎
+user4@example.com,company_a,prod,viewer,山田三郎
+user5@example.com,company_b,prod,admin,高橋美咲
+user5@example.com,company_a,prod,user,高橋美咲
+user5@example.com,company_b,prod,user,高橋美咲
+```
+### 列の説明
+- **メールアドレス / ログインID**: ユーザーのメールアドレスまたはログインID（必須、@を含む場合はメールアドレス認証、@なしの場合はログインID認証として登録）
+- **テナント名**: 所属するテナント名（必須、複数テナントの場合は行を分ける、存在しない場合はスキップ）
+- **環境**: 環境名（必須、prod/dev/test等の文字列、存在しない場合はスキップ）
+- **役割**: 割り当てるロール名（必須、単一ロール、複数ロールの場合は行を分ける、存在しない場合はスキップ）
+- **名前**: ユーザーの名前（属性として設定、オプション）
+- **カスタム属性**: 役割より右の列はすべてカスタム属性として扱う（オプション、存在しない属性の場合はCSV読み込み時点でエラー）
+### 複数テナント・複数ロールの扱い
+- **複数ロール**: 同一ユーザーが複数のロールを持つ場合は、行を分けて記載
+- **複数テナント**: 同一ユーザーが複数のテナントに所属する場合は、行を分けて記載
+- **組み合わせ**: 複数テナント×複数ロールの場合は、すべての組み合わせを行で記載
+## エクスポート機能との連携
+### CSVファイルの準備
+[ユーザー一覧CSV出力手順](./export-user-info-csv.md)で出力されたCSVファイルをそのまま使用できます。エクスポート機能で出力されるCSVは、この一括登録機能で期待される形式と完全に互換性があります。
+**重要**: エクスポート機能を使用する際は、一括登録に必要な以下の必須項目が出力されるように設定してください：
+- メールアドレス / ログインID = true
+- テナント名 = true
+- 環境 = true
+- 役割 = true
+これらの項目が含まれていない場合、一括登録処理でエラーが発生する可能性があります。
+### 推奨ワークフロー
+#### 環境間移行の場合
+1. **出力元環境でのCSV出力**: [ユーザー一覧CSV出力手順](./export-user-info-csv.md)を使用して、移行元環境（例：開発環境）からユーザー情報をCSVで出力
+2. **登録先環境の準備確認**: 移行先環境（例：ステージング環境）に必要なリソース（テナント、役割、カスタム属性）が定義されていることを確認
+3. **CSVの編集（必要に応じて）**: 環境固有の調整が必要な場合はCSVファイルを編集
+4. **一括登録の実行**: 移行先環境でこの手順を使用して一括登録を実行
+#### 既存環境でのユーザー追加の場合
+1. **既存ユーザーの確認**: [ユーザー一覧CSV出力手順](./export-user-info-csv.md)を使用して現在のユーザー情報をCSVで出力
+2. **CSVの編集**: 新規ユーザーの追加、ロールの変更などを実施
+3. **一括登録の実行**: 編集したCSVファイルを使用してこの手順で一括登録を実行
+## 注意事項
+### 環境名について
+- エクスポート機能では環境名が文字列（例：prod, dev, test）で出力されます
+- 一括登録時は、この環境名から自動的に対応する環境IDを取得して処理されます
+- 存在しない環境名が指定された場合、該当行はスキップされます
+### データの整合性
+- 同一ユーザーが複数のテナントに所属している場合、テナントごとに別の行として処理されます
+- 同一ユーザーが複数の役割を持っている場合、役割ごとに別の行として処理されます
+- 既存のユーザー・テナントユーザーは重複作成されず、新しいロールのみが追加されます
+### エラーハンドリング
+- 存在しないテナント名、役割名、環境名が指定された行は自動的にスキップされます
+- カスタム属性が定義されていない場合は、CSV読み込み時点でエラーとなります
+- 処理結果は詳細なレポートとして提供され、成功・スキップ・失敗の詳細が確認できます
+````
+
+---
+## part-4/mcp-server/clone-dev-settings.md
+````markdown
+# SaaSus Platform 環境情報取得手順
+## 概要
+SaaSus Platformの各種設定情報を包括的に取得し、JSON形式で出力する手順書です。
+## 前提条件
+- SaaSus API MCP Serverが設定済みであること
+## MCP Serverへの依頼文言
+### 基本的な依頼文
+```
+SaaSusの設定を取得して、JSON形式で一つのファイルに出力してください。
+以下の情報を含めてください：
+- ドメイン設定
+- 認証後遷移先
+- 認証詳細設定（基本設定）
+- 認証詳細設定（画面設定）
+- 認証詳細設定（認証設定）
+- 認証詳細設定（メール通知内容）
+- ユーザー属性定義
+- テナント属性定義
+- ユーザー環境定義
+- 役割定義
+- メーター単位設定
+- 計測単位設定
+- 機能メニュー設定
+- 料金プラン設定
+- 税率設定
+- 請求情報
+- イベント連携
+- AWS Marketplace情報
+```
+## 出力ファイル構造
+```json
+{
+  "domain": { ... },
+  "callback_url": "...",
+  "auth_basic_settings": { ... },
+  "auth_page_settings": { ... },
+  "auth_identity_providers": { ... },
+  "notification_messages": { ... },
+  "user_attributes": [ ... ],
+  "tenant_attributes": [ ... ],
+  "environments": [ ... ],
+  "roles": [ ... ],
+  "metering_units": [ ... ],
+  "pricing_units": [ ... ],
+  "pricing_menus": [ ... ],
+  "pricing_plans": [ ... ],
+  "tax_rates": [ ... ],
+  "billing_info": { ... },
+  "event_bridge_settings": { ... },
+  "aws_marketplace": { ... }
+}
+```
+````
+
+---
+## part-4/mcp-server/environment-setup-guide.md
+````markdown
+# 環境設定ガイド
+## 概要
+SaaSus API MCP Serverを使用する前に、適切な環境設定を行う必要があります。このガイドでは、SaaSus Platformの基本設定をSaaSus API MCP Serverを利用して作成する手順となります。
+本手順は [チュートリアルを進める前に必要な設定](https://docs.saasus.io/ja/docs/tutorial/prepare-saas-platform) 、 [SaaS 利用者テナントの作成](https://docs.saasus.io/ja/docs/tutorial/authentication-preference#saas-%E5%88%A9%E7%94%A8%E8%80%85%E3%83%86%E3%83%8A%E3%83%B3%E3%83%88%E3%81%AE%E4%BD%9C%E6%88%90)、[SaaS 利用ユーザーの作成](https://docs.saasus.io/ja/docs/tutorial/authentication-preference#saas-%E5%88%A9%E7%94%A8%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%81%AE%E4%BD%9C%E6%88%90) 、[料金プラン設定の手順](https://docs.saasus.io/ja/docs/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans)、[テナントへの料金プランの適用](https://docs.saasus.io/ja/docs/tutorial/manage-rate-plans/manage-rate-plans#%E3%83%86%E3%83%8A%E3%83%B3%E3%83%88%E3%81%B8%E3%81%AE%E6%96%99%E9%87%91%E3%83%97%E3%83%A9%E3%83%B3%E3%81%AE%E9%81%A9%E7%94%A8) で必要な項目を作成しています。
+また、登録内容はCSVでも登録可能です。本手順は分かりやすくするため以下の表現を利用しています。
+## 前提条件
+- SaaSus Platform のアカウント
+- 適切なAPIキーとシークレットキー
+- Node.js環境（v16以上）
+- SaaSus API MCP Serverのセットアップ完了
+## 環境作成
+本手順は [チュートリアルを進める前に必要な設定](https://docs.saasus.io/ja/docs/tutorial/prepare-saas-platform) を元に行なっております。
+#### MCP Serverへの依頼文言
+```
+SaaSus Platform に以下の情報を作成してください。
+エラーが発生した場合、それ以降の作成は中止して、実行した内容とエラーの情報を出力してください。
+[ユーザー属性]
+属性名:username
+表示名:ユーザー名
+タイプ:文字列
+[テナント属性]
+属性名: memo
+表示名: メモ
+タイプ: 文字列
+[役割]
+役割名: user
+表示名: 一般ユーザー
+```
+## テナント作成
+本手順は [SaaS 利用者テナントの作成](https://docs.saasus.io/ja/docs/tutorial/authentication-preference#saas-%E5%88%A9%E7%94%A8%E8%80%85%E3%83%86%E3%83%8A%E3%83%B3%E3%83%88%E3%81%AE%E4%BD%9C%E6%88%90)を元に行なっております。
+#### MCP Serverへの依頼文言
+```
+SaaSus Platform に以下のテナント情報を作成してください。
+エラーが発生した場合、それ以降の作成は中止して、実行した内容とエラーの情報を出力してください。
+名前: テナントサンプルその１
+メモ: テナント属性で定義した属性情報となり、自由に設定可能となります
+代表ユーザーの追加:新規でユーザーを作成
+代表者メールアドレス: saasus-sample-tenant1@example.com
+代表者のパスワード: Passw0rd!!
+名前: サンプルアプリテナント２
+メモ: テナント属性で定義した属性情報となり、自由に設定可能となります
+代表ユーザーの追加:新規でユーザーを作成
+代表者メールアドレス: saasus-sample-tenant2@example.com
+代表者のパスワード: Passw0rd!!
+```
+## ユーザー作成
+本手順は [SaaS 利用ユーザーの作成](https://docs.saasus.io/ja/docs/tutorial/authentication-preference#saas-%E5%88%A9%E7%94%A8%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%81%AE%E4%BD%9C%E6%88%90) を元に行なっております。
+#### MCP Serverへの依頼文言
+```
+SaaSus Platform に以下のユーザー情報を作成してください。
+エラーが発生した場合、それ以降の作成は中止して、実行した内容とエラーの情報を出力してください。
+メールアドレス: user1-1@example.com
+パスワード:Passw0rd!!
+名前:ユーザー１−１
+テナント:テナントサンプルその１
+メールアドレス: user1-2@example.com
+パスワード:Passw0rd!!
+名前:ユーザー１−２
+テナント:テナントサンプルその１
+メールアドレス: user2-1@example.com
+パスワード:Passw0rd!!
+名前:ユーザー２−１
+テナント:サンプルアプリテナント２
+メールアドレス: user2-2@example.com
+パスワード:Passw0rd!!
+名前:ユーザー２−２
+テナント:サンプルアプリテナント２
+```
+## 役割設定
+本手順は [役割管理](https://docs.saasus.io/ja/docs/part-5/adding-role-to-user) を元に行なっております。
+#### MCP Serverへの依頼文言
+```
+SaaSus Platform に以下の情報を作成してください。
+エラーが発生した場合、それ以降の作成は中止して、実行した内容とエラーの情報を出力してください。
+役割 を複数設定する場合、「,」で区切って設定可能です。
+テナント:テナントサンプルその１
+メールアドレス: user1-1@example.com
+役割:user
+テナント:テナントサンプルその１
+メールアドレス: user1-2@example.com
+役割:user
+テナント:サンプルアプリテナント２
+メールアドレス: user2-1@example.com
+役割:user
+テナント:サンプルアプリテナント２
+メールアドレス: user2-2@example.com
+役割:user
+```
+## 料金プラン
+本手順は [料金プラン設定の手順](https://docs.saasus.io/ja/docs/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans) 、[テナントへの料金プランの適用](https://docs.saasus.io/ja/docs/tutorial/manage-rate-plans/manage-rate-plans#%E3%83%86%E3%83%8A%E3%83%B3%E3%83%88%E3%81%B8%E3%81%AE%E6%96%99%E9%87%91%E3%83%97%E3%83%A9%E3%83%B3%E3%81%AE%E9%81%A9%E7%94%A8) を元に行なっております。
+### メーター
+#### MCP Serverへの依頼文言
+```
+SaaSus Platform に以下のメーター単位を作成してください。
+エラーが発生した場合、それ以降の作成は中止して、実行した内容とエラーの情報を出力してください。
+メーター単位名:comment_count
+メーター単位の表示名:コメント数
+メーター単位の説明:コメント数
+```
+### 計測単位
+#### MCP Serverへの依頼文言
+```
+SaaSus Platform に以下の計測単位を作成してください。
+ユニットはfixed: 固定ユニット、usage: 使用量ユニット、tiered: 段階ユニット、tiered_usage: 段階的使用量ユニット を指定
+エラーが発生した場合、それ以降の作成は中止して、実行した内容とエラーの情報を出力してください。
+ユニット: fixed
+計測単位名:basic_base
+計測単位の表示名:Basicプラン基本料金
+計測単位の説明:Basicプラン基本料金
+金額:500
+繰り返しの期間:月
+通貨:JPY
+ユニット: usage
+計測単位名:free_comment
+計測単位の表示名:Freeプランのコメント数
+計測単位の説明:Freeプランのコメント数
+対象メーター名:comment_count
+上限:10
+通貨:JPY
+ユニット: tiered_usage
+計測単位名:basic_comment
+計測単位の表示名: Basicプランコメント数
+計測単位の説明: Basicプランコメント数
+対象メーター名:comment_count
+単位使用量あたりの金額:0
+上限:100
+通貨:JPY
+上限:10
+単位金額:0
+固定金額:500
+上限:50
+単位金額:0
+固定金額:1000
+上限:-
+単位金額:0
+固定金額:1500
+```
+### 機能メニュー
+#### MCP Serverへの依頼文言
+```
+SaaSus Platform に以下の機能メニューを作成してください。
+計測単位は,区切りで複数設定可能です。
+エラーが発生した場合、それ以降の作成は中止して、実行した内容とエラーの情報を出力してください。
+機能メニュー名:basic_menu
+機能メニューの表示名:Basicプラン基本メニュー
+機能メニューの説明:Basicプラン基本メニュー
+計測単位:basic_base, basic_comment
+機能メニュー名: free_menu
+機能メニューの表示名:Freeプラン基本メニュー
+機能メニューの説明:Freeプラン基本メニュー
+計測単位: free_comment
+```
+### 料金プラン
+#### MCP Serverへの依頼文言
+```
+SaaSus Platform に以下のプランを作成してください。
+機能メニューは,区切りで複数設定可能です。
+エラーが発生した場合、それ以降の作成は中止して、実行した内容とエラーの情報を出力してください。
+料金プラン名:basic_plan
+料金プランの表示名:Basicプラン
+料金プランの説明:Basicプラン
+機能メニュー: basic_menu
+料金プラン名:free_plan
+料金プランの表示名:Freeプラン
+料金プランの説明:Freeプラン
+機能メニュー: free_menu
+```
+### テナントへの料金プランの適用
+#### MCP Serverへの依頼文言
+```
+SaaSus Platform に以下の情報を作成してください。
+エラーが発生した場合、それ以降の作成は中止して、実行した内容とエラーの情報を出力してください。
+テナント:テナントサンプルその１
+料金プラン: free_plan
+反映日:すぐ反映
+テナント:サンプルアプリテナント２
+料金プラン: basic_plan
+反映日: すぐ反映
+まず、テナントと料金プランの情報を取得してから、テナントの料金プランを更新してください。
+反映日が「すぐ反映」の場合は、using_next_plan_fromパラメータを未設定でリクエストしてください。
+```
+## 削除
+### ユーザー、テナントの削除
+#### MCP Serverへの依頼文言
+```
+以下を削除してください
+また、テナントの削除時にテナントの代表ユーザーが他のテナントのユーザーに割り当てられていな場合、
+同時に代表ユーザー削除してください。
+エラーが発生した場合、それ以降の作成は中止して、実行した内容とエラーの情報を出力してください。
+[ユーザー属性]
+属性名:username
+[テナント属性]
+属性名： memo
+[役割]
+役割名： user
+[テナント]
+名前: テナントサンプルその１
+名前: サンプルアプリテナント２
+[ユーザー]
+メールアドレス: user1-1@example.com
+メールアドレス: user1-2@example.com
+メールアドレス: user2-1@example.com
+メールアドレス: user2-2@example.com
+```
+## トラブルシューティング
+### よくある問題
+#### 属性作成時のエラー
+- 属性名に使用できない文字が含まれていないか確認してください
+- 同じ属性名が既に存在していないか確認してください
+#### APIキーエラー
+- SaaSus Platform のAPIキーが正しく設定されているか確認してください
+- APIキーの権限が適切に設定されているか確認してください
+#### SaaSus API MCP Server接続エラー
+- SaaSus API MCP Serverが正しく起動しているか確認してください
+- 環境変数が正しく設定されているか確認してください
+````
+
+---
+## part-4/mcp-server/export-metering-data.md
+````markdown
+# SaaSus Platform メータリングデータCSV出力手順
+## 概要
+SaaSus Platformの各テナントの各月のメータリング数値を取得し、CSV形式で出力する手順書です。
+## 前提条件
+- SaaSus API MCP Serverが設定済みであること
+## MCP Serverへの依頼文言
+### 基本的な依頼文
+```
+メータリングデータをCSV出力してください。
+[出力設定]
+出力形式 = CSV
+ファイル名 = saasus_metering_data.csv
+中間成果物は不要
+結果のCSVファイルを直接出力
+各テナントの各期間のメータリングデータを別の行として出力
+期間単位 = 日 または 月 （必要に応じて変更）
+キャッシュは使用せず、常に最新の情報を取得
+[データ取得方法]
+[必須要件]
+漏れなく完全なデータ取得を実行してください。
+[取得手順]
+1. 全テナント取得: `gettenants` APIで全テナント一覧を取得
+2. 全メータリング単位取得: `getmeteringunits` APIで全メータリング単位一覧を取得
+3. 効率的なデータ取得:
+   日単位の場合:
+   - 各テナントID × 各日付の組み合わせで `getmeteringunitdatecountsbytenantidanddate` APIを実行
+   月単位の場合:
+   - 各テナントID × 各月の組み合わせで `getmeteringunitmonthcountsbytenantidandmonth` APIを実行
+   - 実際にデータが存在する場合のみCSVに含める
+   - データが存在しない場合（counts配列が空）は、そのテナント×期間の組み合わせをスキップ
+4. データ確認: 各APIレスポンスでcounts配列の内容を確認し、空配列でない場合のみデータを採用
+[フィールド設定]
+テナントID = true
+テナント名 = true
+メーター名 = true
+使用量 = true
+期間 = true
+; その他カスタム属性がある場合は、以下に追加してください
+; カスタム属性1 = true
+; カスタム属性2 = true
+[フィールド説明]
+テナントID: テナントの一意識別子
+テナント名: テナントの表示名
+メーター名: メータリング単位の表示名（display_name）
+使用量: 該当期間の使用量
+期間: メータリング対象期間（月単位: 2025-8、日単位: 2025-08-15）
+[出力条件]
+; メータリングデータを出力する際のフィルタ条件を設定します
+; 例: 特定のテナントのメータリングデータのみを出力する場合は、以下のように設定します
+; テナント名 = 特定のテナント名
+; 例: 特定の期間のメータリングデータのみを出力する場合は、以下のように設定します
+; 期間 = 2025-8
+;
+; 月単位の例:
+; 期間単位 = 月
+; 期間開始 = 2025-6
+; 期間終了 = 2025-8
+; 日単位の例:
+; 期間単位 = 日
+; 期間開始 = 2025-08-01
+; 期間終了 = 2025-08-31
+; 例: 特定のメーターのメータリングデータのみを出力する場合は、以下のように設定します
+; メーター名 = API呼び出し
+期間単位 = 月
+期間開始 = 2025-6
+期間終了 = 2025-8
+[出力例]
+; 以下は出力されるCSVの例です（月単位の場合）
+; テナントID,テナント名,メーター名,使用量,期間
+; tenant-001,サンプルテナント1,アクティブユーザー数,13,2025-08-27
+; tenant-001,サンプルテナント1,コメント数,3,2025-08-27
+; tenant-002,サンプルテナント2,テスト使用量,5,2025-08-27
+; 以下は日単位での出力例です（日単位の場合）
+; テナントID,テナント名,メーター名,使用量,期間
+; tenant-001,サンプルテナント1,API呼び出し,1200,2025-7
+; tenant-001,サンプルテナント1,ストレージ,550,2025-7
+; tenant-002,サンプルテナント2,API呼び出し,850,2025-7
+; tenant-002,サンプルテナント2,ストレージ,320,2025-7
+[重要な注意事項]
+1. 全組み合わせチェック: 全テナント × 全期間の組み合わせで必ずデータ存在確認を実行
+2. API使用優先順位:
+   - 日単位: `getmeteringunitdatecountsbytenantidanddate`（一回で該当日の全メーター取得）
+   - 月単位: `getmeteringunitmonthcountsbytenantidandmonth`（一回で該当月の全メーター取得）
+   - 個別メーター単位での取得は効率性のため避ける
+3. データ品質確保: 使用量が0の場合とデータが存在しない場合を区別する
+4. 進捗報告: データ取得中は「○件目/全○件のテナント×期間を処理中」のような進捗を示す
+```
+## 出力ファイル形式
+### CSVヘッダー
+```csv
+テナントID,テナント名,メーター名,使用量,期間
+```
+### データ行の例（月単位）
+```csv
+tenant-001,サンプルテナント1,アクティブユーザー数,13,2025-08-27
+tenant-001,サンプルテナント1,コメント数,3,2025-08-27
+tenant-002,サンプルテナント2,テスト使用量,5,2025-08-27
+```
+### データ行の例（日単位）
+```csv
+tenant-001,サンプルテナント1,API呼び出し,1200,2025-7
+tenant-001,サンプルテナント1,ストレージ,550,2025-7
+tenant-002,サンプルテナント2,API呼び出し,850,2025-7
+tenant-002,サンプルテナント2,ストレージ,320,2025-7
+```
+## 注意事項
+- 同一テナントが複数のメーターを使用している場合、メーターごとに別の行として出力されます
+- 同一テナントが複数の期間のデータを持つ場合、期間ごとに別の行として出力されます
+- 期間範囲を指定した場合、指定した範囲内のすべての期間のデータが出力されます
+- 日単位で出力する場合、行数が多くなる可能性があります（例：1ヶ月分で約30行×テナント数×メーター数）
+- フィルタ条件を指定した場合、条件に合致するメータリングデータのみが出力されます
+- 出力されるデータは実行時点での最新情報です（キャッシュは使用されません）
+## カスタマイズ
+### フィールドの追加
+カスタム属性を出力に含めたい場合は、[フィールド設定]セクションで該当項目を`true`に設定してください。
+### フィルタ条件の変更
+特定の条件でメータリングデータを絞り込みたい場合は、[出力条件]セクションで条件を指定してください。複数の条件を組み合わせることも可能です。
+````
+
+---
+## part-4/mcp-server/export-tenant-contract-info.md
+````markdown
+# SaaSus Platform 契約テナント情報取得手順
+## 概要
+SaaSus Platformに登録されている契約テナントの情報を包括的に取得し、表形式で出力する手順書です。
+## 前提条件
+- SaaSus API MCP Serverが設定済みであること
+## MCP Serverへの依頼文言
+### 基本的な依頼文
+```
+契約テナントの情報をまとめてください。
+（;）で始まる行はコメントアウトされており、処理対象外となります
+[出力設定]
+出力形式 = CSV形式（JSON形式、表形式、YAML形式なども選択可能）
+中間成果物は不要
+スクリプトやプログラムの作成は禁止
+結果の情報のみ出力
+キャッシュは使用せず、常に最新の情報を取得
+[フィールド設定]
+会社名 = true
+テナント名 = true
+契約中のプラン = true
+支払い方法 = true
+支払い金額 = true
+通貨 = true
+契約開始日 = true
+テナントID = true
+代表者メールアドレス = true
+[出力条件]
+; 契約中のプラン = プラン1
+; 支払い方法 = Stripe
+[フィールド説明]
+会社名: 請求書に記載されるテナント名、設定がない場合はテナント名を出力
+テナント名: SaaSus Platform上でのテナント名
+契約中のプラン: 現在契約している料金プラン名、契約しているプランがない場合は「未契約」
+支払い方法: Awsmarketplace API の GetCustomers に含まれているテナントは「AWS Marketplace」、それ以外のテナントは「Stripe」
+支払い金額: 月額料金
+通貨:料金の通貨、プランがない場合は「ー」
+契約開始日: プラン契約開始日、プランがない場合は「ー」
+テナントID: SaaSus Platform上のテナントID
+代表者メールアドレス: テナントの代表者メールアドレス、代表者の設定がない場合は「ー」
+```
+## 取得される情報
+### テナント基本情報
+- **テナント名**: SaaSus Platform上で管理されているテナント名
+- **テナントID**: 一意のテナント識別子
+- **代表者メールアドレス**: テナントの管理者メールアドレス
+### 契約・料金情報
+- **契約中のプラン**: 現在適用されている料金プラン
+- **支払い方法**: Stripe連携またはAWS Marketplace連携の判定
+- **支払い金額**: 月額料金
+- **通貨**: 料金の通貨
+- **契約開始日**: プラン適用開始日
+## 注意事項
+- 出力されるデータは実行時点での最新情報です
+- 料金プランが設定されていないテナントは「未契約」と表示されます
+- AWS Marketplace APIのGetCustomersに含まれていないテナントは支払い方法が「Stripe」と表示されます
+- 請求情報が設定されていない場合、会社名はテナント名と同じ値が表示されます
+- 契約開始日はUnixタイムスタンプから日付形式に変換されます
+- プランが設定されていない場合、契約開始日、支払い金額、通貨は「ー」と表示されます
+## カスタマイズ
+### フィルタ条件の追加
+特定の条件でテナントを絞り込みたい場合は、依頼文に条件を追加してください。
+例：
+```
+[出力条件]
+契約中のプラン = プラン1
+支払い方法 = Stripe
+```
+### 追加情報の取得
+テナントの属性情報やカスタム設定を含めたい場合は、フィールド設定に追加してください。
+````
+
+---
+## part-4/mcp-server/export-user-info-csv.md
+````markdown
+# SaaSus Platform ユーザー一覧CSV出力手順
+## 概要
+SaaSus Platformに登録されているユーザー情報を包括的に取得し、CSV形式で出力する手順書です。
+## 前提条件
+- SaaSus API MCP Serverが設定済みであること
+## MCP Serverへの依頼文言
+### 基本的な依頼文
+```
+ユーザー一覧をCSV出力してください。
+[出力設定]
+出力形式 = CSV
+ファイル名 = saasus_users.csv
+中間成果物は不要
+結果のCSVファイルを直接出力
+同一ユーザーが複数のテナントや役割を持つ場合は、別の行として出力
+キャッシュは使用せず、常に最新の情報を取得
+[フィールド設定]
+メールアドレス / ログインID = true
+テナント名 = true
+環境 = true
+役割 = true
+; その他カスタム属性がある場合は、以下に追加してください
+; 名前 = true
+; カスタム属性1 = true
+; カスタム属性2 = true
+[フィールド説明]
+メールアドレス / ログインID: ユーザーのメールアドレスまたはログインID（@を含む場合はメールアドレス認証、@なしの場合はログインID認証）
+テナント名: ユーザーが所属するテナントの名前
+環境: ユーザーが利用している環境（例: 本番、開発、テストなど）
+役割: ユーザーに付与されているロール（例: 管理者、ユーザー、ゲストなど）
+; 名前: ユーザーのフルネーム
+; カスタム属性1: 任意のカスタム属性1の説明
+; カスタム属性2: 任意のカスタム属性2の説明
+[出力条件]
+; ユーザー一覧を出力する際のフィルタ条件を設定します
+; 例: 特定のテナントに所属するユーザーのみを出力する場合は、以下のように設定します
+; テナント名 = 特定のテナント名
+; 例: 特定の環境でのみユーザーを出力する場合は、以下のように設定します
+; 環境 = 本番
+; 例: 特定の役割を持つユーザーのみを出力する場合は、以下のように設定します
+; 役割 = 管理者, ユーザー
+; 例: 特定の名前を持つユーザーのみを出力する場合は、以下のように設定します
+; 名前 = 山田太郎
+テナント名 = テナント2
+[出力例]
+; 以下は出力されるCSVの例です
+; メールアドレス / ログインID,テナント名,環境,役割,名前
+; user1-1@example.com,テナント1,prod,管理者,ユーザ1-1
+; user1-1@example.com,テナント1,prod,一般ユーザ,ユーザ1-1
+; user1-2@example.com,テナント1,prod,管理者,ユーザ1-2
+; user2-1@example.com,テナント2,prod,管理者,ユーザ2-1
+```
+## 出力ファイル形式
+### CSVヘッダー
+```csv
+メールアドレス / ログインID,テナント名,環境,役割
+```
+### データ行の例
+```csv
+user2-1@example.com,テナント2,prod,管理者
+user2-2@example.com,テナント2,prod,一般ユーザ
+user2-3@example.com,テナント2,dev,管理者
+user2-3@example.com,テナント2,dev,一般ユーザ
+```
+## 注意事項
+- 同一ユーザーが複数のテナントに所属している場合、テナントごとに別の行として出力されます
+- 同一ユーザーが複数の役割を持っている場合、役割ごとに別の行として出力されます
+- フィルタ条件を指定した場合、条件に合致するユーザーのみが出力されます
+- 出力されるデータは実行時点での最新情報です（キャッシュは使用されません）
+## カスタマイズ
+### フィールドの追加
+ユーザーの名前やカスタム属性を出力に含めたい場合は、[フィールド設定]セクションで該当項目を`true`に設定してください。
+### フィルタ条件の変更
+特定の条件でユーザーを絞り込みたい場合は、[出力条件]セクションで条件を指定してください。複数の条件を組み合わせることも可能です。
+````
+
+---
+## part-4/mcp-server/setup.md
+````markdown
+# SaaSus API MCP Server 設定ガイド
+## 概要
+SaaSus API MCP Serverは、Model Context Protocol (MCP) サーバーとして動作し、SaaSus APIをClaude DesktopやCursorなどのMCP互換クライアントから利用できるようにします。
+:::caution
+MCP クライアントの送信上限と日次上限はプランごとに異なります。
+Free プランでは、大きなリクエストが拒否されることがあります。
+:::
+## 前提条件
+- Node.js（v16以上必須、v20以上推奨）
+- npm（Nodeに含まれています）
+## インストール手順
+### 1. リポジトリのクローン
+以下のコマンドでプロジェクトをクローンしてください。
+```bash
+git clone https://github.com/saasus-platform/saasus-api-mcp-server.git
+cd saasus-api-mcp-server
+```
+### 2. 依存関係のインストール
+プロジェクトのルートディレクトリで以下のコマンドを実行してください。
+```bash
+npm install
+```
+### 3. 利用可能なツールの確認
+生成されたツールの説明とパラメータを確認するには、以下のコマンドを実行してください。
+```bash
+node index.js tools
+```
+実行例：
+```
+Available Tools:
+Workspace: saasus-auth-api-schema
+  Collection: get-basic-configurations.js
+    get_basic_configurations
+      Description: Get basic configurations including domain name and CNAME records.
+      Parameters:
+    [...]
+```
+## Claude Desktop での設定
+:::caution
+Claude Desktop の無料版をご利用の場合、送信上限を超えるとエラーとなり動作しないことがあります。
+継続してご利用いただくには、有料プランへの切り替えをご検討ください。
+:::
+### 1. ローカル環境の確認
+nodeのパスを確認します
+```bash
+which node
+```
+mcpServer.jsのパスを確認します
+```bash
+realpath mcpServer.js
+```
+### 2. SaaSus Platform のAPIキー情報の取得
+SaaSus API MCP Serverを使用するには、以下の環境変数を設定する必要があります
+これらの値は、SaaSus Platform のSaaS開発コンソールから取得できます。
+- `SAASUS_PLATFORM_SAASID`: SaaS ID
+- `SAASUS_PLATFORM_APIKEY`: API キー
+- `SAASUS_PLATFORM_SECRETKEY`: シークレットキー
+### 3. MCP Server の設定
+手順１、２で取得した情報を設定ファイルに追加します：
+```json
+{
+  "mcpServers": {
+    "saasusapis": {
+      "command": "node のパス",
+      "args": ["mcpServer.js のパス"],
+      "env": {
+        "SAASUS_PLATFORM_SAASID": "SaaS ID",
+        "SAASUS_PLATFORM_APIKEY": "API キー",
+        "SAASUS_PLATFORM_SECRETKEY": "シークレットキー"
+      }
+    }
+  }
+}
+```
+**注意:**
+`node のパス` の部分は、フルパスに置き換えてください。
+`mcpServer.js のパス` の部分は、実際にクローンしたディレクトリのフルパスに置き換えてください。
+### 4. Claude Desktop の再起動
+設定を反映するため、Claude Desktopを再起動します。
+### 5. Claude Desktop での動作確認
+``SaaSusの基本情報を取得してください``とお願いしてください。
+正常に基本情報が取得できたら設定は完了です。
+## 利用可能な機能
+SaaSus API MCP Serverでは、SaaSus Platform の全APIエンドポイントが利用できます。
+主な機能には以下が含まれます
+### Auth API
+- 基本設定の取得・更新
+- ユーザー管理
+- テナント管理
+- 認証設定
+### Pricing API
+- メータリング
+- 機能メニュー管理
+- プラン管理
+### その他のAPI
+- Billing API
+- Communication API
+- API Log API
+- AWS Marketplace API
+- Integration API
+- Analysis API
+## トラブルシューティング
+### よくある問題
+#### 1. サーバーが起動しない
+- Node.jsのバージョンを確認してください（v16以上が必要、v20以上推奨）
+- 依存関係が正しくインストールされているか確認してください
+- 環境変数が正しく設定されているか確認してください
+#### 2. APIキーエラー
+- SaaSus Platform のAPIキーが正しく設定されているか確認してください
+- APIキーの権限が適切に設定されているか確認してください
+- SaaS IDが正しく設定されているか確認してください
+#### 3. MCP接続エラー
+- Claude Desktop または Cursor の設定ファイルのパスが正しいか確認してください
+- 設定ファイルのJSON形式が正しいか確認してください
+- アプリケーションを再起動してください
+- MCP クライアントは、プランやツール定義の大きさによって送信上限を超え失敗する場合があります。
+### ツール一覧の確認
+利用可能なツールを確認するには：
+```bash
+node index.js tools
+```
+このコマンドで、すべての利用可能なAPIエンドポイントとそのパラメータを確認できます。
+````
+
+---
+## part-4/mcp-server/user-behavior-analysis.md
+````markdown
+# SaaSus Platform ユーザー行動履歴分析手順
+## 概要
+SaaSus Platformに蓄積されているユーザー行動履歴データを分析し、出力する手順書です。
+## 前提条件
+- SaaSus API MCP Serverが設定済みであること
+- 分析対象のユーザー行動履歴データが蓄積されていること
+## MCP Serverへの依頼文言
+### ユーザーごとのリファラー分析
+```
+ユーザーごとのリファラー分析を出力してください。
+（;）で始まる行はコメントアウトされており、処理対象外となります
+[出力設定]
+出力形式 = CSV形式（JSON形式、表形式、YAML形式なども選択可能）
+中間成果物は不要
+スクリプトやプログラムの作成は禁止
+結果の情報のみ出力
+キャッシュは使用せず、常に最新の情報を取得
+[API使用方法]
+1. getsaasusers APIで全ユーザーリストを取得
+2. 各ユーザーIDに対してgetuserbehaviorhistories APIを実行
+3. 各ユーザーの行動履歴データをリファラー別に集計
+[フィールド設定]
+ユーザーID = true
+リファラー = true
+アクセス回数 = true
+最初のアクセス日 = true
+最終アクセス日 = true
+[出力条件]
+; 分析期間 = 2025/01以降から現在まで
+; 分析期間 = 2025/01/01-2025/01/31
+[フィールド説明]
+ユーザーID: 実際のユーザーの識別子（APIから取得した実データを使用）
+リファラー: RefererまたはX-SaaSus-Refererヘッダーに設定された値、未設定の場合はブラウザが自動設定したURL
+アクセス回数: 該当リファラーでのアクセス回数
+最初のアクセス日: 該当リファラーでの最初のアクセス日（YYYY-MM-DD形式）
+最終アクセス日: 該当リファラーでの最終アクセス日（YYYY-MM-DD形式）
+```
+### リファラー別使用回数分析
+```
+リファラー別使用回数分析を出力してください。
+（;）で始まる行はコメントアウトされており、処理対象外となります
+[出力設定]
+出力形式 = CSV形式（JSON形式、表形式、YAML形式なども選択可能）
+中間成果物は不要
+スクリプトやプログラムの作成は禁止
+結果の情報のみ出力
+キャッシュは使用せず、常に最新の情報を取得
+[API使用方法]
+1. getsaasusers APIで全ユーザーリストを取得
+2. 各ユーザーIDに対してgetuserbehaviorhistories APIを実行
+3. 全ユーザーのデータを統合してリファラー別に集計
+[フィールド設定]
+リファラー = true
+総アクセス回数 = true
+ユニークユーザー数 = true
+最初のアクセス日 = true
+最後のアクセス日 = true
+[出力条件]
+; 分析期間 = 2025/01以降から現在まで
+; 分析期間 = 2025/01/01-2025/01/31
+; 最小ユニークユーザー数 = 3
+[フィールド説明]
+リファラー: RefererまたはX-SaaSus-Refererヘッダーに設定された値、未設定の場合はブラウザが自動設定したURL
+総アクセス回数: 該当リファラーでの総アクセス回数
+ユニークユーザー数: 該当リファラーでアクセスした実際のユニークユーザー数
+最初のアクセス日: 該当リファラーでの最初のアクセス日（YYYY-MM-DD形式）
+最後のアクセス日: 該当リファラーでの最後のアクセス日（YYYY-MM-DD形式）
+```
+## 取得される情報
+### ユーザーごとのリファラー分析で出力される項目
+- **ユーザーID**: SaaSus Platform上で管理されているユーザー識別子
+- **リファラー**: RefererまたはX-SaaSus-Refererヘッダーに設定された値
+- **アクセス回数**: 各リファラーでのアクセス回数
+- **最初のアクセス日**: 最初に該当リファラーでアクセスした日付
+- **最終アクセス日**: 最後に該当リファラーでアクセスした日付
+### 集計・分析情報
+- **総アクセス回数**: リファラー別の総アクセス回数
+- **ユニークユーザー数**: リファラー別のユニークユーザー数
+- **最初のアクセス日**: リファラー別の初回アクセス日
+- **最後のアクセス日**: リファラー別の最終アクセス日
+## 注意事項
+- 出力されるデータは実行時点での最新情報です
+- ログの保持期間はプランによって異なります。詳細は[料金プランページ](https://saasus.io/pricing)をご覧ください
+- 保持期間を超えたデータは自動的に削除されるため取得できません
+- 分析期間は契約プランの保持期間に制限されます
+- 実際のユーザーIDを使用してデータを取得します
+- 分析結果の取り扱いには十分注意し、適切なアクセス制御を実施してください
+## カスタマイズ
+### フィルタ条件の追加
+特定の条件でデータを絞り込みたい場合は、依頼文に条件を追加してください。
+例：
+```
+[出力条件]
+分析期間 = 2025/01以降から現在まで
+分析期間 = 2025/01/01-2025/01/31
+最小ユニークユーザー数 = 3
+```
+### 分析期間の変更
+分析期間を変更したい場合は、依頼文に期間を指定してください。以下の形式で指定できます：
+- `2025/01以降から現在まで`: 指定した年月以降から現在までの期間
+- `2025/01/01-2025/01/31`: 指定した開始日から終了日までの期間
+ただし、ログ保持期間の制限により契約プランの保持期間までしか指定できません。詳細は[料金プランページ](https://saasus.io/pricing)をご覧ください。
+````
+
+---
+## part-4/pricing-and-billing/pricing-plan-creation.md
+````markdown
+このページでは、**Free / Basic / Enterprise** の 3 プランを例に
+SaaS開発コンソールで必要な 4 要素（メーター単位 → 計測単位 → 機能メニュー → 料金プラン）を順番に設定します。
+---
+## 1 . メーター単位の作成
+まずは、利用量を計測する **メーター単位** を登録します。
+| メーター単位名 | 表示名   | 説明       |
+|---------------|---------|-----------|
+| `comment_count` | コメント数 | コメント数 |
+![メーター単位設定](/ja/img/part-4/pricing-and-billing/pricing-plan-creation/setting-measurement-units-function-menus-and-price-plans-07.png)
+:::info
+Stripe 連携を行っている場合は「使用量の集計」で `sum`／`max` を選択できます。
+詳細 → [メーター単位設定](/docs/part-4/pricing-and-billing/usage-metering)
+:::
+---
+## 2 . 計測単位の作成
+### 2-1 . Free プラン用（使用量ユニット）
+| 計測単位名 | 表示名 | タイプ | 対象メーター | 単位金額 | 上限 | 通貨 |
+|-----------|-------|-------|--------------|---------|-----|-----|
+| `free_comment` | Freeプランコメント数 | **使用量ユニット** | コメント数 | 0 | 10 | JPY |
+![Free 計測単位](/ja/img/part-4/pricing-and-billing/pricing-plan-creation/setting-measurement-units-function-menus-and-price-plans-02.png)
+---
+### 2-2 . Basic プラン用（段階ユニット＋固定ユニット）
+<div className="table-scroll">
+<table className="nowrap-table">
+  <thead>
+    <tr>
+      <th>計測単位名</th>
+      <th>表示名</th>
+      <th>タイプ</th>
+      <th>対象メーター</th>
+      <th>料金設定</th>
+      <th>通貨</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>basic_base</code></td>
+      <td>Basicプラン基本料金</td>
+      <td><strong>固定ユニット</strong></td>
+      <td className="text-center">―</td>
+      <td className="text-right">500 / 月</td>
+      <td className="text-right">JPY</td>
+    </tr>
+    <tr>
+      <td><code>basic_comment</code></td>
+      <td>Basicプランのコメント数</td>
+      <td><strong>段階ユニット</strong></td>
+      <td>コメント数</td>
+      <td className="text-right no-p-margin">
+        0-10=500<br />
+        11-50=1,000<br />
+        51-100=1,500
+      </td>
+      <td className="text-right">JPY</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+![Basic 計測単位 固定ユニット](/ja/img/part-4/pricing-and-billing/pricing-plan-creation/setting-measurement-units-function-menus-and-price-plans-01.png)
+![Basic 計測単位 段階ユニット](/ja/img/part-4/pricing-and-billing/pricing-plan-creation/setting-measurement-units-function-menus-and-price-plans-03.png)
+---
+### 2-3 . Enterprise プラン用（段階的使用量ユニット）
+<div className="table-scroll">
+<table className="nowrap-table">
+  <thead>
+    <tr>
+      <th>計測単位名</th>
+      <th>表示名</th>
+      <th>タイプ</th>
+      <th>対象メーター</th>
+      <th>段階別単位金額</th>
+      <th>通貨</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>enterprise_comment</code></td>
+      <td>Enterpriseプランのコメント数</td>
+      <td><strong>段階的使用量ユニット</strong></td>
+      <td>コメント数</td>
+      <td className="text-right no-p-margin">
+    0-1,000=50 / 件<br />
+    1,001-5,000=40 / 件<br />
+    5,001〜=30 / 件
+      </td>
+      <td className="text-right">JPY</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+![Enterprise 計測単位](/ja/img/part-4/pricing-and-billing/pricing-plan-creation/setting-measurement-units-function-menus-and-price-plans-08.png)
+---
+## 3 . 機能メニューの作成
+| 機能メニュー名 | 表示名 | 含まれる計測単位 |
+|---------------|-------|-----------------|
+| `free_menu` | Freeプラン基本メニュー | Freeプランコメント数 |
+| `basic_menu` | Basicプラン基本メニュー | Basicプラン基本料金<br />Basicプランのコメント数 |
+| `enterprise_menu` | Enterpriseプラン基本メニュー | Enterpriseプランのコメント数 |
+![機能メニュー設定](/ja/img/part-4/pricing-and-billing/pricing-plan-creation/setting-measurement-units-function-menus-and-price-plans-05.png)
+Basicプラン、EnterpriseプランもFreeプランと同様に設定を行なってください。
+---
+## 4 . 料金プランの作成
+| 料金プラン名 | 表示名 | 機能メニュー |
+|-------------|-------|-------------|
+| `free_plan` | Freeプラン | Freeプラン基本メニュー |
+| `basic_plan` | Basicプラン | Basicプラン基本メニュー |
+| `enterprise_plan` | Enterpriseプラン | Enterpriseプラン基本メニュー |
+![料金プラン設定](/ja/img/part-4/pricing-and-billing/pricing-plan-creation/setting-measurement-units-function-menus-and-price-plans-06.png)
+Basicプラン、EnterpriseプランもFreeプランと同様に設定を行なってください。
+---
+これで **Free / Basic / Enterprise** の 3 プランが作成できました。
+````
+
+---
+## part-4/pricing-and-billing/pricing-plan-overview.md
+````markdown
+## 1. 料金プランを構成する 4 階層
+料金プランは **次の 4 階層** の組み合わせで定義します。
+| 階層 | 役割 | キーとなる設定例 |
+|------|------|------------------|
+| **メーター単位** | 利用量を測るカウンタ | コメント数 / アクティブユーザー数 … |
+| **計測単位** | 課金ロジックの“最小単位” | 固定／使用量／段階／段階的使用量 |
+| **機能メニュー** | 複数の計測単位を束ねた「機能パッケージ」 | Free メニュー / Pro メニュー など |
+| **料金プラン** | テナントに割り当てる最上位プラン | Free / Basic / Enterprise … |
+![料金プラン階層図](/ja/img/part-4/pricing-and-billing/pricing-plan-overview/manage-rate-plans-05.png)
+## 2. 計測単位 ― 4 つの課金モデル
+<div className="table-scroll">
+<table className="nowrap-table">
+  <thead>
+    <tr>
+      <th>タイプ</th>
+      <th>イメージ</th>
+      <th>主なユースケース</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>固定ユニット</strong></td>
+      <td>毎月 500 円 などの定額</td>
+      <td>月額基本料、保守費用</td>
+    </tr>
+    <tr>
+      <td><strong>使用量ユニット</strong></td>
+      <td>1 API リクエスト = 0.1 円</td>
+      <td>シンプルな従量課金</td>
+    </tr>
+    <tr>
+      <td><strong>段階ユニット</strong></td>
+      <td className="no-p-margin">
+        0–10 件 = 500 円<br />
+        11–50 件 = 1,000 円<br />
+        など
+      </td>
+      <td>ステップ課金（携帯パケット従量など）</td>
+    </tr>
+    <tr>
+      <td><strong>段階的使用量ユニット</strong></td>
+      <td className="no-p-margin">
+        0–10 件 = 100 円/件<br />
+        11–20 件 = 90 円/件<br />
+        など
+      </td>
+      <td>ボリュームディスカウント</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+:::info
+**詳細な計算パターン** は
+[段階ユニット、段階的使用量ユニットの料金計算の違いについて](/ja/docs/part-4/pricing-and-billing/tiered-unit) を参照してください。
+:::
+## 3. 「メーター単位」と「計測単位」の関係
+| 計測単位タイプ | メーター単位の参照 | 典型的な課金ロジック |
+|---------------|--------------------|--------------|
+| 固定ユニット | **参照しない** | 定額課金 |
+| 使用量ユニット | 参照（1 つ） | 利用量 × 単価 |
+| 段階ユニット | 参照（1 つ） | 利用量が属する **段階の固定額** を請求 |
+| 段階的使用量ユニット | 参照（1 つ） | **各段階ごとに単価 × 利用量を合算** |
+:::info
+**固定ユニット** はメーター単位を参照しません。
+そのため、利用量に左右されない **基本料金（月額〇〇円など）** を表現したいときに使います。
+:::
+## 4. モデル別サンプル（Free / Basic / Enterprise）
+<div className="table-scroll">
+<table className="nowrap-table">
+  <thead>
+    <tr>
+      <th>プラン</th>
+      <th>基本料金</th>
+      <th>コメント数課金</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Free</strong></td>
+      <td className="text-right">0 円</td>
+      <td>10 件まで無料</td>
+    </tr>
+    <tr>
+      <td><strong>Basic</strong></td>
+      <td className="text-right">500 円</td>
+      <td className="no-p-margin">
+        段階課金<br />
+        0–10 件 = 500 円<br />
+        11–50 件 = 1,000 円<br />
+        51–100 件 = 1,500 円
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Enterprise</strong></td>
+      <td className="text-right">0 円</td>
+      <td className="no-p-margin">
+        段階的使用量課金<br />
+        0–1,000 件 = 50 円/件<br />
+        1,001–5,000 件 = 40 円/件<br />
+        5,001〜 = 30 円/件
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+### Free プランの構成
+![Free プラン構成図](/ja/img/part-4/pricing-and-billing/pricing-plan-overview/manage-rate-plans-06.png)
+### Basic プランの構成
+![Basic プラン構成図](/ja/img/part-4/pricing-and-billing/pricing-plan-overview/manage-rate-plans-07.png)
+### Enterprise プランの構成
+![Enterprise プラン構成図](/ja/img/part-4/pricing-and-billing/pricing-plan-overview/manage-rate-plans-08.png)
+````
+
+---
+## part-4/pricing-and-billing/stripe-integration.md
+````markdown
+このページでは、SaaS開発コンソールを用いて Stripe との外部連携を行い、課金処理や請求書発行を効率化する方法について説明します。
+SaaSus Platform で作成した料金プランや税率設定の情報は、Stripe 側にも連携され、請求処理に活用されます。
+:::info
+Stripeを使用しない場合、本設定は不要です。
+:::
+## Stripeシークレットキーの登録
+Stripe連携を有効にするには、Stripeの**シークレットキー**を SaaSus Platform に登録します。
+1. SaaS開発コンソールのサイドメニューから「外部連携」を選択
+2. Stripeの**シークレットキー**を入力
+3. 「保存」をクリック
+![stripe-secret](/ja/img/part-4/pricing-and-billing/stripe-integration/saasus-development-console-used-billing-with-association-01.png)
+これにより、料金プラン作成や税率設定の際に自動的に Stripe 側へ情報が送信されるようになります。
+## Stripeに連携される税率情報
+SaaS開発コンソールで設定した税率は、以下のように Stripe 側へ反映されます。
+| Stripe | SaaS 開発コンソール | 説明                     |
+| ------ | ------------ | ---------------------- |
+| -      | 税率名          | プログラムで識別するための定義        |
+| タイプ    | 表示名          | 税率の名前                  |
+| 説明     | 説明           | 率の説明                   |
+| 率      | パーセント        | 徴収する税率を示す数値            |
+| 地域     | 国            | 税率が適用される国              |
+| 率      | 内税／外税        | 設定した税率が金額に含まれるか、含まれないか |
+![stripe-tax-setting](/ja/img/part-4/pricing-and-billing/stripe-integration/tax-rates-10.png)
+## Stripe請求書の表示例
+設定した税率に応じて、**内税**・**外税**・**未設定** それぞれのStripeで発行した請求書の例は以下の通りです。
+### 内税請求書
+**インボイス画面**
+![invoice-tax-included](/ja/img/part-4/pricing-and-billing/stripe-integration/tax-rates-11.png)
+**請求書 PDF**
+![invoice-tax-included-pdf](/ja/img/part-4/pricing-and-billing/stripe-integration/tax-rates-12.png)
+### 外税請求書
+**インボイス画面**
+![invoice-tax-excluded](/ja/img/part-4/pricing-and-billing/stripe-integration/tax-rates-13.png)
+**請求書 PDF**
+![invoice-tax-excluded-pdf](/ja/img/part-4/pricing-and-billing/stripe-integration/tax-rates-14.png)
+### 税率未設定の請求書
+**インボイス画面**
+![invoice-no-tax](/ja/img/part-4/pricing-and-billing/stripe-integration/tax-rates-15.png)
+**請求書 PDF**
+![invoice-no-tax-pdf](/ja/img/part-4/pricing-and-billing/stripe-integration/tax-rates-16.png)
+````
+
+---
+## part-4/pricing-and-billing/tax-rate-settings.md
+````markdown
+税率設定では、**テナントごとに料金プランに適用される税率（消費税など）の種類や比率を定義**します。
+SaaS運用コンソールで**テナントに料金プランを設定する際、あわせて税率を指定**できます。
+:::info
+請求書に表示する消費税について
+2023年10月1日からインボイス制度が始まります。この「インボイス」とは、事業者間でやり取りされる消費税額等が記載された請求書や領収書のことで、事業者が消費税の納税額を計算する際に必要となるものです。
+<a href="https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/invoice.htm" target="_blank">https\://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/invoice.htm</a>
+:::
+## 税率設定
+1. **SaaS開発コンソールから`料金プランｰ>税率設定`を選択**
+![tax-rates-1](/ja/img/part-4/pricing-and-billing/tax-rate-settings/tax-rates-1.png)
+2. **`税率の作成`をクリック**
+![tax-rates-2](/ja/img/part-4/pricing-and-billing/tax-rate-settings/tax-rates-2.png)
+3. `税率の作成`で税率を設定
+| 項目         | 説明                                                         |
+|--------------|-------------------------------------------------------------|
+| 税率名        | プログラムで識別するための定義を決めます。重複した名前は作成できません  |
+| 表示名        | 税率の名称（Stripe連携時は請求書に表示されます）                   |
+| 説明         | 人がわかりやすい税率の説明を設定                                  |
+| パーセント    | 徴収する税率を示す数値                                          |
+| 国           | 税率が適用される国を設定します                                   |
+| 内税／外税    | 設定した税率が金額に含まれるか、含まれないかを設定します              |
+   :::caution
+   税率は一度作成すると変更・削除ができませんのでご注意ください。
+   :::
+    上記内容を設定し作成ボタンをクリックします。
+![tax-rates-3](/ja/img/part-4/pricing-and-billing/tax-rate-settings/tax-rates-3.png)
+![tax-rates-4](/ja/img/part-4/pricing-and-billing/tax-rate-settings/tax-rates-4.png)
+````
+
+---
+## part-4/pricing-and-billing/tiered-unit.md
+````markdown
+計測単位設定では料金計算の基礎となる最小の計測単位を設定します。
+「段階ユニット」は、携帯電話のパケット料金のように、使用量の各段階で一定の料金が発生する単位、
+「段階的使用量ユニット」は、ボリュームディスカウントのように、使用量に応じて一単位あたりの料金が変動する単位となります。
+それぞれに以下の定義を適用し、15件コメントをした場合の料金計算方法を説明します。
+| 単位〜(以上) | 〜単位まで(以下) | 単位金額 | 備考                    |
+| ------- | --------- | ---- | --------------------- |
+| 1       | 10        | 100円 | 1〜10 件の範囲は、１コメント 100円 |
+| 11      | 20        | 90円  | 11〜20 件の範囲は、１コメント 90円 |
+| 21      | 30        | 80円  | 21〜30 件の範囲は、１コメント 80円 |
+| 31      | ♾️        | 70円  | 31〜 件以降は、１コメント 70円    |
+## 段階ユニット
+15 件 \* 90 円 =  **1350 円**
+段階ユニット は 1350 円 の請求を行うこととなります
+## 段階的使用量ユニット
+10 件 \* 100 円 =  1000 円
+5 件 \*  90 円 =  450 円
+1000 円 + 450 円 = **1450 円**
+段階的使用量ユニット は 1450 円 の請求を行うこととなります。
+````
+
+---
+## part-4/pricing-and-billing/usage-metering.md
+````markdown
+計測単位に設定するメーター単位を定義します。
+## メーター単位設定
+1. **SaaS開発コンソールから`メーター単位設定`を選択**
+![usage-metering-1](/ja/img/part-4/pricing-and-billing/usage-matering/usage-metering-1.png)
+1. **`メーター単位の作成`をクリック**
+![usage-metering-2](/ja/img/part-4/pricing-and-billing/usage-matering/usage-metering-2.png)
+2. `メーター単位の作成`でメーター単位を設定
+| 項目名              | 説明    |
+|-----------------  |----------------------- |
+| メーター単位名   | プログラムで識別するための定義を決めます。重複した名前は作成できません。 |
+| メーター単位の表示名　 | メーターの名前を決めます。 |
+| メーター単位の説明       | 人がわかりやすいメーターの説明を設定します。 |
+| 使用量の集計        | sum（期間中の使用量の値の合計)／max（期間中の最大の使用量の値）の何れかを設定します。 |
+:::info
+この「使用量の集計」項目は、**Stripe連携を有効にしている場合のみ表示**されます。
+ここでは、メーター単位の使用量をどのように集計して課金に利用するかを設定します。
+`sum`（合計）や `max`（最大）などの方式を、**メーター単位ごとに個別に指定可能**です。
+この設定は、Stripe連携時の課金条件として利用されます。
+なお、SaaSus Platform単体での利用時にはこの設定は不要なため、UI上には表示されません。
+:::
+上記内容を設定し保存ボタンをクリックします。
+## 計測単位へメーター単位を設定
+計測単位を作成する際に、メーター単位を設定することができます。
+既に登録されているメーター単位が選択可能です。
+![usage-metering-3](/ja/img/part-4/pricing-and-billing/usage-matering/usage-metering-3.png)
+## メーター単位の更新、削除
+計測単位に設定されているメーター単位は削除することができません。
+メーター単位の表示名、メーター単位の説明のみ更新することができます。
+![usage-metering-4](/ja/img/part-4/pricing-and-billing/usage-matering/usage-metering-4.png)
+````
+
+---
+## part-4/saas-development-console-overview.md
+````markdown
+## 1. SaaS開発コンソールの役割
+SaaS開発コンソールは以下のような場面で利用されます：
+- 自社アプリに認証や料金プラン・請求処理などの機能を組み込む前の初期設定
+- 新規サービス立ち上げ時の基本構成の作成
+- ログイン方式やロール（役割）など、アクセス制御に関する設定ポリシーの定義
+- サービス運用開始前の動作確認や設定内容の検証
+## 2. 画面構成と主なメニュー紹介
+SaaS開発コンソールにログインすると、画面左側にナビゲーションメニューが表示されます。ここから各種設定項目にアクセスできます。
+![01](/ja/img/part-4/saas-development-console-overview/saas_development_console_overview-01.png)
+![02](/ja/img/part-4/saas-development-console-overview/saas_development_console_overview-02.png)
+主なメニュー構成：
+| メニュー名         | 機能概要 |
+|------------------|----------|
+| **ダッシュボード**     | 機能更新などのお知らせやリリース情報が確認できます。 |
+| **基本設定**         | SaaSアプリのドメイン、認証後の遷移先URL、APIキーの確認などを行います。 |
+| **認証認可**         | アプリ情報設定、ログイン方式（パスワード／Google）設定、属性設定、ロール設定を行います。 |
+| **料金プラン** | 定額・使用量に応じた従量課金（段階課金を含む）を組み合わせた料金プランを柔軟に作成・編集・管理できます。 |
+| **外部連携**         | 「外部連携 > 請求」画面からStripeのシークレットキーを登録することで、請求処理の自動化が可能になります。 |
+:::info
+- ナビゲーション上部にあるセレクトボックスでは、SaaS開発コンソールとSaaS運用コンソールの切り替えが可能です。
+- 画面右下にはチャットサポート機能（Intercom）が備わっています。
+- SaaS開発コンソールでは、「認証認可」や「料金プラン」など、1つのメニュー内に複数の設定機能がまとめられている構成になっています。
+- ※SaaS運用コンソールでは、各機能が個別のメニューとして分かれています。
+:::
+## 3. よく使うメニューと基本操作
+### ダッシュボード
+- SaaSus Platformからのお知らせやアップデート通知を確認できます。
+### 認証認可メニュー
+- **サービス名**：ログイン画面や遷移画面に表示されるサービスの名称を設定します。
+- **アイコンアップロード**：サービスのアイコン画像をアップロードします（ログイン画面等に表示されます）。
+- **利用規約URL・プライバシーポリシーURL**：ログイン画面に表示されるリンク先を指定します。
+- **ログイン方式**：パスワードログインに加えて、Googleログインの有無を選択できます。
+- **役割定義**：ユーザーの役割に応じたアクセス権限（ロール）を定義・管理できます（例：管理者、一般ユーザーなど）。
+### 基本設定メニュー
+- **ドメイン設定**：自社SaaSアプリに対応するカスタムドメインを指定します。
+- **認証後遷移先URL**：ログイン成功後に遷移するURL（アプリケーションのトップ画面など）を指定します。
+- **APIキーの確認**：SaaSus SDKやAPI連携時に必要なキーを確認できます。
+````
+
+---
+## part-4/saas-infra-management.md
+````markdown
+## 概要
+SaaS のデプロイモデルとして、「サイロモデル」と「プールモデル」があります。
+サイロモデルとは、SaaS を利用する顧客（テナント）毎に異なるサーバー・DB を用意するデプロイモデルです。
+各テナントは完全に分離された環境を持ちます。
+プールモデルとは、複数のテナントに共通のサーバー・DB を用意するデプロイモデルです。
+データはテナントごとに区分されていますが、物理的なリソースは共有されます。
+SaaSインフラ管理機能は、SaaSus Platform でサイロモデルの SaaS の構築をサポートするための機能です。
+:::warning
+「SaaSインフラ管理機能」は、旧スタータープランおよび旧スタンダードプランをご契約中の場合、ご利用いただけません。
+本機能をご利用いただくには、新しい料金プランへの変更が必要です。
+:::
+サイロモデルでは各テナントのデータは物理的に分離されているため、データ漏洩のリスクが減る等のメリットがあります。
+一方で、テナント毎にサーバーや DB を用意する必要があるため、管理コストが大きくなるというデメリットがあります。
+SaaSインフラ管理機能では、SaaSus Platform にテナントを作成した時に自動でお客様の AWS 環境に対してサーバーや DB を用意します。
+これによって管理・運用コストを下げることができます。
+## 設定方法
+### SaaSus Platform からのアクセス許可
+テナントオンボーディングする際、SaaSus Platform からお客様の AWS 環境へアクセスが必要なため、その権限を SaaSus Platform に付与する必要があります。
+画面の指示に従って IAM Role を作成し、生成したロールの情報を登録してください、
+![settings-role](/ja/img/part-4/saas-infra-management/settings-role.png)
+### Cloud Formation テンプレート
+<a download="saas-infra-management-cf-sample.yml" href="/ja/file/saas-infra-management-cf-sample.yml"> Cloud Formation テンプレートのサンプル </a>
+SaaSus Platform にテナントを作成した時、お客様の AWS 環境に対して Cloud Formation を実行し、テナント毎に環境を作成します。その時に使用する Cloud Formation テンプレートを登録する必要があります。
+Cloud Formation の Outputs として、以下の項目を指定する必要があります。
+| Logical ID       | Value                                              |
+| :--------------- | :------------------------------------------------- |
+| AccountId        | Cloud Formation を実行する環境の AWS アカウント    |
+| SubnetIds        | DB インスタンスに設定したサブネットの ID           |
+| SecurityGroupIds | DB インスタンスに設定したセキュリティグループの ID |
+| DbUser           | DB に接続するためのユーザー                        |
+| DbPass           | DB に接続するためのパスワード                      |
+| DbHost           | DB に接続するためのホスト (IP アドレス)            |
+| DbPort           | DB に接続するためのポート番号                      |
+| DbName           | DB の名前                                          |
+| DbType           | DB の種類 (`mysql` または `postgres`)              |
+### SQL ファイル
+<a download="saas-infra-management-sample.sql" href="/ja/file/saas-infra-management-sample.sql"> SQL ファイルのサンプル </a>
+Cloud Formation によって作成された DB に対して実行する SQL を登録します。DB のテーブル定義や初期データを保存するための SQL を登録してください。
+### SaaSインフラ管理 の進行状況を確認する方法
+SaaS運用コンソール - テナント管理画面 で対象テナントを表示し、TenantOnboardingStatus の値で進行情報の確認ができます。
+| TenantOnboardingStatus | Situation                                  |
+| :--------------------- | :----------------------------------------- |
+| setup_cfn_in_progress  | Cloud Formation の実行準備中               |
+| setup_cfn_db_ready     | Cloud Formation で DB インスタンス作成済み |
+| setup_cfn_completed    | Cloud Formation の終了                     |
+| setup_db_in_progress   | SQL 実行中                                 |
+| all_completed          | 全ての処理が正常に完了                     |
+| error                  | 異常終了（サポートにお問い合わせください） |
+### 注意事項
+テナントオンボーディング処理は、東京リージョン(ap-northeast-1)に実施されます
+テナントオフボーディング処理は、サポートしていません。
+````
+
+---
+## part-4/smart-api-gateway-features/manual.mdx
+````markdown
+import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
+## Smart API Gateway 利用手順
+SaaSus Platform の Smart API Gateway 機能を利用して、API を簡単に公開・管理するための設定手順を以下に示します。
+---
+### Step 1: 事前準備(SaaS 環境とアプリのセットアップ)
+- SaaSus Platform のアカウントを作成<br/>
+  本機能を利用するためには、SaaSus Platform のアカウントが必要です。<br/>
+  [SaaSus Platform](https://saasus.io/) にアクセスし、SaaSus Platform のアカウントを作成し、ログインしてください。
+- 検証に使用する AWS 環境の準備<br/>
+  本機能を利用するためには、AWS アカウントが必要です。<br/>
+  AWS アカウントをお持ちでない場合は、[AWS アカウントの作成](https://aws.amazon.com/jp/) にアクセスし、AWS アカウントを作成してください。
+- SaaS 環境とサンプルアプリ<br/>
+  CloudFormation で AWS に SaaS 環境とサンプルアプリを作成します。<br/>
+  今回検証に使用する AWS 環境にて以下の CloudFormation を実行してください。<br/>
+  実行後に CloudFormation の出力結果に記載されている URL にアクセスし、password を入力して VSCode の環境にログインしてください。<br/>
+  [SaaS 環境とサンプルアプリの作成](https://github.com/saasus-platform/implementation-sample-smart-api-gateway/blob/main/smart-gateway-sample-saas.yaml)
+  - サンプルアプリ<br/>
+    本手順で使用するサンプルアプリは以下です<br/>
+    [Smart API Gateway SaaS Sample](https://github.com/saasus-platform/implementation-sample-smart-api-gateway.git)
+  - SaaSus Java SDK<br/>
+    本手順で使用する SaaSus Java SDK は以下です。<br/>
+    [Java SDK](https://github.com/saasus-platform/saasus-sdk-java)
+- SDK のセットアップ
+  下記手順で SDK のセットアップを行っています。
+1. SaaSus Java SDK でパッケージを作成し、ローカルリポジトリにインストールしてください。
+```txt
+cd saasus-sdk-java
+mvn clean package
+mvn install:install-file -Dfile=target/saasus-sdk-java-1.0.0.jar -DgroupId=io.saasus -DartifactId=saasus-java -Dversion=0.0.1 -Dpackaging=jar
+```
+:::info[設定済み手順のため、何をしているかのみ確認をしてください]
+2. implementation-sample-smart-api-gateway/pom.xml の dependencies タグと profiles タグの中に下記を追記しています。
+```xml
+<!-- saasus platform sdk -->
+<dependency>
+	<groupId>io.saasus</groupId>
+	<artifactId>saasus-java</artifactId>
+	<version>0.0.1</version>
+</dependency>
+<!-- saasus platform sdk -->
+<!-- smart api gateway parameter setting -->
+<profiles>
+	<profile>
+	<id>with-parameters</id>
+	<build>
+		<plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>3.8.1</version>
+			<configuration>
+			<compilerArgs>
+				<arg>-parameters</arg>
+			</compilerArgs>
+			</configuration>
+		</plugin>
+		</plugins>
+	</build>
+	</profile>
+</profiles>
+<!-- smart api gateway parameter setting -->
+```
+:::
+3. implementation-sample-smart-api-gateway プロジェクトで設定を行ってください。
+```txt
+cd implementation-sample-smart-api-gateway
+mvn clean package
+cp .env.example .env
+vi .env
+SAASUS_SAAS_ID="xxxxxxxxxx"
+SAASUS_API_KEY="xxxxxxxxxx"
+SAASUS_SECRET_KEY="xxxxxxxxxx"
+docker compose up -d
+```
+:::info
+SAASUS_SAAS_ID,SAASUS_API_KEY,SAASUS_SECRET_KEYの取得方法は、下記をご参照ください。<br/>
+[SaaS ID と API キー、クライアントシークレットの再確認](/docs/tutorial/configuring-sdk-for-saasus-platform#saas-id-と-api-キークライアントシークレットの確認)
+:::
+---
+:::info[設定済み手順のため、何をしているかのみ確認をしてください]
+### Step 2: ソースコードへのアノテーション設定
+1. 公開対象のメソッドにアノテーションを追加し、API エンドポイントとして使用できるように設定します。
+   今回はサンプルとして <br/>
+   src/main/java/implementsample/service/InventoryService.java<br/>
+   getInventoryEntryPoint メソッドを API として呼び出します。<br/>
+   Smart API Gateway は static なメソッドを呼び出す仕様となります。<br/>
+   そのため Smart API Gateway から呼び出される static なメソッドを作成し、その中で TenantInventory を呼び出しています。<br/>
+   また、作成した static なメソッドに@SaaSusAPI のアノテーションを付与し、Smart API Gateway のエンドポイントとして利用することを宣言しています。
+```mdx-code-block
+<Tabs>
+<TabItem value="java" label="java" default>
+```
+```java
+package implementsample.service;
+import java.util.List;
+import implementsample.dto.InventoryDto;
+import implementsample.repository.InventoryRepository;
+import saasus.sdk.modules.SaaSusAPI;
+import saasus.sdk.util.apiserver.SaasusIdentity;
+public class InventoryService {
+    /**
+     * 在庫情報を取得するAPI
+     * @param identity SaasusIdentity オブジェクト
+     * @return 在庫情報のリスト
+     */
+    @SaaSusAPI(path = "getInventory")
+    public static List<InventoryDto> getInventory(SaasusIdentity identity) {
+        String tenantId = identity.getTenantId();
+        return InventoryRepository.getInventory(tenantId);
+    }
+    /**
+     * ユーザごとの在庫情報を取得するAPI
+     * @param identity SaasusIdentity オブジェクト
+     * @return 在庫情報のリスト
+     */
+    @SaaSusAPI(path = "getInventoryByUser")
+    public static List<InventoryDto> getInventoryByUser(SaasusIdentity identity) {
+        String tenantId = identity.getTenantId();
+        String userId = identity.getUserId();
+        return InventoryRepository.getInventoryByUser(tenantId, userId);
+    }
+}
+```
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+---
+### Step 3: API Server の起動設定
+1. アプリケーションの起動時に `saasus-sdk` の API サーバーが起動するよう、src/main/java/implementsample/ApiServerListener.java クラスを追加しています。
+```mdx-code-block
+<Tabs>
+<TabItem value="java" label="java" default>
+```
+```txt
+// saasus api server
+import saasus.sdk.util.apiserver.ApiServer;
+...省略...
+            // Start the API server on port 8083
+            ApiServer.start(8083);
+```
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+2. **Application Load Balancer** に対して、以下の設定が必要です。(CloudFormation で設定済みです)
+   - **リスナー**: ポート **8083**
+   - **ターゲットグループ**: ポート **8083** のターゲットグループを作成
+   - **セキュリティグループ**: ALB とアプリケーションにポート **8083** へのアクセスを許可
+:::
+---
+### Step 4: コードの修正
+該当箇所のコードを修正してください。
+**InventoryRepository.java で修正が必要な箇所：**
+1. **在庫管理者ID定数の修正**
+   ```java
+   // 修正前
+   private static final String INVENTORY_MANAGER_A = "f47ac10b-58cc-4372-a567-0e02b2c3d479";
+   // 修正後（実際のユーザーIDに変更）
+   private static final String INVENTORY_MANAGER_A = "実際のユーザーID";
+   ```
+2. **テナントIDの修正**
+   ```java
+   // 修正前
+   put("d296b330-3cce-40b6-88c3-035a1d86981f",
+   // 修正後（実際のテナントIDに変更）
+   put("実際のテナントID",
+   ```
+**修正手順：**
+1. `src/main/java/implementsample/repository/InventoryRepository.java` を開く
+2. 上記の定数値を SaaSus Platform で作成した実際のユーザーID・テナントIDに変更する
+3. ファイルを保存する
+:::info
+実際のユーザーIDとテナントIDは、SaaSus Platform の管理画面から確認できます。
+:::
+---
+### Step 5: ソースコードの統合と圧縮
+対象のソースコードを Step 6 でアップロードするため、以下のシェルスクリプトでまとめ、ZIP ファイルに圧縮します。
+```sh
+bash java_files_collector.sh <アプリケーションのパス>
+```
+例:
+```sh
+cd /Workshop/implementation-sample-smart-api-gateway
+bash java_files_collector.sh src/main/java/implementsample
+```
+java_files_archive.zip ファイルが作成されます。
+ダウンロードしてください。
+以上が SaaS アプリ内での設定内容です。
+---
+### Step 6: ZIP ファイルのアップロード
+1. SaaS開発コンソールの Smart API Gateway 機能画面にアクセスしてください。
+2. 画面上から生成した ZIP ファイルをアップロードしてください。
+---
+### Step 7: 権限・インフラの設定
+1. **Permission タブ**に移動し、**Assume Role 用の CloudFormation** を作成します。
+2. 作成した **Role ARN** と **External ID** を登録します。
+3. PrivateLink(Network Load Balancer)を作成する VPC の **VPC ID** と **Subnet IDs** を登録します。
+4. Application Load Balancer の **ALB ARN** を登録します。
+   :::info
+   Subnet IDs には、必ず **複数の Subnet IDs** を入力してください。<br/>
+   :::
+設定が完了すると、SaaSus Platform とお客様の環境を接続するインフラが作成されます。
+---
+### Step 8: API の公開とアクセス
+1. API を公開
+2. API エンドポイントのドメインでアクセスが可能です。
+#### API アクセス方法
+- API のアクセスには **API Key** が必要です。SaaS運用コンソールの **テナント管理画面**で API Key を発行し、アクセスに利用します。
+- API のメソッドは **Throttling&Role** のメソッドパスから確認をしてください。
+- API エンドポイントのドメインに対して、以下のようにアクセスしてください。
+#### SaaSus Identity との連携
+Smart API Gateway では、**SaaSus Identity** と連携することで、テナント ID、環境 ID（ENV ID）、ユーザー ID を活用した細かいアクセス制御とデータフィルタリングが可能です。
+- **テナント ID**: マルチテナント環境において、各テナント固有のデータにアクセスするために使用
+- **環境 ID（ENV ID）**: 開発、ステージング、本番環境などの環境別データアクセスに使用
+- **ユーザー ID**: 特定のユーザーに紐づくデータの取得や操作制限に使用
+実装例では、在庫管理 API において SaasusIdentity オブジェクトから取得したテナント ID とユーザー ID を使用して、テナントとユーザーに応じた在庫データのフィルタリングを行います。
+#### アクセス例
+```sh
+$ curl -v -X GET https://<ドメイン>/<api method path> -H 'x-api-key:<発行したAPI Key>'
+```
+#### API アクセス例
+以下は、SaaSus Identity との連携により、テナント ID、ユーザー ID を活用した API アクセスの例です：
+**全在庫取得（テナントによるフィルタリング）:**
+```sh
+$ curl -X GET https://<ドメイン>/inventory-service/get-inventory -H 'x-api-key:<テナントAPI Key>'
+```
+**ユーザー固有の在庫取得（ユーザー ID によるフィルタリング）:**
+```sh
+$ curl -X GET https://<ドメイン>/inventory-service/get-inventory-by-user -H 'x-api-key:<ユーザーAPI Key>'
+```
+**レスポンス例:**
+```json
+[
+  {
+    "id": "inventory-001",
+    "name": "商品A",
+    "inventoryManagerId": "e47ac10b-58cc-4372-a567-0e02b2c3d480",
+    "quantity": 10
+  }
+]
+```
+この例では、SaasusIdentity オブジェクトから取得したテナント ID とユーザー ID に基づいて在庫データがフィルタリングされています。
+### Step 9: Throttling 設定
+- **Throttling&Role** から対象の method path を選択し、スロットリングの設定を行ってください。
+- 検証のため、**1 分間に 2 回のリクエスト**に制限を設定します。
+- 設定が完了すると、API のアクセス制限が設定されます。
+- 複数回アクセスをして、スロットリングの動作を確認してください。
+:::info
+- スロットリングの設定は、**range（秒）の時間内のリクエスト数**を設定できます。
+  - テナント単位のスロットリング
+    - テナントの API キー、ユーザーの API キーを使用した **すべての API コールの合計** に対して、発行数の制限を適用します。
+  - ユーザー単位のスロットリング
+    - テナントの API キーでは **無制限に API を発行可能** です。
+    - ユーザーの API キーを使用した場合、**各ユーザーごとに API コール数を制限** します。
+:::
+### Step 10: 認可（ロール）設定
+- 検証のため、SaaS開発コンソールの **役割定義**で一般ユーザーというロールを作成してください。
+- ロールによる認可にはユーザーの **API Key** が必要です。SaaS運用コンソールの **ユーザー管理画面**でユーザーを作成し、API Key を発行してください。
+- SaaS運用コンソールの**役割管理**から作成したユーザーに一般ユーザーのロールを設定してください。
+- **Throttling&Role**から対象の method path を選択し、SaaS 管理者ロールの設定を行ってください。
+- 設定が完了すると、API のアクセス制限が設定されます。
+- ユーザーの API key を使用して、ロールによる認可の動作を確認してください。
+:::info
+- ロールによる認可にはユーザーのロールによって制御を行うため、ユーザーの API Key のみが対象です。
+- ユーザーの API key を発行するにはユーザーがテナントに所属している必要があります。
+- テナントの API Key は、どのロールを設定していてもアクセス可能です。
+:::
+### Step 11: ドメイン設定
+- **Custom Domain**からドメインを設定してください。
+- 自身の DNS サーバーに表示された CNAME レコードを設定してください。
+- ドメイン設定が完了すると、API エンドポイントのドメインが更新されます。
+- ドメイン設定後、ドメインに対してアクセスが可能です。
+### Step 12: IP 制限設定
+- SaaS運用コンソールの **テナント管理画面**で IP 制限を設定してください。
+- IP 制限設定後、設定した IP アドレスからのみアクセスが可能です。
+### 検証環境の削除
+- VSCode の環境に再度ログインし、以下のコマンドを実行してください。
+- `t-<tenantid>-saasus-setup-private-link-on-saas` の CloudFormation のリソースから作成した vpc endpoint service id を取得する
+- aws cli を使用できるように、aws configure 等でアクセスキーとシークレットキーを設定する
+- `reject_vpc_endpoints.sh <vpc endpoint service id>` で vpc endpoint service id のエンドポイント接続を reject する（これを行わないと CloudFormation の削除がエラーになります）
+- `t-<tenantid>-saasus-setup-private-link-on-saas` の CloudFormation を削除する
+- saas sample の CloudFormation を削除する
+````
+
+---
+## part-4/smart-api-gateway-features/overview.md
+````markdown
+### Smart API Gateway 機能概要
+API の開発では通常、認証・認可やスロットリング、外部からの攻撃対策、API スキーマの管理、API ドキュメントの公開と更新など、ビジネスロジック実装の他に考えることがたくさんあります。
+また、API を公開するためのエンドポイントの維持や運用も必要になります。
+SaaSus Platform の Smart API Gateway 機能は、既存の Web 版パッケージソフトウェアやスタンドアロン Web アプリケーションを SaaS 化する際に、これらの API 構築の知識・管理のノウハウが少なくても容易に開発・構築をできるようにするための機能です。
+Smart API Gateway により、API エンドポイントの管理、エンドユーザーへの提供がシンプルになります。なお、Smart API Gateway 機能 は SaaSus Platform の**全てのプラン**で利用可能です。
+:::info
+サンプルデモ動画の視聴や Smart API Gateway 機能のデモンストレーション、チュートリアルのサポート、導入検討のための情報収集、実装に関する技術相談をご希望の方は、以下のサポート申請フォームよりお問い合わせください。
+[Smart API Gateway by SaaSus Platform サポート申請フォーム](https://forms.gle/XhFD9fCQv1zVGyRT9)<br/>
+:::
+### Smart API Gateway を使用しない場合のイメージ
+API に必要な API 定義や認証認可、スロットリングに加えて、API 自体の開発も必要となります。
+![api-gateway-function/api-gateway-function-2](/ja/img/part-4/smart-api-gateway-features/api-gateway-function-2.png)
+### Smart API Gateway アーキテクチャ
+API に必要な機能を提供し、既存の処理をほぼそのまま API としてセキュアに公開することができます。
+![api-gateway-function/api-gateway-function-1](/ja/img/part-4/smart-api-gateway-features/api-gateway-function-1.png)
+### 前提条件
+- **API 実装をする対象のアプリケーションは、AWS 上で動作している Java の Web アプリケーション**であること。
+- **アプリケーションは、Application Load Balancer 配下で動作**していること。
+:::info
+現在、本機能は Java SDK でのみご利用いただけます。<br/>
+他の SDK については、今後順次対応を予定しております。
+:::
+### 注意事項
+この Smart API Gateway 機能の利用にあたり、お客様の SaaS 環境に以下の AWS リソースが作成されるため、別途 AWS の料金が発生します。
+- **Network Load Balancer**
+  - 1 ロードバランサー x 0.0243 USD x 730 時間 (1 か月) = 17.74 USD
+  - **追加料金**: LCU あたりの料金が発生します。
+- **PrivateLink (VPC エンドポイント)**
+  - 1 VPC エンドポイント x 2 VPC エンドポイントあたりの ENI x 730 時間 (1 か月) x 0.014 USD = 20.44 USD (エンドポイント ENI の 1 か月あたりの料金)
+  - **追加料金**: データ転送量に応じた料金が発生します。
+````
+
+---
+## part-4/smart-api-gateway-features/smart-mcp-server-overview.mdx
+````markdown
+:::info サポートについて
+サンプルデモ動画の視聴、機能のデモンストレーション、チュートリアルのサポート、導入検討のための情報収集、実装に関する技術相談をご希望の方は、以下のサポート申請フォームよりお問い合わせください。
+[Smart MCP Server by SaaSus Platform サポート申請フォーム](https://forms.gle/DVDqrcNc525E9GG68)
+:::
+## Smart MCP Server機能とは
+Smart MCP Server機能は、Smart API Gateway機能で公開したAPIを、Model Context Protocol（MCP）サーバーとして自動的に提供する機能です。AIエージェントやLLM（大規模言語モデル）がAPIを直接呼び出すことができるリモートMCP Serverを、Smart API GatewayによるAPI公開と連携して利用できるようになります。これにより、既存のAPIをAIエージェントが利用可能な形式で即座に提供し、AI駆動のアプリケーション開発を加速させることができます。
+## 機能概要
+### 自動MCP Server展開
+- **同時展開**: Smart API GatewayでAPIが公開されると、MCP Serverも自動的に同時展開されます
+- **追加設定不要**: Smart API Gateway機能の設定を完了するだけで、MCP Serverの設定は不要です
+- **スキーマ更新**: API定義の変更が自動でMCP Serverに反映されます
+## 対応AIサービス
+現在、以下のAIサービスでSmart MCP Server機能を検証できます：
+### OpenAI Playground
+- **対応状況**: ✅ 動作確認済み
+- **利用方法**: Toolsから、MCP Serverとして追加
+:::caution
+有償のOpenAIアカウントが必要です
+:::
+## チュートリアル
+### 概要
+**所要時間**: 約15〜20分
+**前提条件**: Smart API Gateway機能でAPIが公開済みであること
+:::warning 重要な前提条件
+このチュートリアルを開始する前に、Smart API Gateway機能でAPIが公開済みである必要があります。<br/>
+まだ設定が完了していない場合は、先に[Smart API Gateway機能の設定手順](./manual.mdx)を完了してください。
+:::
+<details>
+<summary>📋 Smart MCP Server機能 チュートリアル（クリックして展開）</summary>
+<div>
+このチュートリアルでは、Smart API Gateway機能で公開したAPIを、AIサービスが利用できるMCP Serverとして設定する手順を説明します。
+---
+## Step 1: MCP Server エンドポイントの確認
+1. [SaaS開発コンソール](https://settings.console.saasus.io/dashboard)にログインします
+2. 左側のメニューから **Smart API Gateway** を選択します
+3. APIが公開されている状態であることを確認します
+4. 画面をスクロールすると以下の情報が表示されますので控えてください：
+- **MCP Server エンドポイント**: AIサービスが接続するためのエンドポイント
+![smart-mcp-server-tutorial-2](/ja/img/api-gateway-function/smart-mcp-server-tutorial-2.png)
+---
+## Step 2: API Keyの確認
+1. [SaaS運用コンソール](https://saasadmin.console.saasus.io/dashboard)にログインします
+2. 左側のメニューから **ユーザー管理** を選択します
+3. 特定のユーザーのActions列の **APIキー管理ボタン** を押下します
+4. ダイアログでAPIキーが表示されますので控えてください（もし未発行の場合は、新しく発行してください）
+![smart-mcp-server-tutorial-3](/ja/img/api-gateway-function/smart-mcp-server-tutorial-3.png)
+## Step 3: OpenAI Playgroundの利用準備
+:::warning 重要な注意事項
+OpenAI Playgroundの利用には**有償のOpenAIアカウント**が必要です。無料アカウントでは利用できません。<br/>
+また、API呼び出しごとに利用料金が発生しますので、予算設定等の適切な管理を行ってください。
+:::
+### OpenAIアカウントの準備
+このステップでは、OpenAI Playgroundを利用するための前提条件を確認し、必要なアカウント設定を行います。
+#### 1. OpenAIアカウントの作成・ログイン
+1. [OpenAI Platform](https://platform.openai.com/) にアクセスします
+2. 「Sign up」からアカウント作成画面に移動します
+3. メールアドレス、パスワードの必要な認証情報を入力してメール検証を行います
+4. 氏名と生年月日、Organization name、What best describes you?を入力してください
+5. Invite your team、Make your first API callはお客様の状況に合わせて入力してください
+6. Add some API creditsは後ほど設定するので、「I'll buy credits later」を押下してください
+以上で登録は完了です。
+#### 2. 支払い方法の設定（必須）
+:::danger 重要
+OpenAI Playgroundを利用するには、支払い方法の設定が**必須**です。
+:::
+1. [OpenAI Platform](https://platform.openai.com/)にログインします
+2. 右上のアカウントアイコンを押下して、表示された「Your Profile」を選択します
+3. サイドメニューから、「Billing」を選択します
+3. 「Add payment details」から有効なクレジットカードを追加し、クレジットをチャージします
+#### 3. OpenAI Playgroundへのアクセス確認
+1. [OpenAI Playground](https://platform.openai.com/playground) にアクセスします
+2. チャット画面が正常に表示されることを確認します
+3. 簡単なメッセージを送信して利用可能であることを確認します
+---
+## Step 4: AIサービスでの動作検証
+:::info
+現時点では、OpenAI Playgroundでの動作検証のみサポートしております。
+:::
+### OpenAI Playground
+1. [OpenAI Playground](https://platform.openai.com/playground) にアクセスします
+2. **Tools** セクションで **Create...** をクリックします
+3. **MCP Server** を選択します
+  ![smart-mcp-server-tutorial-4](/ja/img/api-gateway-function/smart-mcp-server-tutorial-4.png)
+4. **Add New** を選択します
+  ![smart-mcp-server-tutorial-5](/ja/img/api-gateway-function/smart-mcp-server-tutorial-5.png)
+5. 表示されたフォームにそれぞれ値を入力します：
+  - **URL** : 控えておいた**MCP Serverエンドポイント**
+  - **Label** : 任意のラベル
+  - **Authentication** : **Custom headers** を選択
+    - キー : **x-api-key**
+    - 値 : **控えておいた**APIキー**
+  ![smart-mcp-server-tutorial-6](/ja/img/api-gateway-function/smart-mcp-server-tutorial-6.png)
+6. **Connect**を押下します
+7. 成功するとToolsに利用可能なAPI一覧が表示されます
+　![smart-mcp-server-tutorial-7](/ja/img/api-gateway-function/smart-mcp-server-tutorial-7.png)
+8. **Add**を押下します
+9. **Tools** セクションに追加したMCP Serverが表示されていることを確認します
+　![smart-mcp-server-tutorial-8](/ja/img/api-gateway-function/smart-mcp-server-tutorial-8.png)
+---
+## Step 5: AIサービスからのAPI呼び出しテスト
+### OpenAI Playground
+1. チャットで、「（**MCP Server名**）でできる操作を教えて」と入力します
+  ![smart-mcp-server-tutorial-9](/ja/img/api-gateway-function/smart-mcp-server-tutorial-9.png)
+2. 「特定テナントの在庫情報を取得できる」と返答があったので、インベントリIDを提示して在庫情報を取得するように指示をします
+3. 呼び出すAPIと「Approve」ボタンが表示されたら押下します
+  ![smart-mcp-server-tutorial-9](/ja/img/api-gateway-function/smart-mcp-server-tutorial-10.png)
+4. 期待したレスポンスであるか確認します
+  ![smart-mcp-server-tutorial-10](/ja/img/api-gateway-function/smart-mcp-server-tutorial-11.png)
+## Step 6: エラーのトラブルシューティング
+### よくある問題と解決方法
+#### 1. MCP Serverに接続できない
+**症状**: AIサービスがMCP Serverに接続できない
+**解決方法**:
+- API Keyが正しく設定されているか確認する
+- ネットワーク接続を確認する
+#### 2. API呼び出しが失敗する
+**症状**: MCP Server経由でのAPI呼び出しがエラーになる
+**解決方法**:
+- Smart API Gateway機能で公開したAPIが正常に動作するかをMCP Serverを経由せずに確認する
+- API Keyの権限設定を確認する
+- スロットリング制限に達していないか確認する
+#### 3. ツールが表示されない
+**症状**: AIサービスでツールの一覧が表示されない
+**解決方法**:
+- Smart API Gateway機能でAPIが正常に公開されているか確認する
+- ブラウザのキャッシュをクリアしてから再試行する
+---
+## まとめ
+このチュートリアルでは、Smart MCP Server機能を使用してAPIをAIサービス向けに公開する方法を学習しました。
+### 完了した内容
+- MCP Serverエンドポイントの確認
+- AIサービス（OpenAI Playground）での接続設定
+- API呼び出しのテスト
+:::info
+Smart MCP Server機能に関するご質問やサポートが必要な場合は、[サポート申請フォーム](https://forms.gle/DVDqrcNc525E9GG68)からお問い合わせください。
+:::
+</div>
+</details>
+````
+
+---
+## part-4/user-authz-settings/authentication-method-settings.md
+````markdown
+このページでは、SaaSus Platform の「認証詳細設定」画面の「認証設定」タブで行える以下の認証関連機能の設定について説明します。
+- パスワード要件の設定
+- Google ログインの有効化
+- セルフサインアップ（ユーザー自身による新規登録）の可否
+- 信頼済みデバイスの記憶設定
+## パスワード要件の設定
+パスワードの最小文字数や文字種（数字・特殊文字・大文字・小文字など）の要件を設定できます。
+### 設定画面
+![パスワード要件設定画面](/ja/img/part-4/user-authz-settings/authentication-method-settings/auth-password-policy.png)
+## Googleログインの有効化
+Googleログインを有効にするには、事前に Google Cloud Console での設定と SaaSus Platform への登録が必要です。
+詳しい手順は、[Google連携の設定手順](/ja/docs/part-4/user-authz-settings/google-linkage) を参照してください。
+設定が完了すると、「認証詳細設定」画面の「認証設定」タブで Googleログインを有効化できるようになります。
+## セルフサインアップの許可
+ユーザーがログイン画面から自ら新規登録を行えるかどうかを設定します。
+- 有効：ログイン画面に「新規登録はこちら」リンクが表示されます。
+- 無効：管理者による招待が必要になります。
+## 信頼済みデバイスの記憶
+:::info
+この機能は、SaaSアプリケーションに**多要素認証（MFA）機能を実装している場合**にのみ有効です。
+具体的なAPIの使い方や実装例は、[多要素認証の実装](/ja/docs/part-6/implementation-guide/sample-application/multi-factor-authentication) を参照してください。
+:::
+ユーザーの信頼済みデバイスを記憶するかどうかを設定します。
+多要素認証を設定しているユーザーの信頼済みデバイスが記憶されていると、2回目以降のログイン時に多要素認証をスキップすることができます。
+### 設定画面
+![remember-trusted-devices](/ja/img/part-4/user-authz-settings/authentication-method-settings/remember-trusted-devices.png)
+**利用可能な設定オプションは以下の通りです。**
+| オプション               | 動作概要 |
+|------------------------|------------------------------------------------------|
+| **常に記憶する**     | ユーザーのデバイスは**すべて自動的に記憶**され、2回目以降のログイン時には多要素認証の入力がスキップされます。 |
+| **ユーザーオプトイン** | ログイン画面で **「記憶する」** のチェックボックスを選択できるようになります。<ul><li>チェックを入れたデバイスのみ記憶されます。</li><li>次回以降のログイン時に多要素認証の入力がスキップされます。</li></ul> |
+| **記憶しない**       | **毎回のログイン時に多要素認証の入力が必要** となります。 |
+````
+
+---
+## part-4/user-authz-settings/declare-additional-attribute-to-user.md
+````markdown
+## ユーザに追加属性を定義する
+SaaSus Platform では、最初の段階では管理されるSaaSのユーザはユーザID(UUID)とメールアドレスのみを持っています。もし必要があれば、ユーザに追加の属性を設定することができます。
+サイドメニューから「ユーザ属性定義」を選択してください。
+![01](/ja/img/part-4/user-authz-settings/declare-additional-attribute-to-user/declare-additional-attribute-to-user-01.png)
+SaaSの設計者は、SaaSus Platform側とSaaS側の両方で管理されるユーザの属性を考慮し、どの属性をSaaSus Platform側で管理し、どの属性をSaaS側で管理するかを検討する必要があります。
+例えば、すべてのユーザ情報をSaaSus Platform側で管理したい場合は、必要な追加属性をSaaSus Platformに定義します。しかし、個人情報などの重要な情報はSaaSus Platform側で管理したくない場合や、ユーザの追加属性をもとに各種集計を行いたい場合などがあります。その場合には、SaaSus Platform側には認証のみを求め、ユーザ情報の管理はSaaS側でユーザマスタをベースに行います。そして、UUIDをSaaSus Platform側の認証情報と紐付けることで、柔軟に対応できます。
+今回は、「ユーザー名」という属性を定義してみましょう。
+「＋ユーザ属性の作成」ボタンをクリックすると、ユーザ属性作成のポップアップが表示されます。
+属性名は、SaaSアプリケーション（プログラム）側で識別するためのキーとして使用されます。そのため、英字で入力しておくことをお勧めします。
+表示名は、その属性がどのようなものかを理解できるように記述します。
+タイプは、データ型を指定します。
+今回は、以下の設定を行います。
+- 属性名： username
+- 表示名： ユーザー名
+- タイプ： 文字列
+入力が完了したら、「作成」ボタンをクリックします。
+![02](/ja/img/part-4/user-authz-settings/declare-additional-attribute-to-user/declare-additional-attribute-to-user-02.png)
+ユーザー属性が追加されました。
+![03](/ja/img/part-4/user-authz-settings/declare-additional-attribute-to-user/declare-additional-attribute-to-user-03.png)
+````
+
+---
+## part-4/user-authz-settings/google-linkage.md
+````markdown
+## 概要説明
+Google連携を行うためには、Google Cloud PlatformのアカウントにOAuthクライアントを作成し、SaaSus Platformと連携する設定を実施する必要があります。
+SaaSus Platformとの連携設定を行うことで、ログイン画面に「Googleでログイン」のボタンが表示され、Google連携を利用することが出来るようになります
+注意点として、一般公開するためにはGoogleに利用申請を行う必要があります。申請後の審査に1週間程度の時間を要します。（不備がある場合はメールで連絡があるので、対応を実施してください）
+Google連携の手順
+- SaaSus Platformで[ドメインの設定](/ja/docs/part-4/application-settings/domain-and-redirect-settings) が完了していることを確認
+- Google Cloud PlatformのOAuthクライアント作成
+- Google Cloud PlatformとSaaSus Platformアカウントの連携
+- Google認証の動作確認
+- 利用申請
+### Google Cloud PlatformのOAuthクライアント作成
+#### Google連携用の情報を確認
+SaaS開発コンソールにログイン
+認証詳細設定画面を開く
+認証設定タブのGoogle連携を確認する
+![google-linkage-1](/ja/img/part-4/user-authz-settings/google-linkage/google-linkage-1.png)
+以下の項目がGoogleのOAuthクライアント作成時に必要なのでメモします
+- 承認済みの JavaScript 生成元
+- 承認済みのリダイレクト URI
+![google-linkage-2](/ja/img/part-4/user-authz-settings/google-linkage/google-linkage-2.png)
+#### OAuthの利用に同意
+Google連携を管理するための、Google Cloud Platformアカウントにログイン（Google Cloud Platformがない場合は作成してください）
+Google連携用に新しいプロジェクトを作成
+<a href="https://console.cloud.google.com/projectcreate?previousPage=%2Fprojectselector2%2Fhome%2Fdashboard%3Fhl%3Dja%26organizationId%3D0%26supportedpurview%3Dproject&organizationId=0&hl=ja&supportedpurview=project" target="_blank">新しいプロジェクト</a>を開いて、新規プロジェクトを作成します
+プロジェクト名：GoogleOAuth（任意のわかりやすいもので大丈夫です）
+![google-linkage-3](/ja/img/part-4/user-authz-settings/google-linkage/google-linkage-3.png)
+「APIとサービス」 - 「OAuth同意画面」を開く
+![google-linkage-4](/ja/img/part-4/user-authz-settings/google-linkage/google-linkage-4.png)
+User Typeで「外部」を選択し、「作成」ボタンを押す
+![google-linkage-5](/ja/img/part-4/user-authz-settings/google-linkage/google-linkage-5.png)
+以下のとおり入力し、「保存して次へ」ボタンを選択
+- アプリ名：GoogleOAuth
+- ユーザーサポートメール：任意のメールアドレス
+- デベロッパーの連絡先情報：任意のメールアドレス
+![google-linkage-6](/ja/img/part-4/user-authz-settings/google-linkage/google-linkage-6.png)
+「保存して次へ」を選択
+![google-linkage-7](/ja/img/part-4/user-authz-settings/google-linkage/google-linkage-7.png)
+テストユーザーを追加し、「保存して次へ」を選択
+公開ステータスが「テスト中」の場合は、ここで設定したユーザのみでログインすることが可能です
+![google-linkage-8](/ja/img/part-4/user-authz-settings/google-linkage/google-linkage-8.png)
+#### OAuthクライアントの作成
+「APIとサービス」 - 「認証情報」を開く
+![google-linkage-9](/ja/img/part-4/user-authz-settings/google-linkage/google-linkage-9.png)
+「認証情報を作成」 - 「OAuthクライアントID」を選択
+![google-linkage-10](/ja/img/part-4/user-authz-settings/google-linkage/google-linkage-10.png)
+以下のとおり入力し、「作成」ボタンを選択
+- アプリケーションの種類：ウェブアプリケーション
+- 名前：GoogleOAuth（任意のわかりやすいもので大丈夫です）
+- 承認済みのJavaScript生成元：＜SaaS開発コンソールで確認した値＞
+- 承認済みのリダイレクトURI：＜SaaS開発コンソールで確認した値＞
+![google-linkage-11](/ja/img/part-4/user-authz-settings/google-linkage/google-linkage-11.png)
+OAuthクライアントが作成されました
+以下の項目をSaaS開発コンソールに設定するのでメモします
+※「JSONをダウンロード」を選択し、ダウンロードして保管することをおすすめします
+- クライアントID
+- クライアントシークレット
+![google-linkage-12](/ja/img/part-4/user-authz-settings/google-linkage/google-linkage-12.png)
+### Google Cloud PlatformとSaaSus Platformアカウントの連携
+以下のとおり入力し、「保存」ボタンを選択
+- クライアントID：＜OAuthクライアント作成後に画面で確認した値＞
+- クライアントシークレット：＜OAuthクライアント作成後に画面で確認した値＞
+![google-linkage-13](/ja/img/part-4/user-authz-settings/google-linkage/google-linkage-13.png)
+「連携済み」と表示されていれば完了です
+![google-linkage-14](/ja/img/part-4/user-authz-settings/google-linkage/google-linkage-14.png)
+### Google認証の動作確認
+ログイン画面に表示される「Googleでログイン」ボタンの動作確認をしていきます
+![google-linkage-15](/ja/img/part-4/user-authz-settings/google-linkage/google-linkage-15.png)
+「Googleでログイン」の動作について
+- 表示される画面
+  - ログイン画面
+  - 新規登録画面（セルフサインアップを有効にしている場合）
+- Googleでログイン時の動作
+  - セルフサインアップを有効にしている場合
+    アカウントが存在しない場合はアカウントが自動的に作成され、ログインされます
+  - セルフサインアップを有効にしていない場合
+    アカウントが存在しない場合はログインされません
+:::warning 注意
+ログイン時にエラーが発生する場合、ドメインの設定が正しく完了していない可能性があります。
+SaaS開発コンソールのドメイン設定画面にて、DNSレコードの検証とSES（メール送信ドメイン）の認証が、どちらも正常に完了しているか再度ご確認ください。
+:::
+### 利用申請
+準備中
+````
+
+---
+## part-4/user-authz-settings/notifymailcustomize.md
+````markdown
+<a href="https://settings.console.saasus.io/customize" target="_blank">認証詳細設定画面</a>の通知メール内容タブでは、ログイン画面などの認証系ページでユーザーに送信するメールをカスタマイズすることができます。
+:::warning 警告
+メッセージに設定する文字列に全角空白は設定できません。
+:::
+## カスタマイズ可能なメール・予約語一覧
+<div className="table-scroll">
+<table className="nowrap-table">
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>※ 1</th>
+      <th>メールタイプ</th>
+      <th>名前</th>
+      <th>送信条件(API等)</th>
+      <th>Message で使用可能</th>
+      <th>Subject で使用可能</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>⚪︎</td>
+      <td><strong>signUp</strong></td>
+      <td>新規登録時の仮パスワード送信メール<br />(signUp)</td>
+      <td>`SignUp`<br />`createUser`</td>
+      <td>`{username}` ユーザーID<br />`{####}` 仮パスワード</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>×</td>
+      <td><strong>createUser</strong></td>
+      <td>(利用不可)ユーザー作成通知</td>
+      <td></td>
+      <td>`{username}` ユーザーID<br />`{####}` 一時パスワード</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>⚪︎</td>
+      <td><strong>resendCode</strong></td>
+      <td>新規登録時の仮パスワード再送メール<br />(resendCode)</td>
+      <td>`ResendSignUpConfirmationEmail`</td>
+      <td>`{username}` ユーザーID<br />`{####}` 仮パスワード</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>⚪︎</td>
+      <td><strong>forgotPassword</strong></td>
+      <td>パスワードリセット用の検証コード送信メール<br />(forgotPassword)</td>
+      <td>ログイン画面からパスワードを忘れた方はこちら</td>
+      <td>`{####}` リセットコード</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>×</td>
+      <td><strong>verifyUserAttribute</strong></td>
+      <td>(利用不可)ユーザー属性検証通知</td>
+      <td></td>
+      <td>`{username}` ユーザーID<br />`{####}` 検証コード</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>×</td>
+      <td><strong>authenticationMfa</strong></td>
+      <td>MFA認証通知</td>
+      <td>`UpdateUserMfaPreference` を利用して<br />"method"="email" に設定後ログインする</td>
+      <td>`{username}` ユーザーID<br />`{####}` 認証コード</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>×</td>
+      <td><strong>updateUserAttribute</strong></td>
+      <td>ユーザー属性更新通知</td>
+      <td>`RequestEmailUpdate`</td>
+      <td>`{####}` 確認コード</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>×</td>
+      <td><strong>inviteTenantUser</strong></td>
+      <td>テナントユーザー招待通知</td>
+      <td>`CreateTenantInvitation`</td>
+      <td>`{tenant_name}` テナント名<br />`{invitation_url}` 招待URL</td>
+      <td>`{tenant_name}` テナント名</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>×</td>
+      <td><strong>verifyExternalUser</strong></td>
+      <td>外部ユーザー検証通知</td>
+      <td>`RequestExternalUserLink`</td>
+      <td>`{####}` 検証コード</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+※ 1: ⚪︎は、<a href="https://settings.console.saasus.io/customize" target="_blank">認証詳細設定画面</a>の通知メール内容タブで件名と本文を編集できます。<br />
+　　 ×は<a href="https://docs.saasus.io/ja/docs/reference/auth-api#tag/basicInfo/operation/UpdateNotificationMessages" target="_blank">通知メールテンプレートを更新API</a>を利用して直接変更する必要があります。<br />
+</div>
+## メール本文のカスタマイズ方法
+### 新規登録時の仮パスワード送信メール (signUp)
+:::info 情報
+本項目はSaaS運用コンソールにてカスタマイズが可能です。カスタマイズ方法の詳細は<a href="https://settings.console.saasus.io/customize" target="_blank">認証詳細設定画面</a>の通知メール内容タブをご確認ください。
+:::
+`{####}` と `{username}` という文字列が必要になります。
+`{####}` は仮パスワードに、`{username}` はユーザーIDに置き換えられて送信されます。
+#### 設定例
+```
+ユーザー登録のお知らせ
+この度は会員登録いただき、ありがとうございます。
+アカウントの確認を完了するために、下記の仮パスワードをご入力ください。
+仮パスワード: {####}
+ユーザーID: {username}
+確認画面: https://auth.your.domain/sign-up-confirm
+```
+#### 送信例
+```
+ユーザー登録のお知らせ
+この度は会員登録いただき、ありがとうございます。
+アカウントの確認を完了するために、下記の仮パスワードをご入力ください。
+仮パスワード: 123456
+ユーザーID: 12345678-1234-1234-1234-123456789abc
+確認画面: https://auth.your.domain/sign-up-confirm
+```
+### 新規登録時の仮パスワード再送メール (resendCode)
+:::info 情報
+本項目はSaaS運用コンソールにてカスタマイズが可能です。カスタマイズ方法の詳細は<a href="https://settings.console.saasus.io/customize" target="_blank">認証詳細設定画面</a>の通知メール内容タブをご確認ください。
+:::
+`{####}` と `{username}` という文字列が必要になります。
+`{####}` は仮パスワードに、`{username}` はユーザーIDに置き換えられて送信されます。
+#### 設定例
+```
+仮パスワードを再送いたします
+ご依頼いただいた仮パスワードを再送いたします。
+仮パスワード: {####}
+ユーザーID: {username}
+確認画面: https://auth.your.domain/sign-up-confirm
+※このメールは自動送信されています。
+```
+#### 送信例
+```
+仮パスワードを再送いたします
+ご依頼いただいた仮パスワードを再送いたします。
+仮パスワード: 654321
+ユーザーID: 12345678-1234-1234-1234-123456789abc
+確認画面: https://auth.your.domain/sign-up-confirm
+※このメールは自動送信されています。
+```
+### パスワードリセット用の検証コード送信メール (forgotPassword)
+:::info 情報
+本項目はSaaS運用コンソールにてカスタマイズが可能です。カスタマイズ方法の詳細は<a href="https://settings.console.saasus.io/customize" target="_blank">認証詳細設定画面</a>の通知メール内容タブをご確認ください。
+:::
+`{####}` と `{username}` という文字列が必要になります。
+`{####}` はリセットコードに、`{username}` はユーザーIDに置き換えられて送信されます。
+#### 設定例
+```
+パスワードリセットのご依頼
+パスワードのリセット依頼を受け付けました。
+下記のリセットコードを使用して、新しいパスワードを設定してください。
+リセットコード: {####}
+リセット画面: https://auth.your.domain/recover-password-confirm
+```
+#### 送信例
+```
+パスワードリセットのご依頼
+パスワードのリセット依頼を受け付けました。
+下記のリセットコードを使用して、新しいパスワードを設定してください。
+リセットコード: 789012
+リセット画面: https://auth.your.domain/recover-password-confirm
+```
+### MFA認証通知 (authenticationMfa)
+:::warning 警告
+本設定を行うには<a href="https://docs.saasus.io/ja/docs/reference/auth-api#tag/basicInfo/operation/UpdateNotificationMessages" target="_blank">通知メールテンプレートを更新API</a>を利用して直接更新する必要があります。
+:::
+`{####}` と `{username}` という文字列が必要になります。
+`{####}` はMFA認証コードに、`{username}` はユーザーIDに置き換えられて送信されます。
+#### 設定例
+```
+ログイン認証コード
+ログイン時の認証コードをお知らせします。
+認証コード: {####}
+ユーザーID: {username}
+※このコードを他人に教えないでください
+```
+#### 送信例
+```
+ログイン認証コード
+ログイン時の認証コードをお知らせします。
+認証コード: 345678
+ユーザーID: 12345678-1234-1234-1234-123456789abc
+※このコードを他人に教えないでください
+```
+### ユーザー属性更新通知 (updateUserAttribute)
+:::warning 警告
+本設定を行うには<a href="https://docs.saasus.io/ja/docs/reference/auth-api#tag/basicInfo/operation/UpdateNotificationMessages" target="_blank">通知メールテンプレートを更新API</a>を利用して直接更新する必要があります。
+:::
+`{####}` という文字列が必要になります。
+`{####}` は確認コードに置き換えられて送信されます。
+#### 設定例
+```
+アカウント情報変更の確認
+お客様のアカウント情報に変更依頼がありました。
+変更を確定するために、下記の確認コードをご入力ください。
+確認コード: {####}
+変更内容を確認し、アプリケーション画面でコードを入力してください。
+■ 変更内容
+・メールアドレスの変更
+```
+#### 送信例
+```
+アカウント情報変更の確認
+お客様のアカウント情報に変更依頼がありました。
+変更を確定するために、下記の検証コードをご入力ください。
+検証コード: 901234
+変更内容を確認し、アプリケーション画面でコードを入力してください。
+■ 変更内容
+・メールアドレスの変更
+```
+### テナントユーザー招待通知 (inviteTenantUser)
+:::warning 警告
+本設定を行うには<a href="https://docs.saasus.io/ja/docs/reference/auth-api#tag/basicInfo/operation/UpdateNotificationMessages" target="_blank">通知メールテンプレートを更新API</a>を利用して直接更新する必要があります。
+:::
+`{tenant_name}` と `{invitation_url}` という文字列が必要になります。また、件名では `{tenant_name}` が使用可能です。
+`{tenant_name}` はテナント名に、`{invitation_url}` は招待URLに置き換えられて送信されます。
+#### 件名例
+```
+{tenant_name}へのご招待
+```
+#### 設定例
+```
+{tenant_name} への招待
+{tenant_name} のメンバーとしてあなたをお招きいたします。
+下記のリンクをクリックして招待を承諾してください。
+招待を承諾する: {invitation_url}
+■ 招待の詳細
+・組織名：{tenant_name}
+・有効期限：7日間
+ご質問がございましたら、招待者またはサポートまでお問い合わせください。
+```
+#### 送信例
+**件名：** ABC株式会社へのご招待
+**本文：**
+```
+ABC株式会社 への招待
+ABC株式会社 のメンバーとしてあなたをお招きいたします。
+下記のリンクをクリックして招待を承諾してください。
+招待を承諾する: https://auth.your.domain/invitation/accept?token=abc123def456
+■ 招待の詳細
+・組織名：ABC株式会社
+・有効期限：7日間
+ご質問がございましたら、招待者またはサポートまでお問い合わせください。
+```
+### 外部ユーザー検証通知 (verifyExternalUser)
+:::warning 警告
+本設定を行うには<a href="https://docs.saasus.io/ja/docs/reference/auth-api#tag/basicInfo/operation/UpdateNotificationMessages" target="_blank">通知メールテンプレートを更新API</a>を利用して直接更新する必要があります。
+:::
+`{####}` という文字列が必要になります。
+`{####}` は検証コードに置き換えられて送信されます。
+#### 設定例
+```
+外部アカウント連携の認証
+外部アカウントとの連携を安全に行うため、認証コードによる確認をお願いします。
+認証コード: {####}
+【連携手順】
+1. アプリケーションの連携画面で上記コードを入力
+2. 「認証する」ボタンをクリック
+3. 連携完了
+```
+#### 送信例
+```
+外部アカウント連携の認証
+外部アカウントとの連携を安全に行うため、認証コードによる確認をお願いします。
+認証コード: 567890
+【連携手順】
+1. アプリケーションの連携画面で上記コードを入力
+2. 「認証する」ボタンをクリック
+3. 連携完了
+```
+````
+
+---
+## part-4/user-authz-settings/role-definition.md
+````markdown
+## 役割の定義
+役割を定義していきます。
+この役割は、各種SaaSにおける役割（ロール）を表し、認可の基準として利用されます。
+例えば、テナントごとの管理者権限を持つ場合には、"admin"のような役割を定義し、一般利用者の場合は"user"のような役割を付与します。
+"admin"はSaaSus Platformが既に設定済みですので、今回は"user"を定義していきます。
+「＋役割の作成」ボタンをクリックすると、役割の作成ポップアップが表示されます。
+役割名は、SaaS アプリケーション内で役割を識別するために使用されます。
+表示名は、その役割がどのようなものかを理解できるように記述します。
+では、一般利用者を追加しましょう。
+- 役割名: user
+- 表示名: 一般利用者
+![01](/ja/img/part-4/user-authz-settings/role-definition/role-definition-01.png)
+![02](/ja/img/part-4/user-authz-settings/role-definition/role-definition-02.png)
+以上で役割の作成が完了しました。
+````
+
+---
+## part-4/user-authz-settings/saml-linkage.md
+````markdown
+# SAML連携機能
+## 概要
+SAML（Security Assertion Markup Language）連携機能により、外部のアイデンティティプロバイダーを通じてSaaSアプリケーションのユーザー認証を行うことができます。
+これにより、テナントがシングルサインオン（SSO）機能を利用し、既存のアイデンティティ管理システムを使用できるようになります。
+## 設定手順
+SaaSus Platform のSAML連携機能は、SAML 2.0に対応した様々なIDプロバイダーと連携できます。
+ここでは連携先の代表例として、Microsoft Entra IDを利用した設定手順を説明します。
+他のIDプロバイダーをご利用の場合でも、基本的な概念と設定項目は共通しています。
+### 1. Entity ID/Reply URLを取得
+APIを実行し**Entity ID**(`identity_provider_configuration.entity_id`)/**Reply URL**(`identity_provider_configuration.reply_url`)を取得します
+https://docs.saasus.io/docs/reference/auth-api#tag/authInfo/operation/GetSignInSettings
+```json
+{
+    "identity_provider_configuration": {
+        "domain": "xxxxxxxxxxxx.auth.ap-northeast-1.amazoncognito.com",
+        "entity_id": "urn:amazon:cognito:sp:ap-northeast-1_xxxxxxxxxxxx",
+        "redirect_url": "https://xxxxxxxxxxxx.auth.ap-northeast-1.amazoncognito.com/oauth2/idpresponse",
+        "reply_url": "https://xxxxxxxxxxxx.auth.ap-northeast-1.amazoncognito.com/saml2/idpresponse"
+    }
+}
+```
+### 2. Microsoft Entra IDの設定
+Microsoft Entra IDを利用してSAML連携を行うための設定を行います。以下の手順に従ってください。
+1. Microsoft Entra IDにログイン
+[Microsoft Entra 管理センター](https://entra.microsoft.com/#home)
+2. 新しいアプリケーションを作成
+    Entra ID > エンタープランズ アプリ を選択し `新しいアプリケーション`をクリック
+    ![saml-linkage-image-1](/ja/img/part-4/saml-linkage/saml-linkage-image-1.png)
+3. アプリケーションの名前を設定し、`作成`をクリックします。
+    ![saml-linkage-image-2](/ja/img/part-4/saml-linkage/saml-linkage-image-2.png)
+4. シングルサインオンを選択します。
+    ![saml-linkage-image-3](/ja/img/part-4/saml-linkage/saml-linkage-image-3.png)
+5. SAMLを選択します。
+    ![saml-linkage-image-4](/ja/img/part-4/saml-linkage/saml-linkage-image-4.png)
+6. 基本的な SAML 構成を編集し、以下の情報を入力します
+   - **識別子 (エンティティ ID)**: 先ほど取得したEntity IDを入力します。
+   - **応答 URL**: 先ほど取得したReply URLを入力します。
+    ![saml-linkage-image-5](/ja/img/part-4/saml-linkage/saml-linkage-image-5.png)
+7. 属性とクレームの設定で、`user.mail`に設定されているクレーム名を控えます。
+    ![saml-linkage-image-6](/ja/img/part-4/saml-linkage/saml-linkage-image-6.png)
+8. SAML 証明書の`アプリのフェデレーション メタデータ URL`を控えます。
+    ![saml-linkage-image-9](/ja/img/part-4/saml-linkage/saml-linkage-image-9.png)
+### 3. SaaSus Platformへの設定
+SaaSus APIを利用して、SAML連携の設定を行います。
+以下の情報をAPIに渡して、SAML連携を設定します。
+- **provider_type**: "SAML"
+- **metadata_url**: Microsoft Entra IDのアプリのフェデレーション メタデータ URL
+- **email_attribute**: Microsoft Entra IDで控えたクレーム名（例: `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress`）
+**API:** https://docs.saasus.io/docs/reference/auth-api#tag/tenant/operation/UpdateTenantIdentityProvider
+```json
+{
+  "provider_type": "SAML",
+  "identity_provider_props": {
+    "metadata_url": "https://login.microsoftonline.com/xxxx-xxxx-xxxxx-xxxx-xxxx/federationmetadata/2007-06/federationmetadata.xml?appid=xxxx-xxxx-xxxxx-xxxx-xxxx",
+    "email_attribute": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
+  }
+}
+```
+### 4. SAML連携の動作確認
+1. SaaSus にログインユーザの作成
+    SaaS運用 コンソールから、SAML連携を利用するテナントへユーザーを作成し役割を割り当てます。
+    ユーザーのメールアドレスは、Microsoft Entra IDで設定したメールアドレスと一致させる必要があります。
+2. sign_in_urlの確認
+    SaaSus APIを利用して、sign_in_urlを取得します。
+**API:** https://docs.saasus.io/docs/reference/auth-api#tag/tenant/operation/GetTenantIdentityProviders
+```json
+{
+    "saml": {
+        "email_attribute": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress",
+        "metadata_url": "https://login.microsoftonline.com/xxxx-xxxx-xxxxx-xxxx-xxxx/federationmetadata/2007-06/federationmetadata.xml?appid=xxxx-xxxx-xxxxx-xxxx-xxxx",
+        "sign_in_url": "https://auth.implementation-sample2.sandbox.dev.saasus.io/sign-in/saml/6PcH3PYyte8ZTDZ65ul5jE"
+    }
+}
+```
+3. 外部アカウントでのログイン画面
+    取得したsign_in_urlにアクセスします。
+    ![saml-linkage-image-7](/ja/img/part-4/saml-linkage/saml-linkage-image-7.png)
+4. Microsoft Entra IDでログイン
+    Microsoft Entra IDのログイン画面で、ユーザー名とパスワードを入力してログインします。
+    ログインが成功すると、SaaSにリダイレクトされます。
+    ![saml-linkage-image-8](/ja/img/part-4/saml-linkage/saml-linkage-image-8.png)
+## メモ
+### ユーザーグループの設定
+Microsoft Entra ID ではユーザーとグループ機能にて、SAML認証を利用するユーザーをグループに割り当てることができます。
+これにより、特定のグループに属するユーザーのみがSaaSアプリケーションにアクセスできるように制御できます。
+Microsoft Entra 管理センター > エンタープライズ アプリ > `作成したアプリケーション` > ユーザーとグループ から、SaaSus Platformにアクセスするユーザーをグループに割り当てます。
+````
+
+---
+## part-4/user-authz-settings/user-env-definition.md
+````markdown
+SaaSus Platformにて保持するユーザーの環境定義をすることができます。ここで定義する環境とは、SaaS（お客様）で構築している開発環境、テスト環境などを意味します。SaaSのフェーズに合わせてテスト環境の属性を持つことを検討してください。
+## ユーザー環境定義の確認
+**SaaS開発コンソールから`ユーザー環境定義`を選択**
+![user-env-definition-1](/ja/img/part-4/user-authz-settings/user-env-definition/user-env-definition-1.png)
+システムで登録した環境とユーザー自身で登録した環境が表示されます。以前はシステムが自動で環境名が"dev"または、"stg"の環境が登録されましたが、現在は環境名が"prod"のみ自動で登録されます。
+## ユーザー環境定義の登録
+**`環境の作成`をクリック**
+![user-env-definition-2](/ja/img/part-4/user-authz-settings/user-env-definition/user-env-definition-2.png)
+ID、環境名、表示名を設定します。IDは一意となるように設定してください。
+![user-env-definition-3](/ja/img/part-4/user-authz-settings/user-env-definition/user-env-definition-3.png)
+登録した環境が表示されます。
+## ユーザー環境定義の更新と削除
+![user-env-definition-4](/ja/img/part-4/user-authz-settings/user-env-definition/user-env-definition-4.png)
+環境名、表示名が変更することができます。
+![user-env-definition-5](/ja/img/part-4/user-authz-settings/user-env-definition/user-env-definition-5.png)
+環境を削除することができますが、システムで登録した環境名"prod"は削除できません。
+## ユーザー環境定義をユーザーに設定
+**SaaS 運用コンソールから`役割管理`を選択**
+![user-env-definition-6](/ja/img/part-4/user-authz-settings/user-env-definition/user-env-definition-6.png)
+先程、SaaS開発コンソールで作成した”テスト環境"を条件に検索してみます。まだ、ユーザーに付与していないため検索結果に表示されません。SaaS側の"テスト環境"を利用可能なユーザーはSaaSusPlatformに登録されていない状態です。
+**`ユーザーへの役割付与`をクリック**
+![user-env-definition-7](/ja/img/part-4/user-authz-settings/user-env-definition/user-env-definition-7.png)
+SaaS側の"テスト環境"を利用可能とするユーザーのメールアドレスを設定して追加ボタンをクリックします。
+## ユーザー環境定義を設定したユーザーの確認
+**SaaS運用コンソールから`ユーザー管理`を選択**
+![user-env-definition-8](/ja/img/part-4/user-authz-settings/user-env-definition/user-env-definition-8.png)
+テスト環境ユーザーも表示するチェックボックスをONにすると、SaaS側の"テスト環境"を利用可能とするユーザーが表示されます。
+![user-env-definition-9](/ja/img/part-4/user-authz-settings/user-env-definition/user-env-definition-9.png)
+テスト環境ユーザーも表示するチェックボックスをOFFにすると、SaaS側の"テスト環境"を利用可能とするユーザーが表示されません。これは、このユーザーがテスト環境のみ利用できるユーザーとして登録しているためです。
+````
