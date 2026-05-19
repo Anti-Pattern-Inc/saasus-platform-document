@@ -1,0 +1,548 @@
+# Merged Markdown (part-5)
+- Locale: `en`
+- Generated: `2026-05-19 23:43:32 +0900`
+
+---
+## part-5/adding-role-to-user.md
+````markdown
+## Adding Role To User
+Click "role Management" in the side menu.
+You can assign roles to users on a per-tenant basis. In this example, we assume the **General User** role has already been created. First, we’ll assign this role to **User 1-1** and **User 1-2** in **Tenant Sample 1**, and then do the same for **User 2-1** and **User 2-2** in **Sample App Tenant 2**.
+Select "Tenant Sample 1" from the "tenant" pulldown, and search for "General users" from the "role" pulldown.
+First, let's give User 1-1 and User 1-2 the role of "General User" in "Tenant Sample 1".
+Enter the above conditions and click "search".
+![01](/img/part-5/adding-role-to-user/adding-role-to-user-01.png)
+No one is displayed because there are no users for this role yet.
+Grant the role of "General users" to User 1-1 and User 1-2.
+Next, click "Grant role to user" in the upper right corner.
+Select the email addresses of User 1-1 and User 1-2 and click "Add".
+![02](/img/part-5/adding-role-to-user/adding-role-to-user-02.png)
+Role added to user.
+Next, let's assign the role of "General User" to User 2-1 and User 2-2, who belong to "Sample App Tenant 2".
+To confirm that the role has been granted, click "User Management" in the side menu to open the user management screen.
+![03](/img/part-5/adding-role-to-user/adding-role-to-user-03.png)
+We have confirmed that the role has been granted to the user.
+````
+
+---
+## part-5/operations-console-overview.md
+````markdown
+## 1. Purpose of the SaaS Operation Console
+The SaaS Operation Console is designed for users responsible for daily administrative tasks and reviewing key information required for SaaS operations.
+Typical use cases include:
+- Viewing and managing user data associated with each tenant (customer organization)
+- Reviewing and editing tenant basic and billing information
+- Assigning or changing rate plans for each tenant
+Intended users:
+- Customer support representatives
+- Administrators of the SaaS operations team
+## 2. Screen Layout and Main Menu Overview
+Upon logging into the SaaS Operation Console, a navigation menu appears on the left side of the screen, giving access to all main features.
+![01](/img/part-5/operations-console-overview/operations_console_overview-01.png)
+Main menu structure:
+| Menu                 | Description                                                                 |
+|----------------------|-----------------------------------------------------------------------------|
+| **Dashboard**         | Displays updates, announcements, and release notes.                         |
+| **Users**   | Allows searching, registering, editing, and deleting users.                 |
+| **Tenants** | Lets you view and edit basic and billing information for each tenant.       |
+| **Roles**   | Assign roles to users.                                                      |
+| **Pricing**| View rate plans applied to each tenant (creation/editing is done via the SaaS Development Console). |
+| **Feedbacks**          | Displays a list of suggestions and requests submitted by users.             |
+:::info
+You can switch between the SaaS Operation Console and the SaaS Development Console using the dropdown at the top left of the screen. Chat support via Intercom is also available at the bottom right.
+:::
+## 3. Common Menus and Basic Operations
+### Dashboard
+- View announcements and platform update notices from SaaSus.
+### Users
+- Search, register, edit, and delete users.
+### Tenants
+- View and edit basic and billing information for each tenant.
+### Roles
+Manage user roles such as administrator or general user.
+Role definitions are created in the SaaS Development Console; here, you can assign or review them.
+### Pricing
+- View rate plans currently assigned to each tenant.
+- Assign, change, or remove rate plans from tenants on this screen.
+- Defining or editing rate plans is done in the SaaS Development Console.
+### Feedbacks
+- View a list of user-submitted suggestions or requests.
+- Feedback is shown as-is and can be used for service improvements.
+- Each entry includes a submission date.
+````
+
+---
+## part-5/price-plan.md
+````markdown
+In the pricing plan settings of the SaaS operation console, you can set, change, or cancel the tenant's pricing plan.
+When working with Stripe, a subscription will be generated according to the set pricing plan, and billing will be processed automatically.
+````
+
+---
+## part-5/price-plan/price-plan-setting-000.md
+````markdown
+## Setting Billing Address
+Enter the billing information before setting up the price plan for tenants.
+Open the tenant management screen and click the edit button of the target tenant.
+![](/img/part-5/price-plan/price-plan-setting-000/tenant.png)
+Enter and save the billing information in the *Edit Billing Information*.
+![](/img/part-5/price-plan/price-plan-setting-000/setting.png)
+````
+
+---
+## part-5/price-plan/price-plan-setting-001.md
+````markdown
+## Set Pricing Plan to take effect immediately
+1. Go to Pricing Plan Settings in the SaaS Operations Console.
+2. Click "Plan Settings" for the tenant for which you want to set a price plan.
+3. Select a pricing plan from the select box.
+4. For Reflection Date, select "Reflected immediately".
+5. Click Save.
+6. A confirmation message will be displayed. Check the contents and click "Save".
+**\*When "Reflected immediately" is selected, the pricing plan will take effect about 5 minutes after the operation.**
+_For example, a billing plan is set at 9:00 am on December 28, 2022 → Reflected at 09:05:00 on December 28, 2022_
+**For information on tax rate settings, please refer to this document: ([Tax Rate Settings](/docs/part-4/pricing-and-billing/tax-rate-settings))**
+![plan](/img/part-5/price-plan/price-plan-setting-001/plan.png)
+*Dialog that appears when you perform the operation in step 2 (operate here from step 3 onwards)*
+***
+## Schedule a Pricing Plan for the future
+1. Go to Pricing Plan Settings in the SaaS Operations Console.
+2. Click "Plan Settings" for the tenant for which you want to set a price plan.
+3. Select a rate plan from the select box.
+4. For Reflection Date, select "Date and time specification", then specify the desired date and time.
+5. Click Save.
+6. A confirmation message will be displayed. Check the contents and click "Save".
+````
+
+---
+## part-5/price-plan/price-plan-setting-002.md
+````markdown
+## Set Pricing Plan to take effect immediately
+1. Go to Pricing Plan Settings in the SaaS Operations Console.
+2. Click "Plan Settings" for the tenant whose price plan you want to change.
+3. Select a pricing plan from the select box.
+4. For Reflection Date, select "Reflected immediately".
+5. Click Change.
+6. A confirmation message will be displayed. Check the contents and click "Change".
+**\*When "Reflected immediately" is selected, the pricing plan will take effect about 5 minutes after the operation.**
+_Example, Change setting of pricing plan at 9:00 am on December 28, 2022 → Switch to 09:05:00 on December 28, 2022_
+![plan-setting](/img/part-5/price-plan/price-plan-setting-002/plan-setting.png)
+*A confirmation message about the changes will be displayed. Please check if there are any problems.*
+***
+## Schedule a Pricing Plan for the future
+1. Go to Pricing Plan Settings in the SaaS Operations Console.
+2. Click "Plan Settings" for the tenant whose price plan you want to change.
+3. Select a pricing plan from the select box.
+4. For Reflection Date, select "Date and time specification", then specify the desired date and time.
+5. Click Change.
+6. A confirmation message will be displayed. Check the contents and click "Change".
+````
+
+---
+## part-5/price-plan/price-plan-setting-003.md
+````markdown
+## Behavior when working with Stripe
+Canceling a pricing plan will cancel the corresponding Stripe subscription.
+Please note that no refunds will be given in that case.
+## Cancel Pricing Plan Immediately
+1. Go to Pricing Plan Settings in the SaaS Operations Console.
+2. Click "Release" for the tenant whose pricing plan you want to release.
+3. For Reflection Date, select "Reflected immediately".
+4. Click Unlock.
+5. A confirmation message will be displayed. Check the contents and click "Remove".
+**\*When "Reflected immediately" is selected, the pricing plan will take effect about 5 minutes after the operation.**
+_Example, Cancellation setting of pricing plan at 9:00 am on December 28, 2022 → cancellation at 09:05:00 on December 28, 2022_
+![plan-setting](/img/part-5/price-plan/price-plan-setting-003/plan-setting.png)
+*If the cancellation setting is successful, the text (cancellation of plan under contract) is displayed as shown in the red frame in the image.*
+***
+## Schedule Cancellation of Pricing Plan
+1. Go to Pricing Plan Settings in the SaaS Operations Console.
+2. Click "Release" for the tenant whose pricing plan you want to release.
+3. For Reflection Date, select "Date and time specification", then specify the desired date and time.
+4. Click Unlock.
+5. A confirmation message will be displayed. Check the contents and click "Remove".
+````
+
+---
+## part-5/price-plan/price-plan-setting-004.md
+````markdown
+## About canceling a scheduled change
+A schedule will be created when you select "Date and time specification" as the reflection timing during pricing plan setup, change, or cancellation.
+When the specified date and time comes, operations for setting, changing, and canceling rate plans are automatically performed based on the created schedule.
+You can cancel the change up to 10 minutes before the specified date and time by following the steps below.
+1. Go to Pricing Plan Settings in the SaaS Operations Console.
+2. Click “Cancel Schedule” for the tenant whose schedule you want to cancel.
+3. A confirmation message will be displayed. If there is no problem, click "OK".
+![plan-setting](/img/part-5/price-plan/price-plan-setting-004/plan-setting.png)
+*If the scheduled change date and time in the red frame of the image is more than 10 minutes ahead, it will be possible to cancel the schedule*
+````
+
+---
+## part-5/tenant-management.md
+````markdown
+## Searching Tenants
+You can search tenants using the following criteria:
+**Searchable fields:**
+- **ID or Tenant Name**: Text input
+![Search screen](/img/part-5/tenant-management/tenant-search.png)
+## Creating a New Tenant
+Click the “+ Create Tenant” button in the top right to open the tenant creation window.
+**Input fields:**
+| Field Name                | Description                                                                |
+|---------------------------|----------------------------------------------------------------------------|
+| Tenant Name               | The name displayed in your service                                         |
+| Tenant Attributes         | Optional predefined attributes (e.g., industry, contract type)             |
+| Add a representative user | Select either `Add User` or `Select existing user` (radio)                     |
+**If “Add User” is selected:**
+| Field Name     | Description                                        |
+|----------------|----------------------------------------------------|
+| Representative E-mail Address  | Used as the login ID for the new user              |
+| Temporary Password for Representative | One-time password used for initial login       |
+**If “Select existing user” is selected:**
+- Choose from a list of registered user email addresses (autocomplete input)
+:::info
+- The newly created representative user will be automatically assigned to the tenant with the `admin` role.
+- If Stripe is integrated, billing emails will be sent to the **Representative E-mail Address**.
+:::
+![Create form](/img/part-5/tenant-management/tenant-create.png)
+## Editing a Tenant
+Click the "Edit" icon in the list to open the edit window.
+Edits are divided into two sections:
+### Editing Basic Information
+| Field Name                 | Description                                                             |
+|----------------------------|--------------------------------------------------------------------------|
+| Tenant Name                | Update the display name of the tenant                                   |
+| Tenant Attributes          | Update predefined attributes (e.g., industry, contract type)            |
+| Representative E-mail Address       | Select a user associated with the tenant as the representative address  |
+:::info
+- If Stripe is integrated, billing emails will be sent to this address.
+:::
+### Editing Billing Information
+You can update information displayed on invoices.
+| Field Name                     | Description                                                    |
+|-------------------------------|-----------------------------------------------------------------|
+| Tenant Name (for Invoice)     | Name that appears on the invoice                                |
+| Address                       | Street address (e.g., block, lot, etc.)                         |
+| Building name, room number, etc. | Building name, apartment, or room number                        |
+| City                          | City, ward, town, or village                                    |
+| State                         | State or region (e.g., prefecture in Japan)                     |
+| Postal Code                   | Postal or ZIP code                                              |
+| Country                       | Country name                                                    |
+| Invoice Language              | Japanese / English (radio selection)                            |
+![Edit form](/img/part-5/tenant-management/tenant-edit.png)
+## Deleting a Tenant
+Click the "Delete" icon to open a confirmation window.
+![Delete screen](/img/part-5/tenant-management/tenant-delete.png)
+````
+
+---
+## part-5/user-feedback.md
+````markdown
+## Overview
+This feature allows you to obtain feedback from users. By collecting opinions such as questions and requests for additional features from users who are actually using the SaaS, you can use this to improve your service.
+## Comments
+The SaaS administrator can reply to comments on the feedback.
+## Votes
+Users can vote on feedback. This allows to see the features that are most in demand by users.
+## Status
+You can set the status. This allows to communicate the progress of the development to the user.
+0: New
+1: Under consideration
+2: In progress
+3: Implemented
+## Usage
+In order to use this feature, you need to implement a feedback manipulation function into your SaaS using the [Communication API](/docs/reference/communication-api).
+For example, you would use APIs such as:
+* [CreateFeedback](/docs/reference/communication-api#tag/feedback/operation/CreateFeedback)
+  * Creates feedback
+* [GetFeedbacks](/docs/reference/communication-api#tag/feedback/operation/GetFeedbacks)
+  * Retrieves created feedback
+* [CreateVoteUser](/docs/reference/communication-api#tag/feedback/operation/CreateVoteUser)
+  * Allows other users to vote on feedback
+You would use these APIs to implement the feedback function.
+The collected feedback can be checked in the SaaS operation console.
+![feedback-list](/img/part-5/user-feedback/feedback-list.png)
+You can change the status and add comments.
+![feedback-edit](/img/part-5/user-feedback/feedback-edit.png)
+````
+
+---
+## part-5/user-management/user-activity-history-log.md
+````markdown
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+## Overview
+The user activity history log enables you to check the history of user operations on the SaaS.
+:::warning
+The User Activity Log feature is not available for customers on the legacy Starter or Standard plans.
+To use this feature, you need to change to a new pricing plan.
+:::
+You can view the "action history log" in the Actions column of the SaaS Operations Console > User Management.
+![users](/img/part-5/user-management/user-activity-history-log/users.png)
+![activity-history-log](/img/part-5/user-management/user-activity-history-log/activity-history-log.png)
+The history of the screen transitions by users on the SaaS is displayed in chronological order.
+The log retention period is up to one month.
+## Setup
+When executing `GetUserInfo`, set the `Referer` or `X-SaaSus-Referer` header.
+If both are set, `X-SaaSus-Referer` takes precedence.
+Examples of SDK implementations for each language are as follows.
+```mdx-code-block
+<Tabs>
+<TabItem value="php" label="PHP" default>
+```
+For example, if you are using [Laravel](https://github.com/laravel/laravel), it would look like this.
+Use `AntiPatternInc\Saasus\Laravel\Middleware\Auth`.
+```php
+<?php
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+// Run GetUserInfo inside Middleware\Auth
+// Retrieve the "Referer" and "X-SaaSus-Referer" from the request headers and add them as headers when executing
+Route::middleware(\AntiPatternInc\Saasus\Laravel\Middleware\Auth::class)->group(function () {
+  Route::get('/users', 'App\Http\Controllers\UserApiController@index');
+});
+```
+```mdx-code-block
+</TabItem>
+<TabItem value="nodejs" label="Node.js">
+```
+For example, if you are using [`Express`](https://github.com/expressjs/express), it would look like this.
+Use `saasus-sdk.AuthMiddleware`.
+```js
+import express from "express";
+import { AuthMiddleware } from "saasus-sdk";
+const app = express();
+app.use(
+  // Run GetUserInfo inside AuthMiddleware
+  // Retrieve the "Referer" and "X-SaaSus-Referer" from the request headers and add them as headers when executing
+  ["/users"],
+  AuthMiddleware
+);
+app.use(["/users"], usersRouter);
+```
+```mdx-code-block
+</TabItem>
+<TabItem value="java" label="Java">
+```
+```java
+    @GetMapping(value = "/users", produces = "application/json")
+    public ResponseEntity<?> getUsers(HttpSession session, HttpServletRequest request) throws Exception {
+        AuthApiClient apiClient = new Configuration().getAuthApiClient();
+        apiClient.setReferer(request.getHeader("Referer")); // Set the Referer header
+        UserInfoApi userInfoApi = new UserInfoApi(apiClient);
+        UserInfo userInfo = null;
+        try {
+            userInfo = userInfoApi.getUserInfo(getIDToken(request));
+            System.out.println(userInfo);
+        } catch (ApiException e) {
+            e.printStackTrace();
+            throw e;
+        }
+        System.out.println(userInfo.getTenants());
+        String tenantId = userInfo.getTenants().get(0).getId();
+        TenantUserApi tenantUserApi = new TenantUserApi(apiClient);
+        Users users = null;
+        try {
+            users = tenantUserApi.getTenantUsers(tenantId);
+            System.out.println(users);
+        } catch (ApiException e) {
+            e.printStackTrace();
+            throw e;
+        }
+        return ResponseEntity.ok(users.getUsers());
+    }
+```
+```mdx-code-block
+</TabItem>
+<TabItem value="go" label="Go">
+```
+For example, if you are using [`Echo`](https://github.com/labstack/echo), it would look like this.
+Use `middleware.ExtractReferer`.
+```go
+package main
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+	"net/http"
+	"github.com/joho/godotenv"
+	"github.com/labstack/echo/v4"
+	"github.com/saasus-platform/saasus-sdk-go/ctxlib"
+	"github.com/saasus-platform/saasus-sdk-go/generated/authapi"
+	"github.com/saasus-platform/saasus-sdk-go/middleware"
+	"github.com/saasus-platform/saasus-sdk-go/modules/auth"
+)
+func main() {
+	if err := run(); err != nil {
+		log.Fatal(err)
+	}
+}
+var authClient *authapi.ClientWithResponses
+func run() error {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+	authClient, err = auth.AuthWithResponse()
+	if err != nil {
+		return fmt.Errorf("failed to create auth client: %w", err)
+	}
+	idTokenGetter := &middleware.IdTokenGetterFromAuthHeader{}
+	authMiddleware := authMiddlewareEcho(idTokenGetter)
+	e := echo.New()
+	// Retrieve the "Referer" and "X-SaaSus-Referer" from the request headers and store in context
+	// middleware.ExtractReferer must be executed before GetUserInfo
+	e.Use(echo.WrapMiddleware(middleware.ExtractReferer))
+	e.GET("/users", getUsers, authMiddleware)
+	return e.Start(":80")
+}
+func authMiddlewareEcho(getter middleware.IDTokenGetter) echo.MiddlewareFunc {
+	return func(next echo.HandlerFunc) echo.HandlerFunc {
+		return func(c echo.Context) error {
+			// Execute GetUserInfo inside middleware.Authenticate
+			// If the context holds Referer, add it as a header when executing GetUserInfo
+			userInfo, err := middleware.Authenticate(c.Request().Context(), getter.GetIDToken(c.Request()))
+			if err != nil {
+				http.Error(c.Response().Writer, "Unauthorized "+err.Error(), http.StatusUnauthorized)
+				return nil
+			}
+			c.Set(string(ctxlib.UserInfoKey), userInfo)
+			return next(c)
+		}
+	}
+}
+```
+```mdx-code-block
+</TabItem>
+<TabItem value="python" label="Python">
+```
+For example, if you are using [`FastAPI`](https://github.com/tiangolo/fastapi), it would look like this.
+```python
+import uvicorn
+from typing import Union
+from fastapi import FastAPI, Request, Depends, HTTPException, Header
+from saasus_sdk_python import TenantUserApi
+from saasus_sdk_python.callback.callback import Callback
+from saasus_sdk_python.middleware.middleware import Authenticate
+from saasus_sdk_python.client.client import SignedApiClient
+from dotenv import load_dotenv
+load_dotenv()
+app = FastAPI()
+auth = Authenticate()
+callback = Callback()
+api_client = SignedApiClient()
+def fastapi_auth(request: Request) -> Union[dict, HTTPException]:
+    auth_header = request.headers.get("Authorization", "")
+    token = auth_header.replace("Bearer ", "") if "Bearer " in auth_header else ""
+    referer = request.headers.get("Referer", "")
+    # Execute GetUserInfo inside auth.authenticate
+    # You can set the referer as an argument
+    user_info, error = auth.authenticate(id_token=token, referer=referer)
+    if error:
+        raise HTTPException(status_code=401, detail=str(error))
+    return user_info
+@app.get("/users")
+def get_tenant_users(auth_user: dict = Depends(fastapi_auth)):
+    if not auth_user.tenants:
+        raise HTTPException(status_code=400, detail="No tenants found for the user")
+    tenant_id = auth_user.tenants[0].id
+    try:
+        tenant_user_info = TenantUserApi(api_client=api_client).get_tenant_users(tenant_id=tenant_id,
+                                                                                 _headers=api_client.configuration.default_headers)
+        return tenant_user_info.users
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=80)
+```
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+When sending HTTP requests from the SaaS screen to the SaaS, set the `Referer` or `X-SaaSus-Referer` header.
+The `Referer` header is automatically set by the browser, but the path part of the URL may be omitted.
+If the expected value is not set, manually set the `X-SaaSus-Referer` header.
+The activity history log displays the history of `GetUserInfo` executed with `Referer` or `X-SaaSus-Referer` headers. Therefore if a HTTP request is not sent to the SaaS or only HTTP requests that do not execute `GetUserInfo` are sent when navigating to a certain screen, the transition to that screen will not be recorded.
+## Implementation Details
+For detailed information on implementing activity history logs, recommended patterns, and SPA implementation examples, please refer to the following dedicated page:
+**[Implementation of Activity History Logs](/docs/part-6/implementation-guide/sample-application/activity-history-log)**
+This page provides detailed explanations of the following:
+- Implementation points and recommended patterns
+- How to use the `X-SaaSus-Referer` header
+- Implementation Points for Frontend
+- Methods for recording page views and in-page actions
+````
+
+---
+## part-5/user-management/user-crud.md
+````markdown
+## Search Users
+You can filter and search users using the following criteria:
+**Available search filters:**
+- **ID, Email Address, Sign-in ID, or Tenant Name**: Text input
+- **Tenant**: Text box with autocomplete
+- **Environment**: Select box
+- **Role**: Select box
+- **Display users who do not belong to a tenant**: Checkbox
+![Search screen](/img/part-5/user-management/user-crud/user-search.png)
+## Create a New User
+Click the "Add User" button at the top right of the screen to open the user registration window.
+At the top of the user registration window, you can select one of the following tabs:
+- Create With E-Mail Address: Create a user with email address authentication
+- Create With Sign-In ID: Create a user with sign-in ID authentication
+The input fields change depending on the selected tab, and only one of "Email Address" or "Sign-in ID" is shown.
+:::warning Important
+To allow users created with "Create With Sign-In ID" to log in, you need to turn ON
+**Advanced Settings > Basics > Sign-in ID** and enable
+**"Add Sign-in ID label"**.
+If this is OFF, ID authentication users can be created, but they cannot log in with sign-in ID on the login screen.
+:::
+This section explains the input fields.
+**Input fields:**
+| Field           | Description                                                                 |
+|----------------|-----------------------------------------------------------------------------|
+| Creation Method | Select the **Create With E-Mail Address** or **Create With Sign-In ID** tab |
+| E-mail Address  | Displayed when **Create With E-Mail Address** is selected. Used for user login |
+| Sign-in ID      | Displayed when **Create With Sign-In ID** is selected (allowed: alphanumeric characters, hyphen (-), underscore (_); max 50 characters) |
+| Password (Optional) | Enter a password for login. If left blank, a temporary password is issued<br/>When **Create With E-Mail Address** is selected, if the password is left blank, a temporary password will be sent to that email address |
+| Tenant          | Select the tenant to associate the user with                                |
+| User Attributes | Fill in predefined user attributes (e.g., Username, Department, Role, etc.) |
+![Create form](/img/part-5/user-management/user-crud/user-create.png)
+## Add Existing User to Tenant
+Select **"Add Existing User to Tenant"** from the select box on the "Add User" button to open the tenant assignment window.
+This allows you to associate an already registered user with another tenant.
+**Input fields:**
+| Field           | Description                                                               |
+|----------------|---------------------------------------------------------------------------|
+| E-mail Address / Sign-in ID | Email address or sign-in ID of the existing user to be added       |
+| Tenant          | Select the tenant to assign the user to                                   |
+| User Attributes | Fill in predefined user attributes (e.g., Username, etc.)                 |
+![Add to tenant](/img/part-5/user-management/user-crud/add-tenant-to-user.png)
+## Edit or Delete a User
+Click the "Edit" or "Delete" icon from the user list to perform the operation.
+### Edit
+Clicking the edit icon opens a window where user information can be modified.
+**Editable fields:**
+- E-mail Address (when email address authentication is used)
+- Sign-in ID (when sign-in ID authentication is used)
+- Password (re-entry)
+- User Attributes (e.g., Username, Department, etc.)
+**Available actions:**
+- Password reset (invalidates the current password and sets a new one)
+- Unlink MFA (the button is shown at the bottom only for users who have MFA configured)
+![Edit screen](/img/part-5/user-management/user-crud/user-edit.png)
+### Delete
+Clicking the delete icon opens a confirmation window with two deletion options.
+**Deletion options:**
+- **Delete from Tenant**
+  The user will be removed only from the tenant associated with the selected row. Other tenant associations remain unaffected.
+- **Delete from SaaSus**
+  The user will be completely removed from the SaaSus Platform and disassociated from all tenants.
+![Delete window](/img/part-5/user-management/user-crud/user-delete.png)
+**Notes:**
+- If "Delete from SaaSus" is selected, the user is removed from all associated tenants.
+## Related Links
+To view user activity history,
+see [User Activity History Log](/docs/part-5/user-management/user-activity-history-log).
+````

@@ -1,0 +1,970 @@
+# API Spec (apigatewayapi)
+- Locale: `ja`
+- Generated: `2026-05-19 23:43:33 +0900`
+
+```yaml
+openapi: 3.0.0
+info:
+  description: SaaSus Smart API Gateway API Schema
+  version: 1.0.0
+  title: SaaSus Smart API Gateway API Schema
+  contact:
+    name: Anti-Pattern
+servers:
+  - url: https://api.saasus.io/v1/apigateway
+    description: Production API Server
+tags:
+  - name: smartApiGateway
+    description: SaaSus Smart API Gateway
+security:
+  - Bearer: []
+paths:
+  /settings:
+    get:
+      tags:
+        - smartApiGateway
+      operationId: GetApiGatewaySettings
+      summary: Smart API Gatewayの設定情報を取得
+      description: |
+        Smart API Gatewayの設定情報を取得
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiGatewaySettings"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    patch:
+      tags:
+        - smartApiGateway
+      operationId: UpdateApiGatewaySettings
+      summary: Smart API Gatewayの設定情報を更新
+      description: |
+        Smart API Gatewayの設定情報を更新
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateApiGatewaySettingsParam"
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /settings/open-api-definition:
+    put:
+      tags:
+        - smartApiGateway
+      operationId: UpdateOpenApiDefinition
+      summary: OpenAPI定義ファイルを更新
+      description: |
+        OpenAPI定義ファイルを更新します。OpenAPI定義ファイルは、自動生成されるドキュメントに使用されます。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateOpenApiDefinitionParam"
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /draft/settings:
+    get:
+      tags:
+        - smartApiGateway
+      operationId: GetDraftApiGatewaySettings
+      summary: Smart API Gatewayのドラフト設定情報を取得
+      description: |
+        Smart API Gatewayのドラフト設定情報を取得します。
+        アップロードしたソースコードから生成された設定を、適用する前に確認することができます。
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DraftApiGatewaySettings"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /draft/settings/apply:
+    post:
+      tags:
+        - smartApiGateway
+      operationId: ApplyDraftApiGatewaySettings
+      summary: Smart API Gatewayのドラフト設定情報を適用
+      description: |
+        Smart API Gatewayのドラフト設定情報を適用します。
+        ドラフト設定で行った変更を実際のSmart API Gatewayに反映します。
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /draft/settings/cancel:
+    post:
+      tags:
+        - smartApiGateway
+      operationId: CancelDraftApiGatewaySettings
+      summary: Smart API Gatewayのドラフト設定情報をキャンセル
+      description: |
+        Smart API Gatewayのドラフト設定情報をキャンセルします。
+        ドラフト設定で行った変更を実際のSmart API Gatewayに反映せずにキャンセルします。
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /create:
+    post:
+      tags:
+        - smartApiGateway
+      operationId: CreateApiGateway
+      summary: API Gatewayを作成します
+      description: |
+        API Gatewayを作成します
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api-keys:
+    get:
+      tags:
+        - smartApiGateway
+      operationId: GetApiKeys
+      summary: 条件に応じたAPIキー一覧または特定APIキーの取得
+      description: クエリパラメータ tenant_id、env_id、user_id の組み合わせにより、取得内容が変わります。 - tenant_id
+        が指定されない場合、全件の一覧が返されます。 - tenant_id のみ指定されると、指定されたテナント内のAPIキー一覧が返されます。 -
+        tenant_id と env_id が指定されると、環境単位でフィルタリングして取得します。 - tenant_id, env_id,
+        user_id の全てが指定される場合は、完全一致検索で対象ユーザーのAPIキーが取得されます。 - また、env_id のみ、user_id
+        のみ指定された場合も検索が可能です。
+      parameters:
+        - name: tenant_id
+          in: query
+          description: |
+            指定された場合、対象テナントのAPIキーを取得します。
+          required: false
+          schema:
+            type: string
+        - name: env_id
+          in: query
+          description: |
+            指定された場合、対象環境のAPIキーを取得します。
+          required: false
+          schema:
+            type: integer
+            x-go-type: uint64
+        - name: user_id
+          in: query
+          description: |
+            指定された場合、対象ユーザーのAPIキー（最大2件）を取得します。
+          required: false
+          schema:
+            type: string
+        - name: tenant_only
+          in: query
+          description: |
+            true の場合、User_idが指定されていないAPIキーのみを取得します。
+          required: false
+          schema:
+            type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiKeys"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      tags:
+        - smartApiGateway
+      operationId: CreateApiKey
+      summary: APIキーを作成します
+      description: |
+        リクエストボディ内に全てのパラメータ（tenant_id, env_id, user_id（任意））を設定し、新規作成または更新を行います。
+      requestBody:
+        description: Payload for API key creation or update.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateApiKeyParam"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiKey"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/api-keys/{api_key}":
+    get:
+      tags:
+        - smartApiGateway
+      operationId: GetApiKey
+      summary: APIキーを指定して取得
+      description: |
+        APIキーを指定して、APIキーの詳細を取得します。
+      parameters:
+        - in: path
+          name: api_key
+          description: APIキー
+          required: true
+          schema:
+            type: string
+            example: 1234567890abcdef
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiKey"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/api-keys/{api_key}/client-secret":
+    post:
+      tags:
+        - smartApiGateway
+      operationId: RefreshClientSecret
+      summary: APIキーのクライアントシークレットを更新
+      description: |
+        APIキーのクライアントシークレットを更新します。
+      parameters:
+        - in: path
+          name: api_key
+          description: APIキー
+          required: true
+          schema:
+            type: string
+            example: 1234567890abcdef
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiKey"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/tenants/{tenant_id}":
+    patch:
+      tags:
+        - smartApiGateway
+      operationId: UpdateTenant
+      summary: テナント情報を更新
+      description: |
+        テナント情報を更新します。
+      parameters:
+        - $ref: "#/components/parameters/TenantId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTenantParam"
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    get:
+      tags:
+        - smartApiGateway
+      operationId: GetTenant
+      summary: テナント情報を取得
+      description: |
+        テナント情報を取得します。
+      parameters:
+        - $ref: "#/components/parameters/TenantId"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiGatewayTenant"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /publish:
+    post:
+      tags:
+        - smartApiGateway
+      operationId: PublishApiGateway
+      summary: API Gatewayを公開します
+      description: |
+        API Gatewayを公開します
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /unpublish:
+    post:
+      tags:
+        - smartApiGateway
+      operationId: UnpublishApiGateway
+      summary: API Gatewayを非公開にします
+      description: |
+        API Gatewayを非公開にします
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /upload:
+    post:
+      tags:
+        - smartApiGateway
+      operationId: UploadGenerationFiles
+      summary: API Gatewayを作成するファイルをアップロードします
+      description: |
+        API Gatewayを作成するファイルをアップロードします
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApiGatewayInputFile"
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /cloudformation-launch-stack-link:
+    get:
+      tags:
+        - smartApiGateway
+      operationId: GetCloudFormationLaunchStackLink
+      summary: AWS CloudFormationのスタック作成リンクを取得
+      description: |
+        CloudFormationのクイック作成リンクを取得します。
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloudFormationLaunchStackLink"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      description: APIへのアクセス情報または認証情報
+  parameters:
+    TenantId:
+      in: path
+      name: tenant_id
+      description: テナントID
+      required: true
+      schema:
+        $ref: "#/components/schemas/Uuid"
+    UserId:
+      in: path
+      name: user_id
+      description: ユーザーID
+      required: true
+      schema:
+        $ref: "#/components/schemas/Uuid"
+    EnvId:
+      in: path
+      name: env_id
+      description: 環境ID
+      required: true
+      schema:
+        $ref: "#/components/schemas/Id"
+  schemas:
+    Error:
+      properties:
+        type:
+          type: string
+          example: permission_denied
+        message:
+          type: string
+          example: エラーメッセージ
+      required:
+        - type
+        - message
+    Id:
+      type: integer
+      x-go-type: uint64
+      example: 1
+    Uuid:
+      type: string
+      example: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+    ApiGatewaySettings:
+      title: ApiGateway設定
+      type: object
+      properties:
+        generated_file_status:
+          title: 自動生成ファイルの状態
+          description: 自動生成ファイルの状態
+          type: string
+          example: finished
+        internal_endpoint_openapi_definition_file_download_url:
+          title: openapi定義ファイルのダウンロードURL
+          description: 自動生成されたopenapi定義ファイルのダウンロードURL。API Gatewayを構築するために使用されます。
+          type: string
+          example: https://presigned-url-test.s3.ap-northeast-1.amazonaws.com/test.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=xxxxxx%2F20230710%2Fap-northeast-1%2Fs3%2Faws4_request
+        status:
+          title: API Gatewayの作成状態
+          description: API Gatewayの作成状態
+          type: string
+          example: published
+        role_arn:
+          title: AssumeRoleするためのロールのARN
+          description: SaaSus PlatformがAssumeRoleするためのロールのARN
+          type: string
+          example: arn:aws:iam::123456789012:role/role-name
+        role_external_id:
+          title: AssumeRoleする時に使用するExternalID
+          description: SaaSus PlatformがSaaSを操作するためにAssumeRoleする時に使用するexternal id
+          type: string
+          example: 1234567890
+        internal_endpoint_health_check_path:
+          title: インターナルエンドポイントのヘルスチェックパス
+          description: インターナルエンドポイントのヘルスチェックに使用するパス
+          type: string
+          example: /health
+        internal_endpoint_health_check_port:
+          title: インターナルエンドポイントのヘルスチェックポート
+          description: インターナルエンドポイントのヘルスチェックに使用するポート
+          type: integer
+          example: 80
+        internal_endpoint_health_check_protocol:
+          title: インターナルエンドポイントのヘルスチェックプロトコル
+          description: インターナルエンドポイントのヘルスチェックに使用するプロトコル
+          type: string
+          example: HTTP or HTTPS
+        internal_endpoint_health_status_codes:
+          title: インターナルエンドポイントのヘルスチェックステータスコード
+          description: インターナルエンドポイントのヘルスチェックに使用するステータスコード
+          type: string
+          example: 200
+        saas_subnet_ids:
+          title: SaaSサブネットID
+          description: SaaSのサブネットID
+          type: array
+          items:
+            type: string
+          example:
+            - subnet-1234567890abcdef0
+            - subnet-1234567890abcdef1
+        saas_vpc_id:
+          title: SaaS VPC ID
+          description: SaaSのVPC ID
+          type: string
+          example: vpc-12345678
+        domain_name:
+          type: string
+          example: dev.saasus.io
+          description: ドメイン名
+        is_dns_validated:
+          type: boolean
+          example: false
+          description: DNSレコードの検証結果
+        certificate_dns_record:
+          $ref: "#/components/schemas/DnsRecord"
+          description: 代替ドメイン名
+        cloud_front_dns_record:
+          $ref: "#/components/schemas/DnsRecord"
+          description: Cloud Front DNS レコード
+        vpc_endpoint_dns_record:
+          $ref: "#/components/schemas/DnsRecord"
+          description: VPC Endpoint DNS レコード
+        default_domain_name:
+          type: string
+          description: デフォルトドメイン名
+          example: d78bh0l3saarv.cloudfront.net
+        saas_alb_arn:
+          title: SaaS アプリケーションロードバランサーARN
+          description: SaaS アプリケーションロードバランサーARN
+          type: string
+          example: arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188
+        rest_api_endpoint:
+          title: REST APIエンドポイント
+          description: REST APIのエンドポイント
+          type: string
+          example: https://api.example.com
+        endpoint_settings_list:
+          title: エンドポイント設定一覧
+          description: エンドポイント毎の設定一覧
+          type: array
+          items:
+            $ref: "#/components/schemas/EndpointSettings"
+        tenant_routing_type:
+          $ref: "#/components/schemas/TenantRoutingType"
+        docs_cloud_front_fqdn:
+          title: Smart API Gatewayドキュメント用のCloudFront FQDN
+          description: Smart API Gatewayドキュメント用のCloudFront FQDN
+          type: string
+          example: 0123456789abc.cloudfront.net
+        mcp_server_url:
+          title: MCPサーバーURL
+          description: Smart API Gateway用のMCP（Model Context Protocol）サーバーのURL
+          type: string
+          example: https://mcp.example.com
+      required:
+        - generated_file_status
+        - internal_endpoint_openapi_definition_file_download_url
+        - status
+        - role_arn
+        - role_external_id
+        - internal_endpoint_health_check_path
+        - internal_endpoint_health_check_port
+        - internal_endpoint_health_check_protocol
+        - internal_endpoint_health_status_codes
+        - saas_subnet_ids
+        - saas_vpc_id
+        - domain_name
+        - is_dns_validated
+        - certificate_dns_record
+        - cloud_front_dns_record
+        - vpc_endpoint_dns_record
+        - default_domain_name
+        - saas_alb_arn
+        - rest_api_endpoint
+        - endpoint_settings_list
+        - tenant_routing_type
+        - docs_cloud_front_fqdn
+        - mcp_server_url
+    DraftApiGatewaySettings:
+      title: ドラフトAPI Gateway設定
+      type: object
+      properties:
+        internal_endpoint_openapi_definition_file_download_url:
+          title: openapi定義ファイルのダウンロードURL
+          description: 自動生成されたopenapi定義ファイルのダウンロードURL。API Gatewayを構築するために使用されます。
+          type: string
+          example: https://presigned-url-test.s3.ap-northeast-1.amazonaws.com/test.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=xxxxxx%2F20230710%2Fap-northeast-1%2Fs3%2Faws4_request
+        endpoint_settings_list:
+          title: エンドポイント設定一覧
+          description: エンドポイント毎の設定一覧
+          type: array
+          items:
+            $ref: "#/components/schemas/EndpointSettings"
+      required:
+        - endpoint_settings_list
+    TenantRoutingType:
+      title: テナントルーティングタイプ
+      description: テナントルーティングタイプ
+      type: string
+      enum:
+        - path
+        - hostName
+        - headerValue
+        - none
+      example: path
+    UpdateApiGatewaySettingsParam:
+      title: ApiGateway設定更新パラメータ
+      type: object
+      properties:
+        role_arn:
+          title: AssumeRoleするためのロールのARN
+          description: SaaSus PlatformがAssumeRoleするためのロールのARN
+          type: string
+          example: arn:aws:iam::123456789012:role/role-name
+        role_external_id:
+          title: AssumeRoleする時に使用するExternalID
+          description: SaaSus PlatformがSaaSを操作するためにAssumeRoleする時に使用するexternal id
+          type: string
+          example: 1234567890
+        internal_endpoint_health_check_path:
+          title: インターナルエンドポイントのヘルスチェックパス
+          description: インターナルエンドポイントのヘルスチェックに使用するパス
+          type: string
+          example: /health
+        internal_endpoint_health_check_port:
+          title: インターナルエンドポイントのヘルスチェックポート
+          description: インターナルエンドポイントのヘルスチェックに使用するポート
+          type: integer
+          example: 80
+        internal_endpoint_health_check_protocol:
+          title: インターナルエンドポイントのヘルスチェックプロトコル
+          description: インターナルエンドポイントのヘルスチェックに使用するプロトコル
+          type: string
+          example: HTTP or HTTPS
+        internal_endpoint_health_status_codes:
+          title: インターナルエンドポイントのヘルスチェックステータスコード
+          description: インターナルエンドポイントのヘルスチェックに使用するステータスコード
+          type: string
+          example: 200
+        saas_subnet_ids:
+          title: SaaSサブネットID
+          description: SaaSのサブネットID
+          type: array
+          items:
+            type: string
+          example:
+            - subnet-1234567890abcdef0
+            - subnet-1234567890abcdef1
+        saas_vpc_id:
+          title: SaaS VPC ID
+          description: SaaSのVPC ID
+          type: string
+          example: vpc-12345678
+        domain_name:
+          type: string
+          example: dev.saasus.io
+          description: ドメイン名
+        saas_alb_arn:
+          title: SaaS アプリケーションロードバランサーARN
+          description: SaaS アプリケーションロードバランサーARN
+          type: string
+          example: arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188
+        endpoint_settings_list:
+          title: エンドポイント設定一覧
+          description: エンドポイント毎の設定一覧
+          type: array
+          items:
+            $ref: "#/components/schemas/EndpointSettings"
+        tenant_routing_type:
+          $ref: "#/components/schemas/TenantRoutingType"
+    ApiGatewayInputFile:
+      title: ApiGateway入力ファイル
+      type: object
+      properties:
+        content:
+          title: ApiGateway入力ファイルのコンテンツ
+          description: API Gatewayを作成するためにアップロードするファイルのコンテンツ
+          type: string
+          format: base64
+          example: UEsDBBQACAAIAJr6oFQmTAuRfvOGAA==
+      required:
+        - content
+    ApiKey:
+      title: APIキー
+      type: object
+      properties:
+        api_key:
+          title: APIキー
+          description: APIキー
+          type: string
+          example: 1234567890abcdef
+        client_secret:
+          title: クライアントシークレット
+          description: クライアントシークレット
+          type: string
+          example: 1234567890abcdef
+        tenant_id:
+          $ref: "#/components/schemas/Uuid"
+          description: テナントID
+        env_id:
+          $ref: "#/components/schemas/Id"
+          description: 環境ID
+        user_id:
+          $ref: "#/components/schemas/Uuid"
+          description: ユーザーID
+      required:
+        - api_key
+        - client_secret
+        - tenant_id
+        - env_id
+    ApiKeys:
+      title: APIキーレスポンス
+      type: object
+      properties:
+        api_keys:
+          type: array
+          items:
+            $ref: "#/components/schemas/ApiKey"
+      example:
+        api_keys:
+          - api_key: ZDMiIHN0UmVmOmRvY3VtZW50SUQ9Inhtc
+            client_secret: ZDMiIHN0UmVmOmRvY3VtZW50SUQ9Inhtc
+            tenant_id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+            env_id: "1"
+            user_id: f94bfffc-8be2-11ec-b41a-0242ac120004
+          - api_key: icFS9Hit7jZjeSKMbNZP2cmfqBseyxnJZ
+            client_secret: icFS9Hit7jZjeSKMbNZP2cmfqBseyxnJZ
+            tenant_id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+            env_id: "1"
+            user_id: f94bfffc-8be2-11ec-b41a-0242ac120004
+      required:
+        - api_keys
+    CreateApiKeyParam:
+      title: APIキー作成パラメータ
+      type: object
+      properties:
+        tenant_id:
+          $ref: "#/components/schemas/Uuid"
+          description: テナントID
+          example: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+        env_id:
+          $ref: "#/components/schemas/Id"
+          description: 環境ID
+          example: 1
+        user_id:
+          $ref: "#/components/schemas/Uuid"
+          description: ユーザーID
+          example: f94bfffc-8be2-11ec-b41a-0242ac120004
+      required:
+        - tenant_id
+        - env_id
+    CloudFormationLaunchStackLink:
+      title: AWS CloudFormationスタック作成リンク
+      type: object
+      properties:
+        link:
+          type: string
+          example: https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create?stackName=sample&templateURL=https://s3.us-west-2.amazonaws.com/cloudformation-templates-sample.template
+      required:
+        - link
+    DnsRecord:
+      title: DNSレコード
+      type: object
+      properties:
+        type:
+          type: string
+          description: CNAMEリソースレコード
+          enum:
+            - CNAME
+            - TXT
+          example: CNAME
+        name:
+          type: string
+          example: _k90jaskdfawehro.domain-of-saasus-client.com.
+          description: レコード名
+        value:
+          type: string
+          example: _cmojwc239j102mosd9.acm-validations.aws.
+          description: 値
+      required:
+        - type
+        - name
+        - value
+    EndpointSettings:
+      title: エンドポイント設定
+      description: エンドポイント毎の設定
+      type: object
+      properties:
+        path:
+          title: パス
+          description: パス
+          type: string
+          example: /users/get-by-id
+        method:
+          title: メソッド
+          description: メソッド
+          type: string
+          enum:
+            - GET
+            - HEAD
+            - POST
+            - PUT
+            - PATCH
+            - DELETE
+            - CONNECT
+            - OPTIONS
+            - TRACE
+          example: GET
+        throttlings:
+          title: スロットリング設定一覧
+          description: |
+            targetごとのスロットリング設定
+            TODO: 今後の実装で複数設定できるようにする
+          type: array
+          items:
+            $ref: "#/components/schemas/Throttling"
+        role_names:
+          title: 役割(ロール)名
+          description: エンドポイントにアクセスできる役割名
+          type: array
+          items:
+            type: string
+            example: admin
+        mapping_endpoint_id:
+          title: マッピングエンドポイントID
+          description: APIコール時に実行される関数を識別するためのID
+          type: string
+          example: implementsample.service.UserService/getById
+      required:
+        - path
+        - method
+        - throttlings
+        - mapping_endpoint_id
+    Throttling:
+      title: スロットリング設定
+      type: object
+      description: targetごとにrange（秒）の時間内にlimitの回数までリクエストを許可します。
+      properties:
+        target:
+          title: 対象
+          description: 制限対象
+          type: string
+          enum:
+            - tenant
+            - user
+          example: tenant
+        range:
+          title: 範囲
+          description: スロットリングの時間範囲（秒）
+          type: integer
+          minimum: 60
+          maximum: 31536000
+          example: 600
+        limit:
+          title: 上限
+          description: スロットリングの上限
+          type: integer
+          example: 100
+      required:
+        - target
+        - range
+        - limit
+    UpdateTenantParam:
+      title: テナント更新パラメータ
+      type: object
+      properties:
+        allowed_ips:
+          title: 許可されたIPアドレス一覧
+          description: CIDR形式で指定された許可IPアドレス一覧
+          type: array
+          items:
+            type: string
+          example:
+            - 192.168.0.0/24
+            - 172.16.0.0/24
+        routing:
+          $ref: "#/components/schemas/TenantRouting"
+    ApiGatewayTenant:
+      title: テナント
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/Uuid"
+          description: テナントID
+        allowed_ips:
+          title: 許可されたIPアドレス一覧
+          description: CIDR形式で指定された許可IPアドレス一覧
+          type: array
+          items:
+            type: string
+          example:
+            - 192.168.0.0/24
+            - 172.16.0.0/24
+        routing:
+          $ref: "#/components/schemas/TenantRouting"
+      required:
+        - id
+        - allowed_ips
+        - routing
+    TenantRouting:
+      title: テナントルーティング
+      description: |
+        テナントのルーティングに関する情報。
+        ApiGatewaySettings の tenant_routing_type に対応する情報を参照し、リクエストをルーティングします。
+      type: object
+      properties:
+        path:
+          title: パス
+          description: テナント毎のパス
+          type: string
+          example: /4c4eefe8-35fd-4e51-8bd4-798e090e439d
+        header_key:
+          title: ヘッダーキー
+          description: テナントの識別子を設定するヘッダーのキー名
+          type: string
+          example: x-tenant-id
+        header_value:
+          title: ヘッダー値
+          description: ヘッダーキーに設定されるテナントの識別子
+          type: string
+          example: 4c4eefe8-35fd-4e51-8bd4-798e090e439d
+        host_name:
+          title: ホスト名
+          description: テナント毎のホスト名
+          type: string
+          example: tenantid.api.samplesaas.saasus.io
+    UpdateOpenApiDefinitionParam:
+      title: OpenAPI定義更新パラメータ
+      type: object
+      properties:
+        content:
+          title: OpenAPI定義ファイルのコンテンツ
+          description: OpenAPI定義ファイルのコンテンツ
+          type: string
+          format: base64
+          example: UEsDBBQACAAIAJr6oFQmTAuRfvOGAA==
+      required:
+        - content
+
+```
