@@ -38,6 +38,18 @@ jobs:
               changed="${changed}${f}"$'\n'
             fi
           done
+          # 削除されたファイルを検出（oldにのみ存在）
+          deleted=""
+          for f in /tmp/articles-old/*.txt; do
+            name="$(basename "$f")"
+            if [[ ! -f "/tmp/articles-new/$name" ]]; then
+              deleted="${deleted}${name}"$'\n'
+            fi
+          done
+          if [[ -n "$deleted" ]]; then
+            echo "以下の記事が削除されました（Intercom上の対応記事は手動で確認してください）:"
+            printf '%s' "$deleted"
+          fi
           if [[ -z "$changed" ]]; then
             echo "has_changes=false" >> "$GITHUB_OUTPUT"
           else
