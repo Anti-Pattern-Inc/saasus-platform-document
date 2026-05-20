@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 #
-# static/ai-reference 以下の knowledge 以外の .txt ファイルを
-# Intercom Internal Articles に同期（upsert）するスクリプト
+# .txt ファイルを Intercom Internal Articles に同期（upsert）するスクリプト
 #
 # 環境変数:
 #   INTERCOM_ACCESS_TOKEN - Intercom API トークン (必須)
 #   INTERCOM_ADMIN_ID     - author_id / owner_id に使う Admin ID (必須)
+#   SYNC_FILES            - 同期対象ファイルパス（改行区切り、省略時は static/ai-reference/*.txt から knowledge* を除外）
 #
 # 使い方:
 #   ./scripts/sync_intercom_internal_articles.sh [--dry-run]
@@ -63,16 +63,16 @@ trap 'rm -f "$existing_file" "$response_file"' EXIT
 echo '[]' > "$existing_file"
 page=1
 while true; do
-  http_code=$(curl -s -o $response_file -w '%{http_code}' \
+  http_code=$(curl -s -o "$response_file" -w '%{http_code}' \
     -H "Authorization: Bearer $INTERCOM_ACCESS_TOKEN" \
     -H "Intercom-Version: 2.15" \
     "$BASE_URL/internal_articles?page=$page&per_page=100")
   if [[ "$http_code" -lt 200 || "$http_code" -ge 300 ]]; then
     echo "既存記事の取得に失敗しました (HTTP $http_code):" >&2
-    cat $response_file >&2
+    cat "$response_file" >&2
     exit 1
   fi
-  response=$(cat $response_file)
+  response=$(cat "$response_file")
 
   echo "$response" | jq -c '.data // []' | jq -c -s '.[0] + .[1]' "$existing_file" - > "${existing_file}.tmp"
   mv "${existing_file}.tmp" "$existing_file"
@@ -121,14 +121,14 @@ for file in "${target_files[@]}"; do
     # 更新
     http_code=$(jq -n --arg t "$title" --rawfile b "$body_file" --arg l "$locale" \
       '{title: $t, body: $b, locale: $l}' | \
-      curl -s -o $response_file -w '%{http_code}' -X PUT "$BASE_URL/internal_articles/$article_id" \
+      curl -s -o "$response_file" -w '%{http_code}' -X PUT "$BASE_URL/internal_articles/$article_id" \
         -H "Authorization: Bearer $INTERCOM_ACCESS_TOKEN" \
         -H "Content-Type: application/json" \
         -H "Intercom-Version: 2.15" \
         -d @-)
     if [[ "$http_code" -lt 200 || "$http_code" -ge 300 ]]; then
       echo "  記事の更新に失敗しました (HTTP $http_code, id: $article_id):" >&2
-      cat $response_file >&2
+      cat "$response_file" >&2
       exit 1
     fi
     echo "  → 更新完了 (id: $article_id, locale: $locale)"
@@ -137,14 +137,14 @@ for file in "${target_files[@]}"; do
     # 作成
     http_code=$(jq -n --arg t "$title" --rawfile b "$body_file" --arg a "$INTERCOM_ADMIN_ID" --arg l "$locale" \
       '{title: $t, body: $b, author_id: ($a | tonumber), owner_id: ($a | tonumber), locale: $l}' | \
-      curl -s -o $response_file -w '%{http_code}' -X POST "$BASE_URL/internal_articles" \
+      curl -s -o "$response_file" -w '%{http_code}' -X POST "$BASE_URL/internal_articles" \
         -H "Authorization: Bearer $INTERCOM_ACCESS_TOKEN" \
         -H "Content-Type: application/json" \
         -H "Intercom-Version: 2.15" \
         -d @-)
     if [[ "$http_code" -lt 200 || "$http_code" -ge 300 ]]; then
       echo "  記事の作成に失敗しました (HTTP $http_code, title: $title):" >&2
-      cat $response_file >&2
+      cat "$response_file" >&2
       exit 1
     fi
     echo "  → 新規作成完了 (locale: $locale)"
