@@ -1,0 +1,19 @@
+name: Sync Intercom Internal Articles
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'static/ai-reference/**'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sync to Intercom
+        env:
+          INTERCOM_ACCESS_TOKEN: ${{ secrets.INTERCOM_ACCESS_TOKEN }}
+          INTERCOM_ADMIN_ID: ${{ secrets.INTERCOM_ADMIN_ID }}
+        run: ./scripts/sync_intercom_internal_articles.sh
