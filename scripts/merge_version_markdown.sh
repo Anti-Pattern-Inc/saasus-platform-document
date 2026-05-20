@@ -75,6 +75,20 @@ output_dir="$(dirname "$output_file")"
 mkdir -p "$output_dir"
 output_abs="$(cd "$output_dir" && pwd)/$(basename "$output_file")"
 
+# Generated行を除外して比較し、実質的な差分がある場合のみファイルを更新する
+write_if_changed() {
+  local dest="$1" tmp="$2"
+  if [[ -f "$dest" ]]; then
+    local filter='/^- Generated: /d'
+    if diff -q <(sed "$filter" "$dest") <(sed "$filter" "$tmp") >/dev/null 2>&1; then
+      rm -f "$tmp"
+      return 1
+    fi
+  fi
+  mv -f "$tmp" "$dest"
+  return 0
+}
+
 files=()
 while IFS= read -r file; do
   files+=("$file")
@@ -191,10 +205,14 @@ fi
       printf '\n```\n'
     done
   fi
-} > "$output_abs"
+} > "$output_abs.tmp"
 
-printf 'Created %s from %d docs files and %d API files\n' \
-  "$output_abs" "${#files[@]}" "${#api_files[@]}"
+if write_if_changed "$output_abs" "$output_abs.tmp"; then
+  printf 'Created %s from %d docs files and %d API files\n' \
+    "$output_abs" "${#files[@]}" "${#api_files[@]}"
+else
+  printf 'Unchanged %s\n' "$output_abs"
+fi
 
 # --- サブディレクトリごとの個別ファイル出力 ---
 while IFS= read -r subdir; do
@@ -244,9 +262,13 @@ while IFS= read -r subdir; do
           }
         ' "$file"
         printf '````\n'
-      } > "$per_file_output"
+      } > "$per_file_output.tmp"
 
-      printf 'Created %s\n' "$per_file_output"
+      if write_if_changed "$per_file_output" "$per_file_output.tmp"; then
+        printf 'Created %s\n' "$per_file_output"
+      else
+        printf 'Unchanged %s\n' "$per_file_output"
+      fi
     done
     continue
   fi
@@ -281,9 +303,13 @@ while IFS= read -r subdir; do
       ' "$file"
       printf '````\n'
     done
-  } > "$sub_output"
+  } > "$sub_output.tmp"
 
-  printf 'Created %s from %d files\n' "$sub_output" "${#sub_files[@]}"
+  if write_if_changed "$sub_output" "$sub_output.tmp"; then
+    printf 'Created %s from %d files\n' "$sub_output" "${#sub_files[@]}"
+  else
+    printf 'Unchanged %s\n' "$sub_output"
+  fi
 done < <(find "$target_abs" -mindepth 1 -maxdepth 1 -type d | LC_ALL=C sort)
 
 # --- APIファイルごとの個別ファイル出力 ---
@@ -311,7 +337,11 @@ for file in "${api_files[@]}"; do
       }
     ' "$file"
     printf '\n```\n'
-  } > "$api_output"
+  } > "$api_output.tmp"
 
-  printf 'Created %s\n' "$api_output"
+  if write_if_changed "$api_output" "$api_output.tmp"; then
+    printf 'Created %s\n' "$api_output"
+  else
+    printf 'Unchanged %s\n' "$api_output"
+  fi
 done
