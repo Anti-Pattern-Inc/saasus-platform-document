@@ -99,6 +99,7 @@ for file in "${target_files[@]}"; do
 
   # テキストを HTML エスケープして <pre> で囲む
   body_file=$(mktemp)
+  trap 'rm -f "$existing_file" "$response_file" "$body_file"' EXIT
   {
     printf '<pre>'
     sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g' "$file"
@@ -134,8 +135,8 @@ for file in "${target_files[@]}"; do
     updated=$((updated + 1))
   else
     # 作成
-    http_code=$(jq -n --arg t "$title" --rawfile b "$body_file" --argjson a "$INTERCOM_ADMIN_ID" --arg l "$locale" \
-      '{title: $t, body: $b, author_id: $a, owner_id: $a, locale: $l}' | \
+    http_code=$(jq -n --arg t "$title" --rawfile b "$body_file" --arg a "$INTERCOM_ADMIN_ID" --arg l "$locale" \
+      '{title: $t, body: $b, author_id: ($a | tonumber), owner_id: ($a | tonumber), locale: $l}' | \
       curl -s -o $response_file -w '%{http_code}' -X POST "$BASE_URL/internal_articles" \
         -H "Authorization: Bearer $INTERCOM_ACCESS_TOKEN" \
         -H "Content-Type: application/json" \
