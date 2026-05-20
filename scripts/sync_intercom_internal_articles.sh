@@ -47,7 +47,7 @@ if [[ "$DRY_RUN" == true ]]; then
   for file in "${target_files[@]}"; do
     title="$(basename "$file" .txt)"
     size=$(wc -c < "$file")
-    printf '  [dry-run] "%s" (%.1f KB)\n' "$title" "$(echo "scale=1; $size / 1024" | bc)"
+    printf '  [dry-run] "%s" (%.1f KB)\n' "$title" "$(awk "BEGIN{printf \"%.1f\", $size/1024}")"
   done
   echo ""
   echo "dry-run 完了。実行するには --dry-run を外してください。"

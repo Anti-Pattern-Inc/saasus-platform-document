@@ -30,6 +30,7 @@ jobs:
       - name: Detect changed files
         id: diff
         run: |
+          shopt -s nullglob
           changed=""
           for f in /tmp/articles-new/*.txt; do
             name="$(basename "$f")"
@@ -50,4 +51,4 @@ jobs:
           INTERCOM_ACCESS_TOKEN: ${{ secrets.INTERCOM_ACCESS_TOKEN }}
           INTERCOM_ADMIN_ID: ${{ secrets.INTERCOM_ADMIN_ID }}
         run: |
-          SYNC_FILES="$(cat /tmp/changed_files.txt)" ./scripts/sync_intercom_internal_articles.sh
+          SYNC_FILES="$(cat /tmp/changed_files.txt)" bash ./scripts/sync_intercom_internal_articles.sh
