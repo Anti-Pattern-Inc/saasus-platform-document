@@ -4,16 +4,50 @@ on:
   push:
     branches: [main]
     paths:
-      - 'static/ai-reference/**'
+      - 'i18n/**/docusaurus-plugin-content-docs/current/**'
+      - 'docs/**'
+      - 'api/**'
 
 jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
-      - name: Sync to Intercom
+      - name: Generate individual articles
+        run: |
+          chmod +x ./scripts/generate_individual_articles.sh
+          ./scripts/generate_individual_articles.sh ja /tmp/articles-new
+
+      - name: Generate previous version for diff
+        run: |
+          git checkout HEAD~1 -- i18n/ docs/ api/ 2>/dev/null || true
+          ./scripts/generate_individual_articles.sh ja /tmp/articles-old
+          git checkout HEAD -- . 2>/dev/null || true
+
+      - name: Detect changed files
+        id: diff
+        run: |
+          changed=""
+          for f in /tmp/articles-new/*.txt; do
+            name="$(basename "$f")"
+            if [[ ! -f "/tmp/articles-old/$name" ]] || ! diff -q "$f" "/tmp/articles-old/$name" >/dev/null 2>&1; then
+              changed="${changed}${f}"$'\n'
+            fi
+          done
+          if [[ -z "$changed" ]]; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+            printf '%s' "$changed" > /tmp/changed_files.txt
+          fi
+
+      - name: Sync changed articles to Intercom
+        if: steps.diff.outputs.has_changes == 'true'
         env:
           INTERCOM_ACCESS_TOKEN: ${{ secrets.INTERCOM_ACCESS_TOKEN }}
           INTERCOM_ADMIN_ID: ${{ secrets.INTERCOM_ADMIN_ID }}
-        run: ./scripts/sync_intercom_internal_articles.sh
+        run: |
+          SYNC_FILES="$(cat /tmp/changed_files.txt)" ./scripts/sync_intercom_internal_articles.sh

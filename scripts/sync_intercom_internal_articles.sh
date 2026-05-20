@@ -28,11 +28,18 @@ if [[ "$DRY_RUN" == false ]]; then
 fi
 
 # --- 対象ファイル列挙 ---
+# SYNC_FILES 環境変数が設定されている場合はそのファイルのみ対象にする
 
 target_files=()
-while IFS= read -r f; do
-  target_files+=("$f")
-done < <(find "$AI_REF_DIR" -maxdepth 1 -name '*.txt' ! -name 'knowledge*' | LC_ALL=C sort)
+if [[ -n "${SYNC_FILES:-}" ]]; then
+  while IFS= read -r f; do
+    [[ -f "$f" ]] && target_files+=("$f")
+  done <<< "$SYNC_FILES"
+else
+  while IFS= read -r f; do
+    target_files+=("$f")
+  done < <(find "$AI_REF_DIR" -maxdepth 1 -name '*.txt' ! -name 'knowledge*' | LC_ALL=C sort)
+fi
 
 echo "対象ファイル: ${#target_files[@]} 件"
 
