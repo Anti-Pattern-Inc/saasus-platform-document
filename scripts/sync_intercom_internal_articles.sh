@@ -78,10 +78,14 @@ fi
 
 # --- 既存の内部記事を全件取得 ---
 
+# --- 一時ファイル管理 ---
+_tmp_files=()
+cleanup() { rm -f "${_tmp_files[@]+"${_tmp_files[@]}"}"; }
+trap cleanup EXIT
+
 echo "既存の内部記事を取得中..."
-existing_file=$(mktemp)
-response_file=$(mktemp)
-trap 'rm -f "$existing_file" "$response_file"' EXIT
+existing_file=$(mktemp); _tmp_files+=("$existing_file")
+response_file=$(mktemp); _tmp_files+=("$response_file")
 echo '[]' > "$existing_file"
 page=1
 while true; do
@@ -121,8 +125,7 @@ for file in "${target_files[@]}"; do
   echo "[$current/$total] 処理中: $title ($file)"
 
   # テキストを HTML エスケープして <pre> で囲む
-  body_file=$(mktemp)
-  trap 'rm -f "$existing_file" "$response_file" "$body_file"' EXIT
+  body_file=$(mktemp); _tmp_files+=("$body_file")
   {
     printf '<pre>'
     sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g' "$file"
