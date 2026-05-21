@@ -92,7 +92,10 @@ while true; do
   http_code=$(curl -s -o "$response_file" -w '%{http_code}' \
     -H "Authorization: Bearer $INTERCOM_ACCESS_TOKEN" \
     -H "Intercom-Version: 2.15" \
-    "$BASE_URL/internal_articles?page=$page&per_page=100")
+    "$BASE_URL/internal_articles?page=$page&per_page=100") || {
+    echo "既存記事の取得中にネットワークエラーが発生しました" >&2
+    exit 1
+  }
   if [[ "$http_code" -lt 200 || "$http_code" -ge 300 ]]; then
     echo "既存記事の取得に失敗しました (HTTP $http_code):" >&2
     cat "$response_file" >&2
@@ -151,7 +154,10 @@ for file in "${target_files[@]}"; do
         -H "Authorization: Bearer $INTERCOM_ACCESS_TOKEN" \
         -H "Content-Type: application/json" \
         -H "Intercom-Version: 2.15" \
-        -d @-)
+        -d @-) || {
+      echo "  記事の更新中にネットワークエラーが発生しました (id: $article_id)" >&2
+      exit 1
+    }
     if [[ "$http_code" -lt 200 || "$http_code" -ge 300 ]]; then
       echo "  記事の更新に失敗しました (HTTP $http_code, id: $article_id):" >&2
       cat "$response_file" >&2
@@ -167,7 +173,10 @@ for file in "${target_files[@]}"; do
         -H "Authorization: Bearer $INTERCOM_ACCESS_TOKEN" \
         -H "Content-Type: application/json" \
         -H "Intercom-Version: 2.15" \
-        -d @-)
+        -d @-) || {
+      echo "  記事の作成中にネットワークエラーが発生しました (title: $title)" >&2
+      exit 1
+    }
     if [[ "$http_code" -lt 200 || "$http_code" -ge 300 ]]; then
       echo "  記事の作成に失敗しました (HTTP $http_code, title: $title):" >&2
       cat "$response_file" >&2
