@@ -58,6 +58,7 @@ fi
 if [[ "$DRY_RUN" == true ]]; then
   for file in "${target_files[@]}"; do
     title="$(basename "$file" .txt)"
+    title="${title%.ja}"
     size=$(wc -c < "$file")
     printf '  [dry-run] "%s" (%.1f KB)\n' "$title" "$(awk "BEGIN{printf \"%.1f\", $size/1024}")"
   done
@@ -107,6 +108,7 @@ current=0
 for file in "${target_files[@]}"; do
   current=$((current + 1))
   title="$(basename "$file" .txt)"
+  title="${title%.ja}"
   echo "[$current/$total] 処理中: $title ($file)"
 
   # テキストを HTML エスケープして <pre> で囲む
@@ -126,8 +128,8 @@ for file in "${target_files[@]}"; do
     locale="en"
   fi
 
-  # 既存記事を検索
-  article_id=$(jq -r --arg t "$title" '.[] | select(.title == $t) | .id // empty' "$existing_file" | head -1)
+  # 既存記事を検索（title + locale で一意に特定）
+  article_id=$(jq -r --arg t "$title" --arg l "$locale" '.[] | select(.title == $t and .locale == $l) | .id // empty' "$existing_file" | head -1)
 
   if [[ -n "$article_id" ]]; then
     # 更新

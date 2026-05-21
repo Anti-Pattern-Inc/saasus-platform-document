@@ -32,9 +32,14 @@ jobs:
             mkdir -p /tmp/articles-old
           else
             rm -rf i18n docs api
-            git checkout "$BEFORE" -- i18n/ docs/ api/ 2>/dev/null || true
-            ./scripts/generate_individual_articles.sh ja /tmp/articles-old
-            git checkout HEAD -- . 2>/dev/null || true
+            if git checkout "$BEFORE" -- i18n/ docs/ api/ 2>/dev/null; then
+              ./scripts/generate_individual_articles.sh ja /tmp/articles-old
+              git checkout HEAD -- . 2>/dev/null || true
+            else
+              echo "旧版のcheckoutに失敗。全件を変更扱いにします。"
+              mkdir -p /tmp/articles-old
+              git checkout HEAD -- . 2>/dev/null || true
+            fi
           fi
 
       - name: Detect changed files

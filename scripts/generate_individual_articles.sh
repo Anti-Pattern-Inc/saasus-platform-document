@@ -35,6 +35,7 @@ fi
 
 target_abs="$(cd "$target_dir" && pwd)"
 mkdir -p "$output_dir"
+rm -f "$output_dir"/*.txt
 
 suffix=""
 [[ "$locale" == "ja" ]] && suffix=".ja"
