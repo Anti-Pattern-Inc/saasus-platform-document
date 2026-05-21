@@ -130,7 +130,8 @@ if [[ -d "$api_dir" ]]; then
     while IFS= read -r file; do
       base_name="$(basename "$file")"
       [[ "$base_name" == *.jpn.yml ]] && continue
-      [[ ! -f "$api_dir/${base_name%.yml}.jpn.yml" ]] && api_files+=("$file")
+      [[ -f "$api_dir/${base_name%.yml}.jpn.yml" || -f "$api_dir/${base_name%.yml}api.jpn.yml" ]] && continue
+      api_files+=("$file")
     done < <(find "$api_dir" -maxdepth 1 -type f -name '*.yml' | LC_ALL=C sort)
   else
     while IFS= read -r file; do api_files+=("$file"); done < <(find "$api_dir" -maxdepth 1 -type f -name '*.yml' ! -name '*.jpn.yml' | LC_ALL=C sort)
