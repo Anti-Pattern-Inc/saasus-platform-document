@@ -5,7 +5,7 @@
 # 環境変数:
 #   INTERCOM_ACCESS_TOKEN - Intercom API トークン (必須)
 #   INTERCOM_ADMIN_ID     - author_id / owner_id に使う Admin ID (必須)
-#   SYNC_FILES            - 同期対象ファイルパス（改行区切り、省略時は static/ai-reference/*.txt から knowledge* を除外）
+#   SYNC_FILES            - 同期対象ファイルの絶対パス（改行区切り、省略時は static/ai-reference/*.txt から knowledge* を除外）
 #
 # 使い方:
 #   ./scripts/sync_intercom_internal_articles.sh [--dry-run]
@@ -45,6 +45,10 @@ target_files=()
 if [[ -n "${SYNC_FILES:-}" ]]; then
   while IFS= read -r f; do
     [[ -z "$f" ]] && continue
+    if [[ "$f" != /* ]]; then
+      echo "エラー: SYNC_FILES には絶対パスを指定してください: $f" >&2
+      exit 1
+    fi
     if [[ -f "$f" ]]; then
       target_files+=("$f")
     else
