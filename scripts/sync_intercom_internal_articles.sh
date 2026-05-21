@@ -83,7 +83,7 @@ cleanup() { rm -f "${_tmp_files[@]+"${_tmp_files[@]}"}"; }
 trap cleanup EXIT
 
 echo "既存の内部記事を取得中..."
-existing_file=$(mktemp); _tmp_files+=("$existing_file")
+existing_file=$(mktemp); _tmp_files+=("$existing_file" "${existing_file}.tmp")
 response_file=$(mktemp); _tmp_files+=("$response_file")
 echo '[]' > "$existing_file"
 page=1
