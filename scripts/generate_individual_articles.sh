@@ -43,13 +43,16 @@ if [[ -z "$output_dir" || "$output_dir" == "/" ]]; then
   echo "エラー: output_dir が不正です: '$output_dir'" >&2
   exit 1
 fi
-if [[ "$output_dir" != /tmp/* ]]; then
-  echo "エラー: output_dir は /tmp 配下を指定してください: '$output_dir'" >&2
+# パスを正規化して /tmp 配下であることを検証
+resolved_output_dir="$(realpath -m "$output_dir")"
+if [[ "$resolved_output_dir" != /tmp/* ]]; then
+  echo "エラー: output_dir は /tmp 配下を指定してください: '$output_dir' (resolved: $resolved_output_dir)" >&2
   exit 1
 fi
 # 出力先を空の状態で再作成（このスクリプト専用のディレクトリを前提）
-rm -rf "$output_dir"
-mkdir -p "$output_dir"
+rm -rf "$resolved_output_dir"
+mkdir -p "$resolved_output_dir"
+output_dir="$resolved_output_dir"
 
 suffix=""
 [[ "$locale" == "ja" ]] && suffix=".ja"
