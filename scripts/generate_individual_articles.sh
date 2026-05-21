@@ -43,8 +43,9 @@ if [[ -z "$output_dir" || "$output_dir" == "/" ]]; then
   echo "エラー: output_dir が不正です: '$output_dir'" >&2
   exit 1
 fi
+# 出力先を空の状態で再作成（このスクリプト専用のディレクトリを前提）
+rm -rf "$output_dir"
 mkdir -p "$output_dir"
-rm -f "$output_dir"/*.txt
 
 suffix=""
 [[ "$locale" == "ja" ]] && suffix=".ja"
