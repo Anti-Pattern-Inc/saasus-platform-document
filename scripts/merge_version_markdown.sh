@@ -82,18 +82,18 @@ if [[ -d "$api_dir" ]]; then
   if [[ "$locale" == "ja" ]]; then
     while IFS= read -r file; do
       api_files+=("$file")
-    done < <(find "$api_dir" -maxdepth 1 -type f -name '*.jpn.yml' | sort)
+    done < <(find "$api_dir" -maxdepth 1 -type f -name '*.jpn.yml' | LC_ALL=C sort)
 
     while IFS= read -r file; do
       base_name="$(basename "$file")"
       [[ "$base_name" == *.jpn.yml ]] && continue
       jpn_variant="$api_dir/${base_name%.yml}.jpn.yml"
       [[ ! -f "$jpn_variant" ]] && api_files+=("$file")
-    done < <(find "$api_dir" -maxdepth 1 -type f -name '*.yml' | sort)
+    done < <(find "$api_dir" -maxdepth 1 -type f -name '*.yml' | LC_ALL=C sort)
   else
     while IFS= read -r file; do
       api_files+=("$file")
-    done < <(find "$api_dir" -maxdepth 1 -type f -name '*.yml' ! -name '*.jpn.yml' | sort)
+    done < <(find "$api_dir" -maxdepth 1 -type f -name '*.yml' ! -name '*.jpn.yml' | LC_ALL=C sort)
   fi
 fi
 
