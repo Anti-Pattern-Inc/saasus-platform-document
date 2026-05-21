@@ -105,12 +105,11 @@ while true; do
     cat "$response_file" >&2
     exit 1
   fi
-  response=$(cat "$response_file")
 
-  echo "$response" | jq -c '.data // []' | jq -c -s '.[0] + .[1]' "$existing_file" - > "${existing_file}.tmp"
+  jq -c '.data // []' "$response_file" | jq -c -s '.[0] + .[1]' "$existing_file" - > "${existing_file}.tmp"
   mv "${existing_file}.tmp" "$existing_file"
 
-  total_pages=$(echo "$response" | jq '.pages.total_pages // 1')
+  total_pages=$(jq '.pages.total_pages // 1' "$response_file")
   [[ "$page" -ge "$total_pages" ]] && break
   page=$((page + 1))
 done

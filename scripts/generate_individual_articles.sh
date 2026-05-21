@@ -43,13 +43,14 @@ if [[ -z "$output_dir" || "$output_dir" == "/" ]]; then
   echo "エラー: output_dir が不正です: '$output_dir'" >&2
   exit 1
 fi
-# パスを正規化して /tmp 配下であることを検証（.. や . によるトラバーサルを防止）
-case "$output_dir" in
-  *..* | */.)
-    echo "エラー: output_dir に '..' や '.' セグメントは使用できません: '$output_dir'" >&2
-    exit 1
-    ;;
-esac
+# パスの安全性を検証（パストラバーサルやシンボリックリンクを防止）
+# 末尾スラッシュを除去
+output_dir="${output_dir%/}"
+# /../ や /./ セグメントを拒否
+if [[ "$output_dir" =~ (/\.\.(/|$)|/\.(/|$)) ]]; then
+  echo "エラー: output_dir に '..' や '.' セグメントは使用できません: '$output_dir'" >&2
+  exit 1
+fi
 if [[ "$output_dir" != /tmp/* ]]; then
   echo "エラー: output_dir は /tmp 配下を指定してください: '$output_dir'" >&2
   exit 1
