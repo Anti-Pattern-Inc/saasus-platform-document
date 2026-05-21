@@ -34,11 +34,11 @@ jobs:
             rm -rf i18n docs api
             if git checkout "$BEFORE" -- i18n/ docs/ api/ 2>/dev/null; then
               ./scripts/generate_individual_articles.sh ja /tmp/articles-old
-              git checkout HEAD -- . 2>/dev/null || true
+              git checkout HEAD -- . || git reset --hard HEAD
             else
               echo "旧版のcheckoutに失敗。全件を変更扱いにします。"
               mkdir -p /tmp/articles-old
-              git checkout HEAD -- . 2>/dev/null || true
+              git checkout HEAD -- . || git reset --hard HEAD
             fi
           fi
 

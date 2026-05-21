@@ -20,6 +20,11 @@ output_dir="${2:-/tmp/individual-articles}"
 version_dir="current"
 plugin_dir="docusaurus-plugin-content-docs"
 
+if [[ "$locale" != "ja" && "$locale" != "en" ]]; then
+  echo "Usage: $0 [ja|en] [output_dir]" >&2
+  exit 1
+fi
+
 if [[ "$locale" == "en" ]]; then
   target_dir="$PROJECT_ROOT/docs"
 else
@@ -34,6 +39,10 @@ if [[ ! -d "$target_dir" ]]; then
 fi
 
 target_abs="$(cd "$target_dir" && pwd)"
+if [[ -z "$output_dir" || "$output_dir" == "/" ]]; then
+  echo "エラー: output_dir が不正です: '$output_dir'" >&2
+  exit 1
+fi
 mkdir -p "$output_dir"
 rm -f "$output_dir"/*.txt
 

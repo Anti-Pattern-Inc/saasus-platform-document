@@ -32,6 +32,10 @@ if [[ "$DRY_RUN" == false ]]; then
     echo "環境変数 INTERCOM_ACCESS_TOKEN と INTERCOM_ADMIN_ID を設定してください" >&2
     exit 1
   fi
+  if ! [[ "$INTERCOM_ADMIN_ID" =~ ^[0-9]+$ ]]; then
+    echo "エラー: INTERCOM_ADMIN_ID は数値である必要があります: '$INTERCOM_ADMIN_ID'" >&2
+    exit 1
+  fi
 fi
 
 # --- 対象ファイル列挙 ---
@@ -40,7 +44,12 @@ fi
 target_files=()
 if [[ -n "${SYNC_FILES:-}" ]]; then
   while IFS= read -r f; do
-    [[ -f "$f" ]] && target_files+=("$f")
+    [[ -z "$f" ]] && continue
+    if [[ -f "$f" ]]; then
+      target_files+=("$f")
+    else
+      echo "警告: ファイルが見つかりません: $f" >&2
+    fi
   done <<< "$SYNC_FILES"
 else
   while IFS= read -r f; do
