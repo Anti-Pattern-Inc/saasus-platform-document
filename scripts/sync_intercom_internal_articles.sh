@@ -79,7 +79,7 @@ fi
 
 # --- 一時ファイル管理 ---
 _tmp_files=()
-cleanup() { rm -f "${_tmp_files[@]+"${_tmp_files[@]}"}"; }
+cleanup() { [[ ${#_tmp_files[@]} -gt 0 ]] && rm -f "${_tmp_files[@]}"; }
 trap cleanup EXIT
 
 echo "既存の内部記事を取得中..."
