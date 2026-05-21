@@ -5,7 +5,7 @@
 # 環境変数:
 #   INTERCOM_ACCESS_TOKEN - Intercom API トークン (必須)
 #   INTERCOM_ADMIN_ID     - author_id / owner_id に使う Admin ID (必須)
-#   SYNC_FILES            - 同期対象ファイルの絶対パス（改行区切り、必須。ワークフローで生成した個別記事のパスを指定）
+#   SYNC_FILES            - 同期対象ファイルの絶対パス（改行区切り、必須）
 #
 # 使い方:
 #   ./scripts/sync_intercom_internal_articles.sh [--dry-run]
@@ -19,9 +19,6 @@ for cmd in curl jq; do
   fi
 done
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-AI_REF_DIR="$PROJECT_ROOT/static/ai-reference"
 BASE_URL="https://api.intercom.io"
 DRY_RUN=false
 
@@ -42,24 +39,22 @@ fi
 # SYNC_FILES 環境変数が設定されている場合はそのファイルのみ対象にする
 
 target_files=()
-if [[ -n "${SYNC_FILES:-}" ]]; then
-  while IFS= read -r f; do
-    [[ -z "$f" ]] && continue
-    if [[ "$f" != /* ]]; then
-      echo "エラー: SYNC_FILES には絶対パスを指定してください: $f" >&2
-      exit 1
-    fi
-    if [[ -f "$f" ]]; then
-      target_files+=("$f")
-    else
-      echo "警告: ファイルが見つかりません: $f" >&2
-    fi
-  done <<< "$SYNC_FILES"
-else
-  while IFS= read -r f; do
-    target_files+=("$f")
-  done < <(find "$AI_REF_DIR" -maxdepth 1 -name '*.txt' ! -name 'knowledge*' | LC_ALL=C sort)
+if [[ -z "${SYNC_FILES:-}" ]]; then
+  echo "エラー: 環境変数 SYNC_FILES が設定されていません" >&2
+  exit 1
 fi
+while IFS= read -r f; do
+  [[ -z "$f" ]] && continue
+  if [[ "$f" != /* ]]; then
+    echo "エラー: SYNC_FILES には絶対パスを指定してください: $f" >&2
+    exit 1
+  fi
+  if [[ -f "$f" ]]; then
+    target_files+=("$f")
+  else
+    echo "警告: ファイルが見つかりません: $f" >&2
+  fi
+done <<< "$SYNC_FILES"
 
 echo "対象ファイル: ${#target_files[@]} 件"
 
