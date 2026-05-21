@@ -17,6 +17,11 @@ version_dir="current"
 locale="${1:-ja}"
 plugin_dir="docusaurus-plugin-content-docs"
 
+if [[ "$locale" != "ja" && "$locale" != "en" ]]; then
+  echo "Usage: $0 [ja|en]" >&2
+  exit 1
+fi
+
 if [[ "$locale" == "en" ]]; then
   target_dir="$PROJECT_ROOT/docs"
 else

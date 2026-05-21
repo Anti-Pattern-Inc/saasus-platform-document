@@ -50,6 +50,11 @@ fi
 
 echo "対象ファイル: ${#target_files[@]} 件"
 
+if [[ ${#target_files[@]} -eq 0 ]]; then
+  echo "同期対象ファイルがありません。終了します。"
+  exit 0
+fi
+
 if [[ "$DRY_RUN" == true ]]; then
   for file in "${target_files[@]}"; do
     title="$(basename "$file" .txt)"
