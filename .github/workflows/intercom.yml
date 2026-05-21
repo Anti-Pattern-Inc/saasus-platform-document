@@ -30,6 +30,7 @@ jobs:
           BEFORE="${{ github.event.before }}"
           if [[ "$BEFORE" == "0000000000000000000000000000000000000000" || -z "$BEFORE" ]]; then
             echo "初回pushのため旧版なし。全件を変更扱いにします。"
+            rm -rf /tmp/articles-old
             mkdir -p /tmp/articles-old
           else
             rm -rf i18n docs api
@@ -38,6 +39,7 @@ jobs:
               git checkout HEAD -- . || git reset --hard HEAD
             else
               echo "旧版のcheckoutに失敗。全件を変更扱いにします。"
+              rm -rf /tmp/articles-old
               mkdir -p /tmp/articles-old
               git checkout HEAD -- . || git reset --hard HEAD
             fi
