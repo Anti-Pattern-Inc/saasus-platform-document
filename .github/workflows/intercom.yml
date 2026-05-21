@@ -12,6 +12,9 @@ concurrency:
   group: intercom-sync-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -65,7 +68,7 @@ jobs:
             fi
           done
           if [[ -n "$deleted" ]]; then
-            echo "以下の記事が削除されました（Intercom上の対応記事は手動で確認してください）:"
+            echo "::warning::以下の記事が削除されました（Intercom上の対応記事は手動で確認してください）:"
             printf '%s' "$deleted"
           fi
           if [[ -z "$changed" ]]; then
