@@ -5,7 +5,7 @@
 # 環境変数:
 #   INTERCOM_ACCESS_TOKEN - Intercom API トークン (必須)
 #   INTERCOM_ADMIN_ID     - author_id / owner_id に使う Admin ID (必須)
-#   SYNC_FILES            - 同期対象ファイルの絶対パス（改行区切り、省略時は static/ai-reference/*.txt から knowledge* を除外）
+#   SYNC_FILES            - 同期対象ファイルの絶対パス（改行区切り、必須。ワークフローで生成した個別記事のパスを指定）
 #
 # 使い方:
 #   ./scripts/sync_intercom_internal_articles.sh [--dry-run]
