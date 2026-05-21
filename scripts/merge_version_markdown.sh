@@ -47,7 +47,7 @@ mkdir -p "$output_dir"
 output_abs="$(cd "$output_dir" && pwd)/$(basename "$output_file")"
 
 # Generated行を除外して比較し、実質的な差分がある場合のみファイルを更新する
-# ヘッダーは固定5行（# Merged Markdown / Version / Locale / Docs source / API source / Generated）のため
+# ヘッダーは最大7行（# タイトル / Version / Locale / Docs source / API source / Generated + 空行）
 # Generated行は必ず先頭10行以内に収まる
 write_if_changed() {
   local dest="$1" tmp="$2"
