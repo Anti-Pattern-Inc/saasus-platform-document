@@ -43,10 +43,10 @@ if [[ -z "$output_dir" || "$output_dir" == "/" ]]; then
   echo "エラー: output_dir が不正です: '$output_dir'" >&2
   exit 1
 fi
-# パスを正規化して /tmp 配下であることを検証（.. によるトラバーサルを防止）
+# パスを正規化して /tmp 配下であることを検証（.. や . によるトラバーサルを防止）
 case "$output_dir" in
-  *..*)
-    echo "エラー: output_dir に '..' は使用できません: '$output_dir'" >&2
+  *..* | */.)
+    echo "エラー: output_dir に '..' や '.' セグメントは使用できません: '$output_dir'" >&2
     exit 1
     ;;
 esac
