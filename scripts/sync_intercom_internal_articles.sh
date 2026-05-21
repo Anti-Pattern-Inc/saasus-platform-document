@@ -12,6 +12,13 @@
 
 set -euo pipefail
 
+for cmd in curl jq; do
+  if ! command -v "$cmd" >/dev/null 2>&1; then
+    echo "エラー: $cmd がインストールされていません" >&2
+    exit 1
+  fi
+done
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 AI_REF_DIR="$PROJECT_ROOT/static/ai-reference"

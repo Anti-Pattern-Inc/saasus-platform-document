@@ -8,13 +8,17 @@ on:
       - 'docs/**'
       - 'api/**'
 
+concurrency:
+  group: intercom-sync-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
 
       - name: Generate individual articles
         run: |
@@ -24,7 +28,7 @@ jobs:
       - name: Generate previous version for diff
         run: |
           rm -rf i18n docs api
-          git checkout HEAD~1 -- i18n/ docs/ api/ 2>/dev/null || true
+          git checkout ${{ github.event.before }} -- i18n/ docs/ api/ 2>/dev/null || true
           ./scripts/generate_individual_articles.sh ja /tmp/articles-old
           git checkout HEAD -- . 2>/dev/null || true
 
