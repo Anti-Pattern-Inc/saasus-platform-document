@@ -393,6 +393,65 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /users/count:
+    get:
+      tags:
+        - saasUser
+      operationId: GetSaasUsersCount
+      summary: Get SaaS Users Count
+      x-summary-i18n:
+        jpn: SaaSユーザー数を取得
+      description: |
+        Get the count of SaaS users.
+      x-description-i18n:
+        jpn: |
+          SaaSユーザー数を取得します。
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaasUsersCount'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - saasUser
+      operationId: SaveSaasUsersCount
+      summary: Save SaaS Users Count
+      x-summary-i18n:
+        jpn: SaaSユーザー数を保存
+      description: |
+        Save the count of SaaS users.
+      x-description-i18n:
+        jpn: |
+          SaaSユーザー数を保存します。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaveSaasUsersCountParam'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /users/search:
     get:
       tags:
@@ -920,6 +979,65 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /tenants/all/users/count:
+    get:
+      tags:
+        - tenantUser
+      operationId: GetAllTenantUsersCount
+      summary: Get Tenant Users Count
+      x-summary-i18n:
+        jpn: テナントごとのテナントユーザー数を取得
+      description: |
+        Get the count of tenant users for each tenant.
+      x-description-i18n:
+        jpn: |
+          テナントごとのテナントユーザー数を取得します。
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantUsersCounts'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - tenantUser
+      operationId: SaveTenantUsersCounts
+      summary: Save Tenant Users Count
+      x-summary-i18n:
+        jpn: テナントごとのテナントユーザー数を保存
+      description: |
+        Save the count of tenant users for each tenant.
+      x-description-i18n:
+        jpn: |
+          テナントごとのテナントユーザー数を保存します。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaveTenantUsersCountsParam'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /tenants/all/users/search:
     get:
       tags:
@@ -972,12 +1090,12 @@ paths:
           x-description-i18n:
             jpn: 環境ID
         - in: query
-          name: role_id
+          name: role_name
           schema:
             type: string
-          description: Role ID
+          description: Role Name
           x-description-i18n:
-            jpn: ロールID
+            jpn: ロール名
         - $ref: '#/components/parameters/Limit'
         - $ref: '#/components/parameters/Cursor'
       responses:
@@ -3610,6 +3728,18 @@ components:
           x-description-i18n:
             jpn: |
               属性情報
+        last_login_at:
+          type: integer
+          x-go-type: int64
+          nullable: true
+          example: 1640995200
+          description: |
+            Last login date and time (unix timestamp).
+            Null if the user has never logged in.
+          x-description-i18n:
+            jpn: |
+              最終ログイン日時（unixタイムスタンプ）。
+              一度もログインしていない場合はnullになります。
       required:
         - id
         - email
@@ -3622,6 +3752,7 @@ components:
         attributes:
           department: development
           employee_number: 10
+        last_login_at: 1640995200
     SaasUsers:
       title: SaaS Users
       x-title-i18n:
@@ -3634,6 +3765,43 @@ components:
             $ref: '#/components/schemas/SaasUser'
       required:
         - users
+    SaasUsersCount:
+      title: SaaS Users Count
+      x-title-i18n:
+        jpn: SaaSユーザー数
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 42
+          description: Count of SaaS users
+          x-description-i18n:
+            jpn: SaaSユーザー数
+        updated_at:
+          type: integer
+          format: int64
+          example: 1715760000
+          description: Unix timestamp (seconds) of the last update
+          x-description-i18n:
+            jpn: 最終更新日時（Unix 秒）
+      required:
+        - count
+        - updated_at
+    SaveSaasUsersCountParam:
+      title: Save SaaS Users Count Parameter
+      x-title-i18n:
+        jpn: SaaSユーザー数の保存パラメータ
+      type: object
+      properties:
+        count:
+          type: integer
+          minimum: 0
+          example: 42
+          description: Count of SaaS users
+          x-description-i18n:
+            jpn: SaaSユーザー数
+      required:
+        - count
     CreatedSaasUser:
       title: Created SaaS User
       x-title-i18n:
@@ -3798,6 +3966,74 @@ components:
             $ref: '#/components/schemas/User'
       required:
         - users
+    TenantUserCount:
+      title: Tenant User Count
+      x-title-i18n:
+        jpn: テナントユーザー数
+      type: object
+      properties:
+        tenant_id:
+          $ref: '#/components/schemas/Uuid'
+        count:
+          type: integer
+          example: 5
+          description: Count of tenant users
+          x-description-i18n:
+            jpn: テナントユーザー数
+        updated_at:
+          type: integer
+          format: int64
+          example: 1715760000
+          description: Unix timestamp (seconds) of the last update
+          x-description-i18n:
+            jpn: 最終更新日時（Unix 秒）
+      required:
+        - tenant_id
+        - count
+        - updated_at
+    SaveTenantUserCountParam:
+      title: Save Tenant User Count Parameter
+      x-title-i18n:
+        jpn: テナントユーザー数の保存パラメータ
+      type: object
+      properties:
+        tenant_id:
+          $ref: '#/components/schemas/Uuid'
+        count:
+          type: integer
+          minimum: 0
+          example: 5
+          description: Count of tenant users
+          x-description-i18n:
+            jpn: テナントユーザー数
+      required:
+        - tenant_id
+        - count
+    SaveTenantUsersCountsParam:
+      title: Save Tenant Users Counts Parameter
+      x-title-i18n:
+        jpn: テナントごとのテナントユーザー数の保存パラメータ
+      type: object
+      properties:
+        tenant_user_counts:
+          type: array
+          maxItems: 10000
+          items:
+            $ref: '#/components/schemas/SaveTenantUserCountParam'
+      required:
+        - tenant_user_counts
+    TenantUsersCounts:
+      title: Tenant Users Counts
+      x-title-i18n:
+        jpn: テナントユーザー数一覧
+      type: object
+      properties:
+        tenant_user_counts:
+          type: array
+          items:
+            $ref: '#/components/schemas/TenantUserCount'
+      required:
+        - tenant_user_counts
     SearchTenantUsersResult:
       title: Search Tenant Users Result
       x-title-i18n:
