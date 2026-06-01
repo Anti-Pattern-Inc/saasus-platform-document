@@ -540,6 +540,11 @@ const sidebars = {
       label: "Changelog",
       items: [
         {
+          label: "2026/05/31",
+          type: "doc",
+          id: "changelog/20260531",
+        },
+        {
           label: "2026/04/02",
           type: "doc",
           id: "changelog/20260402",

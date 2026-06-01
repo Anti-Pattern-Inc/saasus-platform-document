@@ -411,7 +411,7 @@
         {
           "type": "link",
           "label": "Release Notes and Change History",
-          "href": "/docs/changelog/20260402"
+          "href": "/docs/changelog/20260531"
         },
         "part-8/risk-assessment"
       ]
@@ -499,6 +499,11 @@
       "type": "category",
       "label": "Changelog",
       "items": [
+        {
+          "label": "2026/05/31",
+          "type": "doc",
+          "id": "changelog/20260531"
+        },
         {
           "label": "2026/04/02",
           "type": "doc",
