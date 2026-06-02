@@ -353,5 +353,101 @@
   "theme.unlistedContent.message": {
     "message": "This page is unlisted. Search engines will not index it, and only users having a direct link can access it.",
     "description": "The unlisted content banner message"
+  },
+  "inquiry.button.label": {
+    "message": "お問い合わせ",
+    "description": "Default label for the InquiryButton"
+  },
+  "inquiry.dialog.title": {
+    "message": "SaaSus Platform について問い合わせる",
+    "description": "Title of the inquiry dialog"
+  },
+  "inquiry.dialog.consent": {
+    "message": "SaaSus Platform は、株式会社アンチパターンが運営するサービスです。送信ボタンを押すことは、弊社の{legal}に同意したものとみなします。",
+    "description": "Consent text shown above the inquiry form. The {legal} placeholder is the link to the privacy policy."
+  },
+  "inquiry.dialog.consent.legalLink": {
+    "message": "個人情報の取扱いについて",
+    "description": "Link text for the privacy policy in the consent text"
+  },
+  "inquiry.dialog.field.email": {
+    "message": "メールアドレス",
+    "description": "Inquiry form: email field label"
+  },
+  "inquiry.dialog.field.company": {
+    "message": "会社名",
+    "description": "Inquiry form: company field label"
+  },
+  "inquiry.dialog.field.phone": {
+    "message": "電話番号",
+    "description": "Inquiry form: phone field label"
+  },
+  "inquiry.dialog.field.phone.placeholder": {
+    "message": "ハイフン無しで 10 または 11 桁",
+    "description": "Inquiry form: phone field placeholder"
+  },
+  "inquiry.dialog.field.lastName": {
+    "message": "姓",
+    "description": "Inquiry form: last name field label"
+  },
+  "inquiry.dialog.field.firstName": {
+    "message": "名",
+    "description": "Inquiry form: first name field label"
+  },
+  "inquiry.dialog.field.content": {
+    "message": "お問い合わせ内容",
+    "description": "Inquiry form: content field label"
+  },
+  "inquiry.dialog.action.cancel": {
+    "message": "キャンセル",
+    "description": "Inquiry form: cancel button"
+  },
+  "inquiry.dialog.action.submit": {
+    "message": "送信",
+    "description": "Inquiry form: submit button"
+  },
+  "inquiry.thanks.title": {
+    "message": "お問い合わせありがとうございます",
+    "description": "Thanks page title"
+  },
+  "inquiry.thanks.description": {
+    "message": "SaaSus Platform にお問い合わせいただきありがとうございます。",
+    "description": "Thanks page meta description"
+  },
+  "inquiry.thanks.heading": {
+    "message": "お問い合わせありがとうございます。",
+    "description": "Thanks page heading"
+  },
+  "inquiry.thanks.message": {
+    "message": "お問い合わせを受け付けました。担当者より追ってご連絡いたします。",
+    "description": "Thanks page main message"
+  },
+  "inquiry.thanks.returnHome": {
+    "message": "ドキュメントトップに戻る",
+    "description": "Thanks page link back to documentation"
+  },
+  "inquiry.error.title": {
+    "message": "予期せぬエラーが発生しました",
+    "description": "Error page title"
+  },
+  "inquiry.error.description": {
+    "message": "お問い合わせの送信中にエラーが発生しました。",
+    "description": "Error page meta description"
+  },
+  "inquiry.error.heading": {
+    "message": "お問い合わせの送信中に予期せぬエラーが発生しました。",
+    "description": "Error page heading"
+  },
+  "inquiry.error.message": {
+    "message": "ご不便をおかけし申し訳ありません。時間をおいて再度お試しいただくか、{fallback}よりお問い合わせください。",
+    "description": "Error page main message. The {fallback} placeholder is the link to the alternative form."
+  },
+  "inquiry.error.fallbackLink": {
+    "message": "代替のお問い合わせフォーム",
+    "description": "Error page link text for alternative form"
+  },
+  "inquiry.error.returnHome": {
+    "message": "ドキュメントトップに戻る",
+    "description": "Error page link back to documentation"
   }
 }
