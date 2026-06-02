@@ -45,6 +45,17 @@ export default function InquiryDialog({ open, onClose }: Props): JSX.Element | n
               Contact us about SaaSus Platform
             </Translate>
           </h2>
+          <button
+            type="button"
+            className={styles.closeButton}
+            onClick={onClose}
+            aria-label={translate({
+              id: 'inquiry.dialog.action.close',
+              message: 'Close',
+            })}
+          >
+            ×
+          </button>
         </div>
 
         <form action={POST_URL} method="post">

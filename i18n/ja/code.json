@@ -402,6 +402,10 @@
     "message": "キャンセル",
     "description": "Inquiry form: cancel button"
   },
+  "inquiry.dialog.action.close": {
+    "message": "閉じる",
+    "description": "Inquiry form: close (×) button aria-label"
+  },
   "inquiry.dialog.action.submit": {
     "message": "送信",
     "description": "Inquiry form: submit button"
