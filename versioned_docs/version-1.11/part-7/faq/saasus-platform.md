@@ -7,8 +7,6 @@ createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
-import InquiryButton from '@site/src/components/InquiryButton';
-
 **Q. What countermeasures are available when the service goes down?  
 Is it possible to switch and continue business operations?**  
 A. The Tokyo region has 3 Availability Zones, and the service will not stop unless all of them experience simultaneous failures.  
@@ -70,7 +68,7 @@ If you provide specific performance requirements (user count, access trends, pea
 
 **Q. Is there an SLA (availability guarantee)?**  
 A. Enterprise plans provide an SLA (Service Quality Guarantee) with 99.99% uptime.  
-Pricing is based on individual estimates, so please <InquiryButton variant="inline">contact us</InquiryButton>.
+Pricing is based on individual estimates, so please [contact us](https://saasus.io/pricing#support).
 
 ---
 
@@ -86,7 +84,7 @@ However, the following features are only supported on AWS environments:
 
 **Q. Are there any UI/UX constraints?**  
 A. There are no particular constraints. It supports React, Vue.js and other frontend implementations as well as server-side rendering.  
-Please <InquiryButton variant="inline">contact us</InquiryButton> if you have specific requirements.
+Please [contact us](https://saasus.io/pricing#support) if you have specific requirements.
 
 ---
 
