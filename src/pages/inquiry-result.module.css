@@ -1,0 +1,78 @@
+.main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+  text-align: center;
+}
+
+.heroWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.hero {
+  max-width: 100%;
+  height: auto;
+}
+
+.heading {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .heading {
+    font-size: 3rem;
+  }
+}
+
+.errorHeading {
+  font-size: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .errorHeading {
+    font-size: 2.5rem;
+  }
+}
+
+.message {
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+  color: var(--ifm-color-emphasis-700);
+  line-height: 1.7;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.primaryLink {
+  display: inline-block;
+  padding: 0.625rem 1.5rem;
+  border-radius: 999px;
+  background: var(--ifm-color-primary);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.primaryLink:hover {
+  background: var(--ifm-color-primary-dark);
+  color: #fff;
+  text-decoration: none;
+}
+
+.errorLink {
+  color: var(--ifm-color-primary);
+  text-decoration: underline;
+}
+
+.errorLink:hover {
+  text-decoration: underline;
+}
