@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import Translate, { translate } from '@docusaurus/Translate';
 import styles from './styles.module.css';
 
@@ -12,6 +13,13 @@ type Props = {
 
 export default function InquiryDialog({ open, onClose }: Props): JSX.Element | null {
   const firstInputRef = useRef<HTMLInputElement | null>(null);
+  // Track client-side mount so we can safely access `document` for the
+  // portal. Without this, SSR (Docusaurus build) would crash.
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -28,9 +36,13 @@ export default function InquiryDialog({ open, onClose }: Props): JSX.Element | n
     };
   }, [open, onClose]);
 
-  if (!open) return null;
+  if (!open || !mounted) return null;
 
-  return (
+  // Render into <body> via portal so the dialog is not nested inside the
+  // surrounding <p> (MDX wraps inline elements in a paragraph). Otherwise
+  // React emits a `<div> cannot appear as a descendant of <p>` warning
+  // and HTML hydration mismatches can occur.
+  return createPortal(
     <div className={styles.overlay} onClick={onClose}>
       <div
         className={styles.dialog}
@@ -203,6 +215,7 @@ export default function InquiryDialog({ open, onClose }: Props): JSX.Element | n
           </div>
         </form>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
