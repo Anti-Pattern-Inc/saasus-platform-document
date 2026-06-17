@@ -7,8 +7,20 @@ metadata:
   image: []
   robots: "index"
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Wed Jun 17 2026 03:39:00 GMT+0000 (Coordinated Universal Time)"
 ---
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 1. Sign in to the AWS Management Console.
 2. Please access this <a href="https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks?filteringText=&filteringStatus=active&viewNested=true" target="_blank">link</a>.
 3. When the following page is displayed, select the stack 'AWS-Marketplace-seller-Resource'.

@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-05-19 12:13:58 +0900`
+- Generated: `2026-06-17 13:09:56 +0900`
 
 ---
 ## changelog/20221224.md
@@ -356,6 +356,27 @@ Sign-in ID Authentication
       To avoid affecting existing login screens, the display change setting is initially set to \"OFF\".
       To switch the label, please turn ON \"Add Sign-in ID notation\" from [Authentication Detail Settings] > [Basic Settings] and save.
 With this release, Sign-in ID authentication is now available in addition to the conventional email address authentication. Please choose the appropriate authentication method according to the requirements of your service.
+````
+
+---
+## changelog/20260531.md
+````markdown
+We have released updates on the following features.
+New UI for User Management and Feature Improvements
+　We have launched a new UI (management screen) for the User Management screen, designed to improve usability and performance.
+　Main features
+  - Performance Improvement (Faster Search)
+    As the number of users grew, search operations had been taking longer to complete. With this release, we optimized internal processing and significantly improved performance.
+  - User ID Search
+    In addition to the existing search conditions, you can now filter search results by "User ID".
+  - Integration of the Role Management Screen
+    Along with the migration to the new UI, the conventional "Role Management" screen has been retired. The same management and configuration can now be performed within the new UI.
+　■ How to use the new UI
+　To minimize the impact on existing operations, the conventional UI is displayed by default. To try out the new UI, please follow the steps below to switch.
+  1. Open the User Management screen.
+  2. Turn ON the "Try the new UI (toggle switch)" placed on the screen.
+　※ You can return to the conventional UI at any time by turning the toggle switch OFF.
+With this release, user management can be performed more comfortably and smoothly even in environments with a large number of users. Please try out the comfortable operability of the new UI.
 ````
 
 ---
@@ -1428,6 +1449,12 @@ After setting up IP restrictions, access will be limited as follows:
 ---
 ## part-4/aws-marketplace-integration/aws-marketplace-integration.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 The AWS Marketplace integration function supports the "AWS Marketplace listing process" carried out by the "SaaS created using the SaaSus Platform".
 :::caution
 Please note that listing cannot be completed solely by operating within the SaaSus Platform.
@@ -1492,6 +1519,12 @@ Based on the SaaS product guidelines, we will check from the SaaSus Platform whe
 ---
 ## part-4/aws-marketplace-integration/aws-marketplace-seller-registration.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 ### Preparation
 Please prepare an AWS account for AWS Marketplace.
 ### Overall Process
@@ -1508,6 +1541,12 @@ These are necessary registrations and settings for listing on AWS Marketplace, s
 ---
 ## part-4/aws-marketplace-integration/aws-marketplace-seller-registration/aws-marketplace-seller-registration.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 You will register as a seller on <a href="https://aws.amazon.com/marketplace/partners/management-tour" target="_blank">AWS Marketplace</a>.
 Please start the registration from `Register now` on the page displayed in the link above.
 ![aws-marketplace-seller-registration-1](/img/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/aws-marketplace-seller-registration-1.png)
@@ -1524,6 +1563,12 @@ After registration, proceed to the Public profile settings.
 ---
 ## part-4/aws-marketplace-integration/aws-marketplace-seller-registration/dac7-tax-survey.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 DAC7 refers to the European Commission's directive regarding tax reporting by corporations.
 This directive imposes a tax reporting obligation on subsidiaries, parent corporations, proportionate consolidation corporations, joint ventures and decentralized corporations in the European Union.
 Information sharing on taxation is required to prevent attempts to reduce domestic tax through business expansion or the start of new businesses under control of overseas enterprises.
@@ -1540,6 +1585,12 @@ On the Client Dashboard, press Finish Interview to finish the interview regardin
 ---
 ## part-4/aws-marketplace-integration/aws-marketplace-seller-registration/hyperwallet-registration.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 When you click on `Sign up for Hyper wallet` from the bank account registration, you will be directed to the following page.
 Select the account verification method and valid code.
 ![hyperwallet-registration-1](/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-1.png)
@@ -1574,6 +1625,12 @@ After registration, return to setting up your bank account.
 ---
 ## part-4/aws-marketplace-integration/aws-marketplace-seller-registration/public-profile-settings.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 After seller registration, log into the <a href="https://aws.amazon.com/marketplace/management/homepage" target="_blank">AWS Marketplace Management Portal</a> and set your Public profile.
 Please start the settings from `Add public profile` under Settings.
 ![public-profile-settings-1](/img/part-4/aws-marketplace-integration/public-profile-settings/public-profile-settings-1.png)
@@ -1588,6 +1645,12 @@ After completing the Public profile settings, please start setting up your bank 
 ---
 ## part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 Next, click on `Add bank account` under `Payment Information`.
 ![new-register-bank-account-1](/img/part-4/aws-marketplace-integration/register-bank-account/new-register-bank-account-1.png)
 First, you need to select a payment method. You can choose a US-based ACH account, SWIFT account, or Hyperwallet account. SWIFT accounts can be used for any supported currency (AUD, EUR, GBP, JPY, USD), whereas US-based ACH and Hyperwallet accounts can only use USD.
@@ -1616,6 +1679,12 @@ Please refer to the next page, `Setting up Disbursement Methods`.
 ---
 ## part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-disbursement-methods.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 :::caution
 Please ensure that your bank account setup is complete beforehand. If you haven't done this yet, refer to [Bank Account Setup](/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account).
 :::
@@ -1640,6 +1709,12 @@ With this, the necessary settings to start the listing process are complete.
 ---
 ## part-4/aws-marketplace-integration/aws-marketplace-seller-registration/tax-information-interview.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 ## For Customers Based in Japan
 Check `Payment Information` from the Settings page on <a href="https://aws.amazon.com/marketplace/management/seller-settings/account" target="_blank">AWS Marketplace Management Portal</a>.
 You may find an error displayed, which will not allow you to proceed with the next steps.
@@ -1676,6 +1751,12 @@ You have completed your submission and finished the interview regarding tax info
 ````markdown
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 If you are offering a SaaS product on the SaaSus Platform, you will need to implement consideration for multitenant in the purchase flow by existing users.
 :::caution
 Please finish the implementation until the test phase of the 'Confirmation of Integration with AWS Marketplace'. Since it will be subject to review by the AWS Marketpalce Support team, you will not be allowed to list it without proper implementation.
@@ -1745,6 +1826,12 @@ function post(Request $request)
 ---
 ## part-4/aws-marketplace-integration/product-submission.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 You will register the SaaS product information on the AWS Marketplace Management Portal.
 :::caution
 Before carrying out these procedures, please make sure that you have completed the [Seller Registration and Setting Disbursement methods](/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration) procedure.
@@ -1765,6 +1852,12 @@ The input content etc. will be published on the `AWS Marketplace`. Please check 
 ---
 ## part-4/aws-marketplace-integration/product-submission/generate-product-code.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 To register SaaS product information, first access the <a href="https://aws.amazon.com/marketplace/management/homepage" target="_blank">AWS Marketplace Management Portal</a>, and then proceed with registration as follows.
 On the `AWS Marketplace Management Portal`, select `SaaS` from the `Product` menu.
 ![](/img/part-4/aws-marketplace-integration/product-submission/generate-product-code/generate-product-code-1.png)
@@ -1779,6 +1872,12 @@ After about 10 seconds, the product ID and product code are generated, and the `
 ---
 ## part-4/aws-marketplace-integration/product-submission/step1-provide-product-information.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 Next, you'll enter the information necessary to publish the SaaS product.
 :::info
 Since there's a lot of information to input, it's recommended that you prepare ahead of time. Please check the supplementary documents to understand the limitations for each input field and how it will be published on the AWS Marketplace. See examples [here](/docs/part-4/aws-marketplace-integration/supplementary/supplementary-1) and input field details [here](/docs/part-4/aws-marketplace-integration/supplementary/supplementary-2).
@@ -1808,6 +1907,12 @@ After entering the product-related information, click `Next` to proceed.
 ---
 ## part-4/aws-marketplace-integration/product-submission/step2-configure-fulfillment-options.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 Next, enter the URL to which customers will be redirected upon purchasing the product on the AWS Marketplace.
 The URL to be entered is displayed in the instruction sheet output by the SaaSus Platform's AWS Marketplace integration function, please copy and paste it into the Fulfillment URL input area.
 :::caution
@@ -1822,6 +1927,12 @@ After completing the input, press `Next` to proceed.
 ---
 ## part-4/aws-marketplace-integration/product-submission/step3-configure-product-pricing.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 Next, you'll input the pricing model and its type to be sold on the AWS Marketplace.
 Firstly, for the pricing model, select `Contract-based pricing`.
 :::caution
@@ -1846,6 +1957,12 @@ After completing the input, press `Next` to proceed.
 ---
 ## part-4/aws-marketplace-integration/product-submission/step4-set-prices.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 Next, enter the purchase options and contract duration for the product to be sold on the AWS Marketplace.
 Please enter the `Purchasing options` and `Contract duration options` in accordance with the instructions in the output from the AWS Marketplace integration function.
 :::caution
@@ -1860,6 +1977,12 @@ After completing the input, press `Next` to proceed.
 ---
 ## part-4/aws-marketplace-integration/product-submission/step5-specify-refund-policy.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 Next, input information about the refund policy.
 This is where you'll specify the refund policy for selling the SaaS product on the AWS Marketplace. This should be provided by the seller themselves.
 :::info
@@ -1872,6 +1995,12 @@ After completing the input, press `Next` to proceed.
 ---
 ## part-4/aws-marketplace-integration/product-submission/step6-configure-eula.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 Next, choose the end-user license agreement (EULA) for selling on the AWS Marketplace.
 If you want to use the terms defined in the AWS Marketplace, please select `Standard Contract for AWS Marketplace (SCMP)`.
 :::info
@@ -1886,6 +2015,12 @@ After completing the input, press `Next` to proceed.
 ---
 ## part-4/aws-marketplace-integration/product-submission/step7-configure-offer-availability.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 Next, you'll decide the countries in which to sell your SaaS product.
 Please proceed with entering the countries as per your business.
 If you want to target all countries, select `All countries`.
@@ -1900,6 +2035,12 @@ After completing the input, press `Next` to proceed.
 ---
 ## part-4/aws-marketplace-integration/product-submission/step8-configure-allowlist.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 Next, you'll set up the AWS account ID to use for testing during partnership verification.
 When your SaaS product is in limited release, only the designated accounts will be able to view and purchase the product.
 :::info
@@ -1913,12 +2054,24 @@ This completes the registration of the SaaS product information.
 ---
 ## part-4/aws-marketplace-integration/supplementary.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 This document collates additional information for seller registration, SaaS product information registration, and details related to AWS Marketplace integration functionality.
 ````
 
 ---
 ## part-4/aws-marketplace-integration/supplementary/final-review-request.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 Once you have completed the [exhibition steps '10. Confirmation of integration with AWS Marketplace'](/docs/part-4/aws-marketplace-integration/aws-marketplace-integration), you can request a final review from the AWS Marketplace support team.
 First, access the <a href="https://aws.amazon.com/marketplace/management/homepage" target="_blank">AWS Marketplace Management Portal</a> and open the product detail page you want to manage.
 Then click on `Update visibility` located on the right of the alert displayed at the top of the page.
@@ -1936,6 +2089,12 @@ That's all you need to do to request a final review.
 ---
 ## part-4/aws-marketplace-integration/supplementary/integration-test.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 Please check the URL of the product page that is privately published on AWS Marketplace in advance.
 ### How to Check the Product Page URL
 1. Sign in to AWS Marketplace Management Portal.
@@ -1974,6 +2133,12 @@ Confirmation Example
 ---
 ## part-4/aws-marketplace-integration/supplementary/public-request.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 Once you've completed the [Listing Procedure "11. Final Review Request of Production SaaS Product"](/docs/part-4/aws-marketplace-integration/aws-marketplace-integration), you will receive an email from the AWS Marketplace Support Team detailing the process to request publication. Follow these instructions to request your publication.
 :::caution
 While we have prepared a document regarding the publication request process based on our prior research, the actual instructions provided in the email you'll receive represents the most updated procedure and should be followed accordingly.
@@ -1992,6 +2157,12 @@ With this process, your SaaS product will be published on the AWS Marketplace by
 ---
 ## part-4/aws-marketplace-integration/supplementary/self-up-setting.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 1. Access <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Advanced Setting of SaaS Development Console</a>.
 2. Please click on the `Authentication` tab.
 3. Scroll down to find the item for enabling or disabling Self-Signup (new registration by the user).
@@ -2003,6 +2174,12 @@ That completes the setting. It will be reflected in the actual screen after a fe
 ---
 ## part-4/aws-marketplace-integration/supplementary/supplementary-1.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 ## Product Overview
 The `Product title`, `Short description`, `Long description`, `Product logo S3 URL` etc, input in Step 1: Provide product information, are displayed as `Product Overview` when the product is published.
 ![supplementary-1-1](/img/part-4/aws-marketplace-integration/supplementary/supplementary-1-1.png)
@@ -2023,6 +2200,12 @@ The `AWS Marketplace discoverability` input in Step 1: Provide product informati
 ---
 ## part-4/aws-marketplace-integration/supplementary/supplementary-2.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 The information you enter here can be checked in the [About the Contents Entered in Create Product and the Published Details](/docs/part-4/aws-marketplace-integration/supplementary/supplementary-1) to see what will be published on AWS Marketplace.
 ## Step1 : Provide product information
 | Input Field                        | Description                                                                                                                                                                                                                                                  | Required | Input Type       | Constraints                                              |
@@ -2082,6 +2265,12 @@ The information you enter here can be checked in the [About the Contents Entered
 ---
 ## part-4/aws-marketplace-integration/supplementary/supplementary-3.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 1. Sign in to the AWS Management Console.
 2. Please access this <a href="https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks?filteringText=&filteringStatus=active&viewNested=true" target="_blank">link</a>.
 3. When the following page is displayed, select the stack 'AWS-Marketplace-seller-Resource'.
@@ -2096,6 +2285,12 @@ The information you enter here can be checked in the [About the Contents Entered
 ---
 ## part-4/aws-marketplace-integration/supplementary/user-judgment-method.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 We will use the SAASUS AWS MARKETPLACE API.
 Use the endpoint named [GetCustomers](/docs/reference/awsmarketplace-api#tag/awsMarketplace/operation/GetCustomers). Please refer to the document for details on the specification.
 ## Flow till Judgment
@@ -10638,8 +10833,9 @@ When setting and applying pricing plans in a production environment, please thor
 ````
 
 ---
-## part-7/faq/saasus-platform.md
+## part-7/faq/saasus-platform.mdx
 ````markdown
+import InquiryButton from '@site/src/components/InquiryButton';
 **Q. What countermeasures are available when the service goes down?
 Is it possible to switch and continue business operations?**
 A. The Tokyo region has 3 Availability Zones, and the service will not stop unless all of them experience simultaneous failures.
@@ -10693,7 +10889,7 @@ If you provide specific performance requirements (user count, access trends, pea
 ---
 **Q. Is there an SLA (availability guarantee)?**
 A. Enterprise plans provide an SLA (Service Quality Guarantee) with 99.99% uptime.
-Pricing is based on individual estimates, so please [contact us](https://saasus.io/pricing#support).
+Pricing is based on individual estimates, so please <InquiryButton variant="inline">contact us</InquiryButton>.
 ---
 **Q. Can SaaSus Platform run on platforms other than AWS?**
 A. Core features can be used without depending on cloud platforms.
@@ -10705,7 +10901,7 @@ However, the following features are only supported on AWS environments:
 ---
 **Q. Are there any UI/UX constraints?**
 A. There are no particular constraints. It supports React, Vue.js and other frontend implementations as well as server-side rendering.
-Please [contact us](https://saasus.io/pricing#support) if you have specific requirements.
+Please <InquiryButton variant="inline">contact us</InquiryButton> if you have specific requirements.
 ---
 **Q. Are there any microservice adoption examples?**
 A. There are no public examples at this time, but microservicing specific functions such as WMS can be expected to improve scalability. Discussion is possible upon consultation.
@@ -14791,6 +14987,65 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /users/count:
+    get:
+      tags:
+        - saasUser
+      operationId: GetSaasUsersCount
+      summary: Get SaaS Users Count
+      x-summary-i18n:
+        jpn: SaaSユーザー数を取得
+      description: |
+        Get the count of SaaS users.
+      x-description-i18n:
+        jpn: |
+          SaaSユーザー数を取得します。
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaasUsersCount'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - saasUser
+      operationId: SaveSaasUsersCount
+      summary: Save SaaS Users Count
+      x-summary-i18n:
+        jpn: SaaSユーザー数を保存
+      description: |
+        Save the count of SaaS users.
+      x-description-i18n:
+        jpn: |
+          SaaSユーザー数を保存します。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaveSaasUsersCountParam'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /users/search:
     get:
       tags:
@@ -15318,6 +15573,65 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /tenants/all/users/count:
+    get:
+      tags:
+        - tenantUser
+      operationId: GetAllTenantUsersCount
+      summary: Get Tenant Users Count
+      x-summary-i18n:
+        jpn: テナントごとのテナントユーザー数を取得
+      description: |
+        Get the count of tenant users for each tenant.
+      x-description-i18n:
+        jpn: |
+          テナントごとのテナントユーザー数を取得します。
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantUsersCounts'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - tenantUser
+      operationId: SaveTenantUsersCounts
+      summary: Save Tenant Users Count
+      x-summary-i18n:
+        jpn: テナントごとのテナントユーザー数を保存
+      description: |
+        Save the count of tenant users for each tenant.
+      x-description-i18n:
+        jpn: |
+          テナントごとのテナントユーザー数を保存します。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaveTenantUsersCountsParam'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /tenants/all/users/search:
     get:
       tags:
@@ -15370,12 +15684,12 @@ paths:
           x-description-i18n:
             jpn: 環境ID
         - in: query
-          name: role_id
+          name: role_name
           schema:
             type: string
-          description: Role ID
+          description: Role Name
           x-description-i18n:
-            jpn: ロールID
+            jpn: ロール名
         - $ref: '#/components/parameters/Limit'
         - $ref: '#/components/parameters/Cursor'
       responses:
@@ -18008,6 +18322,18 @@ components:
           x-description-i18n:
             jpn: |
               属性情報
+        last_login_at:
+          type: integer
+          x-go-type: int64
+          nullable: true
+          example: 1640995200
+          description: |
+            Last login date and time (unix timestamp).
+            Null if the user has never logged in.
+          x-description-i18n:
+            jpn: |
+              最終ログイン日時（unixタイムスタンプ）。
+              一度もログインしていない場合はnullになります。
       required:
         - id
         - email
@@ -18020,6 +18346,7 @@ components:
         attributes:
           department: development
           employee_number: 10
+        last_login_at: 1640995200
     SaasUsers:
       title: SaaS Users
       x-title-i18n:
@@ -18032,6 +18359,43 @@ components:
             $ref: '#/components/schemas/SaasUser'
       required:
         - users
+    SaasUsersCount:
+      title: SaaS Users Count
+      x-title-i18n:
+        jpn: SaaSユーザー数
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 42
+          description: Count of SaaS users
+          x-description-i18n:
+            jpn: SaaSユーザー数
+        updated_at:
+          type: integer
+          format: int64
+          example: 1715760000
+          description: Unix timestamp (seconds) of the last update
+          x-description-i18n:
+            jpn: 最終更新日時（Unix 秒）
+      required:
+        - count
+        - updated_at
+    SaveSaasUsersCountParam:
+      title: Save SaaS Users Count Parameter
+      x-title-i18n:
+        jpn: SaaSユーザー数の保存パラメータ
+      type: object
+      properties:
+        count:
+          type: integer
+          minimum: 0
+          example: 42
+          description: Count of SaaS users
+          x-description-i18n:
+            jpn: SaaSユーザー数
+      required:
+        - count
     CreatedSaasUser:
       title: Created SaaS User
       x-title-i18n:
@@ -18196,6 +18560,74 @@ components:
             $ref: '#/components/schemas/User'
       required:
         - users
+    TenantUserCount:
+      title: Tenant User Count
+      x-title-i18n:
+        jpn: テナントユーザー数
+      type: object
+      properties:
+        tenant_id:
+          $ref: '#/components/schemas/Uuid'
+        count:
+          type: integer
+          example: 5
+          description: Count of tenant users
+          x-description-i18n:
+            jpn: テナントユーザー数
+        updated_at:
+          type: integer
+          format: int64
+          example: 1715760000
+          description: Unix timestamp (seconds) of the last update
+          x-description-i18n:
+            jpn: 最終更新日時（Unix 秒）
+      required:
+        - tenant_id
+        - count
+        - updated_at
+    SaveTenantUserCountParam:
+      title: Save Tenant User Count Parameter
+      x-title-i18n:
+        jpn: テナントユーザー数の保存パラメータ
+      type: object
+      properties:
+        tenant_id:
+          $ref: '#/components/schemas/Uuid'
+        count:
+          type: integer
+          minimum: 0
+          example: 5
+          description: Count of tenant users
+          x-description-i18n:
+            jpn: テナントユーザー数
+      required:
+        - tenant_id
+        - count
+    SaveTenantUsersCountsParam:
+      title: Save Tenant Users Counts Parameter
+      x-title-i18n:
+        jpn: テナントごとのテナントユーザー数の保存パラメータ
+      type: object
+      properties:
+        tenant_user_counts:
+          type: array
+          maxItems: 10000
+          items:
+            $ref: '#/components/schemas/SaveTenantUserCountParam'
+      required:
+        - tenant_user_counts
+    TenantUsersCounts:
+      title: Tenant Users Counts
+      x-title-i18n:
+        jpn: テナントユーザー数一覧
+      type: object
+      properties:
+        tenant_user_counts:
+          type: array
+          items:
+            $ref: '#/components/schemas/TenantUserCount'
+      required:
+        - tenant_user_counts
     SearchTenantUsersResult:
       title: Search Tenant Users Result
       x-title-i18n:
