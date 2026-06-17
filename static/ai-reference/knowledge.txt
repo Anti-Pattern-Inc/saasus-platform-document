@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-06-17 13:09:56 +0900`
+- Generated: `2026-06-17 15:04:09 +0900`
 
 ---
 ## changelog/20221224.md
@@ -377,6 +377,22 @@ New UI for User Management and Feature Improvements
   2. Turn ON the "Try the new UI (toggle switch)" placed on the screen.
 　※ You can return to the conventional UI at any time by turning the toggle switch OFF.
 With this release, user management can be performed more comfortably and smoothly even in environments with a large number of users. Please try out the comfortable operability of the new UI.
+````
+
+---
+## changelog/20260617.md
+````markdown
+We would like to inform you about the suspension of the following feature.
+Suspension of the AWS Marketplace Integration Feature
+　Due to changes to the AWS Marketplace integration specification effective June 2026, the current AWS Marketplace integration feature (product listing) no longer supports the new specification, and listing can no longer be completed with the existing procedure.
+　Accordingly, we have suspended new usage of the AWS Marketplace integration feature.
+　■ Impact
+  - New product listings using the AWS Marketplace integration feature cannot be completed.
+　■ Outlook
+  - We will announce the timing of resumption once a plan to support the new specification is in place.
+　■ About the latest listing process
+  - For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+We apologize for any inconvenience this may cause and appreciate your understanding.
 ````
 
 ---
