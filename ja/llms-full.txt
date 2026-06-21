@@ -485,6 +485,20 @@ With this release, user management can be performed more comfortably and smoothl
 
 ---
 
+# Update on 2026/06/19
+
+URL: https://www.prisma.io/docs/changelog/20260619
+
+We have released the following features:
+
+- Date and time range search for API logs  
+On the API log search screen, you can now narrow down your search by specifying a start date/time and an end date/time.  
+
+- Filtering by tenant name when creating a new user  
+When creating a new user, you can now filter tenants by entering a tenant name.  
+
+---
+
 # Welcome to SaaSus Platform
 
 URL: https://www.prisma.io/docs/changelog/welcome-to-saasus-platform
