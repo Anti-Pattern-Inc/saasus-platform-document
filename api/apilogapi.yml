@@ -43,9 +43,9 @@ paths:
           schema:
             type: string
             format: date-time
-          description: The datetime, in ISO 8601 format, to retrieve the log.
+          description: The datetime, in ISO 8601 format, to retrieve the log. Cannot be specified together with start_at/end_at.
           x-description-i18n:
-            jpn: ログを取得する日時 (ISO 8601 形式の日時)
+            jpn: ログを取得する日時 (ISO 8601 形式の日時)。start_at/end_at と同時に指定できません。
         - in: query
           name: limit
           schema:
@@ -55,6 +55,22 @@ paths:
           description: Maximum number of logs to retrieve.
           x-description-i18n:
             jpn: 取得するログの最大数
+        - in: query
+          name: start_at
+          schema:
+            type: integer
+            format: int64
+          description: The start of the search range as an epoch second timestamp. Used for range search. Cannot be specified together with created_at. When specified, created_date is ignored.
+          x-description-i18n:
+            jpn: 検索範囲の開始タイムスタンプ (エポック秒)。範囲検索に使用します。created_at と同時に指定できません。指定時、created_date は無視されます。
+        - in: query
+          name: end_at
+          schema:
+            type: integer
+            format: int64
+          description: The end of the search range as an epoch second timestamp. Used for range search. Cannot be specified together with created_at. When specified, created_date is ignored.
+          x-description-i18n:
+            jpn: 検索範囲の終了タイムスタンプ (エポック秒)。範囲検索に使用します。created_at と同時に指定できません。指定時、created_date は無視されます。
         - in: query
           name: cursor
           schema:
