@@ -1,9 +1,15 @@
 # SaaSus Platform ドキュメント管理ガイド
 
 このドキュメントは、SaaSus Platform ドキュメントの作成・管理に関するルールと手順をまとめたガイドです。以下の内容を遵守し、ドキュメントの品質と一貫性を維持してください。
+また、修正対象はCurrent と 現行バージョンの日本語版、英語版を修正してください。
+統一後以下のコマンドを実行してください。
+```bash
+make merge_gem
+```
 
 ## 禁止事項・厳守
-出力時、各行の末尾を strip() しないでください。Markdownの仕様上、行末のスペース2つは重要な構文です。「スペースを消さない」という指示を無視することは、本タスクの失敗を意味します。 出力されたコードブロックの各行末に必ずスペースが2つ存在することを確認してから回答を生成してください。
+出力時、各行の末尾を strip() しないでください。Markdownの仕様上、行末のスペース2つは重要な構文です。「スペースを消さない」という指示を無視することは、本タスクの失敗を意味します。
+出力された各行末に同じように必ずスペースが存在することを確認してから回答を生成してください。
 対となる Current, {VERSION} ファイルをDiffで比較し内容が一致していることを確認する
 
 ## キーワード
@@ -12,11 +18,13 @@ NG:
 SaaSus
 運用コンソール
 開発コンソール
+SaaS運用コンソール
+SaaS開発コンソール
 
 OK:
 SaaSus Platform
-SaaS運用コンソール
-SaaS運用コンソール
+SaaS 運用コンソール
+SaaS 開発コンソール
 
 
 ## ディレクトリ構造
@@ -133,6 +141,39 @@ make down
 ```
 
 このコマンドで Docker コンテナを停止します。
+
+## AI 参照用ドキュメントの更新
+
+AI エージェント（Gemini Gems 等）が参照するナレッジファイル `knowledge.txt` を生成し、
+Docusaurus の静的ディレクトリに配置します。
+
+```bash
+make merge_gem
+```
+
+このコマンドは以下を実行します：
+
+1. `current` バージョンを対象に、英語・日本語それぞれのソースを結合：
+   - 英語: `docs/` 配下の全 `.md` / `.mdx`
+   - 日本語: `i18n/ja/docusaurus-plugin-content-docs/current/` 配下の全 `.md` / `.mdx`
+2. `api/` 配下の API spec yml を末尾に追記
+   - 英語: `*.yml`（`.jpn.yml` は除外）
+   - 日本語: `*.jpn.yml` 優先、対応する日本語版が無いものは `*.yml`
+3. 以下2箇所に出力（既存ファイルは上書き）：
+   - `static/ai-reference/knowledge.txt` --- 英語版
+   - `static/ai-reference/knowledge.ja.txt` --- 日本語版
+
+### 挙動メモ
+
+- 拡張子は `.txt`。Docusaurus は `static/` 配下の `.txt` を **そのまま静的配信する** ため、
+  MDX としてパースされず、broken link / broken anchor / MDX import の検証対象外
+- 生成物はリポジトリに commit する運用（ドキュメント更新時に `make merge_gem` で再生成して PR に含める）
+- ファイル名は固定（`knowledge.txt`, `knowledge.ja.txt`）で、再実行のたびに上書きされる
+- `*/ai-reference/*` パスは結合元の探索から除外される（出力が再帰的に取り込まれないように）
+- URL アクセス例（dev / build とも同パス）：
+  - `http://localhost:3001/ai-reference/knowledge.txt`
+  - `http://localhost:3001/ai-reference/knowledge.ja.txt`
+- 検証は `bash scripts/verify_merge_gem.sh` で再現可能（exit code 連動）
 
 ## ファイルメタデータ管理
 

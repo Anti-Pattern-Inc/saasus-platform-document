@@ -381,7 +381,9 @@ const sidebars = {
               },
               items: [
                 "part-6/implementation-guide/auth/overview",
-                "part-6/implementation-guide/auth/sign-in",
+                "part-6/implementation-guide/auth/basic-sign-in",
+                "part-6/implementation-guide/auth/advanced-sign-in",
+                "part-6/implementation-guide/auth/security",
               ],
             },
             "part-6/implementation-guide/implementing-authentication-using-saasus-serverless",
@@ -538,6 +540,16 @@ const sidebars = {
       type: "category",
       label: "Changelog",
       items: [
+        {
+          label: "2026/06/19",
+          type: "doc",
+          id: "changelog/20260619",
+        },
+        {
+          label: "2026/05/31",
+          type: "doc",
+          id: "changelog/20260531",
+        },
         {
           label: "2026/04/02",
           type: "doc",

@@ -292,6 +292,100 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  /users/count:
+    get:
+      tags:
+        - saasUser
+      operationId: GetSaasUsersCount
+      summary: SaaSユーザー数を取得
+      description: |
+        SaaSユーザー数を取得します。
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SaasUsersCount"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      tags:
+        - saasUser
+      operationId: SaveSaasUsersCount
+      summary: SaaSユーザー数を保存
+      description: |
+        SaaSユーザー数を保存します。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SaveSaasUsersCountParam"
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /users/search:
+    get:
+      tags:
+        - saasUser
+      operationId: SearchSaasUsers
+      summary: SaaSユーザー検索
+      description: |
+        ユーザーID、メールアドレス、またはログインIDでSaaSユーザーを検索します。
+      parameters:
+        - in: query
+          name: id
+          schema:
+            $ref: "#/components/schemas/Uuid"
+          description: ユーザーID
+        - in: query
+          name: email
+          schema:
+            type: string
+          description: メールアドレス前方一致
+        - in: query
+          name: sign_in_id
+          schema:
+            type: string
+          description: ログインID前方一致
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchSaasUsersResult"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
   "/users/{user_id}":
     get:
       tags:
@@ -671,6 +765,117 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Users"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /tenants/all/users/count:
+    get:
+      tags:
+        - tenantUser
+      operationId: GetAllTenantUsersCount
+      summary: テナントごとのテナントユーザー数を取得
+      description: |
+        テナントごとのテナントユーザー数を取得します。
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TenantUsersCounts"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      tags:
+        - tenantUser
+      operationId: SaveTenantUsersCounts
+      summary: テナントごとのテナントユーザー数を保存
+      description: |
+        テナントごとのテナントユーザー数を保存します。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SaveTenantUsersCountsParam"
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /tenants/all/users/search:
+    get:
+      tags:
+        - tenantUser
+      operationId: SearchTenantUsers
+      summary: テナントユーザー検索
+      description: |
+        ユーザーID、テナントID、メールアドレス、ログインID、環境、ロールでテナントユーザーを検索します。
+      parameters:
+        - in: query
+          name: tenant_id
+          schema:
+            $ref: "#/components/schemas/Uuid"
+          description: テナントID
+        - in: query
+          name: id
+          schema:
+            $ref: "#/components/schemas/Uuid"
+          description: ユーザーID
+        - in: query
+          name: email
+          schema:
+            type: string
+          description: メールアドレス前方一致
+        - in: query
+          name: sign_in_id
+          schema:
+            type: string
+          description: ログインID前方一致
+        - in: query
+          name: env_id
+          schema:
+            type: integer
+            x-go-type: uint64
+            minimum: 1
+          description: 環境ID
+        - in: query
+          name: role_name
+          schema:
+            type: string
+          description: ロール名
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Cursor"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchTenantUsersResult"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
         "500":
           description: Internal Server Error
           content:
@@ -2599,6 +2804,21 @@ components:
       required: true
       schema:
         $ref: "#/components/schemas/Uuid"
+    Limit:
+      in: query
+      name: limit
+      schema:
+        type: integer
+        format: int64
+        minimum: 1
+        maximum: 100
+      description: 取得する最大数
+    Cursor:
+      in: query
+      name: cursor
+      schema:
+        type: string
+      description: カーソルページネーション用のカーソル
   schemas:
     UserInfo:
       title: ユーザー情報
@@ -2770,6 +2990,14 @@ components:
             sex: 男
           description: |
             属性情報
+        last_login_at:
+          type: integer
+          x-go-type: int64
+          nullable: true
+          example: 1640995200
+          description: |
+            最終ログイン日時（unixタイムスタンプ）。
+            一度もログインしていない場合はnullになります。
       required:
         - id
         - email
@@ -2782,6 +3010,7 @@ components:
         attributes:
           department: development
           employee_number: 10
+        last_login_at: 1640995200
     SaasUsers:
       title: SaaSユーザー一覧
       type: object
@@ -2792,6 +3021,33 @@ components:
             $ref: "#/components/schemas/SaasUser"
       required:
         - users
+    SaasUsersCount:
+      title: SaaSユーザー数
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 42
+          description: SaaSユーザー数
+        updated_at:
+          type: integer
+          format: int64
+          example: 1715760000
+          description: 最終更新日時（Unix 秒）
+      required:
+        - count
+        - updated_at
+    SaveSaasUsersCountParam:
+      title: SaaSユーザー数の保存パラメータ
+      type: object
+      properties:
+        count:
+          type: integer
+          minimum: 0
+          example: 42
+          description: SaaSユーザー数
+      required:
+        - count
     CreatedSaasUser:
       title: 作成されたSaaSユーザー
       allOf:
@@ -2909,6 +3165,86 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/User"
+      required:
+        - users
+    TenantUserCount:
+      title: テナントユーザー数
+      type: object
+      properties:
+        tenant_id:
+          $ref: "#/components/schemas/Uuid"
+        count:
+          type: integer
+          example: 5
+          description: テナントユーザー数
+        updated_at:
+          type: integer
+          format: int64
+          example: 1715760000
+          description: 最終更新日時（Unix 秒）
+      required:
+        - tenant_id
+        - count
+        - updated_at
+    SaveTenantUserCountParam:
+      title: テナントユーザー数の保存パラメータ
+      type: object
+      properties:
+        tenant_id:
+          $ref: "#/components/schemas/Uuid"
+        count:
+          type: integer
+          minimum: 0
+          example: 5
+          description: テナントユーザー数
+      required:
+        - tenant_id
+        - count
+    SaveTenantUsersCountsParam:
+      title: テナントごとのテナントユーザー数の保存パラメータ
+      type: object
+      properties:
+        tenant_user_counts:
+          type: array
+          maxItems: 10000
+          items:
+            $ref: "#/components/schemas/SaveTenantUserCountParam"
+      required:
+        - tenant_user_counts
+    TenantUsersCounts:
+      title: テナントユーザー数一覧
+      type: object
+      properties:
+        tenant_user_counts:
+          type: array
+          items:
+            $ref: "#/components/schemas/TenantUserCount"
+      required:
+        - tenant_user_counts
+    SearchTenantUsersResult:
+      title: テナントユーザー検索結果
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: "#/components/schemas/User"
+        cursor:
+          type: string
+          description: 次ページ取得用のカーソル
+      required:
+        - users
+    SearchSaasUsersResult:
+      title: SaaSユーザー検索結果
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: "#/components/schemas/SaasUser"
+        cursor:
+          type: string
+          description: 次ページ取得用のカーソル
       required:
         - users
     UserEnv:
