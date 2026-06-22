@@ -6,8 +6,8 @@
 <title data-rh="true">SaaSus Platform関連のFAQ | SaaSus Platform Document</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docs.saasus.io/img/logo.png"><meta data-rh="true" name="twitter:image" content="https://docs.saasus.io/img/logo.png"><meta data-rh="true" property="og:url" content="https://docs.saasus.io/ja/docs/part-7/faq/saasus-platform"><meta data-rh="true" property="og:locale" content="ja"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="ja"><meta data-rh="true" name="docsearch:language" content="ja"><meta data-rh="true" name="og:type" content="website"><meta data-rh="true" name="og:site_name" content="SaaSus Platform Documentation"><meta data-rh="true" name="og:title" content="SaaSus Platform Documentation"><meta data-rh="true" name="og:description" content="Official documentation for SaaSus Platform"><meta data-rh="true" name="og:url" content="https://docs.saasus.io/"><meta data-rh="true" name="og:image" content="https://docs.saasus.io/img/logo.png"><meta data-rh="true" name="docusaurus_version" content="1.12"><meta data-rh="true" name="docusaurus_tag" content="docs-default-1.12"><meta data-rh="true" name="docsearch:version" content="1.12"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-1.12"><meta data-rh="true" property="og:title" content="SaaSus Platform関連のFAQ | SaaSus Platform Document"><meta data-rh="true" name="description" content="Q. サービスが停止した時の対策として、どのような対応が可能でしょうか？"><meta data-rh="true" property="og:description" content="Q. サービスが停止した時の対策として、どのような対応が可能でしょうか？"><link data-rh="true" rel="icon" href="/ja/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.saasus.io/ja/docs/part-7/faq/saasus-platform"><link data-rh="true" rel="alternate" href="https://docs.saasus.io/ja/docs/part-7/faq/saasus-platform" hreflang="ja"><link data-rh="true" rel="alternate" href="https://docs.saasus.io/docs/part-7/faq/saasus-platform" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.saasus.io/docs/part-7/faq/saasus-platform" hreflang="x-default"><link rel="preconnect" href="https://www.googletagmanager.com">
 <script>window.dataLayer=window.dataLayer||[]</script>
 <script>!function(e,t,a,n){e[n]=e[n]||[],e[n].push({"gtm.start":(new Date).getTime(),event:"gtm.js"});var g=t.getElementsByTagName(a)[0],m=t.createElement(a);m.async=!0,m.src="https://www.googletagmanager.com/gtm.js?id=GTM-5T68ML2",g.parentNode.insertBefore(m,g)}(window,document,"script","dataLayer")</script><link rel="stylesheet" href="/ja/assets/css/styles.29aefb8c.css">
-<script src="/ja/assets/js/runtime~main.659063b7.js" defer="defer"></script>
-<script src="/ja/assets/js/main.76b71842.js" defer="defer"></script>
+<script src="/ja/assets/js/runtime~main.d2e6ebf0.js" defer="defer"></script>
+<script src="/ja/assets/js/main.9f22fabf.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5T68ML2" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -168,7 +168,7 @@
 <!-- -->長時間のロックアウトを防ぐため、正しいパスワードがご不明な場合は、パスワードリセット機能をご利用ください。</p>
 <hr>
 <p><strong>Q. Google などの外部 ID プロバイダ連携を設定しましたが、ログイン時にエラーが発生します。</strong></p>
-<p>A. 外部 ID プロバイダを利用した認証を行うには、セキュリティおよび信頼性確保のため、**「ドメイン設定」**と **「メール送信設定（SES）」**の両方の検証が完了している必要があります。 以下の設定状況をご確認ください。</p>
+<p>A. 外部 ID プロバイダを利用した認証を行うには、セキュリティおよび信頼性確保のため、 <strong>「ドメイン設定」</strong> と <strong>「メール送信設定（SES）」</strong> の両方の検証が完了している必要があります。 以下の設定状況をご確認ください。</p>
 <ul>
 <li>
 <p><strong>ドメインの検証ステータス</strong><br>
@@ -177,7 +177,7 @@
 </li>
 <li>
 <p><strong>設定反映までの待ち時間</strong><br>
-<!-- -->DNS 設定および独自ドメインによる認証メール配信の有効化には、システム内での処理とネットワークへ の浸透のため、最大で 2〜3 日ほどお時間をいただく場合がございます。<br>
+<!-- -->DNS 設定および独自ドメインによる認証メール配信の有効化には、システム内での  処理とネットワークへの浸透のため、最大で 2〜3 日ほどお時間をいただく場合がございます。<br>
 <!-- -->コンソール上に <strong>「独自ドメインによる認証メールの配信が有効になっています」</strong> と表示されるまで、今しばらくお待ちください。</p>
 </li>
 </ul>
@@ -213,7 +213,7 @@
 <!-- -->providerName というフィールドに &quot;Google&quot; などのプロバイダ名が含まれている場合、そのアカウントは外部サービスと連携済みであると判定できます。</p>
 <hr>
 <p><strong>Q. 開発効率向上のため、IDトークンの有効期限を延長する設定はありますか？</strong></p>
-<p>A. セキュリティ上の理由から、IDトークン自体の有効期限を直接延長する設定は提供しておりませ ん。<br>
+<p>A. セキュリティ上の理由から、IDトークン自体の有効期限を直接延長する設 定は提供しておりません。<br>
 <!-- -->短期間で無効になる IDトークンの特性を補完し、再ログインの手間を省く方法として、リフレッシュトークンを利用した自動更新の実装を推奨しております。</p>
 <ul>
 <li>
@@ -235,7 +235,7 @@
 <p>A. SaaSus Platform では、各テナントの現在の計量値をStripeダッシュボードや APIで取得してご確認いただけます。また、詳細な利用推移を可視化するダッシュボード機能についても、現在提供を計画しております。</p>
 <ul>
 <li>
-<p><strong>現在の利 用状況の確認</strong><br>
+<p><strong>現在の利用状況の確認</strong><br>
 <!-- -->SaaSus SDK/API を通じて、各テナントの最新の計量値を参照可能です。</p>
 </li>
 <li>
@@ -257,7 +257,7 @@
 <ul>
 <li>
 <p><strong>自由なデザインを実現する方法</strong><br>
-<!-- -->自社の SaaS の世界観に合わせた独自デザインのログイン画面を実現したい場合は、SaaSus Platform が提供する 認証 API を活用したログイン機能の独自実装を推奨しており ます。</p>
+<!-- -->自社の SaaS の世界観に合わせた独自デザインのログイン画面を実現したい場合は、SaaSus Platform が提供する 認証 API を活用したログイン機能の独  自実装を推奨しております。</p>
 </li>
 <li>
 <p><strong>SRP認証によるセキュアな独自実装</strong><br>
@@ -354,7 +354,7 @@
 </ul>
 <hr>
 <p><strong>Q. SaaSus Platform は IDP (Identity Provider) として利用できますか？</strong><br>
-<!-- -->A. SaaSus Platform は、SaaSの開発・運用に特化した認証・認可プラットフォーム であり、外部の IDP と連携して認証を統合する役割を担います。<br>
+<!-- -->A. SaaSus Platform は、SaaSの開発・運用に特化した認証・ 認可プラットフォームであり、外部の IDP と連携して認証を統合する役割を担います。<br>
 <!-- -->そのため、SaaSus 自体を IDP として他のサービスへ認証情報を提供する機能はございませんが、Microsoft Entra ID (旧 Azure AD) などの外部 IDP と連携したシングルサインオン (SSO) の実装が可能です。</p>
 <ul>
 <li><strong>外部 IDP との連携機能</strong><br>
