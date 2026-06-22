@@ -1,0 +1,87 @@
+name: Sync Intercom Internal Articles
+
+on:
+  push:
+    branches: [main]
+    paths:
+      # 現在 Intercom 同期は ja のみ対象のため docs/**（英語）は含めない
+      - 'i18n/ja/docusaurus-plugin-content-docs/current/**'
+      - 'api/**'
+
+concurrency:
+  group: intercom-sync-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate individual articles
+        run: |
+          chmod +x ./scripts/generate_individual_articles.sh
+          ./scripts/generate_individual_articles.sh ja /tmp/articles-new
+
+      - name: Generate previous version for diff
+        run: |
+          BEFORE="${{ github.event.before }}"
+          if [[ "$BEFORE" == "0000000000000000000000000000000000000000" || -z "$BEFORE" ]]; then
+            echo "初回pushのため旧版なし。全件を変更扱いにします。"
+            rm -rf /tmp/articles-old
+            mkdir -p /tmp/articles-old
+          else
+            rm -rf i18n docs api
+            if git checkout "$BEFORE" -- i18n/ docs/ api/ 2>/dev/null; then
+              ./scripts/generate_individual_articles.sh ja /tmp/articles-old
+              git checkout HEAD -- . || git reset --hard HEAD
+            else
+              echo "旧版のcheckoutに失敗。全件を変更扱いにします。"
+              rm -rf /tmp/articles-old
+              mkdir -p /tmp/articles-old
+              git checkout HEAD -- . || git reset --hard HEAD
+            fi
+          fi
+
+      - name: Detect changed files
+        id: diff
+        run: |
+          shopt -s nullglob
+          changed=""
+          for f in /tmp/articles-new/*.txt; do
+            name="$(basename "$f")"
+            if [[ ! -f "/tmp/articles-old/$name" ]] || ! diff -q "$f" "/tmp/articles-old/$name" >/dev/null 2>&1; then
+              changed="${changed}${f}"$'\n'
+            fi
+          done
+          # 削除されたファイルを検出（oldにのみ存在）
+          deleted=""
+          for f in /tmp/articles-old/*.txt; do
+            name="$(basename "$f")"
+            if [[ ! -f "/tmp/articles-new/$name" ]]; then
+              deleted="${deleted}${name}"$'\n'
+            fi
+          done
+          if [[ -n "$deleted" ]]; then
+            echo "::warning::以下の記事が削除されました（Intercom上の対応記事は手動で確認してください）:"
+            printf '%s' "$deleted"
+          fi
+          if [[ -z "$changed" ]]; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+            printf '%s' "$changed" > /tmp/changed_files.txt
+          fi
+
+      - name: Sync changed articles to Intercom
+        if: steps.diff.outputs.has_changes == 'true'
+        env:
+          INTERCOM_ACCESS_TOKEN: ${{ secrets.INTERCOM_ACCESS_TOKEN }}
+          INTERCOM_ADMIN_ID: ${{ secrets.INTERCOM_ADMIN_ID }}
+        run: |
+          SYNC_FILES="$(cat /tmp/changed_files.txt)" bash ./scripts/sync_intercom_internal_articles.sh

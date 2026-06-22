@@ -8,8 +8,6 @@ createdAt: "Fri May 24 2024 05:24:59 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Fri May 24 2024 05:24:59 GMT+0000 (Coordinated Universal Time)"
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
 
 ### Check your SaaS ID, API key, and client secret
 
@@ -43,36 +41,28 @@ As mentioned at the beginning, the docker container has been started using `init
 
 First, to use the SaaSus Platform, you need to integrate the SaaSus SDK into your application.
 
-- For Laravel, use **Composer**.
-- For Express, use **npm**.
-
 Open a terminal and set up the SDK.
 
-```mdx-code-block
-<Tabs>
-<TabItem value="laravel-bash" label="Laravel (Bash)" default>
+#### Laravel
+
+```bash
+docker compose exec php bash
 ```
 
 ```bash
-repo$ docker compose exec php bash
-root@xxx:/var/www# cd api
-root@xxx:/var/www/api# composer require saasus-platform/saasus-sdk-php
+cd api
+composer require saasus-platform/saasus-sdk-php
 ```
 
-```mdx-code-block
-</TabItem>
-<TabItem value="express-bash" label="Express (Bash)">
+#### Express
+
+```bash
+docker compose exec node bash
 ```
 
 ```bash
-repo$ docker compose exec node bash
-root@xxx:/app# npm install saasus-sdk
-root@xxx:/app# exit
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
+npm install saasus-sdk
+exit
 ```
 
 ## Setting Environment Variables
