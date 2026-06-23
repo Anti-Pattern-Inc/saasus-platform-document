@@ -380,7 +380,7 @@ With this release, user management can be performed more comfortably and smoothl
 ````
 
 ---
-## changelog/20260617.md
+## changelog/20260623.md
 ````markdown
 We would like to inform you about the suspension of the following feature.
 Suspension of the AWS Marketplace Integration Feature
