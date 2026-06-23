@@ -385,7 +385,7 @@ ID認証機能
 ````
 
 ---
-## changelog/20260617.md
+## changelog/20260623.md
 ````markdown
 以下の機能の提供停止についてお知らせいたします。
 AWS Marketplace 連携機能の提供停止
