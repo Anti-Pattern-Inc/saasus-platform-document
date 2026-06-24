@@ -1,0 +1,98 @@
+---
+title: "テナントの情報をもとにした認可の実装"
+slug: "implementation-of-authorization-based-on-tenant-information"
+excerpt: ""
+hidden: false
+pagination_prev: tutorial/manage-rate-plans/manage-rate-plans
+pagination_next: tutorial/summarize
+createdAt: "Wed Jan 11 2023 03:13:22 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
+---
+
+## 認可の実装
+
+### 料金プランの計測単位に基づいたコメント上限の実装
+
+さきほどのサンプルアプリケーションにさらに手を加えていき、認可の一歩目を実装してみます。
+
+ここまでのSaaSus Platformの設定で、どのユーザがログインしていて、そのユーザはどのテナントに属していてどんな役割で、そのテナントがどの料金プランを選択していて、どんなメニューが使えるのか？というのがアプリケーションから取得できる状態になっています。その情報を使って、アプリケーションに制限をかけていきます。
+
+ここでは、料金プランの中の計測単位の一部である「コメント数」に注目してみましょう。
+
+さきほど、料金プランごとにコメント数の上限値が異なっている設定を行いました。
+
+- Free プランでは、コメント数上限 10
+- Basic プランでは、コメント数上限 100
+
+という設定を行っています。
+
+では、この料金プランに紐付いた上限数をテナントごとに取得して、制限をかけてみましょう。
+
+実装コードは利用するフレームワークを選択して参照してください。
+
+- [Laravel の実装例（ソースコード）](/docs/tutorial/authorization-module/authorization-laravel)
+- [Express の実装例（ソースコード）](/docs/tutorial/authorization-module/authorization-express)
+
+先ほどのコードに加えて、コメント数の対象メーター “comment_count” をベースにしてコメント数の上限を確認しています。
+
+先ほど、計測単位は以下の画面のようにどの料金プランの計測単位でも  “comment_count” をベースに設定していると思います。
+
+![](/ja/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-1.png)
+
+そこでコード上では、
+
+テナントに紐付いている**料金プラン**を取得し、
+
+対象メーター “comment_count” の**現在の値**を取得し、
+
+料金プランに紐付いている上限値 “comment_count” の **上限値**を確認しています
+
+そして、もし現在の値が上限値を超えていなければ、
+
+コメント書き込み処理を通常通り行い、
+
+対象メーター “comment_count” の**現在の値**に１を足して更新します。
+
+このようにすることで、料金プランごとの上限値を超えた場合には書き込みを行わせない、ということを実現できます。
+
+今回は処理をシンプルにするために、書き込みが行えないということにとどめていますが、実際はエラーメッセージを出したり、アップセルを促すメッセージを出すことになると思います。
+
+しかし、機能によっては上限値で完全に止めてしまうとSaaSの価値が損なわれる場合があります。  
+たとえば、今回のようにコメントに上限をもうけて、そこで完全に書き込みができなくなってしまうと、これはチャットとして成り立たなくなってしまいます。  
+そうした場合、このメーターがリセットされるまで、このSaaSは使われなくなってしまう可能性があります。  
+その後、ずっと使われなくなってしまう可能性ももちろんあります。  
+そのため、完全に止めるのではなく、書き込みはできるが警告を出したり、保存期間を調整するなどこのSaaS自体の価値が失われないようにすることが重要です。
+
+今回はチュートリアルですので、無情にも完全に書き込みができない状態にしました。では、ちゃんと上限で書き込みができなくなっているか試してみましょう。
+
+まず、最初にアプリケーションを初期化したときのように、 init.sh を実行してアプリケーションをまっさらな状態に戻しましょう。
+
+そして、テナント１の方にはFreeプランを設定し、[user1-1@example.com](mailto:user1-1@example.com) でログインして、１０件以上の書き込みを行ってみましょう。
+
+フリープラン設定後の書き込みが、１０件までしかできないことが確認できたと思います。
+
+:::info
+今回はメーター設定後の書き込みのみをカウントする実装としています。<br/>設定前の書き込みも考慮したい場合は、メーターの値を直接更新する方法もあります。
+:::
+
+![](/ja/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-2.png)
+
+では、次にテナント２のユーザー [user2-1@example.com](mailto:user2-1@example.com) でログインして、１０件以上の書き込みを行ってみましょう。
+
+こちらは上限が100件になっているので、１０件以上の書き込みができたはずです。
+
+![](/ja/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-3.png)
+
+さらに、テナント１の方がプランのアップグレードをした想定で、FreeプランからBasicプランに設定を変更して、再度 [user1-1@example.com](mailto:user1-1@example.com) でログインして、１０件以上の書き込みを行ってみましょう。  
+(設定変更後反映には５分ほど時間がかかります。)
+
+![](/ja/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-4.png)
+
+今度は書き込みができるようになっているかと思います。
+
+![](/ja/img/tutorial/implementation-of-authorization-based-on-tenant-information/implementation-of-authorization-based-on-tenant-information-5.png)
+
+このような形で、料金プランに応じたメータリングや制限ができるようになりました。
+
+制限はSaaSusと連携後から1件とカウントします。  
+APIとしてカウントの制限値を変更する機能など提供しております。
