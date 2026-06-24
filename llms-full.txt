@@ -499,6 +499,29 @@ When creating a new user, you can now filter tenants by entering a tenant name.
 
 ---
 
+# Update on 2026/06/23
+
+URL: https://www.prisma.io/docs/changelog/20260623
+
+We would like to inform you about the suspension of the following feature.
+
+Suspension of the AWS Marketplace Integration Feature  
+　Due to changes to the AWS Marketplace integration specification effective June 2026, the current AWS Marketplace integration feature (product listing) no longer supports the new specification, and listing can no longer be completed with the existing procedure.  
+　Accordingly, we have suspended new usage of the AWS Marketplace integration feature.  
+
+　■ Impact
+  - New product listings using the AWS Marketplace integration feature cannot be completed.
+
+　■ Outlook
+  - We will announce the timing of resumption once a plan to support the new specification is in place.
+
+　■ About the latest listing process
+  - For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+We apologize for any inconvenience this may cause and appreciate your understanding.
+
+---
+
 # Welcome to SaaSus Platform
 
 URL: https://www.prisma.io/docs/changelog/welcome-to-saasus-platform
@@ -2080,6 +2103,18 @@ After setting up IP restrictions, access will be limited as follows:
 # About AWS Marketplace Integration Function
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/aws-marketplace-integration
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 The AWS Marketplace integration function supports the "AWS Marketplace listing process" carried out by the "SaaS created using the SaaSus Platform".
 
 :::caution
@@ -2174,6 +2209,18 @@ Based on the SaaS product guidelines, we will check from the SaaSus Platform whe
 # Seller Registration Guide
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/aws-marketplace-seller-registration
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 You will register as a seller on <a href="https://aws.amazon.com/marketplace/partners/management-tour" target="_blank">AWS Marketplace</a>.  
 Please start the registration from `Register now` on the page displayed in the link above.
 
@@ -2203,6 +2250,18 @@ After registration, proceed to the Public profile settings.
 # DAC7 Tax Survey
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/dac7-tax-survey
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 DAC7 refers to the European Commission's directive regarding tax reporting by corporations.  
 This directive imposes a tax reporting obligation on subsidiaries, parent corporations, proportionate consolidation corporations, joint ventures and decentralized corporations in the European Union.  
 Information sharing on taxation is required to prevent attempts to reduce domestic tax through business expansion or the start of new businesses under control of overseas enterprises.
@@ -2228,6 +2287,18 @@ On the Client Dashboard, press Finish Interview to finish the interview regardin
 # Hyperwallet Registration
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/hyperwallet-registration
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 When you click on `Sign up for Hyper wallet` from the bank account registration, you will be directed to the following page.  
 Select the account verification method and valid code.
 
@@ -2289,6 +2360,18 @@ After registration, return to setting up your bank account.
 # Public profile Setting Guide
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/public-profile-settings
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 After seller registration, log into the <a href="https://aws.amazon.com/marketplace/management/homepage" target="_blank">AWS Marketplace Management Portal</a> and set your Public profile.  
 Please start the settings from `Add public profile` under Settings.
 
@@ -2314,6 +2397,18 @@ After completing the Public profile settings, please start setting up your bank 
 # Setting Up a Bank Account
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 Next, click on `Add bank account` under `Payment Information`.
 
 ![new-register-bank-account-1](/img/part-4/aws-marketplace-integration/register-bank-account/new-register-bank-account-1.png)
@@ -2357,6 +2452,18 @@ Please refer to the next page, `Setting up Disbursement Methods`.
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-disbursement-methods
 
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
+
 :::caution
 Please ensure that your bank account setup is complete beforehand. If you haven't done this yet, refer to [Bank Account Setup](/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account).
 :::
@@ -2395,6 +2502,18 @@ With this, the necessary settings to start the listing process are complete.
 # How to Start Setting Up Bank Account and Disbursement methods
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/tax-information-interview
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 ## For Customers Based in Japan
 
 Check `Payment Information` from the Settings page on <a href="https://aws.amazon.com/marketplace/management/seller-settings/account" target="_blank">AWS Marketplace Management Portal</a>.  
@@ -2466,6 +2585,18 @@ You have completed your submission and finished the interview regarding tax info
 # Setting Up Disbursement methods From Seller Registration
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 ### Preparation
 
 Please prepare an AWS account for AWS Marketplace.
@@ -2489,6 +2620,18 @@ These are necessary registrations and settings for listing on AWS Marketplace, s
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/embedding-products
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 
 If you are offering a SaaS product on the SaaSus Platform, you will need to implement consideration for multitenant in the purchase flow by existing users.
 
@@ -2585,6 +2728,18 @@ function post(Request $request)
 # Getting Started with Registration - Generating Product Code
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/product-submission/generate-product-code
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 To register SaaS product information, first access the <a href="https://aws.amazon.com/marketplace/management/homepage" target="_blank">AWS Marketplace Management Portal</a>, and then proceed with registration as follows.
 
 On the `AWS Marketplace Management Portal`, select `SaaS` from the `Product` menu.
@@ -2607,6 +2762,18 @@ After about 10 seconds, the product ID and product code are generated, and the `
 # Step 1: Provide Product Information
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/product-submission/step1-provide-product-information
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 Next, you'll enter the information necessary to publish the SaaS product.
 
 :::info
@@ -2647,6 +2814,18 @@ After entering the product-related information, click `Next` to proceed.
 # Step 2: Configure Fulfillment Options
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/product-submission/step2-configure-fulfillment-options
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 Next, enter the URL to which customers will be redirected upon purchasing the product on the AWS Marketplace.
 
 The URL to be entered is displayed in the instruction sheet output by the SaaSus Platform's AWS Marketplace integration function, please copy and paste it into the Fulfillment URL input area.
@@ -2667,6 +2846,18 @@ After completing the input, press `Next` to proceed.
 # Step 3: Configure Product Pricing
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/product-submission/step3-configure-product-pricing
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 Next, you'll input the pricing model and its type to be sold on the AWS Marketplace.
 
 Firstly, for the pricing model, select `Contract-based pricing`.
@@ -2704,6 +2895,18 @@ After completing the input, press `Next` to proceed.
 # Step 4: Set Prices
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/product-submission/step4-set-prices
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 Next, enter the purchase options and contract duration for the product to be sold on the AWS Marketplace.
 
 Please enter the `Purchasing options` and `Contract duration options` in accordance with the instructions in the output from the AWS Marketplace integration function.
@@ -2724,6 +2927,18 @@ After completing the input, press `Next` to proceed.
 # Step 5: Specify Refund Policy
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/product-submission/step5-specify-refund-policy
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 Next, input information about the refund policy.
 
 This is where you'll specify the refund policy for selling the SaaS product on the AWS Marketplace. This should be provided by the seller themselves.
@@ -2740,6 +2955,18 @@ After completing the input, press `Next` to proceed.
 # Step 6: Configure EULA
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/product-submission/step6-configure-eula
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 Next, choose the end-user license agreement (EULA) for selling on the AWS Marketplace.
 
 If you want to use the terms defined in the AWS Marketplace, please select `Standard Contract for AWS Marketplace (SCMP)`.
@@ -2760,6 +2987,18 @@ After completing the input, press `Next` to proceed.
 # Step 7: Configure Offer Availability
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/product-submission/step7-configure-offer-availability
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 Next, you'll decide the countries in which to sell your SaaS product.
 
 Please proceed with entering the countries as per your business.
@@ -2782,6 +3021,18 @@ After completing the input, press `Next` to proceed.
 # Step 8: Configure Allowlist
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/product-submission/step8-configure-allowlist
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 Next, you'll set up the AWS account ID to use for testing during partnership verification.
 
 When your SaaS product is in limited release, only the designated accounts will be able to view and purchase the product.
@@ -2799,6 +3050,18 @@ This completes the registration of the SaaS product information.
 # Registering SaaS Product Information
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/product-submission
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 You will register the SaaS product information on the AWS Marketplace Management Portal.
 
 :::caution
@@ -2825,6 +3088,18 @@ The input content etc. will be published on the `AWS Marketplace`. Please check 
 # How to Request a Final Review
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/supplementary/final-review-request
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 Once you have completed the [exhibition steps '10. Confirmation of integration with AWS Marketplace'](/docs/part-4/aws-marketplace-integration/aws-marketplace-integration), you can request a final review from the AWS Marketplace support team.
 
 First, access the <a href="https://aws.amazon.com/marketplace/management/homepage" target="_blank">AWS Marketplace Management Portal</a> and open the product detail page you want to manage.
@@ -2853,6 +3128,18 @@ That's all you need to do to request a final review.
 # Examples of Integration Confirmation to be Done After API Integration
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/supplementary/integration-test
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 Please check the URL of the product page that is privately published on AWS Marketplace in advance.
 
 ### How to Check the Product Page URL
@@ -2911,6 +3198,18 @@ Confirmation Example
 # How to Request for Publication
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/supplementary/public-request
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 Once you've completed the [Listing Procedure "11. Final Review Request of Production SaaS Product"](/docs/part-4/aws-marketplace-integration/aws-marketplace-integration), you will receive an email from the AWS Marketplace Support Team detailing the process to request publication. Follow these instructions to request your publication.
 
 :::caution
@@ -2935,6 +3234,18 @@ With this process, your SaaS product will be published on the AWS Marketplace by
 # How to Set Self-Signup
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/supplementary/self-up-setting
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 1. Access <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Advanced Setting of SaaS Development Console</a>.
 2. Please click on the `Authentication` tab.
 3. Scroll down to find the item for enabling or disabling Self-Signup (new registration by the user).
@@ -2949,6 +3260,18 @@ That completes the setting. It will be reflected in the actual screen after a fe
 # About the Contents Entered in Create Product and the Published Details
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/supplementary/supplementary-1
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 ## Product Overview
 
 The `Product title`, `Short description`, `Long description`, `Product logo S3 URL` etc, input in Step 1: Provide product information, are displayed as `Product Overview` when the product is published.
@@ -2984,6 +3307,18 @@ The `AWS Marketplace discoverability` input in Step 1: Provide product informati
 # Details of Input Fields in Create Product
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/supplementary/supplementary-2
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 The information you enter here can be checked in the [About the Contents Entered in Create Product and the Published Details](/docs/part-4/aws-marketplace-integration/supplementary/supplementary-1) to see what will be published on AWS Marketplace.
 
 ## Step1 : Provide product information
@@ -3060,6 +3395,18 @@ The information you enter here can be checked in the [About the Contents Entered
 # Procedure for Copying the Generated AWS Resources
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/supplementary/supplementary-3
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 1. Sign in to the AWS Management Console.
 2. Please access this <a href="https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks?filteringText=&filteringStatus=active&viewNested=true" target="_blank">link</a>.
 3. When the following page is displayed, select the stack 'AWS-Marketplace-seller-Resource'.
@@ -3075,6 +3422,18 @@ URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/supplementary
 # How to Identify Users who Purchased from AWS Marketplace
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/supplementary/user-judgment-method
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 We will use the SAASUS AWS MARKETPLACE API.
 
 Use the endpoint named [GetCustomers](/docs/reference/awsmarketplace-api#tag/awsMarketplace/operation/GetCustomers). Please refer to the document for details on the specification.
@@ -3090,6 +3449,18 @@ Use the endpoint named [GetCustomers](/docs/reference/awsmarketplace-api#tag/aws
 # Supplementary
 
 URL: https://www.prisma.io/docs/part-4/aws-marketplace-integration/supplementary
+
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+
+:::
+
 This document collates additional information for seller registration, SaaS product information registration, and details related to AWS Marketplace integration functionality.
 
 ---
