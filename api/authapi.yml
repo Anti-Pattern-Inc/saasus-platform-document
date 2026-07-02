@@ -79,12 +79,14 @@ paths:
         The ID token is passed to the Callback URL during login from the SaaSus Platform generated login screen.
         User information can be obtained from calling this API with an ID token from the URL on the server side.
         Since the acquired tenant, role (role), price plan, etc. are included, it is possible to implement authorization based on it.
+        If the ID token validation fails and 401 Unauthorized is returned, the login screen URL will be returned in data.sign_in_page_url of the response, so the client can respond by redirecting to it, etc.
       x-description-i18n:
         jpn: |
           SaaS利用ユーザ(登録ユーザ)のIDトークンを元に、ユーザ情報を取得します。
           IDトークンは、SaaSus Platform生成のログイン画面からログイン時にCallback URLに渡されます。
           サーバ側でそのURLからIDトークンを取得し、このAPIを呼ぶことにより、該当ユーザの情報が取得できます。
           取得した上には、所属テナントや役割(ロール)、料金プランなどが含まれているため、それを元に認可の実装を行うことが可能です。
+          IDトークンの検証に失敗し、401 Unauthorized が返される場合、レスポンスの data.sign_in_page_url にログイン画面のURLが返されますので、クライアントはそちらにリダイレクトするなどの対応を行うことができます。
       parameters:
         - in: query
           name: token
@@ -4817,8 +4819,6 @@ components:
         data:
           type: object
           additionalProperties: true
-          example:
-            sign_in_page_url: auth.dev.saasus.io
       required:
         - type
         - message

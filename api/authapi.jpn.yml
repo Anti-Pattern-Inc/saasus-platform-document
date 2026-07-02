@@ -44,11 +44,16 @@ paths:
         - userInfo
       operationId: GetUserInfo
       summary: ユーザー情報取得
-      description: |
+      description: >
         SaaS利用ユーザ(登録ユーザ)のIDトークンを元に、ユーザ情報を取得します。
+
         IDトークンは、SaaSus Platform生成のログイン画面からログイン時にCallback URLに渡されます。
+
         サーバ側でそのURLからIDトークンを取得し、このAPIを呼ぶことにより、該当ユーザの情報が取得できます。
+
         取得した上には、所属テナントや役割(ロール)、料金プランなどが含まれているため、それを元に認可の実装を行うことが可能です。
+
+        IDトークンの検証に失敗し、401 Unauthorized が返される場合、レスポンスの data.sign_in_page_url にログイン画面のURLが返されますので、クライアントはそちらにリダイレクトするなどの対応を行うことができます。
       parameters:
         - in: query
           name: token
@@ -3788,8 +3793,6 @@ components:
         data:
           type: object
           additionalProperties: true
-          example:
-            sign_in_page_url: auth.dev.saasus.io
       required:
         - type
         - message
