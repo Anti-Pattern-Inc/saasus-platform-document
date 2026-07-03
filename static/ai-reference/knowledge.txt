@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-07-01 20:00:09 +0900`
+- Generated: `2026-07-03 17:41:42 +0900`
 
 ---
 ## changelog/20221224.md
@@ -11096,6 +11096,25 @@ A. You can change it yourself from the SaaS Development Console.
 Please enter and save the new billing information from the following menu.
 Configuration location:
 SaaS Development Console > Account Settings > Billing Information
+---
+**Q. Can I switch back (downgrade) from the Starter plan to the Free plan?**
+A. Under the current specifications, you cannot directly switch back (downgrade) from the Starter plan to the Free plan.
+To switch to the Free plan, you need to follow the steps below.
+1. **Cancel your current Starter plan**
+2. **Create a new account (tenant) and select the Free plan**
+ - **About migrating your settings**
+Along with the steps above, you need to extract the configuration information from your current account and migrate (reconfigure) it to the new account.
+When retrieving your configuration information, using the [MCP Server feature](/docs/part-4/mcp-server/setup) makes the process smoother.
+---
+**Q. How do I upgrade from the Free plan to a paid plan such as the Starter plan?**
+A. You can upgrade (apply for a paid plan) from "Account Settings > Pricing Plans" in the SaaS Development Console.
+Unlike a downgrade, you can complete the procedure directly from the management console.
+ - **About billing after applying**
+Billing is on a monthly basis starting from the application date, invoices are sent via Stripe, and the plan renews automatically each month.
+ - **Applying via AWS Marketplace**
+You can also apply via AWS Marketplace. In this case, the contract is handled as a Private Offer, so please contact our support team.
+ - **Plan pricing and limits**
+For the pricing and limits of each plan, such as the number of environments, users, and tenants, please refer to [Procedure for Applying for a Paid Plan](/docs/part-4/account-settings/procedure-for-applying-for-a-paid-plan).
 ````
 
 ---
