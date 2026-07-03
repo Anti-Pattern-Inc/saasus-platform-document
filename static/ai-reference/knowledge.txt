@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-07-03 19:08:30 +0900`
+- Generated: `2026-07-03 19:09:06 +0900`
 
 ---
 ## changelog/20221224.md
@@ -10856,6 +10856,9 @@ but also directly from the SaaS Development Console screen.
 **For production environments**
 Once metering units, feature menus, and pricing plans have been used, they cannot be deleted.
 When setting and applying pricing plans in a production environment, please thoroughly review the configuration in advance.
+---
+**Q. How is the representative email address used?**
+A. The representative email address is used as the destination for sending invoices.
 ````
 
 ---

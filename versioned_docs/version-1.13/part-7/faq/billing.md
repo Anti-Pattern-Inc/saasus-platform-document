@@ -4,7 +4,7 @@ slug: "billing"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Sun May 18 2026 11:25:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Fri Jul 03 2026 09:26:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 **Q. What is the "Calculation Method" setting (sum/max) for meter units?**  
@@ -240,3 +240,8 @@ but also directly from the SaaS Development Console screen.
 **For production environments**  
 Once metering units, feature menus, and pricing plans have been used, they cannot be deleted.  
 When setting and applying pricing plans in a production environment, please thoroughly review the configuration in advance.
+
+---
+
+**Q. How is the representative email address used?**  
+A. The representative email address is used as the destination for sending invoices.
