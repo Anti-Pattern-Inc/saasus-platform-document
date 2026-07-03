@@ -4,10 +4,10 @@ slug: "api-sdk"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Fri Jul 03 2026 08:46:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
-**Q. 招待用APIを実行すると "Both DNS and SES must be validated..." というエラーが返ってきます。何が原因でしょうか？**
+**Q. 招待用APIを実行すると "Both DNS and SES must be validated..." というエラーが返ってきます。何が原因でしょうか？**  
 A. 認証メール（招待メール）を送信するためのドメイン設定が完了していない、または有効化（検証）されていないことが原因です。
 
 ユーザーへ招待メールを送信するためには、セキュリティおよび到達率の観点から、お客様が所有するドメインでのDKIM認証が必須条件となっています。
