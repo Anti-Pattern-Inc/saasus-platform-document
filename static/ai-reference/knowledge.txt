@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-07-03 17:41:42 +0900`
+- Generated: `2026-07-03 18:36:31 +0900`
 
 ---
 ## changelog/20221224.md
@@ -11097,16 +11097,16 @@ Please enter and save the new billing information from the following menu.
 Configuration location:
 SaaS Development Console > Account Settings > Billing Information
 ---
-**Q. Can I switch back (downgrade) from the Starter plan to the Free plan?**
-A. Under the current specifications, you cannot directly switch back (downgrade) from the Starter plan to the Free plan.
+**Q. Can I switch back (downgrade) from a paid plan to the Free plan?**
+A. Under the current specifications, you cannot directly switch back (downgrade) from a paid plan to the Free plan.
 To switch to the Free plan, you need to follow the steps below.
-1. **Cancel your current Starter plan**
+1. **Cancel your current paid plan**
 2. **Create a new account (tenant) and select the Free plan**
  - **About migrating your settings**
 Along with the steps above, you need to extract the configuration information from your current account and migrate (reconfigure) it to the new account.
 When retrieving your configuration information, using the [MCP Server feature](/docs/part-4/mcp-server/setup) makes the process smoother.
 ---
-**Q. How do I upgrade from the Free plan to a paid plan such as the Starter plan?**
+**Q. How do I upgrade from the Free plan to a paid plan?**
 A. You can upgrade (apply for a paid plan) from "Account Settings > Pricing Plans" in the SaaS Development Console.
 Unlike a downgrade, you can complete the procedure directly from the management console.
  - **About billing after applying**
