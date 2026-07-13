@@ -4,11 +4,11 @@ slug: "integrate-with-amazon-eventbridge"
 excerpt: ""
 hidden: false
 createdAt: "Sat Jan 21 2023 09:57:10 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Mon Jul 13 2026 03:28:00 GMT+0000 (Coordinated Universal Time)"
 ---
 SaaSus Platform は、 Amazon EventBridge と統合されています。 SaaSus Platform で起こった各種イベントをパートナーイベントソースとして、 SaaS 側 AWS アカウントの Amazon EventBridge に送信することができます。これを活用することにより、 SaaSus Platform と連携したイベント駆動のアーキテクチャを採用し SaaS を構築することができます。
 
-例えば、SaaSのテナントが作成されたときにテナントオンボーディング処理をトリガーする、ユーザが削除されたときに付随するデータを削除する処理をトリガーするなどに活用できます。現在は、全ての SaaSus API のイベントを取得することができます。各APIの内容は、<a href="/ja/docs/reference/getting-started-with-your-api" target="_blank">APIリファレンス</a>を確認してください。
+例えば、SaaSのテナントが作成されたときにテナントオンボーディング処理をトリガーする、ユーザが削除されたときに付随するデータを削除する処理をトリガーするなどに活用できます。現在は、参照系（GET）を除く SaaSus API のイベントを取得することができます。各APIの内容は、<a href="/ja/docs/reference/getting-started-with-your-api" target="_blank">APIリファレンス</a>を確認してください。
 
 また、イベントメッセージの内容は<a href="/ja/docs/part-4/integrate-with-amazon-eventbridge/event-sample" target="_blank">イベントサンプル</a>でご確認ください。
 
