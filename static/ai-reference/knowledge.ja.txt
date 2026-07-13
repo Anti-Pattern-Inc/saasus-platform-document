@@ -3,7 +3,7 @@
 - Locale: `ja`
 - Docs source: `i18n/ja/docusaurus-plugin-content-docs/current`
 - API source: `api`
-- Generated: `2026-07-13 12:36:16 +0900`
+- Generated: `2026-07-13 13:37:33 +0900`
 
 ---
 ## changelog/20221224.md
@@ -11325,6 +11325,7 @@ app.use(
 ```
 ### 個別の認証処理の削除
 Express はルートごとに個別の認証処理があったため、それらを削除します。
+`api/routes/chat.ts` を修正します。
 ```ts
 router.get(
   "/",
