@@ -52,7 +52,7 @@ output_abs="$(cd "$output_dir" && pwd)/$(basename "$output_file")"
 write_if_changed() {
   local dest="$1" tmp="$2"
   if [[ -f "$dest" ]]; then
-    if diff -q <(sed '1,10{/^- Generated: /d}' "$dest") <(sed '1,10{/^- Generated: /d}' "$tmp") >/dev/null 2>&1; then
+    if diff -q <(sed '1,10{/^- Generated: /d;}' "$dest") <(sed '1,10{/^- Generated: /d;}' "$tmp") >/dev/null 2>&1; then
       rm -f "$tmp"
       return 1
     fi
