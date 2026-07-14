@@ -4,7 +4,7 @@ slug: "billing"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Fri Jul 03 2026 09:26:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Mon Jul 13 2026 03:28:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 **Q. What is the "Calculation Method" setting (sum/max) for meter units?**  
@@ -122,7 +122,7 @@ A. Currently, there is no feature to directly enable "bank transfer" from the Sa
  - **Setup procedure and precautions**  
 After setting up a pricing plan (creating a subscription) on SaaSus Platform, please configure the target subscription to allow "bank transfer" from the Stripe console within the time it takes for the subscription to be confirmed on the Stripe side (within approximately 1 hour).
 
- - **Important limitations regarding measurement units**  
+ - **Limitations regarding measurement units**  
 When changing settings directly from the Stripe console, you must never change the "measurement units (units or calculation logic)" defined and integrated with SaaSus Platform.  
 Changing measurement units can cause data inconsistency between SaaSus Platform and Stripe, preventing correct meter updates and billing.
 
@@ -133,7 +133,7 @@ Changing measurement units can cause data inconsistency between SaaSus Platform 
 A. SaaSus Platform supports the creation of pricing plans in major payment currencies: **Japanese Yen (JPY) and US Dollar (USD)**.
 
  - **Currency operations through Stripe integration**  
-By integrating with Stripe, you can centrally manage not only domestic Japanese deployments but also revenue models for extensive global business using US dollars (USD) from the SaaSus console.
+By integrating with Stripe, you can centrally manage not only domestic Japanese deployments but also revenue models for global business using US dollars (USD) from the SaaSus console.
 
  - **Service regions and compliance**  
 We currently provide services centered on ap-northeast-1 (Tokyo Region). While common endpoints can be used from many regions including the United States (US), for the European Union (EU) region, API access is currently blocked from the perspective of strict compliance with GDPR (General Data Protection Regulation) and security governance.

@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-07-03 19:09:06 +0900`
+- Generated: `2026-07-13 13:37:32 +0900`
 
 ---
 ## changelog/20221224.md
@@ -2329,7 +2329,7 @@ Use the endpoint named [GetCustomers](/docs/reference/awsmarketplace-api#tag/aws
 ## part-4/integrate-with-amazon-eventbridge.md
 ````markdown
 SaaSus Platform is integrated with Amazon EventBridge. Various events that occur on the SaaSus Platform can be sent to Amazon EventBridge in the SaaS-side AWS account as a partner event source. By leveraging this, SaaS can be built with an event-driven architecture that works in conjunction with SaaSus Platform.
-For example, it can be used to trigger a tenant onboarding process when a SaaS tenant is created, or to trigger the deletion of accompanying data when a user is deleted. Currently, you can retrieve events for all SaaSus APIs. Please check [API Reference](/docs/reference/getting-started-with-your-api) for the contents of each API.
+For example, it can be used to trigger a tenant onboarding process when a SaaS tenant is created, or to trigger the deletion of accompanying data when a user is deleted. Currently, you can retrieve events for SaaSus APIs except for reference (GET) operations. Please check [API Reference](/docs/reference/getting-started-with-your-api) for the contents of each API.
 ## How to integrate with Amazon EventBridge
 Open the [Event Integration Page of the SaaS Development Console](https://settings.console.saasus.io/integrations/event).
 ![01](/img/part-4/integrate-with-amazon-eventbridge/image-01.png)
@@ -10769,14 +10769,14 @@ Direct integration with Stripe's promotional features is being considered on our
 A. Currently, there is no feature to directly enable "bank transfer" from the SaaSus Platform management screen. However, you can enable bank transfer payments by changing settings directly from the integrated Stripe management console.
  - **Setup procedure and precautions**
 After setting up a pricing plan (creating a subscription) on SaaSus Platform, please configure the target subscription to allow "bank transfer" from the Stripe console within the time it takes for the subscription to be confirmed on the Stripe side (within approximately 1 hour).
- - **Important limitations regarding measurement units**
+ - **Limitations regarding measurement units**
 When changing settings directly from the Stripe console, you must never change the "measurement units (units or calculation logic)" defined and integrated with SaaSus Platform.
 Changing measurement units can cause data inconsistency between SaaSus Platform and Stripe, preventing correct meter updates and billing.
 ---
 **Q. We plan to expand globally to the United States (US) and Europe (EU) in the future. Do you support payments in local currencies for each country?**
 A. SaaSus Platform supports the creation of pricing plans in major payment currencies: **Japanese Yen (JPY) and US Dollar (USD)**.
  - **Currency operations through Stripe integration**
-By integrating with Stripe, you can centrally manage not only domestic Japanese deployments but also revenue models for extensive global business using US dollars (USD) from the SaaSus console.
+By integrating with Stripe, you can centrally manage not only domestic Japanese deployments but also revenue models for global business using US dollars (USD) from the SaaSus console.
  - **Service regions and compliance**
 We currently provide services centered on ap-northeast-1 (Tokyo Region). While common endpoints can be used from many regions including the United States (US), for the European Union (EU) region, API access is currently blocked from the perspective of strict compliance with GDPR (General Data Protection Regulation) and security governance.
  - **Future expansion**
@@ -10868,7 +10868,7 @@ import InquiryButton from '@site/src/components/InquiryButton';
 **Q. What countermeasures are available when the service goes down?
 Is it possible to switch and continue business operations?**
 A. The Tokyo region has 3 Availability Zones, and the service will not stop unless all of them experience simultaneous failures.
-AWS has never had a case where all AZs in a region stopped simultaneously, so we consider the risk extremely low.
+AWS has never had a case where all AZs in a region stopped simultaneously, so we consider the risk low.
 A multi-region DR configuration using the Osaka region is also possible, but please consider human resource downtime and cost factors when making decisions based on your requirements.
 ---
 **Q. Can the login screen design be changed?**
@@ -10976,6 +10976,14 @@ When authentication failures continue for a certain number of times, the account
 The specific number of attempts is not disclosed, but the lockout period is automatically adjusted according to the number of unauthorized attempts, and is usually automatically released after a certain period of time.
 To prevent long-term lockouts, please use the password reset function if you are unsure of the correct password.
 ---
+**Q. What authentication methods are available for multi-factor authentication (MFA)?**
+A. SaaSus Platform supports the following two methods for multi-factor authentication (MFA). You can configure either method on a per-user basis.
+ - **Authenticator App (TOTP)**
+Uses an authenticator app such as Google Authenticator, and performs the second-factor authentication with the one-time code displayed in the app. Setup is easy by scanning a QR code.
+ - **Email**
+At login, an authentication code is sent to the registered email address to perform the second-factor authentication.
+Note that using multi-factor authentication (MFA) requires implementation on the SaaS application side. For details on how to use the API and implementation examples, see [Implementing Multi-Factor Authentication](/docs/part-6/implementation-guide/sample-application/multi-factor-authentication).
+---
 **Q. Can users who use email as their multi-factor authentication (MFA) method reset their password from the login screen?**
 A. No. Users who use "Email" as their multi-factor authentication (MFA) method cannot reset their password from the login screen generated by SaaSus Platform.
 To reset the password for such a user, an administrator should perform the password reset from the User Management screen in the SaaS Operation Console. For details, see [Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-crud).
@@ -11016,7 +11024,7 @@ A. For security reasons, we do not provide a setting to directly extend the expi
 To compensate for the characteristic of ID tokens becoming invalid in a short period and save the trouble of re-login, we recommend implementing automatic renewal using refresh tokens.
  - **Role of Refresh Tokens**
 When an ID token expires, it is possible to re-obtain a new ID token in the background without displaying the login screen to the user again.
-This allows you to significantly improve convenience during development and use while maintaining a secure state.
+This allows you to improve convenience during development and use while maintaining a secure state.
  - **Implementation Method Reference**
 For specific procedures on using refresh tokens, please refer to [Updating Authentication Information Using Refresh Tokens](https://docs.saasus.io/docs/part-6/usecase/authentication-methods#%E3%83%AA%E3%83%95%E3%83%AC%E3%83%83%E3%82%B7%E3%83%A5%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3) in the official documentation.
  - **Operational Tips**
@@ -11038,8 +11046,8 @@ A. The login screen provided as standard by SaaSus Platform does not currently s
  - **Method to Achieve Free Design**
 If you want to achieve a custom design login screen that matches the worldview of your SaaS, we recommend custom implementation of login functionality using the authentication API provided by SaaSus Platform.
  - **Secure Custom Implementation with SRP Authentication**
-SaaSus Platform's authentication API adopts SRP (Secure Remote Password) authentication with an extremely secure design.
-By using this mechanism that performs authentication without sending passwords to the server, even when building a custom login screen, you can achieve free styling with HTML/CSS while maintaining the highest level of security.
+SaaSus Platform's authentication API adopts SRP (Secure Remote Password) authentication.
+By using this mechanism that performs authentication without sending passwords to the server, even when building a custom login screen, you can achieve free styling with HTML/CSS while maintaining security.
 ---
 **Q. Can I display maintenance information or system announcements on the login screen?**
 A. The login screen provided as standard by SaaSus Platform does not currently support adding or editing text or announcements arbitrarily.
@@ -11048,7 +11056,7 @@ If you want to freely display available hours, maintenance information, etc., we
  - **Flexible Information Dissemination Through Custom Implementation**
 By building a custom login screen using the authentication API, free layout with HTML/CSS becomes possible. This allows you to post maintenance announcement banners, urgent notices, etc. in the optimal form that matches your service design.
  - **Secure Foundation with SRP Authentication**
-Even when performing custom implementation, SaaSus Platform's authentication API adopts SRP (Secure Remote Password) authentication, so it is possible to enhance operational convenience while maintaining the highest level of security.
+Even when performing custom implementation, SaaSus Platform's authentication API adopts SRP (Secure Remote Password) authentication, so passwords are not sent to the server during authentication, making it possible to enhance operational convenience.
 ---
 **Q. I want to limit the service provision range to within Japan. Can I set geographic restrictions (geo-blocking) on the standard login screen of SaaSus?**
 A. Currently, we do not provide a function for customers to directly set "Geographic Restrictions" on the login screen (CloudFront) provided as standard by SaaSus Platform.
@@ -11266,6 +11274,7 @@ app.use(
 ```
 ### Removing Individual Authentication Logic
 In Express, individual authentication logic was implemented for each route. These need to be removed.
+Edit `api/routes/chat.ts`.
 Modify `api/routes/chat.ts`.
 ```ts
 router.get(
