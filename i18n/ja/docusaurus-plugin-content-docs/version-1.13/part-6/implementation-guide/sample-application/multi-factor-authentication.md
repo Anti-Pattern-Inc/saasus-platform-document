@@ -4,7 +4,7 @@ slug: "multi-factor-authentication"
 excerpt: "SaaSアプリケーションでの多要素認証（MFA）機能の実装サンプル"
 hidden: false
 createdAt: "Fri Feb 28 2025 09:00:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Oct 09 2025 00:00:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Jul 16 2026 01:15:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 import Tabs from "@theme/Tabs";
@@ -12,20 +12,41 @@ import TabItem from "@theme/TabItem";
 
 サンプルアプリのMFA設定機能を題材に、SaaSus Auth APIを使用して多要素認証（MFA）機能を実装する方法を解説します。
 
+サンプルアプリでは、以下の2つの認証方式を選択できます。
+
+- **認証アプリ（TOTP）**: Google AuthenticatorやAuthyなどの認証アプリで生成されるワンタイムコードを使用
+- **メール認証**: ログイン時に登録メールアドレスへ認証コードを送信
+
 以下は多要素認証設定ダイアログのスクリーンショットです。
 
 ![](/ja/img/part-6/implementation-guide/sample-application/multi-factor-authentication/mfa-setting-dialog.png)
-※このQRコードはデモンストレーション用のダミーデータです。実際の認証には使用できません。
 
-MFA機能では以下の機能を提供します：
+MFA機能では以下の操作を提供します。
 
-- MFA設定状態の確認
+- MFA設定状態と認証方式の確認
+- 認証方式の選択（認証アプリ / メール認証）
 - 認証アプリケーション（Google Authenticator等）の登録
 - MFAの有効化・無効化
-- QRコードによる簡単なセットアップ
+- QRコードによる認証アプリのセットアップ
+- 認証方式の切り替え
+
+:::info 前提条件
+メール認証を利用するには、SaaSus Platform でドメイン名の設定とメール送信ドメイン認証（DKIM）が完了している必要があります。
+設定方法は [ドメイン・メール送信ドメイン認証・遷移先の設定](/docs/part-4/application-settings/domain-and-redirect-settings) を参照してください。
+:::
 
 
 ## フロントエンド実装
+
+### 認証方式選択のUIフロー
+
+フロントエンドでは、ステートマシンによりMFA設定ダイアログの表示を管理しています。
+
+1. ダイアログを開くと `GET /mfa_status` でMFA状態を取得
+2. 未設定の場合は方式選択画面を表示（認証アプリ / メール認証のカード選択）
+3. 認証アプリを選択した場合はQRコード表示と認証コード入力へ遷移
+4. メール認証を選択した場合は確認画面を表示し、有効化を実行
+5. 設定済みの場合は現在の方式を表示し、別の方式への切り替えや無効化が可能
 
 ### 実装例リンク
 
@@ -51,7 +72,7 @@ MFA機能では以下の機能を提供します：
       <tr>
         <td>MFA状態確認</td>
         <td><code>GET /mfa_status</code></td>
-        <td>ユーザーのMFA有効/無効状態を取得します。</td>
+        <td>ユーザーのMFA有効/無効状態と認証方式を取得します。</td>
       </tr>
       <tr>
         <td>MFAセットアップ</td>
@@ -64,9 +85,14 @@ MFA機能では以下の機能を提供します：
         <td>認証アプリからの認証コードを検証し、MFAを登録します。</td>
       </tr>
       <tr>
-        <td>MFA有効化</td>
+        <td>MFA有効化（認証アプリ）</td>
         <td><code>POST /mfa_enable</code></td>
-        <td>ユーザーのMFAを有効化します。</td>
+        <td>認証アプリ方式でMFAを有効化します。</td>
+      </tr>
+      <tr>
+        <td>MFA有効化（メール認証）</td>
+        <td><code>POST /mfa_email_enable</code></td>
+        <td>メール認証方式でMFAを有効化します。</td>
       </tr>
       <tr>
         <td>MFA無効化</td>
@@ -83,11 +109,13 @@ MFA機能では以下の機能を提供します：
 
 ### MFA状態確認エンドポイント
 
+`GET /mfa_status` は、MFAの有効/無効状態に加えて、現在設定されている認証方式（`softwareToken` または `email`）を返します。
+
 <Tabs>
 <TabItem value="go" label="Go" default>
 
 ```go
-// MFAの状態を取得 (有効/無効の確認)
+// MFAの状態を取得 (有効/無効の確認と認証方式)
 func getMfaStatus(c echo.Context) error {
 	// コンテキストからユーザー情報を取得
 	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
@@ -103,13 +131,33 @@ func getMfaStatus(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve MFA status"})
 	}
 
-	// MFA の有効/無効の状態を返す
-	return c.JSON(http.StatusOK, map[string]bool{"enabled": response.JSON200.Enabled})
+	// MFA の有効/無効の状態と認証方式を返す
+	result := map[string]interface{}{
+		"enabled": response.JSON200.Enabled,
+	}
+	if response.JSON200.Method != nil {
+		result["method"] = string(*response.JSON200.Method)
+	}
+	return c.JSON(http.StatusOK, result)
 }
 ```
 
 </TabItem>
 </Tabs>
+
+レスポンス例:
+
+```json
+{ "enabled": true, "method": "softwareToken" }
+```
+
+```json
+{ "enabled": true, "method": "email" }
+```
+
+```json
+{ "enabled": false }
+```
 
 #### 実装例リンク
 
@@ -123,6 +171,9 @@ func getMfaStatus(c echo.Context) error {
 - **C# (.NET Framework 4.8)**: [`GetMfaStatus`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
 
 ### MFAセットアップエンドポイント
+
+認証アプリ方式でMFAを設定する際に使用します。
+QRコードURLを生成し、ユーザーが認証アプリでスキャンしてTOTPデバイスを登録します。
 
 <Tabs>
 <TabItem value="go" label="Go" default>
@@ -179,6 +230,8 @@ func getMfaSetup(c echo.Context) error {
 - **C# (.NET Framework 4.8)**: [`SetupMfa`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
 
 ### MFA認証コード検証エンドポイント
+
+認証アプリで生成された6桁のコードを検証し、TOTPデバイスを登録します。
 
 <Tabs>
 <TabItem value="go" label="Go" default>
@@ -239,13 +292,15 @@ func verifyMfa(c echo.Context) error {
 - **C# (.NET 8)**: [`app.MapPost("/mfa_verify"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
 - **C# (.NET Framework 4.8)**: [`VerifyMfa`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
 
-### MFA有効化エンドポイント
+### MFA有効化エンドポイント（認証アプリ）
+
+認証コードの検証が成功した後に呼び出し、認証アプリ方式でMFAを有効化します。
 
 <Tabs>
 <TabItem value="go" label="Go" default>
 
 ```go
-// MFAを有効化する
+// MFAを有効化する（認証アプリ）
 func enableMfa(c echo.Context) error {
 	// コンテキストからユーザー情報を取得
 	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
@@ -253,8 +308,8 @@ func enableMfa(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
 	}
 
-	// MFA を有効化するためのリクエストボディを作成
-	method := authapi.SoftwareToken
+	// MFA を認証アプリで有効化するためのリクエストボディを作成
+	method := authapi.MfaPreferenceMethodSoftwareToken
 	requestBody := authapi.UpdateUserMfaPreferenceJSONRequestBody{
 		Enabled: true,
 		Method:  &method,
@@ -285,6 +340,56 @@ func enableMfa(c echo.Context) error {
 - **C# (.NET 8)**: [`app.MapPost("/mfa_enable"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
 - **C# (.NET Framework 4.8)**: [`EnableMfa`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
 
+### MFA有効化エンドポイント（メール認証）
+
+メール認証方式でMFAを有効化します。
+認証アプリ方式と異なり、デバイス登録（setup/verify）は不要です。
+有効化すると、次回ログイン時に登録メールアドレスへ認証コードが送信されます。
+
+<Tabs>
+<TabItem value="go" label="Go" default>
+
+```go
+// MFAをメール認証で有効化する
+func enableMfaEmail(c echo.Context) error {
+	// コンテキストからユーザー情報を取得
+	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
+	if !ok {
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
+	}
+
+	// メール認証で MFA を有効化するためのリクエストボディを作成
+	method := authapi.MfaPreferenceMethodEmail
+	requestBody := authapi.UpdateUserMfaPreferenceJSONRequestBody{
+		Enabled: true,
+		Method:  &method,
+	}
+
+	// SaaSus API を使用して MFA をメール認証で有効化
+	_, err := authClient.UpdateUserMfaPreferenceWithResponse(context.Background(), userInfo.Id, requestBody)
+	if err != nil {
+		c.Logger().Errorf("Failed to enable email MFA: %v", err)
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to enable email MFA"})
+	}
+
+	return c.JSON(http.StatusOK, map[string]string{"message": "Email MFA has been enabled"})
+}
+```
+
+</TabItem>
+</Tabs>
+
+#### 実装例リンク
+
+以下のリンク先に、本エンドポイントの実装が含まれています。  
+関数名で検索して該当箇所をご確認ください。
+
+- **Go (Echo)**: [`enableMfaEmail`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go)
+- **Python (FastAPI)**: SDKのメール認証方式対応後に追加予定
+- **Java (Spring)**: [`enableMfaEmail`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
+- **C# (.NET 8)**: SDKのメール認証方式対応後に追加予定
+- **C# (.NET Framework 4.8)**: SDKのメール認証方式対応後に追加予定
+
 ### MFA無効化エンドポイント
 
 <Tabs>
@@ -300,7 +405,7 @@ func disableMfa(c echo.Context) error {
 	}
 
 	// MFA を無効化するためのリクエストボディを作成
-	method := authapi.SoftwareToken
+	method := authapi.MfaPreferenceMethodSoftwareToken
 	requestBody := authapi.UpdateUserMfaPreferenceJSONRequestBody{
 		Enabled: false,
 		Method:  &method,
@@ -330,4 +435,3 @@ func disableMfa(c echo.Context) error {
 - **Java (Spring)**: [`disableMfa`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
 - **C# (.NET 8)**: [`app.MapPost("/mfa_disable"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
 - **C# (.NET Framework 4.8)**: [`DisableMfa`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
-
