@@ -4,7 +4,7 @@ slug: "procedure-for-applying-for-a-paid-plan"
 excerpt: ""
 hidden: false
 createdAt: "Thu Jul 20 2023 04:44:09 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Mar 13 2026 02:53:18 GMT+0000 (Coordinated Universal Time)"
 ---
 
 The SaaSus Platform currently offers the following plans.  

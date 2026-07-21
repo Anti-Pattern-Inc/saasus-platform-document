@@ -4,7 +4,7 @@ slug: "notifymailcustomize"
 excerpt: ""
 hidden: false
 createdAt: "Tue Dec 12 2023 05:46:38 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Mar 27 2026 06:58:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 In the E-Mail Content tab of the <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Authorization > Advanced Settings</a>, you can customize the emails that are sent to users on authentication pages such as the sign in page.

@@ -6,7 +6,7 @@ hidden: false
 pagination_next: null
 pagination_prev: null
 createdAt: "Fri Jan 20 2023 01:47:13 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
 
 # Step-by-Step Guide to Setting Up Pricing Plans

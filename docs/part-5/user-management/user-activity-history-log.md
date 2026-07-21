@@ -4,7 +4,7 @@ slug: "user-activity-history-log"
 excerpt: ""
 hidden: false
 createdAt: "Tue Jun 11 2024 00:47:10 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jun 11 2024 00:47:10 GMT+0000 (Coordinated Universal Time)"
 ---
 
 import Tabs from "@theme/Tabs";

@@ -4,7 +4,7 @@ slug: "domain-and-redirect-settings"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Wed Mar 05 2026 08:04:59 GMT+0000 (Coordinated Universal Time)"
 ---
 
 This page explains how to configure your **custom domain** for the login screen and the **post-login redirect URL**. Both settings can be edited from the "Basic Settings" screen.
