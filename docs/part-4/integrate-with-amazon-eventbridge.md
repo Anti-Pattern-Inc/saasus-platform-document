@@ -7,7 +7,7 @@ metadata:
   image: []
   robots: "index"
 createdAt: "Sun Jan 22 2023 11:54:20 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Mon Jul 13 2026 03:28:00 GMT+0000 (Coordinated Universal Time)"
 ---
 SaaSus Platform is integrated with Amazon EventBridge. Various events that occur on the SaaSus Platform can be sent to Amazon EventBridge in the SaaS-side AWS account as a partner event source. By leveraging this, SaaS can be built with an event-driven architecture that works in conjunction with SaaSus Platform.
 

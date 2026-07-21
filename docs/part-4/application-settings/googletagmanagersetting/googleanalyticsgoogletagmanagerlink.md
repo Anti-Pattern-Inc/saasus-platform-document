@@ -4,7 +4,7 @@ slug: "googleanalyticsgoogletagmanagerlink"
 excerpt: ""
 hidden: false
 createdAt: "Mon Dec 11 2023 02:34:11 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Fri Dec 22 2023 06:01:24 GMT+0000 (Coordinated Universal Time)"
 ---
 This guide covers setting up Google Analytics tags in Google Tag Manager to analyze users accessing the login screen.
 

@@ -4,7 +4,7 @@ slug: "advanced-sign-in"
 excerpt: "Implementing ID login with username + tenant ID"
 hidden: false
 createdAt: "Tue Mar 03 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Mon Apr 13 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 This document explains how to implement an ID-based authentication method that uses **username + tenant ID** instead of email.

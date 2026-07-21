@@ -5,7 +5,7 @@ excerpt: ""
 hidden: false
 pagination_next: tutorial/implementation-of-authorization-based-on-tenant-information
 createdAt: "Fri Jan 20 2023 01:46:57 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 ---
 ## Structure and Terminology of Pricing Plans
 
