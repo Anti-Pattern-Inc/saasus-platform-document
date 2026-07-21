@@ -449,9 +449,9 @@ Outputs:
   DistributionId     = ...
 ```
 
-#### 5. SaaSus 開発コンソールの設定
+#### 5. SaaS 開発コンソールの設定
 
-デプロイ後、[SaaSus 開発コンソール](https://settings.console.saasus.io/) の 基本設定 > 認証後遷移先 に Callback URL を登録してください。
+デプロイ後、[SaaS 開発コンソール](https://settings.console.saasus.io/) の 基本設定 > 認証後遷移先 に Callback URL を登録してください。
 
 | 環境 | Callback URL |
 |------|-------------|

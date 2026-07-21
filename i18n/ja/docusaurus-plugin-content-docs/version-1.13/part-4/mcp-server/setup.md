@@ -78,7 +78,7 @@ realpath mcpServer.js
 ### 2. SaaSus Platform のAPIキー情報の取得
 
 SaaSus API MCP Serverを使用するには、以下の環境変数を設定する必要があります
-これらの値は、SaaSus Platform のSaaS開発コンソールから取得できます。
+これらの値は、SaaSus Platform のSaaS 開発コンソールから取得できます。
 
 - `SAASUS_PLATFORM_SAASID`: SaaS ID
 - `SAASUS_PLATFORM_APIKEY`: API キー
