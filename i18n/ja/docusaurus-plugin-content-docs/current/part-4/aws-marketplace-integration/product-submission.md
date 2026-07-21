@@ -7,7 +7,7 @@ metadata:
   image: []
   robots: "index"
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Jun 23 2026 03:39:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 <!-- aws-mp-freeze-notice -->
@@ -30,7 +30,7 @@ AWS Marketplace Management Portalにて、SaaS製品情報を登録します。
 本手順では以下の内容を準備する必要がありますので、あらかじめご準備ください。
 
 - 公開者の情報、プロダクトの説明・概要等
-- エンドユーザー使用許諾契約、AWS Marketplaceで定義してる規約を利用するか、独自で作成した規約を利用するかを選択します。独自で用意した規約を利用する場合`ELUA URL`を指定する必要があります。
+- エンドユーザー使用許諾契約、AWS Marketplaceで定義している規約を利用するか、独自で作成した規約を利用するかを選択します。独自で用意した規約を利用する場合`EULA URL`を指定する必要があります。
 - プロダクトに関してのサポート情報、サポートを行うための方法、メールやサポートするためのフォームなど準備する必要があります。
 - 返金ポリシーに関しての情報、返金ポリシーの内容、記載したページ等のURLなど
 

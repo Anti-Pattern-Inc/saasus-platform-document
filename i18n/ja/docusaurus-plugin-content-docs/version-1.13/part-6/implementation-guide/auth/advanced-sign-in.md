@@ -4,7 +4,7 @@ slug: "advanced-sign-in"
 excerpt: "ユーザー名＋テナントIDによるIDログイン方式の実装"
 hidden: false
 createdAt: "Tue Mar 03 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Apr 13 2026 00:00:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 メールアドレスの代わりに、**ユーザー名＋テナントID** でログインするID認証方式の実装方法を解説します。

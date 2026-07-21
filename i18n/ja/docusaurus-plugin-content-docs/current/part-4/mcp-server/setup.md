@@ -4,7 +4,7 @@ slug: "setup"
 excerpt: ""
 hidden: false
 createdAt: "Fri Jan 20 2023 01:47:47 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Wed May 22 2024 15:16:11 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 # SaaSus API MCP Server 設定ガイド
@@ -78,7 +78,7 @@ realpath mcpServer.js
 ### 2. SaaSus Platform のAPIキー情報の取得
 
 SaaSus API MCP Serverを使用するには、以下の環境変数を設定する必要があります
-これらの値は、SaaSus Platform のSaaS開発コンソールから取得できます。
+これらの値は、SaaSus Platform のSaaS 開発コンソールから取得できます。
 
 - `SAASUS_PLATFORM_SAASID`: SaaS ID
 - `SAASUS_PLATFORM_APIKEY`: API キー

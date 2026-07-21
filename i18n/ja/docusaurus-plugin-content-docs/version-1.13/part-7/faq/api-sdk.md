@@ -4,7 +4,7 @@ slug: "api-sdk"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Fri Jul 03 2026 08:46:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 **Q. 招待用APIを実行すると "Both DNS and SES must be validated..." というエラーが返ってきます。何が原因でしょうか？**  

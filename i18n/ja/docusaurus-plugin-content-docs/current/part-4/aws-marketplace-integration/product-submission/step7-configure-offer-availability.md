@@ -4,7 +4,7 @@ slug: "step7-configure-offer-availability"
 excerpt: ""
 hidden: true
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Jun 23 2026 03:39:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 <!-- aws-mp-freeze-notice -->
@@ -22,7 +22,7 @@ updatedAt: "Tue Jun 23 2026 03:39:00 GMT+0000 (Coordinated Universal Time)"
 
 販売する国についてはお客様の事業内容に応じて、入力を進めてください。
 
-全ての国を対象にする場合は、`All contries`を選択します。
+全ての国を対象にする場合は、`All countries`を選択します。
 
 ![](/ja/img/part-4/aws-marketplace-integration/product-submission/step7-configure-offer-availability/step7-configure-offer-availability-1.png)
 

@@ -6,11 +6,11 @@ hidden: false
 pagination_next: null
 pagination_prev: null
 createdAt: "Wed Jan 18 2023 09:36:51 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Dec 11 2023 05:50:46 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 # 料金プラン設定の手順
 
-このページでは、SaaS開発コンソールを使って以下の要素を順番に設定していく方法を説明します。
+このページでは、SaaS 開発コンソールを使って以下の要素を順番に設定していく方法を説明します。
 
 - メーター単位
 - 計測単位
@@ -103,7 +103,7 @@ updatedAt: "Mon Dec 11 2023 05:50:46 GMT+0000 (Coordinated Universal Time)"
 
 ![05](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/setting-measurement-units-function-menus-and-price-plans-05.png)
 
-BasicプランもFreeプランと同様に設定を行なってください。
+BasicプランもFreeプランと同様に設定を行ってください。
 
 ---
 
@@ -118,6 +118,6 @@ BasicプランもFreeプランと同様に設定を行なってください。
 
 ![06](/ja/img/tutorial/manage-rate-plans/setting-measurement-units-function-menus-and-price-plans/setting-measurement-units-function-menus-and-price-plans-06.png)
 
-BasicプランもFreeプランと同様に設定を行なってください。
+BasicプランもFreeプランと同様に設定を行ってください。
 
 [元の手順に戻る](./manage-rate-plans#%E3%83%86%E3%83%8A%E3%83%B3%E3%83%88%E3%81%B8%E3%81%AE%E6%96%99%E9%87%91%E3%83%97%E3%83%A9%E3%83%B3%E3%81%AE%E9%81%A9%E7%94%A8)

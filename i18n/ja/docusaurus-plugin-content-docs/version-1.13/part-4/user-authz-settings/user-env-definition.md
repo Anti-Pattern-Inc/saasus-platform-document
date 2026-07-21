@@ -4,7 +4,7 @@ slug: "user-env-definition"
 excerpt: ""
 hidden: false
 createdAt: "Mon Mar 25 2024 18:00:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Mar 25 2024 18:00:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 SaaSus Platformにて保持するユーザーの環境定義をすることができます。ここで定義する環境とは、SaaS（お客様）で構築している開発環境、テスト環境などを意味します。SaaSのフェーズに合わせてテスト環境の属性を持つことを検討してください。

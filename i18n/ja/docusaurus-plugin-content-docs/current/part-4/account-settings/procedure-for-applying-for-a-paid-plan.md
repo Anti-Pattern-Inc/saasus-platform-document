@@ -4,7 +4,7 @@ slug: "procedure-for-applying-for-a-paid-plan"
 excerpt: ""
 hidden: false
 createdAt: "Thu Jul 20 2023 04:44:09 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Mar 13 2026 02:53:18 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 SaaSus Platformでは以下プランを現在用意しております。  
@@ -136,9 +136,9 @@ SaaSus Platformでは以下プランを現在用意しております。
 
 ***
 
-## SaaS開発コンソールから有料プランの申し込み
+## SaaS 開発コンソールから有料プランの申し込み
 
-SaaSus Platformコンソールにログインいただき、SaaS開発コンソール、アカウント設定->料金プランをページにて有料プランの申し込みとなります。  
+SaaSus Platform コンソールにログインいただき、SaaS 開発コンソール、アカウント設定 > 料金プランのページにて有料プランの申し込みとなります。  
 期間は本日から１ヶ月単位となりStripeにて請求書を送付いたします。  
 本プランは１ヶ月単位の自動継続となります。
 

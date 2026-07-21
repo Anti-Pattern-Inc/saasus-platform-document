@@ -4,7 +4,7 @@ slug: "saml-linkage"
 excerpt: ""
 hidden: false
 createdAt: "2025-01-24T05:25:00.000Z"
-updatedAt: "2025-01-24T05:25:00.000Z"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 # SAML連携機能

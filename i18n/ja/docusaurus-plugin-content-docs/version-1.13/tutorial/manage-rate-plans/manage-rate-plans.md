@@ -5,7 +5,7 @@ excerpt: ""
 hidden: false
 pagination_next: tutorial/implementation-of-authorization-based-on-tenant-information
 createdAt: "Wed Jan 11 2023 03:13:15 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Fri Dec 08 2023 02:28:54 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 ## 料金プランの構成と用語の整理
 

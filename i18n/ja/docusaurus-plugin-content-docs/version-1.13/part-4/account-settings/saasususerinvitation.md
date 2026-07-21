@@ -4,7 +4,7 @@ slug: "saasususerinvitation"
 excerpt: ""
 hidden: false
 createdAt: "Thu Dec 28 2023 04:34:39 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Jan 22 2024 01:38:49 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 SaaSの開発・運用を複数人で行う場合は一つのSaaSus Platformアカウントを共有せず、ユーザー招待機能を使用し適切な権限を与えてアカウントを管理しましょう。

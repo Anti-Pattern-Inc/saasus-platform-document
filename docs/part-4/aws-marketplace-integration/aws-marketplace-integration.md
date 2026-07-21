@@ -4,7 +4,7 @@ slug: "aws-marketplace-integration"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Jun 23 2026 03:39:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 <!-- aws-mp-freeze-notice -->
@@ -87,7 +87,7 @@ Because it's hard to imagine from text, we will introduce the flow to listing in
    ***
 
 11. Final review request for SaaS product for production
-    1. [How torequest](/docs/part-4/aws-marketplace-integration/supplementary/final-review-request)
+    1. [How to request](/docs/part-4/aws-marketplace-integration/supplementary/final-review-request)
 
 12.  Public release request for SaaS product for production
      1. [Request Method](/docs/part-4/aws-marketplace-integration/supplementary/public-request)

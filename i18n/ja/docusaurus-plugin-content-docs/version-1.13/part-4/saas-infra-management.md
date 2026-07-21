@@ -4,7 +4,7 @@ slug: "saas-infra-management"
 excerpt: ""
 hidden: false
 createdAt: "Thu May 08 2024 14:00:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu May 08 2024 14:00:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 ## 概要
