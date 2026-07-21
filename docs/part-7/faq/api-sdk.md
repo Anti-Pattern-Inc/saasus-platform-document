@@ -4,7 +4,7 @@ slug: "api-sdk"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Fri Jul 03 2026 08:46:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 **Q. When I execute the invitation API, I get an error "Both DNS and SES must be validated...". What is the cause?**  

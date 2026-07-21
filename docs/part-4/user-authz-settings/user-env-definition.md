@@ -4,7 +4,7 @@ slug: "user-env-definition"
 excerpt: ""
 hidden: false
 createdAt: "Mon Mar 25 2024 18:00:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Mar 25 2024 18:00:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 On SaaSus Platform, it is possible to set up user environment definitions. The environments defined here refer to the development, testing, and other environments that you have set up in your SaaS (customer) environment. Consider assigning attributes to the test environment that are in line with your SaaS phase.

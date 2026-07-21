@@ -4,7 +4,7 @@ slug: "implementing-authentication-using-saasus-serverless"
 excerpt: "Implementation guide for SaaS applications using SaaSus Platform's serverless approach"
 hidden: false
 createdAt: "Mon Jul 31 2023 03:24:01 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Apr 14 2026 01:13:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 import Tabs from '@theme/Tabs';

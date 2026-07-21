@@ -4,7 +4,7 @@ slug: "ip-restriction"
 excerpt: ""
 hidden: false
 createdAt: "Mon Mar 25 2024 14:00:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Mar 25 2024 14:00:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 The IP restriction feature limits access to the SaaSus console and API requests by IP address.
