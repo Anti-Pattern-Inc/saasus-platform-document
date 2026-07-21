@@ -44,7 +44,7 @@ updatedAt: "Tue Jun 23 2026 03:39:00 GMT+0000 (Coordinated Universal Time)"
 
 必ず指示書に従って入力してください。
 
-[AWS Marketplace連携機能ページ](https://settings.console.saasus.io/integrations/aws-marketplace)から出品手続きを開始していただき、`ステップ1-4:SaaS製品情報の登録`まで進めていだたくと指示書を確認できるようになります。
+[AWS Marketplace連携機能ページ](https://settings.console.saasus.io/integrations/aws-marketplace)から出品手続きを開始していただき、`ステップ1-4:SaaS製品情報の登録`まで進めていただくと指示書を確認できるようになります。
 
 ![](/ja/img/part-4/aws-marketplace-integration/product-submission/step3-configure-product-pricing/step3-configure-product-pricing-2.png)
 :::

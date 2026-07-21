@@ -37,7 +37,7 @@ updatedAt: "Tue Mar 12 2024 00:47:10 GMT+0000 (Coordinated Universal Time)"
 
 これらのAPIを用いてフィードバック機能を実装します。
 
-得られたフィードバックはSaaS運用コンソールで確認することができます。
+得られたフィードバックはSaaS 運用コンソールで確認することができます。
 ![feedback-list](/ja/img/part-5/user-feedback/feedback-list.png)
 
 ステータスの変更やコメントの追加ができます。

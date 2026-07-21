@@ -10,11 +10,11 @@ updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ## 1. SaaSus Platformの概要
 
 「SaaSus Platform」は、SaaSサービスに必要なコントロールプレーン（管理・運用に関わる機能群）を提供するプラットフォームです。  
-開発者向けのSaaS開発コンソールと、運用管理者向けのSaaS運用コンソールの2種類のコンソールから構成されています。
+開発者向けのSaaS 開発コンソールと、運用管理者向けのSaaS 運用コンソールの2種類のコンソールから構成されています。
 
 ## 2. 提供される機能と特徴
 
-- **SaaS開発コンソール**：  
+- **SaaS 開発コンソール**：  
   自社のSaaSアプリケーションとSaaSus Platformを連携するための初期設定や構成を行うコンソールです。  
   主な機能は以下のとおりです。
 
@@ -28,7 +28,7 @@ updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
   - Smart API Gateway機能（SaaSサービスのAPI化） 
   - APIリクエストログの確認（エラーの把握やトラブルシュートに活用）
 
-- **SaaS運用コンソール**：  
+- **SaaS 運用コンソール**：  
   提供中のSaaSサービスを運用・管理するためのコンソールです。  
   主な機能は以下のとおりです。
 

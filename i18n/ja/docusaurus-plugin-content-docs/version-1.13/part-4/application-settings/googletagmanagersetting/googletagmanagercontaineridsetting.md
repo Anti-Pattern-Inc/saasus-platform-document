@@ -22,7 +22,7 @@ updatedAt: "Mon Apr 06 2026 05:28:53 GMT+0000 (Coordinated Universal Time)"
 
 ## 2. コンテナIDを設定
 
-1. SaaS開発コンソールの「認証詳細設定」を開く
+1. SaaS 開発コンソールの「認証詳細設定」を開く
 
    ![googletagmanagercontaineridsetting-3](/ja/img/part-4/application-settings/googletagmanagersetting/googletagmanagercontaineridsetting-3.png)
 2. 認証詳細設定画面の「基本設定」にある「Google Tag Manager コンテナ ID」にコンテナIDを設定し保存ボタンを押す

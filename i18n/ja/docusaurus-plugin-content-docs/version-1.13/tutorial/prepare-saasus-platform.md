@@ -38,9 +38,9 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 
 ![05](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-05.png)
 
-**SaaS開発コンソール**は、SaaS 構築のための設定を行うコンソールで、
+**SaaS 開発コンソール**は、SaaS 構築のための設定を行うコンソールで、
 
-**SaaS運用コンソール**は、SaaS を運用していくためのコンソールになります。
+**SaaS 運用コンソール**は、SaaS を運用していくためのコンソールになります。
 
 :::info ドメイン設定について
 SaaSus Platformではドメインを設定することで、ログイン画面の自動生成やメール送信の際のベースドメインに設定することができます。<br/>
