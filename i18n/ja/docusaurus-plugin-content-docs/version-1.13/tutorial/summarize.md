@@ -4,7 +4,7 @@ slug: "summarize"
 excerpt: ""
 hidden: false
 createdAt: "Sun Aug 07 2022 12:30:50 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Wed May 22 2024 15:16:11 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 ここまでで、チュートリアルを一通り実施していただき、SaaSus Platformでどんなことができるのかのイメージを持っていただけたかと思います。SaaSでは、重要な機能にも関わらず差別化にならない機能がたくさんあります。これらに工数を割くのではなく、貴社のSaaS本来の価値に集中して工数を割いていただきたいと思います。
 

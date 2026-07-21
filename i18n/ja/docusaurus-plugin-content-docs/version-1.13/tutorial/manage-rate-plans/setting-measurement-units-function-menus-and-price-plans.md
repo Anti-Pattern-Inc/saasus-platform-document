@@ -6,7 +6,7 @@ hidden: false
 pagination_next: null
 pagination_prev: null
 createdAt: "Wed Jan 18 2023 09:36:51 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Dec 11 2023 05:50:46 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 # 料金プラン設定の手順
 

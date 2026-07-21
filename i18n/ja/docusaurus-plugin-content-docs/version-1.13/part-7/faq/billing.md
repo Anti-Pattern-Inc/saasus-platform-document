@@ -4,7 +4,7 @@ slug: "billing"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Jul 13 2026 03:28:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 **Q. メータ単位の「使用量の集計」設定（sum/max）はどのような機能でしょうか？**  

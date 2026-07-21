@@ -4,7 +4,7 @@ slug: "tax-rate-settings"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 税率設定では、**テナントごとに料金プランに適用される税率（消費税など）の種類や比率を定義**します。  

@@ -4,7 +4,7 @@ slug: "integrate-with-amazon-eventbridge"
 excerpt: ""
 hidden: false
 createdAt: "Sat Jan 21 2023 09:57:10 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Jul 13 2026 03:28:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 SaaSus Platform は、 Amazon EventBridge と統合されています。 SaaSus Platform で起こった各種イベントをパートナーイベントソースとして、 SaaS 側 AWS アカウントの Amazon EventBridge に送信することができます。これを活用することにより、 SaaSus Platform と連携したイベント駆動のアーキテクチャを採用し SaaS を構築することができます。
 

@@ -4,7 +4,7 @@ slug: "domain-and-redirect-settings"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Wed Mar 05 2026 08:10:52 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 このページでは、ログイン画面の表示に使用する **独自ドメイン** および、ログイン後の **遷移先URL** の設定方法について説明します。いずれも「基本設定」画面から編集できます。

@@ -4,7 +4,7 @@ slug: "billing-information"
 excerpt: ""
 hidden: false
 createdAt: "Thu Aug 15 2025 02:18:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Aug 15 2025 02:18:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 このページでは、SaaSus Platform有料プランの請求、支払い方法について説明します。
