@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-07-14 15:20:14 +0900`
+- Generated: `2026-07-21 19:52:38 +0900`
 
 ---
 ## changelog/20221224.md
@@ -1527,7 +1527,7 @@ Because it's hard to imagine from text, we will introduce the flow to listing in
    :::
    ***
 11. Final review request for SaaS product for production
-    1. [How torequest](/docs/part-4/aws-marketplace-integration/supplementary/final-review-request)
+    1. [How to request](/docs/part-4/aws-marketplace-integration/supplementary/final-review-request)
 12.  Public release request for SaaS product for production
      1. [Request Method](/docs/part-4/aws-marketplace-integration/supplementary/public-request)
 # Criteria for SaaS Products in Listing
@@ -1617,10 +1617,10 @@ The AWS Marketplace integration specification changed in June 2026. Because this
 We will let you know the timing of resumption once a plan to support the new specification is in place.
 For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
 :::
-When you click on `Sign up for Hyper wallet` from the bank account registration, you will be directed to the following page.
+When you click on `Sign up for Hyperwallet` from the bank account registration, you will be directed to the following page.
 Select the account verification method and valid code.
 ![hyperwallet-registration-1](/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-1.png)
-You will asked to enter a valid code. Please enter the `Pin Code` found below `Sign up for Hyper wallet` on the previous page, and then press the continue button.
+You will be asked to enter a valid code. Please enter the `Pin Code` found below `Sign up for Hyperwallet` on the previous page, and then press the continue button.
 ![hyperwallet-registration-2](/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-2.png)
 After entering, you will be asked to specify the account type. Please select an option that suits your environment.
 ![hyperwallet-registration-3](/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-3.png)
@@ -1643,7 +1643,7 @@ Specify the account for transfer and press Continue.
 ![hyperwallet-registration-11](/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-11.png)
 After moving to the next page, enter the bank account information for the transfer and press Submit.
 ![hyperwallet-registration-12](/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-12.png)
-After pressing Submit, an US deposit account will be created.
+After pressing Submit, a US deposit account will be created.
 ![hyperwallet-registration-13](/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-13.png)
 After registration, return to setting up your bank account.
 ````
@@ -1785,7 +1785,7 @@ For the latest listing process and procedures, please refer to our new service g
 :::
 If you are offering a SaaS product on the SaaSus Platform, you will need to implement consideration for multitenant in the purchase flow by existing users.
 :::caution
-Please finish the implementation until the test phase of the 'Confirmation of Integration with AWS Marketplace'. Since it will be subject to review by the AWS Marketpalce Support team, you will not be allowed to list it without proper implementation.
+Please finish the implementation until the test phase of the 'Confirmation of Integration with AWS Marketplace'. Since it will be subject to review by the AWS Marketplace Support team, you will not be allowed to list it without proper implementation.
 :::
 When an existing user purchases a product from AWS Marketplace and signs in to your SaaS, the association between the existing user and the purchased product has not completed yet.
 This is because the purchased product needs to be associated with the tenant. In the SaaSus Platform specifications, an existing user may belong to multiple tenants. Since SaaSus Platform cannot comprehend that, you are required to implement an association between the purchased product and the tenant the user belongs to, on your side.
@@ -2167,7 +2167,7 @@ For the latest listing process and procedures, please refer to our new service g
 :::
 Once you've completed the [Listing Procedure "11. Final Review Request of Production SaaS Product"](/docs/part-4/aws-marketplace-integration/aws-marketplace-integration), you will receive an email from the AWS Marketplace Support Team detailing the process to request publication. Follow these instructions to request your publication.
 :::caution
-While we have prepared a document regarding the publication request process based on our prior research, the actual instructions provided in the email you'll receive represents the most updated procedure and should be followed accordingly.
+While we have prepared a document regarding the publication request process based on our prior research, the actual instructions provided in the email you'll receive represent the most updated procedure and should be followed accordingly.
 :::
 First, you need to make a publication request in the AWS Marketplace Management Portal.
 1. Access the <a href="https://aws.amazon.com/marketplace/management/homepage" target="_blank">AWS Marketplace Management Portal</a>
@@ -9173,7 +9173,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 This document will explain how SaaS user accounts are managed on the SaaSus Platform.
 ## 1. Components of an Account
-An account consist of the following elements, which must all be set to allow usage:
+An account consists of the following elements, which must all be set to allow usage:
 - SaaS User
   Stores the authentication data (ID, Password) for the SaaS
 - Tenant User
@@ -9262,7 +9262,7 @@ This verification can be performed by checking whether the tenants information i
 </TabItem>
 </Tabs>
 #### 3.1.3. Implementation Sample
-Try modifying the <a href="/docs/part-6/usecase/about-saas-user-accounts/create-tenant" target="blank">Creating a Tenant</a>, so that tenant registration can be done.
+Try modifying the <a href="/docs/part-6/usecase/about-saas-user-accounts/create-tenant" target="_blank">Creating a Tenant</a>, so that tenant registration can be done.
 Once tenant registration can be done, let's <a href="/docs/part-6/usecase/about-saas-user-accounts/add-tenant-user" target="_blank">assign a user to a tenant and set a role</a>.
 After creating a tenant and a tenant user, verify whether the configured tenant information appears in the tenants array within UserInfo.
 <Tabs>
