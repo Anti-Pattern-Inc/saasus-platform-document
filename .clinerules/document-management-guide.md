@@ -24,12 +24,13 @@ SaaSus
 開発コンソール
 SaaS運用コンソール
 SaaS開発コンソール
+SaaSus Platformコンソール
 
 OK:
 SaaSus Platform
 SaaS 運用コンソール
 SaaS 開発コンソール
-
+SaaSus Platform コンソール
 
 ## ディレクトリ構造
 
