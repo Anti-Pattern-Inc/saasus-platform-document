@@ -4,7 +4,7 @@ slug: "pricing-plan-creation"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 This page walks you through how to configure the **4 key elements** required in the SaaS Development Console—**Meter Unit → Measurement Unit → Function Menu → Pricing Plan**—using **Free / Basic / Enterprise** as examples.

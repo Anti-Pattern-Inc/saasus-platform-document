@@ -4,7 +4,7 @@ slug: "environment-setup-guide"
 excerpt: ""
 hidden: false
 createdAt: "Fri Jan 20 2023 01:47:47 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Wed May 22 2024 15:16:11 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 # Environment Setup Guide

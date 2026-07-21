@@ -4,7 +4,7 @@ slug: "basic-charge-preference"
 excerpt: ""
 hidden: false
 createdAt: "Tue May 07 2024 05:17:30 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue May 07 2024 05:17:30 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 # Step-by-Step Guide to Setting Up Complicated Pricing Plans
 

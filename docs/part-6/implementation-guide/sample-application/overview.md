@@ -4,7 +4,7 @@ slug: "overview"
 excerpt: "Overview of SaaS application implementation samples using SaaSus Platform"
 hidden: false
 createdAt: "Thu Oct 09 2025 00:00:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Oct 09 2025 00:00:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 import Tabs from '@theme/Tabs';
