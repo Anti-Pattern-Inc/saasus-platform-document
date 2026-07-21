@@ -21,12 +21,12 @@ updatedAt: "Tue Jun 23 2026 03:39:00 GMT+0000 (Coordinated Universal Time)"
 
 :::
 
-銀行口座の登録から`Sign up for Hyper wallet`を押下すると以下画面に遷移します。  
+銀行口座の登録から`Sign up for Hyperwallet`を押下すると以下画面に遷移します。  
 アカウントの確認方法、有効コードを押下します。
 
 ![hyperwallet-registration-1](/ja/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-1.png)
 
-有効コードの入力となるので、遷移前の画面の`Sign up for Hyper wallet`下にある`Pin Code`を入力して続けるボタンを押下してください。
+有効コードの入力となるので、遷移前の画面の`Sign up for Hyperwallet`下にある`Pin Code`を入力して続けるボタンを押下してください。
 
 ![hyperwallet-registration-2](/ja/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-2.png)
 
@@ -59,7 +59,7 @@ updatedAt: "Tue Jun 23 2026 03:39:00 GMT+0000 (Coordinated Universal Time)"
 ![hyperwallet-registration-9](/ja/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-9.png)
 
 `確認`すると`アカウントが正常に有効化されました`と表示されます。  
-有効になったら`Add　Trunsfer Method`を押下します。
+有効になったら`Add Transfer Method`を押下します。
 
 ![hyperwallet-registration-10](/ja/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-10.png)
 

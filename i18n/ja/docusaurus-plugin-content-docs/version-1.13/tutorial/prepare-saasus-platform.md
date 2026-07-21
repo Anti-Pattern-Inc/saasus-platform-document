@@ -28,7 +28,7 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 
 ![03](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-03.png)
 
-### SaaSus Platformコンソールへのログイン
+### SaaSus Platform コンソールへのログイン
 
 テナントが作成されたのちに、ログインを行うと、このようにユーザ属性の入力が求められますので、会社名、名前を入力してください。
 
