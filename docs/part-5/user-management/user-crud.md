@@ -4,8 +4,14 @@ slug: "user-crud"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Apr 06 2026 05:28:53 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 01:00:00 GMT+0000 (Coordinated Universal Time)"
 ---
+
+:::info Switching Screens
+User Management has two modes: "Old Screen" and "New Screen".  
+You can switch between them using the toggle next to the page heading.  
+For new screen operations, see [User Management (New Screen)](/docs/part-5/user-management/user-management-new-ui).
+:::
 
 ## Search Users
 

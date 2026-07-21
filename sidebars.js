@@ -300,6 +300,7 @@ const sidebars = {
           },
           items: [
             "part-5/user-management/user-crud",
+            "part-5/user-management/user-management-new-ui",
             "part-5/user-management/user-activity-history-log",
           ],
         },
