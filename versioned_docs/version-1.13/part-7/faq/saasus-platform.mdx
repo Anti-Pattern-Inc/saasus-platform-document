@@ -4,7 +4,7 @@ slug: "saasus-platform"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Jul 13 2026 03:28:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 06:51:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 import InquiryButton from '@site/src/components/InquiryButton';
@@ -247,7 +247,7 @@ When an ID token expires, it is possible to re-obtain a new ID token in the back
 This allows you to improve convenience during development and use while maintaining a secure state.
 
  - **Implementation Method Reference**  
-For specific procedures on using refresh tokens, please refer to [Updating Authentication Information Using Refresh Tokens](https://docs.saasus.io/docs/part-6/usecase/authentication-methods#%E3%83%AA%E3%83%95%E3%83%AC%E3%83%83%E3%82%B7%E3%83%A5%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3) in the official documentation.
+For specific procedures on using refresh tokens, please refer to [Updating Authentication Information Using Refresh Tokens](https://docs.saasus.io/docs/part-6/usecase/authentication-methods#refresh-token) in the official documentation.
 
  - **Operational Tips**  
 When tokens are frequently needed for API development, you can build an environment where developers can continue using valid tokens without being aware of it by incorporating refresh token renewal processing into a common authentication library or middleware.
@@ -256,13 +256,13 @@ When tokens are frequently needed for API development, you can build an environm
 
 **Q. Can I check the usage status of metering items for each tenant and daily trends?**
 
-A. SaaSus Platform allows you to check the current metering values for each tenant from the console or API. We are also currently planning to provide a dashboard function that visualizes detailed usage trends.
+A. SaaSus Platform allows you to check the current metering values for each tenant from the Stripe Dashboard or API. We are also currently planning to provide a dashboard function that visualizes detailed usage trends.
 
  - **Checking Current Usage Status**  
-The latest metering values for each tenant can be referenced in real-time through the "Tenant Details" screen in the SaaSus Development Console or through the SaaSus SDK/API.
+The latest metering values for each tenant can be referenced through the SaaSus SDK/API.
 
- - **Checking via Stripe Console**  
-If you are using Stripe integration, you can also check metering status and billing-related usage statistics linked to each customer (tenant) from the Stripe management console.
+ - **Checking via Stripe Dashboard**  
+If you are using Stripe integration, you can open the target customer (tenant) from the "Customers" menu in the Stripe Dashboard to check the linked subscriptions, issued invoices, and usage-based metering amounts.
 
  - **Analysis Using Amazon EventBridge Integration**  
 By utilizing the Amazon EventBridge integration feature, metering update events can be notified to your AWS environment in real-time. By accumulating the notified data in a database and combining it with BI tools, you can flexibly visualize detailed change history such as "how much usage increased or decreased on which day" and create custom analysis reports.
@@ -281,7 +281,7 @@ If you want to achieve a custom design login screen that matches the worldview o
 
  - **Secure Custom Implementation with SRP Authentication**  
 SaaSus Platform's authentication API adopts SRP (Secure Remote Password) authentication.
-By using this mechanism that performs authentication without sending passwords to the server, even when building a custom login screen, you can achieve free styling with HTML/CSS while maintaining security.
+With SRP authentication, the password itself is not sent to the authentication platform; only verification values derived from the password are exchanged to perform authentication. By leveraging this mechanism, even when building a custom login screen, you can achieve free styling with HTML/CSS while maintaining security.
 
 ---
 
@@ -290,13 +290,13 @@ By using this mechanism that performs authentication without sending passwords t
 A. The login screen provided as standard by SaaSus Platform does not currently support adding or editing text or announcements arbitrarily.
 
  - **Method to Display Announcements**  
-If you want to freely display available hours, maintenance information, etc., we recommend custom implementation of login functionality using the authentication API provided by SaaSus Platform.
+To freely display available hours, maintenance information, etc., you need to implement your own login screen using the authentication API provided by SaaSus Platform.
 
  - **Flexible Information Dissemination Through Custom Implementation**  
 By building a custom login screen using the authentication API, free layout with HTML/CSS becomes possible. This allows you to post maintenance announcement banners, urgent notices, etc. in the optimal form that matches your service design.
 
  - **Secure Foundation with SRP Authentication**  
-Even when performing custom implementation, SaaSus Platform's authentication API adopts SRP (Secure Remote Password) authentication, so passwords are not sent to the server during authentication, making it possible to enhance operational convenience.
+Even when performing custom implementation, SaaSus Platform's authentication API adopts SRP (Secure Remote Password) authentication, so the password itself is not sent to the authentication platform during authentication, making it possible to enhance operational convenience.
 
 ---
 
@@ -305,7 +305,7 @@ Even when performing custom implementation, SaaSus Platform's authentication API
 A. Currently, we do not provide a function for customers to directly set "Geographic Restrictions" on the login screen (CloudFront) provided as standard by SaaSus Platform.
 
  - **Method to Achieve Japan-Only Access**  
-If you want to limit access origins to within Japan, we recommend a configuration where you build and distribute the login screen via your own CloudFront using the authentication API of SaaSus Platform.
+If you want to limit access origins to within Japan, we recommend a configuration where you build and distribute the login screen via your own environment (such as AWS, Google Cloud, or Azure) using the authentication API of SaaSus Platform.
 
 ---
 
