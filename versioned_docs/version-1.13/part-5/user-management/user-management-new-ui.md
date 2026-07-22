@@ -1,5 +1,5 @@
 ---
-title: "User Management (New Screen)"
+title: "(New Screen) Search, Edit, Create, or Assign Users to Tenants"
 slug: "user-management-new-ui"
 excerpt: ""
 hidden: false
@@ -10,12 +10,12 @@ updatedAt: "Tue Jul 21 2026 01:00:00 GMT+0000 (Coordinated Universal Time)"
 :::info Switching Screens
 User Management has two modes: "Old Screen" and "New Screen".  
 You can switch between them using the toggle next to the page heading.  
-For old screen operations, see [Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-crud).
+For old screen operations, see [(Old Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-crud).
 :::
 
-## Overview of the New Screen
+## Overview
 
-In the new screen, the user list is split into two tabs: "Tenant Users" and "SaaS Users".  
+The user list is split into two tabs: "Tenant Users" and "SaaS Users".  
 Search is performed server-side, providing fast results even with a large number of users.
 
 <!-- Target: The state immediately after switching to the new screen. The toggle switch next to the heading is ON, and the Tenant Users tab is displayed. -->
@@ -125,4 +125,4 @@ Only "Remove from SaaS" is available in the SaaS Users tab.
 Click the "Create New User" button at the top right of the screen to open the creation dialog.
 
 The input fields are the same as the old screen.  
-For details, see [Search, Edit, Create, or Assign Users to Tenants > Create a New User](/docs/part-5/user-management/user-crud#create-a-new-user).
+For details, see [(Old Screen) Search, Edit, Create, or Assign Users to Tenants > Create a New User](/docs/part-5/user-management/user-crud#create-a-new-user).

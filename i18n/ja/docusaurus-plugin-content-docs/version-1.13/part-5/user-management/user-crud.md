@@ -1,5 +1,5 @@
 ---
-title: "ユーザーの検索・作成・編集・テナント追加"
+title: "（旧画面）ユーザーの検索・作成・編集・テナント追加"
 slug: "user-crud"
 excerpt: ""
 hidden: false
@@ -10,7 +10,7 @@ updatedAt: "Tue Jul 21 2026 01:00:00 GMT+0000 (Coordinated Universal Time)"
 :::info 画面の切り替え
 ユーザー管理には「旧画面」と「新画面」の2つのモードがあります。  
 ページ見出し横のトグルスイッチで切り替えられます。  
-新画面の操作方法は [ユーザー管理（新画面）](/ja/docs/part-5/user-management/user-management-new-ui) を参照してください。
+新画面の操作方法は [（新画面）ユーザーの検索・作成・編集・テナント追加](/ja/docs/part-5/user-management/user-management-new-ui) を参照してください。
 :::
 
 ## ユーザーの検索
