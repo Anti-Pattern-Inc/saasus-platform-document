@@ -1,5 +1,5 @@
 ---
-title: "Search, Edit, Create, or Assign Users to Tenants"
+title: "(Old Screen) Search, Edit, Create, or Assign Users to Tenants"
 slug: "user-crud"
 excerpt: ""
 hidden: false
@@ -10,7 +10,7 @@ updatedAt: "Tue Jul 21 2026 01:00:00 GMT+0000 (Coordinated Universal Time)"
 :::info Switching Screens
 User Management has two modes: "Old Screen" and "New Screen".  
 You can switch between them using the toggle next to the page heading.  
-For new screen operations, see [User Management (New Screen)](/docs/part-5/user-management/user-management-new-ui).
+For new screen operations, see [(New Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-management-new-ui).
 :::
 
 ## Search Users
