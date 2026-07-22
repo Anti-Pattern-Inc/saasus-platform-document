@@ -3,7 +3,7 @@
 - Locale: `ja`
 - Docs source: `i18n/ja/docusaurus-plugin-content-docs/current`
 - API source: `api`
-- Generated: `2026-07-22 17:57:44 +0900`
+- Generated: `2026-07-22 18:02:03 +0900`
 
 ---
 ## changelog/20221224.md
@@ -8423,6 +8423,10 @@ import TabItem from "@theme/TabItem";
 サンプルアプリでは、以下の2つの認証方式を選択できます。
 - **認証アプリ（TOTP）**: Google AuthenticatorやAuthyなどの認証アプリで生成されるワンタイムコードを使用
 - **メール認証**: ログイン時に登録メールアドレスへ認証コードを送信
+:::caution メール認証方式を利用する場合の注意
+多要素認証（MFA）の方式として「メール」を使用しているユーザーは、SaaSus Platform が生成するログイン画面からパスワードをリセットすることはできません。
+このようなユーザーのパスワードを再設定する場合は、SaaS 運用コンソールのユーザー管理画面から、管理者によるパスワードリセットを行ってください。
+:::
 以下は多要素認証設定ダイアログのスクリーンショットです。
 ![](/ja/img/part-6/implementation-guide/sample-application/multi-factor-authentication/mfa-setting-dialog.png)
 MFA機能では以下の操作を提供します。
@@ -8681,6 +8685,9 @@ func enableMfa(c echo.Context) error {
 - **C# (.NET 8)**: [`app.MapPost("/mfa_enable"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
 - **C# (.NET Framework 4.8)**: [`EnableMfa`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
 ### MFA有効化エンドポイント（メール認証）
+:::info SDK対応状況
+メール認証方式のMFA有効化に対応しているSDKは、現在 **Go** と **JavaScript** のみです。
+:::
 メール認証方式でMFAを有効化します。
 認証アプリ方式と異なり、デバイス登録（setup/verify）は不要です。
 有効化すると、次回ログイン時に登録メールアドレスへ認証コードが送信されます。
@@ -8716,7 +8723,7 @@ func enableMfaEmail(c echo.Context) error {
 関数名で検索して該当箇所をご確認ください。
 - **Go (Echo)**: [`enableMfaEmail`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go)
 - **Python (FastAPI)**: SDKのメール認証方式対応後に追加予定
-- **Java (Spring)**: [`enableMfaEmail`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
+- **Java (Spring)**: [`enableMfaEmail`](https://github.com/saasus-platform/implementation-sample-api-java/blob/feature/mfa-email/src/main/java/implementsample/controller/SampleController.java)（SDKリリース待ちのため feature ブランチで対応）
 - **C# (.NET 8)**: SDKのメール認証方式対応後に追加予定
 - **C# (.NET Framework 4.8)**: SDKのメール認証方式対応後に追加予定
 ### MFA無効化エンドポイント

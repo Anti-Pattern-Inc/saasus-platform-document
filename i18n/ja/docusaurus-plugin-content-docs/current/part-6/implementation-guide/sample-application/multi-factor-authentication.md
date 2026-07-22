@@ -17,6 +17,11 @@ import TabItem from "@theme/TabItem";
 - **認証アプリ（TOTP）**: Google AuthenticatorやAuthyなどの認証アプリで生成されるワンタイムコードを使用
 - **メール認証**: ログイン時に登録メールアドレスへ認証コードを送信
 
+:::caution メール認証方式を利用する場合の注意
+多要素認証（MFA）の方式として「メール」を使用しているユーザーは、SaaSus Platform が生成するログイン画面からパスワードをリセットすることはできません。  
+このようなユーザーのパスワードを再設定する場合は、SaaS 運用コンソールのユーザー管理画面から、管理者によるパスワードリセットを行ってください。
+:::
+
 以下は多要素認証設定ダイアログのスクリーンショットです。
 
 ![](/ja/img/part-6/implementation-guide/sample-application/multi-factor-authentication/mfa-setting-dialog.png)
@@ -342,6 +347,10 @@ func enableMfa(c echo.Context) error {
 
 ### MFA有効化エンドポイント（メール認証）
 
+:::info SDK対応状況
+メール認証方式のMFA有効化に対応しているSDKは、現在 **Go** と **JavaScript** のみです。
+:::
+
 メール認証方式でMFAを有効化します。
 認証アプリ方式と異なり、デバイス登録（setup/verify）は不要です。
 有効化すると、次回ログイン時に登録メールアドレスへ認証コードが送信されます。
@@ -386,7 +395,7 @@ func enableMfaEmail(c echo.Context) error {
 
 - **Go (Echo)**: [`enableMfaEmail`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go)
 - **Python (FastAPI)**: SDKのメール認証方式対応後に追加予定
-- **Java (Spring)**: [`enableMfaEmail`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
+- **Java (Spring)**: [`enableMfaEmail`](https://github.com/saasus-platform/implementation-sample-api-java/blob/feature/mfa-email/src/main/java/implementsample/controller/SampleController.java)（SDKリリース待ちのため feature ブランチで対応）
 - **C# (.NET 8)**: SDKのメール認証方式対応後に追加予定
 - **C# (.NET Framework 4.8)**: SDKのメール認証方式対応後に追加予定
 
