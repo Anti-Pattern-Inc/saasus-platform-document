@@ -1,0 +1,81 @@
+name: Update Gem Knowledge (Google Drive)
+
+# Gem 用ナレッジ static/ai-reference/knowledge.ja.txt を Google Drive の
+# 既存ファイル(KNOWLEDGE_DRIVE_FILE_ID)へ上書き反映するワークフロー。
+#
+# 必要な GitHub Secrets:
+#   KNOWLEDGE_GCP_CREDENTIALS ... Google Cloud サービスアカウントキー(JSON文字列)
+#   KNOWLEDGE_DRIVE_FILE_ID   ... 反映先の Google Drive ファイル ID
+#
+# 前提: 上記サービスアカウントに対象ファイルの編集権限が付与されていること。
+
+on:
+  # main への push で knowledge.ja.txt が更新されたら自動反映
+  push:
+    branches: [main]
+    paths:
+      - static/ai-reference/knowledge.ja.txt
+  # 手動実行も可能
+  workflow_dispatch:
+
+# 同時実行を1つに制限(古い実行はキャンセル)
+concurrency:
+  group: update-gem-knowledge
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  update-drive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.KNOWLEDGE_GCP_CREDENTIALS }}
+          token_format: access_token
+          access_token_scopes: https://www.googleapis.com/auth/drive
+
+      - name: Update knowledge.ja.txt on Google Drive
+        env:
+          ACCESS_TOKEN: ${{ steps.auth.outputs.access_token }}
+          FILE_ID: ${{ secrets.KNOWLEDGE_DRIVE_FILE_ID }}
+          SRC: static/ai-reference/knowledge.ja.txt
+        run: |
+          set -euo pipefail
+
+          if [ -z "${FILE_ID}" ]; then
+            echo "::error::secret KNOWLEDGE_DRIVE_FILE_ID is empty"
+            exit 1
+          fi
+          if [ ! -f "${SRC}" ]; then
+            echo "::error::${SRC} not found"
+            exit 1
+          fi
+
+          echo "Uploading ${SRC} ($(wc -c < "${SRC}") bytes) to Drive file ${FILE_ID}"
+
+          # Drive API v3: 既存ファイルの本文(メディア)を上書き更新する
+          # supportsAllDrives=true で共有ドライブ上のファイルにも対応
+          http_code=$(curl -sS -w '%{http_code}' -o /tmp/drive_resp.json \
+            -X PATCH \
+            -H "Authorization: Bearer ${ACCESS_TOKEN}" \
+            -H "Content-Type: text/plain; charset=UTF-8" \
+            --data-binary @"${SRC}" \
+            "https://www.googleapis.com/upload/drive/v3/files/${FILE_ID}?uploadType=media&supportsAllDrives=true&fields=id,name,mimeType,modifiedTime,size")
+
+          echo "Drive API response (HTTP ${http_code}):"
+          cat /tmp/drive_resp.json || true
+          echo
+
+          if [ "${http_code}" != "200" ]; then
+            echo "::error::Google Drive update failed (HTTP ${http_code})"
+            exit 1
+          fi
+
+          echo "✅ Updated Google Drive file ${FILE_ID} with ${SRC}"
