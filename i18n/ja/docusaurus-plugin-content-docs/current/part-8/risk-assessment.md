@@ -44,7 +44,7 @@ updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ### 6. セキュリティ対策
 
 - **通信暗号化**：TLS 対応（SSL/TLS）  
-- **死活監視**：AWS CloudWatch を使用  
+- **死活監視**：Amazon CloudWatch を使用  
 - **WAF・DDoS 対策・脆弱性診断**：導入済み  
 - **アプリ・インフラのログ取得**：CloudTrail にて10年間保存（当社運用担当者のみアクセス可能）  
 - **API アクセス制御**：署名付き認証方式を採用し、不正利用を防止

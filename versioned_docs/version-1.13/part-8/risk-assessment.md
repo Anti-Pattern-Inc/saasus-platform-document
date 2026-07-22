@@ -46,7 +46,7 @@ updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ### 6. Security Measures
 
 - **Transport Encryption**: TLS (SSL/TLS) enforced  
-- **Health Monitoring**: AWS CloudWatch  
+- **Health Monitoring**: Amazon CloudWatch  
 - **WAF / DDoS / Vulnerability Scans**: Implemented  
 - **Application & Infrastructure Logs**: Stored in CloudTrail for 10 years (access limited to our ops team)  
 - **API Access Control**: Signed-request authentication prevents misuse
