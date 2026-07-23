@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-07-21 15:59:49 +0900`
+- Generated: `2026-07-23 12:36:33 +0900`
 
 ---
 ## changelog/20221224.md
@@ -5303,6 +5303,11 @@ This page provides detailed explanations of the following:
 ---
 ## part-5/user-management/user-crud.md
 ````markdown
+:::info Switching Screens
+User Management has two modes: "Old Screen" and "New Screen".
+You can switch between them using the toggle next to the page heading.
+For new screen operations, see [(New Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-management-new-ui).
+:::
 ## Search Users
 You can filter and search users using the following criteria:
 **Available search filters:**
@@ -5371,6 +5376,89 @@ Clicking the delete icon opens a confirmation window with two deletion options.
 ## Related Links
 To view user activity history,
 see [User Activity History Log](/docs/part-5/user-management/user-activity-history-log).
+````
+
+---
+## part-5/user-management/user-management-new-ui.md
+````markdown
+:::info Switching Screens
+User Management has two modes: "Old Screen" and "New Screen".
+You can switch between them using the toggle next to the page heading.
+For old screen operations, see [(Old Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-crud).
+:::
+## Overview
+The user list is split into two tabs: "Tenant Users" and "SaaS Users".
+Search is performed server-side, providing fast results even with a large number of users.
+<!-- Target: The state immediately after switching to the new screen. The toggle switch next to the heading is ON, and the Tenant Users tab is displayed. -->
+![Overview](/img/part-5/user-management/user-management-new-ui/overview.png)
+## Switching Screens
+A toggle switch appears next to the "User Management" page heading.
+- OFF (default): Displays the old screen. Label reads "Use new screen".
+- ON: Displays the new screen. Label reads "Use old screen".
+A confirmation dialog appears only on the first switch.
+Your selection is saved in the browser and persists across sessions.
+<!-- Target: The toggle switch to the right of the "User Management" heading. OFF state with "Use new screen" label visible. -->
+![Screen Toggle](/img/part-5/user-management/user-management-new-ui/screen-toggle.png)
+<!-- Target: The "Switch to new user management screen?" dialog. The subtitle explaining Role Management changes should be visible. -->
+![Toggle Confirm Dialog](/img/part-5/user-management/user-management-new-ui/toggle-confirm-dialog.png)
+:::warning Role Management Menu Change
+When the new screen is enabled, the "Role Management" menu is hidden from the sidebar.
+Role assignment is performed within the user detail drawer.
+:::
+## Tenant Users Tab
+Displays users who belong to a tenant.
+### Search and Filters
+You can filter users by the following criteria:
+| Field | Input Type | Search Method |
+|-------|-----------|---------------|
+| Email / Login ID | Text input | Prefix match |
+| User ID | Text input | Exact match |
+| Tenant | Autocomplete | Selection |
+| Environment | Select box | Selection |
+| Role | Select box | Selection |
+Selecting a tenant enables the Environment and Role filters.
+<!-- Target: The full filter area of the Tenant Users tab. The email input, user ID input, and tenant/environment/role selectors should be visible. -->
+![Tenant User Filter](/img/part-5/user-management/user-management-new-ui/overview.png)
+### List and Pagination
+Search results are displayed in a table format.
+You can change the number of rows per page and navigate using "Previous" and "Next" buttons.
+### Editing Users
+Click the edit icon on a row to open a side drawer on the right.
+The side drawer allows the following operations:
+**Editable fields:**
+- Basic information (email or login ID)
+- User attributes (username, department, etc.)
+- Environment and role assignments
+**Available actions:**
+- Password reset
+- MFA removal
+<!-- Target: The tenant user edit drawer showing the basic information section, user attributes section, and environment/roles section. -->
+![Edit Drawer](/img/part-5/user-management/user-management-new-ui/edit-drawer.png)
+### Deleting Users
+Click the delete icon on a row to display a confirmation dialog.
+You can choose from two deletion methods:
+- **Remove from tenant**: Removes the user from the selected tenant only.
+- **Remove from SaaS**: Permanently deletes the user from SaaSus Platform and removes them from all tenants.
+## SaaS Users Tab
+Displays all users registered in SaaS, regardless of tenant membership.
+This allows SaaS-level user management.
+### Search and Filters
+| Field | Input Type | Search Method |
+|-------|-----------|---------------|
+| Email / Login ID | Text input | Prefix match |
+| User ID | Text input | Exact match |
+<!-- Target: The full SaaS Users tab showing the filter area and user list table. -->
+![SaaS User Tab](/img/part-5/user-management/user-management-new-ui/saas-user-tab.png)
+### Editing Users
+Editing works the same as the Tenant Users tab, using a side drawer.
+In the SaaS Users tab drawer, you can view all tenants the user belongs to.
+### Deleting Users
+Click the delete icon to display a confirmation dialog for SaaS deletion.
+Only "Remove from SaaS" is available in the SaaS Users tab.
+## Creating New Users
+Click the "Create New User" button at the top right of the screen to open the creation dialog.
+The input fields are the same as the old screen.
+For details, see [(Old Screen) Search, Edit, Create, or Assign Users to Tenants > Create a New User](/docs/part-5/user-management/user-crud#create-a-new-user).
 ````
 
 ---
@@ -8384,15 +8472,34 @@ public async Task<IHttpActionResult> GetAllUnitsMonthCount(
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 This page explains how to implement Multi-Factor Authentication (MFA) functionality using the SaaSus Auth API, based on the sample application's MFA settings feature.
+The sample application supports the following two authentication methods:
+- **Authenticator App (TOTP)**: Uses one-time codes generated by authenticator apps such as Google Authenticator or Authy
+- **Email Authentication**: Sends an authentication code to the registered email address at login
+:::caution Note on Email Authentication Method
+Users who use "Email" as their Multi-Factor Authentication (MFA) method cannot reset their password from the login screen generated by SaaSus Platform.
+To reset the password for such users, an administrator must perform the password reset from the User Management screen in the SaaS Operation Console.
+:::
 Below is a screenshot of the multi-factor authentication settings dialog.
 ![](/img/part-6/implementation-guide/sample-application/multi-factor-authentication/mfa-setting-dialog.png)
-※This QR code is dummy data for demonstration purposes. It cannot be used for actual authentication.
 The MFA functionality provides the following features:
-- Check MFA settings status
+- Check MFA settings status and authentication method
+- Select authentication method (Authenticator App / Email)
 - Register authentication applications (Google Authenticator, etc.)
 - Enable/disable MFA
 - Easy setup with QR codes
+- Switch between authentication methods
+:::info Prerequisites
+To use email authentication, you must complete domain name settings and email sending domain authentication (DKIM) in SaaSus Platform.
+See [Domain, Email Sending Domain Authentication, and Redirect Settings](/docs/part-4/application-settings/domain-and-redirect-settings) for details.
+:::
 ## Frontend Implementation
+### Authentication Method Selection UI Flow
+The frontend manages the MFA settings dialog display using a state machine.
+1. When the dialog opens, it fetches MFA status via `GET /mfa_status`
+2. If not configured, it displays the method selection screen (card selection for Authenticator App / Email)
+3. If Authenticator App is selected, it transitions to QR code display and verification code input
+4. If Email is selected, it displays a confirmation screen and executes enablement
+5. If already configured, it displays the current method and allows switching to another method or disabling
 ### Example Implementations
 The following links point to repositories that include implementations of the frontend.
 - **React**: [`UserMfaSettingDialog.tsx`](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/components/dialogs/UserMfaSettingDialog.tsx) - MFA Settings Dialog Component
@@ -8412,7 +8519,7 @@ The following links point to repositories that include implementations of the fr
       <tr>
         <td>MFA Status Check</td>
         <td><code>GET /mfa_status</code></td>
-        <td>Retrieves the user's MFA enabled/disabled status.</td>
+        <td>Retrieves the user's MFA enabled/disabled status and authentication method.</td>
       </tr>
       <tr>
         <td>MFA Setup</td>
@@ -8425,9 +8532,14 @@ The following links point to repositories that include implementations of the fr
         <td>Verifies authentication code from authentication app and registers MFA.</td>
       </tr>
       <tr>
-        <td>MFA Enable</td>
+        <td>MFA Enable (Authenticator App)</td>
         <td><code>POST /mfa_enable</code></td>
-        <td>Enables MFA for the user.</td>
+        <td>Enables MFA with authenticator app method.</td>
+      </tr>
+      <tr>
+        <td>MFA Enable (Email)</td>
+        <td><code>POST /mfa_email_enable</code></td>
+        <td>Enables MFA with email authentication method.</td>
       </tr>
       <tr>
         <td>MFA Disable</td>
@@ -8441,10 +8553,11 @@ The following links point to repositories that include implementations of the fr
 The following code samples assume Go for the backend.
 :::
 ### MFA Status Check Endpoint
+`GET /mfa_status` returns the MFA enabled/disabled status along with the currently configured authentication method (`softwareToken` or `email`).
 <Tabs>
 <TabItem value="go" label="Go" default>
 ```go
-// Retrieve MFA status (enabled/disabled)
+// Retrieve MFA status (enabled/disabled and authentication method)
 func getMfaStatus(c echo.Context) error {
 	// Retrieve user information from context
 	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
@@ -8452,18 +8565,34 @@ func getMfaStatus(c echo.Context) error {
 		c.Logger().Error("Failed to get user info")
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
 	}
-	// Use the SaaSus API to get the user's MFA status
+	// Use the SaaSus API to get the user's MFA settings
 	response, err := authClient.GetUserMfaPreferenceWithResponse(context.Background(), userInfo.Id)
 	if err != nil || response.JSON200 == nil {
 		c.Logger().Errorf("failed to get MFA status: %v", err)
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve MFA status"})
 	}
-	// Return MFA enabled/disabled status
-	return c.JSON(http.StatusOK, map[string]bool{"enabled": response.JSON200.Enabled})
+	// Return MFA enabled/disabled status and authentication method
+	result := map[string]interface{}{
+		"enabled": response.JSON200.Enabled,
+	}
+	if response.JSON200.Method != nil {
+		result["method"] = string(*response.JSON200.Method)
+	}
+	return c.JSON(http.StatusOK, result)
 }
 ```
 </TabItem>
 </Tabs>
+Response examples:
+```json
+{ "enabled": true, "method": "softwareToken" }
+```
+```json
+{ "enabled": true, "method": "email" }
+```
+```json
+{ "enabled": false }
+```
 #### Implementation Example Links
 The following links contain implementations of this endpoint.
 Search for the function name to find the relevant section.
@@ -8473,6 +8602,8 @@ Search for the function name to find the relevant section.
 - **C# (.NET 8)**: [`app.MapGet("/mfa_status"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
 - **C# (.NET Framework 4.8)**: [`GetMfaStatus`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
 ### MFA Setup Endpoint
+Used when setting up MFA with the authenticator app method.
+Generates a QR code URL for the user to scan with their authenticator app to register a TOTP device.
 <Tabs>
 <TabItem value="go" label="Go" default>
 ```go
@@ -8518,6 +8649,7 @@ Search for the function name to find the relevant section.
 - **C# (.NET 8)**: [`app.MapGet("/mfa_setup"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
 - **C# (.NET Framework 4.8)**: [`SetupMfa`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
 ### MFA Authentication Code Verification Endpoint
+Verifies the 6-digit code generated by the authenticator app and registers the TOTP device.
 <Tabs>
 <TabItem value="go" label="Go" default>
 ```go
@@ -8567,19 +8699,20 @@ Search for the function name to find the relevant section.
 - **Java (Spring)**: [`verifyMfa`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
 - **C# (.NET 8)**: [`app.MapPost("/mfa_verify"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
 - **C# (.NET Framework 4.8)**: [`VerifyMfa`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
-### MFA Enable Endpoint
+### MFA Enable Endpoint (Authenticator App)
+Called after successful verification code validation to enable MFA with the authenticator app method.
 <Tabs>
 <TabItem value="go" label="Go" default>
 ```go
-// Enable MFA for the user
+// Enable MFA (Authenticator App)
 func enableMfa(c echo.Context) error {
 	// Retrieve user information from context
 	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
 	if !ok {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
 	}
-	// Create request body to enable MFA
-	method := authapi.SoftwareToken
+	// Create request body to enable MFA with authenticator app
+	method := authapi.MfaPreferenceMethodSoftwareToken
 	requestBody := authapi.UpdateUserMfaPreferenceJSONRequestBody{
 		Enabled: true,
 		Method:  &method,
@@ -8603,6 +8736,48 @@ Search for the function name to find the relevant section.
 - **Java (Spring)**: [`enableMfa`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
 - **C# (.NET 8)**: [`app.MapPost("/mfa_enable"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
 - **C# (.NET Framework 4.8)**: [`EnableMfa`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
+### MFA Enable Endpoint (Email Authentication)
+:::info SDK Support Status
+Currently, only the **Go** and **JavaScript** SDKs support enabling MFA with the email authentication method.
+:::
+Enables MFA with the email authentication method.
+Unlike the authenticator app method, device registration (setup/verify) is not required.
+Once enabled, an authentication code will be sent to the registered email address at next login.
+<Tabs>
+<TabItem value="go" label="Go" default>
+```go
+// Enable MFA with email authentication
+func enableMfaEmail(c echo.Context) error {
+	// Retrieve user information from context
+	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
+	if !ok {
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
+	}
+	// Create request body to enable MFA with email authentication
+	method := authapi.MfaPreferenceMethodEmail
+	requestBody := authapi.UpdateUserMfaPreferenceJSONRequestBody{
+		Enabled: true,
+		Method:  &method,
+	}
+	// Use the SaaSus API to enable MFA with email authentication
+	_, err := authClient.UpdateUserMfaPreferenceWithResponse(context.Background(), userInfo.Id, requestBody)
+	if err != nil {
+		c.Logger().Errorf("Failed to enable email MFA: %v", err)
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to enable email MFA"})
+	}
+	return c.JSON(http.StatusOK, map[string]string{"message": "Email MFA has been enabled"})
+}
+```
+</TabItem>
+</Tabs>
+#### Implementation Example Links
+The following links contain implementations of this endpoint.
+Search for the function name to find the relevant section.
+- **Go (Echo)**: [`enableMfaEmail`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go)
+- **Python (FastAPI)**: To be added after SDK support for email authentication method
+- **Java (Spring)**: [`enableMfaEmail`](https://github.com/saasus-platform/implementation-sample-api-java/blob/feature/mfa-email/src/main/java/implementsample/controller/SampleController.java) (Available on feature branch, pending SDK release)
+- **C# (.NET 8)**: To be added after SDK support for email authentication method
+- **C# (.NET Framework 4.8)**: To be added after SDK support for email authentication method
 ### MFA Disable Endpoint
 <Tabs>
 <TabItem value="go" label="Go" default>
@@ -8615,7 +8790,7 @@ func disableMfa(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
 	}
 	// Create request body to disable MFA
-	method := authapi.SoftwareToken
+	method := authapi.MfaPreferenceMethodSoftwareToken
 	requestBody := authapi.UpdateUserMfaPreferenceJSONRequestBody{
 		Enabled: false,
 		Method:  &method,
@@ -8723,12 +8898,12 @@ This is an implementation approach where the backend is configured as an API ser
 ### Security Functions
 #### [`UserMfaSettingDialog.tsx`](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/components/dialogs/UserMfaSettingDialog.tsx) - Multi-Factor Authentication Settings Dialog
 ![Multi-Factor Authentication Settings Dialog](/img/part-6/implementation-guide/sample-application/overview/mfa-setting-dialog.png)
-*This QR code contains dummy data for demonstration purposes only and cannot be used for actual authentication.
-- **MFA Status Check**: Check enabled/disabled status
-- **QR Code Generation**: Display QR code for Google Authenticator etc.
-- **Authentication Code Verification**: Verification of 6-digit codes generated by authenticator apps
-- **MFA Enable/Disable**: Toggle settings
-- **Device Re-registration**: Setup on new devices
+- **Authentication Method Selection**: Choose between Authenticator App (TOTP) and Email Authentication
+- **MFA Status Check**: Check enabled/disabled status and current authentication method
+- **Authenticator App Setup**: QR code display and 6-digit code verification
+- **Email Authentication Setup**: Enable email authentication with one click
+- **Method Switching**: Switch from current authentication method to another
+- **MFA Disable**: Disable multi-factor authentication
 ## Implemented Features
 ### Custom Attribute Functions
 - Flexible setting and display of user and tenant attributes
@@ -10986,7 +11161,7 @@ Note that using multi-factor authentication (MFA) requires implementation on the
 ---
 **Q. Can users who use email as their multi-factor authentication (MFA) method reset their password from the login screen?**
 A. No. Users who use "Email" as their multi-factor authentication (MFA) method cannot reset their password from the login screen generated by SaaSus Platform.
-To reset the password for such a user, an administrator should perform the password reset from the User Management screen in the SaaS Operation Console. For details, see [Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-crud).
+To reset the password for such a user, an administrator should perform the password reset from the User Management screen in the SaaS Operation Console. For details, see [(Old Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-crud).
 ---
 **Q. I set up integration with an external ID provider such as Google, but an error occurs during login.**
 A. To use authentication via an external ID provider, both **"Domain Settings"** and **"Email Sending Settings (SES)"** must be verified for security and reliability. Please check the following settings:
