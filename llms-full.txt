@@ -3584,7 +3584,7 @@ In the event pattern section, first describe the following pattern to get all Sa
 
 In this case, all events are retrieved, but you can filter events to retrieve only those for specific API calls.
 
-In this case, let's output all events to CloudWatch Logs to see what kind of events are delivered.
+In this case, let's output all events to Amazon CloudWatch Logs to see what kind of events are delivered.
 
 ![11](/img/part-4/integrate-with-amazon-eventbridge/image-11.png)
 
@@ -3606,7 +3606,7 @@ If the event arrives successfully, the event should be recorded in CloudWatch Lo
 
 We are now able to retrieve events in this manner.
 
-In this case, we linked to CloudWatch Logs, but it is possible to link events to various targets such as Lambda and other APIs. This allows us to apply an event-driven architecture, separating where the SaaSus API was called from and when it was called, and what should be done as a result and when.
+In this case, we linked to CloudWatch Logs, but it is possible to link events to various targets such as AWS Lambda and other APIs. This allows us to apply an event-driven architecture, separating where the SaaSus API was called from and when it was called, and what should be done as a result and when.
 
 The "detail" entry contains a "trace_id". This is the same as the one specified at the time of the SaaSus API request or the one generated automatically, so you can trace which API call caused the event.
 
@@ -5389,7 +5389,7 @@ Below is the procedure for configuring the SaaSus Platform Smart API Gateway fea
   If you do not have one, access [Create an AWS Account](https://aws.amazon.com/jp/) to sign up for AWS.
 
 - **SaaS Environment and Sample App**  
-  Use CloudFormation to create a SaaS environment and sample app in AWS.  
+  Use AWS CloudFormation to create a SaaS environment and sample app in AWS.  
   In the AWS environment you will use for verification, run the CloudFormation below.  
   After execution, access the URL listed in the CloudFormation outputs, enter the password, and log in to the VSCode environment.  
   [Create a SaaS Environment and Sample App](https://github.com/saasus-platform/implementation-sample-smart-api-gateway/blob/main/smart-gateway-sample-saas.yaml)
@@ -8600,7 +8600,7 @@ This is an implementation example of a SaaS application using SaaSus Platform's 
 You can learn while running the necessary features for SaaS, such as authentication, tenant management, and user management, in a serverless environment.
 
 ### Key Features
-- **Serverless Architecture**: AWS Lambda + CloudFront + S3
+- **Serverless Architecture**: AWS Lambda + Amazon CloudFront + Amazon S3
 - **React + TypeScript**: Using React for the frontend
 - **JWT Authentication**: Token management in browser's local storage
 - **CDK Support**: Infrastructure construction and deployment using AWS CDK
@@ -13483,7 +13483,7 @@ It can be expressed diagrammatically as follows:
 - Case where an Account is Created from the SaaS Operation Console  
   Example)  
   Upon request from a user, the SaaS administrator creates an account from the SaaS Operation Console.  
-  sign in information is notified to the user via email or EventBridge integration, and the user starts using the account.
+  sign in information is notified to the user via email or Amazon EventBridge integration, and the user starts using the account.
 
 ### 3.1. Implementation for Self-Signup Case
 
@@ -14618,7 +14618,7 @@ Please enable the domain by following these steps:
    Register the domain to be used as the sender from "Common Settings" > "Domain" in the SaaS Development Console.
 
 2. **Obtain and Configure DNS Records**  
-   Configure the DKIM record information (CNAME, etc.) displayed after registration to your DNS server (Route 53, Cloudflare, etc.).
+   Configure the DKIM record information (CNAME, etc.) displayed after registration to your DNS server (Amazon Route 53, Cloudflare, etc.).
 
 3. **Verify Completion**  
    After configuration, the system will verify the domain. It may take up to 2-3 days for the changes to be reflected.
@@ -15064,7 +15064,7 @@ A. To use authentication via an external ID provider, both **"Domain Settings"**
 
  - **Domain Verification Status**  
 In the [Basic Settings] > [Domain] screen, please check if the status of the registered domain is **"Valid (Verified)"** and **"Authentication email delivery via custom domain is enabled."**
-If not verified, you need to correctly set the displayed DNS records in your DNS server (such as AWS Route 53) and complete the verification.
+If not verified, you need to correctly set the displayed DNS records in your DNS server (such as Amazon Route 53) and complete the verification.
 
  - **Wait Time for Settings to Take Effect**  
 DNS settings and enabling authentication email delivery via custom domain may take up to 2-3 days for processing within the system and propagation across the network.
@@ -15173,7 +15173,7 @@ Even when performing custom implementation, SaaSus Platform's authentication API
 
 **Q. I want to limit the service provision range to within Japan. Can I set geographic restrictions (geo-blocking) on the standard login screen of SaaSus?**
 
-A. Currently, we do not provide a function for customers to directly set "Geographic Restrictions" on the login screen (CloudFront) provided as standard by SaaSus Platform.
+A. Currently, we do not provide a function for customers to directly set "Geographic Restrictions" on the login screen (Amazon CloudFront) provided as standard by SaaSus Platform.
 
  - **Method to Achieve Japan-Only Access**  
 If you want to limit access origins to within Japan, we recommend a configuration where you build and distribute the login screen via your own environment (such as AWS, Google Cloud, or Azure) using the authentication API of SaaSus Platform.
@@ -15340,7 +15340,7 @@ URL: https://www.prisma.io/docs/part-8/risk-assessment
 ### 6. Security Measures
 
 - **Transport Encryption**: TLS (SSL/TLS) enforced  
-- **Health Monitoring**: AWS CloudWatch  
+- **Health Monitoring**: Amazon CloudWatch  
 - **WAF / DDoS / Vulnerability Scans**: Implemented  
 - **Application & Infrastructure Logs**: Stored in CloudTrail for 10 years (access limited to our ops team)  
 - **API Access Control**: Signed-request authentication prevents misuse
@@ -16800,7 +16800,7 @@ Once the SaaSus Platform is ready, we will incorporate it into the sample applic
 
 URL: https://www.prisma.io/docs/tutorial/prepare-the-sample-application-ec2
 
-Please follow these steps to create a Blade version operating environment using EC2 or Cloud9.
+Please follow these steps to create a Blade version operating environment using Amazon EC2.
 
 ## Preparing the Sample Application
 
@@ -16817,7 +16817,6 @@ EC2 creation parameters
 :::info
 
 To access an EC2 instance via SSH, inbound traffic on port 22 (SSH) must be allowed.
-For Cloud9, the initial disk capacity will not be sufficient, so additional disk capacity is needed to reach 20G.
 
 :::
 
@@ -16883,7 +16882,7 @@ First, start this sample application.
 
 :::info
 
-If you are using AWS EC2 or Cloud9 to create an operating environment for the Blade version, please follow the steps in [Preparing the Sample Application (EC2)](https://docs.saasus.io/docs/tutorial/prepare-the-sample-application-ec2/).
+If you are using Amazon EC2 to create an operating environment for the Blade version, please follow the steps in [Preparing the Sample Application (EC2)](https://docs.saasus.io/docs/tutorial/prepare-the-sample-application-ec2/).
 
 :::
 
