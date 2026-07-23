@@ -16,7 +16,7 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 
 :::info
 
-Amazon EC2 や AWS Cloud9 を利用して、Blade 版の動作環境を作成する場合は、[サンプルアプリケーションの準備(EC2)](https://docs.saasus.io/ja/docs/tutorial/prepare-the-sample-application-ec2/)の手順で行ってください。
+Amazon EC2 を利用して、Blade 版の動作環境を作成する場合は、[サンプルアプリケーションの準備(EC2)](https://docs.saasus.io/ja/docs/tutorial/prepare-the-sample-application-ec2/)の手順で行ってください。
 
 :::
 

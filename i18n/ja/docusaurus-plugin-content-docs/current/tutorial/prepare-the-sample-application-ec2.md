@@ -8,7 +8,7 @@ createdAt: "Fri Jul 19 2024 06:12:42 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Fri Jul 19 2024 06:12:42 GMT+0000 (Coordinated Universal Time)"
 ---
 
-Amazon EC2 や AWS Cloud9 を利用して、Blade 版の動作環境を作成する場合はこちらの手順で行ってください。
+Amazon EC2 を利用して、Blade 版の動作環境を作成する場合はこちらの手順で行ってください。
 
 ## サンプルアプリケーションの準備
 
@@ -25,7 +25,6 @@ EC2 作成時のパラメータ
 :::info
 
 SSH で EC2 にアクセスする場合は、ポート 22（SSH）のインバウンド通信の許可が必要です。  
-Cloud9 の場合、初期状態のディスク容量では空き容量が足りなくなるので 20G になるようディスク容量追加が必要です
 
 :::
 
