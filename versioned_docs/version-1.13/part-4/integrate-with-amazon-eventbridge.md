@@ -60,7 +60,7 @@ In the event pattern section, first describe the following pattern to get all Sa
 
 In this case, all events are retrieved, but you can filter events to retrieve only those for specific API calls.
 
-In this case, let's output all events to CloudWatch Logs to see what kind of events are delivered.
+In this case, let's output all events to Amazon CloudWatch Logs to see what kind of events are delivered.
 
 ![11](/img/part-4/integrate-with-amazon-eventbridge/image-11.png)
 
