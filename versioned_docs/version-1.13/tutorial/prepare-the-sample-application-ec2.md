@@ -8,7 +8,7 @@ createdAt: "Fri Jul 19 2024 06:12:42 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Fri Jul 19 2024 06:12:42 GMT+0000 (Coordinated Universal Time)"
 ---
 
-Please follow these steps to create a Blade version operating environment using Amazon EC2 or AWS Cloud9.
+Please follow these steps to create a Blade version operating environment using Amazon EC2.
 
 ## Preparing the Sample Application
 
@@ -25,7 +25,6 @@ EC2 creation parameters
 :::info
 
 To access an EC2 instance via SSH, inbound traffic on port 22 (SSH) must be allowed.
-For Cloud9, the initial disk capacity will not be sufficient, so additional disk capacity is needed to reach 20G.
 
 :::
 
