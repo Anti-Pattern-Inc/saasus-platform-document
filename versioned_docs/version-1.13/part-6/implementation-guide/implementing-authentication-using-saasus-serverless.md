@@ -14,7 +14,7 @@ This is an implementation example of a SaaS application using SaaSus Platform's 
 You can learn while running the necessary features for SaaS, such as authentication, tenant management, and user management, in a serverless environment.
 
 ### Key Features
-- **Serverless Architecture**: AWS Lambda + CloudFront + S3
+- **Serverless Architecture**: AWS Lambda + Amazon CloudFront + Amazon S3
 - **React + TypeScript**: Using React for the frontend
 - **JWT Authentication**: Token management in browser's local storage
 - **CDK Support**: Infrastructure construction and deployment using AWS CDK

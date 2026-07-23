@@ -193,7 +193,7 @@ A. To use authentication via an external ID provider, both **"Domain Settings"**
 
  - **Domain Verification Status**  
 In the [Basic Settings] > [Domain] screen, please check if the status of the registered domain is **"Valid (Verified)"** and **"Authentication email delivery via custom domain is enabled."**
-If not verified, you need to correctly set the displayed DNS records in your DNS server (such as AWS Route 53) and complete the verification.
+If not verified, you need to correctly set the displayed DNS records in your DNS server (such as Amazon Route 53) and complete the verification.
 
  - **Wait Time for Settings to Take Effect**  
 DNS settings and enabling authentication email delivery via custom domain may take up to 2-3 days for processing within the system and propagation across the network.
@@ -302,7 +302,7 @@ Even when performing custom implementation, SaaSus Platform's authentication API
 
 **Q. I want to limit the service provision range to within Japan. Can I set geographic restrictions (geo-blocking) on the standard login screen of SaaSus?**
 
-A. Currently, we do not provide a function for customers to directly set "Geographic Restrictions" on the login screen (CloudFront) provided as standard by SaaSus Platform.
+A. Currently, we do not provide a function for customers to directly set "Geographic Restrictions" on the login screen (Amazon CloudFront) provided as standard by SaaSus Platform.
 
  - **Method to Achieve Japan-Only Access**  
 If you want to limit access origins to within Japan, we recommend a configuration where you build and distribute the login screen via your own environment (such as AWS, Google Cloud, or Azure) using the authentication API of SaaSus Platform.
