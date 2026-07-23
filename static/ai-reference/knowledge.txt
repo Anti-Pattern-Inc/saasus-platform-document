@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-07-23 13:07:51 +0900`
+- Generated: `2026-07-23 14:53:16 +0900`
 
 ---
 ## changelog/20221224.md
@@ -6067,7 +6067,7 @@ import TabItem from '@theme/TabItem';
 This is an implementation example of a SaaS application using SaaSus Platform's serverless approach.
 You can learn while running the necessary features for SaaS, such as authentication, tenant management, and user management, in a serverless environment.
 ### Key Features
-- **Serverless Architecture**: AWS Lambda + CloudFront + S3
+- **Serverless Architecture**: AWS Lambda + Amazon CloudFront + Amazon S3
 - **React + TypeScript**: Using React for the frontend
 - **JWT Authentication**: Token management in browser's local storage
 - **CDK Support**: Infrastructure construction and deployment using AWS CDK
@@ -11234,7 +11234,7 @@ By building a custom login screen using the authentication API, free layout with
 Even when performing custom implementation, SaaSus Platform's authentication API adopts SRP (Secure Remote Password) authentication, so the password itself is not sent to the authentication platform during authentication, making it possible to enhance operational convenience.
 ---
 **Q. I want to limit the service provision range to within Japan. Can I set geographic restrictions (geo-blocking) on the standard login screen of SaaSus?**
-A. Currently, we do not provide a function for customers to directly set "Geographic Restrictions" on the login screen (CloudFront) provided as standard by SaaSus Platform.
+A. Currently, we do not provide a function for customers to directly set "Geographic Restrictions" on the login screen (Amazon CloudFront) provided as standard by SaaSus Platform.
  - **Method to Achieve Japan-Only Access**
 If you want to limit access origins to within Japan, we recommend a configuration where you build and distribute the login screen via your own environment (such as AWS, Google Cloud, or Azure) using the authentication API of SaaSus Platform.
 ---
