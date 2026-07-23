@@ -6,8 +6,8 @@
 <title data-rh="true">SaaSus Platform関連のFAQ | SaaSus Platform Document</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docs.saasus.io/img/logo.png"><meta data-rh="true" name="twitter:image" content="https://docs.saasus.io/img/logo.png"><meta data-rh="true" property="og:url" content="https://docs.saasus.io/ja/docs/part-7/faq/saasus-platform"><meta data-rh="true" property="og:locale" content="ja"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="ja"><meta data-rh="true" name="docsearch:language" content="ja"><meta data-rh="true" name="og:type" content="website"><meta data-rh="true" name="og:site_name" content="SaaSus Platform Documentation"><meta data-rh="true" name="og:title" content="SaaSus Platform Documentation"><meta data-rh="true" name="og:description" content="Official documentation for SaaSus Platform"><meta data-rh="true" name="og:url" content="https://docs.saasus.io/"><meta data-rh="true" name="og:image" content="https://docs.saasus.io/img/logo.png"><meta data-rh="true" name="docusaurus_version" content="1.13"><meta data-rh="true" name="docusaurus_tag" content="docs-default-1.13"><meta data-rh="true" name="docsearch:version" content="1.13"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-1.13"><meta data-rh="true" property="og:title" content="SaaSus Platform関連のFAQ | SaaSus Platform Document"><meta data-rh="true" name="description" content="Q. サービスが停止した時の対策として、どのような対応が可能でしょうか？"><meta data-rh="true" property="og:description" content="Q. サービスが停止した時の対策として、どのような対応が可能でしょうか？"><link data-rh="true" rel="icon" href="/ja/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.saasus.io/ja/docs/part-7/faq/saasus-platform"><link data-rh="true" rel="alternate" href="https://docs.saasus.io/ja/docs/part-7/faq/saasus-platform" hreflang="ja"><link data-rh="true" rel="alternate" href="https://docs.saasus.io/docs/part-7/faq/saasus-platform" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.saasus.io/docs/part-7/faq/saasus-platform" hreflang="x-default"><link rel="preconnect" href="https://www.googletagmanager.com">
 <script>window.dataLayer=window.dataLayer||[]</script>
 <script>!function(e,t,a,n){e[n]=e[n]||[],e[n].push({"gtm.start":(new Date).getTime(),event:"gtm.js"});var g=t.getElementsByTagName(a)[0],m=t.createElement(a);m.async=!0,m.src="https://www.googletagmanager.com/gtm.js?id=GTM-5T68ML2",g.parentNode.insertBefore(m,g)}(window,document,"script","dataLayer")</script><link rel="stylesheet" href="/ja/assets/css/styles.53603c37.css">
-<script src="/ja/assets/js/runtime~main.4165331d.js" defer="defer"></script>
-<script src="/ja/assets/js/main.7f14fa8a.js" defer="defer"></script>
+<script src="/ja/assets/js/runtime~main.0b6d5ca1.js" defer="defer"></script>
+<script src="/ja/assets/js/main.15b8da14.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5T68ML2" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -183,7 +183,7 @@
 <hr>
 <p><strong>Q. 多要素認証（MFA）の方式としてメールを使用しているユーザーは、ログイン画面からパスワードを リセットできますか？</strong><br>
 <!-- -->A. いいえ。多要素認証（MFA）の方式として「メール」を使用しているユーザーは、SaaSus Platform が生成するログイン画面からパスワードをリセットすることはできません。<br>
-<!-- -->このようなユーザーのパスワードを再設定する場合は、SaaS 運用コンソールのユーザー管理画面から、管理者によるパスワードリセットを行ってください。手順は <a href="/ja/docs/part-5/user-management/user-crud">ユーザーの検索・作成・編集・テナント追加</a> を参照してください。</p>
+<!-- -->このようなユーザーのパスワードを再設定する場合は、SaaS 運用コンソールのユーザー管理画面から、管理者によるパスワードリセットを行ってください。手順は <a href="/ja/docs/part-5/user-management/user-crud">（旧画面）ユーザーの検索・作成・編集・テナント追加</a> を参照してください。</p>
 <hr>
 <p><strong>Q. Google などの外部 ID プロバイダ連携を設定しましたが、ログイン時にエラーが発生します。</strong></p>
 <p>A. 外部 ID プロバイダを利用した認証を行うには、セキュリティおよび信頼性確保のため、**「ドメイン設定」**と **「メール送信設定（SES）」**の両方の検証が完了している必要があります。 以下の設定状況をご確認ください。</p>
@@ -254,11 +254,11 @@
 <ul>
 <li>
 <p><strong>現在の利用状況の確認</strong><br>
-<!-- -->SaaSus SDK/API を通じて、各テナントの最新の計量値 を参照可能です。</p>
+<!-- -->SaaSus SDK/API を通じて、各テナントの最 新の計量値を参照可能です。</p>
 </li>
 <li>
 <p><strong>Stripeダッシュボードによる確認</strong><br>
-<!-- -->Stripe 連携を利用されている場合は、Stripeダッシュボードからも各顧客（テナント）に紐づく計量状況や、請求に関連する利用統計を確認することが可能です。</p>
+<!-- -->Stripe 連携を利用されている場合は、Stripe ダッシュボードの「顧客（Customers）」から対象の顧客（テナント）を開くことで、紐づくサブスクリプションや発行済みの請求書（invoice）、従量課金メーターの利用量を確認できます。</p>
 </li>
 <li>
 <p><strong>Amazon EventBridge 連携機能による分析</strong><br>
@@ -275,12 +275,12 @@
 <ul>
 <li>
 <p><strong>自由なデザインを実現する方法</strong><br>
-<!-- -->自社の SaaS の世界観に合わせた独自デザインのログイン画面を実現したい場合は、SaaSus Platform が提供する 認証 API を活用したログイン機能の独自実装を推奨しております。</p>
+<!-- -->自社の SaaS の世界観に合わせた独自デザインのログイン画面を実現したい場合は、SaaSus Platform が提供する 認証 API を活用したログイン機能の独自実装を推奨しており ます。</p>
 </li>
 <li>
 <p><strong>SRP認証によるセキュアな独自実装</strong><br>
 <!-- -->SaaSus Platform の認証 API は、SRP（Secure Remote Password）認証を採用しています。<br>
-<!-- -->サーバー側にパスワードを送信することなく認証を行うこの仕組みを利用することで、独自にログイン画面を構築する場合でも、セキュリティを保ったまま、HTML/CSS による自由なスタイリングを実現できます。</p>
+<!-- -->SRP 認証では、パスワードそのものを認証基盤へ送信せず、パスワードから生成した検証情報のみをやり取りして認証を行います。この仕組みを利用することで、独自にログイン画面を構築する場合でも、セキュリティを保ったまま、HTML/CSS による自由なスタイリングを実現できます。</p>
 </li>
 </ul>
 <hr>
@@ -289,7 +289,7 @@
 <ul>
 <li>
 <p><strong>お知らせを表示する方法</strong><br>
-<!-- -->利用可能な時間帯やメンテナンス情報などを自由に表示したい場合は、SaaSus Platform が提供する 認証 API を活用したログイン機能の独自実装を推奨しております。</p>
+<!-- -->利用可能な時間帯やメンテナンス情報などを自由に表示するには、SaaSus Platform が提供する 認証 API を活用して、ログイン画面を独自に実装する必要があります。</p>
 </li>
 <li>
 <p><strong>独自実装による柔軟な情報発信</strong><br>
@@ -297,7 +297,7 @@
 </li>
 <li>
 <p><strong>SRP認証によるセキュアな基盤</strong><br>
-<!-- -->独自実装を行う場合でも、SaaSus Platform の認証 API は SRP（Secure Remote Password）認証を採用しているため、パスワードをサーバーに送信せずに認証でき、運用の利便性を高めることが可能です。</p>
+<!-- -->独自実装を行う場合でも、SaaSus Platform の認証 API は SRP（Secure Remote Password）認証を採用しているため、パスワードそのものを認証基盤へ送信せずに認証でき、運用の利便性を高めることが可能です。</p>
 </li>
 </ul>
 <hr>
@@ -305,7 +305,7 @@
 <p>A. 現在、SaaSus Platform が標準で提供しているログイン画面（CloudFront）に対して、お客様側で直接「地理的制限（Geographic Restrictions）」を設定する機能は提供しておりません。</p>
 <ul>
 <li><strong>日本国内限定を実現する方法</strong><br>
-<!-- -->アクセス元を日本国内に限定したい場合は、SaaSus Platform の 認証 API を活用し、お客様独自の CloudFront 経由でログイン画面を構築・配信する構成を推奨しております。</li>
+<!-- -->アクセス元を日本国内に限定したい場合は、SaaSus Platform の 認証 API を活用し、お客様独自の環境（AWS、Google Cloud、Azure など）経由でログイン画面を構築・配信する構成を推奨しております。</li>
 </ul>
 <hr>
 <p><strong>Q. 新規ユーザーに対して初期パスワードを発行し、初回ログイン時に任意のパスワードへ変更を促す運用は可能ですか？</strong></p>
@@ -372,8 +372,8 @@
 </ul>
 <hr>
 <p><strong>Q. SaaSus Platform は IDP (Identity Provider) として利用できますか？</strong><br>
-<!-- -->A. SaaSus Platform は、SaaSの開発・運用に特化した認証・認可プラットフォームであり、外部の IDP と連携して認証を統合する役割を担います。<br>
-<!-- -->そのため、SaaSus 自体を IDP として他のサービスへ認証 情報を提供する機能はございませんが、Microsoft Entra ID (旧 Azure AD) などの外部 IDP と連携したシングルサインオン (SSO) の実装が可能です。</p>
+<!-- -->A. SaaSus Platform   は、SaaSの開発・運用に特化した認証・認可プラットフォームであり、外部の IDP と連携して認証を統合する役割を担います。<br>
+<!-- -->そのため、SaaSus 自体を IDP として他のサービスへ認証情報を提供する機能はございませんが、Microsoft Entra ID (旧 Azure AD) などの外部 IDP と連携したシングルサインオン (SSO) の実装が可能です。</p>
 <ul>
 <li><strong>外部 IDP との連携機能</strong><br>
 <!-- -->Microsoft Entra ID や Google などの IDP と SAML 連携 や OIDC (OpenID Connect) を利用して接続することで、エンドユーザーに対してセキュアでシームレスなログイン体験を提供できます。</li>
@@ -394,11 +394,11 @@
 </ol>
 <ul>
 <li><strong>設定情報の移行について</strong><br>
-<!-- -->上記の手順に伴い、現在のアカウントから設定情報を抽出し、新しいアカウントへ移行（再設定）していただく必要があります。<br>
+<!-- -->上記の手順に伴い、現在のアカウントから設定情報を抽出し、新しいアカウントへ移行（再設定）していただく必要が あります。<br>
 <!-- -->設定情報を取得する際は、<a href="/ja/docs/part-4/mcp-server/setup">MCP サーバー機能</a>をご利用いただくとスムーズです。</li>
 </ul>
 <hr>
-<p><strong>Q. フリープランから有料プラン  にアップグレードするにはどうすればよいですか？</strong></p>
+<p><strong>Q. フリープランから有料プランにアップグレードするにはどうすればよいですか？</strong></p>
 <p>A. アップグレード（有料プランの申し込み）は、SaaS開発コンソールの「アカウント設定 ＞ 料金プラン」から行えます。<br>
 <!-- -->ダウングレードとは異なり、管理画面から直接お手続きいただけます。</p>
 <ul>
