@@ -127,7 +127,8 @@
 - [Tenant Management](part-5/tenant-management): Searching Tenants
 - [Feedback Management](part-5/user-feedback): Overview
 - [User Activity History Log](part-5/user-management/user-activity-history-log): Overview
-- [Search, Edit, Create, or Assign Users to Tenants](part-5/user-management/user-crud): Search Users
+- [(Old Screen) Search, Edit, Create, or Assign Users to Tenants](part-5/user-management/user-crud): User Management has two modes: "Old Screen" and "New Screen".
+- [(New Screen) Search, Edit, Create, or Assign Users to Tenants](part-5/user-management/user-management-new-ui): User Management has two modes: "Old Screen" and "New Screen".
 - [Developer SDK/API Overview](part-6/developer-sdk-api-overview): 1. SaaSus SDK / API Capabilities and Use Cases
 - [Advanced Example Using the Auth API (ID Login)](part-6/implementation-guide/auth/advanced-sign-in): This document explains how to implement an ID-based authentication method that uses username + tenant ID instead of email.
 - [Basic Implementation Using the Auth API](part-6/implementation-guide/auth/basic-sign-in): This document explains how to implement sign-in and sign-out from a custom login UI, based on the Auth API sample application.
