@@ -32,6 +32,40 @@ SaaS 運用コンソール
 SaaS 開発コンソール
 SaaSus Platform コンソール
 
+## AWS サービス名の表記（必須）
+
+AWS サービスに言及する際は、AWS 公式の正式な製品名を使用してください（AWS SMB コンピテンシー等の「顧客向けドキュメント」要件）。
+
+### 基本ルール
+- 正式名称のプレフィックス（`Amazon` / `AWS`）はサービスごとに決まっているため、正しく付ける。
+- **初出はフルの正式名称**で記載し、以降の同一ページ内では短縮形（サービス名のみ）を使用してよい。
+- コードブロック・インラインコード・URL/ドメイン（例：`cloudfront.net`）・実在するフォーム項目名・識別子は変更しない。
+
+### 主なサービスの正しい表記
+- `Amazon` 系：**Amazon EC2** / **Amazon S3** / **Amazon CloudWatch**（ログは **Amazon CloudWatch Logs**）/ **Amazon CloudFront** / **Amazon Route 53** / **Amazon EventBridge** / **Amazon RDS** / **Amazon DynamoDB** / **Amazon Cognito** / **Amazon SNS** / **Amazon SQS** / **Amazon SES** / **Amazon VPC** / **Amazon API Gateway**
+- `AWS` 系：**AWS Lambda** / **AWS Cloud9** / **AWS CloudFormation** / **AWS Fargate** / **AWS Step Functions** / **AWS Marketplace** / **AWS CDK** / **AWS Amplify**
+
+### よくある誤り（NG → OK）
+- `Lambda`（初出） → `AWS Lambda`
+- `AWS EC2` → `Amazon EC2`
+- `Cloud9` → `AWS Cloud9`
+- `AWS CloudWatch` → `Amazon CloudWatch`（`CloudWatch Logs` → `Amazon CloudWatch Logs`）
+- `AWS Route 53` / `Route 53`（初出） → `Amazon Route 53`
+- `CloudFront`（初出） → `Amazon CloudFront`
+- `S3`（初出） → `Amazon S3`
+- `CloudFormation`（初出） → `AWS CloudFormation`
+- `EventBridge`（初出） → `Amazon EventBridge`
+
+### 変更しない例（誤検出に注意）
+- `Smart API Gateway` / `Smart MCP Server`：SaaSus Platform 独自の機能名（Amazon API Gateway ではない）。
+- マーケティング文脈の `SNS`：ソーシャルメディアの意味であり Amazon SNS ではない。
+- `Product logo S3 URL` などの実在するフォーム項目名。
+- `VPC ID` / `VPC Endpoint` などの技術用語、および 2 回目以降の短縮表記。
+- changelog（履歴記事）内の表記は原則据え置き。
+
+### 反映範囲
+用語修正時は他の文言変更と同様に、current（`docs/` + `i18n/ja/.../current`）と現行バージョンの EN/JA を対象とする。
+
 ## ディレクトリ構造
 
 ```

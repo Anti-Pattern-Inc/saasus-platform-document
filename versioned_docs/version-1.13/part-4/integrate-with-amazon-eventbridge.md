@@ -60,7 +60,7 @@ In the event pattern section, first describe the following pattern to get all Sa
 
 In this case, all events are retrieved, but you can filter events to retrieve only those for specific API calls.
 
-In this case, let's output all events to CloudWatch Logs to see what kind of events are delivered.
+In this case, let's output all events to Amazon CloudWatch Logs to see what kind of events are delivered.
 
 ![11](/img/part-4/integrate-with-amazon-eventbridge/image-11.png)
 
@@ -82,6 +82,6 @@ If the event arrives successfully, the event should be recorded in CloudWatch Lo
 
 We are now able to retrieve events in this manner.
 
-In this case, we linked to CloudWatch Logs, but it is possible to link events to various targets such as Lambda and other APIs. This allows us to apply an event-driven architecture, separating where the SaaSus API was called from and when it was called, and what should be done as a result and when.
+In this case, we linked to CloudWatch Logs, but it is possible to link events to various targets such as AWS Lambda and other APIs. This allows us to apply an event-driven architecture, separating where the SaaSus API was called from and when it was called, and what should be done as a result and when.
 
 The "detail" entry contains a "trace_id". This is the same as the one specified at the time of the SaaSus API request or the one generated automatically, so you can trace which API call caused the event.
