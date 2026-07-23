@@ -4,7 +4,7 @@ slug: "billing"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Jul 13 2026 03:28:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 06:51:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 **Q. What is the "Calculation Method" setting (sum/max) for meter units?**  
@@ -104,7 +104,7 @@ SaaSus Platform allows pricing plan design based on the following four measureme
 
  - **Direct operations on Stripe console and precautions**  
 It is technically possible to apply discounts directly from Stripe's management console to subscriptions created on SaaSus Platform.  
-However, you must never change the "measurement units (units or calculation logic)" of the subscription itself.
+However, you must never change the subscription itself without going through SaaSus Platform.
 This could cause data inconsistency between SaaSus Platform and Stripe, preventing correct billing and meter updates.
 
  - **Alternative approaches for discounts and campaigns**  
@@ -120,7 +120,7 @@ Direct integration with Stripe's promotional features is being considered on our
 A. Currently, there is no feature to directly enable "bank transfer" from the SaaSus Platform management screen. However, you can enable bank transfer payments by changing settings directly from the integrated Stripe management console.
 
  - **Setup procedure and precautions**  
-After setting up a pricing plan (creating a subscription) on SaaSus Platform, please configure the target subscription to allow "bank transfer" from the Stripe console within the time it takes for the subscription to be confirmed on the Stripe side (within approximately 1 hour).
+After setting up a pricing plan (creating a subscription) on SaaSus Platform, please configure the target subscription to allow "bank transfer" from the Stripe Dashboard within the time it takes for the invoice to be confirmed on the Stripe side (within approximately 1 hour).
 
  - **Limitations regarding measurement units**  
 When changing settings directly from the Stripe console, you must never change the "measurement units (units or calculation logic)" defined and integrated with SaaSus Platform.  
