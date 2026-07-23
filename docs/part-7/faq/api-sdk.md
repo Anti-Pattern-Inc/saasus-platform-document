@@ -19,7 +19,7 @@ Please enable the domain by following these steps:
    Register the domain to be used as the sender from "Common Settings" > "Domain" in the SaaS Development Console.
 
 2. **Obtain and Configure DNS Records**  
-   Configure the DKIM record information (CNAME, etc.) displayed after registration to your DNS server (Route 53, Cloudflare, etc.).
+   Configure the DKIM record information (CNAME, etc.) displayed after registration to your DNS server (Amazon Route 53, Cloudflare, etc.).
 
 3. **Verify Completion**  
    After configuration, the system will verify the domain. It may take up to 2-3 days for the changes to be reflected.
