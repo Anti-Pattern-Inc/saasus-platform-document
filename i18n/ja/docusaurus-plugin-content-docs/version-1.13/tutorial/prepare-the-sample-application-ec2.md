@@ -8,7 +8,7 @@ createdAt: "Fri Jul 19 2024 06:12:42 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Fri Jul 19 2024 06:12:42 GMT+0000 (Coordinated Universal Time)"
 ---
 
-EC2 や Cloud9 を利用して、Blade 版の動作環境を作成する場合はこちらの手順で行ってください。
+Amazon EC2 や AWS Cloud9 を利用して、Blade 版の動作環境を作成する場合はこちらの手順で行ってください。
 
 ## サンプルアプリケーションの準備
 

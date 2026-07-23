@@ -8,7 +8,7 @@ createdAt: "Fri Jul 19 2024 06:12:42 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Fri Jul 19 2024 06:12:42 GMT+0000 (Coordinated Universal Time)"
 ---
 
-Please follow these steps to create a Blade version operating environment using EC2 or Cloud9.
+Please follow these steps to create a Blade version operating environment using Amazon EC2 or AWS Cloud9.
 
 ## Preparing the Sample Application
 

@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-07-23 14:53:16 +0900`
+- Generated: `2026-07-23 15:04:33 +0900`
 
 ---
 ## changelog/20221224.md
@@ -3806,7 +3806,7 @@ Below is the procedure for configuring the SaaSus Platform Smart API Gateway fea
   You need an AWS account to use this feature.
   If you do not have one, access [Create an AWS Account](https://aws.amazon.com/jp/) to sign up for AWS.
 - **SaaS Environment and Sample App**
-  Use CloudFormation to create a SaaS environment and sample app in AWS.
+  Use AWS CloudFormation to create a SaaS environment and sample app in AWS.
   In the AWS environment you will use for verification, run the CloudFormation below.
   After execution, access the URL listed in the CloudFormation outputs, enter the password, and log in to the VSCode environment.
   [Create a SaaS Environment and Sample App](https://github.com/saasus-platform/implementation-sample-smart-api-gateway/blob/main/smart-gateway-sample-saas.yaml)
@@ -9374,7 +9374,7 @@ It can be expressed diagrammatically as follows:
 - Case where an Account is Created from the SaaS Operation Console
   Example)
   Upon request from a user, the SaaS administrator creates an account from the SaaS Operation Console.
-  sign in information is notified to the user via email or EventBridge integration, and the user starts using the account.
+  sign in information is notified to the user via email or Amazon EventBridge integration, and the user starts using the account.
 ### 3.1. Implementation for Self-Signup Case
 #### 3.1.1. Allow User Self-Signup
 SaaS Development Console - Authentication Authorization - Advanced Settings - Authentication Tab - Self-Signup (new registration by the user)
@@ -12297,7 +12297,7 @@ Once the SaaSus Platform is ready, we will incorporate it into the sample applic
 ---
 ## tutorial/prepare-the-sample-application-ec2.md
 ````markdown
-Please follow these steps to create a Blade version operating environment using EC2 or Cloud9.
+Please follow these steps to create a Blade version operating environment using Amazon EC2 or AWS Cloud9.
 ## Preparing the Sample Application
 EC2 creation parameters
 | Item | Setting |
