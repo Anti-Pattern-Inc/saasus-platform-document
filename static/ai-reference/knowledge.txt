@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-07-24 18:27:40 +0900`
+- Generated: `2026-07-24 18:35:00 +0900`
 
 ---
 ## changelog/20221224.md
@@ -9298,8 +9298,8 @@ Within the SDK, `client.SetTraceID()` is called in the `RequestEditorFn` of each
 :::
 ## Viewing and Analyzing Logs
 When Trace ID is propagated, it is recorded as a `trace_id` field in the SaaSus Platform API logs.
-### Viewing in the SaaS Operations Console
-From the "action history log" in the SaaS Operations Console, you can filter by `trace_id` to display a list of related API requests.
+### Viewing in the SaaS Development Console
+From the "API Log" in the SaaS Development Console, you can filter by `trace_id` to display a list of related API requests.
 ### Retrieving and Analyzing API Logs
 You can also programmatically retrieve logs from the SaaSus API and filter by `trace_id`.
 #### Log Response Example
@@ -9321,7 +9321,7 @@ With the same `trace_id: 3564e3c3-...`, you can confirm that 3 API calls are lin
 | Frontend | Generate UUID and attach to `X-SaaSus-Trace-Id` header |
 | Backend | Store header in context via middleware (choose SDK standard or framework-specific) |
 | SDK → SaaSus API | Automatic (no implementation required). `SetTraceID()` retrieves from context and propagates |
-| Log Analysis | Filter by `trace_id` in the SaaS Operations Console or API logs |
+| Log Analysis | Filter by `trace_id` in the API Log of the SaaS Development Console or via the API |
 ## Reference Links
 - [Activity History Log Implementation](./activity-history-log)
 - [SaaSus SDK Go Repository](https://github.com/saasus-platform/saasus-sdk-go)
