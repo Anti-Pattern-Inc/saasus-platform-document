@@ -3,7 +3,7 @@
 - Locale: `ja`
 - Docs source: `i18n/ja/docusaurus-plugin-content-docs/current`
 - API source: `api`
-- Generated: `2026-07-24 18:21:30 +0900`
+- Generated: `2026-07-24 18:27:41 +0900`
 
 ---
 ## changelog/20221224.md
@@ -9240,13 +9240,10 @@ import TabItem from "@theme/TabItem";
 SaaS アプリケーションでは、ユーザーの1つの操作が複数の API リクエストを発生させることがあります。例えば、管理画面のトップページを表示するだけでも、認証・ユーザー情報取得・MFA 状態確認など複数の SaaSus API が呼び出されます。
 Trace ID（`X-SaaSus-Trace-Id`）を利用することで、これらの関連する API リクエストに共通の ID を割り当て、後からログを一括で追跡・分析できるようになります。
 ## アーキテクチャ
-```
-┌─────────────┐     X-SaaSus-Trace-Id     ┌─────────────┐     X-SaaSus-Trace-Id     ┌─────────────┐
-│             │ ────────────────────────> │             │ ────────────────────────> │             │
-│ フロントエンド │                           │ バックエンド   │                           │  SaaSus API │
-│             │                           │             │                           │             │
-└─────────────┘                           └─────────────┘                           └─────────────┘
-   UUID 生成                               context に格納                             ログに記録
+```mermaid
+flowchart LR
+    FE["フロントエンド<br/>UUID 生成"] -->|X-SaaSus-Trace-Id| BE["バックエンド<br/>context に格納"]
+    BE -->|X-SaaSus-Trace-Id| API["SaaSus API<br/>ログに記録"]
 ```
 :::tip ポイント
 バックエンドで context にセットすれば、SDK が全ての SaaSus API リクエストに `X-SaaSus-Trace-Id` を自動伝播します。アプリケーション側で API コールごとにヘッダーを個別設定する必要はありません。
