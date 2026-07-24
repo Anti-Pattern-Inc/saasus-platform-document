@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-07-24 18:21:30 +0900`
+- Generated: `2026-07-24 18:27:40 +0900`
 
 ---
 ## changelog/20221224.md
@@ -9211,13 +9211,10 @@ import TabItem from "@theme/TabItem";
 In SaaS applications, a single user action can trigger multiple API requests. For example, simply displaying the admin dashboard may invoke several SaaSus APIs for authentication, user information retrieval, and MFA status checks.
 By using Trace ID (`X-SaaSus-Trace-Id`), you can assign a common ID to these related API requests, enabling you to trace and analyze logs collectively afterward.
 ## Architecture
-```
-┌─────────────┐     X-SaaSus-Trace-Id     ┌─────────────┐     X-SaaSus-Trace-Id     ┌─────────────┐
-│             │ ────────────────────────> │             │ ────────────────────────> │             │
-│  Frontend   │                           │   Backend   │                           │  SaaSus API │
-│             │                           │             │                           │             │
-└─────────────┘                           └─────────────┘                           └─────────────┘
-  Generate UUID                            Store in context                          Record in logs
+```mermaid
+flowchart LR
+    FE["Frontend<br/>Generate UUID"] -->|X-SaaSus-Trace-Id| BE["Backend<br/>Store in context"]
+    BE -->|X-SaaSus-Trace-Id| API["SaaSus API<br/>Record in logs"]
 ```
 :::tip Key Point
 Once you set the Trace ID in the context on the backend, the SDK automatically propagates `X-SaaSus-Trace-Id` to all SaaSus API requests. There's no need to manually set the header for each API call in your application.

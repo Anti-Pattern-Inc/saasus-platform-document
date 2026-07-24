@@ -18,13 +18,10 @@ By using Trace ID (`X-SaaSus-Trace-Id`), you can assign a common ID to these rel
 
 ## Architecture
 
-```
-┌─────────────┐     X-SaaSus-Trace-Id     ┌─────────────┐     X-SaaSus-Trace-Id     ┌─────────────┐
-│             │ ────────────────────────> │             │ ────────────────────────> │             │
-│  Frontend   │                           │   Backend   │                           │  SaaSus API │
-│             │                           │             │                           │             │
-└─────────────┘                           └─────────────┘                           └─────────────┘
-  Generate UUID                            Store in context                          Record in logs
+```mermaid
+flowchart LR
+    FE["Frontend<br/>Generate UUID"] -->|X-SaaSus-Trace-Id| BE["Backend<br/>Store in context"]
+    BE -->|X-SaaSus-Trace-Id| API["SaaSus API<br/>Record in logs"]
 ```
 
 :::tip Key Point
