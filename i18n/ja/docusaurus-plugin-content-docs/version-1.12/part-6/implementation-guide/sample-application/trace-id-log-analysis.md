@@ -92,7 +92,7 @@ import (
     "context"
 
     "github.com/labstack/echo/v4"
-    "github.com/saasus-platform/saasus-sdk-go/middleware"
+    "github.com/saasus-platform/saasus-sdk-go/ctxlib"
 )
 
 // カスタムミドルウェア実装例
@@ -101,7 +101,7 @@ func SaaSusTraceIDMiddleware() echo.MiddlewareFunc {
         return func(c echo.Context) error {
             traceID := c.Request().Header.Get("X-SaaSus-Trace-Id")
             if traceID != "" {
-                ctx := context.WithValue(c.Request().Context(), middleware.XSaaSusTraceIdKey, traceID)
+                ctx := context.WithValue(c.Request().Context(), ctxlib.XSaaSusTraceIDKey, traceID)
                 c.SetRequest(c.Request().WithContext(ctx))
             }
             return next(c)

@@ -3,7 +3,7 @@
 - Locale: `ja`
 - Docs source: `i18n/ja/docusaurus-plugin-content-docs/current`
 - API source: `api`
-- Generated: `2026-07-24 18:35:00 +0900`
+- Generated: `2026-07-24 18:40:32 +0900`
 
 ---
 ## changelog/20221224.md
@@ -9293,7 +9293,7 @@ http.ListenAndServe(":8080", handler)
 import (
     "context"
     "github.com/labstack/echo/v4"
-    "github.com/saasus-platform/saasus-sdk-go/middleware"
+    "github.com/saasus-platform/saasus-sdk-go/ctxlib"
 )
 // カスタムミドルウェア実装例
 func SaaSusTraceIDMiddleware() echo.MiddlewareFunc {
@@ -9301,7 +9301,7 @@ func SaaSusTraceIDMiddleware() echo.MiddlewareFunc {
         return func(c echo.Context) error {
             traceID := c.Request().Header.Get("X-SaaSus-Trace-Id")
             if traceID != "" {
-                ctx := context.WithValue(c.Request().Context(), middleware.XSaaSusTraceIdKey, traceID)
+                ctx := context.WithValue(c.Request().Context(), ctxlib.XSaaSusTraceIDKey, traceID)
                 c.SetRequest(c.Request().WithContext(ctx))
             }
             return next(c)
