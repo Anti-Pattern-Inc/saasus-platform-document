@@ -1,0 +1,120 @@
+---
+sidebar_position: 3
+title: "Tenant and User Preparation"
+slug: "authentication-preference"
+excerpt: ""
+hidden: false
+createdAt: "Fri Jan 20 2023 01:46:49 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
+---
+
+### Creating a SaaS consumer tenant
+
+First, let's create two tenants for the sample application.
+
+Click “Tenant management” on the side menu.
+
+![01](/img/tutorial/authentication-preference/authentication-preference-01.png)
+
+Click the “Creating a tenant” button to display a pop-up.
+
+The tenant name, addition of representative user, representative email address, representative temporary password, and other tenant attributes added in [Tenant Attributes](/docs/part-4/application-settings/declare-additional-attribute-to-tenant), introduced in Docs are displayed.
+
+
+First one
+
+- tenant name：Tenant sample 1
+- memo：This is the attribute information defined in tenant attributes and can be set freely.
+- Add representative user：Create a new user
+- Representative email address： [saasus-sample-tenant1@example.com](mailto:saasus-sample-tenant1@example.com)
+- Representative's temporary password： Password requirements such as G@2qYPQq
+
+![02](/img/tutorial/authentication-preference/authentication-preference-02.png)
+
+The second one
+
+- tenant name：Sample app tenant 2
+- memo：This is the attribute information defined in tenant attributes and can be set freely.
+- Add representative user：Create a new user
+- Representative email address： [saasus-sample-tenant2@example.com](mailto:saasus-sample-tenant2@example.com)
+- Representative's temporary password： Password requirements such as irG_l88r
+
+(There is no set rule, so you can enter other values as well.)
+
+![03](/img/tutorial/authentication-preference/authentication-preference-03.png)
+
+You have now created a tenant and one user belonging to that tenant.
+
+### Creating a SaaS user
+
+Now, let's take a look at the user list. Click "User management" from the side menu.
+
+The user you created earlier is registered as the admin (SaaS administrator) role for each tenant and each environment.
+
+![04](/img/tutorial/authentication-preference/authentication-preference-04.png)
+
+The SaaSus Platform allows the concept of an "environment" to be used as a tenant for SaaS users.
+
+For example, in a SaaS like Stripe that primarily uses APIs, SaaS users will need an environment for testing and developing integrations. <br/>
+SaaS administrators can now define multiple environments, such as using an environment called a development environment to perform these tasks and an environment called a production environment for actual operations.
+
+![05](/img/tutorial/authentication-preference/authentication-preference-05.png)
+
+:::info
+Depending on SaaS, multiple environments may not be necessary, so if you use a single environment, you only need to be aware of the production environment.
+:::
+
+Now, let's register one user for each tenant.
+
+Click the "Create a new user" button in the upper right corner to display a popup.
+
+The email address, password, tenant, and other user attributes added in [User Attributes](/docs/part-4/user-authz-settings/declare-additional-attribute-to-user), introduced in Docs, are displayed.
+
+For now, let's register 4 people.
+
+email address: [user1-1@example.com](mailto:user1-1@example.com)  
+password： Meets password requirements  
+tenant： Tenant sample 1  
+username： User1-1
+
+![06](/img/tutorial/authentication-preference/authentication-preference-06.png)
+
+email address: [user1-2@example.com](mailto:user1-2@example.com)  
+password： Meets password requirements  
+tenant： Tenant sample 1  
+username： User1-2
+
+email address: [user2-1@example.com](mailto:user2-1@example.com)  
+password： Meets password requirements  
+tenant： Sample app tenant 2  
+username： User2-1
+
+email address: [user2-2@example.com](mailto:user2-2@example.com)  
+password： Meets password requirements  
+tenant： Sample app tenant 2  
+username： User2-2
+
+![07](/img/tutorial/authentication-preference/authentication-preference-07.png)
+
+I was able to register 4 additional users.
+
+Please assign appropriate roles to these users using the steps below.
+
+:::caution Required setup before continuing the tutorial
+To proceed smoothly with the following tutorial steps, it is essential to assign appropriate roles to users in advance.
+
+Refer to the following page to complete this setup:
+
+- [Roles](/docs/part-4/user-authz-settings/role-definition)
+:::
+
+:::info
+The following steps require programming knowledge.
+:::
+
+## Select Your Framework
+
+The following steps involve programming. Please select your framework to continue:
+
+- [Laravel](/docs/tutorial/authentication-module/authentication-laravel)
+- [Express](/docs/tutorial/authentication-module/authentication-express)

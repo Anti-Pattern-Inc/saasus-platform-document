@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-05-19 12:13:58 +0900`
+- Generated: `2026-07-23 17:10:39 +0900`
 
 ---
 ## changelog/20221224.md
@@ -356,6 +356,53 @@ Sign-in ID Authentication
       To avoid affecting existing login screens, the display change setting is initially set to \"OFF\".
       To switch the label, please turn ON \"Add Sign-in ID notation\" from [Authentication Detail Settings] > [Basic Settings] and save.
 With this release, Sign-in ID authentication is now available in addition to the conventional email address authentication. Please choose the appropriate authentication method according to the requirements of your service.
+````
+
+---
+## changelog/20260531.md
+````markdown
+We have released updates on the following features.
+New UI for User Management and Feature Improvements
+　We have launched a new UI (management screen) for the User Management screen, designed to improve usability and performance.
+　Main features
+  - Performance Improvement (Faster Search)
+    As the number of users grew, search operations had been taking longer to complete. With this release, we optimized internal processing and significantly improved performance.
+  - User ID Search
+    In addition to the existing search conditions, you can now filter search results by "User ID".
+  - Integration of the Role Management Screen
+    Along with the migration to the new UI, the conventional "Role Management" screen has been retired. The same management and configuration can now be performed within the new UI.
+　■ How to use the new UI
+　To minimize the impact on existing operations, the conventional UI is displayed by default. To try out the new UI, please follow the steps below to switch.
+  1. Open the User Management screen.
+  2. Turn ON the "Try the new UI (toggle switch)" placed on the screen.
+　※ You can return to the conventional UI at any time by turning the toggle switch OFF.
+With this release, user management can be performed more comfortably and smoothly even in environments with a large number of users. Please try out the comfortable operability of the new UI.
+````
+
+---
+## changelog/20260619.md
+````markdown
+We have released the following features:
+- Date and time range search for API logs
+On the API log search screen, you can now narrow down your search by specifying a start date/time and an end date/time.
+- Filtering by tenant name when creating a new user
+When creating a new user, you can now filter tenants by entering a tenant name.
+````
+
+---
+## changelog/20260623.md
+````markdown
+We would like to inform you about the suspension of the following feature.
+Suspension of the AWS Marketplace Integration Feature
+　Due to changes to the AWS Marketplace integration specification effective June 2026, the current AWS Marketplace integration feature (product listing) no longer supports the new specification, and listing can no longer be completed with the existing procedure.
+　Accordingly, we have suspended new usage of the AWS Marketplace integration feature.
+　■ Impact
+  - New product listings using the AWS Marketplace integration feature cannot be completed.
+　■ Outlook
+  - We will announce the timing of resumption once a plan to support the new specification is in place.
+　■ About the latest listing process
+  - For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+We apologize for any inconvenience this may cause and appreciate your understanding.
 ````
 
 ---
@@ -1428,6 +1475,12 @@ After setting up IP restrictions, access will be limited as follows:
 ---
 ## part-4/aws-marketplace-integration/aws-marketplace-integration.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 The AWS Marketplace integration function supports the "AWS Marketplace listing process" carried out by the "SaaS created using the SaaSus Platform".
 :::caution
 Please note that listing cannot be completed solely by operating within the SaaSus Platform.
@@ -1474,7 +1527,7 @@ Because it's hard to imagine from text, we will introduce the flow to listing in
    :::
    ***
 11. Final review request for SaaS product for production
-    1. [How torequest](/docs/part-4/aws-marketplace-integration/supplementary/final-review-request)
+    1. [How to request](/docs/part-4/aws-marketplace-integration/supplementary/final-review-request)
 12.  Public release request for SaaS product for production
      1. [Request Method](/docs/part-4/aws-marketplace-integration/supplementary/public-request)
 # Criteria for SaaS Products in Listing
@@ -1492,6 +1545,12 @@ Based on the SaaS product guidelines, we will check from the SaaSus Platform whe
 ---
 ## part-4/aws-marketplace-integration/aws-marketplace-seller-registration.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 ### Preparation
 Please prepare an AWS account for AWS Marketplace.
 ### Overall Process
@@ -1508,6 +1567,12 @@ These are necessary registrations and settings for listing on AWS Marketplace, s
 ---
 ## part-4/aws-marketplace-integration/aws-marketplace-seller-registration/aws-marketplace-seller-registration.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 You will register as a seller on <a href="https://aws.amazon.com/marketplace/partners/management-tour" target="_blank">AWS Marketplace</a>.
 Please start the registration from `Register now` on the page displayed in the link above.
 ![aws-marketplace-seller-registration-1](/img/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/aws-marketplace-seller-registration-1.png)
@@ -1524,6 +1589,12 @@ After registration, proceed to the Public profile settings.
 ---
 ## part-4/aws-marketplace-integration/aws-marketplace-seller-registration/dac7-tax-survey.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 DAC7 refers to the European Commission's directive regarding tax reporting by corporations.
 This directive imposes a tax reporting obligation on subsidiaries, parent corporations, proportionate consolidation corporations, joint ventures and decentralized corporations in the European Union.
 Information sharing on taxation is required to prevent attempts to reduce domestic tax through business expansion or the start of new businesses under control of overseas enterprises.
@@ -1540,10 +1611,16 @@ On the Client Dashboard, press Finish Interview to finish the interview regardin
 ---
 ## part-4/aws-marketplace-integration/aws-marketplace-seller-registration/hyperwallet-registration.md
 ````markdown
-When you click on `Sign up for Hyper wallet` from the bank account registration, you will be directed to the following page.
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
+When you click on `Sign up for Hyperwallet` from the bank account registration, you will be directed to the following page.
 Select the account verification method and valid code.
 ![hyperwallet-registration-1](/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-1.png)
-You will asked to enter a valid code. Please enter the `Pin Code` found below `Sign up for Hyper wallet` on the previous page, and then press the continue button.
+You will be asked to enter a valid code. Please enter the `Pin Code` found below `Sign up for Hyperwallet` on the previous page, and then press the continue button.
 ![hyperwallet-registration-2](/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-2.png)
 After entering, you will be asked to specify the account type. Please select an option that suits your environment.
 ![hyperwallet-registration-3](/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-3.png)
@@ -1566,7 +1643,7 @@ Specify the account for transfer and press Continue.
 ![hyperwallet-registration-11](/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-11.png)
 After moving to the next page, enter the bank account information for the transfer and press Submit.
 ![hyperwallet-registration-12](/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-12.png)
-After pressing Submit, an US deposit account will be created.
+After pressing Submit, a US deposit account will be created.
 ![hyperwallet-registration-13](/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-13.png)
 After registration, return to setting up your bank account.
 ````
@@ -1574,6 +1651,12 @@ After registration, return to setting up your bank account.
 ---
 ## part-4/aws-marketplace-integration/aws-marketplace-seller-registration/public-profile-settings.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 After seller registration, log into the <a href="https://aws.amazon.com/marketplace/management/homepage" target="_blank">AWS Marketplace Management Portal</a> and set your Public profile.
 Please start the settings from `Add public profile` under Settings.
 ![public-profile-settings-1](/img/part-4/aws-marketplace-integration/public-profile-settings/public-profile-settings-1.png)
@@ -1588,6 +1671,12 @@ After completing the Public profile settings, please start setting up your bank 
 ---
 ## part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 Next, click on `Add bank account` under `Payment Information`.
 ![new-register-bank-account-1](/img/part-4/aws-marketplace-integration/register-bank-account/new-register-bank-account-1.png)
 First, you need to select a payment method. You can choose a US-based ACH account, SWIFT account, or Hyperwallet account. SWIFT accounts can be used for any supported currency (AUD, EUR, GBP, JPY, USD), whereas US-based ACH and Hyperwallet accounts can only use USD.
@@ -1616,6 +1705,12 @@ Please refer to the next page, `Setting up Disbursement Methods`.
 ---
 ## part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-disbursement-methods.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 :::caution
 Please ensure that your bank account setup is complete beforehand. If you haven't done this yet, refer to [Bank Account Setup](/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration/register-bank-account).
 :::
@@ -1640,6 +1735,12 @@ With this, the necessary settings to start the listing process are complete.
 ---
 ## part-4/aws-marketplace-integration/aws-marketplace-seller-registration/tax-information-interview.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 ## For Customers Based in Japan
 Check `Payment Information` from the Settings page on <a href="https://aws.amazon.com/marketplace/management/seller-settings/account" target="_blank">AWS Marketplace Management Portal</a>.
 You may find an error displayed, which will not allow you to proceed with the next steps.
@@ -1676,9 +1777,15 @@ You have completed your submission and finished the interview regarding tax info
 ````markdown
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 If you are offering a SaaS product on the SaaSus Platform, you will need to implement consideration for multitenant in the purchase flow by existing users.
 :::caution
-Please finish the implementation until the test phase of the 'Confirmation of Integration with AWS Marketplace'. Since it will be subject to review by the AWS Marketpalce Support team, you will not be allowed to list it without proper implementation.
+Please finish the implementation until the test phase of the 'Confirmation of Integration with AWS Marketplace'. Since it will be subject to review by the AWS Marketplace Support team, you will not be allowed to list it without proper implementation.
 :::
 When an existing user purchases a product from AWS Marketplace and signs in to your SaaS, the association between the existing user and the purchased product has not completed yet.
 This is because the purchased product needs to be associated with the tenant. In the SaaSus Platform specifications, an existing user may belong to multiple tenants. Since SaaSus Platform cannot comprehend that, you are required to implement an association between the purchased product and the tenant the user belongs to, on your side.
@@ -1745,6 +1852,12 @@ function post(Request $request)
 ---
 ## part-4/aws-marketplace-integration/product-submission.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 You will register the SaaS product information on the AWS Marketplace Management Portal.
 :::caution
 Before carrying out these procedures, please make sure that you have completed the [Seller Registration and Setting Disbursement methods](/docs/part-4/aws-marketplace-integration/aws-marketplace-seller-registration) procedure.
@@ -1765,6 +1878,12 @@ The input content etc. will be published on the `AWS Marketplace`. Please check 
 ---
 ## part-4/aws-marketplace-integration/product-submission/generate-product-code.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 To register SaaS product information, first access the <a href="https://aws.amazon.com/marketplace/management/homepage" target="_blank">AWS Marketplace Management Portal</a>, and then proceed with registration as follows.
 On the `AWS Marketplace Management Portal`, select `SaaS` from the `Product` menu.
 ![](/img/part-4/aws-marketplace-integration/product-submission/generate-product-code/generate-product-code-1.png)
@@ -1779,6 +1898,12 @@ After about 10 seconds, the product ID and product code are generated, and the `
 ---
 ## part-4/aws-marketplace-integration/product-submission/step1-provide-product-information.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 Next, you'll enter the information necessary to publish the SaaS product.
 :::info
 Since there's a lot of information to input, it's recommended that you prepare ahead of time. Please check the supplementary documents to understand the limitations for each input field and how it will be published on the AWS Marketplace. See examples [here](/docs/part-4/aws-marketplace-integration/supplementary/supplementary-1) and input field details [here](/docs/part-4/aws-marketplace-integration/supplementary/supplementary-2).
@@ -1808,6 +1933,12 @@ After entering the product-related information, click `Next` to proceed.
 ---
 ## part-4/aws-marketplace-integration/product-submission/step2-configure-fulfillment-options.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 Next, enter the URL to which customers will be redirected upon purchasing the product on the AWS Marketplace.
 The URL to be entered is displayed in the instruction sheet output by the SaaSus Platform's AWS Marketplace integration function, please copy and paste it into the Fulfillment URL input area.
 :::caution
@@ -1822,6 +1953,12 @@ After completing the input, press `Next` to proceed.
 ---
 ## part-4/aws-marketplace-integration/product-submission/step3-configure-product-pricing.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 Next, you'll input the pricing model and its type to be sold on the AWS Marketplace.
 Firstly, for the pricing model, select `Contract-based pricing`.
 :::caution
@@ -1846,6 +1983,12 @@ After completing the input, press `Next` to proceed.
 ---
 ## part-4/aws-marketplace-integration/product-submission/step4-set-prices.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 Next, enter the purchase options and contract duration for the product to be sold on the AWS Marketplace.
 Please enter the `Purchasing options` and `Contract duration options` in accordance with the instructions in the output from the AWS Marketplace integration function.
 :::caution
@@ -1860,6 +2003,12 @@ After completing the input, press `Next` to proceed.
 ---
 ## part-4/aws-marketplace-integration/product-submission/step5-specify-refund-policy.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 Next, input information about the refund policy.
 This is where you'll specify the refund policy for selling the SaaS product on the AWS Marketplace. This should be provided by the seller themselves.
 :::info
@@ -1872,6 +2021,12 @@ After completing the input, press `Next` to proceed.
 ---
 ## part-4/aws-marketplace-integration/product-submission/step6-configure-eula.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 Next, choose the end-user license agreement (EULA) for selling on the AWS Marketplace.
 If you want to use the terms defined in the AWS Marketplace, please select `Standard Contract for AWS Marketplace (SCMP)`.
 :::info
@@ -1886,6 +2041,12 @@ After completing the input, press `Next` to proceed.
 ---
 ## part-4/aws-marketplace-integration/product-submission/step7-configure-offer-availability.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 Next, you'll decide the countries in which to sell your SaaS product.
 Please proceed with entering the countries as per your business.
 If you want to target all countries, select `All countries`.
@@ -1900,6 +2061,12 @@ After completing the input, press `Next` to proceed.
 ---
 ## part-4/aws-marketplace-integration/product-submission/step8-configure-allowlist.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 Next, you'll set up the AWS account ID to use for testing during partnership verification.
 When your SaaS product is in limited release, only the designated accounts will be able to view and purchase the product.
 :::info
@@ -1913,12 +2080,24 @@ This completes the registration of the SaaS product information.
 ---
 ## part-4/aws-marketplace-integration/supplementary.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 This document collates additional information for seller registration, SaaS product information registration, and details related to AWS Marketplace integration functionality.
 ````
 
 ---
 ## part-4/aws-marketplace-integration/supplementary/final-review-request.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 Once you have completed the [exhibition steps '10. Confirmation of integration with AWS Marketplace'](/docs/part-4/aws-marketplace-integration/aws-marketplace-integration), you can request a final review from the AWS Marketplace support team.
 First, access the <a href="https://aws.amazon.com/marketplace/management/homepage" target="_blank">AWS Marketplace Management Portal</a> and open the product detail page you want to manage.
 Then click on `Update visibility` located on the right of the alert displayed at the top of the page.
@@ -1936,6 +2115,12 @@ That's all you need to do to request a final review.
 ---
 ## part-4/aws-marketplace-integration/supplementary/integration-test.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 Please check the URL of the product page that is privately published on AWS Marketplace in advance.
 ### How to Check the Product Page URL
 1. Sign in to AWS Marketplace Management Portal.
@@ -1974,9 +2159,15 @@ Confirmation Example
 ---
 ## part-4/aws-marketplace-integration/supplementary/public-request.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 Once you've completed the [Listing Procedure "11. Final Review Request of Production SaaS Product"](/docs/part-4/aws-marketplace-integration/aws-marketplace-integration), you will receive an email from the AWS Marketplace Support Team detailing the process to request publication. Follow these instructions to request your publication.
 :::caution
-While we have prepared a document regarding the publication request process based on our prior research, the actual instructions provided in the email you'll receive represents the most updated procedure and should be followed accordingly.
+While we have prepared a document regarding the publication request process based on our prior research, the actual instructions provided in the email you'll receive represent the most updated procedure and should be followed accordingly.
 :::
 First, you need to make a publication request in the AWS Marketplace Management Portal.
 1. Access the <a href="https://aws.amazon.com/marketplace/management/homepage" target="_blank">AWS Marketplace Management Portal</a>
@@ -1992,6 +2183,12 @@ With this process, your SaaS product will be published on the AWS Marketplace by
 ---
 ## part-4/aws-marketplace-integration/supplementary/self-up-setting.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 1. Access <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Advanced Setting of SaaS Development Console</a>.
 2. Please click on the `Authentication` tab.
 3. Scroll down to find the item for enabling or disabling Self-Signup (new registration by the user).
@@ -2003,6 +2200,12 @@ That completes the setting. It will be reflected in the actual screen after a fe
 ---
 ## part-4/aws-marketplace-integration/supplementary/supplementary-1.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 ## Product Overview
 The `Product title`, `Short description`, `Long description`, `Product logo S3 URL` etc, input in Step 1: Provide product information, are displayed as `Product Overview` when the product is published.
 ![supplementary-1-1](/img/part-4/aws-marketplace-integration/supplementary/supplementary-1-1.png)
@@ -2023,6 +2226,12 @@ The `AWS Marketplace discoverability` input in Step 1: Provide product informati
 ---
 ## part-4/aws-marketplace-integration/supplementary/supplementary-2.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 The information you enter here can be checked in the [About the Contents Entered in Create Product and the Published Details](/docs/part-4/aws-marketplace-integration/supplementary/supplementary-1) to see what will be published on AWS Marketplace.
 ## Step1 : Provide product information
 | Input Field                        | Description                                                                                                                                                                                                                                                  | Required | Input Type       | Constraints                                              |
@@ -2082,6 +2291,12 @@ The information you enter here can be checked in the [About the Contents Entered
 ---
 ## part-4/aws-marketplace-integration/supplementary/supplementary-3.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 1. Sign in to the AWS Management Console.
 2. Please access this <a href="https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks?filteringText=&filteringStatus=active&viewNested=true" target="_blank">link</a>.
 3. When the following page is displayed, select the stack 'AWS-Marketplace-seller-Resource'.
@@ -2096,6 +2311,12 @@ The information you enter here can be checked in the [About the Contents Entered
 ---
 ## part-4/aws-marketplace-integration/supplementary/user-judgment-method.md
 ````markdown
+<!-- aws-mp-freeze-notice -->
+:::danger The AWS Marketplace integration feature is currently unavailable
+The AWS Marketplace integration specification changed in June 2026. Because this feature (listing on AWS Marketplace) does not yet support the new specification, listing can no longer be completed with this procedure, and new usage has been suspended.
+We will let you know the timing of resumption once a plan to support the new specification is in place.
+For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
+:::
 We will use the SAASUS AWS MARKETPLACE API.
 Use the endpoint named [GetCustomers](/docs/reference/awsmarketplace-api#tag/awsMarketplace/operation/GetCustomers). Please refer to the document for details on the specification.
 ## Flow till Judgment
@@ -2108,7 +2329,7 @@ Use the endpoint named [GetCustomers](/docs/reference/awsmarketplace-api#tag/aws
 ## part-4/integrate-with-amazon-eventbridge.md
 ````markdown
 SaaSus Platform is integrated with Amazon EventBridge. Various events that occur on the SaaSus Platform can be sent to Amazon EventBridge in the SaaS-side AWS account as a partner event source. By leveraging this, SaaS can be built with an event-driven architecture that works in conjunction with SaaSus Platform.
-For example, it can be used to trigger a tenant onboarding process when a SaaS tenant is created, or to trigger the deletion of accompanying data when a user is deleted. Currently, you can retrieve events for all SaaSus APIs. Please check [API Reference](/docs/reference/getting-started-with-your-api) for the contents of each API.
+For example, it can be used to trigger a tenant onboarding process when a SaaS tenant is created, or to trigger the deletion of accompanying data when a user is deleted. Currently, you can retrieve events for SaaSus APIs except for reference (GET) operations. Please check [API Reference](/docs/reference/getting-started-with-your-api) for the contents of each API.
 ## How to integrate with Amazon EventBridge
 Open the [Event Integration Page of the SaaS Development Console](https://settings.console.saasus.io/integrations/event).
 ![01](/img/part-4/integrate-with-amazon-eventbridge/image-01.png)
@@ -2136,7 +2357,7 @@ In the event pattern section, first describe the following pattern to get all Sa
 }
 ```
 In this case, all events are retrieved, but you can filter events to retrieve only those for specific API calls.
-In this case, let's output all events to CloudWatch Logs to see what kind of events are delivered.
+In this case, let's output all events to Amazon CloudWatch Logs to see what kind of events are delivered.
 ![11](/img/part-4/integrate-with-amazon-eventbridge/image-11.png)
 ![12](/img/part-4/integrate-with-amazon-eventbridge/image-12.png)
 After all settings are complete, click Create rule and confirm that the rule has been created.
@@ -2147,7 +2368,7 @@ Now that we are ready to link events. Send a test event by returning to the SaaS
 If the event arrives successfully, the event should be recorded in CloudWatch Logs. Let's check.
 ![16](/img/part-4/integrate-with-amazon-eventbridge/image-16.png)
 We are now able to retrieve events in this manner.
-In this case, we linked to CloudWatch Logs, but it is possible to link events to various targets such as Lambda and other APIs. This allows us to apply an event-driven architecture, separating where the SaaSus API was called from and when it was called, and what should be done as a result and when.
+In this case, we linked to CloudWatch Logs, but it is possible to link events to various targets such as AWS Lambda and other APIs. This allows us to apply an event-driven architecture, separating where the SaaSus API was called from and when it was called, and what should be done as a result and when.
 The "detail" entry contains a "trace_id". This is the same as the one specified at the time of the SaaSus API request or the one generated automatically, so you can trace which API call caused the event.
 ````
 
@@ -3585,7 +3806,7 @@ Below is the procedure for configuring the SaaSus Platform Smart API Gateway fea
   You need an AWS account to use this feature.
   If you do not have one, access [Create an AWS Account](https://aws.amazon.com/jp/) to sign up for AWS.
 - **SaaS Environment and Sample App**
-  Use CloudFormation to create a SaaS environment and sample app in AWS.
+  Use AWS CloudFormation to create a SaaS environment and sample app in AWS.
   In the AWS environment you will use for verification, run the CloudFormation below.
   After execution, access the URL listed in the CloudFormation outputs, enter the password, and log in to the VSCode environment.
   [Create a SaaS Environment and Sample App](https://github.com/saasus-platform/implementation-sample-smart-api-gateway/blob/main/smart-gateway-sample-saas.yaml)
@@ -5082,6 +5303,11 @@ This page provides detailed explanations of the following:
 ---
 ## part-5/user-management/user-crud.md
 ````markdown
+:::info Switching Screens
+User Management has two modes: "Old Screen" and "New Screen".
+You can switch between them using the toggle next to the page heading.
+For new screen operations, see [(New Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-management-new-ui).
+:::
 ## Search Users
 You can filter and search users using the following criteria:
 **Available search filters:**
@@ -5150,6 +5376,89 @@ Clicking the delete icon opens a confirmation window with two deletion options.
 ## Related Links
 To view user activity history,
 see [User Activity History Log](/docs/part-5/user-management/user-activity-history-log).
+````
+
+---
+## part-5/user-management/user-management-new-ui.md
+````markdown
+:::info Switching Screens
+User Management has two modes: "Old Screen" and "New Screen".
+You can switch between them using the toggle next to the page heading.
+For old screen operations, see [(Old Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-crud).
+:::
+## Overview
+The user list is split into two tabs: "Tenant Users" and "SaaS Users".
+Search is performed server-side, providing fast results even with a large number of users.
+<!-- Target: The state immediately after switching to the new screen. The toggle switch next to the heading is ON, and the Tenant Users tab is displayed. -->
+![Overview](/img/part-5/user-management/user-management-new-ui/overview.png)
+## Switching Screens
+A toggle switch appears next to the "User Management" page heading.
+- OFF (default): Displays the old screen. Label reads "Use new screen".
+- ON: Displays the new screen. Label reads "Use old screen".
+A confirmation dialog appears only on the first switch.
+Your selection is saved in the browser and persists across sessions.
+<!-- Target: The toggle switch to the right of the "User Management" heading. OFF state with "Use new screen" label visible. -->
+![Screen Toggle](/img/part-5/user-management/user-management-new-ui/screen-toggle.png)
+<!-- Target: The "Switch to new user management screen?" dialog. The subtitle explaining Role Management changes should be visible. -->
+![Toggle Confirm Dialog](/img/part-5/user-management/user-management-new-ui/toggle-confirm-dialog.png)
+:::warning Role Management Menu Change
+When the new screen is enabled, the "Role Management" menu is hidden from the sidebar.
+Role assignment is performed within the user detail drawer.
+:::
+## Tenant Users Tab
+Displays users who belong to a tenant.
+### Search and Filters
+You can filter users by the following criteria:
+| Field | Input Type | Search Method |
+|-------|-----------|---------------|
+| Email / Login ID | Text input | Prefix match |
+| User ID | Text input | Exact match |
+| Tenant | Autocomplete | Selection |
+| Environment | Select box | Selection |
+| Role | Select box | Selection |
+Selecting a tenant enables the Environment and Role filters.
+<!-- Target: The full filter area of the Tenant Users tab. The email input, user ID input, and tenant/environment/role selectors should be visible. -->
+![Tenant User Filter](/img/part-5/user-management/user-management-new-ui/overview.png)
+### List and Pagination
+Search results are displayed in a table format.
+You can change the number of rows per page and navigate using "Previous" and "Next" buttons.
+### Editing Users
+Click the edit icon on a row to open a side drawer on the right.
+The side drawer allows the following operations:
+**Editable fields:**
+- Basic information (email or login ID)
+- User attributes (username, department, etc.)
+- Environment and role assignments
+**Available actions:**
+- Password reset
+- MFA removal
+<!-- Target: The tenant user edit drawer showing the basic information section, user attributes section, and environment/roles section. -->
+![Edit Drawer](/img/part-5/user-management/user-management-new-ui/edit-drawer.png)
+### Deleting Users
+Click the delete icon on a row to display a confirmation dialog.
+You can choose from two deletion methods:
+- **Remove from tenant**: Removes the user from the selected tenant only.
+- **Remove from SaaS**: Permanently deletes the user from SaaSus Platform and removes them from all tenants.
+## SaaS Users Tab
+Displays all users registered in SaaS, regardless of tenant membership.
+This allows SaaS-level user management.
+### Search and Filters
+| Field | Input Type | Search Method |
+|-------|-----------|---------------|
+| Email / Login ID | Text input | Prefix match |
+| User ID | Text input | Exact match |
+<!-- Target: The full SaaS Users tab showing the filter area and user list table. -->
+![SaaS User Tab](/img/part-5/user-management/user-management-new-ui/saas-user-tab.png)
+### Editing Users
+Editing works the same as the Tenant Users tab, using a side drawer.
+In the SaaS Users tab drawer, you can view all tenants the user belongs to.
+### Deleting Users
+Click the delete icon to display a confirmation dialog for SaaS deletion.
+Only "Remove from SaaS" is available in the SaaS Users tab.
+## Creating New Users
+Click the "Create New User" button at the top right of the screen to open the creation dialog.
+The input fields are the same as the old screen.
+For details, see [(Old Screen) Search, Edit, Create, or Assign Users to Tenants > Create a New User](/docs/part-5/user-management/user-crud#create-a-new-user).
 ````
 
 ---
@@ -5758,7 +6067,7 @@ import TabItem from '@theme/TabItem';
 This is an implementation example of a SaaS application using SaaSus Platform's serverless approach.
 You can learn while running the necessary features for SaaS, such as authentication, tenant management, and user management, in a serverless environment.
 ### Key Features
-- **Serverless Architecture**: AWS Lambda + CloudFront + S3
+- **Serverless Architecture**: AWS Lambda + Amazon CloudFront + Amazon S3
 - **React + TypeScript**: Using React for the frontend
 - **JWT Authentication**: Token management in browser's local storage
 - **CDK Support**: Infrastructure construction and deployment using AWS CDK
@@ -8163,15 +8472,34 @@ public async Task<IHttpActionResult> GetAllUnitsMonthCount(
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 This page explains how to implement Multi-Factor Authentication (MFA) functionality using the SaaSus Auth API, based on the sample application's MFA settings feature.
+The sample application supports the following two authentication methods:
+- **Authenticator App (TOTP)**: Uses one-time codes generated by authenticator apps such as Google Authenticator or Authy
+- **Email Authentication**: Sends an authentication code to the registered email address at login
+:::caution Note on Email Authentication Method
+Users who use "Email" as their Multi-Factor Authentication (MFA) method cannot reset their password from the login screen generated by SaaSus Platform.
+To reset the password for such users, an administrator must perform the password reset from the User Management screen in the SaaS Operation Console.
+:::
 Below is a screenshot of the multi-factor authentication settings dialog.
 ![](/img/part-6/implementation-guide/sample-application/multi-factor-authentication/mfa-setting-dialog.png)
-※This QR code is dummy data for demonstration purposes. It cannot be used for actual authentication.
 The MFA functionality provides the following features:
-- Check MFA settings status
+- Check MFA settings status and authentication method
+- Select authentication method (Authenticator App / Email)
 - Register authentication applications (Google Authenticator, etc.)
 - Enable/disable MFA
 - Easy setup with QR codes
+- Switch between authentication methods
+:::info Prerequisites
+To use email authentication, you must complete domain name settings and email sending domain authentication (DKIM) in SaaSus Platform.
+See [Domain, Email Sending Domain Authentication, and Redirect Settings](/docs/part-4/application-settings/domain-and-redirect-settings) for details.
+:::
 ## Frontend Implementation
+### Authentication Method Selection UI Flow
+The frontend manages the MFA settings dialog display using a state machine.
+1. When the dialog opens, it fetches MFA status via `GET /mfa_status`
+2. If not configured, it displays the method selection screen (card selection for Authenticator App / Email)
+3. If Authenticator App is selected, it transitions to QR code display and verification code input
+4. If Email is selected, it displays a confirmation screen and executes enablement
+5. If already configured, it displays the current method and allows switching to another method or disabling
 ### Example Implementations
 The following links point to repositories that include implementations of the frontend.
 - **React**: [`UserMfaSettingDialog.tsx`](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/components/dialogs/UserMfaSettingDialog.tsx) - MFA Settings Dialog Component
@@ -8191,7 +8519,7 @@ The following links point to repositories that include implementations of the fr
       <tr>
         <td>MFA Status Check</td>
         <td><code>GET /mfa_status</code></td>
-        <td>Retrieves the user's MFA enabled/disabled status.</td>
+        <td>Retrieves the user's MFA enabled/disabled status and authentication method.</td>
       </tr>
       <tr>
         <td>MFA Setup</td>
@@ -8204,9 +8532,14 @@ The following links point to repositories that include implementations of the fr
         <td>Verifies authentication code from authentication app and registers MFA.</td>
       </tr>
       <tr>
-        <td>MFA Enable</td>
+        <td>MFA Enable (Authenticator App)</td>
         <td><code>POST /mfa_enable</code></td>
-        <td>Enables MFA for the user.</td>
+        <td>Enables MFA with authenticator app method.</td>
+      </tr>
+      <tr>
+        <td>MFA Enable (Email)</td>
+        <td><code>POST /mfa_email_enable</code></td>
+        <td>Enables MFA with email authentication method.</td>
       </tr>
       <tr>
         <td>MFA Disable</td>
@@ -8220,10 +8553,11 @@ The following links point to repositories that include implementations of the fr
 The following code samples assume Go for the backend.
 :::
 ### MFA Status Check Endpoint
+`GET /mfa_status` returns the MFA enabled/disabled status along with the currently configured authentication method (`softwareToken` or `email`).
 <Tabs>
 <TabItem value="go" label="Go" default>
 ```go
-// Retrieve MFA status (enabled/disabled)
+// Retrieve MFA status (enabled/disabled and authentication method)
 func getMfaStatus(c echo.Context) error {
 	// Retrieve user information from context
 	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
@@ -8231,18 +8565,34 @@ func getMfaStatus(c echo.Context) error {
 		c.Logger().Error("Failed to get user info")
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
 	}
-	// Use the SaaSus API to get the user's MFA status
+	// Use the SaaSus API to get the user's MFA settings
 	response, err := authClient.GetUserMfaPreferenceWithResponse(context.Background(), userInfo.Id)
 	if err != nil || response.JSON200 == nil {
 		c.Logger().Errorf("failed to get MFA status: %v", err)
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve MFA status"})
 	}
-	// Return MFA enabled/disabled status
-	return c.JSON(http.StatusOK, map[string]bool{"enabled": response.JSON200.Enabled})
+	// Return MFA enabled/disabled status and authentication method
+	result := map[string]interface{}{
+		"enabled": response.JSON200.Enabled,
+	}
+	if response.JSON200.Method != nil {
+		result["method"] = string(*response.JSON200.Method)
+	}
+	return c.JSON(http.StatusOK, result)
 }
 ```
 </TabItem>
 </Tabs>
+Response examples:
+```json
+{ "enabled": true, "method": "softwareToken" }
+```
+```json
+{ "enabled": true, "method": "email" }
+```
+```json
+{ "enabled": false }
+```
 #### Implementation Example Links
 The following links contain implementations of this endpoint.
 Search for the function name to find the relevant section.
@@ -8252,6 +8602,8 @@ Search for the function name to find the relevant section.
 - **C# (.NET 8)**: [`app.MapGet("/mfa_status"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
 - **C# (.NET Framework 4.8)**: [`GetMfaStatus`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
 ### MFA Setup Endpoint
+Used when setting up MFA with the authenticator app method.
+Generates a QR code URL for the user to scan with their authenticator app to register a TOTP device.
 <Tabs>
 <TabItem value="go" label="Go" default>
 ```go
@@ -8297,6 +8649,7 @@ Search for the function name to find the relevant section.
 - **C# (.NET 8)**: [`app.MapGet("/mfa_setup"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
 - **C# (.NET Framework 4.8)**: [`SetupMfa`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
 ### MFA Authentication Code Verification Endpoint
+Verifies the 6-digit code generated by the authenticator app and registers the TOTP device.
 <Tabs>
 <TabItem value="go" label="Go" default>
 ```go
@@ -8346,19 +8699,20 @@ Search for the function name to find the relevant section.
 - **Java (Spring)**: [`verifyMfa`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
 - **C# (.NET 8)**: [`app.MapPost("/mfa_verify"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
 - **C# (.NET Framework 4.8)**: [`VerifyMfa`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
-### MFA Enable Endpoint
+### MFA Enable Endpoint (Authenticator App)
+Called after successful verification code validation to enable MFA with the authenticator app method.
 <Tabs>
 <TabItem value="go" label="Go" default>
 ```go
-// Enable MFA for the user
+// Enable MFA (Authenticator App)
 func enableMfa(c echo.Context) error {
 	// Retrieve user information from context
 	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
 	if !ok {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
 	}
-	// Create request body to enable MFA
-	method := authapi.SoftwareToken
+	// Create request body to enable MFA with authenticator app
+	method := authapi.MfaPreferenceMethodSoftwareToken
 	requestBody := authapi.UpdateUserMfaPreferenceJSONRequestBody{
 		Enabled: true,
 		Method:  &method,
@@ -8382,6 +8736,48 @@ Search for the function name to find the relevant section.
 - **Java (Spring)**: [`enableMfa`](https://github.com/saasus-platform/implementation-sample-api-java/blob/main/src/main/java/implementsample/controller/SampleController.java)
 - **C# (.NET 8)**: [`app.MapPost("/mfa_enable"`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Program.cs)
 - **C# (.NET Framework 4.8)**: [`EnableMfa`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/MainController.cs)
+### MFA Enable Endpoint (Email Authentication)
+:::info SDK Support Status
+Currently, only the **Go** and **JavaScript** SDKs support enabling MFA with the email authentication method.
+:::
+Enables MFA with the email authentication method.
+Unlike the authenticator app method, device registration (setup/verify) is not required.
+Once enabled, an authentication code will be sent to the registered email address at next login.
+<Tabs>
+<TabItem value="go" label="Go" default>
+```go
+// Enable MFA with email authentication
+func enableMfaEmail(c echo.Context) error {
+	// Retrieve user information from context
+	userInfo, ok := c.Get(string(ctxlib.UserInfoKey)).(*authapi.UserInfo)
+	if !ok {
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
+	}
+	// Create request body to enable MFA with email authentication
+	method := authapi.MfaPreferenceMethodEmail
+	requestBody := authapi.UpdateUserMfaPreferenceJSONRequestBody{
+		Enabled: true,
+		Method:  &method,
+	}
+	// Use the SaaSus API to enable MFA with email authentication
+	_, err := authClient.UpdateUserMfaPreferenceWithResponse(context.Background(), userInfo.Id, requestBody)
+	if err != nil {
+		c.Logger().Errorf("Failed to enable email MFA: %v", err)
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to enable email MFA"})
+	}
+	return c.JSON(http.StatusOK, map[string]string{"message": "Email MFA has been enabled"})
+}
+```
+</TabItem>
+</Tabs>
+#### Implementation Example Links
+The following links contain implementations of this endpoint.
+Search for the function name to find the relevant section.
+- **Go (Echo)**: [`enableMfaEmail`](https://github.com/saasus-platform/implementation-sample-api-go/blob/main/main.go)
+- **Python (FastAPI)**: To be added after SDK support for email authentication method
+- **Java (Spring)**: [`enableMfaEmail`](https://github.com/saasus-platform/implementation-sample-api-java/blob/feature/mfa-email/src/main/java/implementsample/controller/SampleController.java) (Available on feature branch, pending SDK release)
+- **C# (.NET 8)**: To be added after SDK support for email authentication method
+- **C# (.NET Framework 4.8)**: To be added after SDK support for email authentication method
 ### MFA Disable Endpoint
 <Tabs>
 <TabItem value="go" label="Go" default>
@@ -8394,7 +8790,7 @@ func disableMfa(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to retrieve user information"})
 	}
 	// Create request body to disable MFA
-	method := authapi.SoftwareToken
+	method := authapi.MfaPreferenceMethodSoftwareToken
 	requestBody := authapi.UpdateUserMfaPreferenceJSONRequestBody{
 		Enabled: false,
 		Method:  &method,
@@ -8502,12 +8898,12 @@ This is an implementation approach where the backend is configured as an API ser
 ### Security Functions
 #### [`UserMfaSettingDialog.tsx`](https://github.com/saasus-platform/implementation-sample-front-react/blob/main/src/components/dialogs/UserMfaSettingDialog.tsx) - Multi-Factor Authentication Settings Dialog
 ![Multi-Factor Authentication Settings Dialog](/img/part-6/implementation-guide/sample-application/overview/mfa-setting-dialog.png)
-*This QR code contains dummy data for demonstration purposes only and cannot be used for actual authentication.
-- **MFA Status Check**: Check enabled/disabled status
-- **QR Code Generation**: Display QR code for Google Authenticator etc.
-- **Authentication Code Verification**: Verification of 6-digit codes generated by authenticator apps
-- **MFA Enable/Disable**: Toggle settings
-- **Device Re-registration**: Setup on new devices
+- **Authentication Method Selection**: Choose between Authenticator App (TOTP) and Email Authentication
+- **MFA Status Check**: Check enabled/disabled status and current authentication method
+- **Authenticator App Setup**: QR code display and 6-digit code verification
+- **Email Authentication Setup**: Enable email authentication with one click
+- **Method Switching**: Switch from current authentication method to another
+- **MFA Disable**: Disable multi-factor authentication
 ## Implemented Features
 ### Custom Attribute Functions
 - Flexible setting and display of user and tenant attributes
@@ -8952,7 +9348,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 This document will explain how SaaS user accounts are managed on the SaaSus Platform.
 ## 1. Components of an Account
-An account consist of the following elements, which must all be set to allow usage:
+An account consists of the following elements, which must all be set to allow usage:
 - SaaS User
   Stores the authentication data (ID, Password) for the SaaS
 - Tenant User
@@ -8978,7 +9374,7 @@ It can be expressed diagrammatically as follows:
 - Case where an Account is Created from the SaaS Operation Console
   Example)
   Upon request from a user, the SaaS administrator creates an account from the SaaS Operation Console.
-  sign in information is notified to the user via email or EventBridge integration, and the user starts using the account.
+  sign in information is notified to the user via email or Amazon EventBridge integration, and the user starts using the account.
 ### 3.1. Implementation for Self-Signup Case
 #### 3.1.1. Allow User Self-Signup
 SaaS Development Console - Authentication Authorization - Advanced Settings - Authentication Tab - Self-Signup (new registration by the user)
@@ -9041,7 +9437,7 @@ This verification can be performed by checking whether the tenants information i
 </TabItem>
 </Tabs>
 #### 3.1.3. Implementation Sample
-Try modifying the <a href="/docs/part-6/usecase/about-saas-user-accounts/create-tenant" target="blank">Creating a Tenant</a>, so that tenant registration can be done.
+Try modifying the <a href="/docs/part-6/usecase/about-saas-user-accounts/create-tenant" target="_blank">Creating a Tenant</a>, so that tenant registration can be done.
 Once tenant registration can be done, let's <a href="/docs/part-6/usecase/about-saas-user-accounts/add-tenant-user" target="_blank">assign a user to a tenant and set a role</a>.
 After creating a tenant and a tenant user, verify whether the configured tenant information appears in the tenants array within UserInfo.
 <Tabs>
@@ -10462,7 +10858,7 @@ Please enable the domain by following these steps:
 1. **Domain Registration**
    Register the domain to be used as the sender from "Common Settings" > "Domain" in the SaaS Development Console.
 2. **Obtain and Configure DNS Records**
-   Configure the DKIM record information (CNAME, etc.) displayed after registration to your DNS server (Route 53, Cloudflare, etc.).
+   Configure the DKIM record information (CNAME, etc.) displayed after registration to your DNS server (Amazon Route 53, Cloudflare, etc.).
 3. **Verify Completion**
    After configuration, the system will verify the domain. It may take up to 2-3 days for the changes to be reflected.
 **Ready to Use Status**
@@ -10537,7 +10933,7 @@ SaaSus Platform allows pricing plan design based on the following four measureme
    - Tiered usage unit (tiered_usage): Volume discount format where unit price changes as usage increases
  - **Direct operations on Stripe console and precautions**
 It is technically possible to apply discounts directly from Stripe's management console to subscriptions created on SaaSus Platform.
-However, you must never change the "measurement units (units or calculation logic)" of the subscription itself.
+However, you must never change the subscription itself without going through SaaSus Platform.
 This could cause data inconsistency between SaaSus Platform and Stripe, preventing correct billing and meter updates.
  - **Alternative approaches for discounts and campaigns**
 If you want to achieve "first month free" or "specific period discounts," please consider creating a separate campaign-specific pricing plan with a basic fee set to "0 yen" in the SaaSus Development Console and assigning it to target tenants.
@@ -10547,15 +10943,15 @@ Direct integration with Stripe's promotional features is being considered on our
 **Q. Can bank transfers be enabled on SaaSus Platform?**
 A. Currently, there is no feature to directly enable "bank transfer" from the SaaSus Platform management screen. However, you can enable bank transfer payments by changing settings directly from the integrated Stripe management console.
  - **Setup procedure and precautions**
-After setting up a pricing plan (creating a subscription) on SaaSus Platform, please configure the target subscription to allow "bank transfer" from the Stripe console within the time it takes for the subscription to be confirmed on the Stripe side (within approximately 1 hour).
- - **Important limitations regarding measurement units**
+After setting up a pricing plan (creating a subscription) on SaaSus Platform, please configure the target subscription to allow "bank transfer" from the Stripe Dashboard within the time it takes for the invoice to be confirmed on the Stripe side (within approximately 1 hour).
+ - **Limitations regarding measurement units**
 When changing settings directly from the Stripe console, you must never change the "measurement units (units or calculation logic)" defined and integrated with SaaSus Platform.
 Changing measurement units can cause data inconsistency between SaaSus Platform and Stripe, preventing correct meter updates and billing.
 ---
 **Q. We plan to expand globally to the United States (US) and Europe (EU) in the future. Do you support payments in local currencies for each country?**
 A. SaaSus Platform supports the creation of pricing plans in major payment currencies: **Japanese Yen (JPY) and US Dollar (USD)**.
  - **Currency operations through Stripe integration**
-By integrating with Stripe, you can centrally manage not only domestic Japanese deployments but also revenue models for extensive global business using US dollars (USD) from the SaaSus console.
+By integrating with Stripe, you can centrally manage not only domestic Japanese deployments but also revenue models for global business using US dollars (USD) from the SaaSus console.
  - **Service regions and compliance**
 We currently provide services centered on ap-northeast-1 (Tokyo Region). While common endpoints can be used from many regions including the United States (US), for the European Union (EU) region, API access is currently blocked from the perspective of strict compliance with GDPR (General Data Protection Regulation) and security governance.
  - **Future expansion**
@@ -10635,15 +11031,19 @@ but also directly from the SaaS Development Console screen.
 **For production environments**
 Once metering units, feature menus, and pricing plans have been used, they cannot be deleted.
 When setting and applying pricing plans in a production environment, please thoroughly review the configuration in advance.
+---
+**Q. How is the representative email address used?**
+A. The representative email address is used as the destination for sending invoices.
 ````
 
 ---
-## part-7/faq/saasus-platform.md
+## part-7/faq/saasus-platform.mdx
 ````markdown
+import InquiryButton from '@site/src/components/InquiryButton';
 **Q. What countermeasures are available when the service goes down?
 Is it possible to switch and continue business operations?**
 A. The Tokyo region has 3 Availability Zones, and the service will not stop unless all of them experience simultaneous failures.
-AWS has never had a case where all AZs in a region stopped simultaneously, so we consider the risk extremely low.
+AWS has never had a case where all AZs in a region stopped simultaneously, so we consider the risk low.
 A multi-region DR configuration using the Osaka region is also possible, but please consider human resource downtime and cost factors when making decisions based on your requirements.
 ---
 **Q. Can the login screen design be changed?**
@@ -10693,7 +11093,7 @@ If you provide specific performance requirements (user count, access trends, pea
 ---
 **Q. Is there an SLA (availability guarantee)?**
 A. Enterprise plans provide an SLA (Service Quality Guarantee) with 99.99% uptime.
-Pricing is based on individual estimates, so please [contact us](https://saasus.io/pricing#support).
+Pricing is based on individual estimates, so please <InquiryButton variant="inline">contact us</InquiryButton>.
 ---
 **Q. Can SaaSus Platform run on platforms other than AWS?**
 A. Core features can be used without depending on cloud platforms.
@@ -10705,7 +11105,7 @@ However, the following features are only supported on AWS environments:
 ---
 **Q. Are there any UI/UX constraints?**
 A. There are no particular constraints. It supports React, Vue.js and other frontend implementations as well as server-side rendering.
-Please [contact us](https://saasus.io/pricing#support) if you have specific requirements.
+Please <InquiryButton variant="inline">contact us</InquiryButton> if you have specific requirements.
 ---
 **Q. Are there any microservice adoption examples?**
 A. There are no public examples at this time, but microservicing specific functions such as WMS can be expected to improve scalability. Discussion is possible upon consultation.
@@ -10751,11 +11151,23 @@ When authentication failures continue for a certain number of times, the account
 The specific number of attempts is not disclosed, but the lockout period is automatically adjusted according to the number of unauthorized attempts, and is usually automatically released after a certain period of time.
 To prevent long-term lockouts, please use the password reset function if you are unsure of the correct password.
 ---
+**Q. What authentication methods are available for multi-factor authentication (MFA)?**
+A. SaaSus Platform supports the following two methods for multi-factor authentication (MFA). You can configure either method on a per-user basis.
+ - **Authenticator App (TOTP)**
+Uses an authenticator app such as Google Authenticator, and performs the second-factor authentication with the one-time code displayed in the app. Setup is easy by scanning a QR code.
+ - **Email**
+At login, an authentication code is sent to the registered email address to perform the second-factor authentication.
+Note that using multi-factor authentication (MFA) requires implementation on the SaaS application side. For details on how to use the API and implementation examples, see [Implementing Multi-Factor Authentication](/docs/part-6/implementation-guide/sample-application/multi-factor-authentication).
+---
+**Q. Can users who use email as their multi-factor authentication (MFA) method reset their password from the login screen?**
+A. No. Users who use "Email" as their multi-factor authentication (MFA) method cannot reset their password from the login screen generated by SaaSus Platform.
+To reset the password for such a user, an administrator should perform the password reset from the User Management screen in the SaaS Operation Console. For details, see [(Old Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-crud).
+---
 **Q. I set up integration with an external ID provider such as Google, but an error occurs during login.**
 A. To use authentication via an external ID provider, both **"Domain Settings"** and **"Email Sending Settings (SES)"** must be verified for security and reliability. Please check the following settings:
  - **Domain Verification Status**
 In the [Basic Settings] > [Domain] screen, please check if the status of the registered domain is **"Valid (Verified)"** and **"Authentication email delivery via custom domain is enabled."**
-If not verified, you need to correctly set the displayed DNS records in your DNS server (such as AWS Route 53) and complete the verification.
+If not verified, you need to correctly set the displayed DNS records in your DNS server (such as Amazon Route 53) and complete the verification.
  - **Wait Time for Settings to Take Effect**
 DNS settings and enabling authentication email delivery via custom domain may take up to 2-3 days for processing within the system and propagation across the network.
 Please wait until **"Authentication email delivery via custom domain is enabled"** is displayed in the console.
@@ -10787,18 +11199,18 @@ A. For security reasons, we do not provide a setting to directly extend the expi
 To compensate for the characteristic of ID tokens becoming invalid in a short period and save the trouble of re-login, we recommend implementing automatic renewal using refresh tokens.
  - **Role of Refresh Tokens**
 When an ID token expires, it is possible to re-obtain a new ID token in the background without displaying the login screen to the user again.
-This allows you to significantly improve convenience during development and use while maintaining a secure state.
+This allows you to improve convenience during development and use while maintaining a secure state.
  - **Implementation Method Reference**
-For specific procedures on using refresh tokens, please refer to [Updating Authentication Information Using Refresh Tokens](https://docs.saasus.io/docs/part-6/usecase/authentication-methods#%E3%83%AA%E3%83%95%E3%83%AC%E3%83%83%E3%82%B7%E3%83%A5%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3) in the official documentation.
+For specific procedures on using refresh tokens, please refer to [Updating Authentication Information Using Refresh Tokens](https://docs.saasus.io/docs/part-6/usecase/authentication-methods#refresh-token) in the official documentation.
  - **Operational Tips**
 When tokens are frequently needed for API development, you can build an environment where developers can continue using valid tokens without being aware of it by incorporating refresh token renewal processing into a common authentication library or middleware.
 ---
 **Q. Can I check the usage status of metering items for each tenant and daily trends?**
-A. SaaSus Platform allows you to check the current metering values for each tenant from the console or API. We are also currently planning to provide a dashboard function that visualizes detailed usage trends.
+A. SaaSus Platform allows you to check the current metering values for each tenant from the Stripe Dashboard or API. We are also currently planning to provide a dashboard function that visualizes detailed usage trends.
  - **Checking Current Usage Status**
-The latest metering values for each tenant can be referenced in real-time through the "Tenant Details" screen in the SaaSus Development Console or through the SaaSus SDK/API.
- - **Checking via Stripe Console**
-If you are using Stripe integration, you can also check metering status and billing-related usage statistics linked to each customer (tenant) from the Stripe management console.
+The latest metering values for each tenant can be referenced through the SaaSus SDK/API.
+ - **Checking via Stripe Dashboard**
+If you are using Stripe integration, you can open the target customer (tenant) from the "Customers" menu in the Stripe Dashboard to check the linked subscriptions, issued invoices, and usage-based metering amounts.
  - **Analysis Using Amazon EventBridge Integration**
 By utilizing the Amazon EventBridge integration feature, metering update events can be notified to your AWS environment in real-time. By accumulating the notified data in a database and combining it with BI tools, you can flexibly visualize detailed change history such as "how much usage increased or decreased on which day" and create custom analysis reports.
  - **Dashboard Function Provision Plan**
@@ -10809,22 +11221,22 @@ A. The login screen provided as standard by SaaSus Platform does not currently s
  - **Method to Achieve Free Design**
 If you want to achieve a custom design login screen that matches the worldview of your SaaS, we recommend custom implementation of login functionality using the authentication API provided by SaaSus Platform.
  - **Secure Custom Implementation with SRP Authentication**
-SaaSus Platform's authentication API adopts SRP (Secure Remote Password) authentication with an extremely secure design.
-By using this mechanism that performs authentication without sending passwords to the server, even when building a custom login screen, you can achieve free styling with HTML/CSS while maintaining the highest level of security.
+SaaSus Platform's authentication API adopts SRP (Secure Remote Password) authentication.
+With SRP authentication, the password itself is not sent to the authentication platform; only verification values derived from the password are exchanged to perform authentication. By leveraging this mechanism, even when building a custom login screen, you can achieve free styling with HTML/CSS while maintaining security.
 ---
 **Q. Can I display maintenance information or system announcements on the login screen?**
 A. The login screen provided as standard by SaaSus Platform does not currently support adding or editing text or announcements arbitrarily.
  - **Method to Display Announcements**
-If you want to freely display available hours, maintenance information, etc., we recommend custom implementation of login functionality using the authentication API provided by SaaSus Platform.
+To freely display available hours, maintenance information, etc., you need to implement your own login screen using the authentication API provided by SaaSus Platform.
  - **Flexible Information Dissemination Through Custom Implementation**
 By building a custom login screen using the authentication API, free layout with HTML/CSS becomes possible. This allows you to post maintenance announcement banners, urgent notices, etc. in the optimal form that matches your service design.
  - **Secure Foundation with SRP Authentication**
-Even when performing custom implementation, SaaSus Platform's authentication API adopts SRP (Secure Remote Password) authentication, so it is possible to enhance operational convenience while maintaining the highest level of security.
+Even when performing custom implementation, SaaSus Platform's authentication API adopts SRP (Secure Remote Password) authentication, so the password itself is not sent to the authentication platform during authentication, making it possible to enhance operational convenience.
 ---
 **Q. I want to limit the service provision range to within Japan. Can I set geographic restrictions (geo-blocking) on the standard login screen of SaaSus?**
-A. Currently, we do not provide a function for customers to directly set "Geographic Restrictions" on the login screen (CloudFront) provided as standard by SaaSus Platform.
+A. Currently, we do not provide a function for customers to directly set "Geographic Restrictions" on the login screen (Amazon CloudFront) provided as standard by SaaSus Platform.
  - **Method to Achieve Japan-Only Access**
-If you want to limit access origins to within Japan, we recommend a configuration where you build and distribute the login screen via your own CloudFront using the authentication API of SaaSus Platform.
+If you want to limit access origins to within Japan, we recommend a configuration where you build and distribute the login screen via your own environment (such as AWS, Google Cloud, or Azure) using the authentication API of SaaSus Platform.
 ---
 **Q. Is it possible to issue an initial password for new users and prompt them to change it to an arbitrary password on first login?**
 A. Yes, SaaSus Platform offers two main methods to enable users to set their own passwords, eliminating the need for administrators to issue initial passwords.
@@ -10870,6 +11282,25 @@ A. You can change it yourself from the SaaS Development Console.
 Please enter and save the new billing information from the following menu.
 Configuration location:
 SaaS Development Console > Account Settings > Billing Information
+---
+**Q. Can I switch back (downgrade) from a paid plan to the Free plan?**
+A. Under the current specifications, you cannot directly switch back (downgrade) from a paid plan to the Free plan.
+To switch to the Free plan, you need to follow the steps below.
+1. **Cancel your current paid plan**
+2. **Create a new account (tenant) and select the Free plan**
+ - **About migrating your settings**
+Along with the steps above, you need to extract the configuration information from your current account and migrate (reconfigure) it to the new account.
+When retrieving your configuration information, using the [MCP Server feature](/docs/part-4/mcp-server/setup) makes the process smoother.
+---
+**Q. How do I upgrade from the Free plan to a paid plan?**
+A. You can upgrade (apply for a paid plan) from "Account Settings > Pricing Plans" in the SaaS Development Console.
+Unlike a downgrade, you can complete the procedure directly from the management console.
+ - **About billing after applying**
+Billing is on a monthly basis starting from the application date, invoices are sent via Stripe, and the plan renews automatically each month.
+ - **Applying via AWS Marketplace**
+You can also apply via AWS Marketplace.
+ - **Plan pricing and limits**
+For the pricing and limits of each plan, such as the number of environments, users, and tenants, please refer to [Procedure for Applying for a Paid Plan](/docs/part-4/account-settings/procedure-for-applying-for-a-paid-plan).
 ````
 
 ---
@@ -10917,7 +11348,7 @@ For more details, see our  [pricing plans.](https://saasus.io/en).
   - No deletion certificate issued
 ### 6. Security Measures
 - **Transport Encryption**: TLS (SSL/TLS) enforced
-- **Health Monitoring**: AWS CloudWatch
+- **Health Monitoring**: Amazon CloudWatch
 - **WAF / DDoS / Vulnerability Scans**: Implemented
 - **Application & Infrastructure Logs**: Stored in CloudTrail for 10 years (access limited to our ops team)
 - **API Access Control**: Signed-request authentication prevents misuse
@@ -11866,7 +12297,7 @@ Once the SaaSus Platform is ready, we will incorporate it into the sample applic
 ---
 ## tutorial/prepare-the-sample-application-ec2.md
 ````markdown
-Please follow these steps to create a Blade version operating environment using EC2 or Cloud9.
+Please follow these steps to create a Blade version operating environment using Amazon EC2.
 ## Preparing the Sample Application
 EC2 creation parameters
 | Item | Setting |
@@ -11879,7 +12310,6 @@ EC2 creation parameters
 | Storage configuration | 20GB
 :::info
 To access an EC2 instance via SSH, inbound traffic on port 22 (SSH) must be allowed.
-For Cloud9, the initial disk capacity will not be sufficient, so additional disk capacity is needed to reach 20G.
 :::
 Connect to EC2 using Session Manager or SSH
 For SSH:
@@ -11924,7 +12354,7 @@ In this tutorial, we will use SaaSus Platform to turn a simple chat system creat
 ## Preparing the Sample Application
 First, start this sample application.
 :::info
-If you are using AWS EC2 or Cloud9 to create an operating environment for the Blade version, please follow the steps in [Preparing the Sample Application (EC2)](https://docs.saasus.io/docs/tutorial/prepare-the-sample-application-ec2/).
+If you are using Amazon EC2 to create an operating environment for the Blade version, please follow the steps in [Preparing the Sample Application (EC2)](https://docs.saasus.io/docs/tutorial/prepare-the-sample-application-ec2/).
 :::
 This simple chat system comes with two configuration options:
 1. Laravel + Blade (PHP / Laravel / PostgreSQL)
@@ -14172,9 +14602,9 @@ paths:
           schema:
             type: string
             format: date-time
-          description: The datetime, in ISO 8601 format, to retrieve the log.
+          description: The datetime, in ISO 8601 format, to retrieve the log. Cannot be specified together with start_at/end_at.
           x-description-i18n:
-            jpn: ログを取得する日時 (ISO 8601 形式の日時)
+            jpn: ログを取得する日時 (ISO 8601 形式の日時)。start_at/end_at と同時に指定できません。
         - in: query
           name: limit
           schema:
@@ -14184,6 +14614,22 @@ paths:
           description: Maximum number of logs to retrieve.
           x-description-i18n:
             jpn: 取得するログの最大数
+        - in: query
+          name: start_at
+          schema:
+            type: integer
+            format: int64
+          description: The start of the search range as an epoch second timestamp. Used for range search. Cannot be specified together with created_at. When specified, created_date is ignored.
+          x-description-i18n:
+            jpn: 検索範囲の開始タイムスタンプ (エポック秒)。範囲検索に使用します。created_at と同時に指定できません。指定時、created_date は無視されます。
+        - in: query
+          name: end_at
+          schema:
+            type: integer
+            format: int64
+          description: The end of the search range as an epoch second timestamp. Used for range search. Cannot be specified together with created_at. When specified, created_date is ignored.
+          x-description-i18n:
+            jpn: 検索範囲の終了タイムスタンプ (エポック秒)。範囲検索に使用します。created_at と同時に指定できません。指定時、created_date は無視されます。
         - in: query
           name: cursor
           schema:
@@ -14791,6 +15237,65 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /users/count:
+    get:
+      tags:
+        - saasUser
+      operationId: GetSaasUsersCount
+      summary: Get SaaS Users Count
+      x-summary-i18n:
+        jpn: SaaSユーザー数を取得
+      description: |
+        Get the count of SaaS users.
+      x-description-i18n:
+        jpn: |
+          SaaSユーザー数を取得します。
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaasUsersCount'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - saasUser
+      operationId: SaveSaasUsersCount
+      summary: Save SaaS Users Count
+      x-summary-i18n:
+        jpn: SaaSユーザー数を保存
+      description: |
+        Save the count of SaaS users.
+      x-description-i18n:
+        jpn: |
+          SaaSユーザー数を保存します。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaveSaasUsersCountParam'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /users/search:
     get:
       tags:
@@ -15318,6 +15823,65 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /tenants/all/users/count:
+    get:
+      tags:
+        - tenantUser
+      operationId: GetAllTenantUsersCount
+      summary: Get Tenant Users Count
+      x-summary-i18n:
+        jpn: テナントごとのテナントユーザー数を取得
+      description: |
+        Get the count of tenant users for each tenant.
+      x-description-i18n:
+        jpn: |
+          テナントごとのテナントユーザー数を取得します。
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantUsersCounts'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - tenantUser
+      operationId: SaveTenantUsersCounts
+      summary: Save Tenant Users Count
+      x-summary-i18n:
+        jpn: テナントごとのテナントユーザー数を保存
+      description: |
+        Save the count of tenant users for each tenant.
+      x-description-i18n:
+        jpn: |
+          テナントごとのテナントユーザー数を保存します。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaveTenantUsersCountsParam'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /tenants/all/users/search:
     get:
       tags:
@@ -15370,12 +15934,12 @@ paths:
           x-description-i18n:
             jpn: 環境ID
         - in: query
-          name: role_id
+          name: role_name
           schema:
             type: string
-          description: Role ID
+          description: Role Name
           x-description-i18n:
-            jpn: ロールID
+            jpn: ロール名
         - $ref: '#/components/parameters/Limit'
         - $ref: '#/components/parameters/Cursor'
       responses:
@@ -18008,6 +18572,18 @@ components:
           x-description-i18n:
             jpn: |
               属性情報
+        last_login_at:
+          type: integer
+          x-go-type: int64
+          nullable: true
+          example: 1640995200
+          description: |
+            Last login date and time (unix timestamp).
+            Null if the user has never logged in.
+          x-description-i18n:
+            jpn: |
+              最終ログイン日時（unixタイムスタンプ）。
+              一度もログインしていない場合はnullになります。
       required:
         - id
         - email
@@ -18020,6 +18596,7 @@ components:
         attributes:
           department: development
           employee_number: 10
+        last_login_at: 1640995200
     SaasUsers:
       title: SaaS Users
       x-title-i18n:
@@ -18032,6 +18609,43 @@ components:
             $ref: '#/components/schemas/SaasUser'
       required:
         - users
+    SaasUsersCount:
+      title: SaaS Users Count
+      x-title-i18n:
+        jpn: SaaSユーザー数
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 42
+          description: Count of SaaS users
+          x-description-i18n:
+            jpn: SaaSユーザー数
+        updated_at:
+          type: integer
+          format: int64
+          example: 1715760000
+          description: Unix timestamp (seconds) of the last update
+          x-description-i18n:
+            jpn: 最終更新日時（Unix 秒）
+      required:
+        - count
+        - updated_at
+    SaveSaasUsersCountParam:
+      title: Save SaaS Users Count Parameter
+      x-title-i18n:
+        jpn: SaaSユーザー数の保存パラメータ
+      type: object
+      properties:
+        count:
+          type: integer
+          minimum: 0
+          example: 42
+          description: Count of SaaS users
+          x-description-i18n:
+            jpn: SaaSユーザー数
+      required:
+        - count
     CreatedSaasUser:
       title: Created SaaS User
       x-title-i18n:
@@ -18196,6 +18810,74 @@ components:
             $ref: '#/components/schemas/User'
       required:
         - users
+    TenantUserCount:
+      title: Tenant User Count
+      x-title-i18n:
+        jpn: テナントユーザー数
+      type: object
+      properties:
+        tenant_id:
+          $ref: '#/components/schemas/Uuid'
+        count:
+          type: integer
+          example: 5
+          description: Count of tenant users
+          x-description-i18n:
+            jpn: テナントユーザー数
+        updated_at:
+          type: integer
+          format: int64
+          example: 1715760000
+          description: Unix timestamp (seconds) of the last update
+          x-description-i18n:
+            jpn: 最終更新日時（Unix 秒）
+      required:
+        - tenant_id
+        - count
+        - updated_at
+    SaveTenantUserCountParam:
+      title: Save Tenant User Count Parameter
+      x-title-i18n:
+        jpn: テナントユーザー数の保存パラメータ
+      type: object
+      properties:
+        tenant_id:
+          $ref: '#/components/schemas/Uuid'
+        count:
+          type: integer
+          minimum: 0
+          example: 5
+          description: Count of tenant users
+          x-description-i18n:
+            jpn: テナントユーザー数
+      required:
+        - tenant_id
+        - count
+    SaveTenantUsersCountsParam:
+      title: Save Tenant Users Counts Parameter
+      x-title-i18n:
+        jpn: テナントごとのテナントユーザー数の保存パラメータ
+      type: object
+      properties:
+        tenant_user_counts:
+          type: array
+          maxItems: 10000
+          items:
+            $ref: '#/components/schemas/SaveTenantUserCountParam'
+      required:
+        - tenant_user_counts
+    TenantUsersCounts:
+      title: Tenant Users Counts
+      x-title-i18n:
+        jpn: テナントユーザー数一覧
+      type: object
+      properties:
+        tenant_user_counts:
+          type: array
+          items:
+            $ref: '#/components/schemas/TenantUserCount'
+      required:
+        - tenant_user_counts
     SearchTenantUsersResult:
       title: Search Tenant Users Result
       x-title-i18n:

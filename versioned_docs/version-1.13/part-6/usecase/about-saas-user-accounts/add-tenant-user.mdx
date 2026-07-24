@@ -1,0 +1,366 @@
+---
+title: "Assigning Users to Tenants and Setting Roles"
+slug: "add-tenant-user"
+excerpt: ""
+hidden: false
+createdAt: "Wed Nov 01 2023 22:00:34 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Dec 21 2023 22:59:04 GMT+0000 (Coordinated Universal Time)"
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+After a tenant has been created, you can then associate the self-signed up user with the tenant.
+
+Please append the following to the tenant creation source code:
+
+<Tabs>
+<TabItem value="php" label="PHP">
+
+```php
+    // Retrieve user attribute information
+    $userAttributesResponse = $authClient->getUserAttributes();
+    $userAttributes = $userAttributesResponse->getUserAttributes();
+    foreach ($userAttributes as $attribute) {
+        $attributeName = $attribute->getAttributeName();
+        $attributeType = $attribute->getAttributeType();
+
+        // Replace if a number type is defined in the user attribute information
+        if (isset($userAttributeValues[$attributeName]) && $attributeType === 'number') {
+            $userAttributeValues[$attributeName] = (int) $userAttributeValues[$attributeName];
+        }
+    }
+
+    // Create parameters for tenant user registration
+    $createTenantUserParam = new CreateTenantUserParam();
+    $createTenantUserParam
+        ->setEmail($email)
+        ->setAttributes($userAttributeValues);
+
+    // Add a SaaS user to the tenant users
+    $tenantUser = $authClient->createTenantUser($tenantId, $createTenantUserParam);
+```
+
+</TabItem>
+
+<TabItem value="nodejs" label="Node.js">
+
+```js
+    // Retrieve user attribute information
+    const userAttributesObj = (await client.userAttributeApi.getUserAttributes()).data
+    const userAttributes = userAttributesObj.user_attributes
+    let userAttributeValuesCopy = userAttributeValues || {}
+
+    // Replace if a number type is defined in the user attribute information
+    userAttributes.forEach((attribute) => {
+      const attributeName = attribute.attribute_name
+      const attributeType = attribute.attribute_type
+
+      if (userAttributeValuesCopy[attributeName] && attributeType === 'number') {
+        userAttributeValuesCopy[attributeName] = parseInt(userAttributeValuesCopy[attributeName], 10);
+      }
+    });
+
+    // Create parameters for tenant user registration
+    const createTenantUserParam: CreateTenantUserParam = {
+      email: userInfo.email,
+      attributes: userAttributeValuesCopy
+    }
+
+    // Add a SaaS user to the tenant users
+    const tenantUser = (await client.tenantUserApi.createTenantUser(tenantId, createTenantUserParam)).data
+```
+
+</TabItem>
+
+<TabItem value="go" label="Go">
+
+```go
+    // Retrieve user attribute information
+    userAttributesResp, err := authClient.GetUserAttributesWithResponse(context.Background())
+    if err != nil {
+        c.Logger().Errorf("Failed to retrieve user attributes: %v", err)
+        return c.JSON(http.StatusInternalServerError, echo.Map{"error": "Failed to retrieve user attributes"})
+    }
+
+    userAttributes := userAttributesResp.JSON200
+    if userAttributeValues == nil {
+        userAttributeValues = make(map[string]interface{})
+    }
+
+    // Replace if a number type is defined in the user attribute information
+    if userAttributes != nil {
+        for _, attribute := range userAttributes.UserAttributes {
+            attributeName := attribute.AttributeName
+            attributeType := attribute.AttributeType
+            if value, ok := userAttributeValues[attributeName]; ok && attributeType == "number" {
+                userAttributeValues[attributeName], err = strconv.Atoi(value.(string))
+                if err != nil {
+                    c.Logger().Errorf("Invalid user attribute value: %v", err)
+                    return c.JSON(http.StatusBadRequest, echo.Map{"error": "Invalid user attribute value"})
+                }
+            }
+        }
+    }
+
+    // Create parameters for tenant user registration
+    createTenantUserParam := authapi.CreateTenantUserParam{
+        Email:      userInfo.Email,
+        Attributes: userAttributeValues,
+    }
+
+    // Add a SaaS user to the tenant users
+    tenantUserResp, err := authClient.CreateTenantUserWithResponse(context.Background(), tenantID, createTenantUserParam)
+```
+
+</TabItem>
+
+<TabItem value="python" label="Python">
+
+```python
+        # Retrieve user attribute information
+        user_attributes_obj = UserAttributeApi(api_client=api_client).get_user_attributes()
+
+        # Replace if a number type is defined in the user attribute information
+        if user_attribute_values is None:
+            user_attribute_values = {}
+        else:
+            user_attributes = user_attributes_obj.user_attributes
+            for attribute in user_attributes:
+                attribute_name = attribute.attribute_name
+                attribute_type = attribute.attribute_type.value
+
+                if attribute_name in user_attribute_values:
+                    if attribute_type == "number":
+                        user_attribute_values[attribute_name] = int(user_attribute_values[attribute_name])
+
+        # Create parameters for tenant user registration
+        create_tenant_user_param = CreateTenantUserParam(
+            email=auth_user.email,  # 登録者自身のメールアドレス
+            attributes=user_attribute_values
+        )
+
+        # Add a SaaS user to the tenant users
+        tenant_user = TenantUserApi(api_client=api_client).create_tenant_user(
+            tenant_id=tenant_id,
+            create_tenant_user_param=create_tenant_user_param
+        )
+```
+
+</TabItem>
+
+<TabItem value="java" label="Java">
+
+```java
+        // Retrieve user attribute information
+        UserAttributeApi userAttributeApi = new UserAttributeApi(apiClient);
+        UserAttributes userAttributes = userAttributeApi.getUserAttributes();
+
+        // Replace if a number type is defined in the user attribute information
+        for (Attribute attribute : userAttributes.getUserAttributes()) {
+            String attributeName = attribute.getAttributeName();
+            String attributeType = attribute.getAttributeType().getValue();
+
+            if (userAttributeValues.containsKey(attributeName)) {
+                Object attributeValue = userAttributeValues.get(attributeName);
+
+                if ("number".equalsIgnoreCase(attributeType)) {
+                    try {
+                        int numericValue = Integer.parseInt(attributeValue.toString());
+                        userAttributeValues.put(attributeName, numericValue);
+                    } catch (NumberFormatException e) {
+                        System.err.println("Invalid value for user attribute: " + attributeName);
+                        throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                                "Invalid value for user attribute: " + attributeName);
+                    }
+                }
+            }
+        }
+
+        // Create parameters for tenant user registration
+        CreateTenantUserParam createTenantUserParam = new CreateTenantUserParam()
+                .email(userInfo.getEmail())
+                .attributes(userAttributeValues);
+
+        // Add a SaaS user to the tenant users
+        TenantUserApi tenantUserApi = new TenantUserApi(apiClient);
+        User tenantUser = tenantUserApi.createTenantUser(tenantId, createTenantUserParam);
+```
+
+</TabItem>
+
+<TabItem value="csharp" label="C#(.Net8)">
+
+```csharp
+        // Retrieve user attribute information
+        var userAttributeApi = new UserAttributeApi(authApiClientConfig);
+        var userAttributes = await userAttributeApi.GetUserAttributesAsync();
+
+        // Replace if a number type is defined in the user attribute information
+        foreach (var attribute in userAttributes.VarUserAttributes)
+        {
+            var attributeName = attribute.AttributeName;
+            var attributeType = attribute.AttributeType.ToString();
+
+            if (userAttributeValues.ContainsKey(attributeName))
+            {
+                userAttributeValues[attributeName] = ConvertToExpectedType(userAttributeValues[attributeName], attributeType);
+            }
+        }
+
+        // Create parameters for tenant user registration
+        var createTenantUserParam = new CreateTenantUserParam(userInfo.Email, userAttributeValues);
+
+        // Add a SaaS user to the tenant users
+        var tenantUserApi = new TenantUserApi(authApiClientConfig);
+        var tenantUser = await tenantUserApi.CreateTenantUserAsync(tenantId, createTenantUserParam);
+```
+
+</TabItem>
+
+<TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
+
+```csharp
+        // Retrieve user attribute information
+        var userAttributeApi = new UserAttributeApi(authApiClientConfig);
+        var userAttributes = await userAttributeApi.GetUserAttributesAsync();
+
+        // Replace if a number type is defined in the user attribute information
+        foreach (var attribute in userAttributes.VarUserAttributes)
+        {
+            var attributeName = attribute.AttributeName;
+            var attributeType = attribute.AttributeType.ToString();
+
+            if (userAttributeValues.ContainsKey(attributeName) && attributeType.ToLower() == "number")
+            {
+                if (int.TryParse(userAttributeValues[attributeName]?.ToString(), out int numericValue))
+                {
+                    userAttributeValues[attributeName] = numericValue;
+                }
+                else
+                {
+                    return BadRequest("Invalid attribute value");
+                }
+            }
+        }
+
+        // Create parameters for tenant user registration
+        var createTenantUserParam = new CreateTenantUserParam(userInfo.Email, userAttributeValues);
+
+        // Add a SaaS user to the tenant users
+        var tenantUserApi = new TenantUserApi(authApiClientConfig);
+        var tenantUser = await tenantUserApi.CreateTenantUserAsync(tenantId, createTenantUserParam);
+```
+
+</TabItem>
+</Tabs>
+
+Please use the CreateTenantUserParam object.
+
+setAttributes sets the attribute information of the tenant defined in <a href="/docs/tutorial/prepare-saas-platform#defining-additional-attributes-for-a-tenant" target="_blank">Defining Additional Attributes for a Tenant</a>.
+
+Next, set the role.
+
+Please append the following code:
+
+<Tabs>
+<TabItem value="php" label="PHP">
+
+```php
+    // Create parameters for role configuration
+    $create_tenant_user_roles_param = new CreateTenantUserRolesParam();
+    $create_tenant_user_roles_param->setRoleNames(['admin']);
+
+    // Assign a role to the created tenant user
+    $auth_api_client->createTenantUserRoles($tenant->getId(), $request['userinfo']['id'], getenv('DEFAULT_SAASUSER_ENV'), $create_tenant_user_roles_param);
+```
+
+</TabItem>
+
+<TabItem value="nodejs" label="Node.js">
+
+```js
+    // Create parameters for role configuration
+    const createTenantUserRolesParam: CreateTenantUserRolesParam = {
+      role_names: ['admin']
+    }
+
+    // Assign a role to the created tenant user
+    await client.tenantUserApi.createTenantUserRoles(tenantId, tenantUser.id, 3, createTenantUserRolesParam)
+```
+
+</TabItem>
+
+<TabItem value="go" label="Go">
+
+```go
+    // Create parameters for role configuration
+    createTenantUserRolesParam := authapi.CreateTenantUserRolesParam{
+        RoleNames: []string{"admin"},
+    }
+
+    // Assign a role to the created tenant user
+    _, err = authClient.CreateTenantUserRolesWithResponse(context.Background(), tenantID, tenantUserResp.JSON201.Id, 3, createTenantUserRolesParam)
+```
+
+</TabItem>
+
+<TabItem value="python" label="Python">
+
+```python
+        # Create parameters for role configuration
+        create_tenant_user_roles_param = CreateTenantUserRolesParam(role_names=["admin"])
+
+        # Assign a role to the created tenant user
+        TenantUserApi(api_client=api_client).create_tenant_user_roles(tenant_id=tenant_id, user_id=tenant_user.id, env_id=3, create_tenant_user_roles_param=create_tenant_user_roles_param)
+```
+
+</TabItem>
+
+<TabItem value="java" label="Java">
+
+```java
+        // Create parameters for role configuration
+        CreateTenantUserRolesParam createTenantUserRolesParam = new CreateTenantUserRolesParam();
+        createTenantUserRolesParam.setRoleNames(Arrays.asList("admin"));
+
+        // Assign a role to the created tenant user
+        tenantUserApi.createTenantUserRoles(tenantId, tenantUser.getId(), 3, createTenantUserRolesParam);
+```
+
+</TabItem>
+
+<TabItem value="csharp" label="C#(.Net8)">
+
+```csharp
+        // Create parameters for role configuration
+        var createTenantUserRolesParam = new CreateTenantUserRolesParam(new List<string> { "admin" });
+
+        // Assign a role to the created tenant user
+        await tenantUserApi.CreateTenantUserRolesAsync(tenantId, tenantUser.Id, 3, createTenantUserRolesParam);
+```
+
+</TabItem>
+
+<TabItem value="csharp(.Netfw4.8)" label="C#(.Netfw4.8)">
+
+```csharp
+        // Create parameters for role configuration
+        var createTenantUserRolesParam = new CreateTenantUserRolesParam(new List<string> { "admin" });
+
+        // Assign a role to the created tenant user
+        await tenantUserApi.CreateTenantUserRolesAsync(tenantId, tenantUser.Id, 3, createTenantUserRolesParam);
+```
+
+</TabItem>
+</Tabs>
+
+Please use the CreateTenantUserRolesParam object.
+
+setRoleNames allows you to specify multiple roles.
+
+
+The values that can be specified are the "Role Name" that you created in <a href="/docs/tutorial/prepare-saas-platform#role-definition" target="_blank">Role Definition</a>.
+
+You can check whether the tenant user was registered via API in "SaaS Operation Console > User Management".
+
+![user](/img/part-6/usecase/about-saas-user-accounts/add-tenant-user/user.png)
