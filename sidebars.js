@@ -355,6 +355,7 @@ const sidebars = {
                 "part-6/implementation-guide/sample-application/authentication",
                 "part-6/implementation-guide/sample-application/multi-factor-authentication",
                 "part-6/implementation-guide/sample-application/activity-history-log",
+                "part-6/implementation-guide/sample-application/trace-id-log-analysis",
                 "part-6/implementation-guide/sample-application/plan-change-implementation",
                 {
                   type: "category",
