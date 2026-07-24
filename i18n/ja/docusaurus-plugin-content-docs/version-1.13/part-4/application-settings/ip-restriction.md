@@ -4,10 +4,10 @@ slug: "ip-restriction"
 excerpt: ""
 hidden: false
 createdAt: "Mon Mar 25 2024 14:00:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Mar 25 2024 14:00:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
-IP制限機能は、SaaSus PlatformコンソールおよびAPIへのリクエストにIP制限を行う機能です。
+IP制限機能は、SaaSus Platform コンソールおよびAPIへのリクエストにIP制限を行う機能です。
 
 :::warning
 「IP制限機能」は、旧スタータープランおよび旧スタンダードプランをご契約中の場合、ご利用いただけません。  
@@ -22,9 +22,9 @@ Intercomからお問い合わせください。
 
 ### 申請内容
 
-SaaSus PlatformコンソールとAPIそれぞれに対して、許可したいIPのCIDRリストをお送りください。
+SaaSus Platform コンソールとAPIそれぞれに対して、許可したいIPのCIDRリストをお送りください。
 
-  SaaSus Platformコンソール
+  SaaSus Platform コンソール
   ```
   xxx.xxx.xxx.xxx/32, yyy.yyy.yyy.yyy/24
   ```

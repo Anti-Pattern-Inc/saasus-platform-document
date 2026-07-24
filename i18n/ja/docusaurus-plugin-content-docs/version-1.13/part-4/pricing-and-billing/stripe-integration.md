@@ -4,10 +4,10 @@ slug: "stripe-integration"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
-このページでは、SaaS開発コンソールを用いて Stripe との外部連携を行い、課金処理や請求書発行を効率化する方法について説明します。  
+このページでは、SaaS 開発コンソールを用いて Stripe との外部連携を行い、課金処理や請求書発行を効率化する方法について説明します。  
 SaaSus Platform で作成した料金プランや税率設定の情報は、Stripe 側にも連携され、請求処理に活用されます。
 
 :::info
@@ -18,7 +18,7 @@ Stripeを使用しない場合、本設定は不要です。
 
 Stripe連携を有効にするには、Stripeの**シークレットキー**を SaaSus Platform に登録します。
 
-1. SaaS開発コンソールのサイドメニューから「外部連携」を選択  
+1. SaaS 開発コンソールのサイドメニューから「外部連携」を選択  
 2. Stripeの**シークレットキー**を入力  
 3. 「保存」をクリック  
 
@@ -28,7 +28,7 @@ Stripe連携を有効にするには、Stripeの**シークレットキー**を 
 
 ## Stripeに連携される税率情報
 
-SaaS開発コンソールで設定した税率は、以下のように Stripe 側へ反映されます。
+SaaS 開発コンソールで設定した税率は、以下のように Stripe 側へ反映されます。
 
 | Stripe | SaaS 開発コンソール | 説明                     |
 | ------ | ------------ | ---------------------- |

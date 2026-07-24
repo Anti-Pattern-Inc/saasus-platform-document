@@ -7,7 +7,7 @@ metadata:
   image: []
   robots: "index"
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Jun 23 2026 03:39:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 <!-- aws-mp-freeze-notice -->
@@ -21,12 +21,12 @@ For the latest listing process and procedures, please refer to our new service g
 
 :::
 
-When you click on `Sign up for Hyper wallet` from the bank account registration, you will be directed to the following page.  
+When you click on `Sign up for Hyperwallet` from the bank account registration, you will be directed to the following page.  
 Select the account verification method and valid code.
 
 ![hyperwallet-registration-1](/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-1.png)
 
-You will asked to enter a valid code. Please enter the `Pin Code` found below `Sign up for Hyper wallet` on the previous page, and then press the continue button.
+You will be asked to enter a valid code. Please enter the `Pin Code` found below `Sign up for Hyperwallet` on the previous page, and then press the continue button.
 
 ![hyperwallet-registration-2](/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-2.png)
 
@@ -71,7 +71,7 @@ After moving to the next page, enter the bank account information for the transf
 
 ![hyperwallet-registration-12](/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-12.png)
 
-After pressing Submit, an US deposit account will be created.
+After pressing Submit, a US deposit account will be created.
 
 ![hyperwallet-registration-13](/img/part-4/aws-marketplace-integration/hyperwallet-registration/hyperwallet-registration-13.png)
 

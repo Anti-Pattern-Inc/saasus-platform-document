@@ -4,14 +4,14 @@ slug: "usage-metering"
 excerpt: ""
 hidden: false
 createdAt: "Mon Mar 11 2024 13:45:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Mar 11 2024 13:45:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 計測単位に設定するメーター単位を定義します。
 
 
 ## メーター単位設定
 
-1. **SaaS開発コンソールから`メーター単位設定`を選択**
+1. **SaaS 開発コンソールから`メーター単位設定`を選択**
 
 ![usage-metering-1](/ja/img/part-4/pricing-and-billing/usage-matering/usage-metering-1.png)
 

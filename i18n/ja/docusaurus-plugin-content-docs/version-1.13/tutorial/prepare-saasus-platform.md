@@ -5,7 +5,7 @@ slug: "prepare-saas-platform"
 excerpt: ""
 hidden: false
 createdAt: "Wed Jan 11 2023 03:12:50 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 ### SaaSus Platform アカウントの作成
@@ -28,7 +28,7 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 
 ![03](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-03.png)
 
-### SaaSus Platformコンソールへのログイン
+### SaaSus Platform コンソールへのログイン
 
 テナントが作成されたのちに、ログインを行うと、このようにユーザ属性の入力が求められますので、会社名、名前を入力してください。
 
@@ -38,9 +38,9 @@ updatedAt: "Thu Dec 07 2023 01:25:35 GMT+0000 (Coordinated Universal Time)"
 
 ![05](/ja/img/tutorial/prepare-saasus-platform/prepare-saasus-platform-05.png)
 
-**SaaS開発コンソール**は、SaaS 構築のための設定を行うコンソールで、
+**SaaS 開発コンソール**は、SaaS 構築のための設定を行うコンソールで、
 
-**SaaS運用コンソール**は、SaaS を運用していくためのコンソールになります。
+**SaaS 運用コンソール**は、SaaS を運用していくためのコンソールになります。
 
 :::info ドメイン設定について
 SaaSus Platformではドメインを設定することで、ログイン画面の自動生成やメール送信の際のベースドメインに設定することができます。<br/>

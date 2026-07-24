@@ -4,7 +4,7 @@ slug: "implementing-authentication-using-saasus-serverless"
 excerpt: "SaaSus Platformのサーバレス方式を使用したSaaSアプリケーションの実装ガイド"
 hidden: false
 createdAt: "Mon Jul 31 2023 03:24:01 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Apr 14 2026 01:13:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 import Tabs from '@theme/Tabs';
@@ -449,9 +449,9 @@ Outputs:
   DistributionId     = ...
 ```
 
-#### 5. SaaSus 開発コンソールの設定
+#### 5. SaaS 開発コンソールの設定
 
-デプロイ後、[SaaSus 開発コンソール](https://settings.console.saasus.io/) の 基本設定 > 認証後遷移先 に Callback URL を登録してください。
+デプロイ後、[SaaS 開発コンソール](https://settings.console.saasus.io/) の 基本設定 > 認証後遷移先 に Callback URL を登録してください。
 
 | 環境 | Callback URL |
 |------|-------------|
