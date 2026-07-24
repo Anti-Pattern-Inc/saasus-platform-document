@@ -139,11 +139,11 @@ Within the SDK, `client.SetTraceID()` is called in the `RequestEditorFn` of each
 
 ## Viewing and Analyzing Logs
 
-When Trace ID is propagated, it is recorded as a `trace_id` field in the SaaSus API logs.
+When Trace ID is propagated, it is recorded as a `trace_id` field in the SaaSus Platform API logs.
 
-### Viewing in SaaSus Console
+### Viewing in the SaaS Operations Console
 
-From the "Activity History Log" in the SaaSus admin console, you can filter by `trace_id` to display a list of related API requests.
+From the "action history log" in the SaaS Operations Console, you can filter by `trace_id` to display a list of related API requests.
 
 ### Retrieving and Analyzing API Logs
 
@@ -174,7 +174,7 @@ With the same `trace_id: 3564e3c3-...`, you can confirm that 3 API calls are lin
 | Frontend | Generate UUID and attach to `X-SaaSus-Trace-Id` header |
 | Backend | Store header in context via middleware (choose SDK standard or framework-specific) |
 | SDK → SaaSus API | Automatic (no implementation required). `SetTraceID()` retrieves from context and propagates |
-| Log Analysis | Filter by `trace_id` in SaaSus console or API logs |
+| Log Analysis | Filter by `trace_id` in the SaaS Operations Console or API logs |
 
 ## Reference Links
 
