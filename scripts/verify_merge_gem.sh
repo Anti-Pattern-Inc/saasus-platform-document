@@ -13,9 +13,10 @@ set -euo pipefail
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$PROJECT_ROOT"
 
-# Current output layout (knowledge.txt is served statically from /[ja/]ai-reference/knowledge.txt)
+# Current output layout: both files live under static/ai-reference/ and are served
+# statically (en: /ai-reference/knowledge.txt, ja: /ai-reference/knowledge.ja.txt)
 EN_OUTPUT="static/ai-reference/knowledge.txt"
-JA_OUTPUT="static/ja/ai-reference/knowledge.txt"
+JA_OUTPUT="static/ai-reference/knowledge.ja.txt"
 
 pass=0
 fail=0

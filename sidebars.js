@@ -299,6 +299,7 @@ const sidebars = {
             slug: "/part-5/user-management",
           },
           items: [
+            "part-5/user-management/user-management-new-ui",
             "part-5/user-management/user-crud",
             "part-5/user-management/user-activity-history-log",
           ],
@@ -540,6 +541,11 @@ const sidebars = {
       type: "category",
       label: "Changelog",
       items: [
+        {
+          label: "2026/06/23",
+          type: "doc",
+          id: "changelog/20260623",
+        },
         {
           label: "2026/06/19",
           type: "doc",
