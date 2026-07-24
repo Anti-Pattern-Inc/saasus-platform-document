@@ -7,7 +7,7 @@ metadata:
   image: []
   robots: "index"
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Jun 23 2026 03:39:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 <!-- aws-mp-freeze-notice -->
@@ -24,7 +24,7 @@ For the latest listing process and procedures, please refer to our new service g
 Once you've completed the [Listing Procedure "11. Final Review Request of Production SaaS Product"](/docs/part-4/aws-marketplace-integration/aws-marketplace-integration), you will receive an email from the AWS Marketplace Support Team detailing the process to request publication. Follow these instructions to request your publication.
 
 :::caution
-While we have prepared a document regarding the publication request process based on our prior research, the actual instructions provided in the email you'll receive represents the most updated procedure and should be followed accordingly.
+While we have prepared a document regarding the publication request process based on our prior research, the actual instructions provided in the email you'll receive represent the most updated procedure and should be followed accordingly.
 :::
 
 First, you need to make a publication request in the AWS Marketplace Management Portal.

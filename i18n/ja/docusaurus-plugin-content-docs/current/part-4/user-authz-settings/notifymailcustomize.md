@@ -4,7 +4,7 @@ slug: "notifymailcustomize"
 excerpt: ""
 hidden: false
 createdAt: "Tue Dec 12 2023 05:46:38 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Mar 27 2026 07:03:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 <a href="https://settings.console.saasus.io/customize" target="_blank">認証詳細設定画面</a>の通知メール内容タブでは、ログイン画面などの認証系ページでユーザーに送信するメールをカスタマイズすることができます。
@@ -120,7 +120,7 @@ updatedAt: "Thu Mar 27 2026 07:03:00 GMT+0000 (Coordinated Universal Time)"
 ### 新規登録時の仮パスワード送信メール (signUp)
 
 :::info 情報
-本項目はSaaS運用コンソールにてカスタマイズが可能です。カスタマイズ方法の詳細は<a href="https://settings.console.saasus.io/customize" target="_blank">認証詳細設定画面</a>の通知メール内容タブをご確認ください。
+本項目はSaaS 運用コンソールにてカスタマイズが可能です。カスタマイズ方法の詳細は<a href="https://settings.console.saasus.io/customize" target="_blank">認証詳細設定画面</a>の通知メール内容タブをご確認ください。
 :::
 
 `{####}` と `{username}` という文字列が必要になります。
@@ -160,7 +160,7 @@ updatedAt: "Thu Mar 27 2026 07:03:00 GMT+0000 (Coordinated Universal Time)"
 ### 新規登録時の仮パスワード再送メール (resendCode)
 
 :::info 情報
-本項目はSaaS運用コンソールにてカスタマイズが可能です。カスタマイズ方法の詳細は<a href="https://settings.console.saasus.io/customize" target="_blank">認証詳細設定画面</a>の通知メール内容タブをご確認ください。
+本項目はSaaS 運用コンソールにてカスタマイズが可能です。カスタマイズ方法の詳細は<a href="https://settings.console.saasus.io/customize" target="_blank">認証詳細設定画面</a>の通知メール内容タブをご確認ください。
 :::
 
 `{####}` と `{username}` という文字列が必要になります。
@@ -200,7 +200,7 @@ updatedAt: "Thu Mar 27 2026 07:03:00 GMT+0000 (Coordinated Universal Time)"
 ### パスワードリセット用の検証コード送信メール (forgotPassword)
 
 :::info 情報
-本項目はSaaS運用コンソールにてカスタマイズが可能です。カスタマイズ方法の詳細は<a href="https://settings.console.saasus.io/customize" target="_blank">認証詳細設定画面</a>の通知メール内容タブをご確認ください。
+本項目はSaaS 運用コンソールにてカスタマイズが可能です。カスタマイズ方法の詳細は<a href="https://settings.console.saasus.io/customize" target="_blank">認証詳細設定画面</a>の通知メール内容タブをご確認ください。
 :::
 
 `{####}` と `{username}` という文字列が必要になります。

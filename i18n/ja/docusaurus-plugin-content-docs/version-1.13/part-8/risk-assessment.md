@@ -4,7 +4,7 @@ slug: "risk-assessment"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 ## リスクアセスメントに関する情報
@@ -63,7 +63,7 @@ updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 ### 8. サポート・通知
 
 - **問い合わせ対応**：
-  - SaaSus Platformコンソールからのお問い合わせ
+  - SaaSus Platform コンソールからのお問い合わせ
   - プランに応じて Slack Connect も利用可能
 - **障害発生時の通知**：登録代表者のメールアドレス宛に通知
 - **定期報告**：実施していません

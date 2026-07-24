@@ -4,7 +4,7 @@ slug: "user-activity-history-log"
 excerpt: ""
 hidden: false
 createdAt: "Tue Jun 11 2024 00:47:10 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Jun 11 2024 00:47:10 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 import Tabs from "@theme/Tabs";
@@ -19,7 +19,7 @@ import TabItem from "@theme/TabItem";
 本機能をご利用いただくには、新しい料金プランへの変更が必要です。
 :::
 
-SaaS運用コンソール > ユーザー管理 のActions内にある「行動履歴ログ」から閲覧することができます。
+SaaS 運用コンソール > ユーザー管理 のActions内にある「行動履歴ログ」から閲覧することができます。
 
 
 ![users](/ja/img/part-5/user-management/user-activity-history-log/users.png)

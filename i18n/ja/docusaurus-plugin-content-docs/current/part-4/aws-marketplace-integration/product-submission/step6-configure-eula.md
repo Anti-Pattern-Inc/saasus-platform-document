@@ -4,7 +4,7 @@ slug: "step6-configure-eula"
 excerpt: ""
 hidden: true
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Jun 23 2026 03:39:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 <!-- aws-mp-freeze-notice -->
@@ -20,7 +20,7 @@ updatedAt: "Tue Jun 23 2026 03:39:00 GMT+0000 (Coordinated Universal Time)"
 
 続いて、AWS Marketplace上で販売する際のエンドユーザー使用許諾契約について選択していきます。
 
-AWS Marketplaceで定義してる規約を利用する場合は`Standard Contract for AWS Marketplace (SCMP)`を選択してください。
+AWS Marketplaceで定義している規約を利用する場合は`Standard Contract for AWS Marketplace (SCMP)`を選択してください。
 
 :::info
 

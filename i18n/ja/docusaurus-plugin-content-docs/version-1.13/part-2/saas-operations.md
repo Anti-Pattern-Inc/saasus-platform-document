@@ -4,7 +4,7 @@ slug: "saas-operations"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 ## 1. SLA（サービスレベルアグリーメント）とサポート
@@ -40,4 +40,4 @@ updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
   管理画面上で現在の登録状況や契約情報などを確認可能。
 
 - **ユーザー操作履歴ログ**：  
-  SaaSアプリ側から適切なヘッダー付きでAPIを実行することで、ユーザー操作が履歴として記録され、SaaS運用コンソールで確認できます。
+  SaaSアプリ側から適切なヘッダー付きでAPIを実行することで、ユーザー操作が履歴として記録され、SaaS 運用コンソールで確認できます。

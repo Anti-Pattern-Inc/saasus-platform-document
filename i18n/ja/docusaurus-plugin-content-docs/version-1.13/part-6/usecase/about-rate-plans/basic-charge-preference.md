@@ -4,7 +4,7 @@ slug: "basic-charge-preference"
 excerpt: ""
 hidden: false
 createdAt: "Tue May 07 2024 05:17:30 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue May 07 2024 05:17:30 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 # 複雑な料金プラン設定の手順
@@ -68,7 +68,7 @@ updatedAt: "Tue May 07 2024 05:17:30 GMT+0000 (Coordinated Universal Time)"
 
 ![06](/ja/img/part-6/usecase/about-rate-plans/basic-charge-preference-06.png)
 
-EnterpriseプランもIndividualプランと同様に設定を行なってください。
+EnterpriseプランもIndividualプランと同様に設定を行ってください。
 
 ## 料金プラン
 
@@ -79,4 +79,4 @@ EnterpriseプランもIndividualプランと同様に設定を行なってくだ
 
 ![07](/ja/img/part-6/usecase/about-rate-plans/basic-charge-preference-07.png)
 
-EnterpriseプランもIndividualプランと同様に設定を行なってください。
+EnterpriseプランもIndividualプランと同様に設定を行ってください。
