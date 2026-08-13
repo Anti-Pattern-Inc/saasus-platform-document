@@ -43,6 +43,54 @@
     "message": "対応状況:",
     "description": "Status text label"
   },
+  "status.components.heading": {
+    "message": "サービス",
+    "description": "Services section heading"
+  },
+  "status.incident.test": {
+    "message": "テスト",
+    "description": "Test incident badge"
+  },
+  "status.incident.id": {
+    "message": "インシデントID",
+    "description": "Incident ID label"
+  },
+  "status.incident.pendingId": {
+    "message": "公開待ち",
+    "description": "Pending incident ID label"
+  },
+  "status.incident.updatedAt": {
+    "message": "最終更新",
+    "description": "Last updated label"
+  },
+  "status.incident.historyPending": {
+    "message": "詳細な障害履歴を更新しています。",
+    "description": "Incident history pending message"
+  },
+  "status.history.heading": {
+    "message": "障害履歴",
+    "description": "Incident history section heading"
+  },
+  "status.history.empty": {
+    "message": "公開された障害はありません。",
+    "description": "Empty incident history message"
+  },
+  "status.history.test": {
+    "message": "テスト",
+    "description": "Test history badge"
+  },
+  "status.loading": {
+    "message": "稼働状況を読み込んでいます…",
+    "description": "Status loading message"
+  },
+  "status.unavailable.title": {
+    "message": "ステータス情報を一時的に取得できません。",
+    "description": "Status unavailable title"
+  },
+  "status.unavailable.message": {
+    "message": "しばらくしてから再度ご確認ください。",
+    "description": "Status unavailable message"
+  },
   "theme.ErrorPageContent.title": {
     "message": "エラーが発生しました",
     "description": "The title of the fallback page when the page crashed"
