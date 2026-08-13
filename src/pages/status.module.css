@@ -21,6 +21,9 @@
 }
 
 .loading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   color: var(--ifm-color-secondary-darkest);
 }
 
@@ -70,6 +73,7 @@
   font-size: 1.125rem;
   font-weight: 700;
   color: #7f1d1d;
+  margin-top: 0;
   margin-bottom: 0.75rem;
 }
 
@@ -81,11 +85,240 @@
 .incidentDetails {
   font-size: 0.875rem;
   color: #991b1b;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+  margin: 0;
 }
 
-.incidentDetails p {
+.incidentDetails > div {
+  display: grid;
+  grid-template-columns: minmax(7rem, auto) 1fr;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+}
+
+.incidentDetails dt {
+  font-weight: 700;
+}
+
+.incidentDetails dd {
   margin: 0;
+}
+
+.componentsSection,
+.currentIncidentSection,
+.historySection {
+  margin-top: 1.5rem;
+}
+
+.sectionHeading {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.componentList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.componentItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--ifm-background-surface-color);
+}
+
+.componentItem + .componentItem {
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.componentOperational,
+.componentAffected,
+.componentUnknown {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.componentOperational {
+  color: #15803d;
+}
+
+.componentAffected {
+  color: #b91c1c;
+}
+
+.componentUnknown {
+  color: var(--ifm-color-secondary-darkest);
+}
+
+.currentIncidentSection {
+  margin-top: 0;
+}
+
+.testBadge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  vertical-align: middle;
+}
+
+.incidentDetails + .timeline,
+.incidentMessage + .incidentDetails {
+  margin-top: 1rem;
+}
+
+.timeline {
+  list-style: none;
+  padding: 0 0 0 1rem;
+  margin: 1.25rem 0 0;
+  border-left: 2px solid #fecaca;
+}
+
+.timelineItem {
+  position: relative;
+  padding: 0 0 1rem 1rem;
+}
+
+.timelineItem:last-child {
+  padding-bottom: 0;
+}
+
+.timelineItem::before {
+  content: '';
+  position: absolute;
+  top: 0.2rem;
+  left: -1.42rem;
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  border: 2px solid #fef2f2;
+  background: #dc2626;
+}
+
+.timelineMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: baseline;
+  color: #7f1d1d;
+  font-size: 0.8125rem;
+}
+
+.timelineStatus {
+  font-weight: 700;
+}
+
+.timelineItem p {
+  margin: 0.35rem 0 0;
+  color: #991b1b;
+}
+
+.updatePending {
+  margin: 1rem 0 0;
+  color: #991b1b;
+  font-size: 0.875rem;
+  font-style: italic;
+}
+
+.historySection {
+  padding-top: 0.5rem;
+}
+
+.emptyHistory {
+  padding: 1rem;
+  border: 1px dashed var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  color: var(--ifm-color-secondary-darkest);
+  text-align: center;
+}
+
+.historyList {
+  display: grid;
+  gap: 1rem;
+}
+
+.historyCard {
+  padding: 1.25rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  background: var(--ifm-background-surface-color);
+}
+
+.historyHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.historyHeader h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.historyMeta {
+  margin: 0.25rem 0 0.75rem;
+  color: var(--ifm-color-secondary-darkest);
+  font-size: 0.8125rem;
+}
+
+.historyCard > p {
+  margin-bottom: 0;
+}
+
+.historyCard .timeline {
+  border-left-color: var(--ifm-color-emphasis-300);
+}
+
+.historyCard .timelineItem::before {
+  border-color: var(--ifm-background-surface-color);
+  background: var(--ifm-color-primary);
+}
+
+.historyCard .timelineMeta,
+.historyCard .timelineItem p {
+  color: var(--ifm-color-content);
+}
+
+.unknownCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 2px solid #fed7aa;
+  background: #fff7ed;
+  color: #9a3412;
+}
+
+.unknownCard p {
+  margin: 0.35rem 0 0;
+}
+
+@media screen and (max-width: 480px) {
+  .main {
+    padding: 2rem 1rem;
+  }
+
+  .incidentDetails > div {
+    display: block;
+  }
+
+  .incidentDetails dd {
+    margin-top: 0.15rem;
+  }
+
+  .historyHeader {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }
