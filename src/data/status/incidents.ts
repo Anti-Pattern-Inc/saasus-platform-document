@@ -52,6 +52,8 @@ export const statusComponents: readonly StatusComponent[] = [
   },
 ];
 
+const statusComponentIds = new Set(statusComponents.map((component) => component.id));
+
 /**
  * Public incident history. Keep this empty until a real incident or an
  * explicitly labelled test/training record is approved for publication.
@@ -132,6 +134,10 @@ export function validateIncidentRecords(
         errors.push(
           `${prefix}.affectedComponents[${componentIndex}] must contain an ID and localized name`,
         );
+      } else if (!statusComponentIds.has(component.id)) {
+        errors.push(
+          `${prefix}.affectedComponents[${componentIndex}].id is not registered in statusComponents: ${component.id}`,
+        );
       }
     });
 
@@ -141,7 +147,7 @@ export function validateIncidentRecords(
     }
 
     let previousStatusOrder = -1;
-    let previousPublishedAt = 0;
+    let previousPublishedAt: number | undefined;
     let hasResolvedUpdate = false;
     record.updates.forEach((update, updateIndex) => {
       const updatePrefix = `${prefix}.updates[${updateIndex}]`;
@@ -159,8 +165,12 @@ export function validateIncidentRecords(
       if (statusOrder < previousStatusOrder) {
         errors.push(`${updatePrefix}.status moves backwards in the timeline`);
       }
-      if (!Number.isNaN(publishedAt) && publishedAt < previousPublishedAt) {
-        errors.push(`${updatePrefix}.publishedAt must be in ascending order`);
+      if (
+        !Number.isNaN(publishedAt) &&
+        previousPublishedAt !== undefined &&
+        publishedAt <= previousPublishedAt
+      ) {
+        errors.push(`${updatePrefix}.publishedAt must be in strictly ascending order`);
       }
       if (isIsoUtc(record.startedAt) && publishedAt < Date.parse(record.startedAt)) {
         errors.push(`${updatePrefix}.publishedAt must not be before startedAt`);
@@ -174,12 +184,17 @@ export function validateIncidentRecords(
       }
 
       previousStatusOrder = statusOrder;
-      previousPublishedAt = publishedAt;
+      if (!Number.isNaN(publishedAt)) {
+        previousPublishedAt = publishedAt;
+      }
       hasResolvedUpdate ||= update.status === 'resolved';
     });
 
     if (hasResolvedUpdate && !record.resolvedAt) {
       errors.push(`${prefix}.resolvedAt is required for a resolved incident`);
+    }
+    if (record.resolvedAt && !hasResolvedUpdate) {
+      errors.push(`${prefix}.resolvedAt requires a resolved update`);
     }
   });
 

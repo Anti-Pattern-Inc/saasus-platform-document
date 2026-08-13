@@ -32,6 +32,20 @@ const localized = (text: { ja: string; en: string }, locale: Locale) =>
 const latestUpdate = (record: IncidentRecord) =>
   record.updates[record.updates.length - 1];
 
+const incidentStatuses: readonly IncidentStatus[] = [
+  'investigating',
+  'identified',
+  'monitoring',
+  'resolved',
+];
+
+function isIncidentStatus(value: unknown): value is IncidentStatus {
+  return (
+    typeof value === 'string' &&
+    incidentStatuses.includes(value as IncidentStatus)
+  );
+}
+
 function formatTimestamp(timestamp: string, locale: Locale): string {
   return `${new Intl.DateTimeFormat(locale === 'ja' ? 'ja-JP' : 'en-US', {
     dateStyle: 'medium',
@@ -147,8 +161,10 @@ function CurrentIncidentCard({
   record?: IncidentRecord;
   locale: Locale;
 }) {
-  const activeStatus =
-    incident.currentStatus ?? (record ? latestUpdate(record).status : 'investigating');
+  const fallbackStatus = record ? latestUpdate(record).status : 'investigating';
+  const activeStatus = isIncidentStatus(incident.currentStatus)
+    ? incident.currentStatus
+    : fallbackStatus;
   const startTime = record
     ? formatTimestamp(record.startedAt, locale)
     : locale === 'ja'
@@ -319,8 +335,12 @@ function StatusContent() {
   const currentIncidentRecord = incident?.incidentId
     ? publicIncidents.find((record) => record.id === incident.incidentId)
     : undefined;
-  const activeStatus = incident?.currentStatus
-    ?? (currentIncidentRecord ? latestUpdate(currentIncidentRecord).status : 'investigating');
+  const activeStatus =
+    incident && isIncidentStatus(incident.currentStatus)
+      ? incident.currentStatus
+      : currentIncidentRecord
+        ? latestUpdate(currentIncidentRecord).status
+        : 'investigating';
   const affectedComponentIds = incident
     ? currentIncidentRecord?.affectedComponents.map((component) => component.id) ?? null
     : [];
