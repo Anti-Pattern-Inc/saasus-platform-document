@@ -338,6 +338,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+        - smartApiGateway
+      operationId: DeleteApiKey
+      summary: Delete an API key
+      x-summary-i18n:
+        jpn: APIキーを削除
+      description: |
+        Delete the specified API key.
+      x-description-i18n:
+        jpn: |
+          指定したAPIキーを削除します。
+      parameters:
+        - in: path
+          name: api_key
+          description: API Key
+          x-description-i18n:
+            jpn: APIキー
+          required: true
+          schema:
+            type: string
+            example: 1234567890abcdef
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /api-keys/{api_key}/client-secret:
     post:
       tags:
