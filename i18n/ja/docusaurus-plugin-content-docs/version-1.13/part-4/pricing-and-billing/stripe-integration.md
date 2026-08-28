@@ -77,6 +77,6 @@ Stripe ダッシュボードで対象のサブスクリプションを開き、�
 
 ![Stripe ダッシュボードでサブスクリプションを自動キャンセルから除外する](/ja/img/part-4/pricing-and-billing/stripe-integration/stripe-exclude-auto-cancellation.png)
 
-:::info
+:::tip
 これは Stripe のテスト環境固有の挙動であり、本番環境では発生しません。設定項目の名称や場所は Stripe の仕様変更により変更される可能性がありますので、最新の Stripe ドキュメントも併せてご参照ください。
 :::
