@@ -4,7 +4,7 @@ slug: "stripe-integration"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Fri Aug 28 2026 01:30:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 このページでは、SaaS 開発コンソールを用いて Stripe との外部連携を行い、課金処理や請求書発行を効率化する方法について説明します。  
@@ -65,3 +65,18 @@ SaaS 開発コンソールで設定した税率は、以下のように Stripe �
 ![invoice-no-tax](/ja/img/part-4/pricing-and-billing/stripe-integration/tax-rates-15.png)
 **請求書 PDF**  
 ![invoice-no-tax-pdf](/ja/img/part-4/pricing-and-billing/stripe-integration/tax-rates-16.png)
+
+## テスト環境における自動解約についての注意
+
+Stripe の**テスト環境では仕様上、サブスクリプションの作成から 90 日を経過すると自動的に解約（キャンセル）されます**。SaaSus Platform 経由で作成したサブスクリプションも対象となるため、テスト中に Stripe 側のみが解約状態となり、SaaSus Platform と Stripe の間で状態の不整合が発生することがあります。
+
+テストを長期間継続する場合は、対象のサブスクリプションを自動解約の対象から除外してください。
+
+**除外方法**  
+Stripe ダッシュボードで対象のサブスクリプションを開き、「サブスクリプションを更新」の右にある「…」メニューから **「自動キャンセルから除外する」** を選択します。
+
+![Stripe ダッシュボードでサブスクリプションを自動キャンセルから除外する](/ja/img/part-4/pricing-and-billing/stripe-integration/stripe-exclude-auto-cancellation.png)
+
+:::info
+これは Stripe のテスト環境固有の挙動であり、本番環境では発生しません。設定項目の名称や場所は Stripe の仕様変更により変更される可能性がありますので、最新の Stripe ドキュメントも併せてご参照ください。
+:::
