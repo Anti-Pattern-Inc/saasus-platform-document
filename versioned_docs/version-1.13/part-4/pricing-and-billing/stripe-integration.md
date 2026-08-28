@@ -5,7 +5,7 @@ description: "Learn how to integrate with Stripe to automate billing operations 
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Fri Aug 28 2026 01:30:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 This page explains how to integrate Stripe with the SaaS Development Console to streamline billing and invoice management.  
@@ -69,3 +69,18 @@ Based on the configured tax settings, Stripe will generate invoices accordingly 
 
 **PDF Version**  
 ![invoice-no-tax-pdf](/img/part-4/pricing-and-billing/stripe-integration/tax-rates-16.png)
+
+## Note on Automatic Cancellation in the Test Environment
+
+In the Stripe **test environment, by specification, subscriptions are automatically canceled 90 days after creation**. Subscriptions created via SaaSus Platform are also subject to this, so during testing only the Stripe side may become canceled, causing a state inconsistency between SaaSus Platform and Stripe.
+
+If you need to continue testing over a long period, exclude the target subscription from automatic cancellation.
+
+**How to exclude**  
+Open the target subscription in the Stripe dashboard, and from the "..." menu to the right of "Update subscription", select **"Exclude from auto-cancellation"**.
+
+![Exclude a subscription from auto-cancellation in the Stripe dashboard](/img/part-4/pricing-and-billing/stripe-integration/stripe-exclude-auto-cancellation.png)
+
+:::tip Note
+This is behavior specific to the Stripe test environment and does not occur in the production environment. The names and locations of setting items may change due to Stripe specification changes, so please also refer to the latest Stripe documentation.
+:::

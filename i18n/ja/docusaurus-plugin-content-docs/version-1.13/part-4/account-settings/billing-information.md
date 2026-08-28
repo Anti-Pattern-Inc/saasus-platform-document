@@ -4,7 +4,7 @@ slug: "billing-information"
 excerpt: ""
 hidden: false
 createdAt: "Thu Aug 15 2025 02:18:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Fri Aug 28 2026 03:50:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 このページでは、SaaSus Platform有料プランの請求、支払い方法について説明します。
@@ -114,6 +114,24 @@ SaaS 開発コンソールから有料プランを申し込んだ場合の請求
 
 - **請求書ダウンロード**: すべての請求書はPDF形式が利用可能。
 - **保持期間**: 請求データは7年間保持。
+
+## 請求先メールアドレス（代表者メールアドレス）の変更 {#billing-contact-email}
+
+SaaSus Platform 利用料金の請求書発行を通知するメールアドレスは、[代表者メールアドレス] として管理されており、SaaS 開発コンソールからお客様ご自身で変更いただけます。
+
+:::info
+ここで説明する代表者メールアドレスは、SaaSus Platform を契約しているアカウントに対する、SaaSus Platform 利用料金の請求書発行の通知先です。お客様の SaaS のエンドユーザー（テナント）向けの請求とは異なります。
+:::
+
+### 変更手順
+
+1. SaaS 開発コンソールにログインします。
+2. メニューより [アカウント設定] を開きます。
+3. [一般] タブにある [代表者メールアドレス] の項目に新しいメールアドレスを入力し、[保存] をクリックします。
+
+![アカウント設定の代表者メールアドレス](/ja/img/part-4/account-settings/billing-information/primary-email-address.png)
+
+保存後、以降の請求書発行の通知は新しいメールアドレス宛に送信されます。
 
 ## サポートと連絡先
 

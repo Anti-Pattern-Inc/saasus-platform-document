@@ -4,7 +4,7 @@ slug: "billing"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Fri Aug 28 2026 01:30:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 **Q. メータ単位の「使用量の集計」設定（sum/max）はどのような機能でしょうか？**  
@@ -245,3 +245,18 @@ A. 作成した料金プランの削除については、ご利用の環境に�
 
 **Q. 代表者メールアドレスとはどのように利用される情報でしょうか**  
 A. 代表者メールアドレスは、請求書の送付先として利用いたします。
+
+---
+
+**Q. Stripe のテスト環境で、しばらく経つとサブスクリプションが解約され、SaaSus Platform との連携が切れてしまいます。回避できますか？**
+
+A. Stripe の**テスト環境では仕様上、サブスクリプションの作成から 90 日を経過すると自動的に解約（キャンセル）されます**。これにより Stripe 側のみが解約状態となり、SaaSus Platform と Stripe の間で状態の不整合が発生することがあります。
+
+ - **回避方法**  
+Stripe ダッシュボードで対象のサブスクリプションを開き、「サブスクリプションを更新」の右にある「…」メニューから **「自動キャンセルから除外する」** を選択してください。これにより、テスト環境での 90 日自動解約の対象から除外されます。
+
+![Stripe ダッシュボードでサブスクリプションを自動キャンセルから除外する](/ja/img/part-7/faq/stripe-exclude-auto-cancellation.png)
+
+:::tip 補足
+これは Stripe のテスト環境固有の挙動であり、本番環境では発生しません。なお、設定項目の名称や場所は Stripe の仕様変更により変更される可能性がありますので、最新の Stripe ドキュメントも併せてご参照ください。
+:::
