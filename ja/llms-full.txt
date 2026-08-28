@@ -1486,6 +1486,24 @@ For Starter plan:
 - **Invoice downloads**: All invoices are available in PDF format.
 - **Retention period**: Billing data is retained for 7 years.
 
+## Changing the Billing Contact Email Address (Primary Email Address) {#billing-contact-email}
+
+The email address used to notify you of invoices issued for SaaSus Platform usage fees is managed as the [Primary Email Address], and you can change it yourself from the SaaS Development Console.
+
+:::info
+The primary email address described here is the notification destination for invoices issued for SaaSus Platform usage fees, addressed to the account subscribed to SaaSus Platform. This is different from billing for the end users (tenants) of your SaaS.
+:::
+
+### Steps to Change
+
+1. Log in to the SaaS Development Console.
+2. Open [Account Settings] from the menu.
+3. In the [General] tab, enter the new email address in the [Primary Email Address] field and click [Save].
+
+![Primary Email Address in Account Settings](/img/part-4/account-settings/billing-information/primary-email-address.png)
+
+After saving, subsequent invoice notifications will be sent to the new email address.
+
 ## Support and Contact
 
 For billing-related inquiries, please contact our support team through the following methods:
@@ -5086,6 +5104,22 @@ Based on the configured tax settings, Stripe will generate invoices accordingly 
 
 **PDF Version**  
 ![invoice-no-tax-pdf](/img/part-4/pricing-and-billing/stripe-integration/tax-rates-16.png)
+
+## Note on Automatic Cancellation in the Test Environment
+
+In the Stripe **test environment, by specification, subscriptions are automatically canceled 90 days after creation**. Subscriptions created via SaaSus Platform are also subject to this, so during testing only the Stripe side may become canceled, causing a state inconsistency between SaaSus Platform and Stripe.
+
+If you need to continue testing over a long period, exclude the target subscription from automatic cancellation.
+
+**How to exclude**  
+Open the target subscription in the Stripe dashboard, and from the "..." menu to the right of "Update subscription", select **"Exclude from auto-cancellation"**.
+
+![Exclude a subscription from auto-cancellation in the Stripe dashboard](/img/part-4/pricing-and-billing/stripe-integration/stripe-exclude-auto-cancellation.png)
+
+:::tip Note
+This is behavior specific to the Stripe test environment and does not occur in the production environment. The names and locations of setting items may change due to Stripe specification changes, so please also refer to the latest Stripe documentation.
+:::
+
 ---
 
 # Tax Rate Settings
@@ -15051,6 +15085,21 @@ A. The representative email address is used as the destination for sending invoi
 
 ---
 
+**Q. In the Stripe test environment, subscriptions get canceled after a while and the integration with SaaSus Platform breaks. Can this be avoided?**
+
+A. In the Stripe **test environment, by specification, subscriptions are automatically canceled 90 days after creation**. As a result, only the Stripe side becomes canceled, which can cause a state inconsistency between SaaSus Platform and Stripe.
+
+ - **How to avoid this**  
+Open the target subscription in the Stripe dashboard, and from the "..." menu to the right of "Update subscription", select **"Exclude from auto-cancellation"**. This excludes the subscription from the 90-day automatic cancellation in the test environment.
+
+![Exclude a subscription from auto-cancellation in the Stripe dashboard](/img/part-7/faq/stripe-exclude-auto-cancellation.png)
+
+:::tip Note
+This is behavior specific to the Stripe test environment and does not occur in the production environment. The names and locations of setting items may change due to Stripe specification changes, so please also refer to the latest Stripe documentation.
+:::
+
+---
+
 # SaaSus Platform FAQ
 
 URL: https://www.prisma.io/docs/part-7/faq/saasus-platform
@@ -15422,6 +15471,14 @@ A. You can change it yourself from the SaaS Development Console.
 Please enter and save the new billing information from the following menu.  
 Configuration location:  
 SaaS Development Console > Account Settings > Billing Information
+
+---
+
+**Q. How can I change the email address (primary email address) used to notify me of issued invoices?**
+
+A. The email address used to notify you of SaaSus Platform usage-fee invoices (the primary email address) can be changed by yourself from the SaaS Development Console.  
+In [Account Settings] > [General] tab, enter the new email address in [Primary Email Address] and save.  
+For detailed steps, see [Billing and Payment Methods](/docs/part-4/account-settings/billing-information#billing-contact-email).
 
 ---
 
