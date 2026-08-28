@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-08-28 12:50:31 +0900`
+- Generated: `2026-08-28 12:59:04 +0900`
 
 ---
 ## changelog/20221224.md
@@ -1029,7 +1029,7 @@ For Starter plan:
 ### Billing Information
 - **Invoice downloads**: All invoices are available in PDF format.
 - **Retention period**: Billing data is retained for 7 years.
-## Changing the Billing Contact Email Address (Primary Email Address)
+## Changing the Billing Contact Email Address (Primary Email Address) {#billing-contact-email}
 The email address used to notify you of invoices issued for SaaSus Platform usage fees is managed as the [Primary Email Address], and you can change it yourself from the SaaS Development Console.
 :::info
 The primary email address described here is the notification destination for invoices issued for SaaSus Platform usage fees, addressed to the account subscribed to SaaSus Platform. This is different from billing for the end users (tenants) of your SaaS.
@@ -11440,7 +11440,7 @@ SaaS Development Console > Account Settings > Billing Information
 **Q. How can I change the email address (primary email address) used to notify me of issued invoices?**
 A. The email address used to notify you of SaaSus Platform usage-fee invoices (the primary email address) can be changed by yourself from the SaaS Development Console.
 In [Account Settings] > [General] tab, enter the new email address in [Primary Email Address] and save.
-For detailed steps, see [Billing and Payment Methods](/docs/part-4/account-settings/billing-information).
+For detailed steps, see [Billing and Payment Methods](/docs/part-4/account-settings/billing-information#billing-contact-email).
 ---
 **Q. Can I switch back (downgrade) from a paid plan to the Free plan?**
 A. Under the current specifications, you cannot directly switch back (downgrade) from a paid plan to the Free plan.
