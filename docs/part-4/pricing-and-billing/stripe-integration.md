@@ -81,6 +81,6 @@ Open the target subscription in the Stripe dashboard, and from the "..." menu to
 
 ![Exclude a subscription from auto-cancellation in the Stripe dashboard](/img/part-4/pricing-and-billing/stripe-integration/stripe-exclude-auto-cancellation.png)
 
-:::tip
+:::tip Note
 This is behavior specific to the Stripe test environment and does not occur in the production environment. The names and locations of setting items may change due to Stripe specification changes, so please also refer to the latest Stripe documentation.
 :::

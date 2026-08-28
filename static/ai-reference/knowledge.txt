@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-08-28 11:02:05 +0900`
+- Generated: `2026-08-28 11:07:12 +0900`
 
 ---
 ## changelog/20221224.md
@@ -3604,7 +3604,7 @@ If you need to continue testing over a long period, exclude the target subscript
 **How to exclude**
 Open the target subscription in the Stripe dashboard, and from the "..." menu to the right of "Update subscription", select **"Exclude from auto-cancellation"**.
 ![Exclude a subscription from auto-cancellation in the Stripe dashboard](/img/part-4/pricing-and-billing/stripe-integration/stripe-exclude-auto-cancellation.png)
-:::tip
+:::tip Note
 This is behavior specific to the Stripe test environment and does not occur in the production environment. The names and locations of setting items may change due to Stripe specification changes, so please also refer to the latest Stripe documentation.
 :::
 ````
