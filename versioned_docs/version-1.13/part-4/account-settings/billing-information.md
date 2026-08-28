@@ -116,7 +116,7 @@ For Starter plan:
 - **Invoice downloads**: All invoices are available in PDF format.
 - **Retention period**: Billing data is retained for 7 years.
 
-## Changing the Billing Contact Email Address (Primary Email Address)
+## Changing the Billing Contact Email Address (Primary Email Address) {#billing-contact-email}
 
 The email address used to notify you of invoices issued for SaaSus Platform usage fees is managed as the [Primary Email Address], and you can change it yourself from the SaaS Development Console.
 
