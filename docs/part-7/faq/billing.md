@@ -4,7 +4,7 @@ slug: "billing"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Jul 21 2026 06:51:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Fri Aug 28 2026 01:30:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 **Q. What is the "Calculation Method" setting (sum/max) for meter units?**  
@@ -245,3 +245,17 @@ When setting and applying pricing plans in a production environment, please thor
 
 **Q. How is the representative email address used?**  
 A. The representative email address is used as the destination for sending invoices.
+
+---
+
+**Q. In the Stripe test environment, subscriptions get canceled after a while and the integration with SaaSus Platform breaks. Can this be avoided?**
+
+A. In the Stripe **test environment, by specification, subscriptions are automatically canceled 90 days after creation**. As a result, only the Stripe side becomes canceled, which can cause a state inconsistency between SaaSus Platform and Stripe.
+
+ - **How to avoid this**  
+Open the target subscription in the Stripe dashboard, and from the "..." menu to the right of "Update subscription", select **"Exclude from auto-cancellation"**. This excludes the subscription from the 90-day automatic cancellation in the test environment.
+
+![Exclude a subscription from auto-cancellation in the Stripe dashboard](/img/part-7/faq/stripe-exclude-auto-cancellation.png)
+
+ - **Note**  
+This is behavior specific to the Stripe test environment and does not occur in the production environment. The names and locations of setting items may change due to Stripe specification changes, so please also refer to the latest Stripe documentation.
