@@ -4,7 +4,7 @@ slug: "billing-information"
 excerpt: ""
 hidden: false
 createdAt: "Thu Aug 15 2025 02:18:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Aug 15 2025 02:18:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Fri Aug 28 2026 03:50:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 This page explains billing and payment methods for SaaSus Platform paid plans.
@@ -115,6 +115,24 @@ For Starter plan:
 
 - **Invoice downloads**: All invoices are available in PDF format.
 - **Retention period**: Billing data is retained for 7 years.
+
+## Changing the Billing Contact Email Address (Primary Email Address) {#billing-contact-email}
+
+The email address used to notify you of invoices issued for SaaSus Platform usage fees is managed as the [Primary Email Address], and you can change it yourself from the SaaS Development Console.
+
+:::info
+The primary email address described here is the notification destination for invoices issued for SaaSus Platform usage fees, addressed to the account subscribed to SaaSus Platform. This is different from billing for the end users (tenants) of your SaaS.
+:::
+
+### Steps to Change
+
+1. Log in to the SaaS Development Console.
+2. Open [Account Settings] from the menu.
+3. In the [General] tab, enter the new email address in the [Primary Email Address] field and click [Save].
+
+![Primary Email Address in Account Settings](/img/part-4/account-settings/billing-information/primary-email-address.png)
+
+After saving, subsequent invoice notifications will be sent to the new email address.
 
 ## Support and Contact
 
