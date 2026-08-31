@@ -3,7 +3,7 @@
 - Locale: `ja`
 - Docs source: `i18n/ja/docusaurus-plugin-content-docs/current`
 - API source: `api`
-- Generated: `2026-08-28 12:59:05 +0900`
+- Generated: `2026-08-31 10:38:47 +0900`
 
 ---
 ## changelog/20221224.md
@@ -3597,6 +3597,30 @@ Basicプラン、EnterpriseプランもFreeプランと同様に設定を行っ�
 ![Basic プラン構成図](/ja/img/part-4/pricing-and-billing/pricing-plan-overview/manage-rate-plans-07.png)
 ### Enterprise プランの構成
 ![Enterprise プラン構成図](/ja/img/part-4/pricing-and-billing/pricing-plan-overview/manage-rate-plans-08.png)
+## 5. 実装時のポイント：機能の判定は計測単位を基準にする
+アプリケーションで「どの機能を使えるか」「上限値はいくつか」「ログを何日分参照できるか」などを判定する際は、料金プランの ID そのものを条件にするよりも、**料金プランに紐づく計測単位（メーター単位や機能メニュー）を基準に判定する方法をおすすめします。**
+料金プランの ID を直接条件に使うと、料金プランを追加・変更するたびにアプリケーションのコードを修正・デプロイし直す必要が生じます。
+```js
+// 料金プランの ID で分岐する例
+if (pricingPlanId === "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx") {
+  // このプランだけこの機能を使える
+  enableFeatureX();
+  logRetentionDays = 30;
+}
+```
+一方、料金プランに紐づく計測単位を参照して判定しておくと、コードを変更しなくても設定側で挙動を調整できます。
+```js
+// 料金プランに紐づく計測単位を参照して判定する例
+// 例）「feature_x」という計測単位が含まれているかで機能の可否を判定
+if (hasMeteringUnit(plan, "feature_x")) {
+  enableFeatureX();
+}
+// 例）「log_retention_days」という計測単位の値を上限として利用
+logRetentionDays = getMeteringUnitValue(plan, "log_retention_days");
+```
+:::info
+計測単位を参照する実装にしておくと、新しい料金プランを作成したときも、SaaS 開発コンソール上で計測単位（メーター単位や機能メニュー）の設定を変更するだけでアプリケーションの動作を切り替えられます。料金プランを追加・変更するたびにコードを修正する必要がなくなります。
+:::
 ````
 
 ---
