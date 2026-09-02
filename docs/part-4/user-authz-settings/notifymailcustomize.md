@@ -75,7 +75,7 @@ Full-width spaces cannot be set in the strings configured for messages.
     </tr>
     <tr>
       <td>6</td>
-      <td>×</td>
+      <td>⚪︎</td>
       <td><strong>authenticationMfa</strong></td>
       <td>MFA Authentication Notification</td>
       <td>After setting "method"="email" using<br />`UpdateUserMfaPreference` and logging in</td>
@@ -235,8 +235,9 @@ Reset Page: https://auth.your.domain/recover-password-confirm
 
 ### MFA Authentication Notification (authenticationMfa)
 
-:::warning Warning
-To configure this setting, you must update directly using the <a href="https://docs.saasus.io/docs/reference/auth-api#tag/basicInfo/operation/UpdateNotificationMessages" target="_blank">Update Notification Email Template API</a>.
+:::info Information
+This item can be customized in the SaaS Operations Console. For details on customization methods, please check the E-Mail Content tab of the <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Authorization > Advanced Settings</a>.
+:::
 
 The strings `{####}` and `{username}` are required.
 
