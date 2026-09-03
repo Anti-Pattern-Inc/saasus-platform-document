@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-08-31 10:38:47 +0900`
+- Generated: `2026-09-03 11:06:01 +0900`
 
 ---
 ## changelog/20221224.md
@@ -403,6 +403,30 @@ Suspension of the AWS Marketplace Integration Feature
 　■ About the latest listing process
   - For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
 We apologize for any inconvenience this may cause and appreciate your understanding.
+````
+
+---
+## changelog/20260831.md
+````markdown
+We have released the following feature addition and bug fix.
+- Refresh token expiration is now configurable
+  Previously, the refresh token expiration was fixed at 30 days. In response to requests to keep users signed in for longer periods, we have added the ability to set an arbitrary expiration period.
+  Changes
+  - You can now configure the refresh token expiration in the SaaS Development Console.
+  　■ Notes on usage
+  　　To apply the changed setting, the target users need to sign in again.
+  　　If you set a long expiration period, please be fully aware of the risks in the event of token leakage.
+- Fixed a bug related to the consumption tax rate setting when canceling a pay-as-you-go plan
+  We identified an issue where an arbitrary tax rate could be selected in the plan cancellation dialog, which could result in a tax rate different from that of the plan being canceled being set incorrectly.
+  We have corrected this behavior as follows.
+  Changes
+  - We removed the tax rate selection dropdown from the plan cancellation dialog.
+  - When canceling, the tax rate configured for the currently contracted plan is now automatically carried over. (If no tax rate is set for the current plan, the cancellation is processed without a tax rate.)
+  　■ Impact on the API
+  　　Even if a tax rate parameter is sent to the cancellation API, the value is ignored, and the tax rate of the currently contracted plan is automatically applied.
+  　　There is no change to the API specification itself, but the tax rate specified at cancellation will no longer be reflected.
+  　■ Scope not affected by this fix
+  　　Specifying the tax rate during a normal plan change or the initial plan setup can be used as before.
 ````
 
 ---
