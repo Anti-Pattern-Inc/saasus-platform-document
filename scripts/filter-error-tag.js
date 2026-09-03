@@ -15,10 +15,20 @@ if (!file) {
 // --- YAML 読み込み ------------------------------------------------------
 const doc = yaml.load(fs.readFileSync(file, 'utf8'));
 
-// --- 1. paths から "error" タグ付き operation を削除 ------------------
+// --- 除外する operationId 一覧（UI に表示させない operation） ------------
+const EXCLUDED_OPERATION_IDS = [
+  'DeleteAllPlansAndMenusAndUnitsAndMetersAndTaxRates',
+];
+
+// --- 1. paths から "error" タグ付き / 除外対象 operation を削除 ---------
 for (const [route, ops] of Object.entries(doc.paths ?? {})) {
   for (const m of Object.keys(ops)) {
-    if (ops[m]?.tags?.includes('error')) delete ops[m];
+    const op = ops[m];
+    if (op?.tags?.includes('error')) {
+      delete ops[m];
+    } else if (op?.operationId && EXCLUDED_OPERATION_IDS.includes(op.operationId)) {
+      delete ops[m];
+    }
   }
   if (Object.keys(ops).length === 0) delete doc.paths[route];
 }
