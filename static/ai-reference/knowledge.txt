@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-08-31 23:20:57 +0900`
+- Generated: `2026-09-03 11:06:01 +0900`
 
 ---
 ## changelog/20221224.md
@@ -3588,6 +3588,30 @@ Use this model to define **flat fees unaffected by usage** (e.g., 1,000 JPY/mont
 ![Basic Plan Structure](/img/part-4/pricing-and-billing/pricing-plan-overview/manage-rate-plans-07.png)
 ### Enterprise Plan Example
 ![Enterprise Plan Structure](/img/part-4/pricing-and-billing/pricing-plan-overview/manage-rate-plans-08.png)
+## 5. Implementation Tip: Base Feature Decisions on Measurement Units
+When your application decides "which features are available," "what the limits are," or "how many days of logs can be viewed," we recommend basing the decision on the **measurement units (metering units and feature menus) tied to the pricing plan** rather than on the pricing plan ID itself.
+If you branch directly on the pricing plan ID, you need to modify and redeploy your application code every time you add or change a pricing plan.
+```js
+// Branching on the pricing plan ID
+if (pricingPlanId === "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx") {
+  // Only this plan can use this feature
+  enableFeatureX();
+  logRetentionDays = 30;
+}
+```
+By contrast, if you decide based on the measurement units tied to the plan, you can adjust the behavior from the settings without changing your code.
+```js
+// Deciding based on the measurement units tied to the plan
+// Example) Gate a feature by whether the "feature_x" measurement unit is included
+if (hasMeteringUnit(plan, "feature_x")) {
+  enableFeatureX();
+}
+// Example) Use the value of the "log_retention_days" measurement unit as the limit
+logRetentionDays = getMeteringUnitValue(plan, "log_retention_days");
+```
+:::info
+When your implementation refers to measurement units, adding a new pricing plan lets you switch the application's behavior simply by changing the measurement unit (metering unit or feature menu) settings in the SaaS Development Console. You no longer need to modify your code every time you add or change a pricing plan.
+:::
 ````
 
 ---
