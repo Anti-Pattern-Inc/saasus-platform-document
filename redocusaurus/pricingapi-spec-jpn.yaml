@@ -665,23 +665,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /plans-initialization:
-    delete:
-      tags:
-        - pricingPlans
-      operationId: DeleteAllPlansAndMenusAndUnitsAndMetersAndTaxRates
-      summary: 全てのPlans,Menus,Units,Metersの削除
-      description: |
-        無条件に全料金プラン、メニュー、ユニット、メーター、税率を削除します。
-      responses:
-        '200':
-          description: OK
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
   /tax-rates:
     post:
       tags:

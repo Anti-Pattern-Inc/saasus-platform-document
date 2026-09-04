@@ -862,29 +862,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /plans-initialization:
-    delete:
-      tags:
-        - pricingPlans
-      operationId: DeleteAllPlansAndMenusAndUnitsAndMetersAndTaxRates
-      summary: Delete all Plans, Menus, Units, Meters and Tax Rates
-      x-summary-i18n:
-        jpn: 全てのPlans,Menus,Units,Metersの削除
-      description: >
-        Unconditionally remove all rate plans, menus, units, meters and tax
-        rates.
-      x-description-i18n:
-        jpn: |
-          無条件に全料金プラン、メニュー、ユニット、メーター、税率を削除します。
-      responses:
-        '200':
-          description: OK
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
   /tax-rates:
     post:
       tags:
