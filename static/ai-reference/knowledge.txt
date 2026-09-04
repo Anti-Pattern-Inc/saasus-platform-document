@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-08-31 23:20:57 +0900`
+- Generated: `2026-09-04 15:21:07 +0900`
 
 ---
 ## changelog/20221224.md
@@ -4513,7 +4513,7 @@ Full-width spaces cannot be set in the strings configured for messages.
     </tr>
     <tr>
       <td>6</td>
-      <td>×</td>
+      <td>⚪︎</td>
       <td><strong>authenticationMfa</strong></td>
       <td>MFA Authentication Notification</td>
       <td>After setting "method"="email" using<br />`UpdateUserMfaPreference` and logging in</td>
@@ -4555,7 +4555,7 @@ Full-width spaces cannot be set in the strings configured for messages.
 ## How to Customize Email Body
 ### Temporary Password Email for New Registration (signUp)
 :::info Information
-This item can be customized in the SaaS Operations Console. For details on customization methods, please check the E-Mail Content tab of the <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Authorization > Advanced Settings</a>.
+This item can be customized in the SaaS Development Console. For details on customization methods, please check the E-Mail Content tab of the <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Authorization > Advanced Settings</a>.
 :::
 The strings `{####}` and `{username}` are required.
 `{####}` will be replaced with the temporary password and `{username}` will be replaced with the user ID when sent.
@@ -4579,7 +4579,7 @@ Verification Page: https://auth.your.domain/sign-up-confirm
 ```
 ### Temporary Password Resend Email for New Registration (resendCode)
 :::info Information
-This item can be customized in the SaaS Operations Console. For details on customization methods, please check the E-Mail Content tab of the <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Authorization > Advanced Settings</a>.
+This item can be customized in the SaaS Development Console. For details on customization methods, please check the E-Mail Content tab of the <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Authorization > Advanced Settings</a>.
 :::
 The strings `{####}` and `{username}` are required.
 `{####}` will be replaced with the temporary password and `{username}` will be replaced with the user ID when sent.
@@ -4603,7 +4603,7 @@ Verification Page: https://auth.your.domain/sign-up-confirm
 ```
 ### Password Reset Verification Code Email (forgotPassword)
 :::info Information
-This item can be customized in the SaaS Operations Console. For details on customization methods, please check the E-Mail Content tab of the <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Authorization > Advanced Settings</a>.
+This item can be customized in the SaaS Development Console. For details on customization methods, please check the E-Mail Content tab of the <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Authorization > Advanced Settings</a>.
 :::
 The strings `{####}` and `{username}` are required.
 `{####}` will be replaced with the reset code and `{username}` will be replaced with the user ID when sent.
@@ -4624,8 +4624,9 @@ Reset Code: 789012
 Reset Page: https://auth.your.domain/recover-password-confirm
 ```
 ### MFA Authentication Notification (authenticationMfa)
-:::warning Warning
-To configure this setting, you must update directly using the <a href="https://docs.saasus.io/docs/reference/auth-api#tag/basicInfo/operation/UpdateNotificationMessages" target="_blank">Update Notification Email Template API</a>.
+:::info Information
+This item can be customized in the SaaS Development Console. For details on customization methods, please check the E-Mail Content tab of the <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Authorization > Advanced Settings</a>.
+:::
 The strings `{####}` and `{username}` are required.
 `{####}` will be replaced with the MFA authentication code and `{username}` will be replaced with the user ID when sent.
 #### Configuration Example
@@ -24239,28 +24240,6 @@ paths:
                 x-title-i18n:
                   jpn: メータリングユニット
                 $ref: '#/components/schemas/MeteringUnitMonthCounts'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /plans-initialization:
-    delete:
-      tags:
-        - pricingPlans
-      operationId: DeleteAllPlansAndMenusAndUnitsAndMetersAndTaxRates
-      summary: Delete all Plans, Menus, Units, Meters and Tax Rates
-      x-summary-i18n:
-        jpn: 全てのPlans,Menus,Units,Metersの削除
-      description: |
-        Unconditionally remove all rate plans, menus, units, meters and tax rates.
-      x-description-i18n:
-        jpn: |
-          無条件に全料金プラン、メニュー、ユニット、メーター、税率を削除します。
-      responses:
-        '200':
-          description: OK
         '500':
           description: Internal Server Error
           content:
