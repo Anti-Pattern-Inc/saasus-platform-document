@@ -3,7 +3,7 @@
 - Locale: `ja`
 - Docs source: `i18n/ja/docusaurus-plugin-content-docs/current`
 - API source: `api`
-- Generated: `2026-09-02 13:02:52 +0900`
+- Generated: `2026-09-04 15:21:07 +0900`
 
 ---
 ## changelog/20221224.md
@@ -4590,7 +4590,7 @@ SaaS 開発コンソールのドメイン設定画面にて、DNSレコードの
 ## メール本文のカスタマイズ方法
 ### 新規登録時の仮パスワード送信メール (signUp)
 :::info 情報
-本項目はSaaS 運用コンソールにてカスタマイズが可能です。カスタマイズ方法の詳細は<a href="https://settings.console.saasus.io/customize" target="_blank">認証詳細設定画面</a>の通知メール内容タブをご確認ください。
+本項目はSaaS 開発コンソールにてカスタマイズが可能です。カスタマイズ方法の詳細は<a href="https://settings.console.saasus.io/customize" target="_blank">認証詳細設定画面</a>の通知メール内容タブをご確認ください。
 :::
 `{####}` と `{username}` という文字列が必要になります。
 `{####}` は仮パスワードに、`{username}` はユーザーIDに置き換えられて送信されます。
@@ -4614,7 +4614,7 @@ SaaS 開発コンソールのドメイン設定画面にて、DNSレコードの
 ```
 ### 新規登録時の仮パスワード再送メール (resendCode)
 :::info 情報
-本項目はSaaS 運用コンソールにてカスタマイズが可能です。カスタマイズ方法の詳細は<a href="https://settings.console.saasus.io/customize" target="_blank">認証詳細設定画面</a>の通知メール内容タブをご確認ください。
+本項目はSaaS 開発コンソールにてカスタマイズが可能です。カスタマイズ方法の詳細は<a href="https://settings.console.saasus.io/customize" target="_blank">認証詳細設定画面</a>の通知メール内容タブをご確認ください。
 :::
 `{####}` と `{username}` という文字列が必要になります。
 `{####}` は仮パスワードに、`{username}` はユーザーIDに置き換えられて送信されます。
@@ -4638,7 +4638,7 @@ SaaS 開発コンソールのドメイン設定画面にて、DNSレコードの
 ```
 ### パスワードリセット用の検証コード送信メール (forgotPassword)
 :::info 情報
-本項目はSaaS 運用コンソールにてカスタマイズが可能です。カスタマイズ方法の詳細は<a href="https://settings.console.saasus.io/customize" target="_blank">認証詳細設定画面</a>の通知メール内容タブをご確認ください。
+本項目はSaaS 開発コンソールにてカスタマイズが可能です。カスタマイズ方法の詳細は<a href="https://settings.console.saasus.io/customize" target="_blank">認証詳細設定画面</a>の通知メール内容タブをご確認ください。
 :::
 `{####}` と `{username}` という文字列が必要になります。
 `{####}` はリセットコードに、`{username}` はユーザーIDに置き換えられて送信されます。
@@ -4660,7 +4660,7 @@ SaaS 開発コンソールのドメイン設定画面にて、DNSレコードの
 ```
 ### MFA認証通知 (authenticationMfa)
 :::info 情報
-本項目はSaaS 運用コンソールにてカスタマイズが可能です。カスタマイズ方法の詳細は<a href="https://settings.console.saasus.io/customize" target="_blank">認証詳細設定画面</a>の通知メール内容タブをご確認ください。
+本項目はSaaS 開発コンソールにてカスタマイズが可能です。カスタマイズ方法の詳細は<a href="https://settings.console.saasus.io/customize" target="_blank">認証詳細設定画面</a>の通知メール内容タブをご確認ください。
 :::
 `{####}` と `{username}` という文字列が必要になります。
 `{####}` はMFA認証コードに、`{username}` はユーザーIDに置き換えられて送信されます。
@@ -21570,23 +21570,6 @@ paths:
               schema:
                 title: メータリングユニット
                 $ref: "#/components/schemas/MeteringUnitMonthCounts"
-        "500":
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-  /plans-initialization:
-    delete:
-      tags:
-        - pricingPlans
-      operationId: DeleteAllPlansAndMenusAndUnitsAndMetersAndTaxRates
-      summary: 全てのPlans,Menus,Units,Metersの削除
-      description: |
-        無条件に全料金プラン、メニュー、ユニット、メーター、税率を削除します。
-      responses:
-        "200":
-          description: OK
         "500":
           description: Internal Server Error
           content:

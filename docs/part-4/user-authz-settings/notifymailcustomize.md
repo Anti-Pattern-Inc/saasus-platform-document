@@ -120,7 +120,7 @@ Full-width spaces cannot be set in the strings configured for messages.
 ### Temporary Password Email for New Registration (signUp)
 
 :::info Information
-This item can be customized in the SaaS Operations Console. For details on customization methods, please check the E-Mail Content tab of the <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Authorization > Advanced Settings</a>.
+This item can be customized in the SaaS Development Console. For details on customization methods, please check the E-Mail Content tab of the <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Authorization > Advanced Settings</a>.
 :::
 
 The strings `{####}` and `{username}` are required.
@@ -160,7 +160,7 @@ Verification Page: https://auth.your.domain/sign-up-confirm
 ### Temporary Password Resend Email for New Registration (resendCode)
 
 :::info Information
-This item can be customized in the SaaS Operations Console. For details on customization methods, please check the E-Mail Content tab of the <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Authorization > Advanced Settings</a>.
+This item can be customized in the SaaS Development Console. For details on customization methods, please check the E-Mail Content tab of the <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Authorization > Advanced Settings</a>.
 :::
 
 The strings `{####}` and `{username}` are required.
@@ -200,7 +200,7 @@ Verification Page: https://auth.your.domain/sign-up-confirm
 ### Password Reset Verification Code Email (forgotPassword)
 
 :::info Information
-This item can be customized in the SaaS Operations Console. For details on customization methods, please check the E-Mail Content tab of the <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Authorization > Advanced Settings</a>.
+This item can be customized in the SaaS Development Console. For details on customization methods, please check the E-Mail Content tab of the <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Authorization > Advanced Settings</a>.
 :::
 
 The strings `{####}` and `{username}` are required.
@@ -236,7 +236,7 @@ Reset Page: https://auth.your.domain/recover-password-confirm
 ### MFA Authentication Notification (authenticationMfa)
 
 :::info Information
-This item can be customized in the SaaS Operations Console. For details on customization methods, please check the E-Mail Content tab of the <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Authorization > Advanced Settings</a>.
+This item can be customized in the SaaS Development Console. For details on customization methods, please check the E-Mail Content tab of the <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Authorization > Advanced Settings</a>.
 :::
 
 The strings `{####}` and `{username}` are required.
