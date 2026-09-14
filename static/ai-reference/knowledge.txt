@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-09-14 18:22:32 +0900`
+- Generated: `2026-09-14 18:49:55 +0900`
 
 ---
 ## changelog/20221224.md
@@ -5389,7 +5389,7 @@ If this is OFF, sign-in ID users can be created, but they cannot log in with sig
 :::
 :::warning Note on passwords when using sign-in ID authentication
 Sign-in ID authentication is not tied to an email address, so there is no email address to send notifications to. As a result, passwords are handled differently than with email address authentication.
-- **Provide the initial password to the user from the administrator.** If no password is entered when creating the user, a temporary password is issued, but it is not sent to the user automatically because there is no destination. The administrator must convey it to the user directly.
+- **The administrator must set the initial password and provide it to the user.** With sign-in ID authentication, there is no way to notify the user of the password, so the password must be set by the administrator. Either enter a password when creating the user, or note the temporary password that is issued when it is left blank, and convey that value from the administrator to the user directly.
 - **The user cannot change (reset) their password from "Forgot your password?" on the login screen.** There is no destination to send the password reset email to. To reset the password, the administrator resets it from [Edit User] and provides the new password to the user.
 :::
 This section explains the input fields.
