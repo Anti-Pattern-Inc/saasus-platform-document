@@ -4,7 +4,7 @@ slug: "billing-information"
 excerpt: ""
 hidden: false
 createdAt: "Thu Aug 15 2025 02:18:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Fri Aug 28 2026 03:50:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Mon Sep 14 2026 08:07:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 このページでは、SaaSus Platform有料プランの請求、支払い方法について説明します。
@@ -114,6 +114,25 @@ SaaS 開発コンソールから有料プランを申し込んだ場合の請求
 
 - **請求書ダウンロード**: すべての請求書はPDF形式が利用可能。
 - **保持期間**: 請求データは7年間保持。
+
+## クレジットカードの変更 {#change-credit-card}
+
+SaaSus Platform 利用料金の支払いに使うクレジットカードは、Stripe のお客様専用ポータルから変更いただけます。SaaSus Platform 側ではカード情報を保持していないため、変更は Stripe のポータル上で行います。
+
+:::info
+ここで説明するクレジットカードは、SaaSus Platform を契約しているアカウントに対する、SaaSus Platform 利用料金の支払い方法です。お客様の SaaS のエンドユーザー（テナント）向けの支払いとは異なります。
+:::
+
+### 変更手順
+
+1. [お客様専用ポータル](https://billing.stripe.com/p/login/3cI9AS9rq10V3xY1Wk8IU00)のログイン画面を開きます。
+2. ご登録のメールアドレス（請求書発行の通知先）を入力し、送信します。
+3. 送信先のメールアドレスにログイン用リンクを記載したメールが届くので、リンクを開いてポータルにログインします。
+4. ポータル内の [お支払い方法] から、新しいクレジットカードを登録します。既存のカードは、新しいカードの登録後に削除できます。
+
+:::info
+ログイン用のメールが届かない場合は、ご登録のメールアドレスが請求書発行の通知先と異なる可能性があります。その際はサポートまでご連絡ください。
+:::
 
 ## 請求先メールアドレス（代表者メールアドレス）の変更 {#billing-contact-email}
 
