@@ -4,7 +4,7 @@ slug: "billing"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Fri Aug 28 2026 01:30:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Mon Sep 14 2026 08:19:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 **Q. What is the "Calculation Method" setting (sum/max) for meter units?**  
@@ -259,4 +259,19 @@ Open the target subscription in the Stripe dashboard, and from the "..." menu to
 
 :::tip Note
 This is behavior specific to the Stripe test environment and does not occur in the production environment. The names and locations of setting items may change due to Stripe specification changes, so please also refer to the latest Stripe documentation.
+:::
+
+---
+
+**Q. How do I change the credit card used for billing?**
+
+A. You can change your credit card yourself from the Stripe customer portal. Because SaaSus Platform does not store card information, the change is made on the Stripe portal.
+
+1. Open the login screen of the [customer portal](https://billing.stripe.com/p/login/3cI9AS9rq10V3xY1Wk8IU00).
+2. Enter your registered email address (the destination for invoice notifications) and submit.
+3. An email containing a login link is sent to that address. Open the link to log in to the portal.
+4. Register your new credit card from [Payment methods] in the portal. You can delete the existing card after registering the new one.
+
+:::info
+If the login email does not arrive, your registered email address may differ from the destination for invoice notifications. In that case, please contact support.
 :::
