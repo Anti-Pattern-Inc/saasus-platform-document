@@ -4,7 +4,7 @@ slug: "user-crud"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Jul 21 2026 01:00:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Mon Sep 14 2026 08:57:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 :::info Switching Screens
@@ -41,7 +41,14 @@ The input fields change depending on the selected tab, and only one of "Email Ad
 To allow users created with "Create With Sign-In ID" to log in, you need to turn ON
 **Advanced Settings > Basics > Sign-in ID** and enable
 **"Add Sign-in ID label"**.
-If this is OFF, ID authentication users can be created, but they cannot log in with sign-in ID on the login screen.
+If this is OFF, sign-in ID users can be created, but they cannot log in with sign-in ID on the login screen.
+:::
+
+:::warning Note on passwords when using sign-in ID authentication
+Sign-in ID authentication is not tied to an email address, so there is no email address to send notifications to. As a result, passwords are handled differently than with email address authentication.
+
+- **The administrator must set the initial password and provide it to the user.** With sign-in ID authentication, there is no way to notify the user of the password, so the password must be set by the administrator. Either enter a password when creating the user, or note the temporary password that is issued when it is left blank, and convey that value from the administrator to the user directly.
+- **The user cannot change (reset) their password from "Forgot your password?" on the login screen.** There is no destination to send the password reset email to. To reset the password, the administrator resets it from [Edit User] and provides the new password to the user.
 :::
 
 This section explains the input fields.
