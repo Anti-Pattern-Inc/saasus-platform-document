@@ -6,8 +6,8 @@
 <title data-rh="true">（旧画面）ユーザーの検索・作成・編集・テナント追加 | SaaSus Platform Document</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docs.saasus.io/img/logo.png"><meta data-rh="true" name="twitter:image" content="https://docs.saasus.io/img/logo.png"><meta data-rh="true" property="og:url" content="https://docs.saasus.io/ja/docs/part-5/user-management/user-crud"><meta data-rh="true" property="og:locale" content="ja"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="ja"><meta data-rh="true" name="docsearch:language" content="ja"><meta data-rh="true" name="og:type" content="website"><meta data-rh="true" name="og:site_name" content="SaaSus Platform Documentation"><meta data-rh="true" name="og:title" content="SaaSus Platform Documentation"><meta data-rh="true" name="og:description" content="Official documentation for SaaSus Platform"><meta data-rh="true" name="og:url" content="https://docs.saasus.io/"><meta data-rh="true" name="og:image" content="https://docs.saasus.io/img/logo.png"><meta data-rh="true" name="docusaurus_version" content="1.13"><meta data-rh="true" name="docusaurus_tag" content="docs-default-1.13"><meta data-rh="true" name="docsearch:version" content="1.13"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-1.13"><meta data-rh="true" property="og:title" content="（旧画面）ユーザーの検索・作成・編集・テナント追加 | SaaSus Platform Document"><meta data-rh="true" name="description" content="ユーザー管理には「旧画面」と「新画面」の2つのモードがあります。"><meta data-rh="true" property="og:description" content="ユーザー管理には「旧画面」と「新画面」の2つのモードがあります。"><link data-rh="true" rel="icon" href="/ja/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.saasus.io/ja/docs/part-5/user-management/user-crud"><link data-rh="true" rel="alternate" href="https://docs.saasus.io/ja/docs/part-5/user-management/user-crud" hreflang="ja"><link data-rh="true" rel="alternate" href="https://docs.saasus.io/docs/part-5/user-management/user-crud" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.saasus.io/docs/part-5/user-management/user-crud" hreflang="x-default"><link rel="preconnect" href="https://www.googletagmanager.com">
 <script>window.dataLayer=window.dataLayer||[]</script>
 <script>!function(e,t,a,n){e[n]=e[n]||[],e[n].push({"gtm.start":(new Date).getTime(),event:"gtm.js"});var g=t.getElementsByTagName(a)[0],m=t.createElement(a);m.async=!0,m.src="https://www.googletagmanager.com/gtm.js?id=GTM-5T68ML2",g.parentNode.insertBefore(m,g)}(window,document,"script","dataLayer")</script><link rel="stylesheet" href="/ja/assets/css/styles.53603c37.css">
-<script src="/ja/assets/js/runtime~main.8dc30830.js" defer="defer"></script>
-<script src="/ja/assets/js/main.5109760b.js" defer="defer"></script>
+<script src="/ja/assets/js/runtime~main.97d05e67.js" defer="defer"></script>
+<script src="/ja/assets/js/main.fdc76da1.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5T68ML2" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -57,11 +57,15 @@
 <div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>重要</div><div class="admonitionContent_BuS1"><p>「ログインIDで作成」で作成したユーザーをログイン可能にするには、
 <strong>認証詳細設定 &gt; 基本設定 &gt; ログインID</strong> の
 <strong>「ログインIDの表記を追加する」</strong> を ON にしておく必要があります。
-OFF の場合、ID認証ユーザーを作成してもログイン画面でログインIDを使ってログインできません。</p></div></div>
+OFF の場合、ログインIDのユーザーを作成してもログイン画面でログインIDを使ってログインできません。</p></div></div>
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>ログインID認証を利用する場合のパスワードに関する注意</div><div class="admonitionContent_BuS1"><p>ログインIDによる認証はメールアドレスと紐づかず、通知先となるメールアドレスがありません。そのため、パスワードの扱いがメールアドレス認証と異なります。</p><ul>
+<li><strong>初回パスワードは管理者が登録し、利用者へ連絡してください。</strong> ログインID認証ではパスワードを利用者へ通知する手段がないため、パスワードの設定は管理者が行う必要があります。ユーザー作成時にパスワードを入力するか、未入力の場合に発行される一時パスワードを控え、その値を管理者から利用者へ直接お伝えください。</li>
+<li><strong>ログイン画面の「パスワードを忘れた方はこちら」からパ  スワードを変更（リセット）できません。</strong> パスワードのリセット案内メールの送信先がないためです。パスワードを再設定する場合は、管理者が [ユーザーの編集] からパスワードをリセットし、新しいパスワードを利用者へ連絡してください。</li>
+</ul></div></div>
 <p>ここでは入力項目について説明します。</p>
 <p><strong>入力項目：</strong></p>
 <table><thead><tr><th>項目名</th><th>説明</th></tr></thead><tbody><tr><td>作成方法</td><td>「メールアドレスで作成」または「ログインIDで作成」タブを選択します</td></tr><tr><td>メールアドレス</td><td>「メールアドレスで作成」タブを選択した場合に表示される入力項目です。ユーザーのログインに使用されます</td></tr><tr><td>ログインID</td><td>「ログインIDで作成」タブを選択した場合に表示される入力項目です（半角英数字、ハイフン（-）、アンダースコア（_）が使用可能、最大50文字）</td></tr><tr><td>パスワード（任意）</td><td>ログイン用のパスワードを入力します。未入力の場合は一時パスワードが発行されます<br>メールアドレスで作成する際、パスワードが未入力であれば、そのアドレス宛に一時パスワードが送信されます</td></tr><tr><td>テナント</td><td>ユーザーが所属するテナントを選択します</td></tr><tr><td>ユーザー属性</td><td>あらかじめ定義されたユーザー属性（例：ユーザー名、部署、役職など）を入力します</td></tr></tbody></table>
-<p><img decoding="async" loading="lazy" alt="作成フォー  ム" src="/ja/assets/images/user-create-8ae4341da9272e8a2a5c07286c38197b.png" width="1440" height="858" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="作成フォーム" src="/ja/assets/images/user-create-8ae4341da9272e8a2a5c07286c38197b.png" width="1440" height="858" class="img_ev3q"></p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="既存ユーザーのテナントへの追加">既存ユーザーのテナントへの追加<a href="#既存ユーザーのテナントへの追加" class="hash-link" aria-label="既存ユーザーのテナントへの追加 への直接リンク" title="既存ユーザーのテナントへの追加 への直接リンク">​</a></h2>
 <p>「新規ユーザーの作成」ボタンのセレクトボックスから<br>
 <strong>「既存ユーザーのテナントへの追加」</strong> を選択すると、追加用のウィンドウが表示されます。</p>
@@ -72,7 +76,7 @@ OFF の場合、ID認証ユーザーを作成してもログイン画面でロ�
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="ユーザーの編集削除">ユーザーの編集・削除<a href="#ユーザーの編集削除" class="hash-link" aria-label="ユーザーの編集・削除 への直接リンク" title="ユーザーの編集・削除 への直接リンク">​</a></h2>
 <p>ユーザー一覧の各行にある「編集」または「削除」アイコンをクリックして操作します。</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="編集">編集<a href="#編集" class="hash-link" aria-label="編集 への直接リンク" title="編集 への直接リンク">​</a></h3>
-<p>編集アイコンをクリックすると、ユーザー情報の編集ウィンドウが表示されます。<br>
+<p>編集アイコンをクリックすると、ユーザー情報の編集ウィンドウ が表示されます。<br>
 <!-- -->以下の内容を更新できます。</p>
 <p><strong>編集可能な項目：</strong></p>
 <ul>
