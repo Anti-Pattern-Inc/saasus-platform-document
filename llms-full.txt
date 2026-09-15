@@ -1519,6 +1519,25 @@ For Starter plan:
 - **Invoice downloads**: All invoices are available in PDF format.
 - **Retention period**: Billing data is retained for 7 years.
 
+## Changing the Credit Card {#change-credit-card}
+
+You can change the credit card used to pay for SaaSus Platform usage fees from the Stripe customer portal. Because SaaSus Platform does not store card information, the change is made on the Stripe portal.
+
+:::info
+The credit card described here is the payment method for SaaSus Platform usage fees, for the account subscribed to SaaSus Platform. This is different from payments for the end users (tenants) of your SaaS.
+:::
+
+### Steps to Change
+
+1. Open the login screen of the [customer portal](https://billing.stripe.com/p/login/3cI9AS9rq10V3xY1Wk8IU00).
+2. Enter your registered email address (the destination for invoice notifications) and submit.
+3. An email containing a login link is sent to that address. Open the link to log in to the portal.
+4. Register your new credit card from [Payment methods] in the portal. You can delete the existing card after registering the new one.
+
+:::info
+If the login email does not arrive, your registered email address may differ from the destination for invoice notifications. In that case, please contact support.
+:::
+
 ## Changing the Billing Contact Email Address (Primary Email Address) {#billing-contact-email}
 
 The email address used to notify you of invoices issued for SaaSus Platform usage fees is managed as the [Primary Email Address], and you can change it yourself from the SaaS Development Console.
@@ -7657,7 +7676,14 @@ The input fields change depending on the selected tab, and only one of "Email Ad
 To allow users created with "Create With Sign-In ID" to log in, you need to turn ON
 **Advanced Settings > Basics > Sign-in ID** and enable
 **"Add Sign-in ID label"**.
-If this is OFF, ID authentication users can be created, but they cannot log in with sign-in ID on the login screen.
+If this is OFF, sign-in ID users can be created, but they cannot log in with sign-in ID on the login screen.
+:::
+
+:::warning Note on passwords when using sign-in ID authentication
+Sign-in ID authentication is not tied to an email address, so there is no email address to send notifications to. As a result, passwords are handled differently than with email address authentication.
+
+- **The administrator must set the initial password and provide it to the user.** With sign-in ID authentication, there is no way to notify the user of the password, so the password must be set by the administrator. Either enter a password when creating the user, or note the temporary password that is issued when it is left blank, and convey that value from the administrator to the user directly.
+- **The user cannot change (reset) their password from "Forgot your password?" on the login screen.** There is no destination to send the password reset email to. To reset the password, the administrator resets it from [Edit User] and provides the new password to the user.
 :::
 
 This section explains the input fields.
@@ -15130,6 +15156,21 @@ Open the target subscription in the Stripe dashboard, and from the "..." menu to
 
 :::tip Note
 This is behavior specific to the Stripe test environment and does not occur in the production environment. The names and locations of setting items may change due to Stripe specification changes, so please also refer to the latest Stripe documentation.
+:::
+
+---
+
+**Q. How do I change the credit card used for billing?**
+
+A. You can change your credit card yourself from the Stripe customer portal. Because SaaSus Platform does not store card information, the change is made on the Stripe portal.
+
+1. Open the login screen of the [customer portal](https://billing.stripe.com/p/login/3cI9AS9rq10V3xY1Wk8IU00).
+2. Enter your registered email address (the destination for invoice notifications) and submit.
+3. An email containing a login link is sent to that address. Open the link to log in to the portal.
+4. Register your new credit card from [Payment methods] in the portal. You can delete the existing card after registering the new one.
+
+:::info
+If the login email does not arrive, your registered email address may differ from the destination for invoice notifications. In that case, please contact support.
 :::
 
 ---
