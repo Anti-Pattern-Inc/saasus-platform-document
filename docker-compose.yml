@@ -2,7 +2,7 @@ version: "3"
 
 services:
   node:
-    image: node:latest
+    image: node:24
     container_name: saasus-platform-document
     tty: true
     volumes:

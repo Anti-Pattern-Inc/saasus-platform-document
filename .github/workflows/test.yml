@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        node: [18]
+        node: [24]
 
     steps:
       - uses: actions/checkout@v4
@@ -23,7 +23,10 @@ jobs:
           node-version: ${{ matrix.node }}
           check-latest: true
 
-      - run: npm install
+      - run: npm ci
 
       - name: Run build
         run: npm run build
+
+      - name: Run typecheck
+        run: npm run typecheck
