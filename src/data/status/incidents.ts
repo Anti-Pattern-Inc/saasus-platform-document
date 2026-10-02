@@ -61,7 +61,7 @@ const statusComponentIds = new Set(statusComponents.map((component) => component
  */
 export const publicIncidents: readonly IncidentRecord[] = [];
 
-const INCIDENT_ID_PATTERN = /^INC-\d{8}-\d{3}$/;
+const INCIDENT_ID_PATTERN = /^INC-(\d{4})(\d{2})(\d{2})-\d{3}$/;
 const ISO_UTC_PATTERN =
   /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/;
 const STATUS_ORDER: Record<IncidentStatus, number> = {
@@ -75,8 +75,12 @@ function isNonEmptyLocalizedText(value: LocalizedText): boolean {
   return Boolean(value.ja.trim()) && Boolean(value.en.trim());
 }
 
-function isIsoUtc(value: string): boolean {
-  return ISO_UTC_PATTERN.test(value) && !Number.isNaN(Date.parse(value));
+export function isIsoUtc(value: unknown): value is string {
+  if (typeof value !== 'string' || !ISO_UTC_PATTERN.test(value)) return false;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return false;
+  const canonical = value.includes('.') ? value : value.replace('Z', '.000Z');
+  return date.toISOString() === canonical;
 }
 
 /**
@@ -92,8 +96,11 @@ export function validateIncidentRecords(
   records.forEach((record, recordIndex) => {
     const prefix = `incidents[${recordIndex}]`;
 
-    if (!INCIDENT_ID_PATTERN.test(record.id)) {
+    const idParts = INCIDENT_ID_PATTERN.exec(record.id);
+    if (!idParts) {
       errors.push(`${prefix}.id must match INC-YYYYMMDD-NNN`);
+    } else if (!isIsoUtc(`${idParts[1]}-${idParts[2]}-${idParts[3]}T00:00:00Z`)) {
+      errors.push(`${prefix}.id must contain a valid calendar date`);
     }
     if (ids.has(record.id)) {
       errors.push(`${prefix}.id is duplicated: ${record.id}`);

@@ -156,7 +156,7 @@
 }
 
 .currentIncidentSection {
-  margin-top: 0;
+  margin-top: 1.5rem;
 }
 
 .testBadge {
@@ -287,6 +287,29 @@
 .historyCard .timelineMeta,
 .historyCard .timelineItem p {
   color: var(--ifm-color-content);
+}
+
+.inactiveIncidentCard {
+  border-color: var(--ifm-color-emphasis-300);
+  background: var(--ifm-background-surface-color);
+}
+
+.inactiveIncidentCard .incidentTitle,
+.inactiveIncidentCard .incidentMessage,
+.inactiveIncidentCard .incidentDetails,
+.inactiveIncidentCard .timelineMeta,
+.inactiveIncidentCard .timelineItem p,
+.inactiveIncidentCard .updatePending {
+  color: var(--ifm-color-content);
+}
+
+.inactiveIncidentCard .timeline {
+  border-left-color: var(--ifm-color-emphasis-300);
+}
+
+.inactiveIncidentCard .timelineItem::before {
+  border-color: var(--ifm-background-surface-color);
+  background: var(--ifm-color-primary);
 }
 
 .unknownCard {

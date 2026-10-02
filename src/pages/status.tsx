@@ -8,13 +8,15 @@ import {
   IncidentRecord,
   IncidentStatus,
   Locale,
+  isIsoUtc,
   publicIncidents,
   statusComponents,
 } from '../data/status/incidents';
 import styles from './status.module.css';
 
 interface IncidentFlag {
-  enabled?: boolean;
+  enabled: boolean;
+  isTest?: boolean;
   incidentId?: string;
   currentStatus?: IncidentStatus;
   updatedAt?: string;
@@ -46,9 +48,32 @@ function isIncidentStatus(value: unknown): value is IncidentStatus {
   );
 }
 
+function normalizeIncidentFlag(value: unknown): IncidentFlag | null {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return null;
+  const raw = value as Record<string, unknown>;
+  if (typeof raw.enabled !== 'boolean') return null;
+  const text = (key: string): string | undefined => {
+    const field = raw[key];
+    return typeof field === 'string' && field.trim() ? field.trim() : undefined;
+  };
+  return {
+    enabled: raw.enabled,
+    isTest: raw.isTest === true,
+    incidentId: text('incidentId'),
+    currentStatus: isIncidentStatus(raw.currentStatus) ? raw.currentStatus : undefined,
+    updatedAt: text('updatedAt'),
+    startTimeJa: text('startTimeJa'),
+    startTimeEn: text('startTimeEn'),
+    affectedServicesJa: text('affectedServicesJa'),
+    affectedServicesEn: text('affectedServicesEn'),
+    statusTextJa: text('statusTextJa'),
+    statusTextEn: text('statusTextEn'),
+  };
+}
+
 function formatTimestamp(timestamp: unknown, locale: Locale): string {
-  const date = typeof timestamp === 'string' ? new Date(timestamp) : null;
-  if (!date || Number.isNaN(date.getTime())) return '-';
+  if (!isIsoUtc(timestamp)) return '-';
+  const date = new Date(timestamp);
 
   return `${new Intl.DateTimeFormat(locale === 'ja' ? 'ja-JP' : 'en-US', {
     dateStyle: 'medium',
@@ -83,10 +108,12 @@ function ComponentStatusList({
   locale,
   affectedComponentIds,
   activeStatus,
+  isTest,
 }: {
   locale: Locale;
   affectedComponentIds: readonly string[] | null;
   activeStatus: IncidentStatus;
+  isTest: boolean;
 }) {
   return (
     <section className={styles.componentsSection} aria-labelledby="status-components">
@@ -112,13 +139,14 @@ function ComponentStatusList({
               <span>{localized(component.name, locale)}</span>
               <span
                 className={
-                  isUnknown
+                  isUnknown || isTest
                     ? styles.componentUnknown
                     : isAffected
                       ? styles.componentAffected
                       : styles.componentOperational
                 }
               >
+                {isTest && <><Translate id="status.incident.test">Test</Translate>{': '}</>}
                 {status}
               </span>
             </li>
@@ -182,16 +210,18 @@ function CurrentIncidentCard({
       : incident.affectedServicesEn;
   const currentStatusText =
     locale === 'ja' ? incident.statusTextJa : incident.statusTextEn;
+  const isTest = incident.isTest || record?.isTest;
+  const isResolved = activeStatus === 'resolved';
 
   return (
-    <section className={styles.currentIncidentSection} aria-labelledby="current-incident">
-      <div className={styles.incidentCard}>
+    <section id={record?.id} className={styles.currentIncidentSection} aria-labelledby="current-incident">
+      <div className={`${styles.incidentCard} ${isTest || isResolved ? styles.inactiveIncidentCard : ''}`}>
         <h2 id="current-incident" className={styles.incidentTitle}>
           {record ? localized(record.title, locale) : (
             <Translate id="status.incident.title">Incident Report</Translate>
           )}
         </h2>
-        {record?.isTest && (
+        {isTest && (
           <span className={styles.testBadge}>
             <Translate id="status.incident.test">Test</Translate>
           </span>
@@ -199,7 +229,11 @@ function CurrentIncidentCard({
         <p className={styles.incidentMessage}>
           {record
             ? localized(record.impact, locale)
-            : (
+            : isTest ? (
+              <Translate id="status.test.message">This is a test incident notification.</Translate>
+            ) : isResolved ? (
+              <Translate id="status.resolved.message">The incident has been resolved.</Translate>
+            ) : (
               <Translate id="status.incident.message">
                 Some services are currently experiencing issues. Our engineering team is working on a fix and will restore normal operations as soon as possible. We apologize for the inconvenience.
               </Translate>
@@ -222,6 +256,12 @@ function CurrentIncidentCard({
             <dt><Translate id="status.incident.affectedServices">Affected Services</Translate></dt>
             <dd>{affectedServices || '-'}</dd>
           </div>
+          {record && (
+            <div>
+              <dt><Translate id="status.incident.severity">Severity</Translate></dt>
+              <dd>{severityLabel(record.severity, locale)}</dd>
+            </div>
+          )}
           <div>
             <dt><Translate id="status.incident.statusText">Status</Translate></dt>
             <dd>{currentStatusText || statusLabel(activeStatus, locale)}</dd>
@@ -250,9 +290,11 @@ function CurrentIncidentCard({
 function IncidentHistory({
   records,
   locale,
+  hasCurrentIncident,
 }: {
   records: readonly IncidentRecord[];
   locale: Locale;
+  hasCurrentIncident: boolean;
 }) {
   return (
     <section className={styles.historySection} aria-labelledby="incident-history">
@@ -261,9 +303,11 @@ function IncidentHistory({
       </h2>
       {records.length === 0 ? (
         <p className={styles.emptyHistory}>
-          <Translate id="status.history.empty">
-            No incidents have been published.
-          </Translate>
+          {hasCurrentIncident ? (
+            <Translate id="status.history.noOther">No other incidents have been published.</Translate>
+          ) : (
+            <Translate id="status.history.empty">No incidents have been published.</Translate>
+          )}
         </p>
       ) : (
         <div className={styles.historyList}>
@@ -325,29 +369,30 @@ function StatusContent() {
     };
   }, [ldClient]);
 
-  const incident: IncidentFlag | null | undefined = !isReady
-    ? undefined
-    : saasusPlatformMaintenancemode?.enabled
-      ? saasusPlatformMaintenancemode
-      : null;
+  const flag = normalizeIncidentFlag(saasusPlatformMaintenancemode);
+  const liveStatusUnavailable = hasInitializationError || flag === null;
+  const incident = isReady && !liveStatusUnavailable && flag?.enabled ? flag : null;
 
   const locale: Locale = currentLocale === 'ja' ? 'ja' : 'en';
-  const historicalIncidents = useMemo(
-    () => [...publicIncidents].sort(
-      (left, right) => Date.parse(right.startedAt) - Date.parse(left.startedAt),
-    ),
-    [],
-  );
   const currentIncidentRecord = incident?.incidentId
     ? publicIncidents.find((record) => record.id === incident.incidentId)
     : undefined;
+  const currentIncidentId = currentIncidentRecord?.id;
+  const historicalIncidents = useMemo(
+    () => publicIncidents.filter((record) => record.id !== currentIncidentId).sort(
+      (left, right) => Date.parse(right.startedAt) - Date.parse(left.startedAt),
+    ),
+    [currentIncidentId],
+  );
   const activeStatus =
     incident && isIncidentStatus(incident.currentStatus)
       ? incident.currentStatus
       : currentIncidentRecord
         ? latestUpdate(currentIncidentRecord).status
         : 'investigating';
-  const affectedComponentIds = incident
+  const isResolved = activeStatus === 'resolved';
+  const isTest = Boolean(incident?.isTest || currentIncidentRecord?.isTest);
+  const affectedComponentIds = incident && !isResolved
     ? currentIncidentRecord?.affectedComponents.map((component) => component.id) ?? null
     : [];
 
@@ -365,7 +410,7 @@ function StatusContent() {
           <Clock3 size={20} aria-hidden="true" />
           <Translate id="status.loading">Loading status information...</Translate>
         </div>
-      ) : hasInitializationError ? (
+      ) : liveStatusUnavailable ? (
         <div className={styles.unknownCard} role="alert">
           <XCircle size={32} aria-hidden="true" />
           <div>
@@ -381,37 +426,43 @@ function StatusContent() {
         </div>
       ) : (
         <>
-          {incident === null ? (
+          {isTest ? (
+            <div className={styles.unknownCard} role="status">
+              <Clock3 size={32} aria-hidden="true" />
+              <strong><Translate id="status.test.message">This is a test incident notification.</Translate></strong>
+            </div>
+          ) : incident === null || isResolved ? (
             <div className={styles.operationalCard} role="status">
               <CheckCircle2 size={32} aria-hidden="true" />
               <div className={styles.operationalText}>
                 <Translate id="status.operational">All systems are operational.</Translate>
               </div>
             </div>
-          ) : incident && (
-            <>
-              <div className={styles.outageCard} role="alert">
-                <XCircle size={32} aria-hidden="true" />
-                <div className={styles.outageText}>
-                  <Translate id="status.outage">We are experiencing issues with some systems.</Translate>
-                </div>
+          ) : (
+            <div className={styles.outageCard} role="alert">
+              <XCircle size={32} aria-hidden="true" />
+              <div className={styles.outageText}>
+                <Translate id="status.outage">We are experiencing issues with some systems.</Translate>
               </div>
-              <CurrentIncidentCard
-                incident={incident}
-                record={currentIncidentRecord}
-                locale={locale}
-              />
-            </>
+            </div>
+          )}
+          {incident && (
+            <CurrentIncidentCard
+              incident={incident}
+              record={currentIncidentRecord}
+              locale={locale}
+            />
           )}
 
           <ComponentStatusList
             locale={locale}
             affectedComponentIds={affectedComponentIds}
             activeStatus={activeStatus}
+            isTest={isTest}
           />
         </>
       )}
-      <IncidentHistory records={historicalIncidents} locale={locale} />
+      <IncidentHistory records={historicalIncidents} locale={locale} hasCurrentIncident={Boolean(currentIncidentRecord)} />
     </main>
   );
 }
