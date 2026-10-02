@@ -37,6 +37,12 @@ const config = {
   i18n: {
     defaultLocale: "en",
     locales: ["ja", "en"],
+    localeConfigs: {
+      ja: {
+        // Keep /ja/ links valid when building only the Japanese locale.
+        baseUrl: "/ja/",
+      },
+    },
   },
 
   presets: [
@@ -258,7 +264,16 @@ const config = {
       },
     }),
 
-  themes: ['@docusaurus/theme-mermaid'],
+  themes: [
+    '@docusaurus/theme-mermaid',
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      {
+        hashed: true,
+        language: ["en", "ja"],
+      },
+    ],
+  ],
 
   markdown: {
     mermaid: true,
@@ -286,13 +301,6 @@ const config = {
           dark: "rgb(50, 50, 50)",
         },
         config: {},
-      },
-    ],
-    [
-      require.resolve("@easyops-cn/docusaurus-search-local"),
-      {
-        hashed: true,
-        language: ["en", "ja"],
       },
     ],
     [
