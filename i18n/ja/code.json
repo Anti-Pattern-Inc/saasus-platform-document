@@ -23,6 +23,18 @@
     "message": "システムで問題が発生しています",
     "description": "System outage message"
   },
+  "status.test.message": {
+    "message": "これはテスト用のインシデント通知です。",
+    "description": "Prominent test incident notice"
+  },
+  "status.resolved.message": {
+    "message": "インシデントは復旧しました。",
+    "description": "Resolved incident message"
+  },
+  "status.history.noOther": {
+    "message": "ほかに公開されたインシデントはありません。",
+    "description": "Empty history when the current incident is displayed separately"
+  },
   "status.incident.title": {
     "message": "障害情報",
     "description": "Incident info section title"
@@ -38,6 +50,10 @@
   "status.incident.affectedServices": {
     "message": "影響範囲:",
     "description": "Affected services label"
+  },
+  "status.incident.severity": {
+    "message": "重大度",
+    "description": "Incident severity label"
   },
   "status.incident.statusText": {
     "message": "対応状況:",

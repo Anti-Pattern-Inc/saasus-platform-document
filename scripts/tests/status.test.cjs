@@ -49,7 +49,7 @@ function resolvedIncident() {
   };
 }
 
-function renderPage({ locale, ready = true, error = false, flag = { enabled: false } }) {
+function renderPage({ locale, ready = true, error = false, flag = { enabled: false }, records = [resolvedIncident()] }) {
   let stateIndex = 0;
   const state = [ready, error];
   const passthrough = ({ children }) => React.createElement(React.Fragment, null, children);
@@ -80,8 +80,10 @@ function renderPage({ locale, ready = true, error = false, flag = { enabled: fal
       useFlags: () => ({ saasusPlatformMaintenancemode: flag }),
     },
     'lucide-react': { CheckCircle2: () => null, Clock3: () => null, XCircle: () => null },
-    '../data/status/incidents': { ...registry, publicIncidents: [resolvedIncident()] },
-    './status.module.css': {},
+    '../data/status/incidents': { ...registry, publicIncidents: records },
+    './status.module.css': new Proxy({}, {
+      get: (_, key) => key === '__esModule' ? false : key,
+    }),
   });
   return renderToStaticMarkup(React.createElement(page.default));
 }
@@ -106,6 +108,32 @@ test('still rejects duplicate IDs and backwards notification times', () => {
   assert.ok(errors.some((error) => error.includes('strictly ascending order')));
 });
 
+test('rejects impossible calendar dates in all registry timestamps', () => {
+  for (const field of ['startedAt', 'resolvedAt', 'publishedAt']) {
+    const record = resolvedIncident();
+    const target = field === 'publishedAt' ? record.updates[0] : record;
+    target[field] = '2026-02-30T12:00:00Z';
+    assert.ok(registry.validateIncidentRecords([record]).some(
+      (error) => error.includes(`${field} must be an ISO 8601 UTC timestamp`)));
+  }
+  for (const value of ['2026-02-29T00:00:00Z', '2026-04-31T00:00:00Z', '2026-01-01T24:00:00Z']) {
+    assert.equal(registry.isIsoUtc(value), false);
+  }
+  for (const value of ['2024-02-29T23:59:59Z', '2024-02-29T23:59:59.123Z']) {
+    assert.equal(registry.isIsoUtc(value), true);
+  }
+});
+
+test('validates the calendar date in permanent incident IDs', () => {
+  for (const id of ['INC-20260230-001', 'INC-20260229-001', 'INC-20261301-001', 'INC-20260431-001']) {
+    assert.ok(registry.validateIncidentRecords([{ ...resolvedIncident(), id }]).some(
+      (error) => error.includes('.id must contain a valid calendar date')));
+  }
+  assert.equal(registry.validateIncidentRecords([
+    { ...resolvedIncident(), id: 'INC-20240229-001' },
+  ]).length, 0);
+});
+
 for (const locale of ['en', 'ja']) {
   test(`${locale}: malformed flag timestamps preserve the incident page`, () => {
     for (const updatedAt of ['not-a-timestamp', {}, 123, true]) {
@@ -125,7 +153,7 @@ for (const locale of ['en', 'ja']) {
 
   test(`${locale}: resolved history exposes an incident ID and stable anchor`, () => {
     const html = renderPage({ locale });
-    assert.ok(html.includes('<article id="INC-20261002-001">'));
+    assert.match(html, /<article[^>]*id="INC-20261002-001"/);
     assert.ok(html.includes(': INC-20261002-001'));
     assert.ok(html.includes(locale === 'ja' ? '復旧済み' : 'Resolved'));
   });
@@ -145,6 +173,69 @@ for (const locale of ['en', 'ja']) {
           ? '稼働状況を読み込んでいます…'
           : 'Loading status information...';
       assert.ok(html.includes(expected));
+    }
+  });
+
+  test(`${locale}: malformed optional remote fields cannot become React children`, () => {
+    for (const value of [{ nested: 'bad' }, ['bad'], true, 12]) {
+      const flag = { enabled: true };
+      for (const field of ['incidentId', 'startTimeJa', 'startTimeEn', 'affectedServicesJa',
+        'affectedServicesEn', 'statusTextJa', 'statusTextEn', 'currentStatus']) flag[field] = value;
+      const html = renderPage({ locale, flag });
+      assert.ok(html.includes('class="outageCard"'));
+      assert.ok(html.includes('id="incident-history"'));
+      assert.ok(!html.includes('[object Object]'));
+    }
+  });
+
+  test(`${locale}: malformed flag envelopes show unavailable rather than operational`, () => {
+    for (const flag of [null, [], true, 'false', {}, { enabled: 'false' }, { enabled: 1 }]) {
+      const html = renderPage({ locale, flag });
+      assert.ok(html.includes('class="unknownCard"'));
+      assert.ok(!html.includes('class="operationalCard"'));
+      assert.ok(html.includes('id="incident-history"'));
+    }
+  });
+
+  test(`${locale}: a linked current incident appears once and keeps its anchor`, () => {
+    const record = resolvedIncident();
+    const flag = { enabled: true, incidentId: record.id, currentStatus: 'investigating' };
+    const html = renderPage({ locale, flag });
+    assert.equal(html.split(record.title[locale]).length - 1, 1);
+    assert.equal(html.split(`id="${record.id}"`).length - 1, 1);
+    assert.ok(!html.includes('<article'));
+    assert.ok(html.includes(locale === 'ja' ? '<dd>重大</dd>' : '<dd>Major</dd>'));
+    const inactive = renderPage({ locale, flag: { ...flag, enabled: false } });
+    assert.match(inactive, /<article[^>]*id="INC-20261002-001"/);
+    const unavailable = renderPage({ locale, flag, error: true });
+    assert.match(unavailable, /<article[^>]*id="INC-20261002-001"/);
+  });
+
+  test(`${locale}: test notifications do not announce a real outage`, () => {
+    for (const currentStatus of ['investigating', 'identified', 'monitoring', 'resolved']) {
+      for (const link of [{ incidentId: resolvedIncident().id }, { isTest: true }]) {
+        const html = renderPage({ locale, flag: { enabled: true, currentStatus, ...link } });
+        assert.ok(!html.includes('class="outageCard"'));
+        assert.ok(!html.includes('class="componentAffected"'));
+        assert.ok(html.includes(locale === 'ja'
+          ? 'これはテスト用のインシデント通知です。' : 'This is a test incident notification.'));
+        assert.ok(html.includes('class="incidentCard inactiveIncidentCard"'));
+      }
+    }
+  });
+
+  test(`${locale}: a recovery notice remains visible with operational service status`, () => {
+    const record = { ...resolvedIncident(), isTest: false };
+    for (const flag of [
+      { enabled: true, currentStatus: 'resolved' },
+      { enabled: true, incidentId: record.id },
+    ]) {
+      const html = renderPage({ locale, flag, records: [record] });
+      assert.ok(html.includes('class="operationalCard"'));
+      assert.ok(!html.includes('class="outageCard"'));
+      assert.ok(!html.includes('class="componentAffected"'));
+      assert.equal(html.split('class="componentOperational"').length - 1, 3);
+      assert.ok(html.includes('id="current-incident"'));
     }
   });
 }
