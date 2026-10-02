@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-07-24 18:40:32 +0900`
+- Generated: `2026-09-14 18:49:55 +0900`
 
 ---
 ## changelog/20221224.md
@@ -403,6 +403,30 @@ Suspension of the AWS Marketplace Integration Feature
 　■ About the latest listing process
   - For the latest listing process and procedures, please refer to our new service guide site ([https://docs.deshima.cloud](https://docs.deshima.cloud)).
 We apologize for any inconvenience this may cause and appreciate your understanding.
+````
+
+---
+## changelog/20260831.md
+````markdown
+We have released the following feature addition and bug fix.
+- Refresh token expiration is now configurable
+  Previously, the refresh token expiration was fixed at 30 days. In response to requests to keep users signed in for longer periods, we have added the ability to set an arbitrary expiration period.
+  Changes
+  - You can now configure the refresh token expiration in the SaaS Development Console.
+  　■ Notes on usage
+  　　To apply the changed setting, the target users need to sign in again.
+  　　If you set a long expiration period, please be fully aware of the risks in the event of token leakage.
+- Fixed a bug related to the consumption tax rate setting when canceling a pay-as-you-go plan
+  We identified an issue where an arbitrary tax rate could be selected in the plan cancellation dialog, which could result in a tax rate different from that of the plan being canceled being set incorrectly.
+  We have corrected this behavior as follows.
+  Changes
+  - We removed the tax rate selection dropdown from the plan cancellation dialog.
+  - When canceling, the tax rate configured for the currently contracted plan is now automatically carried over. (If no tax rate is set for the current plan, the cancellation is processed without a tax rate.)
+  　■ Impact on the API
+  　　Even if a tax rate parameter is sent to the cancellation API, the value is ignored, and the tax rate of the currently contracted plan is automatically applied.
+  　　There is no change to the API specification itself, but the tax rate specified at cancellation will no longer be reflected.
+  　■ Scope not affected by this fix
+  　　Specifying the tax rate during a normal plan change or the initial plan setup can be used as before.
 ````
 
 ---
@@ -1029,6 +1053,30 @@ For Starter plan:
 ### Billing Information
 - **Invoice downloads**: All invoices are available in PDF format.
 - **Retention period**: Billing data is retained for 7 years.
+## Changing the Credit Card {#change-credit-card}
+You can change the credit card used to pay for SaaSus Platform usage fees from the Stripe customer portal. Because SaaSus Platform does not store card information, the change is made on the Stripe portal.
+:::info
+The credit card described here is the payment method for SaaSus Platform usage fees, for the account subscribed to SaaSus Platform. This is different from payments for the end users (tenants) of your SaaS.
+:::
+### Steps to Change
+1. Open the login screen of the [customer portal](https://billing.stripe.com/p/login/3cI9AS9rq10V3xY1Wk8IU00).
+2. Enter your registered email address (the destination for invoice notifications) and submit.
+3. An email containing a login link is sent to that address. Open the link to log in to the portal.
+4. Register your new credit card from [Payment methods] in the portal. You can delete the existing card after registering the new one.
+:::info
+If the login email does not arrive, your registered email address may differ from the destination for invoice notifications. In that case, please contact support.
+:::
+## Changing the Billing Contact Email Address (Primary Email Address) {#billing-contact-email}
+The email address used to notify you of invoices issued for SaaSus Platform usage fees is managed as the [Primary Email Address], and you can change it yourself from the SaaS Development Console.
+:::info
+The primary email address described here is the notification destination for invoices issued for SaaSus Platform usage fees, addressed to the account subscribed to SaaSus Platform. This is different from billing for the end users (tenants) of your SaaS.
+:::
+### Steps to Change
+1. Log in to the SaaS Development Console.
+2. Open [Account Settings] from the menu.
+3. In the [General] tab, enter the new email address in the [Primary Email Address] field and click [Save].
+![Primary Email Address in Account Settings](/img/part-4/account-settings/billing-information/primary-email-address.png)
+After saving, subsequent invoice notifications will be sent to the new email address.
 ## Support and Contact
 For billing-related inquiries, please contact our support team through the following methods:
 - **Starter**: Submit inquiries through the admin console
@@ -3598,6 +3646,15 @@ Based on the configured tax settings, Stripe will generate invoices accordingly 
 ![invoice-no-tax](/img/part-4/pricing-and-billing/stripe-integration/tax-rates-15.png)
 **PDF Version**
 ![invoice-no-tax-pdf](/img/part-4/pricing-and-billing/stripe-integration/tax-rates-16.png)
+## Note on Automatic Cancellation in the Test Environment
+In the Stripe **test environment, by specification, subscriptions are automatically canceled 90 days after creation**. Subscriptions created via SaaSus Platform are also subject to this, so during testing only the Stripe side may become canceled, causing a state inconsistency between SaaSus Platform and Stripe.
+If you need to continue testing over a long period, exclude the target subscription from automatic cancellation.
+**How to exclude**
+Open the target subscription in the Stripe dashboard, and from the "..." menu to the right of "Update subscription", select **"Exclude from auto-cancellation"**.
+![Exclude a subscription from auto-cancellation in the Stripe dashboard](/img/part-4/pricing-and-billing/stripe-integration/stripe-exclude-auto-cancellation.png)
+:::tip Note
+This is behavior specific to the Stripe test environment and does not occur in the production environment. The names and locations of setting items may change due to Stripe specification changes, so please also refer to the latest Stripe documentation.
+:::
 ````
 
 ---
@@ -4469,7 +4526,7 @@ Full-width spaces cannot be set in the strings configured for messages.
     </tr>
     <tr>
       <td>6</td>
-      <td>×</td>
+      <td>⚪︎</td>
       <td><strong>authenticationMfa</strong></td>
       <td>MFA Authentication Notification</td>
       <td>After setting "method"="email" using<br />`UpdateUserMfaPreference` and logging in</td>
@@ -4511,7 +4568,7 @@ Full-width spaces cannot be set in the strings configured for messages.
 ## How to Customize Email Body
 ### Temporary Password Email for New Registration (signUp)
 :::info Information
-This item can be customized in the SaaS Operations Console. For details on customization methods, please check the E-Mail Content tab of the <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Authorization > Advanced Settings</a>.
+This item can be customized in the SaaS Development Console. For details on customization methods, please check the E-Mail Content tab of the <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Authorization > Advanced Settings</a>.
 :::
 The strings `{####}` and `{username}` are required.
 `{####}` will be replaced with the temporary password and `{username}` will be replaced with the user ID when sent.
@@ -4535,7 +4592,7 @@ Verification Page: https://auth.your.domain/sign-up-confirm
 ```
 ### Temporary Password Resend Email for New Registration (resendCode)
 :::info Information
-This item can be customized in the SaaS Operations Console. For details on customization methods, please check the E-Mail Content tab of the <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Authorization > Advanced Settings</a>.
+This item can be customized in the SaaS Development Console. For details on customization methods, please check the E-Mail Content tab of the <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Authorization > Advanced Settings</a>.
 :::
 The strings `{####}` and `{username}` are required.
 `{####}` will be replaced with the temporary password and `{username}` will be replaced with the user ID when sent.
@@ -4559,7 +4616,7 @@ Verification Page: https://auth.your.domain/sign-up-confirm
 ```
 ### Password Reset Verification Code Email (forgotPassword)
 :::info Information
-This item can be customized in the SaaS Operations Console. For details on customization methods, please check the E-Mail Content tab of the <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Authorization > Advanced Settings</a>.
+This item can be customized in the SaaS Development Console. For details on customization methods, please check the E-Mail Content tab of the <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Authorization > Advanced Settings</a>.
 :::
 The strings `{####}` and `{username}` are required.
 `{####}` will be replaced with the reset code and `{username}` will be replaced with the user ID when sent.
@@ -4580,8 +4637,9 @@ Reset Code: 789012
 Reset Page: https://auth.your.domain/recover-password-confirm
 ```
 ### MFA Authentication Notification (authenticationMfa)
-:::warning Warning
-To configure this setting, you must update directly using the <a href="https://docs.saasus.io/docs/reference/auth-api#tag/basicInfo/operation/UpdateNotificationMessages" target="_blank">Update Notification Email Template API</a>.
+:::info Information
+This item can be customized in the SaaS Development Console. For details on customization methods, please check the E-Mail Content tab of the <a href="https://settings.console.saasus.io/customize" target="_blank">Authentication Authorization > Advanced Settings</a>.
+:::
 The strings `{####}` and `{username}` are required.
 `{####}` will be replaced with the MFA authentication code and `{username}` will be replaced with the user ID when sent.
 #### Configuration Example
@@ -5327,7 +5385,12 @@ The input fields change depending on the selected tab, and only one of "Email Ad
 To allow users created with "Create With Sign-In ID" to log in, you need to turn ON
 **Advanced Settings > Basics > Sign-in ID** and enable
 **"Add Sign-in ID label"**.
-If this is OFF, ID authentication users can be created, but they cannot log in with sign-in ID on the login screen.
+If this is OFF, sign-in ID users can be created, but they cannot log in with sign-in ID on the login screen.
+:::
+:::warning Note on passwords when using sign-in ID authentication
+Sign-in ID authentication is not tied to an email address, so there is no email address to send notifications to. As a result, passwords are handled differently than with email address authentication.
+- **The administrator must set the initial password and provide it to the user.** With sign-in ID authentication, there is no way to notify the user of the password, so the password must be set by the administrator. Either enter a password when creating the user, or note the temporary password that is issued when it is left blank, and convey that value from the administrator to the user directly.
+- **The user cannot change (reset) their password from "Forgot your password?" on the login screen.** There is no destination to send the password reset email to. To reset the password, the administrator resets it from [Edit User] and provides the new password to the user.
 :::
 This section explains the input fields.
 **Input fields:**
@@ -11159,6 +11222,25 @@ When setting and applying pricing plans in a production environment, please thor
 ---
 **Q. How is the representative email address used?**
 A. The representative email address is used as the destination for sending invoices.
+---
+**Q. In the Stripe test environment, subscriptions get canceled after a while and the integration with SaaSus Platform breaks. Can this be avoided?**
+A. In the Stripe **test environment, by specification, subscriptions are automatically canceled 90 days after creation**. As a result, only the Stripe side becomes canceled, which can cause a state inconsistency between SaaSus Platform and Stripe.
+ - **How to avoid this**
+Open the target subscription in the Stripe dashboard, and from the "..." menu to the right of "Update subscription", select **"Exclude from auto-cancellation"**. This excludes the subscription from the 90-day automatic cancellation in the test environment.
+![Exclude a subscription from auto-cancellation in the Stripe dashboard](/img/part-7/faq/stripe-exclude-auto-cancellation.png)
+:::tip Note
+This is behavior specific to the Stripe test environment and does not occur in the production environment. The names and locations of setting items may change due to Stripe specification changes, so please also refer to the latest Stripe documentation.
+:::
+---
+**Q. How do I change the credit card used for billing?**
+A. You can change your credit card yourself from the Stripe customer portal. Because SaaSus Platform does not store card information, the change is made on the Stripe portal.
+1. Open the login screen of the [customer portal](https://billing.stripe.com/p/login/3cI9AS9rq10V3xY1Wk8IU00).
+2. Enter your registered email address (the destination for invoice notifications) and submit.
+3. An email containing a login link is sent to that address. Open the link to log in to the portal.
+4. Register your new credit card from [Payment methods] in the portal. You can delete the existing card after registering the new one.
+:::info
+If the login email does not arrive, your registered email address may differ from the destination for invoice notifications. In that case, please contact support.
+:::
 ````
 
 ---
@@ -11407,6 +11489,11 @@ A. You can change it yourself from the SaaS Development Console.
 Please enter and save the new billing information from the following menu.
 Configuration location:
 SaaS Development Console > Account Settings > Billing Information
+---
+**Q. How can I change the email address (primary email address) used to notify me of issued invoices?**
+A. The email address used to notify you of SaaSus Platform usage-fee invoices (the primary email address) can be changed by yourself from the SaaS Development Console.
+In [Account Settings] > [General] tab, enter the new email address in [Primary Email Address] and save.
+For detailed steps, see [Billing and Payment Methods](/docs/part-4/account-settings/billing-information#billing-contact-email).
 ---
 **Q. Can I switch back (downgrade) from a paid plan to the Free plan?**
 A. Under the current specifications, you cannot directly switch back (downgrade) from a paid plan to the Free plan.
@@ -24181,28 +24268,6 @@ paths:
                 x-title-i18n:
                   jpn: メータリングユニット
                 $ref: '#/components/schemas/MeteringUnitMonthCounts'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /plans-initialization:
-    delete:
-      tags:
-        - pricingPlans
-      operationId: DeleteAllPlansAndMenusAndUnitsAndMetersAndTaxRates
-      summary: Delete all Plans, Menus, Units, Meters and Tax Rates
-      x-summary-i18n:
-        jpn: 全てのPlans,Menus,Units,Metersの削除
-      description: |
-        Unconditionally remove all rate plans, menus, units, meters and tax rates.
-      x-description-i18n:
-        jpn: |
-          無条件に全料金プラン、メニュー、ユニット、メーター、税率を削除します。
-      responses:
-        '200':
-          description: OK
         '500':
           description: Internal Server Error
           content:
