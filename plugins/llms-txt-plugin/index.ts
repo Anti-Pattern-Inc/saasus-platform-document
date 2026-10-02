@@ -1,8 +1,10 @@
-import type { Plugin } from "@docusaurus/types";
+import type { LoadContext, Plugin } from "@docusaurus/types";
 import fs from "node:fs";
 import path from "node:path";
 
-const llmsTxtPlugin: Plugin = async function pluginLlmsTxt(context) {
+const llmsTxtPlugin = async function pluginLlmsTxt(
+  context: LoadContext
+): Promise<Plugin> {
   return {
     name: "llms-txt-plugin",
     loadContent: async () => {

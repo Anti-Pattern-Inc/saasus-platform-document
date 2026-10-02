@@ -498,6 +498,10 @@
     "message": "代替のお問い合わせフォーム",
     "description": "Error page link text for alternative form"
   },
+  "theme.SearchPage.documentsFound.plurals": {
+    "message": "{count} 件のドキュメントが見つかりました",
+    "description": "検索結果の件数。日本語では複数形を分けず、単一の形式を使用します。"
+  },
   "inquiry.error.returnHome": {
     "message": "ドキュメントトップに戻る",
     "description": "Error page link back to documentation"
