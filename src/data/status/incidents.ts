@@ -28,6 +28,7 @@ export interface IncidentRecord {
   affectedComponents: readonly StatusComponent[];
   impact: LocalizedText;
   startedAt: string;
+  /** Actual recovery time, which may precede publication of the recovery notice. */
   resolvedAt?: string;
   isTest: boolean;
   updates: readonly IncidentUpdate[];
@@ -177,10 +178,12 @@ export function validateIncidentRecords(
       }
       if (
         record.resolvedAt &&
+        isIsoUtc(record.resolvedAt) &&
+        update.status === 'resolved' &&
         !Number.isNaN(publishedAt) &&
-        publishedAt > Date.parse(record.resolvedAt)
+        publishedAt < Date.parse(record.resolvedAt)
       ) {
-        errors.push(`${updatePrefix}.publishedAt must not be after resolvedAt`);
+        errors.push(`${updatePrefix}.publishedAt must not be before resolvedAt for a resolved update`);
       }
 
       previousStatusOrder = statusOrder;
