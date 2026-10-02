@@ -46,12 +46,15 @@ function isIncidentStatus(value: unknown): value is IncidentStatus {
   );
 }
 
-function formatTimestamp(timestamp: string, locale: Locale): string {
+function formatTimestamp(timestamp: unknown, locale: Locale): string {
+  const date = typeof timestamp === 'string' ? new Date(timestamp) : null;
+  if (!date || Number.isNaN(date.getTime())) return '-';
+
   return `${new Intl.DateTimeFormat(locale === 'ja' ? 'ja-JP' : 'en-US', {
     dateStyle: 'medium',
     timeStyle: 'short',
     timeZone: 'Asia/Tokyo',
-  }).format(new Date(timestamp))} JST`;
+  }).format(date)} JST`;
 }
 
 function statusLabel(status: IncidentStatus, locale: Locale): string {
@@ -265,11 +268,14 @@ function IncidentHistory({
       ) : (
         <div className={styles.historyList}>
           {records.map((record) => (
-            <article className={styles.historyCard} key={record.id}>
+            <article className={styles.historyCard} key={record.id} id={record.id}>
               <div className={styles.historyHeader}>
                 <div>
                   <h3>{localized(record.title, locale)}</h3>
                   <p className={styles.historyMeta}>
+                    <Translate id="status.incident.id">Incident ID</Translate>
+                    {': '}{record.id}
+                    {' · '}
                     {severityLabel(record.severity, locale)}
                     {' · '}
                     {formatTimestamp(record.startedAt, locale)}
@@ -403,9 +409,9 @@ function StatusContent() {
             affectedComponentIds={affectedComponentIds}
             activeStatus={activeStatus}
           />
-          <IncidentHistory records={historicalIncidents} locale={locale} />
         </>
       )}
+      <IncidentHistory records={historicalIncidents} locale={locale} />
     </main>
   );
 }
