@@ -359,3 +359,8 @@
 .showMore {
   justify-self: center;
 }
+
+.recoveryTime {
+  margin: 1rem 0 0;
+  font-size: 0.875rem;
+}

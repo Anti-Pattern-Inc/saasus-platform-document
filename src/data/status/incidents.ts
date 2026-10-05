@@ -53,7 +53,7 @@ export const statusComponents: readonly StatusComponent[] = [
   },
 ];
 
-const statusComponentIds = new Set(statusComponents.map((component) => component.id));
+const statusComponentsById = new Map(statusComponents.map((component) => [component.id, component]));
 
 /**
  * Public incident history. Keep this empty until a real incident or an
@@ -142,10 +142,17 @@ export function validateIncidentRecords(
         errors.push(
           `${prefix}.affectedComponents[${componentIndex}] must contain an ID and localized name`,
         );
-      } else if (!statusComponentIds.has(component.id)) {
-        errors.push(
-          `${prefix}.affectedComponents[${componentIndex}].id is not registered in statusComponents: ${component.id}`,
-        );
+      } else {
+        const canonical = statusComponentsById.get(component.id);
+        if (!canonical) {
+          errors.push(
+            `${prefix}.affectedComponents[${componentIndex}].id is not registered in statusComponents: ${component.id}`,
+          );
+        } else if (component.name.ja !== canonical.name.ja || component.name.en !== canonical.name.en) {
+          errors.push(
+            `${prefix}.affectedComponents[${componentIndex}].name must match statusComponents: ${component.id}`,
+          );
+        }
       }
     });
 
