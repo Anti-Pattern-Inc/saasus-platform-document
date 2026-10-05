@@ -269,3 +269,80 @@ for (const locale of ['en', 'ja']) {
     }
   });
 }
+
+
+test('rejects component names that disagree with the canonical service registry', () => {
+  for (const name of [
+    { ja: '認証', en: 'Authentication' },
+    { ja: 'API', en: 'Authentication' },
+    { ja: '認証', en: 'API' },
+  ]) {
+    const record = { ...resolvedIncident(), affectedComponents: [{ id: 'api', name }] };
+    assert.ok(registry.validateIncidentRecords([record]).some(error => error.includes('.name must match statusComponents')));
+  }
+  assert.equal(registry.validateIncidentRecords([resolvedIncident()]).length, 0);
+});
+
+for (const locale of ['en', 'ja']) {
+  test(`${locale}: structured status overrides stale legacy status text`, () => {
+    const stale = { statusTextJa: '古い状態', statusTextEn: 'Stale status' };
+    for (const link of [{}, { incidentId: resolvedIncident().id }]) {
+      for (const currentStatus of ['investigating', 'identified', 'monitoring', 'resolved']) {
+        const html = renderPage({ locale, flag: { enabled: true, currentStatus, ...stale, ...link } });
+        const labels = locale === 'ja'
+          ? { investigating: '調査中', identified: '原因特定済み', monitoring: '監視中', resolved: '復旧済み' }
+          : { investigating: 'Investigating', identified: 'Identified', monitoring: 'Monitoring', resolved: 'Resolved' };
+        assert.ok(html.includes(`<dd>${labels[currentStatus]}</dd>`));
+        assert.ok(!html.includes(locale === 'ja' ? stale.statusTextJa : stale.statusTextEn));
+      }
+    }
+    const linked = renderPage({ locale, flag: { enabled: true, incidentId: resolvedIncident().id, ...stale } });
+    assert.ok(linked.includes(locale === 'ja' ? '<dd>復旧済み</dd>' : '<dd>Resolved</dd>'));
+    const legacy = renderPage({ locale, flag: { enabled: true, ...stale } });
+    assert.ok(legacy.includes(locale === 'ja' ? '<dd>古い状態</dd>' : '<dd>Stale status</dd>'));
+  });
+
+  test(`${locale}: distinguishes actual recovery time from notification publication`, () => {
+    const record = resolvedIncident();
+    for (const flag of [{ enabled: false }, { enabled: true, incidentId: record.id, currentStatus: 'resolved' }]) {
+      const html = renderPage({ locale, flag });
+      assert.match(html, /class="recoveryTime">.*<time dateTime="2026-10-02T01:00:00Z">[^<]+ JST<\/time>/);
+      assert.ok(html.includes(locale === 'ja' ? '復旧時刻' : 'Recovered at'));
+      assert.match(html, /<time dateTime="2026-10-02T01:05:00Z">(?:公開時刻|Published): [^<]+ JST<\/time>/);
+    }
+    const ongoing = { ...record, resolvedAt: undefined, updates: record.updates.slice(0, 2) };
+    const html = renderPage({ locale, records: [ongoing] });
+    assert.ok(!html.includes('class="recoveryTime"'));
+  });
+}
+
+
+for (const locale of ['en', 'ja']) {
+  test(`${locale}: rejects malformed test markers instead of announcing a real outage`, () => {
+    for (const isTest of ['true', 'false', 1, 0, {}, [], null]) {
+      const html = renderPage({ locale, flag: { enabled: true, isTest } });
+      assert.ok(html.includes('class="unknownCard"'));
+      assert.ok(!html.includes('class="outageCard"'));
+      assert.ok(!html.includes('id="current-incident"'));
+      assert.ok(html.includes('id="incident-history"'));
+    }
+    const production = renderPage({ locale, flag: { enabled: true, isTest: false }, records: [] });
+    assert.ok(production.includes('class="outageCard"'));
+  });
+
+  test(`${locale}: labels published timelines that lag behind live notifications`, () => {
+    const record = { ...resolvedIncident(), resolvedAt: undefined, updates: resolvedIncident().updates.slice(0, 1) };
+    for (const flag of [
+      { currentStatus: 'resolved' },
+      { currentStatus: 'investigating', updatedAt: '2026-10-02T00:06:00Z' },
+    ]) {
+      const html = renderPage({ locale, records: [record], flag: { enabled: true, incidentId: record.id, ...flag } });
+      assert.ok(html.includes(locale === 'ja'
+        ? '公開済みの対応タイムラインと現在の通知は、まだ同期されていません。'
+        : 'The published timeline is not yet synchronized with the current notification.'));
+      assert.ok(html.includes('dateTime="2026-10-02T00:05:00Z"'));
+    }
+    const html = renderPage({ locale, records: [record], flag: { enabled: true, incidentId: record.id, currentStatus: 'investigating', updatedAt: '2026-10-02T00:05:00Z' } });
+    assert.ok(!html.includes('class="updatePending"'));
+  });
+}

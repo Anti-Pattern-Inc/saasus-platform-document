@@ -527,5 +527,14 @@
   },
   "status.history.showMore": {
     "message": "もっと見る"
+  },
+  "status.incident.resolvedAt": {
+    "message": "復旧時刻"
+  },
+  "status.incident.publishedAt": {
+    "message": "公開時刻"
+  },
+  "status.incident.timelinePending": {
+    "message": "公開済みの対応タイムラインと現在の通知は、まだ同期されていません。"
   }
 }
