@@ -58,7 +58,7 @@ function renderPage({ locale, ready = true, error = false, flag = { enabled: fal
       ...React,
       useEffect: () => {},
       useMemo: (fn) => fn(),
-      useState: () => [state[stateIndex++], () => {}],
+      useState: (initial) => [stateIndex < state.length ? state[stateIndex++] : initial, () => {}],
     },
     '@theme/Layout': passthrough,
     '@docusaurus/Translate': {
@@ -236,6 +236,36 @@ for (const locale of ['en', 'ja']) {
       assert.ok(!html.includes('class="componentAffected"'));
       assert.equal(html.split('class="componentOperational"').length - 1, 3);
       assert.ok(html.includes('id="current-incident"'));
+    }
+  });
+}
+
+for (const locale of ['en', 'ja']) {
+  test(`${locale}: history initially shows the newest ten records with closed timelines`, () => {
+    const records = Array.from({ length: 21 }, (_, index) => ({
+      ...resolvedIncident(),
+      id: `INC-20261002-${String(index + 1).padStart(3, '0')}`,
+      startedAt: `2026-10-02T00:${String(index).padStart(2, '0')}:00Z`,
+    }));
+    const html = renderPage({ locale, records });
+    assert.equal((html.match(/<article/g) || []).length, 10);
+    assert.ok(html.includes('id="INC-20261002-021"'));
+    assert.ok(html.includes('id="INC-20261002-012"'));
+    assert.ok(!html.includes('id="INC-20261002-011"'));
+    assert.equal((html.match(/<details class="historyDetails">/g) || []).length, 10);
+    assert.ok(!html.includes('<details open'));
+    assert.ok(html.includes(locale === 'ja' ? 'もっと見る' : 'Show more'));
+    assert.ok(html.includes(locale === 'ja' ? '対応タイムライン' : 'Response timeline'));
+  });
+
+  test(`${locale}: history has no show-more control when all records fit`, () => {
+    for (const count of [0, 1, 10]) {
+      const records = Array.from({ length: count }, (_, index) => ({
+        ...resolvedIncident(), id: `INC-20261002-${String(index + 1).padStart(3, '0')}`,
+      }));
+      const html = renderPage({ locale, records });
+      assert.equal((html.match(/<article/g) || []).length, count);
+      assert.ok(!html.includes(locale === 'ja' ? 'もっと見る' : 'Show more'));
     }
   });
 }
