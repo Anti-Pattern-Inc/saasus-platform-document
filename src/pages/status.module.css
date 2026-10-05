@@ -345,3 +345,17 @@
     gap: 0.5rem;
   }
 }
+
+.historyDetails {
+  margin-top: 0.75rem;
+}
+
+.historyDetails > summary {
+  cursor: pointer;
+  color: var(--ifm-color-primary);
+  font-weight: 600;
+}
+
+.showMore {
+  justify-self: center;
+}
