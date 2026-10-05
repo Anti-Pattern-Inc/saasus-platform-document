@@ -521,5 +521,11 @@
   "inquiry.error.returnHome": {
     "message": "ドキュメントトップに戻る",
     "description": "Error page link back to documentation"
+  },
+  "status.history.timeline": {
+    "message": "対応タイムライン"
+  },
+  "status.history.showMore": {
+    "message": "もっと見る"
   }
 }

@@ -287,6 +287,8 @@ function CurrentIncidentCard({
   );
 }
 
+const HISTORY_PAGE_SIZE = 10;
+
 function IncidentHistory({
   records,
   locale,
@@ -296,6 +298,28 @@ function IncidentHistory({
   locale: Locale;
   hasCurrentIncident: boolean;
 }) {
+  const [visibleCount, setVisibleCount] = useState(HISTORY_PAGE_SIZE);
+
+  // Preserve direct links to incidents beyond the initial page of history.
+  useEffect(() => {
+    const revealLinkedIncident = () => {
+      const incidentId = window.location.hash.slice(1);
+      const index = records.findIndex((record) => record.id === incidentId);
+      if (index < 0) return;
+      if (index >= visibleCount) {
+        setVisibleCount(Math.ceil((index + 1) / HISTORY_PAGE_SIZE) * HISTORY_PAGE_SIZE);
+        return;
+      }
+      const article = document.getElementById(incidentId);
+      const details = article?.querySelector('details');
+      if (details) details.open = true;
+      article?.scrollIntoView();
+    };
+    revealLinkedIncident();
+    window.addEventListener('hashchange', revealLinkedIncident);
+    return () => window.removeEventListener('hashchange', revealLinkedIncident);
+  }, [records, visibleCount]);
+
   return (
     <section className={styles.historySection} aria-labelledby="incident-history">
       <h2 id="incident-history" className={styles.sectionHeading}>
@@ -311,7 +335,7 @@ function IncidentHistory({
         </p>
       ) : (
         <div className={styles.historyList}>
-          {records.map((record) => (
+          {records.slice(0, visibleCount).map((record) => (
             <article className={styles.historyCard} key={record.id} id={record.id}>
               <div className={styles.historyHeader}>
                 <div>
@@ -332,9 +356,23 @@ function IncidentHistory({
                 )}
               </div>
               <p>{localized(record.impact, locale)}</p>
-              <IncidentTimeline record={record} locale={locale} />
+              <details className={styles.historyDetails}>
+                <summary>
+                  <Translate id="status.history.timeline">Response timeline</Translate>
+                </summary>
+                <IncidentTimeline record={record} locale={locale} />
+              </details>
             </article>
           ))}
+          {visibleCount < records.length && (
+            <button
+              type="button"
+              className={`button button--secondary button--outline ${styles.showMore}`}
+              onClick={() => setVisibleCount((count) => count + HISTORY_PAGE_SIZE)}
+            >
+              <Translate id="status.history.showMore">Show more</Translate>
+            </button>
+          )}
         </div>
       )}
     </section>
