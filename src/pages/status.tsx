@@ -52,6 +52,7 @@ function normalizeIncidentFlag(value: unknown): IncidentFlag | null {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return null;
   const raw = value as Record<string, unknown>;
   if (typeof raw.enabled !== 'boolean') return null;
+  if (raw.isTest !== undefined && typeof raw.isTest !== 'boolean') return null;
   const text = (key: string): string | undefined => {
     const field = raw[key];
     return typeof field === 'string' && field.trim() ? field.trim() : undefined;
@@ -173,13 +174,24 @@ function IncidentTimeline({
               {statusLabel(update.status, locale)}
             </span>
             <time dateTime={update.publishedAt}>
-              {formatTimestamp(update.publishedAt, locale)}
+              <Translate id="status.incident.publishedAt">Published</Translate>
+              {': '}{formatTimestamp(update.publishedAt, locale)}
             </time>
           </div>
           <p>{localized(update.message, locale)}</p>
         </li>
       ))}
     </ol>
+  );
+}
+
+function IncidentRecoveryTime({ record, locale }: { record: IncidentRecord; locale: Locale }) {
+  if (!record.resolvedAt) return null;
+  return (
+    <p className={styles.recoveryTime}>
+      <strong><Translate id="status.incident.resolvedAt">Recovered at</Translate>{': '}</strong>
+      <time dateTime={record.resolvedAt}>{formatTimestamp(record.resolvedAt, locale)}</time>
+    </p>
   );
 }
 
@@ -208,10 +220,16 @@ function CurrentIncidentCard({
     : locale === 'ja'
       ? incident.affectedServicesJa
       : incident.affectedServicesEn;
-  const currentStatusText =
-    locale === 'ja' ? incident.statusTextJa : incident.statusTextEn;
+  const legacyStatusText = locale === 'ja' ? incident.statusTextJa : incident.statusTextEn;
+  const currentStatusText = isIncidentStatus(incident.currentStatus) || record
+    ? statusLabel(activeStatus, locale)
+    : legacyStatusText || statusLabel(activeStatus, locale);
   const isTest = incident.isTest || record?.isTest;
   const isResolved = activeStatus === 'resolved';
+  const timelineIsPending = record && (
+    activeStatus !== latestUpdate(record).status ||
+    (isIsoUtc(incident.updatedAt) && Date.parse(incident.updatedAt) > Date.parse(latestUpdate(record).publishedAt))
+  );
 
   return (
     <section id={record?.id} className={styles.currentIncidentSection} aria-labelledby="current-incident">
@@ -264,7 +282,7 @@ function CurrentIncidentCard({
           )}
           <div>
             <dt><Translate id="status.incident.statusText">Status</Translate></dt>
-            <dd>{currentStatusText || statusLabel(activeStatus, locale)}</dd>
+            <dd>{currentStatusText}</dd>
           </div>
           {incident.updatedAt && (
             <div>
@@ -273,6 +291,14 @@ function CurrentIncidentCard({
             </div>
           )}
         </dl>
+        {record && <IncidentRecoveryTime record={record} locale={locale} />}
+        {timelineIsPending && (
+          <p className={styles.updatePending} role="status">
+            <Translate id="status.incident.timelinePending">
+              The published timeline is not yet synchronized with the current notification.
+            </Translate>
+          </p>
+        )}
         {record ? (
           <IncidentTimeline record={record} locale={locale} />
         ) : (
@@ -305,7 +331,6 @@ function IncidentHistory({
     const revealLinkedIncident = () => {
       const incidentId = window.location.hash.slice(1);
       const index = records.findIndex((record) => record.id === incidentId);
-      if (index < 0) return;
       if (index >= visibleCount) {
         setVisibleCount(Math.ceil((index + 1) / HISTORY_PAGE_SIZE) * HISTORY_PAGE_SIZE);
         return;
@@ -356,6 +381,7 @@ function IncidentHistory({
                 )}
               </div>
               <p>{localized(record.impact, locale)}</p>
+              <IncidentRecoveryTime record={record} locale={locale} />
               <details className={styles.historyDetails}>
                 <summary>
                   <Translate id="status.history.timeline">Response timeline</Translate>
