@@ -23,6 +23,18 @@
     "message": "システムで問題が発生しています",
     "description": "System outage message"
   },
+  "status.test.message": {
+    "message": "これはテスト用のインシデント通知です。",
+    "description": "Prominent test incident notice"
+  },
+  "status.resolved.message": {
+    "message": "インシデントは復旧しました。",
+    "description": "Resolved incident message"
+  },
+  "status.history.noOther": {
+    "message": "ほかに公開されたインシデントはありません。",
+    "description": "Empty history when the current incident is displayed separately"
+  },
   "status.incident.title": {
     "message": "障害情報",
     "description": "Incident info section title"
@@ -39,9 +51,61 @@
     "message": "影響範囲:",
     "description": "Affected services label"
   },
+  "status.incident.severity": {
+    "message": "重大度",
+    "description": "Incident severity label"
+  },
   "status.incident.statusText": {
     "message": "対応状況:",
     "description": "Status text label"
+  },
+  "status.components.heading": {
+    "message": "サービス",
+    "description": "Services section heading"
+  },
+  "status.incident.test": {
+    "message": "テスト",
+    "description": "Test incident badge"
+  },
+  "status.incident.id": {
+    "message": "インシデントID",
+    "description": "Incident ID label"
+  },
+  "status.incident.pendingId": {
+    "message": "公開待ち",
+    "description": "Pending incident ID label"
+  },
+  "status.incident.updatedAt": {
+    "message": "最終更新",
+    "description": "Last updated label"
+  },
+  "status.incident.historyPending": {
+    "message": "詳細な障害履歴を更新しています。",
+    "description": "Incident history pending message"
+  },
+  "status.history.heading": {
+    "message": "障害履歴",
+    "description": "Incident history section heading"
+  },
+  "status.history.empty": {
+    "message": "公開された障害はありません。",
+    "description": "Empty incident history message"
+  },
+  "status.history.test": {
+    "message": "テスト",
+    "description": "Test history badge"
+  },
+  "status.loading": {
+    "message": "稼働状況を読み込んでいます…",
+    "description": "Status loading message"
+  },
+  "status.unavailable.title": {
+    "message": "ステータス情報を一時的に取得できません。",
+    "description": "Status unavailable title"
+  },
+  "status.unavailable.message": {
+    "message": "しばらくしてから再度ご確認ください。",
+    "description": "Status unavailable message"
   },
   "theme.ErrorPageContent.title": {
     "message": "エラーが発生しました",
@@ -457,5 +521,20 @@
   "inquiry.error.returnHome": {
     "message": "ドキュメントトップに戻る",
     "description": "Error page link back to documentation"
+  },
+  "status.history.timeline": {
+    "message": "対応タイムライン"
+  },
+  "status.history.showMore": {
+    "message": "もっと見る"
+  },
+  "status.incident.resolvedAt": {
+    "message": "復旧時刻"
+  },
+  "status.incident.publishedAt": {
+    "message": "公開時刻"
+  },
+  "status.incident.timelinePending": {
+    "message": "公開済みの対応タイムラインと現在の通知は、まだ同期されていません。"
   }
 }
