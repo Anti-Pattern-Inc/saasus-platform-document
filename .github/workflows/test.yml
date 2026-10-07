@@ -25,6 +25,9 @@ jobs:
 
       - run: npm ci
 
+      - name: Run status regression tests
+        run: npm run test:status
+
       - name: Run build
         run: npm run build
 
