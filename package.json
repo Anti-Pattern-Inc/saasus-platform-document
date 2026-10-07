@@ -15,7 +15,8 @@
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "wt-ja": "docusaurus write-translations --locale ja",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "test:status": "node --test scripts/tests/status.test.cjs"
   },
   "dependencies": {
     "@docusaurus/core": "3.10.2",
