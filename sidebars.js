@@ -353,6 +353,7 @@ const sidebars = {
               items: [
                 "part-6/implementation-guide/sample-application/overview",
                 "part-6/implementation-guide/sample-application/authentication",
+                "part-6/implementation-guide/sample-application/authentication-pkce",
                 "part-6/implementation-guide/sample-application/multi-factor-authentication",
                 "part-6/implementation-guide/sample-application/activity-history-log",
                 "part-6/implementation-guide/sample-application/trace-id-log-analysis",
