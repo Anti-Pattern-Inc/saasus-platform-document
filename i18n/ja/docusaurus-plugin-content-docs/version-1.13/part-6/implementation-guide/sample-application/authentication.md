@@ -4,12 +4,16 @@ slug: "authentication"
 excerpt: "SaaSus PlatformのAPIサーバ方式を使用した認証フローの実装ガイド"
 hidden: false
 createdAt: "Sun Aug 06 2023 02:41:08 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Oct 09 2025 00:00:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Oct 08 2026 01:47:00 GMT+0000 (Coordinated Universal Time)"
 ---
 サンプルアプリの認証機能を題材に、SaaSus Platform APIサーバ版での認証フローの実装方法を解説します。
 
 :::info
 実装方式の比較や全体的な処理フローについては、[サンプルアプリ概要](/docs/part-6/implementation-guide/sample-application/overview)をご参照ください。
+:::
+
+:::info
+ホスト型ログイン画面を使う場合のPKCEによるログインCSRF対策については、[PKCEによるログインCSRF対策](/docs/part-6/implementation-guide/sample-application/authentication-pkce)をご参照ください。
 :::
 
 ## フロントエンド実装

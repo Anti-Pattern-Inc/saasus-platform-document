@@ -4,12 +4,16 @@ slug: "authentication"
 excerpt: "Implementation guide for authentication flow using SaaSus Platform API server approach"
 hidden: false
 createdAt: "Sun Aug 06 2023 02:41:08 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Oct 09 2025 00:00:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Thu Oct 08 2026 01:47:00 GMT+0000 (Coordinated Universal Time)"
 ---
 This page explains the implementation methods for authentication flow in the API server version, using the sample application's authentication features as examples.
 
 :::info
 For comparisons of implementation approaches and overall process flows, please refer to the [Sample Application Overview](/docs/part-6/implementation-guide/sample-application/overview).
+:::
+
+:::info
+For login CSRF protection with PKCE when using the hosted login screen, please refer to [Login CSRF Protection with PKCE](/docs/part-6/implementation-guide/sample-application/authentication-pkce).
 :::
 
 ## Frontend Implementation
