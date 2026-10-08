@@ -171,6 +171,9 @@ const config = {
           alt: "My Site Logo",
           src: "img/logo.png",
           srcDark: "img/logo-dark.png",
+          // "/" を経由すると index.jsx がブラウザ言語でリダイレクトしてしまうため、
+          // ドキュメントのトップへ直接リンクする（ロケール接頭辞は自動付与される）
+          href: "/docs/part-1/purpose-and-overview",
         },
         items: [
           {
