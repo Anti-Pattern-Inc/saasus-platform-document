@@ -37,6 +37,12 @@ const config = {
   i18n: {
     defaultLocale: "en",
     locales: ["ja", "en"],
+    localeConfigs: {
+      ja: {
+        // Keep /ja/ links valid when building only the Japanese locale.
+        baseUrl: "/ja/",
+      },
+    },
   },
 
   presets: [
@@ -165,6 +171,9 @@ const config = {
           alt: "My Site Logo",
           src: "img/logo.png",
           srcDark: "img/logo-dark.png",
+          // "/" を経由すると index.jsx がブラウザ言語でリダイレクトしてしまうため、
+          // ドキュメントのトップへ直接リンクする（ロケール接頭辞は自動付与される）
+          href: "/docs/part-1/purpose-and-overview",
         },
         items: [
           {
@@ -258,7 +267,16 @@ const config = {
       },
     }),
 
-  themes: ['@docusaurus/theme-mermaid'],
+  themes: [
+    '@docusaurus/theme-mermaid',
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      {
+        hashed: true,
+        language: ["en", "ja"],
+      },
+    ],
+  ],
 
   markdown: {
     mermaid: true,
@@ -286,13 +304,6 @@ const config = {
           dark: "rgb(50, 50, 50)",
         },
         config: {},
-      },
-    ],
-    [
-      require.resolve("@easyops-cn/docusaurus-search-local"),
-      {
-        hashed: true,
-        language: ["en", "ja"],
       },
     ],
     [
