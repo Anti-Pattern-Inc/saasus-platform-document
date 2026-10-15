@@ -283,17 +283,6 @@ const config = {
   },
 
   plugins: [
-    // [
-    //   '@docusaurus/plugin-ideal-image',
-    //   {
-    //     size: 500,
-    //     // quality: 70,
-    //     // max: 640, // max resized image's size.
-    //     // min: 640, // min resized image's size. if original is lower, use that size.
-    //     // steps: 1, // the max number of images generated between min and max (inclusive)
-    //     disableInDev: false,
-    //   },
-    // ],
     llmsTxtPlugin,
     [
       require.resolve("docusaurus-plugin-image-zoom"),
