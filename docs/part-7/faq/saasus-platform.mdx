@@ -4,7 +4,7 @@ slug: "saasus-platform"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Fri Aug 28 2026 03:50:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Mon Oct 19 2026 05:05:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 import InquiryButton from '@site/src/components/InquiryButton';
@@ -178,6 +178,12 @@ Uses an authenticator app such as Google Authenticator, and performs the second-
 At login, an authentication code is sent to the registered email address to perform the second-factor authentication.
 
 Note that using multi-factor authentication (MFA) requires implementation on the SaaS application side. For details on how to use the API and implementation examples, see [Implementing Multi-Factor Authentication](/docs/part-6/implementation-guide/sample-application/multi-factor-authentication).
+
+---
+
+**Q. For email-based multi-factor authentication (MFA), how long is the sent verification code valid?**  
+A. For two-factor authentication (MFA) by email, the time during which a user can enter the verification code after receiving the email is **3 minutes**. The user must enter the verification code and complete the login within this time.  
+Note that this validity period cannot be changed (customized) on the SaaSus Platform side.
 
 ---
 

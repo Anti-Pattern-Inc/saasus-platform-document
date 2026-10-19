@@ -4,7 +4,7 @@ slug: "saasus-platform"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Fri Aug 28 2026 03:50:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Mon Oct 19 2026 05:05:00 GMT+0000 (Coordinated Universal Time)"
 ---
 
 import InquiryButton from '@site/src/components/InquiryButton';
@@ -177,6 +177,12 @@ Google Authenticator などの認証アプリを利用し、アプリに表示�
 ログイン時に、登録済みのメールアドレスへ認証コードを送信し、二要素目の認証を行います。
 
 なお、多要素認証（MFA）を利用するには SaaS アプリケーション側での実装が必要です。具体的な API の使い方や実装例は [多要素認証の実装](/ja/docs/part-6/implementation-guide/sample-application/multi-factor-authentication) を参照してください。
+
+---
+
+**Q. メールでの多要素認証（MFA）の場合、送信された認証コードの有効時間はどのくらいですか？**  
+A. メールで二段階認証（MFA）を行う場合、ユーザーがメールを受信してから認証コードを入力できる有効時間は **3 分間** です。この時間内に認証コードを入力してログインを完了する必要があります。  
+なお、この有効時間は SaaSus Platform 側で変更（カスタマイズ）することはできません。
 
 ---
 
