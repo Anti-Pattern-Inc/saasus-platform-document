@@ -404,6 +404,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CatalogEntityVisibility'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '500':
           description: Internal Server Error
           content:

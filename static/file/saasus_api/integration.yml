@@ -91,33 +91,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /eventbridge/event:
-    post:
-      tags:
-        - eventBridge
-      operationId: CreateEventBridgeEvent
-      summary: Send Events
-      x-summary-i18n:
-        jpn: イベント連携の送信
-      description: |
-        Send events to Amazon EventBridge.
-      x-description-i18n:
-        jpn: |
-          Amazon EventBridge へイベントを送信します。
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateEventBridgeEventParam'
-      responses:
-        '201':
-          description: Created
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
   /eventbridge/test-event:
     post:
       tags:

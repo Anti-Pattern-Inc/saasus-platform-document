@@ -79,12 +79,14 @@ paths:
         The ID token is passed to the Callback URL during login from the SaaSus Platform generated login screen.
         User information can be obtained from calling this API with an ID token from the URL on the server side.
         Since the acquired tenant, role (role), price plan, etc. are included, it is possible to implement authorization based on it.
+        If the ID token validation fails and 401 Unauthorized is returned, the login screen URL will be returned in data.sign_in_page_url of the response, so the client can respond by redirecting to it, etc.
       x-description-i18n:
         jpn: |
           SaaS利用ユーザ(登録ユーザ)のIDトークンを元に、ユーザ情報を取得します。
           IDトークンは、SaaSus Platform生成のログイン画面からログイン時にCallback URLに渡されます。
           サーバ側でそのURLからIDトークンを取得し、このAPIを呼ぶことにより、該当ユーザの情報が取得できます。
           取得した上には、所属テナントや役割(ロール)、料金プランなどが含まれているため、それを元に認可の実装を行うことが可能です。
+          IDトークンの検証に失敗し、401 Unauthorized が返される場合、レスポンスの data.sign_in_page_url にログイン画面のURLが返されますので、クライアントはそちらにリダイレクトするなどの対応を行うことができます。
       parameters:
         - in: query
           name: token
@@ -419,39 +421,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-    post:
-      tags:
-        - saasUser
-      operationId: SaveSaasUsersCount
-      summary: Save SaaS Users Count
-      x-summary-i18n:
-        jpn: SaaSユーザー数を保存
-      description: |
-        Save the count of SaaS users.
-      x-description-i18n:
-        jpn: |
-          SaaSユーザー数を保存します。
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SaveSaasUsersCountParam'
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
   /users/search:
     get:
       tags:
@@ -735,6 +704,12 @@ paths:
       responses:
         '200':
           description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '500':
           description: Internal Server Error
           content:
@@ -999,39 +974,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TenantUsersCounts'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-    post:
-      tags:
-        - tenantUser
-      operationId: SaveTenantUsersCounts
-      summary: Save Tenant Users Count
-      x-summary-i18n:
-        jpn: テナントごとのテナントユーザー数を保存
-      description: |
-        Save the count of tenant users for each tenant.
-      x-description-i18n:
-        jpn: |
-          テナントごとのテナントユーザー数を保存します。
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SaveTenantUsersCountsParam'
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
         '500':
           description: Internal Server Error
           content:
@@ -2465,6 +2407,12 @@ paths:
       responses:
         '200':
           description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '500':
           description: Internal Server Error
           content:
@@ -2476,16 +2424,14 @@ paths:
       tags:
         - authInfo
       operationId: GetSignInSettings
-      summary: Get Password Requirements
+      summary: Get Sign-In Settings
       x-summary-i18n:
-        jpn: パスワード要件を取得
+        jpn: 認証設定を取得
       description: |
-        Get user password requirements.
-        Set a secure password that is difficult to decipher by increasing the number of digits by combining alphabets, numbers, and symbols.
+        Get sign-in settings, including user password requirements and refresh token validity period.
       x-description-i18n:
         jpn: |
-          ユーザーパスワードの要件設定を取得します。
-          アルファベット、数字、記号の組み合わせで、桁数を長くすれば解読されづらい安全なパスワードを設定することが可能となります。
+          ユーザーの認証設定（パスワード要件、リフレッシュトークンの有効期間など）を取得します。
       responses:
         '200':
           description: OK
@@ -2506,16 +2452,14 @@ paths:
       tags:
         - authInfo
       operationId: UpdateSignInSettings
-      summary: Update Password Requirements
+      summary: Update Sign-In Settings
       x-summary-i18n:
-        jpn: パスワード要件を更新
+        jpn: 認証設定を更新
       description: |
-        Update user password requirements.
-        Set a secure password that is difficult to decipher by increasing the number of digits by combining alphabets, numbers, and symbols.
+        Update sign-in settings, including user password requirements and refresh token validity period.
       x-description-i18n:
         jpn: |
-          ユーザーパスワードの要件設定を更新します。
-          アルファベット、数字、記号の組み合わせで、桁数を長くすれば解読されづらい安全なパスワードを設定することが可能となります。
+          ユーザーの認証設定（パスワード要件、リフレッシュトークンの有効期間など）を更新します。
       requestBody:
         content:
           application/json:
@@ -2524,6 +2468,12 @@ paths:
       responses:
         '200':
           description: OK
+        '400':
+          description: Invalid Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '500':
           description: Internal Server Error
           content:
@@ -2887,10 +2837,12 @@ paths:
       description: |
         Temporarily save the parameter for the ID token, access token, and refresh token and return a temporary code for obtaining.
         Temporary codes are valid for 10 seconds from issuance.
+        When code_challenge is specified, the temporary code can only be exchanged via POST /credentials/exchange and cannot be retrieved via GET /credentials.
       x-description-i18n:
         jpn: |
           引数のIDトークン・アクセストークン・リフレッシュトークンを一時保存し取得用の一時コードを返却する。
           一時コードの有効期間は発行から10秒です。
+          code_challengeを指定した場合、その一時コードは POST /credentials/exchange でのみ交換でき、GET /credentials では取得できません。
       requestBody:
         content:
           application/json:
@@ -2911,6 +2863,92 @@ paths:
                 $ref: '#/components/schemas/Error'
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /credentials/exchange:
+    post:
+      tags:
+        - credential
+      operationId: ExchangeAuthCredentials
+      summary: Exchange a Temporary Code for Authentication/Authorization Information
+      x-summary-i18n:
+        jpn: 一時コードを認証・認可情報へ交換
+      description: |
+        Exchange a temporary code for ID token, access token, and refresh token by verifying the PKCE code verifier.
+        Only temporary codes created with code_challenge can be exchanged. Temporary codes created without code_challenge must be retrieved via GET /credentials.
+      x-description-i18n:
+        jpn: |
+          PKCE code verifierを検証し、一時コードをIDトークン・アクセストークン・リフレッシュトークンへ交換する。
+          交換できるのは code_challenge を指定して作成した一時コードのみです。code_challenge なしで作成した一時コードは GET /credentials で取得してください。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExchangeAuthCredentialsParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credentials'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /token/revoke:
+    post:
+      tags:
+        - credential
+      operationId: RevokeToken
+      summary: Revoke Token
+      x-summary-i18n:
+        jpn: トークンの無効化
+      description: |
+        Revoke the specified refresh token.
+      x-description-i18n:
+        jpn: |
+          指定したリフレッシュトークンを無効化します。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RevokeTokenParam'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
           content:
             application/json:
               schema:
@@ -3731,6 +3769,7 @@ components:
         last_login_at:
           type: integer
           x-go-type: int64
+          x-omitempty: false
           nullable: true
           example: 1640995200
           description: |
@@ -4587,9 +4626,13 @@ components:
               Stripe連携時の注意点: 当月の月初（0時 UTC）を開始日時として指定すると、その月の初日から開始されるサブスクリプションを作成できます。 （例: 2023年1月1日 00:00 UTC を指定する場合 → 1672531200）
         next_plan_tax_rate_id:
           $ref: '#/components/schemas/Uuid'
-          description: Tax rate ID
+          description: |
+            Tax rate ID.
+            For a plan cancellation reservation, the tax rate of the currently active plan is used regardless of the value specified in the request.
           x-description-i18n:
-            jpn: 税率ID
+            jpn: |
+              税率ID。
+              プランの解約予約時は、リクエストで指定した値にかかわらず、現在適用中のプランの税率が使用されます。
         proration_behavior:
           $ref: '#/components/schemas/ProrationBehavior'
           description: If you have a stripe linkage, you can set the behavior of the proportional allocation when changing plans.
@@ -4817,8 +4860,6 @@ components:
         data:
           type: object
           additionalProperties: true
-          example:
-            sign_in_page_url: auth.dev.saasus.io
       required:
         - type
         - message
@@ -5067,6 +5108,8 @@ components:
           $ref: '#/components/schemas/SelfRegist'
         identity_provider_configuration:
           $ref: '#/components/schemas/IdentityProviderConfiguration'
+        refresh_token_validity:
+          $ref: '#/components/schemas/RefreshTokenValidity'
       required:
         - password_policy
         - device_configuration
@@ -5075,6 +5118,48 @@ components:
         - account_verification
         - self_regist
         - identity_provider_configuration
+        - refresh_token_validity
+    RefreshTokenValidity:
+      type: object
+      description: Refresh token validity period.
+      x-description-i18n:
+        jpn: リフレッシュトークンの有効期間
+      properties:
+        value:
+          type: integer
+          x-go-type: uint64
+          example: 30
+          description: |
+            Refresh token validity value. The duration must be between 60 minutes and 10 years.
+          x-description-i18n:
+            jpn: |
+              リフレッシュトークンの有効期間の値。60分以上10年以内で指定してください。
+        unit:
+          $ref: '#/components/schemas/RefreshTokenValidityUnit'
+      required:
+        - value
+        - unit
+    RefreshTokenValidityUnit:
+      type: string
+      enum:
+        - seconds
+        - minutes
+        - hours
+        - days
+      example: days
+      description: |
+        Unit for the refresh token validity period.
+        seconds: seconds
+        minutes: minutes
+        hours: hours
+        days: days
+      x-description-i18n:
+        jpn: |
+          リフレッシュトークンの有効期間の単位。
+          seconds: 秒
+          minutes: 分
+          hours: 時間
+          days: 日
     PasswordPolicy:
       type: object
       description: Password Policy
@@ -5196,6 +5281,9 @@ components:
         - sending_to
     UpdateSignInSettingsParam:
       type: object
+      description: Set both value and unit in refresh_token_validity when updating the refresh token validity period.
+      x-description-i18n:
+        jpn: リフレッシュトークンの有効期間を更新する場合は、refresh_token_validity の value と unit を指定してください。
       properties:
         password_policy:
           $ref: '#/components/schemas/PasswordPolicy'
@@ -5209,6 +5297,8 @@ components:
           $ref: '#/components/schemas/AccountVerification'
         self_regist:
           $ref: '#/components/schemas/SelfRegist'
+        refresh_token_validity:
+          $ref: '#/components/schemas/RefreshTokenValidity'
     MfaConfiguration:
       type: object
       description: |
@@ -5621,7 +5711,84 @@ components:
       title: Authentication/Authorization Storage Parameters
       x-title-i18n:
         jpn: 認証・認可情報の保存パラメータ
-      $ref: '#/components/schemas/Credentials'
+      allOf:
+        - $ref: '#/components/schemas/Credentials'
+        - type: object
+          properties:
+            code_challenge:
+              title: PKCE Code Challenge
+              x-title-i18n:
+                jpn: PKCEコードチャレンジ
+              description: PKCE code challenge derived from the code verifier. It must be specified together with code_challenge_method.
+              x-description-i18n:
+                jpn: code verifierから生成したPKCEコードチャレンジ
+              type: string
+              minLength: 43
+              maxLength: 128
+              pattern: ^[A-Za-z0-9\-._~]+$
+            code_challenge_method:
+              title: PKCE Code Challenge Method
+              x-title-i18n:
+                jpn: PKCEコードチャレンジ方式
+              description: Method used to derive the PKCE code challenge. It must be specified together with code_challenge.
+              x-description-i18n:
+                jpn: PKCEコードチャレンジの生成方式
+              type: string
+              enum:
+                - S256
+    ExchangeAuthCredentialsParam:
+      title: Temporary Code Exchange Parameters
+      x-title-i18n:
+        jpn: 一時コード交換パラメータ
+      type: object
+      properties:
+        auth_flow:
+          title: Authentication Flow
+          x-title-i18n:
+            jpn: 認証フロー
+          description: Authentication flow used for the exchange
+          x-description-i18n:
+            jpn: 交換に使用する認証フロー
+          type: string
+          enum:
+            - tempCodeAuth
+        code:
+          title: Temporary Code
+          x-title-i18n:
+            jpn: 一時コード
+          description: Temporary code
+          x-description-i18n:
+            jpn: 一時コード
+          $ref: '#/components/schemas/Uuid'
+        code_verifier:
+          title: PKCE Code Verifier
+          x-title-i18n:
+            jpn: PKCEコードベリファイア
+          description: PKCE code verifier associated with the temporary code
+          x-description-i18n:
+            jpn: 一時コードに紐付くPKCEコードベリファイア
+          type: string
+          minLength: 43
+          maxLength: 128
+          pattern: ^[A-Za-z0-9\-._~]+$
+      required:
+        - auth_flow
+    RevokeTokenParam:
+      title: Token Revocation Parameters
+      x-title-i18n:
+        jpn: トークン無効化パラメータ
+      type: object
+      properties:
+        refresh_token:
+          title: Refresh Token
+          x-title-i18n:
+            jpn: リフレッシュトークン
+          description: Refresh token to revoke
+          x-description-i18n:
+            jpn: 無効化するリフレッシュトークン
+          type: string
+      required:
+        - refresh_token
     AuthorizationTempCode:
       type: object
       properties:

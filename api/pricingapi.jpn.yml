@@ -381,28 +381,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  /plans/used:
-    patch:
-      tags:
-        - pricingPlans
-      operationId: UpdatePricingPlansUsed
-      summary: 使用済みフラグ更新
-      description: |
-        料金プランと配下のメニュー・ユニットを使用済みに更新します。
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UpdatePricingPlansUsedParam"
-      responses:
-        "200":
-          description: OK
-        "500":
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
   /stripe/init:
     patch:
       tags:

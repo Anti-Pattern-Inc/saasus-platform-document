@@ -484,33 +484,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /plans/used:
-    patch:
-      tags:
-        - pricingPlans
-      operationId: UpdatePricingPlansUsed
-      summary: Update Used Flag
-      x-summary-i18n:
-        jpn: 使用済みフラグ更新
-      description: |
-        Update price plan and feature menu/pricing unit to used.
-      x-description-i18n:
-        jpn: |
-          料金プランと配下のメニュー・ユニットを使用済みに更新します。
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdatePricingPlansUsedParam'
-      responses:
-        '200':
-          description: OK
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
   /stripe/init:
     patch:
       tags:
