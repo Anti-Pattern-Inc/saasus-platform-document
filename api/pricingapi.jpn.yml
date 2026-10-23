@@ -381,28 +381,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  /plans/used:
-    patch:
-      tags:
-        - pricingPlans
-      operationId: UpdatePricingPlansUsed
-      summary: 使用済みフラグ更新
-      description: |
-        料金プランと配下のメニュー・ユニットを使用済みに更新します。
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UpdatePricingPlansUsedParam"
-      responses:
-        "200":
-          description: OK
-        "500":
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
   /stripe/init:
     patch:
       tags:
@@ -1139,6 +1117,10 @@ components:
       type: object
       allOf:
         - properties:
+            type:
+              type: string
+              enum:
+                - tiered_usage
             upper_count:
               type: integer
               x-go-type: uint64
@@ -1160,6 +1142,10 @@ components:
       type: object
       allOf:
         - properties:
+            type:
+              type: string
+              enum:
+                - tiered
             upper_count:
               type: integer
               x-go-type: uint64
@@ -1181,6 +1167,10 @@ components:
       type: object
       allOf:
         - properties:
+            type:
+              type: string
+              enum:
+                - usage
             upper_count:
               type: integer
               x-go-type: uint64
@@ -1207,6 +1197,10 @@ components:
       type: object
       allOf:
         - properties:
+            type:
+              type: string
+              enum:
+                - fixed
             unit_amount:
               type: integer
               x-go-type: uint64
@@ -1233,6 +1227,16 @@ components:
         - $ref: "#/components/schemas/PricingTieredUnit"
         - $ref: "#/components/schemas/PricingUsageUnit"
         - $ref: "#/components/schemas/PricingFixedUnit"
+      example:
+        id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+        type: fixed
+        name: storage_unit
+        display_name: ストレージユニット
+        description: KB unit for storage usage
+        currency: JPY
+        unit_amount: 10000
+        recurring_interval: month
+        used: false
     PricingUnitForSave:
       title: プライシングユニット保存パラメータ
       type: object
@@ -1258,6 +1262,64 @@ components:
             $ref: "#/components/schemas/PricingUnit"
       required:
         - units
+      example:
+        units:
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+            type: fixed
+            name: fixed_unit
+            display_name: 固定ユニット
+            description: Fixed unit for storage usage
+            currency: JPY
+            unit_amount: 10000
+            recurring_interval: month
+            used: false
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe776
+            type: usage
+            name: usage_unit
+            display_name: 使用量ユニット
+            description: Usage unit for storage usage
+            currency: JPY
+            metering_unit_id: 2e9ad0b1-0f3a-4a1c-9f8e-6b5d4c3a2b10
+            metering_unit_name: test_unit
+            recurring_interval: month
+            upper_count: 100
+            unit_amount: 10000
+            aggregate_usage: sum
+            used: false
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe777
+            type: tiered
+            name: tiered_unit
+            display_name: 段階ユニット
+            description: Tiered unit for storage usage
+            currency: JPY
+            metering_unit_id: 2e9ad0b1-0f3a-4a1c-9f8e-6b5d4c3a2b10
+            metering_unit_name: test_unit
+            recurring_interval: month
+            upper_count: 100
+            aggregate_usage: sum
+            used: false
+            tiers:
+              - up_to: 5
+                unit_amount: 1000
+                flat_amount: 500
+                inf: false
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe778
+            type: tiered_usage
+            name: tiered_usage_unit
+            display_name: 段階的使用量ユニット
+            description: Tiered usage unit for storage usage
+            currency: JPY
+            metering_unit_id: 2e9ad0b1-0f3a-4a1c-9f8e-6b5d4c3a2b10
+            metering_unit_name: test_unit
+            recurring_interval: month
+            upper_count: 100
+            aggregate_usage: sum
+            used: false
+            tiers:
+              - up_to: 5
+                unit_amount: 1000
+                flat_amount: 500
+                inf: false
     PricingTiers:
       title: 従量課金情報一覧
       type: object
@@ -1363,6 +1425,22 @@ components:
           required:
             - id
         - $ref: "#/components/schemas/PricingMenuProps"
+      example:
+        id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+        name: Ten Users Menu
+        display_name: 10ユーザーメニュー
+        description: Can use 10 users.
+        used: false
+        units:
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+            type: fixed
+            name: storage_unit
+            display_name: ストレージユニット
+            description: KB unit for storage usage
+            currency: JPY
+            unit_amount: 10000
+            recurring_interval: month
+            used: false
     PricingMenus:
       title: プライシング機能メニュー一覧
       type: object
@@ -1373,6 +1451,23 @@ components:
             $ref: "#/components/schemas/PricingMenu"
       required:
         - pricing_menus
+      example:
+        pricing_menus:
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+            name: Ten Users Menu
+            display_name: 10ユーザーメニュー
+            description: Can use 10 users.
+            used: false
+            units:
+              - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+                type: fixed
+                name: storage_unit
+                display_name: ストレージユニット
+                description: KB unit for storage usage
+                currency: JPY
+                unit_amount: 10000
+                recurring_interval: month
+                used: false
     PricingPlanProps:
       title: 料金プラン基本情報
       type: object
@@ -1441,6 +1536,28 @@ components:
           required:
             - id
         - $ref: "#/components/schemas/PricingPlanProps"
+      example:
+        id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+        name: Standard Plan
+        display_name: スタンダードプラン
+        description: Standard Plan for normal use
+        used: false
+        pricing_menus:
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+            name: Ten Users Menu
+            display_name: 10ユーザーメニュー
+            description: Can use 10 users.
+            used: false
+            units:
+              - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+                type: fixed
+                name: storage_unit
+                display_name: ストレージユニット
+                description: KB unit for storage usage
+                currency: JPY
+                unit_amount: 10000
+                recurring_interval: month
+                used: false
     PricingPlans:
       title: 料金プラン一覧
       type: object
@@ -1451,6 +1568,29 @@ components:
             $ref: "#/components/schemas/PricingPlan"
       required:
         - pricing_plans
+      example:
+        pricing_plans:
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+            name: Standard Plan
+            display_name: スタンダードプラン
+            description: Standard Plan for normal use
+            used: false
+            pricing_menus:
+              - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+                name: Ten Users Menu
+                display_name: 10ユーザーメニュー
+                description: Can use 10 users.
+                used: false
+                units:
+                  - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+                    type: fixed
+                    name: storage_unit
+                    display_name: ストレージユニット
+                    description: KB unit for storage usage
+                    currency: JPY
+                    unit_amount: 10000
+                    recurring_interval: month
+                    used: false
     UpdatePricingPlansUsedParam:
       title: 料金プランと配下のメニュー・ユニットを使用済みに更新パラメータ
       type: object
