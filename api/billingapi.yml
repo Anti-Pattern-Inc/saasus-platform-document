@@ -142,6 +142,6 @@ components:
           description: secret key
           x-description-i18n:
             jpn: シークレットキー
-          example: sk_test_09l3shTSTKHYCzzZZsiLl2vA
+          example: sk_test_dummy
       required:
         - secret_key

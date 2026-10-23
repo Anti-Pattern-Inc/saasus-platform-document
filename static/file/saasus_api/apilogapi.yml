@@ -228,7 +228,7 @@ components:
                 jpn: APIキー
             response_status:
               type: string
-              example: 200
+              example: '200'
               description: Response status
               x-description-i18n:
                 jpn: レスポンスステータス

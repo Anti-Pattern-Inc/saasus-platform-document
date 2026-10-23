@@ -112,7 +112,7 @@ components:
         secret_key:
           type: string
           description: シークレットキー
-          example: sk_test_09l3shTSTKHYCzzZZsiLl2vA
+          example: sk_test_dummy
       required:
         - secret_key
 
