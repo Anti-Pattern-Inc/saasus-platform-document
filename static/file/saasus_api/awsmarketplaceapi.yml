@@ -404,6 +404,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CatalogEntityVisibility'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '500':
           description: Internal Server Error
           content:
@@ -447,7 +453,7 @@ components:
       required: true
       schema:
         type: string
-        example: 123456789012
+        example: '123456789012'
   schemas:
     Error:
       properties:
@@ -473,13 +479,13 @@ components:
       properties:
         product_code:
           type: string
-          example: 1234567890
+          example: '1234567890'
         role_arn:
           type: string
           example: arn:aws:iam::123456789012:role/role-name
         role_external_id:
           type: string
-          example: 1234567890
+          example: '1234567890'
         sns_topic_arn:
           type: string
           example: arn:aws:sns:us-east-1:123456789012:topic-name
@@ -516,13 +522,13 @@ components:
       properties:
         product_code:
           type: string
-          example: 1234567890
+          example: '1234567890'
         role_arn:
           type: string
           example: arn:aws:iam::123456789012:role/role-name
         role_external_id:
           type: string
-          example: 1234567890
+          example: '1234567890'
         sns_topic_arn:
           type: string
           example: arn:aws:sns:us-east-1:123456789012:topic-name

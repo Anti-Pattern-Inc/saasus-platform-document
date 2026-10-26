@@ -178,7 +178,7 @@ components:
               description: APIキー
             response_status:
               type: string
-              example: 200
+              example: "200"
               description: レスポンスステータス
             request_uri:
               type: string
