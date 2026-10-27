@@ -1,0 +1,80 @@
+---
+title: "External service integrations"
+slug: "external-integrations"
+excerpt: "External service integrations features, related APIs, and reference guides."
+hidden: true
+createdAt: "Thu Oct 22 2026 02:21:58 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Oct 27 2026 03:09:05 GMT+0000 (Coordinated Universal Time)"
+---
+
+import FeatureTable from '@site/src/components/FeatureTable';
+
+Integrate with Stripe for billing, deliver events to Amazon EventBridge, and integrate with AWS Marketplace.  
+Alongside the external service configuration, implement event handling and tenant association in your SaaS application.
+
+Related API links use operation names from Billing API, Auth API, Pricing API and Integration API.
+
+## Stripe integration
+
+Synchronize pricing plans, tax rates, tenants, and usage managed in SaaSus Platform with Stripe for billing.  
+Configure the connection in the SaaS Development Console; synchronization then follows plan application and usage recording.  
+If you do not use Stripe, implement billing using the pricing, subscription, and usage information you retrieve.
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Get connection status, configure, or disconnect Stripe | Check the Stripe connection status and register or remove its secret key. Configuring integration in the SaaS Development Console also registers existing pricing plans, tax rates, and tenants in Stripe. Disconnecting deletes customers and archives products in Stripe.<br />References: [Stripe Integration](/docs/part-4/pricing-and-billing/stripe-integration) | [GetStripeInfo](/docs/reference/billing-api#tag/stripe/operation/GetStripeInfo) [UpdateStripeInfo](/docs/reference/billing-api#tag/stripe/operation/UpdateStripeInfo) [DeleteStripeInfo](/docs/reference/billing-api#tag/stripe/operation/DeleteStripeInfo) [DeleteStripeTenantAndPricing](/docs/reference/auth-api#tag/tenant/operation/DeleteStripeTenantAndPricing) |
+| Synchronize plans, tax rates, and customers | Initial synchronization copies existing pricing plans, tax rates, and tenants to Stripe. After connection, synchronization runs automatically when plans or tax rates are created and tenant or billing information is updated.<br />References: [Stripe Integration](/docs/part-4/pricing-and-billing/stripe-integration) | [CreateTenantAndPricing](/docs/reference/auth-api#tag/tenant/operation/CreateTenantAndPricing) [LinkPlanToStripe](/docs/reference/pricing-api#tag/pricingPlans/operation/LinkPlanToStripe) |
+| Get Stripe customer information | Retrieve the Stripe customer linked to a tenant, including subscription information, to check the linked state.<br />References: [Setting Billing Information for Tenants](/docs/part-5/price-plan/price-plan-setting-000) | [GetStripeCustomer](/docs/reference/auth-api#tag/tenant/operation/GetStripeCustomer) |
+| Integrate with billing | Plan application and changes update the Stripe subscription, and recorded usage is sent to Stripe. Manage payment methods and invoices in Stripe.<br />References: [Stripe Integration](/docs/part-4/pricing-and-billing/stripe-integration) | [UpdateTenantPlan](/docs/reference/auth-api#tag/tenant/operation/UpdateTenantPlan) [UpdateMeteringUnitTimestampCountNow](/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCountNow) [UpdateMeteringUnitTimestampCount](/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCount) |
+
+</FeatureTable>
+
+### Payment pages
+
+SaaSus Platform instructs Stripe to create or update subscriptions when pricing plans are applied or changed.  
+SaaSus Platform does not provide pages for card entry or 3D Secure authentication. Integrate Stripe’s Hosted Invoice Page or similar features when these pages are needed.
+
+### Receiving payment events
+
+To send emails after payment or detect refunds, receive Stripe webhooks directly on your SaaS application’s server.  
+SaaSus Platform does not relay Stripe webhook events.
+
+### Operations performed in Stripe
+
+Perform the following operations in the Stripe Dashboard:
+
+- Refund payments and reissue invoices
+- Configure invoice payments using bank transfers or other non-card payment methods
+- Apply individual discounts using coupons
+
+Apply coupons to the Stripe customer or subscription associated with the target tenant.  
+Changing pricing plan or pricing unit configurations directly in Stripe can cause inconsistencies with SaaSus Platform. Make changes to synchronized pricing definitions in SaaSus Platform.
+
+## Amazon EventBridge
+
+Deliver events such as user and tenant creation to your AWS account.  
+Configure the destination in the SaaS Development Console, then set up an event bus, rules, and targets in Amazon EventBridge.
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Get, update, and delete connection settings | Set the destination AWS account ID and region. Associate the resulting partner event source with an event bus in the receiving account.<br />References: [Integrate with Amazon EventBridge](/docs/part-4/integrate-with-amazon-eventbridge) | [GetEventBridgeSettings](/docs/reference/integration#tag/eventBridge/operation/GetEventBridgeSettings) [SaveEventBridgeSettings](/docs/reference/integration#tag/eventBridge/operation/SaveEventBridgeSettings) [DeleteEventBridgeSettings](/docs/reference/integration#tag/eventBridge/operation/DeleteEventBridgeSettings) |
+| Test the connection | Send a test event and verify that it reaches the configured rules and targets.<br />References: [Integrate with Amazon EventBridge](/docs/part-4/integrate-with-amazon-eventbridge) | [CreateEventBridgeTestEvent](/docs/reference/integration#tag/eventBridge/operation/CreateEventBridgeTestEvent) |
+| Deliver events from SaaSus Platform | Events from SaaSus API operations other than GET requests are delivered to your account. Implement event handlers for tasks such as tenant setup and cleanup after user deletion.<br />References: [Event Samples](/docs/part-4/integrate-with-amazon-eventbridge/event-sample) | — |
+
+</FeatureTable>
+
+## AWS Marketplace
+
+Associate AWS Marketplace selling plans and customers with tenants.  
+Login pages handle new customer registration; implement the association with an existing tenant in your application.
+
+:::caution New use is suspended
+
+The existing guide states that new use is suspended because the integration does not support changes to AWS Marketplace specifications.  
+See [AWS Marketplace Integration](/docs/part-4/aws-marketplace-integration/aws-marketplace-integration) for availability.
+
+:::

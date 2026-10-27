@@ -3,7 +3,7 @@
 - Locale: `ja`
 - Docs source: `i18n/ja/docusaurus-plugin-content-docs/current`
 - API source: `api`
-- Generated: `2026-10-19 14:09:14 +0900`
+- Generated: `2026-10-27 15:21:45 +0900`
 
 ---
 ## changelog/20221224.md
@@ -935,6 +935,588 @@ SaaS事業に欠かせない「料金プラン設定」と「請求処理」も�
   月額制・従量制など、ビジネスに応じた料金体系を設定できます。
 - **Stripeとの連携**
   Stripeのシークレットキーを登録することで、契約・請求・支払いステータスの管理が自動化されます。
+````
+
+---
+## part-3/saasus-platform-features.md
+````markdown
+SaaSus Platform は、認証、テナント管理、料金プラン管理など、SaaS の開発・運用で使う機能を提供します。
+各分類の説明から必要な機能を探せます。機能名のリンク先では、機能の詳細、関連API、設定や実装の参考になるガイドを確認できます。
+## [認証・ログイン](/ja/docs/part-3/saasus-platform-features/authentication)
+<div className="feature-overview-table">
+| 機能 | 説明 |
+| --- | --- |
+| [ログイン・ユーザー登録](/ja/docs/part-3/saasus-platform-features/authentication#ログインユーザー登録) | SaaSの利用者向けに、アカウントの新規登録と、登録済みアカウントでのログインを提供する機能です。<br />ログイン画面、またはSaaSus APIを組み込んだ独自ログイン画面を利用できます。ログイン画面では、仮パスワードの再送や、パスワードを忘れた場合の再設定も行えます。 |
+| [外部IDプロバイダー](/ja/docs/part-3/saasus-platform-features/authentication#外部idプロバイダー) | GoogleやSAMLに対応した外部IDプロバイダーを使ってログインするための機能です。<br />Googleログインは通常のログイン画面から、SAMLログインはテナント専用のログインURLから開始します。<br />どちらも連携先のIDプロバイダーで認証します。 |
+| [多要素認証（MFA）](/ja/docs/part-3/saasus-platform-features/authentication#多要素認証mfa) | パスワードに加えて、認証アプリやメールの確認コードで本人確認を行う機能です。<br />認証アプリの登録やMFAの設定画面はSaaSアプリケーションに実装し、ログイン時のコード入力にはログイン画面を利用できます。 |
+| [デバイス認証](/ja/docs/part-3/saasus-platform-features/authentication#デバイス認証) | 利用者のデバイスを記憶し、次回以降のログインでMFAの認証コード入力を省略するための機能です。<br />SaaS 開発コンソールで「常に記憶する」「ユーザーオプトイン」（利用者が選んだ場合だけ記憶する）「記憶しない」から選択します。 |
+| [トークン・認証情報](/ja/docs/part-3/saasus-platform-features/authentication#トークン認証情報) | ログインしたユーザーの認証情報を取得し、ログイン状態を維持・管理する機能です。<br />ログイン画面から渡される一時コードをトークンに交換し、トークンの更新やリフレッシュトークンの失効を行えます。 |
+</div>
+## [ユーザー管理](/ja/docs/part-3/saasus-platform-features/user-management)
+<div className="feature-overview-table">
+| 機能 | 説明 |
+| --- | --- |
+| [SaaSユーザー](/ja/docs/part-3/saasus-platform-features/user-management#saasユーザー) | サービスに登録されたユーザーのログイン情報や属性を管理する機能です。<br />日々の管理はSaaS 運用コンソールで行い、SaaSアプリケーションに管理画面や利用者向けの情報変更機能を作る場合にAPIを組み込みます。<br />利用者自身の登録にはログイン画面のセルフサインアップ、管理者による登録にはユーザー作成機能を使います。 |
+| [SaaSユーザーをテナントへ追加・削除](/ja/docs/part-3/saasus-platform-features/user-management#saasユーザーをテナントへ追加削除) | 登録済みのSaaSユーザーをテナントに追加し、テナントごとのユーザー情報を管理するための機能です。<br />テナントへの追加・テナントからの削除はSaaS 運用コンソールで行え、SaaSアプリケーションで管理機能を提供する場合はAPIを組み込みます。<br />取得したテナントや役割の情報を使った画面・機能の利用可否の判定は、SaaSアプリケーションで実装します。 |
+</div>
+## [テナント管理](/ja/docs/part-3/saasus-platform-features/tenant-management)
+<div className="feature-overview-table">
+| 機能 | 説明 |
+| --- | --- |
+| [テナント](/ja/docs/part-3/saasus-platform-features/tenant-management#テナント) | テナントを作成し、基本情報・属性・請求先情報を管理する機能です。<br />SaaS 運用コンソールでは基本情報・追加属性・請求先情報を設定でき、申込時のテナント作成などを自動化する場合はAPIを組み込みます。 |
+| [招待](/ja/docs/part-3/saasus-platform-features/tenant-management#招待) | ユーザーをテナントに招待する機能です。<br />招待の作成・一覧表示などの管理機能はSaaSアプリケーションに組み込み、招待された利用者の登録・ログイン・受諾にはログイン画面を利用できます。<br />招待を作成できる利用者や付与できる役割の制御は、SaaSアプリケーションで実装します。 |
+</div>
+## [役割・属性・環境の定義](/ja/docs/part-3/saasus-platform-features/authorization)
+<div className="feature-overview-table">
+| 機能 | 説明 |
+| --- | --- |
+| [役割（ロール）定義](/ja/docs/part-3/saasus-platform-features/authorization#役割ロール定義) | SaaSの利用者に管理者・一般利用者などの役割を定義し、テナント・環境ごとに付与するための機能です。<br />役割の定義はSaaS 開発コンソール、ユーザーへの付与・解除はSaaS 運用コンソールで行えます。<br />役割に応じた画面・機能のアクセス制御は、SaaSアプリケーションで実装します。 |
+| [属性定義](/ja/docs/part-3/saasus-platform-features/authorization#属性定義) | ユーザーやテナントに、名前・部署・メモなどの追加情報を持たせるための属性項目を定義する機能です。<br />テナントユーザー属性とテナント属性はSaaS 開発コンソールで定義でき、SaaSユーザー属性はSaaSus APIで定義します。<br />属性項目の定義と、ユーザーやテナントごとの属性値の更新は別の操作です。 |
+| [ユーザー環境定義](/ja/docs/part-3/saasus-platform-features/authorization#ユーザー環境定義) | ユーザーが利用できる環境と、環境ごとの役割を定義する機能です。例えば、テスト用では管理者、本番用では一般利用者として設定し、SaaSアプリケーション側で操作権限を判定します。<br />SaaSus Platform コンソールで切り替える環境とは別の設定です。 |
+</div>
+## [SaaSの設定](/ja/docs/part-3/saasus-platform-features/authentication-settings)
+<div className="feature-overview-table">
+| 機能 | 説明 |
+| --- | --- |
+| [基本設定](/ja/docs/part-3/saasus-platform-features/authentication-settings#基本設定) | ログイン画面や通知メールに使うドメイン名、ログイン後の遷移先URL、SaaSus APIの呼び出しに使う接続情報を設定する機能です。<br />SaaS 開発コンソールで、ドメイン名や遷移先URLの設定、SaaS ID・APIキー・クライアントシークレットの確認・管理を行えます。 |
+| [認証詳細設定](/ja/docs/part-3/saasus-platform-features/authentication-settings#認証詳細設定) | ログイン画面の見た目やリンク、パスワード要件、セルフサインアップの許可、通知メールを設定する機能です。<br />表示に関する設定はログイン画面を対象とし、パスワード要件と登録許可は認証・登録処理にも適用されます。<br />通知メールは、送信元・返信先と、新規登録・パスワード再設定・MFAなどの種類ごとの件名・本文を設定できます。 |
+</div>
+## [料金プラン・利用量・請求](/ja/docs/part-3/saasus-platform-features/pricing-billing)
+<div className="feature-overview-table">
+| 機能 | 説明 |
+| --- | --- |
+| [料金体系の設計](/ja/docs/part-3/saasus-platform-features/pricing-billing#料金体系の設計) | 月額基本料金や、API実行回数に応じた従量料金を組み合わせて、料金プランを作成する機能です。<br />利用量を記録する「メーター単位」、料金を設定する「計測単位」、計測単位をまとめる「機能メニュー」を使って料金プランを構成します。作成した料金プランと税率をテナントに適用します。 |
+| [利用量の記録・取得](/ja/docs/part-3/saasus-platform-features/pricing-billing#利用量の記録取得) | テナントごとの利用量をメーター単位に記録し、日別・月別・期間別に取得する機能です。<br />SaaSアプリケーションで計測対象の操作に合わせて記録APIを呼び出し、取得結果を利用状況の表示や課金額の計算に利用します。 |
+| [テナントの契約](/ja/docs/part-3/saasus-platform-features/pricing-billing#テナントの契約) | テナントに適用する料金プラン・税率と、適用時期を管理する機能です。<br />SaaS 運用コンソールで設定するほか、SaaSアプリケーションにプラン選択や変更の処理を組み込めます。 |
+</div>
+## [外部サービス連携](/ja/docs/part-3/saasus-platform-features/external-integrations)
+<div className="feature-overview-table">
+| 機能 | 説明 |
+| --- | --- |
+| [Stripe連携](/ja/docs/part-3/saasus-platform-features/external-integrations#stripe連携) | SaaSus Platform で管理する料金プラン、税率、テナント、利用量をStripeと連携し、課金・請求に利用する機能です。<br />SaaS 開発コンソールで接続を設定すると、プラン適用や利用量の記録に応じた連携処理が行われます。<br />Stripeを利用しない場合は、取得した料金・契約・利用量の情報を使い、自社側で請求処理を用意します。 |
+| [Amazon EventBridge](/ja/docs/part-3/saasus-platform-features/external-integrations#amazon-eventbridge) | ユーザーやテナントの作成など、SaaSus Platformで発生したイベントを自社のAWSアカウントへ配信する機能です。<br />SaaS 開発コンソールで送信先を設定し、Amazon EventBridgeのイベントバス・ルール・処理先を自社側で用意します。 |
+| [AWS Marketplace](/ja/docs/part-3/saasus-platform-features/external-integrations#aws-marketplace) | AWS Marketplaceの販売プラン、購入者、テナントを関連付ける機能です。<br />購入者の新規登録はログイン画面で処理し、既存テナントとの紐付けはSaaSアプリケーションに組み込みます。 |
+</div>
+:::caution 新規利用停止中
+既存ガイドでは、AWS Marketplaceの仕様変更に未対応のため、新規利用を停止している旨を案内しています。
+提供状況は[AWS Marketplace 連携機能について](/ja/docs/part-4/aws-marketplace-integration/aws-marketplace-integration)を確認してください。
+:::
+## [ログ・分析・フィードバック](/ja/docs/part-3/saasus-platform-features/logs-analytics-feedback)
+<div className="feature-overview-table">
+| 機能 | 説明 |
+| --- | --- |
+| [API実行ログ](/ja/docs/part-3/saasus-platform-features/logs-analytics-feedback#api実行ログ) | SaaSus APIの呼び出し履歴と、各呼び出しの詳細を確認する機能です。<br />APIでエラーが発生したときの原因調査や、呼び出し内容の確認に利用できます。 |
+| [利用状況の分析](/ja/docs/part-3/saasus-platform-features/logs-analytics-feedback#利用状況の分析) | ユーザー行動履歴、ユーザー数、期間ごとの集計指標やページ別の利用統計を取得する機能です。<br />SaaSアプリケーションの利用状況を確認し、利用者の動向を把握するために利用できます。 |
+| [フィードバック](/ja/docs/part-3/saasus-platform-features/logs-analytics-feedback#フィードバック) | SaaS利用者からの質問・要望を収集し、対応状況、投票、コメントを管理する機能です。<br />利用者向けの投稿・閲覧画面はSaaSアプリケーションに実装し、SaaS 運用コンソールで確認や対応を行います。 |
+</div>
+## [Smart API Gateway・Smart MCP Server](/ja/docs/part-3/saasus-platform-features/smart-api-gateway)
+<div className="feature-overview-table">
+| 機能 | 説明 |
+| --- | --- |
+| [API公開設定](/ja/docs/part-3/saasus-platform-features/smart-api-gateway#api公開設定) | 接続先のSaaSアプリケーションや公開する処理を設定し、APIを公開する機能です。<br />SaaS 開発コンソールで設定・公開し、SaaSアプリケーションには参考ガイドに従ってSDKやアノテーションを組み込みます。 |
+| [アクセス制御](/ja/docs/part-3/saasus-platform-features/smart-api-gateway#アクセス制御) | 公開APIを利用できるユーザー・テナント、呼び出し回数の上限、アクセス元のIPアドレスを制限する機能です。<br />APIキーやユーザーに付与された役割を使い、公開する処理に応じてアクセスを制御します。 |
+| [Smart MCP Server](/ja/docs/part-3/saasus-platform-features/smart-api-gateway#smart-mcp-server) | Smart API Gatewayで公開したAPIをMCPツールとして提供する機能です。<br />APIを公開するとMCP Serverも自動で利用可能になり、AIクライアントに接続先と認証情報を設定して呼び出せます。 |
+</div>
+## [SaaSインフラ管理](/ja/docs/part-3/saasus-platform-features/saas-infrastructure)
+<div className="feature-overview-table">
+| 機能 | 説明 |
+| --- | --- |
+| [構築設定](/ja/docs/part-3/saasus-platform-features/saas-infrastructure#構築設定) | 自動構築の有効・無効、AWSへのアクセス権限、構築・初期化に使うファイルを管理する機能です。<br />AWS CloudFormationテンプレートと初期化SQLは、自社SaaSの構成に合わせて用意します。 |
+| [テナントのオンボーディング](/ja/docs/part-3/saasus-platform-features/saas-infrastructure#テナントのオンボーディング) | テナント作成をきっかけに、そのテナント専用のアプリケーション実行環境を構築し、データベースを初期化する機能です。<br />SaaS 運用コンソールのテナント管理画面で、テナント属性の`TenantOnboardingStatus`から構築状況を確認できます。 |
+</div>
+## [SaaSus Platformの管理](/ja/docs/part-3/saasus-platform-features/development-administration)
+<div className="feature-overview-table">
+| 機能 | 説明 |
+| --- | --- |
+| [SaaSus Platformの管理](/ja/docs/part-3/saasus-platform-features/development-administration) | SaaSus Platformを利用するユーザー、自分のアカウント、SaaSus Platformの契約を管理する機能です。<br />主にSaaS 開発コンソールのアカウント設定と、各コンソールのユーザーメニューから操作します。 |
+</div>
+````
+
+---
+## part-3/saasus-platform-features/authentication-settings.mdx
+````markdown
+import FeatureTable from '@site/src/components/FeatureTable';
+SaaSのドメインやAPI接続情報、ログイン画面の表示・認証設定、通知メールを管理する機能です。
+ログインやMFA、トークン交換の実装については、[認証・ログイン](/ja/docs/part-3/saasus-platform-features/authentication)を参照してください。
+関連APIはAuth APIの操作名で表記しています。
+## 基本設定
+ログイン画面や通知メールに使うドメイン名、ログイン後の遷移先URL、SaaSus APIの呼び出しに使う接続情報を設定する機能です。
+SaaS 開発コンソールで、ドメイン名や遷移先URLの設定、SaaS ID・APIキー・クライアントシークレットの確認・管理を行えます。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| ドメイン・メール送信ドメイン認証 | ログイン画面と通知メールに使うドメイン名を設定します。設定後に表示される認証用・メール送信用のDNSレコードを、利用しているDNSサービスに登録します。<br />参考：[ドメイン・メール送信ドメイン認証・遷移先の設定](/ja/docs/part-4/application-settings/domain-and-redirect-settings) | [GetBasicInfo](/ja/docs/reference/auth-api#tag/basicInfo/operation/GetBasicInfo) [UpdateBasicInfo](/ja/docs/reference/auth-api#tag/basicInfo/operation/UpdateBasicInfo) |
+| 認証情報・認証後の遷移先設定 | ログイン後の遷移先となるSaaSアプリケーションのURLを設定します。遷移先では、認証完了後に渡される一時コードをトークンに交換します。<br />参考：[ドメイン・メール送信ドメイン認証・遷移先の設定](/ja/docs/part-4/application-settings/domain-and-redirect-settings) / [認証・ログイン](/ja/docs/part-3/saasus-platform-features/authentication) | [GetAuthInfo](/ja/docs/reference/auth-api#tag/authInfo/operation/GetAuthInfo) [UpdateAuthInfo](/ja/docs/reference/auth-api#tag/authInfo/operation/UpdateAuthInfo) |
+| SaaS ID・APIキー・クライアントシークレット管理 | SaaSus APIの呼び出しに使うSaaS ID・APIキー・クライアントシークレットを確認し、APIキーの発行やクライアントシークレットの再発行を行います。<br />参考：[APIキーの確認](/ja/docs/part-4/application-settings/api-key-settings) | — |
+</FeatureTable>
+## 認証詳細設定
+ログイン画面の見た目やリンク、パスワード要件、セルフサインアップの許可、通知メールを設定する機能です。
+表示に関する設定はログイン画面を対象とし、パスワード要件と登録許可は認証・登録処理にも適用されます。
+通知メールは、送信元・返信先と、新規登録・パスワード再設定・MFAなどの種類ごとの件名・本文を設定できます。
+SaaS 開発コンソールから表示設定を編集でき、保存後はログイン画面への反映に時間がかかる場合があります。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| タイトル・ロゴ・ファビコン | ログイン画面に表示するサービス名・ロゴと、ブラウザーのタブなどに表示するファビコンを設定します。<br />参考：[基本情報の設定](/ja/docs/part-4/application-settings/basic-app-settings) | [GetCustomizePageSettings](/ja/docs/reference/auth-api#tag/basicInfo/operation/GetCustomizePageSettings) [UpdateCustomizePageSettings](/ja/docs/reference/auth-api#tag/basicInfo/operation/UpdateCustomizePageSettings) |
+| 利用規約・プライバシーポリシーのリンク設定 | ログイン画面から開く利用規約とプライバシーポリシーのURLを設定します。リンクを表示する画面は、画面ごとのリンク表示設定で指定します。<br />参考：[基本情報の設定](/ja/docs/part-4/application-settings/basic-app-settings) | [GetCustomizePageSettings](/ja/docs/reference/auth-api#tag/basicInfo/operation/GetCustomizePageSettings) [UpdateCustomizePageSettings](/ja/docs/reference/auth-api#tag/basicInfo/operation/UpdateCustomizePageSettings) |
+| 新規登録・ログイン・パスワード変更画面ごとのリンク表示設定 | 新規登録・ログイン・パスワード変更の各画面で、利用規約やプライバシーポリシーのリンクを表示するか設定します。<br />参考：[基本情報の設定](/ja/docs/part-4/application-settings/basic-app-settings) | [GetCustomizePages](/ja/docs/reference/auth-api#tag/basicInfo/operation/GetCustomizePages) [UpdateCustomizePages](/ja/docs/reference/auth-api#tag/basicInfo/operation/UpdateCustomizePages) |
+| Google Tag Manager設定 | 作成済みのGoogle Tag ManagerコンテナIDを設定し、ログイン画面にタグを組み込みます。タグや計測の設定はGoogle Tag Manager側で行います。<br />参考：[Google Tag Managerの設定](/ja/docs/part-4/application-settings/googletagmanagersetting) | [GetCustomizePageSettings](/ja/docs/reference/auth-api#tag/basicInfo/operation/GetCustomizePageSettings) [UpdateCustomizePageSettings](/ja/docs/reference/auth-api#tag/basicInfo/operation/UpdateCustomizePageSettings) |
+| パスワードポリシー設定 | パスワードの最小文字数と、数字・記号・大文字・小文字など、必要な文字種を設定します。<br />参考：[認証方式の設定](/ja/docs/part-4/user-authz-settings/authentication-method-settings) | [GetSignInSettings](/ja/docs/reference/auth-api#tag/authInfo/operation/GetSignInSettings) [UpdateSignInSettings](/ja/docs/reference/auth-api#tag/authInfo/operation/UpdateSignInSettings) |
+| セルフサインアップの許可設定 | 利用者自身による新規登録を許可するか設定します。無効にすると、ログイン画面の新規登録リンクが非表示になり、SignUpによる登録もできなくなります。<br />参考：[認証方式の設定](/ja/docs/part-4/user-authz-settings/authentication-method-settings) | [GetSignInSettings](/ja/docs/reference/auth-api#tag/authInfo/operation/GetSignInSettings) [UpdateSignInSettings](/ja/docs/reference/auth-api#tag/authInfo/operation/UpdateSignInSettings) |
+| 送信元・返信先設定 | 通知メールに使う送信元・返信先のメールアドレスを設定します。事前にドメイン・メール送信の設定が必要です。<br />参考：[ドメイン・メール送信ドメイン認証・遷移先の設定](/ja/docs/part-4/application-settings/domain-and-redirect-settings) | [GetBasicInfo](/ja/docs/reference/auth-api#tag/basicInfo/operation/GetBasicInfo) [UpdateBasicInfo](/ja/docs/reference/auth-api#tag/basicInfo/operation/UpdateBasicInfo) |
+| メールテンプレートの取得・件名・本文の更新 | 新規登録・仮パスワードの再送・パスワード再設定・MFAのメールは、SaaS 開発コンソールで編集できます。メールアドレス変更・テナント招待・外部アカウント紐付けの確認メールは、APIで編集します。メールの種類ごとに必要な予約語を含めて設定します。<br />参考：[通知メール内容](/ja/docs/part-4/user-authz-settings/notifymailcustomize) | [FindNotificationMessages](/ja/docs/reference/auth-api#tag/basicInfo/operation/FindNotificationMessages) [UpdateNotificationMessages](/ja/docs/reference/auth-api#tag/basicInfo/operation/UpdateNotificationMessages) |
+</FeatureTable>
+### ログイン画面のカスタマイズ範囲
+サービス名・ロゴ・ファビコンやリンクの表示を設定できますが、配色の変更、任意のHTML/CSSの反映、お知らせ文の追加には対応していません。
+独自のデザインやお知らせを表示する場合は、SaaSus APIを利用した独自ログイン画面を実装します。
+実装方法は[認証API実装ガイド](/ja/docs/part-6/implementation-guide/auth/overview)を参照してください。
+````
+
+---
+## part-3/saasus-platform-features/authentication.mdx
+````markdown
+import FeatureTable, {FeatureAnchor} from '@site/src/components/FeatureTable';
+ユーザーのログイン認証と、SaaSアプリケーションで使用するトークンの取得を行う機能です。
+ログイン画面を利用するか、独自ログイン画面にSaaSus APIを組み込んで利用できます。
+関連APIはAuth APIの操作名で表記しています。
+## ログイン・ユーザー登録
+SaaSの利用者向けに、アカウントの新規登録と、登録済みアカウントでのログインを提供する機能です。
+ログイン画面、またはSaaSus APIを組み込んだ独自ログイン画面を利用できます。ログイン画面では、仮パスワードの再送や、パスワードを忘れた場合の再設定も行えます。
+独自ログイン画面では、SRP_Aによる認証開始とSRP署名による検証応答をAPIで実装します。
+MFAの認証コード入力や初回パスワード設定が求められた場合は、その応答処理も実装します。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| メールアドレス・パスワードによるログイン | メールアドレスとパスワードでログインできます。独自ログイン画面では、APIによる認証開始とSRP検証応答を実装します。<br />参考：[認証API実装ガイド](/ja/docs/part-6/implementation-guide/auth/overview) | [SignIn](/ja/docs/reference/auth-api#tag/saasUser/operation/SignIn) [RespondToSignInChallenge](/ja/docs/reference/auth-api#tag/saasUser/operation/RespondToSignInChallenge) |
+| ログインIDによるログイン | ログイン画面で利用する場合は、認証詳細設定の「ログインIDの表記を追加する」をONにします。独自ログイン画面では認証開始とSRP検証応答を実装します。 | [SignIn](/ja/docs/reference/auth-api#tag/saasUser/operation/SignIn) [RespondToSignInChallenge](/ja/docs/reference/auth-api#tag/saasUser/operation/RespondToSignInChallenge) |
+| セルフサインアップ | メールアドレスを登録すると、仮パスワードがメールで届きます。利用者は仮パスワードで認証し、新しいパスワードを設定します。独自の登録画面でも実装でき、セルフサインアップの有効化が必要です。<br />参考：[認証方式の設定](/ja/docs/part-4/user-authz-settings/authentication-method-settings) | [SignUp](/ja/docs/reference/auth-api#tag/saasUser/operation/SignUp) |
+| 新規登録時の仮パスワード再送 | 新規登録時にメールで届く仮パスワードを再送します。ログイン画面から再送できます。 | [ResendSignUpConfirmationEmail](/ja/docs/reference/auth-api#tag/saasUser/operation/ResendSignUpConfirmationEmail) |
+| <FeatureAnchor id="forgotten-password-recovery">パスワードを忘れた場合の再設定</FeatureAnchor> | ログイン画面の「パスワードを忘れた方はこちら」から、メールで届く確認コードを使って新しいパスワードを設定します。メールアドレスで認証するユーザーが対象ですが、メール方式のMFAを使用している場合は利用できません。その場合は、SaaS 運用コンソールで管理者がパスワードをリセットします。 | — |
+| ログイン時の追加確認・初回パスワード設定 | MFAの認証コード入力や、初回ログイン時のパスワード設定を行います。独自ログイン画面では、コードや新しいパスワードを入力する画面を用意し、APIで送信します。<br />参考：[認証API実装ガイド](/ja/docs/part-6/implementation-guide/auth/overview) | [RespondToSignInChallenge](/ja/docs/reference/auth-api#tag/saasUser/operation/RespondToSignInChallenge) |
+</FeatureTable>
+### ログインに繰り返し失敗した場合
+パスワードを連続して間違えると、アカウントが一時的にロックされ、ログインできなくなる場合があります。
+ロックは通常、一定時間が経過すると自動的に解除されます。試行回数の詳細は公開していません。
+## 外部IDプロバイダー
+GoogleやSAMLに対応した外部IDプロバイダーを使ってログインするための機能です。
+Googleログインは通常のログイン画面から、SAMLログインはテナント専用のログインURLから開始します。
+どちらも連携先のIDプロバイダーで認証します。
+外部IDプロバイダーとの連携には、事前にドメインとメール送信ドメインの検証が完了している必要があります。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| Googleログインの設定 | Googleとの連携を設定します。利用者は、通常のログイン画面でGoogleログインを選び、Googleアカウントで認証します。セルフサインアップを有効にすると、未登録の利用者はGoogleアカウントで新規登録もできます。<br />参考：[Google連携](/ja/docs/part-4/user-authz-settings/google-linkage) | [GetIdentityProviders](/ja/docs/reference/auth-api#tag/authInfo/operation/GetIdentityProviders) [UpdateIdentityProvider](/ja/docs/reference/auth-api#tag/authInfo/operation/UpdateIdentityProvider) |
+| テナント単位のSAML連携・SSO設定 | テナントごとにSAML連携先を設定します。利用者を対象テナントに登録し、ユーザーのメールアドレスを連携先のIDプロバイダーと一致させる必要があります。利用者は、取得したテナント専用のログインURL（sign_in_url）にアクセスし、専用のログイン画面から連携先のIDプロバイダーに進んで認証します。<br />参考：[SAML連携](/ja/docs/part-4/user-authz-settings/saml-linkage) | [GetSignInSettings](/ja/docs/reference/auth-api#tag/authInfo/operation/GetSignInSettings) [GetTenantIdentityProviders](/ja/docs/reference/auth-api#tag/tenant/operation/GetTenantIdentityProviders) [UpdateTenantIdentityProvider](/ja/docs/reference/auth-api#tag/tenant/operation/UpdateTenantIdentityProvider) |
+| 外部アカウントとの紐付け要求・確認 | GoogleやSAMLでの認証後、まだアカウントを紐付けていない場合は確認コードがメールで送信されます。ログイン画面でコードを入力すると紐付けが完了し、次回以降はこの確認を省略します。<br />参考：[Google連携](/ja/docs/part-4/user-authz-settings/google-linkage) / [SAML連携](/ja/docs/part-4/user-authz-settings/saml-linkage) | [RequestExternalUserLink](/ja/docs/reference/auth-api#tag/saasUser/operation/RequestExternalUserLink) [ConfirmExternalUserLink](/ja/docs/reference/auth-api#tag/saasUser/operation/ConfirmExternalUserLink) |
+| 外部IDプロバイダーとの紐付け解除 | ユーザーと外部IDプロバイダーの紐付けを解除します。SaaSアプリケーションに解除機能を追加する場合に利用します。連携状態は、IDトークンをデコードし、`identities`内の`providerName`から確認できます。 | [UnlinkProvider](/ja/docs/reference/auth-api#tag/saasUser/operation/UnlinkProvider) |
+</FeatureTable>
+## 多要素認証（MFA）
+パスワードに加えて、認証アプリやメールの確認コードで本人確認を行う機能です。
+認証アプリの登録やMFAの設定画面はSaaSアプリケーションに実装し、ログイン時のコード入力にはログイン画面を利用できます。
+独自ログイン画面では、認証コードの確認もAPIで実装します。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| 認証アプリ登録用シークレットの発行 | 認証アプリの登録に必要なシークレットを発行します。利用者が認証アプリを登録する画面に組み込みます。<br />参考：[多要素認証の実装](/ja/docs/part-6/implementation-guide/sample-application/multi-factor-authentication) | [CreateSecretCode](/ja/docs/reference/auth-api#tag/saasUser/operation/CreateSecretCode) |
+| 認証コードの検証・認証アプリ登録 | 登録画面で入力された認証アプリのコードを検証し、登録を完了します。<br />参考：[多要素認証の実装](/ja/docs/part-6/implementation-guide/sample-application/multi-factor-authentication) | [UpdateSoftwareToken](/ja/docs/reference/auth-api#tag/saasUser/operation/UpdateSoftwareToken) |
+| ユーザーのMFA設定取得 | SaaSアプリケーションの設定画面などで、登録済みの方式や有効状態を表示するために利用します。<br />参考：[多要素認証の実装](/ja/docs/part-6/implementation-guide/sample-application/multi-factor-authentication) | [GetUserMfaPreference](/ja/docs/reference/auth-api#tag/saasUser/operation/GetUserMfaPreference) |
+| 認証アプリ・メール方式の設定、有効化・無効化 | 認証アプリまたはメールによるMFAを設定し、有効・無効を切り替えます。ログインID認証のユーザーはメール方式を利用できません。MFAを設定した後は、ログイン画面で認証コードを入力できます。<br />参考：[多要素認証の実装](/ja/docs/part-6/implementation-guide/sample-application/multi-factor-authentication) | [UpdateUserMfaPreference](/ja/docs/reference/auth-api#tag/saasUser/operation/UpdateUserMfaPreference) |
+| 管理者によるMFA解除 | 管理者がSaaS 運用コンソールで解除できます。<br />参考：[（旧画面）ユーザーの検索・作成・編集・テナント追加](/ja/docs/part-5/user-management/user-crud) | [UpdateUserMfaPreference](/ja/docs/reference/auth-api#tag/saasUser/operation/UpdateUserMfaPreference) |
+</FeatureTable>
+### メール方式のMFAを利用する場合
+メールで送信される認証コードの有効時間は3分で、変更できません。
+有効時間内にコードを入力してログインを完了する必要があります。
+メール方式のMFAを使用しているユーザーは、ログイン画面からパスワードを再設定できません。
+パスワードを忘れた場合は、SaaS 運用コンソールのユーザー管理画面で、管理者がパスワードをリセットします。
+手順は[（旧画面）ユーザーの検索・作成・編集・テナント追加](/ja/docs/part-5/user-management/user-crud)を参照してください。
+## デバイス認証
+利用者のデバイスを記憶し、次回以降のログインでMFAの認証コード入力を省略するための機能です。
+SaaS 開発コンソールで「常に記憶する」「ユーザーオプトイン」（利用者が選んだ場合だけ記憶する）「記憶しない」から選択します。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| 信頼済みデバイスの記憶方法の設定 | デバイスの記憶方法を「常に記憶する」「ユーザーオプトイン」「記憶しない」から選択します。ユーザーオプトインでは、利用者が選んだ場合だけデバイスを記憶します。<br />参考：[認証方式の設定](/ja/docs/part-4/user-authz-settings/authentication-method-settings) | [GetSignInSettings](/ja/docs/reference/auth-api#tag/authInfo/operation/GetSignInSettings) [UpdateSignInSettings](/ja/docs/reference/auth-api#tag/authInfo/operation/UpdateSignInSettings) |
+| デバイスの登録確認 | ログイン時に、信頼済みデバイスとして登録するための確認を行います。ログイン画面の内部処理で使われます。 | [ConfirmDevice](/ja/docs/reference/auth-api#tag/saasUser/operation/ConfirmDevice) |
+| デバイスの記憶状態の更新 | デバイスの記憶状態を更新します。ログイン画面では、「記憶する」を選択した場合に記憶済みにします。チェックを外しても、以前の記憶は解除されません。 | [UpdateDeviceStatus](/ja/docs/reference/auth-api#tag/saasUser/operation/UpdateDeviceStatus) |
+</FeatureTable>
+## トークン・認証情報
+ログインしたユーザーの認証情報を取得し、ログイン状態を維持・管理する機能です。
+ログイン画面から渡される一時コードをトークンに交換し、トークンの更新やリフレッシュトークンの失効を行えます。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| 一時コードの発行・トークンへの交換 | ログイン画面を利用する場合、認証完了後に渡される一時コードを、SaaSアプリケーションでトークンに交換します。<br />参考：[ログイン認証](/ja/docs/part-6/usecase/authentication-methods) | [CreateAuthCredentials](/ja/docs/reference/auth-api#tag/credential/operation/CreateAuthCredentials) [GetAuthCredentials](/ja/docs/reference/auth-api#tag/credential/operation/GetAuthCredentials) |
+| PKCEを利用した一時コードの交換 | ログイン画面を開くURLにPKCE用パラメータを指定します。認証完了後、SaaSアプリケーションで保持していたコードベリファイアと一時コードを使い、トークンに交換します。 | [ExchangeAuthCredentials](/ja/docs/reference/auth-api#tag/credential/operation/ExchangeAuthCredentials) |
+| リフレッシュトークンによるトークン更新 | IDトークンの有効期限は1時間です。リフレッシュトークンを使って新しいIDトークンとアクセストークンを取得し、SaaSアプリケーションでログイン状態を維持します。<br />参考：[ログイン認証](/ja/docs/part-6/usecase/authentication-methods) | [GetAuthCredentials](/ja/docs/reference/auth-api#tag/credential/operation/GetAuthCredentials) |
+| リフレッシュトークンの失効 | 新たなトークン更新を止めるために使います。SaaSアプリケーション側のCookieなどの削除も別途実装します。 | [RevokeToken](/ja/docs/reference/auth-api#tag/credential/operation/RevokeToken) |
+| リフレッシュトークンの有効期間設定 | リフレッシュトークンの有効期間を設定します。トークンを更新する処理はSaaSアプリケーションに実装します。<br />参考：[認証方式の設定](/ja/docs/part-4/user-authz-settings/authentication-method-settings) | [GetSignInSettings](/ja/docs/reference/auth-api#tag/authInfo/operation/GetSignInSettings) [UpdateSignInSettings](/ja/docs/reference/auth-api#tag/authInfo/operation/UpdateSignInSettings) |
+</FeatureTable>
+````
+
+---
+## part-3/saasus-platform-features/authorization.mdx
+````markdown
+import FeatureTable from '@site/src/components/FeatureTable';
+SaaSの認可に使う役割・環境と、ユーザーやテナントに持たせる属性項目を定義する機能です。
+ユーザーに付与した役割や環境の情報を使い、SaaSアプリケーションで画面や機能へのアクセスを制御します。
+関連APIはAuth APIの操作名で表記しています。
+## 役割（ロール）定義
+SaaSの利用者に管理者・一般利用者などの役割を定義し、テナント・環境ごとに付与するための機能です。
+役割の定義はSaaS 開発コンソール、ユーザーへの付与・解除はSaaS 運用コンソールで行えます。
+役割に応じた画面・機能のアクセス制御は、SaaSアプリケーションで実装します。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| 役割の取得・作成・更新・削除 | 役割名と表示名を定義します。更新できるのは表示名で、既定の役割adminは削除できません。<br />参考：[役割定義](/ja/docs/part-4/user-authz-settings/role-definition) | [GetRoles](/ja/docs/reference/auth-api#tag/role/operation/GetRoles) [CreateRole](/ja/docs/reference/auth-api#tag/role/operation/CreateRole) [UpdateRole](/ja/docs/reference/auth-api#tag/role/operation/UpdateRole) [DeleteRole](/ja/docs/reference/auth-api#tag/role/operation/DeleteRole) |
+| テナントユーザーへの環境別の役割付与・解除 | 登録済みのテナントユーザーに、環境を指定して役割を付与・解除します。同じユーザーでもテナント・環境ごとに異なる役割を持てます。<br />参考：[役割管理](/ja/docs/part-5/adding-role-to-user) / [（新画面）ユーザーの検索・作成・編集・テナント追加](/ja/docs/part-5/user-management/user-management-new-ui) | [CreateTenantUserRoles](/ja/docs/reference/auth-api#tag/tenantUser/operation/CreateTenantUserRoles) [DeleteTenantUserRole](/ja/docs/reference/auth-api#tag/tenantUser/operation/DeleteTenantUserRole) |
+</FeatureTable>
+## 属性定義
+ユーザーやテナントに、名前・部署・メモなどの追加情報を持たせるための属性項目を定義する機能です。
+テナントユーザー属性とテナント属性はSaaS 開発コンソールで定義でき、SaaSユーザー属性はSaaSus APIで定義します。
+属性項目の定義と、ユーザーやテナントごとの属性値の更新は別の操作です。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| SaaSユーザー属性の定義 | ユーザー名など、SaaSユーザーに持たせる属性項目を定義します。値の更新は、[ユーザー管理の「ユーザー属性の更新」](/ja/docs/part-3/saasus-platform-features/user-management#saas-user-attributes)を参照してください。<br />参考：[ユーザー管理](/ja/docs/part-3/saasus-platform-features/user-management) | [CreateSaasUserAttribute](/ja/docs/reference/auth-api#tag/userAttribute/operation/CreateSaasUserAttribute) |
+| テナントユーザー属性の定義・取得・削除 | テナントごとに異なる値を持てるユーザー属性を定義します。値の更新は、[ユーザー管理の「テナントユーザーの属性更新」](/ja/docs/part-3/saasus-platform-features/user-management#tenant-user-attributes)を参照してください。<br />参考：[ユーザー属性定義](/ja/docs/part-4/user-authz-settings/declare-additional-attribute-to-user) / [ユーザー管理](/ja/docs/part-3/saasus-platform-features/user-management) | [GetUserAttributes](/ja/docs/reference/auth-api#tag/userAttribute/operation/GetUserAttributes) [CreateUserAttribute](/ja/docs/reference/auth-api#tag/userAttribute/operation/CreateUserAttribute) [DeleteUserAttribute](/ja/docs/reference/auth-api#tag/userAttribute/operation/DeleteUserAttribute) |
+| テナント属性の定義・取得・削除 | テナントに持たせる属性の項目を定義します。テナントごとの値の更新は、[テナント管理の「テナント属性の設定」](/ja/docs/part-3/saasus-platform-features/tenant-management#tenant-attributes)を参照してください。<br />参考：[テナント属性定義](/ja/docs/part-4/application-settings/declare-additional-attribute-to-tenant) / [テナント管理](/ja/docs/part-3/saasus-platform-features/tenant-management) | [GetTenantAttributes](/ja/docs/reference/auth-api#tag/tenantAttribute/operation/GetTenantAttributes) [CreateTenantAttribute](/ja/docs/reference/auth-api#tag/tenantAttribute/operation/CreateTenantAttribute) [DeleteTenantAttribute](/ja/docs/reference/auth-api#tag/tenantAttribute/operation/DeleteTenantAttribute) |
+</FeatureTable>
+## ユーザー環境定義
+ユーザーが利用できる環境と、環境ごとの役割を定義する機能です。例えば、テスト用では管理者、本番用では一般利用者として設定し、SaaSアプリケーション側で操作権限を判定します。
+SaaSus Platform コンソールで切り替える環境とは別の設定です。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| ユーザー環境定義の取得・作成・更新・削除 | 環境ID・環境名・表示名を管理します。既定の本番環境（ID: 3）は削除できません。<br />参考：[ユーザー環境定義の利用](/ja/docs/part-4/user-authz-settings/user-env-definition) | [GetEnvs](/ja/docs/reference/auth-api#tag/env/operation/GetEnvs) [GetEnv](/ja/docs/reference/auth-api#tag/env/operation/GetEnv) [CreateEnv](/ja/docs/reference/auth-api#tag/env/operation/CreateEnv) [UpdateEnv](/ja/docs/reference/auth-api#tag/env/operation/UpdateEnv) [DeleteEnv](/ja/docs/reference/auth-api#tag/env/operation/DeleteEnv) |
+</FeatureTable>
+````
+
+---
+## part-3/saasus-platform-features/development-administration.mdx
+````markdown
+import FeatureTable from '@site/src/components/FeatureTable';
+SaaSus Platformを利用するユーザー、自分のアカウント、SaaSus Platformの契約を管理する機能です。
+主にSaaS 開発コンソールのアカウント設定と、各コンソールのユーザーメニューから操作します。
+SaaSの利用者のアカウント管理については、[ユーザー管理](/ja/docs/part-3/saasus-platform-features/user-management)を参照してください。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| ユーザー管理 | SaaSus Platformを利用するユーザーを確認し、役割の変更やユーザーの削除を行います。役割には管理者・開発者・運用者があり、利用できるコンソールや操作が異なります。<br />参考：[ユーザー招待](/ja/docs/part-4/account-settings/saasususerinvitation) | — |
+| ユーザー招待 | SaaSus Platformを利用するユーザーをメールで招待し、役割を設定します。招待状況の確認や招待の取り消しも行えます。<br />参考：[ユーザー招待](/ja/docs/part-4/account-settings/saasususerinvitation) | — |
+| 自分のプロフィール・認証設定 | SaaSus Platform コンソールにログインしている自分のプロフィール、メールアドレス、パスワード、MFAを設定します。<br />参考：[SaaSus Platformログイン画面・メイン画面の全体イメージ](/ja/docs/part-3/login-and-main-screen-overview) | — |
+| アカウント情報の変更 | アカウント設定の「一般」タブで、アカウント名と代表者メールアドレスを変更します。代表者メールアドレスは、SaaSus Platformの請求書発行の通知先にも使われます。<br />参考：[請求と支払い方法](/ja/docs/part-4/account-settings/billing-information#billing-contact-email) | — |
+| SaaSus Platformの契約・請求情報管理 | アカウント設定の「料金プラン」タブで、SaaSus Platformの利用プランを確認・変更します。有料プランからフリープランへ直接変更することはできません。「支払い」タブでは、契約プランに応じて請求予定額や利用状況を確認できます。請求先情報もアカウント設定で管理し、支払方法の変更や請求書の確認は契約方法に応じた請求ポータルなどで行います。<br />参考：[有料プランの申し込み手順](/ja/docs/part-4/account-settings/procedure-for-applying-for-a-paid-plan) / [請求と支払い方法](/ja/docs/part-4/account-settings/billing-information) | — |
+| コンソール・APIへのIP制限 | SaaSus Platform コンソールとSaaSus APIへアクセスできるIPアドレスを制限します。コンソール用・API用の許可CIDRリストをサポートへ申請します。Smart API Gatewayのテナント単位の許可IP設定とは別の機能です。<br />参考：[IP制限](/ja/docs/part-4/application-settings/ip-restriction) | — |
+</FeatureTable>
+IP制限は、旧スタータープラン・旧スタンダードプランでは利用できません。利用条件はIP制限の参考ガイドを確認してください。
+````
+
+---
+## part-3/saasus-platform-features/external-integrations.mdx
+````markdown
+import FeatureTable from '@site/src/components/FeatureTable';
+Stripeによる課金・請求、Amazon EventBridgeへのイベント配信、AWS Marketplaceとの連携を提供する機能です。
+連携先の設定に加え、イベント受信後の処理やテナントとの紐付けなどをSaaSアプリケーションに実装します。
+関連APIはBilling API、Auth API、Pricing API、Integration APIの操作名で表記しています。
+## Stripe連携
+SaaSus Platform で管理する料金プラン、税率、テナント、利用量をStripeと連携し、課金・請求に利用する機能です。
+SaaS 開発コンソールで接続を設定すると、プラン適用や利用量の記録に応じた連携処理が行われます。
+Stripeを利用しない場合は、取得した料金・契約・利用量の情報を使い、自社側で請求処理を用意します。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| 接続情報の取得・設定・連携解除 | Stripeとの接続状況を確認し、シークレットキーを登録・削除します。SaaS 開発コンソールで連携を設定すると、既存の料金プラン・税率・テナントもStripeに登録されます。連携を解除すると、Stripe上の顧客は削除され、商品はアーカイブされます。<br />参考：[Stripeとの連携設定](/ja/docs/part-4/pricing-and-billing/stripe-integration) | [GetStripeInfo](/ja/docs/reference/billing-api#tag/stripe/operation/GetStripeInfo) [UpdateStripeInfo](/ja/docs/reference/billing-api#tag/stripe/operation/UpdateStripeInfo) [DeleteStripeInfo](/ja/docs/reference/billing-api#tag/stripe/operation/DeleteStripeInfo) [DeleteStripeTenantAndPricing](/ja/docs/reference/auth-api#tag/tenant/operation/DeleteStripeTenantAndPricing) |
+| 料金プラン・税率・顧客情報の連携 | 初期連携では既存の料金プラン・税率・テナントをStripeに反映します。連携後は、プランや税率の作成、テナント情報・請求先情報の更新などに応じて自動で反映します。<br />参考：[Stripeとの連携設定](/ja/docs/part-4/pricing-and-billing/stripe-integration) | [CreateTenantAndPricing](/ja/docs/reference/auth-api#tag/tenant/operation/CreateTenantAndPricing) [LinkPlanToStripe](/ja/docs/reference/pricing-api#tag/pricingPlans/operation/LinkPlanToStripe) |
+| Stripe顧客情報の取得 | テナントに対応するStripe顧客情報を取得します。サブスクリプション情報も含まれ、連携先の状態確認などに利用できます。<br />参考：[テナントの請求先情報を設定](/ja/docs/part-5/price-plan/price-plan-setting-000) | [GetStripeCustomer](/ja/docs/reference/auth-api#tag/tenant/operation/GetStripeCustomer) |
+| 課金・請求処理との連携 | テナントへのプラン適用・変更をStripeのサブスクリプションに反映し、記録した利用量をStripeに連携します。支払方法や請求書などの管理はStripe側で行います。<br />参考：[Stripeとの連携設定](/ja/docs/part-4/pricing-and-billing/stripe-integration) | [UpdateTenantPlan](/ja/docs/reference/auth-api#tag/tenant/operation/UpdateTenantPlan) [UpdateMeteringUnitTimestampCountNow](/ja/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCountNow) [UpdateMeteringUnitTimestampCount](/ja/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCount) |
+</FeatureTable>
+### 決済画面
+SaaSus Platformは、料金プランの適用・変更に応じてStripeにサブスクリプションの作成・更新を指示します。
+カード情報の入力や3Dセキュアによる本人認証の画面は、SaaSus Platformでは提供していません。必要な場合は、Stripeの請求書支払いページ（Hosted Invoice Page）などを組み込みます。
+### 決済イベントの受信
+決済完了時のメール送信や返金の検知などを行う場合は、SaaSアプリケーションのサーバーでStripe Webhookを直接受信します。
+SaaSus Platformは、StripeのWebhookイベントを中継しません。
+### Stripe側で行う操作
+次の操作は、SaaSus Platform コンソールではなく、Stripeダッシュボードで行います。
+- 返金・請求書の再発行
+- 銀行振込など、クレジットカード以外の支払方法による請求書払いの設定
+- クーポンによる個別割引の設定
+クーポンは、対象テナントに対応するStripeの顧客またはサブスクリプションに設定します。
+Stripe側で料金プランや計測単位の構成を変更すると、SaaSus Platformとの間で不整合が生じるおそれがあります。連携している料金定義の変更は、SaaSus Platform側で行います。
+## Amazon EventBridge
+ユーザーやテナントの作成など、SaaSus Platformで発生したイベントを自社のAWSアカウントへ配信する機能です。
+SaaS 開発コンソールで送信先を設定し、Amazon EventBridgeのイベントバス・ルール・処理先を自社側で用意します。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| 接続設定の取得・更新・削除 | 送信先のAWSアカウントIDとリージョンを設定します。受信側では、作成されたパートナーイベントソースをイベントバスに関連付けます。<br />参考：[Amazon EventBridge 連携機能](/ja/docs/part-4/integrate-with-amazon-eventbridge) | [GetEventBridgeSettings](/ja/docs/reference/integration#tag/eventBridge/operation/GetEventBridgeSettings) [SaveEventBridgeSettings](/ja/docs/reference/integration#tag/eventBridge/operation/SaveEventBridgeSettings) [DeleteEventBridgeSettings](/ja/docs/reference/integration#tag/eventBridge/operation/DeleteEventBridgeSettings) |
+| 接続テスト | テストイベントを送信し、受信側のルールや処理先まで届くかを確認します。<br />参考：[Amazon EventBridge 連携機能](/ja/docs/part-4/integrate-with-amazon-eventbridge) | [CreateEventBridgeTestEvent](/ja/docs/reference/integration#tag/eventBridge/operation/CreateEventBridgeTestEvent) |
+| SaaSus Platformで発生するイベントの配信 | 参照系（GET）を除くSaaSus APIのイベントを配信します。自社側でイベントを受信し、テナント作成後の初期設定やユーザー削除後のデータ整理などを実装します。<br />参考：[イベントサンプル](/ja/docs/part-4/integrate-with-amazon-eventbridge/event-sample) | — |
+</FeatureTable>
+## AWS Marketplace
+AWS Marketplaceの販売プラン、購入者、テナントを関連付ける機能です。
+購入者の新規登録はログイン画面で処理し、既存テナントとの紐付けはSaaSアプリケーションに組み込みます。
+:::caution 新規利用停止中
+既存ガイドでは、AWS Marketplaceの仕様変更に未対応のため、新規利用を停止している旨を案内しています。
+提供状況は[AWS Marketplace 連携機能について](/ja/docs/part-4/aws-marketplace-integration/aws-marketplace-integration)を確認してください。
+:::
+````
+
+---
+## part-3/saasus-platform-features/logs-analytics-feedback.mdx
+````markdown
+import FeatureTable from '@site/src/components/FeatureTable';
+SaaSus APIの実行ログ、ユーザーの行動履歴、ユーザー数やページ別の利用統計を確認する機能です。
+利用者からの質問や要望を受け付け、フィードバックとして管理する機能もあります。
+関連APIはAPI Log API、Analysis API、Auth API、Communication APIの操作名で表記しています。
+## API実行ログ
+SaaSus APIの呼び出し履歴と、各呼び出しの詳細を確認する機能です。
+APIでエラーが発生したときの原因調査や、呼び出し内容の確認に利用できます。
+SaaSアプリケーションのログに同じトレースIDを記録すると、処理の流れを追跡できます。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| ログ一覧の検索・詳細取得 | 日付・日時・期間を指定してSaaSus APIの実行ログを検索し、リクエストの詳細やトレースIDを確認します。SaaSアプリケーションのアクセスログは別途記録してください。<br />参考：[Trace ID によるリクエスト追跡ガイド](/ja/docs/part-6/implementation-guide/sample-application/trace-id-log-analysis) | [GetLogs](/ja/docs/reference/apilog-api#tag/apiLog/operation/GetLogs) [GetLog](/ja/docs/reference/apilog-api#tag/apiLog/operation/GetLog) |
+</FeatureTable>
+## 利用状況の分析
+ユーザー行動履歴、ユーザー数、期間ごとの集計指標やページ別の利用統計を取得する機能です。
+SaaSアプリケーションの利用状況を確認し、利用者の動向を把握するために利用できます。
+行動履歴やページ別利用統計には、参照元URLのヘッダーを付けてGetUserInfoを呼び出したときの記録が使われます。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| ユーザー行動履歴の取得 | GetUserInfoにRefererまたはX-SaaSus-Refererヘッダーを付けて記録した履歴を取得します。ユーザーごとに過去1か月の行動履歴を確認できます。<br />参考：[行動履歴ログ](/ja/docs/part-5/user-management/user-activity-history-log) / [行動履歴ログの実装](/ja/docs/part-6/implementation-guide/sample-application/activity-history-log) | [GetUserBehaviorHistories](/ja/docs/reference/analysis-api#tag/userAnalysis/operation/GetUserBehaviorHistories) |
+| SaaSユーザー数・テナントユーザー数の取得 | サービス全体のSaaSユーザー数と、テナントごとのユーザー数を取得します。 | [GetSaasUsersCount](/ja/docs/reference/auth-api#tag/saasUser/operation/GetSaasUsersCount) [GetAllTenantUsersCount](/ja/docs/reference/auth-api#tag/tenantUser/operation/GetAllTenantUsersCount) |
+| ユーザー・テナントの集計指標取得 | 期間と指標の種類を指定し、テナント・SaaSユーザー・テナントユーザーの作成数を取得します。テナントユーザーの指標では対象テナントを指定できます。 | [GetAggregatedMetrics](/ja/docs/reference/analysis-api#tag/metrics/operation/GetAggregatedMetrics) |
+| ページ別利用統計の取得 | 指定期間のページURLごとの閲覧数・ユニークユーザー数を取得します。GetUserInfoの呼び出し時にヘッダーで指定した参照元URLが集計対象になります。 | [GetPageStatistics](/ja/docs/reference/analysis-api#tag/metrics/operation/GetPageStatistics) |
+</FeatureTable>
+## フィードバック
+SaaS利用者からの質問・要望を収集し、対応状況、投票、コメントを管理する機能です。
+利用者向けの投稿・閲覧画面はSaaSアプリケーションに実装し、SaaS 運用コンソールで確認や対応を行います。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| 作成・一覧・詳細取得・更新・削除 | フィードバックの件名や内容を管理します。SaaSアプリケーションの投稿・閲覧機能に組み込み、SaaS 運用コンソールでは寄せられた内容の一覧・詳細を確認します。<br />参考：[フィードバック](/ja/docs/part-5/user-feedback) | [CreateFeedback](/ja/docs/reference/communication-api#tag/feedback/operation/CreateFeedback) [GetFeedbacks](/ja/docs/reference/communication-api#tag/feedback/operation/GetFeedbacks) [GetFeedback](/ja/docs/reference/communication-api#tag/feedback/operation/GetFeedback) [UpdateFeedback](/ja/docs/reference/communication-api#tag/feedback/operation/UpdateFeedback) [DeleteFeedback](/ja/docs/reference/communication-api#tag/feedback/operation/DeleteFeedback) |
+| 対応ステータス更新 | フィードバックの対応状況を更新します。SaaS 運用コンソールでは、新規・検討中・実装中・実装済み・調査中・回答済みから選択します。SaaSアプリケーションにも対応状況を表示できます。<br />参考：[フィードバック](/ja/docs/part-5/user-feedback) | [UpdateFeedbackStatus](/ja/docs/reference/communication-api#tag/feedback/operation/UpdateFeedbackStatus) |
+| 投票・投票取り消し | 利用者がフィードバックに投票したり、投票を取り消したりできます。投票ボタンなどの操作画面はSaaSアプリケーションに実装します。<br />参考：[フィードバック](/ja/docs/part-5/user-feedback) | [CreateVoteUser](/ja/docs/reference/communication-api#tag/feedback/operation/CreateVoteUser) [DeleteVoteForFeedback](/ja/docs/reference/communication-api#tag/feedback/operation/DeleteVoteForFeedback) |
+| コメントの投稿・取得・更新・削除 | フィードバックへの返信や追加情報をコメントとして管理します。SaaS 運用コンソールではコメントの確認・返信を行い、SaaSアプリケーションでは表示・投稿・編集・削除を組み込めます。<br />参考：[フィードバック](/ja/docs/part-5/user-feedback) | [CreateFeedbackComment](/ja/docs/reference/communication-api#tag/feedback/operation/CreateFeedbackComment) [GetFeedbackComment](/ja/docs/reference/communication-api#tag/feedback/operation/GetFeedbackComment) [UpdateFeedbackComment](/ja/docs/reference/communication-api#tag/feedback/operation/UpdateFeedbackComment) [DeleteFeedbackComment](/ja/docs/reference/communication-api#tag/feedback/operation/DeleteFeedbackComment) |
+</FeatureTable>
+````
+
+---
+## part-3/saasus-platform-features/pricing-billing.mdx
+````markdown
+import FeatureTable from '@site/src/components/FeatureTable';
+SaaSの料金プランを作成し、テナントごとの契約や利用量を管理する機能です。
+:::info
+[Stripeと連携](/ja/docs/part-3/saasus-platform-features/external-integrations#stripe連携)すると、設定した料金プランや記録した利用量を課金・請求に利用できます。
+:::
+関連APIはPricing API、Auth APIの操作名で表記しています。
+## 料金体系の設計
+月額基本料金や、API実行回数に応じた従量料金を組み合わせて、料金プランを作成する機能です。
+利用量を記録する「メーター単位」、料金を設定する「計測単位」、計測単位をまとめる「機能メニュー」を使って料金プランを構成します。作成した料金プランと税率をテナントに適用します。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| メーター単位の取得・作成・更新・削除 | API実行回数など、利用量を記録する項目を定義します。Stripe連携時は、日別・月別の利用量取得と課金に使う集計方法を`sum`（合計）・`max`（最大値）から選択します。Stripe連携を利用していない場合、画面には集計方法が表示されず、`sum`（合計）になります。計測単位で使用しているメーター単位は、表示名・説明しか変更できません。削除もできません。計測対象や集計方法を変える場合は新しく作成します。<br />参考：[メーター単位設定](/ja/docs/part-4/pricing-and-billing/usage-metering) | [GetMeteringUnits](/ja/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnits) [CreateMeteringUnit](/ja/docs/reference/pricing-api#tag/metering/operation/CreateMeteringUnit) [UpdateMeteringUnitByID](/ja/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitByID) [DeleteMeteringUnitByID](/ja/docs/reference/pricing-api#tag/metering/operation/DeleteMeteringUnitByID) |
+| 計測単位の管理 | 料金・通貨・課金方式（固定ユニット・使用量ユニット・段階ユニット・段階的使用量ユニット）を設定します。利用量に応じた課金では対象のメーター単位を指定します。機能メニューで使用している計測単位は、表示名・説明・利用上限しか変更できません（固定ユニットには利用上限はありません）。削除はできず、料金や課金方式などを変える場合は新しく作成します。<br />参考：[料金プランの作成手順](/ja/docs/part-4/pricing-and-billing/pricing-plan-creation) / [段階ユニット、段階的使用量ユニットの料金計算の違いについて](/ja/docs/part-4/pricing-and-billing/tiered-unit) | [GetPricingUnits](/ja/docs/reference/pricing-api#tag/pricingUnits/operation/GetPricingUnits) [GetPricingUnit](/ja/docs/reference/pricing-api#tag/pricingUnits/operation/GetPricingUnit) [CreatePricingUnit](/ja/docs/reference/pricing-api#tag/pricingUnits/operation/CreatePricingUnit) [UpdatePricingUnit](/ja/docs/reference/pricing-api#tag/pricingUnits/operation/UpdatePricingUnit) [DeletePricingUnit](/ja/docs/reference/pricing-api#tag/pricingUnits/operation/DeletePricingUnit) |
+| 機能メニューの管理 | 月額基本料金と従量料金など、複数の計測単位をまとめて機能メニューを作成します。料金プランで使用している機能メニューは、表示名・説明しか変更できません。構成変更・削除はできないため、計測単位の組み合わせを変える場合は新しく作成します。<br />参考：[料金プランの作成手順](/ja/docs/part-4/pricing-and-billing/pricing-plan-creation) | [GetPricingMenus](/ja/docs/reference/pricing-api#tag/pricingMenus/operation/GetPricingMenus) [GetPricingMenu](/ja/docs/reference/pricing-api#tag/pricingMenus/operation/GetPricingMenu) [CreatePricingMenu](/ja/docs/reference/pricing-api#tag/pricingMenus/operation/CreatePricingMenu) [UpdatePricingMenu](/ja/docs/reference/pricing-api#tag/pricingMenus/operation/UpdatePricingMenu) [DeletePricingMenu](/ja/docs/reference/pricing-api#tag/pricingMenus/operation/DeletePricingMenu) |
+| 料金プランの管理 | 機能メニューを組み合わせて料金プランを作成します。テナントに適用済み、または適用予約中の料金プランは、表示名・説明しか変更できません。構成変更・削除はできないため、メニューの組み合わせを変える場合は新しく作成します。<br />参考：[料金プランの概要と種類](/ja/docs/part-4/pricing-and-billing/pricing-plan-overview) / [料金プランの作成手順](/ja/docs/part-4/pricing-and-billing/pricing-plan-creation) | [GetPricingPlans](/ja/docs/reference/pricing-api#tag/pricingPlans/operation/GetPricingPlans) [GetPricingPlan](/ja/docs/reference/pricing-api#tag/pricingPlans/operation/GetPricingPlan) [CreatePricingPlan](/ja/docs/reference/pricing-api#tag/pricingPlans/operation/CreatePricingPlan) [UpdatePricingPlan](/ja/docs/reference/pricing-api#tag/pricingPlans/operation/UpdatePricingPlan) [DeletePricingPlan](/ja/docs/reference/pricing-api#tag/pricingPlans/operation/DeletePricingPlan) |
+| 税率の取得・作成、表示名・説明の更新 | 税率、内税・外税、国などを登録し、テナントへのプラン適用時に選択します。作成済みの税率の表示名・説明は更新できますが、パーセンテージなどは変更できません。<br />参考：[税率設定](/ja/docs/part-4/pricing-and-billing/tax-rate-settings) | [GetTaxRates](/ja/docs/reference/pricing-api#tag/taxRate/operation/GetTaxRates) [CreateTaxRate](/ja/docs/reference/pricing-api#tag/taxRate/operation/CreateTaxRate) [UpdateTaxRate](/ja/docs/reference/pricing-api#tag/taxRate/operation/UpdateTaxRate) |
+| 料金プラン全体の初期化 | 開発・ステージング環境で、料金定義や記録済みの利用量をまとめて削除します。SaaS 開発コンソールの「アカウント設定」＞「その他」、またはAPIから実行できます。本番環境では実行できません。削除範囲は、下記の「料金プランの初期化」を参照してください。 | [ResetPlan](/ja/docs/reference/auth-api#tag/tenant/operation/ResetPlan) |
+</FeatureTable>
+### 料金プランの初期化
+初期化すると、対象環境の次の情報を削除します。
+- 料金プラン・機能メニュー・計測単位・メーター単位・税率
+- 記録済みの利用量
+- 全テナントのプラン変更予約・適用履歴
+Stripe連携中の場合は、SaaSus Platform側の連携情報とシークレットキーも削除し、連携を解除します。
+Stripe側の商品・顧客・サブスクリプションは削除されません。
+## 利用量の記録・取得
+テナントごとの利用量をメーター単位に記録し、日別・月別・期間別に取得する機能です。
+SaaSアプリケーションで計測対象の操作に合わせて記録APIを呼び出し、取得結果を利用状況の表示や課金額の計算に利用します。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| 現在時刻・指定時刻の利用量加算・減算・上書き | テナントとメーター単位を指定し、利用量を記録します。更新方法は加算（add）・減算（sub）・上書き（direct）から選択します。更新は、期間全体の集計値ではなく、指定時刻（秒単位）の記録値に対して行います。<br />参考：[メータリングAPI実装サンプル](/ja/docs/part-6/implementation-guide/sample-application/metering-api) | [UpdateMeteringUnitTimestampCountNow](/ja/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCountNow) [UpdateMeteringUnitTimestampCount](/ja/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCount) |
+| 指定時刻の利用量データ削除 | テナントとメーター単位を指定し、指定時刻の利用量を削除します。誤って記録した利用量の取り消しなどに利用します。<br />参考：[メータリングAPI実装サンプル](/ja/docs/part-6/implementation-guide/sample-application/metering-api) | [DeleteMeteringUnitTimestampCount](/ja/docs/reference/pricing-api#tag/metering/operation/DeleteMeteringUnitTimestampCount) |
+| 当日・指定日・当月・指定月の利用量取得 | 1つのメーター単位について、指定日・指定月の集計値を取得します。メーター単位の集計方法が`sum`なら期間内に記録した値の合計、`max`なら最大値を返します。<br />参考：[課金ダッシュボードの実装](/ja/docs/part-6/implementation-guide/sample-application/billing-dashboard) | [GetMeteringUnitDateCountByTenantIdAndUnitNameToday](/ja/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountByTenantIdAndUnitNameToday) [GetMeteringUnitDateCountByTenantIdAndUnitNameAndDate](/ja/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountByTenantIdAndUnitNameAndDate) [GetMeteringUnitMonthCountByTenantIdAndUnitNameThisMonth](/ja/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountByTenantIdAndUnitNameThisMonth) [GetMeteringUnitMonthCountByTenantIdAndUnitNameAndMonth](/ja/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountByTenantIdAndUnitNameAndMonth) |
+| 指定期間の利用量取得 | 開始・終了のタイムスタンプを指定し、期間内の時刻ごとの記録を取得します。メーター単位の集計方法（`sum`・`max`）は適用されません。任意期間の合計や最大値が必要な場合は、取得結果をSaaSアプリケーションで集計します。<br />参考：[メータリングAPI実装サンプル](/ja/docs/part-6/implementation-guide/sample-application/metering-api) | [GetMeteringUnitDateCountByTenantIdAndUnitNameAndDatePeriod](/ja/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountByTenantIdAndUnitNameAndDatePeriod) |
+| 複数メーターの利用量一括取得 | 指定したテナントの全メーター単位について、指定日・指定月の集計値をまとめて取得します。各メーター単位の設定に従い、`sum`なら期間内に記録した値の合計、`max`なら最大値を返します。<br />参考：[課金ダッシュボードの実装](/ja/docs/part-6/implementation-guide/sample-application/billing-dashboard) | [GetMeteringUnitDateCountsByTenantIdAndDate](/ja/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountsByTenantIdAndDate) [GetMeteringUnitMonthCountsByTenantIdAndMonth](/ja/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountsByTenantIdAndMonth) |
+</FeatureTable>
+Stripe連携時は、過去の請求期間やプラン変更前の利用量を修正できません。また、指定時刻の記録値を超えて減算することはできません。
+## テナントの契約
+テナントに適用する料金プラン・税率と、適用時期を管理する機能です。
+SaaS 運用コンソールで設定するほか、SaaSアプリケーションにプラン選択や変更の処理を組み込めます。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| 料金プランの適用・変更・解約 | テナントに料金プランと税率を設定し、プランの変更や解約を行います。即時反映や日時指定、変更予約の確認・取り消しに対応し、現在の適用内容やプラン履歴はテナント情報から確認できます。Stripe連携時は、プラン変更に伴う日割り計算に対応します。請求タイミングなどは、下記の「プラン変更時の日割り計算」を参照してください。<br />参考：[テナントに料金プランを設定する](/ja/docs/part-5/price-plan/price-plan-setting-001) / [テナントの料金プラン設定を変更する](/ja/docs/part-5/price-plan/price-plan-setting-002) / [テナントの料金プラン設定を解除する](/ja/docs/part-5/price-plan/price-plan-setting-003) / [設定した予定を取り消す](/ja/docs/part-5/price-plan/price-plan-setting-004) / [プラン変更の実装](/ja/docs/part-6/implementation-guide/sample-application/plan-change-implementation) | [GetTenant](/ja/docs/reference/auth-api#tag/tenant/operation/GetTenant) [GetTenants](/ja/docs/reference/auth-api#tag/tenant/operation/GetTenants) [UpdateTenantPlan](/ja/docs/reference/auth-api#tag/tenant/operation/UpdateTenantPlan) |
+</FeatureTable>
+補足：予約は反映時刻の5分前から変更・取り消しができません。
+Stripe連携時に従量課金アイテムを削除する設定（`delete_usage`）を指定した予約は、取り消しできません。
+### プラン変更時の日割り計算
+Stripe連携時は、料金プランの変更に伴う日割り計算に対応します。
+SaaS 運用コンソールからの変更では、日割り計算した差額を即時請求します。
+[UpdateTenantPlan](/ja/docs/reference/auth-api#tag/tenant/operation/UpdateTenantPlan)では、`proration_behavior`で日割り計算の有無と差額の請求タイミングを指定できます。
+- `always_invoice`：日割り計算した差額の請求書を即時に発行します。
+- `create_prorations`：日割り計算した差額を次回の請求に合算します。
+- `none`：変更に伴う日割り計算を行いません。
+#### 月額固定料金の計算例
+月額25,000円のプランから月額28,000円のプランへ、請求期間の半分が残っている時点で変更する場合、差額は次のようになります（税・従量料金を除く）。
+- 旧プランの未使用分：−12,500円
+- 新プランの残り期間分：＋14,000円
+- 差額：1,500円
+逆に月額28,000円から月額25,000円へ変更する場合、差額の−1,500円はStripe上のクレジットとして以降の請求に充当されます。
+実際の金額は、Stripeが変更時刻と請求期間に基づいて秒単位で計算します。
+````
+
+---
+## part-3/saasus-platform-features/saas-infrastructure.mdx
+````markdown
+import FeatureTable from '@site/src/components/FeatureTable';
+テナントごとに専用のサーバーやデータベースを用意する、サイロモデルのSaaSを構築するための機能です。
+SaaS 開発コンソールで構築に必要な権限・テンプレートを設定すると、テナント作成時に自社のAWS環境で専用環境の構築を開始します。
+関連APIはAuth APIの操作名で表記しています。
+## 構築設定
+自動構築の有効・無効、AWSへのアクセス権限、構築・初期化に使うファイルを管理する機能です。
+AWS CloudFormationテンプレートと初期化SQLは、自社SaaSの構成に合わせて用意します。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| 設定情報の取得・更新 | SaaSインフラ管理の有効・無効と、登録済みの権限・テンプレート情報を取得・更新します。有効化する前に、構築先の権限と必要なファイルを設定します。<br />参考：[SaaSインフラ管理機能](/ja/docs/part-4/saas-infra-management) | [GetSingleTenantSettings](/ja/docs/reference/auth-api#tag/singleTenant/operation/GetSingleTenantSettings) [UpdateSingleTenantSettings](/ja/docs/reference/auth-api#tag/singleTenant/operation/UpdateSingleTenantSettings) |
+| AWSアクセス権限・CloudFormation起動リンク取得 | 自社のAWS環境を操作するためのIAMロールを作成し、ロールARNとExternal IDを登録します。権限設定用のAWS CloudFormation起動リンクを利用できます。<br />参考：[SaaSインフラ管理機能](/ja/docs/part-4/saas-infra-management) | [GetCloudFormationLaunchStackLinkForSingleTenant](/ja/docs/reference/auth-api#tag/singleTenant/operation/GetCloudFormationLaunchStackLinkForSingleTenant) [UpdateSingleTenantSettings](/ja/docs/reference/auth-api#tag/singleTenant/operation/UpdateSingleTenantSettings) |
+| テンプレート・データベース初期化SQLの設定 | 専用環境を作成するAWS CloudFormationテンプレートと、データベースのテーブル作成や初期データの登録に使うSQLを設定します。テンプレートの必須Outputsや対応データベースは参考ガイドで確認してください。<br />参考：[SaaSインフラ管理機能](/ja/docs/part-4/saas-infra-management) | [GetSingleTenantSettings](/ja/docs/reference/auth-api#tag/singleTenant/operation/GetSingleTenantSettings) [UpdateSingleTenantSettings](/ja/docs/reference/auth-api#tag/singleTenant/operation/UpdateSingleTenantSettings) |
+</FeatureTable>
+## テナントのオンボーディング
+テナント作成をきっかけに、そのテナント専用のアプリケーション実行環境を構築し、データベースを初期化する機能です。
+SaaS 運用コンソールのテナント管理画面で、テナント属性の`TenantOnboardingStatus`から構築状況を確認できます。
+環境の構築はテナントの作成後も続くため、SaaS 運用コンソールで完了したかを確認します。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| テナント専用環境の自動構築 | SaaSインフラ管理を有効にした状態でテナントを作成すると、登録したテンプレートとSQLを使って構築・初期化を開始します。<br />参考：[SaaSインフラ管理機能](/ja/docs/part-4/saas-infra-management) | [CreateTenant](/ja/docs/reference/auth-api#tag/tenant/operation/CreateTenant) |
+| オンボーディング進行状況の確認 | テナント属性の`TenantOnboardingStatus`で、構築準備中・データベース初期化中・完了・異常終了などの状態を確認します。異常終了時はサポートへお問い合わせください。<br />参考：[SaaSインフラ管理機能](/ja/docs/part-4/saas-infra-management) | [GetTenant](/ja/docs/reference/auth-api#tag/tenant/operation/GetTenant) [GetTenants](/ja/docs/reference/auth-api#tag/tenant/operation/GetTenants) |
+</FeatureTable>
+補足：オンボーディング処理は東京リージョン（ap-northeast-1）で実行されます。
+テナント削除時の専用環境の自動削除（オフボーディング）はサポートしていません。
+旧スタータープラン・旧スタンダードプランでは利用できないため、利用条件は参考ガイドを確認してください。
+````
+
+---
+## part-3/saasus-platform-features/smart-api-gateway.mdx
+````markdown
+import FeatureTable from '@site/src/components/FeatureTable';
+SaaSアプリケーションの処理をAPIとして公開し、テナントやユーザーに応じたアクセス制御を行う機能です。
+公開したAPIはSmart MCP Serverを通じてAIクライアントからも利用できます。
+APIの公開・アクセス制御の設定やAPIキーの管理は、主にSaaSus Platform コンソールで行います。
+SaaSアプリケーションでは公開する処理を実装し、SDKを組み込みます。
+関連APIはAPI Gateway APIの操作名で表記しています。
+## API公開設定
+接続先のSaaSアプリケーションや公開する処理を設定し、APIを公開する機能です。
+SaaS 開発コンソールで設定・公開し、SaaSアプリケーションには参考ガイドに従ってSDKやアノテーションを組み込みます。
+対応SDKやインフラの前提条件は、[Smart API Gateway 機能](/ja/docs/part-4/smart-api-gateway-features/overview)を確認してください。
+ガイドでは、AWS上のApplication Load Balancer（ALB）配下で動作するJavaのWebアプリケーションを対象としています。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| 設定の取得・更新、アプリケーション接続 | 接続先の内部エンドポイントやAWSリソースなどを設定します。アプリケーションとインフラの前提条件は参考ガイドを確認してください。<br />参考：[Smart API Gateway 機能](/ja/docs/part-4/smart-api-gateway-features/overview) / [設定手順](/ja/docs/part-4/smart-api-gateway-features/manual) | [GetApiGatewaySettings](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetApiGatewaySettings) [UpdateApiGatewaySettings](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/UpdateApiGatewaySettings) |
+| 生成用ファイルのアップロード | 公開対象の処理を含むソースコードをまとめてアップロードし、API設定の生成に利用します。生成結果は下書き設定で確認します。<br />参考：[設定手順](/ja/docs/part-4/smart-api-gateway-features/manual) | [UploadGenerationFiles](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/UploadGenerationFiles) |
+| OpenAPI定義の更新・APIドキュメント設定 | 公開APIのドキュメントに使用するOpenAPI定義を更新します。APIの処理自体はSaaSアプリケーションに実装します。<br />参考：[設定手順](/ja/docs/part-4/smart-api-gateway-features/manual) | [UpdateOpenApiDefinition](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/UpdateOpenApiDefinition) |
+| 下書き設定の取得・適用・破棄 | アップロードしたソースコードから生成されたAPI設定を確認し、適用するか破棄するかを選びます。<br />参考：[設定手順](/ja/docs/part-4/smart-api-gateway-features/manual) | [GetDraftApiGatewaySettings](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetDraftApiGatewaySettings) [ApplyDraftApiGatewaySettings](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/ApplyDraftApiGatewaySettings) [CancelDraftApiGatewaySettings](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/CancelDraftApiGatewaySettings) |
+| APIの作成・公開 | AWS CloudFormationの起動リンクを使って接続に必要なAWSリソースを準備し、APIを作成・公開します。AWSリソースの利用料金は別途発生します。<br />参考：[設定手順](/ja/docs/part-4/smart-api-gateway-features/manual) | [GetCloudFormationLaunchStackLink](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetCloudFormationLaunchStackLink) [CreateApiGateway](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/CreateApiGateway) [PublishApiGateway](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/PublishApiGateway) |
+| 独自ドメイン・エンドポイント設定 | 公開APIに使用する独自ドメインや接続先エンドポイントを設定します。独自ドメインを利用する場合は、案内されたDNSレコードも設定します。<br />参考：[設定手順](/ja/docs/part-4/smart-api-gateway-features/manual) | [GetApiGatewaySettings](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetApiGatewaySettings) [UpdateApiGatewaySettings](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/UpdateApiGatewaySettings) |
+</FeatureTable>
+## アクセス制御
+公開APIを利用できるユーザー・テナント、呼び出し回数の上限、アクセス元のIPアドレスを制限する機能です。
+APIキーやユーザーに付与された役割を使い、公開する処理に応じてアクセスを制御します。
+テナント用とユーザー用のAPIキーを区別し、公開する処理に応じて設定します。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| APIキーの一覧・詳細取得・発行 | テナント・環境、必要に応じてユーザーを指定してAPIキーを発行します。発行したキーは公開APIへのリクエストで使用します。<br />参考：[設定手順](/ja/docs/part-4/smart-api-gateway-features/manual) | [GetApiKeys](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetApiKeys) [GetApiKey](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetApiKey) [CreateApiKey](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/CreateApiKey) |
+| クライアントシークレットの発行・再発行 | APIキーに対応するクライアントシークレットを発行・再発行します。発行後は、そのAPIキーでの呼び出しにシークレットを使った署名が必要です。再発行した場合は、呼び出し元の設定も新しいシークレットに更新してください。<br />参考：[設定手順](/ja/docs/part-4/smart-api-gateway-features/manual) | [RefreshClientSecret](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/RefreshClientSecret) |
+| テナント・ユーザー単位のAPI利用 | APIキーに対応するテナント・環境・ユーザー情報を、SaaSアプリケーションの処理で利用します。対象データの絞り込みなどはアプリケーション側で実装します。<br />参考：[設定手順](/ja/docs/part-4/smart-api-gateway-features/manual) | — |
+| エンドポイント別役割・スロットリング設定 | 処理ごとに許可する役割やリクエスト数の上限を設定します。役割による制御はユーザー用APIキーが対象で、テナント用APIキーには適用されません。<br />参考：[設定手順](/ja/docs/part-4/smart-api-gateway-features/manual) | [GetApiGatewaySettings](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetApiGatewaySettings) [UpdateApiGatewaySettings](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/UpdateApiGatewaySettings) |
+| テナント単位の許可IP設定 | テナントごとに公開APIへのアクセスを許可するIPアドレスを設定します。Auth APIのテナント基本情報とは別の設定です。<br />参考：[設定手順](/ja/docs/part-4/smart-api-gateway-features/manual) | [GetTenant](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetTenant) [UpdateTenant](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/UpdateTenant) |
+</FeatureTable>
+## Smart MCP Server
+Smart API Gatewayで公開したAPIをMCPツールとして提供する機能です。
+APIを公開するとMCP Serverも自動で利用可能になり、AIクライアントに接続先と認証情報を設定して呼び出せます。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| 公開APIのMCPツール化・スキーマ連携 | Smart API GatewayでAPIを公開すると、Smart MCP ServerでもMCPツールとして利用できるようになります。API定義の変更はMCPツールのスキーマにも反映されます。<br />参考：[Smart MCP Server 機能](/ja/docs/part-4/smart-api-gateway-features/smart-mcp-server-overview) | [PublishApiGateway](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/PublishApiGateway) |
+| AIクライアントからの認証付きAPI利用 | MCP ServerのエンドポイントとAPIキーをAIクライアントに設定します。テナント・ユーザーに対応する認証情報を使って、公開APIを呼び出します。<br />参考：[Smart MCP Server 機能](/ja/docs/part-4/smart-api-gateway-features/smart-mcp-server-overview) | — |
+</FeatureTable>
+````
+
+---
+## part-3/saasus-platform-features/tenant-management.mdx
+````markdown
+import FeatureTable, {FeatureAnchor} from '@site/src/components/FeatureTable';
+テナントの情報と、テナントへの招待を管理する機能です。
+登録済みユーザーのテナントへの追加・テナントからの削除は、[ユーザー管理](/ja/docs/part-3/saasus-platform-features/user-management)を参照してください。
+関連APIはAuth APIの操作名で表記しています。
+## テナント
+テナントを作成し、基本情報・属性・請求先情報を管理する機能です。
+SaaS 運用コンソールでは基本情報・追加属性・請求先情報を設定でき、申込時のテナント作成などを自動化する場合はAPIを組み込みます。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| 一覧・詳細取得、作成・編集・削除 | テナントの一覧や詳細を確認し、テナント名などの基本情報を登録・変更します。不要になったテナントの削除も行えます。<br />参考：[テナント管理](/ja/docs/part-5/tenant-management) | [GetTenants](/ja/docs/reference/auth-api#tag/tenant/operation/GetTenants) [GetTenant](/ja/docs/reference/auth-api#tag/tenant/operation/GetTenant) [CreateTenant](/ja/docs/reference/auth-api#tag/tenant/operation/CreateTenant) [UpdateTenant](/ja/docs/reference/auth-api#tag/tenant/operation/UpdateTenant) [DeleteTenant](/ja/docs/reference/auth-api#tag/tenant/operation/DeleteTenant) |
+| <FeatureAnchor id="tenant-attributes">テナント属性の設定</FeatureAnchor> | あらかじめ定義した属性に、テナントごとの値を設定します。属性項目はSaaS 開発コンソールの「テナント属性定義」で作成します。<br />参考：[テナント管理](/ja/docs/part-5/tenant-management) | [UpdateTenant](/ja/docs/reference/auth-api#tag/tenant/operation/UpdateTenant) |
+| 請求先情報の取得・更新 | 請求書に表示する名称・住所などを管理します。テナントの基本情報とは別の操作です。<br />参考：[テナント管理](/ja/docs/part-5/tenant-management) | [GetTenants](/ja/docs/reference/auth-api#tag/tenant/operation/GetTenants) [GetTenant](/ja/docs/reference/auth-api#tag/tenant/operation/GetTenant) [UpdateTenantBillingInfo](/ja/docs/reference/auth-api#tag/tenant/operation/UpdateTenantBillingInfo) |
+</FeatureTable>
+## 招待
+ユーザーをテナントに招待する機能です。
+招待の作成・一覧表示などの管理機能はSaaSアプリケーションに組み込み、招待された利用者の登録・ログイン・受諾にはログイン画面を利用できます。
+招待を作成できる利用者や付与できる役割の制御は、SaaSアプリケーションで実装します。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| 招待の作成・一覧取得・詳細取得・削除 | 招待の作成には、招待先テナントに所属する招待者のアクセストークンが必要です。作成時に招待メールが送信されるため、事前にドメイン・メール送信の設定が必要です。<br />参考：[サンプルアプリケーション概要](/ja/docs/part-6/implementation-guide/sample-application/overview) / [ドメイン・メール送信ドメイン認証・遷移先の設定](/ja/docs/part-4/application-settings/domain-and-redirect-settings) | [CreateTenantInvitation](/ja/docs/reference/auth-api#tag/invitation/operation/CreateTenantInvitation) [GetTenantInvitations](/ja/docs/reference/auth-api#tag/invitation/operation/GetTenantInvitations) [GetTenantInvitation](/ja/docs/reference/auth-api#tag/invitation/operation/GetTenantInvitation) [DeleteTenantInvitation](/ja/docs/reference/auth-api#tag/invitation/operation/DeleteTenantInvitation) |
+| 招待の有効性確認 | 招待URLを開いたときに、有効期限が切れていないか、すでに受諾されていないかを確認します。 | [GetInvitationValidity](/ja/docs/reference/auth-api#tag/invitation/operation/GetInvitationValidity) |
+| 招待の受諾・テナントへの参加 | 招待された利用者がログイン画面で受諾し、テナントに参加します。新規ユーザーはアカウントを登録し、既存ユーザーはログインして受諾します。参加時には招待で指定された役割が付与されます。<br />参考：[サンプルアプリケーション概要](/ja/docs/part-6/implementation-guide/sample-application/overview) | [ValidateInvitation](/ja/docs/reference/auth-api#tag/invitation/operation/ValidateInvitation) |
+</FeatureTable>
+````
+
+---
+## part-3/saasus-platform-features/user-management.mdx
+````markdown
+import FeatureTable, {FeatureAnchor} from '@site/src/components/FeatureTable';
+SaaS に登録されたユーザーの情報を管理し、テナントへの追加・テナントからの削除を行う機能です。
+SaaSユーザーはサービス全体のユーザー、テナントユーザーは特定のテナントに所属するユーザーを表します。
+1人のSaaSユーザーは、複数のテナントに所属できます。
+関連APIはAuth APIの操作名で表記しています。
+## SaaSユーザー
+サービスに登録されたユーザーのログイン情報や属性を管理する機能です。
+日々の管理はSaaS 運用コンソールで行い、SaaSアプリケーションに管理画面や利用者向けの情報変更機能を作る場合にAPIを組み込みます。
+利用者自身の登録にはログイン画面のセルフサインアップ、管理者による登録にはユーザー作成機能を使います。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| 一覧取得・検索・個別情報取得 | 一覧取得のほか、ユーザーID・メールアドレス・ログインIDで検索できます。<br />参考：[（旧画面）ユーザーの検索・作成・編集・テナント追加](/ja/docs/part-5/user-management/user-crud) / [（新画面）ユーザーの検索・作成・編集・テナント追加](/ja/docs/part-5/user-management/user-management-new-ui) | [GetSaasUsers](/ja/docs/reference/auth-api#tag/saasUser/operation/GetSaasUsers) [SearchSaasUsers](/ja/docs/reference/auth-api#tag/saasUser/operation/SearchSaasUsers) [GetSaasUser](/ja/docs/reference/auth-api#tag/saasUser/operation/GetSaasUser) |
+| 作成・削除 | SaaSユーザーを作成・削除します。メールアドレス認証のユーザーをパスワード未指定で作成すると、一時パスワードがメールで送信されます。削除すると、すべてのテナントからも削除されます。利用者が自分で登録する場合はセルフサインアップを使います。<br />参考：[（旧画面）ユーザーの検索・作成・編集・テナント追加](/ja/docs/part-5/user-management/user-crud) / [認証方式の設定](/ja/docs/part-4/user-authz-settings/authentication-method-settings) | [CreateSaasUser](/ja/docs/reference/auth-api#tag/saasUser/operation/CreateSaasUser) [DeleteSaasUser](/ja/docs/reference/auth-api#tag/saasUser/operation/DeleteSaasUser) |
+| メールアドレス・ログインIDによる情報取得 | メールアドレスまたはログインIDを指定して、ユーザー情報と、そのユーザーが所属するテナントや役割の情報を取得します。 | [GetUserInfoByEmail](/ja/docs/reference/auth-api#tag/userInfo/operation/GetUserInfoByEmail) [GetUserInfoBySignInId](/ja/docs/reference/auth-api#tag/userInfo/operation/GetUserInfoBySignInId) |
+| パスワードの変更・リセット | 対象ユーザーのパスワード設定や、一時パスワードの発行を行います。一時パスワードでのログイン後は、新しいパスワードの設定が必要です。ログインID認証のユーザーには通知先のメールアドレスがないため、管理者から利用者へパスワードを連絡します。ログイン画面で利用者自身が行う[パスワードを忘れた場合の再設定](/ja/docs/part-3/saasus-platform-features/authentication#forgotten-password-recovery)とは別の処理です。<br />参考：[（旧画面）ユーザーの検索・作成・編集・テナント追加](/ja/docs/part-5/user-management/user-crud) | [UpdateSaasUserPassword](/ja/docs/reference/auth-api#tag/saasUser/operation/UpdateSaasUserPassword) [ResetSaasUserPassword](/ja/docs/reference/auth-api#tag/saasUser/operation/ResetSaasUserPassword) |
+| メールアドレスの変更 | メールアドレスで認証するユーザーが対象です。管理者がユーザーのメールアドレスを変更します。<br />参考：[（旧画面）ユーザーの検索・作成・編集・テナント追加](/ja/docs/part-5/user-management/user-crud) | [UpdateSaasUserEmail](/ja/docs/reference/auth-api#tag/saasUser/operation/UpdateSaasUserEmail) |
+| 利用者自身によるメールアドレスの変更 | 変更先のメールアドレスへ確認コードを送り、コードを検証してメールアドレスを変更します。メールアドレスで認証するユーザーが対象で、事前にドメイン・メール送信の設定が必要です。<br />参考：[ドメイン・メール送信ドメイン認証・遷移先の設定](/ja/docs/part-4/application-settings/domain-and-redirect-settings) | [RequestEmailUpdate](/ja/docs/reference/auth-api#tag/saasUser/operation/RequestEmailUpdate) [ConfirmEmailUpdate](/ja/docs/reference/auth-api#tag/saasUser/operation/ConfirmEmailUpdate) |
+| ログインIDの変更 | ログインID認証のユーザーが対象です。メールアドレス認証からの認証方式の変更には利用できません。<br />参考：[（旧画面）ユーザーの検索・作成・編集・テナント追加](/ja/docs/part-5/user-management/user-crud) | [UpdateSaasUserSignInId](/ja/docs/reference/auth-api#tag/saasUser/operation/UpdateSaasUserSignInId) |
+| <FeatureAnchor id="saas-user-attributes">ユーザー属性の更新</FeatureAnchor> | ユーザーごとの属性値を更新します。SaaSアプリケーションのプロフィール編集などに利用でき、テナントごとのユーザー属性とは別に管理します。 | [UpdateSaasUserAttributes](/ja/docs/reference/auth-api#tag/saasUser/operation/UpdateSaasUserAttributes) |
+</FeatureTable>
+## SaaSユーザーをテナントへ追加・削除
+登録済みのSaaSユーザーをテナントに追加し、テナントごとのユーザー情報を管理するための機能です。
+テナントへの追加・テナントからの削除はSaaS 運用コンソールで行え、SaaSアプリケーションで管理機能を提供する場合はAPIを組み込みます。
+取得したテナントや役割の情報を使った画面・機能の利用可否の判定は、SaaSアプリケーションで実装します。
+<FeatureTable>
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| テナントユーザーの追加・取得・削除 | 登録済みのSaaSユーザーをテナントに追加し、テナントユーザーの情報取得や削除を行います。テナントから削除しても、SaaSユーザーのアカウントは残ります。<br />参考：[（旧画面）ユーザーの検索・作成・編集・テナント追加](/ja/docs/part-5/user-management/user-crud) | [CreateTenantUser](/ja/docs/reference/auth-api#tag/tenantUser/operation/CreateTenantUser) [GetTenantUsers](/ja/docs/reference/auth-api#tag/tenantUser/operation/GetTenantUsers) [GetTenantUser](/ja/docs/reference/auth-api#tag/tenantUser/operation/GetTenantUser) [DeleteTenantUser](/ja/docs/reference/auth-api#tag/tenantUser/operation/DeleteTenantUser) |
+| <FeatureAnchor id="tenant-user-attributes">テナントユーザーの属性更新</FeatureAnchor> | テナントごとのユーザー属性の値を更新します。SaaSユーザー全体の属性とは別に管理します。<br />参考：[ユーザー属性定義](/ja/docs/part-4/user-authz-settings/declare-additional-attribute-to-user) | [UpdateTenantUser](/ja/docs/reference/auth-api#tag/tenantUser/operation/UpdateTenantUser) |
+| 全テナントを横断したユーザー検索 | テナントID・環境・役割などの条件で、テナントを横断して検索できます。<br />参考：[（新画面）ユーザーの検索・作成・編集・テナント追加](/ja/docs/part-5/user-management/user-management-new-ui) | [SearchTenantUsers](/ja/docs/reference/auth-api#tag/tenantUser/operation/SearchTenantUsers) |
+| ユーザーが所属するテナント・役割情報の取得 | GetUserInfoはIDトークンから、ユーザーが所属するテナントのうち、環境情報のあるテナントと役割を取得します。GetAllTenantUserはユーザーIDから、ユーザーが所属するすべてのテナントのユーザー情報と役割を取得します。取得結果を使ったアクセス制御はSaaSアプリケーションで実装します。<br />参考：[役割管理](/ja/docs/part-5/adding-role-to-user) | [GetUserInfo](/ja/docs/reference/auth-api#tag/userInfo/operation/GetUserInfo) [GetAllTenantUser](/ja/docs/reference/auth-api#tag/tenantUser/operation/GetAllTenantUser) |
+</FeatureTable>
 ````
 
 ---
@@ -6864,7 +7446,13 @@ func calculateAmountByUnitType(count float64, u map[string]interface{}) float64 
 - **C# (.NET 8)**: [`GetBillingDashboard`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)
 - **C# (.NET Framework 4.8)**: [`GetBillingDashboard`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)
 ### メータ更新
+メータの加算・減算・上書きは、指定時刻（秒単位）の記録値に対して行います。例えば、その時刻に10件が記録されている場合、3件減算すると7件になります。
 課金ダッシュボード上でのメータ更新は、現在時刻に対して更新するインライン編集ケースと、任意のタイムスタンプで履歴補正するモーダル編集ケースに分かれます。
+:::caution このサンプルでの減算について
+このサンプルでは、更新先に現在時刻または選択期間内のランダムな時刻を指定します。既存の記録を選んで減算する仕組みではありません。
+**Stripe連携時は、更新後の記録値が負数になるとエラーになります。** 指定した時刻に記録がなければ0件からの減算になるため、表示期間全体に利用量が残っていても減算に失敗します。
+Stripe連携時でも、記録済みの時刻を指定し、記録値が0以上になる範囲で減算・上書きすることは可能です。ただし、更新可能な日時には制限があり、過去の請求期間やプラン変更前の利用量は修正できません。
+:::
 #### インライン編集例
 <Tabs>
 <TabItem value="go" label="Go" default>
@@ -12716,28 +13304,6 @@ tags:
 security:
   - Bearer: []
 paths:
-  /user-behavior-day:
-    put:
-      tags:
-        - userAnalysis
-      operationId: UpdateUserBehaviorHistoriesByDay
-      summary: 当日のユーザ行動履歴を更新
-      description: |
-        当日のユーザ行動履歴を更新します。
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UpdateUserBehaviorHistoriesByDayParam"
-      responses:
-        "200":
-          description: OK
-        "500":
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
   "/users/{user_id}/behavior-histories":
     get:
       tags:
@@ -12755,67 +13321,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserBehaviorHistories"
-        "500":
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-  /active-users:
-    get:
-      tags:
-        - userAnalysis
-      operationId: GetActiveUsers
-      summary: 日次または月次のアクティブユーザー数を取得
-      description: |
-        日次または月次のアクティブユーザー数を取得します。
-      parameters:
-        - $ref: "#/components/parameters/ActiveUsersType"
-        - $ref: "#/components/parameters/DateFrom"
-        - $ref: "#/components/parameters/DateTo"
-        - $ref: "#/components/parameters/TenantId"
-        - $ref: "#/components/parameters/EnvId"
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ActiveUsers"
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-    put:
-      tags:
-        - userAnalysis
-      operationId: UpdateActiveUsers
-      summary: アクティブユーザーデータの追加・更新
-      description: |
-        日次または月次のアクティブユーザーデータを追加・更新します。
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UpdateActiveUsersParam"
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
         "500":
           description: Internal Server Error
           content:
@@ -12937,45 +13442,12 @@ components:
         type: string
         example: f94bfffc-8be2-11ec-b41a-0242ac120004
       required: true
-    ActiveUsersType:
-      in: query
-      name: type
-      description: アクティブユーザーデータのタイプ（月次または日次）
-      schema:
-        type: string
-        enum:
-          - monthly
-          - daily
-      required: true
-    DateFrom:
-      in: query
-      name: date_from
-      description: 開始日（月次の場合はYYYY-MM、日次の場合はYYYY-MM-DD）
-      schema:
-        type: string
-        example: 2025-01
-      required: true
-    DateTo:
-      in: query
-      name: date_to
-      description: 終了日（月次の場合はYYYY-MM、日次の場合はYYYY-MM-DD）。任意。
-      schema:
-        type: string
-        example: 2025-12
-      required: false
     TenantId:
       in: query
       name: tenant_id
       description: テナントID（任意）
       schema:
         $ref: "#/components/schemas/Uuid"
-      required: false
-    EnvId:
-      in: query
-      name: env_id
-      description: 環境ID（任意、tenant_idが必要）
-      schema:
-        $ref: "#/components/schemas/Id"
       required: false
     MetricsType:
       in: query
@@ -13099,76 +13571,6 @@ components:
       required:
         - behaved_at
         - histories
-    ActiveUsers:
-      title: アクティブユーザー
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: "#/components/schemas/ActiveUserData"
-          description: アクティブユーザーデータ一覧
-      required:
-        - data
-    ActiveUserData:
-      title: アクティブユーザーデータ
-      type: object
-      properties:
-        date:
-          title: 日付
-          description: 日付（月次の場合はYYYY-MM、日次の場合はYYYY-MM-DD）
-          type: string
-          example: 2025-01
-        tenant_id:
-          $ref: "#/components/schemas/Uuid"
-          description: テナントID
-        env_id:
-          $ref: "#/components/schemas/Id"
-          description: 環境ID
-        active_users:
-          title: アクティブユーザー数
-          description: アクティブユーザー数
-          type: integer
-          example: 100
-      required:
-        - date
-        - tenant_id
-        - env_id
-        - active_users
-    UpdateActiveUsersParam:
-      title: アクティブユーザー更新パラメータ
-      type: object
-      properties:
-        type:
-          title: タイプ
-          description: アクティブユーザーデータのタイプ（月次または日次）
-          type: string
-          enum:
-            - daily
-            - monthly
-          example: daily
-        date:
-          title: 日付
-          description: 日付（月次の場合はYYYY-MM、日次の場合はYYYY-MM-DD）
-          type: string
-          example: 2025-01-01
-        tenant_id:
-          $ref: "#/components/schemas/Uuid"
-          description: テナントID
-        env_id:
-          $ref: "#/components/schemas/Id"
-          description: 環境ID
-        active_users:
-          title: アクティブユーザー数
-          description: アクティブユーザー数
-          type: integer
-          example: 100
-      required:
-        - type
-        - date
-        - tenant_id
-        - env_id
-        - active_users
     AggregatedMetrics:
       title: 集計されたメトリクス
       type: object
@@ -13349,6 +13751,12 @@ paths:
       responses:
         "200":
           description: OK
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
         "500":
           description: Internal Server Error
           content:
@@ -13557,6 +13965,36 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ApiKey"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      tags:
+        - smartApiGateway
+      operationId: DeleteApiKey
+      summary: APIキーを削除
+      description: |
+        指定したAPIキーを削除します。
+      parameters:
+        - in: path
+          name: api_key
+          description: APIキー
+          required: true
+          schema:
+            type: string
+            example: 1234567890abcdef
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
         "500":
           description: Internal Server Error
           content:
@@ -14445,7 +14883,7 @@ components:
               description: APIキー
             response_status:
               type: string
-              example: 200
+              example: "200"
               description: レスポンスステータス
             request_uri:
               type: string
@@ -14534,11 +14972,12 @@ paths:
         - userInfo
       operationId: GetUserInfo
       summary: ユーザー情報取得
-      description: |
+      description: >
         SaaS利用ユーザ(登録ユーザ)のIDトークンを元に、ユーザ情報を取得します。
         IDトークンは、SaaSus Platform生成のログイン画面からログイン時にCallback URLに渡されます。
         サーバ側でそのURLからIDトークンを取得し、このAPIを呼ぶことにより、該当ユーザの情報が取得できます。
         取得した上には、所属テナントや役割(ロール)、料金プランなどが含まれているため、それを元に認可の実装を行うことが可能です。
+        IDトークンの検証に失敗し、401 Unauthorized が返される場合、レスポンスの data.sign_in_page_url にログイン画面のURLが返されますので、クライアントはそちらにリダイレクトするなどの対応を行うことができます。
       parameters:
         - in: query
           name: token
@@ -14803,34 +15242,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-    post:
-      tags:
-        - saasUser
-      operationId: SaveSaasUsersCount
-      summary: SaaSユーザー数を保存
-      description: |
-        SaaSユーザー数を保存します。
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/SaveSaasUsersCountParam"
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
   /users/search:
     get:
       tags:
@@ -15060,6 +15471,12 @@ paths:
       responses:
         "200":
           description: OK
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
         "500":
           description: Internal Server Error
           content:
@@ -15276,34 +15693,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TenantUsersCounts"
-        "500":
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-    post:
-      tags:
-        - tenantUser
-      operationId: SaveTenantUsersCounts
-      summary: テナントごとのテナントユーザー数を保存
-      description: |
-        テナントごとのテナントユーザー数を保存します。
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/SaveTenantUsersCountsParam"
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
         "500":
           description: Internal Server Error
           content:
@@ -16466,6 +16855,12 @@ paths:
       responses:
         "200":
           description: OK
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
         "500":
           description: Internal Server Error
           content:
@@ -16477,10 +16872,9 @@ paths:
       tags:
         - authInfo
       operationId: GetSignInSettings
-      summary: パスワード要件を取得
+      summary: 認証設定を取得
       description: |
-        ユーザーパスワードの要件設定を取得します。
-        アルファベット、数字、記号の組み合わせで、桁数を長くすれば解読されづらい安全なパスワードを設定することが可能となります。
+        ユーザーの認証設定（パスワード要件、リフレッシュトークンの有効期間など）を取得します。
       responses:
         "200":
           description: OK
@@ -16499,10 +16893,9 @@ paths:
       tags:
         - authInfo
       operationId: UpdateSignInSettings
-      summary: パスワード要件を更新
+      summary: 認証設定を更新
       description: |
-        ユーザーパスワードの要件設定を更新します。
-        アルファベット、数字、記号の組み合わせで、桁数を長くすれば解読されづらい安全なパスワードを設定することが可能となります。
+        ユーザーの認証設定（パスワード要件、リフレッシュトークンの有効期間など）を更新します。
       requestBody:
         content:
           application/json:
@@ -16511,6 +16904,12 @@ paths:
       responses:
         "200":
           description: OK
+        "400":
+          description: Invalid Parameter
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
         "500":
           description: Internal Server Error
           content:
@@ -16803,9 +17202,10 @@ paths:
         - credential
       operationId: CreateAuthCredentials
       summary: 認証・認可情報の保存
-      description: |
+      description: >
         引数のIDトークン・アクセストークン・リフレッシュトークンを一時保存し取得用の一時コードを返却する。
         一時コードの有効期間は発行から10秒です。
+        code_challengeを指定した場合、その一時コードは POST /credentials/exchange でのみ交換でき、GET /credentials では取得できません。
       requestBody:
         content:
           application/json:
@@ -16826,6 +17226,81 @@ paths:
                 $ref: "#/components/schemas/Error"
         "401":
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /credentials/exchange:
+    post:
+      tags:
+        - credential
+      operationId: ExchangeAuthCredentials
+      summary: 一時コードを認証・認可情報へ交換
+      description: >
+        PKCE code verifierを検証し、一時コードをIDトークン・アクセストークン・リフレッシュトークンへ交換する。
+        交換できるのは code_challenge を指定して作成した一時コードのみです。code_challenge なしで作成した一時コードは GET /credentials で取得してください。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExchangeAuthCredentialsParam"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Credentials"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /token/revoke:
+    post:
+      tags:
+        - credential
+      operationId: RevokeToken
+      summary: トークンの無効化
+      description: |
+        指定したリフレッシュトークンを無効化します。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RevokeTokenParam"
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
           content:
             application/json:
               schema:
@@ -17478,6 +17953,7 @@ components:
         last_login_at:
           type: integer
           x-go-type: int64
+          x-omitempty: false
           nullable: true
           example: 1640995200
           description: |
@@ -18105,7 +18581,9 @@ components:
             Stripe連携時の注意点: 当月の月初（0時 UTC）を開始日時として指定すると、その月の初日から開始されるサブスクリプションを作成できます。 （例: 2023年1月1日 00:00 UTC を指定する場合 → 1672531200）
         next_plan_tax_rate_id:
           $ref: "#/components/schemas/Uuid"
-          description: 税率ID
+          description: |
+            税率ID。
+            プランの解約予約時は、リクエストで指定した値にかかわらず、現在適用中のプランの税率が使用されます。
         proration_behavior:
           $ref: "#/components/schemas/ProrationBehavior"
           description: プラン変更時の比例配分の挙動
@@ -18271,8 +18749,6 @@ components:
         data:
           type: object
           additionalProperties: true
-          example:
-            sign_in_page_url: auth.dev.saasus.io
       required:
         - type
         - message
@@ -18372,7 +18848,7 @@ components:
       properties:
         application_id:
           type: string
-          example: 1234567890123456
+          example: "1234567890123456"
         application_secret:
           type: string
           example: 123456789b00def123456a12345678d1
@@ -18467,6 +18943,8 @@ components:
           $ref: "#/components/schemas/SelfRegist"
         identity_provider_configuration:
           $ref: "#/components/schemas/IdentityProviderConfiguration"
+        refresh_token_validity:
+          $ref: "#/components/schemas/RefreshTokenValidity"
       required:
         - password_policy
         - device_configuration
@@ -18475,6 +18953,36 @@ components:
         - account_verification
         - self_regist
         - identity_provider_configuration
+        - refresh_token_validity
+    RefreshTokenValidity:
+      type: object
+      description: リフレッシュトークンの有効期間
+      properties:
+        value:
+          type: integer
+          x-go-type: uint64
+          example: 30
+          description: |
+            リフレッシュトークンの有効期間の値。60分以上10年以内で指定してください。
+        unit:
+          $ref: "#/components/schemas/RefreshTokenValidityUnit"
+      required:
+        - value
+        - unit
+    RefreshTokenValidityUnit:
+      type: string
+      enum:
+        - seconds
+        - minutes
+        - hours
+        - days
+      example: days
+      description: |
+        リフレッシュトークンの有効期間の単位。
+        seconds: 秒
+        minutes: 分
+        hours: 時間
+        days: 日
     PasswordPolicy:
       type: object
       description: パスワードポリシー
@@ -18561,6 +19069,7 @@ components:
         - sending_to
     UpdateSignInSettingsParam:
       type: object
+      description: リフレッシュトークンの有効期間を更新する場合は、refresh_token_validity の value と unit を指定してください。
       properties:
         password_policy:
           $ref: "#/components/schemas/PasswordPolicy"
@@ -18574,6 +19083,8 @@ components:
           $ref: "#/components/schemas/AccountVerification"
         self_regist:
           $ref: "#/components/schemas/SelfRegist"
+        refresh_token_validity:
+          $ref: "#/components/schemas/RefreshTokenValidity"
     MfaConfiguration:
       type: object
       description: |
@@ -18863,7 +19374,56 @@ components:
         - access_token
     CreateAuthCredentialsParam:
       title: 認証・認可情報の保存パラメータ
-      $ref: "#/components/schemas/Credentials"
+      allOf:
+        - $ref: "#/components/schemas/Credentials"
+        - type: object
+          properties:
+            code_challenge:
+              title: PKCEコードチャレンジ
+              description: code verifierから生成したPKCEコードチャレンジ
+              type: string
+              minLength: 43
+              maxLength: 128
+              pattern: ^[A-Za-z0-9\-._~]+$
+            code_challenge_method:
+              title: PKCEコードチャレンジ方式
+              description: PKCEコードチャレンジの生成方式
+              type: string
+              enum:
+                - S256
+    ExchangeAuthCredentialsParam:
+      title: 一時コード交換パラメータ
+      type: object
+      properties:
+        auth_flow:
+          title: 認証フロー
+          description: 交換に使用する認証フロー
+          type: string
+          enum:
+            - tempCodeAuth
+        code:
+          title: 一時コード
+          description: 一時コード
+          $ref: "#/components/schemas/Uuid"
+        code_verifier:
+          title: PKCEコードベリファイア
+          description: 一時コードに紐付くPKCEコードベリファイア
+          type: string
+          minLength: 43
+          maxLength: 128
+          pattern: ^[A-Za-z0-9\-._~]+$
+      required:
+        - auth_flow
+    RevokeTokenParam:
+      title: トークン無効化パラメータ
+      type: object
+      properties:
+        refresh_token:
+          title: リフレッシュトークン
+          description: 無効化するリフレッシュトークン
+          type: string
+      required:
+        - refresh_token
     AuthorizationTempCode:
       type: object
       properties:
@@ -19203,7 +19763,7 @@ components:
           title: AssumeRoleする時に使用するExternalID
           description: SaaSusがSaaSを操作するためにAssumeRoleする時に使用するexternal id
           type: string
-          example: 1234567890
+          example: "1234567890"
       required:
         - enabled
         - role_arn
@@ -19238,7 +19798,7 @@ components:
           title: AssumeRoleする時に使用するExternalID
           description: SaaSusがSaaSを操作するためにAssumeRoleする時に使用するexternal id
           type: string
-          example: 1234567890
+          example: "1234567890"
     StripeCustomer:
       title: Stripeの顧客ID連携情報
       type: object
@@ -19803,6 +20363,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CatalogEntityVisibility"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
         "500":
           description: Internal Server Error
           content:
@@ -19838,7 +20404,7 @@ components:
       required: true
       schema:
         type: string
-        example: 123456789012
+        example: "123456789012"
   schemas:
     Error:
       properties:
@@ -19860,13 +20426,13 @@ components:
       properties:
         product_code:
           type: string
-          example: 1234567890
+          example: "1234567890"
         role_arn:
           type: string
           example: arn:aws:iam::123456789012:role/role-name
         role_external_id:
           type: string
-          example: 1234567890
+          example: "1234567890"
         sns_topic_arn:
           type: string
           example: arn:aws:sns:us-east-1:123456789012:topic-name
@@ -19901,13 +20467,13 @@ components:
       properties:
         product_code:
           type: string
-          example: 1234567890
+          example: "1234567890"
         role_arn:
           type: string
           example: arn:aws:iam::123456789012:role/role-name
         role_external_id:
           type: string
-          example: 1234567890
+          example: "1234567890"
         sns_topic_arn:
           type: string
           example: arn:aws:sns:us-east-1:123456789012:topic-name
@@ -20179,7 +20745,7 @@ components:
         secret_key:
           type: string
           description: シークレットキー
-          example: sk_test_09l3shTSTKHYCzzZZsiLl2vA
+          example: sk_test_dummy
       required:
         - secret_key
 
@@ -20810,28 +21376,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  /eventbridge/event:
-    post:
-      tags:
-        - eventBridge
-      operationId: CreateEventBridgeEvent
-      summary: イベント連携の送信
-      description: |
-        Amazon EventBridge へイベントを送信します。
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateEventBridgeEventParam"
-      responses:
-        "201":
-          description: Created
-        "500":
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
   /eventbridge/test-event:
     post:
       tags:
@@ -20900,7 +21444,7 @@ components:
       properties:
         aws_account_id:
           type: string
-          example: 267185063265
+          example: "267185063265"
           description: AWSアカウントID
         aws_region:
           $ref: "#/components/schemas/AwsRegion"
@@ -21315,28 +21859,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/UpdatePricingPlanParam"
-      responses:
-        "200":
-          description: OK
-        "500":
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-  /plans/used:
-    patch:
-      tags:
-        - pricingPlans
-      operationId: UpdatePricingPlansUsed
-      summary: 使用済みフラグ更新
-      description: |
-        料金プランと配下のメニュー・ユニットを使用済みに更新します。
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UpdatePricingPlansUsedParam"
       responses:
         "200":
           description: OK
@@ -22082,6 +22604,10 @@ components:
       type: object
       allOf:
         - properties:
+            type:
+              type: string
+              enum:
+                - tiered_usage
             upper_count:
               type: integer
               x-go-type: uint64
@@ -22103,6 +22629,10 @@ components:
       type: object
       allOf:
         - properties:
+            type:
+              type: string
+              enum:
+                - tiered
             upper_count:
               type: integer
               x-go-type: uint64
@@ -22124,6 +22654,10 @@ components:
       type: object
       allOf:
         - properties:
+            type:
+              type: string
+              enum:
+                - usage
             upper_count:
               type: integer
               x-go-type: uint64
@@ -22150,6 +22684,10 @@ components:
       type: object
       allOf:
         - properties:
+            type:
+              type: string
+              enum:
+                - fixed
             unit_amount:
               type: integer
               x-go-type: uint64
@@ -22176,6 +22714,16 @@ components:
         - $ref: "#/components/schemas/PricingTieredUnit"
         - $ref: "#/components/schemas/PricingUsageUnit"
         - $ref: "#/components/schemas/PricingFixedUnit"
+      example:
+        id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+        type: fixed
+        name: storage_unit
+        display_name: ストレージユニット
+        description: KB unit for storage usage
+        currency: JPY
+        unit_amount: 10000
+        recurring_interval: month
+        used: false
     PricingUnitForSave:
       title: プライシングユニット保存パラメータ
       type: object
@@ -22201,6 +22749,64 @@ components:
             $ref: "#/components/schemas/PricingUnit"
       required:
         - units
+      example:
+        units:
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+            type: fixed
+            name: fixed_unit
+            display_name: 固定ユニット
+            description: Fixed unit for storage usage
+            currency: JPY
+            unit_amount: 10000
+            recurring_interval: month
+            used: false
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe776
+            type: usage
+            name: usage_unit
+            display_name: 使用量ユニット
+            description: Usage unit for storage usage
+            currency: JPY
+            metering_unit_id: 2e9ad0b1-0f3a-4a1c-9f8e-6b5d4c3a2b10
+            metering_unit_name: test_unit
+            recurring_interval: month
+            upper_count: 100
+            unit_amount: 10000
+            aggregate_usage: sum
+            used: false
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe777
+            type: tiered
+            name: tiered_unit
+            display_name: 段階ユニット
+            description: Tiered unit for storage usage
+            currency: JPY
+            metering_unit_id: 2e9ad0b1-0f3a-4a1c-9f8e-6b5d4c3a2b10
+            metering_unit_name: test_unit
+            recurring_interval: month
+            upper_count: 100
+            aggregate_usage: sum
+            used: false
+            tiers:
+              - up_to: 5
+                unit_amount: 1000
+                flat_amount: 500
+                inf: false
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe778
+            type: tiered_usage
+            name: tiered_usage_unit
+            display_name: 段階的使用量ユニット
+            description: Tiered usage unit for storage usage
+            currency: JPY
+            metering_unit_id: 2e9ad0b1-0f3a-4a1c-9f8e-6b5d4c3a2b10
+            metering_unit_name: test_unit
+            recurring_interval: month
+            upper_count: 100
+            aggregate_usage: sum
+            used: false
+            tiers:
+              - up_to: 5
+                unit_amount: 1000
+                flat_amount: 500
+                inf: false
     PricingTiers:
       title: 従量課金情報一覧
       type: object
@@ -22306,6 +22912,22 @@ components:
           required:
             - id
         - $ref: "#/components/schemas/PricingMenuProps"
+      example:
+        id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+        name: Ten Users Menu
+        display_name: 10ユーザーメニュー
+        description: Can use 10 users.
+        used: false
+        units:
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+            type: fixed
+            name: storage_unit
+            display_name: ストレージユニット
+            description: KB unit for storage usage
+            currency: JPY
+            unit_amount: 10000
+            recurring_interval: month
+            used: false
     PricingMenus:
       title: プライシング機能メニュー一覧
       type: object
@@ -22316,6 +22938,23 @@ components:
             $ref: "#/components/schemas/PricingMenu"
       required:
         - pricing_menus
+      example:
+        pricing_menus:
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+            name: Ten Users Menu
+            display_name: 10ユーザーメニュー
+            description: Can use 10 users.
+            used: false
+            units:
+              - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+                type: fixed
+                name: storage_unit
+                display_name: ストレージユニット
+                description: KB unit for storage usage
+                currency: JPY
+                unit_amount: 10000
+                recurring_interval: month
+                used: false
     PricingPlanProps:
       title: 料金プラン基本情報
       type: object
@@ -22384,6 +23023,28 @@ components:
           required:
             - id
         - $ref: "#/components/schemas/PricingPlanProps"
+      example:
+        id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+        name: Standard Plan
+        display_name: スタンダードプラン
+        description: Standard Plan for normal use
+        used: false
+        pricing_menus:
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+            name: Ten Users Menu
+            display_name: 10ユーザーメニュー
+            description: Can use 10 users.
+            used: false
+            units:
+              - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+                type: fixed
+                name: storage_unit
+                display_name: ストレージユニット
+                description: KB unit for storage usage
+                currency: JPY
+                unit_amount: 10000
+                recurring_interval: month
+                used: false
     PricingPlans:
       title: 料金プラン一覧
       type: object
@@ -22394,6 +23055,29 @@ components:
             $ref: "#/components/schemas/PricingPlan"
       required:
         - pricing_plans
+      example:
+        pricing_plans:
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+            name: Standard Plan
+            display_name: スタンダードプラン
+            description: Standard Plan for normal use
+            used: false
+            pricing_menus:
+              - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+                name: Ten Users Menu
+                display_name: 10ユーザーメニュー
+                description: Can use 10 users.
+                used: false
+                units:
+                  - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+                    type: fixed
+                    name: storage_unit
+                    display_name: ストレージユニット
+                    description: KB unit for storage usage
+                    currency: JPY
+                    unit_amount: 10000
+                    recurring_interval: month
+                    used: false
     UpdatePricingPlansUsedParam:
       title: 料金プランと配下のメニュー・ユニットを使用済みに更新パラメータ
       type: object

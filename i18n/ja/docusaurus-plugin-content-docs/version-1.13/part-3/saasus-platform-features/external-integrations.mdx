@@ -1,0 +1,80 @@
+---
+title: "外部サービス連携"
+slug: "external-integrations"
+excerpt: "外部サービス連携の機能、関連API、参考ガイド。"
+hidden: true
+createdAt: "Thu Oct 22 2026 02:21:58 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Oct 27 2026 03:09:05 GMT+0000 (Coordinated Universal Time)"
+---
+
+import FeatureTable from '@site/src/components/FeatureTable';
+
+Stripeによる課金・請求、Amazon EventBridgeへのイベント配信、AWS Marketplaceとの連携を提供する機能です。  
+連携先の設定に加え、イベント受信後の処理やテナントとの紐付けなどをSaaSアプリケーションに実装します。
+
+関連APIはBilling API、Auth API、Pricing API、Integration APIの操作名で表記しています。
+
+## Stripe連携
+
+SaaSus Platform で管理する料金プラン、税率、テナント、利用量をStripeと連携し、課金・請求に利用する機能です。  
+SaaS 開発コンソールで接続を設定すると、プラン適用や利用量の記録に応じた連携処理が行われます。  
+Stripeを利用しない場合は、取得した料金・契約・利用量の情報を使い、自社側で請求処理を用意します。
+
+<FeatureTable>
+
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| 接続情報の取得・設定・連携解除 | Stripeとの接続状況を確認し、シークレットキーを登録・削除します。SaaS 開発コンソールで連携を設定すると、既存の料金プラン・税率・テナントもStripeに登録されます。連携を解除すると、Stripe上の顧客は削除され、商品はアーカイブされます。<br />参考：[Stripeとの連携設定](/ja/docs/part-4/pricing-and-billing/stripe-integration) | [GetStripeInfo](/ja/docs/reference/billing-api#tag/stripe/operation/GetStripeInfo) [UpdateStripeInfo](/ja/docs/reference/billing-api#tag/stripe/operation/UpdateStripeInfo) [DeleteStripeInfo](/ja/docs/reference/billing-api#tag/stripe/operation/DeleteStripeInfo) [DeleteStripeTenantAndPricing](/ja/docs/reference/auth-api#tag/tenant/operation/DeleteStripeTenantAndPricing) |
+| 料金プラン・税率・顧客情報の連携 | 初期連携では既存の料金プラン・税率・テナントをStripeに反映します。連携後は、プランや税率の作成、テナント情報・請求先情報の更新などに応じて自動で反映します。<br />参考：[Stripeとの連携設定](/ja/docs/part-4/pricing-and-billing/stripe-integration) | [CreateTenantAndPricing](/ja/docs/reference/auth-api#tag/tenant/operation/CreateTenantAndPricing) [LinkPlanToStripe](/ja/docs/reference/pricing-api#tag/pricingPlans/operation/LinkPlanToStripe) |
+| Stripe顧客情報の取得 | テナントに対応するStripe顧客情報を取得します。サブスクリプション情報も含まれ、連携先の状態確認などに利用できます。<br />参考：[テナントの請求先情報を設定](/ja/docs/part-5/price-plan/price-plan-setting-000) | [GetStripeCustomer](/ja/docs/reference/auth-api#tag/tenant/operation/GetStripeCustomer) |
+| 課金・請求処理との連携 | テナントへのプラン適用・変更をStripeのサブスクリプションに反映し、記録した利用量をStripeに連携します。支払方法や請求書などの管理はStripe側で行います。<br />参考：[Stripeとの連携設定](/ja/docs/part-4/pricing-and-billing/stripe-integration) | [UpdateTenantPlan](/ja/docs/reference/auth-api#tag/tenant/operation/UpdateTenantPlan) [UpdateMeteringUnitTimestampCountNow](/ja/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCountNow) [UpdateMeteringUnitTimestampCount](/ja/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCount) |
+
+</FeatureTable>
+
+### 決済画面
+
+SaaSus Platformは、料金プランの適用・変更に応じてStripeにサブスクリプションの作成・更新を指示します。  
+カード情報の入力や3Dセキュアによる本人認証の画面は、SaaSus Platformでは提供していません。必要な場合は、Stripeの請求書支払いページ（Hosted Invoice Page）などを組み込みます。
+
+### 決済イベントの受信
+
+決済完了時のメール送信や返金の検知などを行う場合は、SaaSアプリケーションのサーバーでStripe Webhookを直接受信します。  
+SaaSus Platformは、StripeのWebhookイベントを中継しません。
+
+### Stripe側で行う操作
+
+次の操作は、SaaSus Platform コンソールではなく、Stripeダッシュボードで行います。
+
+- 返金・請求書の再発行
+- 銀行振込など、クレジットカード以外の支払方法による請求書払いの設定
+- クーポンによる個別割引の設定
+
+クーポンは、対象テナントに対応するStripeの顧客またはサブスクリプションに設定します。  
+Stripe側で料金プランや計測単位の構成を変更すると、SaaSus Platformとの間で不整合が生じるおそれがあります。連携している料金定義の変更は、SaaSus Platform側で行います。
+
+## Amazon EventBridge
+
+ユーザーやテナントの作成など、SaaSus Platformで発生したイベントを自社のAWSアカウントへ配信する機能です。  
+SaaS 開発コンソールで送信先を設定し、Amazon EventBridgeのイベントバス・ルール・処理先を自社側で用意します。
+
+<FeatureTable>
+
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| 接続設定の取得・更新・削除 | 送信先のAWSアカウントIDとリージョンを設定します。受信側では、作成されたパートナーイベントソースをイベントバスに関連付けます。<br />参考：[Amazon EventBridge 連携機能](/ja/docs/part-4/integrate-with-amazon-eventbridge) | [GetEventBridgeSettings](/ja/docs/reference/integration#tag/eventBridge/operation/GetEventBridgeSettings) [SaveEventBridgeSettings](/ja/docs/reference/integration#tag/eventBridge/operation/SaveEventBridgeSettings) [DeleteEventBridgeSettings](/ja/docs/reference/integration#tag/eventBridge/operation/DeleteEventBridgeSettings) |
+| 接続テスト | テストイベントを送信し、受信側のルールや処理先まで届くかを確認します。<br />参考：[Amazon EventBridge 連携機能](/ja/docs/part-4/integrate-with-amazon-eventbridge) | [CreateEventBridgeTestEvent](/ja/docs/reference/integration#tag/eventBridge/operation/CreateEventBridgeTestEvent) |
+| SaaSus Platformで発生するイベントの配信 | 参照系（GET）を除くSaaSus APIのイベントを配信します。自社側でイベントを受信し、テナント作成後の初期設定やユーザー削除後のデータ整理などを実装します。<br />参考：[イベントサンプル](/ja/docs/part-4/integrate-with-amazon-eventbridge/event-sample) | — |
+
+</FeatureTable>
+
+## AWS Marketplace
+
+AWS Marketplaceの販売プラン、購入者、テナントを関連付ける機能です。  
+購入者の新規登録はログイン画面で処理し、既存テナントとの紐付けはSaaSアプリケーションに組み込みます。
+
+:::caution 新規利用停止中
+
+既存ガイドでは、AWS Marketplaceの仕様変更に未対応のため、新規利用を停止している旨を案内しています。  
+提供状況は[AWS Marketplace 連携機能について](/ja/docs/part-4/aws-marketplace-integration/aws-marketplace-integration)を確認してください。
+
+:::

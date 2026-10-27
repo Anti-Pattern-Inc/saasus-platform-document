@@ -215,5 +215,9 @@
   "sidebar.changelogSidebar.doc.2024/04/11": {
     "message": "2024/04/11",
     "description": "The label for the doc item 2024/04/11 in sidebar changelogSidebar, linking to the doc changelog/20240411"
+  },
+  "sidebar.docsSidebar.category.Features": {
+    "message": "機能一覧",
+    "description": "The label for category Features in sidebar docsSidebar"
   }
 }

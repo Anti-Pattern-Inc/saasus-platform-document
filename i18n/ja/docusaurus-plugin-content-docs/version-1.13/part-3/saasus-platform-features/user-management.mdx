@@ -1,0 +1,54 @@
+---
+title: "ユーザー管理"
+slug: "user-management"
+excerpt: "SaaSユーザーの情報管理と、テナントへの追加・テナントからの削除を行う機能。"
+hidden: true
+createdAt: "Wed Oct 21 2026 00:58:29 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Oct 27 2026 03:09:05 GMT+0000 (Coordinated Universal Time)"
+---
+
+import FeatureTable, {FeatureAnchor} from '@site/src/components/FeatureTable';
+
+SaaS に登録されたユーザーの情報を管理し、テナントへの追加・テナントからの削除を行う機能です。  
+SaaSユーザーはサービス全体のユーザー、テナントユーザーは特定のテナントに所属するユーザーを表します。  
+1人のSaaSユーザーは、複数のテナントに所属できます。
+
+関連APIはAuth APIの操作名で表記しています。
+
+## SaaSユーザー
+
+サービスに登録されたユーザーのログイン情報や属性を管理する機能です。  
+日々の管理はSaaS 運用コンソールで行い、SaaSアプリケーションに管理画面や利用者向けの情報変更機能を作る場合にAPIを組み込みます。  
+利用者自身の登録にはログイン画面のセルフサインアップ、管理者による登録にはユーザー作成機能を使います。
+
+<FeatureTable>
+
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| 一覧取得・検索・個別情報取得 | 一覧取得のほか、ユーザーID・メールアドレス・ログインIDで検索できます。<br />参考：[（旧画面）ユーザーの検索・作成・編集・テナント追加](/ja/docs/part-5/user-management/user-crud) / [（新画面）ユーザーの検索・作成・編集・テナント追加](/ja/docs/part-5/user-management/user-management-new-ui) | [GetSaasUsers](/ja/docs/reference/auth-api#tag/saasUser/operation/GetSaasUsers) [SearchSaasUsers](/ja/docs/reference/auth-api#tag/saasUser/operation/SearchSaasUsers) [GetSaasUser](/ja/docs/reference/auth-api#tag/saasUser/operation/GetSaasUser) |
+| 作成・削除 | SaaSユーザーを作成・削除します。メールアドレス認証のユーザーをパスワード未指定で作成すると、一時パスワードがメールで送信されます。削除すると、すべてのテナントからも削除されます。利用者が自分で登録する場合はセルフサインアップを使います。<br />参考：[（旧画面）ユーザーの検索・作成・編集・テナント追加](/ja/docs/part-5/user-management/user-crud) / [認証方式の設定](/ja/docs/part-4/user-authz-settings/authentication-method-settings) | [CreateSaasUser](/ja/docs/reference/auth-api#tag/saasUser/operation/CreateSaasUser) [DeleteSaasUser](/ja/docs/reference/auth-api#tag/saasUser/operation/DeleteSaasUser) |
+| メールアドレス・ログインIDによる情報取得 | メールアドレスまたはログインIDを指定して、ユーザー情報と、そのユーザーが所属するテナントや役割の情報を取得します。 | [GetUserInfoByEmail](/ja/docs/reference/auth-api#tag/userInfo/operation/GetUserInfoByEmail) [GetUserInfoBySignInId](/ja/docs/reference/auth-api#tag/userInfo/operation/GetUserInfoBySignInId) |
+| パスワードの変更・リセット | 対象ユーザーのパスワード設定や、一時パスワードの発行を行います。一時パスワードでのログイン後は、新しいパスワードの設定が必要です。ログインID認証のユーザーには通知先のメールアドレスがないため、管理者から利用者へパスワードを連絡します。ログイン画面で利用者自身が行う[パスワードを忘れた場合の再設定](/ja/docs/part-3/saasus-platform-features/authentication#forgotten-password-recovery)とは別の処理です。<br />参考：[（旧画面）ユーザーの検索・作成・編集・テナント追加](/ja/docs/part-5/user-management/user-crud) | [UpdateSaasUserPassword](/ja/docs/reference/auth-api#tag/saasUser/operation/UpdateSaasUserPassword) [ResetSaasUserPassword](/ja/docs/reference/auth-api#tag/saasUser/operation/ResetSaasUserPassword) |
+| メールアドレスの変更 | メールアドレスで認証するユーザーが対象です。管理者がユーザーのメールアドレスを変更します。<br />参考：[（旧画面）ユーザーの検索・作成・編集・テナント追加](/ja/docs/part-5/user-management/user-crud) | [UpdateSaasUserEmail](/ja/docs/reference/auth-api#tag/saasUser/operation/UpdateSaasUserEmail) |
+| 利用者自身によるメールアドレスの変更 | 変更先のメールアドレスへ確認コードを送り、コードを検証してメールアドレスを変更します。メールアドレスで認証するユーザーが対象で、事前にドメイン・メール送信の設定が必要です。<br />参考：[ドメイン・メール送信ドメイン認証・遷移先の設定](/ja/docs/part-4/application-settings/domain-and-redirect-settings) | [RequestEmailUpdate](/ja/docs/reference/auth-api#tag/saasUser/operation/RequestEmailUpdate) [ConfirmEmailUpdate](/ja/docs/reference/auth-api#tag/saasUser/operation/ConfirmEmailUpdate) |
+| ログインIDの変更 | ログインID認証のユーザーが対象です。メールアドレス認証からの認証方式の変更には利用できません。<br />参考：[（旧画面）ユーザーの検索・作成・編集・テナント追加](/ja/docs/part-5/user-management/user-crud) | [UpdateSaasUserSignInId](/ja/docs/reference/auth-api#tag/saasUser/operation/UpdateSaasUserSignInId) |
+| <FeatureAnchor id="saas-user-attributes">ユーザー属性の更新</FeatureAnchor> | ユーザーごとの属性値を更新します。SaaSアプリケーションのプロフィール編集などに利用でき、テナントごとのユーザー属性とは別に管理します。 | [UpdateSaasUserAttributes](/ja/docs/reference/auth-api#tag/saasUser/operation/UpdateSaasUserAttributes) |
+
+</FeatureTable>
+
+## SaaSユーザーをテナントへ追加・削除
+
+登録済みのSaaSユーザーをテナントに追加し、テナントごとのユーザー情報を管理するための機能です。  
+テナントへの追加・テナントからの削除はSaaS 運用コンソールで行え、SaaSアプリケーションで管理機能を提供する場合はAPIを組み込みます。  
+取得したテナントや役割の情報を使った画面・機能の利用可否の判定は、SaaSアプリケーションで実装します。
+
+<FeatureTable>
+
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| テナントユーザーの追加・取得・削除 | 登録済みのSaaSユーザーをテナントに追加し、テナントユーザーの情報取得や削除を行います。テナントから削除しても、SaaSユーザーのアカウントは残ります。<br />参考：[（旧画面）ユーザーの検索・作成・編集・テナント追加](/ja/docs/part-5/user-management/user-crud) | [CreateTenantUser](/ja/docs/reference/auth-api#tag/tenantUser/operation/CreateTenantUser) [GetTenantUsers](/ja/docs/reference/auth-api#tag/tenantUser/operation/GetTenantUsers) [GetTenantUser](/ja/docs/reference/auth-api#tag/tenantUser/operation/GetTenantUser) [DeleteTenantUser](/ja/docs/reference/auth-api#tag/tenantUser/operation/DeleteTenantUser) |
+| <FeatureAnchor id="tenant-user-attributes">テナントユーザーの属性更新</FeatureAnchor> | テナントごとのユーザー属性の値を更新します。SaaSユーザー全体の属性とは別に管理します。<br />参考：[ユーザー属性定義](/ja/docs/part-4/user-authz-settings/declare-additional-attribute-to-user) | [UpdateTenantUser](/ja/docs/reference/auth-api#tag/tenantUser/operation/UpdateTenantUser) |
+| 全テナントを横断したユーザー検索 | テナントID・環境・役割などの条件で、テナントを横断して検索できます。<br />参考：[（新画面）ユーザーの検索・作成・編集・テナント追加](/ja/docs/part-5/user-management/user-management-new-ui) | [SearchTenantUsers](/ja/docs/reference/auth-api#tag/tenantUser/operation/SearchTenantUsers) |
+| ユーザーが所属するテナント・役割情報の取得 | GetUserInfoはIDトークンから、ユーザーが所属するテナントのうち、環境情報のあるテナントと役割を取得します。GetAllTenantUserはユーザーIDから、ユーザーが所属するすべてのテナントのユーザー情報と役割を取得します。取得結果を使ったアクセス制御はSaaSアプリケーションで実装します。<br />参考：[役割管理](/ja/docs/part-5/adding-role-to-user) | [GetUserInfo](/ja/docs/reference/auth-api#tag/userInfo/operation/GetUserInfo) [GetAllTenantUser](/ja/docs/reference/auth-api#tag/tenantUser/operation/GetAllTenantUser) |
+
+</FeatureTable>

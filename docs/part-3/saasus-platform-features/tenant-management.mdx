@@ -1,0 +1,46 @@
+---
+title: "Tenant management"
+slug: "tenant-management"
+excerpt: "Manage tenant details, attributes, billing information, and invitations."
+hidden: true
+createdAt: "Thu Oct 22 2026 07:06:04 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Oct 27 2026 03:09:05 GMT+0000 (Coordinated Universal Time)"
+---
+
+import FeatureTable, {FeatureAnchor} from '@site/src/components/FeatureTable';
+
+Manage tenant information and invitations to tenants.  
+See [User management](/docs/part-3/saasus-platform-features/user-management) for adding registered users to tenants or removing users from tenants.
+
+Related API links use operation names from Auth API.
+
+## Tenants
+
+Create tenants and manage their basic details, attributes, and billing information.  
+Use the SaaS Operations Console to manage basic details, additional attributes, and billing information; integrate APIs to automate tasks such as tenant creation during subscription sign-up.
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| List, retrieve, create, edit, and delete tenants | View tenant lists and details, and register or update basic information such as tenant names. You can also delete tenants that are no longer needed.<br />References: [Tenant Management](/docs/part-5/tenant-management) | [GetTenants](/docs/reference/auth-api#tag/tenant/operation/GetTenants) [GetTenant](/docs/reference/auth-api#tag/tenant/operation/GetTenant) [CreateTenant](/docs/reference/auth-api#tag/tenant/operation/CreateTenant) [UpdateTenant](/docs/reference/auth-api#tag/tenant/operation/UpdateTenant) [DeleteTenant](/docs/reference/auth-api#tag/tenant/operation/DeleteTenant) |
+| <FeatureAnchor id="tenant-attributes">Configure tenant attributes</FeatureAnchor> | Set values for each tenant using predefined attributes. Create the attribute fields under tenant attribute definitions in the SaaS Development Console.<br />References: [Tenant Management](/docs/part-5/tenant-management) | [UpdateTenant](/docs/reference/auth-api#tag/tenant/operation/UpdateTenant) |
+| Retrieve and update billing information | Manage names, addresses, and other information displayed on invoices, separately from tenant basic details.<br />References: [Tenant Management](/docs/part-5/tenant-management) | [GetTenants](/docs/reference/auth-api#tag/tenant/operation/GetTenants) [GetTenant](/docs/reference/auth-api#tag/tenant/operation/GetTenant) [UpdateTenantBillingInfo](/docs/reference/auth-api#tag/tenant/operation/UpdateTenantBillingInfo) |
+
+</FeatureTable>
+
+## Invitations
+
+Invite users to a tenant.  
+Integrate invitation management such as creation and listing into your application; invited users can use the login pages to register, sign in, and accept.  
+Your application controls who can create invitations and which roles they can assign.
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Create, list, retrieve, and delete invitations | Creating an invitation requires the inviter’s access token, and the inviter must belong to the target tenant. Domain and email delivery settings must be configured in advance because creating an invitation sends an invitation email.<br />References: [Sample Application Overview](/docs/part-6/implementation-guide/sample-application/overview) / [Domain & Email Sending Domain Authentication and Redirect Settings](/docs/part-4/application-settings/domain-and-redirect-settings) | [CreateTenantInvitation](/docs/reference/auth-api#tag/invitation/operation/CreateTenantInvitation) [GetTenantInvitations](/docs/reference/auth-api#tag/invitation/operation/GetTenantInvitations) [GetTenantInvitation](/docs/reference/auth-api#tag/invitation/operation/GetTenantInvitation) [DeleteTenantInvitation](/docs/reference/auth-api#tag/invitation/operation/DeleteTenantInvitation) |
+| Check invitation validity | When an invitation URL is opened, check whether the invitation has expired or has already been accepted. | [GetInvitationValidity](/docs/reference/auth-api#tag/invitation/operation/GetInvitationValidity) |
+| Accept invitations and join a tenant | Invited users accept the invitation through the login pages and join the tenant. New users register an account, while existing users sign in to accept. The roles specified in the invitation are assigned when they join.<br />References: [Sample Application Overview](/docs/part-6/implementation-guide/sample-application/overview) | [ValidateInvitation](/docs/reference/auth-api#tag/invitation/operation/ValidateInvitation) |
+
+</FeatureTable>

@@ -1,0 +1,59 @@
+---
+title: "Role, attribute, and environment definitions"
+slug: "authorization"
+excerpt: "Features for defining roles, environments, and additional user and tenant attributes."
+hidden: true
+createdAt: "Wed Oct 21 2026 07:31:49 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Oct 27 2026 03:09:05 GMT+0000 (Coordinated Universal Time)"
+---
+
+import FeatureTable from '@site/src/components/FeatureTable';
+
+These features define roles and environments for SaaS authorization and additional fields for users and tenants.  
+Use the roles and environments assigned to users to control access to pages and features in your SaaS application.
+
+Related API links use operation names from Auth API.
+
+## Role definitions
+
+Define roles such as administrator or regular user and assign them per tenant and environment.  
+Define roles in the SaaS Development Console and assign or remove them in the SaaS Operations Console.  
+Your application implements access control for its pages and features based on those roles.
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| List, create, update, and delete roles | Define role names and display names. Updates change the display name; the default admin role cannot be deleted.<br />References: [Roles](/docs/part-4/user-authz-settings/role-definition) | [GetRoles](/docs/reference/auth-api#tag/role/operation/GetRoles) [CreateRole](/docs/reference/auth-api#tag/role/operation/CreateRole) [UpdateRole](/docs/reference/auth-api#tag/role/operation/UpdateRole) [DeleteRole](/docs/reference/auth-api#tag/role/operation/DeleteRole) |
+| Assign and remove tenant user roles per environment | Assign or remove roles for an existing tenant user in a specified environment. The same user can have different roles in each tenant and environment.<br />References: [Role Management](/docs/part-5/adding-role-to-user) / [(New Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-management-new-ui) | [CreateTenantUserRoles](/docs/reference/auth-api#tag/tenantUser/operation/CreateTenantUserRoles) [DeleteTenantUserRole](/docs/reference/auth-api#tag/tenantUser/operation/DeleteTenantUserRole) |
+
+</FeatureTable>
+
+## Attribute definitions
+
+Define fields for additional user or tenant information, such as names, departments, or notes.  
+Define tenant user and tenant attributes in the SaaS Development Console; define SaaS user attributes through SaaSus API.  
+Defining attribute fields is separate from updating values for individual users or tenants.
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Define SaaS user attributes | Define attribute fields, such as a user name, for SaaS users. For updating values, see [User management: Updating user attributes](/docs/part-3/saasus-platform-features/user-management#saas-user-attributes).<br />References: [User management](/docs/part-3/saasus-platform-features/user-management) | [CreateSaasUserAttribute](/docs/reference/auth-api#tag/userAttribute/operation/CreateSaasUserAttribute) |
+| Define, list, and delete tenant user attributes | Define user attribute fields that can hold different values per tenant membership. For membership-specific values, see [Update tenant user attributes in User management](/docs/part-3/saasus-platform-features/user-management#tenant-user-attributes).<br />References: [User Attributes](/docs/part-4/user-authz-settings/declare-additional-attribute-to-user) / [User management](/docs/part-3/saasus-platform-features/user-management) | [GetUserAttributes](/docs/reference/auth-api#tag/userAttribute/operation/GetUserAttributes) [CreateUserAttribute](/docs/reference/auth-api#tag/userAttribute/operation/CreateUserAttribute) [DeleteUserAttribute](/docs/reference/auth-api#tag/userAttribute/operation/DeleteUserAttribute) |
+| Define, list, and delete tenant attributes | Define additional tenant attribute fields. For individual tenant values, see [Configure tenant attributes in Tenant management](/docs/part-3/saasus-platform-features/tenant-management#tenant-attributes).<br />References: [Tenant Attributes](/docs/part-4/application-settings/declare-additional-attribute-to-tenant) / [Tenant management](/docs/part-3/saasus-platform-features/tenant-management) | [GetTenantAttributes](/docs/reference/auth-api#tag/tenantAttribute/operation/GetTenantAttributes) [CreateTenantAttribute](/docs/reference/auth-api#tag/tenantAttribute/operation/CreateTenantAttribute) [DeleteTenantAttribute](/docs/reference/auth-api#tag/tenantAttribute/operation/DeleteTenantAttribute) |
+
+</FeatureTable>
+
+## User environment definitions
+
+Define the environments users can access and their roles in each environment. For example, assign a user the administrator role for testing and the regular user role for production, and have your SaaS application determine which operations are allowed.  
+These definitions are separate from the environments you switch between in the SaaSus Platform Console.
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| List, retrieve, create, update, and delete user environment definitions | Manage environment IDs, names, and display names. The default production environment (ID: 3) cannot be deleted.<br />References: [User Environment Definitions](/docs/part-4/user-authz-settings/user-env-definition) | [GetEnvs](/docs/reference/auth-api#tag/env/operation/GetEnvs) [GetEnv](/docs/reference/auth-api#tag/env/operation/GetEnv) [CreateEnv](/docs/reference/auth-api#tag/env/operation/CreateEnv) [UpdateEnv](/docs/reference/auth-api#tag/env/operation/UpdateEnv) [DeleteEnv](/docs/reference/auth-api#tag/env/operation/DeleteEnv) |
+
+</FeatureTable>

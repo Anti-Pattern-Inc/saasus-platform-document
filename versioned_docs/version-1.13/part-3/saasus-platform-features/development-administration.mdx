@@ -1,0 +1,29 @@
+---
+title: "SaaSus Platform administration"
+slug: "development-administration"
+excerpt: "Manage SaaSus Platform users, accounts, and subscriptions."
+hidden: true
+createdAt: "Thu Oct 22 2026 05:36:32 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Oct 27 2026 03:09:05 GMT+0000 (Coordinated Universal Time)"
+---
+
+import FeatureTable from '@site/src/components/FeatureTable';
+
+Manage users of SaaSus Platform, your own account, and your SaaSus Platform subscription.  
+Use the account settings page in the SaaS Development Console and the user menus in both consoles.  
+For managing the accounts of your SaaS users, see [User management](/docs/part-3/saasus-platform-features/user-management).
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Manage users | View users who access SaaSus Platform, change their roles, or remove them. Administrator, developer, and operator roles determine which consoles and operations are available.<br />References: [Inviting Users](/docs/part-4/account-settings/saasususerinvitation) | — |
+| Invite users | Invite users to SaaSus Platform by email and assign roles. You can also check invitation status and cancel invitations.<br />References: [Inviting Users](/docs/part-4/account-settings/saasususerinvitation) | — |
+| Manage your profile and authentication settings | Configure the profile, email address, password, and MFA for the account you use to sign in to the SaaSus Platform Console.<br />References: [Overview of Login Screen and Main Screen of SaaSus Platform](/docs/part-3/login-and-main-screen-overview) | — |
+| Change account information | Change the account name and primary contact email address on the General tab in Account Settings. The primary contact email address also receives invoice issuance notifications for SaaSus Platform.<br />References: [Billing and Payment Methods](/docs/part-4/account-settings/billing-information#billing-contact-email) | — |
+| Manage the SaaSus Platform subscription and billing information | View or change your SaaSus Platform plan on the Pricing Plan tab in Account Settings. You cannot switch directly from a paid plan to the free plan. On the Payment tab, view estimated charges and usage according to your plan. Manage billing information in Account Settings, and use the billing portal or other service for your subscription method to change payment methods and view invoices.<br />References: [Procedure for Applying for a Paid Plan](/docs/part-4/account-settings/procedure-for-applying-for-a-paid-plan) / [Billing and Payment Methods](/docs/part-4/account-settings/billing-information) | — |
+| Restrict console and API access by IP address | Restrict which IP addresses can access the SaaSus Platform Console and SaaSus APIs. Submit separate allowed CIDR lists for console and API access to support. This is separate from per-tenant IP restrictions in Smart API Gateway.<br />References: [IP Restriction](/docs/part-4/application-settings/ip-restriction) | — |
+
+</FeatureTable>
+
+IP restrictions are not available on the legacy Starter and Standard plans. See the IP restriction guide for availability.

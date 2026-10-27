@@ -1,0 +1,107 @@
+---
+title: "料金プラン・利用量・請求"
+slug: "pricing-billing"
+excerpt: "料金体系の設計、利用量の記録・取得、テナントの契約を管理する機能。"
+hidden: true
+createdAt: "Wed Oct 21 2026 08:21:05 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Oct 27 2026 06:10:03 GMT+0000 (Coordinated Universal Time)"
+---
+
+import FeatureTable from '@site/src/components/FeatureTable';
+
+SaaSの料金プランを作成し、テナントごとの契約や利用量を管理する機能です。
+
+:::info
+
+[Stripeと連携](/ja/docs/part-3/saasus-platform-features/external-integrations#stripe連携)すると、設定した料金プランや記録した利用量を課金・請求に利用できます。
+
+:::
+
+関連APIはPricing API、Auth APIの操作名で表記しています。
+
+## 料金体系の設計
+
+月額基本料金や、API実行回数に応じた従量料金を組み合わせて、料金プランを作成する機能です。  
+利用量を記録する「メーター単位」、料金を設定する「計測単位」、計測単位をまとめる「機能メニュー」を使って料金プランを構成します。作成した料金プランと税率をテナントに適用します。
+
+<FeatureTable>
+
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| メーター単位の取得・作成・更新・削除 | API実行回数など、利用量を記録する項目を定義します。Stripe連携時は、日別・月別の利用量取得と課金に使う集計方法を`sum`（合計）・`max`（最大値）から選択します。Stripe連携を利用していない場合、画面には集計方法が表示されず、`sum`（合計）になります。計測単位で使用しているメーター単位は、表示名・説明しか変更できません。削除もできません。計測対象や集計方法を変える場合は新しく作成します。<br />参考：[メーター単位設定](/ja/docs/part-4/pricing-and-billing/usage-metering) | [GetMeteringUnits](/ja/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnits) [CreateMeteringUnit](/ja/docs/reference/pricing-api#tag/metering/operation/CreateMeteringUnit) [UpdateMeteringUnitByID](/ja/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitByID) [DeleteMeteringUnitByID](/ja/docs/reference/pricing-api#tag/metering/operation/DeleteMeteringUnitByID) |
+| 計測単位の管理 | 料金・通貨・課金方式（固定ユニット・使用量ユニット・段階ユニット・段階的使用量ユニット）を設定します。利用量に応じた課金では対象のメーター単位を指定します。機能メニューで使用している計測単位は、表示名・説明・利用上限しか変更できません（固定ユニットには利用上限はありません）。削除はできず、料金や課金方式などを変える場合は新しく作成します。<br />参考：[料金プランの作成手順](/ja/docs/part-4/pricing-and-billing/pricing-plan-creation) / [段階ユニット、段階的使用量ユニットの料金計算の違いについて](/ja/docs/part-4/pricing-and-billing/tiered-unit) | [GetPricingUnits](/ja/docs/reference/pricing-api#tag/pricingUnits/operation/GetPricingUnits) [GetPricingUnit](/ja/docs/reference/pricing-api#tag/pricingUnits/operation/GetPricingUnit) [CreatePricingUnit](/ja/docs/reference/pricing-api#tag/pricingUnits/operation/CreatePricingUnit) [UpdatePricingUnit](/ja/docs/reference/pricing-api#tag/pricingUnits/operation/UpdatePricingUnit) [DeletePricingUnit](/ja/docs/reference/pricing-api#tag/pricingUnits/operation/DeletePricingUnit) |
+| 機能メニューの管理 | 月額基本料金と従量料金など、複数の計測単位をまとめて機能メニューを作成します。料金プランで使用している機能メニューは、表示名・説明しか変更できません。構成変更・削除はできないため、計測単位の組み合わせを変える場合は新しく作成します。<br />参考：[料金プランの作成手順](/ja/docs/part-4/pricing-and-billing/pricing-plan-creation) | [GetPricingMenus](/ja/docs/reference/pricing-api#tag/pricingMenus/operation/GetPricingMenus) [GetPricingMenu](/ja/docs/reference/pricing-api#tag/pricingMenus/operation/GetPricingMenu) [CreatePricingMenu](/ja/docs/reference/pricing-api#tag/pricingMenus/operation/CreatePricingMenu) [UpdatePricingMenu](/ja/docs/reference/pricing-api#tag/pricingMenus/operation/UpdatePricingMenu) [DeletePricingMenu](/ja/docs/reference/pricing-api#tag/pricingMenus/operation/DeletePricingMenu) |
+| 料金プランの管理 | 機能メニューを組み合わせて料金プランを作成します。テナントに適用済み、または適用予約中の料金プランは、表示名・説明しか変更できません。構成変更・削除はできないため、メニューの組み合わせを変える場合は新しく作成します。<br />参考：[料金プランの概要と種類](/ja/docs/part-4/pricing-and-billing/pricing-plan-overview) / [料金プランの作成手順](/ja/docs/part-4/pricing-and-billing/pricing-plan-creation) | [GetPricingPlans](/ja/docs/reference/pricing-api#tag/pricingPlans/operation/GetPricingPlans) [GetPricingPlan](/ja/docs/reference/pricing-api#tag/pricingPlans/operation/GetPricingPlan) [CreatePricingPlan](/ja/docs/reference/pricing-api#tag/pricingPlans/operation/CreatePricingPlan) [UpdatePricingPlan](/ja/docs/reference/pricing-api#tag/pricingPlans/operation/UpdatePricingPlan) [DeletePricingPlan](/ja/docs/reference/pricing-api#tag/pricingPlans/operation/DeletePricingPlan) |
+| 税率の取得・作成、表示名・説明の更新 | 税率、内税・外税、国などを登録し、テナントへのプラン適用時に選択します。作成済みの税率の表示名・説明は更新できますが、パーセンテージなどは変更できません。<br />参考：[税率設定](/ja/docs/part-4/pricing-and-billing/tax-rate-settings) | [GetTaxRates](/ja/docs/reference/pricing-api#tag/taxRate/operation/GetTaxRates) [CreateTaxRate](/ja/docs/reference/pricing-api#tag/taxRate/operation/CreateTaxRate) [UpdateTaxRate](/ja/docs/reference/pricing-api#tag/taxRate/operation/UpdateTaxRate) |
+| 料金プラン全体の初期化 | 開発・ステージング環境で、料金定義や記録済みの利用量をまとめて削除します。SaaS 開発コンソールの「アカウント設定」＞「その他」、またはAPIから実行できます。本番環境では実行できません。削除範囲は、下記の「料金プランの初期化」を参照してください。 | [ResetPlan](/ja/docs/reference/auth-api#tag/tenant/operation/ResetPlan) |
+
+</FeatureTable>
+
+### 料金プランの初期化
+
+初期化すると、対象環境の次の情報を削除します。
+
+- 料金プラン・機能メニュー・計測単位・メーター単位・税率
+- 記録済みの利用量
+- 全テナントのプラン変更予約・適用履歴
+
+Stripe連携中の場合は、SaaSus Platform側の連携情報とシークレットキーも削除し、連携を解除します。  
+Stripe側の商品・顧客・サブスクリプションは削除されません。
+
+## 利用量の記録・取得
+
+テナントごとの利用量をメーター単位に記録し、日別・月別・期間別に取得する機能です。  
+SaaSアプリケーションで計測対象の操作に合わせて記録APIを呼び出し、取得結果を利用状況の表示や課金額の計算に利用します。
+
+<FeatureTable>
+
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| 現在時刻・指定時刻の利用量加算・減算・上書き | テナントとメーター単位を指定し、利用量を記録します。更新方法は加算（add）・減算（sub）・上書き（direct）から選択します。更新は、期間全体の集計値ではなく、指定時刻（秒単位）の記録値に対して行います。<br />参考：[メータリングAPI実装サンプル](/ja/docs/part-6/implementation-guide/sample-application/metering-api) | [UpdateMeteringUnitTimestampCountNow](/ja/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCountNow) [UpdateMeteringUnitTimestampCount](/ja/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCount) |
+| 指定時刻の利用量データ削除 | テナントとメーター単位を指定し、指定時刻の利用量を削除します。誤って記録した利用量の取り消しなどに利用します。<br />参考：[メータリングAPI実装サンプル](/ja/docs/part-6/implementation-guide/sample-application/metering-api) | [DeleteMeteringUnitTimestampCount](/ja/docs/reference/pricing-api#tag/metering/operation/DeleteMeteringUnitTimestampCount) |
+| 当日・指定日・当月・指定月の利用量取得 | 1つのメーター単位について、指定日・指定月の集計値を取得します。メーター単位の集計方法が`sum`なら期間内に記録した値の合計、`max`なら最大値を返します。<br />参考：[課金ダッシュボードの実装](/ja/docs/part-6/implementation-guide/sample-application/billing-dashboard) | [GetMeteringUnitDateCountByTenantIdAndUnitNameToday](/ja/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountByTenantIdAndUnitNameToday) [GetMeteringUnitDateCountByTenantIdAndUnitNameAndDate](/ja/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountByTenantIdAndUnitNameAndDate) [GetMeteringUnitMonthCountByTenantIdAndUnitNameThisMonth](/ja/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountByTenantIdAndUnitNameThisMonth) [GetMeteringUnitMonthCountByTenantIdAndUnitNameAndMonth](/ja/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountByTenantIdAndUnitNameAndMonth) |
+| 指定期間の利用量取得 | 開始・終了のタイムスタンプを指定し、期間内の時刻ごとの記録を取得します。メーター単位の集計方法（`sum`・`max`）は適用されません。任意期間の合計や最大値が必要な場合は、取得結果をSaaSアプリケーションで集計します。<br />参考：[メータリングAPI実装サンプル](/ja/docs/part-6/implementation-guide/sample-application/metering-api) | [GetMeteringUnitDateCountByTenantIdAndUnitNameAndDatePeriod](/ja/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountByTenantIdAndUnitNameAndDatePeriod) |
+| 複数メーターの利用量一括取得 | 指定したテナントの全メーター単位について、指定日・指定月の集計値をまとめて取得します。各メーター単位の設定に従い、`sum`なら期間内に記録した値の合計、`max`なら最大値を返します。<br />参考：[課金ダッシュボードの実装](/ja/docs/part-6/implementation-guide/sample-application/billing-dashboard) | [GetMeteringUnitDateCountsByTenantIdAndDate](/ja/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountsByTenantIdAndDate) [GetMeteringUnitMonthCountsByTenantIdAndMonth](/ja/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountsByTenantIdAndMonth) |
+
+</FeatureTable>
+
+Stripe連携時は、過去の請求期間やプラン変更前の利用量を修正できません。また、指定時刻の記録値を超えて減算することはできません。
+
+## テナントの契約
+
+テナントに適用する料金プラン・税率と、適用時期を管理する機能です。  
+SaaS 運用コンソールで設定するほか、SaaSアプリケーションにプラン選択や変更の処理を組み込めます。
+
+<FeatureTable>
+
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| 料金プランの適用・変更・解約 | テナントに料金プランと税率を設定し、プランの変更や解約を行います。即時反映や日時指定、変更予約の確認・取り消しに対応し、現在の適用内容やプラン履歴はテナント情報から確認できます。Stripe連携時は、プラン変更に伴う日割り計算に対応します。請求タイミングなどは、下記の「プラン変更時の日割り計算」を参照してください。<br />参考：[テナントに料金プランを設定する](/ja/docs/part-5/price-plan/price-plan-setting-001) / [テナントの料金プラン設定を変更する](/ja/docs/part-5/price-plan/price-plan-setting-002) / [テナントの料金プラン設定を解除する](/ja/docs/part-5/price-plan/price-plan-setting-003) / [設定した予定を取り消す](/ja/docs/part-5/price-plan/price-plan-setting-004) / [プラン変更の実装](/ja/docs/part-6/implementation-guide/sample-application/plan-change-implementation) | [GetTenant](/ja/docs/reference/auth-api#tag/tenant/operation/GetTenant) [GetTenants](/ja/docs/reference/auth-api#tag/tenant/operation/GetTenants) [UpdateTenantPlan](/ja/docs/reference/auth-api#tag/tenant/operation/UpdateTenantPlan) |
+
+</FeatureTable>
+
+補足：予約は反映時刻の5分前から変更・取り消しができません。  
+Stripe連携時に従量課金アイテムを削除する設定（`delete_usage`）を指定した予約は、取り消しできません。
+
+
+### プラン変更時の日割り計算
+
+Stripe連携時は、料金プランの変更に伴う日割り計算に対応します。  
+SaaS 運用コンソールからの変更では、日割り計算した差額を即時請求します。
+
+[UpdateTenantPlan](/ja/docs/reference/auth-api#tag/tenant/operation/UpdateTenantPlan)では、`proration_behavior`で日割り計算の有無と差額の請求タイミングを指定できます。
+
+- `always_invoice`：日割り計算した差額の請求書を即時に発行します。
+- `create_prorations`：日割り計算した差額を次回の請求に合算します。
+- `none`：変更に伴う日割り計算を行いません。
+
+#### 月額固定料金の計算例
+
+月額25,000円のプランから月額28,000円のプランへ、請求期間の半分が残っている時点で変更する場合、差額は次のようになります（税・従量料金を除く）。
+
+- 旧プランの未使用分：−12,500円
+- 新プランの残り期間分：＋14,000円
+- 差額：1,500円
+
+逆に月額28,000円から月額25,000円へ変更する場合、差額の−1,500円はStripe上のクレジットとして以降の請求に充当されます。  
+実際の金額は、Stripeが変更時刻と請求期間に基づいて秒単位で計算します。

@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-10-19 14:09:14 +0900`
+- Generated: `2026-10-27 15:21:44 +0900`
 
 ---
 ## changelog/20221224.md
@@ -924,6 +924,588 @@ Essential for SaaS monetization—**rate‑plan definition** and **billing proce
   Configure pricing models such as flat‑rate monthly or usage‑based.
 - **Stripe integration**
   Register your Stripe secret key to fully automate subscription, billing, and payment‑status management.
+````
+
+---
+## part-3/saasus-platform-features.md
+````markdown
+SaaSus Platform provides features for SaaS development and operations, including authentication, tenant management, and pricing plan management.
+Browse the descriptions to find the features you need. Follow each feature link for feature details, related APIs, and configuration and implementation guides.
+## [Authentication and sign-in](/docs/part-3/saasus-platform-features/authentication)
+<div className="feature-overview-table">
+| Feature | Description |
+| --- | --- |
+| [Sign-in and sign-up](/docs/part-3/saasus-platform-features/authentication#sign-in-and-sign-up) | Let SaaS users register new accounts and sign in to existing accounts.<br />Use the login pages or integrate SaaSus API into custom sign-in pages. The login pages also support resending temporary passwords and recovering forgotten passwords. |
+| [External identity providers](/docs/part-3/saasus-platform-features/authentication#external-identity-providers) | Sign in using Google or an external identity provider that supports SAML.<br />Google sign-in starts on the regular login page, while SAML sign-in starts at a tenant-specific login URL.<br />In both cases, authentication takes place with the connected identity provider. |
+| [Multi-factor authentication (MFA)](/docs/part-3/saasus-platform-features/authentication#multi-factor-authentication-mfa) | Verify users with codes from an authenticator app or email in addition to their passwords.<br />Implement authenticator registration and MFA settings pages in your SaaS application; users can enter verification codes on the login pages when signing in. |
+| [Device authentication](/docs/part-3/saasus-platform-features/authentication#device-authentication) | Remember trusted devices so users can skip MFA code entry on subsequent sign-ins.<br />In the SaaS Development Console, choose “Always remember,” “User opt-in” (remember only when the user chooses to), or “Do not remember.” |
+| [Tokens and credentials](/docs/part-3/saasus-platform-features/authentication#tokens-and-credentials) | Obtain credentials for signed-in users and manage their sign-in state.<br />Exchange temporary codes received from the login pages for tokens. You can also refresh tokens or revoke refresh tokens. |
+</div>
+## [User management](/docs/part-3/saasus-platform-features/user-management)
+<div className="feature-overview-table">
+| Feature | Description |
+| --- | --- |
+| [SaaS users](/docs/part-3/saasus-platform-features/user-management#saas-users) | Manage sign-in information and attributes for users registered with your service.<br />Use the SaaS Operations Console for daily administration, and integrate APIs when building your own administration pages or user-facing information change features.<br />Users register themselves through login page self-sign-up, while administrators use the user creation feature. |
+| [Add and remove SaaS users from tenants](/docs/part-3/saasus-platform-features/user-management#add-and-remove-saas-users-from-tenants) | Add registered SaaS users to tenants and manage user information for each tenant.<br />Add users to or remove them from tenants in the SaaS Operations Console, or integrate APIs to provide administration features in your own application.<br />Your application implements access decisions for its pages and features using the retrieved tenant memberships and roles. |
+</div>
+## [Tenant management](/docs/part-3/saasus-platform-features/tenant-management)
+<div className="feature-overview-table">
+| Feature | Description |
+| --- | --- |
+| [Tenants](/docs/part-3/saasus-platform-features/tenant-management#tenants) | Create tenants and manage their basic details, attributes, and billing information.<br />Use the SaaS Operations Console to manage basic details, additional attributes, and billing information; integrate APIs to automate tasks such as tenant creation during subscription sign-up. |
+| [Invitations](/docs/part-3/saasus-platform-features/tenant-management#invitations) | Invite users to a tenant.<br />Integrate invitation management such as creation and listing into your application; invited users can use the login pages to register, sign in, and accept.<br />Your application controls who can create invitations and which roles they can assign. |
+</div>
+## [Role, attribute, and environment definitions](/docs/part-3/saasus-platform-features/authorization)
+<div className="feature-overview-table">
+| Feature | Description |
+| --- | --- |
+| [Role definitions](/docs/part-3/saasus-platform-features/authorization#role-definitions) | Define roles such as administrator or regular user and assign them per tenant and environment.<br />Define roles in the SaaS Development Console and assign or remove them in the SaaS Operations Console.<br />Your application implements access control for its pages and features based on those roles. |
+| [Attribute definitions](/docs/part-3/saasus-platform-features/authorization#attribute-definitions) | Define fields for additional user or tenant information, such as names, departments, or notes.<br />Define tenant user and tenant attributes in the SaaS Development Console; define SaaS user attributes through SaaSus API.<br />Defining attribute fields is separate from updating values for individual users or tenants. |
+| [User environment definitions](/docs/part-3/saasus-platform-features/authorization#user-environment-definitions) | Define the environments users can access and their roles in each environment. For example, assign a user the administrator role for testing and the regular user role for production, and have your SaaS application determine which operations are allowed.<br />These definitions are separate from the environments you switch between in the SaaSus Platform Console. |
+</div>
+## [SaaS settings](/docs/part-3/saasus-platform-features/authentication-settings)
+<div className="feature-overview-table">
+| Feature | Description |
+| --- | --- |
+| [Basic settings](/docs/part-3/saasus-platform-features/authentication-settings#basic-settings) | Configure the domains used for login pages and notification emails, the redirect URL after sign-in, and credentials for calling SaaSus APIs.<br />Use the SaaS Development Console to configure domains and redirect URLs, and to view and manage the SaaS ID, API keys, and client secret. |
+| [Advanced authentication settings](/docs/part-3/saasus-platform-features/authentication-settings#advanced-authentication-settings) | Configure login page appearance and links, password requirements, self-sign-up permissions, and notification emails.<br />Appearance settings apply to the login pages; password requirements and sign-up permissions also apply to authentication and registration processing.<br />Configure the sender and reply-to addresses and the subject and message for each email type, including registration, password recovery, and MFA. |
+</div>
+## [Pricing plans, usage, and billing](/docs/part-3/saasus-platform-features/pricing-billing)
+<div className="feature-overview-table">
+| Feature | Description |
+| --- | --- |
+| [Pricing structure design](/docs/part-3/saasus-platform-features/pricing-billing#pricing-structure-design) | Create pricing plans that combine fixed monthly charges with usage-based charges such as API call counts.<br />Build plans using meter units to record usage, pricing units to define charges, and feature menus to group pricing units. Apply the resulting plan and tax rate to a tenant. |
+| [Record and retrieve usage](/docs/part-3/saasus-platform-features/pricing-billing#record-and-retrieve-usage) | Record usage for each tenant by meter unit and retrieve it by day, month, or time range.<br />Call the recording APIs when the measured activity occurs in your SaaS application, and use the results to display usage or calculate charges. |
+| [Tenant subscriptions](/docs/part-3/saasus-platform-features/pricing-billing#tenant-subscriptions) | Manage the pricing plan, tax rate, and effective time for each tenant.<br />Configure subscriptions in the SaaS Operations Console, or implement plan selection and changes in your application. |
+</div>
+## [External service integrations](/docs/part-3/saasus-platform-features/external-integrations)
+<div className="feature-overview-table">
+| Feature | Description |
+| --- | --- |
+| [Stripe integration](/docs/part-3/saasus-platform-features/external-integrations#stripe-integration) | Synchronize pricing plans, tax rates, tenants, and usage managed in SaaSus Platform with Stripe for billing.<br />Configure the connection in the SaaS Development Console; synchronization then follows plan application and usage recording.<br />If you do not use Stripe, implement billing using the pricing, subscription, and usage information you retrieve. |
+| [Amazon EventBridge](/docs/part-3/saasus-platform-features/external-integrations#amazon-eventbridge) | Deliver events such as user and tenant creation to your AWS account.<br />Configure the destination in the SaaS Development Console, then set up an event bus, rules, and targets in Amazon EventBridge. |
+| [AWS Marketplace](/docs/part-3/saasus-platform-features/external-integrations#aws-marketplace) | Associate AWS Marketplace selling plans and customers with tenants.<br />Login pages handle new customer registration; implement the association with an existing tenant in your application. |
+</div>
+:::caution New use is suspended
+The existing guide states that new use is suspended because the integration does not support changes to AWS Marketplace specifications.
+See [AWS Marketplace Integration](/docs/part-4/aws-marketplace-integration/aws-marketplace-integration) for availability.
+:::
+## [Logs, analytics, and feedback](/docs/part-3/saasus-platform-features/logs-analytics-feedback)
+<div className="feature-overview-table">
+| Feature | Description |
+| --- | --- |
+| [API execution logs](/docs/part-3/saasus-platform-features/logs-analytics-feedback#api-execution-logs) | Inspect SaaSus API calls and their details.<br />Use the logs to investigate API errors and check request details. |
+| [Usage analytics](/docs/part-3/saasus-platform-features/logs-analytics-feedback#usage-analytics) | Retrieve user activity history, user counts, metrics over time, and per-page statistics.<br />Use this information to monitor SaaS application usage and understand user activity. |
+| [Feedback](/docs/part-3/saasus-platform-features/logs-analytics-feedback#feedback) | Collect questions and requests from SaaS users, and manage status, votes, and comments.<br />Implement user-facing submission and viewing pages in your application, and review and respond through the SaaS Operations Console. |
+</div>
+## [Smart API Gateway and Smart MCP Server](/docs/part-3/saasus-platform-features/smart-api-gateway)
+<div className="feature-overview-table">
+| Feature | Description |
+| --- | --- |
+| [API publication settings](/docs/part-3/saasus-platform-features/smart-api-gateway#api-publication-settings) | Configure the connected SaaS application and the operations to expose, then publish APIs.<br />Configure and publish APIs in the SaaS Development Console, and integrate the SDK and annotations into your application following the reference guide. |
+| [Access control](/docs/part-3/saasus-platform-features/smart-api-gateway#access-control) | Restrict which users and tenants can access published APIs, how often they can call them, and which source IP addresses are allowed.<br />Use API keys and roles assigned to users to control access to each published operation. |
+| [Smart MCP Server](/docs/part-3/saasus-platform-features/smart-api-gateway#smart-mcp-server) | Expose APIs published through Smart API Gateway as MCP tools.<br />Publishing the APIs also makes the MCP server available automatically. Configure its endpoint and authentication credentials in an AI client to call the tools. |
+</div>
+## [SaaS infrastructure management](/docs/part-3/saasus-platform-features/saas-infrastructure)
+<div className="feature-overview-table">
+| Feature | Description |
+| --- | --- |
+| [Provisioning settings](/docs/part-3/saasus-platform-features/saas-infrastructure#provisioning-settings) | Manage whether automatic provisioning is enabled, permissions for AWS access, and the files used for provisioning and initialization.<br />Prepare AWS CloudFormation templates and initialization SQL for your SaaS architecture. |
+| [Tenant onboarding](/docs/part-3/saasus-platform-features/saas-infrastructure#tenant-onboarding) | Provision a dedicated application environment for a tenant and initialize its database when the tenant is created.<br />Check provisioning status through the `TenantOnboardingStatus` tenant attribute on the tenant management page in the SaaS Operations Console. |
+</div>
+## [SaaSus Platform administration](/docs/part-3/saasus-platform-features/development-administration)
+<div className="feature-overview-table">
+| Feature | Description |
+| --- | --- |
+| [SaaSus Platform administration](/docs/part-3/saasus-platform-features/development-administration) | Manage users of SaaSus Platform, your own account, and your SaaSus Platform subscription.<br />Use the account settings page in the SaaS Development Console and the user menus in both consoles. |
+</div>
+````
+
+---
+## part-3/saasus-platform-features/authentication-settings.mdx
+````markdown
+import FeatureTable from '@site/src/components/FeatureTable';
+Manage SaaS domains and API credentials, login page appearance and authentication settings, and notification emails.
+See [Authentication and sign-in](/docs/part-3/saasus-platform-features/authentication) for implementing sign-in, MFA, and token exchange.
+Related API links use operation names from Auth API.
+## Basic settings
+Configure the domains used for login pages and notification emails, the redirect URL after sign-in, and credentials for calling SaaSus APIs.
+Use the SaaS Development Console to configure domains and redirect URLs, and to view and manage the SaaS ID, API keys, and client secret.
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Configure the domain and email sending domain authentication | Set the domain name used for login pages and notification emails. Register the domain verification and email sending DNS records displayed after configuration with your DNS service.<br />References: [Domain & Email Sending Domain Authentication and Redirect Settings](/docs/part-4/application-settings/domain-and-redirect-settings) | [GetBasicInfo](/docs/reference/auth-api#tag/basicInfo/operation/GetBasicInfo) [UpdateBasicInfo](/docs/reference/auth-api#tag/basicInfo/operation/UpdateBasicInfo) |
+| Authentication information and redirect settings | Set the URL in your SaaS application to redirect users to after sign-in. At that destination, exchange the temporary code received after authentication for tokens.<br />References: [Domain & Email Sending Domain Authentication and Redirect Settings](/docs/part-4/application-settings/domain-and-redirect-settings) / [Authentication and sign-in](/docs/part-3/saasus-platform-features/authentication) | [GetAuthInfo](/docs/reference/auth-api#tag/authInfo/operation/GetAuthInfo) [UpdateAuthInfo](/docs/reference/auth-api#tag/authInfo/operation/UpdateAuthInfo) |
+| Manage the SaaS ID, API keys, and client secret | View the SaaS ID, API keys, and client secret used to call SaaSus APIs, issue API keys, and regenerate the client secret.<br />References: [API Key Settings](/docs/part-4/application-settings/api-key-settings) | — |
+</FeatureTable>
+## Advanced authentication settings
+Configure login page appearance and links, password requirements, self-sign-up permissions, and notification emails.
+Appearance settings apply to the login pages; password requirements and sign-up permissions also apply to authentication and registration processing.
+Configure the sender and reply-to addresses and the subject and message for each email type, including registration, password recovery, and MFA.
+Edit appearance settings in the SaaS Development Console. Changes can take time to appear on the login pages after saving.
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Configure the title, logo, and favicon | Set the service name and logo displayed on the login pages and the favicon shown in browser tabs and similar locations.<br />References: [Basic App Settings](/docs/part-4/application-settings/basic-app-settings) | [GetCustomizePageSettings](/docs/reference/auth-api#tag/basicInfo/operation/GetCustomizePageSettings) [UpdateCustomizePageSettings](/docs/reference/auth-api#tag/basicInfo/operation/UpdateCustomizePageSettings) |
+| Configure terms of service and privacy policy links | Set the terms of service and privacy policy URLs linked from the login pages. Use the per-page link visibility settings to choose which pages display the links.<br />References: [Basic App Settings](/docs/part-4/application-settings/basic-app-settings) | [GetCustomizePageSettings](/docs/reference/auth-api#tag/basicInfo/operation/GetCustomizePageSettings) [UpdateCustomizePageSettings](/docs/reference/auth-api#tag/basicInfo/operation/UpdateCustomizePageSettings) |
+| Configure link visibility on registration, sign-in, and password change pages | Choose whether to show terms of service and privacy policy links on each registration, sign-in, and password change page.<br />References: [Basic App Settings](/docs/part-4/application-settings/basic-app-settings) | [GetCustomizePages](/docs/reference/auth-api#tag/basicInfo/operation/GetCustomizePages) [UpdateCustomizePages](/docs/reference/auth-api#tag/basicInfo/operation/UpdateCustomizePages) |
+| Configure Google Tag Manager | Set an existing Google Tag Manager container ID to include tags on the login pages. Configure tags and measurement in Google Tag Manager.<br />References: [Google Tag Manager Settings](/docs/part-4/application-settings/googletagmanagersetting) | [GetCustomizePageSettings](/docs/reference/auth-api#tag/basicInfo/operation/GetCustomizePageSettings) [UpdateCustomizePageSettings](/docs/reference/auth-api#tag/basicInfo/operation/UpdateCustomizePageSettings) |
+| Configure the password policy | Set the minimum password length and required character types, such as numbers, symbols, uppercase letters, and lowercase letters.<br />References: [Authentication Method Settings](/docs/part-4/user-authz-settings/authentication-method-settings) | [GetSignInSettings](/docs/reference/auth-api#tag/authInfo/operation/GetSignInSettings) [UpdateSignInSettings](/docs/reference/auth-api#tag/authInfo/operation/UpdateSignInSettings) |
+| Allow or disallow self-sign-up | Set whether users can register their own accounts. When disabled, the registration link is hidden on the login pages and registration through SignUp is also disabled.<br />References: [Authentication Method Settings](/docs/part-4/user-authz-settings/authentication-method-settings) | [GetSignInSettings](/docs/reference/auth-api#tag/authInfo/operation/GetSignInSettings) [UpdateSignInSettings](/docs/reference/auth-api#tag/authInfo/operation/UpdateSignInSettings) |
+| Configure sender and reply-to addresses | Set the sender and reply-to email addresses for notifications. Domain and email delivery settings must be configured in advance.<br />References: [Domain & Email Sending Domain Authentication and Redirect Settings](/docs/part-4/application-settings/domain-and-redirect-settings) | [GetBasicInfo](/docs/reference/auth-api#tag/basicInfo/operation/GetBasicInfo) [UpdateBasicInfo](/docs/reference/auth-api#tag/basicInfo/operation/UpdateBasicInfo) |
+| Retrieve email templates and update subjects and messages | Edit registration, temporary password resend, password recovery, and MFA emails in the SaaS Development Console. Use the API to edit verification emails for email address changes, tenant invitations, and external account linking. Include the placeholders required for each email type.<br />References: [Notification Email Content](/docs/part-4/user-authz-settings/notifymailcustomize) | [FindNotificationMessages](/docs/reference/auth-api#tag/basicInfo/operation/FindNotificationMessages) [UpdateNotificationMessages](/docs/reference/auth-api#tag/basicInfo/operation/UpdateNotificationMessages) |
+</FeatureTable>
+### Login page customization options
+You can configure the service name, logo, favicon, and link visibility. Changing colors, applying custom HTML/CSS, and adding announcements are not supported.
+To use a custom design or display announcements, implement custom sign-in pages with SaaSus API.
+See the [Authentication API Implementation Guide](/docs/part-6/implementation-guide/auth/overview) for implementation details.
+````
+
+---
+## part-3/saasus-platform-features/authentication.mdx
+````markdown
+import FeatureTable, {FeatureAnchor} from '@site/src/components/FeatureTable';
+Authenticate users at sign-in and obtain tokens for use in your SaaS application.
+Use the login pages or integrate SaaSus API into custom sign-in pages.
+Related API links use operation names from Auth API.
+## Sign-in and sign-up
+Let SaaS users register new accounts and sign in to existing accounts.
+Use the login pages or integrate SaaSus API into custom sign-in pages. The login pages also support resending temporary passwords and recovering forgotten passwords.
+For custom sign-in pages, use the APIs to initiate authentication with SRP_A and respond with an SRP signature.
+Also implement responses when MFA verification or initial password setup is required.
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Email and password sign-in | Users can sign in with an email address and password. Custom sign-in pages require API calls to initiate authentication and respond to SRP verification.<br />References: [Auth API Implementation Guide](/docs/part-6/implementation-guide/auth/overview) | [SignIn](/docs/reference/auth-api#tag/saasUser/operation/SignIn) [RespondToSignInChallenge](/docs/reference/auth-api#tag/saasUser/operation/RespondToSignInChallenge) |
+| Sign-in with a sign-in ID | To use sign-in IDs on the login pages, turn on “Add sign-in ID notation” in the advanced authentication settings. Custom sign-in pages implement authentication initiation and the SRP verification response. | [SignIn](/docs/reference/auth-api#tag/saasUser/operation/SignIn) [RespondToSignInChallenge](/docs/reference/auth-api#tag/saasUser/operation/RespondToSignInChallenge) |
+| Self-sign-up | Register an email address to receive a temporary password by email. Users authenticate with that temporary password and then set a new password. You can also implement this flow in custom registration pages. Self-sign-up must be enabled.<br />References: [Authentication Method Settings](/docs/part-4/user-authz-settings/authentication-method-settings) | [SignUp](/docs/reference/auth-api#tag/saasUser/operation/SignUp) |
+| Resend the temporary password for a new registration | Resend the temporary password emailed during registration. Users can request this through the login pages. | [ResendSignUpConfirmationEmail](/docs/reference/auth-api#tag/saasUser/operation/ResendSignUpConfirmationEmail) |
+| <FeatureAnchor id="forgotten-password-recovery">Forgotten password recovery</FeatureAnchor> | Users select “Forgot your password?” on the login page and set a new password using the verification code sent by email. This feature is for users who authenticate with an email address, but is not available to users with email MFA enabled. For those users, an administrator resets the password in the SaaS Operations Console. | — |
+| Additional sign-in verification and initial password setup | Let users enter MFA codes or set a password on their first sign-in. Custom sign-in pages require screens for entering the code or new password and API calls to submit them.<br />References: [Auth API Implementation Guide](/docs/part-6/implementation-guide/auth/overview) | [RespondToSignInChallenge](/docs/reference/auth-api#tag/saasUser/operation/RespondToSignInChallenge) |
+</FeatureTable>
+### Repeated sign-in failures
+Repeated incorrect passwords can temporarily lock the account and prevent sign-in.
+The lock normally clears automatically after a period of time. The exact number of attempts is not disclosed.
+## External identity providers
+Sign in using Google or an external identity provider that supports SAML.
+Google sign-in starts on the regular login page, while SAML sign-in starts at a tenant-specific login URL.
+In both cases, authentication takes place with the connected identity provider.
+Domain and email sending domain verification must be completed before using an external identity provider.
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Configure Google sign-in | Configure integration with Google. Users select Google sign-in on the regular login page and authenticate with their Google account. When self-sign-up is enabled, new users can also register with their Google account.<br />References: [Google Linkage](/docs/part-4/user-authz-settings/google-linkage) | [GetIdentityProviders](/docs/reference/auth-api#tag/authInfo/operation/GetIdentityProviders) [UpdateIdentityProvider](/docs/reference/auth-api#tag/authInfo/operation/UpdateIdentityProvider) |
+| Configure tenant-level SAML integration and SSO | Configure a SAML identity provider for each tenant. Users must be registered in the target tenant, with email addresses matching those in the connected identity provider. Users open the tenant-specific login URL (sign_in_url), then proceed from the dedicated login page to the identity provider to authenticate.<br />References: [SAML Integration](/docs/part-4/user-authz-settings/saml-linkage) | [GetSignInSettings](/docs/reference/auth-api#tag/authInfo/operation/GetSignInSettings) [GetTenantIdentityProviders](/docs/reference/auth-api#tag/tenant/operation/GetTenantIdentityProviders) [UpdateTenantIdentityProvider](/docs/reference/auth-api#tag/tenant/operation/UpdateTenantIdentityProvider) |
+| Request and confirm external account links | After authentication with Google or SAML, a verification code is emailed if the account has not yet been linked. Entering the code on the login page completes the link. This verification is skipped on subsequent sign-ins.<br />References: [Google Linkage](/docs/part-4/user-authz-settings/google-linkage) / [SAML Integration](/docs/part-4/user-authz-settings/saml-linkage) | [RequestExternalUserLink](/docs/reference/auth-api#tag/saasUser/operation/RequestExternalUserLink) [ConfirmExternalUserLink](/docs/reference/auth-api#tag/saasUser/operation/ConfirmExternalUserLink) |
+| Unlink external identity providers | Unlink a user from an external identity provider. Use this API to add an unlinking feature to your SaaS application. To check linked providers, decode the ID token and inspect `providerName` in `identities`. | [UnlinkProvider](/docs/reference/auth-api#tag/saasUser/operation/UnlinkProvider) |
+</FeatureTable>
+## Multi-factor authentication (MFA)
+Verify users with codes from an authenticator app or email in addition to their passwords.
+Implement authenticator registration and MFA settings pages in your SaaS application; users can enter verification codes on the login pages when signing in.
+Custom sign-in pages also require API integration for verification code validation.
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Issue a secret for authenticator app registration | Issue the secret needed to register an authenticator app. Integrate this API into the screen where users set up their authenticator.<br />References: [Multi-Factor Authentication](/docs/part-6/implementation-guide/sample-application/multi-factor-authentication) | [CreateSecretCode](/docs/reference/auth-api#tag/saasUser/operation/CreateSecretCode) |
+| Verify authentication codes and register an authenticator app | Verify an authenticator code entered during enrollment to complete registration.<br />References: [Multi-Factor Authentication](/docs/part-6/implementation-guide/sample-application/multi-factor-authentication) | [UpdateSoftwareToken](/docs/reference/auth-api#tag/saasUser/operation/UpdateSoftwareToken) |
+| Retrieve user MFA preferences | Use to display the configured method and enabled status in your application’s settings.<br />References: [Multi-Factor Authentication](/docs/part-6/implementation-guide/sample-application/multi-factor-authentication) | [GetUserMfaPreference](/docs/reference/auth-api#tag/saasUser/operation/GetUserMfaPreference) |
+| Configure, enable, and disable app-based or email-based MFA | Configure MFA through an authenticator app or email and enable or disable it. Users who authenticate with a sign-in ID cannot use email MFA. Once MFA is configured, users can enter verification codes on the login pages.<br />References: [Multi-Factor Authentication](/docs/part-6/implementation-guide/sample-application/multi-factor-authentication) | [UpdateUserMfaPreference](/docs/reference/auth-api#tag/saasUser/operation/UpdateUserMfaPreference) |
+| Administrator reset of user MFA | Administrators can reset MFA in the SaaS Operations Console.<br />References: [(Old Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-crud) | [UpdateUserMfaPreference](/docs/reference/auth-api#tag/saasUser/operation/UpdateUserMfaPreference) |
+</FeatureTable>
+### Using email MFA
+Verification codes sent by email are valid for three minutes. This duration cannot be changed.
+Users must enter the code and complete sign-in within that time.
+Users with email MFA enabled cannot reset their passwords through the login pages.
+If they forget their password, an administrator resets it through User Management in the SaaS Operations Console.
+See [User Management (Legacy UI): Search, Create, Edit, Add to Tenant](/docs/part-5/user-management/user-crud) for the steps.
+## Device authentication
+Remember trusted devices so users can skip MFA code entry on subsequent sign-ins.
+In the SaaS Development Console, choose “Always remember,” “User opt-in” (remember only when the user chooses to), or “Do not remember.”
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Configure how trusted devices are remembered | Choose “Always remember,” “User opt-in,” or “Do not remember.” With user opt-in, devices are remembered only when users choose to remember them.<br />References: [Authentication Method Settings](/docs/part-4/user-authz-settings/authentication-method-settings) | [GetSignInSettings](/docs/reference/auth-api#tag/authInfo/operation/GetSignInSettings) [UpdateSignInSettings](/docs/reference/auth-api#tag/authInfo/operation/UpdateSignInSettings) |
+| Confirm device registration | Confirm a device for registration as a trusted device during sign-in. The login pages use this API internally. | [ConfirmDevice](/docs/reference/auth-api#tag/saasUser/operation/ConfirmDevice) |
+| Update device remembered status | Update a device’s remembered status. On the login page, selecting “Remember device” marks the device as remembered. Clearing the checkbox does not remove a previously remembered status. | [UpdateDeviceStatus](/docs/reference/auth-api#tag/saasUser/operation/UpdateDeviceStatus) |
+</FeatureTable>
+## Tokens and credentials
+Obtain credentials for signed-in users and manage their sign-in state.
+Exchange temporary codes received from the login pages for tokens. You can also refresh tokens or revoke refresh tokens.
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Issue temporary codes and exchange them for tokens | When using the login pages, your application exchanges the temporary code received after authentication for tokens.<br />References: [Authentication Methods](/docs/part-6/usecase/authentication-methods) | [CreateAuthCredentials](/docs/reference/auth-api#tag/credential/operation/CreateAuthCredentials) [GetAuthCredentials](/docs/reference/auth-api#tag/credential/operation/GetAuthCredentials) |
+| Exchange temporary codes with PKCE | Specify PKCE parameters in the URL used to open the login pages. After authentication completes, your application exchanges the temporary code for tokens using the code verifier it retained. | [ExchangeAuthCredentials](/docs/reference/auth-api#tag/credential/operation/ExchangeAuthCredentials) |
+| Refresh authentication tokens | ID tokens expire after one hour. Use a refresh token to obtain a new ID token and access token and maintain the user’s sign-in state in your SaaS application.<br />References: [Authentication Methods](/docs/part-6/usecase/authentication-methods) | [GetAuthCredentials](/docs/reference/auth-api#tag/credential/operation/GetAuthCredentials) |
+| Revoke refresh tokens | Use to stop further token refreshes. Also implement removal of application cookies or other local session data. | [RevokeToken](/docs/reference/auth-api#tag/credential/operation/RevokeToken) |
+| Configure refresh token validity | Set the refresh token lifetime. Implement token refresh in your SaaS application.<br />References: [Authentication Method Settings](/docs/part-4/user-authz-settings/authentication-method-settings) | [GetSignInSettings](/docs/reference/auth-api#tag/authInfo/operation/GetSignInSettings) [UpdateSignInSettings](/docs/reference/auth-api#tag/authInfo/operation/UpdateSignInSettings) |
+</FeatureTable>
+````
+
+---
+## part-3/saasus-platform-features/authorization.mdx
+````markdown
+import FeatureTable from '@site/src/components/FeatureTable';
+These features define roles and environments for SaaS authorization and additional fields for users and tenants.
+Use the roles and environments assigned to users to control access to pages and features in your SaaS application.
+Related API links use operation names from Auth API.
+## Role definitions
+Define roles such as administrator or regular user and assign them per tenant and environment.
+Define roles in the SaaS Development Console and assign or remove them in the SaaS Operations Console.
+Your application implements access control for its pages and features based on those roles.
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| List, create, update, and delete roles | Define role names and display names. Updates change the display name; the default admin role cannot be deleted.<br />References: [Roles](/docs/part-4/user-authz-settings/role-definition) | [GetRoles](/docs/reference/auth-api#tag/role/operation/GetRoles) [CreateRole](/docs/reference/auth-api#tag/role/operation/CreateRole) [UpdateRole](/docs/reference/auth-api#tag/role/operation/UpdateRole) [DeleteRole](/docs/reference/auth-api#tag/role/operation/DeleteRole) |
+| Assign and remove tenant user roles per environment | Assign or remove roles for an existing tenant user in a specified environment. The same user can have different roles in each tenant and environment.<br />References: [Role Management](/docs/part-5/adding-role-to-user) / [(New Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-management-new-ui) | [CreateTenantUserRoles](/docs/reference/auth-api#tag/tenantUser/operation/CreateTenantUserRoles) [DeleteTenantUserRole](/docs/reference/auth-api#tag/tenantUser/operation/DeleteTenantUserRole) |
+</FeatureTable>
+## Attribute definitions
+Define fields for additional user or tenant information, such as names, departments, or notes.
+Define tenant user and tenant attributes in the SaaS Development Console; define SaaS user attributes through SaaSus API.
+Defining attribute fields is separate from updating values for individual users or tenants.
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Define SaaS user attributes | Define attribute fields, such as a user name, for SaaS users. For updating values, see [User management: Updating user attributes](/docs/part-3/saasus-platform-features/user-management#saas-user-attributes).<br />References: [User management](/docs/part-3/saasus-platform-features/user-management) | [CreateSaasUserAttribute](/docs/reference/auth-api#tag/userAttribute/operation/CreateSaasUserAttribute) |
+| Define, list, and delete tenant user attributes | Define user attribute fields that can hold different values per tenant membership. For membership-specific values, see [Update tenant user attributes in User management](/docs/part-3/saasus-platform-features/user-management#tenant-user-attributes).<br />References: [User Attributes](/docs/part-4/user-authz-settings/declare-additional-attribute-to-user) / [User management](/docs/part-3/saasus-platform-features/user-management) | [GetUserAttributes](/docs/reference/auth-api#tag/userAttribute/operation/GetUserAttributes) [CreateUserAttribute](/docs/reference/auth-api#tag/userAttribute/operation/CreateUserAttribute) [DeleteUserAttribute](/docs/reference/auth-api#tag/userAttribute/operation/DeleteUserAttribute) |
+| Define, list, and delete tenant attributes | Define additional tenant attribute fields. For individual tenant values, see [Configure tenant attributes in Tenant management](/docs/part-3/saasus-platform-features/tenant-management#tenant-attributes).<br />References: [Tenant Attributes](/docs/part-4/application-settings/declare-additional-attribute-to-tenant) / [Tenant management](/docs/part-3/saasus-platform-features/tenant-management) | [GetTenantAttributes](/docs/reference/auth-api#tag/tenantAttribute/operation/GetTenantAttributes) [CreateTenantAttribute](/docs/reference/auth-api#tag/tenantAttribute/operation/CreateTenantAttribute) [DeleteTenantAttribute](/docs/reference/auth-api#tag/tenantAttribute/operation/DeleteTenantAttribute) |
+</FeatureTable>
+## User environment definitions
+Define the environments users can access and their roles in each environment. For example, assign a user the administrator role for testing and the regular user role for production, and have your SaaS application determine which operations are allowed.
+These definitions are separate from the environments you switch between in the SaaSus Platform Console.
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| List, retrieve, create, update, and delete user environment definitions | Manage environment IDs, names, and display names. The default production environment (ID: 3) cannot be deleted.<br />References: [User Environment Definitions](/docs/part-4/user-authz-settings/user-env-definition) | [GetEnvs](/docs/reference/auth-api#tag/env/operation/GetEnvs) [GetEnv](/docs/reference/auth-api#tag/env/operation/GetEnv) [CreateEnv](/docs/reference/auth-api#tag/env/operation/CreateEnv) [UpdateEnv](/docs/reference/auth-api#tag/env/operation/UpdateEnv) [DeleteEnv](/docs/reference/auth-api#tag/env/operation/DeleteEnv) |
+</FeatureTable>
+````
+
+---
+## part-3/saasus-platform-features/development-administration.mdx
+````markdown
+import FeatureTable from '@site/src/components/FeatureTable';
+Manage users of SaaSus Platform, your own account, and your SaaSus Platform subscription.
+Use the account settings page in the SaaS Development Console and the user menus in both consoles.
+For managing the accounts of your SaaS users, see [User management](/docs/part-3/saasus-platform-features/user-management).
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Manage users | View users who access SaaSus Platform, change their roles, or remove them. Administrator, developer, and operator roles determine which consoles and operations are available.<br />References: [Inviting Users](/docs/part-4/account-settings/saasususerinvitation) | — |
+| Invite users | Invite users to SaaSus Platform by email and assign roles. You can also check invitation status and cancel invitations.<br />References: [Inviting Users](/docs/part-4/account-settings/saasususerinvitation) | — |
+| Manage your profile and authentication settings | Configure the profile, email address, password, and MFA for the account you use to sign in to the SaaSus Platform Console.<br />References: [Overview of Login Screen and Main Screen of SaaSus Platform](/docs/part-3/login-and-main-screen-overview) | — |
+| Change account information | Change the account name and primary contact email address on the General tab in Account Settings. The primary contact email address also receives invoice issuance notifications for SaaSus Platform.<br />References: [Billing and Payment Methods](/docs/part-4/account-settings/billing-information#billing-contact-email) | — |
+| Manage the SaaSus Platform subscription and billing information | View or change your SaaSus Platform plan on the Pricing Plan tab in Account Settings. You cannot switch directly from a paid plan to the free plan. On the Payment tab, view estimated charges and usage according to your plan. Manage billing information in Account Settings, and use the billing portal or other service for your subscription method to change payment methods and view invoices.<br />References: [Procedure for Applying for a Paid Plan](/docs/part-4/account-settings/procedure-for-applying-for-a-paid-plan) / [Billing and Payment Methods](/docs/part-4/account-settings/billing-information) | — |
+| Restrict console and API access by IP address | Restrict which IP addresses can access the SaaSus Platform Console and SaaSus APIs. Submit separate allowed CIDR lists for console and API access to support. This is separate from per-tenant IP restrictions in Smart API Gateway.<br />References: [IP Restriction](/docs/part-4/application-settings/ip-restriction) | — |
+</FeatureTable>
+IP restrictions are not available on the legacy Starter and Standard plans. See the IP restriction guide for availability.
+````
+
+---
+## part-3/saasus-platform-features/external-integrations.mdx
+````markdown
+import FeatureTable from '@site/src/components/FeatureTable';
+Integrate with Stripe for billing, deliver events to Amazon EventBridge, and integrate with AWS Marketplace.
+Alongside the external service configuration, implement event handling and tenant association in your SaaS application.
+Related API links use operation names from Billing API, Auth API, Pricing API and Integration API.
+## Stripe integration
+Synchronize pricing plans, tax rates, tenants, and usage managed in SaaSus Platform with Stripe for billing.
+Configure the connection in the SaaS Development Console; synchronization then follows plan application and usage recording.
+If you do not use Stripe, implement billing using the pricing, subscription, and usage information you retrieve.
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Get connection status, configure, or disconnect Stripe | Check the Stripe connection status and register or remove its secret key. Configuring integration in the SaaS Development Console also registers existing pricing plans, tax rates, and tenants in Stripe. Disconnecting deletes customers and archives products in Stripe.<br />References: [Stripe Integration](/docs/part-4/pricing-and-billing/stripe-integration) | [GetStripeInfo](/docs/reference/billing-api#tag/stripe/operation/GetStripeInfo) [UpdateStripeInfo](/docs/reference/billing-api#tag/stripe/operation/UpdateStripeInfo) [DeleteStripeInfo](/docs/reference/billing-api#tag/stripe/operation/DeleteStripeInfo) [DeleteStripeTenantAndPricing](/docs/reference/auth-api#tag/tenant/operation/DeleteStripeTenantAndPricing) |
+| Synchronize plans, tax rates, and customers | Initial synchronization copies existing pricing plans, tax rates, and tenants to Stripe. After connection, synchronization runs automatically when plans or tax rates are created and tenant or billing information is updated.<br />References: [Stripe Integration](/docs/part-4/pricing-and-billing/stripe-integration) | [CreateTenantAndPricing](/docs/reference/auth-api#tag/tenant/operation/CreateTenantAndPricing) [LinkPlanToStripe](/docs/reference/pricing-api#tag/pricingPlans/operation/LinkPlanToStripe) |
+| Get Stripe customer information | Retrieve the Stripe customer linked to a tenant, including subscription information, to check the linked state.<br />References: [Setting Billing Information for Tenants](/docs/part-5/price-plan/price-plan-setting-000) | [GetStripeCustomer](/docs/reference/auth-api#tag/tenant/operation/GetStripeCustomer) |
+| Integrate with billing | Plan application and changes update the Stripe subscription, and recorded usage is sent to Stripe. Manage payment methods and invoices in Stripe.<br />References: [Stripe Integration](/docs/part-4/pricing-and-billing/stripe-integration) | [UpdateTenantPlan](/docs/reference/auth-api#tag/tenant/operation/UpdateTenantPlan) [UpdateMeteringUnitTimestampCountNow](/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCountNow) [UpdateMeteringUnitTimestampCount](/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCount) |
+</FeatureTable>
+### Payment pages
+SaaSus Platform instructs Stripe to create or update subscriptions when pricing plans are applied or changed.
+SaaSus Platform does not provide pages for card entry or 3D Secure authentication. Integrate Stripe’s Hosted Invoice Page or similar features when these pages are needed.
+### Receiving payment events
+To send emails after payment or detect refunds, receive Stripe webhooks directly on your SaaS application’s server.
+SaaSus Platform does not relay Stripe webhook events.
+### Operations performed in Stripe
+Perform the following operations in the Stripe Dashboard:
+- Refund payments and reissue invoices
+- Configure invoice payments using bank transfers or other non-card payment methods
+- Apply individual discounts using coupons
+Apply coupons to the Stripe customer or subscription associated with the target tenant.
+Changing pricing plan or pricing unit configurations directly in Stripe can cause inconsistencies with SaaSus Platform. Make changes to synchronized pricing definitions in SaaSus Platform.
+## Amazon EventBridge
+Deliver events such as user and tenant creation to your AWS account.
+Configure the destination in the SaaS Development Console, then set up an event bus, rules, and targets in Amazon EventBridge.
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Get, update, and delete connection settings | Set the destination AWS account ID and region. Associate the resulting partner event source with an event bus in the receiving account.<br />References: [Integrate with Amazon EventBridge](/docs/part-4/integrate-with-amazon-eventbridge) | [GetEventBridgeSettings](/docs/reference/integration#tag/eventBridge/operation/GetEventBridgeSettings) [SaveEventBridgeSettings](/docs/reference/integration#tag/eventBridge/operation/SaveEventBridgeSettings) [DeleteEventBridgeSettings](/docs/reference/integration#tag/eventBridge/operation/DeleteEventBridgeSettings) |
+| Test the connection | Send a test event and verify that it reaches the configured rules and targets.<br />References: [Integrate with Amazon EventBridge](/docs/part-4/integrate-with-amazon-eventbridge) | [CreateEventBridgeTestEvent](/docs/reference/integration#tag/eventBridge/operation/CreateEventBridgeTestEvent) |
+| Deliver events from SaaSus Platform | Events from SaaSus API operations other than GET requests are delivered to your account. Implement event handlers for tasks such as tenant setup and cleanup after user deletion.<br />References: [Event Samples](/docs/part-4/integrate-with-amazon-eventbridge/event-sample) | — |
+</FeatureTable>
+## AWS Marketplace
+Associate AWS Marketplace selling plans and customers with tenants.
+Login pages handle new customer registration; implement the association with an existing tenant in your application.
+:::caution New use is suspended
+The existing guide states that new use is suspended because the integration does not support changes to AWS Marketplace specifications.
+See [AWS Marketplace Integration](/docs/part-4/aws-marketplace-integration/aws-marketplace-integration) for availability.
+:::
+````
+
+---
+## part-3/saasus-platform-features/logs-analytics-feedback.mdx
+````markdown
+import FeatureTable from '@site/src/components/FeatureTable';
+View SaaSus API execution logs, user activity history, user counts, and per-page usage statistics.
+You can also collect questions and requests from users and manage them as feedback.
+Related API links use operation names from API Log API, Analysis API, Auth API and Communication API.
+## API execution logs
+Inspect SaaSus API calls and their details.
+Use the logs to investigate API errors and check request details.
+Record the same trace ID in your application logs to follow processing across the application and SaaSus Platform.
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Search logs and retrieve details | Search SaaSus API execution logs by date, time, or period and inspect request details and trace IDs. Record access logs for your SaaS application separately.<br />References: [Request Tracing Guide with Trace ID](/docs/part-6/implementation-guide/sample-application/trace-id-log-analysis) | [GetLogs](/docs/reference/apilog-api#tag/apiLog/operation/GetLogs) [GetLog](/docs/reference/apilog-api#tag/apiLog/operation/GetLog) |
+</FeatureTable>
+## Usage analytics
+Retrieve user activity history, user counts, metrics over time, and per-page statistics.
+Use this information to monitor SaaS application usage and understand user activity.
+Activity history and per-page statistics use records from GetUserInfo calls with a referring URL header.
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Get user activity history | Retrieve activity recorded through GetUserInfo calls with the Referer or X-SaaSus-Referer header. View the past month of history for each user.<br />References: [User Activity History Log](/docs/part-5/user-management/user-activity-history-log) / [Activity History Log Implementation](/docs/part-6/implementation-guide/sample-application/activity-history-log) | [GetUserBehaviorHistories](/docs/reference/analysis-api#tag/userAnalysis/operation/GetUserBehaviorHistories) |
+| Get SaaS user and tenant user counts | Retrieve the SaaS-wide user count and tenant membership counts. | [GetSaasUsersCount](/docs/reference/auth-api#tag/saasUser/operation/GetSaasUsersCount) [GetAllTenantUsersCount](/docs/reference/auth-api#tag/tenantUser/operation/GetAllTenantUsersCount) |
+| Get user and tenant metrics | Specify a date range and metric type to retrieve creation counts for tenants, SaaS users, or tenant users. Tenant user metrics can be filtered by tenant. | [GetAggregatedMetrics](/docs/reference/analysis-api#tag/metrics/operation/GetAggregatedMetrics) |
+| Get per-page usage statistics | Retrieve page views and unique user counts per URL for a specified period. Statistics use the referring URL specified in the headers of GetUserInfo calls. | [GetPageStatistics](/docs/reference/analysis-api#tag/metrics/operation/GetPageStatistics) |
+</FeatureTable>
+## Feedback
+Collect questions and requests from SaaS users, and manage status, votes, and comments.
+Implement user-facing submission and viewing pages in your application, and review and respond through the SaaS Operations Console.
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Create, retrieve, update, and delete feedback | Manage feedback titles and content. Integrate submission and viewing into your SaaS application, and use the SaaS Operations Console to view received feedback and its details.<br />References: [Feedback Management](/docs/part-5/user-feedback) | [CreateFeedback](/docs/reference/communication-api#tag/feedback/operation/CreateFeedback) [GetFeedbacks](/docs/reference/communication-api#tag/feedback/operation/GetFeedbacks) [GetFeedback](/docs/reference/communication-api#tag/feedback/operation/GetFeedback) [UpdateFeedback](/docs/reference/communication-api#tag/feedback/operation/UpdateFeedback) [DeleteFeedback](/docs/reference/communication-api#tag/feedback/operation/DeleteFeedback) |
+| Update response status | Update the response status of feedback. In the SaaS Operations Console, choose from New, Under Review, In Progress, Implemented, Under Investigation, and Answered. You can also display the response status in your application.<br />References: [Feedback Management](/docs/part-5/user-feedback) | [UpdateFeedbackStatus](/docs/reference/communication-api#tag/feedback/operation/UpdateFeedbackStatus) |
+| Vote and withdraw votes | Let users vote on feedback or withdraw their votes. Implement voting buttons and other controls in your SaaS application.<br />References: [Feedback Management](/docs/part-5/user-feedback) | [CreateVoteUser](/docs/reference/communication-api#tag/feedback/operation/CreateVoteUser) [DeleteVoteForFeedback](/docs/reference/communication-api#tag/feedback/operation/DeleteVoteForFeedback) |
+| Create, retrieve, update, and delete comments | Manage replies and additional information as feedback comments. View and reply to comments in the SaaS Operations Console, and integrate viewing, submission, editing, and deletion into your SaaS application.<br />References: [Feedback Management](/docs/part-5/user-feedback) | [CreateFeedbackComment](/docs/reference/communication-api#tag/feedback/operation/CreateFeedbackComment) [GetFeedbackComment](/docs/reference/communication-api#tag/feedback/operation/GetFeedbackComment) [UpdateFeedbackComment](/docs/reference/communication-api#tag/feedback/operation/UpdateFeedbackComment) [DeleteFeedbackComment](/docs/reference/communication-api#tag/feedback/operation/DeleteFeedbackComment) |
+</FeatureTable>
+````
+
+---
+## part-3/saasus-platform-features/pricing-billing.mdx
+````markdown
+import FeatureTable from '@site/src/components/FeatureTable';
+Create SaaS pricing plans and manage subscriptions and usage for each tenant.
+:::info
+[Integrate with Stripe](/docs/part-3/saasus-platform-features/external-integrations#stripe-integration) to use your pricing plans and recorded usage for billing.
+:::
+Related API links use operation names from Pricing API and Auth API.
+## Pricing structure design
+Create pricing plans that combine fixed monthly charges with usage-based charges such as API call counts.
+Build plans using meter units to record usage, pricing units to define charges, and feature menus to group pricing units. Apply the resulting plan and tax rate to a tenant.
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Get, create, update, and delete meter units | Define items for recording usage, such as API call counts. With Stripe integration, choose `sum` or `max` as the aggregation method for daily and monthly usage retrieval and billing. Without Stripe integration, the aggregation setting is not shown in the console and the method is `sum`. For meter units used in a pricing unit, only the display name and description can be changed; deletion is not allowed. Create a new meter unit to change what is measured or how it is aggregated.<br />References: [Meter Unit Setting](/docs/part-4/pricing-and-billing/usage-metering) | [GetMeteringUnits](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnits) [CreateMeteringUnit](/docs/reference/pricing-api#tag/metering/operation/CreateMeteringUnit) [UpdateMeteringUnitByID](/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitByID) [DeleteMeteringUnitByID](/docs/reference/pricing-api#tag/metering/operation/DeleteMeteringUnitByID) |
+| Manage pricing units | Set charges, currency, and billing model: fixed, usage-based, tiered, or tiered usage. Usage-based billing references a meter unit. For pricing units used in a feature menu, only the display name, description, and usage limit can be changed (fixed units have no usage limit). Deletion is not allowed; create a new unit to change charges or the billing model.<br />References: [Creating Pricing Plans](/docs/part-4/pricing-and-billing/pricing-plan-creation) / [The difference in rate calculation between Tiered units and Tiered usage units](/docs/part-4/pricing-and-billing/tiered-unit) | [GetPricingUnits](/docs/reference/pricing-api#tag/pricingUnits/operation/GetPricingUnits) [GetPricingUnit](/docs/reference/pricing-api#tag/pricingUnits/operation/GetPricingUnit) [CreatePricingUnit](/docs/reference/pricing-api#tag/pricingUnits/operation/CreatePricingUnit) [UpdatePricingUnit](/docs/reference/pricing-api#tag/pricingUnits/operation/UpdatePricingUnit) [DeletePricingUnit](/docs/reference/pricing-api#tag/pricingUnits/operation/DeletePricingUnit) |
+| Manage feature menus | Group pricing units, such as fixed monthly charges and usage-based charges, into feature menus. For menus used in a pricing plan, only the display name and description can be changed. Their composition cannot be changed and deletion is not allowed; create a new menu to use a different combination of pricing units.<br />References: [Creating Pricing Plans](/docs/part-4/pricing-and-billing/pricing-plan-creation) | [GetPricingMenus](/docs/reference/pricing-api#tag/pricingMenus/operation/GetPricingMenus) [GetPricingMenu](/docs/reference/pricing-api#tag/pricingMenus/operation/GetPricingMenu) [CreatePricingMenu](/docs/reference/pricing-api#tag/pricingMenus/operation/CreatePricingMenu) [UpdatePricingMenu](/docs/reference/pricing-api#tag/pricingMenus/operation/UpdatePricingMenu) [DeletePricingMenu](/docs/reference/pricing-api#tag/pricingMenus/operation/DeletePricingMenu) |
+| Manage pricing plans | Combine feature menus into pricing plans. For plans applied or scheduled for a tenant, only the display name and description can be changed. Their composition cannot be changed and deletion is not allowed; create a new plan to use a different combination of menus.<br />References: [Pricing Plan Overview](/docs/part-4/pricing-and-billing/pricing-plan-overview) / [Creating Pricing Plans](/docs/part-4/pricing-and-billing/pricing-plan-creation) | [GetPricingPlans](/docs/reference/pricing-api#tag/pricingPlans/operation/GetPricingPlans) [GetPricingPlan](/docs/reference/pricing-api#tag/pricingPlans/operation/GetPricingPlan) [CreatePricingPlan](/docs/reference/pricing-api#tag/pricingPlans/operation/CreatePricingPlan) [UpdatePricingPlan](/docs/reference/pricing-api#tag/pricingPlans/operation/UpdatePricingPlan) [DeletePricingPlan](/docs/reference/pricing-api#tag/pricingPlans/operation/DeletePricingPlan) |
+| Get and create tax rates; update display names and descriptions | Register the tax percentage, inclusive or exclusive tax, and country, then select the tax rate when applying a plan to a tenant. You can update an existing tax rate’s display name and description, but not its percentage or other tax properties.<br />References: [Tax Rate Settings](/docs/part-4/pricing-and-billing/tax-rate-settings) | [GetTaxRates](/docs/reference/pricing-api#tag/taxRate/operation/GetTaxRates) [CreateTaxRate](/docs/reference/pricing-api#tag/taxRate/operation/CreateTaxRate) [UpdateTaxRate](/docs/reference/pricing-api#tag/taxRate/operation/UpdateTaxRate) |
+| Reset all pricing plans | Delete pricing definitions and recorded usage together in development or staging environments. Use Account Settings > Others in the SaaS Development Console or call the API. This operation is not available in production. See “Reset pricing plans” below for the scope of deletion. | [ResetPlan](/docs/reference/auth-api#tag/tenant/operation/ResetPlan) |
+</FeatureTable>
+### Reset pricing plans
+Resetting deletes the following information in the selected environment:
+- Pricing plans, feature menus, pricing units, meter units, and tax rates
+- Recorded usage
+- Scheduled plan changes and plan histories for all tenants
+If Stripe integration is configured, resetting also removes the integration mappings and secret key from SaaSus Platform and disconnects Stripe.
+Products, customers, and subscriptions in Stripe are not deleted.
+## Record and retrieve usage
+Record usage for each tenant by meter unit and retrieve it by day, month, or time range.
+Call the recording APIs when the measured activity occurs in your SaaS application, and use the results to display usage or calculate charges.
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Add, subtract, or overwrite usage at the current or a specified time | Record usage for a tenant and meter unit. Choose add, sub, or direct to add, subtract, or overwrite the count. Updates apply to the record at the specified timestamp, in Unix seconds, rather than the aggregated value for the entire period.<br />References: [Metering API Implementation Samples](/docs/part-6/implementation-guide/sample-application/metering-api) | [UpdateMeteringUnitTimestampCountNow](/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCountNow) [UpdateMeteringUnitTimestampCount](/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCount) |
+| Delete usage at a specified time | Delete usage recorded at a specified time for a tenant and meter unit, for example to remove an incorrect record.<br />References: [Metering API Implementation Samples](/docs/part-6/implementation-guide/sample-application/metering-api) | [DeleteMeteringUnitTimestampCount](/docs/reference/pricing-api#tag/metering/operation/DeleteMeteringUnitTimestampCount) |
+| Get usage for today, a specified day, this month, or a specified month | Retrieve the aggregated value for one meter unit for a specified day or month. The meter unit’s aggregation method determines the result: `sum` returns the total of recorded values for the period, and `max` returns the maximum.<br />References: [Billing Dashboard Implementation](/docs/part-6/implementation-guide/sample-application/billing-dashboard) | [GetMeteringUnitDateCountByTenantIdAndUnitNameToday](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountByTenantIdAndUnitNameToday) [GetMeteringUnitDateCountByTenantIdAndUnitNameAndDate](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountByTenantIdAndUnitNameAndDate) [GetMeteringUnitMonthCountByTenantIdAndUnitNameThisMonth](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountByTenantIdAndUnitNameThisMonth) [GetMeteringUnitMonthCountByTenantIdAndUnitNameAndMonth](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountByTenantIdAndUnitNameAndMonth) |
+| Get usage for a time range | Specify start and end timestamps to retrieve timestamped records within a period. The meter unit’s aggregation method (`sum` or `max`) is not applied. Calculate totals or maximum values for that period in your SaaS application.<br />References: [Metering API Implementation Samples](/docs/part-6/implementation-guide/sample-application/metering-api) | [GetMeteringUnitDateCountByTenantIdAndUnitNameAndDatePeriod](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountByTenantIdAndUnitNameAndDatePeriod) |
+| Get usage for multiple meters | Retrieve aggregated values for all meter units of a tenant for a specified day or month. Each meter unit’s setting determines its result: `sum` returns the total of recorded values for the period, and `max` returns the maximum.<br />References: [Billing Dashboard Implementation](/docs/part-6/implementation-guide/sample-application/billing-dashboard) | [GetMeteringUnitDateCountsByTenantIdAndDate](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountsByTenantIdAndDate) [GetMeteringUnitMonthCountsByTenantIdAndMonth](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountsByTenantIdAndMonth) |
+</FeatureTable>
+With Stripe integration, you cannot modify usage for past billing periods or periods before a plan change. You also cannot subtract more than the value recorded at the specified timestamp.
+## Tenant subscriptions
+Manage the pricing plan, tax rate, and effective time for each tenant.
+Configure subscriptions in the SaaS Operations Console, or implement plan selection and changes in your application.
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Apply, change, or cancel a pricing plan | Apply a pricing plan and tax rate to a tenant, change the plan, or cancel it. Apply changes immediately or at a specified time, and check or cancel scheduled changes. Tenant information includes the current plan and plan history. With Stripe integration, plan changes support prorations. See “Prorations when changing plans” below for invoice timing and other details.<br />References: [Set a Pricing Plan for Tenants](/docs/part-5/price-plan/price-plan-setting-001) / [Change Tenant Pricing Plan Settings](/docs/part-5/price-plan/price-plan-setting-002) / [Cancel the Tenant Pricing Plan](/docs/part-5/price-plan/price-plan-setting-003) / [Canceling a Scheduled Change](/docs/part-5/price-plan/price-plan-setting-004) / [Plan Change Implementation](/docs/part-6/implementation-guide/sample-application/plan-change-implementation) | [GetTenant](/docs/reference/auth-api#tag/tenant/operation/GetTenant) [GetTenants](/docs/reference/auth-api#tag/tenant/operation/GetTenants) [UpdateTenantPlan](/docs/reference/auth-api#tag/tenant/operation/UpdateTenantPlan) |
+</FeatureTable>
+Scheduled changes cannot be modified or canceled from five minutes before their effective time.
+With Stripe integration, a scheduled change that removes metered subscription items (`delete_usage`) cannot be canceled.
+### Prorations when changing plans
+With Stripe integration, pricing plan changes support prorations.
+Changes made through the SaaS Operations Console invoice the prorated difference immediately.
+Use `proration_behavior` in [UpdateTenantPlan](/docs/reference/auth-api#tag/tenant/operation/UpdateTenantPlan) to specify whether to prorate and when to invoice the difference.
+- `always_invoice`: Issue an invoice for the prorated difference immediately.
+- `create_prorations`: Include the prorated difference in the next invoice.
+- `none`: Do not prorate the plan change.
+#### Example with fixed monthly prices
+Suppose a tenant switches from a JPY 25,000 monthly plan to a JPY 28,000 monthly plan halfway through the billing period. Excluding tax and usage-based charges, the difference is:
+- Unused time on the old plan: −JPY 12,500
+- Remaining time on the new plan: +JPY 14,000
+- Difference: JPY 1,500
+For the reverse change from JPY 28,000 to JPY 25,000 per month, the −JPY 1,500 difference is retained as a Stripe credit and applied to future invoices.
+Stripe calculates the actual amounts to the second based on the change time and billing period.
+````
+
+---
+## part-3/saasus-platform-features/saas-infrastructure.mdx
+````markdown
+import FeatureTable from '@site/src/components/FeatureTable';
+Build a silo-model SaaS with dedicated servers and databases for each tenant.
+Configure permissions and templates in the SaaS Development Console to start provisioning dedicated resources in your AWS environment when a tenant is created.
+Related API links use operation names from Auth API.
+## Provisioning settings
+Manage whether automatic provisioning is enabled, permissions for AWS access, and the files used for provisioning and initialization.
+Prepare AWS CloudFormation templates and initialization SQL for your SaaS architecture.
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Retrieve and update settings | Retrieve and update whether infrastructure management is enabled, along with the configured permissions and templates. Set up permissions and required files before enabling provisioning.<br />References: [SaaS Infrastructure Management](/docs/part-4/saas-infra-management) | [GetSingleTenantSettings](/docs/reference/auth-api#tag/singleTenant/operation/GetSingleTenantSettings) [UpdateSingleTenantSettings](/docs/reference/auth-api#tag/singleTenant/operation/UpdateSingleTenantSettings) |
+| Configure AWS permissions and retrieve the CloudFormation launch link | Create an IAM role for access to your AWS environment, then register its ARN and external ID. Use the AWS CloudFormation launch link to set up the required permissions.<br />References: [SaaS Infrastructure Management](/docs/part-4/saas-infra-management) | [GetCloudFormationLaunchStackLinkForSingleTenant](/docs/reference/auth-api#tag/singleTenant/operation/GetCloudFormationLaunchStackLinkForSingleTenant) [UpdateSingleTenantSettings](/docs/reference/auth-api#tag/singleTenant/operation/UpdateSingleTenantSettings) |
+| Configure templates and database initialization SQL | Set the AWS CloudFormation template used to provision dedicated resources and the SQL used to create database tables and initial data. See the reference guide for required template Outputs and supported databases.<br />References: [SaaS Infrastructure Management](/docs/part-4/saas-infra-management) | [GetSingleTenantSettings](/docs/reference/auth-api#tag/singleTenant/operation/GetSingleTenantSettings) [UpdateSingleTenantSettings](/docs/reference/auth-api#tag/singleTenant/operation/UpdateSingleTenantSettings) |
+</FeatureTable>
+## Tenant onboarding
+Provision a dedicated application environment for a tenant and initialize its database when the tenant is created.
+Check provisioning status through the `TenantOnboardingStatus` tenant attribute on the tenant management page in the SaaS Operations Console.
+Provisioning continues after the tenant is created. Check the SaaS Operations Console to confirm completion.
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Automatically provision dedicated tenant environments | When infrastructure management is enabled, creating a tenant starts provisioning and initialization using the registered template and SQL.<br />References: [SaaS Infrastructure Management](/docs/part-4/saas-infra-management) | [CreateTenant](/docs/reference/auth-api#tag/tenant/operation/CreateTenant) |
+| Check onboarding progress | Check the `TenantOnboardingStatus` tenant attribute in tenant information for preparation, database initialization, completion, or failure. Contact support if provisioning fails.<br />References: [SaaS Infrastructure Management](/docs/part-4/saas-infra-management) | [GetTenant](/docs/reference/auth-api#tag/tenant/operation/GetTenant) [GetTenants](/docs/reference/auth-api#tag/tenant/operation/GetTenants) |
+</FeatureTable>
+Onboarding runs in the Tokyo Region (ap-northeast-1).
+Automatic deletion of dedicated resources when a tenant is deleted (offboarding) is not supported.
+This feature is not available on legacy Starter and Standard plans; see the reference guide for availability.
+````
+
+---
+## part-3/saasus-platform-features/smart-api-gateway.mdx
+````markdown
+import FeatureTable from '@site/src/components/FeatureTable';
+Publish application operations as APIs and control access by tenant and user.
+Published APIs can also be accessed by AI clients through Smart MCP Server.
+API publishing, access control settings, and API key management are primarily handled in the SaaSus Platform Console.
+Implement the operations to publish and integrate the SDK in your SaaS application.
+Related API links use operation names from API Gateway API.
+## API publication settings
+Configure the connected SaaS application and the operations to expose, then publish APIs.
+Configure and publish APIs in the SaaS Development Console, and integrate the SDK and annotations into your application following the reference guide.
+See [Smart API Gateway Features](/docs/part-4/smart-api-gateway-features/overview) for supported SDKs and infrastructure requirements.
+The guide covers Java web applications running behind an Application Load Balancer (ALB) on AWS.
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Get and update settings and connect an application | Configure the internal endpoint and AWS resources used to connect your application. See the existing guide for application and infrastructure prerequisites.<br />References: [Smart API Gateway Feature](/docs/part-4/smart-api-gateway-features/overview) / [Setup Procedure](/docs/part-4/smart-api-gateway-features/manual) | [GetApiGatewaySettings](/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetApiGatewaySettings) [UpdateApiGatewaySettings](/docs/reference/apigateway-api#tag/smartApiGateway/operation/UpdateApiGatewaySettings) |
+| Upload generation files | Upload packaged source code containing the operations to expose. Review the generated configuration in the draft settings.<br />References: [Setup Procedure](/docs/part-4/smart-api-gateway-features/manual) | [UploadGenerationFiles](/docs/reference/apigateway-api#tag/smartApiGateway/operation/UploadGenerationFiles) |
+| Update OpenAPI definitions and documentation | Update the OpenAPI definition used for published API documentation. Implement the API operations themselves in your application.<br />References: [Setup Procedure](/docs/part-4/smart-api-gateway-features/manual) | [UpdateOpenApiDefinition](/docs/reference/apigateway-api#tag/smartApiGateway/operation/UpdateOpenApiDefinition) |
+| Retrieve, apply, and discard draft settings | Review API settings generated from the uploaded source code, then apply them or discard an unwanted draft.<br />References: [Setup Procedure](/docs/part-4/smart-api-gateway-features/manual) | [GetDraftApiGatewaySettings](/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetDraftApiGatewaySettings) [ApplyDraftApiGatewaySettings](/docs/reference/apigateway-api#tag/smartApiGateway/operation/ApplyDraftApiGatewaySettings) [CancelDraftApiGatewaySettings](/docs/reference/apigateway-api#tag/smartApiGateway/operation/CancelDraftApiGatewaySettings) |
+| Create and publish APIs | Prepare the AWS resources required for the connection using an AWS CloudFormation launch link, then create and publish the APIs. AWS resource charges apply separately.<br />References: [Setup Procedure](/docs/part-4/smart-api-gateway-features/manual) | [GetCloudFormationLaunchStackLink](/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetCloudFormationLaunchStackLink) [CreateApiGateway](/docs/reference/apigateway-api#tag/smartApiGateway/operation/CreateApiGateway) [PublishApiGateway](/docs/reference/apigateway-api#tag/smartApiGateway/operation/PublishApiGateway) |
+| Configure custom domains and endpoints | Configure a custom domain for the published API and the endpoint it connects to. When using a custom domain, also configure the specified DNS records.<br />References: [Setup Procedure](/docs/part-4/smart-api-gateway-features/manual) | [GetApiGatewaySettings](/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetApiGatewaySettings) [UpdateApiGatewaySettings](/docs/reference/apigateway-api#tag/smartApiGateway/operation/UpdateApiGatewaySettings) |
+</FeatureTable>
+## Access control
+Restrict which users and tenants can access published APIs, how often they can call them, and which source IP addresses are allowed.
+Use API keys and roles assigned to users to control access to each published operation.
+Distinguish tenant API keys from user API keys and configure access for each operation.
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| List, retrieve, and issue API keys | Issue API keys for a tenant and environment, optionally associated with a user. Use the issued keys when calling published APIs.<br />References: [Setup Procedure](/docs/part-4/smart-api-gateway-features/manual) | [GetApiKeys](/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetApiKeys) [GetApiKey](/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetApiKey) [CreateApiKey](/docs/reference/apigateway-api#tag/smartApiGateway/operation/CreateApiKey) |
+| Issue and regenerate client secrets | Issue or regenerate the client secret associated with an API key. Once issued, calls using that API key require a signature generated with the secret. After regenerating the secret, update the calling client configuration with the new value.<br />References: [Setup Procedure](/docs/part-4/smart-api-gateway-features/manual) | [RefreshClientSecret](/docs/reference/apigateway-api#tag/smartApiGateway/operation/RefreshClientSecret) |
+| Use APIs by tenant and user | Use the tenant, environment, and user information associated with the API key in your application. Implement data filtering and other application-specific processing yourself.<br />References: [Setup Procedure](/docs/part-4/smart-api-gateway-features/manual) | — |
+| Configure endpoint roles and throttling | Set allowed roles and request limits for each operation. Role checks apply to user API keys and do not apply to tenant API keys.<br />References: [Setup Procedure](/docs/part-4/smart-api-gateway-features/manual) | [GetApiGatewaySettings](/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetApiGatewaySettings) [UpdateApiGatewaySettings](/docs/reference/apigateway-api#tag/smartApiGateway/operation/UpdateApiGatewaySettings) |
+| Configure allowed IP addresses by tenant | Set the IP addresses allowed to access published APIs for each tenant. These settings are separate from tenant basic information managed through Auth API.<br />References: [Setup Procedure](/docs/part-4/smart-api-gateway-features/manual) | [GetTenant](/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetTenant) [UpdateTenant](/docs/reference/apigateway-api#tag/smartApiGateway/operation/UpdateTenant) |
+</FeatureTable>
+## Smart MCP Server
+Expose APIs published through Smart API Gateway as MCP tools.
+Publishing the APIs also makes the MCP server available automatically. Configure its endpoint and authentication credentials in an AI client to call the tools.
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Expose published APIs as MCP tools | When you publish an API through Smart API Gateway, it also becomes available as an MCP tool through Smart MCP Server. Changes to the API definition are also reflected in the MCP tool schema.<br />References: [Smart MCP Server Feature](/docs/part-4/smart-api-gateway-features/smart-mcp-server-overview) | [PublishApiGateway](/docs/reference/apigateway-api#tag/smartApiGateway/operation/PublishApiGateway) |
+| Call APIs from authenticated AI clients | Configure the MCP server endpoint and API key in the AI client. Call published APIs using credentials associated with the appropriate tenant or user.<br />References: [Smart MCP Server Feature](/docs/part-4/smart-api-gateway-features/smart-mcp-server-overview) | — |
+</FeatureTable>
+````
+
+---
+## part-3/saasus-platform-features/tenant-management.mdx
+````markdown
+import FeatureTable, {FeatureAnchor} from '@site/src/components/FeatureTable';
+Manage tenant information and invitations to tenants.
+See [User management](/docs/part-3/saasus-platform-features/user-management) for adding registered users to tenants or removing users from tenants.
+Related API links use operation names from Auth API.
+## Tenants
+Create tenants and manage their basic details, attributes, and billing information.
+Use the SaaS Operations Console to manage basic details, additional attributes, and billing information; integrate APIs to automate tasks such as tenant creation during subscription sign-up.
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| List, retrieve, create, edit, and delete tenants | View tenant lists and details, and register or update basic information such as tenant names. You can also delete tenants that are no longer needed.<br />References: [Tenant Management](/docs/part-5/tenant-management) | [GetTenants](/docs/reference/auth-api#tag/tenant/operation/GetTenants) [GetTenant](/docs/reference/auth-api#tag/tenant/operation/GetTenant) [CreateTenant](/docs/reference/auth-api#tag/tenant/operation/CreateTenant) [UpdateTenant](/docs/reference/auth-api#tag/tenant/operation/UpdateTenant) [DeleteTenant](/docs/reference/auth-api#tag/tenant/operation/DeleteTenant) |
+| <FeatureAnchor id="tenant-attributes">Configure tenant attributes</FeatureAnchor> | Set values for each tenant using predefined attributes. Create the attribute fields under tenant attribute definitions in the SaaS Development Console.<br />References: [Tenant Management](/docs/part-5/tenant-management) | [UpdateTenant](/docs/reference/auth-api#tag/tenant/operation/UpdateTenant) |
+| Retrieve and update billing information | Manage names, addresses, and other information displayed on invoices, separately from tenant basic details.<br />References: [Tenant Management](/docs/part-5/tenant-management) | [GetTenants](/docs/reference/auth-api#tag/tenant/operation/GetTenants) [GetTenant](/docs/reference/auth-api#tag/tenant/operation/GetTenant) [UpdateTenantBillingInfo](/docs/reference/auth-api#tag/tenant/operation/UpdateTenantBillingInfo) |
+</FeatureTable>
+## Invitations
+Invite users to a tenant.
+Integrate invitation management such as creation and listing into your application; invited users can use the login pages to register, sign in, and accept.
+Your application controls who can create invitations and which roles they can assign.
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Create, list, retrieve, and delete invitations | Creating an invitation requires the inviter’s access token, and the inviter must belong to the target tenant. Domain and email delivery settings must be configured in advance because creating an invitation sends an invitation email.<br />References: [Sample Application Overview](/docs/part-6/implementation-guide/sample-application/overview) / [Domain & Email Sending Domain Authentication and Redirect Settings](/docs/part-4/application-settings/domain-and-redirect-settings) | [CreateTenantInvitation](/docs/reference/auth-api#tag/invitation/operation/CreateTenantInvitation) [GetTenantInvitations](/docs/reference/auth-api#tag/invitation/operation/GetTenantInvitations) [GetTenantInvitation](/docs/reference/auth-api#tag/invitation/operation/GetTenantInvitation) [DeleteTenantInvitation](/docs/reference/auth-api#tag/invitation/operation/DeleteTenantInvitation) |
+| Check invitation validity | When an invitation URL is opened, check whether the invitation has expired or has already been accepted. | [GetInvitationValidity](/docs/reference/auth-api#tag/invitation/operation/GetInvitationValidity) |
+| Accept invitations and join a tenant | Invited users accept the invitation through the login pages and join the tenant. New users register an account, while existing users sign in to accept. The roles specified in the invitation are assigned when they join.<br />References: [Sample Application Overview](/docs/part-6/implementation-guide/sample-application/overview) | [ValidateInvitation](/docs/reference/auth-api#tag/invitation/operation/ValidateInvitation) |
+</FeatureTable>
+````
+
+---
+## part-3/saasus-platform-features/user-management.mdx
+````markdown
+import FeatureTable, {FeatureAnchor} from '@site/src/components/FeatureTable';
+Manage users registered with your SaaS and add them to or remove them from tenants.
+A SaaS user represents a user across the service, while a tenant user represents that user's membership in a specific tenant.
+One SaaS user can belong to multiple tenants.
+Related API links use operation names from Auth API.
+## SaaS users
+Manage sign-in information and attributes for users registered with your service.
+Use the SaaS Operations Console for daily administration, and integrate APIs when building your own administration pages or user-facing information change features.
+Users register themselves through login page self-sign-up, while administrators use the user creation feature.
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| List, search, and retrieve individual users | List users or search by user ID, email address, or sign-in ID.<br />References: [(Old Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-crud) / [(New Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-management-new-ui) | [GetSaasUsers](/docs/reference/auth-api#tag/saasUser/operation/GetSaasUsers) [SearchSaasUsers](/docs/reference/auth-api#tag/saasUser/operation/SearchSaasUsers) [GetSaasUser](/docs/reference/auth-api#tag/saasUser/operation/GetSaasUser) |
+| Create and delete users | Create or delete SaaS users. When you create an email-authenticated user without specifying a password, a temporary password is sent by email. Deleting a SaaS user also removes that user from all tenants. Users who register themselves use self-sign-up.<br />References: [(Old Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-crud) / [Authentication Method Settings](/docs/part-4/user-authz-settings/authentication-method-settings) | [CreateSaasUser](/docs/reference/auth-api#tag/saasUser/operation/CreateSaasUser) [DeleteSaasUser](/docs/reference/auth-api#tag/saasUser/operation/DeleteSaasUser) |
+| Retrieve information by email address or sign-in ID | Specify an email address or sign-in ID to retrieve user information, tenant memberships, and roles. | [GetUserInfoByEmail](/docs/reference/auth-api#tag/userInfo/operation/GetUserInfoByEmail) [GetUserInfoBySignInId](/docs/reference/auth-api#tag/userInfo/operation/GetUserInfoBySignInId) |
+| Change and reset passwords | Set a target user’s password or issue a temporary password. Users must set a new password after signing in with a temporary password. Users who authenticate with a sign-in ID have no notification email address, so the administrator must communicate the password to them. This is separate from [forgotten password recovery](/docs/part-3/saasus-platform-features/authentication#forgotten-password-recovery), which users perform through the login pages.<br />References: [(Old Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-crud) | [UpdateSaasUserPassword](/docs/reference/auth-api#tag/saasUser/operation/UpdateSaasUserPassword) [ResetSaasUserPassword](/docs/reference/auth-api#tag/saasUser/operation/ResetSaasUserPassword) |
+| Change email addresses | For users who authenticate with an email address. Administrators change the user’s email address.<br />References: [(Old Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-crud) | [UpdateSaasUserEmail](/docs/reference/auth-api#tag/saasUser/operation/UpdateSaasUserEmail) |
+| Let users change their own email address | Send a verification code to the new email address and verify the code to change the address. This feature is for users who authenticate with an email address and requires domain and email delivery settings to be configured in advance.<br />References: [Domain & Email Sending Domain Authentication and Redirect Settings](/docs/part-4/application-settings/domain-and-redirect-settings) | [RequestEmailUpdate](/docs/reference/auth-api#tag/saasUser/operation/RequestEmailUpdate) [ConfirmEmailUpdate](/docs/reference/auth-api#tag/saasUser/operation/ConfirmEmailUpdate) |
+| Change sign-in IDs | For users who authenticate with a sign-in ID. This does not switch a user from email-based authentication.<br />References: [(Old Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-crud) | [UpdateSaasUserSignInId](/docs/reference/auth-api#tag/saasUser/operation/UpdateSaasUserSignInId) |
+| <FeatureAnchor id="saas-user-attributes">Update user attributes</FeatureAnchor> | Update attribute values for each SaaS user, for example when editing a profile in your SaaS application. These values are managed separately from tenant user attributes. | [UpdateSaasUserAttributes](/docs/reference/auth-api#tag/saasUser/operation/UpdateSaasUserAttributes) |
+</FeatureTable>
+## Add and remove SaaS users from tenants
+Add registered SaaS users to tenants and manage user information for each tenant.
+Add users to or remove them from tenants in the SaaS Operations Console, or integrate APIs to provide administration features in your own application.
+Your application implements access decisions for its pages and features using the retrieved tenant memberships and roles.
+<FeatureTable>
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Add, retrieve, and remove tenant users | Add registered SaaS users to a tenant, retrieve tenant user information, or remove users from the tenant. Removing a user from a tenant leaves the SaaS user account in place.<br />References: [(Old Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-crud) | [CreateTenantUser](/docs/reference/auth-api#tag/tenantUser/operation/CreateTenantUser) [GetTenantUsers](/docs/reference/auth-api#tag/tenantUser/operation/GetTenantUsers) [GetTenantUser](/docs/reference/auth-api#tag/tenantUser/operation/GetTenantUser) [DeleteTenantUser](/docs/reference/auth-api#tag/tenantUser/operation/DeleteTenantUser) |
+| <FeatureAnchor id="tenant-user-attributes">Update tenant user attributes</FeatureAnchor> | Update user attribute values for each tenant, separately from service-wide SaaS user attributes.<br />References: [User Attributes](/docs/part-4/user-authz-settings/declare-additional-attribute-to-user) | [UpdateTenantUser](/docs/reference/auth-api#tag/tenantUser/operation/UpdateTenantUser) |
+| Search users across all tenants | Search across tenants using conditions such as tenant ID, environment, and role.<br />References: [(New Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-management-new-ui) | [SearchTenantUsers](/docs/reference/auth-api#tag/tenantUser/operation/SearchTenantUsers) |
+| Retrieve tenant membership and role information | GetUserInfo uses an ID token to retrieve tenant memberships that have environment information, including their roles. GetAllTenantUser uses a user ID to retrieve user information and roles for all tenant memberships. Implement access control in your application using the retrieved data.<br />References: [Role Management](/docs/part-5/adding-role-to-user) | [GetUserInfo](/docs/reference/auth-api#tag/userInfo/operation/GetUserInfo) [GetAllTenantUser](/docs/reference/auth-api#tag/tenantUser/operation/GetAllTenantUser) |
+</FeatureTable>
 ````
 
 ---
@@ -6833,7 +7415,13 @@ Search by function name to locate the relevant code.
 - **C# (.NET 8)**: [`GetBillingDashboard`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)
 - **C# (.NET Framework 4.8)**: [`GetBillingDashboard`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)
 ### Meter Updates
+Adding, subtracting, and overwriting usage applies to the record at the specified timestamp, in Unix seconds. For example, subtracting 3 from a record containing 10 at that timestamp changes the value to 7.
 The dashboard allows metering updates in two scenarios: inline edits (current time) and modal edits (specific timestamp).
+:::caution Subtracting usage in this sample
+This sample updates the current time or a randomly selected time within the selected period. It does not let you select an existing record to subtract from.
+**With Stripe integration, an update fails if the resulting record value is negative.** If no record exists at the specified timestamp, subtraction starts from 0 and fails, even if usage remains across the displayed period.
+With Stripe integration, you can still subtract from or overwrite an existing record by specifying its timestamp, provided the resulting value is 0 or greater. Timestamp restrictions also apply: you cannot modify usage for past billing periods or periods before a plan change.
+:::
 #### Inline Edit Example (Current Time)
 <Tabs>
 <TabItem value="go" label="Go" default>
@@ -12679,33 +13267,6 @@ tags:
 security:
   - Bearer: []
 paths:
-  /user-behavior-day:
-    put:
-      tags:
-        - userAnalysis
-      operationId: UpdateUserBehaviorHistoriesByDay
-      summary: Analysis of user behavior on the day
-      x-summary-i18n:
-        jpn: 当日のユーザ行動履歴を更新
-      description: |
-        Analysis of user behavior on the day.
-      x-description-i18n:
-        jpn: |
-          当日のユーザ行動履歴を更新します。
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateUserBehaviorHistoriesByDayParam'
-      responses:
-        '200':
-          description: OK
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
   /users/{user_id}/behavior-histories:
     get:
       tags:
@@ -12728,77 +13289,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserBehaviorHistories'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /active-users:
-    get:
-      tags:
-        - userAnalysis
-      operationId: GetActiveUsers
-      summary: Get daily or monthly active users
-      x-summary-i18n:
-        jpn: 日次または月次のアクティブユーザー数を取得
-      description: |
-        Get daily or monthly active users information.
-      x-description-i18n:
-        jpn: |
-          日次または月次のアクティブユーザー数を取得します。
-      parameters:
-        - $ref: '#/components/parameters/ActiveUsersType'
-        - $ref: '#/components/parameters/DateFrom'
-        - $ref: '#/components/parameters/DateTo'
-        - $ref: '#/components/parameters/TenantId'
-        - $ref: '#/components/parameters/EnvId'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ActiveUsers'
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-    put:
-      tags:
-        - userAnalysis
-      operationId: UpdateActiveUsers
-      summary: Update or insert active users data
-      x-summary-i18n:
-        jpn: アクティブユーザーデータの追加・更新
-      description: |
-        Update or insert daily or monthly active users data.
-      x-description-i18n:
-        jpn: |
-          日次または月次のアクティブユーザーデータを追加・更新します。
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateActiveUsersParam'
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
         '500':
           description: Internal Server Error
           content:
@@ -12941,38 +13431,6 @@ components:
         type: string
         example: f94bfffc-8be2-11ec-b41a-0242ac120004
       required: true
-    ActiveUsersType:
-      in: query
-      name: type
-      description: Type of active users data (monthly or daily)
-      x-description-i18n:
-        jpn: アクティブユーザーデータのタイプ（月次または日次）
-      schema:
-        type: string
-        enum:
-          - monthly
-          - daily
-      required: true
-    DateFrom:
-      in: query
-      name: date_from
-      description: Start date (YYYY-MM for monthly, YYYY-MM-DD for daily)
-      x-description-i18n:
-        jpn: 開始日（月次の場合はYYYY-MM、日次の場合はYYYY-MM-DD）
-      schema:
-        type: string
-        example: 2025-01
-      required: true
-    DateTo:
-      in: query
-      name: date_to
-      description: End date (YYYY-MM for monthly, YYYY-MM-DD for daily). Optional.
-      x-description-i18n:
-        jpn: 終了日（月次の場合はYYYY-MM、日次の場合はYYYY-MM-DD）。任意。
-      schema:
-        type: string
-        example: 2025-12
-      required: false
     TenantId:
       in: query
       name: tenant_id
@@ -12981,15 +13439,6 @@ components:
         jpn: テナントID（任意）
       schema:
         $ref: '#/components/schemas/Uuid'
-      required: false
-    EnvId:
-      in: query
-      name: env_id
-      description: Environment ID (optional, requires tenant_id)
-      x-description-i18n:
-        jpn: 環境ID（任意、tenant_idが必要）
-      schema:
-        $ref: '#/components/schemas/Id'
       required: false
     MetricsType:
       in: query
@@ -13153,112 +13602,6 @@ components:
       required:
         - behaved_at
         - histories
-    ActiveUsers:
-      title: Active Users
-      x-title-i18n:
-        jpn: アクティブユーザー
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ActiveUserData'
-          description: Active users data list
-          x-description-i18n:
-            jpn: アクティブユーザーデータ一覧
-      required:
-        - data
-    ActiveUserData:
-      title: Active User Data
-      x-title-i18n:
-        jpn: アクティブユーザーデータ
-      type: object
-      properties:
-        date:
-          title: Date
-          x-title-i18n:
-            jpn: 日付
-          description: Date (YYYY-MM for monthly, YYYY-MM-DD for daily)
-          x-description-i18n:
-            jpn: 日付（月次の場合はYYYY-MM、日次の場合はYYYY-MM-DD）
-          type: string
-          example: 2025-01
-        tenant_id:
-          $ref: '#/components/schemas/Uuid'
-          description: Tenant ID
-          x-description-i18n:
-            jpn: テナントID
-        env_id:
-          $ref: '#/components/schemas/Id'
-          description: Environment ID
-          x-description-i18n:
-            jpn: 環境ID
-        active_users:
-          title: Active Users Count
-          x-title-i18n:
-            jpn: アクティブユーザー数
-          description: Number of active users
-          x-description-i18n:
-            jpn: アクティブユーザー数
-          type: integer
-          example: 100
-      required:
-        - date
-        - tenant_id
-        - env_id
-        - active_users
-    UpdateActiveUsersParam:
-      title: Update Active Users Parameter
-      x-title-i18n:
-        jpn: アクティブユーザー更新パラメータ
-      type: object
-      properties:
-        type:
-          title: Type
-          x-title-i18n:
-            jpn: タイプ
-          description: Type of active users data (monthly or daily)
-          x-description-i18n:
-            jpn: アクティブユーザーデータのタイプ（月次または日次）
-          type: string
-          enum:
-            - daily
-            - monthly
-          example: daily
-        date:
-          title: Date
-          x-title-i18n:
-            jpn: 日付
-          description: Date (YYYY-MM for monthly, YYYY-MM-DD for daily)
-          x-description-i18n:
-            jpn: 日付（月次の場合はYYYY-MM、日次の場合はYYYY-MM-DD）
-          type: string
-          example: '2025-01-01'
-        tenant_id:
-          $ref: '#/components/schemas/Uuid'
-          description: Tenant ID
-          x-description-i18n:
-            jpn: テナントID
-        env_id:
-          $ref: '#/components/schemas/Id'
-          description: Environment ID
-          x-description-i18n:
-            jpn: 環境ID
-        active_users:
-          title: Active Users Count
-          x-title-i18n:
-            jpn: アクティブユーザー数
-          description: Number of active users
-          x-description-i18n:
-            jpn: アクティブユーザー数
-          type: integer
-          example: 100
-      required:
-        - type
-        - date
-        - tenant_id
-        - env_id
-        - active_users
     AggregatedMetrics:
       title: Aggregated Metrics
       x-title-i18n:
@@ -13487,6 +13830,12 @@ paths:
       responses:
         '200':
           description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '500':
           description: Internal Server Error
           content:
@@ -13756,6 +14105,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiKey'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+        - smartApiGateway
+      operationId: DeleteApiKey
+      summary: Delete an API key
+      x-summary-i18n:
+        jpn: APIキーを削除
+      description: |
+        Delete the specified API key.
+      x-description-i18n:
+        jpn: |
+          指定したAPIキーを削除します。
+      parameters:
+        - in: path
+          name: api_key
+          description: API Key
+          x-description-i18n:
+            jpn: APIキー
+          required: true
+          schema:
+            type: string
+            example: 1234567890abcdef
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '500':
           description: Internal Server Error
           content:
@@ -15003,7 +15389,7 @@ components:
                 jpn: APIキー
             response_status:
               type: string
-              example: 200
+              example: '200'
               description: Response status
               x-description-i18n:
                 jpn: レスポンスステータス
@@ -15139,12 +15525,14 @@ paths:
         The ID token is passed to the Callback URL during login from the SaaSus Platform generated login screen.
         User information can be obtained from calling this API with an ID token from the URL on the server side.
         Since the acquired tenant, role (role), price plan, etc. are included, it is possible to implement authorization based on it.
+        If the ID token validation fails and 401 Unauthorized is returned, the login screen URL will be returned in data.sign_in_page_url of the response, so the client can respond by redirecting to it, etc.
       x-description-i18n:
         jpn: |
           SaaS利用ユーザ(登録ユーザ)のIDトークンを元に、ユーザ情報を取得します。
           IDトークンは、SaaSus Platform生成のログイン画面からログイン時にCallback URLに渡されます。
           サーバ側でそのURLからIDトークンを取得し、このAPIを呼ぶことにより、該当ユーザの情報が取得できます。
           取得した上には、所属テナントや役割(ロール)、料金プランなどが含まれているため、それを元に認可の実装を行うことが可能です。
+          IDトークンの検証に失敗し、401 Unauthorized が返される場合、レスポンスの data.sign_in_page_url にログイン画面のURLが返されますので、クライアントはそちらにリダイレクトするなどの対応を行うことができます。
       parameters:
         - in: query
           name: token
@@ -15479,39 +15867,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-    post:
-      tags:
-        - saasUser
-      operationId: SaveSaasUsersCount
-      summary: Save SaaS Users Count
-      x-summary-i18n:
-        jpn: SaaSユーザー数を保存
-      description: |
-        Save the count of SaaS users.
-      x-description-i18n:
-        jpn: |
-          SaaSユーザー数を保存します。
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SaveSaasUsersCountParam'
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
   /users/search:
     get:
       tags:
@@ -15795,6 +16150,12 @@ paths:
       responses:
         '200':
           description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '500':
           description: Internal Server Error
           content:
@@ -16059,39 +16420,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TenantUsersCounts'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-    post:
-      tags:
-        - tenantUser
-      operationId: SaveTenantUsersCounts
-      summary: Save Tenant Users Count
-      x-summary-i18n:
-        jpn: テナントごとのテナントユーザー数を保存
-      description: |
-        Save the count of tenant users for each tenant.
-      x-description-i18n:
-        jpn: |
-          テナントごとのテナントユーザー数を保存します。
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SaveTenantUsersCountsParam'
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
         '500':
           description: Internal Server Error
           content:
@@ -17525,6 +17853,12 @@ paths:
       responses:
         '200':
           description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '500':
           description: Internal Server Error
           content:
@@ -17536,16 +17870,14 @@ paths:
       tags:
         - authInfo
       operationId: GetSignInSettings
-      summary: Get Password Requirements
+      summary: Get Sign-In Settings
       x-summary-i18n:
-        jpn: パスワード要件を取得
+        jpn: 認証設定を取得
       description: |
-        Get user password requirements.
-        Set a secure password that is difficult to decipher by increasing the number of digits by combining alphabets, numbers, and symbols.
+        Get sign-in settings, including user password requirements and refresh token validity period.
       x-description-i18n:
         jpn: |
-          ユーザーパスワードの要件設定を取得します。
-          アルファベット、数字、記号の組み合わせで、桁数を長くすれば解読されづらい安全なパスワードを設定することが可能となります。
+          ユーザーの認証設定（パスワード要件、リフレッシュトークンの有効期間など）を取得します。
       responses:
         '200':
           description: OK
@@ -17566,16 +17898,14 @@ paths:
       tags:
         - authInfo
       operationId: UpdateSignInSettings
-      summary: Update Password Requirements
+      summary: Update Sign-In Settings
       x-summary-i18n:
-        jpn: パスワード要件を更新
+        jpn: 認証設定を更新
       description: |
-        Update user password requirements.
-        Set a secure password that is difficult to decipher by increasing the number of digits by combining alphabets, numbers, and symbols.
+        Update sign-in settings, including user password requirements and refresh token validity period.
       x-description-i18n:
         jpn: |
-          ユーザーパスワードの要件設定を更新します。
-          アルファベット、数字、記号の組み合わせで、桁数を長くすれば解読されづらい安全なパスワードを設定することが可能となります。
+          ユーザーの認証設定（パスワード要件、リフレッシュトークンの有効期間など）を更新します。
       requestBody:
         content:
           application/json:
@@ -17584,6 +17914,12 @@ paths:
       responses:
         '200':
           description: OK
+        '400':
+          description: Invalid Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '500':
           description: Internal Server Error
           content:
@@ -17947,10 +18283,12 @@ paths:
       description: |
         Temporarily save the parameter for the ID token, access token, and refresh token and return a temporary code for obtaining.
         Temporary codes are valid for 10 seconds from issuance.
+        When code_challenge is specified, the temporary code can only be exchanged via POST /credentials/exchange and cannot be retrieved via GET /credentials.
       x-description-i18n:
         jpn: |
           引数のIDトークン・アクセストークン・リフレッシュトークンを一時保存し取得用の一時コードを返却する。
           一時コードの有効期間は発行から10秒です。
+          code_challengeを指定した場合、その一時コードは POST /credentials/exchange でのみ交換でき、GET /credentials では取得できません。
       requestBody:
         content:
           application/json:
@@ -17971,6 +18309,92 @@ paths:
                 $ref: '#/components/schemas/Error'
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /credentials/exchange:
+    post:
+      tags:
+        - credential
+      operationId: ExchangeAuthCredentials
+      summary: Exchange a Temporary Code for Authentication/Authorization Information
+      x-summary-i18n:
+        jpn: 一時コードを認証・認可情報へ交換
+      description: |
+        Exchange a temporary code for ID token, access token, and refresh token by verifying the PKCE code verifier.
+        Only temporary codes created with code_challenge can be exchanged. Temporary codes created without code_challenge must be retrieved via GET /credentials.
+      x-description-i18n:
+        jpn: |
+          PKCE code verifierを検証し、一時コードをIDトークン・アクセストークン・リフレッシュトークンへ交換する。
+          交換できるのは code_challenge を指定して作成した一時コードのみです。code_challenge なしで作成した一時コードは GET /credentials で取得してください。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExchangeAuthCredentialsParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credentials'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /token/revoke:
+    post:
+      tags:
+        - credential
+      operationId: RevokeToken
+      summary: Revoke Token
+      x-summary-i18n:
+        jpn: トークンの無効化
+      description: |
+        Revoke the specified refresh token.
+      x-description-i18n:
+        jpn: |
+          指定したリフレッシュトークンを無効化します。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RevokeTokenParam'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
           content:
             application/json:
               schema:
@@ -18791,6 +19215,7 @@ components:
         last_login_at:
           type: integer
           x-go-type: int64
+          x-omitempty: false
           nullable: true
           example: 1640995200
           description: |
@@ -19647,9 +20072,13 @@ components:
               Stripe連携時の注意点: 当月の月初（0時 UTC）を開始日時として指定すると、その月の初日から開始されるサブスクリプションを作成できます。 （例: 2023年1月1日 00:00 UTC を指定する場合 → 1672531200）
         next_plan_tax_rate_id:
           $ref: '#/components/schemas/Uuid'
-          description: Tax rate ID
+          description: |
+            Tax rate ID.
+            For a plan cancellation reservation, the tax rate of the currently active plan is used regardless of the value specified in the request.
           x-description-i18n:
-            jpn: 税率ID
+            jpn: |
+              税率ID。
+              プランの解約予約時は、リクエストで指定した値にかかわらず、現在適用中のプランの税率が使用されます。
         proration_behavior:
           $ref: '#/components/schemas/ProrationBehavior'
           description: If you have a stripe linkage, you can set the behavior of the proportional allocation when changing plans.
@@ -19877,8 +20306,6 @@ components:
         data:
           type: object
           additionalProperties: true
-          example:
-            sign_in_page_url: auth.dev.saasus.io
       required:
         - type
         - message
@@ -20018,7 +20445,7 @@ components:
       properties:
         application_id:
           type: string
-          example: 1234567890123456
+          example: '1234567890123456'
         application_secret:
           type: string
           example: 123456789b00def123456a12345678d1
@@ -20127,6 +20554,8 @@ components:
           $ref: '#/components/schemas/SelfRegist'
         identity_provider_configuration:
           $ref: '#/components/schemas/IdentityProviderConfiguration'
+        refresh_token_validity:
+          $ref: '#/components/schemas/RefreshTokenValidity'
       required:
         - password_policy
         - device_configuration
@@ -20135,6 +20564,48 @@ components:
         - account_verification
         - self_regist
         - identity_provider_configuration
+        - refresh_token_validity
+    RefreshTokenValidity:
+      type: object
+      description: Refresh token validity period.
+      x-description-i18n:
+        jpn: リフレッシュトークンの有効期間
+      properties:
+        value:
+          type: integer
+          x-go-type: uint64
+          example: 30
+          description: |
+            Refresh token validity value. The duration must be between 60 minutes and 10 years.
+          x-description-i18n:
+            jpn: |
+              リフレッシュトークンの有効期間の値。60分以上10年以内で指定してください。
+        unit:
+          $ref: '#/components/schemas/RefreshTokenValidityUnit'
+      required:
+        - value
+        - unit
+    RefreshTokenValidityUnit:
+      type: string
+      enum:
+        - seconds
+        - minutes
+        - hours
+        - days
+      example: days
+      description: |
+        Unit for the refresh token validity period.
+        seconds: seconds
+        minutes: minutes
+        hours: hours
+        days: days
+      x-description-i18n:
+        jpn: |
+          リフレッシュトークンの有効期間の単位。
+          seconds: 秒
+          minutes: 分
+          hours: 時間
+          days: 日
     PasswordPolicy:
       type: object
       description: Password Policy
@@ -20256,6 +20727,9 @@ components:
         - sending_to
     UpdateSignInSettingsParam:
       type: object
+      description: Set both value and unit in refresh_token_validity when updating the refresh token validity period.
+      x-description-i18n:
+        jpn: リフレッシュトークンの有効期間を更新する場合は、refresh_token_validity の value と unit を指定してください。
       properties:
         password_policy:
           $ref: '#/components/schemas/PasswordPolicy'
@@ -20269,6 +20743,8 @@ components:
           $ref: '#/components/schemas/AccountVerification'
         self_regist:
           $ref: '#/components/schemas/SelfRegist'
+        refresh_token_validity:
+          $ref: '#/components/schemas/RefreshTokenValidity'
     MfaConfiguration:
       type: object
       description: |
@@ -20681,7 +21157,84 @@ components:
       title: Authentication/Authorization Storage Parameters
       x-title-i18n:
         jpn: 認証・認可情報の保存パラメータ
-      $ref: '#/components/schemas/Credentials'
+      allOf:
+        - $ref: '#/components/schemas/Credentials'
+        - type: object
+          properties:
+            code_challenge:
+              title: PKCE Code Challenge
+              x-title-i18n:
+                jpn: PKCEコードチャレンジ
+              description: PKCE code challenge derived from the code verifier. It must be specified together with code_challenge_method.
+              x-description-i18n:
+                jpn: code verifierから生成したPKCEコードチャレンジ
+              type: string
+              minLength: 43
+              maxLength: 128
+              pattern: ^[A-Za-z0-9\-._~]+$
+            code_challenge_method:
+              title: PKCE Code Challenge Method
+              x-title-i18n:
+                jpn: PKCEコードチャレンジ方式
+              description: Method used to derive the PKCE code challenge. It must be specified together with code_challenge.
+              x-description-i18n:
+                jpn: PKCEコードチャレンジの生成方式
+              type: string
+              enum:
+                - S256
+    ExchangeAuthCredentialsParam:
+      title: Temporary Code Exchange Parameters
+      x-title-i18n:
+        jpn: 一時コード交換パラメータ
+      type: object
+      properties:
+        auth_flow:
+          title: Authentication Flow
+          x-title-i18n:
+            jpn: 認証フロー
+          description: Authentication flow used for the exchange
+          x-description-i18n:
+            jpn: 交換に使用する認証フロー
+          type: string
+          enum:
+            - tempCodeAuth
+        code:
+          title: Temporary Code
+          x-title-i18n:
+            jpn: 一時コード
+          description: Temporary code
+          x-description-i18n:
+            jpn: 一時コード
+          $ref: '#/components/schemas/Uuid'
+        code_verifier:
+          title: PKCE Code Verifier
+          x-title-i18n:
+            jpn: PKCEコードベリファイア
+          description: PKCE code verifier associated with the temporary code
+          x-description-i18n:
+            jpn: 一時コードに紐付くPKCEコードベリファイア
+          type: string
+          minLength: 43
+          maxLength: 128
+          pattern: ^[A-Za-z0-9\-._~]+$
+      required:
+        - auth_flow
+    RevokeTokenParam:
+      title: Token Revocation Parameters
+      x-title-i18n:
+        jpn: トークン無効化パラメータ
+      type: object
+      properties:
+        refresh_token:
+          title: Refresh Token
+          x-title-i18n:
+            jpn: リフレッシュトークン
+          description: Refresh token to revoke
+          x-description-i18n:
+            jpn: 無効化するリフレッシュトークン
+          type: string
+      required:
+        - refresh_token
     AuthorizationTempCode:
       type: object
       properties:
@@ -21230,7 +21783,7 @@ components:
           x-description-i18n:
             jpn: SaaSusがSaaSを操作するためにAssumeRoleする時に使用するexternal id
           type: string
-          example: 1234567890
+          example: '1234567890'
       required:
         - enabled
         - role_arn
@@ -21287,7 +21840,7 @@ components:
           x-description-i18n:
             jpn: SaaSusがSaaSを操作するためにAssumeRoleする時に使用するexternal id
           type: string
-          example: 1234567890
+          example: '1234567890'
     StripeCustomer:
       title: Stripe Customer Information
       x-title-i18n:
@@ -22082,6 +22635,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CatalogEntityVisibility'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '500':
           description: Internal Server Error
           content:
@@ -22125,7 +22684,7 @@ components:
       required: true
       schema:
         type: string
-        example: 123456789012
+        example: '123456789012'
   schemas:
     Error:
       properties:
@@ -22151,13 +22710,13 @@ components:
       properties:
         product_code:
           type: string
-          example: 1234567890
+          example: '1234567890'
         role_arn:
           type: string
           example: arn:aws:iam::123456789012:role/role-name
         role_external_id:
           type: string
-          example: 1234567890
+          example: '1234567890'
         sns_topic_arn:
           type: string
           example: arn:aws:sns:us-east-1:123456789012:topic-name
@@ -22194,13 +22753,13 @@ components:
       properties:
         product_code:
           type: string
-          example: 1234567890
+          example: '1234567890'
         role_arn:
           type: string
           example: arn:aws:iam::123456789012:role/role-name
         role_external_id:
           type: string
-          example: 1234567890
+          example: '1234567890'
         sns_topic_arn:
           type: string
           example: arn:aws:sns:us-east-1:123456789012:topic-name
@@ -22528,7 +23087,7 @@ components:
           description: secret key
           x-description-i18n:
             jpn: シークレットキー
-          example: sk_test_09l3shTSTKHYCzzZZsiLl2vA
+          example: sk_test_dummy
       required:
         - secret_key
 
@@ -23272,33 +23831,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /eventbridge/event:
-    post:
-      tags:
-        - eventBridge
-      operationId: CreateEventBridgeEvent
-      summary: Send Events
-      x-summary-i18n:
-        jpn: イベント連携の送信
-      description: |
-        Send events to Amazon EventBridge.
-      x-description-i18n:
-        jpn: |
-          Amazon EventBridge へイベントを送信します。
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateEventBridgeEventParam'
-      responses:
-        '201':
-          description: Created
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
   /eventbridge/test-event:
     post:
       tags:
@@ -23377,7 +23909,7 @@ components:
       properties:
         aws_account_id:
           type: string
-          example: 267185063265
+          example: '267185063265'
           description: AWS Account ID
           x-description-i18n:
             jpn: AWSアカウントID
@@ -23909,33 +24441,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdatePricingPlanParam'
-      responses:
-        '200':
-          description: OK
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /plans/used:
-    patch:
-      tags:
-        - pricingPlans
-      operationId: UpdatePricingPlansUsed
-      summary: Update Used Flag
-      x-summary-i18n:
-        jpn: 使用済みフラグ更新
-      description: |
-        Update price plan and feature menu/pricing unit to used.
-      x-description-i18n:
-        jpn: |
-          料金プランと配下のメニュー・ユニットを使用済みに更新します。
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdatePricingPlansUsedParam'
       responses:
         '200':
           description: OK
@@ -24870,6 +25375,10 @@ components:
       type: object
       allOf:
         - properties:
+            type:
+              type: string
+              enum:
+                - tiered_usage
             upper_count:
               type: integer
               x-go-type: uint64
@@ -24897,6 +25406,10 @@ components:
       type: object
       allOf:
         - properties:
+            type:
+              type: string
+              enum:
+                - tiered
             upper_count:
               type: integer
               x-go-type: uint64
@@ -24924,6 +25437,10 @@ components:
       type: object
       allOf:
         - properties:
+            type:
+              type: string
+              enum:
+                - usage
             upper_count:
               type: integer
               x-go-type: uint64
@@ -24958,6 +25475,10 @@ components:
       type: object
       allOf:
         - properties:
+            type:
+              type: string
+              enum:
+                - fixed
             unit_amount:
               type: integer
               x-go-type: uint64
@@ -24988,6 +25509,16 @@ components:
         - $ref: '#/components/schemas/PricingTieredUnit'
         - $ref: '#/components/schemas/PricingUsageUnit'
         - $ref: '#/components/schemas/PricingFixedUnit'
+      example:
+        id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+        type: fixed
+        name: storage_unit
+        display_name: ストレージユニット
+        description: KB unit for storage usage
+        currency: JPY
+        unit_amount: 10000
+        recurring_interval: month
+        used: false
     PricingUnitForSave:
       title: Pricing Unit Save Parameters
       x-title-i18n:
@@ -25017,6 +25548,64 @@ components:
             $ref: '#/components/schemas/PricingUnit'
       required:
         - units
+      example:
+        units:
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+            type: fixed
+            name: fixed_unit
+            display_name: 固定ユニット
+            description: Fixed unit for storage usage
+            currency: JPY
+            unit_amount: 10000
+            recurring_interval: month
+            used: false
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe776
+            type: usage
+            name: usage_unit
+            display_name: 使用量ユニット
+            description: Usage unit for storage usage
+            currency: JPY
+            metering_unit_id: 2e9ad0b1-0f3a-4a1c-9f8e-6b5d4c3a2b10
+            metering_unit_name: test_unit
+            recurring_interval: month
+            upper_count: 100
+            unit_amount: 10000
+            aggregate_usage: sum
+            used: false
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe777
+            type: tiered
+            name: tiered_unit
+            display_name: 段階ユニット
+            description: Tiered unit for storage usage
+            currency: JPY
+            metering_unit_id: 2e9ad0b1-0f3a-4a1c-9f8e-6b5d4c3a2b10
+            metering_unit_name: test_unit
+            recurring_interval: month
+            upper_count: 100
+            aggregate_usage: sum
+            used: false
+            tiers:
+              - up_to: 5
+                unit_amount: 1000
+                flat_amount: 500
+                inf: false
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe778
+            type: tiered_usage
+            name: tiered_usage_unit
+            display_name: 段階的使用量ユニット
+            description: Tiered usage unit for storage usage
+            currency: JPY
+            metering_unit_id: 2e9ad0b1-0f3a-4a1c-9f8e-6b5d4c3a2b10
+            metering_unit_name: test_unit
+            recurring_interval: month
+            upper_count: 100
+            aggregate_usage: sum
+            used: false
+            tiers:
+              - up_to: 5
+                unit_amount: 1000
+                flat_amount: 500
+                inf: false
     PricingTiers:
       title: Pay-as-you-go Info List
       x-title-i18n:
@@ -25158,6 +25747,22 @@ components:
           required:
             - id
         - $ref: '#/components/schemas/PricingMenuProps'
+      example:
+        id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+        name: Ten Users Menu
+        display_name: 10ユーザーメニュー
+        description: Can use 10 users.
+        used: false
+        units:
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+            type: fixed
+            name: storage_unit
+            display_name: ストレージユニット
+            description: KB unit for storage usage
+            currency: JPY
+            unit_amount: 10000
+            recurring_interval: month
+            used: false
     PricingMenus:
       title: Pricing Feature Menu List
       x-title-i18n:
@@ -25170,6 +25775,23 @@ components:
             $ref: '#/components/schemas/PricingMenu'
       required:
         - pricing_menus
+      example:
+        pricing_menus:
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+            name: Ten Users Menu
+            display_name: 10ユーザーメニュー
+            description: Can use 10 users.
+            used: false
+            units:
+              - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+                type: fixed
+                name: storage_unit
+                display_name: ストレージユニット
+                description: KB unit for storage usage
+                currency: JPY
+                unit_amount: 10000
+                recurring_interval: month
+                used: false
     PricingPlanProps:
       title: Pricing Plan Basic Information
       x-title-i18n:
@@ -25262,6 +25884,28 @@ components:
           required:
             - id
         - $ref: '#/components/schemas/PricingPlanProps'
+      example:
+        id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+        name: Standard Plan
+        display_name: スタンダードプラン
+        description: Standard Plan for normal use
+        used: false
+        pricing_menus:
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+            name: Ten Users Menu
+            display_name: 10ユーザーメニュー
+            description: Can use 10 users.
+            used: false
+            units:
+              - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+                type: fixed
+                name: storage_unit
+                display_name: ストレージユニット
+                description: KB unit for storage usage
+                currency: JPY
+                unit_amount: 10000
+                recurring_interval: month
+                used: false
     PricingPlans:
       title: Pricing Plan List
       x-title-i18n:
@@ -25274,6 +25918,29 @@ components:
             $ref: '#/components/schemas/PricingPlan'
       required:
         - pricing_plans
+      example:
+        pricing_plans:
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+            name: Standard Plan
+            display_name: スタンダードプラン
+            description: Standard Plan for normal use
+            used: false
+            pricing_menus:
+              - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+                name: Ten Users Menu
+                display_name: 10ユーザーメニュー
+                description: Can use 10 users.
+                used: false
+                units:
+                  - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+                    type: fixed
+                    name: storage_unit
+                    display_name: ストレージユニット
+                    description: KB unit for storage usage
+                    currency: JPY
+                    unit_amount: 10000
+                    recurring_interval: month
+                    used: false
     UpdatePricingPlansUsedParam:
       title: Parameter for Updating Pricing Plans and Sub Menu Units to Used
       x-title-i18n:

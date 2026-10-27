@@ -1,0 +1,50 @@
+---
+title: "SaaS infrastructure management"
+slug: "saas-infrastructure"
+excerpt: "SaaS infrastructure management features and reference guides."
+hidden: true
+createdAt: "Thu Oct 22 2026 05:36:32 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Oct 27 2026 03:09:05 GMT+0000 (Coordinated Universal Time)"
+---
+
+import FeatureTable from '@site/src/components/FeatureTable';
+
+Build a silo-model SaaS with dedicated servers and databases for each tenant.  
+Configure permissions and templates in the SaaS Development Console to start provisioning dedicated resources in your AWS environment when a tenant is created.
+
+Related API links use operation names from Auth API.
+
+## Provisioning settings
+
+Manage whether automatic provisioning is enabled, permissions for AWS access, and the files used for provisioning and initialization.  
+Prepare AWS CloudFormation templates and initialization SQL for your SaaS architecture.
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Retrieve and update settings | Retrieve and update whether infrastructure management is enabled, along with the configured permissions and templates. Set up permissions and required files before enabling provisioning.<br />References: [SaaS Infrastructure Management](/docs/part-4/saas-infra-management) | [GetSingleTenantSettings](/docs/reference/auth-api#tag/singleTenant/operation/GetSingleTenantSettings) [UpdateSingleTenantSettings](/docs/reference/auth-api#tag/singleTenant/operation/UpdateSingleTenantSettings) |
+| Configure AWS permissions and retrieve the CloudFormation launch link | Create an IAM role for access to your AWS environment, then register its ARN and external ID. Use the AWS CloudFormation launch link to set up the required permissions.<br />References: [SaaS Infrastructure Management](/docs/part-4/saas-infra-management) | [GetCloudFormationLaunchStackLinkForSingleTenant](/docs/reference/auth-api#tag/singleTenant/operation/GetCloudFormationLaunchStackLinkForSingleTenant) [UpdateSingleTenantSettings](/docs/reference/auth-api#tag/singleTenant/operation/UpdateSingleTenantSettings) |
+| Configure templates and database initialization SQL | Set the AWS CloudFormation template used to provision dedicated resources and the SQL used to create database tables and initial data. See the reference guide for required template Outputs and supported databases.<br />References: [SaaS Infrastructure Management](/docs/part-4/saas-infra-management) | [GetSingleTenantSettings](/docs/reference/auth-api#tag/singleTenant/operation/GetSingleTenantSettings) [UpdateSingleTenantSettings](/docs/reference/auth-api#tag/singleTenant/operation/UpdateSingleTenantSettings) |
+
+</FeatureTable>
+
+## Tenant onboarding
+
+Provision a dedicated application environment for a tenant and initialize its database when the tenant is created.  
+Check provisioning status through the `TenantOnboardingStatus` tenant attribute on the tenant management page in the SaaS Operations Console.
+
+Provisioning continues after the tenant is created. Check the SaaS Operations Console to confirm completion.
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Automatically provision dedicated tenant environments | When infrastructure management is enabled, creating a tenant starts provisioning and initialization using the registered template and SQL.<br />References: [SaaS Infrastructure Management](/docs/part-4/saas-infra-management) | [CreateTenant](/docs/reference/auth-api#tag/tenant/operation/CreateTenant) |
+| Check onboarding progress | Check the `TenantOnboardingStatus` tenant attribute in tenant information for preparation, database initialization, completion, or failure. Contact support if provisioning fails.<br />References: [SaaS Infrastructure Management](/docs/part-4/saas-infra-management) | [GetTenant](/docs/reference/auth-api#tag/tenant/operation/GetTenant) [GetTenants](/docs/reference/auth-api#tag/tenant/operation/GetTenants) |
+
+</FeatureTable>
+
+Onboarding runs in the Tokyo Region (ap-northeast-1).  
+Automatic deletion of dedicated resources when a tenant is deleted (offboarding) is not supported.  
+This feature is not available on legacy Starter and Standard plans; see the reference guide for availability.

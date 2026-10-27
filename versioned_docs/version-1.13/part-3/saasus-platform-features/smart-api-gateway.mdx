@@ -1,0 +1,72 @@
+---
+title: "Smart API Gateway and Smart MCP Server"
+slug: "smart-api-gateway"
+excerpt: "Smart API Gateway and Smart MCP Server features, related APIs, and reference guides."
+hidden: true
+createdAt: "Thu Oct 22 2026 02:21:58 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Oct 27 2026 03:09:05 GMT+0000 (Coordinated Universal Time)"
+---
+
+import FeatureTable from '@site/src/components/FeatureTable';
+
+Publish application operations as APIs and control access by tenant and user.  
+Published APIs can also be accessed by AI clients through Smart MCP Server.
+
+API publishing, access control settings, and API key management are primarily handled in the SaaSus Platform Console.  
+Implement the operations to publish and integrate the SDK in your SaaS application.
+
+Related API links use operation names from API Gateway API.
+
+## API publication settings
+
+Configure the connected SaaS application and the operations to expose, then publish APIs.  
+Configure and publish APIs in the SaaS Development Console, and integrate the SDK and annotations into your application following the reference guide.
+
+See [Smart API Gateway Features](/docs/part-4/smart-api-gateway-features/overview) for supported SDKs and infrastructure requirements.  
+The guide covers Java web applications running behind an Application Load Balancer (ALB) on AWS.
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Get and update settings and connect an application | Configure the internal endpoint and AWS resources used to connect your application. See the existing guide for application and infrastructure prerequisites.<br />References: [Smart API Gateway Feature](/docs/part-4/smart-api-gateway-features/overview) / [Setup Procedure](/docs/part-4/smart-api-gateway-features/manual) | [GetApiGatewaySettings](/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetApiGatewaySettings) [UpdateApiGatewaySettings](/docs/reference/apigateway-api#tag/smartApiGateway/operation/UpdateApiGatewaySettings) |
+| Upload generation files | Upload packaged source code containing the operations to expose. Review the generated configuration in the draft settings.<br />References: [Setup Procedure](/docs/part-4/smart-api-gateway-features/manual) | [UploadGenerationFiles](/docs/reference/apigateway-api#tag/smartApiGateway/operation/UploadGenerationFiles) |
+| Update OpenAPI definitions and documentation | Update the OpenAPI definition used for published API documentation. Implement the API operations themselves in your application.<br />References: [Setup Procedure](/docs/part-4/smart-api-gateway-features/manual) | [UpdateOpenApiDefinition](/docs/reference/apigateway-api#tag/smartApiGateway/operation/UpdateOpenApiDefinition) |
+| Retrieve, apply, and discard draft settings | Review API settings generated from the uploaded source code, then apply them or discard an unwanted draft.<br />References: [Setup Procedure](/docs/part-4/smart-api-gateway-features/manual) | [GetDraftApiGatewaySettings](/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetDraftApiGatewaySettings) [ApplyDraftApiGatewaySettings](/docs/reference/apigateway-api#tag/smartApiGateway/operation/ApplyDraftApiGatewaySettings) [CancelDraftApiGatewaySettings](/docs/reference/apigateway-api#tag/smartApiGateway/operation/CancelDraftApiGatewaySettings) |
+| Create and publish APIs | Prepare the AWS resources required for the connection using an AWS CloudFormation launch link, then create and publish the APIs. AWS resource charges apply separately.<br />References: [Setup Procedure](/docs/part-4/smart-api-gateway-features/manual) | [GetCloudFormationLaunchStackLink](/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetCloudFormationLaunchStackLink) [CreateApiGateway](/docs/reference/apigateway-api#tag/smartApiGateway/operation/CreateApiGateway) [PublishApiGateway](/docs/reference/apigateway-api#tag/smartApiGateway/operation/PublishApiGateway) |
+| Configure custom domains and endpoints | Configure a custom domain for the published API and the endpoint it connects to. When using a custom domain, also configure the specified DNS records.<br />References: [Setup Procedure](/docs/part-4/smart-api-gateway-features/manual) | [GetApiGatewaySettings](/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetApiGatewaySettings) [UpdateApiGatewaySettings](/docs/reference/apigateway-api#tag/smartApiGateway/operation/UpdateApiGatewaySettings) |
+
+</FeatureTable>
+
+## Access control
+
+Restrict which users and tenants can access published APIs, how often they can call them, and which source IP addresses are allowed.  
+Use API keys and roles assigned to users to control access to each published operation.
+
+Distinguish tenant API keys from user API keys and configure access for each operation.
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| List, retrieve, and issue API keys | Issue API keys for a tenant and environment, optionally associated with a user. Use the issued keys when calling published APIs.<br />References: [Setup Procedure](/docs/part-4/smart-api-gateway-features/manual) | [GetApiKeys](/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetApiKeys) [GetApiKey](/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetApiKey) [CreateApiKey](/docs/reference/apigateway-api#tag/smartApiGateway/operation/CreateApiKey) |
+| Issue and regenerate client secrets | Issue or regenerate the client secret associated with an API key. Once issued, calls using that API key require a signature generated with the secret. After regenerating the secret, update the calling client configuration with the new value.<br />References: [Setup Procedure](/docs/part-4/smart-api-gateway-features/manual) | [RefreshClientSecret](/docs/reference/apigateway-api#tag/smartApiGateway/operation/RefreshClientSecret) |
+| Use APIs by tenant and user | Use the tenant, environment, and user information associated with the API key in your application. Implement data filtering and other application-specific processing yourself.<br />References: [Setup Procedure](/docs/part-4/smart-api-gateway-features/manual) | — |
+| Configure endpoint roles and throttling | Set allowed roles and request limits for each operation. Role checks apply to user API keys and do not apply to tenant API keys.<br />References: [Setup Procedure](/docs/part-4/smart-api-gateway-features/manual) | [GetApiGatewaySettings](/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetApiGatewaySettings) [UpdateApiGatewaySettings](/docs/reference/apigateway-api#tag/smartApiGateway/operation/UpdateApiGatewaySettings) |
+| Configure allowed IP addresses by tenant | Set the IP addresses allowed to access published APIs for each tenant. These settings are separate from tenant basic information managed through Auth API.<br />References: [Setup Procedure](/docs/part-4/smart-api-gateway-features/manual) | [GetTenant](/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetTenant) [UpdateTenant](/docs/reference/apigateway-api#tag/smartApiGateway/operation/UpdateTenant) |
+
+</FeatureTable>
+
+## Smart MCP Server
+
+Expose APIs published through Smart API Gateway as MCP tools.  
+Publishing the APIs also makes the MCP server available automatically. Configure its endpoint and authentication credentials in an AI client to call the tools.
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Expose published APIs as MCP tools | When you publish an API through Smart API Gateway, it also becomes available as an MCP tool through Smart MCP Server. Changes to the API definition are also reflected in the MCP tool schema.<br />References: [Smart MCP Server Feature](/docs/part-4/smart-api-gateway-features/smart-mcp-server-overview) | [PublishApiGateway](/docs/reference/apigateway-api#tag/smartApiGateway/operation/PublishApiGateway) |
+| Call APIs from authenticated AI clients | Configure the MCP server endpoint and API key in the AI client. Call published APIs using credentials associated with the appropriate tenant or user.<br />References: [Smart MCP Server Feature](/docs/part-4/smart-api-gateway-features/smart-mcp-server-overview) | — |
+
+</FeatureTable>

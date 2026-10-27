@@ -1,0 +1,72 @@
+---
+title: "Smart API Gateway・Smart MCP Server"
+slug: "smart-api-gateway"
+excerpt: "Smart API Gateway・Smart MCP Serverの機能、関連API、参考ガイド。"
+hidden: true
+createdAt: "Thu Oct 22 2026 02:21:58 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Oct 27 2026 03:09:05 GMT+0000 (Coordinated Universal Time)"
+---
+
+import FeatureTable from '@site/src/components/FeatureTable';
+
+SaaSアプリケーションの処理をAPIとして公開し、テナントやユーザーに応じたアクセス制御を行う機能です。  
+公開したAPIはSmart MCP Serverを通じてAIクライアントからも利用できます。
+
+APIの公開・アクセス制御の設定やAPIキーの管理は、主にSaaSus Platform コンソールで行います。  
+SaaSアプリケーションでは公開する処理を実装し、SDKを組み込みます。
+
+関連APIはAPI Gateway APIの操作名で表記しています。
+
+## API公開設定
+
+接続先のSaaSアプリケーションや公開する処理を設定し、APIを公開する機能です。  
+SaaS 開発コンソールで設定・公開し、SaaSアプリケーションには参考ガイドに従ってSDKやアノテーションを組み込みます。
+
+対応SDKやインフラの前提条件は、[Smart API Gateway 機能](/ja/docs/part-4/smart-api-gateway-features/overview)を確認してください。  
+ガイドでは、AWS上のApplication Load Balancer（ALB）配下で動作するJavaのWebアプリケーションを対象としています。
+
+<FeatureTable>
+
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| 設定の取得・更新、アプリケーション接続 | 接続先の内部エンドポイントやAWSリソースなどを設定します。アプリケーションとインフラの前提条件は参考ガイドを確認してください。<br />参考：[Smart API Gateway 機能](/ja/docs/part-4/smart-api-gateway-features/overview) / [設定手順](/ja/docs/part-4/smart-api-gateway-features/manual) | [GetApiGatewaySettings](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetApiGatewaySettings) [UpdateApiGatewaySettings](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/UpdateApiGatewaySettings) |
+| 生成用ファイルのアップロード | 公開対象の処理を含むソースコードをまとめてアップロードし、API設定の生成に利用します。生成結果は下書き設定で確認します。<br />参考：[設定手順](/ja/docs/part-4/smart-api-gateway-features/manual) | [UploadGenerationFiles](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/UploadGenerationFiles) |
+| OpenAPI定義の更新・APIドキュメント設定 | 公開APIのドキュメントに使用するOpenAPI定義を更新します。APIの処理自体はSaaSアプリケーションに実装します。<br />参考：[設定手順](/ja/docs/part-4/smart-api-gateway-features/manual) | [UpdateOpenApiDefinition](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/UpdateOpenApiDefinition) |
+| 下書き設定の取得・適用・破棄 | アップロードしたソースコードから生成されたAPI設定を確認し、適用するか破棄するかを選びます。<br />参考：[設定手順](/ja/docs/part-4/smart-api-gateway-features/manual) | [GetDraftApiGatewaySettings](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetDraftApiGatewaySettings) [ApplyDraftApiGatewaySettings](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/ApplyDraftApiGatewaySettings) [CancelDraftApiGatewaySettings](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/CancelDraftApiGatewaySettings) |
+| APIの作成・公開 | AWS CloudFormationの起動リンクを使って接続に必要なAWSリソースを準備し、APIを作成・公開します。AWSリソースの利用料金は別途発生します。<br />参考：[設定手順](/ja/docs/part-4/smart-api-gateway-features/manual) | [GetCloudFormationLaunchStackLink](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetCloudFormationLaunchStackLink) [CreateApiGateway](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/CreateApiGateway) [PublishApiGateway](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/PublishApiGateway) |
+| 独自ドメイン・エンドポイント設定 | 公開APIに使用する独自ドメインや接続先エンドポイントを設定します。独自ドメインを利用する場合は、案内されたDNSレコードも設定します。<br />参考：[設定手順](/ja/docs/part-4/smart-api-gateway-features/manual) | [GetApiGatewaySettings](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetApiGatewaySettings) [UpdateApiGatewaySettings](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/UpdateApiGatewaySettings) |
+
+</FeatureTable>
+
+## アクセス制御
+
+公開APIを利用できるユーザー・テナント、呼び出し回数の上限、アクセス元のIPアドレスを制限する機能です。  
+APIキーやユーザーに付与された役割を使い、公開する処理に応じてアクセスを制御します。
+
+テナント用とユーザー用のAPIキーを区別し、公開する処理に応じて設定します。
+
+<FeatureTable>
+
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| APIキーの一覧・詳細取得・発行 | テナント・環境、必要に応じてユーザーを指定してAPIキーを発行します。発行したキーは公開APIへのリクエストで使用します。<br />参考：[設定手順](/ja/docs/part-4/smart-api-gateway-features/manual) | [GetApiKeys](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetApiKeys) [GetApiKey](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetApiKey) [CreateApiKey](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/CreateApiKey) |
+| クライアントシークレットの発行・再発行 | APIキーに対応するクライアントシークレットを発行・再発行します。発行後は、そのAPIキーでの呼び出しにシークレットを使った署名が必要です。再発行した場合は、呼び出し元の設定も新しいシークレットに更新してください。<br />参考：[設定手順](/ja/docs/part-4/smart-api-gateway-features/manual) | [RefreshClientSecret](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/RefreshClientSecret) |
+| テナント・ユーザー単位のAPI利用 | APIキーに対応するテナント・環境・ユーザー情報を、SaaSアプリケーションの処理で利用します。対象データの絞り込みなどはアプリケーション側で実装します。<br />参考：[設定手順](/ja/docs/part-4/smart-api-gateway-features/manual) | — |
+| エンドポイント別役割・スロットリング設定 | 処理ごとに許可する役割やリクエスト数の上限を設定します。役割による制御はユーザー用APIキーが対象で、テナント用APIキーには適用されません。<br />参考：[設定手順](/ja/docs/part-4/smart-api-gateway-features/manual) | [GetApiGatewaySettings](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetApiGatewaySettings) [UpdateApiGatewaySettings](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/UpdateApiGatewaySettings) |
+| テナント単位の許可IP設定 | テナントごとに公開APIへのアクセスを許可するIPアドレスを設定します。Auth APIのテナント基本情報とは別の設定です。<br />参考：[設定手順](/ja/docs/part-4/smart-api-gateway-features/manual) | [GetTenant](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/GetTenant) [UpdateTenant](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/UpdateTenant) |
+
+</FeatureTable>
+
+## Smart MCP Server
+
+Smart API Gatewayで公開したAPIをMCPツールとして提供する機能です。  
+APIを公開するとMCP Serverも自動で利用可能になり、AIクライアントに接続先と認証情報を設定して呼び出せます。
+
+<FeatureTable>
+
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| 公開APIのMCPツール化・スキーマ連携 | Smart API GatewayでAPIを公開すると、Smart MCP ServerでもMCPツールとして利用できるようになります。API定義の変更はMCPツールのスキーマにも反映されます。<br />参考：[Smart MCP Server 機能](/ja/docs/part-4/smart-api-gateway-features/smart-mcp-server-overview) | [PublishApiGateway](/ja/docs/reference/apigateway-api#tag/smartApiGateway/operation/PublishApiGateway) |
+| AIクライアントからの認証付きAPI利用 | MCP ServerのエンドポイントとAPIキーをAIクライアントに設定します。テナント・ユーザーに対応する認証情報を使って、公開APIを呼び出します。<br />参考：[Smart MCP Server 機能](/ja/docs/part-4/smart-api-gateway-features/smart-mcp-server-overview) | — |
+
+</FeatureTable>

@@ -31,6 +31,30 @@
 .table-scroll {
   overflow-x: auto;
 }
+.feature-overview-table {
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+.feature-overview-table table {
+  display: table;
+  width: 100%;
+  min-width: 560px;
+  table-layout: fixed;
+  margin-bottom: 0;
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+.feature-overview-table th {
+  text-align: center;
+}
+.feature-overview-table th:first-child {
+  width: 26%;
+}
+.feature-overview-table td {
+  text-align: left;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
 .nowrap-table th,
 .nowrap-table td {
   white-space: nowrap;

@@ -64,6 +64,28 @@ const sidebars = {
       label: "Part III: Overview and Setup of the SaaSus Platform",
       items: [
         "part-3/saasus-platform-architecture",
+        {
+          type: "category",
+          label: "Features",
+          link: {
+            type: "doc",
+            id: "part-3/saasus-platform-features",
+          },
+          collapsed: false,
+          items: [
+            "part-3/saasus-platform-features/authentication",
+            "part-3/saasus-platform-features/user-management",
+            "part-3/saasus-platform-features/tenant-management",
+            "part-3/saasus-platform-features/authorization",
+            "part-3/saasus-platform-features/authentication-settings",
+            "part-3/saasus-platform-features/pricing-billing",
+            "part-3/saasus-platform-features/external-integrations",
+            "part-3/saasus-platform-features/logs-analytics-feedback",
+            "part-3/saasus-platform-features/smart-api-gateway",
+            "part-3/saasus-platform-features/saas-infrastructure",
+            "part-3/saasus-platform-features/development-administration",
+          ],
+        },
         "part-3/getting-started",
         "part-3/login-and-main-screen-overview",
       ],
