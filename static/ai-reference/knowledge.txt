@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-10-27 12:12:42 +0900`
+- Generated: `2026-10-27 15:21:44 +0900`
 
 ---
 ## changelog/20221224.md
@@ -1327,13 +1327,13 @@ Call the recording APIs when the measured activity occurs in your SaaS applicati
 <FeatureTable>
 | Feature | Details | Related APIs |
 | --- | --- | --- |
-| Add, subtract, or overwrite usage at the current or a specified time | Record usage for a tenant and meter unit. Choose add, sub, or direct to add, subtract, or overwrite the count.<br />References: [Metering API Implementation Samples](/docs/part-6/implementation-guide/sample-application/metering-api) | [UpdateMeteringUnitTimestampCountNow](/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCountNow) [UpdateMeteringUnitTimestampCount](/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCount) |
+| Add, subtract, or overwrite usage at the current or a specified time | Record usage for a tenant and meter unit. Choose add, sub, or direct to add, subtract, or overwrite the count. Updates apply to the record at the specified timestamp, in Unix seconds, rather than the aggregated value for the entire period.<br />References: [Metering API Implementation Samples](/docs/part-6/implementation-guide/sample-application/metering-api) | [UpdateMeteringUnitTimestampCountNow](/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCountNow) [UpdateMeteringUnitTimestampCount](/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCount) |
 | Delete usage at a specified time | Delete usage recorded at a specified time for a tenant and meter unit, for example to remove an incorrect record.<br />References: [Metering API Implementation Samples](/docs/part-6/implementation-guide/sample-application/metering-api) | [DeleteMeteringUnitTimestampCount](/docs/reference/pricing-api#tag/metering/operation/DeleteMeteringUnitTimestampCount) |
 | Get usage for today, a specified day, this month, or a specified month | Retrieve the aggregated value for one meter unit for a specified day or month. The meter unit’s aggregation method determines the result: `sum` returns the total of recorded values for the period, and `max` returns the maximum.<br />References: [Billing Dashboard Implementation](/docs/part-6/implementation-guide/sample-application/billing-dashboard) | [GetMeteringUnitDateCountByTenantIdAndUnitNameToday](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountByTenantIdAndUnitNameToday) [GetMeteringUnitDateCountByTenantIdAndUnitNameAndDate](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountByTenantIdAndUnitNameAndDate) [GetMeteringUnitMonthCountByTenantIdAndUnitNameThisMonth](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountByTenantIdAndUnitNameThisMonth) [GetMeteringUnitMonthCountByTenantIdAndUnitNameAndMonth](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountByTenantIdAndUnitNameAndMonth) |
 | Get usage for a time range | Specify start and end timestamps to retrieve timestamped records within a period. The meter unit’s aggregation method (`sum` or `max`) is not applied. Calculate totals or maximum values for that period in your SaaS application.<br />References: [Metering API Implementation Samples](/docs/part-6/implementation-guide/sample-application/metering-api) | [GetMeteringUnitDateCountByTenantIdAndUnitNameAndDatePeriod](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountByTenantIdAndUnitNameAndDatePeriod) |
 | Get usage for multiple meters | Retrieve aggregated values for all meter units of a tenant for a specified day or month. Each meter unit’s setting determines its result: `sum` returns the total of recorded values for the period, and `max` returns the maximum.<br />References: [Billing Dashboard Implementation](/docs/part-6/implementation-guide/sample-application/billing-dashboard) | [GetMeteringUnitDateCountsByTenantIdAndDate](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountsByTenantIdAndDate) [GetMeteringUnitMonthCountsByTenantIdAndMonth](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountsByTenantIdAndMonth) |
 </FeatureTable>
-With Stripe integration, you cannot modify usage for past billing periods or periods before a plan change.
+With Stripe integration, you cannot modify usage for past billing periods or periods before a plan change. You also cannot subtract more than the value recorded at the specified timestamp.
 ## Tenant subscriptions
 Manage the pricing plan, tax rate, and effective time for each tenant.
 Configure subscriptions in the SaaS Operations Console, or implement plan selection and changes in your application.
@@ -7415,7 +7415,13 @@ Search by function name to locate the relevant code.
 - **C# (.NET 8)**: [`GetBillingDashboard`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet8/Controllers/BillingController.cs)
 - **C# (.NET Framework 4.8)**: [`GetBillingDashboard`](https://github.com/saasus-platform/implementation-sample-api-csharp/blob/main/SampleWebAppDotNet48/Controllers/BillingController.cs)
 ### Meter Updates
+Adding, subtracting, and overwriting usage applies to the record at the specified timestamp, in Unix seconds. For example, subtracting 3 from a record containing 10 at that timestamp changes the value to 7.
 The dashboard allows metering updates in two scenarios: inline edits (current time) and modal edits (specific timestamp).
+:::caution Subtracting usage in this sample
+This sample updates the current time or a randomly selected time within the selected period. It does not let you select an existing record to subtract from.
+**With Stripe integration, an update fails if the resulting record value is negative.** If no record exists at the specified timestamp, subtraction starts from 0 and fails, even if usage remains across the displayed period.
+With Stripe integration, you can still subtract from or overwrite an existing record by specifying its timestamp, provided the resulting value is 0 or greater. Timestamp restrictions also apply: you cannot modify usage for past billing periods or periods before a plan change.
+:::
 #### Inline Edit Example (Current Time)
 <Tabs>
 <TabItem value="go" label="Go" default>

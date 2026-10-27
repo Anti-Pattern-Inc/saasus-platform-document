@@ -4,7 +4,7 @@ slug: "billing-dashboard"
 excerpt: "SaaSアプリケーションでの課金ダッシュボードの実装サンプル"
 hidden: false
 createdAt: "Thu Jul 31 2025 00:00:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Oct 09 2025 00:00:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Oct 27 2026 06:18:02 GMT+0000 (Coordinated Universal Time)"
 ---
 
 import Tabs from "@theme/Tabs";
@@ -218,7 +218,19 @@ func calculateAmountByUnitType(count float64, u map[string]interface{}) float64 
 
 ### メータ更新
 
+メータの加算・減算・上書きは、指定時刻（秒単位）の記録値に対して行います。例えば、その時刻に10件が記録されている場合、3件減算すると7件になります。
+
 課金ダッシュボード上でのメータ更新は、現在時刻に対して更新するインライン編集ケースと、任意のタイムスタンプで履歴補正するモーダル編集ケースに分かれます。
+
+:::caution このサンプルでの減算について
+
+このサンプルでは、更新先に現在時刻または選択期間内のランダムな時刻を指定します。既存の記録を選んで減算する仕組みではありません。
+
+**Stripe連携時は、更新後の記録値が負数になるとエラーになります。** 指定した時刻に記録がなければ0件からの減算になるため、表示期間全体に利用量が残っていても減算に失敗します。
+
+Stripe連携時でも、記録済みの時刻を指定し、記録値が0以上になる範囲で減算・上書きすることは可能です。ただし、更新可能な日時には制限があり、過去の請求期間やプラン変更前の利用量は修正できません。
+
+:::
 
 #### インライン編集例
 

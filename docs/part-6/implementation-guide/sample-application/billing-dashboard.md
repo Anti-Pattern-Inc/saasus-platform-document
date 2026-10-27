@@ -4,7 +4,7 @@ slug: "billing-dashboard"
 excerpt: "Implementation guide for a tenant-based real-time billing dashboard using SaaSus Metering and Pricing APIs"
 hidden: false
 createdAt: "Thu Jul 31 2025 00:00:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Oct 09 2025 00:00:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Oct 27 2026 06:18:02 GMT+0000 (Coordinated Universal Time)"
 ---
 
 import Tabs from "@theme/Tabs";
@@ -222,7 +222,19 @@ Search by function name to locate the relevant code.
 
 ### Meter Updates
 
+Adding, subtracting, and overwriting usage applies to the record at the specified timestamp, in Unix seconds. For example, subtracting 3 from a record containing 10 at that timestamp changes the value to 7.
+
 The dashboard allows metering updates in two scenarios: inline edits (current time) and modal edits (specific timestamp).
+
+:::caution Subtracting usage in this sample
+
+This sample updates the current time or a randomly selected time within the selected period. It does not let you select an existing record to subtract from.
+
+**With Stripe integration, an update fails if the resulting record value is negative.** If no record exists at the specified timestamp, subtraction starts from 0 and fails, even if usage remains across the displayed period.
+
+With Stripe integration, you can still subtract from or overwrite an existing record by specifying its timestamp, provided the resulting value is 0 or greater. Timestamp restrictions also apply: you cannot modify usage for past billing periods or periods before a plan change.
+
+:::
 
 #### Inline Edit Example (Current Time)
 

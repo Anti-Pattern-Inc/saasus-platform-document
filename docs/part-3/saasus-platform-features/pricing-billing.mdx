@@ -4,7 +4,7 @@ slug: "pricing-billing"
 excerpt: "Features for pricing definitions, usage recording, and tenant subscriptions."
 hidden: true
 createdAt: "Wed Oct 21 2026 08:21:05 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Oct 27 2026 03:09:05 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Oct 27 2026 06:10:03 GMT+0000 (Coordinated Universal Time)"
 ---
 
 import FeatureTable from '@site/src/components/FeatureTable';
@@ -57,7 +57,7 @@ Call the recording APIs when the measured activity occurs in your SaaS applicati
 
 | Feature | Details | Related APIs |
 | --- | --- | --- |
-| Add, subtract, or overwrite usage at the current or a specified time | Record usage for a tenant and meter unit. Choose add, sub, or direct to add, subtract, or overwrite the count.<br />References: [Metering API Implementation Samples](/docs/part-6/implementation-guide/sample-application/metering-api) | [UpdateMeteringUnitTimestampCountNow](/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCountNow) [UpdateMeteringUnitTimestampCount](/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCount) |
+| Add, subtract, or overwrite usage at the current or a specified time | Record usage for a tenant and meter unit. Choose add, sub, or direct to add, subtract, or overwrite the count. Updates apply to the record at the specified timestamp, in Unix seconds, rather than the aggregated value for the entire period.<br />References: [Metering API Implementation Samples](/docs/part-6/implementation-guide/sample-application/metering-api) | [UpdateMeteringUnitTimestampCountNow](/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCountNow) [UpdateMeteringUnitTimestampCount](/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCount) |
 | Delete usage at a specified time | Delete usage recorded at a specified time for a tenant and meter unit, for example to remove an incorrect record.<br />References: [Metering API Implementation Samples](/docs/part-6/implementation-guide/sample-application/metering-api) | [DeleteMeteringUnitTimestampCount](/docs/reference/pricing-api#tag/metering/operation/DeleteMeteringUnitTimestampCount) |
 | Get usage for today, a specified day, this month, or a specified month | Retrieve the aggregated value for one meter unit for a specified day or month. The meter unit’s aggregation method determines the result: `sum` returns the total of recorded values for the period, and `max` returns the maximum.<br />References: [Billing Dashboard Implementation](/docs/part-6/implementation-guide/sample-application/billing-dashboard) | [GetMeteringUnitDateCountByTenantIdAndUnitNameToday](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountByTenantIdAndUnitNameToday) [GetMeteringUnitDateCountByTenantIdAndUnitNameAndDate](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountByTenantIdAndUnitNameAndDate) [GetMeteringUnitMonthCountByTenantIdAndUnitNameThisMonth](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountByTenantIdAndUnitNameThisMonth) [GetMeteringUnitMonthCountByTenantIdAndUnitNameAndMonth](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountByTenantIdAndUnitNameAndMonth) |
 | Get usage for a time range | Specify start and end timestamps to retrieve timestamped records within a period. The meter unit’s aggregation method (`sum` or `max`) is not applied. Calculate totals or maximum values for that period in your SaaS application.<br />References: [Metering API Implementation Samples](/docs/part-6/implementation-guide/sample-application/metering-api) | [GetMeteringUnitDateCountByTenantIdAndUnitNameAndDatePeriod](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountByTenantIdAndUnitNameAndDatePeriod) |
@@ -65,7 +65,7 @@ Call the recording APIs when the measured activity occurs in your SaaS applicati
 
 </FeatureTable>
 
-With Stripe integration, you cannot modify usage for past billing periods or periods before a plan change.
+With Stripe integration, you cannot modify usage for past billing periods or periods before a plan change. You also cannot subtract more than the value recorded at the specified timestamp.
 
 ## Tenant subscriptions
 

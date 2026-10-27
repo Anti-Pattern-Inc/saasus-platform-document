@@ -4,7 +4,7 @@ slug: "pricing-billing"
 excerpt: "料金体系の設計、利用量の記録・取得、テナントの契約を管理する機能。"
 hidden: true
 createdAt: "Wed Oct 21 2026 08:21:05 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Oct 27 2026 03:09:05 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Oct 27 2026 06:10:03 GMT+0000 (Coordinated Universal Time)"
 ---
 
 import FeatureTable from '@site/src/components/FeatureTable';
@@ -57,7 +57,7 @@ SaaSアプリケーションで計測対象の操作に合わせて記録APIを�
 
 | 機能 | 詳細 | 関連API |
 | --- | --- | --- |
-| 現在時刻・指定時刻の利用量加算・減算・上書き | テナントとメーター単位を指定し、利用量を記録します。更新方法は加算（add）・減算（sub）・上書き（direct）から選択します。<br />参考：[メータリングAPI実装サンプル](/ja/docs/part-6/implementation-guide/sample-application/metering-api) | [UpdateMeteringUnitTimestampCountNow](/ja/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCountNow) [UpdateMeteringUnitTimestampCount](/ja/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCount) |
+| 現在時刻・指定時刻の利用量加算・減算・上書き | テナントとメーター単位を指定し、利用量を記録します。更新方法は加算（add）・減算（sub）・上書き（direct）から選択します。更新は、期間全体の集計値ではなく、指定時刻（秒単位）の記録値に対して行います。<br />参考：[メータリングAPI実装サンプル](/ja/docs/part-6/implementation-guide/sample-application/metering-api) | [UpdateMeteringUnitTimestampCountNow](/ja/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCountNow) [UpdateMeteringUnitTimestampCount](/ja/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCount) |
 | 指定時刻の利用量データ削除 | テナントとメーター単位を指定し、指定時刻の利用量を削除します。誤って記録した利用量の取り消しなどに利用します。<br />参考：[メータリングAPI実装サンプル](/ja/docs/part-6/implementation-guide/sample-application/metering-api) | [DeleteMeteringUnitTimestampCount](/ja/docs/reference/pricing-api#tag/metering/operation/DeleteMeteringUnitTimestampCount) |
 | 当日・指定日・当月・指定月の利用量取得 | 1つのメーター単位について、指定日・指定月の集計値を取得します。メーター単位の集計方法が`sum`なら期間内に記録した値の合計、`max`なら最大値を返します。<br />参考：[課金ダッシュボードの実装](/ja/docs/part-6/implementation-guide/sample-application/billing-dashboard) | [GetMeteringUnitDateCountByTenantIdAndUnitNameToday](/ja/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountByTenantIdAndUnitNameToday) [GetMeteringUnitDateCountByTenantIdAndUnitNameAndDate](/ja/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountByTenantIdAndUnitNameAndDate) [GetMeteringUnitMonthCountByTenantIdAndUnitNameThisMonth](/ja/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountByTenantIdAndUnitNameThisMonth) [GetMeteringUnitMonthCountByTenantIdAndUnitNameAndMonth](/ja/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountByTenantIdAndUnitNameAndMonth) |
 | 指定期間の利用量取得 | 開始・終了のタイムスタンプを指定し、期間内の時刻ごとの記録を取得します。メーター単位の集計方法（`sum`・`max`）は適用されません。任意期間の合計や最大値が必要な場合は、取得結果をSaaSアプリケーションで集計します。<br />参考：[メータリングAPI実装サンプル](/ja/docs/part-6/implementation-guide/sample-application/metering-api) | [GetMeteringUnitDateCountByTenantIdAndUnitNameAndDatePeriod](/ja/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountByTenantIdAndUnitNameAndDatePeriod) |
@@ -65,7 +65,7 @@ SaaSアプリケーションで計測対象の操作に合わせて記録APIを�
 
 </FeatureTable>
 
-Stripe連携時は、過去の請求期間やプラン変更前の利用量を修正できません。
+Stripe連携時は、過去の請求期間やプラン変更前の利用量を修正できません。また、指定時刻の記録値を超えて減算することはできません。
 
 ## テナントの契約
 
