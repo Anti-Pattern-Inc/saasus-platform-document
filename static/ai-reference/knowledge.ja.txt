@@ -3,7 +3,7 @@
 - Locale: `ja`
 - Docs source: `i18n/ja/docusaurus-plugin-content-docs/current`
 - API source: `api`
-- Generated: `2026-10-19 14:09:14 +0900`
+- Generated: `2026-10-26 11:35:43 +0900`
 
 ---
 ## changelog/20221224.md
@@ -3634,6 +3634,37 @@ Basicプラン、EnterpriseプランもFreeプランと同様に設定を行っ�
 ![Basic プラン構成図](/ja/img/part-4/pricing-and-billing/pricing-plan-overview/manage-rate-plans-07.png)
 ### Enterprise プランの構成
 ![Enterprise プラン構成図](/ja/img/part-4/pricing-and-billing/pricing-plan-overview/manage-rate-plans-08.png)
+## 5. 計測単位を使った機能・上限の判定
+アプリケーションで機能の可否や利用量の上限を判定するときは、料金プランに含まれる計測単位の設定を参照する方法をおすすめします。
+料金プランの ID ごとに条件分岐すると、新しいプランに同じ機能を提供する場合も、条件の追加と再デプロイが必要になります。
+```js
+// 料金プランの ID ごとにコメント数の上限を定義する例
+let commentLimit = 0;
+if (pricingPlanId === "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx") {
+  commentLimit = 10;
+}
+```
+料金プラン取得 API（`GetPricingPlan`）のレスポンスには、機能メニューの配列 `pricing_menus` と、各メニューに含まれる計測単位の配列 `units` があります。
+使用量ユニットなどでは、対象のメーター単位を `metering_unit_name`、上限を `upper_count` で参照できます。
+次の例では、コメント数を測るメーター単位を `comment_count` とし、そのメーター単位に紐づく計測単位がプラン内に 1 つだけある構成を想定しています。
+`plan` は、テナントが利用する料金プランの取得結果です。
+```js
+// プランに含まれる計測単位からコメント数の上限を取得する例
+const commentUnit = plan.pricing_menus
+  .flatMap((menu) => menu.units)
+  .find((unit) => unit.metering_unit_name === "comment_count");
+// 対象の計測単位がない場合は、この例ではコメント機能を無効にする
+const commentLimit = commentUnit?.upper_count ?? 0;
+const canUseComments = commentLimit > 0;
+```
+この構成なら、同じメーター単位に紐づく計測単位を新しい料金プランに含めることで、料金プラン ID の条件を追加せずにコメント機能と上限を判定できます。
+機能メニューは計測単位をまとめる階層であり、メーター単位は利用量を測るカウンタです。
+固定ユニットには `metering_unit_name` と `upper_count` がないため、この例の判定対象には含まれません。
+:::info
+設定を反映するには、アプリケーションでテナントの料金プランを取得し、機能の可否や上限を判定する処理を実装してください。
+取得結果をキャッシュする場合は、料金プランの切り替えや設定変更に合わせて更新します。
+上限を超える操作を拒否する処理も、アプリケーション側で実装します。
+:::
 ````
 
 ---
