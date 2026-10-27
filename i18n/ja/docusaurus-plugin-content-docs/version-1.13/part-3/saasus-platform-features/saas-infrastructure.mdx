@@ -1,0 +1,50 @@
+---
+title: "SaaSインフラ管理"
+slug: "saas-infrastructure"
+excerpt: "SaaSインフラ管理の機能、関連API、参考ガイド。"
+hidden: true
+createdAt: "Thu Oct 22 2026 05:36:32 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Oct 27 2026 03:09:05 GMT+0000 (Coordinated Universal Time)"
+---
+
+import FeatureTable from '@site/src/components/FeatureTable';
+
+テナントごとに専用のサーバーやデータベースを用意する、サイロモデルのSaaSを構築するための機能です。  
+SaaS 開発コンソールで構築に必要な権限・テンプレートを設定すると、テナント作成時に自社のAWS環境で専用環境の構築を開始します。
+
+関連APIはAuth APIの操作名で表記しています。
+
+## 構築設定
+
+自動構築の有効・無効、AWSへのアクセス権限、構築・初期化に使うファイルを管理する機能です。  
+AWS CloudFormationテンプレートと初期化SQLは、自社SaaSの構成に合わせて用意します。
+
+<FeatureTable>
+
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| 設定情報の取得・更新 | SaaSインフラ管理の有効・無効と、登録済みの権限・テンプレート情報を取得・更新します。有効化する前に、構築先の権限と必要なファイルを設定します。<br />参考：[SaaSインフラ管理機能](/ja/docs/part-4/saas-infra-management) | [GetSingleTenantSettings](/ja/docs/reference/auth-api#tag/singleTenant/operation/GetSingleTenantSettings) [UpdateSingleTenantSettings](/ja/docs/reference/auth-api#tag/singleTenant/operation/UpdateSingleTenantSettings) |
+| AWSアクセス権限・CloudFormation起動リンク取得 | 自社のAWS環境を操作するためのIAMロールを作成し、ロールARNとExternal IDを登録します。権限設定用のAWS CloudFormation起動リンクを利用できます。<br />参考：[SaaSインフラ管理機能](/ja/docs/part-4/saas-infra-management) | [GetCloudFormationLaunchStackLinkForSingleTenant](/ja/docs/reference/auth-api#tag/singleTenant/operation/GetCloudFormationLaunchStackLinkForSingleTenant) [UpdateSingleTenantSettings](/ja/docs/reference/auth-api#tag/singleTenant/operation/UpdateSingleTenantSettings) |
+| テンプレート・データベース初期化SQLの設定 | 専用環境を作成するAWS CloudFormationテンプレートと、データベースのテーブル作成や初期データの登録に使うSQLを設定します。テンプレートの必須Outputsや対応データベースは参考ガイドで確認してください。<br />参考：[SaaSインフラ管理機能](/ja/docs/part-4/saas-infra-management) | [GetSingleTenantSettings](/ja/docs/reference/auth-api#tag/singleTenant/operation/GetSingleTenantSettings) [UpdateSingleTenantSettings](/ja/docs/reference/auth-api#tag/singleTenant/operation/UpdateSingleTenantSettings) |
+
+</FeatureTable>
+
+## テナントのオンボーディング
+
+テナント作成をきっかけに、そのテナント専用のアプリケーション実行環境を構築し、データベースを初期化する機能です。  
+SaaS 運用コンソールのテナント管理画面で、テナント属性の`TenantOnboardingStatus`から構築状況を確認できます。
+
+環境の構築はテナントの作成後も続くため、SaaS 運用コンソールで完了したかを確認します。
+
+<FeatureTable>
+
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| テナント専用環境の自動構築 | SaaSインフラ管理を有効にした状態でテナントを作成すると、登録したテンプレートとSQLを使って構築・初期化を開始します。<br />参考：[SaaSインフラ管理機能](/ja/docs/part-4/saas-infra-management) | [CreateTenant](/ja/docs/reference/auth-api#tag/tenant/operation/CreateTenant) |
+| オンボーディング進行状況の確認 | テナント属性の`TenantOnboardingStatus`で、構築準備中・データベース初期化中・完了・異常終了などの状態を確認します。異常終了時はサポートへお問い合わせください。<br />参考：[SaaSインフラ管理機能](/ja/docs/part-4/saas-infra-management) | [GetTenant](/ja/docs/reference/auth-api#tag/tenant/operation/GetTenant) [GetTenants](/ja/docs/reference/auth-api#tag/tenant/operation/GetTenants) |
+
+</FeatureTable>
+
+補足：オンボーディング処理は東京リージョン（ap-northeast-1）で実行されます。  
+テナント削除時の専用環境の自動削除（オフボーディング）はサポートしていません。  
+旧スタータープラン・旧スタンダードプランでは利用できないため、利用条件は参考ガイドを確認してください。

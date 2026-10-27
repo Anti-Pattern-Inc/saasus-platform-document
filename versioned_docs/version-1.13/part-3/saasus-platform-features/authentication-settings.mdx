@@ -1,0 +1,59 @@
+---
+title: "SaaS settings"
+slug: "authentication-settings"
+excerpt: "Manage SaaS basics, API credentials, advanced authentication settings, and notification emails."
+hidden: true
+createdAt: "Wed Oct 21 2026 07:31:49 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Oct 27 2026 03:09:05 GMT+0000 (Coordinated Universal Time)"
+---
+
+import FeatureTable from '@site/src/components/FeatureTable';
+
+Manage SaaS domains and API credentials, login page appearance and authentication settings, and notification emails.  
+See [Authentication and sign-in](/docs/part-3/saasus-platform-features/authentication) for implementing sign-in, MFA, and token exchange.
+
+Related API links use operation names from Auth API.
+
+## Basic settings
+
+Configure the domains used for login pages and notification emails, the redirect URL after sign-in, and credentials for calling SaaSus APIs.  
+Use the SaaS Development Console to configure domains and redirect URLs, and to view and manage the SaaS ID, API keys, and client secret.
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Configure the domain and email sending domain authentication | Set the domain name used for login pages and notification emails. Register the domain verification and email sending DNS records displayed after configuration with your DNS service.<br />References: [Domain & Email Sending Domain Authentication and Redirect Settings](/docs/part-4/application-settings/domain-and-redirect-settings) | [GetBasicInfo](/docs/reference/auth-api#tag/basicInfo/operation/GetBasicInfo) [UpdateBasicInfo](/docs/reference/auth-api#tag/basicInfo/operation/UpdateBasicInfo) |
+| Authentication information and redirect settings | Set the URL in your SaaS application to redirect users to after sign-in. At that destination, exchange the temporary code received after authentication for tokens.<br />References: [Domain & Email Sending Domain Authentication and Redirect Settings](/docs/part-4/application-settings/domain-and-redirect-settings) / [Authentication and sign-in](/docs/part-3/saasus-platform-features/authentication) | [GetAuthInfo](/docs/reference/auth-api#tag/authInfo/operation/GetAuthInfo) [UpdateAuthInfo](/docs/reference/auth-api#tag/authInfo/operation/UpdateAuthInfo) |
+| Manage the SaaS ID, API keys, and client secret | View the SaaS ID, API keys, and client secret used to call SaaSus APIs, issue API keys, and regenerate the client secret.<br />References: [API Key Settings](/docs/part-4/application-settings/api-key-settings) | — |
+
+</FeatureTable>
+
+## Advanced authentication settings
+
+Configure login page appearance and links, password requirements, self-sign-up permissions, and notification emails.  
+Appearance settings apply to the login pages; password requirements and sign-up permissions also apply to authentication and registration processing.  
+Configure the sender and reply-to addresses and the subject and message for each email type, including registration, password recovery, and MFA.
+
+Edit appearance settings in the SaaS Development Console. Changes can take time to appear on the login pages after saving.
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Configure the title, logo, and favicon | Set the service name and logo displayed on the login pages and the favicon shown in browser tabs and similar locations.<br />References: [Basic App Settings](/docs/part-4/application-settings/basic-app-settings) | [GetCustomizePageSettings](/docs/reference/auth-api#tag/basicInfo/operation/GetCustomizePageSettings) [UpdateCustomizePageSettings](/docs/reference/auth-api#tag/basicInfo/operation/UpdateCustomizePageSettings) |
+| Configure terms of service and privacy policy links | Set the terms of service and privacy policy URLs linked from the login pages. Use the per-page link visibility settings to choose which pages display the links.<br />References: [Basic App Settings](/docs/part-4/application-settings/basic-app-settings) | [GetCustomizePageSettings](/docs/reference/auth-api#tag/basicInfo/operation/GetCustomizePageSettings) [UpdateCustomizePageSettings](/docs/reference/auth-api#tag/basicInfo/operation/UpdateCustomizePageSettings) |
+| Configure link visibility on registration, sign-in, and password change pages | Choose whether to show terms of service and privacy policy links on each registration, sign-in, and password change page.<br />References: [Basic App Settings](/docs/part-4/application-settings/basic-app-settings) | [GetCustomizePages](/docs/reference/auth-api#tag/basicInfo/operation/GetCustomizePages) [UpdateCustomizePages](/docs/reference/auth-api#tag/basicInfo/operation/UpdateCustomizePages) |
+| Configure Google Tag Manager | Set an existing Google Tag Manager container ID to include tags on the login pages. Configure tags and measurement in Google Tag Manager.<br />References: [Google Tag Manager Settings](/docs/part-4/application-settings/googletagmanagersetting) | [GetCustomizePageSettings](/docs/reference/auth-api#tag/basicInfo/operation/GetCustomizePageSettings) [UpdateCustomizePageSettings](/docs/reference/auth-api#tag/basicInfo/operation/UpdateCustomizePageSettings) |
+| Configure the password policy | Set the minimum password length and required character types, such as numbers, symbols, uppercase letters, and lowercase letters.<br />References: [Authentication Method Settings](/docs/part-4/user-authz-settings/authentication-method-settings) | [GetSignInSettings](/docs/reference/auth-api#tag/authInfo/operation/GetSignInSettings) [UpdateSignInSettings](/docs/reference/auth-api#tag/authInfo/operation/UpdateSignInSettings) |
+| Allow or disallow self-sign-up | Set whether users can register their own accounts. When disabled, the registration link is hidden on the login pages and registration through SignUp is also disabled.<br />References: [Authentication Method Settings](/docs/part-4/user-authz-settings/authentication-method-settings) | [GetSignInSettings](/docs/reference/auth-api#tag/authInfo/operation/GetSignInSettings) [UpdateSignInSettings](/docs/reference/auth-api#tag/authInfo/operation/UpdateSignInSettings) |
+| Configure sender and reply-to addresses | Set the sender and reply-to email addresses for notifications. Domain and email delivery settings must be configured in advance.<br />References: [Domain & Email Sending Domain Authentication and Redirect Settings](/docs/part-4/application-settings/domain-and-redirect-settings) | [GetBasicInfo](/docs/reference/auth-api#tag/basicInfo/operation/GetBasicInfo) [UpdateBasicInfo](/docs/reference/auth-api#tag/basicInfo/operation/UpdateBasicInfo) |
+| Retrieve email templates and update subjects and messages | Edit registration, temporary password resend, password recovery, and MFA emails in the SaaS Development Console. Use the API to edit verification emails for email address changes, tenant invitations, and external account linking. Include the placeholders required for each email type.<br />References: [Notification Email Content](/docs/part-4/user-authz-settings/notifymailcustomize) | [FindNotificationMessages](/docs/reference/auth-api#tag/basicInfo/operation/FindNotificationMessages) [UpdateNotificationMessages](/docs/reference/auth-api#tag/basicInfo/operation/UpdateNotificationMessages) |
+
+</FeatureTable>
+
+### Login page customization options
+
+You can configure the service name, logo, favicon, and link visibility. Changing colors, applying custom HTML/CSS, and adding announcements are not supported.  
+To use a custom design or display announcements, implement custom sign-in pages with SaaSus API.  
+See the [Authentication API Implementation Guide](/docs/part-6/implementation-guide/auth/overview) for implementation details.

@@ -1,0 +1,54 @@
+.tableContainer {
+  width: 100%;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+
+.tableContainer table {
+  display: table;
+  width: 100%;
+  min-width: 640px;
+  margin-bottom: 0;
+  table-layout: fixed;
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+.tableContainer th,
+.tableContainer td {
+  padding: 0.7rem 0.65rem;
+  text-align: left;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+
+.tableContainer th {
+  text-align: center;
+}
+
+.tableContainer th:nth-child(1) { width: 24%; }
+.tableContainer th:nth-child(2) {
+  width: calc(57% - 3ch);
+  word-break: normal;
+}
+.tableContainer th:nth-child(3) { width: calc(19% + 3ch); }
+
+.tableContainer td:last-child a {
+  display: block;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+.tableContainer td:last-child a + a {
+  margin-top: 0.5rem;
+}
+
+.tableContainer td:first-child [id] {
+  display: block;
+  scroll-margin-top: calc(var(--ifm-navbar-height) + 1rem);
+}
+
+.tableContainer td:first-child [id]:target {
+  background-color: var(--ifm-color-emphasis-100);
+}

@@ -1,0 +1,59 @@
+---
+title: "SaaSの設定"
+slug: "authentication-settings"
+excerpt: "SaaSの基本設定、API接続情報、認証詳細設定、通知メールを管理する機能。"
+hidden: true
+createdAt: "Wed Oct 21 2026 07:31:49 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Oct 27 2026 03:09:05 GMT+0000 (Coordinated Universal Time)"
+---
+
+import FeatureTable from '@site/src/components/FeatureTable';
+
+SaaSのドメインやAPI接続情報、ログイン画面の表示・認証設定、通知メールを管理する機能です。  
+ログインやMFA、トークン交換の実装については、[認証・ログイン](/ja/docs/part-3/saasus-platform-features/authentication)を参照してください。
+
+関連APIはAuth APIの操作名で表記しています。
+
+## 基本設定
+
+ログイン画面や通知メールに使うドメイン名、ログイン後の遷移先URL、SaaSus APIの呼び出しに使う接続情報を設定する機能です。  
+SaaS 開発コンソールで、ドメイン名や遷移先URLの設定、SaaS ID・APIキー・クライアントシークレットの確認・管理を行えます。
+
+<FeatureTable>
+
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| ドメイン・メール送信ドメイン認証 | ログイン画面と通知メールに使うドメイン名を設定します。設定後に表示される認証用・メール送信用のDNSレコードを、利用しているDNSサービスに登録します。<br />参考：[ドメイン・メール送信ドメイン認証・遷移先の設定](/ja/docs/part-4/application-settings/domain-and-redirect-settings) | [GetBasicInfo](/ja/docs/reference/auth-api#tag/basicInfo/operation/GetBasicInfo) [UpdateBasicInfo](/ja/docs/reference/auth-api#tag/basicInfo/operation/UpdateBasicInfo) |
+| 認証情報・認証後の遷移先設定 | ログイン後の遷移先となるSaaSアプリケーションのURLを設定します。遷移先では、認証完了後に渡される一時コードをトークンに交換します。<br />参考：[ドメイン・メール送信ドメイン認証・遷移先の設定](/ja/docs/part-4/application-settings/domain-and-redirect-settings) / [認証・ログイン](/ja/docs/part-3/saasus-platform-features/authentication) | [GetAuthInfo](/ja/docs/reference/auth-api#tag/authInfo/operation/GetAuthInfo) [UpdateAuthInfo](/ja/docs/reference/auth-api#tag/authInfo/operation/UpdateAuthInfo) |
+| SaaS ID・APIキー・クライアントシークレット管理 | SaaSus APIの呼び出しに使うSaaS ID・APIキー・クライアントシークレットを確認し、APIキーの発行やクライアントシークレットの再発行を行います。<br />参考：[APIキーの確認](/ja/docs/part-4/application-settings/api-key-settings) | — |
+
+</FeatureTable>
+
+## 認証詳細設定
+
+ログイン画面の見た目やリンク、パスワード要件、セルフサインアップの許可、通知メールを設定する機能です。  
+表示に関する設定はログイン画面を対象とし、パスワード要件と登録許可は認証・登録処理にも適用されます。  
+通知メールは、送信元・返信先と、新規登録・パスワード再設定・MFAなどの種類ごとの件名・本文を設定できます。
+
+SaaS 開発コンソールから表示設定を編集でき、保存後はログイン画面への反映に時間がかかる場合があります。
+
+<FeatureTable>
+
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| タイトル・ロゴ・ファビコン | ログイン画面に表示するサービス名・ロゴと、ブラウザーのタブなどに表示するファビコンを設定します。<br />参考：[基本情報の設定](/ja/docs/part-4/application-settings/basic-app-settings) | [GetCustomizePageSettings](/ja/docs/reference/auth-api#tag/basicInfo/operation/GetCustomizePageSettings) [UpdateCustomizePageSettings](/ja/docs/reference/auth-api#tag/basicInfo/operation/UpdateCustomizePageSettings) |
+| 利用規約・プライバシーポリシーのリンク設定 | ログイン画面から開く利用規約とプライバシーポリシーのURLを設定します。リンクを表示する画面は、画面ごとのリンク表示設定で指定します。<br />参考：[基本情報の設定](/ja/docs/part-4/application-settings/basic-app-settings) | [GetCustomizePageSettings](/ja/docs/reference/auth-api#tag/basicInfo/operation/GetCustomizePageSettings) [UpdateCustomizePageSettings](/ja/docs/reference/auth-api#tag/basicInfo/operation/UpdateCustomizePageSettings) |
+| 新規登録・ログイン・パスワード変更画面ごとのリンク表示設定 | 新規登録・ログイン・パスワード変更の各画面で、利用規約やプライバシーポリシーのリンクを表示するか設定します。<br />参考：[基本情報の設定](/ja/docs/part-4/application-settings/basic-app-settings) | [GetCustomizePages](/ja/docs/reference/auth-api#tag/basicInfo/operation/GetCustomizePages) [UpdateCustomizePages](/ja/docs/reference/auth-api#tag/basicInfo/operation/UpdateCustomizePages) |
+| Google Tag Manager設定 | 作成済みのGoogle Tag ManagerコンテナIDを設定し、ログイン画面にタグを組み込みます。タグや計測の設定はGoogle Tag Manager側で行います。<br />参考：[Google Tag Managerの設定](/ja/docs/part-4/application-settings/googletagmanagersetting) | [GetCustomizePageSettings](/ja/docs/reference/auth-api#tag/basicInfo/operation/GetCustomizePageSettings) [UpdateCustomizePageSettings](/ja/docs/reference/auth-api#tag/basicInfo/operation/UpdateCustomizePageSettings) |
+| パスワードポリシー設定 | パスワードの最小文字数と、数字・記号・大文字・小文字など、必要な文字種を設定します。<br />参考：[認証方式の設定](/ja/docs/part-4/user-authz-settings/authentication-method-settings) | [GetSignInSettings](/ja/docs/reference/auth-api#tag/authInfo/operation/GetSignInSettings) [UpdateSignInSettings](/ja/docs/reference/auth-api#tag/authInfo/operation/UpdateSignInSettings) |
+| セルフサインアップの許可設定 | 利用者自身による新規登録を許可するか設定します。無効にすると、ログイン画面の新規登録リンクが非表示になり、SignUpによる登録もできなくなります。<br />参考：[認証方式の設定](/ja/docs/part-4/user-authz-settings/authentication-method-settings) | [GetSignInSettings](/ja/docs/reference/auth-api#tag/authInfo/operation/GetSignInSettings) [UpdateSignInSettings](/ja/docs/reference/auth-api#tag/authInfo/operation/UpdateSignInSettings) |
+| 送信元・返信先設定 | 通知メールに使う送信元・返信先のメールアドレスを設定します。事前にドメイン・メール送信の設定が必要です。<br />参考：[ドメイン・メール送信ドメイン認証・遷移先の設定](/ja/docs/part-4/application-settings/domain-and-redirect-settings) | [GetBasicInfo](/ja/docs/reference/auth-api#tag/basicInfo/operation/GetBasicInfo) [UpdateBasicInfo](/ja/docs/reference/auth-api#tag/basicInfo/operation/UpdateBasicInfo) |
+| メールテンプレートの取得・件名・本文の更新 | 新規登録・仮パスワードの再送・パスワード再設定・MFAのメールは、SaaS 開発コンソールで編集できます。メールアドレス変更・テナント招待・外部アカウント紐付けの確認メールは、APIで編集します。メールの種類ごとに必要な予約語を含めて設定します。<br />参考：[通知メール内容](/ja/docs/part-4/user-authz-settings/notifymailcustomize) | [FindNotificationMessages](/ja/docs/reference/auth-api#tag/basicInfo/operation/FindNotificationMessages) [UpdateNotificationMessages](/ja/docs/reference/auth-api#tag/basicInfo/operation/UpdateNotificationMessages) |
+
+</FeatureTable>
+
+### ログイン画面のカスタマイズ範囲
+
+サービス名・ロゴ・ファビコンやリンクの表示を設定できますが、配色の変更、任意のHTML/CSSの反映、お知らせ文の追加には対応していません。  
+独自のデザインやお知らせを表示する場合は、SaaSus APIを利用した独自ログイン画面を実装します。  
+実装方法は[認証API実装ガイド](/ja/docs/part-6/implementation-guide/auth/overview)を参照してください。

@@ -1,0 +1,59 @@
+---
+title: "役割・属性・環境の定義"
+slug: "authorization"
+excerpt: "役割、環境、ユーザーやテナントの追加属性を定義する機能。"
+hidden: true
+createdAt: "Wed Oct 21 2026 07:31:49 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Oct 27 2026 03:09:05 GMT+0000 (Coordinated Universal Time)"
+---
+
+import FeatureTable from '@site/src/components/FeatureTable';
+
+SaaSの認可に使う役割・環境と、ユーザーやテナントに持たせる属性項目を定義する機能です。  
+ユーザーに付与した役割や環境の情報を使い、SaaSアプリケーションで画面や機能へのアクセスを制御します。
+
+関連APIはAuth APIの操作名で表記しています。
+
+## 役割（ロール）定義
+
+SaaSの利用者に管理者・一般利用者などの役割を定義し、テナント・環境ごとに付与するための機能です。  
+役割の定義はSaaS 開発コンソール、ユーザーへの付与・解除はSaaS 運用コンソールで行えます。  
+役割に応じた画面・機能のアクセス制御は、SaaSアプリケーションで実装します。
+
+<FeatureTable>
+
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| 役割の取得・作成・更新・削除 | 役割名と表示名を定義します。更新できるのは表示名で、既定の役割adminは削除できません。<br />参考：[役割定義](/ja/docs/part-4/user-authz-settings/role-definition) | [GetRoles](/ja/docs/reference/auth-api#tag/role/operation/GetRoles) [CreateRole](/ja/docs/reference/auth-api#tag/role/operation/CreateRole) [UpdateRole](/ja/docs/reference/auth-api#tag/role/operation/UpdateRole) [DeleteRole](/ja/docs/reference/auth-api#tag/role/operation/DeleteRole) |
+| テナントユーザーへの環境別の役割付与・解除 | 登録済みのテナントユーザーに、環境を指定して役割を付与・解除します。同じユーザーでもテナント・環境ごとに異なる役割を持てます。<br />参考：[役割管理](/ja/docs/part-5/adding-role-to-user) / [（新画面）ユーザーの検索・作成・編集・テナント追加](/ja/docs/part-5/user-management/user-management-new-ui) | [CreateTenantUserRoles](/ja/docs/reference/auth-api#tag/tenantUser/operation/CreateTenantUserRoles) [DeleteTenantUserRole](/ja/docs/reference/auth-api#tag/tenantUser/operation/DeleteTenantUserRole) |
+
+</FeatureTable>
+
+## 属性定義
+
+ユーザーやテナントに、名前・部署・メモなどの追加情報を持たせるための属性項目を定義する機能です。  
+テナントユーザー属性とテナント属性はSaaS 開発コンソールで定義でき、SaaSユーザー属性はSaaSus APIで定義します。  
+属性項目の定義と、ユーザーやテナントごとの属性値の更新は別の操作です。
+
+<FeatureTable>
+
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| SaaSユーザー属性の定義 | ユーザー名など、SaaSユーザーに持たせる属性項目を定義します。値の更新は、[ユーザー管理の「ユーザー属性の更新」](/ja/docs/part-3/saasus-platform-features/user-management#saas-user-attributes)を参照してください。<br />参考：[ユーザー管理](/ja/docs/part-3/saasus-platform-features/user-management) | [CreateSaasUserAttribute](/ja/docs/reference/auth-api#tag/userAttribute/operation/CreateSaasUserAttribute) |
+| テナントユーザー属性の定義・取得・削除 | テナントごとに異なる値を持てるユーザー属性を定義します。値の更新は、[ユーザー管理の「テナントユーザーの属性更新」](/ja/docs/part-3/saasus-platform-features/user-management#tenant-user-attributes)を参照してください。<br />参考：[ユーザー属性定義](/ja/docs/part-4/user-authz-settings/declare-additional-attribute-to-user) / [ユーザー管理](/ja/docs/part-3/saasus-platform-features/user-management) | [GetUserAttributes](/ja/docs/reference/auth-api#tag/userAttribute/operation/GetUserAttributes) [CreateUserAttribute](/ja/docs/reference/auth-api#tag/userAttribute/operation/CreateUserAttribute) [DeleteUserAttribute](/ja/docs/reference/auth-api#tag/userAttribute/operation/DeleteUserAttribute) |
+| テナント属性の定義・取得・削除 | テナントに持たせる属性の項目を定義します。テナントごとの値の更新は、[テナント管理の「テナント属性の設定」](/ja/docs/part-3/saasus-platform-features/tenant-management#tenant-attributes)を参照してください。<br />参考：[テナント属性定義](/ja/docs/part-4/application-settings/declare-additional-attribute-to-tenant) / [テナント管理](/ja/docs/part-3/saasus-platform-features/tenant-management) | [GetTenantAttributes](/ja/docs/reference/auth-api#tag/tenantAttribute/operation/GetTenantAttributes) [CreateTenantAttribute](/ja/docs/reference/auth-api#tag/tenantAttribute/operation/CreateTenantAttribute) [DeleteTenantAttribute](/ja/docs/reference/auth-api#tag/tenantAttribute/operation/DeleteTenantAttribute) |
+
+</FeatureTable>
+
+## ユーザー環境定義
+
+ユーザーが利用できる環境と、環境ごとの役割を定義する機能です。例えば、テスト用では管理者、本番用では一般利用者として設定し、SaaSアプリケーション側で操作権限を判定します。  
+SaaSus Platform コンソールで切り替える環境とは別の設定です。
+
+<FeatureTable>
+
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| ユーザー環境定義の取得・作成・更新・削除 | 環境ID・環境名・表示名を管理します。既定の本番環境（ID: 3）は削除できません。<br />参考：[ユーザー環境定義の利用](/ja/docs/part-4/user-authz-settings/user-env-definition) | [GetEnvs](/ja/docs/reference/auth-api#tag/env/operation/GetEnvs) [GetEnv](/ja/docs/reference/auth-api#tag/env/operation/GetEnv) [CreateEnv](/ja/docs/reference/auth-api#tag/env/operation/CreateEnv) [UpdateEnv](/ja/docs/reference/auth-api#tag/env/operation/UpdateEnv) [DeleteEnv](/ja/docs/reference/auth-api#tag/env/operation/DeleteEnv) |
+
+</FeatureTable>

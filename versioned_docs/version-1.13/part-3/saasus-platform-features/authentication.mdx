@@ -1,0 +1,120 @@
+---
+title: "Authentication and sign-in"
+slug: "authentication"
+excerpt: "Sign-in, external identity providers, MFA, device authentication, and token management."
+hidden: true
+createdAt: "Wed Oct 21 2026 00:58:29 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Oct 27 2026 03:09:05 GMT+0000 (Coordinated Universal Time)"
+---
+
+import FeatureTable, {FeatureAnchor} from '@site/src/components/FeatureTable';
+
+Authenticate users at sign-in and obtain tokens for use in your SaaS application.  
+Use the login pages or integrate SaaSus API into custom sign-in pages.
+
+Related API links use operation names from Auth API.
+
+## Sign-in and sign-up
+
+Let SaaS users register new accounts and sign in to existing accounts.  
+Use the login pages or integrate SaaSus API into custom sign-in pages. The login pages also support resending temporary passwords and recovering forgotten passwords.
+
+For custom sign-in pages, use the APIs to initiate authentication with SRP_A and respond with an SRP signature.  
+Also implement responses when MFA verification or initial password setup is required.
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Email and password sign-in | Users can sign in with an email address and password. Custom sign-in pages require API calls to initiate authentication and respond to SRP verification.<br />References: [Auth API Implementation Guide](/docs/part-6/implementation-guide/auth/overview) | [SignIn](/docs/reference/auth-api#tag/saasUser/operation/SignIn) [RespondToSignInChallenge](/docs/reference/auth-api#tag/saasUser/operation/RespondToSignInChallenge) |
+| Sign-in with a sign-in ID | To use sign-in IDs on the login pages, turn on “Add sign-in ID notation” in the advanced authentication settings. Custom sign-in pages implement authentication initiation and the SRP verification response. | [SignIn](/docs/reference/auth-api#tag/saasUser/operation/SignIn) [RespondToSignInChallenge](/docs/reference/auth-api#tag/saasUser/operation/RespondToSignInChallenge) |
+| Self-sign-up | Register an email address to receive a temporary password by email. Users authenticate with that temporary password and then set a new password. You can also implement this flow in custom registration pages. Self-sign-up must be enabled.<br />References: [Authentication Method Settings](/docs/part-4/user-authz-settings/authentication-method-settings) | [SignUp](/docs/reference/auth-api#tag/saasUser/operation/SignUp) |
+| Resend the temporary password for a new registration | Resend the temporary password emailed during registration. Users can request this through the login pages. | [ResendSignUpConfirmationEmail](/docs/reference/auth-api#tag/saasUser/operation/ResendSignUpConfirmationEmail) |
+| <FeatureAnchor id="forgotten-password-recovery">Forgotten password recovery</FeatureAnchor> | Users select “Forgot your password?” on the login page and set a new password using the verification code sent by email. This feature is for users who authenticate with an email address, but is not available to users with email MFA enabled. For those users, an administrator resets the password in the SaaS Operations Console. | — |
+| Additional sign-in verification and initial password setup | Let users enter MFA codes or set a password on their first sign-in. Custom sign-in pages require screens for entering the code or new password and API calls to submit them.<br />References: [Auth API Implementation Guide](/docs/part-6/implementation-guide/auth/overview) | [RespondToSignInChallenge](/docs/reference/auth-api#tag/saasUser/operation/RespondToSignInChallenge) |
+
+</FeatureTable>
+
+### Repeated sign-in failures
+
+Repeated incorrect passwords can temporarily lock the account and prevent sign-in.  
+The lock normally clears automatically after a period of time. The exact number of attempts is not disclosed.
+
+## External identity providers
+
+Sign in using Google or an external identity provider that supports SAML.  
+Google sign-in starts on the regular login page, while SAML sign-in starts at a tenant-specific login URL.  
+In both cases, authentication takes place with the connected identity provider.
+
+Domain and email sending domain verification must be completed before using an external identity provider.
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Configure Google sign-in | Configure integration with Google. Users select Google sign-in on the regular login page and authenticate with their Google account. When self-sign-up is enabled, new users can also register with their Google account.<br />References: [Google Linkage](/docs/part-4/user-authz-settings/google-linkage) | [GetIdentityProviders](/docs/reference/auth-api#tag/authInfo/operation/GetIdentityProviders) [UpdateIdentityProvider](/docs/reference/auth-api#tag/authInfo/operation/UpdateIdentityProvider) |
+| Configure tenant-level SAML integration and SSO | Configure a SAML identity provider for each tenant. Users must be registered in the target tenant, with email addresses matching those in the connected identity provider. Users open the tenant-specific login URL (sign_in_url), then proceed from the dedicated login page to the identity provider to authenticate.<br />References: [SAML Integration](/docs/part-4/user-authz-settings/saml-linkage) | [GetSignInSettings](/docs/reference/auth-api#tag/authInfo/operation/GetSignInSettings) [GetTenantIdentityProviders](/docs/reference/auth-api#tag/tenant/operation/GetTenantIdentityProviders) [UpdateTenantIdentityProvider](/docs/reference/auth-api#tag/tenant/operation/UpdateTenantIdentityProvider) |
+| Request and confirm external account links | After authentication with Google or SAML, a verification code is emailed if the account has not yet been linked. Entering the code on the login page completes the link. This verification is skipped on subsequent sign-ins.<br />References: [Google Linkage](/docs/part-4/user-authz-settings/google-linkage) / [SAML Integration](/docs/part-4/user-authz-settings/saml-linkage) | [RequestExternalUserLink](/docs/reference/auth-api#tag/saasUser/operation/RequestExternalUserLink) [ConfirmExternalUserLink](/docs/reference/auth-api#tag/saasUser/operation/ConfirmExternalUserLink) |
+| Unlink external identity providers | Unlink a user from an external identity provider. Use this API to add an unlinking feature to your SaaS application. To check linked providers, decode the ID token and inspect `providerName` in `identities`. | [UnlinkProvider](/docs/reference/auth-api#tag/saasUser/operation/UnlinkProvider) |
+
+</FeatureTable>
+
+## Multi-factor authentication (MFA)
+
+Verify users with codes from an authenticator app or email in addition to their passwords.  
+Implement authenticator registration and MFA settings pages in your SaaS application; users can enter verification codes on the login pages when signing in.
+
+Custom sign-in pages also require API integration for verification code validation.
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Issue a secret for authenticator app registration | Issue the secret needed to register an authenticator app. Integrate this API into the screen where users set up their authenticator.<br />References: [Multi-Factor Authentication](/docs/part-6/implementation-guide/sample-application/multi-factor-authentication) | [CreateSecretCode](/docs/reference/auth-api#tag/saasUser/operation/CreateSecretCode) |
+| Verify authentication codes and register an authenticator app | Verify an authenticator code entered during enrollment to complete registration.<br />References: [Multi-Factor Authentication](/docs/part-6/implementation-guide/sample-application/multi-factor-authentication) | [UpdateSoftwareToken](/docs/reference/auth-api#tag/saasUser/operation/UpdateSoftwareToken) |
+| Retrieve user MFA preferences | Use to display the configured method and enabled status in your application’s settings.<br />References: [Multi-Factor Authentication](/docs/part-6/implementation-guide/sample-application/multi-factor-authentication) | [GetUserMfaPreference](/docs/reference/auth-api#tag/saasUser/operation/GetUserMfaPreference) |
+| Configure, enable, and disable app-based or email-based MFA | Configure MFA through an authenticator app or email and enable or disable it. Users who authenticate with a sign-in ID cannot use email MFA. Once MFA is configured, users can enter verification codes on the login pages.<br />References: [Multi-Factor Authentication](/docs/part-6/implementation-guide/sample-application/multi-factor-authentication) | [UpdateUserMfaPreference](/docs/reference/auth-api#tag/saasUser/operation/UpdateUserMfaPreference) |
+| Administrator reset of user MFA | Administrators can reset MFA in the SaaS Operations Console.<br />References: [(Old Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-crud) | [UpdateUserMfaPreference](/docs/reference/auth-api#tag/saasUser/operation/UpdateUserMfaPreference) |
+
+</FeatureTable>
+
+### Using email MFA
+
+Verification codes sent by email are valid for three minutes. This duration cannot be changed.  
+Users must enter the code and complete sign-in within that time.
+
+Users with email MFA enabled cannot reset their passwords through the login pages.  
+If they forget their password, an administrator resets it through User Management in the SaaS Operations Console.  
+See [User Management (Legacy UI): Search, Create, Edit, Add to Tenant](/docs/part-5/user-management/user-crud) for the steps.
+
+## Device authentication
+
+Remember trusted devices so users can skip MFA code entry on subsequent sign-ins.  
+In the SaaS Development Console, choose “Always remember,” “User opt-in” (remember only when the user chooses to), or “Do not remember.”
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Configure how trusted devices are remembered | Choose “Always remember,” “User opt-in,” or “Do not remember.” With user opt-in, devices are remembered only when users choose to remember them.<br />References: [Authentication Method Settings](/docs/part-4/user-authz-settings/authentication-method-settings) | [GetSignInSettings](/docs/reference/auth-api#tag/authInfo/operation/GetSignInSettings) [UpdateSignInSettings](/docs/reference/auth-api#tag/authInfo/operation/UpdateSignInSettings) |
+| Confirm device registration | Confirm a device for registration as a trusted device during sign-in. The login pages use this API internally. | [ConfirmDevice](/docs/reference/auth-api#tag/saasUser/operation/ConfirmDevice) |
+| Update device remembered status | Update a device’s remembered status. On the login page, selecting “Remember device” marks the device as remembered. Clearing the checkbox does not remove a previously remembered status. | [UpdateDeviceStatus](/docs/reference/auth-api#tag/saasUser/operation/UpdateDeviceStatus) |
+
+</FeatureTable>
+
+## Tokens and credentials
+
+Obtain credentials for signed-in users and manage their sign-in state.  
+Exchange temporary codes received from the login pages for tokens. You can also refresh tokens or revoke refresh tokens.
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Issue temporary codes and exchange them for tokens | When using the login pages, your application exchanges the temporary code received after authentication for tokens.<br />References: [Authentication Methods](/docs/part-6/usecase/authentication-methods) | [CreateAuthCredentials](/docs/reference/auth-api#tag/credential/operation/CreateAuthCredentials) [GetAuthCredentials](/docs/reference/auth-api#tag/credential/operation/GetAuthCredentials) |
+| Exchange temporary codes with PKCE | Specify PKCE parameters in the URL used to open the login pages. After authentication completes, your application exchanges the temporary code for tokens using the code verifier it retained. | [ExchangeAuthCredentials](/docs/reference/auth-api#tag/credential/operation/ExchangeAuthCredentials) |
+| Refresh authentication tokens | ID tokens expire after one hour. Use a refresh token to obtain a new ID token and access token and maintain the user’s sign-in state in your SaaS application.<br />References: [Authentication Methods](/docs/part-6/usecase/authentication-methods) | [GetAuthCredentials](/docs/reference/auth-api#tag/credential/operation/GetAuthCredentials) |
+| Revoke refresh tokens | Use to stop further token refreshes. Also implement removal of application cookies or other local session data. | [RevokeToken](/docs/reference/auth-api#tag/credential/operation/RevokeToken) |
+| Configure refresh token validity | Set the refresh token lifetime. Implement token refresh in your SaaS application.<br />References: [Authentication Method Settings](/docs/part-4/user-authz-settings/authentication-method-settings) | [GetSignInSettings](/docs/reference/auth-api#tag/authInfo/operation/GetSignInSettings) [UpdateSignInSettings](/docs/reference/auth-api#tag/authInfo/operation/UpdateSignInSettings) |
+
+</FeatureTable>

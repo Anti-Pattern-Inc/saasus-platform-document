@@ -1,0 +1,106 @@
+---
+title: "Pricing plans, usage, and billing"
+slug: "pricing-billing"
+excerpt: "Features for pricing definitions, usage recording, and tenant subscriptions."
+hidden: true
+createdAt: "Wed Oct 21 2026 08:21:05 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Oct 27 2026 03:09:05 GMT+0000 (Coordinated Universal Time)"
+---
+
+import FeatureTable from '@site/src/components/FeatureTable';
+
+Create SaaS pricing plans and manage subscriptions and usage for each tenant.
+
+:::info
+
+[Integrate with Stripe](/docs/part-3/saasus-platform-features/external-integrations#stripe-integration) to use your pricing plans and recorded usage for billing.
+
+:::
+
+Related API links use operation names from Pricing API and Auth API.
+
+## Pricing structure design
+
+Create pricing plans that combine fixed monthly charges with usage-based charges such as API call counts.  
+Build plans using meter units to record usage, pricing units to define charges, and feature menus to group pricing units. Apply the resulting plan and tax rate to a tenant.
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Get, create, update, and delete meter units | Define items for recording usage, such as API call counts. With Stripe integration, choose `sum` or `max` as the aggregation method for daily and monthly usage retrieval and billing. Without Stripe integration, the aggregation setting is not shown in the console and the method is `sum`. For meter units used in a pricing unit, only the display name and description can be changed; deletion is not allowed. Create a new meter unit to change what is measured or how it is aggregated.<br />References: [Meter Unit Setting](/docs/part-4/pricing-and-billing/usage-metering) | [GetMeteringUnits](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnits) [CreateMeteringUnit](/docs/reference/pricing-api#tag/metering/operation/CreateMeteringUnit) [UpdateMeteringUnitByID](/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitByID) [DeleteMeteringUnitByID](/docs/reference/pricing-api#tag/metering/operation/DeleteMeteringUnitByID) |
+| Manage pricing units | Set charges, currency, and billing model: fixed, usage-based, tiered, or tiered usage. Usage-based billing references a meter unit. For pricing units used in a feature menu, only the display name, description, and usage limit can be changed (fixed units have no usage limit). Deletion is not allowed; create a new unit to change charges or the billing model.<br />References: [Creating Pricing Plans](/docs/part-4/pricing-and-billing/pricing-plan-creation) / [The difference in rate calculation between Tiered units and Tiered usage units](/docs/part-4/pricing-and-billing/tiered-unit) | [GetPricingUnits](/docs/reference/pricing-api#tag/pricingUnits/operation/GetPricingUnits) [GetPricingUnit](/docs/reference/pricing-api#tag/pricingUnits/operation/GetPricingUnit) [CreatePricingUnit](/docs/reference/pricing-api#tag/pricingUnits/operation/CreatePricingUnit) [UpdatePricingUnit](/docs/reference/pricing-api#tag/pricingUnits/operation/UpdatePricingUnit) [DeletePricingUnit](/docs/reference/pricing-api#tag/pricingUnits/operation/DeletePricingUnit) |
+| Manage feature menus | Group pricing units, such as fixed monthly charges and usage-based charges, into feature menus. For menus used in a pricing plan, only the display name and description can be changed. Their composition cannot be changed and deletion is not allowed; create a new menu to use a different combination of pricing units.<br />References: [Creating Pricing Plans](/docs/part-4/pricing-and-billing/pricing-plan-creation) | [GetPricingMenus](/docs/reference/pricing-api#tag/pricingMenus/operation/GetPricingMenus) [GetPricingMenu](/docs/reference/pricing-api#tag/pricingMenus/operation/GetPricingMenu) [CreatePricingMenu](/docs/reference/pricing-api#tag/pricingMenus/operation/CreatePricingMenu) [UpdatePricingMenu](/docs/reference/pricing-api#tag/pricingMenus/operation/UpdatePricingMenu) [DeletePricingMenu](/docs/reference/pricing-api#tag/pricingMenus/operation/DeletePricingMenu) |
+| Manage pricing plans | Combine feature menus into pricing plans. For plans applied or scheduled for a tenant, only the display name and description can be changed. Their composition cannot be changed and deletion is not allowed; create a new plan to use a different combination of menus.<br />References: [Pricing Plan Overview](/docs/part-4/pricing-and-billing/pricing-plan-overview) / [Creating Pricing Plans](/docs/part-4/pricing-and-billing/pricing-plan-creation) | [GetPricingPlans](/docs/reference/pricing-api#tag/pricingPlans/operation/GetPricingPlans) [GetPricingPlan](/docs/reference/pricing-api#tag/pricingPlans/operation/GetPricingPlan) [CreatePricingPlan](/docs/reference/pricing-api#tag/pricingPlans/operation/CreatePricingPlan) [UpdatePricingPlan](/docs/reference/pricing-api#tag/pricingPlans/operation/UpdatePricingPlan) [DeletePricingPlan](/docs/reference/pricing-api#tag/pricingPlans/operation/DeletePricingPlan) |
+| Get and create tax rates; update display names and descriptions | Register the tax percentage, inclusive or exclusive tax, and country, then select the tax rate when applying a plan to a tenant. You can update an existing tax rate’s display name and description, but not its percentage or other tax properties.<br />References: [Tax Rate Settings](/docs/part-4/pricing-and-billing/tax-rate-settings) | [GetTaxRates](/docs/reference/pricing-api#tag/taxRate/operation/GetTaxRates) [CreateTaxRate](/docs/reference/pricing-api#tag/taxRate/operation/CreateTaxRate) [UpdateTaxRate](/docs/reference/pricing-api#tag/taxRate/operation/UpdateTaxRate) |
+| Reset all pricing plans | Delete pricing definitions and recorded usage together in development or staging environments. Use Account Settings > Others in the SaaS Development Console or call the API. This operation is not available in production. See “Reset pricing plans” below for the scope of deletion. | [ResetPlan](/docs/reference/auth-api#tag/tenant/operation/ResetPlan) |
+
+</FeatureTable>
+
+### Reset pricing plans
+
+Resetting deletes the following information in the selected environment:
+
+- Pricing plans, feature menus, pricing units, meter units, and tax rates
+- Recorded usage
+- Scheduled plan changes and plan histories for all tenants
+
+If Stripe integration is configured, resetting also removes the integration mappings and secret key from SaaSus Platform and disconnects Stripe.  
+Products, customers, and subscriptions in Stripe are not deleted.
+
+## Record and retrieve usage
+
+Record usage for each tenant by meter unit and retrieve it by day, month, or time range.  
+Call the recording APIs when the measured activity occurs in your SaaS application, and use the results to display usage or calculate charges.
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Add, subtract, or overwrite usage at the current or a specified time | Record usage for a tenant and meter unit. Choose add, sub, or direct to add, subtract, or overwrite the count.<br />References: [Metering API Implementation Samples](/docs/part-6/implementation-guide/sample-application/metering-api) | [UpdateMeteringUnitTimestampCountNow](/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCountNow) [UpdateMeteringUnitTimestampCount](/docs/reference/pricing-api#tag/metering/operation/UpdateMeteringUnitTimestampCount) |
+| Delete usage at a specified time | Delete usage recorded at a specified time for a tenant and meter unit, for example to remove an incorrect record.<br />References: [Metering API Implementation Samples](/docs/part-6/implementation-guide/sample-application/metering-api) | [DeleteMeteringUnitTimestampCount](/docs/reference/pricing-api#tag/metering/operation/DeleteMeteringUnitTimestampCount) |
+| Get usage for today, a specified day, this month, or a specified month | Retrieve the aggregated value for one meter unit for a specified day or month. The meter unit’s aggregation method determines the result: `sum` returns the total of recorded values for the period, and `max` returns the maximum.<br />References: [Billing Dashboard Implementation](/docs/part-6/implementation-guide/sample-application/billing-dashboard) | [GetMeteringUnitDateCountByTenantIdAndUnitNameToday](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountByTenantIdAndUnitNameToday) [GetMeteringUnitDateCountByTenantIdAndUnitNameAndDate](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountByTenantIdAndUnitNameAndDate) [GetMeteringUnitMonthCountByTenantIdAndUnitNameThisMonth](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountByTenantIdAndUnitNameThisMonth) [GetMeteringUnitMonthCountByTenantIdAndUnitNameAndMonth](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountByTenantIdAndUnitNameAndMonth) |
+| Get usage for a time range | Specify start and end timestamps to retrieve timestamped records within a period. The meter unit’s aggregation method (`sum` or `max`) is not applied. Calculate totals or maximum values for that period in your SaaS application.<br />References: [Metering API Implementation Samples](/docs/part-6/implementation-guide/sample-application/metering-api) | [GetMeteringUnitDateCountByTenantIdAndUnitNameAndDatePeriod](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountByTenantIdAndUnitNameAndDatePeriod) |
+| Get usage for multiple meters | Retrieve aggregated values for all meter units of a tenant for a specified day or month. Each meter unit’s setting determines its result: `sum` returns the total of recorded values for the period, and `max` returns the maximum.<br />References: [Billing Dashboard Implementation](/docs/part-6/implementation-guide/sample-application/billing-dashboard) | [GetMeteringUnitDateCountsByTenantIdAndDate](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitDateCountsByTenantIdAndDate) [GetMeteringUnitMonthCountsByTenantIdAndMonth](/docs/reference/pricing-api#tag/metering/operation/GetMeteringUnitMonthCountsByTenantIdAndMonth) |
+
+</FeatureTable>
+
+With Stripe integration, you cannot modify usage for past billing periods or periods before a plan change.
+
+## Tenant subscriptions
+
+Manage the pricing plan, tax rate, and effective time for each tenant.  
+Configure subscriptions in the SaaS Operations Console, or implement plan selection and changes in your application.
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Apply, change, or cancel a pricing plan | Apply a pricing plan and tax rate to a tenant, change the plan, or cancel it. Apply changes immediately or at a specified time, and check or cancel scheduled changes. Tenant information includes the current plan and plan history. With Stripe integration, plan changes support prorations. See “Prorations when changing plans” below for invoice timing and other details.<br />References: [Set a Pricing Plan for Tenants](/docs/part-5/price-plan/price-plan-setting-001) / [Change Tenant Pricing Plan Settings](/docs/part-5/price-plan/price-plan-setting-002) / [Cancel the Tenant Pricing Plan](/docs/part-5/price-plan/price-plan-setting-003) / [Canceling a Scheduled Change](/docs/part-5/price-plan/price-plan-setting-004) / [Plan Change Implementation](/docs/part-6/implementation-guide/sample-application/plan-change-implementation) | [GetTenant](/docs/reference/auth-api#tag/tenant/operation/GetTenant) [GetTenants](/docs/reference/auth-api#tag/tenant/operation/GetTenants) [UpdateTenantPlan](/docs/reference/auth-api#tag/tenant/operation/UpdateTenantPlan) |
+
+</FeatureTable>
+
+Scheduled changes cannot be modified or canceled from five minutes before their effective time.  
+With Stripe integration, a scheduled change that removes metered subscription items (`delete_usage`) cannot be canceled.
+
+### Prorations when changing plans
+
+With Stripe integration, pricing plan changes support prorations.  
+Changes made through the SaaS Operations Console invoice the prorated difference immediately.
+
+Use `proration_behavior` in [UpdateTenantPlan](/docs/reference/auth-api#tag/tenant/operation/UpdateTenantPlan) to specify whether to prorate and when to invoice the difference.
+
+- `always_invoice`: Issue an invoice for the prorated difference immediately.
+- `create_prorations`: Include the prorated difference in the next invoice.
+- `none`: Do not prorate the plan change.
+
+#### Example with fixed monthly prices
+
+Suppose a tenant switches from a JPY 25,000 monthly plan to a JPY 28,000 monthly plan halfway through the billing period. Excluding tax and usage-based charges, the difference is:
+
+- Unused time on the old plan: −JPY 12,500
+- Remaining time on the new plan: +JPY 14,000
+- Difference: JPY 1,500
+
+For the reverse change from JPY 28,000 to JPY 25,000 per month, the −JPY 1,500 difference is retained as a Stripe credit and applied to future invoices.  
+Stripe calculates the actual amounts to the second based on the change time and billing period.

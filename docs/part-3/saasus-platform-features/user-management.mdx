@@ -1,0 +1,54 @@
+---
+title: "User management"
+slug: "user-management"
+excerpt: "Manage SaaS user information and add users to or remove them from tenants."
+hidden: true
+createdAt: "Wed Oct 21 2026 00:58:29 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Oct 27 2026 03:09:05 GMT+0000 (Coordinated Universal Time)"
+---
+
+import FeatureTable, {FeatureAnchor} from '@site/src/components/FeatureTable';
+
+Manage users registered with your SaaS and add them to or remove them from tenants.  
+A SaaS user represents a user across the service, while a tenant user represents that user's membership in a specific tenant.  
+One SaaS user can belong to multiple tenants.
+
+Related API links use operation names from Auth API.
+
+## SaaS users
+
+Manage sign-in information and attributes for users registered with your service.  
+Use the SaaS Operations Console for daily administration, and integrate APIs when building your own administration pages or user-facing information change features.  
+Users register themselves through login page self-sign-up, while administrators use the user creation feature.
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| List, search, and retrieve individual users | List users or search by user ID, email address, or sign-in ID.<br />References: [(Old Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-crud) / [(New Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-management-new-ui) | [GetSaasUsers](/docs/reference/auth-api#tag/saasUser/operation/GetSaasUsers) [SearchSaasUsers](/docs/reference/auth-api#tag/saasUser/operation/SearchSaasUsers) [GetSaasUser](/docs/reference/auth-api#tag/saasUser/operation/GetSaasUser) |
+| Create and delete users | Create or delete SaaS users. When you create an email-authenticated user without specifying a password, a temporary password is sent by email. Deleting a SaaS user also removes that user from all tenants. Users who register themselves use self-sign-up.<br />References: [(Old Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-crud) / [Authentication Method Settings](/docs/part-4/user-authz-settings/authentication-method-settings) | [CreateSaasUser](/docs/reference/auth-api#tag/saasUser/operation/CreateSaasUser) [DeleteSaasUser](/docs/reference/auth-api#tag/saasUser/operation/DeleteSaasUser) |
+| Retrieve information by email address or sign-in ID | Specify an email address or sign-in ID to retrieve user information, tenant memberships, and roles. | [GetUserInfoByEmail](/docs/reference/auth-api#tag/userInfo/operation/GetUserInfoByEmail) [GetUserInfoBySignInId](/docs/reference/auth-api#tag/userInfo/operation/GetUserInfoBySignInId) |
+| Change and reset passwords | Set a target user’s password or issue a temporary password. Users must set a new password after signing in with a temporary password. Users who authenticate with a sign-in ID have no notification email address, so the administrator must communicate the password to them. This is separate from [forgotten password recovery](/docs/part-3/saasus-platform-features/authentication#forgotten-password-recovery), which users perform through the login pages.<br />References: [(Old Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-crud) | [UpdateSaasUserPassword](/docs/reference/auth-api#tag/saasUser/operation/UpdateSaasUserPassword) [ResetSaasUserPassword](/docs/reference/auth-api#tag/saasUser/operation/ResetSaasUserPassword) |
+| Change email addresses | For users who authenticate with an email address. Administrators change the user’s email address.<br />References: [(Old Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-crud) | [UpdateSaasUserEmail](/docs/reference/auth-api#tag/saasUser/operation/UpdateSaasUserEmail) |
+| Let users change their own email address | Send a verification code to the new email address and verify the code to change the address. This feature is for users who authenticate with an email address and requires domain and email delivery settings to be configured in advance.<br />References: [Domain & Email Sending Domain Authentication and Redirect Settings](/docs/part-4/application-settings/domain-and-redirect-settings) | [RequestEmailUpdate](/docs/reference/auth-api#tag/saasUser/operation/RequestEmailUpdate) [ConfirmEmailUpdate](/docs/reference/auth-api#tag/saasUser/operation/ConfirmEmailUpdate) |
+| Change sign-in IDs | For users who authenticate with a sign-in ID. This does not switch a user from email-based authentication.<br />References: [(Old Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-crud) | [UpdateSaasUserSignInId](/docs/reference/auth-api#tag/saasUser/operation/UpdateSaasUserSignInId) |
+| <FeatureAnchor id="saas-user-attributes">Update user attributes</FeatureAnchor> | Update attribute values for each SaaS user, for example when editing a profile in your SaaS application. These values are managed separately from tenant user attributes. | [UpdateSaasUserAttributes](/docs/reference/auth-api#tag/saasUser/operation/UpdateSaasUserAttributes) |
+
+</FeatureTable>
+
+## Add and remove SaaS users from tenants
+
+Add registered SaaS users to tenants and manage user information for each tenant.  
+Add users to or remove them from tenants in the SaaS Operations Console, or integrate APIs to provide administration features in your own application.  
+Your application implements access decisions for its pages and features using the retrieved tenant memberships and roles.
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Add, retrieve, and remove tenant users | Add registered SaaS users to a tenant, retrieve tenant user information, or remove users from the tenant. Removing a user from a tenant leaves the SaaS user account in place.<br />References: [(Old Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-crud) | [CreateTenantUser](/docs/reference/auth-api#tag/tenantUser/operation/CreateTenantUser) [GetTenantUsers](/docs/reference/auth-api#tag/tenantUser/operation/GetTenantUsers) [GetTenantUser](/docs/reference/auth-api#tag/tenantUser/operation/GetTenantUser) [DeleteTenantUser](/docs/reference/auth-api#tag/tenantUser/operation/DeleteTenantUser) |
+| <FeatureAnchor id="tenant-user-attributes">Update tenant user attributes</FeatureAnchor> | Update user attribute values for each tenant, separately from service-wide SaaS user attributes.<br />References: [User Attributes](/docs/part-4/user-authz-settings/declare-additional-attribute-to-user) | [UpdateTenantUser](/docs/reference/auth-api#tag/tenantUser/operation/UpdateTenantUser) |
+| Search users across all tenants | Search across tenants using conditions such as tenant ID, environment, and role.<br />References: [(New Screen) Search, Edit, Create, or Assign Users to Tenants](/docs/part-5/user-management/user-management-new-ui) | [SearchTenantUsers](/docs/reference/auth-api#tag/tenantUser/operation/SearchTenantUsers) |
+| Retrieve tenant membership and role information | GetUserInfo uses an ID token to retrieve tenant memberships that have environment information, including their roles. GetAllTenantUser uses a user ID to retrieve user information and roles for all tenant memberships. Implement access control in your application using the retrieved data.<br />References: [Role Management](/docs/part-5/adding-role-to-user) | [GetUserInfo](/docs/reference/auth-api#tag/userInfo/operation/GetUserInfo) [GetAllTenantUser](/docs/reference/auth-api#tag/tenantUser/operation/GetAllTenantUser) |
+
+</FeatureTable>

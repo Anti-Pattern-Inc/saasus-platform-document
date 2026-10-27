@@ -1,0 +1,64 @@
+---
+title: "Logs, analytics, and feedback"
+slug: "logs-analytics-feedback"
+excerpt: "Logs, analytics, and feedback features, related APIs, and reference guides."
+hidden: true
+createdAt: "Thu Oct 22 2026 02:21:58 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Oct 27 2026 03:09:05 GMT+0000 (Coordinated Universal Time)"
+---
+
+import FeatureTable from '@site/src/components/FeatureTable';
+
+View SaaSus API execution logs, user activity history, user counts, and per-page usage statistics.  
+You can also collect questions and requests from users and manage them as feedback.
+
+Related API links use operation names from API Log API, Analysis API, Auth API and Communication API.
+
+## API execution logs
+
+Inspect SaaSus API calls and their details.  
+Use the logs to investigate API errors and check request details.
+
+Record the same trace ID in your application logs to follow processing across the application and SaaSus Platform.
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Search logs and retrieve details | Search SaaSus API execution logs by date, time, or period and inspect request details and trace IDs. Record access logs for your SaaS application separately.<br />References: [Request Tracing Guide with Trace ID](/docs/part-6/implementation-guide/sample-application/trace-id-log-analysis) | [GetLogs](/docs/reference/apilog-api#tag/apiLog/operation/GetLogs) [GetLog](/docs/reference/apilog-api#tag/apiLog/operation/GetLog) |
+
+</FeatureTable>
+
+## Usage analytics
+
+Retrieve user activity history, user counts, metrics over time, and per-page statistics.  
+Use this information to monitor SaaS application usage and understand user activity.
+
+Activity history and per-page statistics use records from GetUserInfo calls with a referring URL header.
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Get user activity history | Retrieve activity recorded through GetUserInfo calls with the Referer or X-SaaSus-Referer header. View the past month of history for each user.<br />References: [User Activity History Log](/docs/part-5/user-management/user-activity-history-log) / [Activity History Log Implementation](/docs/part-6/implementation-guide/sample-application/activity-history-log) | [GetUserBehaviorHistories](/docs/reference/analysis-api#tag/userAnalysis/operation/GetUserBehaviorHistories) |
+| Get SaaS user and tenant user counts | Retrieve the SaaS-wide user count and tenant membership counts. | [GetSaasUsersCount](/docs/reference/auth-api#tag/saasUser/operation/GetSaasUsersCount) [GetAllTenantUsersCount](/docs/reference/auth-api#tag/tenantUser/operation/GetAllTenantUsersCount) |
+| Get user and tenant metrics | Specify a date range and metric type to retrieve creation counts for tenants, SaaS users, or tenant users. Tenant user metrics can be filtered by tenant. | [GetAggregatedMetrics](/docs/reference/analysis-api#tag/metrics/operation/GetAggregatedMetrics) |
+| Get per-page usage statistics | Retrieve page views and unique user counts per URL for a specified period. Statistics use the referring URL specified in the headers of GetUserInfo calls. | [GetPageStatistics](/docs/reference/analysis-api#tag/metrics/operation/GetPageStatistics) |
+
+</FeatureTable>
+
+## Feedback
+
+Collect questions and requests from SaaS users, and manage status, votes, and comments.  
+Implement user-facing submission and viewing pages in your application, and review and respond through the SaaS Operations Console.
+
+<FeatureTable>
+
+| Feature | Details | Related APIs |
+| --- | --- | --- |
+| Create, retrieve, update, and delete feedback | Manage feedback titles and content. Integrate submission and viewing into your SaaS application, and use the SaaS Operations Console to view received feedback and its details.<br />References: [Feedback Management](/docs/part-5/user-feedback) | [CreateFeedback](/docs/reference/communication-api#tag/feedback/operation/CreateFeedback) [GetFeedbacks](/docs/reference/communication-api#tag/feedback/operation/GetFeedbacks) [GetFeedback](/docs/reference/communication-api#tag/feedback/operation/GetFeedback) [UpdateFeedback](/docs/reference/communication-api#tag/feedback/operation/UpdateFeedback) [DeleteFeedback](/docs/reference/communication-api#tag/feedback/operation/DeleteFeedback) |
+| Update response status | Update the response status of feedback. In the SaaS Operations Console, choose from New, Under Review, In Progress, Implemented, Under Investigation, and Answered. You can also display the response status in your application.<br />References: [Feedback Management](/docs/part-5/user-feedback) | [UpdateFeedbackStatus](/docs/reference/communication-api#tag/feedback/operation/UpdateFeedbackStatus) |
+| Vote and withdraw votes | Let users vote on feedback or withdraw their votes. Implement voting buttons and other controls in your SaaS application.<br />References: [Feedback Management](/docs/part-5/user-feedback) | [CreateVoteUser](/docs/reference/communication-api#tag/feedback/operation/CreateVoteUser) [DeleteVoteForFeedback](/docs/reference/communication-api#tag/feedback/operation/DeleteVoteForFeedback) |
+| Create, retrieve, update, and delete comments | Manage replies and additional information as feedback comments. View and reply to comments in the SaaS Operations Console, and integrate viewing, submission, editing, and deletion into your SaaS application.<br />References: [Feedback Management](/docs/part-5/user-feedback) | [CreateFeedbackComment](/docs/reference/communication-api#tag/feedback/operation/CreateFeedbackComment) [GetFeedbackComment](/docs/reference/communication-api#tag/feedback/operation/GetFeedbackComment) [UpdateFeedbackComment](/docs/reference/communication-api#tag/feedback/operation/UpdateFeedbackComment) [DeleteFeedbackComment](/docs/reference/communication-api#tag/feedback/operation/DeleteFeedbackComment) |
+
+</FeatureTable>

@@ -1,0 +1,64 @@
+---
+title: "ログ・分析・フィードバック"
+slug: "logs-analytics-feedback"
+excerpt: "ログ・分析・フィードバックの機能、関連API、参考ガイド。"
+hidden: true
+createdAt: "Thu Oct 22 2026 02:21:58 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Oct 27 2026 03:09:05 GMT+0000 (Coordinated Universal Time)"
+---
+
+import FeatureTable from '@site/src/components/FeatureTable';
+
+SaaSus APIの実行ログ、ユーザーの行動履歴、ユーザー数やページ別の利用統計を確認する機能です。  
+利用者からの質問や要望を受け付け、フィードバックとして管理する機能もあります。
+
+関連APIはAPI Log API、Analysis API、Auth API、Communication APIの操作名で表記しています。
+
+## API実行ログ
+
+SaaSus APIの呼び出し履歴と、各呼び出しの詳細を確認する機能です。  
+APIでエラーが発生したときの原因調査や、呼び出し内容の確認に利用できます。
+
+SaaSアプリケーションのログに同じトレースIDを記録すると、処理の流れを追跡できます。
+
+<FeatureTable>
+
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| ログ一覧の検索・詳細取得 | 日付・日時・期間を指定してSaaSus APIの実行ログを検索し、リクエストの詳細やトレースIDを確認します。SaaSアプリケーションのアクセスログは別途記録してください。<br />参考：[Trace ID によるリクエスト追跡ガイド](/ja/docs/part-6/implementation-guide/sample-application/trace-id-log-analysis) | [GetLogs](/ja/docs/reference/apilog-api#tag/apiLog/operation/GetLogs) [GetLog](/ja/docs/reference/apilog-api#tag/apiLog/operation/GetLog) |
+
+</FeatureTable>
+
+## 利用状況の分析
+
+ユーザー行動履歴、ユーザー数、期間ごとの集計指標やページ別の利用統計を取得する機能です。  
+SaaSアプリケーションの利用状況を確認し、利用者の動向を把握するために利用できます。
+
+行動履歴やページ別利用統計には、参照元URLのヘッダーを付けてGetUserInfoを呼び出したときの記録が使われます。
+
+<FeatureTable>
+
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| ユーザー行動履歴の取得 | GetUserInfoにRefererまたはX-SaaSus-Refererヘッダーを付けて記録した履歴を取得します。ユーザーごとに過去1か月の行動履歴を確認できます。<br />参考：[行動履歴ログ](/ja/docs/part-5/user-management/user-activity-history-log) / [行動履歴ログの実装](/ja/docs/part-6/implementation-guide/sample-application/activity-history-log) | [GetUserBehaviorHistories](/ja/docs/reference/analysis-api#tag/userAnalysis/operation/GetUserBehaviorHistories) |
+| SaaSユーザー数・テナントユーザー数の取得 | サービス全体のSaaSユーザー数と、テナントごとのユーザー数を取得します。 | [GetSaasUsersCount](/ja/docs/reference/auth-api#tag/saasUser/operation/GetSaasUsersCount) [GetAllTenantUsersCount](/ja/docs/reference/auth-api#tag/tenantUser/operation/GetAllTenantUsersCount) |
+| ユーザー・テナントの集計指標取得 | 期間と指標の種類を指定し、テナント・SaaSユーザー・テナントユーザーの作成数を取得します。テナントユーザーの指標では対象テナントを指定できます。 | [GetAggregatedMetrics](/ja/docs/reference/analysis-api#tag/metrics/operation/GetAggregatedMetrics) |
+| ページ別利用統計の取得 | 指定期間のページURLごとの閲覧数・ユニークユーザー数を取得します。GetUserInfoの呼び出し時にヘッダーで指定した参照元URLが集計対象になります。 | [GetPageStatistics](/ja/docs/reference/analysis-api#tag/metrics/operation/GetPageStatistics) |
+
+</FeatureTable>
+
+## フィードバック
+
+SaaS利用者からの質問・要望を収集し、対応状況、投票、コメントを管理する機能です。  
+利用者向けの投稿・閲覧画面はSaaSアプリケーションに実装し、SaaS 運用コンソールで確認や対応を行います。
+
+<FeatureTable>
+
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| 作成・一覧・詳細取得・更新・削除 | フィードバックの件名や内容を管理します。SaaSアプリケーションの投稿・閲覧機能に組み込み、SaaS 運用コンソールでは寄せられた内容の一覧・詳細を確認します。<br />参考：[フィードバック](/ja/docs/part-5/user-feedback) | [CreateFeedback](/ja/docs/reference/communication-api#tag/feedback/operation/CreateFeedback) [GetFeedbacks](/ja/docs/reference/communication-api#tag/feedback/operation/GetFeedbacks) [GetFeedback](/ja/docs/reference/communication-api#tag/feedback/operation/GetFeedback) [UpdateFeedback](/ja/docs/reference/communication-api#tag/feedback/operation/UpdateFeedback) [DeleteFeedback](/ja/docs/reference/communication-api#tag/feedback/operation/DeleteFeedback) |
+| 対応ステータス更新 | フィードバックの対応状況を更新します。SaaS 運用コンソールでは、新規・検討中・実装中・実装済み・調査中・回答済みから選択します。SaaSアプリケーションにも対応状況を表示できます。<br />参考：[フィードバック](/ja/docs/part-5/user-feedback) | [UpdateFeedbackStatus](/ja/docs/reference/communication-api#tag/feedback/operation/UpdateFeedbackStatus) |
+| 投票・投票取り消し | 利用者がフィードバックに投票したり、投票を取り消したりできます。投票ボタンなどの操作画面はSaaSアプリケーションに実装します。<br />参考：[フィードバック](/ja/docs/part-5/user-feedback) | [CreateVoteUser](/ja/docs/reference/communication-api#tag/feedback/operation/CreateVoteUser) [DeleteVoteForFeedback](/ja/docs/reference/communication-api#tag/feedback/operation/DeleteVoteForFeedback) |
+| コメントの投稿・取得・更新・削除 | フィードバックへの返信や追加情報をコメントとして管理します。SaaS 運用コンソールではコメントの確認・返信を行い、SaaSアプリケーションでは表示・投稿・編集・削除を組み込めます。<br />参考：[フィードバック](/ja/docs/part-5/user-feedback) | [CreateFeedbackComment](/ja/docs/reference/communication-api#tag/feedback/operation/CreateFeedbackComment) [GetFeedbackComment](/ja/docs/reference/communication-api#tag/feedback/operation/GetFeedbackComment) [UpdateFeedbackComment](/ja/docs/reference/communication-api#tag/feedback/operation/UpdateFeedbackComment) [DeleteFeedbackComment](/ja/docs/reference/communication-api#tag/feedback/operation/DeleteFeedbackComment) |
+
+</FeatureTable>

@@ -1,0 +1,29 @@
+---
+title: "SaaSus Platformの管理"
+slug: "development-administration"
+excerpt: "SaaSus Platformを利用するユーザー、アカウント、契約を管理する機能。"
+hidden: true
+createdAt: "Thu Oct 22 2026 05:36:32 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Oct 27 2026 03:09:05 GMT+0000 (Coordinated Universal Time)"
+---
+
+import FeatureTable from '@site/src/components/FeatureTable';
+
+SaaSus Platformを利用するユーザー、自分のアカウント、SaaSus Platformの契約を管理する機能です。  
+主にSaaS 開発コンソールのアカウント設定と、各コンソールのユーザーメニューから操作します。  
+SaaSの利用者のアカウント管理については、[ユーザー管理](/ja/docs/part-3/saasus-platform-features/user-management)を参照してください。
+
+<FeatureTable>
+
+| 機能 | 詳細 | 関連API |
+| --- | --- | --- |
+| ユーザー管理 | SaaSus Platformを利用するユーザーを確認し、役割の変更やユーザーの削除を行います。役割には管理者・開発者・運用者があり、利用できるコンソールや操作が異なります。<br />参考：[ユーザー招待](/ja/docs/part-4/account-settings/saasususerinvitation) | — |
+| ユーザー招待 | SaaSus Platformを利用するユーザーをメールで招待し、役割を設定します。招待状況の確認や招待の取り消しも行えます。<br />参考：[ユーザー招待](/ja/docs/part-4/account-settings/saasususerinvitation) | — |
+| 自分のプロフィール・認証設定 | SaaSus Platform コンソールにログインしている自分のプロフィール、メールアドレス、パスワード、MFAを設定します。<br />参考：[SaaSus Platformログイン画面・メイン画面の全体イメージ](/ja/docs/part-3/login-and-main-screen-overview) | — |
+| アカウント情報の変更 | アカウント設定の「一般」タブで、アカウント名と代表者メールアドレスを変更します。代表者メールアドレスは、SaaSus Platformの請求書発行の通知先にも使われます。<br />参考：[請求と支払い方法](/ja/docs/part-4/account-settings/billing-information#billing-contact-email) | — |
+| SaaSus Platformの契約・請求情報管理 | アカウント設定の「料金プラン」タブで、SaaSus Platformの利用プランを確認・変更します。有料プランからフリープランへ直接変更することはできません。「支払い」タブでは、契約プランに応じて請求予定額や利用状況を確認できます。請求先情報もアカウント設定で管理し、支払方法の変更や請求書の確認は契約方法に応じた請求ポータルなどで行います。<br />参考：[有料プランの申し込み手順](/ja/docs/part-4/account-settings/procedure-for-applying-for-a-paid-plan) / [請求と支払い方法](/ja/docs/part-4/account-settings/billing-information) | — |
+| コンソール・APIへのIP制限 | SaaSus Platform コンソールとSaaSus APIへアクセスできるIPアドレスを制限します。コンソール用・API用の許可CIDRリストをサポートへ申請します。Smart API Gatewayのテナント単位の許可IP設定とは別の機能です。<br />参考：[IP制限](/ja/docs/part-4/application-settings/ip-restriction) | — |
+
+</FeatureTable>
+
+IP制限は、旧スタータープラン・旧スタンダードプランでは利用できません。利用条件はIP制限の参考ガイドを確認してください。
