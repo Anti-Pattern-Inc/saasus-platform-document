@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-11-04 18:36:36 +0900`
+- Generated: `2026-11-04 19:20:26 +0900`
 
 ---
 ## changelog/20221224.md
@@ -11618,7 +11618,7 @@ If we determine that suspension is necessary, we follow the order below and proc
 ## How We Communicate
 When a critical vulnerability is disclosed, we communicate through the following channels:
 - [Status page](/status) and announcements page: We publish the impact, the status of our response, planned suspensions, and expected resumption times.
-- Email: We notify registered contacts in advance of suspensions and when our response is complete.
+- Email: We send advance notice of suspensions and notification of response completion to the registered representative email address.
 Our communications primarily cover three points: whether there is an impact, our response, and any action we ask customers to take. We aim to provide information that customers can use directly when communicating with their own users.
 ## Requests to Customers
 - Register contact information: Emergency communications will be sent to the registered representative email address.
