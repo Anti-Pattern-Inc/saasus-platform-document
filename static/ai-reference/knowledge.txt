@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-11-04 19:20:26 +0900`
+- Generated: `2026-11-04 20:07:40 +0900`
 
 ---
 ## changelog/20221224.md
@@ -11623,7 +11623,7 @@ Our communications primarily cover three points: whether there is an impact, our
 ## Requests to Customers
 - Register contact information: Emergency communications will be sent to the registered representative email address.
 - Update SDKs: If an SDK integrated into your application requires a fix, we will notify you and ask you to update it.
-- Prepare maintenance communications: We recommend preparing a way to notify your users in case we temporarily suspend a function.
+- Prepare maintenance communications: We recommend preparing a way to notify the users of your service in case we temporarily suspend a function.
 ## Ongoing Preparations
 To protect services without stopping them, we work on the following on an ongoing basis:
 - Tracking the software and versions we use, so that we can quickly determine whether we are affected when a vulnerability is disclosed
