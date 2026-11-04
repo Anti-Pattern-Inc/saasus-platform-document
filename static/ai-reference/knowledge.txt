@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-11-04 14:13:38 +0900`
+- Generated: `2026-11-04 14:35:23 +0900`
 
 ---
 ## changelog/20221224.md
@@ -11285,7 +11285,7 @@ A. Currently, the service is premised on internet connection, so it cannot be us
 A.
 - Infrastructure layer: Protected by AWS managed services at the OS level and below
 - Application layer: Dependencies are continuously scanned and updated using vulnerability detection tools
-For the response to critical vulnerabilities, see the [response policy](../../part-8/vulnerability-response-policy.md) (Japanese).
+For the response to critical vulnerabilities, see the [response policy](../../part-8/vulnerability-response-policy.md).
 ---
 **Q. Is the login screen using a DV certificate? Is the security adequate?**
 A. Yes, we use a DV (Domain Validation) certificate.
@@ -11569,7 +11569,7 @@ For more details, see our  [pricing plans.](https://saasus.io/en).
 - **WAF / DDoS / Vulnerability Scans**: Implemented
 - **Application & Infrastructure Logs**: Stored in CloudTrail for 10 years (access limited to our ops team)
 - **API Access Control**: Signed-request authentication prevents misuse
-- For the response to critical vulnerabilities, see the [response policy](./vulnerability-response-policy.md) (Japanese).
+- For the response to critical vulnerabilities, see the [response policy](./vulnerability-response-policy.md).
 ### 7. Availability & Performance
 | Metric / Control | Value |
 |------------------|-------|
@@ -11591,46 +11591,46 @@ These details are disclosed individually **only when required** for risk assessm
 ---
 ## part-8/vulnerability-response-policy.md
 ````markdown
-制定日：Nov 4, 2026
-## はじめに
-SaaSus Platformは、お客様が提供するSaaSの認証・テナント管理・課金などを支える基盤です。そのため、当社がサービスを止めると、お客様のサービスやその先のエンドユーザーにも影響が及びます。
-本方針は、重大な脆弱性が公表されたときに「安全を守ること」と「お客様のサービスを止めないこと」をどう両立させるか、当社の基本的な考え方をお示しするものです。
-## 3つの基本方針
-### 1. できる限り、サービスを止めずに守ります
-お客様のサービスを止めずに対策することを第一とし、次の流れで対応します。
-1. WAFで暫定的に防ぐ：WAF（Webアプリケーションファイアウォール）で、攻撃に使われる通信を入口で遮断します。修正が完了するまでの間も、安全を確保します。
-2. 修正パッチを適用する：根本的な対策として修正パッチを適用し、自動テストで動作に問題がないことを確認します。
-3. 止めずに反映する：ローリングアップデート（サーバーを少しずつ順番に入れ替える方式）などにより、サービスを動かしたまま修正を反映します。
-4. 反映後に確認する：監視とログで、異常や攻撃の痕跡がないかを確認します。万一不具合が見つかった場合は、すぐに直前の状態へ戻します。
-WAFで防げない場合や、修正の準備に時間を要する場合は、次の方針2に従い、関係する機能だけを一時的に停止します。
-### 2. 止める場合は、影響の小さい機能から、一部だけ、短時間にとどめます
-やむを得ず停止する場合も、全体を一度に止めることはしません。管理画面など、お客様のエンドユーザーに影響しにくい機能から順に、必要な範囲だけを止めます。ログイン済みのエンドユーザーがサービスを使い続けられる状態は、最後まで守ります。
-### 3. 状況を速やかに、わかりやすくお知らせします
-当社への影響の有無を速やかに公表します。停止の可能性がある場合は、できる限り事前にお知らせします。また、サービスを止めずに対応した場合も、その理由と安全性をご説明します。
-## やむを得ず停止する場合の順番
-停止が必要と判断した場合は、次の順番で、必要な段階までにとどめます。
-| 段階 | 停止する機能 | お客様のサービスへの影響 |
+Established: November 4, 2026
+## Introduction
+SaaSus Platform provides the foundation for authentication, tenant management, billing, and other functions of the SaaS applications our customers offer. If we stop the service, it also affects our customers' services and their end users.
+This policy describes our basic approach to balancing security with the continuity of our customers' services when a critical vulnerability is disclosed.
+## Three Basic Principles
+### 1. We protect services without stopping them wherever possible
+Our first priority is to implement countermeasures without stopping our customers' services. We follow these steps:
+1. Temporarily block attacks with a WAF: A web application firewall (WAF) blocks traffic used in attacks at the entry point. This keeps the service secure until the fix is complete.
+2. Apply a patch: We apply a patch as a fundamental fix and use automated tests to verify that operations are not affected.
+3. Deploy without stopping the service: We deploy the fix while the service remains running, using methods such as rolling updates, which replace servers gradually in sequence.
+4. Verify after deployment: We use monitoring and logs to check for anomalies and signs of attack. If a problem is found, we immediately restore the previous state.
+If the WAF cannot block the threat or preparing a fix takes time, we temporarily suspend only the affected functions in accordance with Principle 2.
+### 2. If suspension is necessary, we start with functions that have the least impact and keep the scope and duration limited
+Even when suspension is unavoidable, we do not stop the entire service at once. We start with functions that are less likely to affect customers' end users, such as management screens, and suspend only what is necessary. We maintain the ability of signed-in end users to continue using the service until the very end.
+### 3. We communicate the situation promptly and clearly
+We promptly disclose whether we are affected. If a suspension is possible, we provide advance notice wherever possible. When we respond without stopping the service, we also explain the reasons and its safety.
+## Order of Suspension When Unavoidable
+If we determine that suspension is necessary, we follow the order below and proceed only as far as necessary.
+| Stage | Functions suspended | Impact on customers' services |
 | --- | --- | --- |
-| 1 | 管理画面、設定変更、管理用API | エンドユーザーの利用は継続します |
-| 2 | 課金計算、利用量の取り込み、通知などの裏側の処理 | 受け付けたデータは、再開後に順次処理します |
-| 3 | 新規ログイン、新規登録など、脆弱性に関係する機能 | 該当機能のみ一時的に利用できなくなります |
-| 最終手段 | サービス全体 | 実際の攻撃が確認され、お客様の情報が漏えいする恐れがある場合に限ります |
-## お知らせの方法
-重大な脆弱性が公表された場合、次の方法でお知らせします。
-- ステータスページ・お知らせページ：影響の有無、対応状況、停止の予定と再開時刻を掲載します
-- メール：ご登録いただいたご担当者様へ、停止の予告や対応完了をご連絡します
-お知らせする内容は、「影響の有無」「当社の対応」「お客様にお願いしたい対応（ある場合）」の3点を基本とします。お客様がご自身の利用者様へご説明される際にも、そのままご活用いただける内容を心がけます。
-## お客様へのお願い
-- 連絡先のご登録：緊急時のご連絡を確実にお届けするため、セキュリティ担当者様の連絡先のご登録をお願いします
-- SDKの更新：お客様のアプリケーションに組み込まれたSDKに修正が必要な場合は、当社からご案内しますので、更新をお願いします
-- メンテナンス時のご案内：当社が機能を一時停止する場合に備え、お客様の利用者様へのご案内方法をご準備いただくことをおすすめします
-## 平時からの取り組み
-「止めずに守る」ために、当社は日頃から次の取り組みを進めています。
-- 利用しているソフトウェアとバージョンの把握（脆弱性が公表された際に、影響の有無をすぐに判断するため）
-- テストと修正適用の自動化（サービスを止めずに、短時間で修正を反映するため）
-- 機能ごとに個別に停止できる仕組みの整備（停止の範囲を最小限にするため）
-- 緊急時の判断体制と手順の整備、定期的な訓練
-本方針は、状況の変化に応じて見直します。
+| 1 | Management screens, configuration changes, and management APIs | End users can continue using the service. |
+| 2 | Background processing, such as billing calculations, usage data ingestion, and notifications | Data received will be processed in sequence after service resumes. |
+| 3 | Functions related to the vulnerability, such as new sign-ins and registrations | Only the affected functions will be temporarily unavailable. |
+| Last resort | The entire service | Only when an actual attack has been confirmed and there is a risk of customer information being leaked. |
+## How We Communicate
+When a critical vulnerability is disclosed, we communicate through the following channels:
+- Status page and announcements page: We publish whether the service is affected, the status of our response, planned suspensions, and expected resumption times.
+- Email: We notify registered contacts in advance of suspensions and when our response is complete.
+Our communications primarily cover three points: whether there is an impact, our response, and any action we ask customers to take. We aim to provide information that customers can use directly when communicating with their own users.
+## Requests to Customers
+- Register contact information: To ensure that we can reach you in an emergency, please register contact information for your security representative.
+- Update SDKs: If an SDK integrated into your application requires a fix, we will notify you and ask you to update it.
+- Prepare maintenance communications: We recommend preparing a way to notify your users in case we temporarily suspend a function.
+## Ongoing Preparations
+To protect services without stopping them, we work on the following on an ongoing basis:
+- Tracking the software and versions we use, so that we can quickly determine whether we are affected when a vulnerability is disclosed
+- Automating tests and the application of fixes, so that we can deploy fixes quickly without stopping the service
+- Preparing mechanisms to suspend functions individually, so that the scope of a suspension can be minimized
+- Establishing emergency decision-making structures and procedures, and conducting regular drills
+We will review this policy as circumstances change.
 ````
 
 ---
