@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-11-04 14:35:23 +0900`
+- Generated: `2026-11-04 14:41:27 +0900`
 
 ---
 ## changelog/20221224.md
@@ -11617,7 +11617,7 @@ If we determine that suspension is necessary, we follow the order below and proc
 | Last resort | The entire service | Only when an actual attack has been confirmed and there is a risk of customer information being leaked. |
 ## How We Communicate
 When a critical vulnerability is disclosed, we communicate through the following channels:
-- Status page and announcements page: We publish whether the service is affected, the status of our response, planned suspensions, and expected resumption times.
+- [Status page](/status) and announcements page: We publish whether the service is affected, the status of our response, planned suspensions, and expected resumption times.
 - Email: We notify registered contacts in advance of suspensions and when our response is complete.
 Our communications primarily cover three points: whether there is an impact, our response, and any action we ask customers to take. We aim to provide information that customers can use directly when communicating with their own users.
 ## Requests to Customers
