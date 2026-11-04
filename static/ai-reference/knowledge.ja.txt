@@ -3,7 +3,7 @@
 - Locale: `ja`
 - Docs source: `i18n/ja/docusaurus-plugin-content-docs/current`
 - API source: `api`
-- Generated: `2026-10-19 14:09:14 +0900`
+- Generated: `2026-11-04 14:13:39 +0900`
 
 ---
 ## changelog/20221224.md
@@ -11321,6 +11321,7 @@ A. 現状、インターネット接続を前提としたサービスのため�
 A.
 - インフラ層：AWS マネージドサービスで OS 以下を保護
 - アプリ層：脆弱性検査ツールで依存パッケージを継続的にスキャン・更新
+重大な脆弱性への対応については、[重大な脆弱性発生時の対応方針](../../part-8/vulnerability-response-policy.md)をご覧ください。
 ---
 **Q. ログイン画面はDV証明書ですか？セキュリティは大丈夫ですか？**
 A. はい、DV（ドメイン認証）証明書を使用しています。
@@ -11602,6 +11603,7 @@ SaaSus Platform では、ご契約プランに応じて Intercom や Slack Conne
 - **WAF・DDoS 対策・脆弱性診断**：導入済み
 - **アプリ・インフラのログ取得**：CloudTrail にて10年間保存（当社運用担当者のみアクセス可能）
 - **API アクセス制御**：署名付き認証方式を採用し、不正利用を防止
+- 重大な脆弱性への対応については、[重大な脆弱性発生時の対応方針](./vulnerability-response-policy.md)をご覧ください。
 ### 7. 可用性・性能
 - **稼働率**
   - 設計値：99.95%
@@ -11620,6 +11622,51 @@ SaaSus Platform では、ご契約プランに応じて Intercom や Slack Conne
 ---
 ### 経営・財務・組織に関する情報
 当該情報は、リスク評価・審査などの目的で必要な場合に限り、個別に開示いたします。
+````
+
+---
+## part-8/vulnerability-response-policy.md
+````markdown
+制定日：Nov 4, 2026
+## はじめに
+SaaSus Platformは、お客様が提供するSaaSの認証・テナント管理・課金などを支える基盤です。そのため、当社がサービスを止めると、お客様のサービスやその先のエンドユーザーにも影響が及びます。
+本方針は、重大な脆弱性が公表されたときに「安全を守ること」と「お客様のサービスを止めないこと」をどう両立させるか、当社の基本的な考え方をお示しするものです。
+## 3つの基本方針
+### 1. できる限り、サービスを止めずに守ります
+お客様のサービスを止めずに対策することを第一とし、次の流れで対応します。
+1. WAFで暫定的に防ぐ：WAF（Webアプリケーションファイアウォール）で、攻撃に使われる通信を入口で遮断します。修正が完了するまでの間も、安全を確保します。
+2. 修正パッチを適用する：根本的な対策として修正パッチを適用し、自動テストで動作に問題がないことを確認します。
+3. 止めずに反映する：ローリングアップデート（サーバーを少しずつ順番に入れ替える方式）などにより、サービスを動かしたまま修正を反映します。
+4. 反映後に確認する：監視とログで、異常や攻撃の痕跡がないかを確認します。万一不具合が見つかった場合は、すぐに直前の状態へ戻します。
+WAFで防げない場合や、修正の準備に時間を要する場合は、次の方針2に従い、関係する機能だけを一時的に停止します。
+### 2. 止める場合は、影響の小さい機能から、一部だけ、短時間にとどめます
+やむを得ず停止する場合も、全体を一度に止めることはしません。管理画面など、お客様のエンドユーザーに影響しにくい機能から順に、必要な範囲だけを止めます。ログイン済みのエンドユーザーがサービスを使い続けられる状態は、最後まで守ります。
+### 3. 状況を速やかに、わかりやすくお知らせします
+当社への影響の有無を速やかに公表します。停止の可能性がある場合は、できる限り事前にお知らせします。また、サービスを止めずに対応した場合も、その理由と安全性をご説明します。
+## やむを得ず停止する場合の順番
+停止が必要と判断した場合は、次の順番で、必要な段階までにとどめます。
+| 段階 | 停止する機能 | お客様のサービスへの影響 |
+| --- | --- | --- |
+| 1 | 管理画面、設定変更、管理用API | エンドユーザーの利用は継続します |
+| 2 | 課金計算、利用量の取り込み、通知などの裏側の処理 | 受け付けたデータは、再開後に順次処理します |
+| 3 | 新規ログイン、新規登録など、脆弱性に関係する機能 | 該当機能のみ一時的に利用できなくなります |
+| 最終手段 | サービス全体 | 実際の攻撃が確認され、お客様の情報が漏えいする恐れがある場合に限ります |
+## お知らせの方法
+重大な脆弱性が公表された場合、次の方法でお知らせします。
+- ステータスページ・お知らせページ：影響の有無、対応状況、停止の予定と再開時刻を掲載します
+- メール：ご登録いただいたご担当者様へ、停止の予告や対応完了をご連絡します
+お知らせする内容は、「影響の有無」「当社の対応」「お客様にお願いしたい対応（ある場合）」の3点を基本とします。お客様がご自身の利用者様へご説明される際にも、そのままご活用いただける内容を心がけます。
+## お客様へのお願い
+- 連絡先のご登録：緊急時のご連絡を確実にお届けするため、セキュリティ担当者様の連絡先のご登録をお願いします
+- SDKの更新：お客様のアプリケーションに組み込まれたSDKに修正が必要な場合は、当社からご案内しますので、更新をお願いします
+- メンテナンス時のご案内：当社が機能を一時停止する場合に備え、お客様の利用者様へのご案内方法をご準備いただくことをおすすめします
+## 平時からの取り組み
+「止めずに守る」ために、当社は日頃から次の取り組みを進めています。
+- 利用しているソフトウェアとバージョンの把握（脆弱性が公表された際に、影響の有無をすぐに判断するため）
+- テストと修正適用の自動化（サービスを止めずに、短時間で修正を反映するため）
+- 機能ごとに個別に停止できる仕組みの整備（停止の範囲を最小限にするため）
+- 緊急時の判断体制と手順の整備、定期的な訓練
+本方針は、状況の変化に応じて見直します。
 ````
 
 ---
@@ -12716,28 +12763,6 @@ tags:
 security:
   - Bearer: []
 paths:
-  /user-behavior-day:
-    put:
-      tags:
-        - userAnalysis
-      operationId: UpdateUserBehaviorHistoriesByDay
-      summary: 当日のユーザ行動履歴を更新
-      description: |
-        当日のユーザ行動履歴を更新します。
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UpdateUserBehaviorHistoriesByDayParam"
-      responses:
-        "200":
-          description: OK
-        "500":
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
   "/users/{user_id}/behavior-histories":
     get:
       tags:
@@ -12755,67 +12780,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserBehaviorHistories"
-        "500":
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-  /active-users:
-    get:
-      tags:
-        - userAnalysis
-      operationId: GetActiveUsers
-      summary: 日次または月次のアクティブユーザー数を取得
-      description: |
-        日次または月次のアクティブユーザー数を取得します。
-      parameters:
-        - $ref: "#/components/parameters/ActiveUsersType"
-        - $ref: "#/components/parameters/DateFrom"
-        - $ref: "#/components/parameters/DateTo"
-        - $ref: "#/components/parameters/TenantId"
-        - $ref: "#/components/parameters/EnvId"
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ActiveUsers"
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-    put:
-      tags:
-        - userAnalysis
-      operationId: UpdateActiveUsers
-      summary: アクティブユーザーデータの追加・更新
-      description: |
-        日次または月次のアクティブユーザーデータを追加・更新します。
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UpdateActiveUsersParam"
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
         "500":
           description: Internal Server Error
           content:
@@ -12937,45 +12901,12 @@ components:
         type: string
         example: f94bfffc-8be2-11ec-b41a-0242ac120004
       required: true
-    ActiveUsersType:
-      in: query
-      name: type
-      description: アクティブユーザーデータのタイプ（月次または日次）
-      schema:
-        type: string
-        enum:
-          - monthly
-          - daily
-      required: true
-    DateFrom:
-      in: query
-      name: date_from
-      description: 開始日（月次の場合はYYYY-MM、日次の場合はYYYY-MM-DD）
-      schema:
-        type: string
-        example: 2025-01
-      required: true
-    DateTo:
-      in: query
-      name: date_to
-      description: 終了日（月次の場合はYYYY-MM、日次の場合はYYYY-MM-DD）。任意。
-      schema:
-        type: string
-        example: 2025-12
-      required: false
     TenantId:
       in: query
       name: tenant_id
       description: テナントID（任意）
       schema:
         $ref: "#/components/schemas/Uuid"
-      required: false
-    EnvId:
-      in: query
-      name: env_id
-      description: 環境ID（任意、tenant_idが必要）
-      schema:
-        $ref: "#/components/schemas/Id"
       required: false
     MetricsType:
       in: query
@@ -13099,76 +13030,6 @@ components:
       required:
         - behaved_at
         - histories
-    ActiveUsers:
-      title: アクティブユーザー
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: "#/components/schemas/ActiveUserData"
-          description: アクティブユーザーデータ一覧
-      required:
-        - data
-    ActiveUserData:
-      title: アクティブユーザーデータ
-      type: object
-      properties:
-        date:
-          title: 日付
-          description: 日付（月次の場合はYYYY-MM、日次の場合はYYYY-MM-DD）
-          type: string
-          example: 2025-01
-        tenant_id:
-          $ref: "#/components/schemas/Uuid"
-          description: テナントID
-        env_id:
-          $ref: "#/components/schemas/Id"
-          description: 環境ID
-        active_users:
-          title: アクティブユーザー数
-          description: アクティブユーザー数
-          type: integer
-          example: 100
-      required:
-        - date
-        - tenant_id
-        - env_id
-        - active_users
-    UpdateActiveUsersParam:
-      title: アクティブユーザー更新パラメータ
-      type: object
-      properties:
-        type:
-          title: タイプ
-          description: アクティブユーザーデータのタイプ（月次または日次）
-          type: string
-          enum:
-            - daily
-            - monthly
-          example: daily
-        date:
-          title: 日付
-          description: 日付（月次の場合はYYYY-MM、日次の場合はYYYY-MM-DD）
-          type: string
-          example: 2025-01-01
-        tenant_id:
-          $ref: "#/components/schemas/Uuid"
-          description: テナントID
-        env_id:
-          $ref: "#/components/schemas/Id"
-          description: 環境ID
-        active_users:
-          title: アクティブユーザー数
-          description: アクティブユーザー数
-          type: integer
-          example: 100
-      required:
-        - type
-        - date
-        - tenant_id
-        - env_id
-        - active_users
     AggregatedMetrics:
       title: 集計されたメトリクス
       type: object
@@ -13349,6 +13210,12 @@ paths:
       responses:
         "200":
           description: OK
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
         "500":
           description: Internal Server Error
           content:
@@ -13557,6 +13424,36 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ApiKey"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      tags:
+        - smartApiGateway
+      operationId: DeleteApiKey
+      summary: APIキーを削除
+      description: |
+        指定したAPIキーを削除します。
+      parameters:
+        - in: path
+          name: api_key
+          description: APIキー
+          required: true
+          schema:
+            type: string
+            example: 1234567890abcdef
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
         "500":
           description: Internal Server Error
           content:
@@ -14445,7 +14342,7 @@ components:
               description: APIキー
             response_status:
               type: string
-              example: 200
+              example: "200"
               description: レスポンスステータス
             request_uri:
               type: string
@@ -14534,11 +14431,12 @@ paths:
         - userInfo
       operationId: GetUserInfo
       summary: ユーザー情報取得
-      description: |
+      description: >
         SaaS利用ユーザ(登録ユーザ)のIDトークンを元に、ユーザ情報を取得します。
         IDトークンは、SaaSus Platform生成のログイン画面からログイン時にCallback URLに渡されます。
         サーバ側でそのURLからIDトークンを取得し、このAPIを呼ぶことにより、該当ユーザの情報が取得できます。
         取得した上には、所属テナントや役割(ロール)、料金プランなどが含まれているため、それを元に認可の実装を行うことが可能です。
+        IDトークンの検証に失敗し、401 Unauthorized が返される場合、レスポンスの data.sign_in_page_url にログイン画面のURLが返されますので、クライアントはそちらにリダイレクトするなどの対応を行うことができます。
       parameters:
         - in: query
           name: token
@@ -14803,34 +14701,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-    post:
-      tags:
-        - saasUser
-      operationId: SaveSaasUsersCount
-      summary: SaaSユーザー数を保存
-      description: |
-        SaaSユーザー数を保存します。
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/SaveSaasUsersCountParam"
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
   /users/search:
     get:
       tags:
@@ -15060,6 +14930,12 @@ paths:
       responses:
         "200":
           description: OK
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
         "500":
           description: Internal Server Error
           content:
@@ -15276,34 +15152,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TenantUsersCounts"
-        "500":
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-    post:
-      tags:
-        - tenantUser
-      operationId: SaveTenantUsersCounts
-      summary: テナントごとのテナントユーザー数を保存
-      description: |
-        テナントごとのテナントユーザー数を保存します。
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/SaveTenantUsersCountsParam"
-      responses:
-        "200":
-          description: OK
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
         "500":
           description: Internal Server Error
           content:
@@ -16466,6 +16314,12 @@ paths:
       responses:
         "200":
           description: OK
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
         "500":
           description: Internal Server Error
           content:
@@ -16477,10 +16331,9 @@ paths:
       tags:
         - authInfo
       operationId: GetSignInSettings
-      summary: パスワード要件を取得
+      summary: 認証設定を取得
       description: |
-        ユーザーパスワードの要件設定を取得します。
-        アルファベット、数字、記号の組み合わせで、桁数を長くすれば解読されづらい安全なパスワードを設定することが可能となります。
+        ユーザーの認証設定（パスワード要件、リフレッシュトークンの有効期間など）を取得します。
       responses:
         "200":
           description: OK
@@ -16499,10 +16352,9 @@ paths:
       tags:
         - authInfo
       operationId: UpdateSignInSettings
-      summary: パスワード要件を更新
+      summary: 認証設定を更新
       description: |
-        ユーザーパスワードの要件設定を更新します。
-        アルファベット、数字、記号の組み合わせで、桁数を長くすれば解読されづらい安全なパスワードを設定することが可能となります。
+        ユーザーの認証設定（パスワード要件、リフレッシュトークンの有効期間など）を更新します。
       requestBody:
         content:
           application/json:
@@ -16511,6 +16363,12 @@ paths:
       responses:
         "200":
           description: OK
+        "400":
+          description: Invalid Parameter
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
         "500":
           description: Internal Server Error
           content:
@@ -16803,9 +16661,10 @@ paths:
         - credential
       operationId: CreateAuthCredentials
       summary: 認証・認可情報の保存
-      description: |
+      description: >
         引数のIDトークン・アクセストークン・リフレッシュトークンを一時保存し取得用の一時コードを返却する。
         一時コードの有効期間は発行から10秒です。
+        code_challengeを指定した場合、その一時コードは POST /credentials/exchange でのみ交換でき、GET /credentials では取得できません。
       requestBody:
         content:
           application/json:
@@ -16826,6 +16685,81 @@ paths:
                 $ref: "#/components/schemas/Error"
         "401":
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /credentials/exchange:
+    post:
+      tags:
+        - credential
+      operationId: ExchangeAuthCredentials
+      summary: 一時コードを認証・認可情報へ交換
+      description: >
+        PKCE code verifierを検証し、一時コードをIDトークン・アクセストークン・リフレッシュトークンへ交換する。
+        交換できるのは code_challenge を指定して作成した一時コードのみです。code_challenge なしで作成した一時コードは GET /credentials で取得してください。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExchangeAuthCredentialsParam"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Credentials"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /token/revoke:
+    post:
+      tags:
+        - credential
+      operationId: RevokeToken
+      summary: トークンの無効化
+      description: |
+        指定したリフレッシュトークンを無効化します。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RevokeTokenParam"
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
           content:
             application/json:
               schema:
@@ -17478,6 +17412,7 @@ components:
         last_login_at:
           type: integer
           x-go-type: int64
+          x-omitempty: false
           nullable: true
           example: 1640995200
           description: |
@@ -18105,7 +18040,9 @@ components:
             Stripe連携時の注意点: 当月の月初（0時 UTC）を開始日時として指定すると、その月の初日から開始されるサブスクリプションを作成できます。 （例: 2023年1月1日 00:00 UTC を指定する場合 → 1672531200）
         next_plan_tax_rate_id:
           $ref: "#/components/schemas/Uuid"
-          description: 税率ID
+          description: |
+            税率ID。
+            プランの解約予約時は、リクエストで指定した値にかかわらず、現在適用中のプランの税率が使用されます。
         proration_behavior:
           $ref: "#/components/schemas/ProrationBehavior"
           description: プラン変更時の比例配分の挙動
@@ -18271,8 +18208,6 @@ components:
         data:
           type: object
           additionalProperties: true
-          example:
-            sign_in_page_url: auth.dev.saasus.io
       required:
         - type
         - message
@@ -18372,7 +18307,7 @@ components:
       properties:
         application_id:
           type: string
-          example: 1234567890123456
+          example: "1234567890123456"
         application_secret:
           type: string
           example: 123456789b00def123456a12345678d1
@@ -18467,6 +18402,8 @@ components:
           $ref: "#/components/schemas/SelfRegist"
         identity_provider_configuration:
           $ref: "#/components/schemas/IdentityProviderConfiguration"
+        refresh_token_validity:
+          $ref: "#/components/schemas/RefreshTokenValidity"
       required:
         - password_policy
         - device_configuration
@@ -18475,6 +18412,36 @@ components:
         - account_verification
         - self_regist
         - identity_provider_configuration
+        - refresh_token_validity
+    RefreshTokenValidity:
+      type: object
+      description: リフレッシュトークンの有効期間
+      properties:
+        value:
+          type: integer
+          x-go-type: uint64
+          example: 30
+          description: |
+            リフレッシュトークンの有効期間の値。60分以上10年以内で指定してください。
+        unit:
+          $ref: "#/components/schemas/RefreshTokenValidityUnit"
+      required:
+        - value
+        - unit
+    RefreshTokenValidityUnit:
+      type: string
+      enum:
+        - seconds
+        - minutes
+        - hours
+        - days
+      example: days
+      description: |
+        リフレッシュトークンの有効期間の単位。
+        seconds: 秒
+        minutes: 分
+        hours: 時間
+        days: 日
     PasswordPolicy:
       type: object
       description: パスワードポリシー
@@ -18561,6 +18528,7 @@ components:
         - sending_to
     UpdateSignInSettingsParam:
       type: object
+      description: リフレッシュトークンの有効期間を更新する場合は、refresh_token_validity の value と unit を指定してください。
       properties:
         password_policy:
           $ref: "#/components/schemas/PasswordPolicy"
@@ -18574,6 +18542,8 @@ components:
           $ref: "#/components/schemas/AccountVerification"
         self_regist:
           $ref: "#/components/schemas/SelfRegist"
+        refresh_token_validity:
+          $ref: "#/components/schemas/RefreshTokenValidity"
     MfaConfiguration:
       type: object
       description: |
@@ -18863,7 +18833,56 @@ components:
         - access_token
     CreateAuthCredentialsParam:
       title: 認証・認可情報の保存パラメータ
-      $ref: "#/components/schemas/Credentials"
+      allOf:
+        - $ref: "#/components/schemas/Credentials"
+        - type: object
+          properties:
+            code_challenge:
+              title: PKCEコードチャレンジ
+              description: code verifierから生成したPKCEコードチャレンジ
+              type: string
+              minLength: 43
+              maxLength: 128
+              pattern: ^[A-Za-z0-9\-._~]+$
+            code_challenge_method:
+              title: PKCEコードチャレンジ方式
+              description: PKCEコードチャレンジの生成方式
+              type: string
+              enum:
+                - S256
+    ExchangeAuthCredentialsParam:
+      title: 一時コード交換パラメータ
+      type: object
+      properties:
+        auth_flow:
+          title: 認証フロー
+          description: 交換に使用する認証フロー
+          type: string
+          enum:
+            - tempCodeAuth
+        code:
+          title: 一時コード
+          description: 一時コード
+          $ref: "#/components/schemas/Uuid"
+        code_verifier:
+          title: PKCEコードベリファイア
+          description: 一時コードに紐付くPKCEコードベリファイア
+          type: string
+          minLength: 43
+          maxLength: 128
+          pattern: ^[A-Za-z0-9\-._~]+$
+      required:
+        - auth_flow
+    RevokeTokenParam:
+      title: トークン無効化パラメータ
+      type: object
+      properties:
+        refresh_token:
+          title: リフレッシュトークン
+          description: 無効化するリフレッシュトークン
+          type: string
+      required:
+        - refresh_token
     AuthorizationTempCode:
       type: object
       properties:
@@ -19203,7 +19222,7 @@ components:
           title: AssumeRoleする時に使用するExternalID
           description: SaaSusがSaaSを操作するためにAssumeRoleする時に使用するexternal id
           type: string
-          example: 1234567890
+          example: "1234567890"
       required:
         - enabled
         - role_arn
@@ -19238,7 +19257,7 @@ components:
           title: AssumeRoleする時に使用するExternalID
           description: SaaSusがSaaSを操作するためにAssumeRoleする時に使用するexternal id
           type: string
-          example: 1234567890
+          example: "1234567890"
     StripeCustomer:
       title: Stripeの顧客ID連携情報
       type: object
@@ -19803,6 +19822,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CatalogEntityVisibility"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
         "500":
           description: Internal Server Error
           content:
@@ -19838,7 +19863,7 @@ components:
       required: true
       schema:
         type: string
-        example: 123456789012
+        example: "123456789012"
   schemas:
     Error:
       properties:
@@ -19860,13 +19885,13 @@ components:
       properties:
         product_code:
           type: string
-          example: 1234567890
+          example: "1234567890"
         role_arn:
           type: string
           example: arn:aws:iam::123456789012:role/role-name
         role_external_id:
           type: string
-          example: 1234567890
+          example: "1234567890"
         sns_topic_arn:
           type: string
           example: arn:aws:sns:us-east-1:123456789012:topic-name
@@ -19901,13 +19926,13 @@ components:
       properties:
         product_code:
           type: string
-          example: 1234567890
+          example: "1234567890"
         role_arn:
           type: string
           example: arn:aws:iam::123456789012:role/role-name
         role_external_id:
           type: string
-          example: 1234567890
+          example: "1234567890"
         sns_topic_arn:
           type: string
           example: arn:aws:sns:us-east-1:123456789012:topic-name
@@ -20179,7 +20204,7 @@ components:
         secret_key:
           type: string
           description: シークレットキー
-          example: sk_test_09l3shTSTKHYCzzZZsiLl2vA
+          example: sk_test_dummy
       required:
         - secret_key
 
@@ -20810,28 +20835,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  /eventbridge/event:
-    post:
-      tags:
-        - eventBridge
-      operationId: CreateEventBridgeEvent
-      summary: イベント連携の送信
-      description: |
-        Amazon EventBridge へイベントを送信します。
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateEventBridgeEventParam"
-      responses:
-        "201":
-          description: Created
-        "500":
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
   /eventbridge/test-event:
     post:
       tags:
@@ -20900,7 +20903,7 @@ components:
       properties:
         aws_account_id:
           type: string
-          example: 267185063265
+          example: "267185063265"
           description: AWSアカウントID
         aws_region:
           $ref: "#/components/schemas/AwsRegion"
@@ -21315,28 +21318,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/UpdatePricingPlanParam"
-      responses:
-        "200":
-          description: OK
-        "500":
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-  /plans/used:
-    patch:
-      tags:
-        - pricingPlans
-      operationId: UpdatePricingPlansUsed
-      summary: 使用済みフラグ更新
-      description: |
-        料金プランと配下のメニュー・ユニットを使用済みに更新します。
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UpdatePricingPlansUsedParam"
       responses:
         "200":
           description: OK
@@ -22082,6 +22063,10 @@ components:
       type: object
       allOf:
         - properties:
+            type:
+              type: string
+              enum:
+                - tiered_usage
             upper_count:
               type: integer
               x-go-type: uint64
@@ -22103,6 +22088,10 @@ components:
       type: object
       allOf:
         - properties:
+            type:
+              type: string
+              enum:
+                - tiered
             upper_count:
               type: integer
               x-go-type: uint64
@@ -22124,6 +22113,10 @@ components:
       type: object
       allOf:
         - properties:
+            type:
+              type: string
+              enum:
+                - usage
             upper_count:
               type: integer
               x-go-type: uint64
@@ -22150,6 +22143,10 @@ components:
       type: object
       allOf:
         - properties:
+            type:
+              type: string
+              enum:
+                - fixed
             unit_amount:
               type: integer
               x-go-type: uint64
@@ -22176,6 +22173,16 @@ components:
         - $ref: "#/components/schemas/PricingTieredUnit"
         - $ref: "#/components/schemas/PricingUsageUnit"
         - $ref: "#/components/schemas/PricingFixedUnit"
+      example:
+        id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+        type: fixed
+        name: storage_unit
+        display_name: ストレージユニット
+        description: KB unit for storage usage
+        currency: JPY
+        unit_amount: 10000
+        recurring_interval: month
+        used: false
     PricingUnitForSave:
       title: プライシングユニット保存パラメータ
       type: object
@@ -22201,6 +22208,64 @@ components:
             $ref: "#/components/schemas/PricingUnit"
       required:
         - units
+      example:
+        units:
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+            type: fixed
+            name: fixed_unit
+            display_name: 固定ユニット
+            description: Fixed unit for storage usage
+            currency: JPY
+            unit_amount: 10000
+            recurring_interval: month
+            used: false
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe776
+            type: usage
+            name: usage_unit
+            display_name: 使用量ユニット
+            description: Usage unit for storage usage
+            currency: JPY
+            metering_unit_id: 2e9ad0b1-0f3a-4a1c-9f8e-6b5d4c3a2b10
+            metering_unit_name: test_unit
+            recurring_interval: month
+            upper_count: 100
+            unit_amount: 10000
+            aggregate_usage: sum
+            used: false
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe777
+            type: tiered
+            name: tiered_unit
+            display_name: 段階ユニット
+            description: Tiered unit for storage usage
+            currency: JPY
+            metering_unit_id: 2e9ad0b1-0f3a-4a1c-9f8e-6b5d4c3a2b10
+            metering_unit_name: test_unit
+            recurring_interval: month
+            upper_count: 100
+            aggregate_usage: sum
+            used: false
+            tiers:
+              - up_to: 5
+                unit_amount: 1000
+                flat_amount: 500
+                inf: false
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe778
+            type: tiered_usage
+            name: tiered_usage_unit
+            display_name: 段階的使用量ユニット
+            description: Tiered usage unit for storage usage
+            currency: JPY
+            metering_unit_id: 2e9ad0b1-0f3a-4a1c-9f8e-6b5d4c3a2b10
+            metering_unit_name: test_unit
+            recurring_interval: month
+            upper_count: 100
+            aggregate_usage: sum
+            used: false
+            tiers:
+              - up_to: 5
+                unit_amount: 1000
+                flat_amount: 500
+                inf: false
     PricingTiers:
       title: 従量課金情報一覧
       type: object
@@ -22306,6 +22371,22 @@ components:
           required:
             - id
         - $ref: "#/components/schemas/PricingMenuProps"
+      example:
+        id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+        name: Ten Users Menu
+        display_name: 10ユーザーメニュー
+        description: Can use 10 users.
+        used: false
+        units:
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+            type: fixed
+            name: storage_unit
+            display_name: ストレージユニット
+            description: KB unit for storage usage
+            currency: JPY
+            unit_amount: 10000
+            recurring_interval: month
+            used: false
     PricingMenus:
       title: プライシング機能メニュー一覧
       type: object
@@ -22316,6 +22397,23 @@ components:
             $ref: "#/components/schemas/PricingMenu"
       required:
         - pricing_menus
+      example:
+        pricing_menus:
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+            name: Ten Users Menu
+            display_name: 10ユーザーメニュー
+            description: Can use 10 users.
+            used: false
+            units:
+              - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+                type: fixed
+                name: storage_unit
+                display_name: ストレージユニット
+                description: KB unit for storage usage
+                currency: JPY
+                unit_amount: 10000
+                recurring_interval: month
+                used: false
     PricingPlanProps:
       title: 料金プラン基本情報
       type: object
@@ -22384,6 +22482,28 @@ components:
           required:
             - id
         - $ref: "#/components/schemas/PricingPlanProps"
+      example:
+        id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+        name: Standard Plan
+        display_name: スタンダードプラン
+        description: Standard Plan for normal use
+        used: false
+        pricing_menus:
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+            name: Ten Users Menu
+            display_name: 10ユーザーメニュー
+            description: Can use 10 users.
+            used: false
+            units:
+              - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+                type: fixed
+                name: storage_unit
+                display_name: ストレージユニット
+                description: KB unit for storage usage
+                currency: JPY
+                unit_amount: 10000
+                recurring_interval: month
+                used: false
     PricingPlans:
       title: 料金プラン一覧
       type: object
@@ -22394,6 +22514,29 @@ components:
             $ref: "#/components/schemas/PricingPlan"
       required:
         - pricing_plans
+      example:
+        pricing_plans:
+          - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+            name: Standard Plan
+            display_name: スタンダードプラン
+            description: Standard Plan for normal use
+            used: false
+            pricing_menus:
+              - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+                name: Ten Users Menu
+                display_name: 10ユーザーメニュー
+                description: Can use 10 users.
+                used: false
+                units:
+                  - id: 69e732d6-8ecc-45c4-c2eb-8438f7ffe775
+                    type: fixed
+                    name: storage_unit
+                    display_name: ストレージユニット
+                    description: KB unit for storage usage
+                    currency: JPY
+                    unit_amount: 10000
+                    recurring_interval: month
+                    used: false
     UpdatePricingPlansUsedParam:
       title: 料金プランと配下のメニュー・ユニットを使用済みに更新パラメータ
       type: object
