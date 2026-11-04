@@ -48,6 +48,7 @@ updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
 - **WAF・DDoS 対策・脆弱性診断**：導入済み  
 - **アプリ・インフラのログ取得**：CloudTrail にて10年間保存（当社運用担当者のみアクセス可能）  
 - **API アクセス制御**：署名付き認証方式を採用し、不正利用を防止
+- 重大な脆弱性への対応については、[重大な脆弱性発生時の対応方針](./vulnerability-response-policy.md)をご覧ください。
 
 ### 7. 可用性・性能
 

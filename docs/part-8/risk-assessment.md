@@ -50,6 +50,7 @@ updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
 - **WAF / DDoS / Vulnerability Scans**: Implemented  
 - **Application & Infrastructure Logs**: Stored in CloudTrail for 10 years (access limited to our ops team)  
 - **API Access Control**: Signed-request authentication prevents misuse
+- For the response to critical vulnerabilities, see the [response policy](./vulnerability-response-policy.md).
 
 ### 7. Availability & Performance
 

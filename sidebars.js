@@ -455,6 +455,7 @@ const sidebars = {
           href: `/docs/changelog/${latest}`,
         },
         "part-8/risk-assessment",
+        "part-8/vulnerability-response-policy",
       ],
     },
   ],

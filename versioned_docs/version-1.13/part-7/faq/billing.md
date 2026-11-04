@@ -244,7 +244,7 @@ When setting and applying pricing plans in a production environment, please thor
 ---
 
 **Q. How is the representative email address used?**  
-A. The representative email address is used as the destination for sending invoices.
+A. The representative email address is used as the destination for sending invoices. It is also used for urgent security communications, such as notifications about critical vulnerabilities.
 
 ---
 
