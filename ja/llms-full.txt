@@ -15141,7 +15141,7 @@ When setting and applying pricing plans in a production environment, please thor
 ---
 
 **Q. How is the representative email address used?**  
-A. The representative email address is used as the destination for sending invoices.
+A. The representative email address is used as the destination for sending invoices. It is also used for urgent security communications, such as notifications about critical vulnerabilities.
 
 ---
 
@@ -15234,6 +15234,8 @@ A. Currently, the service is premised on internet connection, so it cannot be us
 A.  
 - Infrastructure layer: Protected by AWS managed services at the OS level and below  
 - Application layer: Dependencies are continuously scanned and updated using vulnerability detection tools  
+
+For the response to critical vulnerabilities, see the [response policy](../../part-8/vulnerability-response-policy.md).
 
 ---
 
@@ -15659,6 +15661,7 @@ URL: https://www.prisma.io/docs/part-8/risk-assessment
 - **WAF / DDoS / Vulnerability Scans**: Implemented  
 - **Application & Infrastructure Logs**: Stored in CloudTrail for 10 years (access limited to our ops team)  
 - **API Access Control**: Signed-request authentication prevents misuse
+- For the response to critical vulnerabilities, see the [response policy](./vulnerability-response-policy.md).
 
 ### 7. Availability & Performance
 
@@ -15682,6 +15685,78 @@ URL: https://www.prisma.io/docs/part-8/risk-assessment
 ### Corporate, Financial, and Organizational Information
 
 These details are disclosed individually **only when required** for risk assessments or similar evaluations.
+
+---
+
+# Response Policy for Critical Vulnerabilities
+
+URL: https://www.prisma.io/docs/part-8/vulnerability-response-policy
+
+Established: November 4, 2026
+
+## Introduction
+
+SaaSus Platform provides the foundation for authentication, tenant management, billing, and other functions of the SaaS applications our customers offer. If we stop the service, it also affects our customers' services and their end users.
+
+This policy describes our basic approach to balancing security with the continuity of our customers' services when a critical vulnerability is disclosed.
+
+## Three Basic Principles
+
+### 1. We protect services without stopping them wherever possible
+
+Our first priority is to implement countermeasures without stopping our customers' services. We follow these steps:
+
+1. Temporarily block attacks with a WAF: A web application firewall (WAF) blocks traffic used in attacks at the entry point. This keeps the service secure until the fix is complete.
+2. Apply a patch: We apply a patch as a fundamental fix and use automated tests to verify that operations are not affected.
+3. Deploy without stopping the service: We deploy the fix while the service remains running, using methods such as rolling updates, which replace servers gradually in sequence.
+4. Verify after deployment: We use monitoring and logs to check for anomalies and signs of attack. If a problem is found, we immediately restore the previous state.
+
+If the WAF cannot block the threat or preparing a fix takes time, we temporarily suspend only the affected functions in accordance with Principle 2.
+
+### 2. If suspension is necessary, we start with functions that have the least impact and keep the scope and duration limited
+
+Even when suspension is unavoidable, we do not stop the entire service at once. We start with functions that are less likely to affect customers' end users, such as management screens, and suspend only what is necessary. We maintain the ability of signed-in end users to continue using the service until the very end.
+
+### 3. We communicate the situation promptly and clearly
+
+We promptly disclose whether we are affected. If a suspension is possible, we provide advance notice wherever possible. When we respond without stopping the service, we also explain the reasons and its safety.
+
+## Order of Suspension When Unavoidable
+
+If we determine that suspension is necessary, we follow the order below and proceed only as far as necessary.
+
+| Stage | Functions suspended | Impact on customers' services |
+| --- | --- | --- |
+| 1 | Management screens, configuration changes, and management APIs | End users can continue using the service. |
+| 2 | Background processing, such as billing calculations, usage data ingestion, and notifications | Data received will be processed in sequence after service resumes. |
+| 3 | Functions related to the vulnerability, such as new sign-ins and registrations | Only the affected functions will be temporarily unavailable. |
+| Last resort | The entire service | The entire service will be unavailable (only when an actual attack has been confirmed and there is a risk of information being leaked). |
+
+## How We Communicate
+
+When a critical vulnerability is disclosed, we communicate through the following channels:
+
+- [Status page](/status) and announcements page: We publish the impact, the status of our response, planned suspensions, and expected resumption times.
+- Email: We send advance notice of suspensions and notification of response completion to the registered representative email address.
+
+Our communications primarily cover three points: whether there is an impact, our response, and any action we ask customers to take. We aim to provide information that customers can use directly when communicating with their own users.
+
+## Requests to Customers
+
+- Register contact information: Emergency communications will be sent to the registered representative email address.
+- Update SDKs: If an SDK integrated into your application requires a fix, we will notify you and ask you to update it.
+- Prepare maintenance communications: We recommend preparing a way to notify the users of your service in case we temporarily suspend a function.
+
+## Ongoing Preparations
+
+To protect services without stopping them, we work on the following on an ongoing basis:
+
+- Tracking the software and versions we use, so that we can quickly determine whether we are affected when a vulnerability is disclosed
+- Automating tests and the application of fixes, so that we can deploy fixes quickly without stopping the service
+- Preparing mechanisms to suspend functions individually, so that the scope of a suspension can be minimized
+- Establishing emergency decision-making structures and procedures, and conducting regular drills
+
+We will review this policy as circumstances change.
 
 ---
 

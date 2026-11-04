@@ -155,6 +155,7 @@
 - [SaaSus Platform FAQ](part-7/faq/saasus-platform): Q. What countermeasures are available when the service goes down?
 - [Support](part-7/support): Support Channels
 - [Risk Assessment](part-8/risk-assessment): Risk Assessment Information
+- [Response Policy for Critical Vulnerabilities](part-8/vulnerability-response-policy): Established: November 4, 2026
 - [Analysis API](reference/analysis-api): 
 - [ApiGateway API](reference/apigateway-api): 
 - [Apilog API](reference/apilog-api): 

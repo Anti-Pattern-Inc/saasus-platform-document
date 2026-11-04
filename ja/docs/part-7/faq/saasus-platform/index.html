@@ -6,8 +6,8 @@
 <title data-rh="true">SaaSus Platform関連のFAQ | SaaSus Platform Document</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docs.saasus.io/img/logo.png"><meta data-rh="true" name="twitter:image" content="https://docs.saasus.io/img/logo.png"><meta data-rh="true" property="og:url" content="https://docs.saasus.io/ja/docs/part-7/faq/saasus-platform"><meta data-rh="true" property="og:locale" content="ja"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="ja"><meta data-rh="true" name="docsearch:language" content="ja"><meta data-rh="true" name="og:type" content="website"><meta data-rh="true" name="og:site_name" content="SaaSus Platform Documentation"><meta data-rh="true" name="og:title" content="SaaSus Platform Documentation"><meta data-rh="true" name="og:description" content="Official documentation for SaaSus Platform"><meta data-rh="true" name="og:url" content="https://docs.saasus.io/"><meta data-rh="true" name="og:image" content="https://docs.saasus.io/img/logo.png"><meta data-rh="true" name="docusaurus_version" content="1.13"><meta data-rh="true" name="docusaurus_tag" content="docs-default-1.13"><meta data-rh="true" name="docsearch:version" content="1.13"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-1.13"><meta data-rh="true" property="og:title" content="SaaSus Platform関連のFAQ | SaaSus Platform Document"><meta data-rh="true" name="description" content="Q. サービスが停止した時の対策として、どのような対応が可能でしょうか？"><meta data-rh="true" property="og:description" content="Q. サービスが停止した時の対策として、どのような対応が可能でしょうか？"><link data-rh="true" rel="icon" href="/ja/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.saasus.io/ja/docs/part-7/faq/saasus-platform"><link data-rh="true" rel="alternate" href="https://docs.saasus.io/ja/docs/part-7/faq/saasus-platform" hreflang="ja"><link data-rh="true" rel="alternate" href="https://docs.saasus.io/docs/part-7/faq/saasus-platform" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.saasus.io/docs/part-7/faq/saasus-platform" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"よくある質問（FAQ）","item":"https://docs.saasus.io/ja/docs/part-7/faq"},{"@type":"ListItem","position":2,"name":"SaaSus Platform関連のFAQ","item":"https://docs.saasus.io/ja/docs/part-7/faq/saasus-platform"}]}</script><link rel="preconnect" href="https://www.googletagmanager.com">
 <script>window.dataLayer=window.dataLayer||[]</script>
 <script>!function(e,t,a,n){e[n]=e[n]||[],e[n].push({"gtm.start":(new Date).getTime(),event:"gtm.js"});var g=t.getElementsByTagName(a)[0],m=t.createElement(a);m.async=!0,m.src="https://www.googletagmanager.com/gtm.js?id=GTM-5T68ML2",g.parentNode.insertBefore(m,g)}(window,document,"script","dataLayer")</script><link rel="stylesheet" href="/ja/assets/css/styles.f46e8b00.css">
-<script src="/ja/assets/js/runtime~main.5966926d.js" defer="defer"></script>
-<script src="/ja/assets/js/main.bce2a923.js" defer="defer"></script>
+<script src="/ja/assets/js/runtime~main.064962a7.js" defer="defer"></script>
+<script src="/ja/assets/js/main.733f22b3.js" defer="defer"></script>
 </head>
 <body>
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5T68ML2" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -84,6 +84,7 @@
 <li class="">インフラ層：AWS マネージドサービスで OS 以下を保護</li>
 <li class="">アプリ層：脆弱性検査ツールで依存パッケージを継続的にスキャン・更新</li>
 </ul>
+<p>重大な脆弱性への対応については、<a class="" href="/ja/docs/part-8/vulnerability-response-policy">重大な脆弱性発生時の対応方針</a>をご覧ください。</p>
 <hr>
 <p><strong>Q. ログイン画面はDV証明書ですか？セキュリティは大丈夫ですか？</strong><br>
 <!-- -->A. はい、DV（ドメイン認証）証明書を使用しています。<br>
@@ -95,7 +96,7 @@
 <hr>
 <p><strong>Q. プランによってユーザー数の制限がありますが、無制限プランでも性能面の問題はありませんか？</strong><br>
 <!-- -->A. お客様専用データストアを標準提供し、計算処理は負荷状況に応じてオートスケールする構成のため、無制限プランでも大規模ユーザー数に対応可能です。<br>
-<!-- -->具体的な性能要件（ユーザー数・アクセス傾向・ピークなど）をご提示いただければ、性能試験を実施しご提案いたします。</p>
+<!-- -->具体的な性能要件（ユーザー数・アクセス傾向・ピークなど）をご提示いただけれ ば、性能試験を実施しご提案いたします。</p>
 <hr>
 <p><strong>Q. SLA（可用性保証）はありますか？</strong><br>
 <!-- -->A. エンタープライズプランでは、稼働率99.99%のSLA（サービス品質保証）を提供しております。<br>
@@ -120,10 +121,10 @@
 <hr>
 <p><strong>Q. 指定したドメインの URL から SaaSus Platform コンソールを透過的に表示できますか？</strong><br>
 <!-- -->A. お客様には SaaSus Platformの利用が透けて見えない設計です。<br>
-<!-- -->ただしブラウザ開発者ツールで通信内容を確認すると SaaSus Platform へのリクエストが確認できます。</p>
+<!-- -->ただしブラウザ開発者ツールで通信内容を確認すると SaaSus Platform へのリクエストが確認できま  す。</p>
 <hr>
 <p><strong>Q. 複数環境（本番／ステージング）でユーザー管理は共有されますか？</strong><br>
-<!-- -->A. 環境ごとにユーザー管理は独立  しており、本番とステージングでユーザーが混在することはありません。</p>
+<!-- -->A. 環境ごとにユーザー管理は独立しており、本番とステージングでユーザーが混在することはありません。</p>
 <hr>
 <p><strong>Q. 役割管理機能の具体的なユースケースを教えてください。</strong><br>
 <!-- -->A. 例えば以下のような運用が可能です：</p>
@@ -147,7 +148,7 @@
 <p><strong>Q. テナント数やユーザー数に制限はありますか？</strong><br>
 <!-- -->A. ご利用のプランに応じて上限数が設定されています。<br>
 <!-- -->具体的な上限数については、<a href="https://saasus.io/pricing" target="_blank" rel="noopener noreferrer" class="">プラン詳細</a>をご確認ください。<br>
-<!-- -->上限に達した場合、SaaS 運用コンソールに警告が表示され、ご登録のメールアドレスに通知が送信されます。一定期間ご利用を継続いただけますが、上位プランへのアップグレードをご検討ください 。</p>
+<!-- -->上限に達した場合、SaaS 運用コンソールに警告が表示さ れ、ご登録のメールアドレスに通知が送信されます。一定期間ご利用を継続いただけますが、上位プランへのアップグレードをご検討ください。</p>
 <hr>
 <p><strong>Q. SaaSus Platformのアカウント削除予定メールが届きました。どうすればいいですか？</strong><br>
 <!-- -->A. このメールは、SaaSのユーザーが1ヶ月以上ログインされていない場合に届きます。<br>
@@ -168,7 +169,7 @@
 </li>
 </ul>
 <p>具体的な試行回数は公開していませんが、ロックアウトの期間は不正な試行回数に応じて自動的に調整され、通常は一定時間が経過すると自動的に解除されます。<br>
-<!-- -->長時間のロックアウトを防ぐため、正しいパスワードがご不明な場合は、パスワードリセット機能をご利用ください。</p>
+<!-- -->長時間のロックアウトを防 ぐため、正しいパスワードがご不明な場合は、パスワードリセット機能をご利用ください。</p>
 <hr>
 <p><strong>Q. 多要素認証（MFA）ではどのような認証方式が利用できますか？</strong><br>
 <!-- -->A. SaaSus Platform では、多要素認証（MFA）の方式として以下の 2 種類が利用できます。ユーザーごとに、いずれかの方式を設定できます。</p>
@@ -188,7 +189,7 @@
 <!-- -->A. メールで二段階認証（MFA）を行う場合、ユーザーがメールを受信してから認証コードを入力できる有効時間は <strong>3 分間</strong> です。この時間内に認証コードを入力してログインを完了する必要があります。<br>
 <!-- -->なお、この有効時間は SaaSus Platform 側で変更（カスタマイズ）することはできません。</p>
 <hr>
-<p><strong>Q. 多要素認証（MFA）の方式としてメールを使用しているユーザーは、ログイン画面からパスワードをリセットできますか？</strong><br>
+<p><strong>Q. 多要素認証（MFA）の方式としてメールを使用しているユーザーは、ログイン画面からパスワードをリセッ  トできますか？</strong><br>
 <!-- -->A. いいえ。多要素認証（MFA）の方式として「メール」を使用しているユーザーは、SaaSus Platform が生成するログイン画面からパスワードをリセットすることはできません。<br>
 <!-- -->このようなユーザーのパスワードを再設定する場合は、SaaS 運用コンソールのユーザー管理画面から、管理者によるパスワードリセットを行ってください。手順は <a class="" href="/ja/docs/part-5/user-management/user-crud">（旧画面）ユーザーの検索・作成・編集・テナント追加</a> を参照してください。</p>
 <hr>
@@ -223,8 +224,8 @@
 <!-- -->アプリケーションサーバーとSaaSus Platformを同じ東京リージョンに配置することで、物理的な距離によるネットワークレイテンシ（通信遅延）を最小限に抑え、高速なレスポンスを実現できます。</p>
 </li>
 <li class="">
-<p><strong>海外リージョンからの接続について</strong><br>
-<!-- -->us-west-2（米国西部）などの海外リージョンからSaaSus APIを呼び出す場合、地理的な距離に起因す る遅延が発生し、ユーザーエクスペリエンスに影響を与える可能性があります。<br>
+<p><strong>海 外リージョンからの接続について</strong><br>
+<!-- -->us-west-2（米国西部）などの海外リージョンからSaaSus APIを呼び出す場合、地理的な距離に起因する遅延が発生し、ユーザーエクスペリエンスに影響を与える可能性があります。<br>
 <!-- -->日本国内のユーザーを対象とするサービスの場合は、東京リージョンでの運用をご検討ください。</p>
 </li>
 </ul>
@@ -239,7 +240,7 @@
 <hr>
 <p><strong>Q. 開発効率向上のため、IDトークンの有効期限を延長する設定はありますか？</strong></p>
 <p>A. セキュリティ上の理由から、IDトークン自体の有効期限を直接延長する設定は提供しておりません。<br>
-<!-- -->短期間で無効になる IDトークンの特性を補完し、再ログインの手間を省く方法として、リフレッシュトークンを利用した自動更新の実装を推  奨しております。</p>
+<!-- -->短期間で無効になる IDトークンの特性を補完し、再ログインの手間を省く方法として、リフレッシュトークンを利用した自動更新の実装を推奨しております。</p>
 <ul>
 <li class="">
 <p><strong>リフレッシュトークンの役割</strong><br>
@@ -264,7 +265,7 @@
 <!-- -->SaaSus SDK/API を通じて、各テナントの最新の計量値を参照可能です。</p>
 </li>
 <li class="">
-<p><strong>Stripe ダッシュボードによる確認</strong><br>
+<p><strong>Stripeダッシュボードによる確認</strong><br>
 <!-- -->Stripe 連携を利用されている場合は、Stripe ダッシュボードの「顧客（Customers）」から対象の顧客（テナント）を開くことで、紐づくサブスクリプションや発行済みの請求書（invoice）、従量課金メーターの利用量を確認できます。</p>
 </li>
 <li class="">
@@ -282,7 +283,7 @@
 <ul>
 <li class="">
 <p><strong>自由なデザインを実現する方法</strong><br>
-<!-- -->自社の SaaS の世界観に合わせた独自デザインのログイン画面を実現したい場合は、SaaSus Platform が提供する 認証 API を活用したログイン機能の独自実装を推奨しております。</p>
+<!-- -->自社の SaaS の世界観に合わせた独自デザインのログイン  画面を実現したい場合は、SaaSus Platform が提供する 認証 API を活用したログイン機能の独自実装を推奨しております。</p>
 </li>
 <li class="">
 <p><strong>SRP認証によるセキュアな独自実装</strong><br>
@@ -304,7 +305,7 @@
 </li>
 <li class="">
 <p><strong>SRP認証によるセキュアな基盤</strong><br>
-<!-- -->独自実装を行う場合でも、SaaSus Platform の認証 API は SRP（Secure Remote Password）認証を採用しているため、パスワードそのものを認証基盤へ送信せずに認証でき、運用の利便性を高めることが可能で す。</p>
+<!-- -->独自実装を行う場合でも、SaaSus Platform の認証 API  は SRP（Secure Remote Password）認証を採用しているため、パスワードそのものを認証基盤へ送信せずに認証でき、運用の利便性を高めることが可能です。</p>
 </li>
 </ul>
 <hr>
@@ -324,7 +325,7 @@
 <ul>
 <li class="">
 <p><strong>挙動</strong>
-管理者がメールアドレスを指定して招待を送ると、ユーザーに「招待メール」が届きます。この時点ではユーザー作成は完了して おらず、SaaSus Platform上で「招待中」というステータスで管理されます。</p>
+管理者がメールアドレスを指定して招待を送ると、ユーザーに「招待メール」が届きます。この時点ではユーザー作成は完了しておらず、SaaSus Platform上で「招待中」というステータスで管理されます。</p>
 </li>
 <li class="">
 <p><strong>ログインフロー</strong>
@@ -353,7 +354,7 @@
 </li>
 <li class="">
 <p><strong>メリット・注意点</strong>
-管理者が一時パスワードを発行・管理（通知）する手間が省けます。
+管理者が一時パスワードを発行・管理（通知 ）する手間が省けます。
 ユーザーはメール内の一時パスワードを設定するため、初回ログイン時から安全な状態で利用を開始できます。
 ただし、招待機能とは異なり、「役割（ロール）の付与」や「テナントへの割り当て」については、別途APIを組み合わせて独自に実装する必要があります。</p>
 </li>
@@ -394,7 +395,7 @@
 <hr>
 <p><strong>Q. 請求書発行の通知先メールアドレス（代表者メールアドレス）を変更するにはどうすればよいですか？</strong></p>
 <p>A. SaaSus Platform 利用料金の請求書発行を通知するメールアドレス（代表者メールアドレス）は、SaaS 開発コンソールからお客様ご自身で変更いただけます。<br>
-<!-- -->[アカウント設定] ＞ [一般] タブの [代表者メールアドレス] に新しいメールアドレスを入力し、保存してください。<br>
+<!-- -->[アカウント設定] ＞ [一般] タブの [代表者メールアドレス] に新  しいメールアドレスを入力し、保存してください。<br>
 <!-- -->詳細な手順は <a class="" href="/ja/docs/part-4/account-settings/billing-information#billing-contact-email">請求と支払い方法</a> を参照してください。</p>
 <hr>
 <p><strong>Q. 有料プランからフリープランに戻す（ダウングレードする）ことはできますか？</strong></p>
@@ -424,7 +425,7 @@
 </li>
 <li class="">
 <p><strong>各プランの料金と上限</strong><br>
-<!-- -->プランごとの料金や 、環境数・ユーザー数・テナント数などの上限は、<a class="" href="/ja/docs/part-4/account-settings/procedure-for-applying-for-a-paid-plan">有料プランの申し込み手順</a>をご参照ください。</p>
+<!-- -->プランごとの料金や、環境数・ユーザー数・テナント数などの上限は、<a class="" href="/ja/docs/part-4/account-settings/procedure-for-applying-for-a-paid-plan">有料プランの申し込み手順</a>をご参照ください。</p>
 </li>
 </ul></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="ドキュメントページ"><a class="pagination-nav__link pagination-nav__link--prev" href="/ja/docs/part-7/faq"><div class="pagination-nav__sublabel">前へ</div><div class="pagination-nav__label">よくある質問（FAQ）</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/ja/docs/part-7/faq/billing"><div class="pagination-nav__sublabel">次へ</div><div class="pagination-nav__label">請求関連のFAQ</div></a></nav></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Service</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/saasus-platform/" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://saasus.io/10-days-saasification" target="_blank" rel="noopener noreferrer" class="footer__link-item">10 Days SaaSification<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://saasus.io/blog" target="_blank" rel="noopener noreferrer" class="footer__link-item">Blog<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://saasus.io/customer-success-stories" target="_blank" rel="noopener noreferrer" class="footer__link-item">Case Studies<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Company information</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://anti-pattern.co.jp/" target="_blank" rel="noopener noreferrer" class="footer__link-item">Service Provider<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://anti-pattern.co.jp/legal" target="_blank" rel="noopener noreferrer" class="footer__link-item">Privacy Policy<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://saasus.io/terms" target="_blank" rel="noopener noreferrer" class="footer__link-item">Terms of Service<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Anti-Pattern Inc.</div></div></div></footer></div>
 </body>

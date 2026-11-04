@@ -6,8 +6,8 @@
 <title data-rh="true">請求関連のFAQ | SaaSus Platform Document</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://docs.saasus.io/img/logo.png"><meta data-rh="true" name="twitter:image" content="https://docs.saasus.io/img/logo.png"><meta data-rh="true" property="og:url" content="https://docs.saasus.io/ja/docs/part-7/faq/billing"><meta data-rh="true" property="og:locale" content="ja"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="ja"><meta data-rh="true" name="docsearch:language" content="ja"><meta data-rh="true" name="og:type" content="website"><meta data-rh="true" name="og:site_name" content="SaaSus Platform Documentation"><meta data-rh="true" name="og:title" content="SaaSus Platform Documentation"><meta data-rh="true" name="og:description" content="Official documentation for SaaSus Platform"><meta data-rh="true" name="og:url" content="https://docs.saasus.io/"><meta data-rh="true" name="og:image" content="https://docs.saasus.io/img/logo.png"><meta data-rh="true" name="docusaurus_version" content="1.13"><meta data-rh="true" name="docusaurus_tag" content="docs-default-1.13"><meta data-rh="true" name="docsearch:version" content="1.13"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-1.13"><meta data-rh="true" property="og:title" content="請求関連のFAQ | SaaSus Platform Document"><meta data-rh="true" name="description" content="Q. メータ単位の「使用量の集計」設定（sum/max）はどのような機能でしょうか？"><meta data-rh="true" property="og:description" content="Q. メータ単位の「使用量の集計」設定（sum/max）はどのような機能でしょうか？"><link data-rh="true" rel="icon" href="/ja/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://docs.saasus.io/ja/docs/part-7/faq/billing"><link data-rh="true" rel="alternate" href="https://docs.saasus.io/ja/docs/part-7/faq/billing" hreflang="ja"><link data-rh="true" rel="alternate" href="https://docs.saasus.io/docs/part-7/faq/billing" hreflang="en"><link data-rh="true" rel="alternate" href="https://docs.saasus.io/docs/part-7/faq/billing" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"よくある質問（FAQ）","item":"https://docs.saasus.io/ja/docs/part-7/faq"},{"@type":"ListItem","position":2,"name":"請求関連のFAQ","item":"https://docs.saasus.io/ja/docs/part-7/faq/billing"}]}</script><link rel="preconnect" href="https://www.googletagmanager.com">
 <script>window.dataLayer=window.dataLayer||[]</script>
 <script>!function(e,t,a,n){e[n]=e[n]||[],e[n].push({"gtm.start":(new Date).getTime(),event:"gtm.js"});var g=t.getElementsByTagName(a)[0],m=t.createElement(a);m.async=!0,m.src="https://www.googletagmanager.com/gtm.js?id=GTM-5T68ML2",g.parentNode.insertBefore(m,g)}(window,document,"script","dataLayer")</script><link rel="stylesheet" href="/ja/assets/css/styles.f46e8b00.css">
-<script src="/ja/assets/js/runtime~main.5966926d.js" defer="defer"></script>
-<script src="/ja/assets/js/main.bce2a923.js" defer="defer"></script>
+<script src="/ja/assets/js/runtime~main.064962a7.js" defer="defer"></script>
+<script src="/ja/assets/js/main.733f22b3.js" defer="defer"></script>
 </head>
 <body>
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5T68ML2" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -234,7 +234,7 @@ SaaSus Platform と Stripe の間でデータの整合性が取れなくなり�
 <!-- -->本番環境で料金プランを設定・適用する際は、設定内容を事前に十分ご確認ください。</p>
 <hr>
 <p><strong>Q. 代表者メールアドレスとはどのように利用される情報でしょうか</strong><br>
-<!-- -->A. 代表者メールアドレスは、請求書の送付先として利用いたします。</p>
+<!-- -->A. 代表者メールアドレスは、請求書の送付先として利用いたします。また、重大な脆弱性など、セキュリティに関する緊急のご連絡にも利用いたします。</p>
 <hr>
 <p><strong>Q. Stripe のテスト環境で、しばらく経つとサブスクリプションが解約され、SaaSus Platform との連携が切れてしまいます。回避できますか？</strong></p>
 <p>A. Stripe の<strong>テスト環境では仕様上、サブスクリプションの作成から 90 日を経過すると自動的に解約（キャンセル）されます</strong>。これにより Stripe 側のみが解約状態となり、SaaSus Platform と Stripe の間で状態の不整合が発生することがあります。</p>
@@ -246,7 +246,7 @@ SaaSus Platform と Stripe の間でデータの整合性が取れなくなり�
 <div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>補足</div><div class="admonitionContent_BuS1"><p>これは Stripe のテスト環境固有の挙動であり、本番環境では発生しません。なお、設定項目の名称や場所は Stripe の仕様変更により変更される可能性がありますので、最新の Stripe ドキュメントも併せてご参照ください。</p></div></div>
 <hr>
 <p><strong>Q. 請求先のクレジットカードを変更するにはどうすればよいですか？</strong></p>
-<p>A. Stripe のお客様専用ポータルから、ご自身でクレジットカードを変更いただけます。SaaSus Platform 側ではカード情報 を保持していないため、変更は Stripe のポータル上で行います。</p>
+<p>A. Stripe のお客様専用ポータル  から、ご自身でクレジットカードを変更いただけます。SaaSus Platform 側ではカード情報を保持していないため、変更は Stripe のポータル上で行います。</p>
 <ol>
 <li class=""><a href="https://billing.stripe.com/p/login/3cI9AS9rq10V3xY1Wk8IU00" target="_blank" rel="noopener noreferrer" class="">お客様専用ポータル</a>のログイン画面を開きます。</li>
 <li class="">ご登録のメールアドレス（請求書発行の通知先）を入力し、送信します。</li>
