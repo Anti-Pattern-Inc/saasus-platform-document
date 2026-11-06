@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-11-04 20:07:40 +0900`
+- Generated: `2026-11-06 15:47:00 +0900`
 
 ---
 ## changelog/20221224.md
@@ -427,6 +427,19 @@ We have released the following feature addition and bug fix.
   　　There is no change to the API specification itself, but the tax rate specified at cancellation will no longer be reflected.
   　■ Scope not affected by this fix
   　　Specifying the tax rate during a normal plan change or the initial plan setup can be used as before.
+````
+
+---
+## changelog/20261104.md
+````markdown
+We added our response policy for critical vulnerabilities to the documentation.
+The policy describes our approach to service continuity, the order in which functions may be suspended, and how we communicate with customers.
+As part of operating SaaSus Platform, we take the following ongoing measures:
+- Track the software and versions we use
+- Automate tests and the application of fixes
+- Prepare mechanisms to suspend functions individually
+- Establish emergency decision-making structures and procedures, and conduct regular drills
+For details, see the [Response Policy for Critical Vulnerabilities](../part-8/vulnerability-response-policy.md).
 ````
 
 ---
