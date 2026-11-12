@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-11-06 16:04:26 +0900`
+- Generated: `2026-11-11 21:59:18 +0900`
 
 ---
 ## changelog/20221224.md
@@ -440,6 +440,17 @@ As part of operating SaaSus Platform, we take the following ongoing measures:
 - Prepare mechanisms to suspend functions individually
 - Establish emergency decision-making structures and procedures, and conduct regular drills
 For details, see the [Response Policy for Critical Vulnerabilities](https://docs.saasus.io/docs/part-8/vulnerability-response-policy).
+````
+
+---
+## changelog/20261111.md
+````markdown
+We have released the following improvements.
+- Authentication screen security improvements
+  SaaSus Platform no longer includes email addresses in URLs when users move between its sign-in, sign-up confirmation, password reset, and related screens.
+  This prevents email addresses from being recorded in access logs and browser history during these screen transitions.
+- Library vulnerability fixes
+  We updated internal libraries to address vulnerabilities.
 ````
 
 ---
