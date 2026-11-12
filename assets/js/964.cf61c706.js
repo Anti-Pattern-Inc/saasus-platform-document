@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunksaasus_platform_document||=[]).push([[964],{60964(e,s,a){a.d(s,{createArchitectureServices:()=>c.S});var c=a(26587);a(31017)}}]);

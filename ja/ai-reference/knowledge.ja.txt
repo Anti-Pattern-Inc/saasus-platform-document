@@ -3,7 +3,7 @@
 - Locale: `ja`
 - Docs source: `i18n/ja/docusaurus-plugin-content-docs/current`
 - API source: `api`
-- Generated: `2026-11-06 16:04:27 +0900`
+- Generated: `2026-11-11 21:59:19 +0900`
 
 ---
 ## changelog/20221224.md
@@ -445,6 +445,17 @@ SaaSus Platform の運用では、平時から次の取り組みを行ってい�
 - 機能ごとに停止できる仕組みの整備
 - 緊急時の判断体制と手順の整備、定期的な訓練
 詳しくは、[重大な脆弱性発生時の対応方針](https://docs.saasus.io/ja/docs/part-8/vulnerability-response-policy)をご覧ください。
+````
+
+---
+## changelog/20261111.md
+````markdown
+以下の改善についてリリースを行いました。
+- 認証画面のセキュリティ改善
+  SaaSus Platform が提供するログイン、ユーザー登録確認、パスワード再設定などの画面遷移時に、URL にメールアドレスを含めないようにしました。
+  これにより、対象の画面遷移に伴い、メールアドレスがアクセスログやブラウザの履歴に残ることを防ぎます。
+- ライブラリの脆弱性対応
+  サービス内部で利用するライブラリを更新し、脆弱性への対応を行いました。
 ````
 
 ---
