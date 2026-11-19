@@ -2937,6 +2937,28 @@ components:
           type: boolean
           example: false
           description: DNSレコードの検証結果
+        domain_setup_status:
+          type: string
+          enum:
+            - pending
+            - action_required
+            - completed
+          x-enum-varnames:
+            - DomainSetupPending
+            - DomainSetupActionRequired
+            - DomainSetupCompleted
+          description: ドメイン設定の状態。pending は確認待ち、action_required は利用者の対応が必要、completed
+            は設定受付完了を表します。
+        domain_setup_reason_code:
+          type: string
+          enum:
+            - CNAME_ALREADY_EXISTS
+            - CERTIFICATE_VALIDATION_TIMED_OUT
+            - CERTIFICATE_CAA_ERROR
+            - CERTIFICATE_PENDING_VALIDATION
+            - CLOUDFRONT_DNS_NOT_CONFIGURED
+          description: ドメイン設定が未完了の理由。既知の理由がなければ省略されます。DNS の反映待ちを含みます。証明書申請の失敗・検証期限切れでは DNS
+            修正後にドメイン設定の再保存が必要です。
         certificate_dns_record:
           $ref: "#/components/schemas/DnsRecord"
           description: 代替ドメイン名

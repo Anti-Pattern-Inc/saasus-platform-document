@@ -3628,6 +3628,30 @@ components:
           description: DNS Record Verification Results
           x-description-i18n:
             jpn: DNSレコードの検証結果
+        domain_setup_status:
+          type: string
+          enum:
+            - pending
+            - action_required
+            - completed
+          x-enum-varnames:
+            - DomainSetupPending
+            - DomainSetupActionRequired
+            - DomainSetupCompleted
+          description: Domain setup status. Pending means validation or configuration is in progress; action_required means user action is needed; completed means configuration has been accepted.
+          x-description-i18n:
+            jpn: ドメイン設定の状態。pending は確認待ち、action_required は利用者の対応が必要、completed は設定受付完了を表します。
+        domain_setup_reason_code:
+          type: string
+          enum:
+            - CNAME_ALREADY_EXISTS
+            - CERTIFICATE_VALIDATION_TIMED_OUT
+            - CERTIFICATE_CAA_ERROR
+            - CERTIFICATE_PENDING_VALIDATION
+            - CLOUDFRONT_DNS_NOT_CONFIGURED
+          description: Reason domain setup is incomplete. Omitted when no known reason is available. DNS validation may still be pending while records propagate. Failed or timed-out certificate requests require resubmitting the domain settings after correcting DNS.
+          x-description-i18n:
+            jpn: ドメイン設定が未完了の理由。既知の理由がなければ省略されます。DNS の反映待ちを含みます。証明書申請の失敗・検証期限切れでは DNS 修正後にドメイン設定の再保存が必要です。
         certificate_dns_record:
           $ref: '#/components/schemas/DnsRecord'
           description: Certificate Domain Name
