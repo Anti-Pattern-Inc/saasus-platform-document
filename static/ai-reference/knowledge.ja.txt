@@ -3,7 +3,7 @@
 - Locale: `ja`
 - Docs source: `i18n/ja/docusaurus-plugin-content-docs/current`
 - API source: `api`
-- Generated: `2026-11-11 21:59:19 +0900`
+- Generated: `2026-11-24 14:28:01 +0900`
 
 ---
 ## changelog/20221224.md
@@ -3200,6 +3200,7 @@ user2-3@example.com,テナント2,dev,一般ユーザ
 # SaaSus API MCP Server 設定ガイド
 ## 概要
 SaaSus API MCP Serverは、Model Context Protocol (MCP) サーバーとして動作し、SaaSus APIをClaude DesktopやCursorなどのMCP互換クライアントから利用できるようにします。
+MCP Server と併用できる AI コーディングエージェント向けのスキルについては、[SaaSus Platform Skills](../../part-6/developer-sdk-api-overview.md#saasus-platform-skills)を参照してください。
 :::caution
 MCP クライアントの送信上限と日次上限はプランごとに異なります。
 Free プランでは、大きなリクエストが拒否されることがあります。
@@ -5643,6 +5644,9 @@ SDK 例は [ユーザー情報取得 API 実装例](/ja/docs/part-6/implementati
 | Java | [Java SDK GitHub](https://github.com/saasus-platform/saasus-sdk-java) |
 | PHP | [PHP SDK GitHub](https://github.com/saasus-platform/saasus-sdk-php) |
 | C# | [C# SDK GitHub](https://github.com/saasus-platform/saasus-sdk-csharp) |
+## 5. SaaSus Platform Skills {#saasus-platform-skills}
+SaaSus Platform Skills は、SaaSus Platform を使った認証、テナントごとの業務機能、ユーザー管理の実装を支援する AI コーディングエージェント向けのスキル集です。
+スキルの一覧と導入手順は、[SaaSus Platform Skills の README](https://github.com/saasus-platform/saasus-skills#readme)を参照してください。
 ````
 
 ---

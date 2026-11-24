@@ -4,7 +4,7 @@ slug: "developer-sdk-api-overview"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Nov 24 2026 05:28:01 GMT+0000 (Coordinated Universal Time)"
 ---
 
 ## 1. SaaSus SDK / API Capabilities and Use Cases
@@ -86,3 +86,8 @@ See the SDK example in
 | Java        | [Java SDK GitHub](https://github.com/saasus-platform/saasus-sdk-java) |
 | PHP         | [PHP SDK GitHub](https://github.com/saasus-platform/saasus-sdk-php) |
 | C#          | [C# SDK GitHub](https://github.com/saasus-platform/saasus-sdk-csharp) |
+
+## 5. SaaSus Platform Skills {#saasus-platform-skills}
+
+SaaSus Platform Skills is a collection of skills for AI coding agents that helps them implement authentication, tenant-specific features, and user management with SaaSus Platform.
+See the [SaaSus Platform Skills README](https://github.com/saasus-platform/saasus-skills#readme) for the list of skills and installation instructions.
