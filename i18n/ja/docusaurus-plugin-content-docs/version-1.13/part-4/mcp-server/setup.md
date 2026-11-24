@@ -4,13 +4,15 @@ slug: "setup"
 excerpt: ""
 hidden: false
 createdAt: "Fri Jan 20 2023 01:47:47 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Jul 21 2026 10:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Nov 24 2026 05:28:01 GMT+0000 (Coordinated Universal Time)"
 ---
 
 # SaaSus API MCP Server 設定ガイド
 
 ## 概要
 SaaSus API MCP Serverは、Model Context Protocol (MCP) サーバーとして動作し、SaaSus APIをClaude DesktopやCursorなどのMCP互換クライアントから利用できるようにします。
+
+MCP Server と併用できる AI コーディングエージェント向けのスキルについては、[SaaSus Platform Skills](../../part-6/developer-sdk-api-overview.md#saasus-platform-skills)を参照してください。
 
 :::caution
 MCP クライアントの送信上限と日次上限はプランごとに異なります。  

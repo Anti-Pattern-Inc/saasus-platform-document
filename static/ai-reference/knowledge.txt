@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-11-11 21:59:18 +0900`
+- Generated: `2026-11-24 14:28:01 +0900`
 
 ---
 ## changelog/20221224.md
@@ -3169,6 +3169,7 @@ If you want to filter users by specific conditions, specify the conditions in th
 # SaaSus API MCP Server Setup Guide
 ## Overview
 SaaSus API MCP Server operates as a Model Context Protocol (MCP) server, enabling SaaSus API to be used from MCP-compatible clients such as Claude Desktop and Cursor.
+To use AI coding agent skills alongside the MCP server, see [SaaSus Platform Skills](../../part-6/developer-sdk-api-overview.md#saasus-platform-skills).
 :::caution
 Request-size and daily-quota limits vary by MCP client and plan.
 Large requests can be rejected on Free plans.
@@ -5611,6 +5612,9 @@ See the SDK example in
 | Java        | [Java SDK GitHub](https://github.com/saasus-platform/saasus-sdk-java) |
 | PHP         | [PHP SDK GitHub](https://github.com/saasus-platform/saasus-sdk-php) |
 | C#          | [C# SDK GitHub](https://github.com/saasus-platform/saasus-sdk-csharp) |
+## 5. SaaSus Platform Skills {#saasus-platform-skills}
+SaaSus Platform Skills is a collection of skills for AI coding agents that helps them implement authentication, tenant-specific features, and user management with SaaSus Platform.
+See the [SaaSus Platform Skills README](https://github.com/saasus-platform/saasus-skills#readme) for the list of skills and installation instructions.
 ````
 
 ---

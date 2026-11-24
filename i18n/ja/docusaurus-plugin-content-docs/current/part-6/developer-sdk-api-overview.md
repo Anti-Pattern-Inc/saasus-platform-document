@@ -4,7 +4,7 @@ slug: "developer-sdk-api-overview"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Tue Nov 24 2026 05:28:01 GMT+0000 (Coordinated Universal Time)"
 ---
 
 ## 1. SaaSus SDK / API の提供機能と利用用途
@@ -84,3 +84,8 @@ SDK 例は [ユーザー情報取得 API 実装例](/ja/docs/part-6/implementati
 | Java | [Java SDK GitHub](https://github.com/saasus-platform/saasus-sdk-java) |
 | PHP | [PHP SDK GitHub](https://github.com/saasus-platform/saasus-sdk-php) |
 | C# | [C# SDK GitHub](https://github.com/saasus-platform/saasus-sdk-csharp) |
+
+## 5. SaaSus Platform Skills {#saasus-platform-skills}
+
+SaaSus Platform Skills は、SaaSus Platform を使った認証、テナントごとの業務機能、ユーザー管理の実装を支援する AI コーディングエージェント向けのスキル集です。
+スキルの一覧と導入手順は、[SaaSus Platform Skills の README](https://github.com/saasus-platform/saasus-skills#readme)を参照してください。
