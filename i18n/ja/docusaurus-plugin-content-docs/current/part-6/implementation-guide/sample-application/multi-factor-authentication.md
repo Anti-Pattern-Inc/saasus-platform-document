@@ -4,7 +4,7 @@ slug: "multi-factor-authentication"
 excerpt: "SaaSアプリケーションでの多要素認証（MFA）機能の実装サンプル"
 hidden: false
 createdAt: "Fri Feb 28 2025 09:00:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Jul 16 2026 01:15:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Fri Nov 27 2026 05:35:28 GMT+0000 (Coordinated Universal Time)"
 ---
 
 import Tabs from "@theme/Tabs";
@@ -40,6 +40,8 @@ MFA機能では以下の操作を提供します。
 設定方法は [ドメイン・メール送信ドメイン認証・遷移先の設定](/docs/part-4/application-settings/domain-and-redirect-settings) を参照してください。
 :::
 
+
+MFAの仕様と制約は、[多要素認証（MFA）](/docs/part-4/user-authz-settings/multi-factor-authentication)を参照してください。
 
 ## フロントエンド実装
 

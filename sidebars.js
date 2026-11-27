@@ -146,6 +146,7 @@ const sidebars = {
                 "part-4/user-authz-settings/google-linkage",
                 "part-4/user-authz-settings/saml-linkage"],
             },
+            "part-4/user-authz-settings/multi-factor-authentication",
             "part-4/user-authz-settings/declare-additional-attribute-to-user",
             "part-4/user-authz-settings/notifymailcustomize",
             "part-4/user-authz-settings/role-definition",

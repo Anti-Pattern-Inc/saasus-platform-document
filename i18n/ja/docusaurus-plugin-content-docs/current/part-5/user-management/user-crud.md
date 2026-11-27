@@ -4,7 +4,7 @@ slug: "user-crud"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Sep 14 2026 08:57:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Fri Nov 27 2026 05:35:28 GMT+0000 (Coordinated Universal Time)"
 ---
 
 :::info 画面の切り替え
@@ -106,6 +106,9 @@ OFF の場合、ログインIDのユーザーを作成してもログイン画�
 
 - パスワードリセット（現在のパスワードを無効化し、新しいパスワードを設定）
 - MFA解除（MFAを設定しているユーザーのみ、画面最下部にボタンが表示されます）
+
+MFA解除はMFAを無効にしますが、認証アプリの登録自体は削除しません。
+端末紛失時の対応と制約は[管理者によるMFA解除](/docs/part-4/user-authz-settings/multi-factor-authentication#管理者によるmfa解除)を参照してください。
 
 ![編集画面](/ja/img/part-5/user-management/user-crud/user-edit.png)
 

@@ -4,7 +4,7 @@ slug: "authentication-method-settings"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Fri Nov 27 2026 05:35:28 GMT+0000 (Coordinated Universal Time)"
 ---
 
 This page describes how to configure the following authentication-related features in the **Authentication** tab of the **Advanced Settings** screen in the SaaSus Platform:
@@ -41,7 +41,9 @@ You can choose whether users can register themselves from the login screen.
 
 :::info
 This feature is only valid when **multi-factor authentication (MFA)** is implemented in your SaaS application.  
-For details on API usage and implementation examples, see [Metering API Implementation Samples](/docs/part-6/implementation-guide/sample-application/multi-factor-authentication).
+For MFA behavior and limitations, see [Multi-Factor Authentication (MFA)](/docs/part-4/user-authz-settings/multi-factor-authentication).
+
+For details on API usage and implementation examples, see [Implementing Multi-Factor Authentication](/docs/part-6/implementation-guide/sample-application/multi-factor-authentication).
 :::
 
 You can configure whether to remember a user’s trusted device.  

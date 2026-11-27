@@ -4,7 +4,7 @@ slug: "multi-factor-authentication"
 excerpt: "Implementation samples for Multi-Factor Authentication (MFA) in SaaS applications"
 hidden: false
 createdAt: "Fri Feb 28 2025 09:00:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Jul 16 2026 01:15:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Fri Nov 27 2026 05:35:28 GMT+0000 (Coordinated Universal Time)"
 ---
 
 import Tabs from "@theme/Tabs";
@@ -40,6 +40,8 @@ To use email authentication, you must complete domain name settings and email se
 See [Domain, Email Sending Domain Authentication, and Redirect Settings](/docs/part-4/application-settings/domain-and-redirect-settings) for details.
 :::
 
+
+For MFA behavior and limitations, see [Multi-Factor Authentication (MFA)](/docs/part-4/user-authz-settings/multi-factor-authentication).
 
 ## Frontend Implementation
 

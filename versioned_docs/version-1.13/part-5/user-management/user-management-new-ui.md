@@ -4,7 +4,7 @@ slug: "user-management-new-ui"
 excerpt: ""
 hidden: false
 createdAt: "Tue Jul 21 2026 01:00:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Jul 21 2026 01:00:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Fri Nov 27 2026 05:35:28 GMT+0000 (Coordinated Universal Time)"
 ---
 
 :::info Switching Screens
@@ -83,6 +83,9 @@ The side drawer allows the following operations:
 
 - Password reset
 - MFA removal
+
+Removing MFA disables MFA but does not delete the authenticator app registration itself.
+For device loss and related limitations, see [Administrator MFA removal](/docs/part-4/user-authz-settings/multi-factor-authentication#administrator-mfa-removal).
 
 <!-- Target: The tenant user edit drawer showing the basic information section, user attributes section, and environment/roles section. -->
 ![Edit Drawer](/img/part-5/user-management/user-management-new-ui/edit-drawer.png)
