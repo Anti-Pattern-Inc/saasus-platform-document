@@ -4,7 +4,7 @@ slug: "multi-factor-authentication"
 excerpt: "Behavior and limitations of multi-factor authentication for SaaS users"
 hidden: false
 createdAt: "Fri Nov 27 2026 05:35:28 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Fri Nov 27 2026 05:35:28 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Fri Nov 27 2026 05:44:04 GMT+0000 (Coordinated Universal Time)"
 ---
 
 SaaSus Platform supports an authenticator app (TOTP) or email for multi-factor authentication (MFA) for SaaS users.
@@ -36,9 +36,6 @@ An API is available to change a device's status using the user's own access toke
 
 There is no published specification for an application to distinguish an incorrect code, an expired access token, and an attempt limit during authenticator app registration.
 The attempt limit and reset conditions for registration are also not published.
-
-For lockout after failed MFA code attempts during sign-in, see the [Amazon Cognito multi-factor authentication documentation](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-mfa.html).
-The same conditions do not necessarily apply to authenticator app registration.
 
 ## Administrator MFA removal
 

@@ -3,7 +3,7 @@
 - Locale: `en`
 - Docs source: `docs`
 - API source: `api`
-- Generated: `2026-11-27 14:35:28 +0900`
+- Generated: `2026-11-27 14:44:04 +0900`
 
 ---
 ## changelog/20221224.md
@@ -4505,8 +4505,6 @@ An API is available to change a device's status using the user's own access toke
 ## Errors and attempt limits
 There is no published specification for an application to distinguish an incorrect code, an expired access token, and an attempt limit during authenticator app registration.
 The attempt limit and reset conditions for registration are also not published.
-For lockout after failed MFA code attempts during sign-in, see the [Amazon Cognito multi-factor authentication documentation](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-mfa.html).
-The same conditions do not necessarily apply to authenticator app registration.
 ## Administrator MFA removal
 If a user loses the device used for their authenticator app, an administrator can remove MFA from the [user management screen in the SaaS operation console](/docs/part-5/user-management/user-crud#edit).
 This disables MFA but does not delete the authenticator app registration itself.

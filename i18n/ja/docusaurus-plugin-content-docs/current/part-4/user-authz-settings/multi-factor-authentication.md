@@ -4,7 +4,7 @@ slug: "multi-factor-authentication"
 excerpt: "SaaS利用者向け多要素認証の仕様と制約"
 hidden: false
 createdAt: "Fri Nov 27 2026 05:35:28 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Fri Nov 27 2026 05:35:28 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Fri Nov 27 2026 05:44:04 GMT+0000 (Coordinated Universal Time)"
 ---
 
 SaaSus Platformでは、SaaS利用者の多要素認証（MFA）に認証アプリ（TOTP）またはメールを利用できます。
@@ -36,9 +36,6 @@ MFA設定の取得では、有効・無効の状態と設定された認証方�
 
 認証アプリの登録時に発生する、認証コードの誤り、アクセストークンの期限切れ、試行制限をアプリケーションがそれぞれ判別するための公開仕様はありません。
 登録時の試行制限と解除条件も公開していません。
-
-ログイン時のMFAコードの試行失敗によるロックアウトについては、[Amazon Cognitoの多要素認証のドキュメント](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-mfa.html)を参照してください。
-認証アプリの登録時に同じ条件が適用されるとは限りません。
 
 ## 管理者によるMFA解除
 

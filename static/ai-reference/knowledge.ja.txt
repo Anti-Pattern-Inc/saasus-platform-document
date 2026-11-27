@@ -3,7 +3,7 @@
 - Locale: `ja`
 - Docs source: `i18n/ja/docusaurus-plugin-content-docs/current`
 - API source: `api`
-- Generated: `2026-11-27 14:35:29 +0900`
+- Generated: `2026-11-27 14:44:04 +0900`
 
 ---
 ## changelog/20221224.md
@@ -4540,8 +4540,6 @@ MFA設定の取得では、有効・無効の状態と設定された認証方�
 ## エラーと試行制限
 認証アプリの登録時に発生する、認証コードの誤り、アクセストークンの期限切れ、試行制限をアプリケーションがそれぞれ判別するための公開仕様はありません。
 登録時の試行制限と解除条件も公開していません。
-ログイン時のMFAコードの試行失敗によるロックアウトについては、[Amazon Cognitoの多要素認証のドキュメント](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-mfa.html)を参照してください。
-認証アプリの登録時に同じ条件が適用されるとは限りません。
 ## 管理者によるMFA解除
 認証アプリを使用する端末を紛失した場合、管理者は[SaaS運用コンソールのユーザー管理画面](/docs/part-5/user-management/user-crud#編集)からMFAを解除できます。
 解除はMFAの無効化であり、認証アプリの登録自体は削除されません。
