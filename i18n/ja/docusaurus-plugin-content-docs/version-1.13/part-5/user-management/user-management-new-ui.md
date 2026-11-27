@@ -4,7 +4,7 @@ slug: "user-management-new-ui"
 excerpt: ""
 hidden: false
 createdAt: "Tue Jul 21 2026 01:00:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Tue Jul 21 2026 01:00:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Fri Nov 27 2026 05:26:48 GMT+0000 (Coordinated Universal Time)"
 ---
 
 :::info 画面の切り替え
@@ -86,6 +86,9 @@ updatedAt: "Tue Jul 21 2026 01:00:00 GMT+0000 (Coordinated Universal Time)"
 
 - パスワードリセット
 - MFA解除
+
+MFA解除はMFAを無効にしますが、認証アプリの登録自体は削除しません。
+端末紛失時の対応と制約は[管理者によるMFA解除](/docs/part-6/implementation-guide/sample-application/multi-factor-authentication#管理者によるmfa解除)を参照してください。
 
 ![ユーザー編集ドロワー](/ja/img/part-5/user-management/user-management-new-ui/edit-drawer.png)
 

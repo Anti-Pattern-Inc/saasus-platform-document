@@ -4,7 +4,7 @@ slug: "multi-factor-authentication"
 excerpt: "Implementation samples for Multi-Factor Authentication (MFA) in SaaS applications"
 hidden: false
 createdAt: "Fri Feb 28 2025 09:00:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Thu Jul 16 2026 01:15:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Fri Nov 27 2026 05:26:48 GMT+0000 (Coordinated Universal Time)"
 ---
 
 import Tabs from "@theme/Tabs";
@@ -40,6 +40,44 @@ To use email authentication, you must complete domain name settings and email se
 See [Domain, Email Sending Domain Authentication, and Redirect Settings](/docs/part-4/application-settings/domain-and-redirect-settings) for details.
 :::
 
+
+## MFA behavior and limitations
+
+### Registering an authenticator app
+
+When registering an authenticator app for the first time, verify the code after displaying the QR code, then enable MFA.
+You cannot enable authenticator app MFA before an authenticator app has been registered.
+
+Both secret generation and registration code verification require the specified user ID to match the user associated with the access token.
+The API rejects the request if they do not match.
+
+### Reauthentication and MFA status
+
+The MFA settings API returns the enabled or disabled status and the configured authentication method.
+It does not return the time of the most recent MFA authentication or the method used for that authentication.
+There is no dedicated feature for requiring a signed-in user to reauthenticate with their registered TOTP.
+Registration code verification cannot be used for this reauthentication.
+
+There is no administrator feature to remove a specified user's trusted devices.
+An API is available to change a device's status using the user's own access token and device key.
+
+### Errors and attempt limits
+
+There is no published specification for an application to distinguish an incorrect code, an expired access token, and an attempt limit during authenticator app registration.
+The attempt limit and reset conditions for registration are also not published.
+
+For lockout after failed MFA code attempts during sign-in, see the [Amazon Cognito multi-factor authentication documentation](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-mfa.html).
+The same conditions do not necessarily apply to authenticator app registration.
+
+### Administrator MFA removal
+
+If a user loses the device used for their authenticator app, an administrator can remove MFA from the [user management screen in the SaaS operation console](/docs/part-5/user-management/user-crud#edit).
+This disables MFA but does not delete the authenticator app registration itself.
+
+The operation console does not provide an MFA removal history showing the time, operator, and affected user.
+There is also no administrator feature to invalidate all existing sessions for a specified user.
+An API is available to invalidate an individual refresh token.
+The operation console roles required for MFA removal and a method for verifying the user's identity are not defined in the published specifications.
 
 ## Frontend Implementation
 
