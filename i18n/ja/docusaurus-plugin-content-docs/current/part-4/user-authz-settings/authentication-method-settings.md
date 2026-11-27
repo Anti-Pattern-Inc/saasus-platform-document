@@ -4,7 +4,7 @@ slug: "authentication-method-settings"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Fri Nov 27 2026 05:35:28 GMT+0000 (Coordinated Universal Time)"
 ---
 
 このページでは、SaaSus Platform の「認証詳細設定」画面の「認証設定」タブで行える以下の認証関連機能の設定について説明します。
@@ -42,6 +42,8 @@ Googleログインを有効にするには、事前に Google Cloud Console で�
 
 :::info
 この機能は、SaaSアプリケーションに**多要素認証（MFA）機能を実装している場合**にのみ有効です。  
+MFAの仕様と制約は[多要素認証（MFA）](/docs/part-4/user-authz-settings/multi-factor-authentication)を参照してください。
+
 具体的なAPIの使い方や実装例は、[多要素認証の実装](/ja/docs/part-6/implementation-guide/sample-application/multi-factor-authentication) を参照してください。
 :::
 

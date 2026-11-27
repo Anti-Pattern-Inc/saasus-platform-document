@@ -4,7 +4,7 @@ slug: "user-crud"
 excerpt: ""
 hidden: false
 createdAt: "Mon Apr 15 2025 08:20:00 GMT+0000 (Coordinated Universal Time)"
-updatedAt: "Fri Nov 27 2026 05:26:48 GMT+0000 (Coordinated Universal Time)"
+updatedAt: "Fri Nov 27 2026 05:35:28 GMT+0000 (Coordinated Universal Time)"
 ---
 
 :::info Switching Screens
@@ -104,7 +104,7 @@ Clicking the edit icon opens a window where user information can be modified.
 - Unlink MFA (the button is shown at the bottom only for users who have MFA configured)
 
 Removing MFA disables MFA but does not delete the authenticator app registration itself.
-For device loss and related limitations, see [Administrator MFA removal](/docs/part-6/implementation-guide/sample-application/multi-factor-authentication#administrator-mfa-removal).
+For device loss and related limitations, see [Administrator MFA removal](/docs/part-4/user-authz-settings/multi-factor-authentication#administrator-mfa-removal).
 
 ![Edit screen](/img/part-5/user-management/user-crud/user-edit.png)
 
